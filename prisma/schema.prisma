@@ -74,7 +74,7 @@ model UserMaster {
   id            Int              @id @default(autoincrement())
   vendor_id     Int
   user_name     String
-  user_contact  String
+  user_contact  String           @unique
   user_email    String
   user_timezone String
   password      String

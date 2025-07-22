@@ -11,6 +11,8 @@ import projectRoutes from './projectRoutes/project.routes';
 import boxRoutes from './boxRoutes/box.routes';
 import scanItemRoutes from './boxRoutes/scanItem.routes';
 
+import authRoutes from './auth/auth.routes';
+
 const router = Router();
 
 router.use('/vendors', vendorRoutes);
@@ -25,5 +27,7 @@ router.use('/projects', projectRoutes);
 
 router.use('/boxes', boxRoutes);
 router.use('/scan-items', scanItemRoutes);
+
+router.use('/auth', authRoutes);
 
 export { router };
