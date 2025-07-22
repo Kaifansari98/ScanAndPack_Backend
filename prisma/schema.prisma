@@ -1,0 +1,196 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model VendorMaster {
+  id                     Int                 @id @default(autoincrement())
+  vendor_name            String
+  vendor_code            String
+  primary_contact_number String
+  primary_contact_email  String
+  primary_contact_name   String
+  country_code           String
+  head_office_id         Int?
+  status                 String              @default("inactive")
+  logo                   String
+  time_zone              String
+  createdAt              DateTime            @default(now())
+  updatedAt              DateTime            @updatedAt
+
+  addresses              VendorAddress[]
+  taxInfo                VendorTaxInfo[]
+  users                  UserMaster[]
+  projects               ProjectMaster[]
+  projectDetails         ProjectDetails[]
+  projectItems           ProjectItemsMaster[]
+  boxes                  BoxMaster[]
+  scanItems              ScanAndPackItem[]
+}
+
+model VendorAddress {
+  id        Int           @id @default(autoincrement())
+  vendor_id Int
+  address   String
+  state     String
+  city      String
+  country   String
+  pincode   String
+  landmark  String
+
+  vendor    VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+}
+
+model VendorTaxInfo {
+  id          Int           @id @default(autoincrement())
+  tax_no      String
+  tax_status  String
+  vendor_id   Int
+  tax_country String
+  created_at  DateTime      @default(now())
+  updated_at  DateTime      @updatedAt
+
+  vendor      VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+}
+
+model UserTypeMaster {
+  id        Int           @id @default(autoincrement())
+  user_type String
+
+  users     UserMaster[]
+}
+
+model UserMaster {
+  id            Int              @id @default(autoincrement())
+  vendor_id     Int
+  user_name     String
+  user_contact  String
+  user_email    String
+  user_timezone String
+  password      String
+  user_type_id  Int
+  status        String           @default("inactive")
+  created_at    DateTime         @default(now())
+  updated_at    DateTime         @updatedAt
+
+  vendor                VendorMaster           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  user_type             UserTypeMaster         @relation(fields: [user_type_id], references: [id])
+  documents             UserDocument[]
+  scanItemsCreated      ScanAndPackItem[]
+  createdProjects       ProjectMaster[] @relation("CreatedByUser")
+}
+
+model UserDocument {
+  id              Int         @id @default(autoincrement())
+  user_id         Int
+  document_name   String
+  document_number String
+  filename        String
+
+  user            UserMaster  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model ProjectMaster {
+  id             Int                 @id @default(autoincrement())
+  project_name   String
+  vendor_id      Int
+  client_id      Int                @default(1)
+  created_by     Int
+  project_status String
+  created_at     DateTime           @default(now())
+
+  vendor         VendorMaster       @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdByUser  UserMaster         @relation(name: "CreatedByUser", fields: [created_by], references: [id], onDelete: Cascade)
+  details        ProjectDetails[]
+  items          ProjectItemsMaster[]
+  boxes          BoxMaster[]
+  scanItems      ScanAndPackItem[]
+}
+
+model ProjectDetails {
+  id                      Int               @id @default(autoincrement())
+  project_id              Int
+  vendor_id               Int
+  client_id               Int
+  total_items             Int
+  total_packed            Int
+  total_unpacked          Int
+  start_date              DateTime
+  estimated_completion_date DateTime
+  actual_completion_date  DateTime?
+
+  project                 ProjectMaster     @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor                  VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  items                   ProjectItemsMaster[]
+}
+
+model ProjectItemsMaster {
+  id                 Int               @id @default(autoincrement())
+  project_id         Int
+  vendor_id          Int
+  client_id          Int
+  category           String
+  unique_id          String
+  item_name          String
+  L1                 String
+  L2                 String
+  L3                 String
+  qty                Int
+  project_details_id Int
+
+  project            ProjectMaster     @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor             VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  details            ProjectDetails    @relation(fields: [project_details_id], references: [id], onDelete: Cascade)
+}
+
+enum BoxStatus {
+  packed
+  unpacked
+}
+
+enum ItemStatus {
+  packed
+  unpacked
+}
+
+model BoxMaster {
+  id         Int           @id @default(autoincrement())
+  project_id Int
+  vendor_id  Int
+  client_id  Int
+  box_name   String
+  box_status BoxStatus
+  project    ProjectMaster @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor     VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  items      ScanAndPackItem[]
+}
+
+model ScanAndPackItem {
+  id                Int           @id @default(autoincrement())
+  project_id        Int
+  vendor_id         Int
+  client_id         Int
+  box_id            Int
+  project_master_id Int
+  unique_id         String
+  qty               Int
+  created_date      DateTime      @default(now())
+  created_by        Int
+  status            ItemStatus
+
+  project           ProjectMaster @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor            VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  box               BoxMaster     @relation(fields: [box_id], references: [id], onDelete: Cascade)
+  user              UserMaster    @relation(fields: [created_by], references: [id], onDelete: Cascade)
+}
