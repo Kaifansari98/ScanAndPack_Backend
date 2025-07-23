@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import * as projectService from '../../services/projectServices/project.service';
+import { getProjectsByVendorIdService } from '../../services/projectServices/project.service';
 
 export const createProject = async (req: Request, res: Response) => {
   try {
@@ -84,4 +85,20 @@ export const getAllProjects = async (_req: Request, res: Response) => {
       res.status(500).json({ error: 'Failed to fetch project item by ID', details: err });
     }
   };
+
+  export const getProjectsByVendorId = async (req: Request, res: Response) => {
+    try {
+      const vendorId = Number(req.params.vendorId);
   
+      if (isNaN(vendorId)) {
+        return res.status(400).json({ message: "Invalid vendor ID" });
+      }
+  
+      const projects = await getProjectsByVendorIdService(vendorId);
+  
+      return res.status(200).json(projects);
+    } catch (error) {
+      console.error("Error fetching projects by vendorId:", error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  };

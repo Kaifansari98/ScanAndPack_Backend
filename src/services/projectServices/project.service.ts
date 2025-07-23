@@ -82,3 +82,42 @@ export const getAllProjects = () => {
     });
   };
   
+  export const getProjectsByVendorIdService = async (vendorId: number) => {
+    return prisma.projectMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+      },
+      select: {
+        id: true,
+        project_name: true,
+        vendor_id: true,
+        client_id: true,
+        created_by: true,
+        project_status: true,
+        created_at: true,
+        createdByUser: {
+          select: {
+            id: true,
+            vendor_id: true,
+            user_name: true,
+            user_type_id: true,
+          },
+        },
+        details: {
+          select: {
+            id: true,
+            project_id: true,
+            vendor_id: true,
+            client_id: true,
+            total_items: true,
+            total_packed: true,
+            total_unpacked: true,
+            start_date: true,
+            estimated_completion_date: true,
+            actual_completion_date: true,
+          },
+        },
+      },
+    });
+  };
+  

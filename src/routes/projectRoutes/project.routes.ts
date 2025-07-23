@@ -7,7 +7,8 @@ import { createProject,
     getAllProjectItems,
     getProjectById,
     getProjectDetailsById,
-    getProjectItemById
+    getProjectItemById, 
+    getProjectsByVendorId
 } from '../../controllers/projectControllers/project.controller';
 
 const router = Router();
@@ -22,5 +23,7 @@ router.get('/items', getAllProjectItems);
 router.get('/:id', getProjectById);
 router.get('/details/:id', getProjectDetailsById);
 router.get('/items/:id', getProjectItemById);
+
+router.get("/vendor/:vendorId", getProjectsByVendorId);
 
 export default router;

@@ -118,7 +118,7 @@ model ProjectMaster {
 }
 
 model ProjectDetails {
-  id                      Int               @id @default(autoincrement())
+  id                      Int                     @id @default(autoincrement())
   project_id              Int
   vendor_id               Int
   client_id               Int
@@ -129,9 +129,11 @@ model ProjectDetails {
   estimated_completion_date DateTime
   actual_completion_date  DateTime?
 
-  project                 ProjectMaster     @relation(fields: [project_id], references: [id], onDelete: Cascade)
-  vendor                  VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  project                 ProjectMaster           @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor                  VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   items                   ProjectItemsMaster[]
+  boxes                   BoxMaster[]             @relation(name: "BoxDetails")
+  scanItems               ScanAndPackItem[]       @relation(name: "ItemDetails")
 }
 
 model ProjectItemsMaster {
@@ -164,33 +166,42 @@ enum ItemStatus {
 }
 
 model BoxMaster {
-  id         Int           @id @default(autoincrement())
-  project_id Int
-  vendor_id  Int
-  client_id  Int
-  box_name   String
-  box_status BoxStatus
-  project    ProjectMaster @relation(fields: [project_id], references: [id], onDelete: Cascade)
-  vendor     VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  id              Int           @id @default(autoincrement())
+  project_id      Int
+  project_details_id Int
+  vendor_id       Int
+  client_id       Int
+  box_name        String
+  box_status      BoxStatus
+  created_by      Int
+  created_date    DateTime      @default(now())
+  is_deleted      Boolean       @default(false)
+  deleted_by      Int?
+  deleted_at      DateTime?
 
-  items      ScanAndPackItem[]
+  project         ProjectMaster @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor          VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  items           ScanAndPackItem[]
+
+  details         ProjectDetails @relation(name: "BoxDetails", fields: [project_details_id], references: [id], onDelete: Cascade)
 }
 
 model ScanAndPackItem {
-  id                Int           @id @default(autoincrement())
-  project_id        Int
-  vendor_id         Int
-  client_id         Int
-  box_id            Int
-  project_master_id Int
-  unique_id         String
-  qty               Int
-  created_date      DateTime      @default(now())
-  created_by        Int
-  status            ItemStatus
+  id                    Int                   @id @default(autoincrement())
+  project_id            Int
+  vendor_id             Int
+  client_id             Int
+  box_id                Int
+  project_details_id    Int
+  unique_id             String
+  qty                   Int
+  created_date          DateTime              @default(now())
+  created_by            Int
+  status                ItemStatus
 
-  project           ProjectMaster @relation(fields: [project_id], references: [id], onDelete: Cascade)
-  vendor            VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  box               BoxMaster     @relation(fields: [box_id], references: [id], onDelete: Cascade)
-  user              UserMaster    @relation(fields: [created_by], references: [id], onDelete: Cascade)
+  project               ProjectMaster         @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor                VendorMaster          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  box                   BoxMaster             @relation(fields: [box_id], references: [id], onDelete: Cascade)
+  user                  UserMaster            @relation(fields: [created_by], references: [id], onDelete: Cascade)
+  details               ProjectDetails        @relation(name: "ItemDetails", fields: [project_details_id], references: [id], onDelete: Cascade)
 }
