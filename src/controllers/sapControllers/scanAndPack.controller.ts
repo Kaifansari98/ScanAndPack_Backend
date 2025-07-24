@@ -5,9 +5,9 @@ export const addScanAndPackItem = async (req: Request, res: Response) => {
   try {
     const result = await getProjectItemAndInsertScanPack(req.body);
     res.status(201).json(result);
-  } catch (error) {
+  } catch (error: any) {
     console.error('[Add ScanPack Item]', error);
-    res.status(500).json({ error: 'Failed to insert scan and pack item' });
+    res.status(400).json({ error: error.message || 'Failed to insert scan and pack item' });
   }
 };
 

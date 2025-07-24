@@ -12,40 +12,56 @@ interface ScanPackPayload {
 }
 
 export const getProjectItemAndInsertScanPack = async (payload: ScanPackPayload) => {
-  const { project_id, vendor_id, client_id, unique_id, box_id, created_by, status } = payload;
-
-  const item = await prisma.projectItemsMaster.findFirst({
-    where: {
-      project_id,
-      vendor_id,
-      client_id,
-      unique_id
-    },
-    include: {
-      project: true,
-      vendor: true,
-      details: true
+    const { project_id, vendor_id, client_id, unique_id, box_id, created_by, status } = payload;
+  
+    const item = await prisma.projectItemsMaster.findFirst({
+      where: {
+        project_id,
+        vendor_id,
+        client_id,
+        unique_id
+      },
+      include: {
+        project: true,
+        vendor: true,
+        details: true
+      }
+    });
+  
+    if (!item) throw new Error('Item not found');
+  
+    // Step 1: Count existing scan entries for the same item
+    const currentScanCount = await prisma.scanAndPackItem.count({
+      where: {
+        project_id,
+        vendor_id,
+        client_id,
+        unique_id
+      }
+    });
+  
+    // Step 2: Compare with allowed qty
+    if (currentScanCount >= item.qty) {
+      throw new Error(`Scan limit exceeded for this item. Max allowed: ${item.qty}`);
     }
-  });
-
-  if (!item) throw new Error('Item not found');
-
-  const newItem = await prisma.scanAndPackItem.create({
-    data: {
-      project_id: item.project_id,
-      vendor_id: item.vendor_id,
-      client_id: item.client_id,
-      box_id,
-      project_details_id: item.project_details_id,
-      unique_id: item.unique_id,
-      qty: item.qty,
-      created_by,
-      status
-    }
-  });
-
-  return newItem;
-};
+  
+    // Step 3: Proceed to insert
+    const newItem = await prisma.scanAndPackItem.create({
+      data: {
+        project_id: item.project_id,
+        vendor_id: item.vendor_id,
+        client_id: item.client_id,
+        box_id,
+        project_details_id: item.project_details_id,
+        unique_id: item.unique_id,
+        qty: item.qty, // optional: can also store 1 if you prefer one entry per scan
+        created_by,
+        status
+      }
+    });
+  
+    return newItem;
+  };  
 
 export const getScanItemsByFields = async ({
     project_id,
