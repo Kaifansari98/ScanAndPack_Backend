@@ -9,7 +9,7 @@ import userDocumentRoutes from "./userRoutes/userDocument.routes";
 import projectRoutes from './projectRoutes/project.routes';
 
 import boxRoutes from './boxRoutes/box.routes';
-import scanItemRoutes from './boxRoutes/scanItem.routes';
+import scanItemRoutes from './sapRoutes/scanAndPack.routes';
 
 import authRoutes from './auth/auth.routes';
 

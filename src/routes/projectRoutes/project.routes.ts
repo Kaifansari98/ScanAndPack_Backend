@@ -8,7 +8,8 @@ import { createProject,
     getProjectById,
     getProjectDetailsById,
     getProjectItemById, 
-    getProjectsByVendorId
+    getProjectsByVendorId,
+    getProjectItemByFields,
 } from '../../controllers/projectControllers/project.controller';
 
 const router = Router();
@@ -25,5 +26,7 @@ router.get('/details/:id', getProjectDetailsById);
 router.get('/items/:id', getProjectItemById);
 
 router.get("/vendor/:vendorId", getProjectsByVendorId);
+
+router.post('/items-by-fields', getProjectItemByFields);
 
 export default router;

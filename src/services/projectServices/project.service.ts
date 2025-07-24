@@ -120,3 +120,28 @@ export const getAllProjects = () => {
       },
     });
   };
+
+  export const getProjectItemByFields = async (params: {
+    project_id: number;
+    vendor_id: number;
+    client_id: number;
+    unique_id: string;
+  }) => {
+    return prisma.projectItemsMaster.findFirst({
+      where: {
+        project_id: params.project_id,
+        vendor_id: params.vendor_id,
+        client_id: params.client_id,
+        unique_id: {
+          equals: params.unique_id.trim(),
+          mode: 'insensitive',
+        },
+      },
+      include: {
+        project: true,
+        vendor: true,
+        details: true,
+      },
+    });
+  };
+  

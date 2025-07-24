@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import * as projectService from '../../services/projectServices/project.service';
 import { getProjectsByVendorIdService } from '../../services/projectServices/project.service';
+import { getProjectItemByFields as getProjectItemByFieldsService } from '../../services/projectServices/project.service';
 
 export const createProject = async (req: Request, res: Response) => {
   try {
@@ -100,5 +101,43 @@ export const getAllProjects = async (_req: Request, res: Response) => {
     } catch (error) {
       console.error("Error fetching projects by vendorId:", error);
       return res.status(500).json({ message: "Internal Server Error" });
+    }
+  };
+
+  export const getProjectItemByFields = async (req: Request, res: Response) => {
+    try {
+      const { project_id, vendor_id, client_id, unique_id } = req.body;
+  
+      if (
+        typeof project_id !== 'number' ||
+        typeof vendor_id !== 'number' ||
+        typeof client_id !== 'number' ||
+        typeof unique_id !== 'string'
+      ) {
+        return res.status(400).json({ error: 'Invalid input types' });
+      }
+
+      console.log({
+        project_id,
+        vendor_id,
+        client_id,
+        unique_id: unique_id.trim(),
+      });
+  
+      const item = await getProjectItemByFieldsService({
+        project_id,
+        vendor_id,
+        client_id,
+        unique_id: unique_id.trim(),
+      });
+  
+      if (!item) {
+        return res.status(404).json({ message: 'No matching item found' });
+      }
+  
+      res.status(200).json(item);
+    } catch (err) {
+      console.error('Error fetching project item by fields:', err);
+      res.status(500).json({ error: 'Failed to fetch project item', details: err });
     }
   };
