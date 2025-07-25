@@ -64,45 +64,68 @@ export const getProjectItemAndInsertScanPack = async (payload: ScanPackPayload) 
   };  
 
 export const getScanItemsByFields = async ({
-    project_id,
-    vendor_id,
-    client_id,
-    box_id,
-  }: {
-    project_id: number;
-    vendor_id: number;
-    client_id: number;
-    box_id: number;
-  }) => {
-    const scanItems = await prisma.scanAndPackItem.findMany({
-      where: {
-        project_id,
-        vendor_id,
-        client_id,
-        box_id,
-      },
-      orderBy: {
-        created_date: 'desc',
-      },
-    });
-  
-    const enrichedItems = await Promise.all(
-      scanItems.map(async (item) => {
-        const projectItems = await prisma.projectItemsMaster.findMany({
-          where: {
-            project_id: item.project_id,
-            vendor_id: item.vendor_id,
-            client_id: item.client_id,
-            unique_id: item.unique_id,
-          },
-        });
-  
-        return {
-          ...item,
-          project_item_details: projectItems.length === 1 ? projectItems[0] : projectItems,
-        };
-      })
-    );
-  
-    return enrichedItems;
-  };  
+  project_id,
+  vendor_id,
+  client_id,
+  box_id,
+}: {
+  project_id: number;
+  vendor_id: number;
+  client_id: number;
+  box_id: number;
+}) => {
+  const scanItems = await prisma.scanAndPackItem.findMany({
+    where: {
+      project_id,
+      vendor_id,
+      client_id,
+      box_id,
+    },
+    orderBy: {
+      created_date: 'desc',
+    },
+  });
+
+  const enrichedItems = await Promise.all(
+    scanItems.map(async (item) => {
+      const projectItems = await prisma.projectItemsMaster.findMany({
+        where: {
+          project_id: item.project_id,
+          vendor_id: item.vendor_id,
+          client_id: item.client_id,
+          unique_id: item.unique_id,
+        },
+      });
+
+      return {
+        id: item.id, // Include ScanAndPackItem.id
+        unique_id: item.unique_id,
+        project_id: item.project_id,
+        vendor_id: item.vendor_id,
+        client_id: item.client_id,
+        box_id: item.box_id,
+        status: item.status,
+        created_by: item.created_by,
+        created_date: item.created_date,
+        qty: item.qty,
+        project_item_details: projectItems.length === 1 ? projectItems[0] : projectItems,
+      };      
+    })
+  );
+
+  return enrichedItems;
+};  
+
+export const deleteScanAndPackItemById = async (id: number) => {
+  const existing = await prisma.scanAndPackItem.findUnique({ where: { id } });
+
+  if (!existing) {
+    throw new Error('Scan item not found');
+  }
+
+  const deleted = await prisma.scanAndPackItem.delete({
+    where: { id },
+  });
+
+  return deleted;
+};

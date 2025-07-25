@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getProjectItemAndInsertScanPack, getScanItemsByFields } from '../../services/sapServices/scanAndPack.service';
+import { getProjectItemAndInsertScanPack, getScanItemsByFields, deleteScanAndPackItemById } from '../../services/sapServices/scanAndPack.service';
 
 export const addScanAndPackItem = async (req: Request, res: Response) => {
   try {
@@ -30,5 +30,21 @@ export const getScanAndPackItemsByFields = async (req: Request, res: Response) =
   } catch (error) {
     console.error('Error fetching scan and pack items:', error);
     return res.status(500).json({ error: 'Internal server error', details: error });
+  }
+};
+
+export const deleteScanAndPackItem = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  if (!id || isNaN(Number(id))) {
+    return res.status(400).json({ error: 'Invalid or missing ID' });
+  }
+
+  try {
+    const deletedItem = await deleteScanAndPackItemById(Number(id));
+    res.status(200).json({ message: 'Scan item deleted successfully', data: deletedItem });
+  } catch (error: any) {
+    console.error('[Delete ScanPack Item]', error);
+    res.status(500).json({ error: error.message || 'Failed to delete scan item' });
   }
 };
