@@ -41,8 +41,11 @@ export const deleteScanAndPackItem = async (req: Request, res: Response) => {
   }
 
   try {
-    const deletedItem = await deleteScanAndPackItemById(Number(id));
-    res.status(200).json({ message: 'Scan item deleted successfully', data: deletedItem });
+    const result = await deleteScanAndPackItemById(Number(id));
+    res.status(200).json({
+      message: 'Scan item deleted successfully',
+      data: result,
+    });
   } catch (error: any) {
     console.error('[Delete ScanPack Item]', error);
     res.status(500).json({ error: error.message || 'Failed to delete scan item' });

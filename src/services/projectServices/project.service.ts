@@ -14,9 +14,47 @@ export const createProjectDetails = async (data: Omit<ProjectDetails, 'id'>) => 
 };
 
 export const createProjectItem = async (data: Omit<ProjectItemsMaster, 'id'>) => {
-  return prisma.projectItemsMaster.create({
-    data,
+  // 1. Create the new item
+  const newItem = await prisma.projectItemsMaster.create({ data });
+
+  // 2. Recalculate total_items
+  const totalQty = await prisma.projectItemsMaster.aggregate({
+    _sum: { qty: true },
+    where: {
+      project_id: data.project_id,
+      vendor_id: data.vendor_id,
+      client_id: data.client_id,
+    },
   });
+
+  const total_items = totalQty._sum.qty || 0;
+
+  // 3. Get current packed count from projectDetails
+  const existingDetails = await prisma.projectDetails.findFirst({
+    where: {
+      project_id: data.project_id,
+      vendor_id: data.vendor_id,
+      client_id: data.client_id,
+    },
+  });
+
+  const total_packed = existingDetails?.total_packed || 0;
+  const total_unpacked = Math.max(total_items - total_packed, 0); // prevent negative
+
+  // 4. Update ProjectDetails
+  await prisma.projectDetails.updateMany({
+    where: {
+      project_id: data.project_id,
+      vendor_id: data.vendor_id,
+      client_id: data.client_id,
+    },
+    data: {
+      total_items,
+      total_unpacked,
+    },
+  });
+
+  return newItem;
 };
 
 export const getAllProjects = () => {
@@ -145,3 +183,57 @@ export const getAllProjects = () => {
     });
   };
   
+  export const getProjectItemCounts = async ({
+    project_id,
+    vendor_id,
+    client_id,
+  }: {
+    project_id: number;
+    vendor_id: number;
+    client_id: number;
+  }) => {
+    // 1. Total qty from ProjectItemsMaster
+    const totalQty = await prisma.projectItemsMaster.aggregate({
+      _sum: { qty: true },
+      where: {
+        project_id,
+        vendor_id,
+        client_id,
+      },
+    });
+  
+    // 2. Total packed qty from ScanAndPackItem (SUM qty, not just COUNT)
+    const packedQty = await prisma.scanAndPackItem.aggregate({
+      _sum: { qty: true },
+      where: {
+        project_id,
+        vendor_id,
+        client_id,
+        status: 'packed',
+      },
+    });
+  
+    const total_items = totalQty._sum.qty || 0;
+    const total_packed = packedQty._sum.qty || 0;
+    const total_unpacked = total_items - total_packed;
+  
+    // 3. Update ProjectDetails here (optional step)
+    await prisma.projectDetails.updateMany({
+      where: {
+        project_id,
+        vendor_id,
+        client_id,
+      },
+      data: {
+        total_items,
+        total_packed,
+        total_unpacked,
+      },
+    });
+  
+    return {
+      total_items,
+      total_packed,
+      total_unpacked,
+    };
+  };

@@ -141,3 +141,34 @@ export const getAllProjects = async (_req: Request, res: Response) => {
       res.status(500).json({ error: 'Failed to fetch project item', details: err });
     }
   };
+
+  export const getProjectItemCounts = async (req: Request, res: Response) => {
+    try {
+      console.log("Query params:", req.query); 
+      const { project_id, vendor_id, client_id } = req.query;
+  
+      const projectId = Number(project_id);
+      const vendorId = Number(vendor_id);
+      const clientId = Number(client_id);
+  
+      if (
+        isNaN(projectId) ||
+        isNaN(vendorId) ||
+        isNaN(clientId)
+      ) {
+        return res.status(400).json({ error: 'Invalid input types' });
+      }
+  
+      const counts = await projectService.getProjectItemCounts({
+        project_id: projectId,
+        vendor_id: vendorId,
+        client_id: clientId,
+      });
+  
+      res.status(200).json(counts);
+    } catch (err) {
+      console.error('Error fetching item counts:', err);
+      res.status(500).json({ error: 'Failed to fetch item counts', details: err });
+    }
+  };
+  

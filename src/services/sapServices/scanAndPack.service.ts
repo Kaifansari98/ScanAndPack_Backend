@@ -12,56 +12,90 @@ interface ScanPackPayload {
 }
 
 export const getProjectItemAndInsertScanPack = async (payload: ScanPackPayload) => {
-    const { project_id, vendor_id, client_id, unique_id, box_id, created_by, status } = payload;
-  
-    const item = await prisma.projectItemsMaster.findFirst({
-      where: {
-        project_id,
-        vendor_id,
-        client_id,
-        unique_id
-      },
-      include: {
-        project: true,
-        vendor: true,
-        details: true
-      }
-    });
-  
-    if (!item) throw new Error('Item not found');
-  
-    // Step 1: Count existing scan entries for the same item
-    const currentScanCount = await prisma.scanAndPackItem.count({
-      where: {
-        project_id,
-        vendor_id,
-        client_id,
-        unique_id
-      }
-    });
-  
-    // Step 2: Compare with allowed qty
-    if (currentScanCount >= item.qty) {
-      throw new Error(`Scan limit exceeded for this item.`);
+  const { project_id, vendor_id, client_id, unique_id, box_id, created_by, status } = payload;
+
+  // Step 1: Get the item
+  const item = await prisma.projectItemsMaster.findFirst({
+    where: {
+      project_id,
+      vendor_id,
+      client_id,
+      unique_id
+    },
+    include: {
+      project: true,
+      vendor: true,
+      details: true
     }
-  
-    // Step 3: Proceed to insert
-    const newItem = await prisma.scanAndPackItem.create({
-      data: {
-        project_id: item.project_id,
-        vendor_id: item.vendor_id,
-        client_id: item.client_id,
-        box_id,
-        project_details_id: item.project_details_id,
-        unique_id: item.unique_id,
-        qty: item.qty, // optional: can also store 1 if you prefer one entry per scan
-        created_by,
-        status
-      }
-    });
-  
-    return newItem;
-  };  
+  });
+
+  if (!item) throw new Error('Item not found');
+
+  // Step 2: Check how many times this item has already been scanned
+  const currentScanCount = await prisma.scanAndPackItem.count({
+    where: {
+      project_id,
+      vendor_id,
+      client_id,
+      unique_id
+    }
+  });
+
+  if (currentScanCount >= item.qty) {
+    throw new Error(`Scan limit exceeded for this item.`);
+  }
+
+  // Step 3: Insert scan
+  const newScan = await prisma.scanAndPackItem.create({
+    data: {
+      project_id: item.project_id,
+      vendor_id: item.vendor_id,
+      client_id: item.client_id,
+      box_id,
+      project_details_id: item.project_details_id,
+      unique_id: item.unique_id,
+      qty: 1, 
+      created_by,
+      status
+    }
+  });
+
+  // Step 4: Recalculate packed & unpacked totals
+  const packedCount = await prisma.scanAndPackItem.count({
+    where: {
+      project_id,
+      vendor_id,
+      client_id
+    }
+  });
+
+  const projectDetails = await prisma.projectDetails.findFirst({
+    where: {
+      project_id,
+      vendor_id,
+      client_id
+    }
+  });
+
+  const total_items = projectDetails?.total_items || 0;
+  const total_packed = packedCount;
+  const total_unpacked = Math.max(total_items - total_packed, 0);
+
+  // Step 5: Update projectDetails
+  await prisma.projectDetails.updateMany({
+    where: {
+      project_id,
+      vendor_id,
+      client_id
+    },
+    data: {
+      total_packed,
+      total_unpacked
+    }
+  });
+
+  return newScan;
+};
 
 export const getScanItemsByFields = async ({
   project_id,
@@ -117,15 +151,57 @@ export const getScanItemsByFields = async ({
 };  
 
 export const deleteScanAndPackItemById = async (id: number) => {
+  // Step 1: Find the scan item
   const existing = await prisma.scanAndPackItem.findUnique({ where: { id } });
 
   if (!existing) {
     throw new Error('Scan item not found');
   }
 
-  const deleted = await prisma.scanAndPackItem.delete({
+  // Step 2: Delete the scan item
+  await prisma.scanAndPackItem.delete({
     where: { id },
   });
 
-  return deleted;
+  // Step 3: Recalculate total_packed and total_unpacked
+  const { project_id, vendor_id, client_id } = existing;
+
+  const packedCount = await prisma.scanAndPackItem.count({
+    where: {
+      project_id,
+      vendor_id,
+      client_id,
+    },
+  });
+
+  const projectDetails = await prisma.projectDetails.findFirst({
+    where: {
+      project_id,
+      vendor_id,
+      client_id,
+    },
+  });
+
+  if (!projectDetails) {
+    throw new Error('Related projectDetails not found');
+  }
+
+  const total_items = projectDetails.total_items || 0;
+  const total_packed = packedCount;
+  const total_unpacked = Math.max(total_items - total_packed, 0);
+
+  // Step 4: Update the projectDetails table
+  await prisma.projectDetails.updateMany({
+    where: {
+      project_id,
+      vendor_id,
+      client_id,
+    },
+    data: {
+      total_packed,
+      total_unpacked,
+    },
+  });
+
+  return { deletedId: id, total_packed, total_unpacked };
 };
