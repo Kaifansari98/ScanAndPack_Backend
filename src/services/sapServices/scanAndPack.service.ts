@@ -42,7 +42,7 @@ export const getProjectItemAndInsertScanPack = async (payload: ScanPackPayload) 
   
     // Step 2: Compare with allowed qty
     if (currentScanCount >= item.qty) {
-      throw new Error(`Scan limit exceeded for this item. Max allowed: ${item.qty}`);
+      throw new Error(`Scan limit exceeded for this item.`);
     }
   
     // Step 3: Proceed to insert
