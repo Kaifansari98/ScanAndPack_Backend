@@ -31,144 +31,143 @@ export const createProjectItem = async (req: Request, res: Response) => {
 };
 
 export const getAllProjects = async (_req: Request, res: Response) => {
-    try {
-      const projects = await projectService.getAllProjects();
-      res.json(projects);
-    } catch (err) {
-      res.status(500).json({ error: 'Failed to fetch projects', details: err });
-    }
-  };
+  try {
+    const projects = await projectService.getAllProjects();
+    res.json(projects);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch projects', details: err });
+  }
+};
   
-  export const getAllProjectDetails = async (_req: Request, res: Response) => {
-    try {
-      const details = await projectService.getAllProjectDetails();
-      res.json(details);
-    } catch (err) {
-      res.status(500).json({ error: 'Failed to fetch project details', details: err });
-    }
-  };
+export const getAllProjectDetails = async (_req: Request, res: Response) => {
+  try {
+    const details = await projectService.getAllProjectDetails();
+    res.json(details);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch project details', details: err });
+  }
+};
   
-  export const getAllProjectItems = async (_req: Request, res: Response) => {
-    try {
-      const items = await projectService.getAllProjectItems();
-      res.json(items);
-    } catch (err) {
-      res.status(500).json({ error: 'Failed to fetch project items', details: err });
-    }
-  };
+export const getAllProjectItems = async (_req: Request, res: Response) => {
+  try {
+    const items = await projectService.getAllProjectItems();
+    res.json(items);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch project items', details: err });
+  }
+};
   
-  export const getProjectById = async (req: Request, res: Response) => {
-    try {
-      const id = parseInt(req.params.id);
-      const project = await projectService.getProjectById(id);
-      res.json(project);
-    } catch (err) {
-      res.status(500).json({ error: 'Failed to fetch project by ID', details: err });
-    }
-  };
+export const getProjectById = async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    const project = await projectService.getProjectById(id);
+    res.json(project);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch project by ID', details: err });
+  }
+};
   
-  export const getProjectDetailsById = async (req: Request, res: Response) => {
-    try {
-      const id = parseInt(req.params.id);
-      const details = await projectService.getProjectDetailsById(id);
-      res.json(details);
-    } catch (err) {
-      res.status(500).json({ error: 'Failed to fetch project details by ID', details: err });
-    }
-  };
+export const getProjectDetailsById = async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    const details = await projectService.getProjectDetailsById(id);
+    res.json(details);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch project details by ID', details: err });
+  }
+};
   
-  export const getProjectItemById = async (req: Request, res: Response) => {
-    try {
-      const id = parseInt(req.params.id);
-      const item = await projectService.getProjectItemById(id);
-      res.json(item);
-    } catch (err) {
-      res.status(500).json({ error: 'Failed to fetch project item by ID', details: err });
-    }
-  };
+export const getProjectItemById = async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    const item = await projectService.getProjectItemById(id);
+    res.json(item);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch project item by ID', details: err });
+  }
+};
 
-  export const getProjectsByVendorId = async (req: Request, res: Response) => {
-    try {
-      const vendorId = Number(req.params.vendorId);
-  
-      if (isNaN(vendorId)) {
-        return res.status(400).json({ message: "Invalid vendor ID" });
-      }
-  
-      const projects = await getProjectsByVendorIdService(vendorId);
-  
-      return res.status(200).json(projects);
-    } catch (error) {
-      console.error("Error fetching projects by vendorId:", error);
-      return res.status(500).json({ message: "Internal Server Error" });
-    }
-  };
+export const getProjectsByVendorId = async (req: Request, res: Response) => {
+  try {
+    const vendorId = Number(req.params.vendorId);
 
-  export const getProjectItemByFields = async (req: Request, res: Response) => {
-    try {
-      const { project_id, vendor_id, client_id, unique_id } = req.body;
-  
-      if (
-        typeof project_id !== 'number' ||
-        typeof vendor_id !== 'number' ||
-        typeof client_id !== 'number' ||
-        typeof unique_id !== 'string'
-      ) {
-        return res.status(400).json({ error: 'Invalid input types' });
-      }
-
-      console.log({
-        project_id,
-        vendor_id,
-        client_id,
-        unique_id: unique_id.trim(),
-      });
-  
-      const item = await getProjectItemByFieldsService({
-        project_id,
-        vendor_id,
-        client_id,
-        unique_id: unique_id.trim(),
-      });
-  
-      if (!item) {
-        return res.status(404).json({ message: 'No matching item found' });
-      }
-  
-      res.status(200).json(item);
-    } catch (err) {
-      console.error('Error fetching project item by fields:', err);
-      res.status(500).json({ error: 'Failed to fetch project item', details: err });
+    if (isNaN(vendorId)) {
+      return res.status(400).json({ message: "Invalid vendor ID" });
     }
-  };
 
-  export const getProjectItemCounts = async (req: Request, res: Response) => {
-    try {
-      console.log("Query params:", req.query); 
-      const { project_id, vendor_id, client_id } = req.query;
-  
-      const projectId = Number(project_id);
-      const vendorId = Number(vendor_id);
-      const clientId = Number(client_id);
-  
-      if (
-        isNaN(projectId) ||
-        isNaN(vendorId) ||
-        isNaN(clientId)
-      ) {
-        return res.status(400).json({ error: 'Invalid input types' });
-      }
-  
-      const counts = await projectService.getProjectItemCounts({
-        project_id: projectId,
-        vendor_id: vendorId,
-        client_id: clientId,
-      });
-  
-      res.status(200).json(counts);
-    } catch (err) {
-      console.error('Error fetching item counts:', err);
-      res.status(500).json({ error: 'Failed to fetch item counts', details: err });
+    const projects = await getProjectsByVendorIdService(vendorId);
+
+    return res.status(200).json(projects);
+  } catch (error) {
+    console.error("Error fetching projects by vendorId:", error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+export const getProjectItemByFields = async (req: Request, res: Response) => {
+  try {
+    const { project_id, vendor_id, client_id, unique_id } = req.body;
+
+    if (
+      typeof project_id !== 'number' ||
+      typeof vendor_id !== 'number' ||
+      typeof client_id !== 'number' ||
+      typeof unique_id !== 'string'
+    ) {
+      return res.status(400).json({ error: 'Invalid input types' });
     }
-  };
-  
+
+    console.log({
+      project_id,
+      vendor_id,
+      client_id,
+      unique_id: unique_id.trim(),
+    });
+
+    const item = await getProjectItemByFieldsService({
+      project_id,
+      vendor_id,
+      client_id,
+      unique_id: unique_id.trim(),
+    });
+
+    if (!item) {
+      return res.status(404).json({ message: 'No matching item found' });
+    }
+
+    res.status(200).json(item);
+  } catch (err) {
+    console.error('Error fetching project item by fields:', err);
+    res.status(500).json({ error: 'Failed to fetch project item', details: err });
+  }
+};
+
+export const getProjectItemCounts = async (req: Request, res: Response) => {
+  try {
+    console.log("Query params:", req.query); 
+    const { project_id, vendor_id, client_id } = req.query;
+
+    const projectId = Number(project_id);
+    const vendorId = Number(vendor_id);
+    const clientId = Number(client_id);
+
+    if (
+      isNaN(projectId) ||
+      isNaN(vendorId) ||
+      isNaN(clientId)
+    ) {
+      return res.status(400).json({ error: 'Invalid input types' });
+    }
+
+    const counts = await projectService.getProjectItemCounts({
+      project_id: projectId,
+      vendor_id: vendorId,
+      client_id: clientId,
+    });
+
+    res.status(200).json(counts);
+  } catch (err) {
+    console.error('Error fetching item counts:', err);
+    res.status(500).json({ error: 'Failed to fetch item counts', details: err });
+  }
+};

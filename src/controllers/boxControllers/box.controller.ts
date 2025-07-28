@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import * as boxService from '../../services/boxServices/box.service';
+import { getAllBoxesWithItemCountService } from '../../services/boxServices/box.service';
 
 export const createBox = async (req: Request, res: Response) => {
   try {
@@ -39,5 +40,42 @@ export const getBoxesByVendorAndProject = async (req: Request, res: Response) =>
     res.status(200).json(transformed);
   } catch (err: any) {
     res.status(500).json({ error: err.message });
+  }
+};
+
+export const getBoxDetailsWithItems = async (req: Request, res: Response) => {
+  try {
+    const vendorId = Number(req.params.vendorId);
+    const projectId = Number(req.params.projectId);
+    const clientId = Number(req.params.clientId);
+    const boxId = Number(req.params.boxId);
+
+    if ([vendorId, projectId, clientId, boxId].some(isNaN)) {
+      return res.status(400).json({ error: 'Invalid parameters' });
+    }
+
+    const data = await boxService.getBoxDetailsWithItems(vendorId, projectId, clientId, boxId);
+    res.status(200).json(data);
+  } catch (err: any) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+};
+
+export const getAllBoxesWithItemCount = async (req: Request, res: Response) => {
+  try {
+    const vendorId = Number(req.params.vendorId);
+    const projectId = Number(req.params.projectId);
+    const clientId = Number(req.params.clientId);
+
+    if ([vendorId, projectId, clientId].some(isNaN)) {
+      return res.status(400).json({ error: 'Invalid parameters' });
+    }
+
+    const data = await getAllBoxesWithItemCountService(vendorId, projectId, clientId);
+    return res.status(200).json(data);
+  } catch (error: any) {
+    console.error(error);
+    return res.status(500).json({ error: error.message });
   }
 };
