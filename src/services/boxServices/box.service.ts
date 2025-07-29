@@ -3,8 +3,73 @@ import { BoxStatus } from '@prisma/client';
 import { CreateBoxInput } from '../../types/boxTypes';
 
 export const createBox = async (data: CreateBoxInput) => {
-  return await prisma.boxMaster.create({
+  const { vendor_id, project_id, client_id, box_name } = data;
+
+  const existingBox = await prisma.boxMaster.findFirst({
+    where: {
+      vendor_id,
+      project_id,
+      client_id,
+      box_name,
+      is_deleted: false, // also respect soft delete
+    },
+  });
+
+  if (existingBox) {
+    throw new Error('Box already exists');
+  }
+
+  return prisma.boxMaster.create({
     data,
+  });
+};
+
+export const updateBoxName = async (
+  id: number,
+  vendor_id: number,
+  project_id: number,
+  client_id: number,
+  newBoxName: string
+) => {
+  // Check if box exists with these fields
+  const existingBox = await prisma.boxMaster.findFirst({
+    where: {
+      id,
+      vendor_id,
+      project_id,
+      client_id,
+      is_deleted: false,
+    },
+  });
+
+  if (!existingBox) {
+    throw new Error('Box not found');
+  }
+
+  // Check if the new box_name already exists for this vendor/project/client
+  const duplicate = await prisma.boxMaster.findFirst({
+    where: {
+      vendor_id,
+      project_id,
+      client_id,
+      box_name: newBoxName,
+      is_deleted: false,
+      NOT: {
+        id, // exclude the current box
+      },
+    },
+  });
+
+  if (duplicate) {
+    throw new Error('Another box with the same name already exists');
+  }
+
+  // Proceed to update
+  return prisma.boxMaster.update({
+    where: { id },
+    data: {
+      box_name: newBoxName,
+    },
   });
 };
 

@@ -7,6 +7,32 @@ export const createBox = async (req: Request, res: Response) => {
     const box = await boxService.createBox(req.body);
     res.status(201).json(box);
   } catch (err: any) {
+    if (err.message === 'Box already exists') {
+      return res.status(409).json({ message: err.message });
+    }
+    res.status(400).json({ error: err.message });
+  }
+};
+
+export const updateBoxName = async (req: Request, res: Response) => {
+  const { id, vendor_id, project_id, client_id, box_name } = req.body;
+
+  try {
+    const updatedBox = await boxService.updateBoxName(
+      id,
+      vendor_id,
+      project_id,
+      client_id,
+      box_name
+    );
+    res.status(200).json(updatedBox);
+  } catch (err: any) {
+    if (err.message === 'Box not found') {
+      return res.status(404).json({ message: err.message });
+    }
+    if (err.message === 'Another box with the same name already exists') {
+      return res.status(409).json({ message: err.message });
+    }
     res.status(400).json({ error: err.message });
   }
 };

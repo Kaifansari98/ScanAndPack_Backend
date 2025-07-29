@@ -4,7 +4,8 @@ import {
   getAllBoxes,
   getBoxesByVendorAndProject,
   getBoxDetailsWithItems,
-  getAllBoxesWithItemCount
+  getAllBoxesWithItemCount,
+  updateBoxName
 } from '../../controllers/boxControllers/box.controller';
 
 const router = Router();
@@ -23,5 +24,7 @@ router.get(
   '/details/vendor/:vendorId/project/:projectId/client/:clientId/boxes',
   getAllBoxesWithItemCount
 );
+
+router.put('/update-name', updateBoxName);
 
 export default router;
