@@ -237,3 +237,79 @@ export const updateBoxStatus = async (
     data: { box_status: newStatus },
   });
 };
+
+export const softDeleteBoxWithScanItems = async (
+  boxId: number,
+  deletedBy: number
+) => {
+  // Step 1: Check if box exists and is not deleted
+  const box = await prisma.boxMaster.findFirst({
+    where: { id: boxId, is_deleted: false },
+  });
+
+  if (!box) throw new Error('Box not found or already deleted');
+
+  // Step 2: Soft delete all scan items linked to this box
+  await prisma.scanAndPackItem.updateMany({
+    where: {
+      box_id: boxId,
+      is_deleted: false,
+    },
+    data: {
+      is_deleted: true,
+    },
+  });
+
+  // Step 3: Recalculate packed/unpacked totals
+  const packedCount = await prisma.scanAndPackItem.count({
+    where: {
+      project_id: box.project_id,
+      vendor_id: box.vendor_id,
+      client_id: box.client_id,
+      is_deleted: false, // ✅ respect soft delete
+    },
+  });
+
+  const projectDetails = await prisma.projectDetails.findFirst({
+    where: {
+      id: box.project_details_id,
+    },
+  });
+
+  if (!projectDetails) {
+    throw new Error('ProjectDetails not found');
+  }
+
+  const total_items = projectDetails.total_items;
+  const total_packed = packedCount;
+  const total_unpacked = Math.max(total_items - total_packed, 0);
+
+  await prisma.projectDetails.update({
+    where: {
+      id: box.project_details_id,
+    },
+    data: {
+      total_packed,
+      total_unpacked,
+    },
+  });
+
+  // Step 4: Soft delete the box
+  const deletedBox = await prisma.boxMaster.update({
+    where: { id: boxId },
+    data: {
+      is_deleted: true,
+      deleted_by: deletedBy,
+      deleted_at: new Date(),
+    },
+  });
+
+  return {
+    message: 'Box and scan items soft-deleted successfully',
+    deletedBoxId: deletedBox.id,
+    updatedProjectDetails: {
+      total_packed,
+      total_unpacked,
+    },
+  };
+};

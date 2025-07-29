@@ -37,7 +37,8 @@ export const getProjectItemAndInsertScanPack = async (payload: ScanPackPayload) 
       project_id,
       vendor_id,
       client_id,
-      unique_id
+      unique_id,
+      is_deleted: false,
     }
   });
 
@@ -65,7 +66,8 @@ export const getProjectItemAndInsertScanPack = async (payload: ScanPackPayload) 
     where: {
       project_id,
       vendor_id,
-      client_id
+      client_id,
+      is_deleted: false,
     }
   });
 
@@ -114,6 +116,7 @@ export const getScanItemsByFields = async ({
       vendor_id,
       client_id,
       box_id,
+      is_deleted: false,
     },
     orderBy: {
       created_date: 'desc',
@@ -171,6 +174,7 @@ export const deleteScanAndPackItemById = async (id: number) => {
       project_id,
       vendor_id,
       client_id,
+      is_deleted: false, 
     },
   });
 

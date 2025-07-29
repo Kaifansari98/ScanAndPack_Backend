@@ -8,6 +8,7 @@ import {
   updateBoxName,
   markBoxAsPacked,
   markBoxAsUnpacked,
+  deleteBoxAndItsScanItems
 } from '../../controllers/boxControllers/box.controller';
 
 const router = Router();
@@ -31,5 +32,7 @@ router.put('/update-name', updateBoxName);
 
 router.put('/status/packed/:boxId', markBoxAsPacked);
 router.put('/status/unpacked/:boxId', markBoxAsUnpacked);
+
+router.delete('/delete/:boxId', deleteBoxAndItsScanItems);
 
 export default router;

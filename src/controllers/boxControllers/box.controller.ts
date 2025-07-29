@@ -3,6 +3,7 @@ import * as boxService from '../../services/boxServices/box.service';
 import { 
   getAllBoxesWithItemCountService,
   updateBoxStatus,
+  softDeleteBoxWithScanItems
  } from '../../services/boxServices/box.service';
 import { BoxStatus } from '@prisma/client';
 
@@ -131,5 +132,22 @@ export const markBoxAsUnpacked = async (req: Request, res: Response) => {
     res.status(200).json(updatedBox);
   } catch (err: any) {
     res.status(400).json({ error: err.message });
+  }
+};
+
+export const deleteBoxAndItsScanItems = async (req: Request, res: Response) => {
+  const boxId = Number(req.params.boxId);
+  const deletedBy = Number(req.body.deleted_by);
+
+  if (isNaN(boxId) || isNaN(deletedBy)) {
+    return res.status(400).json({ error: 'Invalid boxId or deleted_by' });
+  }
+
+  try {
+    const result = await softDeleteBoxWithScanItems(boxId, deletedBy);
+    res.status(200).json(result);
+  } catch (error: any) {
+    console.error('[Delete Box]', error);
+    res.status(500).json({ error: error.message || 'Failed to delete box' });
   }
 };

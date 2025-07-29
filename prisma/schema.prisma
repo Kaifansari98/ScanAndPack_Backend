@@ -198,6 +198,7 @@ model ScanAndPackItem {
   created_date          DateTime              @default(now())
   created_by            Int
   status                ItemStatus
+  is_deleted            Boolean               @default(false)
 
   project               ProjectMaster         @relation(fields: [project_id], references: [id], onDelete: Cascade)
   vendor                VendorMaster          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
