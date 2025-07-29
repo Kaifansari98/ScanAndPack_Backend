@@ -216,3 +216,24 @@ export const getAllBoxesWithItemCountService = async (
     boxes: enrichedBoxes,
   };
 };
+
+export const updateBoxStatus = async (
+  boxId: number,
+  newStatus: BoxStatus
+) => {
+  const box = await prisma.boxMaster.findFirst({
+    where: {
+      id: boxId,
+      is_deleted: false,
+    },
+  });
+
+  if (!box) {
+    throw new Error('Box not found or is deleted');
+  }
+
+  return await prisma.boxMaster.update({
+    where: { id: boxId },
+    data: { box_status: newStatus },
+  });
+};

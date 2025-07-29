@@ -5,7 +5,9 @@ import {
   getBoxesByVendorAndProject,
   getBoxDetailsWithItems,
   getAllBoxesWithItemCount,
-  updateBoxName
+  updateBoxName,
+  markBoxAsPacked,
+  markBoxAsUnpacked,
 } from '../../controllers/boxControllers/box.controller';
 
 const router = Router();
@@ -26,5 +28,8 @@ router.get(
 );
 
 router.put('/update-name', updateBoxName);
+
+router.put('/status/packed/:boxId', markBoxAsPacked);
+router.put('/status/unpacked/:boxId', markBoxAsUnpacked);
 
 export default router;

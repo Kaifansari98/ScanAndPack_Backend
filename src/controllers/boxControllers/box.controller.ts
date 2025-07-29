@@ -1,6 +1,10 @@
 import { Request, Response } from 'express';
 import * as boxService from '../../services/boxServices/box.service';
-import { getAllBoxesWithItemCountService } from '../../services/boxServices/box.service';
+import { 
+  getAllBoxesWithItemCountService,
+  updateBoxStatus,
+ } from '../../services/boxServices/box.service';
+import { BoxStatus } from '@prisma/client';
 
 export const createBox = async (req: Request, res: Response) => {
   try {
@@ -103,5 +107,29 @@ export const getAllBoxesWithItemCount = async (req: Request, res: Response) => {
   } catch (error: any) {
     console.error(error);
     return res.status(500).json({ error: error.message });
+  }
+};
+
+export const markBoxAsPacked = async (req: Request, res: Response) => {
+  try {
+    const boxId = Number(req.params.boxId);
+    if (isNaN(boxId)) return res.status(400).json({ error: 'Invalid boxId' });
+
+    const updatedBox = await updateBoxStatus(boxId, BoxStatus.packed);
+    res.status(200).json(updatedBox);
+  } catch (err: any) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+export const markBoxAsUnpacked = async (req: Request, res: Response) => {
+  try {
+    const boxId = Number(req.params.boxId);
+    if (isNaN(boxId)) return res.status(400).json({ error: 'Invalid boxId' });
+
+    const updatedBox = await updateBoxStatus(boxId, BoxStatus.unpacked);
+    res.status(200).json(updatedBox);
+  } catch (err: any) {
+    res.status(400).json({ error: err.message });
   }
 };
