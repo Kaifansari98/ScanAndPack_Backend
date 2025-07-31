@@ -10,7 +10,8 @@ import { createProject,
     getProjectItemById, 
     getProjectsByVendorId,
     getProjectItemByFields,
-    getProjectItemCounts
+    getProjectItemCounts,
+    handleFullProjectCreate
 } from '../../controllers/projectControllers/project.controller';
 
 const router = Router();
@@ -32,5 +33,7 @@ router.get('/item-counts', getProjectItemCounts);
 router.get('/:id', getProjectById);
 router.get('/details/:id', getProjectDetailsById);
 router.get('/items/:id', getProjectItemById);
+
+router.post("/onboard/project", handleFullProjectCreate);
 
 export default router;

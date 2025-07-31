@@ -131,6 +131,7 @@ export const getBoxDetailsWithItems = async (
       project_id: projectId,
       client_id: clientId,
       box_id: boxId,
+      is_deleted: false,
     },
     include: {
       user: true,
@@ -187,7 +188,6 @@ export const getAllBoxesWithItemCountService = async (
       project_id: projectId,
       vendor_id: vendorId,
       client_id: clientId,
-      is_deleted: false,
     },
   });
 
@@ -266,7 +266,7 @@ export const softDeleteBoxWithScanItems = async (
       project_id: box.project_id,
       vendor_id: box.vendor_id,
       client_id: box.client_id,
-      is_deleted: false, // ✅ respect soft delete
+      is_deleted: false,
     },
   });
 

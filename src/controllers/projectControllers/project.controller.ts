@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as projectService from '../../services/projectServices/project.service';
-import { getProjectsByVendorIdService } from '../../services/projectServices/project.service';
+import { getProjectsByVendorIdService, createOrUpdateFullProject } from '../../services/projectServices/project.service';
 import { getProjectItemByFields as getProjectItemByFieldsService } from '../../services/projectServices/project.service';
 
 export const createProject = async (req: Request, res: Response) => {
@@ -171,3 +171,19 @@ export const getProjectItemCounts = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to fetch item counts', details: err });
   }
 };
+
+  export const handleFullProjectCreate = async (req: Request, res: Response) => {
+    try {
+      const token = req.headers["authorization"]?.replace("Bearer ", "");
+
+      if (!token) {
+        return res.status(401).json({ message: "Token is required" });
+      }
+
+      const result = await createOrUpdateFullProject(token, req.body);
+      return res.status(200).json(result);
+    } catch (err: any) {
+      console.error(err);
+      return res.status(400).json({ error: err.message });
+    }
+  };
