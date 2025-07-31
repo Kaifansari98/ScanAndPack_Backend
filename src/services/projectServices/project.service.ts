@@ -360,29 +360,83 @@ export const getAllProjects = () => {
       throw new Error("Project details not found");
     }
   
-    // ✅ Step 4: Validate and add project items
-    const invalidItems: string[] = [];
-  
-    const existingItems = await prisma.projectItemsMaster.findMany({
-      where: {
-        project_id: project.id
-      },
-      select: {
-        unique_id: true
-      }
-    });
-  
-    const existingUniqueIds = new Set(existingItems.map(item => item.unique_id));
-  
-    const validItems = payload.items.filter(item => {
-      if (existingUniqueIds.has(item.unique_id)) {
-        invalidItems.push(
-          `Duplicate unique_id "${item.unique_id}" already exists for project`
-        );
-        return false;
-      }
-      return true;
-    });
+// ✅ Step 4: Validate and add project items
+const invalidItems: string[] = [];
+
+// 🚫 Validate required fields in each item
+for (const [index, item] of payload.items.entries()) {
+  const missingFields: string[] = [];
+
+  if (!item.category) missingFields.push("category");
+  if (!item.item_name) missingFields.push("item_name");
+  if (item.qty === undefined || item.qty === null) missingFields.push("qty");
+  if (!item.L1) missingFields.push("L1");
+  if (!item.L2) missingFields.push("L2");
+  if (!item.L3) missingFields.push("L3");
+  if (!item.unique_id) missingFields.push("unique_id");
+
+  if (missingFields.length > 0) {
+    invalidItems.push(
+      `Item at index ${index} is missing required fields: ${missingFields.join(", ")}`
+    );
+  }
+}
+
+if (invalidItems.length > 0) {
+  throw new Error(`Validation failed:\n${invalidItems.join("\n")}`);
+}
+
+// 🚫 Check for duplicates within the payload itself
+const seenInPayload = new Set<string>();
+const duplicatesInPayload = new Set<string>();
+
+for (const item of payload.items) {
+  if (seenInPayload.has(item.unique_id)) {
+    duplicatesInPayload.add(item.unique_id);
+  } else {
+    seenInPayload.add(item.unique_id);
+  }
+}
+
+if (duplicatesInPayload.size > 0) {
+  throw new Error(
+    `Duplicate unique_id(s) found in request payload:\n${Array.from(duplicatesInPayload).join(", ")}`
+  );
+}
+
+
+if (duplicatesInPayload.size > 0) {
+  throw new Error(
+    `Duplicate unique_id(s) found in request payload:\n${Array.from(duplicatesInPayload).join(", ")}`
+  );
+}
+
+// ✅ Now check if any of these unique_ids already exist in DB for this project
+const existingItems = await prisma.projectItemsMaster.findMany({
+  where: {
+    project_id: project.id
+  },
+  select: {
+    unique_id: true
+  }
+});
+
+const existingUniqueIds = new Set(existingItems.map(item => item.unique_id));
+
+const validItems = payload.items.filter(item => {
+  if (existingUniqueIds.has(item.unique_id)) {
+    invalidItems.push(
+      `Duplicate unique_id "${item.unique_id}" already exists in database for this project`
+    );
+    return false;
+  }
+  return true;
+});
+
+if (invalidItems.length > 0) {
+  throw new Error(`Some items have duplicate unique_ids:\n${invalidItems.join("\n")}`);
+}
+
   
     if (invalidItems.length > 0) {
       console.warn("Validation failed for some items:", invalidItems);
