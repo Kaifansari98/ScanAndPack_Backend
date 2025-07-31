@@ -13,11 +13,16 @@ import scanItemRoutes from './sapRoutes/scanAndPack.routes';
 
 import authRoutes from './auth/auth.routes';
 
+import vendorTokenRoutes from './vendorRoutes/vendorToken.routes';
+
+import clientRoutes from "./clientRoutes/client.routes";
+
 const router = Router();
 
 router.use('/vendors', vendorRoutes);
 router.use('/vendor-address', vendorAddressRoutes);
 router.use('/vendor-tax-info', vendorTaxInfoRoutes);
+router.use('/vendor-tokens', vendorTokenRoutes);
 
 router.use('/users', userRoutes);
 router.use("/user-types", userTypeRoutes);
@@ -29,5 +34,7 @@ router.use('/boxes', boxRoutes);
 router.use('/scan-items', scanItemRoutes);
 
 router.use('/auth', authRoutes);
+
+router.use("/clients", clientRoutes);
 
 export { router };

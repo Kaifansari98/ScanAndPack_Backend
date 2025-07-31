@@ -1,5 +1,6 @@
 import { prisma } from '../../prisma/client';
 import { ProjectMaster, ProjectDetails, ProjectItemsMaster } from '@prisma/client';
+import { CreateProjectInput } from '../../types/project.types';
 
 export const createProject = async (data: Omit<ProjectMaster, 'id' | 'created_at'>) => {
   return prisma.projectMaster.create({

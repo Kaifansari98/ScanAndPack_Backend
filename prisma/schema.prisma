@@ -36,6 +36,7 @@ model VendorMaster {
   projectItems           ProjectItemsMaster[]
   boxes                  BoxMaster[]
   scanItems              ScanAndPackItem[]
+  tokens                 VendorTokens[]
 }
 
 model VendorAddress {
@@ -101,20 +102,22 @@ model UserDocument {
 }
 
 model ProjectMaster {
-  id             Int                 @id @default(autoincrement())
-  project_name   String
-  vendor_id      Int
-  client_id      Int                @default(1)
-  created_by     Int
-  project_status String
-  created_at     DateTime           @default(now())
+  id                    Int                     @id @default(autoincrement())
+  unique_project_id     String                  
+  project_name          String
+  vendor_id             Int
+  client_id             Int                     @default(1)
+  created_by            Int
+  project_status        String                  @default("Initiated")
+  created_at            DateTime                @default(now())
 
-  vendor         VendorMaster       @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  createdByUser  UserMaster         @relation(name: "CreatedByUser", fields: [created_by], references: [id], onDelete: Cascade)
-  details        ProjectDetails[]
-  items          ProjectItemsMaster[]
-  boxes          BoxMaster[]
-  scanItems      ScanAndPackItem[]
+  vendor                VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdByUser         UserMaster              @relation(name: "CreatedByUser", fields: [created_by], references: [id], onDelete: Cascade)
+  details               ProjectDetails[]
+  items                 ProjectItemsMaster[]
+  boxes                 BoxMaster[]
+  scanItems             ScanAndPackItem[]
+  client                ClientMaster            @relation(fields: [client_id], references: [id], onDelete: Cascade)
 }
 
 model ProjectDetails {
@@ -122,10 +125,10 @@ model ProjectDetails {
   project_id              Int
   vendor_id               Int
   client_id               Int
-  total_items             Int
-  total_packed            Int
-  total_unpacked          Int
-  start_date              DateTime
+  total_items             Int                     @default(0)
+  total_packed            Int                     @default(0)
+  total_unpacked          Int                     @default(0)
+  start_date              DateTime                @default(now())
   estimated_completion_date DateTime
   actual_completion_date  DateTime?
 
@@ -134,6 +137,7 @@ model ProjectDetails {
   items                   ProjectItemsMaster[]
   boxes                   BoxMaster[]             @relation(name: "BoxDetails")
   scanItems               ScanAndPackItem[]       @relation(name: "ItemDetails")
+  client                  ClientMaster            @relation(fields: [client_id], references: [id], onDelete: Cascade)
 }
 
 model ProjectItemsMaster {
@@ -153,6 +157,7 @@ model ProjectItemsMaster {
   project            ProjectMaster     @relation(fields: [project_id], references: [id], onDelete: Cascade)
   vendor             VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   details            ProjectDetails    @relation(fields: [project_details_id], references: [id], onDelete: Cascade)
+  client             ClientMaster      @relation(fields: [client_id], references: [id], onDelete: Cascade)
 }
 
 enum BoxStatus {
@@ -166,7 +171,7 @@ enum ItemStatus {
 }
 
 model BoxMaster {
-  id              Int           @id @default(autoincrement())
+  id              Int                 @id @default(autoincrement())
   project_id      Int
   project_details_id Int
   vendor_id       Int
@@ -174,16 +179,17 @@ model BoxMaster {
   box_name        String
   box_status      BoxStatus
   created_by      Int
-  created_date    DateTime      @default(now())
-  is_deleted      Boolean       @default(false)
+  created_date    DateTime            @default(now())
+  is_deleted      Boolean             @default(false)
   deleted_by      Int?
   deleted_at      DateTime?
 
-  project         ProjectMaster @relation(fields: [project_id], references: [id], onDelete: Cascade)
-  vendor          VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  project         ProjectMaster       @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor          VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   items           ScanAndPackItem[]
 
-  details         ProjectDetails @relation(name: "BoxDetails", fields: [project_details_id], references: [id], onDelete: Cascade)
+  details         ProjectDetails      @relation(name: "BoxDetails", fields: [project_details_id], references: [id], onDelete: Cascade)
+  client          ClientMaster        @relation(fields: [client_id], references: [id], onDelete: Cascade)
 }
 
 model ScanAndPackItem {
@@ -205,4 +211,34 @@ model ScanAndPackItem {
   box                   BoxMaster             @relation(fields: [box_id], references: [id], onDelete: Cascade)
   user                  UserMaster            @relation(fields: [created_by], references: [id], onDelete: Cascade)
   details               ProjectDetails        @relation(name: "ItemDetails", fields: [project_details_id], references: [id], onDelete: Cascade)
+  client                ClientMaster          @relation(fields: [client_id], references: [id], onDelete: Cascade)
+}
+
+model VendorTokens {
+  id          Int           @id @default(autoincrement())
+  vendor_id   Int
+  token       String        @default(uuid()) @unique
+  expiry_date DateTime      // UTC by default in Prisma
+
+  vendor      VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+}
+
+model ClientMaster {
+  id           Int                @id @default(autoincrement())
+  name         String
+  contact      String
+  alt_contact  String?
+  email        String
+  address      String
+  city         String
+  state        String
+  country      String
+  pincode      String
+  clientCode   String
+
+  projects     ProjectMaster[]
+  details      ProjectDetails[]
+  items        ProjectItemsMaster[]
+  boxes        BoxMaster[]
+  scanItems    ScanAndPackItem[]
 }
