@@ -69,7 +69,7 @@ export const getAllProjects = () => {
     },
   });
 };
-  
+
 export const getAllProjectDetails = () => {
   return prisma.projectDetails.findMany({
     include: {
@@ -78,7 +78,7 @@ export const getAllProjectDetails = () => {
     },
   });
 };
-  
+
 export const getAllProjectItems = () => {
   return prisma.projectItemsMaster.findMany({
     include: {
@@ -100,7 +100,7 @@ export const getProjectById = (id: number) => {
     },
   });
 };
-  
+
 export const getProjectDetailsById = (id: number) => {
   return prisma.projectDetails.findUnique({
     where: { id },
@@ -110,7 +110,7 @@ export const getProjectDetailsById = (id: number) => {
     },
   });
 };
-  
+
 export const getProjectItemById = (id: number) => {
   return prisma.projectItemsMaster.findUnique({
     where: { id },
@@ -184,7 +184,7 @@ export const getProjectItemByFields = async (params: {
     },
   });
 };
-  
+
 export const getProjectItemCounts = async ({
   project_id,
   vendor_id,
