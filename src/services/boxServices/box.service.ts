@@ -121,7 +121,11 @@ export const getBoxDetailsWithItems = async (
     },
     include: {
       details: true,
-      project: true,
+      project: {
+        include: {
+          client: true,
+        },
+      },
     },
   });
 
@@ -161,6 +165,7 @@ export const getBoxDetailsWithItems = async (
   return {
     vendor,
     box,
+    client: box?.project?.client,
     items: enrichedItems,
   };
 };
@@ -176,6 +181,9 @@ export const getAllBoxesWithItemCountService = async (
     }),
     prisma.projectMaster.findUnique({
       where: { id: projectId },
+      include: {
+        client: true,
+      },
     }),
   ]);
 
@@ -213,6 +221,7 @@ export const getAllBoxesWithItemCountService = async (
   return {
     vendor,
     project,
+    client: project.client,
     boxes: enrichedBoxes,
   };
 };
