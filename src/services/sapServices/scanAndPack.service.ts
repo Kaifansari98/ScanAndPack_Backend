@@ -55,6 +55,7 @@ export const getProjectItemAndInsertScanPack = async (payload: ScanPackPayload) 
       box_id,
       project_details_id: item.project_details_id,
       unique_id: item.unique_id,
+      weight: item.weight,
       qty: 1, 
       created_by,
       status

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as projectService from '../../services/projectServices/project.service';
-import { getProjectsByVendorIdService, createOrUpdateFullProject } from '../../services/projectServices/project.service';
+import { getProjectsByVendorIdService, createOrUpdateFullProject, calculateProjectWeight, calculateProjectAndBoxWeight } from '../../services/projectServices/project.service';
 import { getProjectItemByFields as getProjectItemByFieldsService } from '../../services/projectServices/project.service';
 
 export const createProject = async (req: Request, res: Response) => {
@@ -172,18 +172,49 @@ export const getProjectItemCounts = async (req: Request, res: Response) => {
   }
 };
 
-  export const handleFullProjectCreate = async (req: Request, res: Response) => {
-    try {
-      const token = req.headers["authorization"]?.replace("Bearer ", "");
+export const handleFullProjectCreate = async (req: Request, res: Response) => {
+  try {
+    const token = req.headers["authorization"]?.replace("Bearer ", "");
+    if (!token) return res.status(401).json({ message: "Token is required" });
 
-      if (!token) {
-        return res.status(401).json({ message: "Token is required" });
-      }
+    const result = await createOrUpdateFullProject(token, req.body);
+    return res.status(200).json(result);
+  } catch (err: any) {
+    console.error(err);
+    return res.status(400).json({ error: err.message });
+  }
+};
 
-      const result = await createOrUpdateFullProject(token, req.body);
-      return res.status(200).json(result);
-    } catch (err: any) {
-      console.error(err);
-      return res.status(400).json({ error: err.message });
-    }
-  };
+export const getProjectWeight = async (req: Request, res: Response) => {
+  try {
+    const vendorId = parseInt(req.params.vendor_id);
+    const projectId = parseInt(req.params.project_id);
+
+    const weight = await calculateProjectWeight(vendorId, projectId);
+
+    return res.json({ project_id: projectId, project_weight: weight });
+  } catch (err: any) {
+    console.error('getProjectWeight error:', err);
+    return res.status(500).json({ error: err.message || 'Internal server error' });
+  }
+};
+
+export const getProjectAndBoxWeight = async (req: Request, res: Response) => {
+  try {
+    const vendorId = parseInt(req.params.vendor_id);
+    const projectId = parseInt(req.params.project_id);
+    const boxId = parseInt(req.params.box_id);
+
+    const result = await calculateProjectAndBoxWeight(vendorId, projectId, boxId);
+
+    return res.json({
+      project_id: projectId,
+      box_id: boxId,
+      project_weight: result.project_weight,
+      box_weight: result.box_weight
+    });
+  } catch (err: any) {
+    console.error('getProjectAndBoxWeight error:', err);
+    return res.status(500).json({ error: err.message || 'Internal server error' });
+  }
+};

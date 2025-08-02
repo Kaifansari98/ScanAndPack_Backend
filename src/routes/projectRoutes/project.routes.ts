@@ -11,7 +11,9 @@ import { createProject,
     getProjectsByVendorId,
     getProjectItemByFields,
     getProjectItemCounts,
-    handleFullProjectCreate
+    handleFullProjectCreate,
+    getProjectWeight, 
+    getProjectAndBoxWeight
 } from '../../controllers/projectControllers/project.controller';
 
 const router = Router();
@@ -35,5 +37,8 @@ router.get('/details/:id', getProjectDetailsById);
 router.get('/items/:id', getProjectItemById);
 
 router.post("/onboard/project", handleFullProjectCreate);
+
+router.get('/:vendor_id/:project_id/weight', getProjectWeight);
+router.get('/:vendor_id/:project_id/boxes/:box_id/weight', getProjectAndBoxWeight);
 
 export default router;

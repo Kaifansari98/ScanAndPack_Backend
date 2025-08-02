@@ -14,7 +14,7 @@ datasource db {
 }
 
 model VendorMaster {
-  id                     Int                 @id @default(autoincrement())
+  id                     Int      @id @default(autoincrement())
   vendor_name            String
   vendor_code            String
   primary_contact_number String
@@ -22,25 +22,25 @@ model VendorMaster {
   primary_contact_name   String
   country_code           String
   head_office_id         Int?
-  status                 String              @default("inactive")
+  status                 String   @default("inactive")
   logo                   String
   time_zone              String
-  createdAt              DateTime            @default(now())
-  updatedAt              DateTime            @updatedAt
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
 
-  addresses              VendorAddress[]
-  taxInfo                VendorTaxInfo[]
-  users                  UserMaster[]
-  projects               ProjectMaster[]
-  projectDetails         ProjectDetails[]
-  projectItems           ProjectItemsMaster[]
-  boxes                  BoxMaster[]
-  scanItems              ScanAndPackItem[]
-  tokens                 VendorTokens[]
+  addresses      VendorAddress[]
+  taxInfo        VendorTaxInfo[]
+  users          UserMaster[]
+  projects       ProjectMaster[]
+  projectDetails ProjectDetails[]
+  projectItems   ProjectItemsMaster[]
+  boxes          BoxMaster[]
+  scanItems      ScanAndPackItem[]
+  tokens         VendorTokens[]
 }
 
 model VendorAddress {
-  id        Int           @id @default(autoincrement())
+  id        Int    @id @default(autoincrement())
   vendor_id Int
   address   String
   state     String
@@ -49,99 +49,102 @@ model VendorAddress {
   pincode   String
   landmark  String
 
-  vendor    VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
 model VendorTaxInfo {
-  id          Int           @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   tax_no      String
   tax_status  String
   vendor_id   Int
   tax_country String
-  created_at  DateTime      @default(now())
-  updated_at  DateTime      @updatedAt
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
 
-  vendor      VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
 model UserTypeMaster {
-  id        Int           @id @default(autoincrement())
+  id        Int    @id @default(autoincrement())
   user_type String
 
-  users     UserMaster[]
+  users UserMaster[]
 }
 
 model UserMaster {
-  id            Int              @id @default(autoincrement())
+  id            Int      @id @default(autoincrement())
   vendor_id     Int
   user_name     String
-  user_contact  String           @unique
+  user_contact  String   @unique
   user_email    String
   user_timezone String
   password      String
   user_type_id  Int
-  status        String           @default("inactive")
-  created_at    DateTime         @default(now())
-  updated_at    DateTime         @updatedAt
+  status        String   @default("inactive")
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 
-  vendor                VendorMaster           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  user_type             UserTypeMaster         @relation(fields: [user_type_id], references: [id])
-  documents             UserDocument[]
-  scanItemsCreated      ScanAndPackItem[]
-  createdProjects       ProjectMaster[] @relation("CreatedByUser")
+  vendor           VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  user_type        UserTypeMaster    @relation(fields: [user_type_id], references: [id])
+  documents        UserDocument[]
+  scanItemsCreated ScanAndPackItem[]
+  createdProjects  ProjectMaster[]   @relation("CreatedByUser")
 }
 
 model UserDocument {
-  id              Int         @id @default(autoincrement())
+  id              Int    @id @default(autoincrement())
   user_id         Int
   document_name   String
   document_number String
   filename        String
 
-  user            UserMaster  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user UserMaster @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 model ProjectMaster {
-  id                    Int                     @id @default(autoincrement())
-  unique_project_id     String                  
-  project_name          String
-  vendor_id             Int
-  client_id             Int                     @default(1)
-  created_by            Int
-  project_status        String                  @default("Initiated")
-  created_at            DateTime                @default(now())
+  id                Int      @id @default(autoincrement())
+  unique_project_id String
+  project_name      String
+  vendor_id         Int
+  client_id         Int      @default(1)
+  created_by        Int
+  project_status    String   @default("Initiated")
+  created_at        DateTime @default(now())
+  is_grouping       Boolean  @default(false) // ✅ New
 
-  vendor                VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  createdByUser         UserMaster              @relation(name: "CreatedByUser", fields: [created_by], references: [id], onDelete: Cascade)
-  details               ProjectDetails[]
-  items                 ProjectItemsMaster[]
-  boxes                 BoxMaster[]
-  scanItems             ScanAndPackItem[]
-  client                ClientMaster            @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  vendor        VendorMaster         @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdByUser UserMaster           @relation(name: "CreatedByUser", fields: [created_by], references: [id], onDelete: Cascade)
+  details       ProjectDetails[]
+  items         ProjectItemsMaster[]
+  boxes         BoxMaster[]
+  scanItems     ScanAndPackItem[]
+  client        ClientMaster         @relation(fields: [client_id], references: [id], onDelete: Cascade)
 }
 
 model ProjectDetails {
-  id                      Int                     @id @default(autoincrement())
-  project_id              Int
-  vendor_id               Int
-  client_id               Int
-  total_items             Int                     @default(0)
-  total_packed            Int                     @default(0)
-  total_unpacked          Int                     @default(0)
-  start_date              DateTime                @default(now())
+  id                        Int       @id @default(autoincrement())
+  project_id                Int
+  vendor_id                 Int
+  client_id                 Int
+  total_items               Int       @default(0)
+  total_packed              Int       @default(0)
+  total_unpacked            Int       @default(0)
+  start_date                DateTime  @default(now())
   estimated_completion_date DateTime
-  actual_completion_date  DateTime?
+  actual_completion_date    DateTime?
+  room_name                 String // ✅ New
+  is_grouping               Boolean   @default(false) // ✅ New
 
-  project                 ProjectMaster           @relation(fields: [project_id], references: [id], onDelete: Cascade)
-  vendor                  VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  items                   ProjectItemsMaster[]
-  boxes                   BoxMaster[]             @relation(name: "BoxDetails")
-  scanItems               ScanAndPackItem[]       @relation(name: "ItemDetails")
-  client                  ClientMaster            @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  project   ProjectMaster        @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor    VendorMaster         @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  items     ProjectItemsMaster[]
+  boxes     BoxMaster[]          @relation(name: "BoxDetails")
+  scanItems ScanAndPackItem[]    @relation(name: "ItemDetails")
+  client    ClientMaster         @relation(fields: [client_id], references: [id], onDelete: Cascade)
 }
 
 model ProjectItemsMaster {
-  id                 Int               @id @default(autoincrement())
+  id                 Int    @id @default(autoincrement())
   project_id         Int
   vendor_id          Int
   client_id          Int
@@ -152,12 +155,14 @@ model ProjectItemsMaster {
   L2                 String
   L3                 String
   qty                Int
+  weight             Float  @default(0) // ✅ New
+  group              String // ✅ New
   project_details_id Int
 
-  project            ProjectMaster     @relation(fields: [project_id], references: [id], onDelete: Cascade)
-  vendor             VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  details            ProjectDetails    @relation(fields: [project_details_id], references: [id], onDelete: Cascade)
-  client             ClientMaster      @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  project ProjectMaster  @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor  VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  details ProjectDetails @relation(fields: [project_details_id], references: [id], onDelete: Cascade)
+  client  ClientMaster   @relation(fields: [client_id], references: [id], onDelete: Cascade)
 }
 
 enum BoxStatus {
@@ -171,74 +176,75 @@ enum ItemStatus {
 }
 
 model BoxMaster {
-  id              Int                 @id @default(autoincrement())
-  project_id      Int
+  id                 Int       @id @default(autoincrement())
+  project_id         Int
   project_details_id Int
-  vendor_id       Int
-  client_id       Int
-  box_name        String
-  box_status      BoxStatus
-  created_by      Int
-  created_date    DateTime            @default(now())
-  is_deleted      Boolean             @default(false)
-  deleted_by      Int?
-  deleted_at      DateTime?
+  vendor_id          Int
+  client_id          Int
+  box_name           String
+  box_status         BoxStatus
+  created_by         Int
+  created_date       DateTime  @default(now())
+  is_deleted         Boolean   @default(false)
+  deleted_by         Int?
+  deleted_at         DateTime?
 
-  project         ProjectMaster       @relation(fields: [project_id], references: [id], onDelete: Cascade)
-  vendor          VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  items           ScanAndPackItem[]
+  project ProjectMaster     @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor  VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  items   ScanAndPackItem[]
 
-  details         ProjectDetails      @relation(name: "BoxDetails", fields: [project_details_id], references: [id], onDelete: Cascade)
-  client          ClientMaster        @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  details ProjectDetails @relation(name: "BoxDetails", fields: [project_details_id], references: [id], onDelete: Cascade)
+  client  ClientMaster   @relation(fields: [client_id], references: [id], onDelete: Cascade)
 }
 
 model ScanAndPackItem {
-  id                    Int                   @id @default(autoincrement())
-  project_id            Int
-  vendor_id             Int
-  client_id             Int
-  box_id                Int
-  project_details_id    Int
-  unique_id             String
-  qty                   Int
-  created_date          DateTime              @default(now())
-  created_by            Int
-  status                ItemStatus
-  is_deleted            Boolean               @default(false)
+  id                 Int        @id @default(autoincrement())
+  project_id         Int
+  vendor_id          Int
+  client_id          Int
+  box_id             Int
+  project_details_id Int
+  unique_id          String
+  weight             Float      @default(0)
+  qty                Int
+  created_date       DateTime   @default(now())
+  created_by         Int
+  status             ItemStatus
+  is_deleted         Boolean    @default(false)
 
-  project               ProjectMaster         @relation(fields: [project_id], references: [id], onDelete: Cascade)
-  vendor                VendorMaster          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  box                   BoxMaster             @relation(fields: [box_id], references: [id], onDelete: Cascade)
-  user                  UserMaster            @relation(fields: [created_by], references: [id], onDelete: Cascade)
-  details               ProjectDetails        @relation(name: "ItemDetails", fields: [project_details_id], references: [id], onDelete: Cascade)
-  client                ClientMaster          @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  project ProjectMaster  @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor  VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  box     BoxMaster      @relation(fields: [box_id], references: [id], onDelete: Cascade)
+  user    UserMaster     @relation(fields: [created_by], references: [id], onDelete: Cascade)
+  details ProjectDetails @relation(name: "ItemDetails", fields: [project_details_id], references: [id], onDelete: Cascade)
+  client  ClientMaster   @relation(fields: [client_id], references: [id], onDelete: Cascade)
 }
 
 model VendorTokens {
-  id          Int           @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   vendor_id   Int
-  token       String        @default(uuid()) @unique
-  expiry_date DateTime      // UTC by default in Prisma
+  token       String   @unique @default(uuid())
+  expiry_date DateTime // UTC by default in Prisma
 
-  vendor      VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
 model ClientMaster {
-  id           Int                @id @default(autoincrement())
-  name         String
-  contact      String
-  alt_contact  String?
-  email        String
-  address      String
-  city         String
-  state        String
-  country      String
-  pincode      String
-  clientCode   String
+  id          Int     @id @default(autoincrement())
+  name        String
+  contact     String
+  alt_contact String?
+  email       String
+  address     String
+  city        String
+  state       String
+  country     String
+  pincode     String
+  clientCode  String
 
-  projects     ProjectMaster[]
-  details      ProjectDetails[]
-  items        ProjectItemsMaster[]
-  boxes        BoxMaster[]
-  scanItems    ScanAndPackItem[]
+  projects  ProjectMaster[]
+  details   ProjectDetails[]
+  items     ProjectItemsMaster[]
+  boxes     BoxMaster[]
+  scanItems ScanAndPackItem[]
 }
