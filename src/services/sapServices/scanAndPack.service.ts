@@ -214,7 +214,7 @@ export const getScanItemsByFields = async ({
   );
 
   return enrichedItems;
-};  
+};
 
 export const deleteScanAndPackItemById = async (id: number) => {
   // Step 1: Find the scan item

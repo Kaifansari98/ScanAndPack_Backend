@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as projectService from '../../services/projectServices/project.service';
-import { getProjectsByVendorIdService, createOrUpdateFullProject, calculateProjectWeight, calculateProjectAndBoxWeight } from '../../services/projectServices/project.service';
+import { getProjectsByVendorIdService, createOrUpdateFullProject, calculateProjectWeight, calculateProjectAndBoxWeight, getCompletedProjectsByVendorIdService, autoPackGroupedBoxesService } from '../../services/projectServices/project.service';
 import { getProjectItemByFields as getProjectItemByFieldsService } from '../../services/projectServices/project.service';
 
 export const createProject = async (req: Request, res: Response) => {
@@ -216,5 +216,68 @@ export const getProjectAndBoxWeight = async (req: Request, res: Response) => {
   } catch (err: any) {
     console.error('getProjectAndBoxWeight error:', err);
     return res.status(500).json({ error: err.message || 'Internal server error' });
+  }
+};
+
+// ============================================
+// UPDATED CONTROLLER FUNCTION
+// ============================================
+
+export const getCompletedProjects = async (req: Request, res: Response) => {
+  try {
+    const vendorId = parseInt(req.params.vendorId);
+    
+    // Validate vendorId
+    if (!vendorId || isNaN(vendorId)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Valid vendor ID is required'
+      });
+    }
+
+    const result = await getCompletedProjectsByVendorIdService(vendorId);
+    
+    res.status(200).json({
+      success: true,
+      data: result.completedProjects,
+      count: result.completedProjects.length,
+      boxUpdateSummary: result.boxUpdateSummary,
+      message: `Found ${result.completedProjects.length} completed projects. Updated box status for ${result.boxUpdateSummary.length} completed projects.`
+    });
+  } catch (error: any) {
+    console.error('Error fetching completed projects:', error);
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Internal server error'
+    });
+  }
+};
+
+export const autoPackGroupedBoxes = async (req: Request, res: Response) => {
+  try {
+    const vendorId = parseInt(req.params.vendorId);
+
+    // Validate vendorId
+    if (!vendorId || isNaN(vendorId)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Valid vendor ID is required',
+      });
+    }
+
+    const result = await autoPackGroupedBoxesService(vendorId);
+
+    res.status(200).json({
+      success: true,
+      data: result.updatedBoxes,
+      summary: result.summary,
+      message: result.message,
+    });
+  } catch (error: any) {
+    console.error('Error in auto-pack grouped boxes:', error);
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Internal server error',
+    });
   }
 };
