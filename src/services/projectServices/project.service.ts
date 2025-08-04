@@ -123,7 +123,7 @@ export const getProjectItemById = (id: number) => {
 };
 
 export const getProjectsByVendorIdService = async (vendorId: number) => {
-  return prisma.projectMaster.findMany({
+  const projects = await prisma.projectMaster.findMany({
     where: {
       vendor_id: vendorId,
     },
@@ -155,10 +155,46 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
           start_date: true,
           estimated_completion_date: true,
           actual_completion_date: true,
+          room_name: true,
         },
       },
     },
   });
+
+  // Transform the data to sum up totals for each project
+  const projectsWithAggregatedTotals = projects.map(project => {
+    // Sum up all totals from all rooms (details) for this project
+    const aggregatedTotals = project.details.reduce(
+      (acc, detail) => {
+        acc.total_items += detail.total_items || 0;
+        acc.total_packed += detail.total_packed || 0;
+        acc.total_unpacked += detail.total_unpacked || 0;
+        return acc;
+      },
+      { total_items: 0, total_packed: 0, total_unpacked: 0 }
+    );
+
+    return {
+      id: project.id,
+      project_name: project.project_name,
+      vendor_id: project.vendor_id,
+      client_id: project.client_id,
+      created_by: project.created_by,
+      project_status: project.project_status,
+      created_at: project.created_at,
+      createdByUser: project.createdByUser,
+      // Aggregated totals in separate object
+      aggregatedTotals: {
+        total_items: aggregatedTotals.total_items,
+        total_packed: aggregatedTotals.total_packed,
+        total_unpacked: aggregatedTotals.total_unpacked,
+      },
+      // Keep room-wise details for reference if needed
+      details: project.details,
+    };
+  });
+
+  return projectsWithAggregatedTotals;
 };
 
 export const getProjectItemByFields = async (params: {

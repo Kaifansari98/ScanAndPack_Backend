@@ -25,13 +25,16 @@ export const getProjectItemAndInsertScanPack = async (payload: ScanPackPayload) 
     include: {
       project: true,
       vendor: true,
-      details: true
+      details: true // This gives us the specific ProjectDetails row
     }
   });
 
   if (!item) throw new Error('Item not found');
 
-  // Step 2: Check how many times this item has already been scanned
+  // Get the specific project_details_id for this item
+  const project_details_id = item.project_details_id;
+
+  // Step 2: Check scan count for this specific item
   const currentScanCount = await prisma.scanAndPackItem.count({
     where: {
       project_id,
@@ -46,7 +49,60 @@ export const getProjectItemAndInsertScanPack = async (payload: ScanPackPayload) 
     throw new Error(`Scan limit exceeded for this item.`);
   }
 
-  // Step 3: Insert scan
+  // Step 3: Get the specific ProjectDetails row (room)
+  const projectDetails = await prisma.projectDetails.findUnique({
+    where: {
+      id: project_details_id
+    }
+  });
+
+  if (!projectDetails) throw new Error('Project details not found');
+
+  const isGrouping = projectDetails.is_grouping ?? false;
+
+  if (isGrouping) {
+    // Step 4: Check existing items in this box
+    const existingItemsInBox = await prisma.scanAndPackItem.findMany({
+      where: {
+        project_id,
+        vendor_id,
+        client_id,
+        box_id,
+        is_deleted: false
+      },
+      select: {
+        unique_id: true
+      }
+    });
+
+    if (existingItemsInBox.length > 0) {
+      // Get the group of the first item in the box
+      const firstItemId = existingItemsInBox[0].unique_id;
+
+      const firstItem = await prisma.projectItemsMaster.findFirst({
+        where: {
+          project_id,
+          vendor_id,
+          client_id,
+          unique_id: firstItemId
+        },
+        select: {
+          group: true
+        }
+      });
+
+      if (!firstItem) {
+        throw new Error("First item in box not found in master table");
+      }
+
+      // Now compare group
+      if (firstItem.group !== item.group) {
+        throw new Error(`Item group mismatch. Only items of group '${firstItem.group}' are allowed in this box.`);
+      }
+    }
+  }
+
+  // Step 5: Insert scan
   const newScan = await prisma.scanAndPackItem.create({
     data: {
       project_id: item.project_id,
@@ -56,15 +112,30 @@ export const getProjectItemAndInsertScanPack = async (payload: ScanPackPayload) 
       project_details_id: item.project_details_id,
       unique_id: item.unique_id,
       weight: item.weight,
-      qty: 1, 
+      qty: 1,
       created_by,
       status
     }
   });
 
-  // Step 4: Recalculate packed & unpacked totals
-  const packedCount = await prisma.scanAndPackItem.count({
+  // Step 6: Recalculate totals for the specific room (ProjectDetails)
+  // Get total_items for this specific project_details_id
+  const totalItemsForRoom = await prisma.projectItemsMaster.aggregate({
     where: {
+      project_details_id: project_details_id,
+      project_id,
+      vendor_id,
+      client_id
+    },
+    _sum: {
+      qty: true
+    }
+  });
+
+  // Get packed count for this specific project_details_id
+  const packedCountForRoom = await prisma.scanAndPackItem.count({
+    where: {
+      project_details_id: project_details_id,
       project_id,
       vendor_id,
       client_id,
@@ -72,28 +143,19 @@ export const getProjectItemAndInsertScanPack = async (payload: ScanPackPayload) 
     }
   });
 
-  const projectDetails = await prisma.projectDetails.findFirst({
-    where: {
-      project_id,
-      vendor_id,
-      client_id
-    }
-  });
-
-  const total_items = projectDetails?.total_items || 0;
-  const total_packed = packedCount;
+  const total_items = totalItemsForRoom._sum.qty || 0;
+  const total_packed = packedCountForRoom;
   const total_unpacked = Math.max(total_items - total_packed, 0);
 
-  // Step 5: Update projectDetails
-  await prisma.projectDetails.updateMany({
+  // Step 7: Update only the specific ProjectDetails row (room)
+  await prisma.projectDetails.update({
     where: {
-      project_id,
-      vendor_id,
-      client_id
+      id: project_details_id
     },
     data: {
       total_packed,
-      total_unpacked
+      total_unpacked,
+      total_items // Update this too in case it wasn't set correctly before
     }
   });
 
@@ -167,11 +229,13 @@ export const deleteScanAndPackItemById = async (id: number) => {
     where: { id },
   });
 
-  // Step 3: Recalculate total_packed and total_unpacked
-  const { project_id, vendor_id, client_id } = existing;
+  // Step 3: Recalculate total_packed and total_unpacked for the specific room
+  const { project_id, vendor_id, client_id, project_details_id } = existing;
 
-  const packedCount = await prisma.scanAndPackItem.count({
+  // Get packed count for this specific project_details_id only
+  const packedCountForRoom = await prisma.scanAndPackItem.count({
     where: {
+      project_details_id: project_details_id,
       project_id,
       vendor_id,
       client_id,
@@ -179,11 +243,10 @@ export const deleteScanAndPackItemById = async (id: number) => {
     },
   });
 
-  const projectDetails = await prisma.projectDetails.findFirst({
+  // Get the specific ProjectDetails row (room)
+  const projectDetails = await prisma.projectDetails.findUnique({
     where: {
-      project_id,
-      vendor_id,
-      client_id,
+      id: project_details_id,
     },
   });
 
@@ -192,15 +255,13 @@ export const deleteScanAndPackItemById = async (id: number) => {
   }
 
   const total_items = projectDetails.total_items || 0;
-  const total_packed = packedCount;
+  const total_packed = packedCountForRoom;
   const total_unpacked = Math.max(total_items - total_packed, 0);
 
-  // Step 4: Update the projectDetails table
-  await prisma.projectDetails.updateMany({
+  // Step 4: Update only the specific ProjectDetails row (room)
+  await prisma.projectDetails.update({
     where: {
-      project_id,
-      vendor_id,
-      client_id,
+      id: project_details_id,
     },
     data: {
       total_packed,
@@ -208,5 +269,14 @@ export const deleteScanAndPackItemById = async (id: number) => {
     },
   });
 
-  return { deletedId: id, total_packed, total_unpacked };
+  return { 
+    deletedId: id, 
+    updatedProjectDetails: {
+      project_details_id: project_details_id,
+      room_name: projectDetails.room_name,
+      total_items,
+      total_packed, 
+      total_unpacked 
+    }
+  };
 };
