@@ -61,9 +61,32 @@ export const getProjectById = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
     const project = await projectService.getProjectById(id);
-    res.json(project);
+
+    if (!project) {
+      return res.status(404).json({ error: 'Project not found' });
+    }
+
+    // Calculate totals
+    const total_items = project.details.reduce((sum, d) => sum + d.total_items, 0);
+    const total_packed = project.details.reduce((sum, d) => sum + d.total_packed, 0);
+    const total_unpacked = project.details.reduce((sum, d) => sum + d.total_unpacked, 0);
+    const total_items_count = project.items.length;
+
+    // Send combined response
+    res.json({
+      ...project,
+      totals: {
+        total_items,
+        total_packed,
+        total_unpacked,
+        total_items_count
+      }
+    });
   } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch project by ID', details: err });
+    res.status(500).json({
+      error: 'Failed to fetch project by ID',
+      details: err
+    });
   }
 };
   
