@@ -173,6 +173,17 @@ export const getScanItemsByFields = async ({
   client_id: number;
   box_id: number;
 }) => {
+
+  const boxDetails = await prisma.boxMaster.findFirst({
+    where: {
+      id: box_id,
+      project_id,
+      vendor_id,
+      client_id,
+      is_deleted: false,
+    },
+  });
+
   const scanItems = await prisma.scanAndPackItem.findMany({
     where: {
       project_id,
@@ -213,7 +224,11 @@ export const getScanItemsByFields = async ({
     })
   );
 
-  return enrichedItems;
+  return {
+    box_details: boxDetails,
+    items: enrichedItems,
+    total_items: enrichedItems.length,
+  };
 };
 
 export const deleteScanAndPackItemById = async (id: number) => {
