@@ -196,6 +196,7 @@ export const getAllBoxesWithItemCountService = async (
       project_id: projectId,
       vendor_id: vendorId,
       client_id: clientId,
+      is_deleted: false,
     },
   });
 
@@ -207,6 +208,7 @@ export const getAllBoxesWithItemCountService = async (
           project_id: projectId,
           client_id: clientId,
           box_id: box.id,
+          is_deleted: false,
         },
       });
 
