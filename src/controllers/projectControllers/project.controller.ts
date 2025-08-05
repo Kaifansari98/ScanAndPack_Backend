@@ -71,6 +71,7 @@ export const getProjectById = async (req: Request, res: Response) => {
     const total_packed = project.details.reduce((sum, d) => sum + d.total_packed, 0);
     const total_unpacked = project.details.reduce((sum, d) => sum + d.total_unpacked, 0);
     const total_items_count = project.items.length;
+    const total_weight = project.items.reduce((sum, item) => sum + (item.weight || 0), 0);
 
     // Send combined response
     res.json({
@@ -79,7 +80,8 @@ export const getProjectById = async (req: Request, res: Response) => {
         total_items,
         total_packed,
         total_unpacked,
-        total_items_count
+        total_items_count,
+        total_weight
       }
     });
   } catch (err) {
