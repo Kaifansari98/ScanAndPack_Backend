@@ -173,7 +173,6 @@ export const getScanItemsByFields = async ({
   client_id: number;
   box_id: number;
 }) => {
-
   const boxDetails = await prisma.boxMaster.findFirst({
     where: {
       id: box_id,
@@ -191,6 +190,9 @@ export const getScanItemsByFields = async ({
       client_id,
       box_id,
       is_deleted: false,
+    },
+    include: {
+      details: true, // Include ProjectDetails relation
     },
     orderBy: {
       created_date: 'desc',
@@ -215,10 +217,13 @@ export const getScanItemsByFields = async ({
         vendor_id: item.vendor_id,
         client_id: item.client_id,
         box_id: item.box_id,
+        project_details_id: item.project_details_id,
         status: item.status,
         created_by: item.created_by,
         created_date: item.created_date,
         qty: item.qty,
+        weight: item.weight,
+        project_details: item.details, // ProjectDetails data
         project_item_details: projectItems.length === 1 ? projectItems[0] : projectItems,
       };      
     })
