@@ -60,46 +60,108 @@ export const getProjectItemAndInsertScanPack = async (payload: ScanPackPayload) 
 
   const isGrouping = projectDetails.is_grouping ?? false;
 
-  if (isGrouping) {
-    // Step 4: Check existing items in this box
-    const existingItemsInBox = await prisma.scanAndPackItem.findMany({
+  // Step 4: Check box restrictions based on existing items' grouping status
+  const allItemsInBox = await prisma.scanAndPackItem.findMany({
+    where: {
+      project_id,
+      vendor_id,
+      client_id,
+      box_id,
+      is_deleted: false
+    },
+    select: {
+      unique_id: true,
+      project_details_id: true
+    }
+  });
+
+  console.log(`📦 Total items in box: ${allItemsInBox.length}`);
+  
+  if (allItemsInBox.length > 0) {
+    // Get unique room IDs from existing items in box
+    const existingRoomIds = [...new Set(allItemsInBox.map(item => item.project_details_id))];
+    console.log(`📦 Existing rooms in box: ${existingRoomIds.join(', ')}`);
+    
+    // Check if any existing room has is_grouping = true
+    const existingRoomsDetails = await prisma.projectDetails.findMany({
       where: {
-        project_id,
-        vendor_id,
-        client_id,
-        box_id,
-        is_deleted: false
+        id: { in: existingRoomIds }
       },
       select: {
-        unique_id: true
+        id: true,
+        is_grouping: true
       }
     });
-
-    if (existingItemsInBox.length > 0) {
-      // Get the group of the first item in the box
-      const firstItemId = existingItemsInBox[0].unique_id;
-
-      const firstItem = await prisma.projectItemsMaster.findFirst({
-        where: {
-          project_id,
-          vendor_id,
-          client_id,
-          unique_id: firstItemId
-        },
-        select: {
-          group: true
-        }
-      });
-
-      if (!firstItem) {
-        throw new Error("First item in box not found in master table");
+    
+    const hasGroupingEnabledRooms = existingRoomsDetails.some(room => room.is_grouping === true);
+    
+    if (hasGroupingEnabledRooms) {
+      console.log(`🔒 Box contains items from grouping-enabled rooms - applying strict validation`);
+      
+      // Find the grouping-enabled room in the box
+      const groupingEnabledRoom = existingRoomsDetails.find(room => room.is_grouping === true);
+      const existingGroupingRoomId = groupingEnabledRoom?.id;
+      
+      console.log(`🏠 Grouping-enabled room in box: ${existingGroupingRoomId}`);
+      console.log(`🏠 Incoming item room: ${project_details_id}`);
+      
+      // Check room restriction
+      if (project_details_id !== existingGroupingRoomId) {
+        throw new Error(`❌ Room mismatch! This box contains items from grouping-enabled room ${existingGroupingRoomId}. Cannot add items from room ${project_details_id}.`);
       }
+      
+      console.log(`✅ Room validation passed`);
+      
+      // Check group restriction
+      console.log(`📦 Incoming item group: "${item.group}"`);
+      
+      // Get first item from the grouping-enabled room
+      const firstItemFromGroupingRoom = allItemsInBox.find(boxItem => boxItem.project_details_id === existingGroupingRoomId);
+      
+      if (firstItemFromGroupingRoom) {
+        const firstItem = await prisma.projectItemsMaster.findFirst({
+          where: {
+            project_id,
+            vendor_id,
+            client_id,
+            unique_id: firstItemFromGroupingRoom.unique_id,
+            project_details_id: existingGroupingRoomId
+          },
+          select: {
+            group: true
+          }
+        });
 
-      // Now compare group
-      if (firstItem.group !== item.group) {
-        throw new Error(`Item group mismatch. Only items of group '${firstItem.group}' are allowed in this box.`);
+        if (!firstItem) {
+          throw new Error("First item in box not found in master table");
+        }
+
+        console.log(`📦 Existing item group in box: "${firstItem.group}"`);
+
+        // Normalize groups for comparison
+        const existingItemGroup = (firstItem.group || '').toString().trim();
+        const incomingItemGroup = (item.group || '').toString().trim();
+
+        console.log(`🔍 Comparing groups: "${existingItemGroup}" vs "${incomingItemGroup}"`);
+
+        if (existingItemGroup !== incomingItemGroup) {
+          throw new Error(`❌ Group mismatch! This box already contains items of group '${existingItemGroup}' from grouping-enabled room. Cannot add group '${incomingItemGroup}'.`);
+        }
+
+        console.log(`✅ Group validation passed!`);
+      }
+    } else {
+      console.log(`🔓 Box contains only items from non-grouping rooms`);
+      
+      if (isGrouping) {
+        console.log(`🔒 But incoming item is from grouping-enabled room ${project_details_id}`);
+        throw new Error(`❌ Cannot add items from grouping-enabled room ${project_details_id} to a box that already contains items from non-grouping rooms.`);
+      } else {
+        console.log(`✅ Incoming item is also from non-grouping room - no restrictions`);
       }
     }
+  } else {
+    console.log(`📦 This is the first item in the box. Room: ${project_details_id}, Group: "${item.group}", Grouping: ${isGrouping ? 'ENABLED' : 'DISABLED'}`);
   }
 
   // Step 5: Insert scan
