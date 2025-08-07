@@ -3,7 +3,8 @@ import * as boxService from '../../services/boxServices/box.service';
 import { 
   getAllBoxesWithItemCountService,
   updateBoxStatus,
-  softDeleteBoxWithScanItems
+  softDeleteBoxWithScanItems,
+  getGroupedItemInfoByBoxId
  } from '../../services/boxServices/box.service';
 import { BoxStatus } from '@prisma/client';
 
@@ -149,5 +150,24 @@ export const deleteBoxAndItsScanItems = async (req: Request, res: Response) => {
   } catch (error: any) {
     console.error('[Delete Box]', error);
     res.status(500).json({ error: error.message || 'Failed to delete box' });
+  }
+};
+
+export const getGroupedItemInfo = async (req: Request, res: Response) => {
+  try {
+    const boxId = parseInt(req.params.boxId);
+    if (isNaN(boxId)) {
+      return res.status(400).json({ error: 'Invalid box ID' });
+    }
+
+    const result = await getGroupedItemInfoByBoxId(boxId);
+    if (!result) {
+      return res.status(404).json({ message: 'No grouped items found in this box' });
+    }
+
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error('Error fetching grouped item info:', error);
+    return res.status(500).json({ error: 'Internal server error' });
   }
 };

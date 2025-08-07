@@ -8,7 +8,8 @@ import {
   updateBoxName,
   markBoxAsPacked,
   markBoxAsUnpacked,
-  deleteBoxAndItsScanItems
+  deleteBoxAndItsScanItems,
+  getGroupedItemInfo
 } from '../../controllers/boxControllers/box.controller';
 
 const router = Router();
@@ -34,5 +35,7 @@ router.put('/status/packed/:boxId', markBoxAsPacked);
 router.put('/status/unpacked/:boxId', markBoxAsUnpacked);
 
 router.delete('/delete/:boxId', deleteBoxAndItsScanItems);
+
+router.get('/grouped-info/:boxId', getGroupedItemInfo);
 
 export default router;

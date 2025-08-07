@@ -340,3 +340,38 @@ export const softDeleteBoxWithScanItems = async (
     updatedProjectDetails: updatedRooms,
   };
 };
+
+export const getGroupedItemInfoByBoxId = async (boxId: number) => {
+  const groupedItem = await prisma.scanAndPackItem.findFirst({
+    where: {
+      box_id: boxId,
+      is_deleted: false,
+      details: {
+        is_grouping: true,
+      },
+    },
+    include: {
+      details: true,
+      project: false,
+      vendor: false,
+      client: false,
+    },
+  });
+
+  if (!groupedItem) return null;
+
+  const item = await prisma.projectItemsMaster.findFirst({
+    where: {
+      unique_id: groupedItem.unique_id,
+      project_id: groupedItem.project_id,
+      client_id: groupedItem.client_id,
+      vendor_id: groupedItem.vendor_id,
+      project_details_id: groupedItem.project_details_id,
+    },
+  });
+
+  return item ? {
+    group: item.group,
+    roomName: groupedItem.details.room_name,
+  } : null;
+};
