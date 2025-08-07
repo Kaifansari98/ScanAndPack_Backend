@@ -286,7 +286,9 @@ export const createOrUpdateFullProject = async (
     include: { vendor: true }
   });
 
-  if (!vendorTokenEntry) throw new Error("Invalid or expired vendor token");
+  if (!vendorTokenEntry || new Date() > vendorTokenEntry.expiry_date){
+    throw new Error("Invalid or expired vendor token");
+  }
 
   const vendor = vendorTokenEntry.vendor;
 
