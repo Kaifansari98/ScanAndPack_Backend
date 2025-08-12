@@ -10,8 +10,11 @@ import { BoxStatus } from '@prisma/client';
 
 export const createBox = async (req: Request, res: Response) => {
   try {
-    const box = await boxService.createBox(req.body);
-    res.status(201).json(box);
+    const newBox = await boxService.createBox(req.body);
+    res.status(201).json({
+      message: 'Box created successfully',
+      box: newBox, // includes id and other selected fields
+    });
   } catch (err: any) {
     if (err.message === 'Box already exists') {
       return res.status(409).json({ message: err.message });
