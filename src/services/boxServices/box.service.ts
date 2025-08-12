@@ -21,6 +21,7 @@ export const createBox = async (data: CreateBoxInput) => {
 
   return prisma.boxMaster.create({
     data,
+    select: { id: true, box_name: true, project_id: true, vendor_id: true, client_id: true, box_status: true }
   });
 };
 
