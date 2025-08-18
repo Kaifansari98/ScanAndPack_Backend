@@ -3,6 +3,8 @@ import { createProductType, fetchAllProductTypes, removeProductType } from "../.
 import { createSiteType, fetchAllSiteTypes, removeSiteType } from "../../controllers/leadModuleControllers/siteType.controller";
 import { createSourceType, fetchAllSourceTypes, removeSourceType } from "../../controllers/leadModuleControllers/sourceType.controller";
 import { createProductStructureType, fetchAllProductStructureTypes, removeProductStructureType } from "../../controllers/leadModuleControllers/productStructureType.controller";
+import { createLead } from "../../controllers/leadModuleControllers/leadsGeneration/leadGeneration.controller";
+import { upload } from "../../middlewares/upload.middleware";
 
 const router = Router();
 
@@ -18,5 +20,7 @@ router.get("/get-all-productStructure-types/:vendor_id", fetchAllProductStructur
 router.delete("/delete-productStructure-type/:id", removeProductStructureType);
 router.get("/get-all-source-types/:vendor_id", fetchAllSourceTypes);
 router.delete("/delete-source-type/:id", removeSourceType);
+
+router.post("/create", upload.array("documents", 10), createLead);
 
 export default router;

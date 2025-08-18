@@ -1,0 +1,313 @@
+# Postman Testing Guide - Lead Creation API
+
+## 🚀 Base Configuration
+
+**Method:** `POST`  
+**URL:** `http://localhost:3000/api/leads/create` *(adjust port/path as needed)*  
+**Headers:**
+```
+Content-Type: multipart/form-data
+```
+*Note: Postman automatically sets this when using form-data*
+
+---
+
+## 📋 Test Case 1: Complete Lead with Files
+
+### Form-data Body:
+| Key | Type | Value |
+|-----|------|--------|
+| `firstname` | Text | `John` |
+| `lastname` | Text | `Doe` |
+| `country_code` | Text | `+1` |
+| `contact_no` | Text | `9876543210` |
+| `alt_contact_no` | Text | `9876543211` |
+| `email` | Text | `john.doe@example.com` |
+| `site_address` | Text | `123 Main Street, Downtown, New York` |
+| `site_type_id` | Text | `1` |
+| `priority` | Text | `high` |
+| `billing_name` | Text | `John Doe Enterprises` |
+| `source_id` | Text | `1` |
+| `archetech_name` | Text | `Smith Architecture` |
+| `designer_remark` | Text | `Modern design with sustainable materials` |
+| `vendor_id` | Text | `1` |
+| `created_by` | Text | `1` |
+| `product_types` | Text | `Solar Panels` |
+| `product_types` | Text | `Inverters` |
+| `product_structures` | Text | `Roof Mount` |
+| `product_structures` | Text | `Ground Mount` |
+| `documents` | File | *Select image file* |
+| `documents` | File | *Select another image file* |
+
+### Expected Response (201):
+```json
+{
+  "success": true,
+  "message": "Lead created successfully",
+  "data": {
+    "lead": {
+      "id": 1,
+      "fullName": "John Doe", 
+      "priority": "high",
+      "createdAt": "2025-08-18T10:30:00.000Z"
+    },
+    "account": {
+      "id": 1,
+      "name": "John Doe"
+    },
+    "documentsProcessed": 2
+  }
+}
+```
+
+---
+
+## 📋 Test Case 2: Minimal Lead (No Optional Fields)
+
+### Form-data Body:
+| Key | Type | Value |
+|-----|------|--------|
+| `firstname` | Text | `Jane` |
+| `lastname` | Text | `Smith` |
+| `country_code` | Text | `+91` |
+| `contact_no` | Text | `9876543210` |
+| `site_address` | Text | `456 Oak Avenue, Mumbai, Maharashtra` |
+| `priority` | Text | `standard` |
+| `source_id` | Text | `1` |
+| `vendor_id` | Text | `1` |
+| `created_by` | Text | `1` |
+
+### Expected Response (201):
+```json
+{
+  "success": true,
+  "message": "Lead created successfully",
+  "data": {
+    "lead": {
+      "id": 2,
+      "fullName": "Jane Smith",
+      "priority": "standard",
+      "createdAt": "2025-08-18T10:35:00.000Z"
+    },
+    "account": {
+      "id": 2,
+      "name": "Jane Smith"
+    },
+    "documentsProcessed": 0
+  }
+}
+```
+
+---
+
+## 📋 Test Case 3: Lead with Multiple Product Types (Arrays)
+
+### Form-data Body:
+| Key | Type | Value |
+|-----|------|--------|
+| `firstname` | Text | `Mike` |
+| `lastname` | Text | `Johnson` |
+| `country_code` | Text | `+44` |
+| `contact_no` | Text | `7896541230` |
+| `site_address` | Text | `789 Park Lane, London, UK` |
+| `priority` | Text | `urgent` |
+| `source_id` | Text | `2` |
+| `vendor_id` | Text | `1` |
+| `created_by` | Text | `1` |
+| `product_types[0]` | Text | `Solar Panels` |
+| `product_types[1]` | Text | `Inverters` |
+| `product_types[2]` | Text | `Battery Storage` |
+| `product_structures[0]` | Text | `Roof Mount` |
+| `product_structures[1]` | Text | `Carport` |
+
+---
+
+## ❌ Test Case 4: Validation Errors
+
+### Missing Required Fields:
+| Key | Type | Value |
+|-----|------|--------|
+| `firstname` | Text | `Test` |
+| `lastname` | Text | `User` |
+| *(missing other required fields)* |
+
+### Expected Response (400):
+```json
+{
+  "success": false,
+  "error": "Validation failed",
+  "details": [
+    {
+      "field": "country_code",
+      "message": "\"country_code\" is required"
+    },
+    {
+      "field": "contact_no", 
+      "message": "\"contact_no\" is required"
+    }
+  ]
+}
+```
+
+### Invalid Priority:
+| Key | Type | Value |
+|-----|------|--------|
+| `firstname` | Text | `Test` |
+| `lastname` | Text | `User` |
+| `country_code` | Text | `+1` |
+| `contact_no` | Text | `9876543210` |
+| `site_address` | Text | `123 Test St` |
+| `priority` | Text | `invalid_priority` |
+| `source_id` | Text | `1` |
+| `vendor_id` | Text | `1` |
+| `created_by` | Text | `1` |
+
+### Expected Response (400):
+```json
+{
+  "success": false,
+  "error": "Validation failed",
+  "details": [
+    {
+      "field": "priority",
+      "message": "\"priority\" must be one of [urgent, high, standard, low]"
+    }
+  ]
+}
+```
+
+---
+
+## 📋 Test Case 5: Too Many Files
+
+Upload 11+ files to test file limit validation.
+
+### Expected Response (400):
+```json
+{
+  "success": false,
+  "error": "Too many files",
+  "details": "Maximum 10 files allowed"
+}
+```
+
+---
+
+## 📋 Test Case 6: Invalid File Types
+
+Upload a `.txt` or `.doc` file instead of images.
+
+### Expected Response (400):
+```json
+{
+  "error": "Only image files and PDFs are allowed! Received: text/plain"
+}
+```
+
+---
+
+## 🔧 Postman Collection Setup
+
+### Environment Variables:
+Create a Postman environment with:
+```
+base_url: http://localhost:3000
+api_version: v1
+```
+
+### Pre-request Script (Optional):
+```javascript
+// Generate random test data
+pm.environment.set("random_firstname", pm.variables.replaceIn('{{$randomFirstName}}'));
+pm.environment.set("random_lastname", pm.variables.replaceIn('{{$randomLastName}}'));
+pm.environment.set("random_phone", Math.floor(Math.random() * 9000000000) + 1000000000);
+```
+
+### Tests Script:
+```javascript
+pm.test("Status code is 201", function () {
+    pm.response.to.have.status(201);
+});
+
+pm.test("Response has success field", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData).to.have.property('success');
+    pm.expect(jsonData.success).to.eql(true);
+});
+
+pm.test("Response contains lead data", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData.data).to.have.property('lead');
+    pm.expect(jsonData.data.lead).to.have.property('id');
+});
+
+pm.test("Lead has correct priority", function () {
+    var jsonData = pm.response.json();
+    var requestPriority = pm.request.body.formdata.get('priority');
+    pm.expect(jsonData.data.lead.priority).to.eql(requestPriority);
+});
+```
+
+---
+
+## 📊 Load Testing
+
+### Simple Load Test:
+1. Duplicate the successful request
+2. Use Postman Runner
+3. Run 10-50 iterations
+4. Monitor response times and success rates
+
+---
+
+## 🐛 Debugging Tips
+
+### Check Server Logs:
+```bash
+# Terminal where your server is running
+# Look for console.log outputs:
+# [CONTROLLER] createLead called
+# [INFO] Processing X document(s)
+# [SUCCESS] Lead created: ID
+```
+
+### Common Issues:
+
+1. **Port/URL Wrong**: Verify your server is running on correct port
+2. **Database Connection**: Ensure Prisma can connect to your database
+3. **File Upload Path**: Check if upload directory exists and has write permissions
+4. **Enum Values**: Ensure priority values match your Prisma enum exactly
+
+### Verify Database:
+```sql
+-- Check if data was inserted
+SELECT * FROM LeadMaster ORDER BY id DESC LIMIT 5;
+SELECT * FROM AccountMaster ORDER BY id DESC LIMIT 5;
+SELECT * FROM DocumentMaster ORDER BY id DESC LIMIT 5;
+```
+
+---
+
+## ✅ Success Checklist
+
+- [ ] Server running and accessible
+- [ ] Database connected
+- [ ] Upload directory exists
+- [ ] All required environment variables set
+- [ ] Test files (images/PDFs) ready
+- [ ] Postman collection imported
+- [ ] Environment configured
+- [ ] Basic validation tests passing
+- [ ] File upload tests passing
+- [ ] Error handling tests working
+
+---
+
+## 🎯 Next Steps
+
+After successful testing:
+1. Add authentication/authorization tests
+2. Test edge cases (very long strings, special characters)
+3. Performance testing with large files
+4. Integration testing with real frontend
+5. Add monitoring/logging tests
