@@ -17,6 +17,9 @@ import vendorTokenRoutes from './vendorRoutes/vendorToken.routes';
 
 import clientRoutes from "./clientRoutes/client.routes";
 
+// Leads Routes
+import leadModuleRoutes from "./leadModuleRoutes/lead.routes"
+
 const router = Router();
 
 router.use('/vendors', vendorRoutes);
@@ -36,5 +39,7 @@ router.use('/scan-items', scanItemRoutes);
 router.use('/auth', authRoutes);
 
 router.use("/clients", clientRoutes);
+
+router.use("/leads", leadModuleRoutes);
 
 export { router };

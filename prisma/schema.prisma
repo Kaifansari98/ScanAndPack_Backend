@@ -37,6 +37,21 @@ model VendorMaster {
   boxes          BoxMaster[]
   scanItems      ScanAndPackItem[]
   tokens         VendorTokens[]
+
+  // ✅ CRM reverse relations
+
+  // ✅ Leads module
+  leads         LeadMaster[]
+  siteTypes     SiteTypeMaster[]
+  sources       SourceMaster[]
+
+  // ✅ New additions
+  accounts          AccountMaster[]
+  leadProductMaps   LeadProductMapping[]
+  productTypes      ProductTypeMaster[]
+  documents         LeadDocuments[]
+  productStructure  ProductStructure[]
+  leadProductStructureMapping LeadProductStructureMapping[]
 }
 
 model VendorAddress {
@@ -89,6 +104,25 @@ model UserMaster {
   documents        UserDocument[]
   scanItemsCreated ScanAndPackItem[]
   createdProjects  ProjectMaster[]   @relation("CreatedByUser")
+
+  // ✅ CRM reverse relations
+
+  // ✅ Leads
+  leadsCreated   LeadMaster[] @relation("LeadCreatedBy")
+  leadsUpdated   LeadMaster[] @relation("LeadUpdatedBy")
+  leadsAssigned  LeadMaster[] @relation("LeadAssignedTo")
+  leadsDelegated LeadMaster[] @relation("LeadAssignedBy")
+
+  // ✅ Accounts
+  accountsCreated AccountMaster[] @relation("AccountCreatedBy")
+  accountsUpdated AccountMaster[] @relation("AccountUpdatedBy")
+
+  // ✅ Lead Product Mapping
+  leadProductsCreated LeadProductMapping[] @relation("LeadProductCreatedBy")
+
+  // ✅ Documents
+  documentsCreated LeadDocuments[] @relation("DocumentCreatedBy")
+  documentsDeleted LeadDocuments[] @relation("DocumentDeletedBy")
 }
 
 model UserDocument {
@@ -247,4 +281,175 @@ model ClientMaster {
   items     ProjectItemsMaster[]
   boxes     BoxMaster[]
   scanItems ScanAndPackItem[]
+}
+
+enum LeadPriority {
+  urgent
+  high
+  standard
+  low
+}
+
+model LeadMaster {
+  id              Int       @id @default(autoincrement())
+  firstname       String
+  lastname        String
+  country_code    String
+  contact_no      String
+  alt_contact_no  String?
+  email           String?
+  site_address    String
+  site_type_id    Int?
+  priority        LeadPriority
+  billing_name    String?
+  source_id       Int
+  account_id      Int
+  archetech_name  String?
+  designer_remark String?
+  created_by      Int
+  created_at      DateTime  @default(now())
+  updated_by      Int?
+  updated_at      DateTime  @updatedAt
+  vendor_id       Int
+  assign_to       Int?
+  assigned_by     Int?
+
+  // ✅ Relations
+  vendor      VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  siteType    SiteTypeMaster? @relation(fields: [site_type_id], references: [id], onDelete: Cascade)
+  source      SourceMaster   @relation(fields: [source_id], references: [id], onDelete: Cascade)
+  createdBy   UserMaster     @relation("LeadCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  updatedBy   UserMaster?    @relation("LeadUpdatedBy", fields: [updated_by], references: [id])
+  assignedTo  UserMaster?    @relation("LeadAssignedTo", fields: [assign_to], references: [id])
+  assignedBy  UserMaster?    @relation("LeadAssignedBy", fields: [assigned_by], references: [id])
+  account     AccountMaster  @relation(fields: [account_id], references: [id], onDelete: Cascade)
+
+  // ✅ New reverse relations
+  productMappings LeadProductMapping[]
+  documents       LeadDocuments[]
+  leadProductStructureMapping LeadProductStructureMapping[]
+
+  // ✅ Unique constraints for contact_no and email per vendor
+  @@unique([contact_no, vendor_id], name: "unique_contact_per_vendor")
+  @@unique([email, vendor_id], name: "unique_email_per_vendor")
+}
+
+model SiteTypeMaster {
+  id        Int      @id @default(autoincrement())
+  type      String
+  vendor_id Int
+
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  leads  LeadMaster[]
+}
+
+model SourceMaster {
+  id        Int      @id @default(autoincrement())
+  type      String
+  vendor_id Int
+
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  leads  LeadMaster[]
+}
+
+enum DocumentType {
+  site_photo
+}
+
+model AccountMaster {
+  id             Int       @id @default(autoincrement())
+  name           String
+  country_code   String
+  contact_no     String
+  alt_contact_no String?
+  email          String?
+  vendor_id      Int
+  created_by     Int
+  created_at     DateTime  @default(now())
+  updated_by     Int?
+  updated_at     DateTime  @updatedAt
+
+  // ✅ Relations
+  vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdBy UserMaster   @relation("AccountCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  updatedBy UserMaster?  @relation("AccountUpdatedBy", fields: [updated_by], references: [id])
+
+  leadsMapping LeadProductMapping[]
+  documents    LeadDocuments[]
+  leadProductStructureMapping LeadProductStructureMapping[]
+  leads        LeadMaster[]
+}
+
+model LeadProductMapping {
+  id             Int       @id @default(autoincrement())
+  vendor_id      Int
+  lead_id        Int
+  account_id     Int
+  product_type_id Int
+  created_by     Int
+  created_at     DateTime  @default(now())
+
+  // ✅ Relations
+  vendor      VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead        LeadMaster      @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  account     AccountMaster   @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  productType ProductTypeMaster @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
+
+  createdBy   UserMaster      @relation("LeadProductCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+}
+
+model ProductTypeMaster {
+  id        Int      @id @default(autoincrement())
+  type      String
+  vendor_id Int
+
+  vendor VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  leads  LeadProductMapping[]
+}
+
+model LeadDocuments {
+  id           Int          @id @default(autoincrement())
+  doc_og_name  String
+  doc_sys_name String
+  created_by   Int
+  created_at   DateTime     @default(now())
+  deleted_by   Int?
+  deleted_at   DateTime?
+  doc_type     DocumentType
+  account_id   Int?
+  lead_id      Int?
+  vendor_id    Int
+
+  // ✅ Relations
+  vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  account   AccountMaster? @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  lead      LeadMaster?    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+
+  createdBy UserMaster   @relation("DocumentCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  deletedBy UserMaster?  @relation("DocumentDeletedBy", fields: [deleted_by], references: [id])
+}
+
+model ProductStructure{
+  id          Int        @id @default(autoincrement())
+  type        String
+  vendor_id   Int
+
+  vendor VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  leadProductStructureMapping LeadProductStructureMapping[]
+}
+
+model LeadProductStructureMapping{
+  id                      Int       @id @default(autoincrement())
+  vendor_id               Int
+  lead_id                 Int
+  account_id              Int
+  product_structure_id    Int 
+  created_by              Int
+  created_at              DateTime  @default(now())
+
+  vendor VendorMaster     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead  LeadMaster        @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  account AccountMaster   @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  productStructure ProductStructure @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
 }

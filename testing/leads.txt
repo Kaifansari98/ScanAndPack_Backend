@@ -1,0 +1,335 @@
+# Updated Postman Testing Guide - Lead Creation API
+
+## 🚀 Base Configuration
+
+**Method:** `POST`  
+**URL:** `http://localhost:3000/api/leads/create` *(adjust port/path as needed)*  
+**Headers:**
+```
+Content-Type: multipart/form-data
+```
+*Note: Postman automatically sets this when using form-data*
+
+---
+
+## 📋 Test Case 1: Complete Lead with Files
+
+### Form-data Body:
+| Key | Type | Value |
+|-----|------|--------|
+| `firstname` | Text | `John` |
+| `lastname` | Text | `Doe` |
+| `country_code` | Text | `+1` |
+| `contact_no` | Text | `9876543210` |
+| `alt_contact_no` | Text | `9876543211` |
+| `email` | Text | `john.doe@example.com` |
+| `site_address` | Text | `123 Main Street, Downtown, New York` |
+| `site_type_id` | Text | `1` |
+| `priority` | Text | `high` |
+| `billing_name` | Text | `John Doe Enterprises` |
+| `source_id` | Text | `1` |
+| `archetech_name` | Text | `Smith Architecture` |
+| `designer_remark` | Text | `Modern design with sustainable materials` |
+| `vendor_id` | Text | `1` |
+| `created_by` | Text | `1` |
+| `product_types` | Text | `1` | ⭐ **CHANGED: Now ID instead of string** |
+| `product_types` | Text | `2` | ⭐ **CHANGED: Now ID instead of string** |
+| `product_structures` | Text | `1` | ⭐ **CHANGED: Now ID instead of string** |
+| `product_structures` | Text | `3` | ⭐ **CHANGED: Now ID instead of string** |
+| `documents` | File | *Select image file* |
+| `documents` | File | *Select another image file* |
+
+### Expected Response (201):
+```json
+{
+  "success": true,
+  "message": "Lead created successfully",
+  "data": {
+    "lead": {
+      "id": 1,
+      "fullName": "John Doe", 
+      "priority": "high",
+      "account_id": 1,
+      "createdAt": "2025-08-18T10:30:00.000Z"
+    },
+    "account": {
+      "id": 1,
+      "name": "John Doe"
+    },
+    "documentsProcessed": 2
+  }
+}
+```
+
+---
+
+## 📋 Test Case 2: Minimal Lead (No Optional Fields)
+
+### Form-data Body:
+| Key | Type | Value |
+|-----|------|--------|
+| `firstname` | Text | `Jane` |
+| `lastname` | Text | `Smith` |
+| `country_code` | Text | `+91` |
+| `contact_no` | Text | `8876543210` | ⭐ **Different number to avoid duplicate** |
+| `site_address` | Text | `456 Oak Avenue, Mumbai, Maharashtra` |
+| `priority` | Text | `standard` |
+| `source_id` | Text | `1` |
+| `vendor_id` | Text | `1` |
+| `created_by` | Text | `1` |
+
+---
+
+## 📋 Test Case 3: Lead with Multiple Product Types (Using IDs)
+
+### Form-data Body:
+| Key | Type | Value |
+|-----|------|--------|
+| `firstname` | Text | `Mike` |
+| `lastname` | Text | `Johnson` |
+| `country_code` | Text | `+44` |
+| `contact_no` | Text | `7896541230` |
+| `email` | Text | `mike.johnson@example.com` |
+| `site_address` | Text | `789 Park Lane, London, UK` |
+| `priority` | Text | `urgent` |
+| `source_id` | Text | `2` |
+| `vendor_id` | Text | `1` |
+| `created_by` | Text | `1` |
+| `product_types[0]` | Text | `1` | ⭐ **CHANGED: Product Type ID** |
+| `product_types[1]` | Text | `2` | ⭐ **CHANGED: Product Type ID** |
+| `product_types[2]` | Text | `4` | ⭐ **CHANGED: Product Type ID** |
+| `product_structures[0]` | Text | `1` | ⭐ **CHANGED: Product Structure ID** |
+| `product_structures[1]` | Text | `2` | ⭐ **CHANGED: Product Structure ID** |
+
+---
+
+## ❌ Test Case 4: Validation Errors
+
+### Invalid Product Type ID:
+| Key | Type | Value |
+|-----|------|--------|
+| `firstname` | Text | `Test` |
+| `lastname` | Text | `User` |
+| `country_code` | Text | `+1` |
+| `contact_no` | Text | `5555555555` |
+| `site_address` | Text | `123 Test St` |
+| `priority` | Text | `high` |
+| `source_id` | Text | `1` |
+| `vendor_id` | Text | `1` |
+| `created_by` | Text | `1` |
+| `product_types` | Text | `999` | ⭐ **Invalid ID that doesn't exist** |
+
+### Expected Response (400):
+```json
+{
+  "success": false,
+  "error": "Product type with ID 999 not found for vendor 1"
+}
+```
+
+### Invalid Product Structure ID:
+| Key | Type | Value |
+|-----|------|--------|
+| `firstname` | Text | `Test` |
+| `lastname` | Text | `User2` |
+| `country_code` | Text | `+1` |
+| `contact_no` | Text | `4444444444` |
+| `site_address` | Text | `123 Test St` |
+| `priority` | Text | `high` |
+| `source_id` | Text | `1` |
+| `vendor_id` | Text | `1` |
+| `created_by` | Text | `1` |
+| `product_structures` | Text | `888` | ⭐ **Invalid ID that doesn't exist** |
+
+### Expected Response (400):
+```json
+{
+  "success": false,
+  "error": "Product structure with ID 888 not found for vendor 1"
+}
+```
+
+---
+
+## ❌ Test Case 5: Duplicate Contact Number
+
+### First Request:
+| Key | Type | Value |
+|-----|------|--------|
+| `firstname` | Text | `Alice` |
+| `lastname` | Text | `Brown` |
+| `country_code` | Text | `+1` |
+| `contact_no` | Text | `1234567890` |
+| `site_address` | Text | `100 First St` |
+| `priority` | Text | `high` |
+| `source_id` | Text | `1` |
+| `vendor_id` | Text | `1` |
+| `created_by` | Text | `1` |
+
+### Second Request (Same contact_no):
+| Key | Type | Value |
+|-----|------|--------|
+| `firstname` | Text | `Bob` |
+| `lastname` | Text | `Wilson` |
+| `country_code` | Text | `+1` |
+| `contact_no` | Text | `1234567890` | ⭐ **Same number as above** |
+| `site_address` | Text | `200 Second St` |
+| `priority` | Text | `low` |
+| `source_id` | Text | `1` |
+| `vendor_id` | Text | `1` | ⭐ **Same vendor** |
+| `created_by` | Text | `1` |
+
+### Expected Response (400):
+```json
+{
+  "success": false,
+  "error": "Contact number 1234567890 already exists for this vendor"
+}
+```
+
+---
+
+## ❌ Test Case 6: Duplicate Email
+
+### First Request:
+| Key | Type | Value |
+|-----|------|--------|
+| `firstname` | Text | `Carol` |
+| `lastname` | Text | `Davis` |
+| `country_code` | Text | `+1` |
+| `contact_no` | Text | `3333333333` |
+| `email` | Text | `carol@test.com` |
+| `site_address` | Text | `300 Third St` |
+| `priority` | Text | `standard` |
+| `source_id` | Text | `1` |
+| `vendor_id` | Text | `1` |
+| `created_by` | Text | `1` |
+
+### Second Request (Same email):
+| Key | Type | Value |
+|-----|------|--------|
+| `firstname` | Text | `David` |
+| `lastname` | Text | `Miller` |
+| `country_code` | Text | `+1` |
+| `contact_no` | Text | `2222222222` |
+| `email` | Text | `carol@test.com` | ⭐ **Same email as above** |
+| `site_address` | Text | `400 Fourth St` |
+| `priority` | Text | `low` |
+| `source_id` | Text | `1` |
+| `vendor_id` | Text | `1` | ⭐ **Same vendor** |
+| `created_by` | Text | `1` |
+
+### Expected Response (400):
+```json
+{
+  "success": false,
+  "error": "Email carol@test.com already exists for this vendor"
+}
+```
+
+---
+
+## 📋 Test Case 7: Same Contact/Email Different Vendor (Should Work)
+
+### Request:
+| Key | Type | Value |
+|-----|------|--------|
+| `firstname` | Text | `Eve` |
+| `lastname` | Text | `Anderson` |
+| `country_code` | Text | `+1` |
+| `contact_no` | Text | `1234567890` | ⭐ **Same as Test Case 5** |
+| `email` | Text | `carol@test.com` | ⭐ **Same as Test Case 6** |
+| `site_address` | Text | `500 Fifth St` |
+| `priority` | Text | `high` |
+| `source_id` | Text | `1` |
+| `vendor_id` | Text | `2` | ⭐ **Different vendor - should work** |
+| `created_by` | Text | `1` |
+
+### Expected Response (201):
+```json
+{
+  "success": true,
+  "message": "Lead created successfully",
+  "data": {
+    "lead": {
+      "id": 6,
+      "fullName": "Eve Anderson",
+      "priority": "high",
+      "account_id": 6,
+      "createdAt": "2025-08-18T11:00:00.000Z"
+    },
+    "account": {
+      "id": 6,
+      "name": "Eve Anderson"
+    }
+  }
+}
+```
+
+---
+
+## 🔧 Updated Tests Script for Postman:
+
+```javascript
+pm.test("Status code is 201", function () {
+    pm.response.to.have.status(201);
+});
+
+pm.test("Response has success field", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData).to.have.property('success');
+    pm.expect(jsonData.success).to.eql(true);
+});
+
+pm.test("Response contains lead data with account_id", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData.data).to.have.property('lead');
+    pm.expect(jsonData.data.lead).to.have.property('id');
+    pm.expect(jsonData.data.lead).to.have.property('account_id');
+});
+
+pm.test("Account and Lead are linked", function () {
+    var jsonData = pm.response.json();
+    var leadAccountId = jsonData.data.lead.account_id;
+    var accountId = jsonData.data.account.id;
+    pm.expect(leadAccountId).to.eql(accountId);
+});
+
+// Test for product type validation
+pm.test("Product types are processed correctly", function () {
+    var jsonData = pm.response.json();
+    // This assumes your response includes mapping count or success indication
+    pm.expect(jsonData.data).to.have.property('documentsProcessed');
+});
+```
+
+---
+
+## 🚨 Key Changes Summary:
+
+### 1. **Product Types & Structures**
+- **OLD:** `"Solar Panels"`, `"Inverters"`, `"Roof Mount"`
+- **NEW:** `1`, `2`, `3` (use actual IDs from your database)
+
+### 2. **Contact Uniqueness**
+- Each test case now uses different contact numbers
+- Same contact/email only works with different `vendor_id`
+
+### 3. **Response Changes**
+- Lead response now includes `account_id` field
+- Better error messages for duplicate contacts/emails
+- Specific error messages for invalid product type/structure IDs
+
+### 4. **Required Pre-Setup**
+Before testing, ensure your database has:
+```sql
+-- Check available product types for vendor_id = 1
+SELECT id, type FROM ProductTypeMaster WHERE vendor_id = 1;
+
+-- Check available product structures for vendor_id = 1  
+SELECT id, type FROM ProductStructure WHERE vendor_id = 1;
+
+-- Use these actual IDs in your test cases
+```
+
+This updated guide reflects the new integer-based product type/structure IDs, the account_id relationship, and the uniqueness constraints per vendor.

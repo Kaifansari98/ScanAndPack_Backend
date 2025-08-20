@@ -1,8 +1,21 @@
 import express from 'express';
 import { router } from './routes';
 import path from 'path';
+import cors from 'cors';
 
 export const app = express();
+
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://your-production-frontend.com'
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
