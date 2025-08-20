@@ -60,11 +60,11 @@ export interface CreateLeadDTO {
     designer_remark?: string;
     vendor_id: number;
     created_by: number;
-    product_types?: string[];
-    product_structures?: string[];
-  }
+    product_types?: number[];
+    product_structures?: number[];
+}
   
-  export interface DocumentUpload {
+export interface DocumentUpload {
     file: Express.Multer.File;
     type?: DocumentType;
-  }
+}

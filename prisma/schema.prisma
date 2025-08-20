@@ -49,7 +49,7 @@ model VendorMaster {
   accounts          AccountMaster[]
   leadProductMaps   LeadProductMapping[]
   productTypes      ProductTypeMaster[]
-  documents         DocumentMaster[]
+  documents         LeadDocuments[]
   productStructure  ProductStructure[]
   leadProductStructureMapping LeadProductStructureMapping[]
 }
@@ -121,8 +121,8 @@ model UserMaster {
   leadProductsCreated LeadProductMapping[] @relation("LeadProductCreatedBy")
 
   // ✅ Documents
-  documentsCreated DocumentMaster[] @relation("DocumentCreatedBy")
-  documentsDeleted DocumentMaster[] @relation("DocumentDeletedBy")
+  documentsCreated LeadDocuments[] @relation("DocumentCreatedBy")
+  documentsDeleted LeadDocuments[] @relation("DocumentDeletedBy")
 }
 
 model UserDocument {
@@ -303,6 +303,7 @@ model LeadMaster {
   priority        LeadPriority
   billing_name    String?
   source_id       Int
+  account_id      Int
   archetech_name  String?
   designer_remark String?
   created_by      Int
@@ -321,11 +322,16 @@ model LeadMaster {
   updatedBy   UserMaster?    @relation("LeadUpdatedBy", fields: [updated_by], references: [id])
   assignedTo  UserMaster?    @relation("LeadAssignedTo", fields: [assign_to], references: [id])
   assignedBy  UserMaster?    @relation("LeadAssignedBy", fields: [assigned_by], references: [id])
+  account     AccountMaster  @relation(fields: [account_id], references: [id], onDelete: Cascade)
 
   // ✅ New reverse relations
   productMappings LeadProductMapping[]
-  documents       DocumentMaster[]
+  documents       LeadDocuments[]
   leadProductStructureMapping LeadProductStructureMapping[]
+
+  // ✅ Unique constraints for contact_no and email per vendor
+  @@unique([contact_no, vendor_id], name: "unique_contact_per_vendor")
+  @@unique([email, vendor_id], name: "unique_email_per_vendor")
 }
 
 model SiteTypeMaster {
@@ -369,8 +375,9 @@ model AccountMaster {
   updatedBy UserMaster?  @relation("AccountUpdatedBy", fields: [updated_by], references: [id])
 
   leadsMapping LeadProductMapping[]
-  documents    DocumentMaster[]
+  documents    LeadDocuments[]
   leadProductStructureMapping LeadProductStructureMapping[]
+  leads        LeadMaster[]
 }
 
 model LeadProductMapping {
@@ -400,7 +407,7 @@ model ProductTypeMaster {
   leads  LeadProductMapping[]
 }
 
-model DocumentMaster {
+model LeadDocuments {
   id           Int          @id @default(autoincrement())
   doc_og_name  String
   doc_sys_name String
