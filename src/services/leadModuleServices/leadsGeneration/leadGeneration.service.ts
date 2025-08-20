@@ -244,3 +244,43 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
       };
     });
 };
+
+export const getLeadsByVendor = async (vendorId: number) => {
+  return prisma.leadMaster.findMany({
+    where: { vendor_id: vendorId },
+    include: {
+      account: true,
+      leadProductStructureMapping: {
+        include: { productStructure: true },
+      },
+      productMappings: {
+        include: { productType: true },
+      },
+      documents: true,
+      source: true,
+      siteType: true,
+      createdBy: true,
+    },
+    orderBy: { created_at: "desc" },
+  });
+};
+
+export const getLeadsByVendorAndUser = async (vendorId: number, userId: number) => {
+  return prisma.leadMaster.findMany({
+    where: { vendor_id: vendorId, created_by: userId },
+    include: {
+      account: true,
+      leadProductStructureMapping: {
+        include: { productStructure: true },
+      },
+      productMappings: {
+        include: { productType: true },
+      },
+      documents: true,
+      source: true,
+      siteType: true,
+      createdBy: true,
+    },
+    orderBy: { created_at: "desc" },
+  });
+};

@@ -1,0 +1,281 @@
+# Project Onboarding API Documentation
+
+## Overview
+This API endpoint allows vendors to create new projects or add items to existing projects. The endpoint handles both scenarios intelligently based on the provided data.
+
+## Endpoint Details
+
+**URL:** `POST https://api.vloq.com/api/projects/onboard/project`
+
+**Authentication:** Bearer Token (Vendor Token required in Authorization header)
+
+**Content-Type:** `application/json`
+
+## Authentication
+
+The API requires a vendor token to be passed in the Authorization header:
+
+```
+Authorization: Bearer 7f3c1afd-6e78-4ba0-9a78-3dae1f6469eb
+```
+
+## Request Body Schema
+
+```json
+{
+  "client": {
+    "id": "string (optional)",
+    "name": "string (required for new clients)",
+    "contact": "string (required)",
+    "alt_contact": "string (optional)",
+    "email": "string (optional)",
+    "address": {
+      "address": "string (optional)",
+      "city": "string (optional)",
+      "state": "string (optional)",
+      "country": "string (optional)",
+      "pincode": "string (optional)"
+    }
+  },
+  "project": {
+    "project_name": "string (required for new projects)",
+    "unique_project_id": "string (required)",
+    "estimated_completion_date": "string (ISO date, optional)",
+    "is_grouping": "boolean (optional, default: false)"
+  },
+  "rooms": [
+    {
+      "room_name": "string (required)",
+      "estimated_completion_date": "string (ISO date, optional)",
+      "is_grouping": "boolean (optional, default: false)",
+      "items": [
+        {
+          "unique_id": "string (required, must be unique)",
+          "category": "string (required)",
+          "item_name": "string (required)",
+          "qty": "number (required)",
+          "weight": "number (optional, default: 0)",
+          "group": "string (required)",
+          "L1": "string (optional)",
+          "L2": "string (optional)",
+          "L3": "string (optional)"
+        }
+      ]
+    }
+  ]
+}
+```
+
+## Use Cases
+
+### 1. Creating a New Project
+
+When creating a new project, provide complete client and project information:
+
+**Example Request:**
+
+```json
+{
+  "client": {
+    "name": "Microsoft Corporation",
+    "contact": "4258828080",
+    "email": "ops@microsoft.com",
+    "address": {
+      "address": "1 Microsoft Way",
+      "city": "Redmond",
+      "state": "WA",
+      "country": "USA",
+      "pincode": "98052"
+    }
+  },
+  "project": {
+    "project_name": "Azure Data Center – Server Room Build",
+    "unique_project_id": "MS-DC-2025",
+    "estimated_completion_date": "2026-01-30",
+    "is_grouping": false
+  },
+  "rooms": [
+    {
+      "room_name": "Server Rack Hall 3",
+      "estimated_completion_date": "2025-12-15",
+      "is_grouping": true,
+      "items": [
+        {
+          "unique_id": "SRV-901",
+          "category": "Hardware",
+          "item_name": "Rack Mount Server – Xeon Gold",
+          "qty": 3,
+          "weight": 20,
+          "group": "SRV-GOLD",
+          "L1": "3500",
+          "L2": "3600",
+          "L3": "3700"
+        },
+        {
+          "unique_id": "SRV-902",
+          "category": "Networking",
+          "item_name": "10GbE Switch",
+          "qty": 2,
+          "weight": 8,
+          "group": "NT-SWITCH",
+          "L1": "1100",
+          "L2": "1150",
+          "L3": "1200"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### 2. Adding Items to Existing Project
+
+When adding items to an existing project, you only need to provide the client contact and project unique_project_id for identification:
+
+**Example Request:**
+
+```json
+{
+  "client": {
+    "contact": "4258828080"
+  },
+  "project": {
+    "unique_project_id": "MS-DC-2025"
+  },
+  "rooms": [
+    {
+      "room_name": "Room 105",
+      "is_grouping": false,
+      "items": [
+        {
+          "unique_id": "G201-C",
+          "category": "Living Room",
+          "item_name": "Sofa Set",
+          "qty": 3,
+          "weight": 3.5,
+          "group": "G107",
+          "L1": "1200",
+          "L2": "1400",
+          "L3": "1500"
+        },
+        {
+          "unique_id": "SRV-105-A",
+          "category": "Hardware",
+          "item_name": "Rack Mount Server – Xeon Platinum",
+          "qty": 5,
+          "weight": 22,
+          "group": "SRV-XP",
+          "L1": "4200",
+          "L2": "4300",
+          "L3": "4400"
+        }
+      ]
+    },
+    {
+      "room_name": "Room 106",
+      "is_grouping": false,
+      "items": [
+        {
+          "unique_id": "STG-106-A",
+          "category": "Storage",
+          "item_name": "High-Density Storage Array – 500TB",
+          "qty": 1,
+          "weight": 40,
+          "group": "STG500",
+          "L1": "12500",
+          "L2": "12700",
+          "L3": "12900"
+        }
+      ]
+    }
+  ]
+}
+```
+
+## Response Format
+
+### Success Response (200)
+
+```json
+{
+  "message": "Project processed successfully",
+  "project_id": 123,
+  "client_id": 456
+}
+```
+
+### Error Responses
+
+#### 401 Unauthorized
+```json
+{
+  "message": "Token is required"
+}
+```
+
+#### 400 Bad Request - Invalid/Expired Token
+```json
+{
+  "error": "Invalid or expired vendor token"
+}
+```
+
+#### 400 Bad Request - Validation Errors
+```json
+{
+  "error": "Validation errors in room \"Room Name\":\nRoom \"Room Name\" item at index 0 missing required fields.\nDuplicate unique_id \"ITEM-123\" in same room."
+}
+```
+
+#### 400 Bad Request - No Admin User
+```json
+{
+  "error": "No admin user found for this vendor"
+}
+```
+
+## Business Logic
+
+### Client Resolution
+- If `client.id` is provided, the system will search by ID first
+- If `client.contact` is provided, the system will search by contact number
+- If no existing client is found, a new client record is created
+
+### Project Resolution
+- Projects are identified by the combination of `unique_project_id`, `vendor_id`, and `client_id`
+- If the project doesn't exist, a new project is created with status "Initiated"
+- If the project exists, its status is updated to "in-progress"
+
+### Item Validation
+- Each item must have: `unique_id`, `item_name`, `category`, `qty`, and `group`
+- `unique_id` must be unique across the entire project (not just within a room)
+- Duplicate `unique_id` values within the same request payload are rejected
+- Items with `unique_id` that already exist in the database are skipped
+
+### Data Processing
+- Items are processed in rooms, and each room creates a `project_details` record
+- Total quantities are calculated and stored in the `project_details` table
+- All database operations for a room are wrapped in a transaction for data consistency
+
+## Field Descriptions
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `client.contact` | string | Yes | Primary identifier for existing clients |
+| `client.name` | string | Conditional | Required when creating new client |
+| `project.unique_project_id` | string | Yes | Unique identifier for the project within vendor scope |
+| `project.project_name` | string | Conditional | Required when creating new project |
+| `rooms[].room_name` | string | Yes | Name of the room/area |
+| `items[].unique_id` | string | Yes | Unique identifier for the item across the entire project |
+| `items[].qty` | number | Yes | Quantity of the item |
+| `items[].weight` | number | No | Weight per unit (default: 0) |
+| `items[].group` | string | Yes | Grouping identifier for the item |
+| `items[].L1, L2, L3` | string | No | Additional classification levels |
+
+## Notes
+
+- The system automatically resolves the vendor from the provided token
+- A default admin user is used as the `created_by` value for new projects
+- Estimated completion dates are optional and default to the current date if not provided
+- The `is_grouping` flag can be set at both project and room levels
+- All monetary values in L1, L2, L3 should be passed as strings

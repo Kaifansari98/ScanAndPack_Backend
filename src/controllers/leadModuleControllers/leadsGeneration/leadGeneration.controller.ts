@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createLeadService } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
+import { createLeadService, getLeadsByVendor, getLeadsByVendorAndUser } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import { createLeadSchema } from "../../../validations/leadValidation";
 
 export const createLead = async (req: Request, res: Response) => {
@@ -79,5 +79,37 @@ export const createLead = async (req: Request, res: Response) => {
       error: "Internal server error", 
       details: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
+  }
+};
+
+export const fetchLeadsByVendor = async (req: Request, res: Response) => {
+  try {
+    const vendorId = parseInt(req.params.vendorId);
+    if (isNaN(vendorId)) {
+      return res.status(400).json({ error: "Invalid vendorId" });
+    }
+
+    const leads = await getLeadsByVendor(vendorId);
+    res.json(leads);
+  } catch (error: any) {
+    console.error("[CONTROLLER] fetchLeadsByVendor error:", error);
+    res.status(500).json({ error: "Failed to fetch leads" });
+  }
+};
+
+export const fetchLeadsByVendorAndUser = async (req: Request, res: Response) => {
+  try {
+    const vendorId = parseInt(req.params.vendorId);
+    const userId = parseInt(req.params.userId);
+
+    if (isNaN(vendorId) || isNaN(userId)) {
+      return res.status(400).json({ error: "Invalid vendorId or userId" });
+    }
+
+    const leads = await getLeadsByVendorAndUser(vendorId, userId);
+    res.json(leads);
+  } catch (error: any) {
+    console.error("[CONTROLLER] fetchLeadsByVendorAndUser error:", error);
+    res.status(500).json({ error: "Failed to fetch leads" });
   }
 };
