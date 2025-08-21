@@ -3,7 +3,7 @@ import { createProductType, fetchAllProductTypes, removeProductType } from "../.
 import { createSiteType, fetchAllSiteTypes, removeSiteType } from "../../controllers/leadModuleControllers/siteType.controller";
 import { createSourceType, fetchAllSourceTypes, removeSourceType } from "../../controllers/leadModuleControllers/sourceType.controller";
 import { createProductStructureType, fetchAllProductStructureTypes, removeProductStructureType } from "../../controllers/leadModuleControllers/productStructureType.controller";
-import { createLead, fetchLeadsByVendor, fetchLeadsByVendorAndUser } from "../../controllers/leadModuleControllers/leadsGeneration/leadGeneration.controller";
+import { createLead, fetchLeadsByVendor, fetchLeadsByVendorAndUser, deleteLead } from "../../controllers/leadModuleControllers/leadsGeneration/leadGeneration.controller";
 import { upload } from "../../middlewares/upload.middleware";
 
 const router = Router();
@@ -28,5 +28,7 @@ router.get("/get-vendor-leads/vendor/:vendorId", fetchLeadsByVendor);
 
 // GET leads by vendorId and userId
 router.get("/get-vendor-user-leads/vendor/:vendorId/user/:userId", fetchLeadsByVendorAndUser);
+
+router.delete("/delete-lead/:id/user-id/:deletedBy", deleteLead);
 
 export default router;
