@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createLeadService, getLeadsByVendor, getLeadsByVendorAndUser } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
+import { createLeadService, getLeadsByVendor, getLeadsByVendorAndUser, softDeleteLead } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import { createLeadSchema } from "../../../validations/leadValidation";
 
 export const createLead = async (req: Request, res: Response) => {
@@ -113,3 +113,19 @@ export const fetchLeadsByVendorAndUser = async (req: Request, res: Response) => 
     res.status(500).json({ error: "Failed to fetch leads" });
   }
 };
+
+export const deleteLead = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { deletedBy } = req.params;
+
+    if (!deletedBy) {
+      return res.status(400).json({ message: "deletedBy is required" });
+    }
+
+    const lead = await softDeleteLead(Number(id), Number(deletedBy));
+      return res.status(200).json({ message: "Lead deleted successfully", lead });
+  } catch (error: any) {
+    return res.status(400).json({ message: error.message });
+  }
+}

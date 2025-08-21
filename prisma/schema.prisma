@@ -306,13 +306,19 @@ model LeadMaster {
   account_id      Int
   archetech_name  String?
   designer_remark String?
+  vendor_id       Int
+  assign_to       Int?
+  assigned_by     Int?
+
+  // ✅ Soft delete fields
+  is_deleted      Boolean   @default(false)
+  deleted_by      Int?
+  deleted_at      DateTime?
+
   created_by      Int
   created_at      DateTime  @default(now())
   updated_by      Int?
   updated_at      DateTime  @updatedAt
-  vendor_id       Int
-  assign_to       Int?
-  assigned_by     Int?
 
   // ✅ Relations
   vendor      VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
@@ -364,6 +370,12 @@ model AccountMaster {
   alt_contact_no String?
   email          String?
   vendor_id      Int
+
+  // ✅ Soft delete fields
+  is_deleted     Boolean   @default(false)
+  deleted_by     Int?
+  deleted_at     DateTime?
+
   created_by     Int
   created_at     DateTime  @default(now())
   updated_by     Int?

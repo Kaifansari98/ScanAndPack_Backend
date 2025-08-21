@@ -247,7 +247,13 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
 
 export const getLeadsByVendor = async (vendorId: number) => {
   return prisma.leadMaster.findMany({
-    where: { vendor_id: vendorId },
+    where: { 
+      vendor_id: vendorId, 
+      is_deleted: false,
+      account: {
+        is_deleted: false,
+      }
+    },
     include: {
       account: true,
       leadProductStructureMapping: {
@@ -267,7 +273,14 @@ export const getLeadsByVendor = async (vendorId: number) => {
 
 export const getLeadsByVendorAndUser = async (vendorId: number, userId: number) => {
   return prisma.leadMaster.findMany({
-    where: { vendor_id: vendorId, created_by: userId },
+    where: { 
+      vendor_id: vendorId, 
+      created_by: userId, 
+      is_deleted: false,
+      account: {
+        is_deleted: false,
+      }
+    },
     include: {
       account: true,
       leadProductStructureMapping: {
@@ -282,5 +295,48 @@ export const getLeadsByVendorAndUser = async (vendorId: number, userId: number) 
       createdBy: true,
     },
     orderBy: { created_at: "desc" },
+  });
+};
+
+export const softDeleteLead = async (leadId: number, deletedBy: number) => {
+  // 1. Fetch the lead with its account
+  const lead = await prisma.leadMaster.findUnique({
+    where: { id: leadId },
+    include: { account: true }, // 👈 assumes LeadMaster has `account` relation
+  });
+
+  if (!lead) {
+    throw new Error("Lead not found");
+  }
+
+  if (lead.is_deleted) {
+    throw new Error("Lead already deleted");
+  }
+
+  // 2. Start transaction for lead + account deletion
+  return prisma.$transaction(async (tx) => {
+    // Soft delete lead
+    const deletedLead = await tx.leadMaster.update({
+      where: { id: leadId },
+      data: {
+        is_deleted: true,
+        deleted_by: deletedBy,
+        deleted_at: new Date(),
+      },
+    });
+
+    // If lead has an account, soft delete it too
+    if (lead.account) {
+      await tx.accountMaster.update({
+        where: { id: lead.account.id },
+        data: {
+          is_deleted: true,
+          deleted_by: deletedBy,
+          deleted_at: new Date(),
+        },
+      });
+    }
+
+    return deletedLead;
   });
 };
