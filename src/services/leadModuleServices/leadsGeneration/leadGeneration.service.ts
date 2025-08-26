@@ -5,7 +5,12 @@ import { getDocumentTypeFromFile } from "../../../utils/fileUtils";
 import fs from "fs";
 import { SalesExecutiveData } from "../../../types/leadModule.types";
 import { AssignLeadPayload, LeadAssignmentResult } from "../../../types/leadModule.types";
-import { validateAdminUser, validateSalesExecutiveUser, validateLeadOwnership } from "../../../validations/leadValidation";
+import { 
+  validateAdminUser, 
+  validateSalesExecutiveUser, 
+  validateLeadOwnership, 
+  getUserRole 
+} from "../../../validations/leadValidation";
 
 export const createLeadService = async (payload: CreateLeadDTO, files: Express.Multer.File[]) => {
     console.log("[DEBUG] Service called with", files.length, "files");
@@ -274,31 +279,109 @@ export const getLeadsByVendor = async (vendorId: number) => {
   });
 };
 
+/**
+ * Get leads by vendor and user with role-based filtering
+ * @param vendorId - Vendor ID
+ * @param userId - User ID
+ * @returns Promise<Lead[]>
+ */
 export const getLeadsByVendorAndUser = async (vendorId: number, userId: number) => {
-  return prisma.leadMaster.findMany({
-    where: { 
-      vendor_id: vendorId, 
-      created_by: userId, 
+  try {
+    console.log(`[SERVICE] Fetching leads for vendor ${vendorId} and user ${userId}`);
+
+    // First, get user role information
+    const userInfo = await getUserRole(userId, vendorId);
+    
+    if (!userInfo.isValid) {
+      throw new Error("User not found or inactive");
+    }
+
+    console.log(`[SERVICE] User role: ${userInfo.userType}`);
+
+    const userType = userInfo.userType ?? "";
+
+    let whereCondition: any = {
+      vendor_id: vendorId,
       is_deleted: false,
       account: {
         is_deleted: false,
-      }
-    },
-    include: {
-      account: true,
-      leadProductStructureMapping: {
-        include: { productStructure: true },
       },
-      productMappings: {
-        include: { productType: true },
+    };
+
+    // Role-based filtering
+    if (userType === "sales-executive") {
+      // Sales executives can only see leads they created OR leads assigned to them
+      whereCondition.OR = [
+        { created_by: userId },  // Leads created by them
+        { assign_to: userId },   // Leads assigned to them
+      ];
+      
+      console.log(`[SERVICE] Applied sales-executive filter for user ${userId}`);
+    } else if (["admin", "super-admin"].includes(userType)) {
+      // Admins and super-admins can see all leads for their vendor
+      // No additional filtering needed beyond vendor_id
+      console.log(`[SERVICE] Admin/Super-admin access - showing all vendor leads`);
+    } else {
+      // Other roles (if any) - restrict to only their created leads
+      whereCondition.created_by = userId;
+      console.log(`[SERVICE] Restricted access for role ${userType} - only created leads`);
+    }
+
+    const leads = await prisma.leadMaster.findMany({
+      where: whereCondition,
+      include: {
+        account: true,
+        leadProductStructureMapping: {
+          include: { productStructure: true },
+        },
+        productMappings: {
+          include: { productType: true },
+        },
+        documents: true,
+        source: true,
+        siteType: true,
+        createdBy: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+            user_contact: true,
+          },
+        },
+        assignedTo: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+            user_contact: true,
+          },
+        },
+        assignedBy: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+            user_contact: true,
+          },
+        },
       },
-      documents: true,
-      source: true,
-      siteType: true,
-      createdBy: true,
-    },
-    orderBy: { created_at: "desc" },
-  });
+      orderBy: { created_at: "desc" },
+    });
+
+    console.log(`[SERVICE] Found ${leads.length} leads for user ${userId} (${userInfo.userType})`);
+
+    return {
+      leads,
+      userInfo: {
+        role: userType,
+        canViewAllLeads: ["admin", "super-admin"].includes(userType),
+        userData: userInfo.userData,
+      },
+    };
+  } catch (error: any) {
+    console.error("[SERVICE] Error fetching leads:", error);
+    throw error;
+  }
 };
 
 export const softDeleteLead = async (leadId: number, deletedBy: number) => {

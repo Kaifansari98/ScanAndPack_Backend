@@ -383,3 +383,42 @@ export const validateLeadOwnership = async (leadId: number, vendorId: number): P
     throw new Error(`Failed to validate lead ownership: ${error.message}`);
   }
 };
+
+/**
+ * Get user role information
+ * @param userId - User ID to check
+ * @param vendorId - Vendor ID for additional validation
+ * @returns Promise<{userType: string, isValid: boolean}>
+ */
+export const getUserRole = async (userId: number, vendorId: number) => {
+  try {
+    const user = await prisma.userMaster.findFirst({
+      where: {
+        id: userId,
+        vendor_id: vendorId,
+        status: "active",
+      },
+      include: {
+        user_type: true,
+      },
+    });
+
+    if (!user) {
+      return { userType: null, isValid: false };
+    }
+
+    return {
+      userType: user.user_type.user_type.toLowerCase(),
+      isValid: true,
+      userData: {
+        id: user.id,
+        name: user.user_name,
+        email: user.user_email,
+        contact: user.user_contact,
+      },
+    };
+  } catch (error: any) {
+    console.error("[SERVICE] Error fetching user role:", error);
+    throw new Error(`Failed to fetch user role: ${error.message}`);
+  }
+};
