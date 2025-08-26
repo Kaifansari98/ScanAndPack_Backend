@@ -68,3 +68,22 @@ export interface DocumentUpload {
     file: Express.Multer.File;
     type?: DocumentType;
 }
+
+export interface UpdateLeadDTO {
+    firstname: string;
+    lastname: string;
+    country_code: string;
+    contact_no: string;
+    alt_contact_no?: string;
+    email?: string;
+    site_address: string;
+    site_type_id?: number;
+    priority: string;
+    billing_name?: string;
+    source_id: number;
+    archetech_name?: string;
+    designer_remark?: string;
+    updated_by: number;
+    product_types?: number[];
+    product_structures?: number[];
+}

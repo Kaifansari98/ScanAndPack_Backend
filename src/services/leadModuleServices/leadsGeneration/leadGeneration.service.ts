@@ -1,5 +1,5 @@
 import { prisma } from "../../../prisma/client";
-import { CreateLeadDTO } from "../../../types/leadModule.types";
+import { CreateLeadDTO, UpdateLeadDTO } from "../../../types/leadModule.types";
 import { LeadPriority, DocumentType } from "@prisma/client";
 import { getDocumentTypeFromFile } from "../../../utils/fileUtils";
 import fs from "fs";
@@ -338,5 +338,261 @@ export const softDeleteLead = async (leadId: number, deletedBy: number) => {
     }
 
     return deletedLead;
+  });
+};
+
+export const updateLeadService = async (leadId: number, payload: UpdateLeadDTO) => {
+  
+  const {
+    firstname,
+    lastname,
+    country_code,
+    contact_no,
+    alt_contact_no,
+    email,
+    site_address,
+    site_type_id,
+    priority,
+    billing_name,
+    source_id,
+    archetech_name,
+    designer_remark,
+    updated_by,
+    product_types = [],
+    product_structures = []
+  } = payload;
+
+  // Validate priority only if provided
+  let leadPriority: LeadPriority | undefined;
+  if (priority !== undefined) {
+    leadPriority = priority.toLowerCase() as LeadPriority;
+    if (!Object.values(LeadPriority).includes(leadPriority)) {
+      throw new Error(`Invalid priority value: ${priority}. Must be one of: ${Object.values(LeadPriority).join(', ')}`);
+    }
+  }
+
+  return prisma.$transaction(async (tx) => {
+    // 1. Check if lead exists and get current data
+    const existingLead = await tx.leadMaster.findFirst({
+      where: {
+        id: leadId,
+        is_deleted: false
+      },
+      include: {
+        account: true
+      }
+    });
+
+    if (!existingLead) {
+      throw new Error(`Lead with ID ${leadId} not found or has been deleted`);
+    }
+
+    const vendor_id = existingLead.vendor_id;
+
+    // 2. Check for duplicate contact_no (exclude current lead) - only if contact_no is being updated
+    if (contact_no !== undefined) {
+      const existingContactLead = await tx.leadMaster.findFirst({
+        where: {
+          contact_no,
+          vendor_id,
+          id: { not: leadId },
+          is_deleted: false
+        }
+      });
+
+      if (existingContactLead) {
+        throw new Error(`Contact number ${contact_no} already exists for this vendor`);
+      }
+    }
+
+    // 3. Check for duplicate email (exclude current lead) - only if email is being updated
+    if (email !== undefined && email !== null && email.trim() !== '') {
+      const existingEmailLead = await tx.leadMaster.findFirst({
+        where: {
+          email,
+          vendor_id,
+          id: { not: leadId },
+          is_deleted: false
+        }
+      });
+
+      if (existingEmailLead) {
+        throw new Error(`Email ${email} already exists for this vendor`);
+      }
+    }
+
+    // 4. Check for duplicate contact_no in AccountMaster (exclude current account) - only if contact_no is being updated
+    if (contact_no !== undefined) {
+      const existingContactAccount = await tx.accountMaster.findFirst({
+        where: {
+          contact_no,
+          vendor_id,
+          id: { not: existingLead.account_id },
+          is_deleted: false
+        }
+      });
+
+      if (existingContactAccount) {
+        throw new Error(`Contact number ${contact_no} already exists in accounts for this vendor`);
+      }
+    }
+
+    // 5. Check for duplicate email in AccountMaster (exclude current account) - only if email is being updated
+    if (email !== undefined && email !== null && email.trim() !== '') {
+      const existingEmailAccount = await tx.accountMaster.findFirst({
+        where: {
+          email,
+          vendor_id,
+          id: { not: existingLead.account_id },
+          is_deleted: false
+        }
+      });
+
+      if (existingEmailAccount) {
+        throw new Error(`Email ${email} already exists in accounts for this vendor`);
+      }
+    }
+
+    // 6. Build dynamic update data for AccountMaster
+    const accountUpdateData: any = {
+      updated_by,
+      updated_at: new Date()
+    };
+
+    // Only update account fields if lead contact info is being updated
+    if (firstname !== undefined || lastname !== undefined) {
+      accountUpdateData.name = `${firstname || existingLead.firstname} ${lastname || existingLead.lastname}`;
+    }
+    if (country_code !== undefined) accountUpdateData.country_code = country_code;
+    if (contact_no !== undefined) accountUpdateData.contact_no = contact_no;
+    if (alt_contact_no !== undefined) accountUpdateData.alt_contact_no = alt_contact_no;
+    if (email !== undefined) accountUpdateData.email = email;
+
+    const updatedAccount = await tx.accountMaster.update({
+      where: { id: existingLead.account_id },
+      data: accountUpdateData
+    });
+
+    // 7. Build dynamic update data for LeadMaster
+    const leadUpdateData: any = {
+      updated_by,
+      updated_at: new Date()
+    };
+
+    // Only include fields that are actually being updated
+    if (firstname !== undefined) leadUpdateData.firstname = firstname;
+    if (lastname !== undefined) leadUpdateData.lastname = lastname;
+    if (country_code !== undefined) leadUpdateData.country_code = country_code;
+    if (contact_no !== undefined) leadUpdateData.contact_no = contact_no;
+    if (alt_contact_no !== undefined) leadUpdateData.alt_contact_no = alt_contact_no;
+    if (email !== undefined) leadUpdateData.email = email;
+    if (site_address !== undefined) leadUpdateData.site_address = site_address;
+    if (site_type_id !== undefined) leadUpdateData.site_type_id = site_type_id;
+    if (priority !== undefined) leadUpdateData.priority = leadPriority;
+    if (billing_name !== undefined) leadUpdateData.billing_name = billing_name;
+    if (source_id !== undefined) leadUpdateData.source_id = source_id;
+    if (archetech_name !== undefined) leadUpdateData.archetech_name = archetech_name;
+    if (designer_remark !== undefined) leadUpdateData.designer_remark = designer_remark;
+
+    const updatedLead = await tx.leadMaster.update({
+      where: { id: leadId },
+      data: leadUpdateData
+    });
+
+    // 8. Handle product_types updates (only if provided)
+    if (product_types !== undefined) {
+      console.log("[DEBUG] Updating product types for lead ID:", leadId);
+      
+      // Delete existing product type mappings
+      await tx.leadProductMapping.deleteMany({
+        where: {
+          lead_id: leadId,
+          vendor_id
+        }
+      });
+
+      // Create new mappings
+      for (const productTypeId of product_types) {
+        console.log("[DEBUG] Processing product type ID:", productTypeId);
+        
+        // Validate that the product type exists and belongs to the vendor
+        const productType = await tx.productTypeMaster.findFirst({
+          where: { 
+            id: productTypeId, 
+            vendor_id 
+          }
+        });
+
+        if (!productType) {
+          throw new Error(`Product type with ID ${productTypeId} not found for vendor ${vendor_id}`);
+        }
+
+        await tx.leadProductMapping.create({
+          data: {
+            vendor_id,
+            lead_id: leadId,
+            account_id: existingLead.account_id,
+            product_type_id: productTypeId,
+            created_by: updated_by
+          }
+        });
+        console.log("[DEBUG] ✅ Product mapping created for type ID:", productTypeId);
+      }
+    }
+
+    // 9. Handle product_structures updates (only if provided)
+    if (product_structures !== undefined) {
+      console.log("[DEBUG] Updating product structures for lead ID:", leadId);
+      
+      // Delete existing product structure mappings
+      await tx.leadProductStructureMapping.deleteMany({
+        where: {
+          lead_id: leadId,
+          vendor_id
+        }
+      });
+
+      // Create new mappings
+      for (const productStructureId of product_structures) {
+        console.log("[DEBUG] Processing product structure ID:", productStructureId);
+        
+        // Validate that the product structure exists and belongs to the vendor
+        const structure = await tx.productStructure.findFirst({
+          where: { 
+            id: productStructureId, 
+            vendor_id 
+          }
+        });
+
+        if (!structure) {
+          throw new Error(`Product structure with ID ${productStructureId} not found for vendor ${vendor_id}`);
+        }
+
+        await tx.leadProductStructureMapping.create({
+          data: {
+            vendor_id,
+            lead_id: leadId,
+            account_id: existingLead.account_id,
+            product_structure_id: productStructureId,
+            created_by: updated_by
+          }
+        });
+        console.log("[DEBUG] ✅ Product structure mapping created for structure ID:", productStructureId);
+      }
+    }
+
+    console.log("[INFO] Lead updated successfully:", {
+      leadId,
+      accountId: updatedAccount.id,
+      productTypesCount: product_types.length,
+      productStructuresCount: product_structures.length
+    });
+
+    return { 
+      lead: updatedLead, 
+      account: updatedAccount,
+      productTypesUpdated: product_types !== undefined ? product_types.length : 'not updated',
+      productStructuresUpdated: product_structures !== undefined ? product_structures.length : 'not updated'
+    };
   });
 };

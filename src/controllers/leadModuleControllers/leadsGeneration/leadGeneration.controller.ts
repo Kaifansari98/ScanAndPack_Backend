@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { createLeadService, getLeadsByVendor, getLeadsByVendorAndUser, softDeleteLead } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
-import { createLeadSchema } from "../../../validations/leadValidation";
+import { createLeadSchema, validateUpdateLeadInput } from "../../../validations/leadValidation";
+import { ApiResponse } from "../../../utils/apiResponse";
+import { updateLeadService } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 
 export const createLead = async (req: Request, res: Response) => {
   console.log("[CONTROLLER] createLead called");
@@ -129,3 +131,124 @@ export const deleteLead = async (req: Request, res: Response) => {
     return res.status(400).json({ message: error.message });
   }
 }
+
+export const updateLeadController = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const leadId = parseInt(req.params.leadId);
+    const updatedBy = parseInt(req.params.userId);
+
+    if (!updatedBy || isNaN(updatedBy)) {
+      res.status(400).json(ApiResponse.error('Invalid user ID provided', 400));
+      return;
+    }
+    
+    // Validate leadId
+    if (!leadId || isNaN(leadId)) {
+      res.status(400).json(
+        ApiResponse.error(
+          'Invalid lead ID provided',
+          400
+        )
+      );
+      return;
+    } 
+
+    // Merge updated_by into request body before validation
+    const payloadWithUpdatedBy = { ...req.body, updated_by: updatedBy };
+
+    // Validate request body
+    const validationResult = validateUpdateLeadInput(payloadWithUpdatedBy);
+    if (!validationResult.isValid) {
+      res.status(400).json(
+        ApiResponse.error(
+          'Validation failed',
+          400,
+          validationResult.errors
+        )
+      );
+      return;
+    }
+
+    console.log("[DEBUG] Controller received update request for lead ID:", leadId);
+    console.log("[DEBUG] Update payload:", req.body);
+
+    // Call service to update lead
+    const result = await updateLeadService(leadId, { ...req.body, updated_by: updatedBy });
+
+    console.log("[INFO] Lead updated successfully:", {
+      leadId: result.lead.id,
+      accountId: result.account.id
+    });
+
+    res.status(200).json(
+      ApiResponse.success(
+        {
+          lead: {
+            id: result.lead.id,
+            firstname: result.lead.firstname,
+            lastname: result.lead.lastname,
+            contact_no: result.lead.contact_no,
+            email: result.lead.email,
+            priority: result.lead.priority,
+            site_address: result.lead.site_address,
+            updated_at: result.lead.updated_at
+          },
+          account: {
+            id: result.account.id,
+            name: result.account.name,
+            contact_no: result.account.contact_no,
+            email: result.account.email,
+            updated_at: result.account.updated_at
+          },
+          productTypesUpdated: result.productTypesUpdated,
+          productStructuresUpdated: result.productStructuresUpdated
+        },
+        'Lead updated successfully',
+        200
+      )
+    );
+
+  } catch (error: any) {
+    console.error("[ERROR] Failed to update lead:", error.message);
+    console.error("[ERROR] Stack trace:", error.stack);
+
+    // Handle specific error types
+    if (error.message.includes('not found')) {
+      res.status(404).json(
+        ApiResponse.error(
+          error.message,
+          404
+        )
+      );
+      return;
+    }
+
+    if (error.message.includes('already exists')) {
+      res.status(409).json(
+        ApiResponse.error(
+          error.message,
+          409
+        )
+      );
+      return;
+    }
+
+    if (error.message.includes('Invalid priority') || error.message.includes('not found for vendor')) {
+      res.status(400).json(
+        ApiResponse.error(
+          error.message,
+          400
+        )
+      );
+      return;
+    }
+
+    // Generic server error
+    res.status(500).json(
+      ApiResponse.error(
+        'An unexpected error occurred while updating the lead',
+        500
+      )
+    );
+  }
+};

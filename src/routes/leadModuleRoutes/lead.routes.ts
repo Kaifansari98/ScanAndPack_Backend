@@ -3,32 +3,34 @@ import { createProductType, fetchAllProductTypes, removeProductType } from "../.
 import { createSiteType, fetchAllSiteTypes, removeSiteType } from "../../controllers/leadModuleControllers/siteType.controller";
 import { createSourceType, fetchAllSourceTypes, removeSourceType } from "../../controllers/leadModuleControllers/sourceType.controller";
 import { createProductStructureType, fetchAllProductStructureTypes, removeProductStructureType } from "../../controllers/leadModuleControllers/productStructureType.controller";
-import { createLead, fetchLeadsByVendor, fetchLeadsByVendorAndUser, deleteLead } from "../../controllers/leadModuleControllers/leadsGeneration/leadGeneration.controller";
+import { createLead, fetchLeadsByVendor, fetchLeadsByVendorAndUser, deleteLead, updateLeadController } from "../../controllers/leadModuleControllers/leadsGeneration/leadGeneration.controller";
 import { upload } from "../../middlewares/upload.middleware";
 
-const router = Router();
+const leadsRouter = Router();
 
-router.post('/create-product-type', createProductType);
-router.post('/create-site-type', createSiteType);
-router.post('/create-source-type', createSourceType);
-router.post('/create-product-structure', createProductStructureType);
-router.get("/get-all-product-types/:vendor_id", fetchAllProductTypes);
-router.delete("/delete-product-type/:id", removeProductType);
-router.get("/get-all-site-types/:vendor_id", fetchAllSiteTypes);
-router.delete("/delete-site-type/:id", removeSiteType);
-router.get("/get-all-productStructure-types/:vendor_id", fetchAllProductStructureTypes);
-router.delete("/delete-productStructure-type/:id", removeProductStructureType);
-router.get("/get-all-source-types/:vendor_id", fetchAllSourceTypes);
-router.delete("/delete-source-type/:id", removeSourceType);
+leadsRouter.post('/create-product-type', createProductType);
+leadsRouter.post('/create-site-type', createSiteType);
+leadsRouter.post('/create-source-type', createSourceType);
+leadsRouter.post('/create-product-structure', createProductStructureType);
+leadsRouter.get("/get-all-product-types/:vendor_id", fetchAllProductTypes);
+leadsRouter.delete("/delete-product-type/:id", removeProductType);
+leadsRouter.get("/get-all-site-types/:vendor_id", fetchAllSiteTypes);
+leadsRouter.delete("/delete-site-type/:id", removeSiteType);
+leadsRouter.get("/get-all-productStructure-types/:vendor_id", fetchAllProductStructureTypes);
+leadsRouter.delete("/delete-productStructure-type/:id", removeProductStructureType);
+leadsRouter.get("/get-all-source-types/:vendor_id", fetchAllSourceTypes);
+leadsRouter.delete("/delete-source-type/:id", removeSourceType);
 
-router.post("/create", upload.array("documents", 10), createLead);
+leadsRouter.post("/create", upload.array("documents", 10), createLead);
 
 // GET all leads by vendorId
-router.get("/get-vendor-leads/vendor/:vendorId", fetchLeadsByVendor);
+leadsRouter.get("/get-vendor-leads/vendor/:vendorId", fetchLeadsByVendor);
 
 // GET leads by vendorId and userId
-router.get("/get-vendor-user-leads/vendor/:vendorId/user/:userId", fetchLeadsByVendorAndUser);
+leadsRouter.get("/get-vendor-user-leads/vendor/:vendorId/user/:userId", fetchLeadsByVendorAndUser);
 
-router.delete("/delete-lead/:id/user-id/:deletedBy", deleteLead);
+leadsRouter.delete("/delete-lead/:id/user-id/:deletedBy", deleteLead);
 
-export default router;
+leadsRouter.put('/update/:leadId/userId/:userId', updateLeadController);
+
+export default leadsRouter;
