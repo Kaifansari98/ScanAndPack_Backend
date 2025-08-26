@@ -1,5 +1,7 @@
 import Joi from 'joi';
 import { LeadPriority } from '@prisma/client';
+import { prisma } from "../prisma/client";
+import { UserRoleInfo } from '../types/leadModule.types';
 
 export const createLeadSchema = Joi.object({
   firstname: Joi.string().trim().min(2).max(50).required(),
@@ -176,4 +178,208 @@ export const validateUpdateLeadInput = (input: UpdateLeadInput): UpdateLeadValid
 const isValidEmail = (email: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
+};
+
+/**
+ * Validation schema for lead assignment
+ */
+export const assignLeadSchema = Joi.object({
+  assign_to: Joi.number()
+    .integer()
+    .positive()
+    .required()
+    .messages({
+      'number.base': 'assign_to must be a number',
+      'number.integer': 'assign_to must be an integer',
+      'number.positive': 'assign_to must be a positive number',
+      'any.required': 'assign_to is required'
+    }),
+    
+  assign_by: Joi.number()
+    .integer()
+    .positive()
+    .required()
+    .messages({
+      'number.base': 'assign_by must be a number',
+      'number.integer': 'assign_by must be an integer',
+      'number.positive': 'assign_by must be a positive number',
+      'any.required': 'assign_by is required'
+    }),
+    
+  // Optional: Add reason for assignment
+  assignment_reason: Joi.string()
+    .min(3)
+    .max(500)
+    .optional()
+    .messages({
+      'string.min': 'Assignment reason must be at least 3 characters',
+      'string.max': 'Assignment reason cannot exceed 500 characters'
+    })
+});
+
+/**
+ * Validate lead assignment input
+ * @param data - The request data to validate
+ * @returns Validation result with isValid flag and errors
+ */
+export const validateLeadAssignmentInput = (data: any) => {
+  const { error, value } = assignLeadSchema.validate(data, {
+    abortEarly: false,
+    stripUnknown: true
+  });
+
+  if (error) {
+    const errors = error.details.map(detail => ({
+      field: detail.path.join('.'),
+      message: detail.message,
+      value: detail.context?.value
+    }));
+
+    return {
+      isValid: false,
+      errors,
+      data: null
+    };
+  }
+
+  return {
+    isValid: true,
+    errors: null,
+    data: value
+  };
+};
+
+/**
+ * Validate if user has admin or super-admin role
+ * @param userId - User ID to check
+ * @param vendorId - Vendor ID to verify user belongs to
+ * @returns Promise<UserRoleInfo | null>
+ */
+export const validateAdminUser = async (userId: number, vendorId: number): Promise<UserRoleInfo | null> => {
+  try {
+    console.log(`[SERVICE] Validating admin user ID: ${userId} for vendor: ${vendorId}`);
+
+    const user = await prisma.userMaster.findFirst({
+      where: {
+        id: userId,
+        vendor_id: vendorId,
+        status: "active", // Only active users can perform assignments
+      },
+      include: {
+        user_type: true,
+      },
+    });
+
+    if (!user) {
+      console.log(`[SERVICE] User not found or not active: ${userId}`);
+      return null;
+    }
+
+    // Check if user has admin or super-admin role
+    const allowedRoles = ["admin", "super-admin"];
+    const userRole = user.user_type.user_type.toLowerCase();
+
+    if (!allowedRoles.includes(userRole)) {
+      console.log(`[SERVICE] User ${userId} has insufficient permissions. Role: ${userRole}`);
+      return null;
+    }
+
+    console.log(`[SERVICE] Admin validation successful. User: ${user.user_name}, Role: ${userRole}`);
+
+    return {
+      id: user.id,
+      vendor_id: user.vendor_id,
+      user_name: user.user_name,
+      status: user.status,
+      user_type: {
+        id: user.user_type.id,
+        user_type: user.user_type.user_type,
+      },
+    };
+  } catch (error: any) {
+    console.error("[SERVICE] Error validating admin user:", error);
+    throw new Error(`Failed to validate admin user: ${error.message}`);
+  }
+};
+
+/**
+ * Validate if user has sales-executive role
+ * @param userId - User ID to check
+ * @param vendorId - Vendor ID to verify user belongs to
+ * @returns Promise<UserRoleInfo | null>
+ */
+export const validateSalesExecutiveUser = async (userId: number, vendorId: number): Promise<UserRoleInfo | null> => {
+  try {
+    console.log(`[SERVICE] Validating sales executive user ID: ${userId} for vendor: ${vendorId}`);
+
+    const user = await prisma.userMaster.findFirst({
+      where: {
+        id: userId,
+        vendor_id: vendorId,
+        status: "active", // Only active users can be assigned leads
+      },
+      include: {
+        user_type: true,
+      },
+    });
+
+    if (!user) {
+      console.log(`[SERVICE] Sales executive not found or not active: ${userId}`);
+      return null;
+    }
+
+    // Check if user has sales-executive role
+    const userRole = user.user_type.user_type.toLowerCase();
+    if (userRole !== "sales-executive") {
+      console.log(`[SERVICE] User ${userId} is not a sales executive. Role: ${userRole}`);
+      return null;
+    }
+
+    console.log(`[SERVICE] Sales executive validation successful. User: ${user.user_name}`);
+
+    return {
+      id: user.id,
+      vendor_id: user.vendor_id,
+      user_name: user.user_name,
+      status: user.status,
+      user_type: {
+        id: user.user_type.id,
+        user_type: user.user_type.user_type,
+      },
+    };
+  } catch (error: any) {
+    console.error("[SERVICE] Error validating sales executive user:", error);
+    throw new Error(`Failed to validate sales executive user: ${error.message}`);
+  }
+};
+
+/**
+ * Check if lead exists and belongs to the vendor
+ * @param leadId - Lead ID to check
+ * @param vendorId - Vendor ID to verify lead belongs to
+ * @returns Promise<boolean>
+ */
+export const validateLeadOwnership = async (leadId: number, vendorId: number): Promise<boolean> => {
+  try {
+    console.log(`[SERVICE] Validating lead ownership. Lead ID: ${leadId}, Vendor ID: ${vendorId}`);
+
+    const lead = await prisma.leadMaster.findFirst({
+      where: {
+        id: leadId,
+        vendor_id: vendorId,
+        is_deleted: false, // Only non-deleted leads can be assigned
+      },
+    });
+
+    if (!lead) {
+      console.log(`[SERVICE] Lead not found or doesn't belong to vendor: ${leadId}`);
+      return false;
+    }
+
+    console.log(`[SERVICE] Lead ownership validation successful`);
+    return true;
+  } catch (error: any) {
+    console.error("[SERVICE] Error validating lead ownership:", error);
+    throw new Error(`Failed to validate lead ownership: ${error.message}`);
+  }
 };

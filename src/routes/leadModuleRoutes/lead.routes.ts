@@ -3,8 +3,8 @@ import { createProductType, fetchAllProductTypes, removeProductType } from "../.
 import { createSiteType, fetchAllSiteTypes, removeSiteType } from "../../controllers/leadModuleControllers/siteType.controller";
 import { createSourceType, fetchAllSourceTypes, removeSourceType } from "../../controllers/leadModuleControllers/sourceType.controller";
 import { createProductStructureType, fetchAllProductStructureTypes, removeProductStructureType } from "../../controllers/leadModuleControllers/productStructureType.controller";
-import { createLead, fetchLeadsByVendor, fetchLeadsByVendorAndUser, deleteLead, updateLeadController } from "../../controllers/leadModuleControllers/leadsGeneration/leadGeneration.controller";
 import { upload } from "../../middlewares/upload.middleware";
+import { leadController } from "../../controllers/leadModuleControllers/leadsGeneration/leadGeneration.controller";
 
 const leadsRouter = Router();
 
@@ -21,16 +21,46 @@ leadsRouter.delete("/delete-productStructure-type/:id", removeProductStructureTy
 leadsRouter.get("/get-all-source-types/:vendor_id", fetchAllSourceTypes);
 leadsRouter.delete("/delete-source-type/:id", removeSourceType);
 
-leadsRouter.post("/create", upload.array("documents", 10), createLead);
+leadsRouter.post("/create", upload.array("documents", 10), leadController.createLead);
 
 // GET all leads by vendorId
-leadsRouter.get("/get-vendor-leads/vendor/:vendorId", fetchLeadsByVendor);
+leadsRouter.get("/get-vendor-leads/vendor/:vendorId", leadController.fetchLeadsByVendor);
 
 // GET leads by vendorId and userId
-leadsRouter.get("/get-vendor-user-leads/vendor/:vendorId/user/:userId", fetchLeadsByVendorAndUser);
+leadsRouter.get("/get-vendor-user-leads/vendor/:vendorId/user/:userId", leadController.fetchLeadsByVendorAndUser);
 
-leadsRouter.delete("/delete-lead/:id/user-id/:deletedBy", deleteLead);
+leadsRouter.delete("/delete-lead/:id/user-id/:deletedBy", leadController.deleteLead);
 
-leadsRouter.put('/update/:leadId/userId/:userId', updateLeadController);
+leadsRouter.put('/update/:leadId/userId/:userId', leadController.updateLead);
+
+// GET /api/sales-executives/vendor/:vendorId
+// Fetch all sales executives for a specific vendor
+leadsRouter.get("/sales-executives/vendor/:vendorId", leadController.fetchSalesExecutivesByVendor);
+
+/**
+ * Lead Assignment Routes
+ * Base path: /api/leads/assignment
+ * 
+ * All routes require admin or super-admin authentication
+ * These routes should be protected by authentication middleware
+ */
+// PUT /api/leads/assignment/vendor/:vendorId/lead/:leadId
+// Assign a lead to a sales executive
+// Only accessible to admin and super-admin users
+leadsRouter.put(
+    "/sales-executives/vendor/:vendorId/lead/:leadId",
+    // Add authentication middleware here: authMiddleware,
+    // Add role-based middleware here: requireRole(['admin', 'super-admin']),
+    leadController.assignLead
+);
+
+// GET /api/leads/assignment/vendor/:vendorId/lead/:leadId/history
+// Get lead assignment history (optional feature)
+leadsRouter.get(
+    "/sales-executives/vendor/:vendorId/lead/:leadId/history",
+    // Add authentication middleware here: authMiddleware,
+    // Add role-based middleware here: requireRole(['admin', 'super-admin']),
+    leadController.getLeadAssignmentHistory
+);
 
 export default leadsRouter;

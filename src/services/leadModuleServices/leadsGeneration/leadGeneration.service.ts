@@ -3,6 +3,9 @@ import { CreateLeadDTO, UpdateLeadDTO } from "../../../types/leadModule.types";
 import { LeadPriority, DocumentType } from "@prisma/client";
 import { getDocumentTypeFromFile } from "../../../utils/fileUtils";
 import fs from "fs";
+import { SalesExecutiveData } from "../../../types/leadModule.types";
+import { AssignLeadPayload, LeadAssignmentResult } from "../../../types/leadModule.types";
+import { validateAdminUser, validateSalesExecutiveUser, validateLeadOwnership } from "../../../validations/leadValidation";
 
 export const createLeadService = async (payload: CreateLeadDTO, files: Express.Multer.File[]) => {
     console.log("[DEBUG] Service called with", files.length, "files");
@@ -595,4 +598,267 @@ export const updateLeadService = async (leadId: number, payload: UpdateLeadDTO) 
       productStructuresUpdated: product_structures !== undefined ? product_structures.length : 'not updated'
     };
   });
+};
+
+export const getSalesExecutivesByVendor = async (vendorId: number): Promise<SalesExecutiveData[]> => {
+  try {
+    console.log(`[SERVICE] Fetching sales executives for vendor ID: ${vendorId}`);
+
+    // First, find the user type ID for 'sales-executive'
+    const salesExecutiveType = await prisma.userTypeMaster.findFirst({
+      where: {
+        user_type: {
+          equals: "sales-executive",
+          mode: "insensitive", // Case insensitive search
+        },
+      },
+    });
+
+    if (!salesExecutiveType) {
+      console.log("[SERVICE] Sales executive user type not found");
+      return [];
+    }
+
+    console.log(`[SERVICE] Found sales executive type ID: ${salesExecutiveType.id}`);
+
+    // Fetch all users with sales-executive role for the specified vendor
+    const salesExecutives = await prisma.userMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        user_type_id: salesExecutiveType.id,
+        // Optionally filter only active users
+        status: "active",
+      },
+      include: {
+        user_type: true,
+        documents: true,
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+
+    console.log(`[SERVICE] Found ${salesExecutives.length} sales executives`);
+
+    // Transform the data to match our interface
+    const transformedData: SalesExecutiveData[] = salesExecutives.map((executive) => ({
+      id: executive.id,
+      vendor_id: executive.vendor_id,
+      user_name: executive.user_name,
+      user_contact: executive.user_contact,
+      user_email: executive.user_email,
+      user_timezone: executive.user_timezone,
+      status: executive.status,
+      created_at: executive.created_at,
+      updated_at: executive.updated_at,
+      user_type: {
+        id: executive.user_type.id,
+        user_type: executive.user_type.user_type,
+      },
+      documents: executive.documents.map((doc) => ({
+        id: doc.id,
+        document_name: doc.document_name,
+        document_number: doc.document_number,
+        filename: doc.filename,
+      })),
+    }));
+
+    return transformedData;
+  } catch (error: any) {
+    console.error("[SERVICE] Error fetching sales executives:", error);
+    throw new Error(`Failed to fetch sales executives: ${error.message}`);
+  }
+};
+
+/**
+ * Get a specific sales executive by ID within a vendor
+ * @param vendorId - The vendor ID
+ * @param userId - The user ID of the sales executive
+ * @returns Promise<SalesExecutiveData | null>
+ */
+export const getSalesExecutiveById = async (
+  vendorId: number,
+  userId: number
+): Promise<SalesExecutiveData | null> => {
+  try {
+    console.log(`[SERVICE] Fetching sales executive ID: ${userId} for vendor: ${vendorId}`);
+
+    // First, find the user type ID for 'sales-executive'
+    const salesExecutiveType = await prisma.userTypeMaster.findFirst({
+      where: {
+        user_type: {
+          equals: "sales-executive",
+          mode: "insensitive",
+        },
+      },
+    });
+
+    if (!salesExecutiveType) {
+      console.log("[SERVICE] Sales executive user type not found");
+      return null;
+    }
+
+    // Fetch the specific sales executive
+    const salesExecutive = await prisma.userMaster.findFirst({
+      where: {
+        id: userId,
+        vendor_id: vendorId,
+        user_type_id: salesExecutiveType.id,
+      },
+      include: {
+        user_type: true,
+        documents: true,
+      },
+    });
+
+    if (!salesExecutive) {
+      console.log(`[SERVICE] Sales executive not found with ID: ${userId}`);
+      return null;
+    }
+
+    // Transform the data
+    const transformedData: SalesExecutiveData = {
+      id: salesExecutive.id,
+      vendor_id: salesExecutive.vendor_id,
+      user_name: salesExecutive.user_name,
+      user_contact: salesExecutive.user_contact,
+      user_email: salesExecutive.user_email,
+      user_timezone: salesExecutive.user_timezone,
+      status: salesExecutive.status,
+      created_at: salesExecutive.created_at,
+      updated_at: salesExecutive.updated_at,
+      user_type: {
+        id: salesExecutive.user_type.id,
+        user_type: salesExecutive.user_type.user_type,
+      },
+      documents: salesExecutive.documents.map((doc) => ({
+        id: doc.id,
+        document_name: doc.document_name,
+        document_number: doc.document_number,
+        filename: doc.filename,
+      })),
+    };
+
+    return transformedData;
+  } catch (error: any) {
+    console.error("[SERVICE] Error fetching sales executive by ID:", error);
+    throw new Error(`Failed to fetch sales executive: ${error.message}`);
+  }
+};
+
+/**
+ * Assign lead to a sales executive
+ * @param leadId - Lead ID to assign
+ * @param vendorId - Vendor ID
+ * @param payload - Assignment payload with assign_to and assign_by
+ * @returns Promise<LeadAssignmentResult>
+ */
+export const assignLeadToUser = async (
+  leadId: number,
+  vendorId: number,
+  payload: AssignLeadPayload
+): Promise<LeadAssignmentResult> => {
+  try {
+    console.log(`[SERVICE] Starting lead assignment process`);
+    console.log(`[SERVICE] Lead ID: ${leadId}, Vendor ID: ${vendorId}`);
+    console.log(`[SERVICE] Assign to: ${payload.assign_to}, Assign by: ${payload.assign_by}`);
+
+    // Step 1: Validate admin user (assign_by)
+    const adminUser = await validateAdminUser(payload.assign_by, vendorId);
+    if (!adminUser) {
+      throw new Error("Invalid admin user or insufficient permissions");
+    }
+
+    // Step 2: Validate sales executive user (assign_to)
+    const salesExecutiveUser = await validateSalesExecutiveUser(payload.assign_to, vendorId);
+    if (!salesExecutiveUser) {
+      throw new Error("Invalid sales executive user or user is not active");
+    }
+
+    // Step 3: Validate lead ownership
+    const isValidLead = await validateLeadOwnership(leadId, vendorId);
+    if (!isValidLead) {
+      throw new Error("Lead not found or doesn't belong to this vendor");
+    }
+
+    // Step 4: Check if lead is already assigned to the same user
+    const currentLead = await prisma.leadMaster.findUnique({
+      where: { id: leadId },
+      select: { assign_to: true, firstname: true, lastname: true },
+    });
+
+    if (currentLead?.assign_to === payload.assign_to) {
+      throw new Error(`Lead is already assigned to ${salesExecutiveUser.user_name}`);
+    }
+
+    // Step 5: Update the lead assignment
+    const updatedLead = await prisma.leadMaster.update({
+      where: {
+        id: leadId,
+      },
+      data: {
+        assign_to: payload.assign_to,
+        assigned_by: payload.assign_by,
+        updated_by: payload.assign_by,
+        updated_at: new Date(),
+      },
+      select: {
+        id: true,
+        firstname: true,
+        lastname: true,
+        contact_no: true,
+        email: true,
+        assign_to: true,
+        assigned_by: true,
+        updated_at: true,
+      },
+    });
+
+    console.log(`[SERVICE] Lead assignment successful`);
+    console.log(`[SERVICE] Lead ${leadId} assigned to ${salesExecutiveUser.user_name} by ${adminUser.user_name}`);
+
+    // Step 6: Prepare response data
+    const result: LeadAssignmentResult = {
+      lead: updatedLead,
+      assignedTo: {
+        id: salesExecutiveUser.id,
+        user_name: salesExecutiveUser.user_name,
+        user_contact: "", // Will be fetched separately if needed
+        user_email: "", // Will be fetched separately if needed
+      },
+      assignedBy: {
+        id: adminUser.id,
+        user_name: adminUser.user_name,
+        user_contact: "", // Will be fetched separately if needed
+        user_email: "", // Will be fetched separately if needed
+      },
+    };
+
+    // Optionally fetch full user details
+    const [assignedToDetails, assignedByDetails] = await Promise.all([
+      prisma.userMaster.findUnique({
+        where: { id: payload.assign_to },
+        select: { user_contact: true, user_email: true },
+      }),
+      prisma.userMaster.findUnique({
+        where: { id: payload.assign_by },
+        select: { user_contact: true, user_email: true },
+      }),
+    ]);
+
+    if (assignedToDetails) {
+      result.assignedTo.user_contact = assignedToDetails.user_contact;
+      result.assignedTo.user_email = assignedToDetails.user_email;
+    }
+
+    if (assignedByDetails) {
+      result.assignedBy.user_contact = assignedByDetails.user_contact;
+      result.assignedBy.user_email = assignedByDetails.user_email;
+    }
+
+    return result;
+  } catch (error: any) {
+    console.error("[SERVICE] Error assigning lead:", error);
+    throw error;
+  }
 };

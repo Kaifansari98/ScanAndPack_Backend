@@ -18,6 +18,7 @@ app.use(
 );
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // ✅ Serve static assets (e.g., PDFs, images, etc.) from /assets
 app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
