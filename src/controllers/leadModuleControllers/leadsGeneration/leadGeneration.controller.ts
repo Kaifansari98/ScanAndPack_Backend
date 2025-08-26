@@ -7,8 +7,8 @@ import {
   updateLeadService 
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import { 
-  createLeadSchema, 
-  validateUpdateLeadInput, 
+  createLeadSchema,
+  validateUpdateLeadInput,
   validateLeadAssignmentInput 
 } from "../../../validations/leadValidation";
 import { ApiResponse } from "../../../utils/apiResponse";
@@ -19,7 +19,22 @@ import {
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 
 export class LeadController {
-  
+
+  /**
+   * Helper method to explain access levels
+   */
+  private getAccessExplanation(role: string): string {
+    switch (role) {
+      case "sales-executive":
+        return "You can view leads that you created or that are assigned to you";
+      case "admin":
+      case "super-admin":
+        return "You can view all leads for your vendor";
+      default:
+        return "You can only view leads that you created";
+    }
+  }
+
   /**
    * Create a new lead with optional file attachments
    */
@@ -104,8 +119,8 @@ export class LeadController {
   }
 
   /**
-   * Fetch all leads for a specific vendor
-   */
+     * Fetch all leads for a specific vendor (admin access)
+     */
   async fetchLeadsByVendor(req: Request, res: Response): Promise<Response> {
     try {
       const vendorId = parseInt(req.params.vendorId);
@@ -122,22 +137,78 @@ export class LeadController {
   }
 
   /**
-   * Fetch leads for a specific vendor and user combination
+   * Fetch leads for a specific vendor and user with role-based access control
+   * - Sales executives: Only see leads created by them OR assigned to them
+   * - Admins/Super-admins: See all vendor leads
+   * - Other roles: Only see leads created by them
    */
-  async fetchLeadsByVendorAndUser(req: Request, res: Response): Promise<Response> {
+  fetchLeadsByVendorAndUser = async (req: Request, res: Response): Promise<Response> => {
     try {
       const vendorId = parseInt(req.params.vendorId);
       const userId = parseInt(req.params.userId);
 
-      if (isNaN(vendorId) || isNaN(userId)) {
-        return res.status(400).json({ error: "Invalid vendorId or userId" });
+      // Validate parameters
+      if (isNaN(vendorId) || vendorId <= 0) {
+        return res.status(400).json({ 
+          success: false,
+          error: "Invalid vendorId provided" 
+        });
       }
 
-      const leads = await getLeadsByVendorAndUser(vendorId, userId);
-      return res.json(leads);
+      if (isNaN(userId) || userId <= 0) {
+        return res.status(400).json({ 
+          success: false,
+          error: "Invalid userId provided" 
+        });
+      }
+
+      console.log(`[CONTROLLER] Fetching leads for vendor ${vendorId} and user ${userId}`);
+
+      const result = await getLeadsByVendorAndUser(vendorId, userId);
+
+      // Prepare response with metadata
+      const response = {
+        success: true,
+        message: "Leads fetched successfully",
+        data: {
+          leads: result.leads,
+          metadata: {
+            total_leads: result.leads.length,
+            user_role: result.userInfo.role,
+            can_view_all_leads: result.userInfo.canViewAllLeads,
+            user_info: result.userInfo.userData,
+            filter_applied: result.userInfo.role === "sales-executive" ? "created_by_or_assigned_to" : "all_vendor_leads",
+            access_explanation: this.getAccessExplanation(result.userInfo.role),
+          },
+        },
+      };
+
+      console.log(`[CONTROLLER] Successfully fetched ${result.leads.length} leads for ${result.userInfo.role}`);
+      
+      return res.status(200).json(response);
     } catch (error: any) {
       console.error("[CONTROLLER] fetchLeadsByVendorAndUser error:", error);
-      return res.status(500).json({ error: "Failed to fetch leads" });
+
+      // Handle specific error types
+      if (error.message.includes("User not found")) {
+        return res.status(404).json({
+          success: false,
+          error: "User not found or inactive",
+        });
+      }
+
+      if (error.message.includes("not found for vendor")) {
+        return res.status(403).json({
+          success: false,
+          error: "User does not belong to this vendor",
+        });
+      }
+
+      return res.status(500).json({
+        success: false,
+        error: "Failed to fetch leads",
+        details: process.env.NODE_ENV === "development" ? error.message : undefined,
+      });
     }
   }
 
@@ -648,6 +719,7 @@ export class LeadController {
       );
     }
   }
+
 }
 
 // Export a single instance of the controller
