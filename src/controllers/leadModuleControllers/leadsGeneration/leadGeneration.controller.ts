@@ -15,7 +15,8 @@ import { ApiResponse } from "../../../utils/apiResponse";
 import { 
   getSalesExecutivesByVendor, 
   getSalesExecutiveById, 
-  assignLeadToUser 
+  assignLeadToUser,
+  getLeadById
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 
 export class LeadController {
@@ -40,14 +41,10 @@ export class LeadController {
    */
   async createLead(req: Request, res: Response): Promise<Response> {
     console.log("[CONTROLLER] createLead called");
-    console.log("[DEBUG] Request files:", req.files ? req.files.length : 0);
-    console.log("[DEBUG] Request body keys:", Object.keys(req.body));
-
+  
     try {
-      // Files are optional - empty array if none provided
-      const files = (req.files as Express.Multer.File[]) || [];
-      console.log("[DEBUG] Processed files array length:", files.length);
-      
+      const files = (req.files as Express.MulterS3.File[]) || [];
+  
       const payload = {
         ...req.body,
         site_type_id: req.body.site_type_id ? Number(req.body.site_type_id) : undefined,
@@ -57,66 +54,47 @@ export class LeadController {
         product_types: req.body.product_types ? [].concat(req.body.product_types) : [],
         product_structures: req.body.product_structures ? [].concat(req.body.product_structures) : [],
       };
-
-      // Basic validation for debugging
-      console.log("[DEBUG] Payload validation - firstname:", payload.firstname);
-      console.log("[DEBUG] Payload validation - priority:", payload.priority);
-
-      // ✅ Use Joi validation instead of manual checks
+  
       const { error, value } = createLeadSchema.validate(payload);
       if (error) {
-        return res.status(400).json({ 
-          success: false,
-          error: "Validation failed", 
-          details: error.details.map(d => ({
-            field: d.path.join('.'),
-            message: d.message
-          }))
-        });
-      }
-
-      // Optional: Validate file count if files are provided
-      if (files.length > 10) {
-        return res.status(400).json({ 
-          success: false,
-          error: "Too many files", 
-          details: "Maximum 10 files allowed" 
-        });
-      }
-
-      const result = await createLeadService(value, files);
-      
-      console.log("[SUCCESS] Lead created:", result.lead.id);
-      console.log("[DEBUG] Documents processed:", result.documentsProcessed);
-      return res.status(201).json({ 
-        success: true,
-        message: "Lead created successfully", 
-        data: {
-          ...result,
-          documentsUploaded: files.length
-        }
-      });
-
-    } catch (error: any) {
-      console.error("[ERROR] createLead:", error);
-      console.error("[ERROR] Stack trace:", error.stack);
-      
-      // Handle known validation errors
-      if (error.message.includes('Invalid priority')) {
         return res.status(400).json({
           success: false,
-          error: "Invalid priority value",
-          details: error.message
+          error: "Validation failed",
+          details: error.details.map((d) => ({
+            field: d.path.join("."),
+            message: d.message,
+          })),
         });
       }
-      
-      return res.status(500).json({ 
+  
+      if (files.length > 10) {
+        return res.status(400).json({
+          success: false,
+          error: "Too many files",
+          details: "Maximum 10 files allowed",
+        });
+      }
+  
+      // Pass raw files to the service (supports Multer S3 files)
+      const result = await createLeadService(value, files);
+  
+      return res.status(201).json({
+        success: true,
+        message: "Lead created successfully",
+        data: {
+          ...result,
+          documentsUploaded: files.length,
+        },
+      });
+    } catch (error: any) {
+      console.error("[ERROR] createLead:", error);
+      return res.status(500).json({
         success: false,
-        error: "Internal server error", 
-        details: process.env.NODE_ENV === 'development' ? error.message : undefined
+        error: "Internal server error",
+        details: process.env.NODE_ENV === "development" ? error.message : undefined,
       });
     }
-  }
+  }  
 
   /**
      * Fetch all leads for a specific vendor (admin access)
@@ -207,6 +185,91 @@ export class LeadController {
       return res.status(500).json({
         success: false,
         error: "Failed to fetch leads",
+        details: process.env.NODE_ENV === "development" ? error.message : undefined,
+      });
+    }
+  }
+
+  // Controller method to fetch a single lead by ID
+  fetchLeadById = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const leadId = parseInt(req.params.leadId);
+      const userId = parseInt(req.params.userId);
+      const vendorId = parseInt(req.params.vendorId);
+
+      // Validate parameters
+      if (isNaN(leadId) || leadId <= 0) {
+        return res.status(400).json({ 
+          success: false,
+          error: "Invalid leadId provided" 
+        });
+      }
+
+      if (isNaN(userId) || userId <= 0) {
+        return res.status(400).json({ 
+          success: false,
+          error: "Invalid userId provided" 
+        });
+      }
+
+      if (isNaN(vendorId) || vendorId <= 0) {
+        return res.status(400).json({ 
+          success: false,
+          error: "Invalid vendorId provided" 
+        });
+      }
+
+      console.log(`[CONTROLLER] Fetching lead ${leadId} for user ${userId} in vendor ${vendorId}`);
+
+      const result = await getLeadById(leadId, userId, vendorId);
+
+      // Prepare response with metadata
+      const response = {
+        success: true,
+        message: "Lead fetched successfully",
+        data: {
+          lead: result.lead,
+          metadata: {
+            user_role: result.userInfo.role,
+            can_view_all_leads: result.userInfo.canViewAllLeads,
+            user_info: result.userInfo.userData,
+            access_type: result.userInfo.role === "sales-executive" ? "created_by_or_assigned_to" : "all_vendor_leads",
+            access_explanation: this.getAccessExplanation(result.userInfo.role),
+          },
+        },
+      };
+
+      console.log(`[CONTROLLER] Successfully fetched lead ${leadId} for ${result.userInfo.role}`);
+      
+      return res.status(200).json(response);
+    } catch (error: any) {
+      console.error("[CONTROLLER] fetchLeadById error:", error);
+
+      // Handle specific error types
+      if (error.message.includes("User not found")) {
+        return res.status(404).json({
+          success: false,
+          error: "User not found or inactive",
+        });
+      }
+
+      if (error.message.includes("not found for vendor")) {
+        return res.status(403).json({
+          success: false,
+          error: "User does not belong to this vendor",
+        });
+      }
+
+      if (error.message.includes("Lead not found or access denied")) {
+        return res.status(404).json({
+          success: false,
+          error: "Lead not found or you don't have permission to view this lead",
+        });
+      }
+
+      return res.status(500).json({
+        success: false,
+        error: "Failed to fetch lead",
         details: process.env.NODE_ENV === "development" ? error.message : undefined,
       });
     }

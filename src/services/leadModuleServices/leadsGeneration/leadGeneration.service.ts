@@ -23,17 +23,18 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
           filename: file.filename,
           size: file.size,
           mimetype: file.mimetype,
-          path: file.path,
-          destination: file.destination
+          path: (file as any).path,
+          destination: (file as any).destination,
+          key: (file as any).key,
+          location: (file as any).location
         });
         
         // Check if file actually exists
-        if (fs.existsSync(file.path)) {
-          console.log(`[DEBUG] ✅ File ${index + 1} exists at:`, file.path);
-          const stats = fs.statSync(file.path);
+        const diskPath = (file as any).path as string | undefined;
+        if (diskPath && fs.existsSync(diskPath)) {
+          console.log(`[DEBUG] ✅ File ${index + 1} exists at:`, diskPath);
+          const stats = fs.statSync(diskPath);
           console.log(`[DEBUG] File size on disk:`, stats.size, "bytes");
-        } else {
-          console.log(`[DEBUG] ❌ File ${index + 1} NOT found at:`, file.path);
         }
       });
     }
@@ -214,14 +215,16 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
         console.log(`[INFO] Processing ${files.length} document(s)`);
         
         for (const file of files) {
-          // Double-check file exists before saving to DB
-          const fileExists = fs.existsSync(file.path);
-          console.log(`[DEBUG] File ${file.filename} exists: ${fileExists}`);
+          const fileKey = (file as any).key as string | undefined;
+          const fileLocation = (file as any).location as string | undefined;
+          const diskPath = (file as any).path as string | undefined;
+          const fileExists = diskPath ? fs.existsSync(diskPath) : false;
+          console.log(`[DEBUG] File key: ${fileKey}, location: ${fileLocation}, disk exists: ${fileExists}`);
           
           const document = await tx.leadDocuments.create({
             data: {
               doc_og_name: file.originalname,
-              doc_sys_name: file.filename,
+              doc_sys_name: file.filename || fileKey || file.originalname,
               doc_type: getDocumentTypeFromFile(file),
               vendor_id,
               lead_id: lead.id,
@@ -232,8 +235,8 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
           uploadedFiles.push({
             id: document.id,
             originalName: file.originalname,
-            systemName: file.filename,
-            path: file.path,
+            systemName: file.filename || fileKey,
+            path: diskPath || fileLocation,
             exists: fileExists,
             size: file.size
           });
@@ -380,6 +383,111 @@ export const getLeadsByVendorAndUser = async (vendorId: number, userId: number) 
     };
   } catch (error: any) {
     console.error("[SERVICE] Error fetching leads:", error);
+    throw error;
+  }
+};
+
+// Service function to get a single lead by ID with role-based access control
+export const getLeadById = async (leadId: number, userId: number, vendorId: number) => {
+  try {
+    console.log(`[SERVICE] Fetching lead ${leadId} for user ${userId} in vendor ${vendorId}`);
+
+    // First, get user role information
+    const userInfo = await getUserRole(userId, vendorId);
+    
+    if (!userInfo.isValid) {
+      throw new Error("User not found or inactive");
+    }
+
+    console.log(`[SERVICE] User role: ${userInfo.userType}`);
+
+    const userType = userInfo.userType ?? "";
+
+    // Base condition - lead must exist, belong to vendor, and not be deleted
+    let whereCondition: any = {
+      id: leadId,
+      vendor_id: vendorId,
+      is_deleted: false,
+      account: {
+        is_deleted: false,
+      },
+    };
+
+    // Role-based filtering - same logic as the list API
+    if (userType === "sales-executive") {
+      // Sales executives can only see leads they created OR leads assigned to them
+      whereCondition.OR = [
+        { created_by: userId },  // Leads created by them
+        { assign_to: userId },   // Leads assigned to them
+      ];
+      
+      console.log(`[SERVICE] Applied sales-executive filter for user ${userId}`);
+    } else if (["admin", "super-admin"].includes(userType)) {
+      // Admins and super-admins can see all leads for their vendor
+      // No additional filtering needed beyond vendor_id and leadId
+      console.log(`[SERVICE] Admin/Super-admin access - can view any vendor lead`);
+    } else {
+      // Other roles (if any) - restrict to only their created leads
+      whereCondition.created_by = userId;
+      console.log(`[SERVICE] Restricted access for role ${userType} - only created leads`);
+    }
+
+    const lead = await prisma.leadMaster.findFirst({
+      where: whereCondition,
+      include: {
+        account: true,
+        leadProductStructureMapping: {
+          include: { productStructure: true },
+        },
+        productMappings: {
+          include: { productType: true },
+        },
+        documents: true,
+        source: true,
+        siteType: true,
+        createdBy: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+            user_contact: true,
+          },
+        },
+        assignedTo: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+            user_contact: true,
+          },
+        },
+        assignedBy: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+            user_contact: true,
+          },
+        },
+      },
+    });
+
+    if (!lead) {
+      throw new Error("Lead not found or access denied");
+    }
+
+    console.log(`[SERVICE] Found lead ${leadId} for user ${userId} (${userInfo.userType})`);
+
+    return {
+      lead,
+      userInfo: {
+        role: userType,
+        canViewAllLeads: ["admin", "super-admin"].includes(userType),
+        userData: userInfo.userData,
+      },
+    };
+  } catch (error: any) {
+    console.error("[SERVICE] Error fetching lead:", error);
     throw error;
   }
 };

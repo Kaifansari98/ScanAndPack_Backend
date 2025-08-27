@@ -3,7 +3,7 @@ import { createProductType, fetchAllProductTypes, removeProductType } from "../.
 import { createSiteType, fetchAllSiteTypes, removeSiteType } from "../../controllers/leadModuleControllers/siteType.controller";
 import { createSourceType, fetchAllSourceTypes, removeSourceType } from "../../controllers/leadModuleControllers/sourceType.controller";
 import { createProductStructureType, fetchAllProductStructureTypes, removeProductStructureType } from "../../controllers/leadModuleControllers/productStructureType.controller";
-import { upload } from "../../middlewares/upload.middleware";
+import { upload } from "../../middlewares/uploadWasabi";
 import { leadController } from "../../controllers/leadModuleControllers/leadsGeneration/leadGeneration.controller";
 
 const leadsRouter = Router();
@@ -62,5 +62,8 @@ leadsRouter.get(
     // Add role-based middleware here: requireRole(['admin', 'super-admin']),
     leadController.getLeadAssignmentHistory
 );
+
+// GET single lead by leadId for specific user and vendor
+leadsRouter.get("/get-lead/:leadId/vendor/:vendorId/user/:userId", leadController.fetchLeadById);
 
 export default leadsRouter;
