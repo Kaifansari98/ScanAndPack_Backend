@@ -51,6 +51,8 @@ export class LeadController {
         source_id: Number(req.body.source_id),
         vendor_id: Number(req.body.vendor_id),
         created_by: Number(req.body.created_by),
+        assign_to: req.body.assign_to ? Number(req.body.assign_to) : undefined,
+        assigned_by: req.body.assigned_by ? Number(req.body.assigned_by) : undefined,
         product_types: req.body.product_types ? [].concat(req.body.product_types) : [],
         product_structures: req.body.product_structures ? [].concat(req.body.product_structures) : [],
       };
