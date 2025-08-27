@@ -55,6 +55,8 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
       designer_remark,
       vendor_id,
       created_by,
+      assign_to,
+      assigned_by,
       product_types = [],
       product_structures = []
     } = payload;
@@ -148,7 +150,9 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
           designer_remark,
           vendor_id,
           created_by,
-          account_id: account.id // Add account_id reference
+          account_id: account.id, // Add account_id reference
+          assign_to,
+          assigned_by,
         }
       });
   

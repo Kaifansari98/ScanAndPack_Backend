@@ -60,6 +60,8 @@ export interface CreateLeadDTO {
     designer_remark?: string;
     vendor_id: number;
     created_by: number;
+    assign_to?: number;
+    assigned_by?: number;
     product_types?: number[];
     product_structures?: number[];
 }
