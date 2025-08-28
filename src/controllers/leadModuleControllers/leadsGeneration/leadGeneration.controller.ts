@@ -96,7 +96,7 @@ export class LeadController {
         details: process.env.NODE_ENV === "development" ? error.message : undefined,
       });
     }
-  }  
+  }
 
   /**
      * Fetch all leads for a specific vendor (admin access)
