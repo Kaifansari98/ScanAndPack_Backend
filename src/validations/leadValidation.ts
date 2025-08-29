@@ -21,6 +21,7 @@ export const createLeadSchema = Joi.object({
   created_by: Joi.number().integer().positive().required(),
   assign_to: Joi.number().integer().positive().optional(),
   assigned_by: Joi.number().integer().positive().optional(),
+  status_id: Joi.number().required(),
   // Changed from array of strings to array of integers
   product_types: Joi.array().items(Joi.number().integer().positive()).optional(),
   product_structures: Joi.array().items(Joi.number().integer().positive()).optional(),
