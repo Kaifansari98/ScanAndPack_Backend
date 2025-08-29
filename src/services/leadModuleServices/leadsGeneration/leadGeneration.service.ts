@@ -48,6 +48,7 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
       email,
       site_address,
       site_type_id,
+      status_id,
       priority,
       billing_name,
       source_id,
@@ -143,6 +144,7 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
           email,
           site_address,
           site_type_id,
+          status_id,
           priority: leadPriority,
           billing_name,
           source_id,
@@ -347,6 +349,7 @@ export const getLeadsByVendorAndUser = async (vendorId: number, userId: number) 
         documents: true,
         source: true,
         siteType: true,
+        statusType: true,
         createdBy: {
           select: {
             id: true,

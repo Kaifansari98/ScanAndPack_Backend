@@ -54,6 +54,16 @@ export interface DocumentTypeValue{
     type: string;
     vendor_id: number;
 }
+export interface StatusTypeInput {
+    vendor_id: number;
+    type: string;
+}
+
+export interface StatusType{
+    id: number;
+    type: string;
+    vendor_id: number;
+}
 
 export interface CreateLeadDTO {
     firstname: string;
@@ -71,6 +81,7 @@ export interface CreateLeadDTO {
     designer_remark?: string;
     vendor_id: number;
     created_by: number;
+    status_id: number;
     assign_to?: number;
     assigned_by?: number;
     product_types?: number[];

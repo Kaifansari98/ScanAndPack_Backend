@@ -55,6 +55,7 @@ model VendorMaster {
   payments      PaymentInfo[]
   ledgers       Ledger[]
   documentTypes DocumentTypeMaster[]
+  statusTypes   StatusTypeMaster[]
 }
 
 model VendorAddress {
@@ -305,7 +306,8 @@ model LeadMaster {
   alt_contact_no  String?
   email           String?
   site_address    String
-  site_type_id    Int?
+  site_type_id    Int?      
+  status_id       Int
   priority        LeadPriority
   billing_name    String?
   source_id       Int
@@ -335,6 +337,7 @@ model LeadMaster {
   assignedTo  UserMaster?    @relation("LeadAssignedTo", fields: [assign_to], references: [id])
   assignedBy  UserMaster?    @relation("LeadAssignedBy", fields: [assigned_by], references: [id])
   account     AccountMaster  @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  statusType StatusTypeMaster  @relation(fields: [status_id], references: [id], onDelete: Cascade)
 
   // ✅ New reverse relations
   productMappings LeadProductMapping[]
@@ -531,4 +534,14 @@ model DocumentTypeMaster {
 // ✅ Relations
   vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   payments  PaymentInfo[]
+}
+
+model StatusTypeMaster {
+  id        Int      @id @default(autoincrement())
+  type      String
+  vendor_id Int
+
+// ✅ Relations
+  vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  leads  LeadMaster[]
 }

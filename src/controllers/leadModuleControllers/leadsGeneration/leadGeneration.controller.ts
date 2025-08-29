@@ -48,6 +48,7 @@ export class LeadController {
       const payload = {
         ...req.body,
         site_type_id: req.body.site_type_id ? Number(req.body.site_type_id) : undefined,
+        status_id: Number(1),
         source_id: Number(req.body.source_id),
         vendor_id: Number(req.body.vendor_id),
         created_by: Number(req.body.created_by),
