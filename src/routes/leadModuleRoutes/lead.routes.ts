@@ -5,13 +5,16 @@ import { createSourceType, fetchAllSourceTypes, removeSourceType } from "../../c
 import { createProductStructureType, fetchAllProductStructureTypes, removeProductStructureType } from "../../controllers/leadModuleControllers/productStructureType.controller";
 import { upload } from "../../middlewares/uploadWasabi";
 import { leadController } from "../../controllers/leadModuleControllers/leadsGeneration/leadGeneration.controller";
+import { createDocumentType, fetchAllDocumentTypes, removeDocumentType } from "../../controllers/leadModuleControllers/documentType.controller";
 
 const leadsRouter = Router();
 
+leadsRouter.post('/create-document-type', createDocumentType);
 leadsRouter.post('/create-product-type', createProductType);
 leadsRouter.post('/create-site-type', createSiteType);
 leadsRouter.post('/create-source-type', createSourceType);
 leadsRouter.post('/create-product-structure', createProductStructureType);
+leadsRouter.get("/get-all-document-types/:vendor_id", fetchAllDocumentTypes);
 leadsRouter.get("/get-all-product-types/:vendor_id", fetchAllProductTypes);
 leadsRouter.delete("/delete-product-type/:id", removeProductType);
 leadsRouter.get("/get-all-site-types/:vendor_id", fetchAllSiteTypes);
@@ -20,6 +23,7 @@ leadsRouter.get("/get-all-productStructure-types/:vendor_id", fetchAllProductStr
 leadsRouter.delete("/delete-productStructure-type/:id", removeProductStructureType);
 leadsRouter.get("/get-all-source-types/:vendor_id", fetchAllSourceTypes);
 leadsRouter.delete("/delete-source-type/:id", removeSourceType);
+leadsRouter.delete("/delete-document-type/:id", removeDocumentType);
 
 leadsRouter.post("/create", upload.array("documents", 10), leadController.createLead);
 

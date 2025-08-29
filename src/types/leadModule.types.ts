@@ -44,6 +44,17 @@ export interface ProductStructureType{
     vendor_id: number;
 }
 
+export interface DocumentTypeInput {
+    vendor_id: number;
+    type: string;
+}
+
+export interface DocumentTypeValue{
+    id: number;
+    type: string;
+    vendor_id: number;
+}
+
 export interface CreateLeadDTO {
     firstname: string;
     lastname: string;

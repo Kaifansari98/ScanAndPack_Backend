@@ -52,6 +52,9 @@ model VendorMaster {
   documents         LeadDocuments[]
   productStructure  ProductStructure[]
   leadProductStructureMapping LeadProductStructureMapping[]
+  payments      PaymentInfo[]
+  ledgers       Ledger[]
+  documentTypes DocumentTypeMaster[]
 }
 
 model VendorAddress {
@@ -112,6 +115,8 @@ model UserMaster {
   leadsUpdated   LeadMaster[] @relation("LeadUpdatedBy")
   leadsAssigned  LeadMaster[] @relation("LeadAssignedTo")
   leadsDelegated LeadMaster[] @relation("LeadAssignedBy")
+  paymentsCreated PaymentInfo[]
+  ledgersCreated  Ledger[]
 
   // ✅ Accounts
   accountsCreated AccountMaster[] @relation("AccountCreatedBy")
@@ -281,6 +286,7 @@ model ClientMaster {
   items     ProjectItemsMaster[]
   boxes     BoxMaster[]
   scanItems ScanAndPackItem[]
+  ledgers Ledger[]
 }
 
 enum LeadPriority {
@@ -334,6 +340,8 @@ model LeadMaster {
   productMappings LeadProductMapping[]
   documents       LeadDocuments[]
   leadProductStructureMapping LeadProductStructureMapping[]
+  payments PaymentInfo[]
+  ledgers  Ledger[]
 
   // ✅ Unique constraints for contact_no and email per vendor
   @@unique([contact_no, vendor_id], name: "unique_contact_per_vendor")
@@ -390,6 +398,8 @@ model AccountMaster {
   documents    LeadDocuments[]
   leadProductStructureMapping LeadProductStructureMapping[]
   leads        LeadMaster[]
+  payments PaymentInfo[]
+  ledgers  Ledger[]
 }
 
 model LeadProductMapping {
@@ -401,7 +411,7 @@ model LeadProductMapping {
   created_by     Int
   created_at     DateTime  @default(now())
 
-  // ✅ Relations
+// ✅ Relations
   vendor      VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   lead        LeadMaster      @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   account     AccountMaster   @relation(fields: [account_id], references: [id], onDelete: Cascade)
@@ -432,7 +442,7 @@ model LeadDocuments {
   lead_id      Int?
   vendor_id    Int
 
-  // ✅ Relations
+// ✅ Relations
   vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   account   AccountMaster? @relation(fields: [account_id], references: [id], onDelete: Cascade)
   lead      LeadMaster?    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
@@ -464,4 +474,61 @@ model LeadProductStructureMapping{
   lead  LeadMaster        @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   account AccountMaster   @relation(fields: [account_id], references: [id], onDelete: Cascade)
   productStructure ProductStructure @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
+}
+
+// ✅ New Enums
+enum LedgerType {
+  debit
+  credit
+}
+
+// ✅ New Tables
+model PaymentInfo {
+  id              Int       @id @default(autoincrement())
+  lead_id         Int
+  account_id      Int
+  amount          Float?
+  payment_date    DateTime?
+  payment_text    String?   @db.VarChar(2000)
+  payment_file_id Int?
+  created_at      DateTime  @default(now())
+  created_by      Int
+  vendor_id       Int
+
+// ✅ Relations
+  lead        LeadMaster        @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  account     AccountMaster     @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  vendor      VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdBy   UserMaster        @relation(fields: [created_by], references: [id], onDelete: Cascade)
+  document    DocumentTypeMaster? @relation(fields: [payment_file_id], references: [id], onDelete: SetNull)
+}
+
+model Ledger {
+  id           Int       @id @default(autoincrement())
+  lead_id      Int
+  account_id   Int
+  client_id    Int
+  vendor_id    Int
+  amount       Float
+  payment_date DateTime
+  type         LedgerType
+  created_by   Int
+  created_at   DateTime  @default(now())
+
+// ✅ Relations
+  lead      LeadMaster    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  account   AccountMaster @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  client    ClientMaster  @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  vendor    VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdBy UserMaster    @relation(fields: [created_by], references: [id], onDelete: Cascade)
+}
+
+model DocumentTypeMaster {
+  id        Int      @id @default(autoincrement())
+  type      String
+  vendor_id Int
+
+// ✅ Relations
+  vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  payments  PaymentInfo[]
 }
