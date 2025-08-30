@@ -2,7 +2,9 @@ import { PrismaClient, LedgerType } from '@prisma/client';
 import { PutObjectCommand } from '@aws-sdk/client-s3';
 import wasabi from '../../../utils/wasabiClient';
 import { sanitizeFilename } from '../../../utils/fileUtils';
-import { CreatePaymentUploadDto, PaymentUploadResponseDto } from '../../../types/leadModule.types';
+import { CreatePaymentUploadDto, PaymentUploadResponseDto, PaymentUploadDetailDto, PaymentAnalyticsDto, PaymentUploadListDto, DocumentDownloadDto } from '../../../types/leadModule.types';
+import { GetObjectCommand } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 const prisma = new PrismaClient();
 
@@ -32,7 +34,7 @@ export class PaymentUploadService {
 
           for (const photo of data.sitePhotos) {
             const sanitizedFilename = sanitizeFilename(photo.originalname);
-            const s3Key = `site-photos/${data.vendor_id}/${data.lead_id}/${Date.now()}-${sanitizedFilename}`;
+            const s3Key = `current_site_photos/${data.vendor_id}/${data.lead_id}/${Date.now()}-${sanitizedFilename}`;
             
             // Upload to Wasabi
             await wasabi.send(new PutObjectCommand({
@@ -48,7 +50,7 @@ export class PaymentUploadService {
                 doc_og_name: photo.originalname,
                 doc_sys_name: s3Key,
                 created_by: data.created_by,
-                doc_type_id: 2, // CUrrent Site photos document type ID
+                doc_type_id: 2, // Current Site photos document type ID
                 account_id: data.account_id,
                 lead_id: data.lead_id,
                 vendor_id: data.vendor_id,
@@ -57,7 +59,7 @@ export class PaymentUploadService {
 
             response.documentsUploaded.push({
               id: document.id,
-              type: 'site_photo',
+              type: 'current_site_photo',
               originalName: photo.originalname,
               s3Key: s3Key
             });
@@ -79,7 +81,7 @@ export class PaymentUploadService {
         }
 
         const sanitizedPdfName = sanitizeFilename(data.pdfFile.originalname);
-        const pdfS3Key = `pdf-uploads/${data.vendor_id}/${data.lead_id}/${Date.now()}-${sanitizedPdfName}`;
+        const pdfS3Key = `initial_site_measurement_documents/${data.vendor_id}/${data.lead_id}/${Date.now()}-${sanitizedPdfName}`;
         
         // Upload PDF to Wasabi
         await wasabi.send(new PutObjectCommand({
@@ -95,7 +97,7 @@ export class PaymentUploadService {
             doc_og_name: data.pdfFile.originalname,
             doc_sys_name: pdfS3Key,
             created_by: data.created_by,
-            doc_type_id: 3, // PDF document type ID
+            doc_type_id: 4, // PDF document type ID
             account_id: data.account_id,
             lead_id: data.lead_id,
             vendor_id: data.vendor_id,
@@ -112,33 +114,38 @@ export class PaymentUploadService {
         // 3. Handle payment image file (optional)
         let paymentFileId: number | null = null;
         if (data.paymentImageFile) {
-          const sanitizedPaymentImageName = sanitizeFilename(data.paymentImageFile.originalname);
-          const paymentImageS3Key = `payment-images/${data.vendor_id}/${data.lead_id}/${Date.now()}-${sanitizedPaymentImageName}`;
-          
-          // Upload payment image to Wasabi
-          await wasabi.send(new PutObjectCommand({
+        const sanitizedPaymentImageName = sanitizeFilename(data.paymentImageFile.originalname);
+        const paymentImageS3Key = `initial-site-measurement-payment-images/${data.vendor_id}/${data.lead_id}/${Date.now()}-${sanitizedPaymentImageName}`;
+        
+        // Upload payment image to Wasabi
+        await wasabi.send(new PutObjectCommand({
             Bucket: process.env.WASABI_BUCKET_NAME || 'your-bucket-name',
             Key: paymentImageS3Key,
             Body: data.paymentImageFile.buffer,
             ContentType: data.paymentImageFile.mimetype,
-          }));
+        }));
 
-          // Create document type entry for payment image
-          const paymentImageDoc = await tx.documentTypeMaster.create({
+        // Save document info to database with doc_type_id = 3 (hardcoded for payments)
+        const paymentDocument = await tx.leadDocuments.create({
             data: {
-              type: `payment_image_${Date.now()}`, // Unique identifier
-              vendor_id: data.vendor_id,
+            doc_og_name: data.paymentImageFile.originalname,
+            doc_sys_name: paymentImageS3Key,
+            created_by: data.created_by,
+            doc_type_id: 3, // Payment document type ID (hardcoded)
+            account_id: data.account_id,
+            lead_id: data.lead_id,
+            vendor_id: data.vendor_id,
             }
-          });
+        });
 
-          paymentFileId = paymentImageDoc.id;
+        paymentFileId = paymentDocument.id;
 
-          response.documentsUploaded.push({
-            id: paymentImageDoc.id,
-            type: 'payment_image',
+        response.documentsUploaded.push({
+            id: paymentDocument.id,
+            type: 'initial_site_measurement_payment_details',
             originalName: data.paymentImageFile.originalname,
             s3Key: paymentImageS3Key
-          });
+        });
         }
 
         // 4. Create PaymentInfo entry (if amount is provided)
@@ -152,7 +159,7 @@ export class PaymentUploadService {
               amount: data.amount,
               payment_date: data.payment_date,
               payment_text: data.payment_text || null,
-              payment_file_id: paymentFileId,
+              payment_file_id: null,
             }
           });
 
@@ -186,6 +193,8 @@ export class PaymentUploadService {
         }
 
         return response;
+    }, {
+        timeout: 20000 // 20 seconds
       });
 
       return result;
@@ -193,6 +202,528 @@ export class PaymentUploadService {
     } catch (error: any) {
       console.error('[PaymentUploadService] Error:', error);
       throw new Error(`Failed to create payment upload: ${error.message}`);
+    }
+  }
+
+    // Get payment uploads by lead ID
+    public async getPaymentUploadsByLead(leadId: number, vendorId: number): Promise<PaymentUploadDetailDto[]> {
+        try {
+          // Get payment info with related data
+          const paymentInfos = await prisma.paymentInfo.findMany({
+            where: {
+              lead_id: leadId,
+              vendor_id: vendorId
+            },
+            include: {
+              lead: {
+                select: {
+                  id: true,
+                  firstname: true,
+                  lastname: true,
+                  contact_no: true,
+                  email: true
+                }
+              },
+              account: {
+                select: {
+                  id: true,
+                  name: true,
+                  contact_no: true,
+                  email: true
+                }
+              },
+              createdBy: {
+                select: {
+                  id: true,
+                  user_name: true,
+                  user_email: true
+                }
+              },
+              document: {
+                select: {
+                  id: true,
+                  type: true
+                }
+              }
+            },
+            orderBy: {
+              created_at: 'desc'
+            }
+          });
+    
+          // Get associated documents for this lead
+          const documents = await prisma.leadDocuments.findMany({
+            where: {
+              lead_id: leadId,
+              vendor_id: vendorId,
+              deleted_at: null
+            },
+                          include: {
+                createdBy: {
+                  select: {
+                    id: true,
+                    user_name: true,
+                    user_email: true
+                  }
+                },
+                documentType: {
+                  select: {
+                    id: true,
+                    type: true
+                  }
+                }
+              },
+            orderBy: {
+              created_at: 'desc'
+            }
+          });
+    
+          // Get ledger entries for this lead
+          const ledgerEntries = await prisma.ledger.findMany({
+            where: {
+              lead_id: leadId,
+              vendor_id: vendorId
+            },
+            orderBy: {
+              created_at: 'desc'
+            }
+          });
+    
+          // Group data by payment info or create entries for document-only uploads
+          const result: PaymentUploadDetailDto[] = [];
+    
+          // Add payment-based uploads
+          for (const payment of paymentInfos) {
+            const relatedLedger = ledgerEntries.find(l => 
+              l.payment_date.getTime() === payment.payment_date?.getTime() &&
+              l.amount === payment.amount
+            );
+    
+            result.push({
+              id: payment.id,
+              type: 'payment_upload',
+              lead: payment.lead,
+              account: payment.account,
+              paymentInfo: {
+                id: payment.id,
+                amount: payment.amount,
+                payment_date: payment.payment_date,
+                payment_text: payment.payment_text,
+                payment_file_id: payment.payment_file_id
+              },
+              ledgerEntry: relatedLedger ? {
+                id: relatedLedger.id,
+                amount: relatedLedger.amount,
+                type: relatedLedger.type,
+                payment_date: relatedLedger.payment_date
+              } : null,
+              documents: documents.filter(doc => {
+                // Associate documents created around the same time as payment
+                const timeDiff = Math.abs(doc.created_at.getTime() - payment.created_at.getTime());
+                return timeDiff < 60000; // Within 1 minute
+              }).map(doc => ({
+                id: doc.id,
+                doc_og_name: doc.doc_og_name,
+                doc_sys_name: doc.doc_sys_name,
+                doc_type: doc.documentType.type,
+                created_at: doc.created_at,
+                createdBy: doc.createdBy
+              })),
+              createdBy: payment.createdBy,
+              created_at: payment.created_at
+            });
+          }
+    
+          // Add document-only uploads (not associated with payments)
+          const paymentTimes = paymentInfos.map(p => p.created_at.getTime());
+          const documentOnlyUploads = documents.filter(doc => {
+            return !paymentTimes.some(time => {
+              const timeDiff = Math.abs(doc.created_at.getTime() - time);
+              return timeDiff < 60000; // Not within 1 minute of any payment
+            });
+          });
+    
+          // Group document-only uploads by creation time (within 5 minutes)
+          const groupedDocs: { [key: string]: typeof documents } = {};
+          documentOnlyUploads.forEach(doc => {
+            const timeKey = Math.floor(doc.created_at.getTime() / (5 * 60 * 1000)); // 5-minute intervals
+            if (!groupedDocs[timeKey]) {
+              groupedDocs[timeKey] = [];
+            }
+            groupedDocs[timeKey].push(doc);
+          });
+    
+          // Add grouped document uploads
+          Object.values(groupedDocs).forEach(docGroup => {
+            if (docGroup.length > 0) {
+              const firstDoc = docGroup[0];
+              result.push({
+                id: firstDoc.id,
+                type: 'document_upload',
+                lead: paymentInfos[0]?.lead || null,
+                account: paymentInfos[0]?.account || null,
+                paymentInfo: null,
+                ledgerEntry: null,
+                documents: docGroup.map(doc => ({
+                  id: doc.id,
+                  doc_og_name: doc.doc_og_name,
+                  doc_sys_name: doc.doc_sys_name,
+                  doc_type: doc.documentType.type,
+                  created_at: doc.created_at,
+                  createdBy: doc.createdBy
+                })),
+                createdBy: firstDoc.createdBy,
+                created_at: firstDoc.created_at
+              });
+            }
+          });
+    
+          return result.sort((a, b) => b.created_at.getTime() - a.created_at.getTime());
+    
+        } catch (error: any) {
+          console.error('[PaymentUploadGetService] Error getting uploads by lead:', error);
+          throw new Error(`Failed to get payment uploads: ${error.message}`);
+        }
+      }
+
+    // Get payment uploads by account ID
+  public async getPaymentUploadsByAccount(accountId: number, vendorId: number): Promise<PaymentUploadListDto[]> {
+    try {
+      const paymentInfos = await prisma.paymentInfo.findMany({
+        where: {
+          account_id: accountId,
+          vendor_id: vendorId
+        },
+        include: {
+          lead: {
+            select: {
+              id: true,
+              firstname: true,
+              lastname: true,
+              contact_no: true
+            }
+          },
+          account: {
+            select: {
+              id: true,
+              name: true
+            }
+          },
+          createdBy: {
+            select: {
+              user_name: true
+            }
+          }
+        },
+        orderBy: {
+          created_at: 'desc'
+        }
+      });
+
+      return paymentInfos.map(payment => ({
+        id: payment.id,
+        lead: payment.lead,
+        account: payment.account,
+        amount: payment.amount,
+        payment_date: payment.payment_date,
+        payment_text: payment.payment_text,
+        createdBy: payment.createdBy.user_name,
+        created_at: payment.created_at
+      }));
+
+    } catch (error: any) {
+      console.error('[PaymentUploadGetService] Error getting uploads by account:', error);
+      throw new Error(`Failed to get payment uploads: ${error.message}`);
+    }
+  }
+
+  // Get payment upload by ID
+  public async getPaymentUploadById(id: number, vendorId: number): Promise<PaymentUploadDetailDto | null> {
+    try {
+      const paymentInfo = await prisma.paymentInfo.findFirst({
+        where: {
+          id: id,
+          vendor_id: vendorId
+        },
+        include: {
+          lead: true,
+          account: true,
+          createdBy: {
+            select: {
+              id: true,
+              user_name: true,
+              user_email: true
+            }
+          },
+          document: true
+        }
+      });
+
+      if (!paymentInfo) {
+        return null;
+      }
+
+             // Get related documents and ledger entries
+       const documents = await prisma.leadDocuments.findMany({
+         where: {
+           lead_id: paymentInfo.lead_id,
+           vendor_id: vendorId,
+           deleted_at: null,
+           created_at: {
+             gte: new Date(paymentInfo.created_at.getTime() - 60000),
+             lte: new Date(paymentInfo.created_at.getTime() + 60000)
+           }
+         },
+         include: {
+           createdBy: {
+             select: {
+               id: true,
+               user_name: true
+             }
+           },
+           documentType: {
+             select: {
+               id: true,
+               type: true
+             }
+           }
+         }
+       });
+
+      const ledgerEntry = await prisma.ledger.findFirst({
+        where: {
+          lead_id: paymentInfo.lead_id,
+          vendor_id: vendorId,
+          amount: paymentInfo.amount || 0,
+          payment_date: paymentInfo.payment_date || undefined
+        }
+      });
+
+      return {
+        id: paymentInfo.id,
+        type: 'payment_upload',
+        lead: paymentInfo.lead,
+        account: paymentInfo.account,
+        paymentInfo: {
+          id: paymentInfo.id,
+          amount: paymentInfo.amount,
+          payment_date: paymentInfo.payment_date,
+          payment_text: paymentInfo.payment_text,
+          payment_file_id: paymentInfo.payment_file_id
+        },
+        ledgerEntry: ledgerEntry ? {
+          id: ledgerEntry.id,
+          amount: ledgerEntry.amount,
+          type: ledgerEntry.type,
+          payment_date: ledgerEntry.payment_date
+        } : null,
+                 documents: documents.map(doc => ({
+           id: doc.id,
+           doc_og_name: doc.doc_og_name,
+           doc_sys_name: doc.doc_sys_name,
+           doc_type: doc.documentType.type,
+           created_at: doc.created_at,
+           createdBy: doc.createdBy
+         })),
+        createdBy: paymentInfo.createdBy,
+        created_at: paymentInfo.created_at
+      };
+
+    } catch (error: any) {
+      console.error('[PaymentUploadGetService] Error getting upload by id:', error);
+      throw new Error(`Failed to get payment upload: ${error.message}`);
+    }
+  }
+
+  // Get payment uploads by vendor with pagination
+  public async getPaymentUploadsByVendor(
+    vendorId: number, 
+    page: number = 1, 
+    limit: number = 10,
+    startDate?: Date,
+    endDate?: Date
+  ): Promise<{ data: PaymentUploadListDto[], total: number }> {
+    try {
+      const whereClause: any = {
+        vendor_id: vendorId
+      };
+
+      if (startDate || endDate) {
+        whereClause.created_at = {};
+        if (startDate) whereClause.created_at.gte = startDate;
+        if (endDate) whereClause.created_at.lte = endDate;
+      }
+
+      const [paymentInfos, total] = await Promise.all([
+        prisma.paymentInfo.findMany({
+          where: whereClause,
+          include: {
+            lead: {
+              select: {
+                id: true,
+                firstname: true,
+                lastname: true,
+                contact_no: true
+              }
+            },
+            account: {
+              select: {
+                id: true,
+                name: true
+              }
+            },
+            createdBy: {
+              select: {
+                user_name: true
+              }
+            }
+          },
+          orderBy: {
+            created_at: 'desc'
+          },
+          skip: (page - 1) * limit,
+          take: limit
+        }),
+        prisma.paymentInfo.count({
+          where: whereClause
+        })
+      ]);
+
+      const data = paymentInfos.map(payment => ({
+        id: payment.id,
+        lead: payment.lead,
+        account: payment.account,
+        amount: payment.amount,
+        payment_date: payment.payment_date,
+        payment_text: payment.payment_text,
+        createdBy: payment.createdBy.user_name,
+        created_at: payment.created_at
+      }));
+
+      return { data, total };
+
+    } catch (error: any) {
+      console.error('[PaymentUploadGetService] Error getting uploads by vendor:', error);
+      throw new Error(`Failed to get payment uploads: ${error.message}`);
+    }
+  }
+
+  // Generate download URL for document
+  public async getDocumentDownloadUrl(documentId: number, vendorId: number): Promise<DocumentDownloadDto | null> {
+    try {
+      const document = await prisma.leadDocuments.findFirst({
+        where: {
+          id: documentId,
+          vendor_id: vendorId,
+          deleted_at: null
+        }
+      });
+
+      if (!document) {
+        return null;
+      }
+
+      // Generate signed URL for Wasabi
+      const command = new GetObjectCommand({
+        Bucket: process.env.WASABI_BUCKET_NAME || 'your-bucket-name',
+        Key: document.doc_sys_name
+      });
+
+      const signedUrl = await getSignedUrl(wasabi, command, { expiresIn: 3600 }); // 1 hour
+
+      return {
+        id: document.id,
+        originalName: document.doc_og_name,
+        downloadUrl: signedUrl,
+        expiresAt: new Date(Date.now() + 3600000) // 1 hour from now
+      };
+
+    } catch (error: any) {
+      console.error('[PaymentUploadGetService] Error generating download URL:', error);
+      throw new Error(`Failed to generate download URL: ${error.message}`);
+    }
+  }
+
+  // Get payment analytics
+  public async getPaymentAnalytics(
+    vendorId: number,
+    startDate?: Date,
+    endDate?: Date
+  ): Promise<PaymentAnalyticsDto> {
+    try {
+      const whereClause: any = {
+        vendor_id: vendorId
+      };
+
+      if (startDate || endDate) {
+        whereClause.payment_date = {};
+        if (startDate) whereClause.payment_date.gte = startDate;
+        if (endDate) whereClause.payment_date.lte = endDate;
+      }
+
+      // Get payment statistics
+      const [paymentStats, documentStats] = await Promise.all([
+        prisma.paymentInfo.aggregate({
+          where: whereClause,
+          _sum: {
+            amount: true
+          },
+          _count: {
+            id: true
+          },
+          _avg: {
+            amount: true
+          }
+        }),
+        prisma.leadDocuments.count({
+          where: {
+            vendor_id: vendorId,
+            deleted_at: null,
+            ...(startDate || endDate ? {
+              created_at: {
+                ...(startDate && { gte: startDate }),
+                ...(endDate && { lte: endDate })
+              }
+            } : {})
+          }
+        })
+      ]);
+
+      // Get monthly payment breakdown
+      const monthlyPayments = await prisma.$queryRaw<Array<{
+        month: string;
+        total_amount: number;
+        payment_count: number;
+      }>>`
+        SELECT 
+          TO_CHAR(payment_date, 'YYYY-MM') as month,
+          SUM(amount::numeric)::float as total_amount,
+          COUNT(*)::int as payment_count
+        FROM "PaymentInfo"
+        WHERE vendor_id = ${vendorId}
+        ${startDate ? `AND payment_date >= ${startDate}` : ''}
+        ${endDate ? `AND payment_date <= ${endDate}` : ''}
+        AND payment_date IS NOT NULL
+        GROUP BY TO_CHAR(payment_date, 'YYYY-MM')
+        ORDER BY month DESC
+        LIMIT 12
+      `;
+
+      return {
+        totalAmount: paymentStats._sum.amount || 0,
+        totalPayments: paymentStats._count.id || 0,
+        averagePayment: paymentStats._avg.amount || 0,
+        totalDocuments: documentStats,
+        monthlyBreakdown: monthlyPayments,
+        dateRange: {
+          startDate: startDate || null,
+          endDate: endDate || null
+        }
+      };
+
+    } catch (error: any) {
+      console.error('[PaymentUploadGetService] Error getting analytics:', error);
+      throw new Error(`Failed to get payment analytics: ${error.message}`);
     }
   }
 

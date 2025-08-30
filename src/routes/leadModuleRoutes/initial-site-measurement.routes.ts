@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import multer from 'multer';
 import { PaymentUploadController } from '../../controllers/leadModuleControllers/leadsGeneration/initial-site_measurement.controller';
-import { validatePaymentUpload, handleMulterError, validateFiles } from '../../middlewares/initial-site-measurement.middleware';
+import { validatePaymentUpload, handleMulterError, validateFiles, validateGetRequest, validatePaginationRequest, handleGetErrors } from '../../middlewares/initial-site-measurement.middleware';
 
 const router = Router();
 const paymentUploadController = new PaymentUploadController();
@@ -62,5 +62,75 @@ router.post('/payment-upload',
   validateFiles,
   paymentUploadController.createPaymentUpload
 );
+
+/**
+ * GET /api/payment-upload/lead/:leadId
+ * Get all payment uploads for a specific lead
+ * Query params: vendor_id (required)
+ */
+router.get('/initial-site-measurement/:leadId', 
+    validateGetRequest,
+    paymentUploadController.getPaymentUploadsByLead
+);
+  
+/**
+ * GET /api/payment-upload/account/:accountId  
+ * Get all payment uploads for a specific account
+ * Query params: vendor_id (required)
+ */
+router.get('/account/:accountId',
+    validateGetRequest, 
+    paymentUploadController.getPaymentUploadsByAccount
+);
+  
+  /**
+   * GET /api/payment-upload/:id
+   * Get a specific payment upload by ID
+   * Query params: vendor_id (required)
+   */
+  router.get('/:id',
+    validateGetRequest,
+    paymentUploadController.getPaymentUploadById
+  );
+  
+    /**
+     * GET /api/payment-upload/vendor/:vendorId
+     * Get all payment uploads for a vendor with pagination
+     * Query params: 
+     * - page (optional, default: 1)
+     * - limit (optional, default: 10) 
+     * - startDate (optional, ISO date string)
+     * - endDate (optional, ISO date string)
+     */
+    router.get('/vendor/:vendorId',
+    validatePaginationRequest,
+    paymentUploadController.getPaymentUploadsByVendor
+    );
+  
+  /**
+   * GET /api/payment-upload/documents/:documentId/download
+   * Get download URL for a specific document
+   * Query params: vendor_id (required)
+   */
+  router.get('/documents/:documentId/download',
+    validateGetRequest,
+    paymentUploadController.downloadDocument
+  );
+  
+  /**
+   * GET /api/payment-upload/analytics/:vendorId
+   * Get payment analytics for a vendor
+   * Query params:
+   * - startDate (optional, ISO date string)
+   * - endDate (optional, ISO date string)  
+   */
+  router.get('/analytics/:vendorId',
+    validatePaginationRequest,
+    paymentUploadController.getPaymentAnalytics
+  );
+  
+  // Error handling middleware
+  router.use(handleGetErrors);
+
 
 export { router as paymentUploadRoutes };

@@ -110,4 +110,231 @@ export class PaymentUploadController {
       });
     }
   };
+
+  // GET /api/payment-upload/lead/:leadId
+  public getPaymentUploadsByLead = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { leadId } = req.params;
+      const { vendor_id } = req.query;
+
+      if (!leadId || !vendor_id) {
+        res.status(400).json({
+          success: false,
+          message: 'leadId and vendor_id are required'
+        });
+        return;
+      }
+
+      const result = await this.paymentUploadService.getPaymentUploadsByLead(
+        parseInt(leadId),
+        parseInt(vendor_id as string)
+      );
+
+      res.status(200).json({
+        success: true,
+        message: 'Payment uploads retrieved successfully',
+        data: result
+      });
+
+    } catch (error: any) {
+      console.error('[PaymentUploadGetController] Error:', error);
+      
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message
+      });
+    }
+  };
+
+  // GET /api/payment-upload/account/:accountId
+  public getPaymentUploadsByAccount = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { accountId } = req.params;
+      const { vendor_id } = req.query;
+
+      if (!accountId || !vendor_id) {
+        res.status(400).json({
+          success: false,
+          message: 'accountId and vendor_id are required'
+        });
+        return;
+      }
+
+      const result = await this.paymentUploadService.getPaymentUploadsByAccount(
+        parseInt(accountId),
+        parseInt(vendor_id as string)
+      );
+
+      res.status(200).json({
+        success: true,
+        message: 'Payment uploads retrieved successfully',
+        data: result
+      });
+
+    } catch (error: any) {
+      console.error('[PaymentUploadGetController] Error:', error);
+      
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message
+      });
+    }
+  };
+
+  // GET /api/payment-upload/:id
+  public getPaymentUploadById = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { id } = req.params;
+      const { vendor_id } = req.query;
+
+      if (!id || !vendor_id) {
+        res.status(400).json({
+          success: false,
+          message: 'id and vendor_id are required'
+        });
+        return;
+      }
+
+      const result = await this.paymentUploadService.getPaymentUploadById(
+        parseInt(id),
+        parseInt(vendor_id as string)
+      );
+
+      if (!result) {
+        res.status(404).json({
+          success: false,
+          message: 'Payment upload not found'
+        });
+        return;
+      }
+
+      res.status(200).json({
+        success: true,
+        message: 'Payment upload retrieved successfully',
+        data: result
+      });
+
+    } catch (error: any) {
+      console.error('[PaymentUploadGetController] Error:', error);
+      
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message
+      });
+    }
+  };
+
+  // GET /api/payment-upload/vendor/:vendorId
+  public getPaymentUploadsByVendor = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { vendorId } = req.params;
+      const { page = '1', limit = '10', startDate, endDate } = req.query;
+
+      const result = await this.paymentUploadService.getPaymentUploadsByVendor(
+        parseInt(vendorId),
+        parseInt(page as string),
+        parseInt(limit as string),
+        startDate ? new Date(startDate as string) : undefined,
+        endDate ? new Date(endDate as string) : undefined
+      );
+
+      res.status(200).json({
+        success: true,
+        message: 'Payment uploads retrieved successfully',
+        data: result.data,
+        pagination: {
+          currentPage: parseInt(page as string),
+          totalPages: Math.ceil(result.total / parseInt(limit as string)),
+          totalRecords: result.total,
+          hasNext: parseInt(page as string) < Math.ceil(result.total / parseInt(limit as string)),
+          hasPrev: parseInt(page as string) > 1
+        }
+      });
+
+    } catch (error: any) {
+      console.error('[PaymentUploadGetController] Error:', error);
+      
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message
+      });
+    }
+  };
+
+  // GET /api/payment-upload/documents/:documentId/download
+  public downloadDocument = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { documentId } = req.params;
+      const { vendor_id } = req.query;
+
+      if (!documentId || !vendor_id) {
+        res.status(400).json({
+          success: false,
+          message: 'documentId and vendor_id are required'
+        });
+        return;
+      }
+
+      const result = await this.paymentUploadService.getDocumentDownloadUrl(
+        parseInt(documentId),
+        parseInt(vendor_id as string)
+      );
+
+      if (!result) {
+        res.status(404).json({
+          success: false,
+          message: 'Document not found'
+        });
+        return;
+      }
+
+      res.status(200).json({
+        success: true,
+        message: 'Document download URL generated successfully',
+        data: result
+      });
+
+    } catch (error: any) {
+      console.error('[PaymentUploadGetController] Error:', error);
+      
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message
+      });
+    }
+  };
+
+  // GET /api/payment-upload/analytics/:vendorId
+  public getPaymentAnalytics = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { vendorId } = req.params;
+      const { startDate, endDate } = req.query;
+
+      const result = await this.paymentUploadService.getPaymentAnalytics(
+        parseInt(vendorId),
+        startDate ? new Date(startDate as string) : undefined,
+        endDate ? new Date(endDate as string) : undefined
+      );
+
+      res.status(200).json({
+        success: true,
+        message: 'Payment analytics retrieved successfully',
+        data: result
+      });
+
+    } catch (error: any) {
+      console.error('[PaymentUploadGetController] Error:', error);
+      
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message
+      });
+    }
+  };
 }
