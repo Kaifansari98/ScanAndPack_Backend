@@ -226,12 +226,22 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
           const diskPath = (file as any).path as string | undefined;
           const fileExists = diskPath ? fs.existsSync(diskPath) : false;
           console.log(`[DEBUG] File key: ${fileKey}, location: ${fileLocation}, disk exists: ${fileExists}`);
+
+          // const resolvedDocType = getDocumentTypeFromFile(file) as unknown as string;
+          // let docTypeRecord = await tx.documentTypeMaster.findFirst({
+          //   where: { type: resolvedDocType, vendor_id }
+          // });
+          // if (!docTypeRecord) {
+          //   docTypeRecord = await tx.documentTypeMaster.create({
+          //     data: { type: resolvedDocType, vendor_id }
+          //   });
+          // }
           
           const document = await tx.leadDocuments.create({
             data: {
               doc_og_name: file.originalname,
               doc_sys_name: file.filename || fileKey || file.originalname,
-              doc_type: getDocumentTypeFromFile(file),
+              doc_type_id: 1,
               vendor_id,
               lead_id: lead.id,
               created_by
