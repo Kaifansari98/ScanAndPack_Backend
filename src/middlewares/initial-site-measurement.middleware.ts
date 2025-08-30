@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { body, validationResult } from 'express-validator';
+import { body, validationResult, query, param  } from 'express-validator';
 
 // Validation middleware
 export const validatePaymentUpload = [
@@ -135,4 +135,118 @@ export const handleMulterError = (err: any, req: Request, res: Response, next: N
     });
   }
   next();
+};
+
+// Validation middleware for GET requests
+export const validateGetRequest = [
+  // Validate vendor_id in query params
+  query('vendor_id')
+    .isInt({ min: 1 })
+    .withMessage('vendor_id must be a valid positive integer'),
+  
+  // Validate ID parameters
+  param('leadId')
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage('leadId must be a valid positive integer'),
+  
+  param('accountId')
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage('accountId must be a valid positive integer'),
+  
+  param('id')
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage('id must be a valid positive integer'),
+  
+  param('vendorId')
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage('vendorId must be a valid positive integer'),
+  
+  param('documentId')
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage('documentId must be a valid positive integer'),
+
+  // Handle validation errors
+  (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        message: 'Validation failed',
+        errors: errors.array()
+      });
+    }
+    next();
+  }
+];
+
+// Validation middleware for pagination
+export const validatePaginationRequest = [
+  query('page')
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage('page must be a positive integer'),
+  
+  query('limit')
+    .optional()
+    .isInt({ min: 1, max: 100 })
+    .withMessage('limit must be between 1 and 100'),
+  
+  query('startDate')
+    .optional()
+    .isISO8601()
+    .withMessage('startDate must be a valid ISO 8601 date'),
+  
+  query('endDate')
+    .optional()
+    .isISO8601()
+    .withMessage('endDate must be a valid ISO 8601 date'),
+
+  // Custom validation for date range
+  query('endDate').custom((endDate, { req }) => {
+    if (endDate && req.query?.startDate) {
+      const start = new Date(req.query.startDate as string);
+      const end = new Date(endDate);
+      if (end <= start) {
+        throw new Error('endDate must be after startDate');
+      }
+    }
+    return true;
+  }),
+
+  // Handle validation errors
+  (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        message: 'Validation failed',
+        errors: errors.array()
+      });
+    }
+    next();
+  }
+];
+
+// Error handling middleware
+export const handleGetErrors = (err: any, req: Request, res: Response, next: NextFunction) => {
+  console.error('[PaymentUploadGetMiddleware] Error:', err);
+  
+  if (err.name === 'PrismaClientKnownRequestError') {
+    return res.status(400).json({
+      success: false,
+      message: 'Database error',
+      error: 'Invalid request parameters'
+    });
+  }
+
+  return res.status(500).json({
+    success: false,
+    message: 'Internal server error',
+    error: err.message
+  });
 };

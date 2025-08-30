@@ -4,6 +4,8 @@ import { LeadPriority, DocumentType } from "@prisma/client";
 import { getDocumentTypeFromFile } from "../../../utils/fileUtils";
 import fs from "fs";
 import { SalesExecutiveData } from "../../../types/leadModule.types";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
+import wasabi from "../../../utils/wasabiClient";
 import { AssignLeadPayload, LeadAssignmentResult } from "../../../types/leadModule.types";
 import { 
   validateAdminUser, 
@@ -14,9 +16,14 @@ import {
 
 export const createLeadService = async (payload: CreateLeadDTO, files: Express.Multer.File[]) => {
     console.log("[DEBUG] Service called with", files.length, "files");
+
+    function sanitizeFilename(filename: string): string {
+      return filename.replace(/[^a-zA-Z0-9.\-_]/g, "_");
+    }
     
     // Debug file information
     if (files && files.length > 0) {
+      console.log(`[INFO] Processing ${files.length} document(s)`);
       files.forEach((file, index) => {
         console.log(`[DEBUG] File ${index + 1}:`, {
           originalname: file.originalname,
@@ -221,6 +228,7 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
         console.log(`[INFO] Processing ${files.length} document(s)`);
         
         for (const file of files) {
+          const sanitizedFilename = sanitizeFilename(file.originalname);
           const fileKey = (file as any).key as string | undefined;
           const fileLocation = (file as any).location as string | undefined;
           const diskPath = (file as any).path as string | undefined;
@@ -236,29 +244,38 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
           //     data: { type: resolvedDocType, vendor_id }
           //   });
           // }
+
+          const s3Key = `site-photos/${vendor_id}/${lead.id}/${Date.now()}-${sanitizedFilename}`;
+
+          await wasabi.send(new PutObjectCommand({
+            Bucket: process.env.WASABI_BUCKET_NAME!,
+            Key: s3Key,
+            Body: file.buffer,           // <--- use Multer memory storage
+            ContentType: file.mimetype,
+          }));
           
           const document = await tx.leadDocuments.create({
             data: {
               doc_og_name: file.originalname,
-              doc_sys_name: file.filename || fileKey || file.originalname,
-              doc_type_id: 1,
+              doc_sys_name: s3Key,  // store S3 path instead of raw filename
+              doc_type_id: 1,       // generic doc type (or resolve dynamically)
               vendor_id,
               lead_id: lead.id,
-              created_by
+              account_id: account.id,
+              created_by,
             }
           });
           
           uploadedFiles.push({
             id: document.id,
+            type: 1,
             originalName: file.originalname,
-            systemName: file.filename || fileKey,
-            path: diskPath || fileLocation,
-            exists: fileExists,
-            size: file.size
+            s3Key,
+            size: file.size,
           });
         }
         
-        console.log("[DEBUG] Files saved to database:", uploadedFiles.length);
+        console.log("[DEBUG] Files uploaded to Wasabi and saved:", uploadedFiles.length);
       } else {
         console.log("[INFO] No documents to process - files are optional");
       }

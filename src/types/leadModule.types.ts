@@ -220,3 +220,93 @@ export interface CreatePaymentUploadDto {
     }[];
     message: string;
   }
+
+  export interface PaymentUploadDetailDto {
+    id: number;
+    type: 'payment_upload' | 'document_upload';
+    lead: {
+      id: number;
+      firstname: string;
+      lastname: string;
+      contact_no: string;
+      email: string | null;
+    } | null;
+    account: {
+      id: number;
+      name: string;
+      contact_no: string;
+      email: string | null;
+    } | null;
+    paymentInfo: {
+      id: number;
+      amount: number | null;
+      payment_date: Date | null;
+      payment_text: string | null;
+      payment_file_id: number | null;
+    } | null;
+    ledgerEntry: {
+      id: number;
+      amount: number;
+      type: string;
+      payment_date: Date;
+    } | null;
+    documents: {
+      id: number;
+      doc_og_name: string;
+      doc_sys_name: string;
+      doc_type: string;
+      created_at: Date;
+      createdBy: {
+        id: number;
+        user_name: string;
+      };
+    }[];
+    createdBy: {
+      id: number;
+      user_name: string;
+      user_email: string;
+    };
+    created_at: Date;
+  }
+  
+  export interface PaymentUploadListDto {
+    id: number;
+    lead: {
+      id: number;
+      firstname: string;
+      lastname: string;
+      contact_no: string;
+    };
+    account: {
+      id: number;
+      name: string;
+    };
+    amount: number | null;
+    payment_date: Date | null;
+    payment_text: string | null;
+    createdBy: string;
+    created_at: Date;
+  }
+  
+  export interface DocumentDownloadDto {
+    id: number;
+    originalName: string;
+    downloadUrl: string;
+    expiresAt: Date;
+  }
+  
+  export interface PaymentAnalyticsDto {
+    totalAmount: number;
+    totalPayments: number;
+    averagePayment: number;
+    totalDocuments: number;
+    monthlyBreakdown: {
+      month: string;
+      total_amount: number;
+      payment_count: number;
+    }[];
+    dateRange: {
+      startDate: Date | null;
+      endDate: Date | null;
+    };
+  }
