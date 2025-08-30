@@ -25,8 +25,10 @@ const storage = multerS3({
 });
 
 export const upload = multer({
-  storage,
-  limits: { fileSize: parseInt(process.env.MAX_FILE_SIZE_MB || "5") * 1024 * 1024 },
+  storage: multer.memoryStorage(), // ✅ keep file in memory, don't auto-upload
+  limits: {
+    fileSize: parseInt(process.env.MAX_FILE_SIZE_MB || "5") * 1024 * 1024, // default 5MB
+  },
   fileFilter: (req, file, cb) => {
     const allowedMimeTypes = [
       "image/jpeg",

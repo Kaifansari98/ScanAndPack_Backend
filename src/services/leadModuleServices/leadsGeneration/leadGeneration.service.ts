@@ -286,6 +286,8 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
         documentsProcessed: files ? files.length : 0,
         uploadedFiles: uploadedFiles // Add this for debugging
       };
+    },{
+      timeout: 15000, // 15s instead of 5s
     });
 };
 
