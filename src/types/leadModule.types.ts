@@ -184,3 +184,39 @@ export interface LeadAssignmentResult {
       user_email: string;
     };
 }
+
+export interface CreatePaymentUploadDto {
+    lead_id: number;
+    account_id: number;
+    vendor_id: number;
+    created_by: number;
+    client_id: number;
+    amount?: number;
+    payment_date?: Date;
+    payment_text?: string;
+    sitePhotos?: Express.Multer.File[];
+    pdfFile?: Express.Multer.File;
+    paymentImageFile?: Express.Multer.File;
+  }
+  
+  export interface PaymentUploadResponseDto {
+    paymentInfo: {
+      id: number;
+      amount: number | null;
+      payment_date: Date | null;
+      payment_text: string | null;
+    } | null;
+    ledgerEntry: {
+      id: number;
+      amount: number;
+      type: string;
+      payment_date: Date;
+    } | null;
+    documentsUploaded: {
+      id: number;
+      type: string;
+      originalName: string;
+      s3Key: string;
+    }[];
+    message: string;
+  }

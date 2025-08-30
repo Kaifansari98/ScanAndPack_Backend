@@ -440,15 +440,16 @@ model LeadDocuments {
   created_at   DateTime     @default(now())
   deleted_by   Int?
   deleted_at   DateTime?
-  doc_type     DocumentType
+  doc_type_id  Int 
   account_id   Int?
   lead_id      Int?
   vendor_id    Int
 
 // ✅ Relations
-  vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  account   AccountMaster? @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  lead      LeadMaster?    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  vendor        VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  account       AccountMaster? @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  lead          LeadMaster?    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  documentType  DocumentTypeMaster @relation(fields: [doc_type_id], references: [id], onDelete: Cascade)
 
   createdBy UserMaster   @relation("DocumentCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   deletedBy UserMaster?  @relation("DocumentDeletedBy", fields: [deleted_by], references: [id])
@@ -534,6 +535,7 @@ model DocumentTypeMaster {
 // ✅ Relations
   vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   payments  PaymentInfo[]
+  documents LeadDocuments[]
 }
 
 model StatusTypeMaster {

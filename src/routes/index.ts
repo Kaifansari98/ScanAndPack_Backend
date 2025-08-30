@@ -19,6 +19,7 @@ import clientRoutes from "./clientRoutes/client.routes";
 
 // Leads Routes
 import leadModuleRoutes from "./leadModuleRoutes/lead.routes"
+import { paymentUploadRoutes } from './leadModuleRoutes/initial-site-measurement.routes';
 
 const router = Router();
 
@@ -41,5 +42,6 @@ router.use('/auth', authRoutes);
 router.use("/clients", clientRoutes);
 
 router.use("/leads", leadModuleRoutes);
+router.use("/leads/initial-site-measurement", paymentUploadRoutes);
 
 export { router };
