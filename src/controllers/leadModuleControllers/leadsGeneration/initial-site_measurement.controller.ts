@@ -111,6 +111,65 @@ export class PaymentUploadController {
     }
   };
 
+  // GET /api/leads/vendor/:vendorId/status/2
+  public getLeadsByStatus = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { vendorId } = req.params;
+      const { page = '1', limit = '10' } = req.query;
+  
+      if (!vendorId) {
+        res.status(400).json({
+          success: false,
+          message: 'vendorId is required'
+        });
+        return;
+      }
+  
+      const result = await this.paymentUploadService.getLeadsByStatus(
+        parseInt(vendorId),
+        2, // status_id == 2
+        parseInt(page as string),
+        parseInt(limit as string)
+      );
+  
+      // Fetch detailed uploads for each lead
+      const leadsWithUploads = await Promise.all(
+        result.data.map(async (lead: any) => {
+          const uploads = await this.paymentUploadService.getPaymentUploadsByLead(
+            lead.id,
+            parseInt(vendorId)
+          );
+          return {
+            ...lead,
+            uploads
+          };
+        })
+      );
+  
+      res.status(200).json({
+        success: true,
+        message: 'Leads retrieved successfully',
+        data: leadsWithUploads,
+        pagination: {
+          currentPage: parseInt(page as string),
+          totalPages: Math.ceil(result.total / parseInt(limit as string)),
+          totalRecords: result.total,
+          hasNext: parseInt(page as string) < Math.ceil(result.total / parseInt(limit as string)),
+          hasPrev: parseInt(page as string) > 1
+        }
+      });
+  
+    } catch (error: any) {
+      console.error('[PaymentUploadController] Error getting leads by status:', error);
+      
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message
+      });
+    }
+  };
+
   // GET /api/payment-upload/lead/:leadId
   public getPaymentUploadsByLead = async (req: Request, res: Response): Promise<void> => {
     try {
