@@ -310,3 +310,81 @@ export interface CreatePaymentUploadDto {
       endDate: Date | null;
     };
   }
+
+  export interface LeadDetailDto {
+    id: number;
+    firstname: string;
+    lastname: string;
+    country_code: string;
+    contact_no: string;
+    alt_contact_no: string | null;
+    email: string | null;
+    site_address: string;
+    priority: string;
+    billing_name: string | null;
+    archetech_name: string | null;
+    designer_remark: string | null;
+    created_at: Date;
+    updated_at: Date;
+    
+    // Related entities
+    vendor: {
+      id: number;
+      vendor_name: string;
+      vendor_code: string;
+    };
+    
+    siteType: {
+      id: number;
+      type: string;
+    } | null;
+    
+    source: {
+      id: number;
+      type: string;
+    };
+    
+    account: {
+      id: number;
+      name: string;
+      contact_no: string;
+      email: string | null;
+    };
+    
+    statusType: {
+      id: number;
+      type: string;
+    };
+    
+    createdBy: {
+      id: number;
+      user_name: string;
+      user_email: string;
+    };
+    
+    updatedBy: {
+      id: number;
+      user_name: string;
+      user_email: string;
+    } | null;
+    
+    assignedTo: {
+      id: number;
+      user_name: string;
+      user_email: string;
+    } | null;
+    
+    assignedBy: {
+      id: number;
+      user_name: string;
+      user_email: string;
+    } | null;
+    
+    // Summary statistics
+    summary: {
+      totalPayments: number;
+      totalDocuments: number;
+      totalLedgerEntries: number;
+      totalProductMappings: number;
+    };
+  }

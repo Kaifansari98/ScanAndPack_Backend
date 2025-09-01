@@ -132,5 +132,10 @@ router.get('/account/:accountId',
   // Error handling middleware
   router.use(handleGetErrors);
 
+  // Get first 10 leads with status_id == 2 for vendor 123
+  // GET /api/leads/vendor/123/status/2
+  // Get page 2 with 20 records per page
+  // GET /api/leads/vendor/123/status/2?page=2&limit=20
+  router.get('/vendor/:vendorId/status/2', paymentUploadController.getLeadsByStatus);
 
 export { router as paymentUploadRoutes };
