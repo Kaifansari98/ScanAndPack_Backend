@@ -192,6 +192,18 @@ export class PaymentUploadService {
           };
         }
 
+        // ✅ 6. Update LeadMaster status from 1 → 2
+        await tx.leadMaster.updateMany({
+            where: {
+            id: data.lead_id,
+            vendor_id: data.vendor_id,
+            status_id: 1 
+            },
+            data: {
+            status_id: 2
+            }
+        });
+
         return response;
     }, {
         timeout: 20000 // 20 seconds
@@ -205,188 +217,212 @@ export class PaymentUploadService {
     }
   }
 
-    // Get payment uploads by lead ID
-    public async getPaymentUploadsByLead(leadId: number, vendorId: number): Promise<PaymentUploadDetailDto[]> {
-        try {
-          // Get payment info with related data
-          const paymentInfos = await prisma.paymentInfo.findMany({
-            where: {
-              lead_id: leadId,
-              vendor_id: vendorId
-            },
-            include: {
-              lead: {
-                select: {
-                  id: true,
-                  firstname: true,
-                  lastname: true,
-                  contact_no: true,
-                  email: true
-                }
-              },
-              account: {
-                select: {
-                  id: true,
-                  name: true,
-                  contact_no: true,
-                  email: true
-                }
-              },
-              createdBy: {
-                select: {
-                  id: true,
-                  user_name: true,
-                  user_email: true
-                }
-              },
-              document: {
-                select: {
-                  id: true,
-                  type: true
-                }
-              }
-            },
-            orderBy: {
-              created_at: 'desc'
-            }
-          });
-    
-          // Get associated documents for this lead
-          const documents = await prisma.leadDocuments.findMany({
-            where: {
-              lead_id: leadId,
-              vendor_id: vendorId,
-              deleted_at: null
-            },
-                          include: {
-                createdBy: {
-                  select: {
-                    id: true,
-                    user_name: true,
-                    user_email: true
-                  }
-                },
-                documentType: {
-                  select: {
-                    id: true,
-                    type: true
-                  }
-                }
-              },
-            orderBy: {
-              created_at: 'desc'
-            }
-          });
-    
-          // Get ledger entries for this lead
-          const ledgerEntries = await prisma.ledger.findMany({
-            where: {
-              lead_id: leadId,
-              vendor_id: vendorId
-            },
-            orderBy: {
-              created_at: 'desc'
-            }
-          });
-    
-          // Group data by payment info or create entries for document-only uploads
-          const result: PaymentUploadDetailDto[] = [];
-    
-          // Add payment-based uploads
-          for (const payment of paymentInfos) {
-            const relatedLedger = ledgerEntries.find(l => 
-              l.payment_date.getTime() === payment.payment_date?.getTime() &&
-              l.amount === payment.amount
-            );
-    
-            result.push({
-              id: payment.id,
-              type: 'payment_upload',
-              lead: payment.lead,
-              account: payment.account,
-              paymentInfo: {
-                id: payment.id,
-                amount: payment.amount,
-                payment_date: payment.payment_date,
-                payment_text: payment.payment_text,
-                payment_file_id: payment.payment_file_id
-              },
-              ledgerEntry: relatedLedger ? {
-                id: relatedLedger.id,
-                amount: relatedLedger.amount,
-                type: relatedLedger.type,
-                payment_date: relatedLedger.payment_date
-              } : null,
-              documents: documents.filter(doc => {
-                // Associate documents created around the same time as payment
-                const timeDiff = Math.abs(doc.created_at.getTime() - payment.created_at.getTime());
-                return timeDiff < 60000; // Within 1 minute
-              }).map(doc => ({
-                id: doc.id,
-                doc_og_name: doc.doc_og_name,
-                doc_sys_name: doc.doc_sys_name,
-                doc_type: doc.documentType.type,
-                created_at: doc.created_at,
-                createdBy: doc.createdBy
-              })),
-              createdBy: payment.createdBy,
-              created_at: payment.created_at
-            });
-          }
-    
-          // Add document-only uploads (not associated with payments)
-          const paymentTimes = paymentInfos.map(p => p.created_at.getTime());
-          const documentOnlyUploads = documents.filter(doc => {
-            return !paymentTimes.some(time => {
-              const timeDiff = Math.abs(doc.created_at.getTime() - time);
-              return timeDiff < 60000; // Not within 1 minute of any payment
-            });
-          });
-    
-          // Group document-only uploads by creation time (within 5 minutes)
-          const groupedDocs: { [key: string]: typeof documents } = {};
-          documentOnlyUploads.forEach(doc => {
-            const timeKey = Math.floor(doc.created_at.getTime() / (5 * 60 * 1000)); // 5-minute intervals
-            if (!groupedDocs[timeKey]) {
-              groupedDocs[timeKey] = [];
-            }
-            groupedDocs[timeKey].push(doc);
-          });
-    
-          // Add grouped document uploads
-          Object.values(groupedDocs).forEach(docGroup => {
-            if (docGroup.length > 0) {
-              const firstDoc = docGroup[0];
-              result.push({
-                id: firstDoc.id,
-                type: 'document_upload',
-                lead: paymentInfos[0]?.lead || null,
-                account: paymentInfos[0]?.account || null,
-                paymentInfo: null,
-                ledgerEntry: null,
-                documents: docGroup.map(doc => ({
-                  id: doc.id,
-                  doc_og_name: doc.doc_og_name,
-                  doc_sys_name: doc.doc_sys_name,
-                  doc_type: doc.documentType.type,
-                  created_at: doc.created_at,
-                  createdBy: doc.createdBy
-                })),
-                createdBy: firstDoc.createdBy,
-                created_at: firstDoc.created_at
-              });
-            }
-          });
-    
-          return result.sort((a, b) => b.created_at.getTime() - a.created_at.getTime());
-    
-        } catch (error: any) {
-          console.error('[PaymentUploadGetService] Error getting uploads by lead:', error);
-          throw new Error(`Failed to get payment uploads: ${error.message}`);
-        }
+// Get payment uploads by lead ID (only for leads with status_id == 2)
+public async getPaymentUploadsByLead(leadId: number, vendorId: number): Promise<PaymentUploadDetailDto[]> {
+  try {
+    // First check if the lead exists and has status_id == 2
+    const lead = await prisma.leadMaster.findFirst({
+      where: {
+        id: leadId,
+        vendor_id: vendorId,
+        status_id: 2
       }
+    });
 
-    // Get payment uploads by account ID
+    // If lead doesn't exist or doesn't have status_id == 2, return empty array
+    if (!lead) {
+      return [];
+    }
+
+    // Get payment info with related data (only for leads with status_id == 2)
+    const paymentInfos = await prisma.paymentInfo.findMany({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+        lead: {
+          status_id: 2
+        }
+      },
+      include: {
+        lead: {
+          select: {
+            id: true,
+            firstname: true,
+            lastname: true,
+            contact_no: true,
+            email: true,
+            status_id: true
+          }
+        },
+        account: {
+          select: {
+            id: true,
+            name: true,
+            contact_no: true,
+            email: true
+          }
+        },
+        createdBy: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true
+          }
+        },
+        document: {
+          select: {
+            id: true,
+            type: true
+          }
+        }
+      },
+      orderBy: {
+        created_at: 'desc'
+      }
+    });
+
+    // Get associated documents for this lead (only for leads with status_id == 2)
+    const documents = await prisma.leadDocuments.findMany({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+        deleted_at: null,
+        lead: {
+          status_id: 2
+        }
+      },
+      include: {
+        createdBy: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true
+          }
+        },
+        documentType: {
+          select: {
+            id: true,
+            type: true
+          }
+        }
+      },
+      orderBy: {
+        created_at: 'desc'
+      }
+    });
+
+    // Get ledger entries for this lead (only for leads with status_id == 2)
+    const ledgerEntries = await prisma.ledger.findMany({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+        lead: {
+          status_id: 2
+        }
+      },
+      orderBy: {
+        created_at: 'desc'
+      }
+    });
+
+    // Group data by payment info or create entries for document-only uploads
+    const result: PaymentUploadDetailDto[] = [];
+
+    // Add payment-based uploads
+    for (const payment of paymentInfos) {
+      const relatedLedger = ledgerEntries.find(l => 
+        l.payment_date.getTime() === payment.payment_date?.getTime() &&
+        l.amount === payment.amount
+      );
+
+      result.push({
+        id: payment.id,
+        type: 'payment_upload',
+        lead: payment.lead,
+        account: payment.account,
+        paymentInfo: {
+          id: payment.id,
+          amount: payment.amount,
+          payment_date: payment.payment_date,
+          payment_text: payment.payment_text,
+          payment_file_id: payment.payment_file_id
+        },
+        ledgerEntry: relatedLedger ? {
+          id: relatedLedger.id,
+          amount: relatedLedger.amount,
+          type: relatedLedger.type,
+          payment_date: relatedLedger.payment_date
+        } : null,
+        documents: documents.filter(doc => {
+          // Associate documents created around the same time as payment
+          const timeDiff = Math.abs(doc.created_at.getTime() - payment.created_at.getTime());
+          return timeDiff < 60000; // Within 1 minute
+        }).map(doc => ({
+          id: doc.id,
+          doc_og_name: doc.doc_og_name,
+          doc_sys_name: doc.doc_sys_name,
+          doc_type: doc.documentType.type,
+          created_at: doc.created_at,
+          createdBy: doc.createdBy
+        })),
+        createdBy: payment.createdBy,
+        created_at: payment.created_at
+      });
+    }
+
+    // Add document-only uploads (not associated with payments)
+    const paymentTimes = paymentInfos.map(p => p.created_at.getTime());
+    const documentOnlyUploads = documents.filter(doc => {
+      return !paymentTimes.some(time => {
+        const timeDiff = Math.abs(doc.created_at.getTime() - time);
+        return timeDiff < 60000; // Not within 1 minute of any payment
+      });
+    });
+
+    // Group document-only uploads by creation time (within 5 minutes)
+    const groupedDocs: { [key: string]: typeof documents } = {};
+    documentOnlyUploads.forEach(doc => {
+      const timeKey = Math.floor(doc.created_at.getTime() / (5 * 60 * 1000)); // 5-minute intervals
+      if (!groupedDocs[timeKey]) {
+        groupedDocs[timeKey] = [];
+      }
+      groupedDocs[timeKey].push(doc);
+    });
+
+    // Add grouped document uploads
+    Object.values(groupedDocs).forEach(docGroup => {
+      if (docGroup.length > 0) {
+        const firstDoc = docGroup[0];
+        result.push({
+          id: firstDoc.id,
+          type: 'document_upload',
+          lead: paymentInfos[0]?.lead || null,
+          account: paymentInfos[0]?.account || null,
+          paymentInfo: null,
+          ledgerEntry: null,
+          documents: docGroup.map(doc => ({
+            id: doc.id,
+            doc_og_name: doc.doc_og_name,
+            doc_sys_name: doc.doc_sys_name,
+            doc_type: doc.documentType.type,
+            created_at: doc.created_at,
+            createdBy: doc.createdBy
+          })),
+          createdBy: firstDoc.createdBy,
+          created_at: firstDoc.created_at
+        });
+      }
+    });
+
+    return result.sort((a, b) => b.created_at.getTime() - a.created_at.getTime());
+
+  } catch (error: any) {
+    console.error('[PaymentUploadGetService] Error getting uploads by lead:', error);
+    throw new Error(`Failed to get payment uploads: ${error.message}`);
+  }
+}
+
+  // Get payment uploads by account ID
   public async getPaymentUploadsByAccount(accountId: number, vendorId: number): Promise<PaymentUploadListDto[]> {
     try {
       const paymentInfos = await prisma.paymentInfo.findMany({
