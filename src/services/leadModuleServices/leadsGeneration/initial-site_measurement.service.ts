@@ -218,6 +218,66 @@ public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentU
   }
 }
 
+// Generate signed URL for file access
+public async generateSignedUrl(s3Key: string, vendorId: number, expiresIn: number = 3600): Promise<string> {
+  try {
+    // Validate that the file belongs to the vendor (security check)
+    const document = await prisma.leadDocuments.findFirst({
+      where: {
+        doc_sys_name: s3Key,
+        vendor_id: vendorId,
+        deleted_at: null
+      }
+    });
+
+    if (!document) {
+      throw new Error('Document not found or access denied');
+    }
+
+    // Generate signed URL
+    const command = new GetObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME || 'your-bucket-name',
+      Key: s3Key,
+    });
+
+    const signedUrl = await getSignedUrl(wasabi, command, { 
+      expiresIn: expiresIn // URL expires in 1 hour by default
+    });
+
+    return signedUrl;
+
+  } catch (error: any) {
+    console.error('[PaymentUploadService] Error generating signed URL:', error);
+    throw new Error(`Failed to generate signed URL: ${error.message}`);
+  }
+}
+
+// Batch generate signed URLs for multiple documents
+public async generateBatchSignedUrls(documents: Array<{s3Key: string, vendorId: number}>): Promise<Record<string, string>> {
+  try {
+    const signedUrls: Record<string, string> = {};
+    
+    // Process all URLs in parallel
+    await Promise.all(
+      documents.map(async (doc) => {
+        try {
+          const signedUrl = await this.generateSignedUrl(doc.s3Key, doc.vendorId);
+          signedUrls[doc.s3Key] = signedUrl;
+        } catch (error) {
+          console.error(`Failed to generate URL for ${doc.s3Key}:`, error);
+          // Don't throw, just skip this document
+          signedUrls[doc.s3Key] = '';
+        }
+      })
+    );
+
+    return signedUrls;
+  } catch (error: any) {
+    console.error('[PaymentUploadService] Error generating batch signed URLs:', error);
+    throw new Error(`Failed to generate batch signed URLs: ${error.message}`);
+  }
+}
+
 // Get leads by status with pagination
 public async getLeadsByStatus(
   vendorId: number, 
@@ -299,6 +359,19 @@ public async getLeadsByStatus(
               user_email: true
             }
           },
+          // Include documents for generating signed URLs
+          documents: {
+            where: {
+              deleted_at: null
+            },
+            select: {
+              id: true,
+              doc_og_name: true,
+              doc_sys_name: true,
+              doc_type_id: true,
+              created_at: true
+            }
+          },
           // Include counts for related data
           _count: {
             select: {
@@ -324,6 +397,16 @@ public async getLeadsByStatus(
       })
     ]);
 
+    // Generate signed URLs for all documents
+    const allDocuments = leads.flatMap(lead => 
+      lead.documents.map(doc => ({
+        s3Key: doc.doc_sys_name,
+        vendorId: vendorId
+      }))
+    );
+
+    const signedUrls = await this.generateBatchSignedUrls(allDocuments);
+
     const data: LeadDetailDto[] = leads.map(lead => ({
       id: lead.id,
       firstname: lead.firstname,
@@ -348,6 +431,17 @@ public async getLeadsByStatus(
       assignedBy: lead.assignedBy,
       created_at: lead.created_at,
       updated_at: lead.updated_at,
+      // Add documents with signed URLs
+      documents: lead.documents.map(doc => ({
+        id: doc.id,
+        doc_og_name: doc.doc_og_name,
+        doc_sys_name: doc.doc_sys_name,
+        doc_type_id: doc.doc_type_id,
+        created_at: doc.created_at,
+        signed_url: signedUrls[doc.doc_sys_name] || '', // Add signed URL
+        file_type: this.getFileType(doc.doc_og_name), // Helper to determine file type
+        is_image: this.isImageFile(doc.doc_og_name) // Helper to check if it's an image
+      })),
       // Summary counts
       summary: {
         totalPayments: lead._count.payments,
@@ -882,5 +976,21 @@ public async getPaymentUploadsByLead(
     if (!pdfType) {
       throw new Error('PDF document type (id: 3) not found for vendor');
     }
+  }
+
+  private getFileType(filename: string): string {
+    const ext = filename.toLowerCase().split('.').pop() || '';
+    const imageTypes = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+    const documentTypes = ['pdf', 'doc', 'docx'];
+    
+    if (imageTypes.includes(ext)) return 'image';
+    if (documentTypes.includes(ext)) return 'document';
+    return 'other';
+  }
+  
+  private isImageFile(filename: string): boolean {
+    const ext = filename.toLowerCase().split('.').pop() || '';
+    const imageTypes = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+    return imageTypes.includes(ext);
   }
 }

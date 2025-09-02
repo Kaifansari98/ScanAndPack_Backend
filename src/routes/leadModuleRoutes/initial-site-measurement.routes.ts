@@ -138,4 +138,33 @@ router.get('/account/:accountId',
   // GET /api/leads/vendor/123/status/2?page=2&limit=20
   router.get('/vendor/:vendorId/status/2', paymentUploadController.getLeadsByStatus);
 
+  /**
+ * GET /api/payment-upload/documents/signed-url/:s3Key
+ * Generate signed URL for a specific document
+ * Query params: 
+ * - vendor_id (required)
+ * - expires_in (optional, default: 3600 seconds)
+ * 
+ * Example: GET /api/payment-upload/documents/signed-url/initial_site_measurement_documents%2F1%2F14%2F1756788920552-Dummy_PDF__1_.pdf?vendor_id=1
+ */
+router.get('/documents/signed-url/:s3Key',
+  validateGetRequest,
+  paymentUploadController.generateSignedUrl
+);
+
+/**
+ * POST /api/payment-upload/documents/batch-signed-urls
+ * Generate signed URLs for multiple documents
+ * Body:
+ * {
+ *   "documents": ["s3key1", "s3key2"] or [{"s3Key": "s3key1"}, {"s3Key": "s3key2"}],
+ *   "vendor_id": 1,
+ *   "expires_in": 3600 (optional)
+ * }
+ */
+router.post('/documents/batch-signed-urls',
+  validateGetRequest, // Reuse this middleware for vendor_id validation
+  paymentUploadController.generateBatchSignedUrls
+);
+
 export { router as paymentUploadRoutes };

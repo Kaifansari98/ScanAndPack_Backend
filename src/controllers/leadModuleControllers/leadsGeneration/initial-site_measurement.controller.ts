@@ -111,6 +111,104 @@ export class PaymentUploadController {
     }
   };
 
+  // GET /api/payment-upload/documents/signed-url/:s3Key
+public generateSignedUrl = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { s3Key } = req.params;
+    const { vendor_id, expires_in } = req.query;
+
+    if (!s3Key || !vendor_id) {
+      res.status(400).json({
+        success: false,
+        message: 's3Key and vendor_id are required'
+      });
+      return;
+    }
+
+    // Decode the s3Key if it was URL encoded
+    const decodedS3Key = decodeURIComponent(s3Key);
+    
+    const signedUrl = await this.paymentUploadService.generateSignedUrl(
+      decodedS3Key,
+      parseInt(vendor_id as string),
+      expires_in ? parseInt(expires_in as string) : 3600
+    );
+
+    res.status(200).json({
+      success: true,
+      message: 'Signed URL generated successfully',
+      data: {
+        signed_url: signedUrl,
+        expires_in: expires_in ? parseInt(expires_in as string) : 3600
+      }
+    });
+
+  } catch (error: any) {
+    console.error('[PaymentUploadController] Error generating signed URL:', error);
+    
+    res.status(error.message.includes('not found') ? 404 : 500).json({
+      success: false,
+      message: error.message.includes('not found') ? 'Document not found' : 'Internal server error',
+      error: error.message
+    });
+  }
+};
+
+// POST /api/payment-upload/documents/batch-signed-urls
+public generateBatchSignedUrls = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { documents, vendor_id, expires_in } = req.body;
+
+    if (!documents || !Array.isArray(documents) || !vendor_id) {
+      res.status(400).json({
+        success: false,
+        message: 'documents (array) and vendor_id are required'
+      });
+      return;
+    }
+
+    // Validate documents array structure
+    const isValidDocuments = documents.every(doc => 
+      typeof doc === 'string' || (typeof doc === 'object' && doc.s3Key)
+    );
+
+    if (!isValidDocuments) {
+      res.status(400).json({
+        success: false,
+        message: 'documents must be an array of s3Keys (strings) or objects with s3Key property'
+      });
+      return;
+    }
+
+    // Transform to consistent format
+    const documentList = documents.map(doc => ({
+      s3Key: typeof doc === 'string' ? doc : doc.s3Key,
+      vendorId: parseInt(vendor_id as string)
+    }));
+
+    const signedUrls = await this.paymentUploadService.generateBatchSignedUrls(documentList);
+
+    res.status(200).json({
+      success: true,
+      message: 'Batch signed URLs generated successfully',
+      data: {
+        signed_urls: signedUrls,
+        expires_in: expires_in ? parseInt(expires_in as string) : 3600,
+        total_processed: documents.length
+      }
+    });
+
+  } catch (error: any) {
+    console.error('[PaymentUploadController] Error generating batch signed URLs:', error);
+    
+    res.status(500).json({
+      success: false,
+      message: 'Internal server error',
+      error: error.message
+    });
+  }
+};
+
   // GET /api/leads/vendor/:vendorId/status/2
   public getLeadsByStatus = async (req: Request, res: Response): Promise<void> => {
     try {
