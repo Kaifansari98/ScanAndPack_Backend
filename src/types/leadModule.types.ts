@@ -221,6 +221,56 @@ export interface CreatePaymentUploadDto {
     message: string;
   }
 
+  export interface PaymentUploadResponseDtoo {
+    paymentInfo: {
+      id: number;
+      amount: number | null;
+      payment_date: Date | null;
+      payment_text: string | null;
+    } | null;
+    ledgerEntry: {
+      id: number;
+      amount: number;
+      type: string;
+      payment_date: Date;
+    } | null;
+    documentsUploaded: PaymentDocumentDto[];
+    message: string;
+  }
+
+  export interface PaymentUploadDetailDtoo {
+    id: number;
+    lead_id: number;
+    account_id: number;
+    vendor_id: number;
+    amount: number | null;
+    payment_date: Date | null;
+    payment_text: string | null;
+    payment_file_id: number | null;
+    created_at: Date;
+    created_by: number;
+    lead: {
+      id: number;
+      firstname: string;
+      lastname: string;
+      contact_no: string;
+      email: string | null;
+      site_address: string;
+    };
+    account: {
+      id: number;
+      name: string;
+      contact_no: string;
+      email: string | null;
+    };
+    createdBy: {
+      id: number;
+      user_name: string;
+      user_email: string;
+    };
+    documents: PaymentDocumentDto[];
+  }
+
   export interface PaymentUploadDetailDto {
     id: number;
     type: 'payment_upload' | 'document_upload';
@@ -387,4 +437,28 @@ export interface CreatePaymentUploadDto {
       totalLedgerEntries: number;
       totalProductMappings: number;
     };
+  }
+
+  export interface UpdatePaymentUploadDto {
+    lead_id: number;
+    account_id: number;
+    vendor_id: number;
+    updated_by: number;
+    amount?: number;
+    payment_date?: Date;
+    payment_text?: string;
+    currentSitePhotos?: Express.Multer.File[];
+    paymentDetailPhotos?: Express.Multer.File[];
+  }
+
+  export interface PaymentDocumentDto {
+    id: number;
+    type: string;
+    originalName: string;
+    s3Key: string;
+    signed_url?: string;
+    file_type?: string;
+    is_image?: boolean;
+    document_type?: string;
+    created_at?: Date;
   }

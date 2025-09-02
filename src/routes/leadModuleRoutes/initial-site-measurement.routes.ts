@@ -167,4 +167,13 @@ router.post('/documents/batch-signed-urls',
   paymentUploadController.generateBatchSignedUrls
 );
 
+router.put(
+  '/:paymentId',
+  upload.fields([
+    { name: 'current_site_photos', maxCount: 10 },
+    { name: 'payment_detail_photos', maxCount: 10 }
+  ]),
+  paymentUploadController.updatePaymentUpload
+);  
+
 export { router as paymentUploadRoutes };

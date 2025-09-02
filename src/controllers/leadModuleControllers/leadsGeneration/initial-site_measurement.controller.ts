@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { PaymentUploadService } from '../../../services/leadModuleServices/leadsGeneration/initial-site_measurement.service';
-import { CreatePaymentUploadDto } from '../../../types/leadModule.types';
+import { CreatePaymentUploadDto, UpdatePaymentUploadDto } from '../../../types/leadModule.types';
 
 export class PaymentUploadController {
   private paymentUploadService: PaymentUploadService;
@@ -341,48 +341,48 @@ public generateBatchSignedUrls = async (req: Request, res: Response): Promise<vo
   };
 
   // GET /api/payment-upload/:id
-  public getPaymentUploadById = async (req: Request, res: Response): Promise<void> => {
-    try {
-      const { id } = req.params;
-      const { vendor_id } = req.query;
+  // public getPaymentUploadById = async (req: Request, res: Response): Promise<void> => {
+  //   try {
+  //     const { id } = req.params;
+  //     const { vendor_id } = req.query;
 
-      if (!id || !vendor_id) {
-        res.status(400).json({
-          success: false,
-          message: 'id and vendor_id are required'
-        });
-        return;
-      }
+  //     if (!id || !vendor_id) {
+  //       res.status(400).json({
+  //         success: false,
+  //         message: 'id and vendor_id are required'
+  //       });
+  //       return;
+  //     }
 
-      const result = await this.paymentUploadService.getPaymentUploadById(
-        parseInt(id),
-        parseInt(vendor_id as string)
-      );
+  //     const result = await this.paymentUploadService.getPaymentUploadById(
+  //       parseInt(id),
+  //       parseInt(vendor_id as string)
+  //     );
 
-      if (!result) {
-        res.status(404).json({
-          success: false,
-          message: 'Payment upload not found'
-        });
-        return;
-      }
+  //     if (!result) {
+  //       res.status(404).json({
+  //         success: false,
+  //         message: 'Payment upload not found'
+  //       });
+  //       return;
+  //     }
 
-      res.status(200).json({
-        success: true,
-        message: 'Payment upload retrieved successfully',
-        data: result
-      });
+  //     res.status(200).json({
+  //       success: true,
+  //       message: 'Payment upload retrieved successfully',
+  //       data: result
+  //     });
 
-    } catch (error: any) {
-      console.error('[PaymentUploadGetController] Error:', error);
+  //   } catch (error: any) {
+  //     console.error('[PaymentUploadGetController] Error:', error);
       
-      res.status(500).json({
-        success: false,
-        message: 'Internal server error',
-        error: error.message
-      });
-    }
-  };
+  //     res.status(500).json({
+  //       success: false,
+  //       message: 'Internal server error',
+  //       error: error.message
+  //     });
+  //   }
+  // };
 
   // GET /api/payment-upload/vendor/:vendorId
   public getPaymentUploadsByVendor = async (req: Request, res: Response): Promise<void> => {
@@ -490,6 +490,222 @@ public generateBatchSignedUrls = async (req: Request, res: Response): Promise<vo
       res.status(500).json({
         success: false,
         message: 'Internal server error',
+        error: error.message
+      });
+    }
+  };
+
+  public updatePaymentUpload = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { paymentId } = req.params;
+      const { 
+        lead_id, 
+        account_id, 
+        vendor_id, 
+        updated_by,
+        amount,
+        payment_date,
+        payment_text 
+      } = req.body;
+
+      // Validate required fields
+      if (!paymentId || !lead_id || !account_id || !vendor_id || !updated_by) {
+        res.status(400).json({
+          success: false,
+          message: 'paymentId, lead_id, account_id, vendor_id, and updated_by are required'
+        });
+        return;
+      }
+
+      // Validate paymentId is a valid number
+      const paymentIdNum = parseInt(paymentId);
+      if (isNaN(paymentIdNum)) {
+        res.status(400).json({
+          success: false,
+          message: 'Invalid payment ID'
+        });
+        return;
+      }
+
+      // Extract files from multer
+      const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+      
+      const currentSitePhotos = files?.current_site_photos || [];
+      const paymentDetailPhotos = files?.payment_detail_photos || [];
+
+      // Validate image files for current site photos
+      const validImageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+      
+      for (const photo of currentSitePhotos) {
+        if (!validImageTypes.includes(photo.mimetype)) {
+          res.status(400).json({
+            success: false,
+            message: 'Current site photos must be valid image files (JPEG, JPG, PNG, GIF)'
+          });
+          return;
+        }
+      }
+
+      // Validate payment detail photos
+      for (const photo of paymentDetailPhotos) {
+        if (!validImageTypes.includes(photo.mimetype)) {
+          res.status(400).json({
+            success: false,
+            message: 'Payment detail photos must be valid image files (JPEG, JPG, PNG, GIF)'
+          });
+          return;
+        }
+      }
+
+      // Validate amount if provided
+      if (amount !== undefined) {
+        const parsedAmount = parseFloat(amount);
+        if (isNaN(parsedAmount) || parsedAmount < 0) {
+          res.status(400).json({
+            success: false,
+            message: 'Amount must be a valid positive number'
+          });
+          return;
+        }
+      }
+
+      // Validate payment_date if provided
+      if (payment_date !== undefined && payment_date !== '') {
+        const parsedDate = new Date(payment_date);
+        if (isNaN(parsedDate.getTime())) {
+          res.status(400).json({
+            success: false,
+            message: 'Payment date must be a valid date'
+          });
+          return;
+        }
+      }
+
+      // Create DTO
+      const updateDto: UpdatePaymentUploadDto = {
+        lead_id: parseInt(lead_id),
+        account_id: parseInt(account_id),
+        vendor_id: parseInt(vendor_id),
+        updated_by: parseInt(updated_by),
+        amount: amount ? parseFloat(amount) : undefined,
+        payment_date: payment_date ? new Date(payment_date) : undefined,
+        payment_text: payment_text || undefined,
+        currentSitePhotos: currentSitePhotos.length > 0 ? currentSitePhotos : undefined,
+        paymentDetailPhotos: paymentDetailPhotos.length > 0 ? paymentDetailPhotos : undefined
+      };
+
+      // Business logic validation
+      if (updateDto.amount !== undefined && updateDto.payment_date === undefined) {
+        // Check if existing payment has payment_date
+        const existingPayment = await this.paymentUploadService.getPaymentUploadById(
+          paymentIdNum, 
+          updateDto.vendor_id
+        );
+        
+        if (!existingPayment.payment_date) {
+          res.status(400).json({
+            success: false,
+            message: 'Payment date is required when updating amount'
+          });
+          return;
+        }
+      }
+
+      // Ensure at least one field is being updated
+      const hasUpdates = updateDto.amount !== undefined || 
+                        updateDto.payment_date !== undefined || 
+                        updateDto.payment_text !== undefined ||
+                        (updateDto.currentSitePhotos && updateDto.currentSitePhotos.length > 0) ||
+                        (updateDto.paymentDetailPhotos && updateDto.paymentDetailPhotos.length > 0);
+
+      if (!hasUpdates) {
+        res.status(400).json({
+          success: false,
+          message: 'At least one field must be provided for update'
+        });
+        return;
+      }
+
+      // Call service
+      const result = await this.paymentUploadService.updatePaymentUpload(paymentIdNum, updateDto);
+
+      res.status(200).json({
+        success: true,
+        message: 'Payment upload updated successfully',
+        data: result
+      });
+
+    } catch (error: any) {
+      console.error('[PaymentUploadController] Error updating payment:', error);
+      
+      let statusCode = 500;
+      let message = 'Internal server error';
+
+      if (error.message.includes('not found') || error.message.includes('access denied')) {
+        statusCode = 404;
+        message = 'Payment not found or access denied';
+      } else if (error.message.includes('Document type') && error.message.includes('not found')) {
+        statusCode = 400;
+        message = 'Invalid document type configuration for vendor';
+      }
+
+      res.status(statusCode).json({
+        success: false,
+        message: message,
+        error: error.message
+      });
+    }
+  };
+
+  // GET /api/payment-upload/:paymentId
+  public getPaymentUploadById = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { paymentId } = req.params;
+      const { vendor_id } = req.query;
+
+      if (!paymentId || !vendor_id) {
+        res.status(400).json({
+          success: false,
+          message: 'paymentId and vendor_id are required'
+        });
+        return;
+      }
+
+      // Validate paymentId is a valid number
+      const paymentIdNum = parseInt(paymentId);
+      if (isNaN(paymentIdNum)) {
+        res.status(400).json({
+          success: false,
+          message: 'Invalid payment ID'
+        });
+        return;
+      }
+
+      const result = await this.paymentUploadService.getPaymentUploadById(
+        paymentIdNum,
+        parseInt(vendor_id as string)
+      );
+
+      res.status(200).json({
+        success: true,
+        message: 'Payment upload retrieved successfully',
+        data: result
+      });
+
+    } catch (error: any) {
+      console.error('[PaymentUploadController] Error getting payment by ID:', error);
+      
+      let statusCode = 500;
+      let message = 'Internal server error';
+
+      if (error.message.includes('not found') || error.message.includes('access denied')) {
+        statusCode = 404;
+        message = 'Payment not found or access denied';
+      }
+
+      res.status(statusCode).json({
+        success: false,
+        message: message,
         error: error.message
       });
     }
