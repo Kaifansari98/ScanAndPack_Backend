@@ -4,7 +4,7 @@ import path from "path";
 import { sanitizeFilename } from "../utils/fileUtils";
 import wasabi from "../utils/wasabiClient";
 
-const bucketName = process.env.WASABI_BUCKET_NAME || "furnix";
+const bucketName = process.env.WASABI_BUCKET_NAME || "vloq-furnix";
 
 const storage = multerS3({
   s3: wasabi,
