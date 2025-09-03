@@ -462,3 +462,102 @@ export interface CreatePaymentUploadDto {
     document_type?: string;
     created_at?: Date;
   }
+
+  // Soft Delete Document Request DTO
+export interface SoftDeleteDocumentDto {
+  user_id: number;
+  vendor_id: number;
+}
+
+// Soft Delete Response DTO
+export interface SoftDeleteResponseDto {
+  success: boolean;
+  message: string;
+  document?: {
+    id: number;
+    doc_og_name: string;
+    doc_sys_name: string;
+    doc_type: {
+      id: number;
+      type: string;
+    };
+    lead?: {
+      id: number;
+      firstname: string;
+      lastname: string;
+    };
+    account?: {
+      id: number;
+      name: string;
+    };
+    deleted_by?: {
+      id: number;
+      user_name: string;
+      user_email: string;
+    };
+    deleted_at?: Date;
+  };
+}
+
+// Deleted Document List Item
+export interface DeletedDocumentDto {
+  id: number;
+  doc_og_name: string;
+  doc_sys_name: string;
+  created_at: Date;
+  deleted_at: Date | null;
+  is_deleted: boolean;
+  lead?: {
+    id: number;
+    firstname: string;
+    lastname: string;
+  };
+  account?: {
+    id: number;
+    name: string;
+  };
+  documentType: {
+    id: number;
+    type: string;
+  };
+  deletedBy?: {
+    id: number;
+    user_name: string;
+    user_email: string;
+  };
+}
+
+// Deleted Documents List Response
+export interface DeletedDocumentsResponseDto {
+  success: boolean;
+  message: string;
+  data: DeletedDocumentDto[];
+  pagination: {
+    currentPage: number;
+    totalPages: number;
+    totalRecords: number;
+    hasNext: boolean;
+    hasPrev: boolean;
+  };
+}
+
+// API Error Response
+export interface ApiErrorResponse {
+  success: false;
+  message: string;
+  error?: string;
+}
+
+// API Success Response
+export interface ApiSuccessResponse<T = any> {
+  success: true;
+  message: string;
+  data?: T;
+  pagination?: {
+    currentPage: number;
+    totalPages: number;
+    totalRecords: number;
+    hasNext: boolean;
+    hasPrev: boolean;
+  };
+}

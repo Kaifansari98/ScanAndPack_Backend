@@ -440,6 +440,7 @@ model LeadDocuments {
   created_at   DateTime     @default(now())
   deleted_by   Int?
   deleted_at   DateTime?
+  is_deleted   Boolean      @default(false)
   doc_type_id  Int 
   account_id   Int?
   lead_id      Int?
