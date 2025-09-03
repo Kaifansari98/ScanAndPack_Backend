@@ -12,4 +12,10 @@ DesigningStageRouter.post(
   DesigingStageController.addToDesigingStage
 );
 
+// GET /api/leads/vendor/:vendorId/status/:statusId?page=1&limit=10
+DesigningStageRouter.get(
+  "/vendor/:vendorId/status/:statusId",
+  DesigingStageController.getLeadsByStatus
+);
+
 export default DesigningStageRouter;

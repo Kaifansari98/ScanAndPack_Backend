@@ -1,4 +1,5 @@
-import { S3Client } from "@aws-sdk/client-s3";
+import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 console.log("[DEBUG] WASABI_ENDPOINT:", process.env.WASABI_ENDPOINT);
 
@@ -11,5 +12,13 @@ const wasabi = new S3Client({
     secretAccessKey: process.env.WASABI_SECRET_ACCESS_KEY || "",
   },
 });
+
+export const generateSignedUrl = async (key: string, expiresIn: number = 3600) => {
+  const command = new GetObjectCommand({
+    Bucket: process.env.WASABI_BUCKET_NAME!,
+    Key: key,
+  });
+  return await getSignedUrl(wasabi, command, { expiresIn });
+};
 
 export default wasabi;

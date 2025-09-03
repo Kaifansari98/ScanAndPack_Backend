@@ -37,4 +37,30 @@ export class DesigingStageController {
     }
   }
 
+  public static async getLeadsByStatus(req: Request, res: Response) {
+    try {
+      const { vendorId, statusId } = req.params;
+      const { page = "1", limit = "10" } = req.query;
+
+      if (!vendorId || !statusId) {
+        return res
+          .status(400)
+          .json(ApiResponse.validationError("vendorId and statusId are required"));
+      }
+
+      const result = await DesigingStage.getLeadsByStatus(
+        Number(vendorId),
+        Number(statusId),
+        Number(page),
+        Number(limit)
+      );
+
+      return res
+        .status(200)
+        .json(ApiResponse.success(result, "Leads fetched successfully"));
+    } catch (error: any) {
+      return res.status(500).json(ApiResponse.error(error.message));
+    }
+  }
+
 }
