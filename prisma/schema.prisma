@@ -59,6 +59,7 @@ model VendorMaster {
   leadStatusLogs  LeadStatusLogs[]
   designMeeting   LeadDesignMeeting[]
   designSelection LeadDesignSelection[]
+  designMeetingDocsMapping  LeadDesignMeetingDocumentsMapping[]
 }
 
 model VendorAddress {
@@ -142,6 +143,8 @@ model UserMaster {
   // ✅ Reverse relations for LeadDesignSelection
   designSelectionsCreated LeadDesignSelection[] @relation("DesignSelectionCreatedBy")
   designSelectionsUpdated LeadDesignSelection[] @relation("DesignSelectionUpdatedBy")
+
+  designMeetingDocsMappingForCreatedBY  LeadDesignMeetingDocumentsMapping[] @relation("DesignMeetingDocsMappingCreatedBy")
 }
 
 model UserDocument {
@@ -361,6 +364,7 @@ model LeadMaster {
   leadStatusLogs LeadStatusLogs[]
   designMeeting   LeadDesignMeeting[]
   designSelection LeadDesignSelection[]
+  designMeetingDocsMapping  LeadDesignMeetingDocumentsMapping[]
 
   // ✅ Unique constraints for contact_no and email per vendor
   @@unique([contact_no, vendor_id], name: "unique_contact_per_vendor")
@@ -422,6 +426,7 @@ model AccountMaster {
   leadStatusLogs LeadStatusLogs[]
   designMeeting   LeadDesignMeeting[]
   designSelection LeadDesignSelection[]
+  designMeetingDocsMapping  LeadDesignMeetingDocumentsMapping[]
 }
 
 model LeadProductMapping {
@@ -475,7 +480,6 @@ model LeadDocuments {
   deletedBy UserMaster?  @relation("DocumentDeletedBy", fields: [deleted_by], references: [id])
 
   paymentInfo     PaymentInfo[]
-  designDocument  LeadDesignMeeting[]
 }
 
 model ProductStructure{
@@ -590,24 +594,41 @@ model LeadStatusLogs {
 }
 
 model LeadDesignMeeting {
-  id            Int       @id @default(autoincrement())
-  lead_id       Int
-  account_id    Int
-  vendor_id     Int
-  date          DateTime
-  desc          String   @db.VarChar(2000)
-  doc_id        Int?
-  created_by    Int
-  updated_by    Int?
-  created_at    DateTime  @default(now())
-  updated_at    DateTime  @updatedAt
+  id              Int       @id @default(autoincrement())
+  lead_id         Int
+  account_id      Int
+  vendor_id       Int
+  date            DateTime
+  desc            String   @db.VarChar(2000)
+  created_by      Int
+  updated_by      Int?
+  created_at      DateTime  @default(now())
+  updated_at      DateTime  @updatedAt
 
   vendor      VendorMaster       @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   lead        LeadMaster         @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   account     AccountMaster      @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  document    LeadDocuments? @relation(fields: [doc_id], references: [id], onDelete: SetNull)
   createdBy   UserMaster         @relation("DesignMeetingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
-  updatedBy   UserMaster?        @relation("DesignMeetingUpdatedBy", fields: [updated_by], references: [id], onDelete: Cascade) 
+  updatedBy   UserMaster?        @relation("DesignMeetingUpdatedBy", fields: [updated_by], references: [id], onDelete: Cascade)
+
+  designMeetingDocsMapping LeadDesignMeetingDocumentsMapping[]
+}
+
+model LeadDesignMeetingDocumentsMapping {
+  id          Int   @id @default(autoincrement())
+  lead_id       Int
+  account_id    Int
+  vendor_id     Int
+  meeting_id    Int
+  document_id   Int
+  created_at    DateTime @default(now())
+  created_by    Int
+
+  vendor         VendorMaster       @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead           LeadMaster         @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  account        AccountMaster      @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  createdBy      UserMaster         @relation("DesignMeetingDocsMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  designMeeting  LeadDesignMeeting  @relation(fields: [meeting_id], references: [id], onDelete: Cascade)
 }
 
 model LeadDesignSelection {

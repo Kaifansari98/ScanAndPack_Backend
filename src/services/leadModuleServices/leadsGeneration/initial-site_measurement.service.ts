@@ -99,7 +99,7 @@ public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentU
           doc_og_name: data.pdfFile.originalname,
           doc_sys_name: pdfS3Key,
           created_by: data.created_by,
-          doc_type_id: 4, // PDF document type ID
+          doc_type_id: 3, // PDF document type ID
           account_id: data.account_id,
           lead_id: data.lead_id,
           vendor_id: data.vendor_id,
@@ -133,7 +133,7 @@ public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentU
           doc_og_name: data.paymentImageFile.originalname,
           doc_sys_name: paymentImageS3Key,
           created_by: data.created_by,
-          doc_type_id: 3, // Payment document type ID (hardcoded)
+          doc_type_id: 4, // Payment document type ID (hardcoded)
           account_id: data.account_id,
           lead_id: data.lead_id,
           vendor_id: data.vendor_id,
