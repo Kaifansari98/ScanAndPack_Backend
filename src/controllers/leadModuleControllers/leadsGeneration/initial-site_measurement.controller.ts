@@ -940,7 +940,6 @@ public generateBatchSignedUrls = async (req: Request, res: Response): Promise<vo
     }
   };
 
-
   // GET /api/payment-upload/:paymentId
   public getPaymentUploadById = async (req: Request, res: Response): Promise<void> => {
     try {

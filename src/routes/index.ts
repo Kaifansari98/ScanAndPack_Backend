@@ -20,6 +20,7 @@ import clientRoutes from "./clientRoutes/client.routes";
 // Leads Routes
 import leadModuleRoutes from "./leadModuleRoutes/lead.routes"
 import { paymentUploadRoutes } from './leadModuleRoutes/initial-site-measurement.routes';
+import DesigningStageRouter from './leadModuleRoutes/desigingStage/designing-stage.routes';
 
 const router = Router();
 
@@ -43,5 +44,7 @@ router.use("/clients", clientRoutes);
 
 router.use("/leads", leadModuleRoutes);
 router.use("/leads/initial-site-measurement", paymentUploadRoutes);
+
+router.use("/leads/designing-stage", DesigningStageRouter);
 
 export { router };
