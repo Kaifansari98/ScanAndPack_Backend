@@ -497,7 +497,12 @@ public async getPaymentUploadsByLead(
         },
         account: { select: { id: true, name: true, contact_no: true, email: true } },
         createdBy: { select: { id: true, user_name: true, user_email: true } },
-        document: { select: { id: true, type: true } }
+        document: { 
+          select: { 
+            id: true, 
+            documentType: { select: { id: true, type: true } }
+          } 
+        }
       },
       orderBy: { created_at: 'desc' }
     });
