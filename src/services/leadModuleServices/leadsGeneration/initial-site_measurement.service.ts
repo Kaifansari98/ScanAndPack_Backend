@@ -831,6 +831,318 @@ public async updatePaymentUpload(
   }
 }
 
+public async softDeleteDocument(
+  documentId: number,
+  userId: number,
+  vendorId: number
+): Promise<{ success: boolean; message: string; document?: any }> {
+  try {
+    const result = await prisma.$transaction(async (tx) => {
+      // 1. Verify the user belongs to the vendor
+      const user = await tx.userMaster.findFirst({
+        where: {
+          id: userId,
+          vendor_id: vendorId,
+          status: 'active' // Assuming only active users can delete
+        }
+      });
+
+      if (!user) {
+        throw new Error('User not found or not authorized for this vendor');
+      }
+
+      // 2. Verify the document exists and belongs to the vendor
+      const document = await tx.leadDocuments.findFirst({
+        where: {
+          id: documentId,
+          vendor_id: vendorId,
+          is_deleted: false // Only allow deletion of non-deleted documents
+        },
+        include: {
+          lead: {
+            select: {
+              id: true,
+              firstname: true,
+              lastname: true
+            }
+          },
+          account: {
+            select: {
+              id: true,
+              name: true
+            }
+          },
+          documentType: {
+            select: {
+              id: true,
+              type: true
+            }
+          }
+        }
+      });
+
+      if (!document) {
+        throw new Error('Document not found, already deleted, or access denied');
+      }
+
+      // 3. Update the document with soft delete fields
+      const deletedDocument = await tx.leadDocuments.update({
+        where: {
+          id: documentId
+        },
+        data: {
+          is_deleted: true,
+          deleted_by: userId,
+          deleted_at: new Date()
+        },
+        include: {
+          lead: {
+            select: {
+              id: true,
+              firstname: true,
+              lastname: true
+            }
+          },
+          account: {
+            select: {
+              id: true,
+              name: true
+            }
+          },
+          documentType: {
+            select: {
+              id: true,
+              type: true
+            }
+          },
+          deletedBy: {
+            select: {
+              id: true,
+              user_name: true,
+              user_email: true
+            }
+          }
+        }
+      });
+
+      return {
+        success: true,
+        message: 'Document deleted successfully',
+        document: {
+          id: deletedDocument.id,
+          doc_og_name: deletedDocument.doc_og_name,
+          doc_sys_name: deletedDocument.doc_sys_name,
+          doc_type: deletedDocument.documentType,
+          lead: deletedDocument.lead,
+          account: deletedDocument.account,
+          deleted_by: deletedDocument.deletedBy,
+          deleted_at: deletedDocument.deleted_at
+        }
+      };
+    });
+
+    return result;
+
+  } catch (error: any) {
+    console.error('[PaymentUploadService] Error soft deleting document:', error);
+    
+    if (error.message.includes('not found') || 
+        error.message.includes('not authorized') ||
+        error.message.includes('access denied') ||
+        error.message.includes('already deleted')) {
+      return {
+        success: false,
+        message: error.message
+      };
+    }
+
+    throw new Error(`Failed to delete document: ${error.message}`);
+  }
+}
+
+// Restore a soft deleted document (bonus method)
+public async restoreDocument(
+  documentId: number,
+  userId: number,
+  vendorId: number
+): Promise<{ success: boolean; message: string; document?: any }> {
+  try {
+    const result = await prisma.$transaction(async (tx) => {
+      // 1. Verify the user belongs to the vendor
+      const user = await tx.userMaster.findFirst({
+        where: {
+          id: userId,
+          vendor_id: vendorId,
+          status: 'active'
+        }
+      });
+
+      if (!user) {
+        throw new Error('User not found or not authorized for this vendor');
+      }
+
+      // 2. Verify the document exists and is deleted
+      const document = await tx.leadDocuments.findFirst({
+        where: {
+          id: documentId,
+          vendor_id: vendorId,
+          is_deleted: true // Only allow restoration of deleted documents
+        }
+      });
+
+      if (!document) {
+        throw new Error('Document not found, not deleted, or access denied');
+      }
+
+      // 3. Restore the document
+      const restoredDocument = await tx.leadDocuments.update({
+        where: {
+          id: documentId
+        },
+        data: {
+          is_deleted: false,
+          deleted_by: null,
+          deleted_at: null
+        },
+        include: {
+          lead: {
+            select: {
+              id: true,
+              firstname: true,
+              lastname: true
+            }
+          },
+          account: {
+            select: {
+              id: true,
+              name: true
+            }
+          },
+          documentType: {
+            select: {
+              id: true,
+              type: true
+            }
+          }
+        }
+      });
+
+      return {
+        success: true,
+        message: 'Document restored successfully',
+        document: {
+          id: restoredDocument.id,
+          doc_og_name: restoredDocument.doc_og_name,
+          doc_sys_name: restoredDocument.doc_sys_name,
+          doc_type: restoredDocument.documentType,
+          lead: restoredDocument.lead,
+          account: restoredDocument.account
+        }
+      };
+    });
+
+    return result;
+
+  } catch (error: any) {
+    console.error('[PaymentUploadService] Error restoring document:', error);
+    
+    if (error.message.includes('not found') || 
+        error.message.includes('not authorized') ||
+        error.message.includes('access denied') ||
+        error.message.includes('not deleted')) {
+      return {
+        success: false,
+        message: error.message
+      };
+    }
+
+    throw new Error(`Failed to restore document: ${error.message}`);
+  }
+}
+
+// Get deleted documents for a vendor (bonus method for admin purposes)
+public async getDeletedDocuments(
+  vendorId: number,
+  userId: number,
+  page: number = 1,
+  limit: number = 10
+): Promise<{ data: any[], total: number, success: boolean }> {
+  try {
+    // Verify user belongs to vendor
+    const user = await prisma.userMaster.findFirst({
+      where: {
+        id: userId,
+        vendor_id: vendorId,
+        status: 'active'
+      }
+    });
+
+    if (!user) {
+      throw new Error('User not found or not authorized for this vendor');
+    }
+
+    const skip = (page - 1) * limit;
+
+    const [documents, total] = await Promise.all([
+      prisma.leadDocuments.findMany({
+        where: {
+          vendor_id: vendorId,
+          is_deleted: true
+        },
+        include: {
+          lead: {
+            select: {
+              id: true,
+              firstname: true,
+              lastname: true
+            }
+          },
+          account: {
+            select: {
+              id: true,
+              name: true
+            }
+          },
+          documentType: {
+            select: {
+              id: true,
+              type: true
+            }
+          },
+          deletedBy: {
+            select: {
+              id: true,
+              user_name: true,
+              user_email: true
+            }
+          }
+        },
+        orderBy: {
+          deleted_at: 'desc'
+        },
+        skip,
+        take: limit
+      }),
+      prisma.leadDocuments.count({
+        where: {
+          vendor_id: vendorId,
+          is_deleted: true
+        }
+      })
+    ]);
+
+    return {
+      success: true,
+      data: documents,
+      total
+    };
+
+  } catch (error: any) {
+    console.error('[PaymentUploadService] Error getting deleted documents:', error);
+    throw new Error(`Failed to get deleted documents: ${error.message}`);
+  }
+}
+
 // Get payment upload details by ID
 public async getPaymentUploadById(
   paymentId: number, 

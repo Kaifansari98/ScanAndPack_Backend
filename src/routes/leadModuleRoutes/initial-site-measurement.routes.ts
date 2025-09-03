@@ -176,4 +176,23 @@ router.put(
   paymentUploadController.updatePaymentUpload
 );  
 
+// Soft delete document
+router.put(
+  '/documents/:documentId/delete',
+  paymentUploadController.softDeleteDocument
+);
+
+// Restore document (bonus functionality)
+router.put(
+  '/documents/:documentId/restore',
+  paymentUploadController.restoreDocument
+);
+
+// Get deleted documents (admin/audit functionality)
+router.get(
+  '/documents/deleted',
+  paymentUploadController.getDeletedDocuments
+);
+
+
 export { router as paymentUploadRoutes };

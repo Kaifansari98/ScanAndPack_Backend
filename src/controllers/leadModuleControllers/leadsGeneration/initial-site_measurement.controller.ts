@@ -657,6 +657,290 @@ public generateBatchSignedUrls = async (req: Request, res: Response): Promise<vo
     }
   };
 
+  // PUT /api/payment-upload/documents/:documentId/delete
+  public softDeleteDocument = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { documentId } = req.params;
+      const { user_id, vendor_id } = req.body;
+
+      // Validate required parameters
+      if (!documentId) {
+        res.status(400).json({
+          success: false,
+          message: 'Document ID is required in URL parameters'
+        });
+        return;
+      }
+
+      if (!user_id || !vendor_id) {
+        res.status(400).json({
+          success: false,
+          message: 'user_id and vendor_id are required in request body'
+        });
+        return;
+      }
+
+      // Validate documentId is a valid number
+      const documentIdNum = parseInt(documentId);
+      if (isNaN(documentIdNum) || documentIdNum <= 0) {
+        res.status(400).json({
+          success: false,
+          message: 'Invalid document ID. Must be a positive number'
+        });
+        return;
+      }
+
+      // Validate user_id and vendor_id are valid numbers
+      const userIdNum = parseInt(user_id);
+      const vendorIdNum = parseInt(vendor_id);
+      
+      if (isNaN(userIdNum) || userIdNum <= 0) {
+        res.status(400).json({
+          success: false,
+          message: 'Invalid user_id. Must be a positive number'
+        });
+        return;
+      }
+
+      if (isNaN(vendorIdNum) || vendorIdNum <= 0) {
+        res.status(400).json({
+          success: false,
+          message: 'Invalid vendor_id. Must be a positive number'
+        });
+        return;
+      }
+
+      // Call service
+      const result = await this.paymentUploadService.softDeleteDocument(
+        documentIdNum,
+        userIdNum,
+        vendorIdNum
+      );
+
+      if (!result.success) {
+        // Determine appropriate status code based on error message
+        let statusCode = 400;
+        
+        if (result.message.includes('not found') || 
+            result.message.includes('already deleted') ||
+            result.message.includes('access denied')) {
+          statusCode = 404;
+        } else if (result.message.includes('not authorized')) {
+          statusCode = 403;
+        }
+
+        res.status(statusCode).json({
+          success: false,
+          message: result.message
+        });
+        return;
+      }
+
+      res.status(200).json({
+        success: true,
+        message: result.message,
+        data: result.document
+      });
+
+    } catch (error: any) {
+      console.error('[PaymentUploadController] Error soft deleting document:', error);
+      
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message
+      });
+    }
+  };
+
+  // PUT /api/payment-upload/documents/:documentId/restore
+  public restoreDocument = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { documentId } = req.params;
+      const { user_id, vendor_id } = req.body;
+
+      // Validate required parameters
+      if (!documentId) {
+        res.status(400).json({
+          success: false,
+          message: 'Document ID is required in URL parameters'
+        });
+        return;
+      }
+
+      if (!user_id || !vendor_id) {
+        res.status(400).json({
+          success: false,
+          message: 'user_id and vendor_id are required in request body'
+        });
+        return;
+      }
+
+      // Validate documentId is a valid number
+      const documentIdNum = parseInt(documentId);
+      if (isNaN(documentIdNum) || documentIdNum <= 0) {
+        res.status(400).json({
+          success: false,
+          message: 'Invalid document ID. Must be a positive number'
+        });
+        return;
+      }
+
+      // Validate user_id and vendor_id are valid numbers
+      const userIdNum = parseInt(user_id);
+      const vendorIdNum = parseInt(vendor_id);
+      
+      if (isNaN(userIdNum) || userIdNum <= 0) {
+        res.status(400).json({
+          success: false,
+          message: 'Invalid user_id. Must be a positive number'
+        });
+        return;
+      }
+
+      if (isNaN(vendorIdNum) || vendorIdNum <= 0) {
+        res.status(400).json({
+          success: false,
+          message: 'Invalid vendor_id. Must be a positive number'
+        });
+        return;
+      }
+
+      // Call service
+      const result = await this.paymentUploadService.restoreDocument(
+        documentIdNum,
+        userIdNum,
+        vendorIdNum
+      );
+
+      if (!result.success) {
+        // Determine appropriate status code based on error message
+        let statusCode = 400;
+        
+        if (result.message.includes('not found') || 
+            result.message.includes('not deleted') ||
+            result.message.includes('access denied')) {
+          statusCode = 404;
+        } else if (result.message.includes('not authorized')) {
+          statusCode = 403;
+        }
+
+        res.status(statusCode).json({
+          success: false,
+          message: result.message
+        });
+        return;
+      }
+
+      res.status(200).json({
+        success: true,
+        message: result.message,
+        data: result.document
+      });
+
+    } catch (error: any) {
+      console.error('[PaymentUploadController] Error restoring document:', error);
+      
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message
+      });
+    }
+  };
+
+  // GET /api/payment-upload/documents/deleted
+  public getDeletedDocuments = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { user_id, vendor_id, page = '1', limit = '10' } = req.query;
+
+      if (!user_id || !vendor_id) {
+        res.status(400).json({
+          success: false,
+          message: 'user_id and vendor_id are required as query parameters'
+        });
+        return;
+      }
+
+      // Validate user_id and vendor_id are valid numbers
+      const userIdNum = parseInt(user_id as string);
+      const vendorIdNum = parseInt(vendor_id as string);
+      const pageNum = parseInt(page as string);
+      const limitNum = parseInt(limit as string);
+      
+      if (isNaN(userIdNum) || userIdNum <= 0) {
+        res.status(400).json({
+          success: false,
+          message: 'Invalid user_id. Must be a positive number'
+        });
+        return;
+      }
+
+      if (isNaN(vendorIdNum) || vendorIdNum <= 0) {
+        res.status(400).json({
+          success: false,
+          message: 'Invalid vendor_id. Must be a positive number'
+        });
+        return;
+      }
+
+      if (isNaN(pageNum) || pageNum <= 0) {
+        res.status(400).json({
+          success: false,
+          message: 'Invalid page number. Must be a positive number'
+        });
+        return;
+      }
+
+      if (isNaN(limitNum) || limitNum <= 0 || limitNum > 100) {
+        res.status(400).json({
+          success: false,
+          message: 'Invalid limit. Must be between 1 and 100'
+        });
+        return;
+      }
+
+      // Call service
+      const result = await this.paymentUploadService.getDeletedDocuments(
+        vendorIdNum,
+        userIdNum,
+        pageNum,
+        limitNum
+      );
+
+      res.status(200).json({
+        success: true,
+        message: 'Deleted documents retrieved successfully',
+        data: result.data,
+        pagination: {
+          currentPage: pageNum,
+          totalPages: Math.ceil(result.total / limitNum),
+          totalRecords: result.total,
+          hasNext: pageNum < Math.ceil(result.total / limitNum),
+          hasPrev: pageNum > 1
+        }
+      });
+
+    } catch (error: any) {
+      console.error('[PaymentUploadController] Error getting deleted documents:', error);
+      
+      let statusCode = 500;
+      let message = 'Internal server error';
+
+      if (error.message.includes('not authorized') || error.message.includes('not found')) {
+        statusCode = 403;
+        message = 'Access denied or user not found';
+      }
+
+      res.status(statusCode).json({
+        success: false,
+        message: message,
+        error: error.message
+      });
+    }
+  };
+
+
   // GET /api/payment-upload/:paymentId
   public getPaymentUploadById = async (req: Request, res: Response): Promise<void> => {
     try {
