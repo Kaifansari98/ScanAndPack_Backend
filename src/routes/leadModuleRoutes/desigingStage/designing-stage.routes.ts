@@ -25,4 +25,26 @@ DesigningStageRouter.post(
     (req, res) => DesigingStageController.upload(req, res)
 );
 
+// POST /api/leads/design-meeting
+// Form-data: leadId, vendorId, userId, accountId, date, desc, files[]
+DesigningStageRouter.post(
+    "/design-meeting",
+    upload.array("files"), // multiple files
+    DesigingStageController.addDesignMeeting
+);
+
+// GET /api/leads/:vendorId/:leadId/design-meetings
+DesigningStageRouter.get(
+    "/:vendorId/:leadId/design-meetings",
+    DesigingStageController.getDesignMeetings
+);
+
+// POST /api/leads/upload-designs
+// Form-data: vendorId, leadId, userId, accountId, files[]
+DesigningStageRouter.post(
+    "/upload-designs",
+    upload.array("files"), // multiple files
+    (req, res) => DesigingStageController.uploadDesigns(req, res)
+  );
+
 export default DesigningStageRouter;

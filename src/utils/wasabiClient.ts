@@ -41,4 +41,42 @@ export const uploadToWasabi = async (
   return sysName; // relative path
 };
 
+export const uploadToWasabiMeetingDocs = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  originalName: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `meeting_documents/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(new PutObjectCommand({
+    Bucket: process.env.WASABI_BUCKET_NAME!,
+    Key: sysName,
+    Body: buffer,
+    ContentType: "application/octet-stream",
+  }));
+
+  return sysName; // relative path
+};
+
+export const uploadToWasabStage1Desings = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  originalName: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `stage_1_design/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(new PutObjectCommand({
+    Bucket: process.env.WASABI_BUCKET_NAME!,
+    Key: sysName,
+    Body: buffer,
+    ContentType: "application/octet-stream",
+  }));
+
+  return sysName; // relative path
+};
+
 export default wasabi;
