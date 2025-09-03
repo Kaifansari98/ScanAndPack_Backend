@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { DesigingStageController } from "../../../controllers/leadModuleControllers/desigingStage/designing-stage.controller";
 import { updateLeadStatusValidation } from "../../../validations/designing-stage.validation";
+import { upload } from "../../../middlewares/uploadWasabi";
 
 const DesigningStageRouter = Router();
 
@@ -16,6 +17,12 @@ DesigningStageRouter.post(
 DesigningStageRouter.get(
   "/vendor/:vendorId/status/:statusId",
   DesigingStageController.getLeadsByStatus
+);
+
+DesigningStageRouter.post(
+    "/upload-quoation",
+    upload.single("file"), // file field in form-data
+    (req, res) => DesigingStageController.upload(req, res)
 );
 
 export default DesigningStageRouter;

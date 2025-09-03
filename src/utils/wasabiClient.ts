@@ -1,5 +1,6 @@
-import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { GetObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { v4 as uuidv4 } from "uuid";
 
 console.log("[DEBUG] WASABI_ENDPOINT:", process.env.WASABI_ENDPOINT);
 
@@ -19,6 +20,25 @@ export const generateSignedUrl = async (key: string, expiresIn: number = 3600) =
     Key: key,
   });
   return await getSignedUrl(wasabi, command, { expiresIn });
+};
+
+export const uploadToWasabi = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  originalName: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `design_quotation/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(new PutObjectCommand({
+    Bucket: process.env.WASABI_BUCKET_NAME!,
+    Key: sysName,
+    Body: buffer,
+    ContentType: "application/octet-stream",
+  }));
+
+  return sysName; // relative path
 };
 
 export default wasabi;

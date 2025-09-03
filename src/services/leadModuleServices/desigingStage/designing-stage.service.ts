@@ -1,5 +1,5 @@
 import { prisma } from "../../../prisma/client";
-import { generateSignedUrl } from "../../../utils/wasabiClient";
+import { generateSignedUrl, uploadToWasabi } from "../../../utils/wasabiClient";
 
 export class DesigingStage {
 
@@ -145,6 +145,36 @@ export class DesigingStage {
         totalPages: Math.ceil(total / limit),
       },
     };
+  }
+
+  public static async uploadQuotation(data: {
+    fileBuffer: Buffer;
+    originalName: string;
+    vendorId: number;
+    leadId: number;
+    userId: number;
+    accountId: number;
+  }) {
+    const sysName = await uploadToWasabi(
+      data.fileBuffer,
+      data.vendorId,
+      data.leadId,
+      data.originalName
+    );
+
+    const doc = await prisma.leadDocuments.create({
+      data: {
+        doc_og_name: data.originalName,
+        doc_sys_name: sysName,
+        vendor_id: data.vendorId,
+        lead_id: data.leadId,
+        account_id: data.accountId,
+        doc_type_id: 5, // ✅ design quotation type
+        created_by: data.userId,
+      },
+    });
+
+    return doc;
   }
 
 }

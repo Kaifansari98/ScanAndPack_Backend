@@ -63,4 +63,27 @@ export class DesigingStageController {
     }
   }
 
+  public static async upload(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId, userId, accountId } = req.body;
+
+      if (!req.file) {
+        return res.status(400).json({ success: false, message: "File required" });
+      }
+
+      const doc = await DesigingStage.uploadQuotation({
+        fileBuffer: req.file.buffer,
+        originalName: req.file.originalname,
+        vendorId: Number(vendorId),
+        leadId: Number(leadId),
+        userId: Number(userId),
+        accountId: Number(accountId),
+      });
+
+      res.json({ success: true, document: doc });
+    } catch (error: any) {
+      res.status(500).json({ success: false, message: error.message });
+    }
+  }
+
 }
