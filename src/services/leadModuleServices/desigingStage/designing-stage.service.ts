@@ -1,5 +1,15 @@
 import { prisma } from "../../../prisma/client";
-import { generateSignedUrl, uploadToWasabi } from "../../../utils/wasabiClient";
+import { generateSignedUrl, uploadToWasabi, uploadToWasabiMeetingDocs } from "../../../utils/wasabiClient";
+import { z } from "zod";
+
+const editDesignMeetingSchema = z.object({
+  meetingId: z.number().int().positive(),
+  vendorId: z.number().int().positive(),
+  userId: z.number().int().positive(),
+  date: z.string().datetime().optional(),
+  desc: z.string().max(2000).optional(),
+  files: z.array(z.any()).optional()
+});
 
 export class DesigingStage {
 
@@ -65,18 +75,52 @@ export class DesigingStage {
       take: limit,
       orderBy: { created_at: "desc" },
       include: {
-        vendor: true,
-        siteType: true,
-        source: true,
-        statusType: true,
-        account: true,
+        siteType: {
+          select: {
+            id: true,
+            type: true,
+          },
+        },
+        source: {
+          select: {
+            id: true,
+            type: true,
+          },
+        },
+        statusType: {
+          select: {
+            id: true,
+            type: true,
+          }
+        },
+        // vendor: true,
+        // account: true,
+        assignedTo: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+          },
+        },
 
         // ✅ Include Documents
         documents: {
           where: { is_deleted: false },
           include: {
-            documentType: true,
-            createdBy: true,
+            documentType: {
+              select: {
+                id: true,
+                type: true,
+              }
+            },
+            createdBy: {
+              select: {
+                id: true,
+                user_name: true,
+                user_contact: true,
+                user_email: true,
+              }
+            },
           },
         },
 
@@ -177,6 +221,112 @@ export class DesigingStage {
     return doc;
   }
 
+  public static async editDesignMeeting(data: any) {
+    // ✅ Validate incoming data
+    const parsed = editDesignMeetingSchema.safeParse(data);
+    if (!parsed.success) {
+      throw new Error(parsed.error.issues.map(i => i.message).join(", "));
+    }
+    const input = parsed.data;
 
+    const logs: any[] = [];
 
+    // 1️⃣ Verify user belongs to vendor
+    const user = await prisma.userMaster.findFirst({
+      where: { id: input.userId, vendor_id: input.vendorId }
+    });
+
+    if (!user) {
+      throw new Error("Unauthorized: User does not belong to this vendor");
+    }
+    logs.push("User verified");
+
+    // 2️⃣ Check meeting exists and belongs to vendor
+    const existingMeeting = await prisma.leadDesignMeeting.findFirst({
+      where: {
+        id: input.meetingId,
+        vendor_id: input.vendorId
+      }
+    });
+
+    if (!existingMeeting) {
+      throw new Error("Design meeting not found or access denied");
+    }
+    logs.push("Meeting verified");
+
+    // 3️⃣ Prepare update data
+    const updateData: any = {
+      updated_by: input.userId,
+      updated_at: new Date()
+    };
+
+    if (input.date) {
+      updateData.date = new Date(input.date);
+    }
+
+    if (input.desc !== undefined) {
+      updateData.desc = input.desc;
+    }
+
+    // 4️⃣ Update the meeting
+    const updatedMeeting = await prisma.leadDesignMeeting.update({
+      where: { id: input.meetingId },
+      data: updateData
+    });
+    logs.push({ meetingUpdated: updatedMeeting });
+
+    const newDocuments: any[] = [];
+    const newMappings: any[] = [];
+
+    // 5️⃣ Handle new file uploads
+    if (input.files && input.files.length > 0) {
+      for (const file of input.files) {
+        // Upload to Wasabi
+        const sysName = await uploadToWasabiMeetingDocs(
+          file.buffer,
+          input.vendorId,
+          existingMeeting.lead_id,
+          file.originalname
+        );
+        logs.push({ fileUploaded: file.originalname, sysName });
+
+        // Create LeadDocument
+        const doc = await prisma.leadDocuments.create({
+          data: {
+            doc_og_name: file.originalname,
+            doc_sys_name: sysName,
+            vendor_id: input.vendorId,
+            lead_id: existingMeeting.lead_id,
+            account_id: existingMeeting.account_id,
+            doc_type_id: 5, // design quotation
+            created_by: input.userId,
+          }
+        });
+        newDocuments.push(doc);
+        logs.push({ documentCreated: doc });
+
+        // Create mapping
+        const mapping = await prisma.leadDesignMeetingDocumentsMapping.create({
+          data: {
+            lead_id: existingMeeting.lead_id,
+            account_id: existingMeeting.account_id,
+            vendor_id: input.vendorId,
+            meeting_id: input.meetingId,
+            document_id: doc.id,
+            created_at: new Date(),
+            created_by: input.userId,
+          }
+        });
+        newMappings.push(mapping);
+        logs.push({ mappingCreated: mapping });
+      }
+    }
+
+    return {
+      logs,
+      updatedMeeting,
+      newDocuments,
+      newMappings
+    };
+  }
 }
