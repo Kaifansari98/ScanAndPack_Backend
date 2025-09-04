@@ -431,4 +431,31 @@ export class DesigingStageController {
     }
   }
 
+  public static async getLeadById(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+  
+      if (!vendorId || !leadId) {
+        return res
+          .status(400)
+          .json(ApiResponse.validationError("vendorId and leadId are required"));
+      }
+  
+      const lead = await DesigingStage.getLeadById(Number(vendorId), Number(leadId));
+  
+      if (!lead) {
+        return res
+          .status(404)
+          .json(ApiResponse.notFound("Lead not found"));
+      }
+  
+      return res
+        .status(200)
+        .json(ApiResponse.success(lead, "Lead fetched successfully"));
+    } catch (error: any) {
+      return res.status(500).json(ApiResponse.error(error.message));
+    }
+  }
+  
+
 }

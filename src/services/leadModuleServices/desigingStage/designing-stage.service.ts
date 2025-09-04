@@ -223,6 +223,115 @@ export class DesigingStage {
     };
   }
 
+  public static async getLeadById(vendorId: number, leadId: number) {
+    // ✅ Fetch lead with relations
+    const lead = await prisma.leadMaster.findFirst({
+      where: {
+        id: leadId,
+        vendor_id: vendorId,
+        is_deleted: false,
+      },
+      include: {
+        siteType: {
+          select: { id: true, type: true },
+        },
+        source: {
+          select: { id: true, type: true },
+        },
+        statusType: {
+          select: { id: true, type: true },
+        },
+        assignedTo: {
+          select: { id: true, user_name: true, user_email: true },
+        },
+  
+        // ✅ Include Documents
+        documents: {
+          where: { is_deleted: false },
+          select: {
+            id: true,
+            doc_og_name: true,
+            doc_sys_name: true,
+            created_at: true,
+            doc_type_id: true,
+            account_id: true,
+            lead_id: true,
+            vendor_id: true,
+            documentType: {
+              select: { id: true, type: true },
+            },
+            createdBy: {
+              select: {
+                id: true,
+                user_name: true,
+                user_contact: true,
+                user_email: true,
+              },
+            },
+          },
+        },
+  
+        // ✅ Include Payments
+        payments: {
+          select: {
+            id: true,
+            amount: true,
+            payment_date: true,
+            payment_text: true,
+            payment_file_id: true,
+            created_at: true,
+            created_by: true,
+            document: true, // payment file
+            createdBy: {
+              select: {
+                id: true,
+                user_name: true,
+                user_email: true,
+                user_type: true,
+              },
+            },
+          },
+        },
+  
+        // ✅ Include Product Mappings → ProductType
+        productMappings: {
+          select: {
+            productType: {
+              select: { id: true, type: true },
+            },
+          },
+        },
+  
+        // ✅ Include ProductStructure Mapping → ProductStructure
+        leadProductStructureMapping: {
+          select: {
+            productStructure: {
+              select: { id: true, type: true },
+            },
+          },
+        },
+      },
+    });
+  
+    if (!lead) return null;
+  
+    // ✅ Generate signed URLs for documents
+    const docsWithUrls = await Promise.all(
+      (lead.documents || []).map(async (doc) => {
+        return {
+          ...doc,
+          signedUrl: await generateSignedUrl(doc.doc_sys_name),
+        };
+      })
+    );
+  
+    return {
+      ...lead,
+      documents: docsWithUrls,
+    };
+  }
+  
+
   public static async uploadQuotation(data: {
     fileBuffer: Buffer;
     originalName: string;

@@ -56,5 +56,11 @@ DesigningStageRouter.put(
     DesigingStageController.editDesignMeeting
 );
 
+// GET /api/leads/vendor/:vendorId/lead/:leadId
+DesigningStageRouter.get(
+  "/vendor/:vendorId/lead/:leadId",
+  DesigingStageController.getLeadById
+);
+
 
 export default DesigningStageRouter;
