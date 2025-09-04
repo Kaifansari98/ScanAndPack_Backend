@@ -288,4 +288,147 @@ export class DesigingStageController {
     }
   }
 
+  public static async editDesignMeeting(req: Request, res: Response) {
+    try {
+      const { meetingId } = req.params;
+      const { vendorId, userId, date, desc } = req.body;
+
+      if (!meetingId) {
+        return res.status(400).json({ 
+          success: false, 
+          message: "Meeting ID is required" 
+        });
+      }
+
+      if (!vendorId || !userId) {
+        return res.status(400).json({ 
+          success: false, 
+          message: "vendorId and userId are required" 
+        });
+      }
+
+      // At least one field should be provided for update
+      if (!date && !desc && (!req.files || (req.files as Express.Multer.File[]).length === 0)) {
+        return res.status(400).json({ 
+          success: false, 
+          message: "At least one field (date, desc, or files) must be provided for update" 
+        });
+      }
+
+      const files = req.files as Express.Multer.File[] || [];
+      const logs: any = [];
+
+      // 1️⃣ Check user belongs to vendor
+      const user = await prisma.userMaster.findFirst({ 
+        where: { id: Number(userId), vendor_id: Number(vendorId) } 
+      });
+      if (!user) {
+        return res.status(401).json({ 
+          success: false, 
+          logs: ["Unauthorized: User not in vendor"] 
+        });
+      }
+      logs.push("User verified");
+
+      // 2️⃣ Check meeting exists and belongs to vendor
+      const existingMeeting = await prisma.leadDesignMeeting.findFirst({
+        where: { 
+          id: Number(meetingId), 
+          vendor_id: Number(vendorId) 
+        }
+      });
+      
+      if (!existingMeeting) {
+        return res.status(404).json({ 
+          success: false, 
+          logs: ["Design meeting not found or access denied"] 
+        });
+      }
+      logs.push("Meeting verified");
+
+      // 3️⃣ Prepare update data
+      const updateData: any = {
+        updated_by: Number(userId),
+        updated_at: new Date()
+      };
+
+      if (date) {
+        updateData.date = new Date(date);
+      }
+      
+      if (desc) {
+        updateData.desc = desc;
+      }
+
+      // 4️⃣ Update the meeting
+      const updatedMeeting = await prisma.leadDesignMeeting.update({
+        where: { id: Number(meetingId) },
+        data: updateData
+      });
+      logs.push({ meetingUpdated: updatedMeeting });
+
+      const newDocuments: any[] = [];
+      const newMappings: any[] = [];
+
+      // 5️⃣ Upload new files if provided
+      if (files.length > 0) {
+        for (const file of files) {
+          // Upload to Wasabi
+          const sysName = await uploadToWasabiMeetingDocs(
+            file.buffer, 
+            Number(vendorId), 
+            existingMeeting.lead_id, 
+            file.originalname
+          );
+          logs.push({ fileUploaded: file.originalname, sysName });
+
+          // Create LeadDocument
+          const doc = await prisma.leadDocuments.create({
+            data: {
+              doc_og_name: file.originalname,
+              doc_sys_name: sysName,
+              vendor_id: Number(vendorId),
+              lead_id: existingMeeting.lead_id,
+              account_id: existingMeeting.account_id,
+              doc_type_id: 5, // design quotation
+              created_by: Number(userId),
+            }
+          });
+          newDocuments.push(doc);
+          logs.push({ documentCreated: doc });
+
+          // Create DesignMeetingDocumentsMapping
+          const mapping = await prisma.leadDesignMeetingDocumentsMapping.create({
+            data: {
+              lead_id: existingMeeting.lead_id,
+              account_id: existingMeeting.account_id,
+              vendor_id: Number(vendorId),
+              meeting_id: Number(meetingId),
+              document_id: doc.id,
+              created_at: new Date(),
+              created_by: Number(userId),
+            }
+          });
+          newMappings.push(mapping);
+          logs.push({ mappingCreated: mapping });
+        }
+      }
+
+      return res.status(200).json({
+        success: true,
+        message: "Design meeting updated successfully",
+        logs,
+        updatedMeeting,
+        newDocuments,
+        newMappings
+      });
+
+    } catch (error: any) {
+      return res.status(500).json({ 
+        success: false, 
+        logs: [error.message] 
+      });
+    }
+  }
+
 }

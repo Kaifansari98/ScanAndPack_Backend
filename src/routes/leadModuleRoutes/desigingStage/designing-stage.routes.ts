@@ -47,4 +47,14 @@ DesigningStageRouter.post(
     (req, res) => DesigingStageController.uploadDesigns(req, res)
   );
 
+
+// PUT /api/leads/design-meeting/:meetingId
+// Form-data: vendorId, userId, date?, desc?, files[]?
+DesigningStageRouter.put(
+    "/design-meeting/:meetingId",
+    upload.array("files"), // optional multiple files
+    DesigingStageController.editDesignMeeting
+);
+
+
 export default DesigningStageRouter;
