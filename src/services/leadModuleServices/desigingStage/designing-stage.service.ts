@@ -106,7 +106,15 @@ export class DesigingStage {
         // ✅ Include Documents
         documents: {
           where: { is_deleted: false },
-          include: {
+          select: {
+            id: true,
+            doc_og_name: true,
+            doc_sys_name: true,
+            created_at: true,
+            doc_type_id: true,
+            account_id: true,
+            lead_id: true,
+            vendor_id: true,
             documentType: {
               select: {
                 id: true,
@@ -126,32 +134,56 @@ export class DesigingStage {
 
         // ✅ Include Payments
         payments: {
-          include: {
+          select: {
+            id: true,
+            amount: true,
+            payment_date: true,
+            payment_text: true,
+            payment_file_id: true,
+            created_at: true,
+            created_by: true,
             document: true, // payment file
-            createdBy: true,
-          },
+            createdBy: {
+              select: {
+                id: true,
+                user_name: true,
+                user_email: true,
+                user_type: true,
+              }
+            },
+          }
         },
 
         // ✅ Include Ledgers
-        ledgers: {
-          include: {
-            account: true,
-            client: true,
-            createdBy: true,
-          },
-        },
+        // ledgers: {
+        //   include: {
+        //     account: true,
+        //     client: true,
+        //     createdBy: true,
+        //   },
+        // },
 
         // ✅ Include Product Mappings → ProductType
         productMappings: {
-          include: {
-            productType: true,
+          select: {
+            productType: {
+              select: {
+                id: true,
+                type: true,
+              }
+            },
           },
         },
 
         // ✅ Include ProductStructure Mapping → ProductStructure
         leadProductStructureMapping: {
-          include: {
-            productStructure: true,
+          select: {
+            productStructure: {
+              select: {
+                id: true,
+                type: true,
+              }
+            },
           },
         },
       },
