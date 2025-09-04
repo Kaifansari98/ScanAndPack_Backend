@@ -9,11 +9,31 @@ dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecretkey';
 
 export const login = async (req: Request, res: Response) => {
-  const { user_contact, password } = req.body;
+  const { identifier, password } = req.body;
 
   try {
-    const user = await prisma.userMaster.findUnique({
-      where: { user_contact },
+    // ✅ Add validation for required fields
+    if (!identifier || !password) {
+      return res.status(400).json({ 
+        message: 'Identifier (email or phone) and password are required' 
+      });
+    }
+
+    // ✅ Add type check for identifier
+    if (typeof identifier !== 'string') {
+      return res.status(400).json({ 
+        message: 'Identifier must be a string' 
+      });
+    }
+
+    // ✅ Check if identifier is email or phone
+    const isEmail = identifier.includes('@');
+    
+    // ✅ Query user by either email or phone
+    const user = await prisma.userMaster.findFirst({
+      where: isEmail 
+        ? { user_email: identifier }
+        : { user_contact: identifier },
       include: {
         vendor: true,
         user_type: true,
@@ -22,7 +42,11 @@ export const login = async (req: Request, res: Response) => {
       },
     });
 
-    if (!user) return res.status(404).json({ message: 'User not found' });
+    if (!user) {
+      return res.status(404).json({ 
+        message: `User not found with ${isEmail ? 'email' : 'phone number'}: ${identifier}` 
+      });
+    }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(401).json({ message: 'Invalid credentials' });
