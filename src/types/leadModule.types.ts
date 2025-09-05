@@ -47,11 +47,13 @@ export interface ProductStructureType{
 export interface DocumentTypeInput {
     vendor_id: number;
     type: string;
+    tag: string;
 }
 
 export interface DocumentTypeValue{
     id: number;
     type: string;
+    tag: string;
     vendor_id: number;
 }
 export interface StatusTypeInput {

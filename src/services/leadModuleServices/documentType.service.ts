@@ -2,17 +2,29 @@ import { prisma } from "../../prisma/client";
 import { DocumentTypeValue, DocumentTypeInput } from "../../types/leadModule.types";
 
 export const addDocumentType = async (payload: DocumentTypeInput): Promise<DocumentTypeValue> => {
-
     console.log("[SERVICE] addDocumentType called", payload);
 
     // ✅ Check vendor exists
     const vendor = await prisma.vendorMaster.findUnique({
-        where: {id: payload.vendor_id},
-    })
+        where: { id: payload.vendor_id },
+    });
 
-    if(!vendor) {
+    if (!vendor) {
         console.error("[SERVICE] Vendor not found", { vendor_id: payload.vendor_id });
         throw new Error("Invalid vendor_id");
+    }
+
+    // ✅ Optional: Check if tag already exists for this vendor
+    const existing = await prisma.documentTypeMaster.findFirst({
+        where: {
+            vendor_id: payload.vendor_id,
+            tag: payload.tag,
+        },
+    });
+
+    if (existing) {
+        console.warn("[SERVICE] DocumentType with this tag already exists for vendor", existing);
+        throw new Error("DocumentType with this tag already exists for this vendor");
     }
 
     // ✅ Create new document type
@@ -20,13 +32,14 @@ export const addDocumentType = async (payload: DocumentTypeInput): Promise<Docum
         data: {
             type: payload.type,
             vendor_id: payload.vendor_id,
-        }
+            tag: payload.tag,
+        },
     });
 
     console.log("[SERVICE] DocumentType created successfully", documentType);
 
     return documentType as DocumentTypeValue;
-}
+};
 
 export const getAllDocumentTypes = async (vendor_id: number): Promise<DocumentTypeValue[]> => {
     console.log("[SERVICE] getAllDocumentTypes called", { vendor_id });

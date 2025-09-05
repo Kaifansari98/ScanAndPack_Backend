@@ -247,6 +247,14 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
 
           const s3Key = `site-photos/${vendor_id}/${lead.id}/${Date.now()}-${sanitizedFilename}`;
 
+          let docTypeRecord = await tx.documentTypeMaster.findFirst({
+            where: { vendor_id, tag: "Type 1" } // or tag: "site-photo" if you have a tag field
+          });
+          
+          if (!docTypeRecord) {
+            throw new Error(`Document type "Type 1" not found for vendor ${vendor_id}`);
+          }
+
           await wasabi.send(new PutObjectCommand({
             Bucket: process.env.WASABI_BUCKET_NAME!,
             Key: s3Key,
@@ -258,7 +266,7 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
             data: {
               doc_og_name: file.originalname,
               doc_sys_name: s3Key,  // store S3 path instead of raw filename
-              doc_type_id: 1,       // generic doc type (or resolve dynamically)
+              doc_type_id: docTypeRecord.id,
               vendor_id,
               lead_id: lead.id,
               account_id: account.id,

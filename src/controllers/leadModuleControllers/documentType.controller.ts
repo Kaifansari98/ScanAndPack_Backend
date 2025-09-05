@@ -3,27 +3,25 @@ import { addDocumentType, deleteDocumentType, getAllDocumentTypes } from "../../
 import { DocumentTypeInput } from "../../types/leadModule.types";
 
 export const createDocumentType = async (req: Request, res: Response) => {
-    console.log("[CONTROLLER] createDocumentType called", { body: req.body });
+  console.log("[CONTROLLER] createDocumentType called", { body: req.body });
 
-    try {
-        const {vendor_id, type} = req.body as DocumentTypeInput;
+  try {
+      const { vendor_id, type, tag } = req.body as DocumentTypeInput;
 
-        if(!vendor_id || !type){
-            console.warn("[CONTROLLER] Missing required fields", { vendor_id, type });
-            return res.status(400).json({ error: "vendor_id and type are required" });
-        }
+      if (!vendor_id || !type || !tag) {
+          console.warn("[CONTROLLER] Missing required fields", { vendor_id, type, tag });
+          return res.status(400).json({ error: "vendor_id, type, and tag are required" });
+      }
 
-        const documentType = await addDocumentType({vendor_id, type});
+      const documentType = await addDocumentType({ vendor_id, type, tag });
 
-        console.log("[CONTROLLER] createDocumentType created successfully", documentType);
-        return res.status(201).json({ success: true, data: documentType });
-    }
-    catch (error: any) {
-        console.error("[CONTROLLER] Error creating product type", { error: error.message });
-        return res.status(500).json({ success: false, error: error.message });
-    }
-
-}
+      console.log("[CONTROLLER] createDocumentType created successfully", documentType);
+      return res.status(201).json({ success: true, data: documentType });
+  } catch (error: any) {
+      console.error("[CONTROLLER] Error creating document type", { error: error.message });
+      return res.status(500).json({ success: false, error: error.message });
+  }
+};
 
 export const fetchAllDocumentTypes = async (req: Request, res: Response) => {
     console.log("[CONTROLLER] fetchAllDocumentTypes called", { query: req.query });
