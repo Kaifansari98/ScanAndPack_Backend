@@ -331,7 +331,6 @@ export class DesigingStage {
     };
   }
   
-
   public static async uploadQuotation(data: {
     fileBuffer: Buffer;
     originalName: string;

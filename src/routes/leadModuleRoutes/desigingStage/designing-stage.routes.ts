@@ -39,7 +39,7 @@ DesigningStageRouter.get(
     DesigingStageController.getDesignMeetings
 );
 
-// POST /api/leads/upload-designs
+// POST /api/leads/designing-stage/upload-designs
 // Form-data: vendorId, leadId, userId, accountId, files[]
 DesigningStageRouter.post(
     "/upload-designs",
@@ -56,7 +56,7 @@ DesigningStageRouter.put(
     DesigingStageController.editDesignMeeting
 );
 
-// GET /api/leads/vendor/:vendorId/lead/:leadId
+// GET /api/leads/designing-stage/vendor/:vendorId/lead/:leadId
 DesigningStageRouter.get(
   "/vendor/:vendorId/lead/:leadId",
   DesigingStageController.getLeadById
