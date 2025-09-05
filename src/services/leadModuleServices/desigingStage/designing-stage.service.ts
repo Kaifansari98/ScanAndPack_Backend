@@ -346,6 +346,18 @@ export class DesigingStage {
       data.originalName
     );
 
+    // 2. Fetch correct doc type for "quotation" using tag + vendor
+    const quotationDocType = await prisma.documentTypeMaster.findFirst({
+      where: {
+        vendor_id: data.vendorId,
+        tag: "Type 5", // ← quotation doc type tag
+      },
+    });
+
+    if (!quotationDocType) {
+      throw new Error("Document type for quotation not found for this vendor");
+    }
+
     const doc = await prisma.leadDocuments.create({
       data: {
         doc_og_name: data.originalName,
@@ -353,7 +365,7 @@ export class DesigingStage {
         vendor_id: data.vendorId,
         lead_id: data.leadId,
         account_id: data.accountId,
-        doc_type_id: 5, // ✅ design quotation type
+        doc_type_id: quotationDocType.id, // ✅ design quotation type
         created_by: data.userId,
       },
     });

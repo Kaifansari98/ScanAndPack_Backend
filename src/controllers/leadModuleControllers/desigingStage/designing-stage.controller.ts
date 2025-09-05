@@ -263,6 +263,31 @@ export class DesigingStageController {
           file.originalname
         );
 
+        const account = await prisma.accountMaster.findUnique({
+          where: { id: Number(accountId) }
+        });
+        
+        if (!account) {
+          return res.status(400).json({
+            success: false,
+            message: `Invalid account_id: ${accountId}`
+          });
+        }
+
+        const designDocType = await prisma.documentTypeMaster.findFirst({
+          where: {
+            vendor_id: Number(vendorId),
+            tag: "Type 6"
+          }
+        });
+
+        if (!designDocType) {
+          return res.status(404).json({
+            success: false,
+            message: "Document type for designs (Type 6) not found for this vendor",
+          });
+        }
+
         const doc = await prisma.leadDocuments.create({
           data: {
             doc_og_name: file.originalname,
@@ -270,7 +295,7 @@ export class DesigingStageController {
             vendor_id: Number(vendorId),
             lead_id: Number(leadId),
             account_id: Number(accountId),
-            doc_type_id: 6, // ✅ use correct doc_type_id for "Designs"
+            doc_type_id: designDocType.id, // ✅ use correct doc_type_id for "Designs"
             created_by: Number(userId),
           },
         });

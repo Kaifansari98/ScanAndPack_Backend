@@ -27,11 +27,11 @@ public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentU
       if (data.sitePhotos && data.sitePhotos.length > 0) {
         // Validate that document type with id = 1 exists for this vendor
         const sitePhotoDocType = await tx.documentTypeMaster.findFirst({
-          where: { id: 1, vendor_id: data.vendor_id }
+          where: { vendor_id: data.vendor_id, tag: "Type 2" }
         });
 
         if (!sitePhotoDocType) {
-          throw new Error('Document type with id 1 (site photos) not found for this vendor');
+          throw new Error('Document type (site photos) not found for this vendor');
         }
 
         for (const photo of data.sitePhotos) {
@@ -52,7 +52,7 @@ public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentU
               doc_og_name: photo.originalname,
               doc_sys_name: s3Key,
               created_by: data.created_by,
-              doc_type_id: 2, // Current Site photos document type ID
+              doc_type_id: sitePhotoDocType.id,
               account_id: data.account_id,
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
@@ -75,11 +75,11 @@ public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentU
 
       // Validate that document type with id = 3 exists for this vendor
       const pdfDocType = await tx.documentTypeMaster.findFirst({
-        where: { id: 3, vendor_id: data.vendor_id }
+        where: { vendor_id: data.vendor_id, tag: "Type 3" }
       });
 
       if (!pdfDocType) {
-        throw new Error('Document type with id 3 (PDF uploads) not found for this vendor');
+        throw new Error('Document type (PDF uploads) not found for this vendor');
       }
 
       const sanitizedPdfName = sanitizeFilename(data.pdfFile.originalname);
@@ -99,7 +99,7 @@ public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentU
           doc_og_name: data.pdfFile.originalname,
           doc_sys_name: pdfS3Key,
           created_by: data.created_by,
-          doc_type_id: 3, // PDF document type ID
+          doc_type_id: pdfDocType.id, // PDF document type ID
           account_id: data.account_id,
           lead_id: data.lead_id,
           vendor_id: data.vendor_id,
@@ -118,6 +118,14 @@ public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentU
       if (data.paymentImageFile) {
       const sanitizedPaymentImageName = sanitizeFilename(data.paymentImageFile.originalname);
       const paymentImageS3Key = `initial-site-measurement-payment-images/${data.vendor_id}/${data.lead_id}/${Date.now()}-${sanitizedPaymentImageName}`;
+
+      const paymentDocType = await tx.documentTypeMaster.findFirst({
+        where: { vendor_id: data.vendor_id, tag: "Type 4" }
+      });
+      
+      if (!paymentDocType) {
+        throw new Error('Document type for payment images not found for this vendor');
+      }
       
       // Upload payment image to Wasabi
       await wasabi.send(new PutObjectCommand({
@@ -133,7 +141,7 @@ public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentU
           doc_og_name: data.paymentImageFile.originalname,
           doc_sys_name: paymentImageS3Key,
           created_by: data.created_by,
-          doc_type_id: 4, // Payment document type ID (hardcoded)
+          doc_type_id: paymentDocType.id,
           account_id: data.account_id,
           lead_id: data.lead_id,
           vendor_id: data.vendor_id,
@@ -654,7 +662,7 @@ public async updatePaymentUpload(
       if (data.currentSitePhotos && data.currentSitePhotos.length > 0) {
         // Validate document type exists
         const sitePhotoDocType = await tx.documentTypeMaster.findFirst({
-          where: { id: 2, vendor_id: data.vendor_id }
+          where: { tag: "Type 2", vendor_id: data.vendor_id }
         });
 
         if (!sitePhotoDocType) {
@@ -679,7 +687,7 @@ public async updatePaymentUpload(
               doc_og_name: photo.originalname,
               doc_sys_name: s3Key,
               created_by: data.updated_by,
-              doc_type_id: 2, // Current Site photos document type ID
+              doc_type_id: sitePhotoDocType.id, // Current Site photos document type ID
               account_id: data.account_id,
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
@@ -699,7 +707,7 @@ public async updatePaymentUpload(
       if (data.paymentDetailPhotos && data.paymentDetailPhotos.length > 0) {
         // Validate document type exists
         const paymentDocType = await tx.documentTypeMaster.findFirst({
-          where: { id: 3, vendor_id: data.vendor_id }
+          where: { tag: "Type 4", vendor_id: data.vendor_id }
         });
 
         if (!paymentDocType) {
@@ -724,7 +732,7 @@ public async updatePaymentUpload(
               doc_og_name: photo.originalname,
               doc_sys_name: s3Key,
               created_by: data.updated_by,
-              doc_type_id: 3, // Payment document type ID
+              doc_type_id: paymentDocType.id, // Payment document type ID
               account_id: data.account_id,
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,

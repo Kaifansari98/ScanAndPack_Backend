@@ -558,6 +558,7 @@ model DocumentTypeMaster {
   id        Int      @id @default(autoincrement())
   type      String
   vendor_id Int
+  tag       String
 
 // ✅ Relations
   vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
