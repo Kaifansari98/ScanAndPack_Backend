@@ -88,6 +88,7 @@ export interface CreateLeadDTO {
     assigned_by?: number;
     product_types?: number[];
     product_structures?: number[];
+    initial_site_measurement_date?: Date;
 }
   
 export interface DocumentUpload {
@@ -112,6 +113,7 @@ export interface UpdateLeadDTO {
     updated_by: number;
     product_types?: number[];
     product_structures?: number[];
+    initial_site_measurement_date?: Date | string;
 }
 
 export interface SalesExecutiveData {

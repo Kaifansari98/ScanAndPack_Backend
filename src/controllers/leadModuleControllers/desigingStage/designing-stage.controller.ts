@@ -977,4 +977,121 @@ export class DesigingStageController {
     }
   }
 
+  public static async updateDesignSelection(req: Request, res: Response) {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ 
+          success: false, 
+          message: "Validation failed",
+          logs: errors.array().map(err => err.msg) 
+        });
+      }
+  
+      const { id } = req.params;
+      const {
+        type,
+        desc,
+        updated_by
+      } = req.body;
+  
+      const logs: any[] = [];
+  
+      // 1️⃣ Validate design selection exists
+      const existingDesignSelection = await prisma.leadDesignSelection.findUnique({
+        where: { id: Number(id) },
+        include: {
+          lead: {
+            select: {
+              id: true,
+              vendor_id: true,
+            }
+          }
+        }
+      });
+  
+      if (!existingDesignSelection) {
+        return res.status(404).json({ 
+          success: false, 
+          message: "Design selection not found",
+          logs: ["Design selection not found"] 
+        });
+      }
+      logs.push("Design selection found");
+  
+      // 2️⃣ Validate user belongs to the same vendor as the lead
+      const user = await prisma.userMaster.findFirst({
+        where: { 
+          id: Number(updated_by), 
+          vendor_id: existingDesignSelection.vendor_id 
+        }
+      });
+      
+      if (!user) {
+        return res.status(401).json({ 
+          success: false, 
+          message: "Unauthorized: User does not belong to this vendor",
+          logs: ["User verification failed"] 
+        });
+      }
+      logs.push("User verified successfully");
+  
+      // 3️⃣ Update design selection
+      const updatedDesignSelection = await prisma.leadDesignSelection.update({
+        where: { id: Number(id) },
+        data: {
+          type: type,
+          desc: desc,
+          updated_by: Number(updated_by),
+        },
+        include: {
+          createdBy: {
+            select: {
+              id: true,
+              user_name: true,
+              user_email: true,
+            }
+          },
+          updatedBy: {
+            select: {
+              id: true,
+              user_name: true,
+              user_email: true,
+            }
+          },
+          lead: {
+            select: {
+              id: true,
+              firstname: true,
+              lastname: true,
+              contact_no: true,
+            }
+          },
+          account: {
+            select: {
+              id: true,
+              name: true,
+            }
+          }
+        }
+      });
+  
+      logs.push("Design selection updated successfully");
+  
+      return res.status(200).json({
+        success: true,
+        message: "Design selection updated successfully",
+        logs,
+        data: updatedDesignSelection
+      });
+  
+    } catch (error: any) {
+      return res.status(500).json({ 
+        success: false, 
+        message: "Internal server error",
+        logs: [error.message] 
+      });
+    }
+  }
+
 }

@@ -330,6 +330,7 @@ model LeadMaster {
   account_id      Int
   archetech_name  String?
   designer_remark String?
+  initial_site_measurement_date DateTime?
   vendor_id       Int
   assign_to       Int?
   assigned_by     Int?

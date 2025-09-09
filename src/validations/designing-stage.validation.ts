@@ -81,3 +81,33 @@ export const createDesignSelectionValidation = [
     .withMessage("created_by must be a valid number")
     .toInt(), // Convert string to integer
 ];
+
+export const updateDesignSelectionValidation = [
+  param("id")
+    .notEmpty()
+    .withMessage("Design selection ID is required")
+    .isNumeric({ no_symbols: true })
+    .withMessage("Design selection ID must be a valid number")
+    .toInt(), // Convert string to integer
+
+  body("type")
+    .notEmpty()
+    .withMessage("type is required")
+    .isLength({ min: 1, max: 1000 })
+    .withMessage("type must be between 1 and 1000 characters")
+    .trim(), // Remove whitespace
+
+  body("desc")
+    .notEmpty()
+    .withMessage("desc is required")
+    .isLength({ min: 1, max: 2000 })
+    .withMessage("desc must be between 1 and 2000 characters")
+    .trim(), // Remove whitespace
+
+  body("updated_by")
+    .notEmpty()
+    .withMessage("updated_by is required")
+    .isNumeric({ no_symbols: true })
+    .withMessage("updated_by must be a valid number")
+    .toInt(), // Convert string to integer
+];
