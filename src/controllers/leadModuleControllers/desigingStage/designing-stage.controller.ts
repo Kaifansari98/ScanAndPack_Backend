@@ -88,8 +88,6 @@ export class DesigingStageController {
     }
   }
 
-  // Add this method to your DesigingStageController class
-
   public static async getDesignQuotationDocuments(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
@@ -195,6 +193,125 @@ export class DesigingStageController {
           lead_id: Number(leadId),
           vendor_id: Number(vendorId),
           document_type: designQuotationDocType.type,
+          total_documents: documents.length,
+          documents: documentsWithSignedUrls
+        }
+      });
+
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        logs: [error.message]
+      });
+    }
+  }
+
+  public static async getDesignStageDocuments(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+
+      if (!vendorId || !leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and leadId are required",
+          logs: ["Missing required parameters: vendorId and leadId"]
+        });
+      }
+
+      const logs: any[] = [];
+
+      // 1️⃣ Validate lead exists and belongs to vendor
+      const lead = await prisma.leadMaster.findFirst({
+        where: { 
+          id: Number(leadId), 
+          vendor_id: Number(vendorId), 
+          is_deleted: false 
+        }
+      });
+      
+      if (!lead) {
+        return res.status(404).json({ 
+          success: false, 
+          message: "Lead not found or access denied",
+          logs: ["Lead verification failed: Lead not found or doesn't belong to vendor"] 
+        });
+      }
+      logs.push("Lead verified successfully");
+
+      // 2️⃣ Find the document type for "design-quotation"
+      const designType = await prisma.documentTypeMaster.findFirst({
+        where: {
+          vendor_id: Number(vendorId),
+          tag: "Type 6"
+        }
+      });
+
+      if (!designType) {
+        return res.status(404).json({
+          success: false,
+          message: "Design document type not found for this vendor",
+          logs: ["Document type 'stage-1-design' not found for vendor"]
+        });
+      }
+      logs.push("stage-1-design document type found");
+
+      // 3️⃣ Fetch all design-quotation documents for the lead
+      const documents = await prisma.leadDocuments.findMany({
+        where: {
+          lead_id: Number(leadId),
+          vendor_id: Number(vendorId),
+          doc_type_id: designType.id,
+          is_deleted: false
+        },
+        orderBy: { created_at: "desc" },
+        include: {
+          documentType: {
+            select: {
+              id: true,
+              type: true,
+              tag: true
+            }
+          },
+          createdBy: {
+            select: {
+              id: true,
+              user_name: true,
+              user_email: true,
+              user_contact: true
+            }
+          },
+          deletedBy: {
+            select: {
+              id: true,
+              user_name: true,
+              user_email: true
+            }
+          }
+        }
+      });
+
+      // 4️⃣ Generate signed URLs for documents
+      const documentsWithSignedUrls = await Promise.all(
+        documents.map(async (doc) => {
+          const signedUrl = await generateSignedUrl(doc.doc_sys_name);
+          return {
+            ...doc,
+            signedUrl
+          };
+        })
+      );
+
+      logs.push(`Found ${documents.length} design quotation documents for lead ${leadId}`);
+
+      return res.status(200).json({
+        success: true,
+        message: "Design quotation documents fetched successfully",
+        logs,
+        data: {
+          lead_id: Number(leadId),
+          vendor_id: Number(vendorId),
+          document_type: designType.type,
           total_documents: documents.length,
           documents: documentsWithSignedUrls
         }
