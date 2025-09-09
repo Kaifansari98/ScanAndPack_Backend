@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { DesigingStageController } from "../../../controllers/leadModuleControllers/desigingStage/designing-stage.controller";
-import { createDesignSelectionValidation, updateLeadStatusValidation } from "../../../validations/designing-stage.validation";
+import { createDesignSelectionValidation, updateLeadStatusValidation, updateDesignSelectionValidation } from "../../../validations/designing-stage.validation";
 import { upload, uploadDesigns } from "../../../middlewares/uploadWasabi";
 
 const DesigningStageRouter = Router();
@@ -90,6 +90,15 @@ DesigningStageRouter.get(
 DesigningStageRouter.get(
   "/:vendorId/:leadId/design-stage1-documents",
   DesigingStageController.getDesignStageDocuments
+);
+
+// PUT /api/leads/designing-stage/design-selection/:id
+// Form-data: type, desc, updated_by
+DesigningStageRouter.put(
+  "/design-selection/:id",
+  upload.none(), // Handle form-data without files
+  updateDesignSelectionValidation,
+  DesigingStageController.updateDesignSelection
 );
 
 export default DesigningStageRouter;
