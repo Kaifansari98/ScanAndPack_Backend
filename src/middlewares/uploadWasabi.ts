@@ -44,3 +44,20 @@ export const upload = multer({
     }
   },
 });
+
+export const uploadDesigns = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: parseInt(process.env.MAX_FILE_SIZE_MB || "5") * 1024 * 1024, // default 5MB
+  },
+  fileFilter: (req, file, cb) => {
+    const allowedExtensions = [".pyo", ".pytha"]; // ✅ extensions not mime types
+    const ext = path.extname(file.originalname).toLowerCase();
+
+    if (allowedExtensions.includes(ext)) {
+      cb(null, true);
+    } else {
+      cb(new Error(`Only ${allowedExtensions.join(", ")} files are allowed! Received: ${ext}`));
+    }
+  },
+});

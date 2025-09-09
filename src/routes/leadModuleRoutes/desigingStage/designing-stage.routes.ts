@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { DesigingStageController } from "../../../controllers/leadModuleControllers/desigingStage/designing-stage.controller";
 import { createDesignSelectionValidation, updateLeadStatusValidation } from "../../../validations/designing-stage.validation";
-import { upload } from "../../../middlewares/uploadWasabi";
+import { upload, uploadDesigns } from "../../../middlewares/uploadWasabi";
 
 const DesigningStageRouter = Router();
 
@@ -43,7 +43,7 @@ DesigningStageRouter.get(
 // Form-data: vendorId, leadId, userId, accountId, files[]
 DesigningStageRouter.post(
     "/upload-designs",
-    upload.array("files"), // multiple files
+    uploadDesigns.array("files"), // multiple files
     (req, res) => DesigingStageController.uploadDesigns(req, res)
   );
 
