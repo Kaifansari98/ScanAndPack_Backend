@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { DesigingStageController } from "../../../controllers/leadModuleControllers/desigingStage/designing-stage.controller";
-import { updateLeadStatusValidation } from "../../../validations/designing-stage.validation";
+import { createDesignSelectionValidation, updateLeadStatusValidation } from "../../../validations/designing-stage.validation";
 import { upload } from "../../../middlewares/uploadWasabi";
 
 const DesigningStageRouter = Router();
@@ -61,6 +61,23 @@ DesigningStageRouter.get(
   "/vendor/:vendorId/lead/:leadId",
   DesigingStageController.getLeadById
 );
+
+// ✅ NEW: Design Selection Routes
+// POST /api/leads/designing-stage/design-selection
+// Form-data: lead_id, account_id, vendor_id, type, desc, created_by
+DesigningStageRouter.post(
+  "/design-selection",
+  upload.none(), // Handle form-data without files
+  createDesignSelectionValidation,
+  DesigingStageController.createDesignSelection
+);
+
+// GET /api/leads/designing-stage/:vendorId/:leadId/design-selections?page=1&limit=10
+DesigningStageRouter.get(
+  "/:vendorId/:leadId/design-selections",
+  DesigingStageController.getDesignSelections
+);
+
 
 
 export default DesigningStageRouter;

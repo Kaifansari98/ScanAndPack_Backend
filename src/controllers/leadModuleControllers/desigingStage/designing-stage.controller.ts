@@ -482,5 +482,246 @@ export class DesigingStageController {
     }
   }
   
+  public static async createDesignSelection(req: Request, res: Response) {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ 
+          success: false, 
+          message: "Validation failed",
+          logs: errors.array().map(err => err.msg) 
+        });
+      }
+  
+      const {
+        lead_id,
+        account_id,
+        vendor_id,
+        type,
+        desc,
+        created_by
+      } = req.body;
+  
+      const logs: any[] = [];
+  
+      // 1️⃣ Validate user belongs to vendor
+      const user = await prisma.userMaster.findFirst({
+        where: { 
+          id: Number(created_by), 
+          vendor_id: Number(vendor_id) 
+        }
+      });
+      
+      if (!user) {
+        return res.status(401).json({ 
+          success: false, 
+          message: "Unauthorized: User does not belong to this vendor",
+          logs: ["User verification failed"] 
+        });
+      }
+      logs.push("User verified successfully");
+  
+      // 2️⃣ Validate lead exists and belongs to vendor
+      const lead = await prisma.leadMaster.findFirst({
+        where: { 
+          id: Number(lead_id), 
+          vendor_id: Number(vendor_id), 
+          is_deleted: false 
+        }
+      });
+      
+      if (!lead) {
+        return res.status(404).json({ 
+          success: false, 
+          message: "Lead not found or access denied",
+          logs: ["Lead verification failed"] 
+        });
+      }
+      logs.push("Lead verified successfully");
+  
+      // 3️⃣ Validate account exists
+      const account = await prisma.accountMaster.findFirst({
+        where: { 
+          id: Number(account_id),
+          vendor_id: Number(vendor_id),
+          is_deleted: false 
+        }
+      });
+      
+      if (!account) {
+        return res.status(404).json({ 
+          success: false, 
+          message: "Account not found or access denied",
+          logs: ["Account verification failed"] 
+        });
+      }
+      logs.push("Account verified successfully");
+  
+      // 4️⃣ Create design selection
+      const designSelection = await prisma.leadDesignSelection.create({
+        data: {
+          lead_id: Number(lead_id),
+          account_id: Number(account_id),
+          vendor_id: Number(vendor_id),
+          type: type,
+          desc: desc,
+          created_by: Number(created_by),
+        },
+        include: {
+          createdBy: {
+            select: {
+              id: true,
+              user_name: true,
+              user_email: true,
+            }
+          },
+          lead: {
+            select: {
+              id: true,
+              firstname: true,
+              lastname: true,
+              contact_no: true,
+            }
+          },
+          account: {
+            select: {
+              id: true,
+              name: true,
+            }
+          }
+        }
+      });
+  
+      logs.push("Design selection created successfully");
+  
+      return res.status(201).json({
+        success: true,
+        message: "Design selection created successfully",
+        logs,
+        data: designSelection
+      });
+  
+    } catch (error: any) {
+      return res.status(500).json({ 
+        success: false, 
+        message: "Internal server error",
+        logs: [error.message] 
+      });
+    }
+  }
+  
+  public static async getDesignSelections(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+      const { page = "1", limit = "10" } = req.query;
+  
+      if (!vendorId || !leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and leadId are required",
+          logs: ["Missing required parameters"]
+        });
+      }
+  
+      const logs: any[] = [];
+      const skip = (Number(page) - 1) * Number(limit);
+  
+      // 1️⃣ Validate lead exists and belongs to vendor
+      const lead = await prisma.leadMaster.findFirst({
+        where: { 
+          id: Number(leadId), 
+          vendor_id: Number(vendorId), 
+          is_deleted: false 
+        }
+      });
+      
+      if (!lead) {
+        return res.status(404).json({ 
+          success: false, 
+          message: "Lead not found or access denied",
+          logs: ["Lead verification failed"] 
+        });
+      }
+      logs.push("Lead verified successfully");
+  
+      // 2️⃣ Fetch design selections with pagination
+      const designSelections = await prisma.leadDesignSelection.findMany({
+        where: {
+          lead_id: Number(leadId),
+          vendor_id: Number(vendorId),
+        },
+        skip,
+        take: Number(limit),
+        orderBy: { created_at: "desc" },
+        include: {
+          createdBy: {
+            select: {
+              id: true,
+              user_name: true,
+              user_email: true,
+            }
+          },
+          updatedBy: {
+            select: {
+              id: true,
+              user_name: true,
+              user_email: true,
+            }
+          },
+          lead: {
+            select: {
+              id: true,
+              firstname: true,
+              lastname: true,
+              contact_no: true,
+              email: true,
+            }
+          },
+          account: {
+            select: {
+              id: true,
+              name: true,
+              contact_no: true,
+              email: true,
+            }
+          }
+        }
+      });
+  
+      // 3️⃣ Get total count for pagination
+      const totalCount = await prisma.leadDesignSelection.count({
+        where: {
+          lead_id: Number(leadId),
+          vendor_id: Number(vendorId),
+        }
+      });
+  
+      logs.push(`Fetched ${designSelections.length} design selections for lead ${leadId}`);
+  
+      const pagination = {
+        total: totalCount,
+        page: Number(page),
+        limit: Number(limit),
+        totalPages: Math.ceil(totalCount / Number(limit)),
+        hasNext: Number(page) < Math.ceil(totalCount / Number(limit)),
+        hasPrev: Number(page) > 1
+      };
+  
+      return res.status(200).json({
+        success: true,
+        message: "Design selections fetched successfully",
+        logs,
+        data: designSelections,
+        pagination
+      });
+  
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        logs: [error.message]
+      });
+    }
+  }
 
 }

@@ -37,3 +37,47 @@ export const editDesignMeetingValidation = [
       .isLength({ max: 2000 })
       .withMessage("Description cannot exceed 2000 characters")
 ];
+
+export const createDesignSelectionValidation = [
+  body("lead_id")
+    .notEmpty()
+    .withMessage("lead_id is required")
+    .isNumeric({ no_symbols: true })
+    .withMessage("lead_id must be a valid number")
+    .toInt(), // Convert string to integer
+
+  body("account_id")
+    .notEmpty()
+    .withMessage("account_id is required")
+    .isNumeric({ no_symbols: true })
+    .withMessage("account_id must be a valid number")
+    .toInt(), // Convert string to integer
+
+  body("vendor_id")
+    .notEmpty()
+    .withMessage("vendor_id is required")
+    .isNumeric({ no_symbols: true })
+    .withMessage("vendor_id must be a valid number")
+    .toInt(), // Convert string to integer
+
+  body("type")
+    .notEmpty()
+    .withMessage("type is required")
+    .isLength({ min: 1, max: 1000 })
+    .withMessage("type must be between 1 and 1000 characters")
+    .trim(), // Remove whitespace
+
+  body("desc")
+    .notEmpty()
+    .withMessage("desc is required")
+    .isLength({ min: 1, max: 2000 })
+    .withMessage("desc must be between 1 and 2000 characters")
+    .trim(), // Remove whitespace
+
+  body("created_by")
+    .notEmpty()
+    .withMessage("created_by is required")
+    .isNumeric({ no_symbols: true })
+    .withMessage("created_by must be a valid number")
+    .toInt(), // Convert string to integer
+];
