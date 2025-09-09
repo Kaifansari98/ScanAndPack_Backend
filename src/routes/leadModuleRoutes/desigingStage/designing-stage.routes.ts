@@ -21,7 +21,7 @@ DesigningStageRouter.get(
 
 DesigningStageRouter.post(
     "/upload-quoation",
-    upload.single("file"), // file field in form-data
+    upload.array("files", 10), // file field in form-data
     (req, res) => DesigingStageController.upload(req, res)
 );
 
