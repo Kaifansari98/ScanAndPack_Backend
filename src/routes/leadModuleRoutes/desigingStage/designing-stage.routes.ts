@@ -78,6 +78,11 @@ DesigningStageRouter.get(
   DesigingStageController.getDesignSelections
 );
 
-
+// ✅ NEW: Get Design Quotation Documents
+// GET /api/leads/designing-stage/:vendorId/:leadId/design-quotation-documents
+DesigningStageRouter.get(
+  "/:vendorId/:leadId/design-quotation-documents",
+  DesigingStageController.getDesignQuotationDocuments
+);
 
 export default DesigningStageRouter;
