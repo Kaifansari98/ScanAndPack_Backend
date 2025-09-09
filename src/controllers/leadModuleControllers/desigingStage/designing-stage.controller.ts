@@ -126,7 +126,7 @@ public static async getDesignQuotationDocuments(req: Request, res: Response) {
     const designQuotationDocType = await prisma.documentTypeMaster.findFirst({
       where: {
         vendor_id: Number(vendorId),
-        type: "design-quotation"
+        tag: "Type 5"
       }
     });
 
@@ -264,6 +264,21 @@ public static async getDesignQuotationDocuments(req: Request, res: Response) {
         const sysName = await uploadToWasabiMeetingDocs(file.buffer, Number(vendorId), Number(leadId), file.originalname);
         logs.push({ fileUploaded: file.originalname, sysName });
 
+
+        const mettingDocType = await prisma.documentTypeMaster.findFirst({
+          where: {
+            vendor_id: Number(vendorId),
+            tag: "Type 7"
+          }
+        });
+
+        if (!mettingDocType) {
+          return res.status(404).json({
+            success: false,
+            message: "Document type for metting documents (Type 7) not found for this vendor",
+          });
+        }
+
         // Create LeadDocument
         const doc = await prisma.leadDocuments.create({
           data: {
@@ -272,7 +287,7 @@ public static async getDesignQuotationDocuments(req: Request, res: Response) {
             vendor_id: Number(vendorId),
             lead_id: Number(leadId),
             account_id: Number(accountId),
-            doc_type_id: 5, // design quotation
+            doc_type_id: mettingDocType.id, // design quotation
             created_by: Number(userId),
           }
         });
