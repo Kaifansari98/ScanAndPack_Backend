@@ -481,4 +481,191 @@ export class DesigingStage {
       newMappings
     };
   }
+
+  public static async createDesignSelection(data: {
+    lead_id: number;
+    account_id: number;
+    vendor_id: number;
+    type: string;
+    desc: string;
+    created_by: number;
+  }) {
+    const logs: any[] = [];
+  
+    // 1️⃣ Validate user belongs to vendor
+    const user = await prisma.userMaster.findFirst({
+      where: { 
+        id: data.created_by, 
+        vendor_id: data.vendor_id 
+      }
+    });
+    
+    if (!user) {
+      throw new Error("Unauthorized: User does not belong to this vendor");
+    }
+    logs.push("User verified successfully");
+  
+    // 2️⃣ Validate lead exists and belongs to vendor
+    const lead = await prisma.leadMaster.findFirst({
+      where: { 
+        id: data.lead_id, 
+        vendor_id: data.vendor_id, 
+        is_deleted: false 
+      }
+    });
+    
+    if (!lead) {
+      throw new Error("Lead not found or access denied");
+    }
+    logs.push("Lead verified successfully");
+  
+    // 3️⃣ Validate account exists
+    const account = await prisma.accountMaster.findFirst({
+      where: { 
+        id: data.account_id,
+        vendor_id: data.vendor_id,
+        is_deleted: false 
+      }
+    });
+    
+    if (!account) {
+      throw new Error("Account not found or access denied");
+    }
+    logs.push("Account verified successfully");
+  
+    // 4️⃣ Create design selection
+    const designSelection = await prisma.leadDesignSelection.create({
+      data: {
+        lead_id: data.lead_id,
+        account_id: data.account_id,
+        vendor_id: data.vendor_id,
+        type: data.type,
+        desc: data.desc,
+        created_by: data.created_by,
+      },
+      include: {
+        createdBy: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+          }
+        },
+        lead: {
+          select: {
+            id: true,
+            firstname: true,
+            lastname: true,
+            contact_no: true,
+          }
+        },
+        account: {
+          select: {
+            id: true,
+            name: true,
+          }
+        }
+      }
+    });
+  
+    logs.push("Design selection created successfully");
+  
+    return {
+      logs,
+      designSelection
+    };
+  }
+  
+  public static async getDesignSelections(
+    vendorId: number,
+    leadId: number,
+    page: number,
+    limit: number
+  ) {
+    const logs: any[] = [];
+    const skip = (page - 1) * limit;
+  
+    // 1️⃣ Validate lead exists and belongs to vendor
+    const lead = await prisma.leadMaster.findFirst({
+      where: { 
+        id: leadId, 
+        vendor_id: vendorId, 
+        is_deleted: false 
+      }
+    });
+    
+    if (!lead) {
+      throw new Error("Lead not found or access denied");
+    }
+    logs.push("Lead verified successfully");
+  
+    // 2️⃣ Fetch design selections with pagination
+    const designSelections = await prisma.leadDesignSelection.findMany({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+      },
+      skip,
+      take: limit,
+      orderBy: { created_at: "desc" },
+      include: {
+        createdBy: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+          }
+        },
+        updatedBy: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+          }
+        },
+        lead: {
+          select: {
+            id: true,
+            firstname: true,
+            lastname: true,
+            contact_no: true,
+            email: true,
+          }
+        },
+        account: {
+          select: {
+            id: true,
+            name: true,
+            contact_no: true,
+            email: true,
+          }
+        }
+      }
+    });
+  
+    // 3️⃣ Get total count for pagination
+    const totalCount = await prisma.leadDesignSelection.count({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+      }
+    });
+  
+    logs.push(`Fetched ${designSelections.length} design selections for lead ${leadId}`);
+  
+    const pagination = {
+      total: totalCount,
+      page,
+      limit,
+      totalPages: Math.ceil(totalCount / limit),
+      hasNext: page < Math.ceil(totalCount / limit),
+      hasPrev: page > 1
+    };
+  
+    return {
+      logs,
+      designSelections,
+      pagination
+    };
+  }
 }
