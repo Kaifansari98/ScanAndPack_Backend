@@ -21,7 +21,7 @@ DesigningStageRouter.get(
 
 DesigningStageRouter.post(
     "/upload-quoation",
-    upload.array("files", 10), // file field in form-data
+    upload.single("file"), // file field in form-data
     (req, res) => DesigingStageController.upload(req, res)
 );
 
@@ -78,6 +78,11 @@ DesigningStageRouter.get(
   DesigingStageController.getDesignSelections
 );
 
-
+// ✅ NEW: Get Design Quotation Documents
+// GET /api/leads/designing-stage/:vendorId/:leadId/design-quotation-documents
+DesigningStageRouter.get(
+  "/:vendorId/:leadId/design-quotation-documents",
+  DesigingStageController.getDesignQuotationDocuments
+);
 
 export default DesigningStageRouter;

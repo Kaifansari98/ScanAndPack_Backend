@@ -373,6 +373,96 @@ export class DesigingStage {
     return doc;
   }
 
+  // Add this method to your DesigingStage service class
+
+public static async getDesignQuotationDocuments(vendorId: number, leadId: number) {
+  const logs: any[] = [];
+
+  // 1️⃣ Validate lead exists and belongs to vendor
+  const lead = await prisma.leadMaster.findFirst({
+    where: { 
+      id: leadId, 
+      vendor_id: vendorId, 
+      is_deleted: false 
+    }
+  });
+  
+  if (!lead) {
+    throw new Error("Lead not found or access denied");
+  }
+  logs.push("Lead verified successfully");
+
+  // 2️⃣ Find the document type for "design-quotation"
+  const designQuotationDocType = await prisma.documentTypeMaster.findFirst({
+    where: {
+      vendor_id: vendorId,
+      type: "design-quotation"
+    }
+  });
+
+  if (!designQuotationDocType) {
+    throw new Error("Design quotation document type not found for this vendor");
+  }
+  logs.push("Design quotation document type found");
+
+  // 3️⃣ Fetch all design-quotation documents for the lead
+  const documents = await prisma.leadDocuments.findMany({
+    where: {
+      lead_id: leadId,
+      vendor_id: vendorId,
+      doc_type_id: designQuotationDocType.id,
+      is_deleted: false
+    },
+    orderBy: { created_at: "desc" },
+    include: {
+      documentType: {
+        select: {
+          id: true,
+          type: true,
+          tag: true
+        }
+      },
+      createdBy: {
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+          user_contact: true
+        }
+      },
+      deletedBy: {
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true
+        }
+      }
+    }
+  });
+
+  // 4️⃣ Generate signed URLs for documents
+  const documentsWithSignedUrls = await Promise.all(
+    documents.map(async (doc) => {
+      const signedUrl = await generateSignedUrl(doc.doc_sys_name);
+      return {
+        ...doc,
+        signedUrl
+      };
+    })
+  );
+
+  logs.push(`Found ${documents.length} design quotation documents for lead ${leadId}`);
+
+  return {
+    logs,
+    lead_id: leadId,
+    vendor_id: vendorId,
+    document_type: designQuotationDocType.type,
+    total_documents: documents.length,
+    documents: documentsWithSignedUrls
+  };
+}
+
   public static async editDesignMeeting(data: any) {
     // ✅ Validate incoming data
     const parsed = editDesignMeetingSchema.safeParse(data);
