@@ -66,7 +66,8 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
       assign_to,
       assigned_by,
       product_types = [],
-      product_structures = []
+      product_structures = [],
+      initial_site_measurement_date,
     } = payload;
   
     const leadPriority = priority.toLowerCase() as LeadPriority;
@@ -162,6 +163,7 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
           account_id: account.id, // Add account_id reference
           assign_to,
           assigned_by,
+          initial_site_measurement_date,
         }
       });
   
@@ -597,7 +599,8 @@ export const updateLeadService = async (leadId: number, payload: UpdateLeadDTO) 
     designer_remark,
     updated_by,
     product_types = [],
-    product_structures = []
+    product_structures = [],
+    initial_site_measurement_date
   } = payload;
 
   // Validate priority only if provided
@@ -716,6 +719,21 @@ export const updateLeadService = async (leadId: number, payload: UpdateLeadDTO) 
       updated_by,
       updated_at: new Date()
     };
+
+    if (initial_site_measurement_date !== undefined) {
+      const dateValue = new Date(initial_site_measurement_date);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0); // normalize to start of day
+    
+      if (dateValue < today) {
+        throw new Error(
+          `Invalid initial_site_measurement_date: ${initial_site_measurement_date}. Date must be today or a future date.`
+        );
+      }
+    
+      leadUpdateData.initial_site_measurement_date = dateValue;
+    }
+    
 
     // Only include fields that are actually being updated
     if (firstname !== undefined) leadUpdateData.firstname = firstname;

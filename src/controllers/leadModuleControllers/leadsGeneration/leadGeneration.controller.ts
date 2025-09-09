@@ -56,6 +56,9 @@ export class LeadController {
         assigned_by: req.body.assigned_by ? Number(req.body.assigned_by) : undefined,
         product_types: req.body.product_types ? [].concat(req.body.product_types) : [],
         product_structures: req.body.product_structures ? [].concat(req.body.product_structures) : [],
+        initial_site_measurement_date: req.body.initial_site_measurement_date
+        ? new Date(req.body.initial_site_measurement_date)
+        : undefined,
       };
   
       const { error, value } = createLeadSchema.validate(payload);
@@ -359,7 +362,8 @@ export class LeadController {
               email: result.lead.email,
               priority: result.lead.priority,
               site_address: result.lead.site_address,
-              updated_at: result.lead.updated_at
+              updated_at: result.lead.updated_at,
+              initial_site_measurement_date: result.lead.initial_site_measurement_date,
             },
             account: {
               id: result.account.id,
@@ -408,6 +412,12 @@ export class LeadController {
             400
           )
         );
+        return;
+      }
+
+      // ✅ Handle invalid date
+      if (error.message.includes('Invalid initial_site_measurement_date')) {
+        res.status(400).json(ApiResponse.error(error.message, 400));
         return;
       }
 

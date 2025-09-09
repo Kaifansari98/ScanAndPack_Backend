@@ -3,6 +3,9 @@ import { LeadPriority } from '@prisma/client';
 import { prisma } from "../prisma/client";
 import { UserRoleInfo } from '../types/leadModule.types';
 
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
 export const createLeadSchema = Joi.object({
   firstname: Joi.string().trim().min(2).max(50).required(),
   lastname: Joi.string().trim().min(2).max(50).required(),
@@ -25,6 +28,14 @@ export const createLeadSchema = Joi.object({
   // Changed from array of strings to array of integers
   product_types: Joi.array().items(Joi.number().integer().positive()).optional(),
   product_structures: Joi.array().items(Joi.number().integer().positive()).optional(),
+
+  // ✅ new field
+  initial_site_measurement_date: Joi.date()
+    .min(today) // must be today or future
+    .optional()
+    .messages({
+      "date.min": "Initial site measurement date cannot be in the past",
+    }),
 });
 
 interface UpdateLeadValidationResult {
