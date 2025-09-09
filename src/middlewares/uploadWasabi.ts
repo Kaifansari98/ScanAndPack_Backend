@@ -44,3 +44,31 @@ export const upload = multer({
     }
   },
 });
+
+export const uploadDesigns = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: parseInt(process.env.MAX_FILE_SIZE_MB || "5") * 1024 * 1024, // default 5MB
+  },
+  fileFilter: (req, file, cb) => {
+    // ✅ Add common CAD formats + your custom ones
+    const allowedExtensions = [
+      ".pyo", ".pytha",  // custom
+      ".dwg", ".dxf", ".stl", ".step", ".stp", ".iges", ".igs",
+      ".3ds", ".obj", ".skp", ".sldprt", ".sldasm",
+      ".prt", ".catpart", ".catproduct"
+    ];
+
+    const ext = path.extname(file.originalname).toLowerCase();
+
+    if (allowedExtensions.includes(ext)) {
+      cb(null, true);
+    } else {
+      cb(
+        new Error(
+          `Only CAD files are allowed! Supported extensions: ${allowedExtensions.join(", ")}. Received: ${ext}`
+        )
+      );
+    }
+  },
+});
