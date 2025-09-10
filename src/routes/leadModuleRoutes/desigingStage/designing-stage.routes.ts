@@ -42,10 +42,10 @@ DesigningStageRouter.get(
 // POST /api/leads/designing-stage/upload-designs
 // Form-data: vendorId, leadId, userId, accountId, files[]
 DesigningStageRouter.post(
-    "/upload-designs",
-    uploadDesigns.array("files"), // multiple files
-    (req, res) => DesigingStageController.uploadDesigns(req, res)
-  );
+  "/upload-designs",
+  uploadDesigns.array("files"), // multiple files
+  (req, res) => DesigingStageController.uploadDesigns(req, res)
+);
 
 
 // PUT /api/leads/design-meeting/:meetingId
