@@ -45,4 +45,54 @@ export class BookingStageController {
       res.status(500).json({ success: false, message: error.message || "Internal server error" });
     }
   };
+
+  public getBookingStage = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const leadId = parseInt(req.params.leadId);
+  
+      if (!leadId) {
+        res.status(400).json({ success: false, message: "leadId is required" });
+        return;
+      }
+  
+      const result = await this.bookingStageService.getBookingStage(leadId);
+  
+      res.status(200).json({
+        success: true,
+        message: "Booking stage details fetched successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error("[BookingStageController] Get Error:", error);
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public getStatus4Leads = async (req: Request, res: Response) => {
+    try {
+      const vendorId = parseInt(req.params.vendorId);
+  
+      if (!vendorId) {
+        return res.status(400).json({ success: false, message: "Vendor ID is required" });
+      }
+  
+      const leads = await BookingStageService.getLeadsWithStatus4(vendorId);
+  
+      return res.status(200).json({
+        success: true,
+        message: "Leads with status_id = 4 fetched successfully",
+        data: leads,
+      });
+    } catch (error: any) {
+      console.error("[BookingStageController] GetStatus4Leads Error:", error);
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Something went wrong",
+      });
+    }
+  };
+  
 }

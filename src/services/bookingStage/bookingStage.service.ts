@@ -159,4 +159,98 @@ export class BookingStageService {
       timeout: 15000, // 15 seconds instead of 5
     });
   }
+
+  public async getBookingStage(leadId: number) {
+    const lead = await prisma.leadMaster.findUnique({
+      where: { id: leadId },
+      include: {
+        documents: {
+          where: { is_deleted: false },
+          include: { documentType: true },
+        },
+        payments: {
+          include: { paymentType: true, document: true },
+        },
+        ledgers: true,
+        siteSupervisors: {
+          include: { supervisor: true },
+        },
+      },
+    });
+  
+    if (!lead) {
+      throw new Error("Lead not found");
+    }
+  
+    return {
+      leadId: lead.id,
+      name: `${lead.firstname} ${lead.lastname}`,
+      finalBookingAmount: lead.final_booking_amt,
+      documents: lead.documents.map((doc) => ({
+        id: doc.id,
+        originalName: doc.doc_og_name,
+        s3Key: doc.doc_sys_name,
+        type: doc.documentType?.tag,
+      })),
+      payments: lead.payments.map((p) => ({
+        id: p.id,
+        amount: p.amount,
+        date: p.payment_date,
+        text: p.payment_text,
+        type: p.paymentType?.tag,
+        file: p.document
+          ? { id: p.document.id, originalName: p.document.doc_og_name }
+          : null,
+      })),
+      ledger: lead.ledgers.map((l) => ({
+        id: l.id,
+        type: l.type,
+        amount: l.amount,
+        date: l.payment_date,
+      })),
+      supervisors: lead.siteSupervisors.map((s) => ({
+        id: s.id,
+        userId: s.user_id,
+        userName: s.supervisor.user_name,
+        status: s.status,
+      })),
+    };
+  } 
+  
+  public static async getLeadsWithStatus4(vendorId: number) {
+    return prisma.leadMaster.findMany({
+      where: {
+        status_id: 4,
+        is_deleted: false,
+        vendor_id: vendorId,
+      },
+      include: {
+        vendor: true,
+        siteType: true,
+        source: true,
+        account: true,
+        statusType: true,
+        createdBy: true,
+        updatedBy: true,
+        assignedTo: true,
+        assignedBy: true,
+        productMappings: {
+          include: { productType: true },
+        },
+        documents: {
+          include: { documentType: true },
+        },
+        payments: true,
+        ledgers: true,
+        leadStatusLogs: {
+          include: { statusType: true, createdBy: true },
+        },
+        designMeeting: true,
+        designSelection: true,
+        siteSupervisors: {
+          include: { supervisor: true },
+        },
+      },
+    });
+  }  
 }
