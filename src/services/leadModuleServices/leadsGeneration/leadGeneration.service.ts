@@ -1,7 +1,6 @@
 import { prisma } from "../../../prisma/client";
 import { CreateLeadDTO, UpdateLeadDTO } from "../../../types/leadModule.types";
 import { LeadPriority, DocumentType } from "@prisma/client";
-import { getDocumentTypeFromFile } from "../../../utils/fileUtils";
 import fs from "fs";
 import { SalesExecutiveData } from "../../../types/leadModule.types";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
@@ -491,6 +490,7 @@ export const getLeadById = async (leadId: number, userId: number, vendorId: numb
         documents: true,
         source: true,
         siteType: true,
+        statusType: true,
         createdBy: {
           select: {
             id: true,

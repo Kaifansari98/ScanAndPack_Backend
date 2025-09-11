@@ -56,6 +56,18 @@ export interface DocumentTypeValue{
     tag: string;
     vendor_id: number;
 }
+export interface PaymentTypeInput {
+    vendor_id: number;
+    type: string;
+    tag: string;
+}
+
+export interface PaymentTypeValue{
+    id: number;
+    type: string;
+    tag: string;
+    vendor_id: number;
+}
 export interface StatusTypeInput {
     vendor_id: number;
     type: string;

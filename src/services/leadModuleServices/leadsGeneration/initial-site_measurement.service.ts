@@ -160,6 +160,15 @@ public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentU
 
       // 4. Create PaymentInfo entry (if amount is provided)
       if (data.amount && data.payment_date) {
+
+        const paymentType = await tx.paymentTypeMaster.findFirst({
+          where: { vendor_id: data.vendor_id, tag: "Type 1" }
+        });
+      
+        if (!paymentType) {
+          throw new Error('Payment type (Initial Site Measurement Payment) not found for this vendor');
+        }
+
         const paymentInfo = await tx.paymentInfo.create({
           data: {
             lead_id: data.lead_id,
@@ -170,6 +179,7 @@ public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentU
             payment_date: data.payment_date,
             payment_text: data.payment_text || null,
             payment_file_id: null,
+            payment_type_id: paymentType.id,
           }
         });
 

@@ -23,6 +23,7 @@ import Statsrouter from './generic/leadStats.routes';
 import leadModuleRoutes from "./leadModuleRoutes/lead.routes"
 import { paymentUploadRoutes } from './leadModuleRoutes/initial-site-measurement.routes';
 import DesigningStageRouter from './leadModuleRoutes/desigingStage/designing-stage.routes';
+import bookingStageRouter from './bookingStageRoutes/booking-stage.routes';
 
 const router = Router();
 
@@ -50,5 +51,6 @@ router.use("/leads/initial-site-measurement", paymentUploadRoutes);
 router.use("/leads/designing-stage", DesigningStageRouter);
 
 router.use("/leads/stats", Statsrouter);
+router.use("/leads/bookingStage", bookingStageRouter)
 
 export { router };
