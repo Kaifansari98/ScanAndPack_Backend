@@ -15,4 +15,15 @@ bookingStageRouter.post(
   bookingStageController.createBookingStage
 );
 
+bookingStageRouter.get(
+  "/lead/:leadId",
+  bookingStageController.getBookingStage
+);
+
+// GET /api/leads/status-4
+bookingStageRouter.get(
+  "/status4-leads/:vendorId",
+  bookingStageController.getStatus4Leads
+);
+
 export default bookingStageRouter;
