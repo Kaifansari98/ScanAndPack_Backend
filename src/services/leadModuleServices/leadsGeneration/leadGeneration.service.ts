@@ -1,5 +1,5 @@
 import { prisma } from "../../../prisma/client";
-import { CreateLeadDTO, UpdateLeadDTO } from "../../../types/leadModule.types";
+import { CreateLeadDTO, SiteSupervisorData, UpdateLeadDTO } from "../../../types/leadModule.types";
 import { LeadPriority, DocumentType } from "@prisma/client";
 import fs from "fs";
 import { SalesExecutiveData } from "../../../types/leadModule.types";
@@ -920,6 +920,76 @@ export const getSalesExecutivesByVendor = async (vendorId: number): Promise<Sale
   } catch (error: any) {
     console.error("[SERVICE] Error fetching sales executives:", error);
     throw new Error(`Failed to fetch sales executives: ${error.message}`);
+  }
+};
+
+export const getSiteSupervisorByVendor = async (vendorId: number): Promise<SiteSupervisorData[]> => {
+  try {
+    console.log(`[SERVICE] Fetching Site Supervisor for vendor ID: ${vendorId}`);
+
+    // First, find the user type ID for 'site-supervisor'
+    const SiteSupervisorType = await prisma.userTypeMaster.findFirst({
+      where: {
+        user_type: {
+          equals: "site-supervisor",
+          mode: "insensitive", // Case insensitive search
+        },
+      },
+    });
+
+    if (!SiteSupervisorType) {
+      console.log("[SERVICE] Site Supervisor user type not found");
+      return [];
+    }
+
+    console.log(`[SERVICE] Found Site Supervisor type ID: ${SiteSupervisorType.id}`);
+
+    // Fetch all users with sales-executive role for the specified vendor
+    const siteSupervisor = await prisma.userMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        user_type_id: SiteSupervisorType.id,
+        // Optionally filter only active users
+        status: "active",
+      },
+      include: {
+        user_type: true,
+        documents: true,
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+
+    console.log(`[SERVICE] Found ${siteSupervisor.length} Site Supervisors`);
+
+    // Transform the data to match our interface
+    const transformedData: SalesExecutiveData[] = siteSupervisor.map((supervisor) => ({
+      id: supervisor.id,
+      vendor_id: supervisor.vendor_id,
+      user_name: supervisor.user_name,
+      user_contact: supervisor.user_contact,
+      user_email: supervisor.user_email,
+      user_timezone: supervisor.user_timezone,
+      status: supervisor.status,
+      created_at: supervisor.created_at,
+      updated_at: supervisor.updated_at,
+      user_type: {
+        id: supervisor.user_type.id,
+        user_type: supervisor.user_type.user_type,
+      },
+      documents: supervisor.documents.map((doc) => ({
+        id: doc.id,
+        document_name: doc.document_name,
+        document_number: doc.document_number,
+        filename: doc.filename,
+      })),
+    }));
+
+    return transformedData;
+  } catch (error: any) {
+    console.error("[SERVICE] Error fetching Site Supervisors:", error);
+    throw new Error(`Failed to fetch Site Supervisors: ${error.message}`);
   }
 };
 

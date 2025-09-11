@@ -149,6 +149,27 @@ export interface SalesExecutiveData {
       filename: string;
     }>;
 }
+export interface SiteSupervisorData {
+    id: number;
+    vendor_id: number;
+    user_name: string;
+    user_contact: string;
+    user_email: string;
+    user_timezone: string;
+    status: string;
+    created_at: Date;
+    updated_at: Date;
+    user_type: {
+      id: number;
+      user_type: string;
+    };
+    documents: Array<{
+      id: number;
+      document_name: string;
+      document_number: string;
+      filename: string;
+    }>;
+}
 
 /**
  * Interface for assignment payload

@@ -3,6 +3,7 @@ import {
   createLeadService, 
   getLeadsByVendor, 
   getLeadsByVendorAndUser, 
+  getSiteSupervisorByVendor, 
   softDeleteLead,
   updateLeadService 
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
@@ -478,6 +479,60 @@ export class LeadController {
       return res.status(500).json(
         ApiResponse.error(
           "Failed to fetch sales executives",
+          500,
+          process.env.NODE_ENV === "development" ? error.message : undefined
+        )
+      );
+    }
+  }
+
+  /**
+   * Fetch all Site Supervisors for a specific vendor
+   */
+  async fetchSiteSupervisorsByVendor(req: Request, res: Response): Promise<Response> {
+    try {
+      const vendorId = parseInt(req.params.vendorId);
+
+      // Validate vendorId
+      if (isNaN(vendorId) || vendorId <= 0) {
+        return res.status(400).json(
+          ApiResponse.error("Invalid vendor ID provided", 400)
+        );
+      }
+
+      console.log(`[CONTROLLER] Fetching Site Supervisors for vendor ID: ${vendorId}`);
+
+      const siteSupervisors = await getSiteSupervisorByVendor(vendorId);
+
+      // Check if any sales executives were found
+      if (siteSupervisors.length === 0) {
+        return res.status(200).json(
+          ApiResponse.success(
+            [],
+            "No site supervisors found for this vendor",
+            200
+          )
+        );
+      }
+
+      console.log(`[CONTROLLER] Found ${siteSupervisors.length} Site Supervisors`);
+
+      return res.status(200).json(
+        ApiResponse.success(
+          {
+            site_supervisors: siteSupervisors,
+            count: siteSupervisors.length,
+          },
+          "site supervisors fetched successfully",
+          200
+        )
+      );
+    } catch (error: any) {
+      console.error("[CONTROLLER] fetchSiteSupervisorsByVendor error:", error);
+
+      return res.status(500).json(
+        ApiResponse.error(
+          "Failed to fetch Site Supervisors",
           500,
           process.env.NODE_ENV === "development" ? error.message : undefined
         )

@@ -49,6 +49,10 @@ leadsRouter.put('/update/:leadId/userId/:userId', leadController.updateLead);
 // Fetch all sales executives for a specific vendor
 leadsRouter.get("/sales-executives/vendor/:vendorId", leadController.fetchSalesExecutivesByVendor);
 
+// GET /api/site-supervisor/vendor/:vendorId
+// Fetch all site supervisor for a specific vendor
+leadsRouter.get("/site-supervisor/vendor/:vendorId", leadController.fetchSiteSupervisorsByVendor);
+
 /**
  * Lead Assignment Routes
  * Base path: /api/leads/assignment
