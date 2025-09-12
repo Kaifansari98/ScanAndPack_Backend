@@ -225,30 +225,75 @@ export class BookingStageService {
         vendor_id: vendorId,
       },
       include: {
-        vendor: true,
+        // vendor: true,
         siteType: true,
         source: true,
-        account: true,
+        // account: true,
         statusType: true,
-        createdBy: true,
+        createdBy: {
+          select: {
+            id: true,
+            user_name: true,
+          }
+        },
         updatedBy: true,
-        assignedTo: true,
-        assignedBy: true,
+        assignedTo: {
+          select: {
+            id: true,
+            user_name: true,
+          }
+        },
+        assignedBy: {
+          select: {
+            id: true,
+            user_name: true,
+          }
+        },
         productMappings: {
-          include: { productType: true },
+          select: { productType: {
+            select: {
+              id: true,
+              type: true,
+            }
+          } },
         },
-        documents: {
-          include: { documentType: true },
+        // documents: {
+        //   include: { documentType: {
+        //     select: {
+        //       type: true,
+        //       tag: true,
+        //     }
+        //   } },
+        // },
+        payments: {
+          select: {
+            id: true,
+            amount: true,
+            payment_date: true,
+            payment_text: true,
+            payment_file_id: true,
+            payment_type_id: true,
+            paymentType: {
+              select: {
+                id: true,
+                type: true,
+              }
+            }
+          }
         },
-        payments: true,
-        ledgers: true,
-        leadStatusLogs: {
-          include: { statusType: true, createdBy: true },
-        },
-        designMeeting: true,
-        designSelection: true,
+        // ledgers: true,
+        // leadStatusLogs: {
+        //   include: { statusType: true, createdBy: true },
+        // },
+        // designMeeting: true,
+        // designSelection: true,
         siteSupervisors: {
-          include: { supervisor: true },
+          select: { supervisor: {
+            select: {
+              id: true,
+              user_name: true,
+            }
+          } },
         },
       },
     });
