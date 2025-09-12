@@ -335,6 +335,12 @@ export class BookingStageService {
           },
         },
         payments: {
+          where: {
+            paymentType: {
+              tag: "Type 2",            // ✅ Only Type 2 payments
+              vendor_id: vendorId,      // ✅ Match current vendor
+            },
+          },
           select: {
             id: true,
             amount: true,
@@ -342,7 +348,7 @@ export class BookingStageService {
             payment_text: true,
             payment_file_id: true,
             payment_type_id: true,
-            paymentType: { select: { id: true, type: true } },
+            paymentType: { select: { id: true, type: true, tag: true } },
           },
         },
         siteSupervisors: {
@@ -386,6 +392,7 @@ export class BookingStageService {
         return {
           ...lead,
           documents: docsWithUrls,
+          siteSupervisors: lead.siteSupervisors.map((s) => s.supervisor),
         };
       })
     );
