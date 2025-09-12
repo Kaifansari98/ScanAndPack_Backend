@@ -255,7 +255,18 @@ export class BookingStageService {
               id: true,
               type: true,
             }
-          } },
+          },
+         },
+        },
+        leadProductStructureMapping: {
+          select: {
+            productStructure: {
+              select: {
+                id: true,
+                type: true,
+              }
+            }
+          }
         },
         // documents: {
         //   include: { documentType: {
