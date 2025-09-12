@@ -1,10 +1,46 @@
 import { prisma } from "../../prisma/client";
 import { CreateBookingStageDto } from "../../types/booking-stage.dto";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
-import wasabi from "../../utils/wasabiClient";
+import { GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
+import wasabi, { generateSignedUrl } from "../../utils/wasabiClient";
 import { sanitizeFilename } from "../../utils/sanitizeFilename";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 export class BookingStageService {
+
+  // Generate signed URL for file access
+  public async generateSignedUrl(s3Key: string, vendorId: number, expiresIn: number = 3600): Promise<string> {
+    try {
+      // Validate that the file belongs to the vendor (security check)
+      const document = await prisma.leadDocuments.findFirst({
+        where: {
+          doc_sys_name: s3Key,
+          vendor_id: vendorId,
+          deleted_at: null
+        }
+      });
+
+      if (!document) {
+        throw new Error('Document not found or access denied');
+      }
+
+      // Generate signed URL
+      const command = new GetObjectCommand({
+        Bucket: process.env.WASABI_BUCKET_NAME || 'your-bucket-name',
+        Key: s3Key,
+      });
+
+      const signedUrl = await getSignedUrl(wasabi, command, { 
+        expiresIn: expiresIn // URL expires in 1 hour by default
+      });
+
+      return signedUrl;
+
+    } catch (error: any) {
+      console.error('[PaymentUploadService] Error generating signed URL:', error);
+      throw new Error(`Failed to generate signed URL: ${error.message}`);
+    }
+  }
+
   public async createBookingStage(data: CreateBookingStageDto) {
     return await prisma.$transaction(async (tx) => {
       const response: any = {
@@ -273,7 +309,7 @@ export class BookingStageService {
   } 
 
   public static async getLeadsWithStatusBooking(vendorId: number) {
-    return prisma.leadMaster.findMany({
+    const leads = await prisma.leadMaster.findMany({
       where: {
         status_id: 4,
         is_deleted: false,
@@ -283,43 +319,18 @@ export class BookingStageService {
         siteType: true,
         source: true,
         statusType: true,
-        createdBy: {
-          select: {
-            id: true,
-            user_name: true,
-          },
-        },
+        createdBy: { select: { id: true, user_name: true } },
         updatedBy: true,
-        assignedTo: {
-          select: {
-            id: true,
-            user_name: true,
-          },
-        },
-        assignedBy: {
-          select: {
-            id: true,
-            user_name: true,
-          },
-        },
+        assignedTo: { select: { id: true, user_name: true } },
+        assignedBy: { select: { id: true, user_name: true } },
         productMappings: {
           select: {
-            productType: {
-              select: {
-                id: true,
-                type: true,
-              },
-            },
+            productType: { select: { id: true, type: true } },
           },
         },
         leadProductStructureMapping: {
           select: {
-            productStructure: {
-              select: {
-                id: true,
-                type: true,
-              },
-            },
+            productStructure: { select: { id: true, type: true } },
           },
         },
         payments: {
@@ -330,51 +341,71 @@ export class BookingStageService {
             payment_text: true,
             payment_file_id: true,
             payment_type_id: true,
-            paymentType: {
-              select: {
-                id: true,
-                type: true,
-              },
-            },
+            paymentType: { select: { id: true, type: true } },
           },
         },
         siteSupervisors: {
           select: {
-            supervisor: {
-              select: {
-                id: true,
-                user_name: true,
-              },
-            },
+            supervisor: { select: { id: true, user_name: true } },
           },
         },
-        // ✅ Fetch only documents where documentType.tag = "Type 8"
+        // ✅ Fetch only documents where DocumentTypeMaster.tag = "Type 8"
         documents: {
           where: {
             is_deleted: false,
             documentType: {
               tag: "Type 8",
-              vendor_id: vendorId, 
+              vendor_id: vendorId,
             },
           },
           include: {
-            documentType: {
-              select: {
-                id: true,
-                type: true,
-                tag: true,
-              },
-            },
-            createdBy: {
-              select: {
-                id: true,
-                user_name: true,
-              },
-            },
+            documentType: { select: { id: true, type: true, tag: true } },
+            createdBy: { select: { id: true, user_name: true } },
           },
         },
       },
+      orderBy: { created_at: "desc" },
     });
+  
+    // ✅ Generate signed URLs for all documents
+    const data = await Promise.all(
+      leads.map(async (lead) => {
+        const docsWithUrls = await Promise.all(
+          lead.documents.map(async (doc) => {
+            const signed_url = await generateSignedUrl(doc.doc_sys_name);
+            return {
+              ...doc,
+              signed_url,
+              file_type: BookingStageService.getFileType(doc.doc_og_name),
+              is_image: BookingStageService.isImageFile(doc.doc_og_name),
+            };
+          })
+        );
+  
+        return {
+          ...lead,
+          documents: docsWithUrls,
+        };
+      })
+    );
+  
+    return data;
+  }
+  
+  // ✅ Helpers (you already have these in your other service)
+  private static getFileType(filename: string): string {
+    const ext = filename.split(".").pop()?.toLowerCase();
+    if (!ext) return "unknown";
+    if (["jpg", "jpeg", "png", "gif", "webp"].includes(ext)) return "image";
+    if (["pdf"].includes(ext)) return "pdf";
+    if (["doc", "docx"].includes(ext)) return "word";
+    if (["xls", "xlsx"].includes(ext)) return "excel";
+    return ext;
+  }
+  
+  private static isImageFile(filename: string): boolean {
+    const ext = filename.split(".").pop()?.toLowerCase();
+    return ["jpg", "jpeg", "png", "gif", "webp"].includes(ext || "");
   }
     
   public async editBookingStage(data: Partial<CreateBookingStageDto>) {
