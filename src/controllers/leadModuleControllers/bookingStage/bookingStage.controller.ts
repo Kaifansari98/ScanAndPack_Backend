@@ -129,6 +129,30 @@ export class BookingStageController {
     }
   };
 
+  public getOpenLeads = async (req: Request, res: Response) => {
+    try {
+      const vendorId = parseInt(req.params.vendorId);
+  
+      if (!vendorId) {
+        return res.status(400).json({ success: false, message: "Vendor ID is required" });
+      }
+  
+      const leads = await BookingStageService.getLeadsWithStatusOpen(vendorId);
+  
+      return res.status(200).json({
+        success: true,
+        message: "Leads with status_id = 1 fetched successfully",
+        data: leads,
+      });
+    } catch (error: any) {
+      console.error("[BookingStageController] getOpenLeads Error:", error);
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Something went wrong",
+      });
+    }
+  };
+
   // bookingStage.controller.ts
   public editBookingStage = async (req: Request, res: Response) => {
     try {

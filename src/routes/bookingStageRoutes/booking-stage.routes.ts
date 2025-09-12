@@ -35,6 +35,12 @@ bookingStageRouter.get(
   bookingStageController.getBookingLeads
 );
 
+// GET /api/leads/status-4
+bookingStageRouter.get(
+  "/status1-leads/:vendorId",
+  bookingStageController.getOpenLeads
+);
+
 bookingStageRouter.put(
   "/edit",
   bookingStageController.editBookingStage
