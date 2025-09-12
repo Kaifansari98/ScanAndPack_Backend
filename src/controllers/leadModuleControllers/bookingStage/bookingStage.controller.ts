@@ -94,5 +94,28 @@ export class BookingStageController {
       });
     }
   };
+
+  // bookingStage.controller.ts
+  public editBookingStage = async (req: Request, res: Response) => {
+    try {
+      const dto = {
+        lead_id: parseInt(req.body.lead_id),
+        account_id: parseInt(req.body.account_id),
+        vendor_id: parseInt(req.body.vendor_id),
+        created_by: parseInt(req.body.created_by),
+        client_id: req.body.client_id ? parseInt(req.body.client_id) : undefined,
+        bookingAmount: req.body.bookingAmount ? parseFloat(req.body.bookingAmount) : undefined,
+        finalBookingAmount: req.body.finalBookingAmount ? parseFloat(req.body.finalBookingAmount) : undefined,
+        siteSupervisorId: req.body.siteSupervisorId ? parseInt(req.body.siteSupervisorId) : undefined,
+        bookingAmountPaymentDetailsText: req.body.bookingAmountPaymentDetailsText || undefined, // ✅ added
+      };
+  
+      const result = await this.bookingStageService.editBookingStage(dto);
+      res.status(200).json({ success: true, message: "Booking stage updated", data: result });
+    } catch (error: any) {
+      console.error("[BookingStageController] Edit Error:", error);
+      res.status(500).json({ success: false, message: error.message || "Internal server error" });
+    }
+  };    
   
 }

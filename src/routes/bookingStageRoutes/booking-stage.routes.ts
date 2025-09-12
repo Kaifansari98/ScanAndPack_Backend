@@ -26,4 +26,9 @@ bookingStageRouter.get(
   bookingStageController.getStatus4Leads
 );
 
+bookingStageRouter.put(
+  "/edit",
+  bookingStageController.editBookingStage
+);
+
 export default bookingStageRouter;

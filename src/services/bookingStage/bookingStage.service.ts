@@ -309,4 +309,112 @@ export class BookingStageService {
       },
     });
   }  
+
+  public async editBookingStage(data: Partial<CreateBookingStageDto>) {
+    return await prisma.$transaction(async (tx) => {
+      const response: any = {
+        updatedFields: {},
+        message: "Booking stage updated successfully",
+      };
+  
+      // 1. Update LeadMaster fields if provided
+      if (data.finalBookingAmount !== undefined) {
+        const lead = await tx.leadMaster.update({
+          where: { id: data.lead_id },
+          data: { final_booking_amt: data.finalBookingAmount },
+        });
+        response.updatedFields.leadMaster = lead;
+      }
+  
+      // 2. Update Booking Amount (paymentInfo + ledger)
+      if (data.bookingAmount !== undefined) {
+        const bookingPaymentType = await tx.paymentTypeMaster.findFirst({
+          where: { vendor_id: data.vendor_id, tag: "Type 2" },
+        });
+        if (!bookingPaymentType) throw new Error("Payment type not found for vendor");
+  
+        // 🔹 Find latest paymentInfo
+        const existingPayment = await tx.paymentInfo.findFirst({
+          where: {
+            lead_id: data.lead_id!,
+            payment_type_id: bookingPaymentType.id,
+          },
+          orderBy: { created_at: "desc" },
+        });
+  
+        let payment;
+        if (existingPayment) {
+          payment = await tx.paymentInfo.update({
+            where: { id: existingPayment.id },
+            data: {
+              amount: data.bookingAmount,
+              payment_text: data.bookingAmountPaymentDetailsText || existingPayment.payment_text, // ✅ added
+            },
+          });
+        } else {
+          payment = await tx.paymentInfo.create({
+            data: {
+              lead_id: data.lead_id!,
+              account_id: data.account_id!,
+              vendor_id: data.vendor_id!,
+              created_by: data.created_by!,
+              amount: data.bookingAmount,
+              payment_date: new Date(),
+              payment_type_id: bookingPaymentType.id,
+              payment_text: data.bookingAmountPaymentDetailsText || null, // ✅ added
+            },
+          });
+        }
+  
+        response.updatedFields.paymentInfo = payment;
+  
+        // Always add a new ledger entry
+        await tx.ledger.create({
+          data: {
+            lead_id: data.lead_id!,
+            account_id: data.account_id!,
+            client_id: data.client_id!,
+            vendor_id: data.vendor_id!,
+            created_by: data.created_by!,
+            amount: data.bookingAmount,
+            payment_date: new Date(),
+            type: "credit",
+          },
+        });
+      }
+  
+      // 3. Update supervisor
+      if (data.siteSupervisorId) {
+        const existingSupervisor = await tx.leadSiteSupervisorMapping.findFirst({
+          where: {
+            lead_id: data.lead_id!,
+            user_id: data.siteSupervisorId,
+          },
+        });
+  
+        let supervisor;
+        if (existingSupervisor) {
+          supervisor = await tx.leadSiteSupervisorMapping.update({
+            where: { id: existingSupervisor.id },
+            data: { user_id: data.siteSupervisorId },
+          });
+        } else {
+          supervisor = await tx.leadSiteSupervisorMapping.create({
+            data: {
+              lead_id: data.lead_id!,
+              user_id: data.siteSupervisorId,
+              vendor_id: data.vendor_id!,
+              account_id: data.account_id!,
+              created_by: data.created_by!,
+            },
+          });
+        }
+  
+        response.updatedFields.supervisor = supervisor;
+      }
+  
+      return response;
+    });
+  }
+  
 }

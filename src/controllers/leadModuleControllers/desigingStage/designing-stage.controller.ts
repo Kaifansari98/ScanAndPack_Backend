@@ -469,7 +469,10 @@ export class DesigingStageController {
           const docsWithUrls = await Promise.all(
             mappings.map(async (map: any) => {
               const document = await prisma.leadDocuments.findUnique({ where: { id: map.document_id } });
-              const signedUrl = document ? await generateSignedUrl(document.doc_sys_name) : null;
+              const signedUrl = document
+  ? await generateSignedUrl(document.doc_sys_name, 3600, "inline") // 👈 always inline
+  : null;
+
               return {
                 ...map,
                 document: document ? { ...document, signedUrl } : null,
