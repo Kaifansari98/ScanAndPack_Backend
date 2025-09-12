@@ -101,19 +101,19 @@ export class BookingStageService {
         throw new Error("Payment type (Booking Amount) not found for this vendor");
       }
 
-      const bookingPayment = await tx.paymentInfo.create({
-        data: {
-          lead_id: data.lead_id,
-          account_id: data.account_id,
-          vendor_id: data.vendor_id,
-          created_by: data.created_by,
-          amount: data.bookingAmount,
-          payment_date: new Date(),
-          payment_type_id: bookingPaymentType.id,
-        }
-      });
+      // const bookingPayment = await tx.paymentInfo.create({
+      //   data: {
+      //     lead_id: data.lead_id,
+      //     account_id: data.account_id,
+      //     vendor_id: data.vendor_id,
+      //     created_by: data.created_by,
+      //     amount: data.bookingAmount,
+      //     payment_date: new Date(),
+      //     payment_type_id: bookingPaymentType.id,
+      //   }
+      // });
 
-      response.paymentInfo = bookingPayment;
+      // response.paymentInfo = bookingPayment;
 
       // ➕ NEW: Ledger Entry
       await tx.ledger.create({
@@ -155,9 +155,9 @@ export class BookingStageService {
         });
 
         paymentFileId = document.id;
-      }
+      }   
 
-      await tx.paymentInfo.create({
+      const bookingPayment = await tx.paymentInfo.create({
         data: {
           lead_id: data.lead_id,
           account_id: data.account_id,
@@ -165,11 +165,12 @@ export class BookingStageService {
           created_by: data.created_by,
           amount: data.bookingAmount,
           payment_text: data.bookingAmountPaymentDetailsText || null,
-          payment_file_id: paymentFileId,
+          payment_file_id: paymentFileId, // may be null if no file
           payment_date: new Date(),
           payment_type_id: bookingPaymentType.id,
         }
       });
+      response.paymentInfo = bookingPayment;
 
       // 4. Update LeadMaster final_booking_amt
       await tx.leadMaster.update({
@@ -355,6 +356,90 @@ export class BookingStageService {
             is_deleted: false,
             documentType: {
               tag: "Type 8",
+              vendor_id: vendorId,
+            },
+          },
+          include: {
+            documentType: { select: { id: true, type: true, tag: true } },
+            createdBy: { select: { id: true, user_name: true } },
+          },
+        },
+      },
+      orderBy: { created_at: "desc" },
+    });
+  
+    // ✅ Generate signed URLs for all documents
+    const data = await Promise.all(
+      leads.map(async (lead) => {
+        const docsWithUrls = await Promise.all(
+          lead.documents.map(async (doc) => {
+            const signed_url = await generateSignedUrl(doc.doc_sys_name);
+            return {
+              ...doc,
+              signed_url,
+              file_type: BookingStageService.getFileType(doc.doc_og_name),
+              is_image: BookingStageService.isImageFile(doc.doc_og_name),
+            };
+          })
+        );
+  
+        return {
+          ...lead,
+          documents: docsWithUrls,
+        };
+      })
+    );
+  
+    return data;
+  }
+
+  public static async getLeadsWithStatusOpen(vendorId: number) {
+    const leads = await prisma.leadMaster.findMany({
+      where: {
+        status_id: 1,
+        is_deleted: false,
+        vendor_id: vendorId,
+      },
+      include: {
+        siteType: true,
+        source: true,
+        statusType: true,
+        createdBy: { select: { id: true, user_name: true } },
+        updatedBy: true,
+        assignedTo: { select: { id: true, user_name: true } },
+        assignedBy: { select: { id: true, user_name: true } },
+        productMappings: {
+          select: {
+            productType: { select: { id: true, type: true } },
+          },
+        },
+        leadProductStructureMapping: {
+          select: {
+            productStructure: { select: { id: true, type: true } },
+          },
+        },
+        // payments: {
+        //   select: {
+        //     id: true,
+        //     amount: true,
+        //     payment_date: true,
+        //     payment_text: true,
+        //     payment_file_id: true,
+        //     payment_type_id: true,
+        //     paymentType: { select: { id: true, type: true } },
+        //   },
+        // },
+        // siteSupervisors: {
+        //   select: {
+        //     supervisor: { select: { id: true, user_name: true } },
+        //   },
+        // },
+        // ✅ Fetch only documents where DocumentTypeMaster.tag = "Type 8"
+        documents: {
+          where: {
+            is_deleted: false,
+            documentType: {
+              tag: "Type 1",
               vendor_id: vendorId,
             },
           },
