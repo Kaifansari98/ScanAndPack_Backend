@@ -15,6 +15,15 @@ bookingStageRouter.post(
   bookingStageController.createBookingStage
 );
 
+bookingStageRouter.post(
+  "/add-more-files",
+  upload.fields([
+    { name: "final_documents", maxCount: 10 },
+  ]),
+  bookingStageController.addBookingStageFiles
+);
+
+
 bookingStageRouter.get(
   "/lead/:leadId",
   bookingStageController.getBookingStage
@@ -23,7 +32,7 @@ bookingStageRouter.get(
 // GET /api/leads/status-4
 bookingStageRouter.get(
   "/status4-leads/:vendorId",
-  bookingStageController.getStatus4Leads
+  bookingStageController.getBookingLeads
 );
 
 bookingStageRouter.put(

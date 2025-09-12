@@ -16,7 +16,7 @@ export class BookingStageService {
 
       // 1. Upload Final Documents (mandatory)
       if (!data.finalDocuments || data.finalDocuments.length === 0) {
-        throw new Error("Final documents are required");
+        throw new Error("At least one final document must be uploaded");
       }
 
       const finalDocType = await tx.documentTypeMaster.findFirst({
@@ -160,6 +160,61 @@ export class BookingStageService {
     });
   }
 
+  public async addBookingStageFiles(data: {
+    lead_id: number;
+    account_id: number;
+    vendor_id: number;
+    created_by: number;
+    finalDocuments?: Express.Multer.File[];
+  }) {
+    return await prisma.$transaction(async (tx) => {
+      const response: any = {
+        documentsUploaded: [],
+      };
+  
+      // 1. Upload Final Documents
+      if (data.finalDocuments && data.finalDocuments.length > 0) {
+        const finalDocType = await tx.documentTypeMaster.findFirst({
+          where: { vendor_id: data.vendor_id, tag: "Type 8" }, // Final Documents
+        });
+        if (!finalDocType) throw new Error("Final Document type not found for this vendor");
+  
+        for (const file of data.finalDocuments) {
+          const sanitizedName = sanitizeFilename(file.originalname);
+          const s3Key = `final-documents-booking/${data.vendor_id}/${data.lead_id}/${Date.now()}-${sanitizedName}`;
+  
+          await wasabi.send(new PutObjectCommand({
+            Bucket: process.env.WASABI_BUCKET_NAME!,
+            Key: s3Key,
+            Body: file.buffer,
+            ContentType: file.mimetype,
+          }));
+  
+          const document = await tx.leadDocuments.create({
+            data: {
+              doc_og_name: file.originalname,
+              doc_sys_name: s3Key,
+              created_by: data.created_by,
+              doc_type_id: finalDocType.id,
+              account_id: data.account_id,
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+            }
+          });
+  
+          response.documentsUploaded.push({
+            id: document.id,
+            type: "final_document",
+            originalName: file.originalname,
+            s3Key,
+          });
+        }
+      }
+  
+      return response;
+    });
+  }
+
   public async getBookingStage(leadId: number) {
     const lead = await prisma.leadMaster.findUnique({
       where: { id: leadId },
@@ -216,8 +271,8 @@ export class BookingStageService {
       })),
     };
   } 
-  
-  public static async getLeadsWithStatus4(vendorId: number) {
+
+  public static async getLeadsWithStatusBooking(vendorId: number) {
     return prisma.leadMaster.findMany({
       where: {
         status_id: 4,
@@ -225,38 +280,37 @@ export class BookingStageService {
         vendor_id: vendorId,
       },
       include: {
-        // vendor: true,
         siteType: true,
         source: true,
-        // account: true,
         statusType: true,
         createdBy: {
           select: {
             id: true,
             user_name: true,
-          }
+          },
         },
         updatedBy: true,
         assignedTo: {
           select: {
             id: true,
             user_name: true,
-          }
+          },
         },
         assignedBy: {
           select: {
             id: true,
             user_name: true,
-          }
+          },
         },
         productMappings: {
-          select: { productType: {
-            select: {
-              id: true,
-              type: true,
-            }
+          select: {
+            productType: {
+              select: {
+                id: true,
+                type: true,
+              },
+            },
           },
-         },
         },
         leadProductStructureMapping: {
           select: {
@@ -264,18 +318,10 @@ export class BookingStageService {
               select: {
                 id: true,
                 type: true,
-              }
-            }
-          }
+              },
+            },
+          },
         },
-        // documents: {
-        //   include: { documentType: {
-        //     select: {
-        //       type: true,
-        //       tag: true,
-        //     }
-        //   } },
-        // },
         payments: {
           select: {
             id: true,
@@ -288,28 +334,49 @@ export class BookingStageService {
               select: {
                 id: true,
                 type: true,
-              }
-            }
-          }
+              },
+            },
+          },
         },
-        // ledgers: true,
-        // leadStatusLogs: {
-        //   include: { statusType: true, createdBy: true },
-        // },
-        // designMeeting: true,
-        // designSelection: true,
         siteSupervisors: {
-          select: { supervisor: {
-            select: {
-              id: true,
-              user_name: true,
-            }
-          } },
+          select: {
+            supervisor: {
+              select: {
+                id: true,
+                user_name: true,
+              },
+            },
+          },
+        },
+        // ✅ Fetch only documents where documentType.tag = "Type 8"
+        documents: {
+          where: {
+            is_deleted: false,
+            documentType: {
+              tag: "Type 8",
+              vendor_id: vendorId, 
+            },
+          },
+          include: {
+            documentType: {
+              select: {
+                id: true,
+                type: true,
+                tag: true,
+              },
+            },
+            createdBy: {
+              select: {
+                id: true,
+                user_name: true,
+              },
+            },
+          },
         },
       },
     });
-  }  
-
+  }
+    
   public async editBookingStage(data: Partial<CreateBookingStageDto>) {
     return await prisma.$transaction(async (tx) => {
       const response: any = {

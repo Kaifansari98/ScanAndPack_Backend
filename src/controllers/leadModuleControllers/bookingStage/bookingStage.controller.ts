@@ -46,6 +46,40 @@ export class BookingStageController {
     }
   };
 
+  public addBookingStageFiles = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { lead_id, account_id, vendor_id, created_by } = req.body;
+  
+      if (!lead_id || !account_id || !vendor_id || !created_by) {
+        res.status(400).json({ success: false, message: "Missing required fields" });
+        return;
+      }
+  
+      const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+      const finalDocuments = files?.final_documents || [];
+  
+      if (!finalDocuments || finalDocuments.length === 0) {
+        res.status(400).json({ success: false, message: "[BOOKING STAGE] At least one file must be uploaded of finalDocuments" });
+        return;
+      }
+  
+      const dto = {
+        lead_id: parseInt(lead_id),
+        account_id: parseInt(account_id),
+        vendor_id: parseInt(vendor_id),
+        created_by: parseInt(created_by),
+        finalDocuments,
+      };
+  
+      const result = await this.bookingStageService.addBookingStageFiles(dto);
+      res.status(201).json({ success: true, message: "Final documents uploaded successfully", data: result });
+  
+    } catch (error: any) {
+      console.error("[BookingStageController] Error adding files:", error);
+      res.status(500).json({ success: false, message: error.message || "Internal server error" });
+    }
+  };
+  
   public getBookingStage = async (req: Request, res: Response): Promise<void> => {
     try {
       const leadId = parseInt(req.params.leadId);
@@ -71,7 +105,7 @@ export class BookingStageController {
     }
   };
 
-  public getStatus4Leads = async (req: Request, res: Response) => {
+  public getBookingLeads = async (req: Request, res: Response) => {
     try {
       const vendorId = parseInt(req.params.vendorId);
   
@@ -79,7 +113,7 @@ export class BookingStageController {
         return res.status(400).json({ success: false, message: "Vendor ID is required" });
       }
   
-      const leads = await BookingStageService.getLeadsWithStatus4(vendorId);
+      const leads = await BookingStageService.getLeadsWithStatusBooking(vendorId);
   
       return res.status(200).json({
         success: true,
