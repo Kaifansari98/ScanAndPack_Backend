@@ -342,10 +342,13 @@ export class BookingStageService {
           },
         },
         siteSupervisors: {
+          where: { status: "active" },
           select: {
-            supervisor: { select: { id: true, user_name: true } },
+            supervisor: {
+              select: { id: true, user_name: true },
+            },
           },
-        },
+        },        
         // ✅ Fetch only documents where DocumentTypeMaster.tag = "Type 8"
         documents: {
           where: {
