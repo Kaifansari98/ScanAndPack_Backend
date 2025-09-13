@@ -39,11 +39,22 @@ export class LeadStatsService {
       // For admin and super-admin, show all vendor leads (no additional filtering needed)
     }
 
-    // Total leads (status = open)
+    // Total leads 
     const totalLeads = await prisma.leadMaster.count({
       where: {
         ...whereClause,
         statusType: {
+          vendor_id: vendorId,
+        },
+      },
+    });
+
+    // Total leads (status = open)
+    const totalOpenLeads = await prisma.leadMaster.count({
+      where: {
+        ...whereClause,
+        statusType: {
+          vendor_id: vendorId,
           type: "open",
         },
       },
@@ -64,15 +75,29 @@ export class LeadStatsService {
       where: {
         ...whereClause,
         statusType: {
+          vendor_id: vendorId,
           type: "designing-stage",
+        },
+      },
+    });
+
+    // Designing stage leads
+    const totalBookingStageLeads = await prisma.leadMaster.count({
+      where: {
+        ...whereClause,
+        statusType: {
+          vendor_id: vendorId,
+          type: "booking-stage",
         },
       },
     });
 
     return {
       total_leads: totalLeads,
+      total_open_leads: totalOpenLeads,
       total_initial_site_measurement_leads: totalInitialSiteMeasurementLeads,
       total_designing_stage_leads: totalDesigningStageLeads,
+      total_booking_stage_leads: totalBookingStageLeads
     };
   }
 }
