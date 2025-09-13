@@ -661,7 +661,7 @@
     createdBy   UserMaster         @relation("DesignSelectionCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
     updatedBy   UserMaster?        @relation("DesignSelectionUpdatedBy", fields: [updated_by], references: [id], onDelete: Cascade)
   }
-
+  
   model PaymentTypeMaster {
     id        Int      @id @default(autoincrement())
     type      String
