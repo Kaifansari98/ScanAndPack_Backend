@@ -238,19 +238,34 @@ export class BookingStageService {
     });
   }
 
-  public async getBookingStage(leadId: number) {
+  public async getBookingStage(leadId: number, vendorId: number) {
     const lead = await prisma.leadMaster.findUnique({
       where: { id: leadId },
       include: {
         documents: {
-          where: { is_deleted: false },
+          where: {
+            is_deleted: false,
+            documentType: {
+              tag: "Type 8",
+              vendor_id: vendorId, // ✅ now directly filter
+            },
+          },
           include: { documentType: true },
         },
         payments: {
-          include: { paymentType: true, document: true },
+          where: {
+            paymentType: {
+              type: "booking_amount", // ✅ filter only booking_amount type payments
+            },
+          },
+          include: {
+            paymentType: true,
+            document: true,
+          },
         },
-        ledgers: true,
+        // ledgers: true,
         siteSupervisors: {
+          where: { status: "active" }, // ✅ only active supervisors
           include: { supervisor: true },
         },
       },
@@ -259,35 +274,57 @@ export class BookingStageService {
     if (!lead) {
       throw new Error("Lead not found");
     }
+
+    // 🔹 Generate signed URLs for each document
+    const documentsWithUrls = await Promise.all(
+      lead.documents.map(async (doc) => {
+        const signedUrl = await generateSignedUrl(doc.doc_sys_name, 3600, "inline");
+        return {
+          id: doc.id,
+          originalName: doc.doc_og_name,
+          s3Key: doc.doc_sys_name,
+          type: doc.documentType?.tag,
+          signedUrl, // ✅ added signed URL
+        };
+      })
+    );
   
     return {
       leadId: lead.id,
       name: `${lead.firstname} ${lead.lastname}`,
       finalBookingAmount: lead.final_booking_amt,
-      documents: lead.documents.map((doc) => ({
-        id: doc.id,
-        originalName: doc.doc_og_name,
-        s3Key: doc.doc_sys_name,
-        type: doc.documentType?.tag,
-      })),
-      payments: lead.payments.map((p) => ({
-        id: p.id,
-        amount: p.amount,
-        date: p.payment_date,
-        text: p.payment_text,
-        type: p.paymentType?.tag,
-        file: p.document
-          ? { id: p.document.id, originalName: p.document.doc_og_name }
-          : null,
-      })),
-      ledger: lead.ledgers.map((l) => ({
-        id: l.id,
-        type: l.type,
-        amount: l.amount,
-        date: l.payment_date,
-      })),
+      vendorId: lead.vendor_id,
+      documents: documentsWithUrls,
+      payments: await Promise.all(
+        lead.payments.map(async (p) => {
+          let file: any = null;
+          if (p.document) {
+            const signedUrl = await generateSignedUrl(p.document.doc_sys_name, 3600, "inline");
+            file = {
+              id: p.document.id,
+              originalName: p.document.doc_og_name,
+              signedUrl,
+            };
+          }
+  
+          return {
+            id: p.id,
+            amount: p.amount,
+            date: p.payment_date,
+            text: p.payment_text,
+            type: p.paymentType?.tag,
+            file,
+          };
+        })
+      ),
+      // ledger: lead.ledgers.map((l) => ({
+      //   id: l.id,
+      //   type: l.type,
+      //   amount: l.amount,
+      //   date: l.payment_date,
+      // })),
       supervisors: lead.siteSupervisors.map((s) => ({
-        id: s.id,
+        // id: s.id,
         userId: s.user_id,
         userName: s.supervisor.user_name,
         status: s.status,
