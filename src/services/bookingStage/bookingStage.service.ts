@@ -101,30 +101,16 @@ export class BookingStageService {
         throw new Error("Payment type (Booking Amount) not found for this vendor");
       }
 
-      // const bookingPayment = await tx.paymentInfo.create({
-      //   data: {
-      //     lead_id: data.lead_id,
-      //     account_id: data.account_id,
-      //     vendor_id: data.vendor_id,
-      //     created_by: data.created_by,
-      //     amount: data.bookingAmount,
-      //     payment_date: new Date(),
-      //     payment_type_id: bookingPaymentType.id,
-      //   }
-      // });
-
-      // response.paymentInfo = bookingPayment;
-
       // ➕ NEW: Ledger Entry
       await tx.ledger.create({
         data: {
           lead_id: data.lead_id,
           account_id: data.account_id,
-          client_id: data.client_id,            // required
+          client_id: data.client_id,
           vendor_id: data.vendor_id,
           created_by: data.created_by,
           amount: data.bookingAmount,
-          payment_date: new Date(),             // required
+          payment_date: new Date(),
           type: "credit",
         }
       });      
@@ -252,19 +238,34 @@ export class BookingStageService {
     });
   }
 
-  public async getBookingStage(leadId: number) {
+  public async getBookingStage(leadId: number, vendorId: number) {
     const lead = await prisma.leadMaster.findUnique({
       where: { id: leadId },
       include: {
         documents: {
-          where: { is_deleted: false },
+          where: {
+            is_deleted: false,
+            documentType: {
+              tag: "Type 8",
+              vendor_id: vendorId, // ✅ now directly filter
+            },
+          },
           include: { documentType: true },
         },
         payments: {
-          include: { paymentType: true, document: true },
+          where: {
+            paymentType: {
+              type: "booking_amount", // ✅ filter only booking_amount type payments
+            },
+          },
+          include: {
+            paymentType: true,
+            document: true,
+          },
         },
-        ledgers: true,
+        // ledgers: true,
         siteSupervisors: {
+          where: { status: "active" }, // ✅ only active supervisors
           include: { supervisor: true },
         },
       },
@@ -273,41 +274,63 @@ export class BookingStageService {
     if (!lead) {
       throw new Error("Lead not found");
     }
+
+    // 🔹 Generate signed URLs for each document
+    const documentsWithUrls = await Promise.all(
+      lead.documents.map(async (doc) => {
+        const signedUrl = await generateSignedUrl(doc.doc_sys_name, 3600, "inline");
+        return {
+          id: doc.id,
+          originalName: doc.doc_og_name,
+          s3Key: doc.doc_sys_name,
+          type: doc.documentType?.tag,
+          signedUrl, // ✅ added signed URL
+        };
+      })
+    );
   
     return {
       leadId: lead.id,
       name: `${lead.firstname} ${lead.lastname}`,
       finalBookingAmount: lead.final_booking_amt,
-      documents: lead.documents.map((doc) => ({
-        id: doc.id,
-        originalName: doc.doc_og_name,
-        s3Key: doc.doc_sys_name,
-        type: doc.documentType?.tag,
-      })),
-      payments: lead.payments.map((p) => ({
-        id: p.id,
-        amount: p.amount,
-        date: p.payment_date,
-        text: p.payment_text,
-        type: p.paymentType?.tag,
-        file: p.document
-          ? { id: p.document.id, originalName: p.document.doc_og_name }
-          : null,
-      })),
-      ledger: lead.ledgers.map((l) => ({
-        id: l.id,
-        type: l.type,
-        amount: l.amount,
-        date: l.payment_date,
-      })),
+      vendorId: lead.vendor_id,
+      documents: documentsWithUrls,
+      payments: await Promise.all(
+        lead.payments.map(async (p) => {
+          let file: any = null;
+          if (p.document) {
+            const signedUrl = await generateSignedUrl(p.document.doc_sys_name, 3600, "inline");
+            file = {
+              id: p.document.id,
+              originalName: p.document.doc_og_name,
+              signedUrl,
+            };
+          }
+  
+          return {
+            id: p.id,
+            amount: p.amount,
+            date: p.payment_date,
+            text: p.payment_text,
+            type: p.paymentType?.tag,
+            file,
+          };
+        })
+      ),
+      // ledger: lead.ledgers.map((l) => ({
+      //   id: l.id,
+      //   type: l.type,
+      //   amount: l.amount,
+      //   date: l.payment_date,
+      // })),
       supervisors: lead.siteSupervisors.map((s) => ({
-        id: s.id,
+        // id: s.id,
         userId: s.user_id,
         userName: s.supervisor.user_name,
         status: s.status,
       })),
     };
-  } 
+  }
 
   public static async getLeadsWithStatusBooking(vendorId: number) {
     const leads = await prisma.leadMaster.findMany({
@@ -356,10 +379,13 @@ export class BookingStageService {
           },
         },
         siteSupervisors: {
+          where: { status: "active" },
           select: {
-            supervisor: { select: { id: true, user_name: true } },
+            supervisor: {
+              select: { id: true, user_name: true },
+            },
           },
-        },
+        },        
         // ✅ Fetch only documents where DocumentTypeMaster.tag = "Type 8"
         documents: {
           where: {
@@ -503,7 +529,7 @@ export class BookingStageService {
     const ext = filename.split(".").pop()?.toLowerCase();
     return ["jpg", "jpeg", "png", "gif", "webp"].includes(ext || "");
   }
-    
+  
   public async editBookingStage(data: Partial<CreateBookingStageDto>) {
     return await prisma.$transaction(async (tx) => {
       const response: any = {
@@ -579,20 +605,38 @@ export class BookingStageService {
   
       // 3. Update supervisor
       if (data.siteSupervisorId) {
+
+        // Step 1: Mark all existing supervisors for this lead as inactive
+        await tx.leadSiteSupervisorMapping.updateMany({
+          where: {
+            lead_id: data.lead_id!,
+            vendor_id: data.vendor_id!,
+            account_id: data.account_id!,
+          },
+          data: {
+            status: "inactive",
+          },
+        });
+
+        // Step 2: Check if this supervisor already exists for the lead
         const existingSupervisor = await tx.leadSiteSupervisorMapping.findFirst({
           where: {
             lead_id: data.lead_id!,
             user_id: data.siteSupervisorId,
+            vendor_id: data.vendor_id!,
+            account_id: data.account_id!,
           },
         });
-  
+
         let supervisor;
         if (existingSupervisor) {
+          // Update status to active
           supervisor = await tx.leadSiteSupervisorMapping.update({
             where: { id: existingSupervisor.id },
-            data: { user_id: data.siteSupervisorId },
+            data: { status: "active" },
           });
         } else {
+          // Create new mapping with active status
           supervisor = await tx.leadSiteSupervisorMapping.create({
             data: {
               lead_id: data.lead_id!,
@@ -600,6 +644,7 @@ export class BookingStageService {
               vendor_id: data.vendor_id!,
               account_id: data.account_id!,
               created_by: data.created_by!,
+              status: "active",
             },
           });
         }

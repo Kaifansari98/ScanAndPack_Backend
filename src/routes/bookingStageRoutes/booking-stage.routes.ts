@@ -25,7 +25,7 @@ bookingStageRouter.post(
 
 
 bookingStageRouter.get(
-  "/lead/:leadId",
+  "/vendor/:vendorId/lead/:leadId",
   bookingStageController.getBookingStage
 );
 

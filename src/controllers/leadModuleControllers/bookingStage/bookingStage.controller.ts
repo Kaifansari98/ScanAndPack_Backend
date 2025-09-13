@@ -83,13 +83,14 @@ export class BookingStageController {
   public getBookingStage = async (req: Request, res: Response): Promise<void> => {
     try {
       const leadId = parseInt(req.params.leadId);
+      const vendorId = parseInt(req.params.vendorId);
   
       if (!leadId) {
         res.status(400).json({ success: false, message: "leadId is required" });
         return;
       }
   
-      const result = await this.bookingStageService.getBookingStage(leadId);
+      const result = await this.bookingStageService.getBookingStage(leadId, vendorId);
   
       res.status(200).json({
         success: true,
