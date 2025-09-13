@@ -12,6 +12,7 @@ import {
   validateLeadOwnership, 
   getUserRole 
 } from "../../../validations/leadValidation";
+import { generateSignedUrl } from "../../../utils/wasabiClient";
 
 export const createLeadService = async (payload: CreateLeadDTO, files: Express.Multer.File[]) => {
     console.log("[DEBUG] Service called with", files.length, "files");
@@ -377,49 +378,61 @@ export const getLeadsByVendorAndUser = async (vendorId: number, userId: number) 
     const leads = await prisma.leadMaster.findMany({
       where: whereCondition,
       include: {
-        account: true,
         leadProductStructureMapping: {
-          include: { productStructure: true },
+          select: { productStructure: { select: { id: true, type: true } } },
         },
         productMappings: {
-          include: { productType: true },
+          select: { productType: { select: { id: true, type: true } } },
         },
-        documents: true,
+        documents: {
+          where: {
+            documentType: { tag: "Type 1", vendor_id: vendorId },
+          },
+          select: {
+            id: true,
+            doc_sys_name: true, // stored S3/Wasabi key
+            documentType: { select: { id: true, type: true, tag: true } },
+          },
+        },
         source: true,
         siteType: true,
         statusType: true,
         createdBy: {
-          select: {
-            id: true,
-            user_name: true,
-            user_email: true,
-            user_contact: true,
-          },
+          select: { id: true, user_name: true, user_email: true, user_contact: true },
         },
         assignedTo: {
-          select: {
-            id: true,
-            user_name: true,
-            user_email: true,
-            user_contact: true,
-          },
+          select: { id: true, user_name: true, user_email: true, user_contact: true },
         },
         assignedBy: {
-          select: {
-            id: true,
-            user_name: true,
-            user_email: true,
-            user_contact: true,
-          },
+          select: { id: true, user_name: true, user_email: true, user_contact: true },
         },
       },
       orderBy: { created_at: "desc" },
     });
 
-    console.log(`[SERVICE] Found ${leads.length} leads for user ${userId} (${userInfo.userType})`);
+    // ✅ Add signed URLs
+    const leadsWithSignedDocs = await Promise.all(
+      leads.map(async (lead) => {
+        const signedDocs = await Promise.all(
+          lead.documents.map(async (doc) => {
+            if (!doc.doc_sys_name) return doc;
+
+            try {
+              const signedUrl = await generateSignedUrl(doc.doc_sys_name, 3600, "inline"); // 1h
+              return { ...doc, signedUrl };
+            } catch (err) {
+              console.error(`[ERROR] Failed to sign doc ${doc.id}:`, err);
+              return { ...doc, signedUrl: null };
+            }
+          })
+        );
+
+        return { ...lead, documents: signedDocs };
+      })
+    );
 
     return {
-      leads,
+      leads: leadsWithSignedDocs,
       userInfo: {
         role: userType,
         canViewAllLeads: ["admin", "super-admin"].includes(userType),

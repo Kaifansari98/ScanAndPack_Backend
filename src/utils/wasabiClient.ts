@@ -28,7 +28,6 @@ export const generateSignedUrl = async (
   return await getSignedUrl(wasabi, command, { expiresIn });
 };
 
-
 export const uploadToWasabi = async (
   buffer: Buffer,
   vendorId: number,
