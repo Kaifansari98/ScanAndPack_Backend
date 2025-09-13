@@ -317,6 +317,10 @@ export class BookingStageService {
         vendor_id: vendorId,
       },
       include: {
+        account: { select: {
+          id: true,
+          name: true,
+        }},
         siteType: true,
         source: true,
         statusType: true,
