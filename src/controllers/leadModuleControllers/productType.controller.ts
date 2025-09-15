@@ -6,14 +6,14 @@ export const createProductType = async (req: Request, res: Response) => {
     console.log("[CONTROLLER] createProductType called", { body: req.body });
 
     try{
-        const { vendor_id, type } = req.body as ProductTypeInput;
+        const { vendor_id, type, tag } = req.body as ProductTypeInput;
 
-        if(!vendor_id || !type) {
+        if(!vendor_id || !type || !tag) {
             console.warn("[CONTROLLER] Missing required fields", { vendor_id, type });
-            return res.status(400).json({ error: "vendor_id and type are required" });
+            return res.status(400).json({ error: "vendor_id tag and type are required" });
         }
 
-        const productType = await addProductType({vendor_id, type});
+        const productType = await addProductType({vendor_id, type, tag});
 
         console.log("[CONTROLLER] ProductType created successfully", productType);
         return res.status(201).json({ success: true, data: productType });

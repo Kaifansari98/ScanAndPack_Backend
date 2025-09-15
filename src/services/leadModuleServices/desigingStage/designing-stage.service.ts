@@ -170,6 +170,7 @@ export class DesigingStage {
               select: {
                 id: true,
                 type: true,
+                tag: true,
               }
             },
           },
@@ -297,7 +298,7 @@ export class DesigingStage {
         productMappings: {
           select: {
             productType: {
-              select: { id: true, type: true },
+              select: { id: true, type: true, tag: true },
             },
           },
         },

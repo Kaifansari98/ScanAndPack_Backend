@@ -25,6 +25,8 @@ import { paymentUploadRoutes } from './leadModuleRoutes/initial-site-measurement
 import DesigningStageRouter from './leadModuleRoutes/desigingStage/designing-stage.routes';
 import bookingStageRouter from './bookingStageRoutes/booking-stage.routes';
 
+import { finalMeasurementRouter } from './finalMeasurementStage/finalMeasurement.routes';
+
 const router = Router();
 
 router.use('/vendors', vendorRoutes);
@@ -51,6 +53,8 @@ router.use("/leads/initial-site-measurement", paymentUploadRoutes);
 router.use("/leads/designing-stage", DesigningStageRouter);
 
 router.use("/leads/stats", Statsrouter);
-router.use("/leads/bookingStage", bookingStageRouter)
+router.use("/leads/bookingStage", bookingStageRouter);
+
+router.use("/leads/final-measurement", finalMeasurementRouter);
 
 export { router };

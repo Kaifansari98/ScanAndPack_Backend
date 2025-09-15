@@ -18,6 +18,7 @@ export const addProductType = async (payload: ProductTypeInput): Promise<Product
     const productType = await prisma.productTypeMaster.create({
         data: {
             type: payload.type,
+            tag: payload.tag,
             vendor_id: payload.vendor_id,
         }
     });

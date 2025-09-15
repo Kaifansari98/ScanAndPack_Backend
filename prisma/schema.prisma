@@ -335,6 +335,7 @@
     account_id      Int
     archetech_name  String?
     designer_remark String?
+    final_desc_note String?   @db.VarChar(2000)
     initial_site_measurement_date DateTime?
     final_booking_amt Float?
     vendor_id       Int
@@ -460,6 +461,7 @@
     id        Int      @id @default(autoincrement())
     type      String
     vendor_id Int
+    tag       String
 
     vendor VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
     leads  LeadProductMapping[]

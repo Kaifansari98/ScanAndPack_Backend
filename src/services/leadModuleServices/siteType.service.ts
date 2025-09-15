@@ -54,7 +54,7 @@ export const deleteSiteType = async (id: number): Promise<boolean> => {
     const existing = await prisma.siteTypeMaster.findUnique({ where: { id } });
     if (!existing) {
         console.error("[SERVICE] SiteType not found for deletion", { id });
-        throw new Error("ProductType not found");
+        throw new Error("SiteType not found");
     }
 
     await prisma.siteTypeMaster.delete({ where: { id } });

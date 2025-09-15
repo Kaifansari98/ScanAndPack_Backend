@@ -3,11 +3,13 @@ import { LeadPriority, DocumentType } from "@prisma/client";
 export interface ProductTypeInput {
     vendor_id: number;
     type: string;
+    tag: string;
 }
   
 export interface ProductType {
     id: number;
     type: string;
+    tag: string;
     vendor_id: number;
 }
 
