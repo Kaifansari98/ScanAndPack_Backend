@@ -157,13 +157,13 @@ export class FinalMeasurementController {
   public getFinalMeasurementLeads = async (req: Request, res: Response) => {
     try {
       const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId);
+      const userId = parseInt(req.params.userId); // ✅ take userId also
   
       if (!vendorId || !userId) {
         return res.status(400).json({ success: false, message: "Vendor ID and User ID are required" });
       }
   
-      const leads = await FinalMeasurementService.getLeadsWithStatusFinalMeasurement(vendorId, userId);
+      const leads = await finalMeasurementService.getLeadsWithStatusFinalMeasurement(vendorId, userId);
   
       return res.status(200).json({
         success: true,

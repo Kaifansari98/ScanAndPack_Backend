@@ -66,6 +66,48 @@ export const uploadFinalMeasurement = multer({
   },
 });
 
+export const uploadClientDocumentation = multer({
+  storage: multer.memoryStorage(), // ✅ keep file in memory
+  limits: {
+    fileSize: parseInt(process.env.MAX_FILE_SIZE_MB || "5") * 1024 * 1024, // default 5MB
+  },
+  fileFilter: (req, file, cb) => {
+    const allowedMimeTypes = [
+      // Images
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+
+      // PDF
+      "application/pdf",
+
+      // Word
+      "application/msword", // .doc
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .docx
+
+      // PowerPoint
+      "application/vnd.ms-powerpoint", // .ppt
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation", // .pptx
+    ];
+
+    const allowedExtensions = [".pyo"]; // ✅ custom extension
+
+    const ext = file.originalname
+      .slice(file.originalname.lastIndexOf("."))
+      .toLowerCase();
+
+    if (allowedMimeTypes.includes(file.mimetype) || allowedExtensions.includes(ext)) {
+      cb(null, true);
+    } else {
+      cb(
+        new Error(
+          `Only .ppt, .pptx, .pdf, .jpg, .jpeg, .png, .doc, .docx, .pyo files are allowed! Received: ${file.originalname} (${file.mimetype})`
+        )
+      );
+    }
+  },
+});
+
 export const uploadDesigns = multer({
   storage: multer.memoryStorage(),
   limits: {

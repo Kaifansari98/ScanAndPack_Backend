@@ -1,6 +1,6 @@
 import { prisma } from "../../../prisma/client";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import wasabi, { generateSignedUrl } from "../../../utils/wasabiClient"; // your existing Wasabi config
+import wasabi from "../../../utils/wasabiClient"; // your existing Wasabi config
 import { sanitizeFilename } from "../../../utils/sanitizeFilename";
 import { SupervisorStatus } from "@prisma/client";
 
@@ -234,7 +234,7 @@ export class FinalMeasurementService {
     }, { timeout: 15000 });
   }
 
-  public static async getLeadsWithStatusFinalMeasurement(vendorId: number, userId: number) {
+  public async getLeadsWithStatusFinalMeasurement(vendorId: number, userId: number) {
     // ✅ Get user role
     const user = await prisma.userMaster.findUnique({
       where: { id: userId },
@@ -292,6 +292,4 @@ export class FinalMeasurementService {
 
     return leads;
   }
-  
-  
 }

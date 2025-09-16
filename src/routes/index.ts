@@ -26,6 +26,7 @@ import DesigningStageRouter from './leadModuleRoutes/desigingStage/designing-sta
 import bookingStageRouter from './bookingStageRoutes/booking-stage.routes';
 
 import { finalMeasurementRouter } from './finalMeasurementStage/finalMeasurement.routes';
+import ClientDocumentationRouter from './clientDocumentationRoutes/clientDocumentation.routes';
 
 const router = Router();
 
@@ -56,5 +57,6 @@ router.use("/leads/stats", Statsrouter);
 router.use("/leads/bookingStage", bookingStageRouter);
 
 router.use("/leads/final-measurement", finalMeasurementRouter);
+router.use("/leads/client-documentation", ClientDocumentationRouter);
 
 export { router };
