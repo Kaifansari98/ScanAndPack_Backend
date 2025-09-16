@@ -1,6 +1,6 @@
 import { prisma } from "../../../prisma/client";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import wasabi from "../../../utils/wasabiClient"; // your existing Wasabi config
+import wasabi, { generateSignedUrl } from "../../../utils/wasabiClient"; // your existing Wasabi config
 import { sanitizeFilename } from "../../../utils/sanitizeFilename";
 import { SupervisorStatus } from "@prisma/client";
 
@@ -155,15 +155,38 @@ export class FinalMeasurementService {
   
     const measurementDocType = docTypes.find(d => d.tag === "Type 9");
     const sitePhotoType = docTypes.find(d => d.tag === "Type 10");
+
+    // Measurement doc (single)
+    const measurementDoc = lead.documents.find(
+      (d) => d.doc_type_id === measurementDocType?.id
+    );
+
+    let measurementDocWithUrl = null;
+    if (measurementDoc) {
+      measurementDocWithUrl = {
+        ...measurementDoc,
+        signedUrl: await generateSignedUrl(measurementDoc.doc_sys_name, 3600, "inline"),
+      };
+    }
+
+    // Site photos (multiple)
+    const sitePhotos = await Promise.all(
+      lead.documents
+        .filter((d) => d.doc_type_id === sitePhotoType?.id)
+        .map(async (doc) => ({
+          ...doc,
+          signedUrl: await generateSignedUrl(doc.doc_sys_name, 3600, "inline"),
+        }))
+    );
   
     return {
       id: lead.id,
       vendor_id: lead.vendor_id,
       final_desc_note: lead.final_desc_note,
       status_id: lead.status_id,
-      measurementDoc: lead.documents.find(d => d.doc_type_id === measurementDocType?.id) || null,
-      sitePhotos: lead.documents.filter(d => d.doc_type_id === sitePhotoType?.id),
-    };
+      measurementDoc: measurementDocWithUrl,
+      sitePhotos,
+    };    
   }
 
   public async updateCriticalDiscussionNotes(vendorId: number, leadId: number, notes: string) {
