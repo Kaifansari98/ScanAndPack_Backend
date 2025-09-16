@@ -1598,25 +1598,6 @@ public async getPaymentAnalytics(
   }
 }
 
-// Helper method to validate that required document types exist
-private async validateDocumentTypes(vendorId: number) {
-  const sitePhotoType = await prisma.documentTypeMaster.findFirst({
-    where: { id: 1, vendor_id: vendorId }
-  });
-
-  const pdfType = await prisma.documentTypeMaster.findFirst({
-    where: { id: 3, vendor_id: vendorId }
-  });
-
-  if (!sitePhotoType) {
-    throw new Error('Site photo document type (id: 1) not found for vendor');
-  }
-
-  if (!pdfType) {
-    throw new Error('PDF document type (id: 3) not found for vendor');
-  }
-}
-
 private getFileType(filename: string): string {
   const ext = filename.toLowerCase().split('.').pop() || '';
   const imageTypes = ['jpg', 'jpeg', 'png', 'gif', 'webp'];

@@ -353,7 +353,7 @@ export class BookingStageService {
         assignedBy: { select: { id: true, user_name: true } },
         productMappings: {
           select: {
-            productType: { select: { id: true, type: true } },
+            productType: { select: { id: true, type: true, tag: true } },
           },
         },
         leadProductStructureMapping: {
@@ -447,7 +447,7 @@ export class BookingStageService {
         assignedBy: { select: { id: true, user_name: true } },
         productMappings: {
           select: {
-            productType: { select: { id: true, type: true } },
+            productType: { select: { id: true, type: true, tag: true } },
           },
         },
         leadProductStructureMapping: {
