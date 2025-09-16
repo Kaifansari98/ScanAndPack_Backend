@@ -92,12 +92,35 @@ export class LeadStatsService {
       },
     });
 
+    // Final Measurement stage leads
+    const totalFinalMeasurementStageLeads = await prisma.leadMaster.count({
+      where: {
+        ...whereClause,
+        statusType: {
+          vendor_id: vendorId,
+          type: "final-site-measurement-stage",
+        },
+      },
+    });
+
+    const totalClientDocumentationStageLeads = await prisma.leadMaster.count({
+      where: {
+        ...whereClause,
+        statusType: {
+          vendor_id: vendorId,
+          type: "client-documentation-stage",
+        },
+      },
+    });
+
     return {
       total_leads: totalLeads,
       total_open_leads: totalOpenLeads,
       total_initial_site_measurement_leads: totalInitialSiteMeasurementLeads,
       total_designing_stage_leads: totalDesigningStageLeads,
-      total_booking_stage_leads: totalBookingStageLeads
+      total_booking_stage_leads: totalBookingStageLeads,
+      total_final_measurement_leads: totalFinalMeasurementStageLeads,
+      total_client_documentation_leads: totalClientDocumentationStageLeads
     };
   }
 }
