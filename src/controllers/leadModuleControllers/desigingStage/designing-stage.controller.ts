@@ -332,7 +332,7 @@ export class DesigingStageController {
       if (!errors.isEmpty()) {
         return res.status(400).json({ success: false, logs: errors.array() });
       }
-
+  
       const {
         leadId,
         vendorId,
@@ -341,24 +341,34 @@ export class DesigingStageController {
         date,
         desc
       } = req.body;
-
-      if (!req.files || (req.files as Express.Multer.File[]).length === 0) {
-        return res.status(400).json({ success: false, message: "At least one file is required" });
-      }
-
+  
       const logs: any = [];
-      const files = req.files as Express.Multer.File[];
-
+      const files = (req.files as Express.Multer.File[]) || [];
+  
       // 1️⃣ Check user belongs to vendor
-      const user = await prisma.userMaster.findFirst({ where: { id: Number(userId), vendor_id: Number(vendorId) } });
-      if (!user) return res.status(401).json({ success: false, logs: ["Unauthorized: User not in vendor"] });
+      const user = await prisma.userMaster.findFirst({
+        where: { id: Number(userId), vendor_id: Number(vendorId) }
+      });
+      if (!user)
+        return res
+          .status(401)
+          .json({ success: false, logs: ["Unauthorized: User not in vendor"] });
       logs.push("User verified");
-
+  
       // 2️⃣ Check lead existence
-      const lead = await prisma.leadMaster.findFirst({ where: { id: Number(leadId), vendor_id: Number(vendorId), is_deleted: false } });
-      if (!lead) return res.status(404).json({ success: false, logs: ["Lead not found"] });
+      const lead = await prisma.leadMaster.findFirst({
+        where: {
+          id: Number(leadId),
+          vendor_id: Number(vendorId),
+          is_deleted: false,
+        },
+      });
+      if (!lead)
+        return res
+          .status(404)
+          .json({ success: false, logs: ["Lead not found"] });
       logs.push("Lead verified");
-
+  
       // 3️⃣ Create Design Meeting
       const meeting = await prisma.leadDesignMeeting.create({
         data: {
@@ -368,77 +378,86 @@ export class DesigingStageController {
           date: new Date(date),
           desc,
           created_by: Number(userId),
-        }
+        },
       });
       logs.push({ meetingCreated: meeting });
-
+  
       const documents: any[] = [];
       const mapping: any[] = [];
-
-      // 4️⃣ Upload files to Wasabi & create LeadDocuments + LeadDesignMeetingDocumentsMapping
-      for (const file of files) {
-        // Upload to Wasabi
-        const sysName = await uploadToWasabiMeetingDocs(file.buffer, Number(vendorId), Number(leadId), file.originalname);
-        logs.push({ fileUploaded: file.originalname, sysName });
-
-
-        const mettingDocType = await prisma.documentTypeMaster.findFirst({
-          where: {
-            vendor_id: Number(vendorId),
-            tag: "Type 7"
-          }
-        });
-
-        if (!mettingDocType) {
-          return res.status(404).json({
-            success: false,
-            message: "Document type for metting documents (Type 7) not found for this vendor",
+  
+      // 4️⃣ Upload files only if present
+      if (files.length > 0) {
+        for (const file of files) {
+          // Upload to Wasabi
+          const sysName = await uploadToWasabiMeetingDocs(
+            file.buffer,
+            Number(vendorId),
+            Number(leadId),
+            file.originalname
+          );
+          logs.push({ fileUploaded: file.originalname, sysName });
+  
+          const mettingDocType = await prisma.documentTypeMaster.findFirst({
+            where: {
+              vendor_id: Number(vendorId),
+              tag: "Type 7",
+            },
           });
+  
+          if (!mettingDocType) {
+            return res.status(404).json({
+              success: false,
+              message:
+                "Document type for meeting documents (Type 7) not found for this vendor",
+            });
+          }
+  
+          // Create LeadDocument
+          const doc = await prisma.leadDocuments.create({
+            data: {
+              doc_og_name: file.originalname,
+              doc_sys_name: sysName,
+              vendor_id: Number(vendorId),
+              lead_id: Number(leadId),
+              account_id: Number(accountId),
+              doc_type_id: mettingDocType.id,
+              created_by: Number(userId),
+            },
+          });
+          documents.push(doc);
+          logs.push({ documentCreated: doc });
+  
+          // Create DesignMeetingDocumentsMapping
+          const map = await prisma.leadDesignMeetingDocumentsMapping.create({
+            data: {
+              lead_id: Number(leadId),
+              account_id: Number(accountId),
+              vendor_id: Number(vendorId),
+              meeting_id: meeting.id,
+              document_id: doc.id,
+              created_at: new Date(),
+              created_by: Number(userId),
+            },
+          });
+          mapping.push(map);
+          logs.push({ mappingCreated: map });
         }
-
-        // Create LeadDocument
-        const doc = await prisma.leadDocuments.create({
-          data: {
-            doc_og_name: file.originalname,
-            doc_sys_name: sysName,
-            vendor_id: Number(vendorId),
-            lead_id: Number(leadId),
-            account_id: Number(accountId),
-            doc_type_id: mettingDocType.id, // design quotation
-            created_by: Number(userId),
-          }
-        });
-        documents.push(doc);
-        logs.push({ documentCreated: doc });
-
-        // Create DesignMeetingDocumentsMapping
-        const map = await prisma.leadDesignMeetingDocumentsMapping.create({
-          data: {
-            lead_id: Number(leadId),
-            account_id: Number(accountId),
-            vendor_id: Number(vendorId),
-            meeting_id: meeting.id,
-            document_id: doc.id,
-            created_at: new Date(),
-            created_by: Number(userId),
-          }
-        });
-        mapping.push(map);
-        logs.push({ mappingCreated: map });
+      } else {
+        logs.push("No files uploaded");
       }
-
+  
       return res.status(201).json({
         success: true,
         logs,
         meeting,
         documents,
-        mapping
+        mapping,
       });
-
     } catch (error: any) {
       return res.status(500).json({ success: false, logs: [error.message] });
     }
   }
+  
 
   public static async getDesignMeetings(req: Request, res: Response) {
     try {
