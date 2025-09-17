@@ -100,8 +100,8 @@ export interface CreateLeadDTO {
     status_id: number;
     assign_to?: number;
     assigned_by?: number;
-    product_types?: number[];
-    product_structures?: number[];
+    product_types: number[];
+    product_structures: number[];
     initial_site_measurement_date?: Date;
 }
   

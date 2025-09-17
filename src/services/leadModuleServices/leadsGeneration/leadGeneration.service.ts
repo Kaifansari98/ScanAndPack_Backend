@@ -149,7 +149,7 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
           country_code,
           contact_no,
           alt_contact_no,
-          email,
+          email: email ?? "",
           site_address,
           site_type_id,
           status_id,

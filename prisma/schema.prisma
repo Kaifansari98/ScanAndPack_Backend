@@ -338,6 +338,7 @@
     final_desc_note String?   @db.VarChar(2000)
     initial_site_measurement_date DateTime?
     final_booking_amt Float?
+    advance_payment_date DateTime?
     vendor_id       Int
     assign_to       Int?
     assigned_by     Int?
@@ -377,7 +378,6 @@
 
     // ✅ Unique constraints for contact_no and email per vendor
     @@unique([contact_no, vendor_id], name: "unique_contact_per_vendor")
-    @@unique([email, vendor_id], name: "unique_email_per_vendor")
   }
 
   model SiteTypeMaster {

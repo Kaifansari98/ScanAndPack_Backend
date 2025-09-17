@@ -26,9 +26,22 @@ export const createLeadSchema = Joi.object({
   assigned_by: Joi.number().integer().positive().optional(),
   status_id: Joi.number().required(),
   // Changed from array of strings to array of integers
-  product_types: Joi.array().items(Joi.number().integer().positive()).optional(),
-  product_structures: Joi.array().items(Joi.number().integer().positive()).optional(),
-
+  product_types: Joi.array()
+  .items(Joi.number().integer().positive())
+  .min(1)
+  .required()
+  .messages({
+    "any.required": "At least one product type is required",
+    "array.min": "At least one product type must be selected"
+  }),
+  product_structures: Joi.array()
+    .items(Joi.number().integer().positive())
+    .min(1)
+    .required()
+    .messages({
+      "any.required": "At least one product structure is required",
+      "array.min": "At least one product structure must be selected"
+    }),
   // ✅ new field
   initial_site_measurement_date: Joi.date()
     .min(today) // must be today or future
