@@ -102,7 +102,7 @@ export class ClientDocumentationService {
     const docsWithSignedUrls = await Promise.all(
       clientDocs.map(async (doc) => ({
         ...doc,
-        signedUrl: await generateSignedUrl(doc.doc_sys_name, 3600, "inline"),
+        signed_url: await generateSignedUrl(doc.doc_sys_name, 3600, "inline"),
       }))
     );
 
