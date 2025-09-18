@@ -51,11 +51,24 @@ export class ClientDocumentationService {
       response.documents.push(docEntry);
     }
 
+    // Resolve the vendor's Open status ID dynamically
+    const clientDocumentationStatus = await prisma.statusTypeMaster.findFirst({
+      where: {
+        vendor_id: data.vendor_id,
+        tag: "Type 6", // ✅ Open status
+      },
+      select: { id: true },
+    });
+
+    if (!clientDocumentationStatus) {
+      throw new Error(`Open status (Type 1) not found for vendor ${data.vendor_id}`);
+    }
+
     // 3. Update lead stage (Final Measurement → Client Documentation)
     await prisma.leadMaster.update({
       where: { id: data.lead_id },
       data: {
-        status_id: 6, // Client Documentation stage
+        status_id: clientDocumentationStatus.id,
         updated_at: new Date(),
         updated_by: data.created_by,
       },
@@ -65,12 +78,26 @@ export class ClientDocumentationService {
   }
 
   public async getClientDocumentation(vendorId: number, leadId: number) {
+
+    // Resolve the vendor's Open status ID dynamically
+    const clientDocumentationStatus = await prisma.statusTypeMaster.findFirst({
+      where: {
+        vendor_id: vendorId,
+        tag: "Type 6", // ✅ Open status
+      },
+      select: { id: true },
+    });
+
+    if (!clientDocumentationStatus) {
+      throw new Error(`Open status (Type 1) not found for vendor ${vendorId}`);
+    }
+
     // 1. Get lead
     const lead = await prisma.leadMaster.findFirst({
       where: {
         id: leadId,
         vendor_id: vendorId,
-        status_id: 6, // ✅ Client Documentation stage
+        status_id: clientDocumentationStatus.id, // ✅ Client Documentation stage
       },
       include: {
         documents: true,
@@ -168,9 +195,22 @@ export class ClientDocumentationService {
 
     const role = user.user_type.user_type.toLowerCase();
 
+    // Resolve the vendor's Open status ID dynamically
+    const clientDocumentationStatus = await prisma.statusTypeMaster.findFirst({
+      where: {
+        vendor_id: vendorId,
+        tag: "Type 6", // ✅ Open status
+      },
+      select: { id: true },
+    });
+
+    if (!clientDocumentationStatus) {
+      throw new Error(`Open status (Type 1) not found for vendor ${vendorId}`);
+    }
+
     // ✅ Base where clause
     const whereClause: any = {
-      status_id: 6,
+      status_id: clientDocumentationStatus.id,
       is_deleted: false,
       vendor_id: vendorId,
     };

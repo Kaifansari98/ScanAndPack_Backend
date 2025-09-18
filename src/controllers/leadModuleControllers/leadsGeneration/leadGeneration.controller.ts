@@ -19,6 +19,7 @@ import {
   assignLeadToUser,
   getLeadById
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
+import { prisma } from "../../../prisma/client";
 
 export class LeadController {
 
@@ -45,11 +46,25 @@ export class LeadController {
   
     try {
       const files = (req.files as Express.MulterS3.File[]) || [];
+      const { vendor_id } = req.body;
+
+      // 1. Resolve the vendor's Open status ID dynamically
+      const openStatus = await prisma.statusTypeMaster.findFirst({
+        where: {
+          vendor_id: Number(vendor_id),
+          tag: "Type 1", // ✅ Open status
+        },
+        select: { id: true },
+      });
+
+      if (!openStatus) {
+        throw new Error(`Open status (Type 1) not found for vendor ${vendor_id}`);
+      }
   
       const payload = {
         ...req.body,
         site_type_id: req.body.site_type_id ? Number(req.body.site_type_id) : undefined,
-        status_id: Number(1),
+        status_id: openStatus.id, // <-- use openStatus' id here
         source_id: Number(req.body.source_id),
         vendor_id: Number(req.body.vendor_id),
         created_by: Number(req.body.created_by),
