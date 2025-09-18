@@ -73,11 +73,13 @@ export interface PaymentTypeValue{
 export interface StatusTypeInput {
     vendor_id: number;
     type: string;
+    tag: string;
 }
 
 export interface StatusType{
     id: number;
     type: string;
+    tag: string;
     vendor_id: number;
 }
 

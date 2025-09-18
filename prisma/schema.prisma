@@ -581,6 +581,7 @@
   model StatusTypeMaster {
     id        Int      @id @default(autoincrement())
     type      String
+    tag       String
     vendor_id Int
 
   // ✅ Relations

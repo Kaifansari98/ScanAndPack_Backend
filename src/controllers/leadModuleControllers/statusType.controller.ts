@@ -6,14 +6,14 @@ export const createStatusType = async (req: Request, res: Response) => {
     console.log("[CONTROLLER] createStatusType called", { body: req.body });
 
     try {
-        const {vendor_id, type} = req.body as StatusType;
+        const {vendor_id, type, tag} = req.body as StatusType;
 
         if(!vendor_id || !type){
-            console.warn("[CONTROLLER] Missing required fields", { vendor_id, type });
-            return res.status(400).json({ error: "vendor_id and type are required" });
+            console.warn("[CONTROLLER] Missing required fields", { vendor_id, type, tag });
+            return res.status(400).json({ error: "vendor_id, tag and type are required" });
         }
 
-        const statusType = await addStatusType({vendor_id, type});
+        const statusType = await addStatusType({vendor_id, type, tag});
 
         console.log("[CONTROLLER] createStatusType created successfully", statusType);
         return res.status(201).json({ success: true, data: statusType });

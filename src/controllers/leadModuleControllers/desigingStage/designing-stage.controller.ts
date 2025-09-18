@@ -7,37 +7,62 @@ import { generateSignedUrl, uploadToWasabi, uploadToWasabiMeetingDocs, uploadToW
 
 export class DesigingStageController {
 
-  public static async addToDesigingStage(req: Request, res: Response) {
-    try {
-      // ✅ Validate
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        return res
-          .status(400)
-          .json(ApiResponse.validationError(errors.array().map(err => err.msg)));
-      }
-
-      const { lead_id, user_id, vendor_id } = req.body;
-
-      const result = await DesigingStage.addToDesigingStage(
-        Number(lead_id),
-        Number(user_id),
-        Number(vendor_id)
-      );
-
-      return res
-        .status(200)
-        .json(ApiResponse.success(result, "Lead status updated to 3 and log created"));
-    } catch (error: any) {
-      if (error.message.includes("Unauthorized")) {
-        return res.status(401).json(ApiResponse.unauthorized(error.message));
-      }
-      if (error.message.includes("not found")) {
-        return res.status(404).json(ApiResponse.notFound(error.message));
-      }
-      return res.status(500).json(ApiResponse.error(error.message));
+  public static async addToDesigingStage(
+    lead_id: number,
+    user_id: number,
+    vendor_id: number
+  ) {
+    // 1. Check if user belongs to the same vendor
+    const user = await prisma.userMaster.findFirst({
+      where: { id: user_id, vendor_id },
+    });
+  
+    if (!user) {
+      throw new Error("Unauthorized: User does not belong to this vendor");
     }
-  }
+  
+    // 2. Check lead existence and ownership
+    const lead = await prisma.leadMaster.findFirst({
+      where: { id: lead_id, vendor_id, is_deleted: false },
+    });
+  
+    if (!lead) {
+      throw new Error("Lead not found for this vendor");
+    }
+  
+    // 3. Validate StatusTypeMaster for this vendor
+    const statusType = await prisma.statusTypeMaster.findFirst({
+      where: {
+        vendor_id,
+        tag: "Type 3",
+      },
+    });
+  
+    if (!statusType) {
+      throw new Error(
+        `Status 'Type 3' is not defined for vendor ${vendor_id}`
+      );
+    }
+  
+    // 4. Update lead status with the correct status_id
+    const updatedLead = await prisma.leadMaster.update({
+      where: { id: lead_id },
+      data: { status_id: statusType.id }, // ✅ Use vendor-specific status id
+    });
+  
+    // 5. Create log in LeadStatusLogs
+    const log = await prisma.leadStatusLogs.create({
+      data: {
+        lead_id,
+        account_id: lead.account_id,
+        created_by: user_id,
+        vendor_id,
+        status_id: statusType.id, // ✅ Use the same status id
+      },
+    });
+  
+    return { updatedLead, log };
+  }  
 
   public static async getLeadsByStatus(req: Request, res: Response) {
     try {
@@ -457,7 +482,6 @@ export class DesigingStageController {
       return res.status(500).json({ success: false, logs: [error.message] });
     }
   }
-  
 
   public static async getDesignMeetings(req: Request, res: Response) {
     try {
