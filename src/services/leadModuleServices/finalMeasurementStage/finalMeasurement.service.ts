@@ -88,12 +88,25 @@ export class FinalMeasurementService {
         response.sitePhotos.push(siteDoc);
       }
 
+      // Resolve the vendor's Open status ID dynamically
+      const finalMeasurementStatus = await prisma.statusTypeMaster.findFirst({
+        where: {
+          vendor_id: data.vendor_id,
+          tag: "Type 5", // ✅ Open status
+        },
+        select: { id: true },
+      });
+
+      if (!finalMeasurementStatus) {
+        throw new Error(`Open status (Type 1) not found for vendor ${data.vendor_id}`);
+      }
+
       // 3. Save critical discussion notes + update stage
       await tx.leadMaster.update({
         where: { id: data.lead_id },
         data: {
           final_desc_note: data.critical_discussion_notes,
-          status_id: 5, // Assuming status 5 = Final Measurement stage
+          status_id: finalMeasurementStatus.id, // Assuming status 5 = Final Measurement stage
         },
       });
 
@@ -104,10 +117,24 @@ export class FinalMeasurementService {
   }
 
   public async getAllFinalMeasurementLeadsByVendorId(vendorId: number) {
+
+    // Resolve the vendor's Open status ID dynamically
+    const finalMeasurementStatus = await prisma.statusTypeMaster.findFirst({
+      where: {
+        vendor_id: vendorId,
+        tag: "Type 5", // ✅ Open status
+      },
+      select: { id: true },
+    });
+
+    if (!finalMeasurementStatus) {
+      throw new Error(`Open status (Type 1) not found for vendor ${vendorId}`);
+    }
+
     return await prisma.leadMaster.findMany({
       where: {
         vendor_id: vendorId,
-        status_id: 5, // ✅ Final Measurement stage
+        status_id: finalMeasurementStatus.id, // ✅ Final Measurement stage
       },
       include: {
         documents: {
@@ -129,12 +156,26 @@ export class FinalMeasurementService {
   }
 
   public async getFinalMeasurementLead(vendorId: number, leadId: number) {
+
+    // Resolve the vendor's Open status ID dynamically
+    const finalMeasurementStatus = await prisma.statusTypeMaster.findFirst({
+      where: {
+        vendor_id: vendorId,
+        tag: "Type 5", // ✅ Open status
+      },
+      select: { id: true },
+    });
+
+    if (!finalMeasurementStatus) {
+      throw new Error(`Open status (Type 1) not found for vendor ${vendorId}`);
+    }
+
     // Find the lead in Final Measurement stage
     const lead = await prisma.leadMaster.findFirst({
       where: {
         id: leadId,
         vendor_id: vendorId,
-        status_id: 5, // ✅ Final Measurement stage
+        status_id: finalMeasurementStatus.id, // ✅ Final Measurement stage
       },
       include: {
         documents: true, // we'll filter after fetch
@@ -190,8 +231,22 @@ export class FinalMeasurementService {
   }
 
   public async updateCriticalDiscussionNotes(vendorId: number, leadId: number, notes: string) {
+
+    // Resolve the vendor's Open status ID dynamically
+    const finalMeasurementStatus = await prisma.statusTypeMaster.findFirst({
+      where: {
+        vendor_id: vendorId,
+        tag: "Type 5", // ✅ Open status
+      },
+      select: { id: true },
+    });
+
+    if (!finalMeasurementStatus) {
+      throw new Error(`Open status (Type 1) not found for vendor ${vendorId}`);
+    }
+
     const lead = await prisma.leadMaster.findFirst({
-      where: { id: leadId, vendor_id: vendorId, status_id: 5 },
+      where: { id: leadId, vendor_id: vendorId, status_id: finalMeasurementStatus.id },
     });
   
     if (!lead) {
@@ -268,9 +323,22 @@ export class FinalMeasurementService {
 
     const role = user.user_type.user_type.toLowerCase();
 
+    // Resolve the vendor's Open status ID dynamically
+    const finalMeasurementStatus = await prisma.statusTypeMaster.findFirst({
+      where: {
+        vendor_id: vendorId,
+        tag: "Type 5", // ✅ Open status
+      },
+      select: { id: true },
+    });
+
+    if (!finalMeasurementStatus) {
+      throw new Error(`Open status (Type 1) not found for vendor ${vendorId}`);
+    }
+
     // ✅ Base where clause
     const whereClause: any = {
-      status_id: 5,
+      status_id: finalMeasurementStatus.id,
       is_deleted: false,
       vendor_id: vendorId,
     };

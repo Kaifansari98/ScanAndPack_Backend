@@ -36,10 +36,23 @@ export class DesigingStage {
       throw new Error("Lead not found for this vendor");
     }
 
+    // Resolve the vendor's Designing status ID dynamically
+    const DesigningStatus = await prisma.statusTypeMaster.findFirst({
+      where: {
+        vendor_id: vendor_id,
+        tag: "Type 3", // ✅ Designing status
+      },
+      select: { id: true },
+    });
+
+    if (!DesigningStatus) {
+      throw new Error(`Open status (Type 1) not found for vendor ${vendor_id}`);
+    }
+
     // 3. Update lead status
     const updatedLead = await prisma.leadMaster.update({
       where: { id: lead_id },
-      data: { status_id: 3 }, // ✅ Set to status 3
+      data: { status_id: DesigningStatus.id }, // ✅ Set to status 3
     });
 
     // 4. Create log in LeadStatusLogs
@@ -49,7 +62,7 @@ export class DesigingStage {
         account_id: lead.account_id,
         created_by: user_id,
         vendor_id,
-        status_id: 3,
+        status_id: DesigningStatus.id,
       },
     });
 
@@ -374,95 +387,93 @@ export class DesigingStage {
     return doc;
   }
 
-  // Add this method to your DesigingStage service class
+  public static async getDesignQuotationDocuments(vendorId: number, leadId: number) {
+    const logs: any[] = [];
 
-public static async getDesignQuotationDocuments(vendorId: number, leadId: number) {
-  const logs: any[] = [];
-
-  // 1️⃣ Validate lead exists and belongs to vendor
-  const lead = await prisma.leadMaster.findFirst({
-    where: { 
-      id: leadId, 
-      vendor_id: vendorId, 
-      is_deleted: false 
+    // 1️⃣ Validate lead exists and belongs to vendor
+    const lead = await prisma.leadMaster.findFirst({
+      where: { 
+        id: leadId, 
+        vendor_id: vendorId, 
+        is_deleted: false 
+      }
+    });
+    
+    if (!lead) {
+      throw new Error("Lead not found or access denied");
     }
-  });
-  
-  if (!lead) {
-    throw new Error("Lead not found or access denied");
-  }
-  logs.push("Lead verified successfully");
+    logs.push("Lead verified successfully");
 
-  // 2️⃣ Find the document type for "design-quotation"
-  const designQuotationDocType = await prisma.documentTypeMaster.findFirst({
-    where: {
-      vendor_id: vendorId,
-      type: "design-quotation"
+    // 2️⃣ Find the document type for "design-quotation"
+    const designQuotationDocType = await prisma.documentTypeMaster.findFirst({
+      where: {
+        vendor_id: vendorId,
+        type: "design-quotation"
+      }
+    });
+
+    if (!designQuotationDocType) {
+      throw new Error("Design quotation document type not found for this vendor");
     }
-  });
+    logs.push("Design quotation document type found");
 
-  if (!designQuotationDocType) {
-    throw new Error("Design quotation document type not found for this vendor");
-  }
-  logs.push("Design quotation document type found");
-
-  // 3️⃣ Fetch all design-quotation documents for the lead
-  const documents = await prisma.leadDocuments.findMany({
-    where: {
-      lead_id: leadId,
-      vendor_id: vendorId,
-      doc_type_id: designQuotationDocType.id,
-      is_deleted: false
-    },
-    orderBy: { created_at: "desc" },
-    include: {
-      documentType: {
-        select: {
-          id: true,
-          type: true,
-          tag: true
-        }
+    // 3️⃣ Fetch all design-quotation documents for the lead
+    const documents = await prisma.leadDocuments.findMany({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+        doc_type_id: designQuotationDocType.id,
+        is_deleted: false
       },
-      createdBy: {
-        select: {
-          id: true,
-          user_name: true,
-          user_email: true,
-          user_contact: true
-        }
-      },
-      deletedBy: {
-        select: {
-          id: true,
-          user_name: true,
-          user_email: true
+      orderBy: { created_at: "desc" },
+      include: {
+        documentType: {
+          select: {
+            id: true,
+            type: true,
+            tag: true
+          }
+        },
+        createdBy: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+            user_contact: true
+          }
+        },
+        deletedBy: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true
+          }
         }
       }
-    }
-  });
+    });
 
-  // 4️⃣ Generate signed URLs for documents
-  const documentsWithSignedUrls = await Promise.all(
-    documents.map(async (doc) => {
-      const signedUrl = await generateSignedUrl(doc.doc_sys_name);
-      return {
-        ...doc,
-        signedUrl
-      };
-    })
-  );
+    // 4️⃣ Generate signed URLs for documents
+    const documentsWithSignedUrls = await Promise.all(
+      documents.map(async (doc) => {
+        const signedUrl = await generateSignedUrl(doc.doc_sys_name);
+        return {
+          ...doc,
+          signedUrl
+        };
+      })
+    );
 
-  logs.push(`Found ${documents.length} design quotation documents for lead ${leadId}`);
+    logs.push(`Found ${documents.length} design quotation documents for lead ${leadId}`);
 
-  return {
-    logs,
-    lead_id: leadId,
-    vendor_id: vendorId,
-    document_type: designQuotationDocType.type,
-    total_documents: documents.length,
-    documents: documentsWithSignedUrls
-  };
-}
+    return {
+      logs,
+      lead_id: leadId,
+      vendor_id: vendorId,
+      document_type: designQuotationDocType.type,
+      total_documents: documents.length,
+      documents: documentsWithSignedUrls
+    };
+  }
 
   public static async editDesignMeeting(data: any) {
     // ✅ Validate incoming data

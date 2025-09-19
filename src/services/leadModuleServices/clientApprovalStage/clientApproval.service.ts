@@ -36,12 +36,25 @@ export class ClientApprovalService {
       response.screenshots.push(docEntry);
     }
 
+    // 1. Resolve the vendor's Booking status ID dynamically
+    const bookingStatus = await prisma.statusTypeMaster.findFirst({
+      where: {
+        vendor_id: data.vendor_id,
+        tag: "Type 4", // ✅ booking status
+      },
+      select: { id: true },
+    });
+
+    if (!bookingStatus) {
+      throw new Error(`Open status (Type 1) not found for vendor ${data.vendor_id}`);
+    }
+
     // Step 2. Update lead with advance payment date
     await prisma.leadMaster.update({
       where: { id: data.lead_id },
       data: {
         advance_payment_date: new Date(data.advance_payment_date),
-        status_id: 7, // Client Approval Stage
+        status_id: bookingStatus.id, // Client Approval Stage
         updated_at: new Date(),
         updated_by: data.created_by,
       },

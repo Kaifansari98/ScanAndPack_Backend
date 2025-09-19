@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { PaymentUploadService } from '../../../services/leadModuleServices/leadsGeneration/initial-site_measurement.service';
 import { CreatePaymentUploadDto, UpdatePaymentUploadDto } from '../../../types/leadModule.types';
+import { prisma } from '../../../prisma/client';
 
 export class PaymentUploadController {
   private paymentUploadService: PaymentUploadService;
@@ -222,10 +223,25 @@ export class PaymentUploadController {
         });
         return;
       }
+
+      const vendor_id = parseInt(vendorId);
+
+      // ✅ Find the correct status type for this vendor
+      const statusType = await prisma.statusTypeMaster.findFirst({
+        where: { vendor_id, tag: "Type 2" },
+      });
+
+      if (!statusType) {
+        res.status(404).json({
+          success: false,
+          message: `Status 'Type 2' not found for vendor ${vendorId}`,
+        });
+        return;
+      }
   
       const result = await this.paymentUploadService.getLeadsByStatus(
-        parseInt(vendorId),
-        2, // status_id == 2
+        vendor_id,
+        statusType.id,
         parseInt(page as string),
         parseInt(limit as string)
       );
@@ -235,7 +251,7 @@ export class PaymentUploadController {
         result.data.map(async (lead: any) => {
           const uploads = await this.paymentUploadService.getPaymentUploadsByLead(
             lead.id,
-            parseInt(vendorId)
+            parseInt(vendorId),
           );
           return {
             ...lead,

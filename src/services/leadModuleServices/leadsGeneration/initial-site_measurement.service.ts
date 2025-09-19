@@ -212,17 +212,26 @@ public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentU
         };
       }
 
-      // ✅ 6. Update LeadMaster status from 1 → 2
-      await tx.leadMaster.updateMany({
+     // 6. Update LeadMaster status (status "Type 1" → "Type 2")
+     const statusFrom = await tx.statusTypeMaster.findFirst({
+      where: { vendor_id: data.vendor_id, tag: "Type 1" },
+      });
+      const statusTo = await tx.statusTypeMaster.findFirst({
+        where: { vendor_id: data.vendor_id, tag: "Type 2" },
+      });
+
+      if (statusFrom && statusTo) {
+        await tx.leadMaster.updateMany({
           where: {
-          id: data.lead_id,
-          vendor_id: data.vendor_id,
-          status_id: 1 
+            id: data.lead_id,
+            vendor_id: data.vendor_id,
+            status_id: statusFrom.id,
           },
           data: {
-          status_id: 2
-          }
-      });
+            status_id: statusTo.id,
+          },
+        });
+      }
 
       return response;
   }, {
@@ -484,12 +493,23 @@ public async getPaymentUploadsByLead(
   vendorId: number
 ): Promise<PaymentUploadDetailDto[]> {
   try {
-    // Ensure the lead exists and has status_id = 2
+
+    // ✅ Find the correct status type for this vendor
+    const statusType = await prisma.statusTypeMaster.findFirst({
+      where: { vendor_id: vendorId, tag: "Type 2" },
+    });
+
+    if (!statusType) {
+      // Instead of using res (not available here), throw an error
+      throw new Error(`Status 'Type 2' not found for vendor ${vendorId}`);
+    }
+
+    // Ensure the lead exists and has status_id = statusType.id
     const lead = await prisma.leadMaster.findFirst({
       where: {
         id: leadId,
         vendor_id: vendorId,
-        status_id: 2
+        status_id: statusType.id
       }
     });
 
@@ -500,7 +520,7 @@ public async getPaymentUploadsByLead(
       where: {
         lead_id: leadId,
         vendor_id: vendorId,
-        lead: { status_id: 2 }
+        lead: { status_id: statusType.id }
       },
       include: {
         lead: {
@@ -531,7 +551,7 @@ public async getPaymentUploadsByLead(
         lead_id: leadId,
         vendor_id: vendorId,
         deleted_at: null,
-        lead: { status_id: 2 }
+        lead: { status_id: statusType.id }
       },
       include: {
         createdBy: { select: { id: true, user_name: true, user_email: true } },
@@ -545,7 +565,7 @@ public async getPaymentUploadsByLead(
       where: {
         lead_id: leadId,
         vendor_id: vendorId,
-        lead: { status_id: 2 }
+        lead: { status_id: statusType.id }
       },
       orderBy: { created_at: 'desc' }
     });
@@ -642,7 +662,7 @@ public async getPaymentUploadsByLead(
 }
 
 public async updatePaymentUpload(
-  paymentId: number, 
+  paymentId: number,
   data: UpdatePaymentUploadDto
 ): Promise<PaymentUploadResponseDto> {
   try {

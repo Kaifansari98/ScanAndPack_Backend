@@ -158,10 +158,25 @@ export class BookingStageService {
       });
       response.paymentInfo = bookingPayment;
 
+      // 1. Resolve the vendor's Booking status ID dynamically using vendor_id from req.body (data.vendor_id)
+      const bookingStatus = await prisma.statusTypeMaster.findFirst({
+        where: {
+          vendor_id: data.vendor_id,
+          tag: "Type 4", // ✅ Booking status
+        },
+        select: { id: true },
+      });
+
+      if (!bookingStatus) {
+        throw new Error(`Booking status (Type 4) not found for vendor ${data.vendor_id}`);
+      }
+
+      const bookingStatusId = bookingStatus.id;
+
       // 4. Update LeadMaster final_booking_amt
       await tx.leadMaster.update({
         where: { id: data.lead_id },
-        data: { final_booking_amt: data.finalBookingAmount, status_id: 4 }, // Assuming status 3 = Booking
+        data: { final_booking_amt: data.finalBookingAmount, status_id: Number(bookingStatusId) }, 
       });
 
       // 5. Assign Site Supervisor
@@ -333,9 +348,23 @@ export class BookingStageService {
   }
 
   public static async getLeadsWithStatusBooking(vendorId: number) {
+
+    // 1. Fetch the status ID for Booking stage dynamically
+    const bookingStatus = await prisma.statusTypeMaster.findFirst({
+      where: {
+        vendor_id: vendorId,
+        tag: "Type 4",   // ✅ vendor-specific tag for Booking stage
+      },
+      select: { id: true },
+    });
+
+    if (!bookingStatus) {
+      throw new Error(`Booking status (Type 4) not found for vendor ${vendorId}`);
+    }
+
     const leads = await prisma.leadMaster.findMany({
       where: {
-        status_id: 4,
+        status_id: bookingStatus.id,  // ✅ vendor-specific status id
         is_deleted: false,
         vendor_id: vendorId,
       },
@@ -431,9 +460,23 @@ export class BookingStageService {
   }
 
   public static async getLeadsWithStatusOpen(vendorId: number) {
+
+    // 1. Resolve the vendor's Open status ID dynamically
+    const openStatus = await prisma.statusTypeMaster.findFirst({
+      where: {
+        vendor_id: vendorId,
+        tag: "Type 1", // ✅ booking status
+      },
+      select: { id: true },
+    });
+
+    if (!openStatus) {
+      throw new Error(`Open status (Type 1) not found for vendor ${vendorId}`);
+    }
+
     const leads = await prisma.leadMaster.findMany({
       where: {
-        status_id: 1,
+        status_id: openStatus.id,  // ✅ vendor-specific
         is_deleted: false,
         vendor_id: vendorId,
       },
