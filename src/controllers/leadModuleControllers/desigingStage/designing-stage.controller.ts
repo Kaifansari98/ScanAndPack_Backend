@@ -41,22 +41,21 @@ export class DesigingStageController {
 
   public static async getLeadsByStatus(req: Request, res: Response) {
     try {
-      const { vendorId, statusId } = req.params;
+      const { vendorId } = req.params;
       const { page = "1", limit = "10" } = req.query;
-
-      if (!vendorId || !statusId) {
+  
+      if (!vendorId) {
         return res
           .status(400)
-          .json(ApiResponse.validationError("vendorId and statusId are required"));
+          .json(ApiResponse.validationError("vendorId is required"));
       }
-
+  
       const result = await DesigingStage.getLeadsByStatus(
         Number(vendorId),
-        Number(statusId),
         Number(page),
         Number(limit)
       );
-
+  
       return res
         .status(200)
         .json(ApiResponse.success(result, "Leads fetched successfully"));
@@ -64,6 +63,7 @@ export class DesigingStageController {
       return res.status(500).json(ApiResponse.error(error.message));
     }
   }
+  
 
   public static async upload(req: Request, res: Response) {
     try {
@@ -174,7 +174,7 @@ export class DesigingStageController {
 
       // 4️⃣ Generate signed URLs for documents
       const documentsWithSignedUrls = await Promise.all(
-        documents.map(async (doc) => {
+        documents.map(async (doc: any) => {
           const signedUrl = await generateSignedUrl(doc.doc_sys_name);
           return {
             ...doc,
@@ -293,7 +293,7 @@ export class DesigingStageController {
 
       // 4️⃣ Generate signed URLs for documents
       const documentsWithSignedUrls = await Promise.all(
-        documents.map(async (doc) => {
+        documents.map(async (doc: any) => {
           const signedUrl = await generateSignedUrl(doc.doc_sys_name);
           return {
             ...doc,
@@ -482,7 +482,7 @@ export class DesigingStageController {
 
       // Attach signed URLs to documents
       const meetingsWithUrls = await Promise.all(
-        meetings.map(async (meeting) => {
+        meetings.map(async (meeting: any) => {
           const mappings = (meeting as any).designMeetingDocsMapping as any[];
           const docsWithUrls = await Promise.all(
             mappings.map(async (map: any) => {
