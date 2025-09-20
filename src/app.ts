@@ -9,7 +9,7 @@ export const app = express();
 
 const allowedOrigins = [
   'http://localhost:3000',
-  'https://your-production-frontend.com'
+  'https://furnix.vloq.com'
 ];
 
 app.use(
