@@ -122,12 +122,12 @@ export class ClientDocumentationService {
 
     // 3. Filter documents of this type
     const clientDocs = lead.documents.filter(
-      (doc) => doc.doc_type_id === docType.id
+      (doc: any) => doc.doc_type_id === docType.id
     );
 
     // 4. Attach signed URLs
     const docsWithSignedUrls = await Promise.all(
-      clientDocs.map(async (doc) => ({
+      clientDocs.map(async (doc: any) => ({
         ...doc,
         signed_url: await generateSignedUrl(doc.doc_sys_name, 3600, "inline"),
       }))

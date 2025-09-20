@@ -1,28 +1,74 @@
-// logger.ts
-import { createLogger, format, transports } from "winston";
+// src/lib/logger.ts
+import winston from "winston";
+import "winston-daily-rotate-file";
 
-const { combine, timestamp, ms, json, colorize, printf, splat, errors } = format;
+const isProd = process.env.NODE_ENV === "production";
+const logLevel = process.env.LOG_LEVEL || (isProd ? "info" : "debug");
 
-const devFormat = printf(({ level, message, timestamp, stack, ...meta }) => {
-  const base = `${timestamp} ${level}: ${message}`;
-  const metaStr = Object.keys(meta).length ? ` ${JSON.stringify(meta)}` : "";
-  return stack ? `${base}\n${stack}${metaStr}` : `${base}${metaStr}`;
-});
+const consoleFormat = winston.format.combine(
+  winston.format.colorize(),
+  winston.format.timestamp(),
+  winston.format.errors({ stack: true }),
+  winston.format.splat(),
+  winston.format.printf(({ level, message, timestamp, stack, ...meta }) => {
+    const rest = Object.keys(meta).length ? ` ${JSON.stringify(meta)}` : "";
+    return stack
+      ? `[${timestamp}] ${level}: ${message}\n${stack}${rest}`
+      : `[${timestamp}] ${level}: ${message}${rest}`;
+  })
+);
 
-export const logger = createLogger({
-  level: process.env.LOG_LEVEL || "info",
-  defaultMeta: { service: "lead-status" },
-  format: combine(
-    timestamp(),
-    ms(),
-    splat(),
-    errors({ stack: true }), // <-- capture error stack traces
-    process.env.NODE_ENV === "production" ? json() : combine(colorize(), devFormat)
-  ),
+const jsonFormat = winston.format.combine(
+  winston.format.timestamp(),
+  winston.format.errors({ stack: true }),
+  winston.format.splat(),
+  winston.format.json()
+);
+
+// File rotation (daily), keeps 14 days, zipped
+const rotate = (filename: string) =>
+  new (winston.transports as any).DailyRotateFile({
+    filename,
+    datePattern: "YYYY-MM-DD",
+    dirname: "logs",
+    zippedArchive: true,
+    maxFiles: "14d",
+    maxSize: "20m",
+    level: logLevel,
+  });
+
+export const logger = winston.createLogger({
+  level: logLevel,
+  format: isProd ? jsonFormat : consoleFormat,
   transports: [
-    new transports.Console(),
-    // In prod you might also add:
-    // new transports.File({ filename: 'logs/error.log', level: 'error' }),
-    // new transports.File({ filename: 'logs/combined.log' }),
+    new winston.transports.Console({ level: logLevel }),
+    rotate("app-%DATE%.log"),
+    new (winston.transports as any).DailyRotateFile({
+      filename: "error-%DATE%.log",
+      dirname: "logs",
+      datePattern: "YYYY-MM-DD",
+      zippedArchive: true,
+      maxFiles: "30d",
+      level: "error",
+    }),
   ],
+  exceptionHandlers: [
+    new winston.transports.Console(),
+    rotate("exceptions-%DATE%.log"),
+  ],
+  rejectionHandlers: [
+    new winston.transports.Console(),
+    rotate("rejections-%DATE%.log"),
+  ],
+  exitOnError: false,
 });
+
+// Helpful typed helpers (optional)
+export const log = {
+  info: (msg: string, meta?: unknown) => logger.info(msg, meta),
+  error: (msg: string, meta?: unknown) => logger.error(msg, meta),
+  warn: (msg: string, meta?: unknown) => logger.warn(msg, meta),
+  debug: (msg: string, meta?: unknown) => logger.debug(msg, meta),
+};
+
+export default logger;

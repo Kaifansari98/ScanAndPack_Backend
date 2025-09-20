@@ -71,52 +71,39 @@ export class DesigingStage {
 
   public static async getLeadsByStatus(
     vendorId: number,
-    statusId: number,
     page: number,
     limit: number
   ) {
     const skip = (page - 1) * limit;
-
-    // ✅ Fetch leads with relations
+  
+    // 1. Resolve status ID dynamically from statusTypeMaster (Type 3)
+    const statusType = await prisma.statusTypeMaster.findFirst({
+      where: {
+        vendor_id: vendorId,
+        tag: "Type 3", // ✅ Fetch Type 3 dynamically
+      },
+      select: { id: true },
+    });
+  
+    if (!statusType) {
+      throw new Error(`Status Type 3 not found for vendor ${vendorId}`);
+    }
+  
+    // 2. Fetch leads with that status
     const leads = await prisma.leadMaster.findMany({
       where: {
         vendor_id: vendorId,
-        status_id: statusId,
+        status_id: statusType.id,
         is_deleted: false,
       },
       skip,
       take: limit,
       orderBy: { created_at: "desc" },
       include: {
-        siteType: {
-          select: {
-            id: true,
-            type: true,
-          },
-        },
-        source: {
-          select: {
-            id: true,
-            type: true,
-          },
-        },
-        statusType: {
-          select: {
-            id: true,
-            type: true,
-          }
-        },
-        // vendor: true,
-        // account: true,
-        assignedTo: {
-          select: {
-            id: true,
-            user_name: true,
-            user_email: true,
-          },
-        },
-
-        // ✅ Include Documents
+        siteType: { select: { id: true, type: true } },
+        source: { select: { id: true, type: true } },
+        statusType: { select: { id: true, type: true } },
+        assignedTo: { select: { id: true, user_name: true, user_email: true } },
         documents: {
           where: { is_deleted: false },
           select: {
@@ -128,24 +115,12 @@ export class DesigingStage {
             account_id: true,
             lead_id: true,
             vendor_id: true,
-            documentType: {
-              select: {
-                id: true,
-                type: true,
-              }
-            },
+            documentType: { select: { id: true, type: true } },
             createdBy: {
-              select: {
-                id: true,
-                user_name: true,
-                user_contact: true,
-                user_email: true,
-              }
+              select: { id: true, user_name: true, user_contact: true, user_email: true }
             },
           },
         },
-
-        // ✅ Include Payments
         payments: {
           select: {
             id: true,
@@ -155,77 +130,41 @@ export class DesigingStage {
             payment_file_id: true,
             created_at: true,
             created_by: true,
-            document: true, // payment file
-            createdBy: {
-              select: {
-                id: true,
-                user_name: true,
-                user_email: true,
-                user_type: true,
-              }
-            },
-          }
-        },
-
-        // ✅ Include Ledgers
-        // ledgers: {
-        //   include: {
-        //     account: true,
-        //     client: true,
-        //     createdBy: true,
-        //   },
-        // },
-
-        // ✅ Include Product Mappings → ProductType
-        productMappings: {
-          select: {
-            productType: {
-              select: {
-                id: true,
-                type: true,
-                tag: true,
-              }
-            },
+            document: true,
+            createdBy: { select: { id: true, user_name: true, user_email: true, user_type: true } },
           },
         },
-
-        // ✅ Include ProductStructure Mapping → ProductStructure
+        productMappings: {
+          select: {
+            productType: { select: { id: true, type: true, tag: true } },
+          },
+        },
         leadProductStructureMapping: {
           select: {
-            productStructure: {
-              select: {
-                id: true,
-                type: true,
-              }
-            },
+            productStructure: { select: { id: true, type: true } },
           },
         },
       },
     });
-
-    // ✅ Generate signed URLs for documents
+  
+    // 3. Generate signed URLs for docs
     const leadsWithSignedUrls = await Promise.all(
-      leads.map(async (lead) => {
+      leads.map(async (lead: any) => {
         const docsWithUrls = await Promise.all(
-          (lead.documents || []).map(async (doc) => {
-            return {
-              ...doc,
-              signedUrl: await generateSignedUrl(doc.doc_sys_name),
-            };
-          })
+          (lead.documents || []).map(async (doc: any) => ({
+            ...doc,
+            signedUrl: await generateSignedUrl(doc.doc_sys_name),
+          }))
         );
-
-        return {
-          ...lead,
-          documents: docsWithUrls,
-        };
+        return { ...lead, documents: docsWithUrls };
       })
     );
-
+  
+    // 4. Count total for pagination
     const total = await prisma.leadMaster.count({
-      where: { vendor_id: vendorId, status_id: statusId, is_deleted: false },
+      where: { vendor_id: vendorId, status_id: statusType.id, is_deleted: false },
     });
-
+  
     return {
       leads: leadsWithSignedUrls,
       pagination: {
@@ -235,7 +174,7 @@ export class DesigingStage {
         totalPages: Math.ceil(total / limit),
       },
     };
-  }
+  }  
 
   public static async getLeadById(vendorId: number, leadId: number) {
     // ✅ Fetch lead with relations
@@ -331,7 +270,7 @@ export class DesigingStage {
   
     // ✅ Generate signed URLs for documents
     const docsWithUrls = await Promise.all(
-      (lead.documents || []).map(async (doc) => {
+      (lead.documents || []).map(async (doc: any) => {
         return {
           ...doc,
           signedUrl: await generateSignedUrl(doc.doc_sys_name),
@@ -454,7 +393,7 @@ export class DesigingStage {
 
     // 4️⃣ Generate signed URLs for documents
     const documentsWithSignedUrls = await Promise.all(
-      documents.map(async (doc) => {
+      documents.map(async (doc: any) => {
         const signedUrl = await generateSignedUrl(doc.doc_sys_name);
         return {
           ...doc,

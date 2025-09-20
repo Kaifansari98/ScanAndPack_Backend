@@ -20,6 +20,7 @@ import {
   getLeadById
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import { prisma } from "../../../prisma/client";
+import logger from "../../../utils/logger";
 
 export class LeadController {
 
@@ -42,7 +43,7 @@ export class LeadController {
    * Create a new lead with optional file attachments
    */
   async createLead(req: Request, res: Response): Promise<Response> {
-    console.log("[CONTROLLER] createLead called");
+    logger.info("[CONTROLLER] createLead called");
   
     try {
       const files = (req.files as Express.MulterS3.File[]) || [];
@@ -79,6 +80,7 @@ export class LeadController {
   
       const { error, value } = createLeadSchema.validate(payload);
       if (error) {
+        logger.warn("Validation failed", { details: error.details });
         return res.status(400).json({
           success: false,
           error: "Validation failed",
@@ -90,6 +92,7 @@ export class LeadController {
       }
   
       if (files.length > 10) {
+        logger.warn("Too many files uploaded", { count: files.length });
         return res.status(400).json({
           success: false,
           error: "Too many files",
@@ -109,6 +112,7 @@ export class LeadController {
         },
       });
     } catch (error: any) {
+      logger.error("[ERROR] createLead failed", { error: error.message, stack: error.stack });
       console.error("[ERROR] createLead:", error);
       return res.status(500).json({
         success: false,

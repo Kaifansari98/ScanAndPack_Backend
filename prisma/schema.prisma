@@ -62,6 +62,8 @@
     designMeetingDocsMapping  LeadDesignMeetingDocumentsMapping[]
     paymentTypeMaster PaymentTypeMaster[]
     siteSupervisors LeadSiteSupervisorMapping[]
+    leadUserMappings LeadUserMapping[]
+    userLeadTasks UserLeadTask[] 
   }
 
   model VendorAddress {
@@ -150,6 +152,14 @@
     supervisorMappingsCreated LeadSiteSupervisorMapping[] @relation("SupervisorCreatedBy")
 
     designMeetingDocsMappingForCreatedBY  LeadDesignMeetingDocumentsMapping[] @relation("DesignMeetingDocsMappingCreatedBy")
+
+    leadUserAsUser     LeadUserMapping[] @relation("LeadUser_User")
+    leadUserCreated    LeadUserMapping[] @relation("LeadUser_CreatedBy")
+    leadUserUpdated    LeadUserMapping[] @relation("LeadUser_UpdatedBy")
+
+    leadTasksAssigned  UserLeadTask[] @relation("LeadTask_User")
+    leadTasksCreated   UserLeadTask[] @relation("LeadTask_CreatedBy")
+    leadTasksClosed    UserLeadTask[] @relation("LeadTask_ClosedBy")
   }
 
   model UserDocument {
@@ -375,10 +385,41 @@
     designSelection LeadDesignSelection[]
     designMeetingDocsMapping  LeadDesignMeetingDocumentsMapping[]
     siteSupervisors LeadSiteSupervisorMapping[]
+    userMappings LeadUserMapping[]
+    tasks UserLeadTask[]
 
     // ✅ Unique constraints for contact_no and email per vendor
     @@unique([contact_no, vendor_id], name: "unique_contact_per_vendor")
   }
+
+  enum LeadUserStatus {
+    inactive
+    active
+  }
+
+  model LeadUserMapping {
+  id          Int             @id @default(autoincrement())
+  account_id  Int
+  lead_id     Int
+  vendor_id   Int
+  user_id     Int
+  type        String
+  status      LeadUserStatus  @default(active)
+  created_by  Int
+  created_at  DateTime        @default(now())
+  updated_by  Int?
+  updated_at  DateTime        @updatedAt
+
+  // Relations
+  lead       LeadMaster    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  account    AccountMaster @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  vendor     VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  // Distinct user relations
+  user       UserMaster    @relation("LeadUser_User", fields: [user_id], references: [id], onDelete: Cascade)
+  createdBy  UserMaster    @relation("LeadUser_CreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  updatedBy  UserMaster?   @relation("LeadUser_UpdatedBy", fields: [updated_by], references: [id])
+}
 
   model SiteTypeMaster {
     id        Int      @id @default(autoincrement())
@@ -437,6 +478,8 @@
     designSelection LeadDesignSelection[]
     designMeetingDocsMapping  LeadDesignMeetingDocumentsMapping[]
     siteSupervisors LeadSiteSupervisorMapping[]
+    leadUserMappings LeadUserMapping[]
+    tasks UserLeadTask[]
   }
 
   model LeadProductMapping {
@@ -699,4 +742,37 @@
     // 👇 Give unique relation names
     supervisor UserMaster @relation("SupervisorUser", fields: [user_id], references: [id], onDelete: Cascade)
     createdBy  UserMaster @relation("SupervisorCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  }
+
+  // ✅ New enum for task status
+  enum LeadTaskStatus {
+    open
+    closed
+    in_progress
+  }
+
+  // ✅ New table
+  model UserLeadTask {
+    id         Int             @id @default(autoincrement())
+    lead_id    Int
+    account_id Int
+    vendor_id  Int
+    user_id    Int
+    task_type  String
+    due_date   DateTime
+    remark     String?         @db.VarChar(2000)
+    status     LeadTaskStatus  @default(open)
+    closed_by  Int?
+    closed_at  DateTime?
+    created_by Int
+    created_at DateTime        @default(now())
+
+    // Relations
+    lead      LeadMaster    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+    account   AccountMaster @relation(fields: [account_id], references: [id], onDelete: Cascade)
+    vendor    VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+    user      UserMaster    @relation("LeadTask_User", fields: [user_id], references: [id], onDelete: Cascade)
+    createdBy UserMaster    @relation("LeadTask_CreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+    closedBy  UserMaster?   @relation("LeadTask_ClosedBy", fields: [closed_by], references: [id])
   }

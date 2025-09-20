@@ -13,9 +13,10 @@ import {
   getUserRole 
 } from "../../../validations/leadValidation";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
+import logger from "../../../utils/logger";
 
 export const createLeadService = async (payload: CreateLeadDTO, files: Express.Multer.File[]) => {
-    console.log("[DEBUG] Service called with", files.length, "files");
+    logger.debug("[SERVICE] createLeadService called", { fileCount: files.length });
 
     function sanitizeFilename(filename: string): string {
       return filename.replace(/[^a-zA-Z0-9.\-_]/g, "_");
@@ -23,7 +24,7 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
     
     // Debug file information
     if (files && files.length > 0) {
-      console.log(`[INFO] Processing ${files.length} document(s)`);
+      logger.info(`Processing ${files.length} document(s)`);
       files.forEach((file, index) => {
         console.log(`[DEBUG] File ${index + 1}:`, {
           originalname: file.originalname,
@@ -166,10 +167,45 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
           initial_site_measurement_date,
         }
       });
+
+      /* ✅ NEW: LeadUserMapping writes (cases: admin vs sales-executive)
+      - Both cases use: type="ISM", status="active"
+      */
+      const creator = await tx.userMaster.findUnique({
+        where: { id: created_by },
+        include: { user_type: true }, // joins UserTypeMaster
+      });
+
+      const creatorRole = creator?.user_type?.user_type?.toLowerCase(); // e.g., "admin" or "sales-executive"
+
+      // Base fields common to all LeadUserMapping rows
+      const mappingBase = {
+        vendor_id,
+        account_id: account.id,
+        lead_id: lead.id,
+        type: "ISM" as const,
+        status: "active" as const,
+        created_by, // actor creating the mapping
+      };
+
+      // Always insert mapping for the creator
+      await tx.leadUserMapping.create({
+        data: { ...mappingBase, user_id: created_by },
+      });
+
+      // If creator is admin -> also map the assignee (when provided)
+      if (creatorRole === "admin" && assign_to) {
+        await tx.leadUserMapping.create({
+          data: { ...mappingBase, user_id: assign_to },
+        });
+      }
+
+      // If creator is sales-executive -> nothing more to do (only his own mapping above)
+      // Any other/unknown role falls back to just the creator row
   
       // 3. Validate and create mappings for product types using IDs
       for (const productTypeId of product_types) {
-        console.log("[DEBUG] Processing product type ID:", productTypeId);
+        logger.debug("Processing product type", { productTypeId });
         
         // Validate that the product type exists and belongs to the vendor
         const productType = await tx.productTypeMaster.findFirst({
@@ -192,12 +228,12 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
             created_by
           }
         });
-        console.log("[DEBUG] ✅ Product mapping created for type ID:", productTypeId);
+        logger.info("✅ Product mapping created", { productTypeId });
       }
 
       // 4. Validate and create mappings for product structures using IDs
       for (const productStructureId of product_structures) {
-        console.log("[DEBUG] Processing product structure ID:", productStructureId);
+        logger.debug("Processing product structure", { productStructureId });
         
         // Validate that the product structure exists and belongs to the vendor
         const structure = await tx.productStructure.findFirst({
@@ -220,14 +256,14 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
             created_by
           }
         });
-        console.log("[DEBUG] ✅ Product structure mapping created for structure ID:", productStructureId);
+        logger.info("✅ Product structure mapping created", { productStructureId });
       }
   
       // 5. Documents (only if files are provided) with enhanced debugging
       let uploadedFiles: any[] = [];
       
       if (files && files.length > 0) {
-        console.log(`[INFO] Processing ${files.length} document(s)`);
+        logger.info(`Uploading ${files.length} document(s) to Wasabi`);
         
         for (const file of files) {
           const sanitizedFilename = sanitizeFilename(file.originalname);
@@ -287,7 +323,7 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
         
         console.log("[DEBUG] Files uploaded to Wasabi and saved:", uploadedFiles.length);
       } else {
-        console.log("[INFO] No documents to process - files are optional");
+        logger.info("No documents to process - files are optional");
       }
   
       return { 

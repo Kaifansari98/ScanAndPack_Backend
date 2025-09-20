@@ -1,4 +1,5 @@
-import { LeadPriority, DocumentType } from "@prisma/client";
+// Note: LeadPriority and DocumentType enums are not exported from @prisma/client
+// Using string literals instead
 
 export interface ProductTypeInput {
     vendor_id: number;
@@ -92,7 +93,7 @@ export interface CreateLeadDTO {
     email?: string;
     site_address: string;
     site_type_id?: number;
-    priority: LeadPriority | string;
+    priority: string;
     billing_name?: string;
     source_id: number;
     archetech_name?: string;
@@ -109,7 +110,7 @@ export interface CreateLeadDTO {
   
 export interface DocumentUpload {
     file: Express.Multer.File;
-    type?: DocumentType;
+    type?: string;
 }
 
 export interface UpdateLeadDTO {
@@ -602,3 +603,12 @@ export interface ApiSuccessResponse<T = any> {
     hasPrev: boolean;
   };
 }
+
+export interface AssignTaskISMInput {
+  lead_id: number;
+  task_type: string;
+  due_date: string | Date;  // ISO from FE is fine
+  remark?: string;
+  assignee_user_id: number;
+  created_by: number;
+};

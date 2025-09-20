@@ -2,7 +2,7 @@ import { prisma } from "../../../prisma/client";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import wasabi, { generateSignedUrl } from "../../../utils/wasabiClient"; // your existing Wasabi config
 import { sanitizeFilename } from "../../../utils/sanitizeFilename";
-import { SupervisorStatus } from "@prisma/client";
+// import { SupervisorStatus } from "@prisma/client";
 
 interface FinalMeasurementDto {
   lead_id: number;
@@ -16,7 +16,7 @@ interface FinalMeasurementDto {
 
 export class FinalMeasurementService {
   public async createFinalMeasurementStage(data: FinalMeasurementDto) {
-    return await prisma.$transaction(async (tx) => {
+    return await prisma.$transaction(async (tx: any) => {
       const response: any = {
         measurementDoc: null,
         sitePhotos: [],
@@ -146,7 +146,7 @@ export class FinalMeasurementService {
                   tag: { in: ["Type 9", "Type 10"] }, // measurement + site photos
                 },
                 select: { id: true },
-              }).then(docs => docs.map(d => d.id)),
+              }).then((docs: any) => docs.map((d: any) => d.id)),
             },
           },
         },
@@ -194,12 +194,12 @@ export class FinalMeasurementService {
       },
     });
   
-    const measurementDocType = docTypes.find(d => d.tag === "Type 9");
-    const sitePhotoType = docTypes.find(d => d.tag === "Type 10");
+    const measurementDocType = docTypes.find((d: any) => d.tag === "Type 9");
+    const sitePhotoType = docTypes.find((d: any) => d.tag === "Type 10");
 
     // Measurement doc (single)
     const measurementDoc = lead.documents.find(
-      (d) => d.doc_type_id === measurementDocType?.id
+      (d: any) => d.doc_type_id === measurementDocType?.id
     );
 
     let measurementDocWithUrl = null;
@@ -213,8 +213,8 @@ export class FinalMeasurementService {
     // Site photos (multiple)
     const sitePhotos = await Promise.all(
       lead.documents
-        .filter((d) => d.doc_type_id === sitePhotoType?.id)
-        .map(async (doc) => ({
+        .filter((d: any) => d.doc_type_id === sitePhotoType?.id)
+        .map(async (doc: any) => ({
           ...doc,
           signedUrl: await generateSignedUrl(doc.doc_sys_name, 3600, "inline"),
         }))
@@ -266,7 +266,7 @@ export class FinalMeasurementService {
     created_by: number;
     sitePhotos?: Express.Multer.File[];
   }) {
-    return await prisma.$transaction(async (tx) => {
+    return await prisma.$transaction(async (tx: any) => {
       const response: any = {
         sitePhotos: [],
       };
