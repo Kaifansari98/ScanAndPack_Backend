@@ -4,6 +4,7 @@ import { GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 import wasabi, { generateSignedUrl } from "../../utils/wasabiClient";
 import { sanitizeFilename } from "../../utils/sanitizeFilename";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import logger from "../../utils/logger";
 
 export class BookingStageService {
 
@@ -42,7 +43,7 @@ export class BookingStageService {
   }
 
   public async createBookingStage(data: CreateBookingStageDto) {
-    return await prisma.$transaction(async (tx) => {
+    return await prisma.$transaction(async (tx: any) => {
       const response: any = {
         documentsUploaded: [],
         paymentInfo: null,
@@ -205,7 +206,7 @@ export class BookingStageService {
     created_by: number;
     finalDocuments?: Express.Multer.File[];
   }) {
-    return await prisma.$transaction(async (tx) => {
+    return await prisma.$transaction(async (tx: any) => {
       const response: any = {
         documentsUploaded: [],
       };
@@ -292,7 +293,7 @@ export class BookingStageService {
 
     // 🔹 Generate signed URLs for each document
     const documentsWithUrls = await Promise.all(
-      lead.documents.map(async (doc) => {
+      lead.documents.map(async (doc: any) => {
         const signedUrl = await generateSignedUrl(doc.doc_sys_name, 3600, "inline");
         return {
           id: doc.id,
@@ -311,7 +312,7 @@ export class BookingStageService {
       vendorId: lead.vendor_id,
       documents: documentsWithUrls,
       payments: await Promise.all(
-        lead.payments.map(async (p) => {
+        lead.payments.map(async (p: any) => {
           let file: any = null;
           if (p.document) {
             const signedUrl = await generateSignedUrl(p.document.doc_sys_name, 3600, "inline");
@@ -338,7 +339,7 @@ export class BookingStageService {
       //   amount: l.amount,
       //   date: l.payment_date,
       // })),
-      supervisors: lead.siteSupervisors.map((s) => ({
+      supervisors: lead.siteSupervisors.map((s: any) => ({
         // id: s.id,
         userId: s.user_id,
         userName: s.supervisor.user_name,
@@ -435,9 +436,9 @@ export class BookingStageService {
   
     // ✅ Generate signed URLs for all documents
     const data = await Promise.all(
-      leads.map(async (lead) => {
+      leads.map(async (lead: any) => {
         const docsWithUrls = await Promise.all(
-          lead.documents.map(async (doc) => {
+          lead.documents.map(async (doc: any) => {
             const signed_url = await generateSignedUrl(doc.doc_sys_name);
             return {
               ...doc,
@@ -451,7 +452,7 @@ export class BookingStageService {
         return {
           ...lead,
           documents: docsWithUrls,
-          siteSupervisors: lead.siteSupervisors.map((s) => s.supervisor),
+          siteSupervisors: lead.siteSupervisors.map((s: any) => s.supervisor),
         };
       })
     );
@@ -459,27 +460,54 @@ export class BookingStageService {
     return data;
   }
 
-  public static async getLeadsWithStatusOpen(vendorId: number) {
-
+  public static async getLeadsWithStatusOpen(vendorId: number, userId: number) {
+    logger.info("[BookingStageService] getLeadsWithStatusOpen called", { vendorId, userId });
+  
     // 1. Resolve the vendor's Open status ID dynamically
     const openStatus = await prisma.statusTypeMaster.findFirst({
-      where: {
-        vendor_id: vendorId,
-        tag: "Type 1", // ✅ booking status
-      },
+      where: { vendor_id: vendorId, tag: "Type 1" },
       select: { id: true },
     });
-
+  
     if (!openStatus) {
+      logger.error("Open status not found", { vendorId });
       throw new Error(`Open status (Type 1) not found for vendor ${vendorId}`);
     }
-
+  
+    // 2. Check if user is admin
+    const creator = await prisma.userMaster.findUnique({
+      where: { id: userId },
+      include: { user_type: true },
+    });
+  
+    const isAdmin = creator?.user_type?.user_type?.toLowerCase() === "admin";
+  
+    // 3. Build where condition
+    let leadWhere: any = {
+      status_id: openStatus.id,
+      is_deleted: false,
+      vendor_id: vendorId,
+    };
+  
+    if (!isAdmin) {
+      // restrict to leads where this user is mapped
+      leadWhere.id = {
+        in: (
+          await prisma.leadUserMapping.findMany({
+            where: {
+              vendor_id: vendorId,
+              user_id: userId,
+              status: "active",
+            },
+            select: { lead_id: true },
+          })
+        ).map((m) => m.lead_id),
+      };
+    }
+  
+    // 4. Query leads
     const leads = await prisma.leadMaster.findMany({
-      where: {
-        status_id: openStatus.id,  // ✅ vendor-specific
-        is_deleted: false,
-        vendor_id: vendorId,
-      },
+      where: leadWhere,
       include: {
         siteType: true,
         source: true,
@@ -489,39 +517,15 @@ export class BookingStageService {
         assignedTo: { select: { id: true, user_name: true } },
         assignedBy: { select: { id: true, user_name: true } },
         productMappings: {
-          select: {
-            productType: { select: { id: true, type: true, tag: true } },
-          },
+          select: { productType: { select: { id: true, type: true, tag: true } } },
         },
         leadProductStructureMapping: {
-          select: {
-            productStructure: { select: { id: true, type: true } },
-          },
+          select: { productStructure: { select: { id: true, type: true } } },
         },
-        // payments: {
-        //   select: {
-        //     id: true,
-        //     amount: true,
-        //     payment_date: true,
-        //     payment_text: true,
-        //     payment_file_id: true,
-        //     payment_type_id: true,
-        //     paymentType: { select: { id: true, type: true } },
-        //   },
-        // },
-        // siteSupervisors: {
-        //   select: {
-        //     supervisor: { select: { id: true, user_name: true } },
-        //   },
-        // },
-        // ✅ Fetch only documents where DocumentTypeMaster.tag = "Type 8"
         documents: {
           where: {
             is_deleted: false,
-            documentType: {
-              tag: "Type 1",
-              vendor_id: vendorId,
-            },
+            documentType: { tag: "Type 1", vendor_id: vendorId },
           },
           include: {
             documentType: { select: { id: true, type: true, tag: true } },
@@ -532,11 +536,13 @@ export class BookingStageService {
       orderBy: { created_at: "desc" },
     });
   
-    // ✅ Generate signed URLs for all documents
+    logger.debug("Fetched open leads", { count: leads.length, isAdmin });
+  
+    // 5. Attach signed URLs
     const data = await Promise.all(
-      leads.map(async (lead) => {
+      leads.map(async (lead: any) => {
         const docsWithUrls = await Promise.all(
-          lead.documents.map(async (doc) => {
+          lead.documents.map(async (doc: any) => {
             const signed_url = await generateSignedUrl(doc.doc_sys_name);
             return {
               ...doc,
@@ -546,11 +552,7 @@ export class BookingStageService {
             };
           })
         );
-  
-        return {
-          ...lead,
-          documents: docsWithUrls,
-        };
+        return { ...lead, documents: docsWithUrls };
       })
     );
   
@@ -574,7 +576,7 @@ export class BookingStageService {
   }
   
   public async editBookingStage(data: Partial<CreateBookingStageDto>) {
-    return await prisma.$transaction(async (tx) => {
+    return await prisma.$transaction(async (tx: any) => {
       const response: any = {
         updatedFields: {},
         message: "Booking stage updated successfully",

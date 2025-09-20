@@ -1,21 +1,105 @@
-import { PrismaClient, LedgerType } from '@prisma/client';
 import { PutObjectCommand } from '@aws-sdk/client-s3';
 import wasabi from '../../../utils/wasabiClient';
 import { sanitizeFilename } from '../../../utils/fileUtils';
-import { CreatePaymentUploadDto, PaymentUploadResponseDto, PaymentUploadDetailDto, PaymentAnalyticsDto, PaymentUploadListDto, DocumentDownloadDto } from '../../../types/leadModule.types';
+import { CreatePaymentUploadDto, PaymentUploadResponseDto, PaymentUploadDetailDto, PaymentAnalyticsDto, PaymentUploadListDto, DocumentDownloadDto, AssignTaskISMInput } from '../../../types/leadModule.types';
 import { GetObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { LeadDetailDto } from '../../../types/leadModule.types';
 import { PaymentUploadDetailDtoo, UpdatePaymentUploadDto } from '../../../types/leadModule.types';
+import { prisma } from '../../../prisma/client';
+import Joi from 'joi';
+import logger from '../../../utils/logger';
 
-const prisma = new PrismaClient();
+// ----------------------
+// AssignTaskISM (standalone)
+// ----------------------
+
+const assignTaskISMSchema = Joi.object({
+  lead_id: Joi.number().integer().positive().required(),
+  task_type: Joi.string().trim().required(),
+  due_date: Joi.alternatives().try(Joi.string().isoDate(), Joi.date()).required(),
+  remark: Joi.string().allow("", null),
+  assignee_user_id: Joi.number().integer().positive().required(),
+  created_by: Joi.number().integer().positive().required(),
+});
+
+export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
+  const { error, value } = assignTaskISMSchema.validate(payload);
+  if (error) {
+    throw new Error(
+      `Validation failed: ${error.details.map((d) => d.message).join(", ")}`
+    );
+  }
+
+  const { lead_id, task_type, due_date, remark, assignee_user_id, created_by } =
+    value;
+
+  return prisma.$transaction(async (tx) => {
+    // 1) Lead (for vendor/account)
+    const lead = await tx.leadMaster.findUnique({
+      where: { id: lead_id },
+      select: { id: true, vendor_id: true, account_id: true },
+    });
+    if (!lead) throw new Error(`Lead ${lead_id} not found`);
+
+    // 2) Assignee guard (same vendor)
+    const assignee = await tx.userMaster.findUnique({
+      where: { id: assignee_user_id },
+      select: { id: true, vendor_id: true },
+    });
+    if (!assignee) throw new Error(`Assignee user ${assignee_user_id} not found`);
+    if (assignee.vendor_id !== lead.vendor_id) {
+      throw new Error(
+        `Assignee user ${assignee_user_id} does not belong to vendor ${lead.vendor_id}`
+      );
+    }
+
+    // 3) Create task (status=open by default)
+    const task = await tx.userLeadTask.create({
+      data: {
+        lead_id: lead.id,
+        account_id: lead.account_id,
+        vendor_id: lead.vendor_id,
+        user_id: assignee_user_id,
+        task_type,
+        due_date: new Date(due_date),
+        remark: remark || null,
+        status: "open",
+        created_by,
+      },
+    });
+
+    // 4) Flip status to "Type 2"
+    const toStatus = await tx.statusTypeMaster.findFirst({
+      where: { vendor_id: lead.vendor_id, tag: "Type 2" },
+      select: { id: true },
+    });
+    if (!toStatus) {
+      throw new Error(`Status 'Type 2' not found for vendor ${lead.vendor_id}`);
+    }
+
+    const updatedLead = await tx.leadMaster.update({
+      where: { id: lead.id },
+      data: { status_id: toStatus.id },
+      select: { id: true, status_id: true },
+    });
+
+    logger.info("[SERVICE] assignTaskISM completed", {
+      lead_id: lead.id,
+      task_id: task.id,
+      new_status_id: updatedLead.status_id,
+    });
+
+    return { task, lead: updatedLead };
+  });
+};
 
 export class PaymentUploadService {
   
 public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentUploadResponseDto> {
   try {
     // Start a transaction to ensure data consistency
-    const result = await prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx: any) => {
       const response: PaymentUploadResponseDto = {
         paymentInfo: null,
         ledgerEntry: null,
@@ -199,7 +283,7 @@ public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentU
             vendor_id: data.vendor_id,
             amount: data.amount,
             payment_date: data.payment_date,
-            type: LedgerType.credit, // Assuming payment received is a credit
+            type: "credit", // Assuming payment received is a credit
             created_by: data.created_by,
           }
         });
@@ -212,12 +296,12 @@ public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentU
         };
       }
 
-     // 6. Update LeadMaster status (status "Type 1" → "Type 2")
+     // 6. Update LeadMaster status (status "Type 2" → "Type 3")
      const statusFrom = await tx.statusTypeMaster.findFirst({
-      where: { vendor_id: data.vendor_id, tag: "Type 1" },
+      where: { vendor_id: data.vendor_id, tag: "Type 2" },
       });
       const statusTo = await tx.statusTypeMaster.findFirst({
-        where: { vendor_id: data.vendor_id, tag: "Type 2" },
+        where: { vendor_id: data.vendor_id, tag: "Type 3" },
       });
 
       if (statusFrom && statusTo) {
@@ -426,8 +510,8 @@ public async getLeadsByStatus(
     ]);
 
     // Generate signed URLs for all documents
-    const allDocuments = leads.flatMap(lead => 
-      lead.documents.map(doc => ({
+    const allDocuments = leads.flatMap((lead: any) => 
+      lead.documents.map((doc: any) => ({
         s3Key: doc.doc_sys_name,
         vendorId: vendorId
       }))
@@ -435,7 +519,7 @@ public async getLeadsByStatus(
 
     const signedUrls = await this.generateBatchSignedUrls(allDocuments);
 
-    const data: LeadDetailDto[] = leads.map(lead => ({
+    const data: LeadDetailDto[] = leads.map((lead: any) => ({
       id: lead.id,
       firstname: lead.firstname,
       lastname: lead.lastname,
@@ -460,7 +544,7 @@ public async getLeadsByStatus(
       created_at: lead.created_at,
       updated_at: lead.updated_at,
       // Add documents with signed URLs
-      documents: lead.documents.map(doc => ({
+      documents: lead.documents.map((doc: any) => ({
         id: doc.id,
         doc_og_name: doc.doc_og_name,
         doc_sys_name: doc.doc_sys_name,
@@ -575,7 +659,7 @@ public async getPaymentUploadsByLead(
     // Combine payment info + ledger + documents
     for (const payment of paymentInfos) {
       const relatedLedger = ledgerEntries.find(
-        l =>
+        (l: any) =>
           l.payment_date.getTime() === payment.payment_date?.getTime() &&
           l.amount === payment.amount
       );
@@ -601,11 +685,11 @@ public async getPaymentUploadsByLead(
             }
           : null,
         documents: documents
-          .filter(doc => {
+          .filter((doc: any) => {
             const timeDiff = Math.abs(doc.created_at.getTime() - payment.created_at.getTime());
             return timeDiff < 60000;
           })
-          .map(doc => ({
+          .map((doc: any) => ({
             id: doc.id,
             doc_og_name: doc.doc_og_name,
             doc_sys_name: doc.doc_sys_name,
@@ -619,13 +703,13 @@ public async getPaymentUploadsByLead(
     }
 
     // Handle standalone documents (not tied to payment)
-    const paymentTimes = paymentInfos.map(p => p.created_at.getTime());
-    const documentOnlyUploads = documents.filter(doc => {
-      return !paymentTimes.some(time => Math.abs(doc.created_at.getTime() - time) < 60000);
+    const paymentTimes = paymentInfos.map((p: any) => p.created_at.getTime());
+    const documentOnlyUploads = documents.filter((doc: any) => {
+      return !paymentTimes.some((time: any) => Math.abs(doc.created_at.getTime() - time) < 60000);
     });
 
     const groupedDocs: { [key: string]: typeof documents } = {};
-    documentOnlyUploads.forEach(doc => {
+    documentOnlyUploads.forEach((doc: any) => {
       const timeKey = Math.floor(doc.created_at.getTime() / (5 * 60 * 1000));
       if (!groupedDocs[timeKey]) groupedDocs[timeKey] = [];
       groupedDocs[timeKey].push(doc);
@@ -640,7 +724,7 @@ public async getPaymentUploadsByLead(
         account: paymentInfos[0]?.account || null,
         paymentInfo: null,
         ledgerEntry: null,
-        documents: docGroup.map(doc => ({
+        documents: docGroup.map((doc: any) => ({
           id: doc.id,
           doc_og_name: doc.doc_og_name,
           doc_sys_name: doc.doc_sys_name,
@@ -667,7 +751,7 @@ public async updatePaymentUpload(
 ): Promise<PaymentUploadResponseDto> {
   try {
     // Start a transaction to ensure data consistency
-    const result = await prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx: any) => {
       const response: PaymentUploadResponseDto = {
         paymentInfo: null,
         ledgerEntry: null,
@@ -828,7 +912,7 @@ public async updatePaymentUpload(
               lead_id: data.lead_id,
               account_id: data.account_id,
               vendor_id: data.vendor_id,
-              type: LedgerType.credit,
+              type: "credit",
               // Match by payment date and amount to identify the correct ledger entry
               payment_date: existingPayment.payment_date ?? undefined,
               amount: existingPayment.amount ?? undefined
@@ -843,7 +927,7 @@ public async updatePaymentUpload(
                 lead_id: data.lead_id,
                 account_id: data.account_id,
                 vendor_id: data.vendor_id,
-                type: LedgerType.credit,
+                type: "credit",
                 payment_date: (data.payment_date ?? existingPayment.payment_date) ?? undefined,
                 amount: (data.amount ?? existingPayment.amount) ?? undefined
               }
@@ -880,7 +964,7 @@ public async softDeleteDocument(
   vendorId: number
 ): Promise<{ success: boolean; message: string; document?: any }> {
   try {
-    const result = await prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx: any) => {
       // 1. Verify the user belongs to the vendor
       const user = await tx.userMaster.findFirst({
         where: {
@@ -1010,7 +1094,7 @@ public async restoreDocument(
   vendorId: number
 ): Promise<{ success: boolean; message: string; document?: any }> {
   try {
-    const result = await prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx: any) => {
       // 1. Verify the user belongs to the vendor
       const user = await tx.userMaster.findFirst({
         where: {
@@ -1254,7 +1338,7 @@ public async getPaymentUploadById(
 
     // Generate signed URLs for documents
     const documentsWithUrls = await Promise.all(
-      documents.map(async (doc) => {
+      documents.map(async (doc: any) => {
         const signedUrl = await this.generateSignedUrl(doc.doc_sys_name, vendorId);
         return {
           ...doc,
@@ -1311,7 +1395,7 @@ public async getPaymentUploadsByAccount(accountId: number, vendorId: number): Pr
       }
     });
 
-    return paymentInfos.map(payment => ({
+    return paymentInfos.map((payment: any) => ({
       id: payment.id,
       lead: payment.lead,
       account: payment.account,
@@ -1480,7 +1564,7 @@ public async getPaymentUploadsByVendor(
       })
     ]);
 
-    const data = paymentInfos.map(payment => ({
+    const data = paymentInfos.map((payment: any) => ({
       id: payment.id,
       lead: payment.lead,
       account: payment.account,
