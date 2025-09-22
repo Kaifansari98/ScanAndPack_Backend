@@ -749,6 +749,7 @@
     open
     closed
     in_progress
+    completed
   }
 
   // ✅ New table

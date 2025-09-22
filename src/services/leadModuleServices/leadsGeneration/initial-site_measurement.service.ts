@@ -539,7 +539,6 @@ public async getLeadsByStatus(
   }
 }
 
-
 // Get payment uploads by lead ID (only for leads with status_id == 2)
 public async getPaymentUploadsByLead(
   leadId: number,
