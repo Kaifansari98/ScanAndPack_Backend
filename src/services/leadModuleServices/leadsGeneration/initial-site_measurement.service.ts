@@ -410,72 +410,19 @@ public async getLeadsByStatus(
       prisma.leadMaster.findMany({
         where: whereClause,
         include: {
-          vendor: {
-            select: {
-              id: true,
-              vendor_name: true,
-              vendor_code: true
-            }
-          },
-          siteType: {
-            select: {
-              id: true,
-              type: true
-            }
-          },
-          source: {
-            select: {
-              id: true,
-              type: true
-            }
-          },
-          account: {
-            select: {
-              id: true,
-              name: true,
-              contact_no: true,
-              email: true
-            }
-          },
-          statusType: {
-            select: {
-              id: true,
-              type: true
-            }
-          },
-          createdBy: {
-            select: {
-              id: true,
-              user_name: true,
-              user_email: true
-            }
-          },
-          updatedBy: {
-            select: {
-              id: true,
-              user_name: true,
-              user_email: true
-            }
-          },
-          assignedTo: {
-            select: {
-              id: true,
-              user_name: true,
-              user_email: true
-            }
-          },
-          assignedBy: {
-            select: {
-              id: true,
-              user_name: true,
-              user_email: true
-            }
-          },
-          // Include documents for generating signed URLs
+          vendor: { select: { id: true, vendor_name: true, vendor_code: true } },
+          siteType: { select: { id: true, type: true } },
+          source: { select: { id: true, type: true } },
+          account: { select: { id: true, name: true, contact_no: true, email: true } },
+          statusType: { select: { id: true, type: true } },
+          createdBy: { select: { id: true, user_name: true, user_email: true } },
+          updatedBy: { select: { id: true, user_name: true, user_email: true } },
+          assignedTo: { select: { id: true, user_name: true, user_email: true } },
+          assignedBy: { select: { id: true, user_name: true, user_email: true } },
+
+          // ✅ Documents
           documents: {
-            where: {
-              deleted_at: null
-            },
+            where: { deleted_at: null },
             select: {
               id: true,
               doc_og_name: true,
@@ -484,41 +431,50 @@ public async getLeadsByStatus(
               created_at: true
             }
           },
-          // Include counts for related data
+
+          // ✅ UserLeadTask
+          tasks: {
+            where: {
+              task_type: "Follow Up"   // ✅ Only include Follow Up tasks
+            },
+            select: {
+              id: true,
+              task_type: true,
+              due_date: true,
+              remark: true,
+              status: true,
+              created_at: true
+            },
+            orderBy: { created_at: 'desc' }
+          },
+
+          // ✅ Counts
           _count: {
             select: {
               payments: true,
-              documents: {
-                where: {
-                  deleted_at: null
-                }
-              },
+              documents: { where: { deleted_at: null } },
               ledgers: true,
               productMappings: true
             }
           }
         },
-        orderBy: {
-          created_at: 'desc'
-        },
+        orderBy: { created_at: 'desc' },
         skip,
         take: limit
       }),
-      prisma.leadMaster.count({
-        where: whereClause
-      })
+      prisma.leadMaster.count({ where: whereClause })
     ]);
 
-    // Generate signed URLs for all documents
+    // ✅ Signed URLs for docs
     const allDocuments = leads.flatMap((lead: any) => 
       lead.documents.map((doc: any) => ({
         s3Key: doc.doc_sys_name,
         vendorId: vendorId
       }))
     );
-
     const signedUrls = await this.generateBatchSignedUrls(allDocuments);
 
+    // ✅ Format response
     const data: LeadDetailDto[] = leads.map((lead: any) => ({
       id: lead.id,
       firstname: lead.firstname,
@@ -543,18 +499,30 @@ public async getLeadsByStatus(
       assignedBy: lead.assignedBy,
       created_at: lead.created_at,
       updated_at: lead.updated_at,
-      // Add documents with signed URLs
+
+      // ✅ Attach signed docs
       documents: lead.documents.map((doc: any) => ({
         id: doc.id,
         doc_og_name: doc.doc_og_name,
         doc_sys_name: doc.doc_sys_name,
         doc_type_id: doc.doc_type_id,
         created_at: doc.created_at,
-        signed_url: signedUrls[doc.doc_sys_name] || '', // Add signed URL
-        file_type: this.getFileType(doc.doc_og_name), // Helper to determine file type
-        is_image: this.isImageFile(doc.doc_og_name) // Helper to check if it's an image
+        signed_url: signedUrls[doc.doc_sys_name] || '',
+        file_type: this.getFileType(doc.doc_og_name),
+        is_image: this.isImageFile(doc.doc_og_name)
       })),
-      // Summary counts
+
+      // ✅ Include tasks
+      tasks: lead.tasks.map((task: any) => ({
+        id: task.id,
+        task_type: task.task_type,
+        due_date: task.due_date,
+        remark: task.remark,
+        status: task.status,
+        created_at: task.created_at
+      })),
+
+      // ✅ Summary
       summary: {
         totalPayments: lead._count.payments,
         totalDocuments: lead._count.documents,
@@ -570,6 +538,7 @@ public async getLeadsByStatus(
     throw new Error(`Failed to get leads by status: ${error.message}`);
   }
 }
+
 
 // Get payment uploads by lead ID (only for leads with status_id == 2)
 public async getPaymentUploadsByLead(
