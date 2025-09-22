@@ -877,7 +877,7 @@ export class LeadController {
     try {
       const leadId = Number(req.params.leadId);
       const taskId = Number(req.params.taskId);
-      const { task_type, due_date, remark, user_id, updated_by } = req.body;
+      const { task_type, due_date, remark, user_id, updated_by, status, closed_at, closed_by } = req.body;
   
       if (!leadId || !taskId) {
         return res.status(400).json({
@@ -898,6 +898,9 @@ export class LeadController {
         remark,
         assignee_user_id: user_id ? Number(user_id) : undefined,
         updated_by: Number(updated_by),
+        status,
+        closed_at,
+        closed_by: closed_by ? Number(closed_by) : undefined
       });
   
       return res.status(200).json({
@@ -913,7 +916,7 @@ export class LeadController {
         details: process.env.NODE_ENV === "development" ? error.message : undefined,
       });
     }
-  }
+  }  
 
 }
 

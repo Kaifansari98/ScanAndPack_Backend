@@ -24,6 +24,9 @@ type EditTaskISMInput = {
   remark?: string;
   assignee_user_id?: number;
   updated_by: number;
+  status?: string;
+  closed_at?: string | Date;
+  closed_by?: number;
 };
 
 const editTaskISMSchema = Joi.object({
@@ -34,6 +37,9 @@ const editTaskISMSchema = Joi.object({
   remark: Joi.string().allow("", null),
   assignee_user_id: Joi.number().integer().positive(),
   updated_by: Joi.number().integer().positive().required(),
+  status: Joi.string().trim(),
+  closed_at: Joi.alternatives().try(Joi.string().isoDate(), Joi.date()),
+  closed_by: Joi.number().integer().positive(),
 });
 
 export const createLeadService = async (payload: CreateLeadDTO, files: Express.Multer.File[]) => {
@@ -1264,11 +1270,9 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
     );
   }
 
-  const { lead_id, task_id, task_type, due_date, remark, assignee_user_id, updated_by } =
-    value;
+  const { lead_id, task_id, task_type, due_date, remark, assignee_user_id, updated_by, status, closed_at, closed_by } = value;
 
   return prisma.$transaction(async (tx) => {
-    // Ensure task belongs to given lead
     const task = await tx.userLeadTask.findFirst({
       where: { id: task_id, lead_id },
     });
@@ -1278,12 +1282,14 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
       updated_by,
       updated_at: new Date(),
     };
+
     if (task_type !== undefined) updateData.task_type = task_type;
     if (due_date !== undefined) updateData.due_date = new Date(due_date);
     if (remark !== undefined) updateData.remark = remark;
+    if (status !== undefined) updateData.status = status;
+    if (closed_at !== undefined) updateData.closed_at = new Date(closed_at);
 
     if (assignee_user_id !== undefined) {
-      // Ensure assignee belongs to same vendor
       const lead = await tx.leadMaster.findUnique({
         where: { id: lead_id },
         select: { vendor_id: true },
@@ -1301,6 +1307,26 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
       }
 
       updateData.user_id = assignee_user_id;
+    }
+
+    if (closed_by !== undefined) {
+      const lead = await tx.leadMaster.findUnique({
+        where: { id: lead_id },
+        select: { vendor_id: true },
+      });
+
+      const closer = await tx.userMaster.findUnique({
+        where: { id: closed_by },
+        select: { vendor_id: true },
+      });
+
+      if (!closer || closer.vendor_id !== lead?.vendor_id) {
+        throw new Error(
+          `Closed_by user ${closed_by} does not belong to vendor ${lead?.vendor_id}`
+        );
+      }
+
+      updateData.closed_by = closed_by;
     }
 
     const updatedTask = await tx.userLeadTask.update({
