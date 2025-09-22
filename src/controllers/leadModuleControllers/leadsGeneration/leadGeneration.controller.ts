@@ -17,7 +17,8 @@ import {
   getSalesExecutivesByVendor, 
   getSalesExecutiveById, 
   assignLeadToUser,
-  getLeadById
+  getLeadById,
+  editTaskISMService
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import { prisma } from "../../../prisma/client";
 import logger from "../../../utils/logger";
@@ -867,6 +868,50 @@ export class LeadController {
           process.env.NODE_ENV === "development" ? error.message : undefined
         )
       );
+    }
+  }
+
+  async editTaskISM(req: Request, res: Response): Promise<Response> {
+    logger.info("[CONTROLLER] editTaskISM called");
+  
+    try {
+      const leadId = Number(req.params.leadId);
+      const taskId = Number(req.params.taskId);
+      const { task_type, due_date, remark, user_id, updated_by } = req.body;
+  
+      if (!leadId || !taskId) {
+        return res.status(400).json({
+          success: false,
+          error: "Validation failed",
+          details: [
+            !leadId && { field: "leadId", message: "leadId (param) is required" },
+            !taskId && { field: "taskId", message: "taskId (param) is required" },
+          ].filter(Boolean),
+        });
+      }
+  
+      const result = await editTaskISMService({
+        lead_id: leadId,
+        task_id: taskId,
+        task_type,
+        due_date,
+        remark,
+        assignee_user_id: user_id ? Number(user_id) : undefined,
+        updated_by: Number(updated_by),
+      });
+  
+      return res.status(200).json({
+        success: true,
+        message: "ISM task updated successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      logger.error("[ERROR] editTaskISM:", { err: error });
+      return res.status(500).json({
+        success: false,
+        error: "Internal server error",
+        details: process.env.NODE_ENV === "development" ? error.message : undefined,
+      });
     }
   }
 

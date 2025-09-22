@@ -753,19 +753,21 @@
 
   // ✅ New table
   model UserLeadTask {
-    id         Int             @id @default(autoincrement())
-    lead_id    Int
-    account_id Int
-    vendor_id  Int
-    user_id    Int
-    task_type  String
-    due_date   DateTime
-    remark     String?         @db.VarChar(2000)
-    status     LeadTaskStatus  @default(open)
-    closed_by  Int?
-    closed_at  DateTime?
-    created_by Int
-    created_at DateTime        @default(now())
+    id              Int             @id @default(autoincrement())
+    lead_id         Int
+    account_id      Int
+    vendor_id       Int
+    user_id         Int
+    task_type       String
+    due_date        DateTime
+    remark          String?         @db.VarChar(2000)
+    status          LeadTaskStatus  @default(open)
+    closed_by       Int?
+    closed_at       DateTime?
+    created_by      Int
+    created_at      DateTime        @default(now())
+    updated_by      Int?
+    updated_at      DateTime       @updatedAt
 
     // Relations
     lead      LeadMaster    @relation(fields: [lead_id], references: [id], onDelete: Cascade)

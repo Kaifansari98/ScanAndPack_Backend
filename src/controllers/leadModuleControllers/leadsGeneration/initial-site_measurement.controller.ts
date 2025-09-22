@@ -409,50 +409,6 @@ export class PaymentUploadController {
     }
   };
 
-  // GET /api/payment-upload/:id
-  // public getPaymentUploadById = async (req: Request, res: Response): Promise<void> => {
-  //   try {
-  //     const { id } = req.params;
-  //     const { vendor_id } = req.query;
-
-  //     if (!id || !vendor_id) {
-  //       res.status(400).json({
-  //         success: false,
-  //         message: 'id and vendor_id are required'
-  //       });
-  //       return;
-  //     }
-
-  //     const result = await this.paymentUploadService.getPaymentUploadById(
-  //       parseInt(id),
-  //       parseInt(vendor_id as string)
-  //     );
-
-  //     if (!result) {
-  //       res.status(404).json({
-  //         success: false,
-  //         message: 'Payment upload not found'
-  //       });
-  //       return;
-  //     }
-
-  //     res.status(200).json({
-  //       success: true,
-  //       message: 'Payment upload retrieved successfully',
-  //       data: result
-  //     });
-
-  //   } catch (error: any) {
-  //     console.error('[PaymentUploadGetController] Error:', error);
-      
-  //     res.status(500).json({
-  //       success: false,
-  //       message: 'Internal server error',
-  //       error: error.message
-  //     });
-  //   }
-  // };
-
   // GET /api/payment-upload/vendor/:vendorId
   public getPaymentUploadsByVendor = async (req: Request, res: Response): Promise<void> => {
     try {

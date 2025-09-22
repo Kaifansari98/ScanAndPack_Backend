@@ -82,4 +82,7 @@ leadsRouter.get(
 // GET single lead by leadId for specific user and vendor
 leadsRouter.get("/get-lead/:leadId/vendor/:vendorId/user/:userId", leadController.fetchLeadById);
 
+// PATCH /leads/:leadId/tasks/:taskId/assign-ism
+leadsRouter.patch("/leadId/:leadId/taskId/:taskId/update-assign-ism", leadController.editTaskISM);
+
 export default leadsRouter;
