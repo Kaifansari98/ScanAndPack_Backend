@@ -1412,104 +1412,6 @@ public async getPaymentUploadsByAccount(accountId: number, vendorId: number): Pr
   }
 }
 
-// Get payment upload by ID
-// public async getPaymentUploadById(id: number, vendorId: number): Promise<PaymentUploadDetailDto | null> {
-//   try {
-//     const paymentInfo = await prisma.paymentInfo.findFirst({
-//       where: {
-//         id: id,
-//         vendor_id: vendorId
-//       },
-//       include: {
-//         lead: true,
-//         account: true,
-//         createdBy: {
-//           select: {
-//             id: true,
-//             user_name: true,
-//             user_email: true
-//           }
-//         },
-//         document: true
-//       }
-//     });
-
-//     if (!paymentInfo) {
-//       return null;
-//     }
-
-//             // Get related documents and ledger entries
-//       const documents = await prisma.leadDocuments.findMany({
-//         where: {
-//           lead_id: paymentInfo.lead_id,
-//           vendor_id: vendorId,
-//           deleted_at: null,
-//           created_at: {
-//             gte: new Date(paymentInfo.created_at.getTime() - 60000),
-//             lte: new Date(paymentInfo.created_at.getTime() + 60000)
-//           }
-//         },
-//         include: {
-//           createdBy: {
-//             select: {
-//               id: true,
-//               user_name: true
-//             }
-//           },
-//           documentType: {
-//             select: {
-//               id: true,
-//               type: true
-//             }
-//           }
-//         }
-//       });
-
-//     const ledgerEntry = await prisma.ledger.findFirst({
-//       where: {
-//         lead_id: paymentInfo.lead_id,
-//         vendor_id: vendorId,
-//         amount: paymentInfo.amount || 0,
-//         payment_date: paymentInfo.payment_date || undefined
-//       }
-//     });
-
-//     return {
-//       id: paymentInfo.id,
-//       type: 'payment_upload',
-//       lead: paymentInfo.lead,
-//       account: paymentInfo.account,
-//       paymentInfo: {
-//         id: paymentInfo.id,
-//         amount: paymentInfo.amount,
-//         payment_date: paymentInfo.payment_date,
-//         payment_text: paymentInfo.payment_text,
-//         payment_file_id: paymentInfo.payment_file_id
-//       },
-//       ledgerEntry: ledgerEntry ? {
-//         id: ledgerEntry.id,
-//         amount: ledgerEntry.amount,
-//         type: ledgerEntry.type,
-//         payment_date: ledgerEntry.payment_date
-//       } : null,
-//                 documents: documents.map(doc => ({
-//           id: doc.id,
-//           doc_og_name: doc.doc_og_name,
-//           doc_sys_name: doc.doc_sys_name,
-//           doc_type: doc.documentType.type,
-//           created_at: doc.created_at,
-//           createdBy: doc.createdBy
-//         })),
-//       createdBy: paymentInfo.createdBy,
-//       created_at: paymentInfo.created_at
-//     };
-
-//   } catch (error: any) {
-//     console.error('[PaymentUploadGetService] Error getting upload by id:', error);
-//     throw new Error(`Failed to get payment upload: ${error.message}`);
-//   }
-// }
-
 // Get payment uploads by vendor with pagination
 public async getPaymentUploadsByVendor(
   vendorId: number, 
@@ -1717,4 +1619,5 @@ private isImageFile(filename: string): boolean {
   const imageTypes = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
   return imageTypes.includes(ext);
 }
+
 }

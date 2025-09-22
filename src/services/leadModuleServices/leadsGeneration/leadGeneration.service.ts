@@ -14,6 +14,27 @@ import {
 } from "../../../validations/leadValidation";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
+import Joi from "joi";
+
+type EditTaskISMInput = {
+  lead_id: number;
+  task_id: number;
+  task_type?: string;
+  due_date?: string | Date;
+  remark?: string;
+  assignee_user_id?: number;
+  updated_by: number;
+};
+
+const editTaskISMSchema = Joi.object({
+  lead_id: Joi.number().integer().positive().required(),
+  task_id: Joi.number().integer().positive().required(),
+  task_type: Joi.string().trim(),
+  due_date: Joi.alternatives().try(Joi.string().isoDate(), Joi.date()),
+  remark: Joi.string().allow("", null),
+  assignee_user_id: Joi.number().integer().positive(),
+  updated_by: Joi.number().integer().positive().required(),
+});
 
 export const createLeadService = async (payload: CreateLeadDTO, files: Express.Multer.File[]) => {
     logger.debug("[SERVICE] createLeadService called", { fileCount: files.length });
@@ -1233,4 +1254,66 @@ export const assignLeadToUser = async (
     console.error("[SERVICE] Error assigning lead:", error);
     throw error;
   }
+};
+
+export const editTaskISMService = async (payload: EditTaskISMInput) => {
+  const { error, value } = editTaskISMSchema.validate(payload);
+  if (error) {
+    throw new Error(
+      `Validation failed: ${error.details.map((d) => d.message).join(", ")}`
+    );
+  }
+
+  const { lead_id, task_id, task_type, due_date, remark, assignee_user_id, updated_by } =
+    value;
+
+  return prisma.$transaction(async (tx) => {
+    // Ensure task belongs to given lead
+    const task = await tx.userLeadTask.findFirst({
+      where: { id: task_id, lead_id },
+    });
+    if (!task) throw new Error(`Task ${task_id} not found for lead ${lead_id}`);
+
+    const updateData: any = {
+      updated_by,
+      updated_at: new Date(),
+    };
+    if (task_type !== undefined) updateData.task_type = task_type;
+    if (due_date !== undefined) updateData.due_date = new Date(due_date);
+    if (remark !== undefined) updateData.remark = remark;
+
+    if (assignee_user_id !== undefined) {
+      // Ensure assignee belongs to same vendor
+      const lead = await tx.leadMaster.findUnique({
+        where: { id: lead_id },
+        select: { vendor_id: true },
+      });
+      if (!lead) throw new Error(`Lead ${lead_id} not found`);
+
+      const assignee = await tx.userMaster.findUnique({
+        where: { id: assignee_user_id },
+        select: { vendor_id: true },
+      });
+      if (!assignee || assignee.vendor_id !== lead.vendor_id) {
+        throw new Error(
+          `Assignee ${assignee_user_id} does not belong to vendor ${lead.vendor_id}`
+        );
+      }
+
+      updateData.user_id = assignee_user_id;
+    }
+
+    const updatedTask = await tx.userLeadTask.update({
+      where: { id: task_id },
+      data: updateData,
+    });
+
+    logger.info("[SERVICE] editTaskISM completed", {
+      task_id,
+      lead_id,
+      updated_by,
+    });
+
+    return updatedTask;
+  });
 };
