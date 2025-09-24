@@ -65,13 +65,13 @@ export class PaymentUploadController {
 
   public createPaymentUpload = async (req: Request, res: Response): Promise<void> => {
     try {
-      const { lead_id, account_id, vendor_id, created_by, client_id } = req.body;
+      const { lead_id, account_id, vendor_id, created_by, client_id, user_id } = req.body;
 
       // Validate required fields
-      if (!lead_id || !account_id || !vendor_id || !created_by || !client_id) {
+      if (!lead_id || !account_id || !vendor_id || !created_by || !client_id || !user_id) {
         res.status(400).json({
           success: false,
-          message: 'lead_id, account_id, vendor_id, created_by, and client_id are required'
+          message: 'lead_id, account_id, vendor_id, created_by, client_id, and user_id are required',
         });
         return;
       }
@@ -120,6 +120,7 @@ export class PaymentUploadController {
         vendor_id: parseInt(vendor_id),
         created_by: parseInt(created_by),
         client_id: parseInt(client_id),
+        user_id: parseInt(user_id),
         amount: req.body.amount ? parseFloat(req.body.amount) : undefined,
         payment_date: req.body.payment_date ? new Date(req.body.payment_date) : undefined,
         payment_text: req.body.payment_text || undefined,
@@ -267,23 +268,24 @@ export class PaymentUploadController {
   public getLeadsByStatus = async (req: Request, res: Response): Promise<void> => {
     try {
       const { vendorId } = req.params;
-      const { page = '1', limit = '10' } = req.query;
+      const { page = '1', limit = '10', userId } = req.query;
   
-      if (!vendorId) {
+      if (!vendorId || !userId) {
         res.status(400).json({
           success: false,
-          message: 'vendorId is required'
+          message: 'vendorId and userId are required'
         });
         return;
       }
-
+  
       const vendor_id = parseInt(vendorId);
-
+      const user_id = Number(userId);
+  
       // ✅ Find the correct status type for this vendor
       const statusType = await prisma.statusTypeMaster.findFirst({
         where: { vendor_id, tag: "Type 2" },
       });
-
+  
       if (!statusType) {
         res.status(404).json({
           success: false,
@@ -294,22 +296,20 @@ export class PaymentUploadController {
   
       const result = await this.paymentUploadService.getLeadsByStatus(
         vendor_id,
+        user_id,
         statusType.id,
         parseInt(page as string),
         parseInt(limit as string)
       );
   
-      // Fetch detailed uploads for each lead
+      // ✅ Attach uploads as before
       const leadsWithUploads = await Promise.all(
         result.data.map(async (lead: any) => {
           const uploads = await this.paymentUploadService.getPaymentUploadsByLead(
             lead.id,
-            parseInt(vendorId),
+            vendor_id,
           );
-          return {
-            ...lead,
-            uploads
-          };
+          return { ...lead, uploads };
         })
       );
   
@@ -328,14 +328,14 @@ export class PaymentUploadController {
   
     } catch (error: any) {
       console.error('[PaymentUploadController] Error getting leads by status:', error);
-      
+  
       res.status(500).json({
         success: false,
         message: 'Internal server error',
         error: error.message
       });
     }
-  };
+  };  
 
   // GET /api/payment-upload/lead/:leadId
   public getPaymentUploadsByLead = async (req: Request, res: Response): Promise<void> => {

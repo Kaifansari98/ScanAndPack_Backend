@@ -233,6 +233,7 @@ export interface CreatePaymentUploadDto {
     vendor_id: number;
     created_by: number;
     client_id: number;
+    user_id: number;
     amount?: number;
     payment_date?: Date;
     payment_text?: string;
@@ -605,6 +606,15 @@ export interface ApiSuccessResponse<T = any> {
 }
 
 export interface AssignTaskISMInput {
+  lead_id: number;
+  task_type: string;
+  due_date: string | Date;  // ISO from FE is fine
+  remark?: string;
+  assignee_user_id: number;
+  created_by: number;
+};
+
+export interface AssignTaskFMInput {
   lead_id: number;
   task_type: string;
   due_date: string | Date;  // ISO from FE is fine

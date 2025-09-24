@@ -5,8 +5,64 @@ import wasabi, { generateSignedUrl } from "../../utils/wasabiClient";
 import { sanitizeFilename } from "../../utils/sanitizeFilename";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import logger from "../../utils/logger";
+import { Prisma, SupervisorStatus } from "@prisma/client";
 
 export class BookingStageService {
+
+    // Helper to avoid repeating include structure
+    private static leadIncludes() {
+      return {
+        account: { select: { id: true, name: true } },
+        siteType: true,
+        source: true,
+        statusType: true,
+        createdBy: { select: { id: true, user_name: true } },
+        updatedBy: true,
+        assignedTo: { select: { id: true, user_name: true } },
+        assignedBy: { select: { id: true, user_name: true } },
+        productMappings: {
+          select: { productType: { select: { id: true, type: true, tag: true } } },
+        },
+        leadProductStructureMapping: {
+          select: { productStructure: { select: { id: true, type: true } } },
+        },
+        payments: {
+          where: { paymentType: { tag: "Type 2" } },
+          select: {
+            id: true,
+            amount: true,
+            payment_date: true,
+            payment_text: true,
+            payment_file_id: true,
+            payment_type_id: true,
+            paymentType: { select: { id: true, type: true, tag: true } },
+          },
+        },
+        siteSupervisors: {
+          where: { status: SupervisorStatus.active },
+          select: { supervisor: { select: { id: true, user_name: true } } },
+        },
+        documents: {
+          where: { is_deleted: false, documentType: { tag: "Type 8" } },
+          include: {
+            documentType: { select: { id: true, type: true, tag: true } },
+            createdBy: { select: { id: true, user_name: true } },
+          },
+        },
+        tasks: {
+          select: {
+            id: true,
+            task_type: true,
+            due_date: true,
+            remark: true,
+            status: true,
+            created_at: true,
+          },
+          orderBy: { created_at: Prisma.SortOrder.desc }, // ✅ fixed
+        },
+      };
+    }
+       
 
   // Generate signed URL for file access
   public async generateSignedUrl(s3Key: string, vendorId: number, expiresIn: number = 3600): Promise<string> {
@@ -348,32 +404,61 @@ export class BookingStageService {
     };
   }
 
-  public static async getLeadsWithStatusBooking(vendorId: number) {
-
-    // 1. Fetch the status ID for Booking stage dynamically
+  public static async getLeadsWithStatusBooking(vendorId: number, userId: number) {
+    // 1️⃣ Get Booking status (Type 4)
     const bookingStatus = await prisma.statusTypeMaster.findFirst({
-      where: {
-        vendor_id: vendorId,
-        tag: "Type 4",   // ✅ vendor-specific tag for Booking stage
-      },
+      where: { vendor_id: vendorId, tag: "Type 4" },
       select: { id: true },
     });
-
+  
     if (!bookingStatus) {
       throw new Error(`Booking status (Type 4) not found for vendor ${vendorId}`);
     }
-
+  
+    // 2️⃣ Check if user is admin
+    const creator = await prisma.userMaster.findUnique({
+      where: { id: userId },
+      include: { user_type: true },
+    });
+  
+    const isAdmin = creator?.user_type?.user_type?.toLowerCase() === "admin";
+  
+    let leadIds: number[] = [];
+  
+    if (!isAdmin) {
+      // Leads via LeadUserMapping
+      const mappedLeads = await prisma.leadUserMapping.findMany({
+        where: { vendor_id: vendorId, user_id: userId, status: "active" },
+        select: { lead_id: true },
+      });
+  
+      // Leads via UserLeadTask
+      const taskLeads = await prisma.userLeadTask.findMany({
+        where: {
+          vendor_id: vendorId,
+          OR: [{ created_by: userId }, { user_id: userId }],
+        },
+        select: { lead_id: true },
+      });
+  
+      // Union of both sets
+      leadIds = [
+        ...new Set([...mappedLeads.map((m) => m.lead_id), ...taskLeads.map((t) => t.lead_id)]),
+      ];
+  
+      if (!leadIds.length) return [];
+    }
+  
+    // 3️⃣ Fetch leads
     const leads = await prisma.leadMaster.findMany({
       where: {
-        status_id: bookingStatus.id,  // ✅ vendor-specific status id
+        ...(isAdmin ? {} : { id: { in: leadIds } }),
+        status_id: bookingStatus.id,
         is_deleted: false,
         vendor_id: vendorId,
       },
       include: {
-        account: { select: {
-          id: true,
-          name: true,
-        }},
+        account: { select: { id: true, name: true } },
         siteType: true,
         source: true,
         statusType: true,
@@ -382,21 +467,14 @@ export class BookingStageService {
         assignedTo: { select: { id: true, user_name: true } },
         assignedBy: { select: { id: true, user_name: true } },
         productMappings: {
-          select: {
-            productType: { select: { id: true, type: true, tag: true } },
-          },
+          select: { productType: { select: { id: true, type: true, tag: true } } },
         },
         leadProductStructureMapping: {
-          select: {
-            productStructure: { select: { id: true, type: true } },
-          },
+          select: { productStructure: { select: { id: true, type: true } } },
         },
         payments: {
           where: {
-            paymentType: {
-              tag: "Type 2",            // ✅ Only Type 2 payments
-              vendor_id: vendorId,      // ✅ Match current vendor
-            },
+            paymentType: { tag: "Type 2", vendor_id: vendorId }, // only booking payments
           },
           select: {
             id: true,
@@ -410,31 +488,31 @@ export class BookingStageService {
         },
         siteSupervisors: {
           where: { status: "active" },
-          select: {
-            supervisor: {
-              select: { id: true, user_name: true },
-            },
-          },
-        },        
-        // ✅ Fetch only documents where DocumentTypeMaster.tag = "Type 8"
+          select: { supervisor: { select: { id: true, user_name: true } } },
+        },
         documents: {
-          where: {
-            is_deleted: false,
-            documentType: {
-              tag: "Type 8",
-              vendor_id: vendorId,
-            },
-          },
+          where: { is_deleted: false, documentType: { tag: "Type 8", vendor_id: vendorId } },
           include: {
             documentType: { select: { id: true, type: true, tag: true } },
             createdBy: { select: { id: true, user_name: true } },
           },
         },
+        tasks: {
+          select: {
+            id: true,
+            task_type: true,
+            due_date: true,
+            remark: true,
+            status: true,
+            created_at: true,
+          },
+          orderBy: { created_at: Prisma.SortOrder.desc },
+        },
       },
-      orderBy: { created_at: "desc" },
+      orderBy: { created_at: Prisma.SortOrder.desc },
     });
   
-    // ✅ Generate signed URLs for all documents
+    // 4️⃣ Attach signed URLs
     const data = await Promise.all(
       leads.map(async (lead: any) => {
         const docsWithUrls = await Promise.all(
@@ -458,19 +536,21 @@ export class BookingStageService {
     );
   
     return data;
-  }
+  }  
 
   public static async getLeadsWithStatusOpen(vendorId: number, userId: number) {
-    logger.info("[BookingStageService] getLeadsWithStatusOpen called", { vendorId, userId });
+    logger.info("[BookingStageService] getLeadsWithStatusOpen called", {
+      vendorId,
+      userId,
+    });
   
-    // 1. Resolve the vendor's Open status ID dynamically
+    // 1. Get Open status
     const openStatus = await prisma.statusTypeMaster.findFirst({
       where: { vendor_id: vendorId, tag: "Type 1" },
       select: { id: true },
     });
   
     if (!openStatus) {
-      logger.error("Open status not found", { vendorId });
       throw new Error(`Open status (Type 1) not found for vendor ${vendorId}`);
     }
   
@@ -482,82 +562,84 @@ export class BookingStageService {
   
     const isAdmin = creator?.user_type?.user_type?.toLowerCase() === "admin";
   
-    // 3. Build where condition
-    let leadWhere: any = {
-      status_id: openStatus.id,
-      is_deleted: false,
-      vendor_id: vendorId,
-    };
-  
-    if (!isAdmin) {
-      // restrict to leads where this user is mapped
-      leadWhere.id = {
-        in: (
-          await prisma.leadUserMapping.findMany({
-            where: {
-              vendor_id: vendorId,
-              user_id: userId,
-              status: "active",
-            },
-            select: { lead_id: true },
-          })
-        ).map((m) => m.lead_id),
-      };
+    // ============= Admin Flow =============
+    if (isAdmin) {
+      return prisma.leadMaster.findMany({
+        where: {
+          vendor_id: vendorId,
+          is_deleted: false,
+          statusType: { tag: "Type 1", vendor_id: vendorId },
+        },
+        include: BookingStageService.leadIncludes(),
+        orderBy: { created_at: "desc" },
+      });
     }
   
-    // 4. Query leads
-    const leads = await prisma.leadMaster.findMany({
-      where: leadWhere,
-      include: {
-        siteType: true,
-        source: true,
-        statusType: true,
-        createdBy: { select: { id: true, user_name: true } },
-        updatedBy: true,
-        assignedTo: { select: { id: true, user_name: true } },
-        assignedBy: { select: { id: true, user_name: true } },
-        productMappings: {
-          select: { productType: { select: { id: true, type: true, tag: true } } },
-        },
-        leadProductStructureMapping: {
-          select: { productStructure: { select: { id: true, type: true } } },
-        },
-        documents: {
-          where: {
-            is_deleted: false,
-            documentType: { tag: "Type 1", vendor_id: vendorId },
-          },
-          include: {
-            documentType: { select: { id: true, type: true, tag: true } },
-            createdBy: { select: { id: true, user_name: true } },
-          },
-        },
-      },
-      orderBy: { created_at: "desc" },
-    });
-  
-    logger.debug("Fetched open leads", { count: leads.length, isAdmin });
-  
-    // 5. Attach signed URLs
-    const data = await Promise.all(
-      leads.map(async (lead: any) => {
-        const docsWithUrls = await Promise.all(
-          lead.documents.map(async (doc: any) => {
-            const signed_url = await generateSignedUrl(doc.doc_sys_name);
-            return {
-              ...doc,
-              signed_url,
-              file_type: BookingStageService.getFileType(doc.doc_og_name),
-              is_image: BookingStageService.isImageFile(doc.doc_og_name),
-            };
-          })
-        );
-        return { ...lead, documents: docsWithUrls };
+    // ============= Non-Admin Flow =============
+
+// Leads mapped via LeadUserMapping
+const mappedLeads = await prisma.leadUserMapping.findMany({
+  where: {
+    vendor_id: vendorId,
+    user_id: userId,
+    status: "active",
+  },
+  select: { lead_id: true },
+});
+
+// Leads assigned/created via UserLeadTask
+const taskLeads = await prisma.userLeadTask.findMany({
+  where: {
+    vendor_id: vendorId,
+    OR: [{ created_by: userId }, { user_id: userId }],
+  },
+  select: { lead_id: true },
+});
+
+// ✅ Use OR (union) instead of AND (intersection)
+const leadIds = [
+  ...new Set([
+    ...mappedLeads.map((m) => m.lead_id),
+    ...taskLeads.map((t) => t.lead_id),
+  ]),
+];
+
+if (!leadIds.length) {
+  logger.info("No leads found for user (union empty)", {
+    userId,
+    vendorId,
+  });
+  return [];
+}
+
+const leads = await prisma.leadMaster.findMany({
+  where: {
+    id: { in: leadIds },
+    is_deleted: false,
+    vendor_id: vendorId,
+    statusType: { tag: "Type 1", vendor_id: vendorId },
+  },
+  include: BookingStageService.leadIncludes(),
+  orderBy: { created_at: Prisma.SortOrder.desc },
+});
+
+// Attach signed URLs for documents
+return Promise.all(
+  leads.map(async (lead: any) => {
+    const docsWithUrls = await Promise.all(
+      lead.documents.map(async (doc: any) => {
+        const signed_url = await generateSignedUrl(doc.doc_sys_name);
+        return {
+          ...doc,
+          signed_url,
+          file_type: BookingStageService.getFileType(doc.doc_og_name),
+          is_image: BookingStageService.isImageFile(doc.doc_og_name),
+        };
       })
     );
-  
-    return data;
-  }
+    return { ...lead, documents: docsWithUrls };
+  })
+);}
   
   // ✅ Helpers (you already have these in your other service)
   private static getFileType(filename: string): string {

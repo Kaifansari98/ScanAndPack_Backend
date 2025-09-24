@@ -110,12 +110,16 @@ export class BookingStageController {
   public getBookingLeads = async (req: Request, res: Response) => {
     try {
       const vendorId = parseInt(req.params.vendorId);
+      const userId = Number(req.query.userId);
   
-      if (!vendorId) {
-        return res.status(400).json({ success: false, message: "Vendor ID is required" });
+      if (!vendorId || !userId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and userId are required",
+        });
       }
   
-      const leads = await BookingStageService.getLeadsWithStatusBooking(vendorId);
+      const leads = await BookingStageService.getLeadsWithStatusBooking(vendorId, userId);
   
       return res.status(200).json({
         success: true,
@@ -134,16 +138,23 @@ export class BookingStageController {
   public getOpenLeads = async (req: Request, res: Response) => {
     try {
       const vendorId = parseInt(req.params.vendorId);
-      const userId = Number(req.query.userId || req.body.userId); // assume userId comes in request
+      const userId = Number(req.query.userId || req.body.userId);
   
       if (!vendorId || !userId) {
         logger.warn("Missing vendorId or userId", { vendorId, userId });
-        return res.status(400).json({ success: false, message: "Vendor ID and User ID are required" });
+        return res.status(400).json({
+          success: false,
+          message: "Vendor ID and User ID are required",
+        });
       }
   
       const leads = await BookingStageService.getLeadsWithStatusOpen(vendorId, userId);
   
-      logger.info("Fetched open leads successfully", { vendorId, userId, count: leads.length });
+      logger.info("Fetched open leads successfully", {
+        vendorId,
+        userId,
+        count: leads.length,
+      });
   
       return res.status(200).json({
         success: true,
@@ -151,7 +162,10 @@ export class BookingStageController {
         data: leads,
       });
     } catch (error: any) {
-      logger.error("[BookingStageController] getOpenLeads Error", { error: error.message, stack: error.stack });
+      logger.error("[BookingStageController] getOpenLeads Error", {
+        error: error.message,
+        stack: error.stack,
+      });
       return res.status(500).json({
         success: false,
         message: error.message || "Something went wrong",

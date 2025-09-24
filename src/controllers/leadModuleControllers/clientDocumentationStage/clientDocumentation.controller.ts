@@ -128,22 +128,29 @@ export class ClientDocumentationController {
       const userId = parseInt(req.params.userId);
   
       if (!vendorId || !userId) {
-        return res.status(400).json({ success: false, message: "Vendor ID and User ID are required" });
+        return res.status(400).json({
+          success: false,
+          message: "Vendor ID and User ID are required",
+        });
       }
   
-      const leads = await clientDocumentationService.getLeadsWithStatusClientDocumentation(vendorId, userId);
+      const leads = await clientDocumentationService.getLeadsWithStatusClientDocumentation(
+        vendorId,
+        userId
+      );
   
       return res.status(200).json({
         success: true,
-        message: "Final Measurement leads fetched successfully",
+        message: "Client Documentation leads fetched successfully",
         data: leads,
       });
     } catch (error: any) {
-      console.error("[FinalMeasurementController] getFinalMeasurementLeads Error:", error);
+      console.error("[ClientDocumentationController] getAllClientDocumentations Error:", error);
       return res.status(500).json({
         success: false,
         message: error.message || "Something went wrong",
       });
     }
   };
+  
 }
