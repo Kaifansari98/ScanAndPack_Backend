@@ -12,6 +12,34 @@ export class PaymentUploadController {
     this.paymentUploadService = new PaymentUploadService();
   }
 
+  public getISMDetailsByLeadId = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { leadId } = req.params;
+
+      if (!leadId) {
+        res.status(400).json({
+          success: false,
+          message: "leadId is required",
+        });
+        return;
+      }
+
+      const result = await this.paymentUploadService.getISMDetailsByLeadId(parseInt(leadId));
+
+      res.status(200).json({
+        success: true,
+        data: result,
+      });
+    } catch (error: any) {
+      console.error("[PaymentUploadController] Error:", error);
+      res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  };
+
   public async assignTaskISM(req: Request, res: Response): Promise<Response> {
     logger.info("[CONTROLLER] assignTaskISM called");
     try {

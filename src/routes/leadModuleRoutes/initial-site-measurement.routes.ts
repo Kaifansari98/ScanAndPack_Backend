@@ -212,4 +212,7 @@ router.get("/documents/deleted", paymentUploadController.getDeletedDocuments);
 
 router.post("/leadId/:leadId/tasks/assign-ism", paymentUploadController.assignTaskISM);
 
+// GET ISM details by leadId
+router.get("/leadId/:leadId", paymentUploadController.getISMDetailsByLeadId);
+
 export { router as paymentUploadRoutes };

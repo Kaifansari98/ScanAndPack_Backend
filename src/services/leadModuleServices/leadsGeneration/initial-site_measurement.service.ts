@@ -10,6 +10,7 @@ import { prisma } from '../../../prisma/client';
 import Joi from 'joi';
 import logger from '../../../utils/logger';
 import { Prisma } from '@prisma/client';
+import { generateSignedUrl } from '../../../utils/wasabiClient';
 
 // ----------------------
 // AssignTaskISM (standalone)
@@ -100,6 +101,105 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
 };
 
 export class PaymentUploadService {
+
+  public async getISMDetailsByLeadId(leadId: number): Promise<any> {
+    try {
+      // Step 1: Get vendor_id from leadMaster
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: leadId },
+        select: { vendor_id: true },
+      });
+
+      if (!lead) {
+        throw new Error("Lead not found");
+      }
+
+      const vendorId = lead.vendor_id;
+
+      // Step 2: Get document type IDs
+      const [sitePhotoDocType, pdfDocType, paymentDocType] = await Promise.all([
+        prisma.documentTypeMaster.findFirst({ where: { vendor_id: vendorId, tag: "Type 2" } }),
+        prisma.documentTypeMaster.findFirst({ where: { vendor_id: vendorId, tag: "Type 3" } }),
+        prisma.documentTypeMaster.findFirst({ where: { vendor_id: vendorId, tag: "Type 4" } }),
+      ]);
+
+      // Step 3: Fetch documents
+      const [sitePhotos, pdfDocs, paymentDocs] = await Promise.all([
+        sitePhotoDocType
+          ? prisma.leadDocuments.findMany({
+              where: { lead_id: leadId, vendor_id: vendorId, doc_type_id: sitePhotoDocType.id },
+            })
+          : [],
+        pdfDocType
+          ? prisma.leadDocuments.findMany({
+              where: { lead_id: leadId, vendor_id: vendorId, doc_type_id: pdfDocType.id },
+            })
+          : [],
+        paymentDocType
+          ? prisma.leadDocuments.findMany({
+              where: { lead_id: leadId, vendor_id: vendorId, doc_type_id: paymentDocType.id },
+            })
+          : [],
+      ]);
+
+      // Step 4: Generate signed URLs with util
+      const withSignedUrls = async (docs: any[], type: string) => {
+        return Promise.all(
+          docs.map(async (doc) => ({
+            id: doc.id,
+            type,
+            originalName: doc.doc_og_name,
+            s3Key: doc.doc_sys_name,
+            signedUrl: await generateSignedUrl(doc.doc_sys_name),
+          }))
+        );
+      };
+
+      const current_site_photos = await withSignedUrls(sitePhotos, "current_site_photo");
+      const initial_site_measurement_documents = await withSignedUrls(pdfDocs, "pdf_upload");
+      const initial_site_measurement_payment_details = await withSignedUrls(
+        paymentDocs,
+        "initial_site_measurement_payment_details"
+      );
+
+      // Step 5: Fetch payment info
+      const paymentInfo = await prisma.paymentInfo.findFirst({
+        where: { lead_id: leadId, vendor_id: vendorId },
+        select: {
+          id: true,
+          amount: true,
+          payment_date: true,
+          payment_text: true,
+          payment_file_id: true,
+        },
+      });
+
+      // Step 6: If payment_file_id exists, link it with signedUrl
+      if (paymentInfo?.payment_file_id) {
+        const paymentDoc = await prisma.leadDocuments.findUnique({
+          where: { id: paymentInfo.payment_file_id },
+        });
+
+        if (paymentDoc) {
+          (paymentInfo as any).payment_file = {
+            id: paymentDoc.id,
+            originalName: paymentDoc.doc_og_name,
+            signedUrl: await generateSignedUrl(paymentDoc.doc_sys_name),
+          };
+        }
+      }
+
+      return {
+        current_site_photos,
+        initial_site_measurement_documents,
+        initial_site_measurement_payment_details,
+        payment_info: paymentInfo,
+      };
+    } catch (error: any) {
+      console.error("[PaymentUploadService] Error:", error);
+      throw new Error(`Failed to fetch ISM details: ${error.message}`);
+    }
+  }
   
 public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentUploadResponseDto> {
   try {
@@ -267,7 +367,7 @@ public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentU
             amount: data.amount,
             payment_date: data.payment_date,
             payment_text: data.payment_text || null,
-            payment_file_id: null,
+            payment_file_id: paymentFileId,
             payment_type_id: paymentType.id,
           }
         });
