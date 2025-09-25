@@ -24,17 +24,20 @@ export class TaskService {
           updated_by: true,
           updated_at: true,
       
-          // 👇 Include relation to get created by user details
+          // 👤 Who created the task
           createdBy: {
             select: {
               id: true,
               user_name: true,
             },
           },
-      
+
+          // 🔑 Lead details
           lead: {
             select: {
               id: true,
+              account_id: true,
+              vendor_id: true,
               firstname: true,
               lastname: true,
               contact_no: true,
@@ -46,6 +49,7 @@ export class TaskService {
               leadProductStructureMapping: {
                 select: { productStructure: { select: { type: true } } },
               },
+              
             },
           },
         },
@@ -70,6 +74,8 @@ export class TaskService {
         },
         leadMaster: {
           id: task.lead?.id,
+          account_id: task.lead?.account_id,
+          vendor_id: task?.lead?.vendor_id,
           name: `${task.lead?.firstname} ${task.lead?.lastname}`,
           phone_number: task.lead?.contact_no,
           site_type: task.lead?.siteType?.type,

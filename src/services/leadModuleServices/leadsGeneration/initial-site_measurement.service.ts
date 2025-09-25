@@ -200,6 +200,58 @@ export class PaymentUploadService {
       throw new Error(`Failed to fetch ISM details: ${error.message}`);
     }
   }
+
+  public async getISMPaymentInfoByLeadId(leadId: number): Promise<any> {
+    try {
+      // 1. Get vendor_id from leadMaster
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: leadId },
+        select: { vendor_id: true },
+      });
+
+      if (!lead) {
+        throw new Error("Lead not found");
+      }
+
+      const vendorId = lead.vendor_id;
+
+      // 2. Fetch paymentInfo
+      const paymentInfo = await prisma.paymentInfo.findFirst({
+        where: { lead_id: leadId, vendor_id: vendorId },
+        select: {
+          id: true,
+          amount: true,
+          payment_date: true,
+          payment_text: true,
+          payment_file_id: true,
+        },
+      });
+
+      if (!paymentInfo) {
+        return null; // no payment info
+      }
+
+      // 3. Attach signedUrl if payment_file_id exists
+      if (paymentInfo.payment_file_id) {
+        const paymentDoc = await prisma.leadDocuments.findUnique({
+          where: { id: paymentInfo.payment_file_id },
+        });
+
+        if (paymentDoc) {
+          (paymentInfo as any).payment_file = {
+            id: paymentDoc.id,
+            originalName: paymentDoc.doc_og_name,
+            signedUrl: await generateSignedUrl(paymentDoc.doc_sys_name),
+          };
+        }
+      }
+
+      return paymentInfo;
+    } catch (error: any) {
+      console.error("[PaymentUploadService] Error:", error);
+      throw new Error(`Failed to fetch ISM payment info: ${error.message}`);
+    }
+  }
   
 public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentUploadResponseDto> {
   try {

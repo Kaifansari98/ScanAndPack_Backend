@@ -215,4 +215,7 @@ router.post("/leadId/:leadId/tasks/assign-ism", paymentUploadController.assignTa
 // GET ISM details by leadId
 router.get("/leadId/:leadId", paymentUploadController.getISMDetailsByLeadId);
 
+// GET only payment info by leadId
+router.get("/leadId/:leadId/payment-info", paymentUploadController.getISMPaymentInfoByLeadId);
+
 export { router as paymentUploadRoutes };
