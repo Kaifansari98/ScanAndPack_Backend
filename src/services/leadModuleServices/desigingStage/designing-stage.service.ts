@@ -1,6 +1,7 @@
 import { prisma } from "../../../prisma/client";
 import { generateSignedUrl, uploadToWasabi, uploadToWasabiMeetingDocs } from "../../../utils/wasabiClient";
 import { z } from "zod";
+import { Prisma } from "@prisma/client";
 
 const editDesignMeetingSchema = z.object({
   meetingId: z.number().int().positive(),
@@ -71,83 +72,143 @@ export class DesigingStage {
 
   public static async getLeadsByStatus(
     vendorId: number,
-    page: number,
-    limit: number
+    userId: number,
+    page: number = 1,
+    limit: number = 10
   ) {
     const skip = (page - 1) * limit;
   
-    // 1. Resolve status ID dynamically from statusTypeMaster (Type 3)
+    // 1️⃣ Resolve statusType dynamically for Type 3
     const statusType = await prisma.statusTypeMaster.findFirst({
-      where: {
-        vendor_id: vendorId,
-        tag: "Type 3", // ✅ Fetch Type 3 dynamically
-      },
+      where: { vendor_id: vendorId, tag: "Type 3" },
       select: { id: true },
     });
   
     if (!statusType) {
-      throw new Error(`Status Type 3 not found for vendor ${vendorId}`);
+      throw new Error(`Status 'Type 3' not found for vendor ${vendorId}`);
     }
   
-    // 2. Fetch leads with that status
-    const leads = await prisma.leadMaster.findMany({
-      where: {
-        vendor_id: vendorId,
-        status_id: statusType.id,
-        is_deleted: false,
-      },
-      skip,
-      take: limit,
-      orderBy: { created_at: "desc" },
-      include: {
-        siteType: { select: { id: true, type: true } },
-        source: { select: { id: true, type: true } },
-        statusType: { select: { id: true, type: true } },
-        assignedTo: { select: { id: true, user_name: true, user_email: true } },
-        documents: {
-          where: { is_deleted: false },
-          select: {
-            id: true,
-            doc_og_name: true,
-            doc_sys_name: true,
-            created_at: true,
-            doc_type_id: true,
-            account_id: true,
-            lead_id: true,
-            vendor_id: true,
-            documentType: { select: { id: true, type: true } },
-            createdBy: {
-              select: { id: true, user_name: true, user_contact: true, user_email: true }
-            },
-          },
-        },
-        payments: {
-          select: {
-            id: true,
-            amount: true,
-            payment_date: true,
-            payment_text: true,
-            payment_file_id: true,
-            created_at: true,
-            created_by: true,
-            document: true,
-            createdBy: { select: { id: true, user_name: true, user_email: true, user_type: true } },
-          },
-        },
-        productMappings: {
-          select: {
-            productType: { select: { id: true, type: true, tag: true } },
-          },
-        },
-        leadProductStructureMapping: {
-          select: {
-            productStructure: { select: { id: true, type: true } },
-          },
-        },
-      },
+    // 2️⃣ Check if user is admin
+    const creator = await prisma.userMaster.findUnique({
+      where: { id: userId },
+      include: { user_type: true },
     });
   
-    // 3. Generate signed URLs for docs
+    const isAdmin = creator?.user_type?.user_type?.toLowerCase() === "admin";
+  
+    let leadIds: number[] = [];
+  
+    if (!isAdmin) {
+      // 🔹 Collect leads from LeadUserMapping
+      const mappedLeads = await prisma.leadUserMapping.findMany({
+        where: { vendor_id: vendorId, user_id: userId, status: "active" },
+        select: { lead_id: true },
+      });
+  
+      // 🔹 Collect leads from UserLeadTask
+      const taskLeads = await prisma.userLeadTask.findMany({
+        where: {
+          vendor_id: vendorId,
+          OR: [{ created_by: userId }, { user_id: userId }],
+        },
+        select: { lead_id: true },
+      });
+  
+      // 🔹 Union of both sets (OR logic)
+      leadIds = [
+        ...new Set([...mappedLeads.map((m) => m.lead_id), ...taskLeads.map((t) => t.lead_id)]),
+      ];
+  
+      if (!leadIds.length) {
+        return {
+          leads: [],
+          pagination: { total: 0, page, limit, totalPages: 0 },
+        };
+      }
+    }
+  
+    // 3️⃣ Fetch leads
+    const [leads, total] = await Promise.all([
+      prisma.leadMaster.findMany({
+        where: {
+          ...(isAdmin ? {} : { id: { in: leadIds } }),
+          vendor_id: vendorId,
+          is_deleted: false,
+          statusType: { tag: "Type 3", vendor_id: vendorId },
+        },
+        skip,
+        take: limit,
+        orderBy: { created_at: Prisma.SortOrder.desc },
+        include: {
+          siteType: { select: { id: true, type: true } },
+          source: { select: { id: true, type: true } },
+          statusType: { select: { id: true, type: true, tag: true } },
+          assignedTo: { select: { id: true, user_name: true, user_email: true } },
+          documents: {
+            where: { is_deleted: false },
+            select: {
+              id: true,
+              doc_og_name: true,
+              doc_sys_name: true,
+              created_at: true,
+              doc_type_id: true,
+              account_id: true,
+              lead_id: true,
+              vendor_id: true,
+              documentType: { select: { id: true, type: true, tag: true } },
+              createdBy: {
+                select: { id: true, user_name: true, user_contact: true, user_email: true },
+              },
+            },
+          },
+          payments: {
+            select: {
+              id: true,
+              amount: true,
+              payment_date: true,
+              payment_text: true,
+              payment_file_id: true,
+              created_at: true,
+              created_by: true,
+              document: true,
+              createdBy: { select: { id: true, user_name: true, user_email: true } },
+            },
+          },
+          productMappings: {
+            select: {
+              productType: { select: { id: true, type: true, tag: true } },
+            },
+          },
+          leadProductStructureMapping: {
+            select: { productStructure: { select: { id: true, type: true } } },
+          },
+          // 🔹 Include all tasks (not just "Follow Up")
+          tasks: {
+            select: {
+              id: true,
+              task_type: true,
+              due_date: true,
+              remark: true,
+              status: true,
+              created_at: true,
+              user_id: true,
+              created_by: true,
+            },
+            orderBy: { created_at: Prisma.SortOrder.desc },
+          },
+        },
+      }),
+      prisma.leadMaster.count({
+        where: {
+          ...(isAdmin ? {} : { id: { in: leadIds } }),
+          vendor_id: vendorId,
+          is_deleted: false,
+          statusType: { tag: "Type 3", vendor_id: vendorId },
+        },
+      }),
+    ]);
+  
+    // 4️⃣ Generate signed URLs
     const leadsWithSignedUrls = await Promise.all(
       leads.map(async (lead: any) => {
         const docsWithUrls = await Promise.all(
@@ -160,11 +221,6 @@ export class DesigingStage {
       })
     );
   
-    // 4. Count total for pagination
-    const total = await prisma.leadMaster.count({
-      where: { vendor_id: vendorId, status_id: statusType.id, is_deleted: false },
-    });
-  
     return {
       leads: leadsWithSignedUrls,
       pagination: {
@@ -174,8 +230,8 @@ export class DesigingStage {
         totalPages: Math.ceil(total / limit),
       },
     };
-  }  
-
+  }
+   
   public static async getLeadById(vendorId: number, leadId: number) {
     // ✅ Fetch lead with relations
     const lead = await prisma.leadMaster.findFirst({

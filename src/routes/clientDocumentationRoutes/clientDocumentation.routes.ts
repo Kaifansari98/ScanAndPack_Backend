@@ -22,6 +22,7 @@ ClientDocumentationRouter.post(
     ClientDocumentationController.addMoreDocuments
 );  
 
+// GET /api/leads/client-documentation/allLeads/vendorId/:vendorId/userId/:userId
 ClientDocumentationRouter.get(
     "/allLeads/vendorId/:vendorId/userId/:userId",
     ClientDocumentationController.getAllClientDocumentations

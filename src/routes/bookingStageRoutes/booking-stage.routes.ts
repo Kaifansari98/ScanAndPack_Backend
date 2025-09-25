@@ -23,7 +23,6 @@ bookingStageRouter.post(
   bookingStageController.addBookingStageFiles
 );
 
-
 bookingStageRouter.get(
   "/vendor/:vendorId/lead/:leadId",
   bookingStageController.getBookingStage
@@ -36,7 +35,10 @@ bookingStageRouter.get(
 );
 
 // Example: GET /api/leads/status1-leads/:vendorId?userId=123
-bookingStageRouter.get("/status1-leads/vendorId/:vendorId", bookingStageController.getOpenLeads);
+bookingStageRouter.get(
+  "/status1-leads/vendorId/:vendorId",
+  bookingStageController.getOpenLeads
+);
 
 bookingStageRouter.put(
   "/edit",

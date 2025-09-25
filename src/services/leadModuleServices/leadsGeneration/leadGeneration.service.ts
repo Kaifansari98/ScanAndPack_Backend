@@ -513,92 +513,70 @@ export const getLeadById = async (leadId: number, userId: number, vendorId: numb
   try {
     console.log(`[SERVICE] Fetching lead ${leadId} for user ${userId} in vendor ${vendorId}`);
 
-    // First, get user role information
+    // 1️⃣ Get user role
     const userInfo = await getUserRole(userId, vendorId);
-    
-    if (!userInfo.isValid) {
-      throw new Error("User not found or inactive");
-    }
-
-    console.log(`[SERVICE] User role: ${userInfo.userType}`);
-
+    if (!userInfo.isValid) throw new Error("User not found or inactive");
     const userType = userInfo.userType ?? "";
 
-    // Base condition - lead must exist, belong to vendor, and not be deleted
+    // 2️⃣ Base where
     let whereCondition: any = {
       id: leadId,
       vendor_id: vendorId,
       is_deleted: false,
-      account: {
-        is_deleted: false,
-      },
+      account: { is_deleted: false },
     };
 
-    // Role-based filtering - same logic as the list API
     if (userType === "sales-executive") {
-      // Sales executives can only see leads they created OR leads assigned to them
-      whereCondition.OR = [
-        { created_by: userId },  // Leads created by them
-        { assign_to: userId },   // Leads assigned to them
+      // Get leadIds accessible via mapping + tasks
+      const [mappedLeads, taskLeads] = await Promise.all([
+        prisma.leadUserMapping.findMany({
+          where: { vendor_id: vendorId, user_id: userId, status: "active" },
+          select: { lead_id: true },
+        }),
+        prisma.userLeadTask.findMany({
+          where: {
+            vendor_id: vendorId,
+            OR: [{ created_by: userId }, { user_id: userId }],
+          },
+          select: { lead_id: true },
+        }),
+      ]);
+
+      const leadIds = [
+        ...new Set([...mappedLeads.map(m => m.lead_id), ...taskLeads.map(t => t.lead_id)]),
       ];
-      
-      console.log(`[SERVICE] Applied sales-executive filter for user ${userId}`);
+
+      if (!leadIds.includes(leadId)) {
+        throw new Error("Lead not found or access denied");
+      }
+
+      whereCondition.id = { in: leadIds, equals: leadId };
+      console.log(`[SERVICE] Applied sales-executive lead filter for user ${userId}`);
     } else if (["admin", "super-admin"].includes(userType)) {
-      // Admins and super-admins can see all leads for their vendor
-      // No additional filtering needed beyond vendor_id and leadId
-      console.log(`[SERVICE] Admin/Super-admin access - can view any vendor lead`);
+      console.log(`[SERVICE] Admin/Super-admin access`);
     } else {
-      // Other roles (if any) - restrict to only their created leads
       whereCondition.created_by = userId;
-      console.log(`[SERVICE] Restricted access for role ${userType} - only created leads`);
     }
 
+    // 3️⃣ Fetch lead
     const lead = await prisma.leadMaster.findFirst({
       where: whereCondition,
       include: {
         account: true,
-        leadProductStructureMapping: {
-          include: { productStructure: true },
-        },
-        productMappings: {
-          include: { productType: true },
-        },
-        documents: true,
+        leadProductStructureMapping: { include: { productStructure: true } },
+        productMappings: { include: { productType: true } },
+        documents: { where: { deleted_at: null } },
         source: true,
         siteType: true,
         statusType: true,
-        createdBy: {
-          select: {
-            id: true,
-            user_name: true,
-            user_email: true,
-            user_contact: true,
-          },
-        },
-        assignedTo: {
-          select: {
-            id: true,
-            user_name: true,
-            user_email: true,
-            user_contact: true,
-          },
-        },
-        assignedBy: {
-          select: {
-            id: true,
-            user_name: true,
-            user_email: true,
-            user_contact: true,
-          },
-        },
+        createdBy: { select: { id: true, user_name: true, user_email: true, user_contact: true } },
+        assignedTo: { select: { id: true, user_name: true, user_email: true, user_contact: true } },
+        assignedBy: { select: { id: true, user_name: true, user_email: true, user_contact: true } },
+        tasks: true,
       },
     });
 
-    if (!lead) {
-      throw new Error("Lead not found or access denied");
-    }
-
-    console.log(`[SERVICE] Found lead ${leadId} for user ${userId} (${userInfo.userType})`);
+    if (!lead) throw new Error("Lead not found or access denied");
 
     return {
       lead,
@@ -613,6 +591,7 @@ export const getLeadById = async (leadId: number, userId: number, vendorId: numb
     throw error;
   }
 };
+
 
 export const softDeleteLead = async (leadId: number, deletedBy: number) => {
   // 1. Fetch the lead with its account

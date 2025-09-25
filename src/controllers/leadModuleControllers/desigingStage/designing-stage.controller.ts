@@ -42,16 +42,17 @@ export class DesigingStageController {
   public static async getLeadsByStatus(req: Request, res: Response) {
     try {
       const { vendorId } = req.params;
-      const { page = "1", limit = "10" } = req.query;
-  
-      if (!vendorId) {
+      const { page = "1", limit = "10", userId } = req.query;
+
+      if (!vendorId || !userId) {
         return res
           .status(400)
-          .json(ApiResponse.validationError("vendorId is required"));
+          .json(ApiResponse.validationError("vendorId and userId are required"));
       }
   
       const result = await DesigingStage.getLeadsByStatus(
         Number(vendorId),
+        Number(userId),
         Number(page),
         Number(limit)
       );
@@ -62,8 +63,7 @@ export class DesigingStageController {
     } catch (error: any) {
       return res.status(500).json(ApiResponse.error(error.message));
     }
-  }
-  
+  } 
 
   public static async upload(req: Request, res: Response) {
     try {

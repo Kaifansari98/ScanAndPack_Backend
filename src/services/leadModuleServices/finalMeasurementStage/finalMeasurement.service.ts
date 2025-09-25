@@ -2,7 +2,10 @@ import { prisma } from "../../../prisma/client";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import wasabi, { generateSignedUrl } from "../../../utils/wasabiClient"; // your existing Wasabi config
 import { sanitizeFilename } from "../../../utils/sanitizeFilename";
-// import { SupervisorStatus } from "@prisma/client";
+import Joi = require("joi");
+import logger from "../../../utils/logger";
+import { AssignTaskFMInput } from "../../../types/leadModule.types";
+import { Prisma } from "@prisma/client";
 
 interface FinalMeasurementDto {
   lead_id: number;
@@ -10,9 +13,18 @@ interface FinalMeasurementDto {
   vendor_id: number;
   created_by: number;
   critical_discussion_notes?: string | null;
-  finalMeasurementDoc: Express.Multer.File;
+  finalMeasurementDocs: Express.Multer.File[];
   sitePhotos: Express.Multer.File[];
 }
+
+const assignTaskISMSchema = Joi.object({
+  lead_id: Joi.number().integer().positive().required(),
+  task_type: Joi.string().trim().required(),
+  due_date: Joi.alternatives().try(Joi.string().isoDate(), Joi.date()).required(),
+  remark: Joi.string().allow("", null),
+  assignee_user_id: Joi.number().integer().positive().required(),
+  created_by: Joi.number().integer().positive().required(),
+});
 
 export class FinalMeasurementService {
   public async createFinalMeasurementStage(data: FinalMeasurementDto) {
@@ -31,28 +43,33 @@ export class FinalMeasurementService {
         throw new Error("Document type (Final Measurement) not found for this vendor");
       }
 
-      const sanitizedDocName = sanitizeFilename(data.finalMeasurementDoc.originalname);
-      const docKey = `final-measurement-documents/${data.vendor_id}/${data.lead_id}/${Date.now()}-${sanitizedDocName}`;
+      response.measurementDocs = [];
 
-      await wasabi.send(new PutObjectCommand({
-        Bucket: process.env.WASABI_BUCKET_NAME!,
-        Key: docKey,
-        Body: data.finalMeasurementDoc.buffer,
-        ContentType: data.finalMeasurementDoc.mimetype,
-      }));
-
-      const measurementDoc = await tx.leadDocuments.create({
-        data: {
-          doc_og_name: data.finalMeasurementDoc.originalname,
-          doc_sys_name: docKey,
-          created_by: data.created_by,
-          doc_type_id: measurementDocType.id,
-          account_id: data.account_id,
-          lead_id: data.lead_id,
-          vendor_id: data.vendor_id,
-        }
-      });
-      response.measurementDoc = measurementDoc;
+      for (const doc of data.finalMeasurementDocs) {
+        const sanitizedDocName = sanitizeFilename(doc.originalname);
+        const docKey = `final-measurement-documents/${data.vendor_id}/${data.lead_id}/${Date.now()}-${sanitizedDocName}`;
+      
+        await wasabi.send(new PutObjectCommand({
+          Bucket: process.env.WASABI_BUCKET_NAME!,
+          Key: docKey,
+          Body: doc.buffer,
+          ContentType: doc.mimetype,
+        }));
+      
+        const measurementDoc = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: doc.originalname,
+            doc_sys_name: docKey,
+            created_by: data.created_by,
+            doc_type_id: measurementDocType.id,
+            account_id: data.account_id,
+            lead_id: data.lead_id,
+            vendor_id: data.vendor_id,
+          },
+        });
+      
+        response.measurementDocs.push(measurementDoc);
+      }
 
       // 2. Upload Site Photos (Type 10)
       const sitePhotoType = await tx.documentTypeMaster.findFirst({
@@ -89,16 +106,16 @@ export class FinalMeasurementService {
       }
 
       // Resolve the vendor's Open status ID dynamically
-      const finalMeasurementStatus = await prisma.statusTypeMaster.findFirst({
+      const clientdocumentationStatus = await prisma.statusTypeMaster.findFirst({
         where: {
           vendor_id: data.vendor_id,
-          tag: "Type 5", // ✅ Open status
+          tag: "Type 6", // ✅ Client documentation
         },
         select: { id: true },
       });
 
-      if (!finalMeasurementStatus) {
-        throw new Error(`Open status (Type 1) not found for vendor ${data.vendor_id}`);
+      if (!clientdocumentationStatus) {
+        throw new Error(`Client documentation status (Type 6) not found for vendor ${data.vendor_id}`);
       }
 
       // 3. Save critical discussion notes + update stage
@@ -106,9 +123,27 @@ export class FinalMeasurementService {
         where: { id: data.lead_id },
         data: {
           final_desc_note: data.critical_discussion_notes,
-          status_id: finalMeasurementStatus.id, // Assuming status 5 = Final Measurement stage
+          status_id: clientdocumentationStatus.id, 
         },
       });
+
+      // 4. Mark related userLeadTask as completed (if exists)
+      await tx.userLeadTask.updateMany({
+        where: {
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          task_type: "Final Measurements",
+          status: "open", // or "in_progress" if that’s your flow
+        },
+        data: {
+          status: "completed",
+          closed_by: data.created_by, // or user_id if you pass it
+          closed_at: new Date(),
+          updated_by: data.created_by,
+          updated_at: new Date(),
+        },
+      });
+
 
       return response;
     }, {
@@ -116,43 +151,98 @@ export class FinalMeasurementService {
     });
   }
 
-  public async getAllFinalMeasurementLeadsByVendorId(vendorId: number) {
-
-    // Resolve the vendor's Open status ID dynamically
+  public async getAllFinalMeasurementLeadsByVendorId(vendorId: number, userId: number) {
+    // 1. Resolve status ID dynamically for Type 5
     const finalMeasurementStatus = await prisma.statusTypeMaster.findFirst({
-      where: {
-        vendor_id: vendorId,
-        tag: "Type 5", // ✅ Open status
-      },
+      where: { vendor_id: vendorId, tag: "Type 5" },
       select: { id: true },
     });
-
+  
     if (!finalMeasurementStatus) {
-      throw new Error(`Open status (Type 1) not found for vendor ${vendorId}`);
+      throw new Error(`Final Measurement status (Type 5) not found for vendor ${vendorId}`);
     }
-
-    return await prisma.leadMaster.findMany({
+  
+    // 2. Check if user is admin
+    const creator = await prisma.userMaster.findUnique({
+      where: { id: userId },
+      include: { user_type: true },
+    });
+    const isAdmin = creator?.user_type?.user_type?.toLowerCase() === "admin";
+  
+    // ============= Admin Flow =============
+    if (isAdmin) {
+      return prisma.leadMaster.findMany({
+        where: {
+          vendor_id: vendorId,
+          is_deleted: false,
+          status_id: finalMeasurementStatus.id,
+        },
+        include: this.defaultIncludes(vendorId),
+        orderBy: { created_at: "desc" },
+      });
+    }
+  
+    // ============= Non-Admin Flow =============
+    // Leads mapped via LeadUserMapping
+    const mappedLeads = await prisma.leadUserMapping.findMany({
+      where: { vendor_id: vendorId, user_id: userId, status: "active" },
+      select: { lead_id: true },
+    });
+  
+    // Leads via UserLeadTask
+    const taskLeads = await prisma.userLeadTask.findMany({
       where: {
         vendor_id: vendorId,
-        status_id: finalMeasurementStatus.id, // ✅ Final Measurement stage
+        OR: [{ created_by: userId }, { user_id: userId }],
       },
-      include: {
-        documents: {
-          where: {
-            doc_type_id: {
-              in: await prisma.documentTypeMaster.findMany({
-                where: {
-                  vendor_id: vendorId,
-                  tag: { in: ["Type 9", "Type 10"] }, // measurement + site photos
-                },
-                select: { id: true },
-              }).then((docs: any) => docs.map((d: any) => d.id)),
-            },
-          },
+      select: { lead_id: true },
+    });
+  
+    // ✅ Union
+    const leadIds = [...new Set([...mappedLeads.map(m => m.lead_id), ...taskLeads.map(t => t.lead_id)])];
+    if (!leadIds.length) return [];
+  
+    return prisma.leadMaster.findMany({
+      where: {
+        id: { in: leadIds },
+        vendor_id: vendorId,
+        is_deleted: false,
+        status_id: finalMeasurementStatus.id,
+      },
+      include: this.defaultIncludes(vendorId),
+      orderBy: { created_at: "desc" },
+    });
+  }
+  
+  // ✅ Common include (reusable)
+  private defaultIncludes(vendorId: number) {
+    return {
+      siteType: true,
+      source: true,
+      statusType: true,
+      account: { select: { id: true, name: true, contact_no: true, email: true } },
+      createdBy: { select: { id: true, user_name: true, user_email: true } },
+      assignedTo: { select: { id: true, user_name: true, user_email: true } },
+      documents: {
+        where: { is_deleted: false },
+        include: {
+          documentType: { select: { id: true, type: true, tag: true } },
+          createdBy: { select: { id: true, user_name: true } },
         },
       },
-      orderBy: { id: "desc" },
-    });
+      tasks: {
+        where: { task_type: "Follow Up" },
+        select: {
+          id: true,
+          task_type: true,
+          due_date: true,
+          remark: true,
+          status: true,
+          created_at: true,
+        },
+        orderBy: { created_at: Prisma.SortOrder.desc },
+      },
+    };
   }
 
   public async getFinalMeasurementLead(vendorId: number, leadId: number) {
@@ -377,10 +467,106 @@ export class FinalMeasurementService {
             productStructure: { select: { id: true, type: true } },
           },
         },
+        // ✅ Add tasks like in PaymentUploadService
+        tasks: {
+          where: {
+            task_type: "Follow Up",   // or remove this filter if you need all tasks
+          },
+          select: {
+            id: true,
+            task_type: true,
+            due_date: true,
+            remark: true,
+            status: true,
+            created_at: true,
+          },
+          orderBy: { created_at: "desc" },
+        },
       },
       orderBy: { created_at: "desc" },
     });
 
     return leads;
   }
+  
+  public async assignTaskFMService(payload: AssignTaskFMInput) {
+    const { error, value } = assignTaskISMSchema.validate(payload);
+    if (error) {
+      throw new Error(
+        `Validation failed: ${error.details.map((d) => d.message).join(", ")}`
+      );
+    }
+  
+    const { lead_id, task_type, due_date, remark, assignee_user_id, created_by } =
+      value;
+  
+    return prisma.$transaction(async (tx) => {
+      // 1) Lead (for vendor/account)
+      const lead = await tx.leadMaster.findUnique({
+        where: { id: lead_id },
+        select: { id: true, vendor_id: true, account_id: true },
+      });
+      if (!lead) throw new Error(`Lead ${lead_id} not found`);
+  
+      // 2) Assignee guard (same vendor)
+      const assignee = await tx.userMaster.findUnique({
+        where: { id: assignee_user_id },
+        select: { id: true, vendor_id: true },
+      });
+      if (!assignee) throw new Error(`Assignee user ${assignee_user_id} not found`);
+      if (assignee.vendor_id !== lead.vendor_id) {
+        throw new Error(
+          `Assignee user ${assignee_user_id} does not belong to vendor ${lead.vendor_id}`
+        );
+      }
+  
+      // 3) Create task (status=open by default)
+      const task = await tx.userLeadTask.create({
+        data: {
+          lead_id: lead.id,
+          account_id: lead.account_id,
+          vendor_id: lead.vendor_id,
+          user_id: assignee_user_id,
+          task_type,
+          due_date: new Date(due_date),
+          remark: remark || null,
+          status: "open",
+          created_by,
+        },
+      });
+  
+      // 4) Flip status to "Type 5" — only if NOT Follow Up
+      let updatedLead: {
+        id: number;
+        account_id: number;
+        vendor_id: number;
+        status_id?: number;
+      } = lead;
+  
+      if (task_type.toLowerCase() !== "follow up") {
+        const toStatus = await tx.statusTypeMaster.findFirst({
+          where: { vendor_id: lead.vendor_id, tag: "Type 5" },
+          select: { id: true },
+        });
+        if (!toStatus) {
+          throw new Error(`Status 'Type 5' not found for vendor ${lead.vendor_id}`);
+        }
+  
+        updatedLead = await tx.leadMaster.update({
+          where: { id: lead.id },
+          data: { status_id: toStatus.id },
+          select: { id: true, account_id: true, vendor_id: true, status_id: true },
+        });
+      }
+  
+      logger.info("[SERVICE] assignTaskFM completed", {
+        lead_id: lead.id,
+        task_id: task.id,
+        new_status_id: updatedLead.status_id,
+      });
+  
+      return { task, lead: updatedLead };
+    });
+  }
+  
 }

@@ -2,6 +2,7 @@ import { prisma } from "../../../prisma/client";
 import { uploadToWasabClientDocumentation } from "../../../utils/wasabiClient";
 import { sanitizeFilename } from "../../../utils/sanitizeFilename";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
+import { Prisma } from "@prisma/client";
 
 interface ClientDocumentationDto {
   lead_id: number;
@@ -51,20 +52,20 @@ export class ClientDocumentationService {
       response.documents.push(docEntry);
     }
 
-    // Resolve the vendor's Open status ID dynamically
+    // Resolve the vendor's Client Approval status ID dynamically
     const clientDocumentationStatus = await prisma.statusTypeMaster.findFirst({
       where: {
         vendor_id: data.vendor_id,
-        tag: "Type 6", // ✅ Open status
+        tag: "Type 7", // ✅ Client Approval status
       },
       select: { id: true },
     });
 
     if (!clientDocumentationStatus) {
-      throw new Error(`Open status (Type 1) not found for vendor ${data.vendor_id}`);
+      throw new Error(`Client Approval status (Type 7) not found for vendor ${data.vendor_id}`);
     }
 
-    // 3. Update lead stage (Final Measurement → Client Documentation)
+    // 3. Update lead stage (Client Documentation → Client Approval)
     await prisma.leadMaster.update({
       where: { id: data.lead_id },
       data: {
@@ -185,75 +186,104 @@ export class ClientDocumentationService {
   }
   
   public async getLeadsWithStatusClientDocumentation(vendorId: number, userId: number) {
-    // ✅ Get user role
-    const user = await prisma.userMaster.findUnique({
+    // 1. Resolve status ID dynamically for Type 6
+    const clientDocStatus = await prisma.statusTypeMaster.findFirst({
+      where: { vendor_id: vendorId, tag: "Type 6" },
+      select: { id: true },
+    });
+  
+    if (!clientDocStatus) {
+      throw new Error(`Client Documentation status (Type 6) not found for vendor ${vendorId}`);
+    }
+  
+    // 2. Check if user is admin
+    const creator = await prisma.userMaster.findUnique({
       where: { id: userId },
       include: { user_type: true },
     });
-
-    if (!user) throw new Error("User not found");
-
-    const role = user.user_type.user_type.toLowerCase();
-
-    // Resolve the vendor's Open status ID dynamically
-    const clientDocumentationStatus = await prisma.statusTypeMaster.findFirst({
+    const isAdmin = creator?.user_type?.user_type?.toLowerCase() === "admin";
+  
+    // ============= Admin Flow =============
+    if (isAdmin) {
+      return prisma.leadMaster.findMany({
+        where: {
+          vendor_id: vendorId,
+          is_deleted: false,
+          status_id: clientDocStatus.id,
+        },
+        include: this.defaultIncludes(),
+        orderBy: { created_at: Prisma.SortOrder.desc },
+      });
+    }
+  
+    // ============= Non-Admin Flow =============
+    // Leads via LeadUserMapping
+    const mappedLeads = await prisma.leadUserMapping.findMany({
+      where: { vendor_id: vendorId, user_id: userId, status: "active" },
+      select: { lead_id: true },
+    });
+  
+    // Leads via UserLeadTask
+    const taskLeads = await prisma.userLeadTask.findMany({
       where: {
         vendor_id: vendorId,
-        tag: "Type 6", // ✅ Open status
+        OR: [{ created_by: userId }, { user_id: userId }],
       },
-      select: { id: true },
+      select: { lead_id: true },
     });
-
-    if (!clientDocumentationStatus) {
-      throw new Error(`Open status (Type 1) not found for vendor ${vendorId}`);
-    }
-
-    // ✅ Base where clause
-    const whereClause: any = {
-      status_id: clientDocumentationStatus.id,
-      is_deleted: false,
-      vendor_id: vendorId,
+  
+    // ✅ Union
+    const leadIds = [...new Set([...mappedLeads.map(m => m.lead_id), ...taskLeads.map(t => t.lead_id)])];
+    if (!leadIds.length) return [];
+  
+    return prisma.leadMaster.findMany({
+      where: {
+        id: { in: leadIds },
+        vendor_id: vendorId,
+        is_deleted: false,
+        status_id: clientDocStatus.id,
+      },
+      include: this.defaultIncludes(),
+      orderBy: { created_at: Prisma.SortOrder.desc },
+    });
+  }
+  
+  // ✅ Common include
+  private defaultIncludes() {
+    return {
+      siteType: true,
+      source: true,
+      statusType: true,
+      createdBy: { select: { id: true, user_name: true } },
+      updatedBy: true,
+      assignedTo: { select: { id: true, user_name: true } },
+      assignedBy: { select: { id: true, user_name: true } },
+      productMappings: {
+        select: { productType: { select: { id: true, type: true, tag: true } } },
+      },
+      leadProductStructureMapping: {
+        select: { productStructure: { select: { id: true, type: true } } },
+      },
+      documents: {
+        where: { is_deleted: false },
+        include: {
+          documentType: { select: { id: true, type: true, tag: true } },
+          createdBy: { select: { id: true, user_name: true } },
+        },
+      },
+      tasks: {
+        where: { task_type: "Follow Up" },
+        select: {
+          id: true,
+          task_type: true,
+          due_date: true,
+          remark: true,
+          status: true,
+          created_at: true,
+        },
+        orderBy: { created_at: Prisma.SortOrder.desc }, // ✅ fixed typing
+      },
     };
-
-    // ✅ Restrict based on role
-    if (role === "sales-executive") {
-      whereClause.OR = [
-        { created_by: userId },
-        { assign_to: userId },
-      ];
-    } else if (role === "site-supervisor") {
-      // supervisor mapping table is LeadSiteSupervisorMapping
-      whereClause.siteSupervisors = {
-        some: { user_id: userId, status: "active" },
-      };
-    }
-    // ✅ Admin can see all → no extra filter
-
-    const leads = await prisma.leadMaster.findMany({
-      where: whereClause,
-      include: {
-        siteType: true,
-        source: true,
-        statusType: true,
-        createdBy: { select: { id: true, user_name: true } },
-        updatedBy: true,
-        assignedTo: { select: { id: true, user_name: true } },
-        assignedBy: { select: { id: true, user_name: true } },
-        productMappings: {
-          select: {
-            productType: { select: { id: true, type: true, tag: true } },
-          },
-        },
-        leadProductStructureMapping: {
-          select: {
-            productStructure: { select: { id: true, type: true } },
-          },
-        },
-      },
-      orderBy: { created_at: "desc" },
-    });
-
-    return leads;
   }
   
 }

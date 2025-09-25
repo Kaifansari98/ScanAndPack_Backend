@@ -27,6 +27,7 @@ import bookingStageRouter from './bookingStageRoutes/booking-stage.routes';
 
 import { finalMeasurementRouter } from './finalMeasurementStage/finalMeasurement.routes';
 import ClientDocumentationRouter from './clientDocumentationRoutes/clientDocumentation.routes';
+import taskRouter from './task/task.routes';
 
 const router = Router();
 
@@ -58,5 +59,7 @@ router.use("/leads/bookingStage", bookingStageRouter);
 
 router.use("/leads/final-measurement", finalMeasurementRouter);
 router.use("/leads/client-documentation", ClientDocumentationRouter);
+
+router.use("/leads/tasks", taskRouter);
 
 export { router };

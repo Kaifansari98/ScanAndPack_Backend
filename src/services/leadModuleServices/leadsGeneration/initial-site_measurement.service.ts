@@ -9,6 +9,8 @@ import { PaymentUploadDetailDtoo, UpdatePaymentUploadDto } from '../../../types/
 import { prisma } from '../../../prisma/client';
 import Joi from 'joi';
 import logger from '../../../utils/logger';
+import { Prisma } from '@prisma/client';
+import { generateSignedUrl } from '../../../utils/wasabiClient';
 
 // ----------------------
 // AssignTaskISM (standalone)
@@ -69,20 +71,24 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
       },
     });
 
-    // 4) Flip status to "Type 2"
-    const toStatus = await tx.statusTypeMaster.findFirst({
-      where: { vendor_id: lead.vendor_id, tag: "Type 2" },
-      select: { id: true },
-    });
-    if (!toStatus) {
-      throw new Error(`Status 'Type 2' not found for vendor ${lead.vendor_id}`);
-    }
+    // 4) Flip status only if NOT "Follow Up"
+    let updatedLead: { id: number; account_id: number; vendor_id: number; status_id?: number } = lead;
 
-    const updatedLead = await tx.leadMaster.update({
-      where: { id: lead.id },
-      data: { status_id: toStatus.id },
-      select: { id: true, status_id: true },
-    });
+    if (task_type.toLowerCase() !== "follow up") {
+      const toStatus = await tx.statusTypeMaster.findFirst({
+        where: { vendor_id: lead.vendor_id, tag: "Type 2" },
+        select: { id: true },
+      });
+      if (!toStatus) {
+        throw new Error(`Status 'Type 2' not found for vendor ${lead.vendor_id}`);
+      }
+
+      updatedLead = await tx.leadMaster.update({
+        where: { id: lead.id },
+        data: { status_id: toStatus.id },
+        select: { id: true, account_id: true, vendor_id: true, status_id: true },
+      });
+    }
 
     logger.info("[SERVICE] assignTaskISM completed", {
       lead_id: lead.id,
@@ -95,6 +101,157 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
 };
 
 export class PaymentUploadService {
+
+  public async getISMDetailsByLeadId(leadId: number): Promise<any> {
+    try {
+      // Step 1: Get vendor_id from leadMaster
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: leadId },
+        select: { vendor_id: true },
+      });
+
+      if (!lead) {
+        throw new Error("Lead not found");
+      }
+
+      const vendorId = lead.vendor_id;
+
+      // Step 2: Get document type IDs
+      const [sitePhotoDocType, pdfDocType, paymentDocType] = await Promise.all([
+        prisma.documentTypeMaster.findFirst({ where: { vendor_id: vendorId, tag: "Type 2" } }),
+        prisma.documentTypeMaster.findFirst({ where: { vendor_id: vendorId, tag: "Type 3" } }),
+        prisma.documentTypeMaster.findFirst({ where: { vendor_id: vendorId, tag: "Type 4" } }),
+      ]);
+
+      // Step 3: Fetch documents
+      const [sitePhotos, pdfDocs, paymentDocs] = await Promise.all([
+        sitePhotoDocType
+          ? prisma.leadDocuments.findMany({
+              where: { lead_id: leadId, vendor_id: vendorId, doc_type_id: sitePhotoDocType.id },
+            })
+          : [],
+        pdfDocType
+          ? prisma.leadDocuments.findMany({
+              where: { lead_id: leadId, vendor_id: vendorId, doc_type_id: pdfDocType.id },
+            })
+          : [],
+        paymentDocType
+          ? prisma.leadDocuments.findMany({
+              where: { lead_id: leadId, vendor_id: vendorId, doc_type_id: paymentDocType.id },
+            })
+          : [],
+      ]);
+
+      // Step 4: Generate signed URLs with util
+      const withSignedUrls = async (docs: any[], type: string) => {
+        return Promise.all(
+          docs.map(async (doc) => ({
+            id: doc.id,
+            type,
+            originalName: doc.doc_og_name,
+            s3Key: doc.doc_sys_name,
+            signedUrl: await generateSignedUrl(doc.doc_sys_name),
+          }))
+        );
+      };
+
+      const current_site_photos = await withSignedUrls(sitePhotos, "current_site_photo");
+      const initial_site_measurement_documents = await withSignedUrls(pdfDocs, "pdf_upload");
+      const initial_site_measurement_payment_details = await withSignedUrls(
+        paymentDocs,
+        "initial_site_measurement_payment_details"
+      );
+
+      // Step 5: Fetch payment info
+      const paymentInfo = await prisma.paymentInfo.findFirst({
+        where: { lead_id: leadId, vendor_id: vendorId },
+        select: {
+          id: true,
+          amount: true,
+          payment_date: true,
+          payment_text: true,
+          payment_file_id: true,
+        },
+      });
+
+      // Step 6: If payment_file_id exists, link it with signedUrl
+      if (paymentInfo?.payment_file_id) {
+        const paymentDoc = await prisma.leadDocuments.findUnique({
+          where: { id: paymentInfo.payment_file_id },
+        });
+
+        if (paymentDoc) {
+          (paymentInfo as any).payment_file = {
+            id: paymentDoc.id,
+            originalName: paymentDoc.doc_og_name,
+            signedUrl: await generateSignedUrl(paymentDoc.doc_sys_name),
+          };
+        }
+      }
+
+      return {
+        current_site_photos,
+        initial_site_measurement_documents,
+        initial_site_measurement_payment_details,
+        payment_info: paymentInfo,
+      };
+    } catch (error: any) {
+      console.error("[PaymentUploadService] Error:", error);
+      throw new Error(`Failed to fetch ISM details: ${error.message}`);
+    }
+  }
+
+  public async getISMPaymentInfoByLeadId(leadId: number): Promise<any> {
+    try {
+      // 1. Get vendor_id from leadMaster
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: leadId },
+        select: { vendor_id: true },
+      });
+
+      if (!lead) {
+        throw new Error("Lead not found");
+      }
+
+      const vendorId = lead.vendor_id;
+
+      // 2. Fetch paymentInfo
+      const paymentInfo = await prisma.paymentInfo.findFirst({
+        where: { lead_id: leadId, vendor_id: vendorId },
+        select: {
+          id: true,
+          amount: true,
+          payment_date: true,
+          payment_text: true,
+          payment_file_id: true,
+        },
+      });
+
+      if (!paymentInfo) {
+        return null; // no payment info
+      }
+
+      // 3. Attach signedUrl if payment_file_id exists
+      if (paymentInfo.payment_file_id) {
+        const paymentDoc = await prisma.leadDocuments.findUnique({
+          where: { id: paymentInfo.payment_file_id },
+        });
+
+        if (paymentDoc) {
+          (paymentInfo as any).payment_file = {
+            id: paymentDoc.id,
+            originalName: paymentDoc.doc_og_name,
+            signedUrl: await generateSignedUrl(paymentDoc.doc_sys_name),
+          };
+        }
+      }
+
+      return paymentInfo;
+    } catch (error: any) {
+      console.error("[PaymentUploadService] Error:", error);
+      throw new Error(`Failed to fetch ISM payment info: ${error.message}`);
+    }
+  }
   
 public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentUploadResponseDto> {
   try {
@@ -262,7 +419,7 @@ public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentU
             amount: data.amount,
             payment_date: data.payment_date,
             payment_text: data.payment_text || null,
-            payment_file_id: null,
+            payment_file_id: paymentFileId,
             payment_type_id: paymentType.id,
           }
         });
@@ -316,6 +473,23 @@ public async createPaymentUpload(data: CreatePaymentUploadDto): Promise<PaymentU
           },
         });
       }
+
+      // 7. Mark related userLeadTask as completed
+      await tx.userLeadTask.updateMany({
+        where: {
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          task_type: "Initial Site Measurement",
+          status: "open", // or "pending" depending on your flow
+        },
+        data: {
+          status: "completed",
+          closed_by: data.user_id,
+          closed_at: new Date(),
+          updated_by: data.user_id,
+          updated_at: new Date(),
+        },
+      });
 
       return response;
   }, {
@@ -393,6 +567,7 @@ public async generateBatchSignedUrls(documents: Array<{s3Key: string, vendorId: 
 // Get leads by status with pagination
 public async getLeadsByStatus(
   vendorId: number, 
+  userId: number,
   statusId: number,
   page: number = 1, 
   limit: number = 10
@@ -400,27 +575,70 @@ public async getLeadsByStatus(
   try {
     const skip = (page - 1) * limit;
 
-    const whereClause = {
-      vendor_id: vendorId,
-      status_id: statusId,
-      is_deleted: false
-    };
+    // 1️⃣ Get statusType for vendor (Type 2)
+    const statusType = await prisma.statusTypeMaster.findFirst({
+      where: { vendor_id: vendorId, tag: "Type 2" },
+    });
 
+    if (!statusType) {
+      throw new Error(`Status 'Type 2' not found for vendor ${vendorId}`);
+    }
+
+    // 2️⃣ Check if user is admin
+    const creator = await prisma.userMaster.findUnique({
+      where: { id: userId },
+      include: { user_type: true },
+    });
+
+    const isAdmin = creator?.user_type?.user_type?.toLowerCase() === "admin";
+
+    let leadIds: number[] = [];
+
+    if (!isAdmin) {
+      // 🔹 Leads mapped via LeadUserMapping
+      const mappedLeads = await prisma.leadUserMapping.findMany({
+        where: { vendor_id: vendorId, user_id: userId, status: "active" },
+        select: { lead_id: true },
+      });
+
+      // 🔹 Leads assigned/created via UserLeadTask
+      const taskLeads = await prisma.userLeadTask.findMany({
+        where: {
+          vendor_id: vendorId,
+          OR: [{ created_by: userId }, { user_id: userId }],
+        },
+        select: { lead_id: true },
+      });
+
+      // 🔹 OR logic (union of both sets)
+      leadIds = [
+        ...new Set([...mappedLeads.map((m) => m.lead_id), ...taskLeads.map((t) => t.lead_id)]),
+      ];
+
+      if (!leadIds.length) {
+        return { data: [], total: 0 };
+      }
+    }
+
+    // 3️⃣ Fetch leads (admin = all, non-admin = filtered by leadIds)
     const [leads, total] = await Promise.all([
       prisma.leadMaster.findMany({
-        where: whereClause,
+        where: {
+          ...(isAdmin ? {} : { id: { in: leadIds } }),
+          vendor_id: vendorId,
+          is_deleted: false,
+          statusType: { tag: "Type 2", vendor_id: vendorId },
+        },
         include: {
           vendor: { select: { id: true, vendor_name: true, vendor_code: true } },
           siteType: { select: { id: true, type: true } },
           source: { select: { id: true, type: true } },
           account: { select: { id: true, name: true, contact_no: true, email: true } },
-          statusType: { select: { id: true, type: true } },
+          statusType: { select: { id: true, type: true, tag: true } },
           createdBy: { select: { id: true, user_name: true, user_email: true } },
           updatedBy: { select: { id: true, user_name: true, user_email: true } },
           assignedTo: { select: { id: true, user_name: true, user_email: true } },
           assignedBy: { select: { id: true, user_name: true, user_email: true } },
-
-          // ✅ Documents
           documents: {
             where: { deleted_at: null },
             select: {
@@ -428,113 +646,78 @@ public async getLeadsByStatus(
               doc_og_name: true,
               doc_sys_name: true,
               doc_type_id: true,
-              created_at: true
-            }
-          },
-
-          // ✅ UserLeadTask
-          tasks: {
-            where: {
-              task_type: "Follow Up"   // ✅ Only include Follow Up tasks
+              created_at: true,
             },
+          },
+          tasks: {
+            where: { task_type: "Follow Up" },
             select: {
               id: true,
               task_type: true,
               due_date: true,
               remark: true,
               status: true,
-              created_at: true
+              created_at: true,
             },
-            orderBy: { created_at: 'desc' }
+            orderBy: { created_at: Prisma.SortOrder.desc },
           },
-
-          // ✅ Counts
           _count: {
             select: {
               payments: true,
               documents: { where: { deleted_at: null } },
               ledgers: true,
-              productMappings: true
-            }
-          }
+              productMappings: true,
+            },
+          },
         },
-        orderBy: { created_at: 'desc' },
+        orderBy: { created_at: Prisma.SortOrder.desc },
         skip,
-        take: limit
+        take: limit,
       }),
-      prisma.leadMaster.count({ where: whereClause })
+      prisma.leadMaster.count({
+        where: {
+          ...(isAdmin ? {} : { id: { in: leadIds } }),
+          vendor_id: vendorId,
+          is_deleted: false,
+          statusType: { tag: "Type 2", vendor_id: vendorId },
+        },
+      }),
     ]);
 
-    // ✅ Signed URLs for docs
-    const allDocuments = leads.flatMap((lead: any) => 
-      lead.documents.map((doc: any) => ({
-        s3Key: doc.doc_sys_name,
-        vendorId: vendorId
-      }))
+    // 4️⃣ Signed URLs for docs
+    const allDocuments = leads.flatMap((lead: any) =>
+      lead.documents.map((doc: any) => ({ s3Key: doc.doc_sys_name, vendorId }))
     );
     const signedUrls = await this.generateBatchSignedUrls(allDocuments);
 
-    // ✅ Format response
+    // 5️⃣ Format response
     const data: LeadDetailDto[] = leads.map((lead: any) => ({
-      id: lead.id,
-      firstname: lead.firstname,
-      lastname: lead.lastname,
-      country_code: lead.country_code,
-      contact_no: lead.contact_no,
-      alt_contact_no: lead.alt_contact_no,
-      email: lead.email,
-      site_address: lead.site_address,
-      priority: lead.priority,
-      billing_name: lead.billing_name,
-      archetech_name: lead.archetech_name,
-      designer_remark: lead.designer_remark,
-      vendor: lead.vendor,
-      siteType: lead.siteType,
-      source: lead.source,
-      account: lead.account,
-      statusType: lead.statusType,
-      createdBy: lead.createdBy,
-      updatedBy: lead.updatedBy,
-      assignedTo: lead.assignedTo,
-      assignedBy: lead.assignedBy,
-      created_at: lead.created_at,
-      updated_at: lead.updated_at,
-
-      // ✅ Attach signed docs
+      ...lead,
       documents: lead.documents.map((doc: any) => ({
-        id: doc.id,
-        doc_og_name: doc.doc_og_name,
-        doc_sys_name: doc.doc_sys_name,
-        doc_type_id: doc.doc_type_id,
-        created_at: doc.created_at,
-        signed_url: signedUrls[doc.doc_sys_name] || '',
+        ...doc,
+        signed_url: signedUrls[doc.doc_sys_name] || "",
         file_type: this.getFileType(doc.doc_og_name),
-        is_image: this.isImageFile(doc.doc_og_name)
+        is_image: this.isImageFile(doc.doc_og_name),
       })),
-
-      // ✅ Include tasks
       tasks: lead.tasks.map((task: any) => ({
         id: task.id,
         task_type: task.task_type,
         due_date: task.due_date,
         remark: task.remark,
         status: task.status,
-        created_at: task.created_at
+        created_at: task.created_at,
       })),
-
-      // ✅ Summary
       summary: {
         totalPayments: lead._count.payments,
         totalDocuments: lead._count.documents,
         totalLedgerEntries: lead._count.ledgers,
-        totalProductMappings: lead._count.productMappings
-      }
+        totalProductMappings: lead._count.productMappings,
+      },
     }));
 
     return { data, total };
-
   } catch (error: any) {
-    console.error('[PaymentUploadService] Error getting leads by status:', error);
+    console.error("[PaymentUploadService] Error getting leads by status:", error);
     throw new Error(`Failed to get leads by status: ${error.message}`);
   }
 }

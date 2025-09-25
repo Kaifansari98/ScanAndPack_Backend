@@ -30,20 +30,35 @@ export class LeadStatsService {
       const userType = user.user_type.user_type.toLowerCase();
 
       if (userType === "sales-executive") {
-        // ✅ Filter by LeadUserMapping
+        // ✅ Leads from LeadUserMapping
         const mappedLeads = await prisma.leadUserMapping.findMany({
           where: { vendor_id: vendorId, user_id: userId, status: "active" },
           select: { lead_id: true },
         });
 
-        const leadIds = mappedLeads.map((m) => m.lead_id);
+        // ✅ Leads from UserLeadTask (created_by OR assigned_to)
+        const taskLeads = await prisma.userLeadTask.findMany({
+          where: {
+            vendor_id: vendorId,
+            OR: [{ created_by: userId }, { user_id: userId }],
+          },
+          select: { lead_id: true },
+        });
+
+        // ✅ Union of both sources
+        const leadIds = [
+          ...new Set([
+            ...mappedLeads.map((m) => m.lead_id),
+            ...taskLeads.map((t) => t.lead_id),
+          ]),
+        ];
 
         whereClause = {
           ...whereClause,
           id: { in: leadIds.length > 0 ? leadIds : [0] }, // avoid empty "in []"
         };
       }
-      // ✅ admin/super-admin see all vendor leads
+      // ✅ Admin/super-admin → see all vendor leads
     }
 
     // Helper: count leads by status type
@@ -51,19 +66,13 @@ export class LeadStatsService {
       prisma.leadMaster.count({
         where: {
           ...whereClause,
-          statusType: {
-            vendor_id: vendorId,
-            type: statusType,
-          },
+          statusType: { vendor_id: vendorId, type: statusType },
         },
       });
 
     // Aggregate counts
     const totalLeads = await prisma.leadMaster.count({
-      where: {
-        ...whereClause,
-        statusType: { vendor_id: vendorId },
-      },
+      where: { ...whereClause, statusType: { vendor_id: vendorId } },
     });
 
     const totalOpenLeads = await countByStatus("open");
