@@ -15,14 +15,13 @@ export class FinalMeasurementController {
       }
 
       const files = req.files as { [fieldname: string]: Express.Multer.File[] };
-      const finalMeasurementDoc = files?.final_measurement_doc?.[0];
+      const finalMeasurementDocs = files?.final_measurement_doc || [];
       const sitePhotos = files?.site_photos || [];
 
-      if (!finalMeasurementDoc) {
-        res.status(400).json({ success: false, message: "Final measurement document is required" });
+      if (!finalMeasurementDocs || finalMeasurementDocs.length === 0) {
+        res.status(400).json({ success: false, message: "At least one Final Measurement document is required" });
         return;
       }
-
       if (!sitePhotos || sitePhotos.length === 0) {
         res.status(400).json({ success: false, message: "At least one site photo is required" });
         return;
@@ -34,7 +33,7 @@ export class FinalMeasurementController {
         vendor_id: parseInt(vendor_id),
         created_by: parseInt(created_by),
         critical_discussion_notes: critical_discussion_notes || null,
-        finalMeasurementDoc,
+        finalMeasurementDocs,
         sitePhotos,
       };
 
@@ -74,8 +73,7 @@ export class FinalMeasurementController {
         message: error.message || "Internal server error",
       });
     }
-  };
-  
+  }; 
 
   public getFinalMeasurementLead = async (req: Request, res: Response): Promise<void> => {
     try {

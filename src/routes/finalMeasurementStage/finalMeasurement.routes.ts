@@ -8,7 +8,7 @@ const finalMeasurementController = new FinalMeasurementController();
 finalMeasurementRouter.post(
     "/onboard",
     uploadFinalMeasurement.fields([
-        { name: "final_measurement_doc", maxCount: 1 },
+        { name: "final_measurement_doc", maxCount: 10 },
         { name: "site_photos", maxCount: 10 },
     ]),
     finalMeasurementController.createFinalMeasurementStage

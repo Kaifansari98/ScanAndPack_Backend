@@ -13,7 +13,7 @@ interface FinalMeasurementDto {
   vendor_id: number;
   created_by: number;
   critical_discussion_notes?: string | null;
-  finalMeasurementDoc: Express.Multer.File;
+  finalMeasurementDocs: Express.Multer.File[];
   sitePhotos: Express.Multer.File[];
 }
 
@@ -43,28 +43,33 @@ export class FinalMeasurementService {
         throw new Error("Document type (Final Measurement) not found for this vendor");
       }
 
-      const sanitizedDocName = sanitizeFilename(data.finalMeasurementDoc.originalname);
-      const docKey = `final-measurement-documents/${data.vendor_id}/${data.lead_id}/${Date.now()}-${sanitizedDocName}`;
+      response.measurementDocs = [];
 
-      await wasabi.send(new PutObjectCommand({
-        Bucket: process.env.WASABI_BUCKET_NAME!,
-        Key: docKey,
-        Body: data.finalMeasurementDoc.buffer,
-        ContentType: data.finalMeasurementDoc.mimetype,
-      }));
-
-      const measurementDoc = await tx.leadDocuments.create({
-        data: {
-          doc_og_name: data.finalMeasurementDoc.originalname,
-          doc_sys_name: docKey,
-          created_by: data.created_by,
-          doc_type_id: measurementDocType.id,
-          account_id: data.account_id,
-          lead_id: data.lead_id,
-          vendor_id: data.vendor_id,
-        }
-      });
-      response.measurementDoc = measurementDoc;
+      for (const doc of data.finalMeasurementDocs) {
+        const sanitizedDocName = sanitizeFilename(doc.originalname);
+        const docKey = `final-measurement-documents/${data.vendor_id}/${data.lead_id}/${Date.now()}-${sanitizedDocName}`;
+      
+        await wasabi.send(new PutObjectCommand({
+          Bucket: process.env.WASABI_BUCKET_NAME!,
+          Key: docKey,
+          Body: doc.buffer,
+          ContentType: doc.mimetype,
+        }));
+      
+        const measurementDoc = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: doc.originalname,
+            doc_sys_name: docKey,
+            created_by: data.created_by,
+            doc_type_id: measurementDocType.id,
+            account_id: data.account_id,
+            lead_id: data.lead_id,
+            vendor_id: data.vendor_id,
+          },
+        });
+      
+        response.measurementDocs.push(measurementDoc);
+      }
 
       // 2. Upload Site Photos (Type 10)
       const sitePhotoType = await tx.documentTypeMaster.findFirst({
@@ -121,6 +126,24 @@ export class FinalMeasurementService {
           status_id: clientdocumentationStatus.id, 
         },
       });
+
+      // 4. Mark related userLeadTask as completed (if exists)
+      await tx.userLeadTask.updateMany({
+        where: {
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          task_type: "Final Measurements",
+          status: "open", // or "in_progress" if that’s your flow
+        },
+        data: {
+          status: "completed",
+          closed_by: data.created_by, // or user_id if you pass it
+          closed_at: new Date(),
+          updated_by: data.created_by,
+          updated_at: new Date(),
+        },
+      });
+
 
       return response;
     }, {
@@ -221,7 +244,6 @@ export class FinalMeasurementService {
       },
     };
   }
-  
 
   public async getFinalMeasurementLead(vendorId: number, leadId: number) {
 
