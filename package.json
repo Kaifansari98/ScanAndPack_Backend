@@ -43,6 +43,8 @@
     "express-winston": "^4.2.0",
     "joi": "^18.0.0",
     "jsonwebtoken": "^9.0.2",
+    "mime-type": "^5.0.3",
+    "mime-types": "^3.0.1",
     "multer": "^2.0.2",
     "multer-s3": "^3.0.1",
     "uuid": "^13.0.0",

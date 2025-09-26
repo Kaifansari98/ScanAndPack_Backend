@@ -9,4 +9,22 @@ taskRouter.get(
   TaskController.getTasks
 );
 
+// GET /api/tasks/user/:userId/lead/:leadId/initial-site-measurement
+taskRouter.get(
+  "/user/:userId/lead/:leadId/initial-site-measurement",
+  TaskController.getInitialSiteMeasurementTasks
+);
+
+// GET /api/tasks/user/:userId/lead/:leadId/follow-up
+taskRouter.get(
+  "/user/:userId/lead/:leadId/follow-up",
+  TaskController.getFollowUpTasks
+);
+
+// GET /api/tasks/user/:userId/lead/:leadId/final-measurement
+taskRouter.get(
+  "/user/:userId/lead/:leadId/final-measurement",
+  TaskController.getFinalMeasurementTasks
+);
+
 export default taskRouter;

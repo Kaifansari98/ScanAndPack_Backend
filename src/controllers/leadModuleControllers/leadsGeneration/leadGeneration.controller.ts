@@ -77,6 +77,7 @@ export class LeadController {
         initial_site_measurement_date: req.body.initial_site_measurement_date
         ? new Date(req.body.initial_site_measurement_date)
         : undefined,
+        site_map_link: req.body.site_map_link || null,
       };
   
       const { error, value } = createLeadSchema.validate(payload);

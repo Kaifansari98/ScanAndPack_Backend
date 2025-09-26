@@ -43,7 +43,7 @@ DesigningStageRouter.get(
 // Form-data: vendorId, leadId, userId, accountId, files[]
 DesigningStageRouter.post(
   "/upload-designs",
-  uploadDesigns.array("files"), // multiple files
+  uploadDesigns.array("files", 10), // multiple files
   (req, res) => DesigingStageController.uploadDesigns(req, res)
 );
 
@@ -99,6 +99,11 @@ DesigningStageRouter.put(
   upload.none(), // Handle form-data without files
   updateDesignSelectionValidation,
   DesigingStageController.updateDesignSelection
+);
+
+DesigningStageRouter.get(
+  "/:vendorId/:leadId/design-stage-counts",
+  DesigingStageController.getDesignStageCounts
 );
 
 export default DesigningStageRouter;

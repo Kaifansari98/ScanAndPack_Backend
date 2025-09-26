@@ -14,6 +14,7 @@ export const createLeadSchema = Joi.object({
   alt_contact_no: Joi.string().pattern(/^\d{10,15}$/).optional(),
   email: Joi.string().email().optional(),
   site_address: Joi.string().trim().min(1).max(2000).required(),
+  site_map_link: Joi.string().uri().optional().allow(null, ""),
   site_type_id: Joi.number().integer().positive().optional(),
   priority: Joi.string().valid(...Object.values(LeadPriority)).required(),
   billing_name: Joi.string().trim().max(100).optional(),
