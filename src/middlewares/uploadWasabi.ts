@@ -108,18 +108,21 @@ export const uploadClientDocumentation = multer({
   },
 });
 
+
 export const uploadDesigns = multer({
   storage: multer.memoryStorage(),
   limits: {
     fileSize: parseInt(process.env.MAX_FILE_SIZE_MB || "5") * 1024 * 1024, // default 5MB
+    files: 10, // ⬅️ max 10 files at once
   },
   fileFilter: (req, file, cb) => {
-    // ✅ Add common CAD formats + your custom ones
+    // ✅ Allowed formats: CAD + PDF
     const allowedExtensions = [
+      ".pdf", // ⬅️ added
       ".pyo", ".pytha",  // custom
       ".dwg", ".dxf", ".stl", ".step", ".stp", ".iges", ".igs",
       ".3ds", ".obj", ".skp", ".sldprt", ".sldasm",
-      ".prt", ".catpart", ".catproduct"
+      ".prt", ".catpart", ".catproduct",
     ];
 
     const ext = path.extname(file.originalname).toLowerCase();
@@ -129,7 +132,9 @@ export const uploadDesigns = multer({
     } else {
       cb(
         new Error(
-          `Only CAD files are allowed! Supported extensions: ${allowedExtensions.join(", ")}. Received: ${ext}`
+          `Only design files are allowed! Supported extensions: ${allowedExtensions.join(
+            ", "
+          )}. Received: ${ext}`
         )
       );
     }

@@ -337,6 +337,7 @@
     alt_contact_no  String?
     email           String?
     site_address    String
+    site_map_link   String?   @db.Text
     site_type_id    Int?      
     status_id       Int
     priority        LeadPriority

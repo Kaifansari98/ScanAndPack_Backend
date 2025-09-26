@@ -1115,4 +1115,92 @@ export class DesigingStageController {
     }
   }
 
+  public static async getDesignStageCounts(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+  
+      if (!vendorId || !leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and leadId are required",
+        });
+      }
+  
+      const vId = Number(vendorId);
+      const lId = Number(leadId);
+  
+      // 1️⃣ Validate lead
+      const lead = await prisma.leadMaster.findFirst({
+        where: { id: lId, vendor_id: vId, is_deleted: false },
+      });
+  
+      if (!lead) {
+        return res.status(404).json({
+          success: false,
+          message: "Lead not found or does not belong to vendor",
+        });
+      }
+  
+      // 2️⃣ Get doc types for quotation + designs
+      const [quotationType, designsType] = await Promise.all([
+        prisma.documentTypeMaster.findFirst({ where: { vendor_id: vId, tag: "Type 5" } }), // Quotation
+        prisma.documentTypeMaster.findFirst({ where: { vendor_id: vId, tag: "Type 6" } }), // Designs
+      ]);
+  
+      // 3️⃣ Get counts
+      const [quotationCount, designCount, selectionCount, meetingCount] =
+        await Promise.all([
+          quotationType
+            ? prisma.leadDocuments.count({
+                where: {
+                  lead_id: lId,
+                  vendor_id: vId,
+                  doc_type_id: quotationType.id,
+                  is_deleted: false,
+                },
+              })
+            : 0,
+  
+          designsType
+            ? prisma.leadDocuments.count({
+                where: {
+                  lead_id: lId,
+                  vendor_id: vId,
+                  doc_type_id: designsType.id,
+                  is_deleted: false,
+                },
+              })
+            : 0,
+  
+          prisma.leadDesignSelection.count({
+            where: { lead_id: lId, vendor_id: vId },
+          }),
+  
+          prisma.leadDesignMeeting.count({
+            where: { lead_id: lId, vendor_id: vId },
+          }),
+        ]);
+  
+      // 4️⃣ Return response
+      return res.status(200).json({
+        success: true,
+        message: "Design stage counts fetched successfully",
+        data: {
+          QuotationDoc: quotationCount,
+          DesignsDoc: designCount,
+          SelectionData: selectionCount,
+          Meetings: meetingCount,
+        },
+      });
+    } catch (error: any) {
+      console.error("[getDesignStageCounts] Error:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  }
+  
+
 }
