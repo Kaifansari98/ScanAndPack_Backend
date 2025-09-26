@@ -648,6 +648,7 @@ export const updateLeadService = async (leadId: number, payload: UpdateLeadDTO) 
     alt_contact_no,
     email,
     site_address,
+    site_map_link,
     site_type_id,
     priority,
     billing_name,
@@ -790,7 +791,11 @@ export const updateLeadService = async (leadId: number, payload: UpdateLeadDTO) 
     
       leadUpdateData.initial_site_measurement_date = dateValue;
     }
-    
+
+    // ✅ Add site_map_link update
+    if (site_map_link !== undefined) {
+      leadUpdateData.site_map_link = site_map_link;
+    }
 
     // Only include fields that are actually being updated
     if (firstname !== undefined) leadUpdateData.firstname = firstname;

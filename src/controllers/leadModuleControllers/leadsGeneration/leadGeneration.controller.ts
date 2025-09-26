@@ -384,6 +384,7 @@ export class LeadController {
               email: result.lead.email,
               priority: result.lead.priority,
               site_address: result.lead.site_address,
+              site_map_link: result.lead.site_map_link,
               updated_at: result.lead.updated_at,
               initial_site_measurement_date: result.lead.initial_site_measurement_date,
             },
