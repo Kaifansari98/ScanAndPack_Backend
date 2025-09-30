@@ -1,5 +1,9 @@
 import { prisma } from "../../../prisma/client";
-import { generateSignedUrl, uploadToWasabi, uploadToWasabiMeetingDocs } from "../../../utils/wasabiClient";
+import {
+  generateSignedUrl,
+  uploadToWasabi,
+  uploadToWasabiMeetingDocs,
+} from "../../../utils/wasabiClient";
 import { z } from "zod";
 import { Prisma } from "@prisma/client";
 
@@ -9,11 +13,10 @@ const editDesignMeetingSchema = z.object({
   userId: z.number().int().positive(),
   date: z.string().datetime().optional(),
   desc: z.string().max(2000).optional(),
-  files: z.array(z.any()).optional()
+  files: z.array(z.any()).optional(),
 });
 
 export class DesigingStage {
-
   public static async addToDesigingStage(
     lead_id: number,
     user_id: number,
@@ -77,34 +80,34 @@ export class DesigingStage {
     limit: number = 10
   ) {
     const skip = (page - 1) * limit;
-  
+
     // 1️⃣ Resolve statusType dynamically for Type 3
     const statusType = await prisma.statusTypeMaster.findFirst({
       where: { vendor_id: vendorId, tag: "Type 3" },
       select: { id: true },
     });
-  
+
     if (!statusType) {
       throw new Error(`Status 'Type 3' not found for vendor ${vendorId}`);
     }
-  
+
     // 2️⃣ Check if user is admin
     const creator = await prisma.userMaster.findUnique({
       where: { id: userId },
       include: { user_type: true },
     });
-  
+
     const isAdmin = creator?.user_type?.user_type?.toLowerCase() === "admin";
-  
+
     let leadIds: number[] = [];
-  
+
     if (!isAdmin) {
       // 🔹 Collect leads from LeadUserMapping
       const mappedLeads = await prisma.leadUserMapping.findMany({
         where: { vendor_id: vendorId, user_id: userId, status: "active" },
         select: { lead_id: true },
       });
-  
+
       // 🔹 Collect leads from UserLeadTask
       const taskLeads = await prisma.userLeadTask.findMany({
         where: {
@@ -113,12 +116,15 @@ export class DesigingStage {
         },
         select: { lead_id: true },
       });
-  
+
       // 🔹 Union of both sets (OR logic)
       leadIds = [
-        ...new Set([...mappedLeads.map((m) => m.lead_id), ...taskLeads.map((t) => t.lead_id)]),
+        ...new Set([
+          ...mappedLeads.map((m) => m.lead_id),
+          ...taskLeads.map((t) => t.lead_id),
+        ]),
       ];
-  
+
       if (!leadIds.length) {
         return {
           leads: [],
@@ -126,7 +132,7 @@ export class DesigingStage {
         };
       }
     }
-  
+
     // 3️⃣ Fetch leads
     const [leads, total] = await Promise.all([
       prisma.leadMaster.findMany({
@@ -135,6 +141,7 @@ export class DesigingStage {
           vendor_id: vendorId,
           is_deleted: false,
           statusType: { tag: "Type 3", vendor_id: vendorId },
+          activity_status: { in: ["onGoing", "lostApproval"] }, // ✅ allow both
         },
         skip,
         take: limit,
@@ -143,7 +150,9 @@ export class DesigingStage {
           siteType: { select: { id: true, type: true } },
           source: { select: { id: true, type: true } },
           statusType: { select: { id: true, type: true, tag: true } },
-          assignedTo: { select: { id: true, user_name: true, user_email: true } },
+          assignedTo: {
+            select: { id: true, user_name: true, user_email: true },
+          },
           documents: {
             where: { is_deleted: false },
             select: {
@@ -157,7 +166,12 @@ export class DesigingStage {
               vendor_id: true,
               documentType: { select: { id: true, type: true, tag: true } },
               createdBy: {
-                select: { id: true, user_name: true, user_contact: true, user_email: true },
+                select: {
+                  id: true,
+                  user_name: true,
+                  user_contact: true,
+                  user_email: true,
+                },
               },
             },
           },
@@ -171,7 +185,9 @@ export class DesigingStage {
               created_at: true,
               created_by: true,
               document: true,
-              createdBy: { select: { id: true, user_name: true, user_email: true } },
+              createdBy: {
+                select: { id: true, user_name: true, user_email: true },
+              },
             },
           },
           productMappings: {
@@ -204,10 +220,11 @@ export class DesigingStage {
           vendor_id: vendorId,
           is_deleted: false,
           statusType: { tag: "Type 3", vendor_id: vendorId },
+          activity_status: { in: ["onGoing", "lostApproval"] }, // ✅ allow both
         },
       }),
     ]);
-  
+
     // 4️⃣ Generate signed URLs
     const leadsWithSignedUrls = await Promise.all(
       leads.map(async (lead: any) => {
@@ -220,7 +237,7 @@ export class DesigingStage {
         return { ...lead, documents: docsWithUrls };
       })
     );
-  
+
     return {
       leads: leadsWithSignedUrls,
       pagination: {
@@ -231,7 +248,7 @@ export class DesigingStage {
       },
     };
   }
-   
+
   public static async getLeadById(vendorId: number, leadId: number) {
     // ✅ Fetch lead with relations
     const lead = await prisma.leadMaster.findFirst({
@@ -253,7 +270,7 @@ export class DesigingStage {
         assignedTo: {
           select: { id: true, user_name: true, user_email: true },
         },
-  
+
         // ✅ Include Documents
         documents: {
           where: { is_deleted: false },
@@ -279,7 +296,7 @@ export class DesigingStage {
             },
           },
         },
-  
+
         // ✅ Include Payments
         payments: {
           select: {
@@ -301,7 +318,7 @@ export class DesigingStage {
             },
           },
         },
-  
+
         // ✅ Include Product Mappings → ProductType
         productMappings: {
           select: {
@@ -310,7 +327,7 @@ export class DesigingStage {
             },
           },
         },
-  
+
         // ✅ Include ProductStructure Mapping → ProductStructure
         leadProductStructureMapping: {
           select: {
@@ -321,9 +338,9 @@ export class DesigingStage {
         },
       },
     });
-  
+
     if (!lead) return null;
-  
+
     // ✅ Generate signed URLs for documents
     const docsWithUrls = await Promise.all(
       (lead.documents || []).map(async (doc: any) => {
@@ -333,13 +350,13 @@ export class DesigingStage {
         };
       })
     );
-  
+
     return {
       ...lead,
       documents: docsWithUrls,
     };
   }
-  
+
   public static async uploadQuotation(data: {
     fileBuffer: Buffer;
     originalName: string;
@@ -382,18 +399,21 @@ export class DesigingStage {
     return doc;
   }
 
-  public static async getDesignQuotationDocuments(vendorId: number, leadId: number) {
+  public static async getDesignQuotationDocuments(
+    vendorId: number,
+    leadId: number
+  ) {
     const logs: any[] = [];
 
     // 1️⃣ Validate lead exists and belongs to vendor
     const lead = await prisma.leadMaster.findFirst({
-      where: { 
-        id: leadId, 
-        vendor_id: vendorId, 
-        is_deleted: false 
-      }
+      where: {
+        id: leadId,
+        vendor_id: vendorId,
+        is_deleted: false,
+      },
     });
-    
+
     if (!lead) {
       throw new Error("Lead not found or access denied");
     }
@@ -403,12 +423,14 @@ export class DesigingStage {
     const designQuotationDocType = await prisma.documentTypeMaster.findFirst({
       where: {
         vendor_id: vendorId,
-        type: "design-quotation"
-      }
+        type: "design-quotation",
+      },
     });
 
     if (!designQuotationDocType) {
-      throw new Error("Design quotation document type not found for this vendor");
+      throw new Error(
+        "Design quotation document type not found for this vendor"
+      );
     }
     logs.push("Design quotation document type found");
 
@@ -418,7 +440,7 @@ export class DesigingStage {
         lead_id: leadId,
         vendor_id: vendorId,
         doc_type_id: designQuotationDocType.id,
-        is_deleted: false
+        is_deleted: false,
       },
       orderBy: { created_at: "desc" },
       include: {
@@ -426,25 +448,25 @@ export class DesigingStage {
           select: {
             id: true,
             type: true,
-            tag: true
-          }
+            tag: true,
+          },
         },
         createdBy: {
           select: {
             id: true,
             user_name: true,
             user_email: true,
-            user_contact: true
-          }
+            user_contact: true,
+          },
         },
         deletedBy: {
           select: {
             id: true,
             user_name: true,
-            user_email: true
-          }
-        }
-      }
+            user_email: true,
+          },
+        },
+      },
     });
 
     // 4️⃣ Generate signed URLs for documents
@@ -453,12 +475,14 @@ export class DesigingStage {
         const signedUrl = await generateSignedUrl(doc.doc_sys_name);
         return {
           ...doc,
-          signedUrl
+          signedUrl,
         };
       })
     );
 
-    logs.push(`Found ${documents.length} design quotation documents for lead ${leadId}`);
+    logs.push(
+      `Found ${documents.length} design quotation documents for lead ${leadId}`
+    );
 
     return {
       logs,
@@ -466,7 +490,7 @@ export class DesigingStage {
       vendor_id: vendorId,
       document_type: designQuotationDocType.type,
       total_documents: documents.length,
-      documents: documentsWithSignedUrls
+      documents: documentsWithSignedUrls,
     };
   }
 
@@ -474,7 +498,7 @@ export class DesigingStage {
     // ✅ Validate incoming data
     const parsed = editDesignMeetingSchema.safeParse(data);
     if (!parsed.success) {
-      throw new Error(parsed.error.issues.map(i => i.message).join(", "));
+      throw new Error(parsed.error.issues.map((i) => i.message).join(", "));
     }
     const input = parsed.data;
 
@@ -482,7 +506,7 @@ export class DesigingStage {
 
     // 1️⃣ Verify user belongs to vendor
     const user = await prisma.userMaster.findFirst({
-      where: { id: input.userId, vendor_id: input.vendorId }
+      where: { id: input.userId, vendor_id: input.vendorId },
     });
 
     if (!user) {
@@ -494,8 +518,8 @@ export class DesigingStage {
     const existingMeeting = await prisma.leadDesignMeeting.findFirst({
       where: {
         id: input.meetingId,
-        vendor_id: input.vendorId
-      }
+        vendor_id: input.vendorId,
+      },
     });
 
     if (!existingMeeting) {
@@ -506,7 +530,7 @@ export class DesigingStage {
     // 3️⃣ Prepare update data
     const updateData: any = {
       updated_by: input.userId,
-      updated_at: new Date()
+      updated_at: new Date(),
     };
 
     if (input.date) {
@@ -520,7 +544,7 @@ export class DesigingStage {
     // 4️⃣ Update the meeting
     const updatedMeeting = await prisma.leadDesignMeeting.update({
       where: { id: input.meetingId },
-      data: updateData
+      data: updateData,
     });
     logs.push({ meetingUpdated: updatedMeeting });
 
@@ -549,7 +573,7 @@ export class DesigingStage {
             account_id: existingMeeting.account_id,
             doc_type_id: 5, // design quotation
             created_by: input.userId,
-          }
+          },
         });
         newDocuments.push(doc);
         logs.push({ documentCreated: doc });
@@ -564,7 +588,7 @@ export class DesigingStage {
             document_id: doc.id,
             created_at: new Date(),
             created_by: input.userId,
-          }
+          },
         });
         newMappings.push(mapping);
         logs.push({ mappingCreated: mapping });
@@ -575,7 +599,7 @@ export class DesigingStage {
       logs,
       updatedMeeting,
       newDocuments,
-      newMappings
+      newMappings,
     };
   }
 
@@ -588,48 +612,48 @@ export class DesigingStage {
     created_by: number;
   }) {
     const logs: any[] = [];
-  
+
     // 1️⃣ Validate user belongs to vendor
     const user = await prisma.userMaster.findFirst({
-      where: { 
-        id: data.created_by, 
-        vendor_id: data.vendor_id 
-      }
+      where: {
+        id: data.created_by,
+        vendor_id: data.vendor_id,
+      },
     });
-    
+
     if (!user) {
       throw new Error("Unauthorized: User does not belong to this vendor");
     }
     logs.push("User verified successfully");
-  
+
     // 2️⃣ Validate lead exists and belongs to vendor
     const lead = await prisma.leadMaster.findFirst({
-      where: { 
-        id: data.lead_id, 
-        vendor_id: data.vendor_id, 
-        is_deleted: false 
-      }
+      where: {
+        id: data.lead_id,
+        vendor_id: data.vendor_id,
+        is_deleted: false,
+      },
     });
-    
+
     if (!lead) {
       throw new Error("Lead not found or access denied");
     }
     logs.push("Lead verified successfully");
-  
+
     // 3️⃣ Validate account exists
     const account = await prisma.accountMaster.findFirst({
-      where: { 
+      where: {
         id: data.account_id,
         vendor_id: data.vendor_id,
-        is_deleted: false 
-      }
+        is_deleted: false,
+      },
     });
-    
+
     if (!account) {
       throw new Error("Account not found or access denied");
     }
     logs.push("Account verified successfully");
-  
+
     // 4️⃣ Create design selection
     const designSelection = await prisma.leadDesignSelection.create({
       data: {
@@ -646,7 +670,7 @@ export class DesigingStage {
             id: true,
             user_name: true,
             user_email: true,
-          }
+          },
         },
         lead: {
           select: {
@@ -654,25 +678,25 @@ export class DesigingStage {
             firstname: true,
             lastname: true,
             contact_no: true,
-          }
+          },
         },
         account: {
           select: {
             id: true,
             name: true,
-          }
-        }
-      }
+          },
+        },
+      },
     });
-  
+
     logs.push("Design selection created successfully");
-  
+
     return {
       logs,
-      designSelection
+      designSelection,
     };
   }
-  
+
   public static async getDesignSelections(
     vendorId: number,
     leadId: number,
@@ -681,21 +705,21 @@ export class DesigingStage {
   ) {
     const logs: any[] = [];
     const skip = (page - 1) * limit;
-  
+
     // 1️⃣ Validate lead exists and belongs to vendor
     const lead = await prisma.leadMaster.findFirst({
-      where: { 
-        id: leadId, 
-        vendor_id: vendorId, 
-        is_deleted: false 
-      }
+      where: {
+        id: leadId,
+        vendor_id: vendorId,
+        is_deleted: false,
+      },
     });
-    
+
     if (!lead) {
       throw new Error("Lead not found or access denied");
     }
     logs.push("Lead verified successfully");
-  
+
     // 2️⃣ Fetch design selections with pagination
     const designSelections = await prisma.leadDesignSelection.findMany({
       where: {
@@ -711,14 +735,14 @@ export class DesigingStage {
             id: true,
             user_name: true,
             user_email: true,
-          }
+          },
         },
         updatedBy: {
           select: {
             id: true,
             user_name: true,
             user_email: true,
-          }
+          },
         },
         lead: {
           select: {
@@ -727,7 +751,7 @@ export class DesigingStage {
             lastname: true,
             contact_no: true,
             email: true,
-          }
+          },
         },
         account: {
           select: {
@@ -735,34 +759,36 @@ export class DesigingStage {
             name: true,
             contact_no: true,
             email: true,
-          }
-        }
-      }
+          },
+        },
+      },
     });
-  
+
     // 3️⃣ Get total count for pagination
     const totalCount = await prisma.leadDesignSelection.count({
       where: {
         lead_id: leadId,
         vendor_id: vendorId,
-      }
+      },
     });
-  
-    logs.push(`Fetched ${designSelections.length} design selections for lead ${leadId}`);
-  
+
+    logs.push(
+      `Fetched ${designSelections.length} design selections for lead ${leadId}`
+    );
+
     const pagination = {
       total: totalCount,
       page,
       limit,
       totalPages: Math.ceil(totalCount / limit),
       hasNext: page < Math.ceil(totalCount / limit),
-      hasPrev: page > 1
+      hasPrev: page > 1,
     };
-  
+
     return {
       logs,
       designSelections,
-      pagination
+      pagination,
     };
   }
 }

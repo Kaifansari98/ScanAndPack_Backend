@@ -28,6 +28,7 @@ import bookingStageRouter from './bookingStageRoutes/booking-stage.routes';
 import { finalMeasurementRouter } from './finalMeasurementStage/finalMeasurement.routes';
 import ClientDocumentationRouter from './clientDocumentationRoutes/clientDocumentation.routes';
 import taskRouter from './task/task.routes';
+import leadActivityStatusRouter from './leadModuleRoutes/leadActivityStatus.routes';
 
 const router = Router();
 
@@ -61,5 +62,7 @@ router.use("/leads/final-measurement", finalMeasurementRouter);
 router.use("/leads/client-documentation", ClientDocumentationRouter);
 
 router.use("/leads/tasks", taskRouter);
+
+router.use("/leads/lead-activity-status", leadActivityStatusRouter);
 
 export { router };

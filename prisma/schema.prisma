@@ -64,6 +64,7 @@
     siteSupervisors LeadSiteSupervisorMapping[]
     leadUserMappings LeadUserMapping[]
     userLeadTasks UserLeadTask[] 
+    leadActivityStatusLog LeadActivityStatusLog[]
   }
 
   model VendorAddress {
@@ -127,6 +128,7 @@
     paymentsCreated PaymentInfo[]
     ledgersCreated  Ledger[]
     leadStatusLogs LeadStatusLogs[]
+    leadActivityStatusLog LeadActivityStatusLog[]
 
     // ✅ Accounts
     accountsCreated AccountMaster[] @relation("AccountCreatedBy")
@@ -328,6 +330,13 @@
     low
   }
 
+  enum ActivityStatus {
+    onGoing
+    onHold
+    lostApproval
+    lost
+  }
+
   model LeadMaster {
     id              Int       @id @default(autoincrement())
     firstname       String
@@ -346,6 +355,8 @@
     account_id      Int
     archetech_name  String?
     designer_remark String?
+    activity_status ActivityStatus @default(onGoing) 
+    activity_status_remark String? @db.VarChar(2000)
     final_desc_note String?   @db.VarChar(2000)
     initial_site_measurement_date DateTime?
     final_booking_amt Float?
@@ -388,6 +399,7 @@
     siteSupervisors LeadSiteSupervisorMapping[]
     userMappings LeadUserMapping[]
     tasks UserLeadTask[]
+    leadActivityStatusLog LeadActivityStatusLog[]
 
     // ✅ Unique constraints for contact_no and email per vendor
     @@unique([contact_no, vendor_id], name: "unique_contact_per_vendor")
@@ -420,6 +432,24 @@
   user       UserMaster    @relation("LeadUser_User", fields: [user_id], references: [id], onDelete: Cascade)
   createdBy  UserMaster    @relation("LeadUser_CreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   updatedBy  UserMaster?   @relation("LeadUser_UpdatedBy", fields: [updated_by], references: [id])
+}
+
+model LeadActivityStatusLog {
+  id                 Int             @id @default(autoincrement())
+  vendor_id          Int
+  account_id         Int
+  lead_id            Int
+  user_id            Int
+  activity_status    ActivityStatus
+  activity_status_remark String?      @db.VarChar(2000)
+  created_by         Int
+  created_at         DateTime        @default(now())
+
+  // ✅ Relations
+  vendor VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  account AccountMaster @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  lead    LeadMaster    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  createdBy UserMaster  @relation(fields: [created_by], references: [id], onDelete: Cascade)
 }
 
   model SiteTypeMaster {
@@ -481,6 +511,7 @@
     siteSupervisors LeadSiteSupervisorMapping[]
     leadUserMappings LeadUserMapping[]
     tasks UserLeadTask[]
+    leadActivityStatusLog LeadActivityStatusLog[]
   }
 
   model LeadProductMapping {

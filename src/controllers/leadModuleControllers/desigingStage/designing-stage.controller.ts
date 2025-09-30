@@ -1201,6 +1201,5 @@ export class DesigingStageController {
       });
     }
   }
-  
 
 }
