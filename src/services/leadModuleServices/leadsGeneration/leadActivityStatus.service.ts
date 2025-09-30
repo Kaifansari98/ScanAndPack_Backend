@@ -1,11 +1,9 @@
 import { prisma } from "../../../prisma/client";
 import { ActivityStatus } from "@prisma/client";
-import { ApiErrorResponse } from "../../../types/leadModule.types";
 import logger from "../../../utils/logger";
-import { ApiResponse } from "../../../utils/apiResponse";
 
 export class LeadActivityStatusService {
-  // Change status (onHold / lost)
+  // Change status (onHold / lostApproval / lost )
   static async updateStatus(
     leadId: number,
     vendorId: number,
@@ -13,7 +11,8 @@ export class LeadActivityStatusService {
     userId: number,
     status: ActivityStatus,
     remark: string,
-    createdBy: number
+    createdBy: number,
+    dueDate?: string // 👈 optional param, required only for onHold
   ) {
     if (!remark) {
       throw new Error("Remark is required when changing activity status.");
@@ -42,6 +41,27 @@ export class LeadActivityStatusService {
           created_by: createdBy,
         },
       });
+
+      // 3. If status is onHold → create a follow-up task
+      if (status === ActivityStatus.onHold) {
+        if (!dueDate) {
+          throw new Error("Due date is required when marking lead as On Hold.");
+        }
+
+        await tx.userLeadTask.create({
+          data: {
+            lead_id: leadId,
+            account_id: accountId,
+            vendor_id: vendorId,
+            user_id: userId,
+            task_type: "Follow Up",
+            due_date: new Date(dueDate),
+            remark: remark,
+            status: "open", // default anyway
+            created_by: createdBy,
+          },
+        });
+      }
 
       logger.info("Lead activity status updated", { leadId, vendorId, status });
       return lead;
@@ -167,5 +187,62 @@ export class LeadActivityStatusService {
       },
       orderBy: { created_at: "desc" },
     });
+  }
+
+  static async getActivityStatusCount(vendorId: number) {
+    const counts = await prisma.leadMaster.groupBy({
+      by: ["activity_status"],
+      where: {
+        vendor_id: vendorId,
+        is_deleted: false,
+      },
+      _count: {
+        id: true,
+      },
+    });
+
+    // Initialize response
+    const response: {
+      totalOnGoing: number;
+      openOnGoing: number;
+      onHold: number;
+      lostApproval: number;
+      lost: number;
+    } = {
+      totalOnGoing: 0,
+      openOnGoing: 0,
+      onHold: 0,
+      lostApproval: 0,
+      lost: 0,
+    };
+
+    // 2️⃣ Fill totals from groupBy
+    counts.forEach((c) => {
+      if (c.activity_status === "onGoing") {
+        response.totalOnGoing = c._count.id;
+      } else if (c.activity_status === "onHold") {
+        response.onHold = c._count.id;
+      } else if (c.activity_status === "lostApproval") {
+        response.lostApproval = c._count.id;
+      } else if (c.activity_status === "lost") {
+        response.lost = c._count.id;
+      }
+    });
+
+    // 3️⃣ Query for openOnGoing (statusTypeMaster.type = 'open')
+    const openOnGoingCount = await prisma.leadMaster.count({
+      where: {
+        vendor_id: vendorId,
+        is_deleted: false,
+        activity_status: "onGoing",
+        statusType: {
+          type: "open", // depends on your StatusTypeMaster records
+        },
+      },
+    });
+
+    response.openOnGoing = openOnGoingCount;
+
+    return response;
   }
 }

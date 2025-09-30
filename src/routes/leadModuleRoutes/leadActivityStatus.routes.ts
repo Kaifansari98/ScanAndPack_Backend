@@ -63,4 +63,10 @@ leadActivityStatusRouter.get(
   LeadActivityStatusController.getLostApprovalLeads
 );
 
+// Fetch counts of leads grouped by activity_status (onGoing, onHold, lostApproval, lost)
+leadActivityStatusRouter.get(
+  "/vendorId/:vendorId/activity-status-counts",
+  LeadActivityStatusController.getActivityStatusCounts
+);
+
 export default leadActivityStatusRouter;
