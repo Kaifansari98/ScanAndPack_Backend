@@ -1,9 +1,13 @@
+import { ActivityStatus } from "@prisma/client";
 import { prisma } from "../../prisma/client";
 import logger from "../../utils/logger";
 
 export class LeadStatsService {
   static async getVendorLeadStats(vendorId: number, userId?: number) {
-    logger.info("[LeadStatsService] getVendorLeadStats called", { vendorId, userId });
+    logger.info("[LeadStatsService] getVendorLeadStats called", {
+      vendorId,
+      userId,
+    });
 
     let whereClause: any = {
       vendor_id: vendorId,
@@ -67,20 +71,35 @@ export class LeadStatsService {
         where: {
           ...whereClause,
           statusType: { vendor_id: vendorId, type: statusType },
+          activity_status: {
+            in: [ActivityStatus.onGoing, ActivityStatus.lostApproval],
+          },
         },
       });
 
     // Aggregate counts
     const totalLeads = await prisma.leadMaster.count({
-      where: { ...whereClause, statusType: { vendor_id: vendorId } },
+      where: {
+        ...whereClause,
+        statusType: { vendor_id: vendorId },
+        activity_status: {
+          in: [ActivityStatus.onGoing, ActivityStatus.lostApproval],
+        },
+      },
     });
 
     const totalOpenLeads = await countByStatus("open");
-    const totalInitialSiteMeasurementLeads = await countByStatus("initial-site-measurement");
+    const totalInitialSiteMeasurementLeads = await countByStatus(
+      "initial-site-measurement"
+    );
     const totalDesigningStageLeads = await countByStatus("designing-stage");
     const totalBookingStageLeads = await countByStatus("booking-stage");
-    const totalFinalMeasurementStageLeads = await countByStatus("final-site-measurement-stage");
-    const totalClientDocumentationStageLeads = await countByStatus("client-documentation-stage");
+    const totalFinalMeasurementStageLeads = await countByStatus(
+      "final-site-measurement-stage"
+    );
+    const totalClientDocumentationStageLeads = await countByStatus(
+      "client-documentation-stage"
+    );
 
     const stats = {
       total_leads: totalLeads,

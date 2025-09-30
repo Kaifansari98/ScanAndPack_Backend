@@ -10,16 +10,14 @@ bookingStageRouter.post(
   "/onboard",
   upload.fields([
     { name: "final_documents", maxCount: 10 },
-    { name: "booking_payment_file", maxCount: 1 }
+    { name: "booking_payment_file", maxCount: 1 },
   ]),
   bookingStageController.createBookingStage
 );
 
 bookingStageRouter.post(
   "/add-more-files",
-  upload.fields([
-    { name: "final_documents", maxCount: 10 },
-  ]),
+  upload.fields([{ name: "final_documents", maxCount: 10 }]),
   bookingStageController.addBookingStageFiles
 );
 
@@ -40,9 +38,6 @@ bookingStageRouter.get(
   bookingStageController.getOpenLeads
 );
 
-bookingStageRouter.put(
-  "/edit",
-  bookingStageController.editBookingStage
-);
+bookingStageRouter.put("/edit", bookingStageController.editBookingStage);
 
 export default bookingStageRouter;

@@ -6,12 +6,36 @@ import logger from "../../../utils/logger";
 export class BookingStageController {
   private bookingStageService = new BookingStageService();
 
-  public createBookingStage = async (req: Request, res: Response): Promise<void> => {
+  public createBookingStage = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
     try {
-      const { lead_id, account_id, vendor_id, created_by, client_id, bookingAmount, bookingAmountPaymentDetailsText, finalBookingAmount, siteSupervisorId } = req.body;
+      const {
+        lead_id,
+        account_id,
+        vendor_id,
+        created_by,
+        client_id,
+        bookingAmount,
+        bookingAmountPaymentDetailsText,
+        finalBookingAmount,
+        siteSupervisorId,
+      } = req.body;
 
-      if (!lead_id || !account_id || !vendor_id || !created_by || !client_id || !bookingAmount || !finalBookingAmount || !siteSupervisorId) {
-        res.status(400).json({ success: false, message: "Missing required fields" });
+      if (
+        !lead_id ||
+        !account_id ||
+        !vendor_id ||
+        !created_by ||
+        !client_id ||
+        !bookingAmount ||
+        !finalBookingAmount ||
+        !siteSupervisorId
+      ) {
+        res
+          .status(400)
+          .json({ success: false, message: "Missing required fields" });
         return;
       }
 
@@ -20,7 +44,9 @@ export class BookingStageController {
       const bookingAmountPaymentDetailsFile = files?.booking_payment_file?.[0];
 
       if (!finalDocuments || finalDocuments.length === 0) {
-        res.status(400).json({ success: false, message: "Final documents are mandatory" });
+        res
+          .status(400)
+          .json({ success: false, message: "Final documents are mandatory" });
         return;
       }
 
@@ -39,31 +65,52 @@ export class BookingStageController {
       };
 
       const result = await this.bookingStageService.createBookingStage(dto);
-      res.status(201).json({ success: true, message: "Booking stage completed", data: result });
-
+      res
+        .status(201)
+        .json({
+          success: true,
+          message: "Booking stage completed",
+          data: result,
+        });
     } catch (error: any) {
       console.error("[BookingStageController] Error:", error);
-      res.status(500).json({ success: false, message: error.message || "Internal server error" });
+      res
+        .status(500)
+        .json({
+          success: false,
+          message: error.message || "Internal server error",
+        });
     }
   };
 
-  public addBookingStageFiles = async (req: Request, res: Response): Promise<void> => {
+  public addBookingStageFiles = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
     try {
       const { lead_id, account_id, vendor_id, created_by } = req.body;
-  
+
       if (!lead_id || !account_id || !vendor_id || !created_by) {
-        res.status(400).json({ success: false, message: "Missing required fields" });
+        res
+          .status(400)
+          .json({ success: false, message: "Missing required fields" });
         return;
       }
-  
+
       const files = req.files as { [fieldname: string]: Express.Multer.File[] };
       const finalDocuments = files?.final_documents || [];
-  
+
       if (!finalDocuments || finalDocuments.length === 0) {
-        res.status(400).json({ success: false, message: "[BOOKING STAGE] At least one file must be uploaded of finalDocuments" });
+        res
+          .status(400)
+          .json({
+            success: false,
+            message:
+              "[BOOKING STAGE] At least one file must be uploaded of finalDocuments",
+          });
         return;
       }
-  
+
       const dto = {
         lead_id: parseInt(lead_id),
         account_id: parseInt(account_id),
@@ -71,28 +118,44 @@ export class BookingStageController {
         created_by: parseInt(created_by),
         finalDocuments,
       };
-  
+
       const result = await this.bookingStageService.addBookingStageFiles(dto);
-      res.status(201).json({ success: true, message: "Final documents uploaded successfully", data: result });
-  
+      res
+        .status(201)
+        .json({
+          success: true,
+          message: "Final documents uploaded successfully",
+          data: result,
+        });
     } catch (error: any) {
       console.error("[BookingStageController] Error adding files:", error);
-      res.status(500).json({ success: false, message: error.message || "Internal server error" });
+      res
+        .status(500)
+        .json({
+          success: false,
+          message: error.message || "Internal server error",
+        });
     }
   };
-  
-  public getBookingStage = async (req: Request, res: Response): Promise<void> => {
+
+  public getBookingStage = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
     try {
       const leadId = parseInt(req.params.leadId);
       const vendorId = parseInt(req.params.vendorId);
-  
+
       if (!leadId) {
         res.status(400).json({ success: false, message: "leadId is required" });
         return;
       }
-  
-      const result = await this.bookingStageService.getBookingStage(leadId, vendorId);
-  
+
+      const result = await this.bookingStageService.getBookingStage(
+        leadId,
+        vendorId
+      );
+
       res.status(200).json({
         success: true,
         message: "Booking stage details fetched successfully",
@@ -111,16 +174,19 @@ export class BookingStageController {
     try {
       const vendorId = parseInt(req.params.vendorId);
       const userId = Number(req.query.userId);
-  
+
       if (!vendorId || !userId) {
         return res.status(400).json({
           success: false,
           message: "vendorId and userId are required",
         });
       }
-  
-      const leads = await BookingStageService.getLeadsWithStatusBooking(vendorId, userId);
-  
+
+      const leads = await BookingStageService.getLeadsWithStatusBooking(
+        vendorId,
+        userId
+      );
+
       return res.status(200).json({
         success: true,
         message: "Leads with status_id = 4 fetched successfully",
@@ -139,7 +205,7 @@ export class BookingStageController {
     try {
       const vendorId = parseInt(req.params.vendorId);
       const userId = Number(req.query.userId || req.body.userId);
-  
+
       if (!vendorId || !userId) {
         logger.warn("Missing vendorId or userId", { vendorId, userId });
         return res.status(400).json({
@@ -147,15 +213,18 @@ export class BookingStageController {
           message: "Vendor ID and User ID are required",
         });
       }
-  
-      const leads = await BookingStageService.getLeadsWithStatusOpen(vendorId, userId);
-  
+
+      const leads = await BookingStageService.getLeadsWithStatusOpen(
+        vendorId,
+        userId
+      );
+
       logger.info("Fetched open leads successfully", {
         vendorId,
         userId,
         count: leads.length,
       });
-  
+
       return res.status(200).json({
         success: true,
         message: "Leads with open status fetched successfully",
@@ -180,19 +249,38 @@ export class BookingStageController {
         account_id: parseInt(req.body.account_id),
         vendor_id: parseInt(req.body.vendor_id),
         created_by: parseInt(req.body.created_by),
-        client_id: req.body.client_id ? parseInt(req.body.client_id) : undefined,
-        bookingAmount: req.body.bookingAmount ? parseFloat(req.body.bookingAmount) : undefined,
-        finalBookingAmount: req.body.finalBookingAmount ? parseFloat(req.body.finalBookingAmount) : undefined,
-        siteSupervisorId: req.body.siteSupervisorId ? parseInt(req.body.siteSupervisorId) : undefined,
-        bookingAmountPaymentDetailsText: req.body.bookingAmountPaymentDetailsText || undefined, // ✅ added
+        client_id: req.body.client_id
+          ? parseInt(req.body.client_id)
+          : undefined,
+        bookingAmount: req.body.bookingAmount
+          ? parseFloat(req.body.bookingAmount)
+          : undefined,
+        finalBookingAmount: req.body.finalBookingAmount
+          ? parseFloat(req.body.finalBookingAmount)
+          : undefined,
+        siteSupervisorId: req.body.siteSupervisorId
+          ? parseInt(req.body.siteSupervisorId)
+          : undefined,
+        bookingAmountPaymentDetailsText:
+          req.body.bookingAmountPaymentDetailsText || undefined, // ✅ added
       };
-  
+
       const result = await this.bookingStageService.editBookingStage(dto);
-      res.status(200).json({ success: true, message: "Booking stage updated", data: result });
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: "Booking stage updated",
+          data: result,
+        });
     } catch (error: any) {
       console.error("[BookingStageController] Edit Error:", error);
-      res.status(500).json({ success: false, message: error.message || "Internal server error" });
+      res
+        .status(500)
+        .json({
+          success: false,
+          message: error.message || "Internal server error",
+        });
     }
-  };    
-  
+  };
 }

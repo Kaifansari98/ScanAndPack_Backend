@@ -24,7 +24,9 @@ export class ClientDocumentationService {
       where: { vendor_id: data.vendor_id, tag: "Type 11" },
     });
     if (!docType) {
-      throw new Error("Document type (Client Documentation) not found for this vendor");
+      throw new Error(
+        "Document type (Client Documentation) not found for this vendor"
+      );
     }
 
     // 2. Upload each document → outside transaction
@@ -62,7 +64,9 @@ export class ClientDocumentationService {
     });
 
     if (!clientDocumentationStatus) {
-      throw new Error(`Client Approval status (Type 7) not found for vendor ${data.vendor_id}`);
+      throw new Error(
+        `Client Approval status (Type 7) not found for vendor ${data.vendor_id}`
+      );
     }
 
     // 3. Update lead stage (Client Documentation → Client Approval)
@@ -79,7 +83,6 @@ export class ClientDocumentationService {
   }
 
   public async getClientDocumentation(vendorId: number, leadId: number) {
-
     // Resolve the vendor's Open status ID dynamically
     const clientDocumentationStatus = await prisma.statusTypeMaster.findFirst({
       where: {
@@ -118,7 +121,9 @@ export class ClientDocumentationService {
     });
 
     if (!docType) {
-      throw new Error("Document type (Client Documentation) not found for this vendor");
+      throw new Error(
+        "Document type (Client Documentation) not found for this vendor"
+      );
     }
 
     // 3. Filter documents of this type
@@ -147,15 +152,17 @@ export class ClientDocumentationService {
       documents: [],
       message: "Additional client documentation uploaded successfully",
     };
-  
+
     // 1. Get Document Type (Type 11)
     const docType = await prisma.documentTypeMaster.findFirst({
       where: { vendor_id: data.vendor_id, tag: "Type 11" },
     });
     if (!docType) {
-      throw new Error("Document type (Client Documentation) not found for this vendor");
+      throw new Error(
+        "Document type (Client Documentation) not found for this vendor"
+      );
     }
-  
+
     // 2. Upload each document → outside transaction
     for (const doc of data.documents) {
       const sanitizedName = sanitizeFilename(doc.originalname);
@@ -165,7 +172,7 @@ export class ClientDocumentationService {
         data.lead_id,
         sanitizedName
       );
-  
+
       const docEntry = await prisma.leadDocuments.create({
         data: {
           doc_og_name: doc.originalname,
@@ -177,32 +184,37 @@ export class ClientDocumentationService {
           vendor_id: data.vendor_id,
         },
       });
-  
+
       response.documents.push(docEntry);
     }
-  
+
     // ❌ Do NOT update status_id here
     return response;
   }
-  
-  public async getLeadsWithStatusClientDocumentation(vendorId: number, userId: number) {
+
+  public async getLeadsWithStatusClientDocumentation(
+    vendorId: number,
+    userId: number
+  ) {
     // 1. Resolve status ID dynamically for Type 6
     const clientDocStatus = await prisma.statusTypeMaster.findFirst({
       where: { vendor_id: vendorId, tag: "Type 6" },
       select: { id: true },
     });
-  
+
     if (!clientDocStatus) {
-      throw new Error(`Client Documentation status (Type 6) not found for vendor ${vendorId}`);
+      throw new Error(
+        `Client Documentation status (Type 6) not found for vendor ${vendorId}`
+      );
     }
-  
+
     // 2. Check if user is admin
     const creator = await prisma.userMaster.findUnique({
       where: { id: userId },
       include: { user_type: true },
     });
     const isAdmin = creator?.user_type?.user_type?.toLowerCase() === "admin";
-  
+
     // ============= Admin Flow =============
     if (isAdmin) {
       return prisma.leadMaster.findMany({
@@ -210,19 +222,20 @@ export class ClientDocumentationService {
           vendor_id: vendorId,
           is_deleted: false,
           status_id: clientDocStatus.id,
+          activity_status: { in: ["onGoing", "lostApproval"] }, // ✅ allow both
         },
         include: this.defaultIncludes(),
         orderBy: { created_at: Prisma.SortOrder.desc },
       });
     }
-  
+
     // ============= Non-Admin Flow =============
     // Leads via LeadUserMapping
     const mappedLeads = await prisma.leadUserMapping.findMany({
       where: { vendor_id: vendorId, user_id: userId, status: "active" },
       select: { lead_id: true },
     });
-  
+
     // Leads via UserLeadTask
     const taskLeads = await prisma.userLeadTask.findMany({
       where: {
@@ -231,23 +244,29 @@ export class ClientDocumentationService {
       },
       select: { lead_id: true },
     });
-  
+
     // ✅ Union
-    const leadIds = [...new Set([...mappedLeads.map(m => m.lead_id), ...taskLeads.map(t => t.lead_id)])];
+    const leadIds = [
+      ...new Set([
+        ...mappedLeads.map((m) => m.lead_id),
+        ...taskLeads.map((t) => t.lead_id),
+      ]),
+    ];
     if (!leadIds.length) return [];
-  
+
     return prisma.leadMaster.findMany({
       where: {
         id: { in: leadIds },
         vendor_id: vendorId,
         is_deleted: false,
         status_id: clientDocStatus.id,
+        activity_status: { in: ["onGoing", "lostApproval"] }, // ✅ allow both
       },
       include: this.defaultIncludes(),
       orderBy: { created_at: Prisma.SortOrder.desc },
     });
   }
-  
+
   // ✅ Common include
   private defaultIncludes() {
     return {
@@ -259,7 +278,9 @@ export class ClientDocumentationService {
       assignedTo: { select: { id: true, user_name: true } },
       assignedBy: { select: { id: true, user_name: true } },
       productMappings: {
-        select: { productType: { select: { id: true, type: true, tag: true } } },
+        select: {
+          productType: { select: { id: true, type: true, tag: true } },
+        },
       },
       leadProductStructureMapping: {
         select: { productStructure: { select: { id: true, type: true } } },
@@ -285,5 +306,4 @@ export class ClientDocumentationService {
       },
     };
   }
-  
 }
