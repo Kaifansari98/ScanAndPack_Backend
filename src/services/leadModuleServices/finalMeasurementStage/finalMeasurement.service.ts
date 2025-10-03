@@ -297,7 +297,7 @@ export class FinalMeasurementService {
       where: {
         id: leadId,
         vendor_id: vendorId,
-        status_id: finalMeasurementStatus.id, // ✅ Final Measurement stage
+        // status_id: finalMeasurementStatus.id, // ✅ Final Measurement stage
       },
       include: {
         documents: true, // we'll filter after fetch

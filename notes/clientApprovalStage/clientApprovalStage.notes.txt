@@ -1,0 +1,136 @@
+1. Client Approval API
+
+POST /client-approval/vendorId/:vendorId/leadId/:leadId
+
+Params
+vendorId → Vendor’s ID (URL param)
+leadId → Lead’s ID (URL param)
+
+Body
+account_id → Account ID (required)
+client_id → Client ID (required)
+created_by → User ID who is performing the action (required)
+assign_lead_to → Backend user ID to whom the lead is assigned (required)
+advance_payment_date → Date of advance payment (optional)
+amount_paid → Amount paid (optional)
+payment_text → Remarks for payment (optional)
+
+Files →
+approvalScreenshots (required) → Client approval screenshots (images only, at least 1 required) 
+payment_files (optional) → Payment proof files (images only, optional)
+
+_____________________________________________________________________________________________________________
+
+🛠 Workflow (Step by Step)
+
+1. Validate inputs
+
+Must have leadId, vendorId, account_id, client_id, created_by, and assign_lead_to.
+Must have at least one approval screenshot.
+If any required field/file is missing → return 400 Bad Request.
+
+2. Upload approval screenshots
+
+Loops over each screenshot.
+Sanitizes filename.
+Uploads to Wasabi (S3 bucket).
+Saves metadata in DB → leadDocuments table with doc_type_id = Type 12 (Client Approval Documents).
+Adds entries to response.screenshots.
+
+3. Update lead stage
+
+Fetches status ID for Client Approval stage (Type 7).
+Updates leadMaster row:
+advance_payment_date (if provided).
+status_id = Client Approval.
+Updates updated_at + updated_by.
+
+4. Handle payment info (optional)
+Finds paymentType = client_approval_payment (Type 3).
+If payment_files uploaded:
+Uploads to Wasabi.
+Saves metadata in leadDocuments.
+Takes first uploaded file’s ID as reference for paymentInfo.
+Creates paymentInfo record with:
+amount (if provided).
+payment_text.
+payment_file_id.
+
+5. Ledger entry (optional)
+Creates row in ledger table:
+leadId, vendorId, accountId, clientId.
+amount (if provided).
+payment_date = advance_payment_date (if provided).
+type = credit.
+
+6. LeadUserMapping entry
+
+Creates new row in leadUserMapping:
+account_id, lead_id, vendor_id.
+user_id = assign_lead_to (from body).
+type = backend.
+status = active.
+created_by = created_by (from body).
+
+_____________________________________________________________________________________________________________
+
+6. Response
+If everything succeeds, API returns:
+
+{
+  "success": true,
+  "message": "Client approval stage submitted successfully",
+  "data": {
+    "screenshots": [
+      { "id": 1, "doc_sys_name": "approval1.png", ... }
+    ],
+    "paymentInfo": {
+      "id": 10,
+      "amount": 5000,
+      "payment_text": "Advance paid",
+      "payment_file_id": 22
+    },
+    "ledger": {
+      "id": 15,
+      "amount": 5000,
+      "type": "credit",
+      "payment_date": "2025-10-02T10:00:00.000Z"
+    },
+    "leadUserMapping": {
+      "id": 5,
+      "user_id": 101,
+      "status": "active",
+      "type": "backend"
+    }
+  }
+}
+
+_____________________________________________________________________________________________________________
+
+🔑 In short
+
+Used when a client approves a lead.
+Approval screenshots → mandatory.
+Assigning lead to backend user → mandatory.
+Moves lead into Client Approval stage.
+Optionally: uploads payment proofs, creates payment info, adds ledger entry.
+Always creates a LeadUserMapping row to assign the lead to a backend user.
+
+_____________________________________________________________________________________________________________
+
+- Mandatory fields
+
+leadId (param)
+vendorId (param)
+account_id (body)
+client_id (body)
+created_by (body)
+approvalScreenshots (at least 1 file)
+assign_lead_to (body → because required for LeadUserMapping)
+
+- Optional fields
+
+advance_payment_date
+amount_paid
+payment_text
+payment_files

@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
 import { BookingStageService } from "../../../services/bookingStage/bookingStage.service";
-import { CreateBookingStageDto } from "../../../types/booking-stage.dto";
-import logger from "../../../utils/logger";
+import {
+  AddPaymentDto,
+  CreateBookingStageDto,
+} from "../../../types/booking-stage.dto";
+import logger, { log } from "../../../utils/logger";
 
 export class BookingStageController {
   private bookingStageService = new BookingStageService();
@@ -65,21 +68,17 @@ export class BookingStageController {
       };
 
       const result = await this.bookingStageService.createBookingStage(dto);
-      res
-        .status(201)
-        .json({
-          success: true,
-          message: "Booking stage completed",
-          data: result,
-        });
+      res.status(201).json({
+        success: true,
+        message: "Booking stage completed",
+        data: result,
+      });
     } catch (error: any) {
       console.error("[BookingStageController] Error:", error);
-      res
-        .status(500)
-        .json({
-          success: false,
-          message: error.message || "Internal server error",
-        });
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
     }
   };
 
@@ -101,13 +100,11 @@ export class BookingStageController {
       const finalDocuments = files?.final_documents || [];
 
       if (!finalDocuments || finalDocuments.length === 0) {
-        res
-          .status(400)
-          .json({
-            success: false,
-            message:
-              "[BOOKING STAGE] At least one file must be uploaded of finalDocuments",
-          });
+        res.status(400).json({
+          success: false,
+          message:
+            "[BOOKING STAGE] At least one file must be uploaded of finalDocuments",
+        });
         return;
       }
 
@@ -120,21 +117,17 @@ export class BookingStageController {
       };
 
       const result = await this.bookingStageService.addBookingStageFiles(dto);
-      res
-        .status(201)
-        .json({
-          success: true,
-          message: "Final documents uploaded successfully",
-          data: result,
-        });
+      res.status(201).json({
+        success: true,
+        message: "Final documents uploaded successfully",
+        data: result,
+      });
     } catch (error: any) {
       console.error("[BookingStageController] Error adding files:", error);
-      res
-        .status(500)
-        .json({
-          success: false,
-          message: error.message || "Internal server error",
-        });
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
     }
   };
 
@@ -266,21 +259,94 @@ export class BookingStageController {
       };
 
       const result = await this.bookingStageService.editBookingStage(dto);
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "Booking stage updated",
-          data: result,
-        });
+      res.status(200).json({
+        success: true,
+        message: "Booking stage updated",
+        data: result,
+      });
     } catch (error: any) {
       console.error("[BookingStageController] Edit Error:", error);
-      res
-        .status(500)
-        .json({
-          success: false,
-          message: error.message || "Internal server error",
-        });
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public addPayment = async (req: Request, res: Response) => {
+    try {
+      const {
+        lead_id,
+        account_id,
+        vendor_id,
+        client_id,
+        created_by,
+        amount,
+        payment_text,
+        payment_date,
+      } = req.body;
+
+      if (
+        !lead_id ||
+        !account_id ||
+        !vendor_id ||
+        !client_id ||
+        !created_by ||
+        !amount ||
+        !payment_text ||
+        !payment_date
+      ) {
+        res
+          .status(400)
+          .json({ success: false, message: "Missing required fields" });
+        return;
+      }
+
+      const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+      const payment_file = files?.payment_file?.[0];
+
+      const dto: AddPaymentDto = {
+        lead_id: parseInt(lead_id),
+        account_id: parseInt(account_id),
+        vendor_id: parseInt(vendor_id),
+        client_id: parseInt(client_id),
+        created_by: parseInt(created_by),
+        amount: parseFloat(amount),
+        payment_text,
+        payment_date,
+        payment_file,
+      };
+
+      const result = await this.bookingStageService.addPayment(dto);
+
+      res.status(201).json({ success: true, data: result });
+    } catch (error: any) {
+      console.error("[AddPaymentController] Error:", error);
+      res.status(500).json({ success: false, message: error.message });
+    }
+  };
+
+  public getPayments = async (req: Request, res: Response) => {
+    // 👈 arrow fn preserves `this`
+    try {
+      const leadId = parseInt(req.params.leadId);
+      const vendorId = parseInt(req.query.vendorId as string);
+
+      if (!leadId || !vendorId) {
+        res
+          .status(400)
+          .json({ success: false, message: "Missing leadId or vendorId" });
+        return;
+      }
+
+      const result = await this.bookingStageService.getPaymentsByLead(
+        leadId,
+        vendorId
+      );
+      res.json({ success: true, ...result });
+    } catch (error: any) {
+      logger.error("[PaymentController] Error", { error: error.message });
+      res.status(500).json({ success: false, message: error.message });
     }
   };
 }

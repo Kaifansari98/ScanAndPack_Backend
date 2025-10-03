@@ -1,5 +1,8 @@
 import { prisma } from "../../prisma/client";
-import { CreateBookingStageDto } from "../../types/booking-stage.dto";
+import {
+  AddPaymentDto,
+  CreateBookingStageDto,
+} from "../../types/booking-stage.dto";
 import { GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 import wasabi, { generateSignedUrl } from "../../utils/wasabiClient";
 import { sanitizeFilename } from "../../utils/sanitizeFilename";
@@ -253,11 +256,13 @@ export class BookingStageService {
 
         const bookingStatusId = bookingStatus.id;
 
-        // 4. Update LeadMaster final_booking_amt
+        // 4. Update LeadMaster total_project_amount
         await tx.leadMaster.update({
           where: { id: data.lead_id },
           data: {
-            final_booking_amt: data.finalBookingAmount,
+            total_project_amount: data.finalBookingAmount,
+            booking_amount: data.bookingAmount, // ➕ new field
+            pending_amount: data.finalBookingAmount - data.bookingAmount, // ➕ new field
             status_id: Number(bookingStatusId),
           },
         });
@@ -401,7 +406,7 @@ export class BookingStageService {
     return {
       leadId: lead.id,
       name: `${lead.firstname} ${lead.lastname}`,
-      finalBookingAmount: lead.final_booking_amt,
+      finalBookingAmount: lead.total_project_amount,
       vendorId: lead.vendor_id,
       documents: documentsWithUrls,
       payments: await Promise.all(
@@ -728,7 +733,7 @@ export class BookingStageService {
       if (data.finalBookingAmount !== undefined) {
         const lead = await tx.leadMaster.update({
           where: { id: data.lead_id },
-          data: { final_booking_amt: data.finalBookingAmount },
+          data: { total_project_amount: data.finalBookingAmount },
         });
         response.updatedFields.leadMaster = lead;
       }
@@ -845,5 +850,184 @@ export class BookingStageService {
 
       return response;
     });
+  }
+
+  public async addPayment(data: AddPaymentDto) {
+    return await prisma.$transaction(async (tx) => {
+      // 1. Fetch lead
+      const lead = await tx.leadMaster.findUnique({
+        where: { id: data.lead_id },
+      });
+      if (!lead) throw new Error("Lead not found");
+
+      const pendingAmount = lead.pending_amount ?? 0;
+
+      // 2. Validate pending amount
+      if (data.amount > pendingAmount) {
+        throw new Error(
+          `Payment exceeds pending amount. Pending: ${pendingAmount}`
+        );
+      }
+
+      // 3. Resolve payment type (e.g. Type 4 = Additional Payment)
+      const paymentType = await tx.paymentTypeMaster.findFirst({
+        where: { vendor_id: data.vendor_id, tag: "Type 4" },
+      });
+      if (!paymentType) {
+        throw new Error("Payment type (Additional Payment) not found");
+      }
+
+      // 4. Upload file if exists
+      let paymentFileId: number | null = null;
+      if (data.payment_file) {
+        const sanitizedName = sanitizeFilename(data.payment_file.originalname);
+        const s3Key = `additional-payments/${data.vendor_id}/${
+          data.lead_id
+        }/${Date.now()}-${sanitizedName}`;
+
+        await wasabi.send(
+          new PutObjectCommand({
+            Bucket: process.env.WASABI_BUCKET_NAME!,
+            Key: s3Key,
+            Body: data.payment_file.buffer,
+            ContentType: data.payment_file.mimetype,
+          })
+        );
+
+        const document = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: data.payment_file.originalname,
+            doc_sys_name: s3Key,
+            created_by: data.created_by,
+            doc_type_id: paymentType.id,
+            account_id: data.account_id,
+            lead_id: data.lead_id,
+            vendor_id: data.vendor_id,
+          },
+        });
+
+        paymentFileId = document.id;
+      }
+
+      // 5. Insert into PaymentInfo
+      const payment = await tx.paymentInfo.create({
+        data: {
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          vendor_id: data.vendor_id,
+          created_by: data.created_by,
+          amount: data.amount,
+          payment_text: data.payment_text, // ✅ from payload
+          payment_file_id: paymentFileId, // optional
+          payment_date: new Date(data.payment_date), // ✅ from payload
+          payment_type_id: paymentType.id,
+        },
+      });
+
+      // 6. Insert into Ledger
+      const ledger = await tx.ledger.create({
+        data: {
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          client_id: data.client_id,
+          vendor_id: data.vendor_id,
+          created_by: data.created_by,
+          amount: data.amount,
+          payment_date: new Date(data.payment_date), // ✅ from payload
+          type: "credit",
+        },
+      });
+
+      // 7. Update only pending_amount
+      await tx.leadMaster.update({
+        where: { id: data.lead_id },
+        data: {
+          pending_amount: { decrement: data.amount },
+        },
+      });
+
+      return {
+        message: "Payment recorded successfully",
+        payment,
+        ledger,
+      };
+    });
+  }
+
+  public async getPaymentsByLead(leadId: number, vendorId: number) {
+    try {
+      // 1. Fetch finance info
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: leadId },
+        select: {
+          total_project_amount: true,
+          pending_amount: true,
+          booking_amount: true,
+        },
+      });
+
+      if (!lead) {
+        throw new Error(`Lead with id ${leadId} not found`);
+      }
+
+      // 2. Fetch payment logs
+      const payments = await prisma.paymentInfo.findMany({
+        where: { lead_id: leadId, vendor_id: vendorId },
+        orderBy: { created_at: "desc" },
+        include: {
+          createdBy: {
+            select: {
+              id: true,
+              user_name: true,
+            },
+          },
+        },
+      });
+
+      // 3. Map response with signed URL if payment_file_id exists
+      const paymentLogs = [];
+      for (const p of payments) {
+        let signedUrl: string | null = null;
+
+        if (p.payment_file_id) {
+          const doc = await prisma.leadDocuments.findUnique({
+            where: { id: p.payment_file_id },
+          });
+          if (doc?.doc_sys_name) {
+            signedUrl = await generateSignedUrl(
+              doc.doc_sys_name,
+              3600,
+              "inline"
+            );
+          }
+        }
+
+        paymentLogs.push({
+          id: p.id,
+          amount: p.amount,
+          payment_text: p.payment_text,
+          payment_date: p.payment_date,
+          entry_date: p.created_at,
+          entered_by_id: p.createdBy.id,
+          entered_by: p.createdBy.user_name,
+          payment_file_id: p.payment_file_id,
+          payment_file: signedUrl,
+        });
+      }
+
+      return {
+        project_finance: {
+          total_project_amount: lead.total_project_amount,
+          pending_amount: lead.pending_amount,
+          booking_amount: lead.booking_amount,
+        },
+        payment_logs: paymentLogs,
+      };
+    } catch (error: any) {
+      logger.error("[PaymentService] getPaymentsByLead error", {
+        error: error.message,
+      });
+      throw error;
+    }
   }
 }
