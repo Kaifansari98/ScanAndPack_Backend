@@ -40,4 +40,15 @@ bookingStageRouter.get(
 
 bookingStageRouter.put("/edit", bookingStageController.editBookingStage);
 
+bookingStageRouter.post(
+  "/add-additional-payment",
+  upload.fields([{ name: "payment_file", maxCount: 1 }]),
+  bookingStageController.addPayment
+);
+
+bookingStageRouter.get(
+  "/payment-records/leadId/:leadId/payments",
+  bookingStageController.getPayments
+);
+
 export default bookingStageRouter;

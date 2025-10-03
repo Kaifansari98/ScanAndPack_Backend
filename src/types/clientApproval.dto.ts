@@ -4,6 +4,7 @@ export interface ClientApprovalDto {
     account_id: number;
     client_id: number;
     created_by: number;
+    assign_lead_to: number;
   
     // Step 1 - Approval Screenshot
     approvalScreenshots: Express.Multer.File[];

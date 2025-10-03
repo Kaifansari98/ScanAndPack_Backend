@@ -33,7 +33,7 @@ export class LeadStatsService {
 
       const userType = user.user_type.user_type.toLowerCase();
 
-      if (userType === "sales-executive") {
+      if (userType === "sales-executive" || userType === "site-supervisor") {
         // ✅ Leads from LeadUserMapping
         const mappedLeads = await prisma.leadUserMapping.findMany({
           where: { vendor_id: vendorId, user_id: userId, status: "active" },

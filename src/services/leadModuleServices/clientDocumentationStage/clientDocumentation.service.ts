@@ -101,7 +101,7 @@ export class ClientDocumentationService {
       where: {
         id: leadId,
         vendor_id: vendorId,
-        status_id: clientDocumentationStatus.id, // ✅ Client Documentation stage
+        // status_id: clientDocumentationStatus.id, // ✅ Client Documentation stage
       },
       include: {
         documents: true,

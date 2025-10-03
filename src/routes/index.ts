@@ -29,6 +29,7 @@ import { finalMeasurementRouter } from './finalMeasurementStage/finalMeasurement
 import ClientDocumentationRouter from './clientDocumentationRoutes/clientDocumentation.routes';
 import taskRouter from './task/task.routes';
 import leadActivityStatusRouter from './leadModuleRoutes/leadActivityStatus.routes';
+import { clientApprovalRouter } from './clientApprovalStage/clientApproval.routes';
 
 const router = Router();
 
@@ -64,5 +65,7 @@ router.use("/leads/client-documentation", ClientDocumentationRouter);
 router.use("/leads/tasks", taskRouter);
 
 router.use("/leads/lead-activity-status", leadActivityStatusRouter);
+
+router.use("/leads/client-approval", clientApprovalRouter);
 
 export { router };

@@ -283,7 +283,7 @@ export class FinalMeasurementService {
     const finalMeasurementStatus = await prisma.statusTypeMaster.findFirst({
       where: {
         vendor_id: vendorId,
-        tag: "Type 5", // ✅ Open status
+        tag: "Type 6", // ✅ Open status
       },
       select: { id: true },
     });
@@ -297,7 +297,7 @@ export class FinalMeasurementService {
       where: {
         id: leadId,
         vendor_id: vendorId,
-        status_id: finalMeasurementStatus.id, // ✅ Final Measurement stage
+        // status_id: finalMeasurementStatus.id, // ✅ Final Measurement stage
       },
       include: {
         documents: true, // we'll filter after fetch
@@ -319,22 +319,16 @@ export class FinalMeasurementService {
     const measurementDocType = docTypes.find((d: any) => d.tag === "Type 9");
     const sitePhotoType = docTypes.find((d: any) => d.tag === "Type 10");
 
-    // Measurement doc (single)
-    const measurementDoc = lead.documents.find(
-      (d: any) => d.doc_type_id === measurementDocType?.id
+    // Measurement docs (multiple)
+    const measurementDocs = await Promise.all(
+      lead.documents
+        .filter((d: any) => d.doc_type_id === measurementDocType?.id)
+        .map(async (doc: any) => ({
+          ...doc,
+          signedUrl: await generateSignedUrl(doc.doc_sys_name, 3600, "inline"),
+        }))
     );
 
-    let measurementDocWithUrl = null;
-    if (measurementDoc) {
-      measurementDocWithUrl = {
-        ...measurementDoc,
-        signedUrl: await generateSignedUrl(
-          measurementDoc.doc_sys_name,
-          3600,
-          "inline"
-        ),
-      };
-    }
 
     // Site photos (multiple)
     const sitePhotos = await Promise.all(
@@ -351,7 +345,7 @@ export class FinalMeasurementService {
       vendor_id: lead.vendor_id,
       final_desc_note: lead.final_desc_note,
       status_id: lead.status_id,
-      measurementDoc: measurementDocWithUrl,
+      measurementDocs, 
       sitePhotos,
     };
   }

@@ -66,6 +66,26 @@ export const uploadFinalMeasurement = multer({
   },
 });
 
+export const uploadClientApproval = multer({
+  storage: multer.memoryStorage(), // ✅ keep file in memory, don't auto-upload
+  limits: {
+    fileSize: parseInt(process.env.MAX_FILE_SIZE_MB || "5") * 1024 * 1024, // default 5MB
+  },
+  fileFilter: (req, file, cb) => {
+    const allowedMimeTypes = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/gif",
+    ];
+    if (allowedMimeTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error(`Only image files are allowed! Received: ${file.mimetype}`));
+    }
+  },
+});
+
 export const uploadClientDocumentation = multer({
   storage: multer.memoryStorage(), // ✅ keep file in memory
   limits: {
@@ -107,7 +127,6 @@ export const uploadClientDocumentation = multer({
     }
   },
 });
-
 
 export const uploadDesigns = multer({
   storage: multer.memoryStorage(),
