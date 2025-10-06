@@ -63,6 +63,48 @@ export class LeadActivityStatusService {
         });
       }
 
+      // 4️⃣ Insert into LeadDetailedLogs (Audit Trail)
+      let actionMessage = "";
+
+      if (status === ActivityStatus.onHold) {
+        const formattedDate = new Date(dueDate!).toLocaleDateString("en-IN", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        });
+        actionMessage = `Lead has been put On Hold till ${formattedDate}.`;
+      } else if (status === ActivityStatus.lostApproval) {
+        actionMessage = `Lead has been sent for Lost Approval.`;
+      } else if (status === ActivityStatus.lost) {
+        actionMessage = `Lead has been marked as Lost.`;
+      }
+
+      // 👇 Append remark (if provided)
+      if (remark && remark.trim() !== "") {
+        actionMessage += ` — Remark: ${remark.trim()}`;
+      }
+
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          action: actionMessage,
+          action_type: "UPDATE",
+          created_by: createdBy,
+          created_at: new Date(),
+        },
+      });
+
+      logger.info(
+        "✅ LeadDetailedLogs entry created for activity status change",
+        {
+          leadId,
+          status,
+          actionMessage,
+        }
+      );
+
       logger.info("Lead activity status updated", { leadId, vendorId, status });
       return lead;
     });
@@ -82,6 +124,7 @@ export class LeadActivityStatusService {
     }
 
     return await prisma.$transaction(async (tx) => {
+      // 1️⃣ Update LeadMaster
       const lead = await tx.leadMaster.update({
         where: { id: leadId, vendor_id: vendorId },
         data: {
@@ -91,6 +134,7 @@ export class LeadActivityStatusService {
         },
       });
 
+      // 2️⃣ Insert into LeadActivityStatusLog
       await tx.leadActivityStatusLog.create({
         data: {
           vendor_id: vendorId,
@@ -101,6 +145,31 @@ export class LeadActivityStatusService {
           activity_status_remark: remark,
           created_by: createdBy,
         },
+      });
+
+      // 3️⃣ Build action message dynamically with remark
+      let actionMessage = "Lead has been reverted to Active.";
+      if (remark && remark.trim() !== "") {
+        actionMessage += ` — Remark: ${remark.trim()}`;
+      }
+
+      // 4️⃣ Insert into LeadDetailedLogs (Audit Trail)
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          action: actionMessage,
+          action_type: "UPDATE",
+          created_by: createdBy,
+          created_at: new Date(),
+        },
+      });
+
+      logger.info("✅ LeadDetailedLogs entry created for revert to Active", {
+        leadId,
+        vendorId,
+        actionMessage,
       });
 
       logger.info("Lead activity status reverted to onGoing", {

@@ -1,30 +1,30 @@
 import { Request, Response } from "express";
-import { 
-  createLeadService, 
-  getLeadsByVendor, 
-  getLeadsByVendorAndUser, 
-  getSiteSupervisorByVendor, 
+import {
+  createLeadService,
+  getLeadsByVendor,
+  getLeadsByVendorAndUser,
+  getSiteSupervisorByVendor,
   softDeleteLead,
-  updateLeadService 
+  updateLeadService,
+  verifyUserTokenService,
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
-import { 
+import {
   createLeadSchema,
   validateUpdateLeadInput,
-  validateLeadAssignmentInput 
+  validateLeadAssignmentInput,
 } from "../../../validations/leadValidation";
 import { ApiResponse } from "../../../utils/apiResponse";
-import { 
-  getSalesExecutivesByVendor, 
-  getSalesExecutiveById, 
+import {
+  getSalesExecutivesByVendor,
+  getSalesExecutiveById,
   assignLeadToUser,
   getLeadById,
-  editTaskISMService
+  editTaskISMService,
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import { prisma } from "../../../prisma/client";
 import logger from "../../../utils/logger";
 
 export class LeadController {
-
   /**
    * Helper method to explain access levels
    */
@@ -45,7 +45,7 @@ export class LeadController {
    */
   async createLead(req: Request, res: Response): Promise<Response> {
     logger.info("[CONTROLLER] createLead called");
-  
+
     try {
       const files = (req.files as Express.MulterS3.File[]) || [];
       const { vendor_id } = req.body;
@@ -60,26 +60,36 @@ export class LeadController {
       });
 
       if (!openStatus) {
-        throw new Error(`Open status (Type 1) not found for vendor ${vendor_id}`);
+        throw new Error(
+          `Open status (Type 1) not found for vendor ${vendor_id}`
+        );
       }
-  
+
       const payload = {
         ...req.body,
-        site_type_id: req.body.site_type_id ? Number(req.body.site_type_id) : undefined,
+        site_type_id: req.body.site_type_id
+          ? Number(req.body.site_type_id)
+          : undefined,
         status_id: openStatus.id, // <-- use openStatus' id here
         source_id: Number(req.body.source_id),
         vendor_id: Number(req.body.vendor_id),
         created_by: Number(req.body.created_by),
         assign_to: req.body.assign_to ? Number(req.body.assign_to) : undefined,
-        assigned_by: req.body.assigned_by ? Number(req.body.assigned_by) : undefined,
-        product_types: req.body.product_types ? [].concat(req.body.product_types) : undefined,
-        product_structures: req.body.product_structures ? [].concat(req.body.product_structures) : undefined,
+        assigned_by: req.body.assigned_by
+          ? Number(req.body.assigned_by)
+          : undefined,
+        product_types: req.body.product_types
+          ? [].concat(req.body.product_types)
+          : undefined,
+        product_structures: req.body.product_structures
+          ? [].concat(req.body.product_structures)
+          : undefined,
         initial_site_measurement_date: req.body.initial_site_measurement_date
-        ? new Date(req.body.initial_site_measurement_date)
-        : undefined,
+          ? new Date(req.body.initial_site_measurement_date)
+          : undefined,
         site_map_link: req.body.site_map_link || null,
       };
-  
+
       const { error, value } = createLeadSchema.validate(payload);
       if (error) {
         logger.warn("Validation failed", { details: error.details });
@@ -92,7 +102,7 @@ export class LeadController {
           })),
         });
       }
-  
+
       if (files.length > 10) {
         logger.warn("Too many files uploaded", { count: files.length });
         return res.status(400).json({
@@ -101,10 +111,10 @@ export class LeadController {
           details: "Maximum 10 files allowed",
         });
       }
-  
+
       // Pass raw files to the service (supports Multer S3 files)
       const result = await createLeadService(value, files);
-  
+
       return res.status(201).json({
         success: true,
         message: "Lead created successfully",
@@ -114,19 +124,23 @@ export class LeadController {
         },
       });
     } catch (error: any) {
-      logger.error("[ERROR] createLead failed", { error: error.message, stack: error.stack });
+      logger.error("[ERROR] createLead failed", {
+        error: error.message,
+        stack: error.stack,
+      });
       console.error("[ERROR] createLead:", error);
       return res.status(500).json({
         success: false,
         error: "Internal server error",
-        details: process.env.NODE_ENV === "development" ? error.message : undefined,
+        details:
+          process.env.NODE_ENV === "development" ? error.message : undefined,
       });
     }
   }
 
   /**
-     * Fetch all leads for a specific vendor (admin access)
-     */
+   * Fetch all leads for a specific vendor (admin access)
+   */
   async fetchLeadsByVendor(req: Request, res: Response): Promise<Response> {
     try {
       const vendorId = parseInt(req.params.vendorId);
@@ -148,27 +162,32 @@ export class LeadController {
    * - Admins/Super-admins: See all vendor leads
    * - Other roles: Only see leads created by them
    */
-  fetchLeadsByVendorAndUser = async (req: Request, res: Response): Promise<Response> => {
+  fetchLeadsByVendorAndUser = async (
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
     try {
       const vendorId = parseInt(req.params.vendorId);
       const userId = parseInt(req.params.userId);
 
       // Validate parameters
       if (isNaN(vendorId) || vendorId <= 0) {
-        return res.status(400).json({ 
+        return res.status(400).json({
           success: false,
-          error: "Invalid vendorId provided" 
+          error: "Invalid vendorId provided",
         });
       }
 
       if (isNaN(userId) || userId <= 0) {
-        return res.status(400).json({ 
+        return res.status(400).json({
           success: false,
-          error: "Invalid userId provided" 
+          error: "Invalid userId provided",
         });
       }
 
-      console.log(`[CONTROLLER] Fetching leads for vendor ${vendorId} and user ${userId}`);
+      console.log(
+        `[CONTROLLER] Fetching leads for vendor ${vendorId} and user ${userId}`
+      );
 
       const result = await getLeadsByVendorAndUser(vendorId, userId);
 
@@ -183,14 +202,19 @@ export class LeadController {
             user_role: result.userInfo.role,
             can_view_all_leads: result.userInfo.canViewAllLeads,
             user_info: result.userInfo.userData,
-            filter_applied: result.userInfo.role === "sales-executive" ? "created_by_or_assigned_to" : "all_vendor_leads",
+            filter_applied:
+              result.userInfo.role === "sales-executive"
+                ? "created_by_or_assigned_to"
+                : "all_vendor_leads",
             access_explanation: this.getAccessExplanation(result.userInfo.role),
           },
         },
       };
 
-      console.log(`[CONTROLLER] Successfully fetched ${result.leads.length} leads for ${result.userInfo.role}`);
-      
+      console.log(
+        `[CONTROLLER] Successfully fetched ${result.leads.length} leads for ${result.userInfo.role}`
+      );
+
       return res.status(200).json(response);
     } catch (error: any) {
       console.error("[CONTROLLER] fetchLeadsByVendorAndUser error:", error);
@@ -213,10 +237,11 @@ export class LeadController {
       return res.status(500).json({
         success: false,
         error: "Failed to fetch leads",
-        details: process.env.NODE_ENV === "development" ? error.message : undefined,
+        details:
+          process.env.NODE_ENV === "development" ? error.message : undefined,
       });
     }
-  }
+  };
 
   // Controller method to fetch a single lead by ID
   fetchLeadById = async (req: Request, res: Response): Promise<Response> => {
@@ -227,27 +252,29 @@ export class LeadController {
 
       // Validate parameters
       if (isNaN(leadId) || leadId <= 0) {
-        return res.status(400).json({ 
+        return res.status(400).json({
           success: false,
-          error: "Invalid leadId provided" 
+          error: "Invalid leadId provided",
         });
       }
 
       if (isNaN(userId) || userId <= 0) {
-        return res.status(400).json({ 
+        return res.status(400).json({
           success: false,
-          error: "Invalid userId provided" 
+          error: "Invalid userId provided",
         });
       }
 
       if (isNaN(vendorId) || vendorId <= 0) {
-        return res.status(400).json({ 
+        return res.status(400).json({
           success: false,
-          error: "Invalid vendorId provided" 
+          error: "Invalid vendorId provided",
         });
       }
 
-      console.log(`[CONTROLLER] Fetching lead ${leadId} for user ${userId} in vendor ${vendorId}`);
+      console.log(
+        `[CONTROLLER] Fetching lead ${leadId} for user ${userId} in vendor ${vendorId}`
+      );
 
       const result = await getLeadById(leadId, userId, vendorId);
 
@@ -261,14 +288,19 @@ export class LeadController {
             user_role: result.userInfo.role,
             can_view_all_leads: result.userInfo.canViewAllLeads,
             user_info: result.userInfo.userData,
-            access_type: result.userInfo.role === "sales-executive" ? "created_by_or_assigned_to" : "all_vendor_leads",
+            access_type:
+              result.userInfo.role === "sales-executive"
+                ? "created_by_or_assigned_to"
+                : "all_vendor_leads",
             access_explanation: this.getAccessExplanation(result.userInfo.role),
           },
         },
       };
 
-      console.log(`[CONTROLLER] Successfully fetched lead ${leadId} for ${result.userInfo.role}`);
-      
+      console.log(
+        `[CONTROLLER] Successfully fetched lead ${leadId} for ${result.userInfo.role}`
+      );
+
       return res.status(200).json(response);
     } catch (error: any) {
       console.error("[CONTROLLER] fetchLeadById error:", error);
@@ -291,17 +323,19 @@ export class LeadController {
       if (error.message.includes("Lead not found or access denied")) {
         return res.status(404).json({
           success: false,
-          error: "Lead not found or you don't have permission to view this lead",
+          error:
+            "Lead not found or you don't have permission to view this lead",
         });
       }
 
       return res.status(500).json({
         success: false,
         error: "Failed to fetch lead",
-        details: process.env.NODE_ENV === "development" ? error.message : undefined,
+        details:
+          process.env.NODE_ENV === "development" ? error.message : undefined,
       });
     }
-  }
+  };
 
   /**
    * Soft delete a lead
@@ -316,7 +350,9 @@ export class LeadController {
       }
 
       const lead = await softDeleteLead(Number(id), Number(deletedBy));
-      return res.status(200).json({ message: "Lead deleted successfully", lead });
+      return res
+        .status(200)
+        .json({ message: "Lead deleted successfully", lead });
     } catch (error: any) {
       return res.status(400).json({ message: error.message });
     }
@@ -331,20 +367,19 @@ export class LeadController {
       const updatedBy = parseInt(req.params.userId);
 
       if (!updatedBy || isNaN(updatedBy)) {
-        res.status(400).json(ApiResponse.error('Invalid user ID provided', 400));
+        res
+          .status(400)
+          .json(ApiResponse.error("Invalid user ID provided", 400));
         return;
       }
-      
+
       // Validate leadId
       if (!leadId || isNaN(leadId)) {
-        res.status(400).json(
-          ApiResponse.error(
-            'Invalid lead ID provided',
-            400
-          )
-        );
+        res
+          .status(400)
+          .json(ApiResponse.error("Invalid lead ID provided", 400));
         return;
-      } 
+      }
 
       // Merge updated_by into request body before validation
       const payloadWithUpdatedBy = { ...req.body, updated_by: updatedBy };
@@ -352,25 +387,37 @@ export class LeadController {
       // Validate request body
       const validationResult = validateUpdateLeadInput(payloadWithUpdatedBy);
       if (!validationResult.isValid) {
-        res.status(400).json(
-          ApiResponse.error(
-            'Validation failed',
-            400,
-            validationResult.errors ? validationResult.errors.map((e: any) => `${e.field}: ${e.message}`) : undefined
-          )
-        );
+        res
+          .status(400)
+          .json(
+            ApiResponse.error(
+              "Validation failed",
+              400,
+              validationResult.errors
+                ? validationResult.errors.map(
+                    (e: any) => `${e.field}: ${e.message}`
+                  )
+                : undefined
+            )
+          );
         return;
       }
 
-      console.log("[DEBUG] Controller received update request for lead ID:", leadId);
+      console.log(
+        "[DEBUG] Controller received update request for lead ID:",
+        leadId
+      );
       console.log("[DEBUG] Update payload:", req.body);
 
       // Call service to update lead
-      const result = await updateLeadService(leadId, { ...req.body, updated_by: updatedBy });
+      const result = await updateLeadService(leadId, {
+        ...req.body,
+        updated_by: updatedBy,
+      });
 
       console.log("[INFO] Lead updated successfully:", {
         leadId: result.lead.id,
-        accountId: result.account.id
+        accountId: result.account.id,
       });
 
       res.status(200).json(
@@ -386,104 +433,103 @@ export class LeadController {
               site_address: result.lead.site_address,
               site_map_link: result.lead.site_map_link,
               updated_at: result.lead.updated_at,
-              initial_site_measurement_date: result.lead.initial_site_measurement_date,
+              initial_site_measurement_date:
+                result.lead.initial_site_measurement_date,
             },
             account: {
               id: result.account.id,
               name: result.account.name,
               contact_no: result.account.contact_no,
               email: result.account.email,
-              updated_at: result.account.updated_at
+              updated_at: result.account.updated_at,
             },
             productTypesUpdated: result.productTypesUpdated,
-            productStructuresUpdated: result.productStructuresUpdated
+            productStructuresUpdated: result.productStructuresUpdated,
           },
-          'Lead updated successfully',
+          "Lead updated successfully",
           200
         )
       );
-
     } catch (error: any) {
       console.error("[ERROR] Failed to update lead:", error.message);
       console.error("[ERROR] Stack trace:", error.stack);
 
       // Handle specific error types
-      if (error.message.includes('not found')) {
-        res.status(404).json(
-          ApiResponse.error(
-            error.message,
-            404
-          )
-        );
+      if (error.message.includes("not found")) {
+        res.status(404).json(ApiResponse.error(error.message, 404));
         return;
       }
 
-      if (error.message.includes('already exists')) {
-        res.status(409).json(
-          ApiResponse.error(
-            error.message,
-            409
-          )
-        );
+      if (error.message.includes("already exists")) {
+        res.status(409).json(ApiResponse.error(error.message, 409));
         return;
       }
 
-      if (error.message.includes('Invalid priority') || error.message.includes('not found for vendor')) {
-        res.status(400).json(
-          ApiResponse.error(
-            error.message,
-            400
-          )
-        );
+      if (
+        error.message.includes("Invalid priority") ||
+        error.message.includes("not found for vendor")
+      ) {
+        res.status(400).json(ApiResponse.error(error.message, 400));
         return;
       }
 
       // ✅ Handle invalid date
-      if (error.message.includes('Invalid initial_site_measurement_date')) {
+      if (error.message.includes("Invalid initial_site_measurement_date")) {
         res.status(400).json(ApiResponse.error(error.message, 400));
         return;
       }
 
       // Generic server error
-      res.status(500).json(
-        ApiResponse.error(
-          'An unexpected error occurred while updating the lead',
-          500
-        )
-      );
+      res
+        .status(500)
+        .json(
+          ApiResponse.error(
+            "An unexpected error occurred while updating the lead",
+            500
+          )
+        );
     }
   }
 
   /**
    * Fetch all sales executives for a specific vendor
    */
-  async fetchSalesExecutivesByVendor(req: Request, res: Response): Promise<Response> {
+  async fetchSalesExecutivesByVendor(
+    req: Request,
+    res: Response
+  ): Promise<Response> {
     try {
       const vendorId = parseInt(req.params.vendorId);
 
       // Validate vendorId
       if (isNaN(vendorId) || vendorId <= 0) {
-        return res.status(400).json(
-          ApiResponse.error("Invalid vendor ID provided", 400)
-        );
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid vendor ID provided", 400));
       }
 
-      console.log(`[CONTROLLER] Fetching sales executives for vendor ID: ${vendorId}`);
+      console.log(
+        `[CONTROLLER] Fetching sales executives for vendor ID: ${vendorId}`
+      );
 
       const salesExecutives = await getSalesExecutivesByVendor(vendorId);
 
       // Check if any sales executives were found
       if (salesExecutives.length === 0) {
-        return res.status(200).json(
-          ApiResponse.success(
-            [],
-            "No sales executives found for this vendor",
-            200
-          )
-        );
+        return res
+          .status(200)
+          .json(
+            ApiResponse.success(
+              [],
+              "No sales executives found for this vendor",
+              200
+            )
+          );
       }
 
-      console.log(`[CONTROLLER] Found ${salesExecutives.length} sales executives`);
+      console.log(
+        `[CONTROLLER] Found ${salesExecutives.length} sales executives`
+      );
 
       return res.status(200).json(
         ApiResponse.success(
@@ -498,46 +544,57 @@ export class LeadController {
     } catch (error: any) {
       console.error("[CONTROLLER] fetchSalesExecutivesByVendor error:", error);
 
-      return res.status(500).json(
-        ApiResponse.error(
-          "Failed to fetch sales executives",
-          500,
-          process.env.NODE_ENV === "development" ? error.message : undefined
-        )
-      );
+      return res
+        .status(500)
+        .json(
+          ApiResponse.error(
+            "Failed to fetch sales executives",
+            500,
+            process.env.NODE_ENV === "development" ? error.message : undefined
+          )
+        );
     }
   }
 
   /**
    * Fetch all Site Supervisors for a specific vendor
    */
-  async fetchSiteSupervisorsByVendor(req: Request, res: Response): Promise<Response> {
+  async fetchSiteSupervisorsByVendor(
+    req: Request,
+    res: Response
+  ): Promise<Response> {
     try {
       const vendorId = parseInt(req.params.vendorId);
 
       // Validate vendorId
       if (isNaN(vendorId) || vendorId <= 0) {
-        return res.status(400).json(
-          ApiResponse.error("Invalid vendor ID provided", 400)
-        );
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid vendor ID provided", 400));
       }
 
-      console.log(`[CONTROLLER] Fetching Site Supervisors for vendor ID: ${vendorId}`);
+      console.log(
+        `[CONTROLLER] Fetching Site Supervisors for vendor ID: ${vendorId}`
+      );
 
       const siteSupervisors = await getSiteSupervisorByVendor(vendorId);
 
       // Check if any sales executives were found
       if (siteSupervisors.length === 0) {
-        return res.status(200).json(
-          ApiResponse.success(
-            [],
-            "No site supervisors found for this vendor",
-            200
-          )
-        );
+        return res
+          .status(200)
+          .json(
+            ApiResponse.success(
+              [],
+              "No site supervisors found for this vendor",
+              200
+            )
+          );
       }
 
-      console.log(`[CONTROLLER] Found ${siteSupervisors.length} Site Supervisors`);
+      console.log(
+        `[CONTROLLER] Found ${siteSupervisors.length} Site Supervisors`
+      );
 
       return res.status(200).json(
         ApiResponse.success(
@@ -552,69 +609,84 @@ export class LeadController {
     } catch (error: any) {
       console.error("[CONTROLLER] fetchSiteSupervisorsByVendor error:", error);
 
-      return res.status(500).json(
-        ApiResponse.error(
-          "Failed to fetch Site Supervisors",
-          500,
-          process.env.NODE_ENV === "development" ? error.message : undefined
-        )
-      );
+      return res
+        .status(500)
+        .json(
+          ApiResponse.error(
+            "Failed to fetch Site Supervisors",
+            500,
+            process.env.NODE_ENV === "development" ? error.message : undefined
+          )
+        );
     }
   }
 
   /**
    * Fetch a specific sales executive by ID within a vendor
    */
-  async fetchSalesExecutiveById(req: Request, res: Response): Promise<Response> {
+  async fetchSalesExecutiveById(
+    req: Request,
+    res: Response
+  ): Promise<Response> {
     try {
       const vendorId = parseInt(req.params.vendorId);
       const userId = parseInt(req.params.userId);
 
       // Validate parameters
       if (isNaN(vendorId) || vendorId <= 0) {
-        return res.status(400).json(
-          ApiResponse.error("Invalid vendor ID provided", 400)
-        );
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid vendor ID provided", 400));
       }
 
       if (isNaN(userId) || userId <= 0) {
-        return res.status(400).json(
-          ApiResponse.error("Invalid user ID provided", 400)
-        );
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid user ID provided", 400));
       }
 
-      console.log(`[CONTROLLER] Fetching sales executive ID: ${userId} for vendor: ${vendorId}`);
+      console.log(
+        `[CONTROLLER] Fetching sales executive ID: ${userId} for vendor: ${vendorId}`
+      );
 
       const salesExecutive = await getSalesExecutiveById(vendorId, userId);
 
       if (!salesExecutive) {
-        return res.status(404).json(
-          ApiResponse.error(
-            "Sales executive not found or not authorized for this vendor",
-            404
-          )
-        );
+        return res
+          .status(404)
+          .json(
+            ApiResponse.error(
+              "Sales executive not found or not authorized for this vendor",
+              404
+            )
+          );
       }
 
-      console.log(`[CONTROLLER] Sales executive found: ${salesExecutive.user_name}`);
-
-      return res.status(200).json(
-        ApiResponse.success(
-          salesExecutive,
-          "Sales executive fetched successfully",
-          200
-        )
+      console.log(
+        `[CONTROLLER] Sales executive found: ${salesExecutive.user_name}`
       );
+
+      return res
+        .status(200)
+        .json(
+          ApiResponse.success(
+            salesExecutive,
+            "Sales executive fetched successfully",
+            200
+          )
+        );
     } catch (error: any) {
       console.error("[CONTROLLER] fetchSalesExecutiveById error:", error);
 
-      return res.status(500).json(
-        ApiResponse.error(
-          "Failed to fetch sales executive",
-          500,
-          process.env.NODE_ENV === "development" ? error.message : undefined
-        )
-      );
+      return res
+        .status(500)
+        .json(
+          ApiResponse.error(
+            "Failed to fetch sales executive",
+            500,
+            process.env.NODE_ENV === "development" ? error.message : undefined
+          )
+        );
     }
   }
 
@@ -629,17 +701,17 @@ export class LeadController {
 
       // Validate leadId
       if (isNaN(leadId) || leadId <= 0) {
-        res.status(400).json(
-          ApiResponse.error("Invalid lead ID provided", 400)
-        );
+        res
+          .status(400)
+          .json(ApiResponse.error("Invalid lead ID provided", 400));
         return;
       }
 
       // Validate vendorId
       if (isNaN(vendorId) || vendorId <= 0) {
-        res.status(400).json(
-          ApiResponse.error("Invalid vendor ID provided", 400)
-        );
+        res
+          .status(400)
+          .json(ApiResponse.error("Invalid vendor ID provided", 400));
         return;
       }
 
@@ -650,13 +722,19 @@ export class LeadController {
       // Validate request payload
       const validationResult = validateLeadAssignmentInput(req.body);
       if (!validationResult.isValid) {
-        res.status(400).json(
-          ApiResponse.error(
-            "Validation failed",
-            400,
-            validationResult.errors ? validationResult.errors.map((e: any) => `${e.field}: ${e.message}`) : undefined
-          )
-        );
+        res
+          .status(400)
+          .json(
+            ApiResponse.error(
+              "Validation failed",
+              400,
+              validationResult.errors
+                ? validationResult.errors.map(
+                    (e: any) => `${e.field}: ${e.message}`
+                  )
+                : undefined
+            )
+          );
         return;
       }
 
@@ -664,23 +742,33 @@ export class LeadController {
 
       // Additional validation: ensure assign_to and assign_by are different
       if (assignmentPayload.assign_to === assignmentPayload.assign_by) {
-        res.status(400).json(
-          ApiResponse.error(
-            "assign_to and assign_by cannot be the same user",
-            400
-          )
-        );
+        res
+          .status(400)
+          .json(
+            ApiResponse.error(
+              "assign_to and assign_by cannot be the same user",
+              400
+            )
+          );
         return;
       }
 
       console.log(`[CONTROLLER] Payload validation successful`);
-      console.log(`[CONTROLLER] Assigning lead to user ${assignmentPayload.assign_to} by user ${assignmentPayload.assign_by}`);
+      console.log(
+        `[CONTROLLER] Assigning lead to user ${assignmentPayload.assign_to} by user ${assignmentPayload.assign_by}`
+      );
 
       // Call service to assign lead
-      const result = await assignLeadToUser(leadId, vendorId, assignmentPayload);
+      const result = await assignLeadToUser(
+        leadId,
+        vendorId,
+        assignmentPayload
+      );
 
       console.log(`[CONTROLLER] Lead assignment successful`);
-      console.log(`[CONTROLLER] Lead ${result.lead.id} assigned to ${result.assignedTo.user_name}`);
+      console.log(
+        `[CONTROLLER] Lead ${result.lead.id} assigned to ${result.assignedTo.user_name}`
+      );
 
       res.status(200).json(
         ApiResponse.success(
@@ -718,57 +806,66 @@ export class LeadController {
       console.error("[CONTROLLER] Stack trace:", error.stack);
 
       // Handle specific error types
-      if (error.message.includes("Invalid admin user") || 
-          error.message.includes("insufficient permissions")) {
-        res.status(403).json(
-          ApiResponse.error(
-            "Access denied. Only admin and super-admin users can assign leads",
-            403
-          )
-        );
+      if (
+        error.message.includes("Invalid admin user") ||
+        error.message.includes("insufficient permissions")
+      ) {
+        res
+          .status(403)
+          .json(
+            ApiResponse.error(
+              "Access denied. Only admin and super-admin users can assign leads",
+              403
+            )
+          );
         return;
       }
 
-      if (error.message.includes("Invalid sales executive") || 
-          error.message.includes("not a sales executive")) {
-        res.status(400).json(
-          ApiResponse.error(
-            "Invalid assignment target. User must be an active sales executive",
-            400
-          )
-        );
+      if (
+        error.message.includes("Invalid sales executive") ||
+        error.message.includes("not a sales executive")
+      ) {
+        res
+          .status(400)
+          .json(
+            ApiResponse.error(
+              "Invalid assignment target. User must be an active sales executive",
+              400
+            )
+          );
         return;
       }
 
-      if (error.message.includes("Lead not found") || 
-          error.message.includes("doesn't belong to this vendor")) {
-        res.status(404).json(
-          ApiResponse.error(
-            "Lead not found or doesn't belong to this vendor",
-            404
-          )
-        );
+      if (
+        error.message.includes("Lead not found") ||
+        error.message.includes("doesn't belong to this vendor")
+      ) {
+        res
+          .status(404)
+          .json(
+            ApiResponse.error(
+              "Lead not found or doesn't belong to this vendor",
+              404
+            )
+          );
         return;
       }
 
       if (error.message.includes("already assigned")) {
-        res.status(409).json(
-          ApiResponse.error(
-            error.message,
-            409
-          )
-        );
+        res.status(409).json(ApiResponse.error(error.message, 409));
         return;
       }
 
       // Generic server error
-      res.status(500).json(
-        ApiResponse.error(
-          "An unexpected error occurred while assigning the lead",
-          500,
-          process.env.NODE_ENV === "development" ? error.message : undefined
-        )
-      );
+      res
+        .status(500)
+        .json(
+          ApiResponse.error(
+            "An unexpected error occurred while assigning the lead",
+            500,
+            process.env.NODE_ENV === "development" ? error.message : undefined
+          )
+        );
     }
   }
 
@@ -776,25 +873,30 @@ export class LeadController {
    * Get lead assignment history (optional feature)
    * Shows who assigned leads to whom and when
    */
-  async getLeadAssignmentHistory(req: Request, res: Response): Promise<Response> {
+  async getLeadAssignmentHistory(
+    req: Request,
+    res: Response
+  ): Promise<Response> {
     try {
       const leadId = parseInt(req.params.leadId);
       const vendorId = parseInt(req.params.vendorId);
 
       // Validate parameters
       if (isNaN(leadId) || leadId <= 0) {
-        return res.status(400).json(
-          ApiResponse.error("Invalid lead ID provided", 400)
-        );
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid lead ID provided", 400));
       }
 
       if (isNaN(vendorId) || vendorId <= 0) {
-        return res.status(400).json(
-          ApiResponse.error("Invalid vendor ID provided", 400)
-        );
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid vendor ID provided", 400));
       }
 
-      console.log(`[CONTROLLER] Fetching assignment history for lead ${leadId}`);
+      console.log(
+        `[CONTROLLER] Fetching assignment history for lead ${leadId}`
+      );
 
       // This would require a separate table to track assignment history
       // For now, just return current assignment info
@@ -828,70 +930,91 @@ export class LeadController {
       });
 
       if (!lead) {
-        return res.status(404).json(
-          ApiResponse.error("Lead not found", 404)
-        );
+        return res.status(404).json(ApiResponse.error("Lead not found", 404));
       }
 
       const assignmentInfo = {
         lead_id: lead.id,
         lead_name: `${lead.firstname} ${lead.lastname}`,
         current_assignment: {
-          assigned_to: lead.assignedTo ? {
-            id: lead.assignedTo.id,
-            name: lead.assignedTo.user_name,
-            contact: lead.assignedTo.user_contact,
-            email: lead.assignedTo.user_email,
-          } : null,
-          assigned_by: lead.assignedBy ? {
-            id: lead.assignedBy.id,
-            name: lead.assignedBy.user_name,
-            contact: lead.assignedBy.user_contact,
-            email: lead.assignedBy.user_email,
-          } : null,
+          assigned_to: lead.assignedTo
+            ? {
+                id: lead.assignedTo.id,
+                name: lead.assignedTo.user_name,
+                contact: lead.assignedTo.user_contact,
+                email: lead.assignedTo.user_email,
+              }
+            : null,
+          assigned_by: lead.assignedBy
+            ? {
+                id: lead.assignedBy.id,
+                name: lead.assignedBy.user_name,
+                contact: lead.assignedBy.user_contact,
+                email: lead.assignedBy.user_email,
+              }
+            : null,
           assigned_at: lead.updated_at,
         },
       };
 
-      return res.status(200).json(
-        ApiResponse.success(
-          assignmentInfo,
-          "Lead assignment information retrieved successfully",
-          200
-        )
-      );
+      return res
+        .status(200)
+        .json(
+          ApiResponse.success(
+            assignmentInfo,
+            "Lead assignment information retrieved successfully",
+            200
+          )
+        );
     } catch (error: any) {
       console.error("[CONTROLLER] getLeadAssignmentHistory error:", error);
 
-      return res.status(500).json(
-        ApiResponse.error(
-          "Failed to fetch lead assignment history",
-          500,
-          process.env.NODE_ENV === "development" ? error.message : undefined
-        )
-      );
+      return res
+        .status(500)
+        .json(
+          ApiResponse.error(
+            "Failed to fetch lead assignment history",
+            500,
+            process.env.NODE_ENV === "development" ? error.message : undefined
+          )
+        );
     }
   }
 
   async editTaskISM(req: Request, res: Response): Promise<Response> {
     logger.info("[CONTROLLER] editTaskISM called");
-  
+
     try {
       const leadId = Number(req.params.leadId);
       const taskId = Number(req.params.taskId);
-      const { task_type, due_date, remark, user_id, updated_by, status, closed_at, closed_by } = req.body;
-  
+      const {
+        task_type,
+        due_date,
+        remark,
+        user_id,
+        updated_by,
+        status,
+        closed_at,
+        closed_by,
+      } = req.body;
+
       if (!leadId || !taskId) {
         return res.status(400).json({
           success: false,
           error: "Validation failed",
           details: [
-            !leadId && { field: "leadId", message: "leadId (param) is required" },
-            !taskId && { field: "taskId", message: "taskId (param) is required" },
+            !leadId && {
+              field: "leadId",
+              message: "leadId (param) is required",
+            },
+            !taskId && {
+              field: "taskId",
+              message: "taskId (param) is required",
+            },
           ].filter(Boolean),
         });
       }
-  
+
       const result = await editTaskISMService({
         lead_id: leadId,
         task_id: taskId,
@@ -902,9 +1025,9 @@ export class LeadController {
         updated_by: Number(updated_by),
         status,
         closed_at,
-        closed_by: closed_by ? Number(closed_by) : undefined
+        closed_by: closed_by ? Number(closed_by) : undefined,
       });
-  
+
       return res.status(200).json({
         success: true,
         message: "ISM task updated successfully",
@@ -915,10 +1038,11 @@ export class LeadController {
       return res.status(500).json({
         success: false,
         error: "Internal server error",
-        details: process.env.NODE_ENV === "development" ? error.message : undefined,
+        details:
+          process.env.NODE_ENV === "development" ? error.message : undefined,
       });
     }
-  }  
+  }
 
   verifyUserTokenController = async (req: Request, res: Response) => {
     const { token } = req.params;
