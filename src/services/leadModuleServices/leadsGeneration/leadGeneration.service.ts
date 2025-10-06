@@ -1343,3 +1343,30 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
     return updatedTask;
   });
 };
+
+export const verifyUserTokenService = async (token: string) => {
+  const vendorToken = await prisma.vendorTokens.findUnique({
+    where: { token },
+    include: {
+      vendor: {
+        select: {
+          // id: true,
+          vendor_name: true,
+          primary_contact_name: true,
+          primary_contact_number: true,
+          primary_contact_email: true,
+        },
+      },
+    },
+  });
+
+  if (!vendorToken) {
+    throw new Error("Invalid token");
+  }
+
+  if (new Date(vendorToken.expiry_date) < new Date()) {
+    throw new Error("Token expired");
+  }
+
+  return vendorToken.vendor;
+};
