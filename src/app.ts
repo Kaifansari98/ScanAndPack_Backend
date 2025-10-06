@@ -9,7 +9,8 @@ export const app = express();
 
 const allowedOrigins = [
   'http://localhost:3000',
-  'https://furnix.vloq.com'
+  'https://furnix.vloq.com',
+  'https://cadbid.com'
 ];
 
 app.use(
