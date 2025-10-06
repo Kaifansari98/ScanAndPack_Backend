@@ -65,6 +65,8 @@ model VendorMaster {
   leadUserMappings            LeadUserMapping[]
   userLeadTasks               UserLeadTask[]
   leadActivityStatusLog       LeadActivityStatusLog[]
+  leadDetailedLogs            LeadDetailedLogs[]
+  leadDocumentLogs            LeadDocumentLogs[]
 }
 
 model VendorAddress {
@@ -162,6 +164,9 @@ model UserMaster {
   leadTasksAssigned UserLeadTask[] @relation("LeadTask_User")
   leadTasksCreated  UserLeadTask[] @relation("LeadTask_CreatedBy")
   leadTasksClosed   UserLeadTask[] @relation("LeadTask_ClosedBy")
+
+  leadDetailedLogs LeadDetailedLogs[]
+  leadDocumentLogs LeadDocumentLogs[]
 }
 
 model UserDocument {
@@ -402,6 +407,8 @@ model LeadMaster {
   userMappings                LeadUserMapping[]
   tasks                       UserLeadTask[]
   leadActivityStatusLog       LeadActivityStatusLog[]
+  leadDetailedLogs            LeadDetailedLogs[]
+  leadDocumentLogs            LeadDocumentLogs[]
 
   // ✅ Unique constraints for contact_no and email per vendor
   @@unique([contact_no, vendor_id], name: "unique_contact_per_vendor")
@@ -514,6 +521,8 @@ model AccountMaster {
   leadUserMappings            LeadUserMapping[]
   tasks                       UserLeadTask[]
   leadActivityStatusLog       LeadActivityStatusLog[]
+  leadDetailedLogs            LeadDetailedLogs[]
+  leadDocumentLogs            LeadDocumentLogs[]
 }
 
 model LeadProductMapping {
@@ -567,7 +576,8 @@ model LeadDocuments {
   createdBy UserMaster  @relation("DocumentCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   deletedBy UserMaster? @relation("DocumentDeletedBy", fields: [deleted_by], references: [id])
 
-  paymentInfo PaymentInfo[]
+  paymentInfo      PaymentInfo[]
+  leadDocumentLogs LeadDocumentLogs[]
 }
 
 model ProductStructure {
@@ -812,4 +822,50 @@ model UserLeadTask {
   user      UserMaster  @relation("LeadTask_User", fields: [user_id], references: [id], onDelete: Cascade)
   createdBy UserMaster  @relation("LeadTask_CreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   closedBy  UserMaster? @relation("LeadTask_ClosedBy", fields: [closed_by], references: [id])
+}
+
+enum ActionType {
+  CREATE
+  UPDATE
+  DELETE
+  UPLOAD
+  STATUS_CHANGE
+  OTHER
+}
+
+model LeadDetailedLogs {
+  id          Int        @id @default(autoincrement())
+  vendor_id   Int
+  lead_id     Int
+  account_id  Int
+  action      String
+  action_type ActionType
+  created_at  DateTime   @default(now())
+  created_by  Int
+
+  // Relations
+  vendor  VendorMaster       @relation(fields: [vendor_id], references: [id])
+  lead    LeadMaster         @relation(fields: [lead_id], references: [id])
+  account AccountMaster      @relation(fields: [account_id], references: [id])
+  user    UserMaster         @relation(fields: [created_by], references: [id])
+  docLogs LeadDocumentLogs[]
+}
+
+model LeadDocumentLogs {
+  id           Int      @id @default(autoincrement())
+  vendor_id    Int
+  lead_id      Int
+  account_id   Int
+  doc_id       Int
+  lead_logs_id Int
+  created_at   DateTime @default(now())
+  created_by   Int
+
+  // Relations
+  vendor       VendorMaster    @relation(fields: [vendor_id], references: [id])
+  lead         LeadMaster      @relation(fields: [lead_id], references: [id])
+  account      AccountMaster   @relation(fields: [account_id], references: [id])
+  doc          LeadDocuments   @relation(fields: [doc_id], references: [id])
+  detailed_log LeadDetailedLogs @relation(fields: [lead_logs_id], references: [id])
+  user         UserMaster      @relation(fields: [created_by], references: [id])
 }
