@@ -564,7 +564,7 @@ export const getLeadById = async (leadId: number, userId: number, vendorId: numb
     const lead = await prisma.leadMaster.findFirst({
       where: whereCondition,
       include: {
-        account: true,
+        account: {select: {id: true, name: true}},
         leadProductStructureMapping: { include: { productStructure: true } },
         productMappings: { include: { productType: true } },
         documents: { where: { deleted_at: null } },
@@ -580,8 +580,22 @@ export const getLeadById = async (leadId: number, userId: number, vendorId: numb
 
     if (!lead) throw new Error("Lead not found or access denied");
 
+    // 👇 Add signed URLs for each document
+    const documentsWithUrls = await Promise.all(
+      lead.documents.map(async (doc) => {
+        if (doc.doc_sys_name) {
+          const signedUrl = await generateSignedUrl(doc.doc_sys_name, 3600, "inline");
+          return { ...doc, signedUrl };
+        }
+        return doc;
+      })
+    );
+
     return {
-      lead,
+      lead: {
+        ...lead,
+        documents: documentsWithUrls,
+      },
       userInfo: {
         role: userType,
         canViewAllLeads: ["admin", "super-admin"].includes(userType),
@@ -1328,4 +1342,31 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
 
     return updatedTask;
   });
+};
+
+export const verifyUserTokenService = async (token: string) => {
+  const vendorToken = await prisma.vendorTokens.findUnique({
+    where: { token },
+    include: {
+      vendor: {
+        select: {
+          // id: true,
+          vendor_name: true,
+          primary_contact_name: true,
+          primary_contact_number: true,
+          primary_contact_email: true,
+        },
+      },
+    },
+  });
+
+  if (!vendorToken) {
+    throw new Error("Invalid token");
+  }
+
+  if (new Date(vendorToken.expiry_date) < new Date()) {
+    throw new Error("Token expired");
+  }
+
+  return vendorToken.vendor;
 };

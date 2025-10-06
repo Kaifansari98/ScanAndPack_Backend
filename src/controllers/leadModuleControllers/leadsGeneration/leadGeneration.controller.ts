@@ -920,6 +920,26 @@ export class LeadController {
     }
   }  
 
+  verifyUserTokenController = async (req: Request, res: Response) => {
+    const { token } = req.params;
+    try {
+      const vendor = await verifyUserTokenService(token);
+      return res.json({
+        success: true,
+        data: {
+          // id: vendor.id,
+          name: vendor.vendor_name,
+          email: vendor.primary_contact_email,
+          contact: vendor.primary_contact_number,
+        },
+      });
+    } catch (err: any) {
+      return res.status(400).json({
+        success: false,
+        error: err.message,
+      });
+    }
+  };
 }
 
 // Export a single instance of the controller
