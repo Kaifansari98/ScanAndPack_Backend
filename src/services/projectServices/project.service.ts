@@ -296,7 +296,7 @@ export const createOrUpdateFullProject = async (
   const adminUser = await prisma.userMaster.findFirst({
     where: {
       vendor_id: vendor.id,
-      user_type_id: 1 // assuming 1 = admin
+      user_type_id: 2 // assuming 1 = admin
     },
     orderBy: { created_at: "asc" }
   });
