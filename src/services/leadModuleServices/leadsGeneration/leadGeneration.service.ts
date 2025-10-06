@@ -564,7 +564,7 @@ export const getLeadById = async (leadId: number, userId: number, vendorId: numb
     const lead = await prisma.leadMaster.findFirst({
       where: whereCondition,
       include: {
-        account: true,
+        account: {select: {id: true, name: true}},
         leadProductStructureMapping: { include: { productStructure: true } },
         productMappings: { include: { productType: true } },
         documents: { where: { deleted_at: null } },
@@ -580,8 +580,22 @@ export const getLeadById = async (leadId: number, userId: number, vendorId: numb
 
     if (!lead) throw new Error("Lead not found or access denied");
 
+    // 👇 Add signed URLs for each document
+    const documentsWithUrls = await Promise.all(
+      lead.documents.map(async (doc) => {
+        if (doc.doc_sys_name) {
+          const signedUrl = await generateSignedUrl(doc.doc_sys_name, 3600, "inline");
+          return { ...doc, signedUrl };
+        }
+        return doc;
+      })
+    );
+
     return {
-      lead,
+      lead: {
+        ...lead,
+        documents: documentsWithUrls,
+      },
       userInfo: {
         role: userType,
         canViewAllLeads: ["admin", "super-admin"].includes(userType),
