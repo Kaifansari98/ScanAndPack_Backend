@@ -33,12 +33,12 @@ export class FinalMeasurementService {
     return await prisma.$transaction(
       async (tx: any) => {
         const response: any = {
-          measurementDoc: null,
+          measurementDocs: [],
           sitePhotos: [],
           message: "Final measurement stage completed successfully",
         };
 
-        // 1. Upload Final Measurement Document (Type 9)
+        // 1️⃣ Upload Final Measurement Documents (Type 9)
         const measurementDocType = await tx.documentTypeMaster.findFirst({
           where: { vendor_id: data.vendor_id, tag: "Type 9" },
         });
@@ -47,8 +47,6 @@ export class FinalMeasurementService {
             "Document type (Final Measurement) not found for this vendor"
           );
         }
-
-        response.measurementDocs = [];
 
         for (const doc of data.finalMeasurementDocs) {
           const sanitizedDocName = sanitizeFilename(doc.originalname);
@@ -80,7 +78,7 @@ export class FinalMeasurementService {
           response.measurementDocs.push(measurementDoc);
         }
 
-        // 2. Upload Site Photos (Type 10)
+        // 2️⃣ Upload Site Photos (Type 10)
         const sitePhotoType = await tx.documentTypeMaster.findFirst({
           where: { vendor_id: data.vendor_id, tag: "Type 10" },
         });
@@ -120,52 +118,104 @@ export class FinalMeasurementService {
           response.sitePhotos.push(siteDoc);
         }
 
-        // Resolve the vendor's Open status ID dynamically
-        const clientdocumentationStatus =
-          await prisma.statusTypeMaster.findFirst({
-            where: {
-              vendor_id: data.vendor_id,
-              tag: "Type 6", // ✅ Client documentation
-            },
-            select: { id: true },
-          });
-
-        if (!clientdocumentationStatus) {
+        // 3️⃣ Resolve the vendor’s Client Documentation status (Type 6)
+        const clientDocumentationStatus = await tx.statusTypeMaster.findFirst({
+          where: { vendor_id: data.vendor_id, tag: "Type 6" },
+          select: { id: true },
+        });
+        if (!clientDocumentationStatus) {
           throw new Error(
             `Client documentation status (Type 6) not found for vendor ${data.vendor_id}`
           );
         }
 
-        // 3. Save critical discussion notes + update stage
+        // 4️⃣ Update LeadMaster with notes and new status
         await tx.leadMaster.update({
           where: { id: data.lead_id },
           data: {
             final_desc_note: data.critical_discussion_notes,
-            status_id: clientdocumentationStatus.id,
+            status_id: clientDocumentationStatus.id,
           },
         });
 
-        // 4. Mark related userLeadTask as completed (if exists)
+        // 5️⃣ Mark related Final Measurement task as completed
         await tx.userLeadTask.updateMany({
           where: {
             vendor_id: data.vendor_id,
             lead_id: data.lead_id,
-            task_type: "Final Measurements",
-            status: "open", // or "in_progress" if that’s your flow
+            task_type: "Final Measurement",
+            status: "open",
           },
           data: {
             status: "completed",
-            closed_by: data.created_by, // or user_id if you pass it
+            closed_by: data.created_by,
             closed_at: new Date(),
             updated_by: data.created_by,
             updated_at: new Date(),
           },
         });
 
+        // 6️⃣ Create Action Log Entry
+        const fmCount = response.measurementDocs.length;
+        const spCount = response.sitePhotos.length;
+
+        const pluralFM =
+          fmCount > 1
+            ? "Final Measurement documents have"
+            : "Final Measurement document has";
+        const pluralSP = spCount > 1 ? "Site Photos have" : "Site Photo has";
+
+        let actionMessage = `Final Measurement stage completed successfully — ${fmCount} ${pluralFM} and ${spCount} ${pluralSP} been uploaded successfully.`;
+
+        if (
+          data.critical_discussion_notes &&
+          data.critical_discussion_notes.trim()
+        ) {
+          actionMessage += ` — Remark: ${data.critical_discussion_notes.trim()}`;
+        } else {
+          actionMessage += ` — Remark: No remark provided.`;
+        }
+
+        const detailedLog = await tx.leadDetailedLogs.create({
+          data: {
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            account_id: data.account_id,
+            action: actionMessage,
+            action_type: "CREATE",
+            created_by: data.created_by,
+            created_at: new Date(),
+          },
+        });
+
+        // 7️⃣ Create LeadDocumentLogs
+        const allDocs = [...response.measurementDocs, ...response.sitePhotos];
+        if (allDocs.length > 0) {
+          const docLogsData = allDocs.map((doc: any) => ({
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            account_id: data.account_id,
+            doc_id: doc.id,
+            lead_logs_id: detailedLog.id,
+            created_by: data.created_by,
+            created_at: new Date(),
+          }));
+
+          await tx.leadDocumentLogs.createMany({ data: docLogsData });
+        }
+
+        logger.info("✅ Final Measurement Stage completed", {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          fmCount,
+          spCount,
+          actionMessage,
+        });
+
         return response;
       },
       {
-        timeout: 20000, // 20 seconds
+        timeout: 20000,
       }
     );
   }
@@ -329,7 +379,6 @@ export class FinalMeasurementService {
         }))
     );
 
-
     // Site photos (multiple)
     const sitePhotos = await Promise.all(
       lead.documents
@@ -345,7 +394,7 @@ export class FinalMeasurementService {
       vendor_id: lead.vendor_id,
       final_desc_note: lead.final_desc_note,
       status_id: lead.status_id,
-      measurementDocs, 
+      measurementDocs,
       sitePhotos,
     };
   }
@@ -551,17 +600,17 @@ export class FinalMeasurementService {
     } = value;
 
     return prisma.$transaction(async (tx) => {
-      // 1) Lead (for vendor/account)
+      // 1️⃣ Validate lead
       const lead = await tx.leadMaster.findUnique({
         where: { id: lead_id },
         select: { id: true, vendor_id: true, account_id: true },
       });
       if (!lead) throw new Error(`Lead ${lead_id} not found`);
 
-      // 2) Assignee guard (same vendor)
+      // 2️⃣ Validate assignee
       const assignee = await tx.userMaster.findUnique({
         where: { id: assignee_user_id },
-        select: { id: true, vendor_id: true },
+        select: { id: true, vendor_id: true, user_name: true },
       });
       if (!assignee)
         throw new Error(`Assignee user ${assignee_user_id} not found`);
@@ -571,7 +620,7 @@ export class FinalMeasurementService {
         );
       }
 
-      // 3) Create task (status=open by default)
+      // 3️⃣ Create task
       const task = await tx.userLeadTask.create({
         data: {
           lead_id: lead.id,
@@ -586,7 +635,7 @@ export class FinalMeasurementService {
         },
       });
 
-      // 4) Flip status to "Type 5" — only if NOT Follow Up
+      // 4️⃣ Update lead status (if not Follow Up)
       let updatedLead: {
         id: number;
         account_id: number;
@@ -617,10 +666,48 @@ export class FinalMeasurementService {
         });
       }
 
-      logger.info("[SERVICE] assignTaskFM completed", {
+      // 5️⃣ Create action log
+      let actionMessage = "";
+
+      if (task_type.toLowerCase() === "follow up") {
+        actionMessage = `Lead has been assigned to ${assignee.user_name} for Follow Up.`;
+      } else {
+        actionMessage = `Lead has been assigned to ${assignee.user_name} for Final Measurement.`;
+      }
+
+      // Add due date (formatted)
+      const formattedDate = new Date(due_date).toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
+      actionMessage += ` Due Date: ${formattedDate}.`;
+
+      // Add remark if present
+      if (remark && remark.trim()) {
+        actionMessage += ` — Remark: ${remark.trim()}`;
+      } else {
+        actionMessage += ` — Remark: No remark provided.`;
+      }
+
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: lead.vendor_id,
+          lead_id: lead.id,
+          account_id: lead.account_id,
+          action: actionMessage,
+          action_type: "CREATE",
+          created_by,
+          created_at: new Date(),
+        },
+      });
+
+      logger.info("[SERVICE] Final Measurement task assigned successfully", {
         lead_id: lead.id,
         task_id: task.id,
-        new_status_id: updatedLead.status_id,
+        assignee: assignee.user_name,
+        due_date: formattedDate,
+        remark: remark || "No remark",
       });
 
       return { task, lead: updatedLead };

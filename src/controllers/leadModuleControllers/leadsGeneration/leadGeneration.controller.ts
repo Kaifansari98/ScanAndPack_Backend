@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import {
   createLeadService,
+  getLeadLogsWithDocuments,
   getLeadsByVendor,
   getLeadsByVendorAndUser,
   getSiteSupervisorByVendor,
@@ -1064,6 +1065,42 @@ export class LeadController {
       });
     }
   };
+
+  async getLeadLogsWithDocuments(req: Request, res: Response) {
+    try {
+      const { lead_id, vendor_id } = req.params;
+      const limit = Number(req.query.limit) || 10;
+      const cursor = req.query.cursor ? Number(req.query.cursor) : undefined;
+
+      if (!lead_id || !vendor_id) {
+        return res.status(400).json({
+          success: false,
+          message: "lead_id and vendor_id are required",
+        });
+      }
+
+      const { data, meta } = await getLeadLogsWithDocuments({
+        lead_id: Number(lead_id),
+        vendor_id: Number(vendor_id),
+        limit,
+        cursor,
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Lead logs fetched successfully",
+        data,
+        meta,
+      });
+    } catch (error: any) {
+      logger.error("[LeadLogsController] Error fetching logs:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Failed to fetch lead logs",
+        error: error.message,
+      });
+    }
+  }
 }
 
 // Export a single instance of the controller

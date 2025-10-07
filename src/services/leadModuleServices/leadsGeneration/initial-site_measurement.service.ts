@@ -60,7 +60,7 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
     // 2) Assignee guard (same vendor)
     const assignee = await tx.userMaster.findUnique({
       where: { id: assignee_user_id },
-      select: { id: true, vendor_id: true },
+      select: { id: true, user_name: true, vendor_id: true },
     });
     if (!assignee)
       throw new Error(`Assignee user ${assignee_user_id} not found`);
@@ -113,6 +113,53 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
           vendor_id: true,
           status_id: true,
         },
+      });
+    }
+
+    // 5️⃣ Build action message for LeadDetailedLogs
+    let actionMessage = "";
+    const formattedDate = new Date(due_date).toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+
+    if (task_type === "Initial Site Measurement") {
+      actionMessage = `Lead has been assigned to ${assignee.user_name} for Initial Site Measurement on ${formattedDate}.`;
+    } else if (task_type === "Follow Up") {
+      actionMessage = `Lead has been assigned to ${assignee.user_name} for Follow Up on ${formattedDate}.`;
+    }
+
+    // Append remark if present
+    if (remark && remark.trim() !== "") {
+      actionMessage += ` — Remark: ${remark.trim()}`;
+    }
+
+    // Append remark if present
+    if (remark && remark.trim() !== "") {
+      actionMessage += ` — Remark: ${remark.trim()}`;
+    }
+
+    // 6️⃣ Insert into LeadDetailedLogs
+    if (actionMessage) {
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: lead.vendor_id,
+          lead_id: lead.id,
+          account_id: lead.account_id,
+          action: actionMessage,
+          action_type: "CREATE",
+          created_by,
+          created_at: new Date(),
+        },
+      });
+
+      logger.info("✅ LeadDetailedLogs entry created for ISM task assignment", {
+        lead_id: lead.id,
+        task_id: task.id,
+        task_type,
+        assignee_user_id,
+        actionMessage,
       });
     }
 
@@ -562,6 +609,66 @@ export class PaymentUploadService {
               updated_by: data.user_id,
               updated_at: new Date(),
             },
+          });
+
+          // 8️⃣ Create LeadDetailedLogs + LeadDocumentLogs (Audit Trail)
+          let actionMessage = "";
+
+          // If payment details exist, include them in sentence format
+          if (data.amount && data.payment_date) {
+            const formattedDate = new Date(
+              data.payment_date
+            ).toLocaleDateString("en-IN", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            });
+
+            actionMessage = `Initial Site Measurement amount ₹${data.amount.toLocaleString(
+              "en-IN"
+            )} received on ${formattedDate}. `;
+          }
+
+          // Always append upload success message
+          actionMessage +=
+            "Initial Site Measurements have been uploaded successfully.";
+
+          // Create parent log entry
+          const detailedLog = await tx.leadDetailedLogs.create({
+            data: {
+              vendor_id: data.vendor_id,
+              lead_id: data.lead_id,
+              account_id: data.account_id,
+              action: actionMessage,
+              action_type: "CREATE",
+              created_by: data.created_by,
+              created_at: new Date(),
+            },
+          });
+
+          // Log each document (if any)
+          if (response.documentsUploaded.length > 0) {
+            const docLogsData = response.documentsUploaded.map((doc) => ({
+              vendor_id: data.vendor_id,
+              lead_id: data.lead_id,
+              account_id: data.account_id,
+              doc_id: doc.id,
+              lead_logs_id: detailedLog.id,
+              created_by: data.created_by,
+              created_at: new Date(),
+            }));
+
+            await tx.leadDocumentLogs.createMany({ data: docLogsData });
+
+            logger.info("✅ LeadDocumentLogs created for uploaded documents", {
+              lead_id: data.lead_id,
+              count: docLogsData.length,
+            });
+          }
+
+          logger.info("✅ LeadDetailedLogs entry created for ISM upload", {
+            lead_id: data.lead_id,
+            action: actionMessage,
           });
 
           return response;
@@ -1236,6 +1343,103 @@ export class PaymentUploadService {
               }
             }
           }
+
+          // 6️⃣ Create audit trail logs (LeadDetailedLogs + LeadDocumentLogs)
+          let actionParts: string[] = [];
+
+          // If payment details changed
+          if (
+            data.amount !== undefined ||
+            data.payment_date !== undefined ||
+            data.payment_text !== undefined
+          ) {
+            const amountPart =
+              data.amount !== undefined
+                ? `Amount updated to ₹${data.amount}`
+                : "";
+            const datePart = data.payment_date
+              ? `Payment Date set to ${new Date(
+                  data.payment_date
+                ).toLocaleDateString("en-IN", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })}`
+              : "";
+            const textPart = data.payment_text
+              ? `Remark updated: ${data.payment_text}`
+              : "";
+
+            const details = [amountPart, datePart, textPart]
+              .filter(Boolean)
+              .join(", ");
+            if (details) actionParts.push(details);
+          }
+
+          // If documents were uploaded
+          if (response.documentsUploaded.length > 0) {
+            const sitePhotoCount = response.documentsUploaded.filter(
+              (d) => d.type === "current_site_photo"
+            ).length;
+            const paymentPhotoCount = response.documentsUploaded.filter(
+              (d) => d.type === "payment_detail_photo"
+            ).length;
+
+            if (sitePhotoCount > 0)
+              actionParts.push(
+                `${sitePhotoCount} Current Site Photo${
+                  sitePhotoCount > 1 ? "s" : ""
+                } uploaded`
+              );
+            if (paymentPhotoCount > 0)
+              actionParts.push(
+                `${paymentPhotoCount} Payment Detail Photo${
+                  paymentPhotoCount > 1 ? "s" : ""
+                } uploaded`
+              );
+          }
+
+          // Construct the full action message
+          const actionMessage =
+            actionParts.length > 0
+              ? `Payment details updated successfully — ${actionParts.join(
+                  ", "
+                )}.`
+              : "Payment details updated successfully.";
+
+          // Create LeadDetailedLogs entry
+          const detailedLog = await tx.leadDetailedLogs.create({
+            data: {
+              vendor_id: data.vendor_id,
+              lead_id: data.lead_id,
+              account_id: data.account_id,
+              action: actionMessage,
+              action_type: "UPDATE",
+              created_by: data.updated_by,
+              created_at: new Date(),
+            },
+          });
+
+          // If new documents were uploaded → create mapping logs
+          if (response.documentsUploaded.length > 0) {
+            const docLogsData = response.documentsUploaded.map((doc) => ({
+              vendor_id: data.vendor_id,
+              lead_id: data.lead_id,
+              account_id: data.account_id,
+              doc_id: doc.id,
+              lead_logs_id: detailedLog.id,
+              created_by: data.updated_by,
+              created_at: new Date(),
+            }));
+
+            await tx.leadDocumentLogs.createMany({ data: docLogsData });
+          }
+
+          logger.info("✅ LeadDetailedLogs entry created for payment update", {
+            leadId: data.lead_id,
+            vendorId: data.vendor_id,
+            actionMessage,
+          });
 
           return response;
         },

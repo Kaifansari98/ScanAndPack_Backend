@@ -87,4 +87,6 @@ leadsRouter.patch("/leadId/:leadId/taskId/:taskId/update-assign-ism", leadContro
 
 leadsRouter.get("/vendor-token/:token/verify", leadController.verifyUserTokenController);
 
+leadsRouter.get("/vendorId/:vendor_id/leadId/:lead_id/logs", leadController.getLeadLogsWithDocuments);
+
 export default leadsRouter;

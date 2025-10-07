@@ -278,6 +278,54 @@ export class BookingStageService {
           },
         });
 
+        // 6️⃣ Create audit trail (LeadDetailedLogs + LeadDocumentLogs)
+        const docCount = response.documentsUploaded.length;
+        const hasDocs = docCount > 0;
+
+        let actionMessage = `Booking has been done successfully`;
+
+        if (hasDocs) {
+          actionMessage += ` — Remark: ${docCount} document${
+            docCount > 1 ? "s have" : " has"
+          } been uploaded successfully with it.`;
+        } else {
+          actionMessage += ` — Remark: No documents were uploaded.`;
+        }
+
+        // Create LeadDetailedLogs entry
+        const detailedLog = await tx.leadDetailedLogs.create({
+          data: {
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            account_id: data.account_id,
+            action: actionMessage,
+            action_type: "CREATE",
+            created_by: data.created_by,
+            created_at: new Date(),
+          },
+        });
+
+        // Map uploaded documents to LeadDocumentLogs if any
+        if (hasDocs) {
+          const docLogsData = response.documentsUploaded.map((doc: any) => ({
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            account_id: data.account_id,
+            doc_id: doc.id,
+            lead_logs_id: detailedLog.id,
+            created_by: data.created_by,
+            created_at: new Date(),
+          }));
+
+          await tx.leadDocumentLogs.createMany({ data: docLogsData });
+        }
+
+        logger.info("✅ Booking stage logs created successfully", {
+          leadId: data.lead_id,
+          vendorId: data.vendor_id,
+          actionMessage,
+        });
+
         response.supervisorAssigned = supervisor;
 
         return response;
@@ -300,11 +348,12 @@ export class BookingStageService {
         documentsUploaded: [],
       };
 
-      // 1. Upload Final Documents
+      // 1️⃣ Upload Final Documents
       if (data.finalDocuments && data.finalDocuments.length > 0) {
         const finalDocType = await tx.documentTypeMaster.findFirst({
           where: { vendor_id: data.vendor_id, tag: "Type 8" }, // Final Documents
         });
+
         if (!finalDocType)
           throw new Error("Final Document type not found for this vendor");
 
@@ -314,6 +363,7 @@ export class BookingStageService {
             data.lead_id
           }/${Date.now()}-${sanitizedName}`;
 
+          // Upload to Wasabi
           await wasabi.send(
             new PutObjectCommand({
               Bucket: process.env.WASABI_BUCKET_NAME!,
@@ -323,6 +373,7 @@ export class BookingStageService {
             })
           );
 
+          // Create LeadDocuments entry
           const document = await tx.leadDocuments.create({
             data: {
               doc_og_name: file.originalname,
@@ -343,6 +394,53 @@ export class BookingStageService {
           });
         }
       }
+
+      // 2️⃣ Log action if files were uploaded
+      const uploadedCount = response.documentsUploaded.length;
+      const plural = uploadedCount > 1 ? "documents have" : "document has";
+
+      let actionMessage = "";
+
+      if (uploadedCount > 0) {
+        actionMessage = `${uploadedCount} ${plural} been added successfully in Booking Stage.`;
+      } else {
+        actionMessage = `No new Documents were uploaded.`;
+      }
+
+      // Create LeadDetailedLogs entry
+      const detailedLog = await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          action: actionMessage,
+          action_type: "CREATE",
+          created_by: data.created_by,
+          created_at: new Date(),
+        },
+      });
+
+      // Create LeadDocumentLogs if applicable
+      if (uploadedCount > 0) {
+        const docLogsData = response.documentsUploaded.map((doc: any) => ({
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: data.created_by,
+          created_at: new Date(),
+        }));
+
+        await tx.leadDocumentLogs.createMany({ data: docLogsData });
+      }
+
+      logger.info("✅ Booking stage documents added", {
+        lead_id: data.lead_id,
+        vendor_id: data.vendor_id,
+        uploadedCount,
+        actionMessage,
+      });
 
       return response;
     });
@@ -854,7 +952,14 @@ export class BookingStageService {
 
   public async addPayment(data: AddPaymentDto) {
     return await prisma.$transaction(async (tx) => {
-      // 1. Fetch lead
+      const response: any = {
+        payment: null,
+        ledger: null,
+        documentsUploaded: [],
+        message: "Payment recorded successfully",
+      };
+
+      // 1️⃣ Fetch Lead
       const lead = await tx.leadMaster.findUnique({
         where: { id: data.lead_id },
       });
@@ -862,22 +967,24 @@ export class BookingStageService {
 
       const pendingAmount = lead.pending_amount ?? 0;
 
-      // 2. Validate pending amount
+      // 2️⃣ Validate Amount
       if (data.amount > pendingAmount) {
         throw new Error(
           `Payment exceeds pending amount. Pending: ${pendingAmount}`
         );
       }
 
-      // 3. Resolve payment type (e.g. Type 4 = Additional Payment)
+      // 3️⃣ Resolve Payment Type (Type 4 = Additional Payment)
       const paymentType = await tx.paymentTypeMaster.findFirst({
         where: { vendor_id: data.vendor_id, tag: "Type 4" },
       });
       if (!paymentType) {
-        throw new Error("Payment type (Additional Payment) not found");
+        throw new Error(
+          "Payment type (Additional Payment) not found for this vendor"
+        );
       }
 
-      // 4. Upload file if exists
+      // 4️⃣ Upload Payment Proof (Optional)
       let paymentFileId: number | null = null;
       if (data.payment_file) {
         const sanitizedName = sanitizeFilename(data.payment_file.originalname);
@@ -907,9 +1014,10 @@ export class BookingStageService {
         });
 
         paymentFileId = document.id;
+        response.documentsUploaded.push(document);
       }
 
-      // 5. Insert into PaymentInfo
+      // 5️⃣ Record Payment
       const payment = await tx.paymentInfo.create({
         data: {
           lead_id: data.lead_id,
@@ -917,14 +1025,15 @@ export class BookingStageService {
           vendor_id: data.vendor_id,
           created_by: data.created_by,
           amount: data.amount,
-          payment_text: data.payment_text, // ✅ from payload
-          payment_file_id: paymentFileId, // optional
-          payment_date: new Date(data.payment_date), // ✅ from payload
+          payment_text: data.payment_text,
+          payment_file_id: paymentFileId,
+          payment_date: new Date(data.payment_date),
           payment_type_id: paymentType.id,
         },
       });
+      response.payment = payment;
 
-      // 6. Insert into Ledger
+      // 6️⃣ Record Ledger Entry
       const ledger = await tx.ledger.create({
         data: {
           lead_id: data.lead_id,
@@ -933,12 +1042,13 @@ export class BookingStageService {
           vendor_id: data.vendor_id,
           created_by: data.created_by,
           amount: data.amount,
-          payment_date: new Date(data.payment_date), // ✅ from payload
+          payment_date: new Date(data.payment_date),
           type: "credit",
         },
       });
+      response.ledger = ledger;
 
-      // 7. Update only pending_amount
+      // 7️⃣ Update Lead Pending Amount
       await tx.leadMaster.update({
         where: { id: data.lead_id },
         data: {
@@ -946,11 +1056,61 @@ export class BookingStageService {
         },
       });
 
-      return {
-        message: "Payment recorded successfully",
-        payment,
-        ledger,
-      };
+      // 8️⃣ Create Action Log
+      const formattedDate = new Date(data.payment_date).toLocaleDateString(
+        "en-IN",
+        {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        }
+      );
+
+      let actionMessage = `Additional payment of ₹${data.amount.toLocaleString()} received successfully on ${formattedDate}. — Payment Details: ${
+        data.payment_text
+      }`;
+
+      if (response.documentsUploaded.length > 0) {
+        const docCount = response.documentsUploaded.length;
+        const plural = docCount > 1 ? "documents have" : "document has";
+        actionMessage += ` — ${docCount} payment proof ${plural} been uploaded successfully.`;
+      }
+
+      const detailedLog = await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          action: actionMessage,
+          action_type: "CREATE",
+          created_by: data.created_by,
+          created_at: new Date(),
+        },
+      });
+
+      // 9️⃣ Map Uploaded Documents to LeadDocumentLogs
+      if (response.documentsUploaded.length > 0) {
+        const docLogs = response.documentsUploaded.map((doc: any) => ({
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: data.created_by,
+          created_at: new Date(),
+        }));
+
+        await tx.leadDocumentLogs.createMany({ data: docLogs });
+      }
+
+      logger.info("✅ Additional payment recorded", {
+        lead_id: data.lead_id,
+        vendor_id: data.vendor_id,
+        amount: data.amount,
+        payment_date: data.payment_date,
+      });
+
+      return response;
     });
   }
 

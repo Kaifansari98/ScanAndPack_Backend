@@ -3,6 +3,7 @@ import { uploadToWasabClientDocumentation } from "../../../utils/wasabiClient";
 import { sanitizeFilename } from "../../../utils/sanitizeFilename";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { Prisma } from "@prisma/client";
+import logger from "../../../utils/logger";
 
 interface ClientDocumentationDto {
   lead_id: number;
@@ -14,72 +15,128 @@ interface ClientDocumentationDto {
 
 export class ClientDocumentationService {
   public async createClientDocumentationStage(data: ClientDocumentationDto) {
-    const response: any = {
-      documents: [],
-      message: "Client documentation stage completed successfully",
-    };
+    return await prisma.$transaction(async (tx: any) => {
+      const response: any = {
+        documents: [],
+        message: "Client documentation stage completed successfully",
+      };
 
-    // 1. Get Document Type (Type 11)
-    const docType = await prisma.documentTypeMaster.findFirst({
-      where: { vendor_id: data.vendor_id, tag: "Type 11" },
-    });
-    if (!docType) {
-      throw new Error(
-        "Document type (Client Documentation) not found for this vendor"
-      );
-    }
+      // 1️⃣ Get Document Type (Type 11)
+      const docType = await tx.documentTypeMaster.findFirst({
+        where: { vendor_id: data.vendor_id, tag: "Type 11" },
+      });
+      if (!docType) {
+        throw new Error(
+          "Document type (Client Documentation) not found for this vendor"
+        );
+      }
 
-    // 2. Upload each document → outside transaction
-    for (const doc of data.documents) {
-      const sanitizedName = sanitizeFilename(doc.originalname);
-      const sysName = await uploadToWasabClientDocumentation(
-        doc.buffer,
-        data.vendor_id,
-        data.lead_id,
-        sanitizedName
-      );
+      // 2️⃣ Upload each document
+      for (const doc of data.documents) {
+        const sanitizedName = sanitizeFilename(doc.originalname);
+        const sysName = await uploadToWasabClientDocumentation(
+          doc.buffer,
+          data.vendor_id,
+          data.lead_id,
+          sanitizedName
+        );
 
-      const docEntry = await prisma.leadDocuments.create({
-        data: {
-          doc_og_name: doc.originalname,
-          doc_sys_name: sysName,
-          created_by: data.created_by,
-          doc_type_id: docType.id,
-          account_id: data.account_id,
-          lead_id: data.lead_id,
+        const docEntry = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: doc.originalname,
+            doc_sys_name: sysName,
+            created_by: data.created_by,
+            doc_type_id: docType.id,
+            account_id: data.account_id,
+            lead_id: data.lead_id,
+            vendor_id: data.vendor_id,
+          },
+        });
+
+        response.documents.push(docEntry);
+      }
+
+      // 3️⃣ Resolve the vendor's Client Approval status ID dynamically
+      const clientApprovalStatus = await tx.statusTypeMaster.findFirst({
+        where: {
           vendor_id: data.vendor_id,
+          tag: "Type 7", // ✅ Client Approval
+        },
+        select: { id: true },
+      });
+
+      if (!clientApprovalStatus) {
+        throw new Error(
+          `Client Approval status (Type 7) not found for vendor ${data.vendor_id}`
+        );
+      }
+
+      // 4️⃣ Update lead status (move to Client Approval)
+      await tx.leadMaster.update({
+        where: { id: data.lead_id },
+        data: {
+          status_id: clientApprovalStatus.id,
+          updated_at: new Date(),
+          updated_by: data.created_by,
         },
       });
 
-      response.documents.push(docEntry);
-    }
+      // 5️⃣ Action logging
+      const docCount = response.documents.length;
+      const plural = docCount > 1 ? "documents have" : "document has";
+      const actionMessage = `Client Documentation stage completed successfully — ${docCount} Client Documentation ${plural} been uploaded successfully.`;
 
-    // Resolve the vendor's Client Approval status ID dynamically
-    const clientDocumentationStatus = await prisma.statusTypeMaster.findFirst({
-      where: {
+      // Create LeadDetailedLogs entry
+      const detailedLog = await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          action: actionMessage,
+          action_type: "CREATE",
+          created_by: data.created_by,
+          created_at: new Date(),
+        },
+      });
+
+      // Create LeadDocumentLogs entries
+      if (response.documents.length > 0) {
+        const docLogsData = response.documents.map((doc: any) => ({
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: data.created_by,
+          created_at: new Date(),
+        }));
+
+        await tx.leadDocumentLogs.createMany({ data: docLogsData });
+      }
+
+      // 6️⃣ Add second action log for status movement
+      const statusAction = `Lead has been moved to Client Approval stage.`;
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          action: statusAction,
+          action_type: "UPDATE",
+          created_by: data.created_by,
+          created_at: new Date(),
+        },
+      });
+
+      logger.info("✅ Client Documentation Stage completed", {
+        lead_id: data.lead_id,
         vendor_id: data.vendor_id,
-        tag: "Type 7", // ✅ Client Approval status
-      },
-      select: { id: true },
+        document_count: docCount,
+        actionMessage,
+      });
+
+      return response;
     });
-
-    if (!clientDocumentationStatus) {
-      throw new Error(
-        `Client Approval status (Type 7) not found for vendor ${data.vendor_id}`
-      );
-    }
-
-    // 3. Update lead stage (Client Documentation → Client Approval)
-    await prisma.leadMaster.update({
-      where: { id: data.lead_id },
-      data: {
-        status_id: clientDocumentationStatus.id,
-        updated_at: new Date(),
-        updated_by: data.created_by,
-      },
-    });
-
-    return response;
   }
 
   public async getClientDocumentation(vendorId: number, leadId: number) {
@@ -148,48 +205,90 @@ export class ClientDocumentationService {
   }
 
   public async addMoreClientDocumentation(data: ClientDocumentationDto) {
-    const response: any = {
-      documents: [],
-      message: "Additional client documentation uploaded successfully",
-    };
+    return await prisma.$transaction(async (tx: any) => {
+      const response: any = {
+        documents: [],
+        message: "Additional client documentation uploaded successfully",
+      };
 
-    // 1. Get Document Type (Type 11)
-    const docType = await prisma.documentTypeMaster.findFirst({
-      where: { vendor_id: data.vendor_id, tag: "Type 11" },
-    });
-    if (!docType) {
-      throw new Error(
-        "Document type (Client Documentation) not found for this vendor"
-      );
-    }
+      // 1️⃣ Get Document Type (Type 11)
+      const docType = await tx.documentTypeMaster.findFirst({
+        where: { vendor_id: data.vendor_id, tag: "Type 11" },
+      });
 
-    // 2. Upload each document → outside transaction
-    for (const doc of data.documents) {
-      const sanitizedName = sanitizeFilename(doc.originalname);
-      const sysName = await uploadToWasabClientDocumentation(
-        doc.buffer,
-        data.vendor_id,
-        data.lead_id,
-        sanitizedName
-      );
+      if (!docType) {
+        throw new Error(
+          "Document type (Client Documentation) not found for this vendor"
+        );
+      }
 
-      const docEntry = await prisma.leadDocuments.create({
+      // 2️⃣ Upload documents to Wasabi and create entries
+      for (const doc of data.documents) {
+        const sanitizedName = sanitizeFilename(doc.originalname);
+        const sysName = await uploadToWasabClientDocumentation(
+          doc.buffer,
+          data.vendor_id,
+          data.lead_id,
+          sanitizedName
+        );
+
+        const document = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: doc.originalname,
+            doc_sys_name: sysName,
+            created_by: data.created_by,
+            doc_type_id: docType.id,
+            account_id: data.account_id,
+            lead_id: data.lead_id,
+            vendor_id: data.vendor_id,
+          },
+        });
+
+        response.documents.push(document);
+      }
+
+      // 3️⃣ Create Action Log
+      const docCount = response.documents.length;
+      const plural = docCount > 1 ? "documents have" : "document has";
+      const actionMessage = `${docCount} additional Client Documentation ${plural} been uploaded successfully.`;
+
+      // Create LeadDetailedLogs entry
+      const detailedLog = await tx.leadDetailedLogs.create({
         data: {
-          doc_og_name: doc.originalname,
-          doc_sys_name: sysName,
-          created_by: data.created_by,
-          doc_type_id: docType.id,
-          account_id: data.account_id,
-          lead_id: data.lead_id,
           vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          action: actionMessage,
+          action_type: "CREATE",
+          created_by: data.created_by,
+          created_at: new Date(),
         },
       });
 
-      response.documents.push(docEntry);
-    }
+      // Create LeadDocumentLogs mapping
+      if (response.documents.length > 0) {
+        const docLogsData = response.documents.map((doc: any) => ({
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: data.created_by,
+          created_at: new Date(),
+        }));
 
-    // ❌ Do NOT update status_id here
-    return response;
+        await tx.leadDocumentLogs.createMany({ data: docLogsData });
+      }
+
+      logger.info("✅ Additional Client Documentation uploaded", {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        docCount,
+        actionMessage,
+      });
+
+      return response;
+    });
   }
 
   public async getLeadsWithStatusClientDocumentation(

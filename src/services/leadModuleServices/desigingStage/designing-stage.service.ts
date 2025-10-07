@@ -358,45 +358,109 @@ export class DesigingStage {
   }
 
   public static async uploadQuotation(data: {
-    fileBuffer: Buffer;
-    originalName: string;
+    fileBuffer: Buffer | Buffer[];
+    originalName: string | string[];
     vendorId: number;
     leadId: number;
     userId: number;
     accountId: number;
   }) {
-    const sysName = await uploadToWasabi(
-      data.fileBuffer,
-      data.vendorId,
-      data.leadId,
-      data.originalName
-    );
+    return prisma.$transaction(async (tx) => {
+      // Normalize files so we always have an array of { buffer, originalName: string }
+      const files =
+        Array.isArray(data.fileBuffer) && Array.isArray(data.originalName)
+          ? data.fileBuffer.map((buf, idx) => ({
+              buffer: buf,
+              originalName: data.originalName[idx] ?? `file_${idx + 1}`,
+            }))
+          : Array.isArray(data.fileBuffer)
+          ? data.fileBuffer.map((buf, idx) => ({
+              buffer: buf,
+              originalName:
+                typeof data.originalName === "string"
+                  ? data.originalName
+                  : data.originalName[idx] ?? `file_${idx + 1}`,
+            }))
+          : [
+              {
+                buffer: data.fileBuffer as Buffer,
+                originalName:
+                  typeof data.originalName === "string"
+                    ? data.originalName
+                    : data.originalName[0] ?? "file_1",
+              },
+            ];
 
-    // 2. Fetch correct doc type for "quotation" using tag + vendor
-    const quotationDocType = await prisma.documentTypeMaster.findFirst({
-      where: {
-        vendor_id: data.vendorId,
-        tag: "Type 5", // ← quotation doc type tag
-      },
-    });
+      // 1️⃣ Get doc type for quotations
+      const quotationDocType = await tx.documentTypeMaster.findFirst({
+        where: { vendor_id: data.vendorId, tag: "Type 5" },
+      });
 
-    if (!quotationDocType) {
-      throw new Error("Document type for quotation not found for this vendor");
-    }
+      if (!quotationDocType) {
+        throw new Error(
+          "Document type for quotation not found for this vendor"
+        );
+      }
 
-    const doc = await prisma.leadDocuments.create({
-      data: {
-        doc_og_name: data.originalName,
-        doc_sys_name: sysName,
+      const uploadedDocs: any[] = [];
+
+      // 2️⃣ Upload to Wasabi + insert into LeadDocuments
+      for (const file of files) {
+        const sysName = await uploadToWasabi(
+          file.buffer,
+          data.vendorId,
+          data.leadId,
+          file.originalName
+        );
+
+        const document = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: file.originalName, // ✅ always string now
+            doc_sys_name: sysName,
+            vendor_id: data.vendorId,
+            lead_id: data.leadId,
+            account_id: data.accountId,
+            doc_type_id: quotationDocType.id,
+            created_by: data.userId,
+          },
+        });
+
+        uploadedDocs.push(document);
+      }
+
+      // 3️⃣ Build Action message
+      const count = uploadedDocs.length;
+      const plural = count > 1 ? "Quotations have" : "Quotation has";
+      const actionMessage = `${count} ${plural} been uploaded successfully.`;
+
+      // 4️⃣ Create LeadDetailedLogs
+      const detailedLog = await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: data.vendorId,
+          lead_id: data.leadId,
+          account_id: data.accountId,
+          action: actionMessage,
+          action_type: "CREATE",
+          created_by: data.userId,
+          created_at: new Date(),
+        },
+      });
+
+      // 5️⃣ Create LeadDocumentLogs
+      const docLogsData = uploadedDocs.map((doc) => ({
         vendor_id: data.vendorId,
         lead_id: data.leadId,
         account_id: data.accountId,
-        doc_type_id: quotationDocType.id, // ✅ design quotation type
+        doc_id: doc.id,
+        lead_logs_id: detailedLog.id,
         created_by: data.userId,
-      },
-    });
+        created_at: new Date(),
+      }));
 
-    return doc;
+      await tx.leadDocumentLogs.createMany({ data: docLogsData });
+
+      return uploadedDocs;
+    });
   }
 
   public static async getDesignQuotationDocuments(
