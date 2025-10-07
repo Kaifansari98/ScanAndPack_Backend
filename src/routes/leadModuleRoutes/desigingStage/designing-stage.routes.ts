@@ -20,8 +20,8 @@ DesigningStageRouter.get(
 );
 
 DesigningStageRouter.post(
-    "/upload-quoation",
-    upload.single("file"), // file field in form-data
+    "/upload-quotation",
+    upload.array("files"), // file field in form-data
     (req, res) => DesigingStageController.upload(req, res)
 );
 
@@ -46,7 +46,6 @@ DesigningStageRouter.post(
   uploadDesigns.array("files", 10), // multiple files
   (req, res) => DesigingStageController.uploadDesigns(req, res)
 );
-
 
 // PUT /api/leads/design-meeting/:meetingId
 // Form-data: vendorId, userId, date?, desc?, files[]?

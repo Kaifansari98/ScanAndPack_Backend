@@ -1776,3 +1776,85 @@ export const verifyUserTokenService = async (token: string) => {
 
   return vendorToken.vendor;
 };
+
+export const getLeadLogsWithDocuments = async (params: {
+  lead_id: number;
+  vendor_id: number;
+  limit?: number;
+  cursor?: number;
+}) => {
+  const { lead_id, vendor_id, limit = 10, cursor } = params;
+
+  const logs = await prisma.leadDetailedLogs.findMany({
+    where: { lead_id, vendor_id },
+    include: {
+      user: {
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+        },
+      },
+      docLogs: {
+        include: {
+          doc: {
+            select: {
+              id: true,
+              doc_sys_name: true,
+              doc_og_name: true,
+            },
+          },
+        },
+      },
+    },
+    orderBy: { id: "desc" }, // stable chronological order
+    take: limit + 1, // fetch one extra record to check "hasNextPage"
+    ...(cursor && { cursor: { id: cursor }, skip: 1 }), // skip cursor itself
+  });
+
+  const hasMore = logs.length > limit;
+  const data = hasMore ? logs.slice(0, limit) : logs;
+
+  // Generate signed URLs efficiently in parallel
+  const formattedLogs = await Promise.all(
+    data.map(async (log) => {
+      const docs = await Promise.all(
+        log.docLogs.map(async (docLog) => {
+          const doc = docLog.doc;
+          const signedUrl = await generateSignedUrl(
+            doc.doc_sys_name,
+            3600,
+            "inline"
+          );
+          return {
+            id: doc.id,
+            original_name: doc.doc_og_name,
+            signedUrl,
+          };
+        })
+      );
+
+      return {
+        id: log.id,
+        action: log.action,
+        action_type: log.action_type,
+        created_at: log.created_at,
+        created_by: {
+          id: log.user.id,
+          name: log.user.user_name,
+          email: log.user.user_email,
+        },
+        docs,
+      };
+    })
+  );
+
+  return {
+    data: formattedLogs,
+    meta: {
+      hasMore,
+      nextCursor: hasMore ? data[data.length - 1].id : null,
+      count: formattedLogs.length,
+    },
+  };
+};
