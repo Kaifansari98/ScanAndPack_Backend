@@ -1,7 +1,4 @@
 -- CreateEnum
-CREATE TYPE "public"."LeadPriority" AS ENUM ('urgent', 'high', 'standard', 'low');
-
--- CreateEnum
 CREATE TYPE "public"."DocumentType" AS ENUM ('site_photo');
 
 -- CreateTable
@@ -15,8 +12,6 @@ CREATE TABLE "public"."LeadMaster" (
     "email" TEXT NOT NULL,
     "site_address" TEXT NOT NULL,
     "site_type_id" INTEGER NOT NULL,
-    "priority" "public"."LeadPriority" NOT NULL,
-    "billing_name" TEXT,
     "source_id" INTEGER NOT NULL,
     "archetech_name" TEXT NOT NULL,
     "designer_remark" TEXT NOT NULL,

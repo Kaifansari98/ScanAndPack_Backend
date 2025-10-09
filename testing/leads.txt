@@ -25,8 +25,6 @@ Content-Type: multipart/form-data
 | `email` | Text | `john.doe@example.com` |
 | `site_address` | Text | `123 Main Street, Downtown, New York` |
 | `site_type_id` | Text | `1` |
-| `priority` | Text | `high` |
-| `billing_name` | Text | `John Doe Enterprises` |
 | `source_id` | Text | `1` |
 | `archetech_name` | Text | `Smith Architecture` |
 | `designer_remark` | Text | `Modern design with sustainable materials` |
@@ -47,8 +45,7 @@ Content-Type: multipart/form-data
   "data": {
     "lead": {
       "id": 1,
-      "fullName": "John Doe", 
-      "priority": "high",
+      "fullName": "John Doe",
       "account_id": 1,
       "createdAt": "2025-08-18T10:30:00.000Z"
     },
@@ -73,7 +70,6 @@ Content-Type: multipart/form-data
 | `country_code` | Text | `+91` |
 | `contact_no` | Text | `8876543210` | ⭐ **Different number to avoid duplicate** |
 | `site_address` | Text | `456 Oak Avenue, Mumbai, Maharashtra` |
-| `priority` | Text | `standard` |
 | `source_id` | Text | `1` |
 | `vendor_id` | Text | `1` |
 | `created_by` | Text | `1` |
@@ -91,7 +87,6 @@ Content-Type: multipart/form-data
 | `contact_no` | Text | `7896541230` |
 | `email` | Text | `mike.johnson@example.com` |
 | `site_address` | Text | `789 Park Lane, London, UK` |
-| `priority` | Text | `urgent` |
 | `source_id` | Text | `2` |
 | `vendor_id` | Text | `1` |
 | `created_by` | Text | `1` |
@@ -113,7 +108,6 @@ Content-Type: multipart/form-data
 | `country_code` | Text | `+1` |
 | `contact_no` | Text | `5555555555` |
 | `site_address` | Text | `123 Test St` |
-| `priority` | Text | `high` |
 | `source_id` | Text | `1` |
 | `vendor_id` | Text | `1` |
 | `created_by` | Text | `1` |
@@ -135,7 +129,6 @@ Content-Type: multipart/form-data
 | `country_code` | Text | `+1` |
 | `contact_no` | Text | `4444444444` |
 | `site_address` | Text | `123 Test St` |
-| `priority` | Text | `high` |
 | `source_id` | Text | `1` |
 | `vendor_id` | Text | `1` |
 | `created_by` | Text | `1` |
@@ -161,7 +154,6 @@ Content-Type: multipart/form-data
 | `country_code` | Text | `+1` |
 | `contact_no` | Text | `1234567890` |
 | `site_address` | Text | `100 First St` |
-| `priority` | Text | `high` |
 | `source_id` | Text | `1` |
 | `vendor_id` | Text | `1` |
 | `created_by` | Text | `1` |
@@ -174,7 +166,6 @@ Content-Type: multipart/form-data
 | `country_code` | Text | `+1` |
 | `contact_no` | Text | `1234567890` | ⭐ **Same number as above** |
 | `site_address` | Text | `200 Second St` |
-| `priority` | Text | `low` |
 | `source_id` | Text | `1` |
 | `vendor_id` | Text | `1` | ⭐ **Same vendor** |
 | `created_by` | Text | `1` |
@@ -200,7 +191,6 @@ Content-Type: multipart/form-data
 | `contact_no` | Text | `3333333333` |
 | `email` | Text | `carol@test.com` |
 | `site_address` | Text | `300 Third St` |
-| `priority` | Text | `standard` |
 | `source_id` | Text | `1` |
 | `vendor_id` | Text | `1` |
 | `created_by` | Text | `1` |
@@ -214,7 +204,6 @@ Content-Type: multipart/form-data
 | `contact_no` | Text | `2222222222` |
 | `email` | Text | `carol@test.com` | ⭐ **Same email as above** |
 | `site_address` | Text | `400 Fourth St` |
-| `priority` | Text | `low` |
 | `source_id` | Text | `1` |
 | `vendor_id` | Text | `1` | ⭐ **Same vendor** |
 | `created_by` | Text | `1` |
@@ -240,7 +229,6 @@ Content-Type: multipart/form-data
 | `contact_no` | Text | `1234567890` | ⭐ **Same as Test Case 5** |
 | `email` | Text | `carol@test.com` | ⭐ **Same as Test Case 6** |
 | `site_address` | Text | `500 Fifth St` |
-| `priority` | Text | `high` |
 | `source_id` | Text | `1` |
 | `vendor_id` | Text | `2` | ⭐ **Different vendor - should work** |
 | `created_by` | Text | `1` |
@@ -254,7 +242,6 @@ Content-Type: multipart/form-data
     "lead": {
       "id": 6,
       "fullName": "Eve Anderson",
-      "priority": "high",
       "account_id": 6,
       "createdAt": "2025-08-18T11:00:00.000Z"
     },

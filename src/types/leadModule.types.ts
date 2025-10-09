@@ -1,5 +1,3 @@
-// Note: LeadPriority and DocumentType enums are not exported from @prisma/client
-// Using string literals instead
 
 export interface ProductTypeInput {
     vendor_id: number;
@@ -94,8 +92,6 @@ export interface CreateLeadDTO {
     site_address: string;
     site_map_link?: string;
     site_type_id?: number;
-    priority: string;
-    billing_name?: string;
     source_id: number;
     archetech_name?: string;
     designer_remark?: string;
@@ -124,8 +120,6 @@ export interface UpdateLeadDTO {
     site_address: string;
     site_map_link?: string;
     site_type_id?: number;
-    priority: string;
-    billing_name?: string;
     source_id: number;
     archetech_name?: string;
     designer_remark?: string;
@@ -436,8 +430,6 @@ export interface CreatePaymentUploadDto {
     alt_contact_no: string | null;
     email: string | null;
     site_address: string;
-    priority: string;
-    billing_name: string | null;
     archetech_name: string | null;
     designer_remark: string | null;
     created_at: Date;

@@ -4,7 +4,6 @@ import {
   SiteSupervisorData,
   UpdateLeadDTO,
 } from "../../../types/leadModule.types";
-import { LeadPriority, DocumentType } from "@prisma/client";
 import fs from "fs";
 import { SalesExecutiveData } from "../../../types/leadModule.types";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
@@ -96,8 +95,6 @@ export const createLeadService = async (
     site_map_link,
     site_type_id,
     status_id,
-    priority,
-    billing_name,
     source_id,
     archetech_name,
     designer_remark,
@@ -109,17 +106,6 @@ export const createLeadService = async (
     product_structures = [],
     initial_site_measurement_date,
   } = payload;
-
-  const leadPriority = priority.toLowerCase() as LeadPriority;
-
-  // Validate priority
-  if (!Object.values(LeadPriority).includes(leadPriority)) {
-    throw new Error(
-      `Invalid priority value: ${priority}. Must be one of: ${Object.values(
-        LeadPriority
-      ).join(", ")}`
-    );
-  }
 
   return prisma.$transaction(
     async (tx) => {
@@ -205,8 +191,6 @@ export const createLeadService = async (
           site_map_link,
           site_type_id,
           status_id,
-          priority: leadPriority,
-          billing_name,
           source_id,
           archetech_name,
           designer_remark,
@@ -813,8 +797,6 @@ export const updateLeadService = async (
     site_address,
     site_map_link,
     site_type_id,
-    priority,
-    billing_name,
     source_id,
     archetech_name,
     designer_remark,
@@ -823,19 +805,6 @@ export const updateLeadService = async (
     product_structures = [],
     initial_site_measurement_date,
   } = payload;
-
-  // Validate priority only if provided
-  let leadPriority: LeadPriority | undefined;
-  if (priority !== undefined) {
-    leadPriority = priority.toLowerCase() as LeadPriority;
-    if (!Object.values(LeadPriority).includes(leadPriority)) {
-      throw new Error(
-        `Invalid priority value: ${priority}. Must be one of: ${Object.values(
-          LeadPriority
-        ).join(", ")}`
-      );
-    }
-  }
 
   return prisma.$transaction(async (tx) => {
     // 1. Check if lead exists and get current data
@@ -984,8 +953,6 @@ export const updateLeadService = async (
     if (email !== undefined) leadUpdateData.email = email;
     if (site_address !== undefined) leadUpdateData.site_address = site_address;
     if (site_type_id !== undefined) leadUpdateData.site_type_id = site_type_id;
-    if (priority !== undefined) leadUpdateData.priority = leadPriority;
-    if (billing_name !== undefined) leadUpdateData.billing_name = billing_name;
     if (source_id !== undefined) leadUpdateData.source_id = source_id;
     if (archetech_name !== undefined)
       leadUpdateData.archetech_name = archetech_name;
@@ -1132,12 +1099,6 @@ export const updateLeadService = async (
       "Site Map Link",
       existingLead.site_map_link,
       updatedLead.site_map_link
-    );
-    collectChange("Priority", existingLead.priority, updatedLead.priority);
-    collectChange(
-      "Billing Name",
-      existingLead.billing_name,
-      updatedLead.billing_name
     );
     collectChange(
       "Architect Name",

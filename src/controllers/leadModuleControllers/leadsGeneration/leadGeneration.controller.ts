@@ -430,7 +430,6 @@ export class LeadController {
               lastname: result.lead.lastname,
               contact_no: result.lead.contact_no,
               email: result.lead.email,
-              priority: result.lead.priority,
               site_address: result.lead.site_address,
               site_map_link: result.lead.site_map_link,
               updated_at: result.lead.updated_at,
@@ -463,14 +462,6 @@ export class LeadController {
 
       if (error.message.includes("already exists")) {
         res.status(409).json(ApiResponse.error(error.message, 409));
-        return;
-      }
-
-      if (
-        error.message.includes("Invalid priority") ||
-        error.message.includes("not found for vendor")
-      ) {
-        res.status(400).json(ApiResponse.error(error.message, 400));
         return;
       }
 

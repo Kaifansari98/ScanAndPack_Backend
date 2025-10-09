@@ -328,13 +328,6 @@ model ClientMaster {
   ledgers   Ledger[]
 }
 
-enum LeadPriority {
-  urgent
-  high
-  standard
-  low
-}
-
 enum ActivityStatus {
   onGoing
   onHold
@@ -354,8 +347,6 @@ model LeadMaster {
   site_map_link                 String?        @db.Text
   site_type_id                  Int?
   status_id                     Int
-  priority                      LeadPriority
-  billing_name                  String?
   source_id                     Int
   account_id                    Int
   archetech_name                String?
