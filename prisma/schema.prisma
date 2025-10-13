@@ -337,21 +337,23 @@ enum ActivityStatus {
 
 model LeadMaster {
   id                            Int            @id @default(autoincrement())
+  lead_code                     String
   firstname                     String
   lastname                      String
   country_code                  String
   contact_no                    String
   alt_contact_no                String?
   email                         String?
-  site_address                  String
+  site_address                  String?
   site_map_link                 String?        @db.Text
   site_type_id                  Int?
-  status_id                     Int
-  source_id                     Int
-  account_id                    Int
+  status_id                     Int?
+  source_id                     Int?
+  account_id                    Int?
   archetech_name                String?
   designer_remark               String?
   activity_status               ActivityStatus @default(onGoing)
+  is_draft                      Boolean        @default(false)
   activity_status_remark        String?        @db.VarChar(2000)
   final_desc_note               String?        @db.VarChar(2000)
   initial_site_measurement_date DateTime?
@@ -374,15 +376,15 @@ model LeadMaster {
   updated_at DateTime @updatedAt
 
   // ✅ Relations
-  vendor     VendorMaster     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  siteType   SiteTypeMaster?  @relation(fields: [site_type_id], references: [id], onDelete: Cascade)
-  source     SourceMaster     @relation(fields: [source_id], references: [id], onDelete: Cascade)
-  createdBy  UserMaster       @relation("LeadCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
-  updatedBy  UserMaster?      @relation("LeadUpdatedBy", fields: [updated_by], references: [id])
-  assignedTo UserMaster?      @relation("LeadAssignedTo", fields: [assign_to], references: [id])
-  assignedBy UserMaster?      @relation("LeadAssignedBy", fields: [assigned_by], references: [id])
-  account    AccountMaster    @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  statusType StatusTypeMaster @relation(fields: [status_id], references: [id], onDelete: Cascade)
+  vendor     VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  siteType   SiteTypeMaster?   @relation(fields: [site_type_id], references: [id], onDelete: Cascade)
+  source     SourceMaster?     @relation(fields: [source_id], references: [id], onDelete: Cascade)
+  createdBy  UserMaster        @relation("LeadCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  updatedBy  UserMaster?       @relation("LeadUpdatedBy", fields: [updated_by], references: [id])
+  assignedTo UserMaster?       @relation("LeadAssignedTo", fields: [assign_to], references: [id])
+  assignedBy UserMaster?       @relation("LeadAssignedBy", fields: [assigned_by], references: [id])
+  account    AccountMaster?    @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  statusType StatusTypeMaster? @relation(fields: [status_id], references: [id], onDelete: Cascade)
 
   // ✅ New reverse relations
   productMappings             LeadProductMapping[]
@@ -403,6 +405,7 @@ model LeadMaster {
 
   // ✅ Unique constraints for contact_no and email per vendor
   @@unique([contact_no, vendor_id], name: "unique_contact_per_vendor")
+  @@unique([vendor_id, lead_code], name: "uniq_vendor_lead_code")
 }
 
 enum LeadUserStatus {
@@ -853,10 +856,10 @@ model LeadDocumentLogs {
   created_by   Int
 
   // Relations
-  vendor       VendorMaster    @relation(fields: [vendor_id], references: [id])
-  lead         LeadMaster      @relation(fields: [lead_id], references: [id])
-  account      AccountMaster   @relation(fields: [account_id], references: [id])
-  doc          LeadDocuments   @relation(fields: [doc_id], references: [id])
+  vendor       VendorMaster     @relation(fields: [vendor_id], references: [id])
+  lead         LeadMaster       @relation(fields: [lead_id], references: [id])
+  account      AccountMaster    @relation(fields: [account_id], references: [id])
+  doc          LeadDocuments    @relation(fields: [doc_id], references: [id])
   detailed_log LeadDetailedLogs @relation(fields: [lead_logs_id], references: [id])
-  user         UserMaster      @relation(fields: [created_by], references: [id])
+  user         UserMaster       @relation(fields: [created_by], references: [id])
 }

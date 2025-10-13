@@ -194,6 +194,53 @@ export class BookingStageController {
     }
   };
 
+  /**
+   * Get all vendor leads by tag (Type 1, Type 2, etc.)
+   */
+  public getVendorLeadsByTag = async (req: Request, res: Response) => {
+    try {
+      const vendorId = parseInt(req.params.vendorId);
+      const userId = req.query.userId ? Number(req.query.userId) : null;
+      const tag = req.query.tag as string;
+
+      if (!vendorId || !tag) {
+        logger.warn("Missing vendorId or tag", { vendorId, tag });
+        return res.status(400).json({
+          success: false,
+          message: "Vendor ID and tag (e.g. Type 1, Type 2) are required",
+        });
+      }
+
+      const { count, leads } = await BookingStageService.getVendorLeadsByTag(
+        vendorId,
+        tag,
+        userId!
+      );
+
+      logger.info("Fetched vendor leads successfully", {
+        vendorId,
+        tag,
+        count: leads.length,
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: `Leads with tag ${tag} fetched successfully`,
+        count,
+        data: leads,
+      });
+    } catch (error: any) {
+      logger.error("[BookingStageController] getVendorLeadsByTag Error", {
+        error: error.message,
+        stack: error.stack,
+      });
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Something went wrong",
+      });
+    }
+  };
+
   public getOpenLeads = async (req: Request, res: Response) => {
     try {
       const vendorId = parseInt(req.params.vendorId);
@@ -211,16 +258,18 @@ export class BookingStageController {
         vendorId,
         userId
       );
+      const count = leads.length;
 
       logger.info("Fetched open leads successfully", {
         vendorId,
         userId,
-        count: leads.length,
+        count,
       });
 
       return res.status(200).json({
         success: true,
         message: "Leads with open status fetched successfully",
+        count,
         data: leads,
       });
     } catch (error: any) {

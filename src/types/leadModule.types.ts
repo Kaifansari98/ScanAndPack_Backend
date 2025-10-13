@@ -103,6 +103,7 @@ export interface CreateLeadDTO {
     product_types: number[];
     product_structures: number[];
     initial_site_measurement_date?: Date;
+    is_draft?: boolean;
 }
   
 export interface DocumentUpload {

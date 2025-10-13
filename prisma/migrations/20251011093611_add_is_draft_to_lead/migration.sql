@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "LeadMaster" ALTER COLUMN "site_address" DROP NOT NULL,
+ALTER COLUMN "source_id" DROP NOT NULL,
+ALTER COLUMN "account_id" DROP NOT NULL,
+ALTER COLUMN "status_id" DROP NOT NULL;

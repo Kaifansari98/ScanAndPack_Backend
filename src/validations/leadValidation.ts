@@ -2,58 +2,143 @@ import Joi from "joi";
 import { prisma } from "../prisma/client";
 import { UserRoleInfo } from "../types/leadModule.types";
 
+// 🧩 Reusable helper for numeric fields (accepts number or numeric string)
+const numberLike = Joi.alternatives()
+  .try(Joi.number().integer().positive(), Joi.string().regex(/^\d+$/))
+  .messages({
+    "alternatives.match": "This field must be a valid number",
+  });
+
+// 🗓️ Optional date constraint for today or future
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 
 export const createLeadSchema = Joi.object({
   firstname: Joi.string().trim().min(2).max(50).required(),
   lastname: Joi.string().trim().min(2).max(50).required(),
+
   country_code: Joi.string()
     .pattern(/^\+\d{1,4}$/)
     .required(),
+
   contact_no: Joi.string()
     .pattern(/^\d{10,15}$/)
     .required(),
+
   alt_contact_no: Joi.string()
     .pattern(/^\d{10,15}$/)
-    .optional(),
-  email: Joi.string().email().optional(),
-  site_address: Joi.string().trim().min(1).max(2000).required(),
-  site_map_link: Joi.string().uri().optional().allow(null, ""),
-  site_type_id: Joi.number().integer().positive().optional(),
-  source_id: Joi.number().integer().positive().required(),
-  archetech_name: Joi.string().trim().max(100).optional(),
-  designer_remark: Joi.string().trim().max(1000).optional(),
-  vendor_id: Joi.number().integer().positive().required(),
-  created_by: Joi.number().integer().positive().required(),
-  assign_to: Joi.number().integer().positive().optional(),
-  assigned_by: Joi.number().integer().positive().optional(),
-  status_id: Joi.number().required(),
-  // Changed from array of strings to array of integers
-  product_types: Joi.array()
-    .items(Joi.number().integer().positive())
-    .min(1)
-    .required()
-    .messages({
-      "any.required": "At least one product type is required",
-      "array.min": "At least one product type must be selected",
-    }),
-  product_structures: Joi.array()
-    .items(Joi.number().integer().positive())
-    .min(1)
-    .required()
-    .messages({
-      "any.required": "At least one product structure is required",
-      "array.min": "At least one product structure must be selected",
-    }),
-  // ✅ new field
-  initial_site_measurement_date: Joi.date()
-    .min(today) // must be today or future
     .optional()
-    .messages({
-      "date.min": "Initial site measurement date cannot be in the past",
-    }),
+    .allow("", null),
+
+  email: Joi.string().email().optional().allow("", null),
+
+  site_address: Joi.string().trim().min(1).max(2000).required(),
+  site_map_link: Joi.string().uri().optional().allow("", null, ""),
+
+  site_type_id: numberLike.optional().allow(null),
+  source_id: numberLike.required().messages({
+    "alternatives.match": '"source_id" must be a valid number',
+  }),
+
+  archetech_name: Joi.string().trim().max(100).optional().allow("", null),
+  designer_remark: Joi.string().trim().max(1000).optional().allow("", null),
+
+  vendor_id: numberLike.required(),
+  created_by: numberLike.required(),
+  assign_to: numberLike.optional().allow(null),
+  assigned_by: numberLike.optional().allow(null),
+
+  status_id: numberLike.required(),
+
+  product_types: Joi.array().items(numberLike).min(1).required().messages({
+    "any.required": "At least one product type is required",
+    "array.min": "At least one product type must be selected",
+  }),
+
+  product_structures: Joi.array().items(numberLike).min(1).required().messages({
+    "any.required": "At least one product structure is required",
+    "array.min": "At least one product structure must be selected",
+  }),
+
+  initial_site_measurement_date: Joi.date().min(today).optional().messages({
+    "date.min": "Initial site measurement date cannot be in the past",
+  }),
+
+  is_draft: Joi.boolean().optional(),
 });
+
+export const createLeadDraftSchema = Joi.object({
+  firstname: Joi.string().trim().min(1).max(50).required(),
+  lastname: Joi.string().trim().max(50).optional().allow("", null),
+
+  country_code: Joi.string()
+    .pattern(/^\+\d{1,4}$/)
+    .required(),
+
+  contact_no: Joi.string()
+    .pattern(/^\d{10,15}$/)
+    .required(),
+
+  alt_contact_no: Joi.string()
+    .pattern(/^\d{10,15}$/)
+    .optional()
+    .allow("", null),
+
+  email: Joi.string().email().optional().allow("", null),
+
+  site_address: Joi.string().max(2000).optional().allow("", null),
+  site_map_link: Joi.string().uri().optional().allow("", null, ""),
+
+  site_type_id: numberLike.optional().allow(null),
+  source_id: numberLike.optional().allow(null), // ✅ Drafts don't require this
+  archetech_name: Joi.string().trim().max(100).optional().allow("", null),
+  designer_remark: Joi.string().trim().max(1000).optional().allow("", null),
+
+  vendor_id: numberLike.required(),
+  created_by: numberLike.required(),
+  assign_to: numberLike.optional().allow(null),
+  assigned_by: numberLike.optional().allow(null),
+
+  status_id: numberLike.optional(), // ✅ allow missing
+  product_types: Joi.array().items(numberLike).optional(),
+  product_structures: Joi.array().items(numberLike).optional(),
+  initial_site_measurement_date: Joi.date().optional().allow(null),
+
+  is_draft: Joi.boolean().optional(),
+});
+
+/**
+ * Checks if a lead has all mandatory fields filled
+ * Returns true if the lead should no longer be a draft
+ */
+export const isLeadComplete = (lead: any): boolean => {
+  const requiredFields = {
+    firstname: lead.firstname,
+    lastname: lead.lastname,
+    contact_no: lead.contact_no,
+    site_type_id: lead.site_type_id,
+    site_address: lead.site_address,
+    source_id: lead.source_id,
+  };
+
+  // Check if all required fields are filled
+  const allFieldsFilled = Object.values(requiredFields).every(
+    (value) => value !== null && value !== undefined && value !== ""
+  );
+
+  if (!allFieldsFilled) return false;
+
+  // Check product types (at least one required)
+  const hasProductTypes =
+    lead.productMappings && lead.productMappings.length > 0;
+
+  // Check product structures (at least one required)
+  const hasProductStructures =
+    lead.leadProductStructureMapping &&
+    lead.leadProductStructureMapping.length > 0;
+
+  return hasProductTypes && hasProductStructures;
+};
 
 interface UpdateLeadValidationResult {
   isValid: boolean;
