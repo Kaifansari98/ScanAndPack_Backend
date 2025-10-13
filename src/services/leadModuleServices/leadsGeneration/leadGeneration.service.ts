@@ -4,7 +4,6 @@ import {
   SiteSupervisorData,
   UpdateLeadDTO,
 } from "../../../types/leadModule.types";
-import { LeadPriority, DocumentType } from "@prisma/client";
 import fs from "fs";
 import { SalesExecutiveData } from "../../../types/leadModule.types";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
@@ -17,10 +16,12 @@ import {
   validateAdminUser,
   validateSalesExecutiveUser,
   getUserRole,
+  isLeadComplete,
 } from "../../../validations/leadValidation";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
 import Joi from "joi";
+import { generateLeadCode } from "../../../utils/generateLeadCode";
 
 type EditTaskISMInput = {
   lead_id: number;
@@ -49,7 +50,7 @@ const editTaskISMSchema = Joi.object({
 });
 
 export const createLeadService = async (
-  payload: CreateLeadDTO,
+  payload: CreateLeadDTO & { is_draft?: boolean },
   files: Express.Multer.File[]
 ) => {
   logger.debug("[SERVICE] createLeadService called", {
@@ -96,8 +97,6 @@ export const createLeadService = async (
     site_map_link,
     site_type_id,
     status_id,
-    priority,
-    billing_name,
     source_id,
     archetech_name,
     designer_remark,
@@ -109,17 +108,6 @@ export const createLeadService = async (
     product_structures = [],
     initial_site_measurement_date,
   } = payload;
-
-  const leadPriority = priority.toLowerCase() as LeadPriority;
-
-  // Validate priority
-  if (!Object.values(LeadPriority).includes(leadPriority)) {
-    throw new Error(
-      `Invalid priority value: ${priority}. Must be one of: ${Object.values(
-        LeadPriority
-      ).join(", ")}`
-    );
-  }
 
   return prisma.$transaction(
     async (tx) => {
@@ -192,9 +180,13 @@ export const createLeadService = async (
         },
       });
 
-      // 2. LeadMaster (now with account_id reference)
+      // 2) ⬅️ NEW: generate lead_code for this vendor
+      const lead_code = await generateLeadCode(tx, vendor_id);
+
+      // 3) Create Lead with the generated code
       const lead = await tx.leadMaster.create({
         data: {
+          lead_code,
           firstname,
           lastname,
           country_code,
@@ -205,8 +197,6 @@ export const createLeadService = async (
           site_map_link,
           site_type_id,
           status_id,
-          priority: leadPriority,
-          billing_name,
           source_id,
           archetech_name,
           designer_remark,
@@ -216,6 +206,7 @@ export const createLeadService = async (
           assign_to,
           assigned_by,
           initial_site_measurement_date,
+          is_draft: !!payload.is_draft,
         },
       });
 
@@ -249,6 +240,13 @@ export const createLeadService = async (
         await tx.leadUserMapping.create({
           data: { ...mappingBase, user_id: assign_to },
         });
+      }
+
+      if (payload.is_draft) {
+        logger.info(
+          "📝 Draft lead detected — skipping mappings, logs & uploads"
+        );
+        return { lead, account, draft: true };
       }
 
       // If creator is sales-executive -> nothing more to do (only his own mapping above)
@@ -629,7 +627,6 @@ export const getLeadById = async (
     };
 
     if (userType === "sales-executive") {
-      // Get leadIds accessible via mapping + tasks
       const [mappedLeads, taskLeads] = await Promise.all([
         prisma.leadUserMapping.findMany({
           where: { vendor_id: vendorId, user_id: userId, status: "active" },
@@ -656,9 +653,6 @@ export const getLeadById = async (
       }
 
       whereCondition.id = { in: leadIds, equals: leadId };
-      console.log(
-        `[SERVICE] Applied sales-executive lead filter for user ${userId}`
-      );
     } else if (["admin", "super-admin"].includes(userType)) {
       console.log(`[SERVICE] Admin/Super-admin access`);
     } else {
@@ -666,7 +660,7 @@ export const getLeadById = async (
     }
 
     // 3️⃣ Fetch lead
-    const lead = await prisma.leadMaster.findFirst({
+    let lead = await prisma.leadMaster.findFirst({
       where: whereCondition,
       include: {
         account: { select: { id: true, name: true } },
@@ -706,7 +700,16 @@ export const getLeadById = async (
 
     if (!lead) throw new Error("Lead not found or access denied");
 
-    // 👇 Add signed URLs for each document
+    // ✅ Auto-convert draft to complete if all fields are filled
+    if (lead.is_draft && isLeadComplete(lead)) {
+      await prisma.leadMaster.update({
+        where: { id: lead.id },
+        data: { is_draft: false },
+      });
+      lead.is_draft = false;
+    }
+
+    // Add signed URLs for each document
     const documentsWithUrls = await Promise.all(
       lead.documents.map(async (doc) => {
         if (doc.doc_sys_name) {
@@ -782,7 +785,7 @@ export const softDeleteLead = async (leadId: number, deletedBy: number) => {
       data: {
         vendor_id: lead.vendor_id,
         lead_id: lead.id,
-        account_id: lead.account_id,
+        account_id: lead.account_id!,
         action: "Lead has been deleted successfully",
         action_type: "DELETE",
         created_by: deletedBy,
@@ -813,8 +816,6 @@ export const updateLeadService = async (
     site_address,
     site_map_link,
     site_type_id,
-    priority,
-    billing_name,
     source_id,
     archetech_name,
     designer_remark,
@@ -823,19 +824,6 @@ export const updateLeadService = async (
     product_structures = [],
     initial_site_measurement_date,
   } = payload;
-
-  // Validate priority only if provided
-  let leadPriority: LeadPriority | undefined;
-  if (priority !== undefined) {
-    leadPriority = priority.toLowerCase() as LeadPriority;
-    if (!Object.values(LeadPriority).includes(leadPriority)) {
-      throw new Error(
-        `Invalid priority value: ${priority}. Must be one of: ${Object.values(
-          LeadPriority
-        ).join(", ")}`
-      );
-    }
-  }
 
   return prisma.$transaction(async (tx) => {
     // 1. Check if lead exists and get current data
@@ -895,7 +883,7 @@ export const updateLeadService = async (
         where: {
           contact_no,
           vendor_id,
-          id: { not: existingLead.account_id },
+          id: { not: existingLead.account_id! },
           is_deleted: false,
         },
       });
@@ -913,7 +901,7 @@ export const updateLeadService = async (
         where: {
           email,
           vendor_id,
-          id: { not: existingLead.account_id },
+          id: { not: existingLead.account_id! },
           is_deleted: false,
         },
       });
@@ -945,7 +933,7 @@ export const updateLeadService = async (
     if (email !== undefined) accountUpdateData.email = email;
 
     const updatedAccount = await tx.accountMaster.update({
-      where: { id: existingLead.account_id },
+      where: { id: existingLead.account_id! },
       data: accountUpdateData,
     });
 
@@ -984,8 +972,6 @@ export const updateLeadService = async (
     if (email !== undefined) leadUpdateData.email = email;
     if (site_address !== undefined) leadUpdateData.site_address = site_address;
     if (site_type_id !== undefined) leadUpdateData.site_type_id = site_type_id;
-    if (priority !== undefined) leadUpdateData.priority = leadPriority;
-    if (billing_name !== undefined) leadUpdateData.billing_name = billing_name;
     if (source_id !== undefined) leadUpdateData.source_id = source_id;
     if (archetech_name !== undefined)
       leadUpdateData.archetech_name = archetech_name;
@@ -1031,7 +1017,7 @@ export const updateLeadService = async (
           data: {
             vendor_id,
             lead_id: leadId,
-            account_id: existingLead.account_id,
+            account_id: existingLead.account_id!,
             product_type_id: productTypeId,
             created_by: updated_by,
           },
@@ -1080,7 +1066,7 @@ export const updateLeadService = async (
           data: {
             vendor_id,
             lead_id: leadId,
-            account_id: existingLead.account_id,
+            account_id: existingLead.account_id!,
             product_structure_id: productStructureId,
             created_by: updated_by,
           },
@@ -1132,12 +1118,6 @@ export const updateLeadService = async (
       "Site Map Link",
       existingLead.site_map_link,
       updatedLead.site_map_link
-    );
-    collectChange("Priority", existingLead.priority, updatedLead.priority);
-    collectChange(
-      "Billing Name",
-      existingLead.billing_name,
-      updatedLead.billing_name
     );
     collectChange(
       "Architect Name",
@@ -1544,7 +1524,7 @@ export const assignLeadToUser = async (
       data: {
         vendor_id: vendorId,
         lead_id: lead.id,
-        account_id: lead.account?.id ?? null,
+        account_id: lead.account?.id!,
         action: actionMessage,
         action_type: "UPDATE",
         created_by: payload.assign_by,
@@ -1725,7 +1705,7 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
         data: {
           vendor_id,
           lead_id,
-          account_id,
+          account_id: account_id!,
           action: actionMessage,
           action_type: "UPDATE",
           created_by: updated_by,

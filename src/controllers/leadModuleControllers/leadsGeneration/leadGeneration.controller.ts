@@ -13,6 +13,7 @@ import {
   createLeadSchema,
   validateUpdateLeadInput,
   validateLeadAssignmentInput,
+  createLeadDraftSchema,
 } from "../../../validations/leadValidation";
 import { ApiResponse } from "../../../utils/apiResponse";
 import {
@@ -49,7 +50,8 @@ export class LeadController {
 
     try {
       const files = (req.files as Express.MulterS3.File[]) || [];
-      const { vendor_id } = req.body;
+      const { vendor_id, is_draft } = req.body;
+      const draftMode = String(is_draft) === "true";
 
       // 1. Resolve the vendor's Open status ID dynamically
       const openStatus = await prisma.statusTypeMaster.findFirst({
@@ -72,7 +74,7 @@ export class LeadController {
           ? Number(req.body.site_type_id)
           : undefined,
         status_id: openStatus.id, // <-- use openStatus' id here
-        source_id: Number(req.body.source_id),
+        source_id: Number(req.body.source_id)|| undefined,
         vendor_id: Number(req.body.vendor_id),
         created_by: Number(req.body.created_by),
         assign_to: req.body.assign_to ? Number(req.body.assign_to) : undefined,
@@ -91,7 +93,11 @@ export class LeadController {
         site_map_link: req.body.site_map_link || null,
       };
 
-      const { error, value } = createLeadSchema.validate(payload);
+      // 🧩 Use draft or full schema dynamically
+      const schemaToUse = draftMode ? createLeadDraftSchema : createLeadSchema;
+
+      const { error, value } = schemaToUse.validate(payload, { convert: true, allowUnknown: true, });
+
       if (error) {
         logger.warn("Validation failed", { details: error.details });
         return res.status(400).json({
@@ -114,7 +120,10 @@ export class LeadController {
       }
 
       // Pass raw files to the service (supports Multer S3 files)
-      const result = await createLeadService(value, files);
+      const result = await createLeadService(
+        { ...value, is_draft: draftMode },
+        files
+      );
 
       return res.status(201).json({
         success: true,
@@ -430,7 +439,6 @@ export class LeadController {
               lastname: result.lead.lastname,
               contact_no: result.lead.contact_no,
               email: result.lead.email,
-              priority: result.lead.priority,
               site_address: result.lead.site_address,
               site_map_link: result.lead.site_map_link,
               updated_at: result.lead.updated_at,
@@ -463,14 +471,6 @@ export class LeadController {
 
       if (error.message.includes("already exists")) {
         res.status(409).json(ApiResponse.error(error.message, 409));
-        return;
-      }
-
-      if (
-        error.message.includes("Invalid priority") ||
-        error.message.includes("not found for vendor")
-      ) {
-        res.status(400).json(ApiResponse.error(error.message, 400));
         return;
       }
 

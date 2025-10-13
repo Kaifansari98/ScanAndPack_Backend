@@ -14,6 +14,9 @@ export class LeadStatsService {
       is_deleted: false,
     };
 
+    // ✅ Total My Tasks count (for current user)
+    let totalMyTasks: number | null = null;
+
     // If userId is provided, check user type and apply appropriate filters
     if (userId) {
       const user = await prisma.userMaster.findUnique({
@@ -63,6 +66,16 @@ export class LeadStatsService {
         };
       }
       // ✅ Admin/super-admin → see all vendor leads
+
+      if (userType === "sales-executive" || userType === "site-supervisor") {
+        totalMyTasks = await prisma.userLeadTask.count({
+          where: {
+            vendor_id: vendorId,
+            OR: [{ user_id: userId }, { created_by: userId }],
+            status: { in: ["open", "in_progress"] },
+          },
+        });
+      }
     }
 
     // Helper: count leads by status type
@@ -109,6 +122,7 @@ export class LeadStatsService {
       total_booking_stage_leads: totalBookingStageLeads,
       total_final_measurement_leads: totalFinalMeasurementStageLeads,
       total_client_documentation_leads: totalClientDocumentationStageLeads,
+      total_my_tasks: totalMyTasks,
     };
 
     logger.debug("[LeadStatsService] Computed stats", stats);

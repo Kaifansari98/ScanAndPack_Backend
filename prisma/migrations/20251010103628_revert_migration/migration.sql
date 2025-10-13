@@ -1,5 +1,20 @@
+/*
+  Warnings:
+
+  - You are about to drop the column `final_booking_amt` on the `LeadMaster` table. All the data in the column will be lost.
+
+*/
 -- CreateEnum
 CREATE TYPE "ActionType" AS ENUM ('CREATE', 'UPDATE', 'DELETE', 'UPLOAD', 'STATUS_CHANGE', 'OTHER');
+
+-- AlterEnum
+ALTER TYPE "ActivityStatus" ADD VALUE 'lostApproval';
+
+-- AlterTable
+ALTER TABLE "LeadMaster" DROP COLUMN "final_booking_amt",
+ADD COLUMN     "booking_amount" DOUBLE PRECISION,
+ADD COLUMN     "pending_amount" DOUBLE PRECISION,
+ADD COLUMN     "total_project_amount" DOUBLE PRECISION;
 
 -- CreateTable
 CREATE TABLE "LeadDetailedLogs" (

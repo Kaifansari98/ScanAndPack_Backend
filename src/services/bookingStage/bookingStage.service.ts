@@ -9,6 +9,7 @@ import { sanitizeFilename } from "../../utils/sanitizeFilename";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import logger from "../../utils/logger";
 import { Prisma, SupervisorStatus } from "@prisma/client";
+import { isLeadComplete } from "../../validations/leadValidation";
 
 export class BookingStageService {
   // Helper to avoid repeating include structure
@@ -698,6 +699,97 @@ export class BookingStageService {
     return data;
   }
 
+  /**
+   * Fetch all leads for a vendor filtered by tag (Type 1, 2, 3, etc.)
+   */
+  public static async getVendorLeadsByTag(
+    vendorId: number,
+    tag: string,
+    userId?: number
+  ) {
+    logger.info("[BookingStageService] getVendorLeadsByTag called", {
+      vendorId,
+      tag,
+      userId,
+    });
+
+    // 0️⃣ Exclude user-linked leads if userId provided
+    let excludedLeadIds: number[] = [];
+    if (userId) {
+      const mappedLeads = await prisma.leadUserMapping.findMany({
+        where: { vendor_id: vendorId, user_id: userId, status: "active" },
+        select: { lead_id: true },
+      });
+
+      const taskLeads = await prisma.userLeadTask.findMany({
+        where: {
+          vendor_id: vendorId,
+          OR: [{ created_by: userId }, { user_id: userId }],
+        },
+        select: { lead_id: true },
+      });
+
+      excludedLeadIds = [
+        ...new Set([
+          ...mappedLeads.map((m) => m.lead_id),
+          ...taskLeads.map((t) => t.lead_id),
+        ]),
+      ];
+    }
+
+    // 1️⃣ Find status type for this vendor & tag
+    const statusType = await prisma.statusTypeMaster.findFirst({
+      where: { vendor_id: vendorId, tag },
+      select: { id: true },
+    });
+    if (!statusType)
+      throw new Error(
+        `Status type with tag "${tag}" not found for vendor ${vendorId}`
+      );
+
+    // 2️⃣ Fetch all leads that match (excluding user-linked)
+    const leads = await prisma.leadMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        is_deleted: false,
+        statusType: { tag, vendor_id: vendorId },
+        activity_status: "onGoing",
+        ...(excludedLeadIds.length > 0 && { id: { notIn: excludedLeadIds } }),
+      },
+      include: BookingStageService.leadIncludes(),
+      orderBy: { created_at: "desc" },
+    });
+
+    // 3️⃣ Process and attach signed URLs
+    const processedLeads = await Promise.all(
+      leads.map(async (lead: any) => {
+        if (lead.is_draft && isLeadComplete(lead)) {
+          await prisma.leadMaster.update({
+            where: { id: lead.id },
+            data: { is_draft: false },
+          });
+          lead.is_draft = false;
+        }
+
+        const docsWithUrls = await Promise.all(
+          lead.documents.map(async (doc: any) => {
+            const signed_url = await generateSignedUrl(doc.doc_sys_name);
+            return {
+              ...doc,
+              signed_url,
+              file_type: BookingStageService.getFileType(doc.doc_og_name),
+              is_image: BookingStageService.isImageFile(doc.doc_og_name),
+            };
+          })
+        );
+
+        return { ...lead, documents: docsWithUrls };
+      })
+    );
+
+    return { count: processedLeads.length, leads: processedLeads };
+  }
+
   public static async getLeadsWithStatusOpen(vendorId: number, userId: number) {
     logger.info("[BookingStageService] getLeadsWithStatusOpen called", {
       vendorId,
@@ -724,7 +816,7 @@ export class BookingStageService {
 
     // ============= Admin Flow =============
     if (isAdmin) {
-      return prisma.leadMaster.findMany({
+      const leads = await prisma.leadMaster.findMany({
         where: {
           vendor_id: vendorId,
           is_deleted: false,
@@ -734,6 +826,32 @@ export class BookingStageService {
         include: BookingStageService.leadIncludes(),
         orderBy: { created_at: "desc" },
       });
+
+      // ✅ Auto-convert drafts to complete leads if all fields are filled
+      return Promise.all(
+        leads.map(async (lead: any) => {
+          if (lead.is_draft && isLeadComplete(lead)) {
+            await prisma.leadMaster.update({
+              where: { id: lead.id },
+              data: { is_draft: false },
+            });
+            lead.is_draft = false; // Update in-memory object
+          }
+
+          const docsWithUrls = await Promise.all(
+            lead.documents.map(async (doc: any) => {
+              const signed_url = await generateSignedUrl(doc.doc_sys_name);
+              return {
+                ...doc,
+                signed_url,
+                file_type: BookingStageService.getFileType(doc.doc_og_name),
+                is_image: BookingStageService.isImageFile(doc.doc_og_name),
+              };
+            })
+          );
+          return { ...lead, documents: docsWithUrls };
+        })
+      );
     }
 
     // ============= Non-Admin Flow =============
@@ -757,7 +875,6 @@ export class BookingStageService {
       select: { lead_id: true },
     });
 
-    // ✅ Use OR (union) instead of AND (intersection)
     const leadIds = [
       ...new Set([
         ...mappedLeads.map((m) => m.lead_id),
@@ -785,9 +902,17 @@ export class BookingStageService {
       orderBy: { created_at: Prisma.SortOrder.desc },
     });
 
-    // Attach signed URLs for documents
+    // ✅ Auto-convert drafts and attach signed URLs
     return Promise.all(
       leads.map(async (lead: any) => {
+        if (lead.is_draft && isLeadComplete(lead)) {
+          await prisma.leadMaster.update({
+            where: { id: lead.id },
+            data: { is_draft: false },
+          });
+          lead.is_draft = false;
+        }
+
         const docsWithUrls = await Promise.all(
           lead.documents.map(async (doc: any) => {
             const signed_url = await generateSignedUrl(doc.doc_sys_name);

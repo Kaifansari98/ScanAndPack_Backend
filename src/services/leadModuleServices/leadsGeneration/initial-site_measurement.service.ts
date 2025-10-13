@@ -74,7 +74,7 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
     const task = await tx.userLeadTask.create({
       data: {
         lead_id: lead.id,
-        account_id: lead.account_id,
+        account_id: lead.account_id!,
         vendor_id: lead.vendor_id,
         user_id: assignee_user_id,
         task_type,
@@ -146,7 +146,7 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
         data: {
           vendor_id: lead.vendor_id,
           lead_id: lead.id,
-          account_id: lead.account_id,
+          account_id: lead.account_id!,
           action: actionMessage,
           action_type: "CREATE",
           created_by,

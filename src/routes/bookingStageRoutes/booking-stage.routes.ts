@@ -32,6 +32,11 @@ bookingStageRouter.get(
   bookingStageController.getBookingLeads
 );
 
+bookingStageRouter.get(
+  "/vendorId/:vendorId/all-leads",
+  bookingStageController.getVendorLeadsByTag // can now accept ?tag=Type1&userId=123
+);
+
 // Example: GET /api/leads/status1-leads/:vendorId?userId=123
 bookingStageRouter.get(
   "/status1-leads/vendorId/:vendorId",
