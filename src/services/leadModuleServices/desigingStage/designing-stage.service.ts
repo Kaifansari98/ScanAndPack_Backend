@@ -63,7 +63,7 @@ export class DesigingStage {
     const log = await prisma.leadStatusLogs.create({
       data: {
         lead_id,
-        account_id: lead.account_id,
+        account_id: lead.account_id!,
         created_by: user_id,
         vendor_id,
         status_id: DesigningStatus.id,

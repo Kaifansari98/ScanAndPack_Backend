@@ -624,7 +624,7 @@ export class FinalMeasurementService {
       const task = await tx.userLeadTask.create({
         data: {
           lead_id: lead.id,
-          account_id: lead.account_id,
+          account_id: lead.account_id!,
           vendor_id: lead.vendor_id,
           user_id: assignee_user_id,
           task_type,
@@ -638,10 +638,10 @@ export class FinalMeasurementService {
       // 4️⃣ Update lead status (if not Follow Up)
       let updatedLead: {
         id: number;
-        account_id: number;
+        account_id: number | null;
         vendor_id: number;
-        status_id?: number;
-      } = lead;
+        status_id: number | null;
+      } = { ...lead, status_id: null };
 
       if (task_type.toLowerCase() !== "follow up") {
         const toStatus = await tx.statusTypeMaster.findFirst({
@@ -694,7 +694,7 @@ export class FinalMeasurementService {
         data: {
           vendor_id: lead.vendor_id,
           lead_id: lead.id,
-          account_id: lead.account_id,
+          account_id: lead.account_id!,
           action: actionMessage,
           action_type: "CREATE",
           created_by,

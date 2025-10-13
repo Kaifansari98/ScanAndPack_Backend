@@ -88,10 +88,10 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
     // 4) Flip status only if NOT "Follow Up"
     let updatedLead: {
       id: number;
-      account_id: number;
+      account_id: number | null; // ✅ nullable
       vendor_id: number;
-      status_id?: number;
-    } = lead;
+      status_id: number | null; // ✅ explicit, matches Prisma
+    } = { ...lead, status_id: null };
 
     if (task_type.toLowerCase() !== "follow up") {
       const toStatus = await tx.statusTypeMaster.findFirst({
