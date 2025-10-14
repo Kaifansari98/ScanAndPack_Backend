@@ -6,6 +6,19 @@ import wasabi from "../utils/wasabiClient";
 
 const bucketName = process.env.WASABI_BUCKET_NAME || "vloq-furnix";
 
+// 🔒 Ensure env variable exists
+const MAX_FILE_SIZE_MB = process.env.MAX_FILE_SIZE_MB;
+if (!MAX_FILE_SIZE_MB) {
+  throw new Error("❌ Missing environment variable: MAX_FILE_SIZE_MB");
+}
+
+const MAX_FILE_SIZE = parseInt(MAX_FILE_SIZE_MB, 10) * 1024 * 1024; // Convert MB → bytes
+
+// ✅ shared limits object
+const fileLimits = {
+  fileSize: MAX_FILE_SIZE,
+};
+
 const storage = multerS3({
   s3: wasabi,
   bucket: bucketName,
@@ -26,9 +39,7 @@ const storage = multerS3({
 
 export const upload = multer({
   storage: multer.memoryStorage(), // ✅ keep file in memory, don't auto-upload
-  limits: {
-    fileSize: parseInt(process.env.MAX_FILE_SIZE_MB || "5") * 1024 * 1024, // default 5MB
-  },
+  limits: fileLimits,
   fileFilter: (req, file, cb) => {
     const allowedMimeTypes = [
       "image/jpeg",
@@ -40,16 +51,18 @@ export const upload = multer({
     if (allowedMimeTypes.includes(file.mimetype)) {
       cb(null, true);
     } else {
-      cb(new Error(`Only image files and PDFs are allowed! Received: ${file.mimetype}`));
+      cb(
+        new Error(
+          `Only image files and PDFs are allowed! Received: ${file.mimetype}`
+        )
+      );
     }
   },
 });
 
 export const uploadFinalMeasurement = multer({
   storage: multer.memoryStorage(), // ✅ keep file in memory, don't auto-upload
-  limits: {
-    fileSize: parseInt(process.env.MAX_FILE_SIZE_MB || "5") * 1024 * 1024, // default 5MB
-  },
+  limits: fileLimits,
   fileFilter: (req, file, cb) => {
     const allowedMimeTypes = [
       "image/jpeg",
@@ -61,16 +74,18 @@ export const uploadFinalMeasurement = multer({
     if (allowedMimeTypes.includes(file.mimetype)) {
       cb(null, true);
     } else {
-      cb(new Error(`Only image files and PDFs are allowed! Received: ${file.mimetype}`));
+      cb(
+        new Error(
+          `Only image files and PDFs are allowed! Received: ${file.mimetype}`
+        )
+      );
     }
   },
 });
 
 export const uploadClientApproval = multer({
   storage: multer.memoryStorage(), // ✅ keep file in memory, don't auto-upload
-  limits: {
-    fileSize: parseInt(process.env.MAX_FILE_SIZE_MB || "5") * 1024 * 1024, // default 5MB
-  },
+  limits: fileLimits,
   fileFilter: (req, file, cb) => {
     const allowedMimeTypes = [
       "image/jpeg",
@@ -88,9 +103,7 @@ export const uploadClientApproval = multer({
 
 export const uploadClientDocumentation = multer({
   storage: multer.memoryStorage(), // ✅ keep file in memory
-  limits: {
-    fileSize: parseInt(process.env.MAX_FILE_SIZE_MB || "5") * 1024 * 1024, // default 5MB
-  },
+  limits: fileLimits,
   fileFilter: (req, file, cb) => {
     const allowedMimeTypes = [
       // Images
@@ -116,7 +129,10 @@ export const uploadClientDocumentation = multer({
       .slice(file.originalname.lastIndexOf("."))
       .toLowerCase();
 
-    if (allowedMimeTypes.includes(file.mimetype) || allowedExtensions.includes(ext)) {
+    if (
+      allowedMimeTypes.includes(file.mimetype) ||
+      allowedExtensions.includes(ext)
+    ) {
       cb(null, true);
     } else {
       cb(
@@ -130,18 +146,28 @@ export const uploadClientDocumentation = multer({
 
 export const uploadDesigns = multer({
   storage: multer.memoryStorage(),
-  limits: {
-    fileSize: parseInt(process.env.MAX_FILE_SIZE_MB || "5") * 1024 * 1024, // default 5MB
-    files: 10, // ⬅️ max 10 files at once
-  },
+  limits: { ...fileLimits, files: 10 },
   fileFilter: (req, file, cb) => {
     // ✅ Allowed formats: CAD + PDF
     const allowedExtensions = [
       ".pdf", // ⬅️ added
-      ".pyo", ".pytha",  // custom
-      ".dwg", ".dxf", ".stl", ".step", ".stp", ".iges", ".igs",
-      ".3ds", ".obj", ".skp", ".sldprt", ".sldasm",
-      ".prt", ".catpart", ".catproduct",
+      ".pyo",
+      ".pytha", // custom
+      ".dwg",
+      ".dxf",
+      ".stl",
+      ".step",
+      ".stp",
+      ".iges",
+      ".igs",
+      ".3ds",
+      ".obj",
+      ".skp",
+      ".sldprt",
+      ".sldasm",
+      ".prt",
+      ".catpart",
+      ".catproduct",
     ];
 
     const ext = path.extname(file.originalname).toLowerCase();

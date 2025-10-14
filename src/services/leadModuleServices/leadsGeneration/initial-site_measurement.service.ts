@@ -872,6 +872,19 @@ export class PaymentUploadService {
               },
               orderBy: { created_at: Prisma.SortOrder.desc },
             },
+
+            // ✅ Add these two includes ↓
+            productMappings: {
+              include: {
+                productType: { select: { id: true, type: true } },
+              },
+            },
+            leadProductStructureMapping: {
+              include: {
+                productStructure: { select: { id: true, type: true } },
+              },
+            },
+
             _count: {
               select: {
                 payments: true,

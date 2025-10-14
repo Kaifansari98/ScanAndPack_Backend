@@ -705,7 +705,7 @@ export class BookingStageService {
   public static async getVendorLeadsByTag(
     vendorId: number,
     tag: string,
-    userId?: number
+    userId: number
   ) {
     logger.info("[BookingStageService] getVendorLeadsByTag called", {
       vendorId,
