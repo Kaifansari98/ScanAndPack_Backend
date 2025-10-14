@@ -325,6 +325,23 @@ export class FinalMeasurementService {
         },
         orderBy: { created_at: Prisma.SortOrder.desc },
       },
+      // ✅ Added: product mappings
+      productMappings: {
+        include: {
+          productType: {
+            select: { id: true, type: true },
+          },
+        },
+      },
+
+      // ✅ Added: structure mappings
+      leadProductStructureMapping: {
+        include: {
+          productStructure: {
+            select: { id: true, type: true },
+          },
+        },
+      },
     };
   }
 
