@@ -32,12 +32,10 @@ export class ClientApprovalController {
       }
 
       if (!approvalScreenshots || approvalScreenshots.length === 0) {
-        res
-          .status(400)
-          .json({
-            success: false,
-            message: "Client approval screenshot is mandatory",
-          });
+        res.status(400).json({
+          success: false,
+          message: "Client approval screenshot is mandatory",
+        });
         return;
       }
 
@@ -64,12 +62,10 @@ export class ClientApprovalController {
       });
     } catch (error: any) {
       console.error("[ClientApprovalController] Error:", error);
-      res
-        .status(500)
-        .json({
-          success: false,
-          message: error.message || "Internal server error",
-        });
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
     }
   }
 
@@ -156,9 +152,12 @@ export class ClientApprovalController {
           userId
         );
 
+      const count = leads.length;
+
       return res.status(200).json({
         success: true,
         message: "Client Approval leads fetched successfully",
+        count,
         data: leads,
       });
     } catch (error: any) {
@@ -181,12 +180,10 @@ export class ClientApprovalController {
       const { leadId, vendorId } = req.params;
 
       if (!leadId || !vendorId) {
-        res
-          .status(400)
-          .json({
-            success: false,
-            message: "LeadId and VendorId are required",
-          });
+        res.status(400).json({
+          success: false,
+          message: "LeadId and VendorId are required",
+        });
         return;
       }
 
@@ -205,12 +202,10 @@ export class ClientApprovalController {
         "[ClientApprovalController] getApprovalDetails Error:",
         error
       );
-      res
-        .status(500)
-        .json({
-          success: false,
-          message: error.message || "Internal server error",
-        });
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
     }
   }
 }

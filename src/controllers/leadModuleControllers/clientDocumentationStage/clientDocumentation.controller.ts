@@ -138,10 +138,13 @@ export class ClientDocumentationController {
         vendorId,
         userId
       );
+
+      const count = leads.length;
   
       return res.status(200).json({
         success: true,
         message: "Client Documentation leads fetched successfully",
+        count,
         data: leads,
       });
     } catch (error: any) {
