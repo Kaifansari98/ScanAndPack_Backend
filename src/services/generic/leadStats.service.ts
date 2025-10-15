@@ -71,9 +71,15 @@ export class LeadStatsService {
         totalMyTasks = await prisma.userLeadTask.count({
           where: {
             vendor_id: vendorId,
-            OR: [{ user_id: userId }, { created_by: userId }],
-            status: { in: ["open", "in_progress"] },
+            // OR: [{ user_id: userId }, { created_by: userId }],
+            user_id: userId, // ✅ Only assigned tasks
+            status: "open",
+            closed_at: null,
           },
+        });
+        logger.info("[LeadStatsService] totalMyTasks debug", {
+          userId,
+          totalMyTasks,
         });
       }
     }
@@ -113,7 +119,9 @@ export class LeadStatsService {
     const totalClientDocumentationStageLeads = await countByStatus(
       "client-documentation-stage"
     );
-    const totalClientApprovalStageLeads = await countByStatus("client-approval-stage");
+    const totalClientApprovalStageLeads = await countByStatus(
+      "client-approval-stage"
+    );
 
     const stats = {
       total_leads: totalLeads,
