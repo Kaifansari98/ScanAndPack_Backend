@@ -20,7 +20,7 @@ ClientDocumentationRouter.post(
     "/add-documents",
     uploadClientDocumentation.array("documents", 10),
     ClientDocumentationController.addMoreDocuments
-);  
+);
 
 // GET /api/leads/client-documentation/allLeads/vendorId/:vendorId/userId/:userId
 ClientDocumentationRouter.get(
