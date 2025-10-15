@@ -613,12 +613,12 @@ export const getLeadById = async (
       `[SERVICE] Fetching lead ${leadId} for user ${userId} in vendor ${vendorId}`
     );
 
-    // 1️⃣ Get user role
+    // 1️⃣ Get user role info
     const userInfo = await getUserRole(userId, vendorId);
     if (!userInfo.isValid) throw new Error("User not found or inactive");
-    const userType = userInfo.userType ?? "";
+    const userType = userInfo.userType?.toLowerCase() ?? "";
 
-    // 2️⃣ Base where
+    // 2️⃣ Base condition (vendor-scoped)
     let whereCondition: any = {
       id: leadId,
       vendor_id: vendorId,
@@ -626,81 +626,48 @@ export const getLeadById = async (
       account: { is_deleted: false },
     };
 
+    // 3️⃣ Access control
     if (userType === "sales-executive") {
-      const [mappedLeads, taskLeads] = await Promise.all([
-        prisma.leadUserMapping.findMany({
-          where: { vendor_id: vendorId, user_id: userId, status: "active" },
-          select: { lead_id: true },
-        }),
-        prisma.userLeadTask.findMany({
-          where: {
-            vendor_id: vendorId,
-            OR: [{ created_by: userId }, { user_id: userId }],
-          },
-          select: { lead_id: true },
-        }),
-      ]);
-
-      const leadIds = [
-        ...new Set([
-          ...mappedLeads.map((m) => m.lead_id),
-          ...taskLeads.map((t) => t.lead_id),
-        ]),
-      ];
-
-      if (!leadIds.includes(leadId)) {
-        throw new Error("Lead not found or access denied");
-      }
-
-      whereCondition.id = { in: leadIds, equals: leadId };
+      // Instead of blocking access, only check vendor ownership.
+      console.log("[SERVICE] Sales Executive – vendor scoped access granted");
     } else if (["admin", "super-admin"].includes(userType)) {
-      console.log(`[SERVICE] Admin/Super-admin access`);
+      console.log("[SERVICE] Admin/Super-admin full access");
     } else {
+      // Fallback: normal users can only see their created leads
       whereCondition.created_by = userId;
     }
 
-    // 3️⃣ Fetch lead
-    let lead = await prisma.leadMaster.findFirst({
+    // 4️⃣ Fetch the lead
+    const lead = await prisma.leadMaster.findFirst({
       where: whereCondition,
       include: {
-        account: { select: { id: true, name: true } },
-        leadProductStructureMapping: { include: { productStructure: true } },
-        productMappings: { include: { productType: true } },
-        documents: { where: { deleted_at: null } },
-        source: true,
+        account: {
+          select: { id: true, name: true, email: true, contact_no: true },
+        },
         siteType: true,
+        source: true,
         statusType: true,
+        productMappings: { include: { productType: true } },
+        leadProductStructureMapping: { include: { productStructure: true } },
+        documents: { where: { deleted_at: null } },
         createdBy: {
-          select: {
-            id: true,
-            user_name: true,
-            user_email: true,
-            user_contact: true,
-          },
+          select: { id: true, user_name: true, user_email: true },
         },
         assignedTo: {
-          select: {
-            id: true,
-            user_name: true,
-            user_email: true,
-            user_contact: true,
-          },
+          select: { id: true, user_name: true, user_email: true },
         },
         assignedBy: {
-          select: {
-            id: true,
-            user_name: true,
-            user_email: true,
-            user_contact: true,
-          },
+          select: { id: true, user_name: true, user_email: true },
         },
         tasks: true,
       },
     });
 
-    if (!lead) throw new Error("Lead not found or access denied");
+    if (!lead) {
+      throw new Error(`Lead ${leadId} not found for vendor ${vendorId}`);
+    }
 
-    // ✅ Auto-convert draft to complete if all fields are filled
+    // ✅ Auto-unmark draft if completed
     if (lead.is_draft && isLeadComplete(lead)) {
       await prisma.leadMaster.update({
         where: { id: lead.id },
@@ -709,26 +676,18 @@ export const getLeadById = async (
       lead.is_draft = false;
     }
 
-    // Add signed URLs for each document
+    // 5️⃣ Add signed URLs
     const documentsWithUrls = await Promise.all(
       lead.documents.map(async (doc) => {
-        if (doc.doc_sys_name) {
-          const signedUrl = await generateSignedUrl(
-            doc.doc_sys_name,
-            3600,
-            "inline"
-          );
-          return { ...doc, signedUrl };
-        }
-        return doc;
+        const signedUrl = doc.doc_sys_name
+          ? await generateSignedUrl(doc.doc_sys_name, 3600, "inline")
+          : null;
+        return { ...doc, signedUrl };
       })
     );
 
     return {
-      lead: {
-        ...lead,
-        documents: documentsWithUrls,
-      },
+      lead: { ...lead, documents: documentsWithUrls },
       userInfo: {
         role: userType,
         canViewAllLeads: ["admin", "super-admin"].includes(userType),
