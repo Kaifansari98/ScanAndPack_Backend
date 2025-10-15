@@ -185,8 +185,10 @@ export class BookingStageController {
       return res.status(200).json({
         success: true,
         message: "Leads with status_id = 4 fetched successfully",
-        count,
-        data: leads,
+        data: {
+          leads, // ✅ array
+          count, // ✅ number
+        },
       });
     } catch (error: any) {
       console.error("[BookingStageController] GetStatus4Leads Error:", error);
