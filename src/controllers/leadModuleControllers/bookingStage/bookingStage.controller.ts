@@ -180,9 +180,12 @@ export class BookingStageController {
         userId
       );
 
+      const count = leads.length;
+
       return res.status(200).json({
         success: true,
         message: "Leads with status_id = 4 fetched successfully",
+        count,
         data: leads,
       });
     } catch (error: any) {

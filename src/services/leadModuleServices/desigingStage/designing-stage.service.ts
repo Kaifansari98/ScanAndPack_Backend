@@ -246,6 +246,7 @@ export class DesigingStage {
         limit,
         totalPages: Math.ceil(total / limit),
       },
+      count: leadsWithSignedUrls.length,
     };
   }
 
