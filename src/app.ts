@@ -8,7 +8,7 @@ import { requestLogger, errorLogger } from './middlewares/requestLogger';
 export const app = express();
 
 const allowedOrigins = [
-  'https://furnix.vloq.com',
+  'https://shambhala.furnixcrm.com',
   'https://cadbid.com',
   'http://localhost:3000',
   'http://localhost:5173', 
@@ -16,13 +16,29 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); // allow REST clients, Postman, etc.
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      logger.warn(`❌ Blocked by CORS: ${origin}`);
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "X-Requested-With",
+      "Accept",
+      "Origin",
+    ],
   })
 );
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// ✅ Increase request size limits (fixes “CORS” caused by 413 Payload Too Large)
+app.use(express.json({ limit: '200mb' }));
+app.use(express.urlencoded({ extended: true, limit: '200mb' }));
 
 app.use(requestLogger);
 
