@@ -36,4 +36,16 @@ clientApprovalRouter.get(
   ClientApprovalController.getApprovalDetails
 );
 
+clientApprovalRouter.post(
+  "/vendorId/:vendorId/leadId/:leadId/request-to-tech-check",
+  ClientApprovalController.requestToTechCheck
+);
+
+// GET /api/tech-check-users/vendorId/:vendorId
+// Fetch all tech-check users for a specific vendor
+clientApprovalRouter.get(
+  "/tech-check-users/vendorId/:vendorId",
+  ClientApprovalController.fetchTechCheckUsersByVendor
+);
+
 export { clientApprovalRouter };

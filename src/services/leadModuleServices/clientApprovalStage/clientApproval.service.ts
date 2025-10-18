@@ -2,18 +2,16 @@ import { prisma } from "../../../prisma/client";
 import { ClientApprovalDto } from "../../../types/clientApproval.dto";
 import { BackendData } from "../../../types/leadModule.types";
 import { sanitizeFilename } from "../../../utils/sanitizeFilename";
-import {
-  uploadToWasabClientApprovalDocumentation,
-} from "../../../utils/wasabiClient";
+import { generateSignedUrl, uploadToWasabClientApprovalDocumentation } from "../../../utils/wasabiClient";
 import { Prisma } from "@prisma/client";
 
 export class ClientApprovalService {
   public async submitClientApproval(data: ClientApprovalDto) {
     const response: any = { screenshots: [], paymentInfo: null, ledger: null };
 
-    // Step 1. Get DocType for approval screenshots (Type 12)
+    // Step 1. Get DocType for approval screenshots (Type 13)
     const approvalDocType = await prisma.documentTypeMaster.findFirst({
-      where: { vendor_id: data.vendor_id, tag: "Type 12" },
+      where: { vendor_id: data.vendor_id, tag: "Type 13" },
     });
     if (!approvalDocType)
       throw new Error(
@@ -43,29 +41,19 @@ export class ClientApprovalService {
       response.screenshots.push(docEntry);
     }
 
-    // Step 2. Resolve status IDs
-    const clientApprovalDoneStatus = await prisma.statusTypeMaster.findFirst({
-      where: { vendor_id: data.vendor_id, tag: "Type 8" },
-      select: { id: true },
-    });
-    if (!clientApprovalDoneStatus) {
-      throw new Error(
-        `Tech Check Status (Type 8) not found for vendor ${data.vendor_id}`
-      );
-    }
-
-    // Step 3. Update lead with advance payment date + move to Type 8
+    // Step 2. (REMOVED) - Do not update lead status anymore
+    // If you still want to update advance_payment_date alone, keep this:
     await prisma.leadMaster.update({
       where: { id: data.lead_id },
       data: {
+        is_client_approval_submitted: true,
         advance_payment_date: new Date(data.advance_payment_date),
-        status_id: clientApprovalDoneStatus.id, // ✅ Move to Type 8
         updated_at: new Date(),
         updated_by: data.created_by,
       },
     });
 
-    // Step 4. Handle Payment Info
+    // Step 3. Handle Payment Info
     const paymentType = await prisma.paymentTypeMaster.findFirst({
       where: { vendor_id: data.vendor_id, tag: "Type 3" },
     });
@@ -112,11 +100,11 @@ export class ClientApprovalService {
         amount: data.amount_paid,
         payment_text: data.payment_text,
         payment_file_id: paymentFileId,
-        payment_date: new Date(data.advance_payment_date), // ✅ FIX applied
+        payment_date: new Date(data.advance_payment_date),
       },
     });
 
-    // Step 5. Ledger Entry
+    // Step 4. Ledger Entry
     const ledger = await prisma.ledger.create({
       data: {
         lead_id: data.lead_id,
@@ -125,27 +113,15 @@ export class ClientApprovalService {
         client_id: data.client_id,
         created_by: data.created_by,
         amount: data.amount_paid,
-        payment_date: new Date(data.advance_payment_date), // ✅ Already correct
+        payment_date: new Date(data.advance_payment_date),
         type: "credit",
       },
     });
 
-    // Step 6. LeadUserMapping
-    const leadUserMapping = await prisma.leadUserMapping.create({
-      data: {
-        account_id: data.account_id,
-        lead_id: data.lead_id,
-        vendor_id: data.vendor_id,
-        user_id: data.assign_lead_to,
-        type: "backend",
-        status: "active",
-        created_by: data.created_by,
-      },
-    });
+    // Step 5. (REMOVED) - No LeadUserMapping creation anymore
 
     response.paymentInfo = paymentInfo;
     response.ledger = ledger;
-    response.leadUserMapping = leadUserMapping;
 
     return response;
   }
@@ -302,52 +278,75 @@ export class ClientApprovalService {
   }
 
   public async getClientApprovalDetails(vendorId: number, leadId: number) {
-    // Step 1. Fetch DocType for approval screenshots
+    // Step 1️⃣. Fetch DocType for approval screenshots
     const approvalDocType = await prisma.documentTypeMaster.findFirst({
-      where: { vendor_id: vendorId, tag: "Type 12" }, // Client Approval Documents
+      where: { vendor_id: vendorId, tag: "Type 13" }, // Client Approval Documents
       select: { id: true },
     });
 
-    // Step 2. Fetch Payment Info first (so we can exclude its file from screenshots)
+    // Step 2️⃣. Fetch Payment Info (to exclude its file from screenshots)
     const paymentInfo = await prisma.paymentInfo.findFirst({
       where: { vendor_id: vendorId, lead_id: leadId },
       orderBy: { created_at: "desc" },
     });
 
-    // Step 3. Screenshots (exclude payment_file_id if exists)
-    const screenshots = approvalDocType
-      ? await prisma.leadDocuments.findMany({
-          where: {
-            vendor_id: vendorId,
-            lead_id: leadId,
-            doc_type_id: approvalDocType.id,
-            is_deleted: false,
-            NOT: paymentInfo?.payment_file_id
-              ? { id: paymentInfo.payment_file_id }
-              : undefined, // 👈 Exclude payment file
-          },
-          orderBy: { created_at: "desc" },
-        })
-      : [];
-
-    // Step 4. Fetch Payment File separately
-    let paymentFile: any = null;
-    if (paymentInfo?.payment_file_id) {
-      paymentFile = await prisma.leadDocuments.findUnique({
-        where: { id: paymentInfo.payment_file_id },
+    // Step 3️⃣. Screenshots (exclude payment_file_id if exists)
+    let screenshots: any[] = [];
+    if (approvalDocType) {
+      const docs = await prisma.leadDocuments.findMany({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          doc_type_id: approvalDocType.id,
+          is_deleted: false,
+          NOT: paymentInfo?.payment_file_id
+            ? { id: paymentInfo.payment_file_id }
+            : undefined, // exclude payment proof file
+        },
+        orderBy: { created_at: "desc" },
       });
+
+      // ✅ Add signed URLs
+      screenshots = await Promise.all(
+        docs.map(async (doc) => {
+          const signedUrl = doc.doc_sys_name
+            ? await generateSignedUrl(doc.doc_sys_name, 3600, "inline")
+            : null;
+          return { ...doc, signedUrl };
+        })
+      );
     }
 
-    // Step 5. LeadUserMapping with User details
+    // Step 4️⃣. Fetch Payment File separately
+    let paymentFile: any = null;
+    if (paymentInfo?.payment_file_id) {
+      const file = await prisma.leadDocuments.findUnique({
+        where: { id: paymentInfo.payment_file_id },
+      });
+
+      if (file) {
+        const signedUrl = file.doc_sys_name
+          ? await generateSignedUrl(file.doc_sys_name, 3600, "inline")
+          : null;
+        paymentFile = { ...file, signedUrl };
+      }
+    }
+
+    // Step 5️⃣. LeadUserMapping with User details (only user_type_id = 5)
     const leadUserMapping = await prisma.leadUserMapping.findFirst({
-      where: { vendor_id: vendorId, lead_id: leadId, status: "active" },
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        status: "active",
+        user: { user_type_id: 5 },
+      },
       include: {
         user: { select: { id: true, user_name: true } },
       },
       orderBy: { created_at: "desc" },
     });
 
-    // Step 6. LeadMaster basic details
+    // Step 6️⃣. LeadMaster basic details
     const leadMaster = await prisma.leadMaster.findUnique({
       where: { id: leadId, vendor_id: vendorId },
       select: {
@@ -372,10 +371,10 @@ export class ClientApprovalService {
       : null;
 
     return {
-      lead, // ✅ added
+      lead,
       screenshots,
       paymentInfo,
-      paymentFile, // ✅ separate
+      paymentFile,
       leadUserMapping,
     };
   }
@@ -418,5 +417,130 @@ export class ClientApprovalService {
         orderBy: { created_at: Prisma.SortOrder.desc }, // ✅ fixed typing
       },
     };
+  }
+
+  public async requestToTechCheck(data: {
+    lead_id: number;
+    vendor_id: number;
+    account_id: number;
+    assign_to_user_id: number;
+    created_by: number;
+  }) {
+    const response: any = {};
+
+    // Step 1. Get Tech Check Status (Type 8)
+    const techCheckStatus = await prisma.statusTypeMaster.findFirst({
+      where: { vendor_id: data.vendor_id, tag: "Type 8" },
+      select: { id: true },
+    });
+
+    if (!techCheckStatus) {
+      throw new Error(
+        `Tech Check Status (Type 8) not found for vendor ${data.vendor_id}`
+      );
+    }
+
+    // Step 2. Update lead status → Type 8
+    const updatedLead = await prisma.leadMaster.update({
+      where: { id: data.lead_id },
+      data: {
+        status_id: techCheckStatus.id,
+        updated_by: data.created_by,
+        updated_at: new Date(),
+      },
+    });
+
+    // Step 3. Create LeadUserMapping (assign to backend user)
+    const leadUserMapping = await prisma.leadUserMapping.create({
+      data: {
+        account_id: data.account_id,
+        lead_id: data.lead_id,
+        vendor_id: data.vendor_id,
+        user_id: data.assign_to_user_id,
+        type: "tech-check",
+        status: "active",
+        created_by: data.created_by,
+      },
+    });
+
+    response.lead = updatedLead;
+    response.leadUserMapping = leadUserMapping;
+
+    return response;
+  }
+
+  public async getTechCheckUsersByVendor(
+    vendorId: number
+  ): Promise<BackendData[]> {
+    try {
+      console.log(
+        `[SERVICE] Fetching Tech-Check Users for vendor ID: ${vendorId}`
+      );
+
+      // 1. Find the user type ID for 'tech-check'
+      const techCheckUserType = await prisma.userTypeMaster.findFirst({
+        where: {
+          user_type: {
+            equals: "tech-check",
+            mode: "insensitive",
+          },
+        },
+      });
+
+      if (!techCheckUserType) {
+        console.log("[SERVICE] Tech-Check user type not found");
+        return [];
+      }
+
+      console.log(
+        `[SERVICE] Found Tech-Check user type ID: ${techCheckUserType.id}`
+      );
+
+      // 2. Fetch all users with tech-check role for the specified vendor
+      const techCheckUsers = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: vendorId,
+          user_type_id: techCheckUserType.id,
+          status: "active",
+        },
+        include: {
+          user_type: true,
+          documents: true,
+        },
+        orderBy: {
+          created_at: "desc",
+        },
+      });
+
+      console.log(`[SERVICE] Found ${techCheckUsers.length} Tech-Check Users`);
+
+      // 3. Transform data to match interface
+      const transformedData: BackendData[] = techCheckUsers.map((user) => ({
+        id: user.id,
+        vendor_id: user.vendor_id,
+        user_name: user.user_name,
+        user_contact: user.user_contact,
+        user_email: user.user_email,
+        user_timezone: user.user_timezone,
+        status: user.status,
+        created_at: user.created_at,
+        updated_at: user.updated_at,
+        user_type: {
+          id: user.user_type.id,
+          user_type: user.user_type.user_type,
+        },
+        documents: user.documents.map((doc) => ({
+          id: doc.id,
+          document_name: doc.document_name,
+          document_number: doc.document_number,
+          filename: doc.filename,
+        })),
+      }));
+
+      return transformedData;
+    } catch (error: any) {
+      console.error("[SERVICE] Error fetching Tech-Check Users:", error);
+      throw new Error(`Failed to fetch Tech-Check Users: ${error.message}`);
+    }
   }
 }

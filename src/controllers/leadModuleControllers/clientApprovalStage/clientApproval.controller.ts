@@ -18,7 +18,6 @@ export class ClientApprovalController {
         advance_payment_date,
         amount_paid,
         payment_text,
-        assign_lead_to,
       } = req.body;
 
       const approvalScreenshots = (req.files as any)?.approvalScreenshots || [];
@@ -50,7 +49,6 @@ export class ClientApprovalController {
         amount_paid: parseFloat(amount_paid),
         payment_text,
         payment_files,
-        assign_lead_to: parseInt(assign_lead_to),
       };
 
       const result = await clientApprovalService.submitClientApproval(dto);
@@ -206,6 +204,116 @@ export class ClientApprovalController {
         success: false,
         message: error.message || "Internal server error",
       });
+    }
+  }
+
+  public static async requestToTechCheck(
+    req: Request,
+    res: Response
+  ): Promise<void> {
+    try {
+      const { leadId, vendorId } = req.params;
+      const { account_id, assign_to_user_id, created_by } = req.body;
+
+      if (
+        !leadId ||
+        !vendorId ||
+        !account_id ||
+        !assign_to_user_id ||
+        !created_by
+      ) {
+        res.status(400).json({
+          success: false,
+          message: "Missing required fields",
+        });
+        return;
+      }
+
+      const dto = {
+        lead_id: parseInt(leadId),
+        vendor_id: parseInt(vendorId),
+        account_id: parseInt(account_id),
+        assign_to_user_id: parseInt(assign_to_user_id),
+        created_by: parseInt(created_by),
+      };
+
+      const result = await clientApprovalService.requestToTechCheck(dto);
+
+      res.status(200).json({
+        success: true,
+        message: "Lead moved to Tech Check stage successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error(
+        "[ClientApprovalController] Error in requestToTechCheck:",
+        error
+      );
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  }
+
+  public static async fetchTechCheckUsersByVendor(
+    req: Request,
+    res: Response
+  ): Promise<Response> {
+    try {
+      const vendorId = parseInt(req.params.vendorId);
+
+      if (isNaN(vendorId) || vendorId <= 0) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid vendor ID provided", 400));
+      }
+
+      console.log(
+        `[CONTROLLER] Fetching Tech-Check Users for vendor ID: ${vendorId}`
+      );
+
+      const techCheckUsers =
+        await clientApprovalService.getTechCheckUsersByVendor(vendorId);
+
+      if (techCheckUsers.length === 0) {
+        return res
+          .status(200)
+          .json(
+            ApiResponse.success(
+              [],
+              "No Tech-Check Users found for this vendor",
+              200
+            )
+          );
+      }
+
+      console.log(
+        `[CONTROLLER] Found ${techCheckUsers.length} Tech-Check Users`
+      );
+
+      return res.status(200).json(
+        ApiResponse.success(
+          {
+            tech_check_users: techCheckUsers,
+            count: techCheckUsers.length,
+          },
+          "Tech-Check users fetched successfully",
+          200
+        )
+      );
+    } catch (error: any) {
+      console.error("[CONTROLLER] fetchTechCheckUsersByVendor error:", error);
+
+      return res
+        .status(500)
+        .json(
+          ApiResponse.error(
+            "Failed to fetch Tech-Check Users",
+            500,
+            process.env.NODE_ENV === "development" ? error.message : undefined
+          )
+        );
     }
   }
 }

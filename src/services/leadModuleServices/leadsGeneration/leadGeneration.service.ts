@@ -649,7 +649,7 @@ export const getLeadById = async (
         statusType: true,
         productMappings: { include: { productType: true } },
         leadProductStructureMapping: { include: { productStructure: true } },
-        documents: { where: { deleted_at: null } },
+        documents: { where: { deleted_at: null, documentType: { tag: "Type 1" } } },
         createdBy: {
           select: { id: true, user_name: true, user_email: true },
         },

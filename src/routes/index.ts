@@ -30,7 +30,7 @@ import ClientDocumentationRouter from './clientDocumentationRoutes/clientDocumen
 import taskRouter from './task/task.routes';
 import leadActivityStatusRouter from './leadModuleRoutes/leadActivityStatus.routes';
 import { clientApprovalRouter } from './clientApprovalStage/clientApproval.routes';
-
+import { techCheckRouter } from './production/tech-check/tech-check.routes';
 const router = Router();
 
 router.use('/vendors', vendorRoutes);
@@ -67,5 +67,7 @@ router.use("/leads/tasks", taskRouter);
 router.use("/leads/lead-activity-status", leadActivityStatusRouter);
 
 router.use("/leads/client-approval", clientApprovalRouter);
+
+router.use("/leads/production/tech-check", techCheckRouter);
 
 export { router };
