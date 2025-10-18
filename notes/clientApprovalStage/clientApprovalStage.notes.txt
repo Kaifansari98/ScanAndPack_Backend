@@ -34,7 +34,7 @@ If any required field/file is missing → return 400 Bad Request.
 Loops over each screenshot.
 Sanitizes filename.
 Uploads to Wasabi (S3 bucket).
-Saves metadata in DB → leadDocuments table with doc_type_id = Type 12 (Client Approval Documents).
+Saves metadata in DB → leadDocuments table with doc_type_id = Type 13 (Client Approval Documents).
 Adds entries to response.screenshots.
 
 3. Update lead stage

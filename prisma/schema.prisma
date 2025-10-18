@@ -361,6 +361,7 @@ model LeadMaster {
   booking_amount                Float?
   total_project_amount          Float?
   advance_payment_date          DateTime?
+  is_client_approval_submitted  Boolean        @default(false)
   vendor_id                     Int
   assign_to                     Int?
   assigned_by                   Int?
@@ -547,19 +548,26 @@ model ProductTypeMaster {
   leads  LeadProductMapping[]
 }
 
+enum TechCheckStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
 model LeadDocuments {
-  id           Int       @id @default(autoincrement())
-  doc_og_name  String
-  doc_sys_name String
-  created_by   Int
-  created_at   DateTime  @default(now())
-  deleted_by   Int?
-  deleted_at   DateTime?
-  is_deleted   Boolean   @default(false)
-  doc_type_id  Int
-  account_id   Int?
-  lead_id      Int?
-  vendor_id    Int
+  id                Int              @id @default(autoincrement())
+  doc_og_name       String
+  doc_sys_name      String
+  created_by        Int
+  created_at        DateTime         @default(now())
+  deleted_by        Int?
+  deleted_at        DateTime?
+  is_deleted        Boolean          @default(false)
+  doc_type_id       Int
+  account_id        Int?
+  lead_id           Int?
+  vendor_id         Int
+  tech_check_status TechCheckStatus?
 
   // ✅ Relations
   vendor       VendorMaster       @relation(fields: [vendor_id], references: [id], onDelete: Cascade)

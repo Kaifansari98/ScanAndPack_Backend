@@ -74,7 +74,7 @@ export class LeadController {
           ? Number(req.body.site_type_id)
           : undefined,
         status_id: openStatus.id, // <-- use openStatus' id here
-        source_id: Number(req.body.source_id)|| undefined,
+        source_id: Number(req.body.source_id) || undefined,
         vendor_id: Number(req.body.vendor_id),
         created_by: Number(req.body.created_by),
         assign_to: req.body.assign_to ? Number(req.body.assign_to) : undefined,
@@ -96,7 +96,10 @@ export class LeadController {
       // 🧩 Use draft or full schema dynamically
       const schemaToUse = draftMode ? createLeadDraftSchema : createLeadSchema;
 
-      const { error, value } = schemaToUse.validate(payload, { convert: true, allowUnknown: true, });
+      const { error, value } = schemaToUse.validate(payload, {
+        convert: true,
+        allowUnknown: true,
+      });
 
       if (error) {
         logger.warn("Validation failed", { details: error.details });

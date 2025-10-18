@@ -4,47 +4,81 @@ import { sanitizeFilename } from "../../../utils/sanitizeFilename";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { Prisma } from "@prisma/client";
 import logger from "../../../utils/logger";
+import type { Express } from "express";
 
-interface ClientDocumentationDto {
+export type DocTypeTag = "Type 11" | "Type 12";
+
+export interface CustomMulterFile extends Express.Multer.File {
+  docTypeTag: DocTypeTag;
+}
+
+export interface ClientDocumentationDto {
   lead_id: number;
   vendor_id: number;
   account_id: number;
   created_by: number;
-  documents: Express.Multer.File[];
+  documents: CustomMulterFile[];
 }
 
 export class ClientDocumentationService {
   public async createClientDocumentationStage(data: ClientDocumentationDto) {
-    return await prisma.$transaction(async (tx: any) => {
+    // ✅ Step 1: Upload files to Wasabi (outside transaction)
+    const uploadedDocs: {
+      originalname: string;
+      sysName: string;
+      docTypeTag: "Type 11" | "Type 12";
+    }[] = [];
+
+    for (const doc of data.documents) {
+      const sanitizedName = sanitizeFilename(doc.originalname);
+
+      // Select folder based on docTypeTag
+      let folder = "client_documentations";
+      if (doc.docTypeTag === "Type 11") {
+        folder = "client_documentations/client_documentations_ppt";
+      } else if (doc.docTypeTag === "Type 12") {
+        folder = "client_documentations/client_documentations_pytha";
+      }
+
+      // Upload to Wasabi
+      const sysName = await uploadToWasabClientDocumentation(
+        doc.buffer,
+        data.vendor_id,
+        data.lead_id,
+        sanitizedName,
+        folder
+      );
+
+      uploadedDocs.push({
+        originalname: doc.originalname,
+        sysName,
+        docTypeTag: doc.docTypeTag,
+      });
+    }
+
+    // ✅ Step 2: Run DB operations inside a short transaction
+    return await prisma.$transaction(async (tx) => {
       const response: any = {
         documents: [],
         message: "Client documentation stage completed successfully",
       };
 
-      // 1️⃣ Get Document Type (Type 11)
-      const docType = await tx.documentTypeMaster.findFirst({
-        where: { vendor_id: data.vendor_id, tag: "Type 11" },
-      });
-      if (!docType) {
-        throw new Error(
-          "Document type (Client Documentation) not found for this vendor"
-        );
-      }
+      // Insert lead documents
+      for (const uploaded of uploadedDocs) {
+        const docType = await tx.documentTypeMaster.findFirst({
+          where: { vendor_id: data.vendor_id, tag: uploaded.docTypeTag },
+        });
 
-      // 2️⃣ Upload each document
-      for (const doc of data.documents) {
-        const sanitizedName = sanitizeFilename(doc.originalname);
-        const sysName = await uploadToWasabClientDocumentation(
-          doc.buffer,
-          data.vendor_id,
-          data.lead_id,
-          sanitizedName
-        );
+        if (!docType) {
+          throw new Error(
+            `Document type ${uploaded.docTypeTag} not found for vendor ${data.vendor_id}`
+          );
+        }
 
         const docEntry = await tx.leadDocuments.create({
           data: {
-            doc_og_name: doc.originalname,
-            doc_sys_name: sysName,
+            doc_og_name: uploaded.originalname,
+            doc_sys_name: uploaded.sysName,
             created_by: data.created_by,
             doc_type_id: docType.id,
             account_id: data.account_id,
@@ -56,11 +90,11 @@ export class ClientDocumentationService {
         response.documents.push(docEntry);
       }
 
-      // 3️⃣ Resolve the vendor's Client Approval status ID dynamically
+      // Find Client Approval Status (Type 7)
       const clientApprovalStatus = await tx.statusTypeMaster.findFirst({
         where: {
           vendor_id: data.vendor_id,
-          tag: "Type 7", // ✅ Client Approval
+          tag: "Type 7",
         },
         select: { id: true },
       });
@@ -71,7 +105,7 @@ export class ClientDocumentationService {
         );
       }
 
-      // 4️⃣ Update lead status (move to Client Approval)
+      // Update lead status
       await tx.leadMaster.update({
         where: { id: data.lead_id },
         data: {
@@ -81,12 +115,11 @@ export class ClientDocumentationService {
         },
       });
 
-      // 5️⃣ Action logging
+      // Add logs
       const docCount = response.documents.length;
       const plural = docCount > 1 ? "documents have" : "document has";
       const actionMessage = `Client Documentation stage completed successfully — ${docCount} Client Documentation ${plural} been uploaded successfully.`;
 
-      // Create LeadDetailedLogs entry
       const detailedLog = await tx.leadDetailedLogs.create({
         data: {
           vendor_id: data.vendor_id,
@@ -99,7 +132,6 @@ export class ClientDocumentationService {
         },
       });
 
-      // Create LeadDocumentLogs entries
       if (response.documents.length > 0) {
         const docLogsData = response.documents.map((doc: any) => ({
           vendor_id: data.vendor_id,
@@ -114,14 +146,12 @@ export class ClientDocumentationService {
         await tx.leadDocumentLogs.createMany({ data: docLogsData });
       }
 
-      // 6️⃣ Add second action log for status movement
-      const statusAction = `Lead has been moved to Client Approval stage.`;
       await tx.leadDetailedLogs.create({
         data: {
           vendor_id: data.vendor_id,
           lead_id: data.lead_id,
           account_id: data.account_id,
-          action: statusAction,
+          action: `Lead has been moved to Client Approval stage.`,
           action_type: "UPDATE",
           created_by: data.created_by,
           created_at: new Date(),
@@ -140,28 +170,23 @@ export class ClientDocumentationService {
   }
 
   public async getClientDocumentation(vendorId: number, leadId: number) {
-    // Resolve the vendor's Open status ID dynamically
-    const clientDocumentationStatus = await prisma.statusTypeMaster.findFirst({
-      where: {
-        vendor_id: vendorId,
-        tag: "Type 6", // ✅ Open status
-      },
-      select: { id: true },
-    });
-
-    if (!clientDocumentationStatus) {
-      throw new Error(`Open status (Type 1) not found for vendor ${vendorId}`);
+    // 1️⃣ Validate vendor & lead
+    if (!vendorId || !leadId) {
+      throw new Error("vendorId and leadId are required");
     }
 
-    // 1. Get lead
+    // 2️⃣ Fetch the lead with all its documents
     const lead = await prisma.leadMaster.findFirst({
       where: {
         id: leadId,
         vendor_id: vendorId,
-        // status_id: clientDocumentationStatus.id, // ✅ Client Documentation stage
       },
       include: {
-        documents: true,
+        documents: {
+          include: {
+            documentType: true, // To easily identify Type 11 / Type 12
+          },
+        },
       },
     });
 
@@ -169,90 +194,122 @@ export class ClientDocumentationService {
       throw new Error("Lead not found or not in Client Documentation stage");
     }
 
-    // 2. Get doc type for Client Documentation (Type 11)
-    const docType = await prisma.documentTypeMaster.findFirst({
-      where: {
-        vendor_id: vendorId,
-        tag: "Type 11",
-      },
-    });
+    // 3️⃣ Get document type entries for both PPT and PYTHA
+    const [pptDocType, pythaDocType] = await Promise.all([
+      prisma.documentTypeMaster.findFirst({
+        where: { vendor_id: vendorId, tag: "Type 11" }, // PPT
+      }),
+      prisma.documentTypeMaster.findFirst({
+        where: { vendor_id: vendorId, tag: "Type 12" }, // PYTHA
+      }),
+    ]);
 
-    if (!docType) {
+    if (!pptDocType && !pythaDocType) {
       throw new Error(
-        "Document type (Client Documentation) not found for this vendor"
+        "Document types (Client Documentation PPT / PYTHA) not found for this vendor"
       );
     }
 
-    // 3. Filter documents of this type
-    const clientDocs = lead.documents.filter(
-      (doc: any) => doc.doc_type_id === docType.id
+    // 4️⃣ Separate PPT and PYTHA documents by doc_type_id
+    const pptDocs = lead.documents.filter(
+      (d) => d.doc_type_id === pptDocType?.id
+    );
+    const pythaDocs = lead.documents.filter(
+      (d) => d.doc_type_id === pythaDocType?.id
     );
 
-    // 4. Attach signed URLs
-    const docsWithSignedUrls = await Promise.all(
-      clientDocs.map(async (doc: any) => ({
-        ...doc,
-        signed_url: await generateSignedUrl(doc.doc_sys_name, 3600, "inline"),
-      }))
-    );
+    // 5️⃣ Generate signed URLs for both sets
+    const [pptDocsWithUrls, pythaDocsWithUrls] = await Promise.all([
+      Promise.all(
+        pptDocs.map(async (doc: any) => ({
+          ...doc,
+          signed_url: await generateSignedUrl(doc.doc_sys_name, 3600, "inline"),
+        }))
+      ),
+      Promise.all(
+        pythaDocs.map(async (doc: any) => ({
+          ...doc,
+          signed_url: await generateSignedUrl(doc.doc_sys_name, 3600, "inline"),
+        }))
+      ),
+    ]);
 
+    // 6️⃣ Return structured response
     return {
       id: lead.id,
       vendor_id: lead.vendor_id,
       status_id: lead.status_id,
-      documents: docsWithSignedUrls,
+      documents: {
+        ppt: pptDocsWithUrls,
+        pytha: pythaDocsWithUrls,
+      },
     };
   }
 
   public async addMoreClientDocumentation(data: ClientDocumentationDto) {
-    return await prisma.$transaction(async (tx: any) => {
+    // Upload outside transaction
+    const uploadedDocs: {
+      originalname: string;
+      sysName: string;
+      docTypeTag: "Type 11" | "Type 12";
+    }[] = [];
+
+    for (const doc of data.documents) {
+      const sanitizedName = sanitizeFilename(doc.originalname);
+
+      let folder = "client_documentations";
+      if (doc.docTypeTag === "Type 11") {
+        folder = "client_documentations/client_documentations_ppt";
+      } else if (doc.docTypeTag === "Type 12") {
+        folder = "client_documentations/client_documentations_pytha";
+      }
+
+      const sysName = await uploadToWasabClientDocumentation(
+        doc.buffer,
+        data.vendor_id,
+        data.lead_id,
+        sanitizedName,
+        folder
+      );
+
+      uploadedDocs.push({
+        originalname: doc.originalname,
+        sysName,
+        docTypeTag: doc.docTypeTag,
+      });
+    }
+
+    // DB Transaction
+    return await prisma.$transaction(async (tx) => {
       const response: any = {
         documents: [],
         message: "Additional client documentation uploaded successfully",
       };
 
-      // 1️⃣ Get Document Type (Type 11)
-      const docType = await tx.documentTypeMaster.findFirst({
-        where: { vendor_id: data.vendor_id, tag: "Type 11" },
-      });
+      for (const uploaded of uploadedDocs) {
+        const docType = await tx.documentTypeMaster.findFirst({
+          where: { vendor_id: data.vendor_id, tag: uploaded.docTypeTag },
+        });
 
-      if (!docType) {
-        throw new Error(
-          "Document type (Client Documentation) not found for this vendor"
-        );
-      }
-
-      // 2️⃣ Upload documents to Wasabi and create entries
-      for (const doc of data.documents) {
-        const sanitizedName = sanitizeFilename(doc.originalname);
-        const sysName = await uploadToWasabClientDocumentation(
-          doc.buffer,
-          data.vendor_id,
-          data.lead_id,
-          sanitizedName
-        );
-
-        const document = await tx.leadDocuments.create({
+        const docEntry = await tx.leadDocuments.create({
           data: {
-            doc_og_name: doc.originalname,
-            doc_sys_name: sysName,
+            doc_og_name: uploaded.originalname,
+            doc_sys_name: uploaded.sysName,
             created_by: data.created_by,
-            doc_type_id: docType.id,
+            doc_type_id: docType?.id!,
             account_id: data.account_id,
             lead_id: data.lead_id,
             vendor_id: data.vendor_id,
           },
         });
 
-        response.documents.push(document);
+        response.documents.push(docEntry);
       }
 
-      // 3️⃣ Create Action Log
       const docCount = response.documents.length;
       const plural = docCount > 1 ? "documents have" : "document has";
       const actionMessage = `${docCount} additional Client Documentation ${plural} been uploaded successfully.`;
 
-      // Create LeadDetailedLogs entry
       const detailedLog = await tx.leadDetailedLogs.create({
         data: {
           vendor_id: data.vendor_id,
@@ -265,20 +322,17 @@ export class ClientDocumentationService {
         },
       });
 
-      // Create LeadDocumentLogs mapping
-      if (response.documents.length > 0) {
-        const docLogsData = response.documents.map((doc: any) => ({
-          vendor_id: data.vendor_id,
-          lead_id: data.lead_id,
-          account_id: data.account_id,
-          doc_id: doc.id,
-          lead_logs_id: detailedLog.id,
-          created_by: data.created_by,
-          created_at: new Date(),
-        }));
+      const docLogsData = response.documents.map((doc: any) => ({
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        account_id: data.account_id,
+        doc_id: doc.id,
+        lead_logs_id: detailedLog.id,
+        created_by: data.created_by,
+        created_at: new Date(),
+      }));
 
-        await tx.leadDocumentLogs.createMany({ data: docLogsData });
-      }
+      await tx.leadDocumentLogs.createMany({ data: docLogsData });
 
       logger.info("✅ Additional Client Documentation uploaded", {
         vendor_id: data.vendor_id,
