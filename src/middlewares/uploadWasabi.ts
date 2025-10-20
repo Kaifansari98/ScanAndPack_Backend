@@ -168,6 +168,7 @@ export const uploadDesigns = multer({
       ".prt",
       ".catpart",
       ".catproduct",
+      ".zip",
     ];
 
     const ext = path.extname(file.originalname).toLowerCase();
@@ -183,5 +184,16 @@ export const uploadDesigns = multer({
         )
       );
     }
+  },
+});
+
+export const uploadMeetingDocs = multer({
+  storage: multer.memoryStorage(),
+  limits: { files: 10 },
+  fileFilter: (req, file, cb) => {
+    const allowed = [".pdf", ".jpg", ".jpeg", ".png", ".doc", ".docx"];
+    const ext = path.extname(file.originalname).toLowerCase();
+    if (allowed.includes(ext)) cb(null, true);
+    else cb(new Error(`Unsupported file type: ${ext}`));
   },
 });
