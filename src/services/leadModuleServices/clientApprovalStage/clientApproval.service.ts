@@ -1,24 +1,24 @@
 import { prisma } from "../../../prisma/client";
 import { ClientApprovalDto } from "../../../types/clientApproval.dto";
 import { BackendData } from "../../../types/leadModule.types";
+import { formatIndianCurrency } from "../../../utils/formatIndianCurrency";
 import { sanitizeFilename } from "../../../utils/sanitizeFilename";
-import { generateSignedUrl, uploadToWasabClientApprovalDocumentation } from "../../../utils/wasabiClient";
+import {
+  generateSignedUrl,
+  uploadToWasabClientApprovalDocumentation,
+} from "../../../utils/wasabiClient";
 import { Prisma } from "@prisma/client";
 
 export class ClientApprovalService {
   public async submitClientApproval(data: ClientApprovalDto) {
     const response: any = { screenshots: [], paymentInfo: null, ledger: null };
 
-    // Step 1. Get DocType for approval screenshots (Type 13)
+    // ✅ Step 1: Upload Client Approval Screenshots
     const approvalDocType = await prisma.documentTypeMaster.findFirst({
       where: { vendor_id: data.vendor_id, tag: "Type 13" },
     });
-    if (!approvalDocType)
-      throw new Error(
-        "Document type (Client Approval Documents) not found for this vendor"
-      );
+    if (!approvalDocType) throw new Error("Doc Type (Type 13) not found");
 
-    // Upload Approval Screenshots
     for (const doc of data.approvalScreenshots) {
       const sanitized = sanitizeFilename(doc.originalname);
       const sysName = await uploadToWasabClientApprovalDocumentation(
@@ -41,87 +41,121 @@ export class ClientApprovalService {
       response.screenshots.push(docEntry);
     }
 
-    // Step 2. (REMOVED) - Do not update lead status anymore
-    // If you still want to update advance_payment_date alone, keep this:
+    // ✅ Step 2: Update Lead flags (but NOT status)
     await prisma.leadMaster.update({
       where: { id: data.lead_id },
       data: {
         is_client_approval_submitted: true,
-        advance_payment_date: new Date(data.advance_payment_date),
-        updated_at: new Date(),
+        advance_payment_date: data.advance_payment_date
+          ? new Date(data.advance_payment_date)
+          : undefined,
         updated_by: data.created_by,
+        updated_at: new Date(),
       },
     });
 
-    // Step 3. Handle Payment Info
-    const paymentType = await prisma.paymentTypeMaster.findFirst({
-      where: { vendor_id: data.vendor_id, tag: "Type 3" },
-    });
-    if (!paymentType)
-      throw new Error(
-        "Payment Type :- client_approval_payment (Type 3) not found for this vendor"
-      );
+    // ✅ Step 3: If amount is provided → create payment + ledger + update pending
+    if (data.amount_paid && data.amount_paid > 0) {
+      const paymentType = await prisma.paymentTypeMaster.findFirst({
+        where: { vendor_id: data.vendor_id, tag: "Type 3" }, // Client Approval Payment
+      });
+      if (!paymentType) throw new Error("Payment Type (Type 3) not found");
 
-    let paymentFileId: number | null = null;
+      let paymentFileId: number | null = null;
 
-    if (data.payment_files && data.payment_files.length > 0) {
-      const uploadedDocs = [];
-      for (const doc of data.payment_files) {
-        const sanitized = sanitizeFilename(doc.originalname);
-        const sysName = await uploadToWasabClientApprovalDocumentation(
-          doc.buffer,
-          data.vendor_id,
-          data.lead_id,
-          sanitized
-        );
-        const docEntry = await prisma.leadDocuments.create({
+      // If payment files uploaded → store them
+      if (data.payment_files && data.payment_files.length > 0) {
+        const uploadedPaymentDocs = [];
+        for (const doc of data.payment_files) {
+          const sanitized = sanitizeFilename(doc.originalname);
+          const sysName = await uploadToWasabClientApprovalDocumentation(
+            doc.buffer,
+            data.vendor_id,
+            data.lead_id,
+            sanitized
+          );
+
+          const docEntry = await prisma.leadDocuments.create({
+            data: {
+              doc_og_name: doc.originalname,
+              doc_sys_name: sysName,
+              created_by: data.created_by,
+              doc_type_id: approvalDocType.id,
+              account_id: data.account_id,
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+            },
+          });
+          uploadedPaymentDocs.push(docEntry);
+        }
+        paymentFileId = uploadedPaymentDocs[0]?.id || null;
+      }
+
+      // ✅ Payment Entry
+      const paymentInfo = await prisma.paymentInfo.create({
+        data: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          account_id: data.account_id,
+          created_by: data.created_by,
+          payment_type_id: paymentType.id,
+          amount: data.amount_paid,
+          payment_text: data.payment_text,
+          payment_file_id: paymentFileId,
+          payment_date: new Date(data.advance_payment_date),
+        },
+      });
+
+      // ✅ Ledger Entry
+      const ledger = await prisma.ledger.create({
+        data: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          account_id: data.account_id,
+          client_id: data.client_id,
+          created_by: data.created_by,
+          amount: data.amount_paid,
+          payment_date: new Date(data.advance_payment_date),
+          type: "credit",
+        },
+      });
+
+      response.paymentInfo = paymentInfo;
+      response.ledger = ledger;
+
+      // ✅ Step 4: Update pending amount
+      const leadRecord = await prisma.leadMaster.findUnique({
+        where: { id: data.lead_id },
+        select: { pending_amount: true },
+      });
+
+      if (leadRecord) {
+        const updatedPending =
+          (leadRecord.pending_amount || 0) - data.amount_paid;
+        await prisma.leadMaster.update({
+          where: { id: data.lead_id },
           data: {
-            doc_og_name: doc.originalname,
-            doc_sys_name: sysName,
-            created_by: data.created_by,
-            doc_type_id: approvalDocType.id,
-            account_id: data.account_id,
-            lead_id: data.lead_id,
-            vendor_id: data.vendor_id,
+            pending_amount: updatedPending < 0 ? 0 : updatedPending,
+            updated_by: data.created_by,
+            updated_at: new Date(),
           },
         });
-        uploadedDocs.push(docEntry);
       }
-      paymentFileId = uploadedDocs[0]?.id || null;
+
+      // ✅ Step 5: Log this event in LeadDetailedLogs
+      await prisma.leadDetailedLogs.create({
+        data: {
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          action: `₹${formatIndianCurrency(
+            data.amount_paid
+          )} has been paid during Client Approval`,
+          action_type: "CREATE", // enum ActionType
+          created_by: data.created_by,
+        },
+      });
     }
-
-    const paymentInfo = await prisma.paymentInfo.create({
-      data: {
-        lead_id: data.lead_id,
-        vendor_id: data.vendor_id,
-        account_id: data.account_id,
-        created_by: data.created_by,
-        payment_type_id: paymentType.id,
-        amount: data.amount_paid,
-        payment_text: data.payment_text,
-        payment_file_id: paymentFileId,
-        payment_date: new Date(data.advance_payment_date),
-      },
-    });
-
-    // Step 4. Ledger Entry
-    const ledger = await prisma.ledger.create({
-      data: {
-        lead_id: data.lead_id,
-        vendor_id: data.vendor_id,
-        account_id: data.account_id,
-        client_id: data.client_id,
-        created_by: data.created_by,
-        amount: data.amount_paid,
-        payment_date: new Date(data.advance_payment_date),
-        type: "credit",
-      },
-    });
-
-    // Step 5. (REMOVED) - No LeadUserMapping creation anymore
-
-    response.paymentInfo = paymentInfo;
-    response.ledger = ledger;
 
     return response;
   }

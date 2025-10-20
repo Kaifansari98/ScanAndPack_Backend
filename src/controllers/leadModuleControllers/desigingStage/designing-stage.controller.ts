@@ -521,6 +521,110 @@ export class DesigingStageController {
     }
   }
 
+  public static async addMeetingDocs(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId, userId, accountId, meetingId } = req.body;
+      const files = req.files as Express.Multer.File[];
+  
+      if (!meetingId)
+        return res.status(400).json({ success: false, message: "meetingId is required" });
+  
+      if (!files || files.length === 0)
+        return res.status(400).json({ success: false, message: "No files uploaded" });
+  
+      // ✅ 1. Check meeting exists
+      const meeting = await prisma.leadDesignMeeting.findFirst({
+        where: { id: Number(meetingId), vendor_id: Number(vendorId) },
+      });
+      if (!meeting)
+        return res.status(404).json({ success: false, message: "Meeting not found" });
+
+      const meetingDocType = await prisma.documentTypeMaster.findFirst({
+        where: { vendor_id: Number(vendorId), tag: "Type 7" },
+      });
+
+      if (!meetingDocType) {
+        return res.status(404).json({
+          success: false,
+          message:
+            "Document type for meeting documents (Type 7) not found for this vendor",
+        });
+      }
+  
+      // ✅ 2. Upload and save docs
+      const uploadedDocs = [];
+      for (const file of files) {
+        const sysName = await uploadToWasabiMeetingDocs(
+          file.buffer,
+          Number(vendorId),
+          Number(leadId),
+          file.originalname
+        );
+  
+        const doc = await prisma.leadDocuments.create({
+          data: {
+            doc_og_name: file.originalname,
+            doc_sys_name: sysName,
+            vendor_id: Number(vendorId),
+            lead_id: Number(leadId),
+            account_id: Number(accountId),
+            doc_type_id: meetingDocType.id /* Type 7 - Meeting Doc */,
+            created_by: Number(userId),
+          },
+        });
+  
+        uploadedDocs.push(doc);
+  
+        await prisma.leadDesignMeetingDocumentsMapping.create({
+          data: {
+            vendor_id: Number(vendorId),
+            lead_id: Number(leadId),
+            account_id: Number(accountId),
+            meeting_id: Number(meetingId),
+            document_id: doc.id,
+            created_by: Number(userId),
+            created_at: new Date(),
+          },
+        });
+      }
+  
+      // ✅ 3. Log into LeadDetailedLogs
+      const actionMsg = `${uploadedDocs.length} meeting file(s) added`;
+      const logEntry = await prisma.leadDetailedLogs.create({
+        data: {
+          vendor_id: Number(vendorId),
+          lead_id: Number(leadId),
+          account_id: Number(accountId),
+          action: actionMsg,
+          action_type: "UPDATE",
+          created_by: Number(userId),
+          created_at: new Date(),
+        },
+      });
+  
+      // ✅ 4. Link documents to logs
+      await prisma.leadDocumentLogs.createMany({
+        data: uploadedDocs.map((doc) => ({
+          vendor_id: Number(vendorId),
+          lead_id: Number(leadId),
+          account_id: Number(accountId),
+          doc_id: doc.id,
+          lead_logs_id: logEntry.id,
+          created_by: Number(userId),
+          created_at: new Date(),
+        })),
+      });
+  
+      return res.status(201).json({
+        success: true,
+        message: "Files added to meeting successfully",
+        uploadedDocs,
+      });
+    } catch (error: any) {
+      return res.status(500).json({ success: false, message: error.message });
+    }
+  }
+  
   public static async getDesignMeetings(req: Request, res: Response) {
     try {
       const { leadId, vendorId } = req.params;
