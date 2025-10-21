@@ -143,7 +143,7 @@ export class FinalMeasurementService {
           where: {
             vendor_id: data.vendor_id,
             lead_id: data.lead_id,
-            task_type: "Final Measurement",
+            task_type: "Final Measurements",
             status: "open",
           },
           data: {
