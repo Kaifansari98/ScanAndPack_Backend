@@ -627,14 +627,13 @@ export const getLeadById = async (
     };
 
     // 3️⃣ Access control
-    if (userType === "sales-executive") {
-      // Instead of blocking access, only check vendor ownership.
+    if (userType === "sales-executive" || userType === "site-supervisor" || userType === "tech-check") {
       console.log("[SERVICE] Sales Executive – vendor scoped access granted");
     } else if (["admin", "super-admin"].includes(userType)) {
       console.log("[SERVICE] Admin/Super-admin full access");
     } else {
-      // Fallback: normal users can only see their created leads
-      whereCondition.created_by = userId;
+      console.log("[SERVICE] Limited role – assigned/created leads access");
+      whereCondition.OR = [{ created_by: userId }, { assigned_to: userId }];
     }
 
     // 4️⃣ Fetch the lead
@@ -649,7 +648,9 @@ export const getLeadById = async (
         statusType: true,
         productMappings: { include: { productType: true } },
         leadProductStructureMapping: { include: { productStructure: true } },
-        documents: { where: { deleted_at: null, documentType: { tag: "Type 1" } } },
+        documents: {
+          where: { deleted_at: null, documentType: { tag: "Type 1" } },
+        },
         createdBy: {
           select: { id: true, user_name: true, user_email: true },
         },
