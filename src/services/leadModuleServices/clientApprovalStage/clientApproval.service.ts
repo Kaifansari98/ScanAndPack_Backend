@@ -150,7 +150,7 @@ export class ClientApprovalService {
           account_id: data.account_id,
           action: `₹${formatIndianCurrency(
             data.amount_paid
-          )} has been paid during Client Approval`,
+          )} has been received during Client Approval`,
           action_type: "CREATE", // enum ActionType
           created_by: data.created_by,
         },

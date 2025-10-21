@@ -261,6 +261,7 @@ export class DesigingStageController {
           vendor_id: Number(vendorId),
           is_deleted: false,
         },
+        include: { statusType: true },
       });
 
       if (!lead) {
@@ -273,6 +274,8 @@ export class DesigingStageController {
         });
       }
       logs.push("Lead verified successfully");
+
+      const leadStage = lead?.statusType?.type || "Unknown Stage";
 
       // 2️⃣ Find the document type for "design-quotation"
       const designType = await prisma.documentTypeMaster.findFirst({
@@ -351,6 +354,7 @@ export class DesigingStageController {
           document_type: designType.type,
           total_documents: documents.length,
           documents: documentsWithSignedUrls,
+          leadStage: lead?.statusType?.type || "Unknown Stage",
         },
       });
     } catch (error: any) {
@@ -525,19 +529,25 @@ export class DesigingStageController {
     try {
       const { vendorId, leadId, userId, accountId, meetingId } = req.body;
       const files = req.files as Express.Multer.File[];
-  
+
       if (!meetingId)
-        return res.status(400).json({ success: false, message: "meetingId is required" });
-  
+        return res
+          .status(400)
+          .json({ success: false, message: "meetingId is required" });
+
       if (!files || files.length === 0)
-        return res.status(400).json({ success: false, message: "No files uploaded" });
-  
+        return res
+          .status(400)
+          .json({ success: false, message: "No files uploaded" });
+
       // ✅ 1. Check meeting exists
       const meeting = await prisma.leadDesignMeeting.findFirst({
         where: { id: Number(meetingId), vendor_id: Number(vendorId) },
       });
       if (!meeting)
-        return res.status(404).json({ success: false, message: "Meeting not found" });
+        return res
+          .status(404)
+          .json({ success: false, message: "Meeting not found" });
 
       const meetingDocType = await prisma.documentTypeMaster.findFirst({
         where: { vendor_id: Number(vendorId), tag: "Type 7" },
@@ -550,7 +560,7 @@ export class DesigingStageController {
             "Document type for meeting documents (Type 7) not found for this vendor",
         });
       }
-  
+
       // ✅ 2. Upload and save docs
       const uploadedDocs = [];
       for (const file of files) {
@@ -560,7 +570,7 @@ export class DesigingStageController {
           Number(leadId),
           file.originalname
         );
-  
+
         const doc = await prisma.leadDocuments.create({
           data: {
             doc_og_name: file.originalname,
@@ -572,9 +582,9 @@ export class DesigingStageController {
             created_by: Number(userId),
           },
         });
-  
+
         uploadedDocs.push(doc);
-  
+
         await prisma.leadDesignMeetingDocumentsMapping.create({
           data: {
             vendor_id: Number(vendorId),
@@ -587,7 +597,7 @@ export class DesigingStageController {
           },
         });
       }
-  
+
       // ✅ 3. Log into LeadDetailedLogs
       const actionMsg = `${uploadedDocs.length} meeting file(s) added`;
       const logEntry = await prisma.leadDetailedLogs.create({
@@ -601,7 +611,7 @@ export class DesigingStageController {
           created_at: new Date(),
         },
       });
-  
+
       // ✅ 4. Link documents to logs
       await prisma.leadDocumentLogs.createMany({
         data: uploadedDocs.map((doc) => ({
@@ -614,7 +624,7 @@ export class DesigingStageController {
           created_at: new Date(),
         })),
       });
-  
+
       return res.status(201).json({
         success: true,
         message: "Files added to meeting successfully",
@@ -624,7 +634,7 @@ export class DesigingStageController {
       return res.status(500).json({ success: false, message: error.message });
     }
   }
-  
+
   public static async getDesignMeetings(req: Request, res: Response) {
     try {
       const { leadId, vendorId } = req.params;

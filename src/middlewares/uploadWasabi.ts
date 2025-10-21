@@ -47,13 +47,15 @@ export const upload = multer({
       "image/png",
       "image/gif",
       "application/pdf",
+      "application/zip",
+      "application/x-zip-compressed",
     ];
     if (allowedMimeTypes.includes(file.mimetype)) {
       cb(null, true);
     } else {
       cb(
         new Error(
-          `Only image files and PDFs are allowed! Received: ${file.mimetype}`
+          `Only image files and PDFs and ZIP archives are allowed! Received: ${file.mimetype}`
         )
       );
     }
@@ -123,7 +125,7 @@ export const uploadClientDocumentation = multer({
       "application/vnd.openxmlformats-officedocument.presentationml.presentation", // .pptx
     ];
 
-    const allowedExtensions = [".pyo"]; // ✅ custom extension
+    const allowedExtensions = [".pyo", ".zip"]; // ✅ custom extension
 
     const ext = file.originalname
       .slice(file.originalname.lastIndexOf("."))
