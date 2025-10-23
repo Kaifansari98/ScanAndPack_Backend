@@ -116,4 +116,6 @@ DesigningStageRouter.get(
   DesigingStageController.getDesignStageCounts
 );
 
+DesigningStageRouter.get("/status/leadId/:lead_id/vendorId/:vendor_id", DesigingStageController.getLeadStatus);
+
 export default DesigningStageRouter;
