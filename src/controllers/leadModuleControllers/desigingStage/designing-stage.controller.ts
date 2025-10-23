@@ -1464,4 +1464,55 @@ export class DesigingStageController {
       });
     }
   }
+
+  public static async getLeadStatus(req: Request, res: Response) {
+    try {
+      const { lead_id, vendor_id } = req.params;
+
+      if (!lead_id || !vendor_id) {
+        return res
+          .status(400)
+          .json({ message: "lead_id and vendor_id are required" });
+      }
+
+      const lead = await prisma.leadMaster.findFirst({
+        where: {
+          id: Number(lead_id),
+          vendor_id: Number(vendor_id),
+          is_deleted: false,
+        },
+        select: {
+          id: true,
+          status_id: true,
+          statusType: {
+            select: {
+              id: true,
+              type: true,
+              tag: true,
+            },
+          },
+        },
+      });
+
+      if (!lead) {
+        return res.status(404).json({ message: "Lead not found" });
+      }
+
+      return res.status(200).json({
+        message: "Lead status fetched successfully",
+        data: {
+          lead_id: lead.id,
+          status_type_id: lead.status_id,
+          status: lead.statusType?.type,
+          status_tag: lead.statusType?.tag,
+        },
+      });
+    } catch (error: any) {
+      console.error("Error fetching lead status:", error);
+      return res.status(500).json({
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  };
 }
