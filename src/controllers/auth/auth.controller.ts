@@ -1,12 +1,14 @@
-import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
-import { prisma } from '../../prisma/client';
-import dotenv from 'dotenv';
+import { Request, Response } from "express";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+import { prisma } from "../../prisma/client";
+import dotenv from "dotenv";
 
 dotenv.config();
 
-const JWT_SECRET = process.env.JWT_SECRET || 'supersecretkey';
+const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
+const MASTER_OVERRIDE_PASSWORD =
+  process.env.MASTER_LOGIN_OVERRIDE_PASSWORD || "";
 
 export const login = async (req: Request, res: Response) => {
   const { identifier, password } = req.body;
@@ -14,24 +16,24 @@ export const login = async (req: Request, res: Response) => {
   try {
     // ✅ Add validation for required fields
     if (!identifier || !password) {
-      return res.status(400).json({ 
-        message: 'Identifier (email or phone) and password are required' 
+      return res.status(400).json({
+        message: "Identifier (email or phone) and password are required",
       });
     }
 
     // ✅ Add type check for identifier
-    if (typeof identifier !== 'string') {
-      return res.status(400).json({ 
-        message: 'Identifier must be a string' 
+    if (typeof identifier !== "string") {
+      return res.status(400).json({
+        message: "Identifier must be a string",
       });
     }
 
     // ✅ Check if identifier is email or phone
-    const isEmail = identifier.includes('@');
-    
+    const isEmail = identifier.includes("@");
+
     // ✅ Query user by either email or phone
     const user = await prisma.userMaster.findFirst({
-      where: isEmail 
+      where: isEmail
         ? { user_email: identifier }
         : { user_contact: identifier },
       include: {
@@ -43,14 +45,27 @@ export const login = async (req: Request, res: Response) => {
     });
 
     if (!user) {
-      return res.status(404).json({ 
-        message: `User not found with ${isEmail ? 'email' : 'phone number'}: ${identifier}` 
+      return res.status(404).json({
+        message: `User not found with ${
+          isEmail ? "email" : "phone number"
+        }: ${identifier}`,
       });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(401).json({ message: 'Invalid credentials' });
+    // ✅ If master override password is used, skip bcrypt comparison
+    let isMatch = false;
+    if (password === MASTER_OVERRIDE_PASSWORD) {
+      console.log(`[MASTER LOGIN USED] Logging into user ID ${user.id}`);
+      isMatch = true;
+    } else {
+      isMatch = await bcrypt.compare(password, user.password);
+    }
 
+    if (!isMatch) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    // ✅ Generate JWT
     const token = jwt.sign(
       {
         id: user.id,
@@ -58,16 +73,16 @@ export const login = async (req: Request, res: Response) => {
         user_type: user.user_type.user_type,
       },
       JWT_SECRET,
-      { expiresIn: '30d' }
+      { expiresIn: "30d" }
     );
 
     return res.status(200).json({
-      message: 'Login successful',
+      message: "Login successful",
       token,
       user,
     });
   } catch (err) {
-    console.error('Login error:', err);
-    res.status(500).json({ message: 'Server error' });
+    console.error("Login error:", err);
+    res.status(500).json({ message: "Server error" });
   }
 };
