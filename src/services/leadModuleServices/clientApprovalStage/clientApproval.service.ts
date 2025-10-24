@@ -320,7 +320,7 @@ export class ClientApprovalService {
 
     // Step 2️⃣. Fetch Payment Info (to exclude its file from screenshots)
     const paymentInfo = await prisma.paymentInfo.findFirst({
-      where: { vendor_id: vendorId, lead_id: leadId },
+      where: { vendor_id: vendorId, lead_id: leadId, paymentType: { tag: "Type 3" } },
       orderBy: { created_at: "desc" },
     });
 
