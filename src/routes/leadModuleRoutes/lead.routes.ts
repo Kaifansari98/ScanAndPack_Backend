@@ -89,4 +89,6 @@ leadsRouter.get("/vendor-token/:token/verify", leadController.verifyUserTokenCon
 
 leadsRouter.get("/vendorId/:vendor_id/leadId/:lead_id/logs", leadController.getLeadLogsWithDocuments);
 
+leadsRouter.delete("/delete-doc/vendorId/:vendorId/documentId/:documentId", leadController.deleteDocument);
+
 export default leadsRouter;
