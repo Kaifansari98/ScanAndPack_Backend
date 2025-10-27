@@ -67,6 +67,7 @@ model VendorMaster {
   leadActivityStatusLog       LeadActivityStatusLog[]
   leadDetailedLogs            LeadDetailedLogs[]
   leadDocumentLogs            LeadDocumentLogs[]
+  CompanyVendorsMaster        CompanyVendorsMaster[]
 }
 
 model VendorAddress {
@@ -165,8 +166,11 @@ model UserMaster {
   leadTasksCreated  UserLeadTask[] @relation("LeadTask_CreatedBy")
   leadTasksClosed   UserLeadTask[] @relation("LeadTask_ClosedBy")
 
-  leadDetailedLogs LeadDetailedLogs[]
-  leadDocumentLogs LeadDocumentLogs[]
+  leadDetailedLogs      LeadDetailedLogs[]
+  leadDocumentLogs      LeadDocumentLogs[]
+  companyVendorsCreated CompanyVendorsMaster[] @relation("CompanyVendorCreatedBy")
+  companyVendorsUpdated CompanyVendorsMaster[] @relation("CompanyVendorUpdatedBy")
+  companyVendorsDeleted CompanyVendorsMaster[] @relation("CompanyVendorDeletedBy")
 }
 
 model UserDocument {
@@ -870,4 +874,30 @@ model LeadDocumentLogs {
   doc          LeadDocuments    @relation(fields: [doc_id], references: [id])
   detailed_log LeadDetailedLogs @relation(fields: [lead_logs_id], references: [id])
   user         UserMaster       @relation(fields: [created_by], references: [id])
+}
+
+model CompanyVendorsMaster {
+  id               Int      @id @default(autoincrement())
+  vendor_id        Int
+  vendor_code      String
+  company_name     String
+  point_of_contact String
+  contact_no       String
+  email            String?
+  address          String?
+  created_at       DateTime @default(now())
+  created_by       Int
+  updated_at       DateTime @updatedAt
+  updated_by       Int
+
+  // ✅ Soft delete fields
+  is_deleted Boolean   @default(false)
+  deleted_by Int?
+  deleted_at DateTime?
+
+  // ✅ Relations
+  vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdBy UserMaster   @relation("CompanyVendorCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  updatedBy UserMaster   @relation("CompanyVendorUpdatedBy", fields: [updated_by], references: [id])
+  deletedBy UserMaster?  @relation("CompanyVendorDeletedBy", fields: [deleted_by], references: [id])
 }

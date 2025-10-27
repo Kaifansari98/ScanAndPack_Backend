@@ -31,6 +31,9 @@ import taskRouter from './task/task.routes';
 import leadActivityStatusRouter from './leadModuleRoutes/leadActivityStatus.routes';
 import { clientApprovalRouter } from './clientApprovalStage/clientApproval.routes';
 import { techCheckRouter } from './production/tech-check/tech-check.routes';
+
+import companyVendorsRoutes from "./generic/companyVendors.routes"
+
 const router = Router();
 
 router.use('/vendors', vendorRoutes);
@@ -57,6 +60,8 @@ router.use("/leads/initial-site-measurement", paymentUploadRoutes);
 router.use("/leads/designing-stage", DesigningStageRouter);
 
 router.use("/leads/stats", Statsrouter);
+router.use("/vendor/company-vendors", companyVendorsRoutes);
+
 router.use("/leads/bookingStage", bookingStageRouter);
 
 router.use("/leads/final-measurement", finalMeasurementRouter);
