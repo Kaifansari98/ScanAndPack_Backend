@@ -33,6 +33,7 @@ import { clientApprovalRouter } from './clientApprovalStage/clientApproval.route
 import { techCheckRouter } from './production/tech-check/tech-check.routes';
 
 import companyVendorsRoutes from "./generic/companyVendors.routes"
+import orderLoginRoutes from './production/order-login/orderLogin.routes';
 
 const router = Router();
 
@@ -74,5 +75,7 @@ router.use("/leads/lead-activity-status", leadActivityStatusRouter);
 router.use("/leads/client-approval", clientApprovalRouter);
 
 router.use("/leads/production/tech-check", techCheckRouter);
+
+router.use("/leads/production/order-login", orderLoginRoutes);
 
 export { router };
