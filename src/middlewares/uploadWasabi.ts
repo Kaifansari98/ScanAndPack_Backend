@@ -189,6 +189,49 @@ export const uploadDesigns = multer({
   },
 });
 
+export const uploadProductionFiles = multer({
+  storage: multer.memoryStorage(),
+  limits: { ...fileLimits, files: 10 },
+  fileFilter: (req, file, cb) => {
+    // ✅ Allowed formats: CAD + PDF
+    const allowedExtensions = [
+      ".pdf", // ⬅️ added
+      ".pyo",
+      ".pytha", // custom
+      ".dwg",
+      ".dxf",
+      ".stl",
+      ".step",
+      ".stp",
+      ".iges",
+      ".igs",
+      ".3ds",
+      ".obj",
+      ".skp",
+      ".sldprt",
+      ".sldasm",
+      ".prt",
+      ".catpart",
+      ".catproduct",
+      ".zip",
+    ];
+
+    const ext = path.extname(file.originalname).toLowerCase();
+
+    if (allowedExtensions.includes(ext)) {
+      cb(null, true);
+    } else {
+      cb(
+        new Error(
+          `Only design files are allowed! Supported extensions: ${allowedExtensions.join(
+            ", "
+          )}. Received: ${ext}`
+        )
+      );
+    }
+  },
+});
+
 export const uploadMeetingDocs = multer({
   storage: multer.memoryStorage(),
   limits: { files: 10 },

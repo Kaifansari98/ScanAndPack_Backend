@@ -140,3 +140,24 @@ export const uploadToWasabClientApprovalDocumentation = async (
 };
 
 export default wasabi;
+
+export const uploadToWasabiProductionFiles = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  originalName: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `production_files/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: "application/octet-stream",
+    })
+  );
+
+  return sysName; // stored path in Wasabi
+};

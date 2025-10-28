@@ -67,6 +67,8 @@ model VendorMaster {
   leadActivityStatusLog       LeadActivityStatusLog[]
   leadDetailedLogs            LeadDetailedLogs[]
   leadDocumentLogs            LeadDocumentLogs[]
+  CompanyVendorsMaster        CompanyVendorsMaster[]
+  orderLoginDetails           OrderLoginDetails[]
 }
 
 model VendorAddress {
@@ -131,6 +133,7 @@ model UserMaster {
   ledgersCreated        Ledger[]
   leadStatusLogs        LeadStatusLogs[]
   leadActivityStatusLog LeadActivityStatusLog[]
+  orderLoginDetails     OrderLoginDetails[]
 
   // ✅ Accounts
   accountsCreated AccountMaster[] @relation("AccountCreatedBy")
@@ -165,8 +168,12 @@ model UserMaster {
   leadTasksCreated  UserLeadTask[] @relation("LeadTask_CreatedBy")
   leadTasksClosed   UserLeadTask[] @relation("LeadTask_ClosedBy")
 
-  leadDetailedLogs LeadDetailedLogs[]
-  leadDocumentLogs LeadDocumentLogs[]
+  leadDetailedLogs      LeadDetailedLogs[]
+  leadDocumentLogs      LeadDocumentLogs[]
+  companyVendorsCreated CompanyVendorsMaster[] @relation("CompanyVendorCreatedBy")
+  companyVendorsUpdated CompanyVendorsMaster[] @relation("CompanyVendorUpdatedBy")
+  companyVendorsDeleted CompanyVendorsMaster[] @relation("CompanyVendorDeletedBy")
+  orderLoginsUpdated    OrderLoginDetails[]    @relation("OrderLoginUpdatedBy")
 }
 
 model UserDocument {
@@ -362,9 +369,13 @@ model LeadMaster {
   total_project_amount          Float?
   advance_payment_date          DateTime?
   is_client_approval_submitted  Boolean        @default(false)
-  vendor_id                     Int
-  assign_to                     Int?
-  assigned_by                   Int?
+
+  client_required_order_login_complition_date DateTime?
+  expected_order_login_ready_date             DateTime?
+
+  vendor_id   Int
+  assign_to   Int?
+  assigned_by Int?
 
   // ✅ Soft delete fields
   is_deleted Boolean   @default(false)
@@ -403,6 +414,7 @@ model LeadMaster {
   leadActivityStatusLog       LeadActivityStatusLog[]
   leadDetailedLogs            LeadDetailedLogs[]
   leadDocumentLogs            LeadDocumentLogs[]
+  orderLoginDetails           OrderLoginDetails[]
 
   // ✅ Unique constraints for contact_no and email per vendor
   @@unique([contact_no, vendor_id], name: "unique_contact_per_vendor")
@@ -518,6 +530,7 @@ model AccountMaster {
   leadActivityStatusLog       LeadActivityStatusLog[]
   leadDetailedLogs            LeadDetailedLogs[]
   leadDocumentLogs            LeadDocumentLogs[]
+  orderLoginDetails           OrderLoginDetails[]
 }
 
 model LeadProductMapping {
@@ -870,4 +883,56 @@ model LeadDocumentLogs {
   doc          LeadDocuments    @relation(fields: [doc_id], references: [id])
   detailed_log LeadDetailedLogs @relation(fields: [lead_logs_id], references: [id])
   user         UserMaster       @relation(fields: [created_by], references: [id])
+}
+
+model CompanyVendorsMaster {
+  id               Int      @id @default(autoincrement())
+  vendor_id        Int
+  vendor_code      String
+  company_name     String
+  point_of_contact String
+  contact_no       String
+  email            String?
+  address          String?
+  created_at       DateTime @default(now())
+  created_by       Int
+  updated_at       DateTime @updatedAt
+  updated_by       Int
+
+  // ✅ Soft delete fields
+  is_deleted Boolean   @default(false)
+  deleted_by Int?
+  deleted_at DateTime?
+
+  // ✅ Relations
+  vendor          VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdBy       UserMaster          @relation("CompanyVendorCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  updatedBy       UserMaster          @relation("CompanyVendorUpdatedBy", fields: [updated_by], references: [id])
+  deletedBy       UserMaster?         @relation("CompanyVendorDeletedBy", fields: [deleted_by], references: [id])
+  orderLoginLinks OrderLoginDetails[]
+}
+
+model OrderLoginDetails {
+  id                        Int       @id @default(autoincrement())
+  lead_id                   Int
+  account_id                Int
+  vendor_id                 Int
+  item_type                 String
+  item_desc                 String    @db.Text
+  company_vendor_id         Int?
+  estimated_completion_date DateTime?
+  completion_date           DateTime?
+  is_completed              Boolean   @default(false)
+  created_at                DateTime  @default(now())
+  created_by                Int
+  updated_at                DateTime  @updatedAt
+  updated_by                Int?
+
+  // ✅ Relations
+  vendor        VendorMaster          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead          LeadMaster            @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  account       AccountMaster         @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  createdBy     UserMaster            @relation(fields: [created_by], references: [id], onDelete: Cascade)
+  updatedBy     UserMaster?           @relation("OrderLoginUpdatedBy", fields: [updated_by], references: [id])
+  companyVendor CompanyVendorsMaster? @relation(fields: [company_vendor_id], references: [id], onDelete: SetNull)
 }

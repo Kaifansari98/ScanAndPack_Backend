@@ -1104,6 +1104,87 @@ export class LeadController {
       });
     }
   }
+
+  async deleteDocument(req: Request, res: Response) {
+    try {
+      const { vendorId, documentId } = req.params;
+      const { deleted_by } = req.body;
+
+      if (!vendorId || !documentId || !deleted_by) {
+        return res.status(400).json({
+          success: false,
+          message: "vendor_id, document_id, and deleted_by are required",
+        });
+      }
+
+      // 🧾 Check if document exists and belongs to the vendor
+      const existingDoc = await prisma.leadDocuments.findFirst({
+        where: {
+          id: Number(documentId),
+          vendor_id: Number(vendorId),
+          is_deleted: false,
+        },
+        include: {
+          lead: true,
+          account: true,
+        },
+      });
+
+      if (!existingDoc) {
+        return res.status(404).json({
+          success: false,
+          message: "Document not found or already deleted",
+        });
+      }
+
+      // 🧹 Soft delete it
+      const updatedDoc = await prisma.leadDocuments.update({
+        where: { id: Number(documentId) },
+        data: {
+          is_deleted: true,
+          deleted_by: Number(deleted_by),
+          deleted_at: new Date(),
+        },
+      });
+
+      // 🪵 Step 1: Create LeadDetailedLogs entry
+      const detailedLog = await prisma.leadDetailedLogs.create({
+        data: {
+          vendor_id: Number(vendorId),
+          lead_id: existingDoc.lead_id!,
+          account_id: existingDoc.account_id!,
+          action: `Document "${existingDoc.doc_og_name}" was deleted.`,
+          action_type: "DELETE",
+          created_by: Number(deleted_by),
+        },
+      });
+
+      // 🪵 Step 2: Create LeadDocumentLogs entry (linked to detailedLog)
+      await prisma.leadDocumentLogs.create({
+        data: {
+          vendor_id: Number(vendorId),
+          lead_id: existingDoc.lead_id!,
+          account_id: existingDoc.account_id!,
+          doc_id: Number(documentId),
+          lead_logs_id: detailedLog.id,
+          created_by: Number(deleted_by),
+        },
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Document deleted successfully (soft delete)",
+        data: updatedDoc,
+      });
+    } catch (error: any) {
+      console.error("Error deleting document:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error while deleting document",
+        error: error.message,
+      });
+    }
+  }
 }
 
 // Export a single instance of the controller
