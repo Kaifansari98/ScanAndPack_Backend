@@ -1021,7 +1021,6 @@ export class PaymentUploadService {
         where: {
           lead_id: leadId,
           vendor_id: vendorId,
-          deleted_at: null,
           lead: { status_id: statusType.id },
           is_deleted: false
         },

@@ -1,6 +1,30 @@
 import { prisma } from "../../../prisma/client";
 import { uploadToWasabiProductionFiles } from "../../../utils/wasabiClient";
 
+// 🧩 Define this at the top of your service file
+
+interface BackendData {
+  id: number;
+  vendor_id: number;
+  user_name: string;
+  user_contact: string | null;
+  user_email: string | null;
+  user_timezone: string | null;
+  status: string;
+  created_at: Date;
+  updated_at: Date;
+  user_type: {
+    id: number;
+    user_type: string;
+  };
+  documents: {
+    id: number;
+    document_name: string | null;
+    document_number: string | null;
+    filename: string | null;
+  }[];
+}
+
 export class OrderLoginService {
   async uploadFileBreakups(vendorId: number, payload: any) {
     const {
@@ -491,15 +515,15 @@ export class OrderLoginService {
     leadId,
     accountId,
     userId,
-    requiredDate,
+    assignToUserId,
   }: {
     vendorId: number;
     leadId: number;
     accountId: number;
-    userId: number;
-    requiredDate: Date;
+    userId: number; // user performing the action
+    assignToUserId: number; // user to whom the lead is being assigned
   }) {
-    // ✅ Fetch StatusTypeMaster entry for Production Stage (Type 10)
+    // ✅ 1. Fetch StatusTypeMaster entry for Production Stage (Type 10)
     const statusType = await prisma.statusTypeMaster.findFirst({
       where: { vendor_id: vendorId, tag: "Type 10" },
     });
@@ -512,20 +536,33 @@ export class OrderLoginService {
       throw error;
     }
 
-    // ✅ Update LeadMaster
+    // ✅ 2. Update LeadMaster → move to Production Stage
     const updatedLead = await prisma.leadMaster.update({
       where: { id: leadId },
       data: {
         status_id: statusType.id,
-        client_required_order_login_complition_date: requiredDate,
         updated_by: userId,
+        updated_at: new Date(),
       },
       include: {
         statusType: true,
       },
     });
 
-    // ✅ Log into LeadStatusLogs
+    // ✅ 3. Assign this lead to the Factory user via LeadUserMapping
+    const leadUserMapping = await prisma.leadUserMapping.create({
+      data: {
+        account_id: accountId,
+        lead_id: leadId,
+        vendor_id: vendorId,
+        user_id: assignToUserId,
+        type: "production-stage",
+        status: "active",
+        created_by: userId,
+      },
+    });
+
+    // ✅ 4. Log in LeadStatusLogs
     await prisma.leadStatusLogs.create({
       data: {
         lead_id: leadId,
@@ -536,19 +573,19 @@ export class OrderLoginService {
       },
     });
 
-    // ✅ Log into LeadDetailedLogs
+    // ✅ 5. Log in LeadDetailedLogs
     await prisma.leadDetailedLogs.create({
       data: {
         vendor_id: vendorId,
         lead_id: leadId,
         account_id: accountId,
-        action: "Lead has been moved to Production Stage",
+        action: `Lead moved to Production Stage and assigned to user ID ${assignToUserId}`,
         action_type: "UPDATE",
         created_by: userId,
       },
     });
 
-    return updatedLead;
+    return { lead: updatedLead, leadUserMapping };
   }
 
   async getLeadProductionReadiness(vendorId: number, leadId: number) {
@@ -614,5 +651,78 @@ export class OrderLoginService {
       },
       readyForProduction: allThree && hasAnyProductionFiles,
     };
+  }
+
+  async getFactoryUsersByVendor(vendorId: number): Promise<BackendData[]> {
+    try {
+      console.log(
+        `[SERVICE] Fetching Factory Users for vendor ID: ${vendorId}`
+      );
+
+      // 1. Find the user type ID for 'factory'
+      const factoryUserType = await prisma.userTypeMaster.findFirst({
+        where: {
+          user_type: {
+            equals: "factory",
+            mode: "insensitive",
+          },
+        },
+      });
+
+      if (!factoryUserType) {
+        console.log("[SERVICE] Factory user type not found");
+        return [];
+      }
+
+      console.log(
+        `[SERVICE] Found Factory user type ID: ${factoryUserType.id}`
+      );
+
+      // 2. Fetch all users with factory role for the specified vendor
+      const factoryUsers = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: vendorId,
+          user_type_id: factoryUserType.id,
+          status: "active",
+        },
+        include: {
+          user_type: true,
+          documents: true,
+        },
+        orderBy: {
+          created_at: "desc",
+        },
+      });
+
+      console.log(`[SERVICE] Found ${factoryUsers.length} Factory Users`);
+
+      // 3. Transform data
+      const transformedData: BackendData[] = factoryUsers.map((user) => ({
+        id: user.id,
+        vendor_id: user.vendor_id,
+        user_name: user.user_name,
+        user_contact: user.user_contact,
+        user_email: user.user_email,
+        user_timezone: user.user_timezone,
+        status: user.status,
+        created_at: user.created_at,
+        updated_at: user.updated_at,
+        user_type: {
+          id: user.user_type.id,
+          user_type: user.user_type.user_type,
+        },
+        documents: user.documents.map((doc) => ({
+          id: doc.id,
+          document_name: doc.document_name,
+          document_number: doc.document_number,
+          filename: doc.filename,
+        })),
+      }));
+
+      return transformedData;
+    } catch (error: any) {
+      console.error("[SERVICE] Error fetching Factory Users:", error);
+      throw new Error(`Failed to fetch Factory Users: ${error.message}`);
+    }
   }
 }

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { OrderLoginService } from "../../../../services/production/order-login/orderLogin.service";
 import { prisma } from "../../../../prisma/client";
 import { generateSignedUrl } from "../../../../utils/wasabiClient";
+import { ApiResponse } from "../../../../utils/apiResponse";
 
 const service = new OrderLoginService();
 
@@ -380,23 +381,19 @@ export class OrderLoginController {
   async updateLeadToProductionStage(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
-      const {
-        account_id,
-        user_id,
-        client_required_order_login_complition_date,
-      } = req.body;
+      const { account_id, user_id, assign_to_user_id } = req.body;
 
       if (
         !vendorId ||
         !leadId ||
         !account_id ||
         !user_id ||
-        !client_required_order_login_complition_date
+        !assign_to_user_id
       ) {
         return res.status(400).json({
           success: false,
           message:
-            "vendorId, leadId, account_id, user_id, and client_required_order_login_complition_date are required.",
+            "vendorId, leadId, account_id, user_id, and assign_to_user_id are required.",
         });
       }
 
@@ -405,7 +402,7 @@ export class OrderLoginController {
         leadId: Number(leadId),
         accountId: Number(account_id),
         userId: Number(user_id),
-        requiredDate: new Date(client_required_order_login_complition_date),
+        assignToUserId: Number(assign_to_user_id),
       });
 
       return res.status(200).json({
@@ -451,6 +448,66 @@ export class OrderLoginController {
           error.message ||
           "Internal server error while fetching readiness status",
       });
+    }
+  }
+
+  async fetchFactoryUsersByVendor(
+    req: Request,
+    res: Response
+  ): Promise<Response> {
+    try {
+      const vendorId = parseInt(req.params.vendorId);
+
+      if (isNaN(vendorId) || vendorId <= 0) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid vendor ID provided", 400));
+      }
+
+      console.log(
+        `[CONTROLLER] Fetching Factory Users for vendor ID: ${vendorId}`
+      );
+
+      const factoryUsers = await service.getFactoryUsersByVendor(
+        vendorId
+      );
+
+      if (factoryUsers.length === 0) {
+        return res
+          .status(200)
+          .json(
+            ApiResponse.success(
+              [],
+              "No Factory Users found for this vendor",
+              200
+            )
+          );
+      }
+
+      console.log(`[CONTROLLER] Found ${factoryUsers.length} Factory Users`);
+
+      return res.status(200).json(
+        ApiResponse.success(
+          {
+            factory_users: factoryUsers,
+            count: factoryUsers.length,
+          },
+          "Factory users fetched successfully",
+          200
+        )
+      );
+    } catch (error: any) {
+      console.error("[CONTROLLER] fetchFactoryUsersByVendor error:", error);
+
+      return res
+        .status(500)
+        .json(
+          ApiResponse.error(
+            "Failed to fetch Factory Users",
+            500,
+            process.env.NODE_ENV === "development" ? error.message : undefined
+          )
+        );
     }
   }
 }
