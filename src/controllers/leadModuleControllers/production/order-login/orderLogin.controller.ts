@@ -381,19 +381,25 @@ export class OrderLoginController {
   async updateLeadToProductionStage(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
-      const { account_id, user_id, assign_to_user_id } = req.body;
+      const {
+        account_id,
+        user_id,
+        assign_to_user_id,
+        client_required_order_login_complition_date,
+      } = req.body;
 
       if (
         !vendorId ||
         !leadId ||
         !account_id ||
         !user_id ||
-        !assign_to_user_id
+        !assign_to_user_id ||
+        !client_required_order_login_complition_date
       ) {
         return res.status(400).json({
           success: false,
           message:
-            "vendorId, leadId, account_id, user_id, and assign_to_user_id are required.",
+            "vendorId, leadId, account_id, user_id, assign_to_user_id, and client_required_order_login_complition_date are required.",
         });
       }
 
@@ -403,6 +409,7 @@ export class OrderLoginController {
         accountId: Number(account_id),
         userId: Number(user_id),
         assignToUserId: Number(assign_to_user_id),
+        requiredDate: new Date(client_required_order_login_complition_date),
       });
 
       return res.status(200).json({
@@ -468,9 +475,7 @@ export class OrderLoginController {
         `[CONTROLLER] Fetching Factory Users for vendor ID: ${vendorId}`
       );
 
-      const factoryUsers = await service.getFactoryUsersByVendor(
-        vendorId
-      );
+      const factoryUsers = await service.getFactoryUsersByVendor(vendorId);
 
       if (factoryUsers.length === 0) {
         return res

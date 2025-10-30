@@ -627,7 +627,12 @@ export const getLeadById = async (
     };
 
     // 3️⃣ Access control
-    if (userType === "sales-executive" || userType === "site-supervisor" || userType === "tech-check" || userType === "backend") {
+    if (
+      userType === "sales-executive" ||
+      userType === "site-supervisor" ||
+      userType === "tech-check" ||
+      userType === "backend"
+    ) {
       console.log("[SERVICE] Sales Executive – vendor scoped access granted");
     } else if (["admin", "super-admin"].includes(userType)) {
       console.log("[SERVICE] Admin/Super-admin full access");
@@ -1797,4 +1802,22 @@ export const getLeadLogsWithDocuments = async (params: {
       count: formattedLogs.length,
     },
   };
+};
+
+export const getClientRequiredCompletionDate = async (
+  vendorId: number,
+  leadId: number
+): Promise<Date | null> => {
+  const lead = await prisma.leadMaster.findFirst({
+    where: {
+      id: leadId,
+      vendor_id: vendorId,
+      is_deleted: false,
+    },
+    select: {
+      client_required_order_login_complition_date: true,
+    },
+  });
+
+  return lead?.client_required_order_login_complition_date || null;
 };

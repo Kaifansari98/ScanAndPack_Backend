@@ -516,12 +516,14 @@ export class OrderLoginService {
     accountId,
     userId,
     assignToUserId,
+    requiredDate,
   }: {
     vendorId: number;
     leadId: number;
     accountId: number;
-    userId: number; // user performing the action
-    assignToUserId: number; // user to whom the lead is being assigned
+    userId: number;
+    assignToUserId: number;
+    requiredDate: Date;
   }) {
     // ✅ 1. Fetch StatusTypeMaster entry for Production Stage (Type 10)
     const statusType = await prisma.statusTypeMaster.findFirst({
@@ -541,6 +543,7 @@ export class OrderLoginService {
       where: { id: leadId },
       data: {
         status_id: statusType.id,
+        client_required_order_login_complition_date: requiredDate,
         updated_by: userId,
         updated_at: new Date(),
       },
@@ -579,7 +582,7 @@ export class OrderLoginService {
         vendor_id: vendorId,
         lead_id: leadId,
         account_id: accountId,
-        action: `Lead moved to Production Stage and assigned to user ID ${assignToUserId}`,
+        action: `Lead moved to Production Stage and assigned to user ID ${assignToUserId}. Required completion date: ${requiredDate.toLocaleDateString()}`,
         action_type: "UPDATE",
         created_by: userId,
       },

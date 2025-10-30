@@ -207,54 +207,56 @@ export class ClientApprovalController {
     }
   }
 
-  public static async requestToTechCheck(
-    req: Request,
-    res: Response
-  ): Promise<void> {
+  public static async requestToTechCheck(req: Request, res: Response): Promise<void> {
     try {
       const { leadId, vendorId } = req.params;
-      const { account_id, assign_to_user_id, created_by } = req.body;
-
+      const {
+        account_id,
+        assign_to_user_id,
+        created_by,
+        client_required_order_login_complition_date,
+      } = req.body;
+  
       if (
         !leadId ||
         !vendorId ||
         !account_id ||
         !assign_to_user_id ||
-        !created_by
+        !created_by ||
+        !client_required_order_login_complition_date
       ) {
         res.status(400).json({
           success: false,
-          message: "Missing required fields",
+          message:
+            "Missing required fields: leadId, vendorId, account_id, assign_to_user_id, created_by, client_required_order_login_complition_date",
         });
         return;
       }
-
+  
       const dto = {
         lead_id: parseInt(leadId),
         vendor_id: parseInt(vendorId),
         account_id: parseInt(account_id),
         assign_to_user_id: parseInt(assign_to_user_id),
         created_by: parseInt(created_by),
+        required_date: new Date(client_required_order_login_complition_date),
       };
-
+  
       const result = await clientApprovalService.requestToTechCheck(dto);
-
+  
       res.status(200).json({
         success: true,
         message: "Lead moved to Tech Check stage successfully",
         data: result,
       });
     } catch (error: any) {
-      console.error(
-        "[ClientApprovalController] Error in requestToTechCheck:",
-        error
-      );
+      console.error("[ClientApprovalController] Error in requestToTechCheck:", error);
       res.status(500).json({
         success: false,
         message: error.message || "Internal server error",
       });
     }
-  }
+  }  
 
   public static async fetchTechCheckUsersByVendor(
     req: Request,
