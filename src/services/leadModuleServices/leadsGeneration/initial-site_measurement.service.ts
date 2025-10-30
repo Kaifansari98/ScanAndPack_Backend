@@ -239,6 +239,7 @@ export class PaymentUploadService {
             id: doc.id,
             type,
             originalName: doc.doc_og_name,
+            uploadedAt: doc.created_at,
             s3Key: doc.doc_sys_name,
             signedUrl: await generateSignedUrl(doc.doc_sys_name),
           }))
@@ -280,6 +281,7 @@ export class PaymentUploadService {
           (paymentInfo as any).payment_file = {
             id: paymentDoc.id,
             originalName: paymentDoc.doc_og_name,
+            uploadedAt: paymentDoc.created_at,
             signedUrl: await generateSignedUrl(paymentDoc.doc_sys_name),
           };
         }
