@@ -320,7 +320,11 @@ export class ClientApprovalService {
 
     // Step 2️⃣. Fetch Payment Info (to exclude its file from screenshots)
     const paymentInfo = await prisma.paymentInfo.findFirst({
-      where: { vendor_id: vendorId, lead_id: leadId, paymentType: { tag: "Type 3" } },
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        paymentType: { tag: "Type 3" },
+      },
       orderBy: { created_at: "desc" },
     });
 
@@ -459,6 +463,7 @@ export class ClientApprovalService {
     account_id: number;
     assign_to_user_id: number;
     created_by: number;
+    required_date: Date;
   }) {
     const response: any = {};
 
@@ -474,11 +479,12 @@ export class ClientApprovalService {
       );
     }
 
-    // Step 2. Update lead status → Type 8
+    // Step 2. Update lead status + store date
     const updatedLead = await prisma.leadMaster.update({
       where: { id: data.lead_id },
       data: {
         status_id: techCheckStatus.id,
+        client_required_order_login_complition_date: data.required_date,
         updated_by: data.created_by,
         updated_at: new Date(),
       },
@@ -493,6 +499,18 @@ export class ClientApprovalService {
         user_id: data.assign_to_user_id,
         type: "tech-check",
         status: "active",
+        created_by: data.created_by,
+      },
+    });
+
+    // Step 4. Log the action
+    await prisma.leadDetailedLogs.create({
+      data: {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        account_id: data.account_id,
+        action: `Lead moved to Tech Check stage. Client's Required order-login completion date is ${data.required_date.toLocaleDateString()}`,
+        action_type: "UPDATE",
         created_by: data.created_by,
       },
     });

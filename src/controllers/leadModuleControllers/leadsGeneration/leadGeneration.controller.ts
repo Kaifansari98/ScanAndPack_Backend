@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import {
   createLeadService,
+  getClientRequiredCompletionDate,
   getLeadLogsWithDocuments,
   getLeadsByVendor,
   getLeadsByVendorAndUser,
@@ -1182,6 +1183,55 @@ export class LeadController {
         success: false,
         message: "Internal server error while deleting document",
         error: error.message,
+      });
+    }
+  }
+
+  async getClientRequiredCompletionDate(
+    req: Request,
+    res: Response
+  ): Promise<void> {
+    try {
+      const { vendorId, leadId } = req.params;
+
+      if (!vendorId || !leadId) {
+        res.status(400).json({
+          success: false,
+          message: "vendorId and leadId are required.",
+        });
+        return;
+      }
+
+      const date = await getClientRequiredCompletionDate(
+        Number(vendorId),
+        Number(leadId)
+      );
+
+      if (!date) {
+        res.status(404).json({
+          success: false,
+          message: "No completion date found for this lead.",
+        });
+        return;
+      }
+
+      res.status(200).json({
+        success: true,
+        message: "Client required completion date fetched successfully.",
+        data: {
+          lead_id: Number(leadId),
+          vendor_id: Number(vendorId),
+          client_required_order_login_complition_date: date,
+        },
+      });
+    } catch (error: any) {
+      console.error(
+        "[ClientApprovalController] getClientRequiredCompletionDate error:",
+        error
+      );
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error.",
       });
     }
   }
