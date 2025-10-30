@@ -209,6 +209,7 @@ export class PaymentUploadService {
                 lead_id: leadId,
                 vendor_id: vendorId,
                 doc_type_id: sitePhotoDocType.id,
+                is_deleted: false,
               },
             })
           : [],
@@ -218,6 +219,7 @@ export class PaymentUploadService {
                 lead_id: leadId,
                 vendor_id: vendorId,
                 doc_type_id: pdfDocType.id,
+                is_deleted: false,
               },
             })
           : [],
@@ -227,6 +229,7 @@ export class PaymentUploadService {
                 lead_id: leadId,
                 vendor_id: vendorId,
                 doc_type_id: paymentDocType.id,
+                is_deleted: false,
               },
             })
           : [],
@@ -274,7 +277,7 @@ export class PaymentUploadService {
       // Step 6: If payment_file_id exists, link it with signedUrl
       if (paymentInfo?.payment_file_id) {
         const paymentDoc = await prisma.leadDocuments.findUnique({
-          where: { id: paymentInfo.payment_file_id },
+          where: { id: paymentInfo.payment_file_id, is_deleted: false },
         });
 
         if (paymentDoc) {
@@ -1021,8 +1024,8 @@ export class PaymentUploadService {
         where: {
           lead_id: leadId,
           vendor_id: vendorId,
+          deleted_at: null,
           lead: { status_id: statusType.id },
-          is_deleted: false
         },
         include: {
           createdBy: {
