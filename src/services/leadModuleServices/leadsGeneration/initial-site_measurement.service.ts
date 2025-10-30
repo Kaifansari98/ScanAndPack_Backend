@@ -1023,6 +1023,7 @@ export class PaymentUploadService {
           vendor_id: vendorId,
           deleted_at: null,
           lead: { status_id: statusType.id },
+          is_deleted: false
         },
         include: {
           createdBy: {
