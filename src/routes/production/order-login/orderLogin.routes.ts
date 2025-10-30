@@ -69,4 +69,9 @@ orderLoginRoutes.get(
   controller.getLeadProductionReadiness
 );
 
+orderLoginRoutes.get(
+  "/factory-users/vendorId/:vendorId",
+  controller.fetchFactoryUsersByVendor
+);
+
 export default orderLoginRoutes;
