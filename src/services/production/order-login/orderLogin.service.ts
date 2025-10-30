@@ -69,6 +69,78 @@ export class OrderLoginService {
     return newOrderLogin;
   }
 
+  async uploadMultipleFileBreakupsByLead(
+    vendorId: number,
+    leadId: number,
+    accountId: number,
+    breakups: any[]
+  ) {
+    if (!vendorId || !leadId)
+      throw Object.assign(new Error("vendorId and leadId are required"), {
+        statusCode: 400,
+      });
+
+    if (!Array.isArray(breakups) || breakups.length === 0)
+      throw Object.assign(new Error("breakups array is required"), {
+        statusCode: 400,
+      });
+
+    const results = [];
+    const errors = [];
+
+    for (const [index, payload] of breakups.entries()) {
+      try {
+        const { item_type, item_desc, company_vendor_id, created_by } = payload;
+
+        // validation
+        const missing = [];
+        if (!item_type) missing.push("item_type");
+        if (!item_desc) missing.push("item_desc");
+        if (!created_by) missing.push("created_by");
+        if (missing.length)
+          throw new Error(
+            `Missing field(s) in record #${index + 1}: ${missing.join(", ")}`
+          );
+
+        // duplicate check
+        const existing = await prisma.orderLoginDetails.findFirst({
+          where: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            item_type,
+            is_completed: false,
+          },
+        });
+
+        if (existing)
+          throw new Error(
+            `Item type '${item_type}' already exists for lead ${leadId}`
+          );
+
+        // create record
+        const record = await prisma.orderLoginDetails.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: accountId,
+            item_type,
+            item_desc,
+            company_vendor_id: company_vendor_id
+              ? Number(company_vendor_id)
+              : null,
+            created_by: Number(created_by),
+          },
+        });
+
+        results.push(record);
+      } catch (err: any) {
+        errors.push({ index, message: err.message });
+      }
+    }
+
+    return { results, errors };
+  }
+
   async getOrderLoginByLead(vendorId: number, leadId: number) {
     if (!vendorId || !leadId) {
       const error = new Error("vendor_id and lead_id are required");
@@ -169,6 +241,86 @@ export class OrderLoginService {
     });
 
     return updated;
+  }
+
+  async updateMultipleOrderLogins(
+    vendorId: number,
+    leadId: number,
+    updates: any[]
+  ) {
+    if (!vendorId || !leadId)
+      throw Object.assign(new Error("vendorId and leadId are required"), {
+        statusCode: 400,
+      });
+
+    if (!Array.isArray(updates) || updates.length === 0)
+      throw Object.assign(new Error("updates array is required"), {
+        statusCode: 400,
+      });
+
+    const results = [];
+    const errors = [];
+
+    for (const [index, payload] of updates.entries()) {
+      try {
+        const { id, item_type, item_desc, company_vendor_id, updated_by } =
+          payload;
+
+        const missing = [];
+        if (!id) missing.push("id");
+        if (!item_type) missing.push("item_type");
+        if (!item_desc) missing.push("item_desc");
+        if (!updated_by) missing.push("updated_by");
+        if (missing.length)
+          throw new Error(
+            `Missing field(s) in record #${index + 1}: ${missing.join(", ")}`
+          );
+
+        // Check if record exists
+        const existing = await prisma.orderLoginDetails.findFirst({
+          where: { id: Number(id), vendor_id: vendorId },
+        });
+
+        if (!existing)
+          throw new Error(
+            `Order login record #${id} not found for vendor ${vendorId}`
+          );
+
+        // Duplicate check (unique item_type per lead)
+        const duplicate = await prisma.orderLoginDetails.findFirst({
+          where: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            item_type,
+            NOT: { id: Number(id) },
+          },
+        });
+
+        if (duplicate)
+          throw new Error(
+            `Item type '${item_type}' already exists for this lead. (record #${id})`
+          );
+
+        // Update
+        const updated = await prisma.orderLoginDetails.update({
+          where: { id: Number(id) },
+          data: {
+            item_type,
+            item_desc,
+            company_vendor_id: company_vendor_id
+              ? Number(company_vendor_id)
+              : null,
+            updated_by: Number(updated_by),
+          },
+        });
+
+        results.push(updated);
+      } catch (err: any) {
+        errors.push({ index, message: err.message });
+      }
+    }
+
+    return { results, errors };
   }
 
   async getLeadsWithStatusOrderLogin(
@@ -405,10 +557,10 @@ export class OrderLoginService {
       (error as any).statusCode = 400;
       throw error;
     }
-  
+
     // --- Check required OrderLoginDetails (three items) ---
     const REQUIRED_TYPES = ["Carcass", "Shutter", "Stock Hardware"] as const;
-  
+
     // Fetch existing item_types for this lead
     const existing = await prisma.orderLoginDetails.findMany({
       where: {
@@ -418,21 +570,21 @@ export class OrderLoginService {
       },
       select: { item_type: true },
     });
-  
+
     const presentSet = new Set(existing.map((e) => e.item_type));
     const carcass = presentSet.has("Carcass");
     const shutter = presentSet.has("Shutter");
     const stockHardware = presentSet.has("Stock Hardware");
     const allThree = carcass && shutter && stockHardware;
-  
+
     // --- Check if at least 1 Production File (Type 14) exists ---
     const docType = await prisma.documentTypeMaster.findFirst({
       where: { vendor_id: vendorId, tag: "Type 14" },
       select: { id: true },
     });
-  
+
     let productionFilesCount = 0;
-  
+
     if (docType?.id) {
       productionFilesCount = await prisma.leadDocuments.count({
         where: {
@@ -443,9 +595,9 @@ export class OrderLoginService {
         },
       });
     }
-  
+
     const hasAnyProductionFiles = productionFilesCount > 0;
-  
+
     // You asked for “true/false” overall; returning detailed + overall flags
     return {
       orderLogin: {
@@ -463,5 +615,4 @@ export class OrderLoginService {
       readyForProduction: allThree && hasAnyProductionFiles,
     };
   }
-  
 }
