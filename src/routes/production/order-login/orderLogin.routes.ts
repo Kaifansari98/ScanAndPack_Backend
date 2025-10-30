@@ -14,6 +14,12 @@ orderLoginRoutes.post(
   controller.uploadFileBreakups
 );
 
+orderLoginRoutes.post(
+  "/vendorId/:vendorId/leadId/:leadId/accountId/:accountId/upload-multiple-file-breakups",
+  upload.none(),
+  controller.uploadMultipleFileBreakupsByLead
+);
+
 orderLoginRoutes.get(
   "/vendorId/:vendorId/get-order-login-details",
   controller.getOrderLoginByLead
@@ -23,6 +29,12 @@ orderLoginRoutes.put(
   "/vendorId/:vendorId/order-login-id/:orderLoginId/update",
   upload.none(),
   controller.updateOrderLogin
+);
+
+orderLoginRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/update-multiple",
+  upload.none(),
+  controller.updateMultipleOrderLogins
 );
 
 orderLoginRoutes.get(

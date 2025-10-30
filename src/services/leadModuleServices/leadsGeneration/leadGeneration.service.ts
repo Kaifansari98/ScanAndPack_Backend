@@ -627,7 +627,7 @@ export const getLeadById = async (
     };
 
     // 3️⃣ Access control
-    if (userType === "sales-executive" || userType === "site-supervisor" || userType === "tech-check") {
+    if (userType === "sales-executive" || userType === "site-supervisor" || userType === "tech-check" || userType === "backend") {
       console.log("[SERVICE] Sales Executive – vendor scoped access granted");
     } else if (["admin", "super-admin"].includes(userType)) {
       console.log("[SERVICE] Admin/Super-admin full access");

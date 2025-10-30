@@ -32,6 +32,39 @@ export class OrderLoginController {
     }
   }
 
+  async uploadMultipleFileBreakupsByLead(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId, accountId } = req.params;
+      const { breakups } = req.body;
+
+      const { results, errors } =
+        await service.uploadMultipleFileBreakupsByLead(
+          Number(vendorId),
+          Number(leadId),
+          Number(accountId),
+          breakups
+        );
+
+      return res.status(201).json({
+        success: true,
+        message: "Multiple Order Login file breakups processed successfully",
+        total_submitted: breakups.length,
+        total_success: results.length,
+        total_failed: errors.length,
+        data: results,
+        errors,
+      });
+    } catch (error: any) {
+      console.error("Error uploading multiple file breakups:", error);
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message:
+          error.message ||
+          "Internal server error while uploading multiple file breakups",
+      });
+    }
+  }
+
   async getOrderLoginByLead(req: Request, res: Response) {
     try {
       const { vendorId } = req.params;
@@ -80,6 +113,44 @@ export class OrderLoginController {
         success: false,
         message:
           error.message || "Internal server error while updating order login",
+      });
+    }
+  }
+
+  async updateMultipleOrderLogins(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+      const { updates } = req.body;
+
+      if (!Array.isArray(updates) || updates.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "updates array is required",
+        });
+      }
+
+      const { results, errors } = await service.updateMultipleOrderLogins(
+        Number(vendorId),
+        Number(leadId),
+        updates
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Multiple order login records updated successfully",
+        total_submitted: updates.length,
+        total_success: results.length,
+        total_failed: errors.length,
+        data: results,
+        errors,
+      });
+    } catch (error: any) {
+      console.error("Error updating multiple order logins:", error);
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message:
+          error.message ||
+          "Internal server error while updating multiple order logins",
       });
     }
   }
@@ -350,23 +421,23 @@ export class OrderLoginController {
       });
     }
   }
-  
+
   async getLeadProductionReadiness(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
-  
+
       if (!vendorId || !leadId) {
         return res.status(400).json({
           success: false,
           message: "vendorId and leadId are required",
         });
       }
-  
+
       const data = await service.getLeadProductionReadiness(
         Number(vendorId),
         Number(leadId)
       );
-  
+
       return res.status(200).json({
         success: true,
         message: "Lead readiness status fetched successfully",
@@ -377,9 +448,9 @@ export class OrderLoginController {
       return res.status(error.statusCode || 500).json({
         success: false,
         message:
-          error.message || "Internal server error while fetching readiness status",
+          error.message ||
+          "Internal server error while fetching readiness status",
       });
     }
   }
-  
 }
