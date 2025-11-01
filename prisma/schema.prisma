@@ -343,32 +343,33 @@ enum ActivityStatus {
 }
 
 model LeadMaster {
-  id                            Int            @id @default(autoincrement())
-  lead_code                     String
-  firstname                     String
-  lastname                      String
-  country_code                  String
-  contact_no                    String
-  alt_contact_no                String?
-  email                         String?
-  site_address                  String?
-  site_map_link                 String?        @db.Text
-  site_type_id                  Int?
-  status_id                     Int?
-  source_id                     Int?
-  account_id                    Int?
-  archetech_name                String?
-  designer_remark               String?
-  activity_status               ActivityStatus @default(onGoing)
-  is_draft                      Boolean        @default(false)
-  activity_status_remark        String?        @db.VarChar(2000)
-  final_desc_note               String?        @db.VarChar(2000)
-  initial_site_measurement_date DateTime?
-  pending_amount                Float?
-  booking_amount                Float?
-  total_project_amount          Float?
-  advance_payment_date          DateTime?
-  is_client_approval_submitted  Boolean        @default(false)
+  id                                         Int            @id @default(autoincrement())
+  lead_code                                  String
+  firstname                                  String
+  lastname                                   String
+  country_code                               String
+  contact_no                                 String
+  alt_contact_no                             String?
+  email                                      String?
+  site_address                               String?
+  site_map_link                              String?        @db.Text
+  site_type_id                               Int?
+  status_id                                  Int?
+  source_id                                  Int?
+  account_id                                 Int?
+  archetech_name                             String?
+  designer_remark                            String?
+  activity_status                            ActivityStatus @default(onGoing)
+  is_draft                                   Boolean        @default(false)
+  activity_status_remark                     String?        @db.VarChar(2000)
+  final_desc_note                            String?        @db.VarChar(2000)
+  initial_site_measurement_date              DateTime?
+  pending_amount                             Float?
+  booking_amount                             Float?
+  total_project_amount                       Float?
+  advance_payment_date                       DateTime?
+  no_of_client_documents_initially_submitted Int?
+  is_client_approval_submitted               Boolean        @default(false)
 
   client_required_order_login_complition_date DateTime?
   expected_order_login_ready_date             DateTime?

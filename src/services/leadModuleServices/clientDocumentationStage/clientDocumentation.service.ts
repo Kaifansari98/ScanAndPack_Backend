@@ -105,6 +105,9 @@ export class ClientDocumentationService {
         );
       }
 
+      // ✅ Calculate total number of documents initially submitted
+      const totalSubmittedDocs = data.documents?.length || 0;
+
       // Update lead status
       await tx.leadMaster.update({
         where: { id: data.lead_id },
@@ -112,6 +115,7 @@ export class ClientDocumentationService {
           status_id: clientApprovalStatus.id,
           updated_at: new Date(),
           updated_by: data.created_by,
+          no_of_client_documents_initially_submitted: totalSubmittedDocs,
         },
       });
 
