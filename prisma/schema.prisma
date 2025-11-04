@@ -373,6 +373,9 @@ model LeadMaster {
 
   client_required_order_login_complition_date DateTime?
   expected_order_login_ready_date             DateTime?
+  hardware_packing_details_remark             String?   @db.VarChar(2000)
+  woodwork_packing_details_remark             String?   @db.VarChar(2000)
+  no_of_boxes                                 Int?
 
   vendor_id   Int
   assign_to   Int?
@@ -914,20 +917,21 @@ model CompanyVendorsMaster {
 }
 
 model OrderLoginDetails {
-  id                        Int       @id @default(autoincrement())
-  lead_id                   Int
-  account_id                Int
-  vendor_id                 Int
-  item_type                 String
-  item_desc                 String    @db.Text
-  company_vendor_id         Int?
-  estimated_completion_date DateTime?
-  completion_date           DateTime?
-  is_completed              Boolean   @default(false)
-  created_at                DateTime  @default(now())
-  created_by                Int
-  updated_at                DateTime  @updatedAt
-  updated_by                Int?
+  id                                   Int       @id @default(autoincrement())
+  lead_id                              Int
+  account_id                           Int
+  vendor_id                            Int
+  item_type                            String
+  item_desc                            String    @db.Text
+  company_vendor_id                    Int?
+  factory_user_vendor_selection_remark String?
+  estimated_completion_date            DateTime?
+  completion_date                      DateTime?
+  is_completed                         Boolean   @default(false)
+  created_at                           DateTime  @default(now())
+  created_by                           Int
+  updated_at                           DateTime  @updatedAt
+  updated_by                           Int?
 
   // ✅ Relations
   vendor        VendorMaster          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)

@@ -34,6 +34,8 @@ import { techCheckRouter } from './production/tech-check/tech-check.routes';
 
 import companyVendorsRoutes from "./generic/companyVendors.routes"
 import orderLoginRoutes from './production/order-login/orderLogin.routes';
+import preProductionRoutes from './production/pre-production/preProduction.routes';
+import postProductionRoutes from './production/post-production/postProductionRoutes';
 
 const router = Router();
 
@@ -77,5 +79,8 @@ router.use("/leads/client-approval", clientApprovalRouter);
 router.use("/leads/production/tech-check", techCheckRouter);
 
 router.use("/leads/production/order-login", orderLoginRoutes);
+
+router.use("/leads/production/pre-production", preProductionRoutes);
+router.use("/leads/production/post-production", postProductionRoutes);
 
 export { router };
