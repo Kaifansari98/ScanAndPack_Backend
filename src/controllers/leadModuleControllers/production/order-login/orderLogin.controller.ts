@@ -388,18 +388,22 @@ export class OrderLoginController {
         client_required_order_login_complition_date,
       } = req.body;
 
-      if (
-        !vendorId ||
-        !leadId ||
-        !account_id ||
-        !user_id ||
-        !assign_to_user_id ||
-        !client_required_order_login_complition_date
-      ) {
+      const missingFields = [];
+
+      if (!vendorId) missingFields.push("vendorId");
+      if (!leadId) missingFields.push("leadId");
+      if (!account_id) missingFields.push("account_id");
+      if (!user_id) missingFields.push("user_id");
+      if (!assign_to_user_id) missingFields.push("assign_to_user_id");
+      if (!client_required_order_login_complition_date)
+        missingFields.push("client_required_order_login_complition_date");
+
+      if (missingFields.length > 0) {
         return res.status(400).json({
           success: false,
-          message:
-            "vendorId, leadId, account_id, user_id, assign_to_user_id, and client_required_order_login_complition_date are required.",
+          message: `Missing required field${
+            missingFields.length > 1 ? "s" : ""
+          }: ${missingFields.join(", ")}`,
         });
       }
 
