@@ -329,4 +329,40 @@ export class PostProductionController {
       });
     }
   }
+
+  // ✅ Check Post-Production Completeness
+  async checkPostProductionCompleteness(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+
+      if (!vendorId || !leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and leadId are required",
+        });
+      }
+
+      const result = await service.checkPostProductionCompleteness(
+        Number(vendorId),
+        Number(leadId)
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Post Production completeness check successful",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error(
+        "[PostProductionController] checkPostProductionCompleteness Error:",
+        error
+      );
+      return res.status(500).json({
+        success: false,
+        message:
+          error.message ||
+          "Internal server error while checking post production completeness",
+      });
+    }
+  }
 }
