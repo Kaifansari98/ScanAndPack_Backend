@@ -266,7 +266,11 @@ export class PreProductionService {
   async checkPostProductionReady(
     vendorId: number,
     leadId: number
-  ): Promise<boolean> {
+  ): Promise<{
+    readyForPostProduction: boolean;
+    all_order_login_dates_added: boolean;
+    all_order_login_marked_completed: boolean;
+  }> {
     // 1️⃣ Fetch the lead to confirm existence and get the expected date
     const lead = await prisma.leadMaster.findFirst({
       where: { id: leadId, vendor_id: vendorId, is_deleted: false },
@@ -276,25 +280,40 @@ export class PreProductionService {
     if (!lead)
       throw new Error(`Lead ${leadId} not found for vendor ${vendorId}`);
 
-    // 2️⃣ Check if expected date is set
     const hasExpectedDate = !!lead.expected_order_login_ready_date;
 
-    // 3️⃣ Count total order-login items and how many are completed
-    const [totalItems, completedItems] = await Promise.all([
-      prisma.orderLoginDetails.count({
-        where: { vendor_id: vendorId, lead_id: leadId },
-      }),
-      prisma.orderLoginDetails.count({
-        where: { vendor_id: vendorId, lead_id: leadId, is_completed: true },
-      }),
-    ]);
+    // 2️⃣ Fetch all order login records
+    const orderLogins = await prisma.orderLoginDetails.findMany({
+      where: { vendor_id: vendorId, lead_id: leadId },
+      select: {
+        id: true,
+        is_completed: true,
+        estimated_completion_date: true,
+      },
+    });
 
-    // 4️⃣ Evaluate readiness
-    if (totalItems > 0 && completedItems === totalItems && hasExpectedDate) {
-      return true; // ✅ all completed + expected date set
-    }
+    const totalItems = orderLogins.length;
 
-    return false; // ❌ missing completion or expected date
+    // 3️⃣ Compute detailed checks
+    const all_order_login_dates_added =
+      totalItems > 0 &&
+      orderLogins.every((item) => !!item.estimated_completion_date);
+
+    const all_order_login_marked_completed =
+      totalItems > 0 && orderLogins.every((item) => item.is_completed === true);
+
+    // 4️⃣ Evaluate overall readiness
+    const readyForPostProduction =
+      totalItems > 0 &&
+      all_order_login_dates_added &&
+      all_order_login_marked_completed &&
+      hasExpectedDate;
+
+    return {
+      readyForPostProduction,
+      all_order_login_dates_added,
+      all_order_login_marked_completed,
+    };
   }
 
   async getLatestOrderLoginByLead(vendorId: number, leadId: number) {

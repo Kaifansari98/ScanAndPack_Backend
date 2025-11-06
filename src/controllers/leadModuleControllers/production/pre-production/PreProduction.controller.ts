@@ -31,6 +31,7 @@ export class PreProductionController {
         message: "Pre-Production leads fetched successfully",
         count: leads.total,
         data: leads,
+        ...leads,
       });
     } catch (error: any) {
       console.error(
@@ -180,8 +181,8 @@ export class PreProductionController {
 
       return res.status(200).json({
         success: true,
-        readyForPostProduction: result,
-        message: result
+        ...result,
+        message: result.readyForPostProduction
           ? "Lead is ready for Post-Production"
           : "Lead is not yet ready for Post-Production",
       });

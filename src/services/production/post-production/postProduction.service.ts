@@ -399,4 +399,90 @@ export class PostProductionService {
 
     return lead;
   }
+
+  // ✅ Check Post-Production Completeness
+  async checkPostProductionCompleteness(vendorId: number, leadId: number) {
+    // 🟦 1. QC Photos (Type 15)
+    const qcDocType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id: vendorId, tag: "Type 15" },
+    });
+
+    let qcPhotosExist = false;
+    if (qcDocType) {
+      const qcCount = await prisma.leadDocuments.count({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          doc_type_id: qcDocType.id,
+          is_deleted: false,
+        },
+      });
+      qcPhotosExist = qcCount > 0;
+    }
+
+    // 🟩 2. Hardware Packing Details (Type 16)
+    const hardwareDocType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id: vendorId, tag: "Type 16" },
+    });
+
+    let hardwareDocsExist = false;
+    let hardwareRemarkExist = false;
+    if (hardwareDocType) {
+      const hardwareCount = await prisma.leadDocuments.count({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          doc_type_id: hardwareDocType.id,
+          is_deleted: false,
+        },
+      });
+      hardwareDocsExist = hardwareCount > 0;
+
+      const hardwareRemark = await prisma.leadMaster.findFirst({
+        where: { id: leadId, vendor_id: vendorId },
+        select: { hardware_packing_details_remark: true },
+      });
+      hardwareRemarkExist = !!hardwareRemark?.hardware_packing_details_remark;
+    }
+
+    // 🟨 3. Woodwork Packing Details (Type 17)
+    const woodworkDocType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id: vendorId, tag: "Type 17" },
+    });
+
+    let woodworkDocsExist = false;
+    let woodworkRemarkExist = false;
+    if (woodworkDocType) {
+      const woodworkCount = await prisma.leadDocuments.count({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          doc_type_id: woodworkDocType.id,
+          is_deleted: false,
+        },
+      });
+      woodworkDocsExist = woodworkCount > 0;
+
+      const woodworkRemark = await prisma.leadMaster.findFirst({
+        where: { id: leadId, vendor_id: vendorId },
+        select: { woodwork_packing_details_remark: true },
+      });
+      woodworkRemarkExist = !!woodworkRemark?.woodwork_packing_details_remark;
+    }
+
+    // 🧾 Return Combined Result
+    return {
+      qc_photos: qcPhotosExist,
+      hardware_docs: hardwareDocsExist,
+      hardware_remark: hardwareRemarkExist,
+      woodwork_docs: woodworkDocsExist,
+      woodwork_remark: woodworkRemarkExist,
+      any_exists:
+        qcPhotosExist ||
+        hardwareDocsExist ||
+        woodworkDocsExist ||
+        hardwareRemarkExist ||
+        woodworkRemarkExist,
+    };
+  }
 }

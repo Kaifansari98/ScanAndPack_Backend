@@ -54,4 +54,10 @@ postProductionRoutes.get(
   controller.getNoOfBoxes
 );
 
+// ✅ Check Post-Production Completeness
+postProductionRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/check-post-production-completeness",
+  controller.checkPostProductionCompleteness
+);
+
 export default postProductionRoutes;
