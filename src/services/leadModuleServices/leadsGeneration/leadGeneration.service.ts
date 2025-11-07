@@ -631,7 +631,8 @@ export const getLeadById = async (
       userType === "sales-executive" ||
       userType === "site-supervisor" ||
       userType === "tech-check" ||
-      userType === "backend"
+      userType === "backend" ||
+      userType === "factory"
     ) {
       console.log("[SERVICE] Sales Executive – vendor scoped access granted");
     } else if (["admin", "super-admin"].includes(userType)) {
