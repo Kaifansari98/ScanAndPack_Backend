@@ -125,6 +125,7 @@ export class LeadStatsService {
     const totalTechCheckStageLeads = await countByStatus("tech-check-stage");
     const totalOrderLoginStageLeads = await countByStatus("order-login-stage");
     const totalProductionStageLeads = await countByStatus("production-stage");
+    const totalReadyToDispatchStageLeads = await countByStatus("ready-to-dispatch-stage");
 
     const stats = {
       total_leads: totalLeads,
@@ -139,6 +140,7 @@ export class LeadStatsService {
       total_tech_check_leads: totalTechCheckStageLeads,
       total_order_login_leads: totalOrderLoginStageLeads,
       total_production_stage_leads: totalProductionStageLeads,
+      total_ready_to_dispatch_leads: totalReadyToDispatchStageLeads,
     };
 
     logger.debug("[LeadStatsService] Computed stats", stats);

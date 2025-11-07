@@ -365,4 +365,40 @@ export class PostProductionController {
       });
     }
   }
+
+  async moveLeadToReadyToDispatch(req: Request, res: Response) {
+    try {
+      const vendorId = parseInt(req.params.vendorId);
+      const leadId = parseInt(req.params.leadId);
+      const { updated_by } = req.body;
+
+      if (!vendorId || !leadId || !updated_by) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId, leadId and updated_by are required",
+        });
+      }
+
+      const result = await service.moveLeadToReadyToDispatch(
+        vendorId,
+        leadId,
+        updated_by
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Lead successfully moved to Ready To Dispatch stage",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error(
+        "[PreProductionController] moveLeadToReadyToDispatch error:",
+        error
+      );
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  }
 }
