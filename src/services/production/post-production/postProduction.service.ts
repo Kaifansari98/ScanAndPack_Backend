@@ -485,4 +485,56 @@ export class PostProductionService {
         woodworkRemarkExist,
     };
   }
+
+  async moveLeadToReadyToDispatch(
+    vendorId: number,
+    leadId: number,
+    updatedBy: number
+  ) {
+    // 1️⃣ Get Ready To Dispatch status
+    const readyToDispatchStatus = await prisma.statusTypeMaster.findFirst({
+      where: { vendor_id: vendorId, tag: "Type 11" },
+      select: { id: true },
+    });
+
+    if (!readyToDispatchStatus) {
+      throw new Error(
+        `Ready To Dispatch status (Type 11) not found for vendor ${vendorId}`
+      );
+    }
+
+    // 2️⃣ Validate the lead exists in Production stage (Type 10)
+    const currentLead = await prisma.leadMaster.findFirst({
+      where: { id: leadId, vendor_id: vendorId, is_deleted: false },
+      select: { id: true, status_id: true, account_id: true },
+    });
+
+    if (!currentLead) {
+      throw new Error(`Lead ${leadId} not found for vendor ${vendorId}`);
+    }
+
+    // 3️⃣ Update status to Ready To Dispatch
+    const updatedLead = await prisma.leadMaster.update({
+      where: { id: leadId },
+      data: {
+        status_id: readyToDispatchStatus.id,
+        updated_by: updatedBy,
+      },
+    });
+
+    // 4️⃣ Log transition
+    await prisma.leadDetailedLogs.create({
+      data: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: currentLead.account_id ?? 0,
+        action: "Lead moved to Ready To Dispatch stage",
+        action_type: "STATUS_CHANGE",
+        created_by: updatedBy,
+        created_at: new Date(),
+      },
+    });
+
+    return updatedLead;
+  }
 }

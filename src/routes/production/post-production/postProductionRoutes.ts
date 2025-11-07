@@ -60,4 +60,10 @@ postProductionRoutes.get(
   controller.checkPostProductionCompleteness
 );
 
+// PUT → Move lead from Production (Type 10) → Ready To Dispatch (Type 11)
+postProductionRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/move-to-ready-to-dispatch",
+  controller.moveLeadToReadyToDispatch
+);
+
 export default postProductionRoutes;

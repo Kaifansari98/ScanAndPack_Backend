@@ -36,6 +36,7 @@ import companyVendorsRoutes from "./generic/companyVendors.routes"
 import orderLoginRoutes from './production/order-login/orderLogin.routes';
 import preProductionRoutes from './production/pre-production/preProduction.routes';
 import postProductionRoutes from './production/post-production/postProductionRoutes';
+import readyToDispatchRoutes from './production/ready-to-dispatch/ReadyToDispatch.routes';
 
 const router = Router();
 
@@ -82,5 +83,6 @@ router.use("/leads/production/order-login", orderLoginRoutes);
 
 router.use("/leads/production/pre-production", preProductionRoutes);
 router.use("/leads/production/post-production", postProductionRoutes);
+router.use("/leads/production/ready-to-dispatch", readyToDispatchRoutes);
 
 export { router };
