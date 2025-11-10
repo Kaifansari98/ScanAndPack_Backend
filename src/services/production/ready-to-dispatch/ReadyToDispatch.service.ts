@@ -239,6 +239,42 @@ export class ReadyToDispatchService {
     return docsWithUrls;
   }
 
+  async getCurrentSitePhotosCountAtReadyToDispatch(
+    vendorId: number,
+    leadId: number
+  ) {
+    if (!vendorId || !leadId)
+      throw Object.assign(new Error("vendorId and leadId are required"), {
+        statusCode: 400,
+      });
+
+    // 🔹 Get DocType for Current Site Photos (Type 18)
+    const sitePhotoDocType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id: vendorId, tag: "Type 18" },
+    });
+
+    if (!sitePhotoDocType)
+      throw Object.assign(
+        new Error("Document type (Type 18) not found for this vendor"),
+        { statusCode: 404 }
+      );
+
+    // 🔹 Count all uploaded Current Site Photos for this lead
+    const count = await prisma.leadDocuments.count({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        doc_type_id: sitePhotoDocType.id,
+      },
+    });
+
+    // 🔹 Return count and boolean flag
+    return {
+      count,
+      hasPhotos: count > 0,
+    };
+  }
+
   public async assignTaskSiteReadinessService(payload: AssignTaskFMInput) {
     const { error, value } = assignTaskSiteReadinessSchema.validate(payload);
     if (error) {

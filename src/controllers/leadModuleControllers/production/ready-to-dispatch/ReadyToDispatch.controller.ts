@@ -133,6 +133,45 @@ export class ReadyToDispatchController {
     }
   }
 
+  async getCurrentSitePhotosCountAtReadyToDispatch(
+    req: Request,
+    res: Response
+  ) {
+    try {
+      const { vendorId, leadId } = req.params;
+
+      if (!vendorId || !leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and leadId are required",
+        });
+      }
+
+      const result = await service.getCurrentSitePhotosCountAtReadyToDispatch(
+        Number(vendorId),
+        Number(leadId)
+      );
+
+      return res.status(200).json({
+        success: true,
+        message:
+          "Fetched Current Site Photos count successfully (Ready-To-Dispatch)",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error(
+        "[ReadyToDispatchController] getCurrentSitePhotosCountAtReadyToDispatch Error:",
+        error
+      );
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message:
+          error.message ||
+          "Internal server error while fetching site photo count",
+      });
+    }
+  }
+
   /** ✅ Assign Site Readiness Task */
   public async assignTaskSiteReadiness(
     req: Request,
