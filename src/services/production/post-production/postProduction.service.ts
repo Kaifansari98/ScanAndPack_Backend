@@ -480,9 +480,7 @@ export class PostProductionService {
       any_exists:
         qcPhotosExist ||
         hardwareDocsExist ||
-        woodworkDocsExist ||
-        hardwareRemarkExist ||
-        woodworkRemarkExist,
+        woodworkDocsExist
     };
   }
 
