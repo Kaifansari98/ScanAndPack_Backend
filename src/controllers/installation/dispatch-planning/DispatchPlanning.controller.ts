@@ -289,4 +289,89 @@ export class DispatchPlanningController {
         .json(ApiResponse.error(error.message || "Internal server error"));
     }
   }
+
+  /**
+   * ✅ Move Lead to Dispatch Stage
+   * @route PUT /leads/installation/dispatch-planning/vendorId/:vendorId/leadId/:leadId/move-to-dispatch
+   */
+  async moveLeadToDispatch(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+      const { updated_by } = req.body;
+
+      if (!vendorId || !leadId || !updated_by) {
+        return res
+          .status(400)
+          .json(
+            ApiResponse.error(
+              "vendorId, leadId, and updated_by are required",
+              400
+            )
+          );
+      }
+
+      const result = await DispatchPlanningService.moveLeadToDispatch(
+        vendorId,
+        leadId,
+        updated_by
+      );
+
+      return res
+        .status(200)
+        .json(
+          ApiResponse.success(
+            result,
+            "Lead successfully moved to Dispatch stage"
+          )
+        );
+    } catch (error: any) {
+      console.error(
+        "[DispatchPlanningController] moveLeadToDispatch Error:",
+        error
+      );
+      return res
+        .status(500)
+        .json(ApiResponse.error(error.message || "Internal server error"));
+    }
+  }
+
+  /**
+   * ✅ Check if Lead has Required Dispatch Readiness Info
+   * @route GET /leads/installation/dispatch-planning/vendorId/:vendorId/leadId/:leadId/check-dispatch-readiness
+   */
+  async checkDispatchReadiness(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+
+      if (!vendorId || !leadId) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("vendorId and leadId are required", 400));
+      }
+
+      const result = await DispatchPlanningService.checkDispatchReadiness(
+        vendorId,
+        leadId
+      );
+
+      return res
+        .status(200)
+        .json(
+          ApiResponse.success(
+            result,
+            "Dispatch readiness status fetched successfully"
+          )
+        );
+    } catch (error: any) {
+      console.error(
+        "[DispatchPlanningController] checkDispatchReadiness Error:",
+        error
+      );
+      return res
+        .status(500)
+        .json(ApiResponse.error(error.message || "Internal server error"));
+    }
+  }
 }

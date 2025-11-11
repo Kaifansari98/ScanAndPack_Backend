@@ -411,4 +411,123 @@ export class DispatchPlanningService {
       pending_amount: lead.pending_amount ?? 0,
     };
   }
+
+  /**
+   * ✅ Move Lead to Dispatch Stage (Type 14)
+   */
+  static async moveLeadToDispatch(
+    vendorId: number,
+    leadId: number,
+    updatedBy: number
+  ) {
+    return prisma.$transaction(async (tx) => {
+      // 1️⃣ Validate lead
+      const lead = await tx.leadMaster.findUnique({
+        where: { id: leadId },
+        select: { id: true, vendor_id: true, account_id: true },
+      });
+
+      if (!lead) throw new Error(`Lead ${leadId} not found`);
+      if (lead.vendor_id !== vendorId)
+        throw new Error(`Lead does not belong to vendor ${vendorId}`);
+
+      // 2️⃣ Fetch Dispatch StatusType (Type 14)
+      const toStatus = await tx.statusTypeMaster.findFirst({
+        where: { vendor_id: vendorId, tag: "Type 14" },
+        select: { id: true, type: true },
+      });
+
+      if (!toStatus)
+        throw new Error(
+          `Status 'Type 14' (Dispatch Stage) not found for vendor ${vendorId}`
+        );
+
+      // 3️⃣ Update Lead’s Status
+      const updatedLead = await tx.leadMaster.update({
+        where: { id: lead.id },
+        data: {
+          status_id: toStatus.id,
+          updated_by: updatedBy,
+          updated_at: new Date(),
+        },
+        select: {
+          id: true,
+          account_id: true,
+          vendor_id: true,
+          status_id: true,
+        },
+      });
+
+      // 4️⃣ Add Detailed Log Entry
+      const actionMessage = `Lead moved to Dispatch stage (Type 14).`;
+
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: lead.id,
+          account_id: lead.account_id!,
+          action: actionMessage,
+          action_type: "UPDATE",
+          created_by: updatedBy,
+          created_at: new Date(),
+        },
+      });
+
+      logger.info("[SERVICE] Lead moved to Dispatch", {
+        lead_id: lead.id,
+        vendor_id: vendorId,
+        updated_by: updatedBy,
+      });
+
+      return {
+        lead_id: lead.id,
+        vendor_id: vendorId,
+        new_status: toStatus.type,
+      };
+    });
+  }
+
+  /**
+   * ✅ Check if all required Dispatch fields are filled
+   */
+  static async checkDispatchReadiness(vendorId: number, leadId: number) {
+    const lead = await prisma.leadMaster.findFirst({
+      where: { id: leadId, vendor_id: vendorId, is_deleted: false },
+      select: {
+        id: true,
+        lead_code: true,
+        required_date_for_dispatch: true,
+        onsite_contact_person_name: true,
+        onsite_contact_person_number: true,
+        material_lift_availability: true,
+        dispatch_planning_remark: true,
+      },
+    });
+
+    if (!lead)
+      throw new Error(`Lead ${leadId} not found for vendor ${vendorId}`);
+
+    // ✅ Check each field
+    const missingFields: string[] = [];
+    if (!lead.required_date_for_dispatch)
+      missingFields.push("Required Date for Dispatch");
+    if (!lead.onsite_contact_person_name)
+      missingFields.push("Onsite Contact Person Name");
+    if (!lead.onsite_contact_person_number)
+      missingFields.push("Onsite Contact Person Number");
+    if (
+      lead.material_lift_availability === null ||
+      lead.material_lift_availability === undefined
+    )
+      missingFields.push("Material Lift Availability");
+
+    const isReadyForDispatch = missingFields.length === 0;
+
+    return {
+      lead_id: lead.id,
+      vendor_id: vendorId,
+      is_ready_for_dispatch: isReadyForDispatch,
+      missing_fields: missingFields,
+    };
+  }
 }

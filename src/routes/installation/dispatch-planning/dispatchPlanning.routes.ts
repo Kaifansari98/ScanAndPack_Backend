@@ -40,4 +40,16 @@ dispatchPlanningRoutes.get(
   controller.getPendingProjectAmount
 );
 
+// ✅ Move Lead to Dispatch Stage
+dispatchPlanningRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/move-to-dispatch",
+  controller.moveLeadToDispatch
+);
+
+// ✅ Check Dispatch Readiness Info
+dispatchPlanningRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/check-dispatch-readiness",
+  controller.checkDispatchReadiness
+);
+
 export default dispatchPlanningRoutes;
