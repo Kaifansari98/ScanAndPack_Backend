@@ -246,3 +246,24 @@ export const uploadToWasabiCurrentSitePhotosReadyToDispatch = async (
   return sysName;
 };
 
+export const uploadToWasabiCurrentSitePhotosSiteReadiness = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  originalName: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `site_readiness/current_site_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: "application/octet-stream",
+    })
+  );
+
+  return sysName;
+};
+

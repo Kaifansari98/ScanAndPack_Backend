@@ -69,6 +69,7 @@ model VendorMaster {
   leadDocumentLogs            LeadDocumentLogs[]
   CompanyVendorsMaster        CompanyVendorsMaster[]
   orderLoginDetails           OrderLoginDetails[]
+  siteReadiness               SiteReadiness[]
 }
 
 model VendorAddress {
@@ -174,6 +175,9 @@ model UserMaster {
   companyVendorsUpdated CompanyVendorsMaster[] @relation("CompanyVendorUpdatedBy")
   companyVendorsDeleted CompanyVendorsMaster[] @relation("CompanyVendorDeletedBy")
   orderLoginsUpdated    OrderLoginDetails[]    @relation("OrderLoginUpdatedBy")
+
+  siteReadinessCreated SiteReadiness[] @relation("SiteReadinessCreatedBy")
+  siteReadinessUpdated SiteReadiness[] @relation("SiteReadinessUpdatedBy")
 }
 
 model UserDocument {
@@ -419,6 +423,7 @@ model LeadMaster {
   leadDetailedLogs            LeadDetailedLogs[]
   leadDocumentLogs            LeadDocumentLogs[]
   orderLoginDetails           OrderLoginDetails[]
+  siteReadiness               SiteReadiness[]
 
   // ✅ Unique constraints for contact_no and email per vendor
   @@unique([contact_no, vendor_id], name: "unique_contact_per_vendor")
@@ -535,6 +540,7 @@ model AccountMaster {
   leadDetailedLogs            LeadDetailedLogs[]
   leadDocumentLogs            LeadDocumentLogs[]
   orderLoginDetails           OrderLoginDetails[]
+  siteReadiness               SiteReadiness[]
 }
 
 model LeadProductMapping {
@@ -595,8 +601,9 @@ model LeadDocuments {
   createdBy UserMaster  @relation("DocumentCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   deletedBy UserMaster? @relation("DocumentDeletedBy", fields: [deleted_by], references: [id])
 
-  paymentInfo      PaymentInfo[]
-  leadDocumentLogs LeadDocumentLogs[]
+  paymentInfo           PaymentInfo[]
+  leadDocumentLogs      LeadDocumentLogs[]
+  site_readiness_photos SiteReadiness[]
 }
 
 model ProductStructure {
@@ -940,4 +947,29 @@ model OrderLoginDetails {
   createdBy     UserMaster            @relation(fields: [created_by], references: [id], onDelete: Cascade)
   updatedBy     UserMaster?           @relation("OrderLoginUpdatedBy", fields: [updated_by], references: [id])
   companyVendor CompanyVendorsMaster? @relation(fields: [company_vendor_id], references: [id], onDelete: SetNull)
+}
+
+model SiteReadiness {
+  id         Int      @id @default(autoincrement())
+  vendor_id  Int
+  account_id Int
+  lead_id    Int
+  type       String
+  remark     String?  @db.VarChar(2000)
+  value      Boolean  @default(false)
+  created_by Int
+  updated_by Int?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  vendor  VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  account AccountMaster @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  lead    LeadMaster    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+
+  createdBy UserMaster  @relation("SiteReadinessCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  updatedBy UserMaster? @relation("SiteReadinessUpdatedBy", fields: [updated_by], references: [id])
+
+  site_readiness_photos LeadDocuments[]
+
+  @@index([lead_id, vendor_id, type])
 }
