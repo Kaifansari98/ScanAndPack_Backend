@@ -30,6 +30,7 @@ import preProductionRoutes from './production/pre-production/preProduction.route
 import postProductionRoutes from './production/post-production/postProductionRoutes';
 import readyToDispatchRoutes from './production/ready-to-dispatch/ReadyToDispatch.routes';
 import siteReadinessRoutes from './installation/site-readiness/SiteReadiness.routes';
+import dispatchPlanningRoutes from './installation/dispatch-planning/dispatchPlanning.routes';
 
 const router = Router();
 
@@ -62,5 +63,6 @@ router.use("/leads/production/pre-production", preProductionRoutes);
 router.use("/leads/production/post-production", postProductionRoutes);
 router.use("/leads/production/ready-to-dispatch", readyToDispatchRoutes);
 router.use("/leads/installation/site-readiness", siteReadinessRoutes);
+router.use("/leads/installation/dispatch-planning", dispatchPlanningRoutes);
 
 export { router };

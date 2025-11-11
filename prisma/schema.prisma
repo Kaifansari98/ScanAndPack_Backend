@@ -381,6 +381,12 @@ model LeadMaster {
   woodwork_packing_details_remark             String?   @db.VarChar(2000)
   no_of_boxes                                 Int?
 
+  required_date_for_dispatch    DateTime?
+  onsite_contact_person_name    String?
+  onsite_contact_person_number  String?
+  material_lift_availability    Boolean?   @default(false)
+  dispatch_planning_remark      String?    @db.VarChar(2000)
+
   vendor_id   Int
   assign_to   Int?
   assigned_by Int?
@@ -664,7 +670,7 @@ model Ledger {
   id           Int        @id @default(autoincrement())
   lead_id      Int
   account_id   Int
-  client_id    Int
+  client_id    Int?
   vendor_id    Int
   amount       Float
   payment_date DateTime
@@ -675,7 +681,7 @@ model Ledger {
   // ✅ Relations
   lead      LeadMaster    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   account   AccountMaster @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  client    ClientMaster  @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  client    ClientMaster?  @relation(fields: [client_id], references: [id], onDelete: Cascade)
   vendor    VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   createdBy UserMaster    @relation(fields: [created_by], references: [id], onDelete: Cascade)
 }
