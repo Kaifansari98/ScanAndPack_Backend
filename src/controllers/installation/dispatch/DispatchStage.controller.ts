@@ -361,4 +361,82 @@ export class DispatchStageController {
       });
     }
   }
+
+  // ✅ Create Pending Material Task
+  async createPendingMaterialTask(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+      const { account_id, created_by, due_date, remark } = req.body;
+
+      if (!vendorId || !leadId || !account_id || !created_by || !due_date) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "vendorId, leadId, account_id, created_by and due_date are required",
+        });
+      }
+
+      const task = await service.createPendingMaterialTask(
+        Number(vendorId),
+        Number(leadId),
+        Number(account_id),
+        Number(created_by),
+        due_date,
+        remark
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Pending Material task created successfully",
+        data: task,
+      });
+    } catch (error: any) {
+      logger.error(
+        "[PendingMaterialController] createPendingMaterialTask Error:",
+        error
+      );
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message:
+          error.message ||
+          "Internal server error while creating Pending Material task",
+      });
+    }
+  }
+
+  // ✅ Fetch all Pending Material Tasks
+  async getPendingMaterialTasks(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+
+      if (!vendorId || !leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and leadId are required",
+        });
+      }
+
+      const tasks = await service.getPendingMaterialTasks(
+        Number(vendorId),
+        Number(leadId)
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Pending material tasks fetched successfully",
+        data: tasks,
+      });
+    } catch (error: any) {
+      logger.error(
+        "[DispatchStageController] getPendingMaterialTasks Error:",
+        error
+      );
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message:
+          error.message ||
+          "Internal server error while fetching pending materials",
+      });
+    }
+  }
 }

@@ -61,4 +61,16 @@ dispatchStageRoutes.get(
   controller.getPostDispatchDocuments
 );
 
+// ✅ POST → Create Pending Material Task
+dispatchStageRoutes.post(
+  "/vendorId/:vendorId/leadId/:leadId/create-pending-material",
+  controller.createPendingMaterialTask
+);
+
+// ✅ GET → Fetch all Pending Material Tasks
+dispatchStageRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/pending-material-tasks",
+  controller.getPendingMaterialTasks
+);
+
 export default dispatchStageRoutes;
