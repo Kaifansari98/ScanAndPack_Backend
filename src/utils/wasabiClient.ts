@@ -288,3 +288,44 @@ export const uploadToWasabiPaymentProffDispatchPlanning = async (
   return sysName;
 };
 
+export const uploadToWasabiDispatchDocuments = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  originalName: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `dispatch/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: "application/octet-stream",
+    })
+  );
+
+  return sysName;
+};
+
+export const uploadToWasabiPostDispatchDocuments = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  originalName: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `post_dispatch/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: "application/octet-stream",
+    })
+  );
+
+  return sysName;
+};

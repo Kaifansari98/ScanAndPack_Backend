@@ -389,6 +389,13 @@ model LeadMaster {
   material_lift_availability       Boolean?  @default(false)
   dispatch_planning_remark         String?   @db.VarChar(2000)
 
+  // ✅ New Dispatch Fields
+  dispatch_date   DateTime?
+  driver_name     String?   @db.VarChar(255)
+  driver_number   String?   @db.VarChar(50)
+  vehicle_no      String?   @db.VarChar(100)
+  dispatch_remark String?   @db.VarChar(2000)
+
   vendor_id   Int
   assign_to   Int?
   assigned_by Int?
