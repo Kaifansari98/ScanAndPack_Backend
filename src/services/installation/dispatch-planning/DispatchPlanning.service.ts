@@ -137,29 +137,29 @@ export class DispatchPlanningService {
       required_date_for_dispatch,
       onsite_contact_person_name,
       onsite_contact_person_number,
+      alt_onsite_contact_person_name,
+      alt_onsite_contact_person_number,
       material_lift_availability,
       dispatch_planning_remark,
       created_by,
     } = payload;
 
-    // Validation for date selection (>= 2 days ahead)
-    const dispatchDate = new Date(required_date_for_dispatch);
-    const now = new Date();
-    const diffDays =
-      (dispatchDate.getTime() - now.getTime()) / (1000 * 3600 * 24);
-    if (diffDays < 2) {
-      throw new Error(
-        "Required date for dispatch must be at least 2 days ahead"
-      );
-    }
+    // 🧹 Removed backend date validation
+    // The frontend already ensures this is >= 2 days ahead
 
-    // Update LeadMaster
+    const dispatchDate = required_date_for_dispatch
+      ? new Date(required_date_for_dispatch)
+      : null;
+
+    // ✅ Update LeadMaster directly
     const leadUpdate = await prisma.leadMaster.update({
       where: { id: lead_id },
       data: {
         required_date_for_dispatch: dispatchDate,
         onsite_contact_person_name,
         onsite_contact_person_number,
+        alt_onsite_contact_person_name,
+        alt_onsite_contact_person_number,
         material_lift_availability,
         dispatch_planning_remark,
         updated_by: created_by,
@@ -317,6 +317,8 @@ export class DispatchPlanningService {
         required_date_for_dispatch: true,
         onsite_contact_person_name: true,
         onsite_contact_person_number: true,
+        alt_onsite_contact_person_name: true,
+        alt_onsite_contact_person_number: true,
         material_lift_availability: true,
         dispatch_planning_remark: true,
         updated_at: true,

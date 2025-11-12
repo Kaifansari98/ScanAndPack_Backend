@@ -60,6 +60,8 @@ export class DispatchPlanningController {
         required_date_for_dispatch,
         onsite_contact_person_name,
         onsite_contact_person_number,
+        alt_onsite_contact_person_name,
+        alt_onsite_contact_person_number,
         material_lift_availability,
         dispatch_planning_remark,
         created_by,
@@ -82,6 +84,8 @@ export class DispatchPlanningController {
         required_date_for_dispatch,
         onsite_contact_person_name,
         onsite_contact_person_number,
+        alt_onsite_contact_person_name,
+        alt_onsite_contact_person_number,
         material_lift_availability: material_lift_availability === "true",
         dispatch_planning_remark,
         created_by: Number(created_by),
@@ -179,6 +183,7 @@ export class DispatchPlanningController {
         vendorId,
         leadId
       );
+
       return res
         .status(200)
         .json(
