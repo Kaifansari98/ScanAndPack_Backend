@@ -971,7 +971,7 @@ model SiteReadiness {
   lead_id    Int
   type       String
   remark     String?  @db.VarChar(2000)
-  value      Boolean  @default(false)
+  value      Boolean?
   created_by Int
   updated_by Int?
   created_at DateTime @default(now())

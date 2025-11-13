@@ -368,12 +368,21 @@ export class DispatchStageController {
       const { vendorId, leadId } = req.params;
       const { account_id, created_by, due_date, remark } = req.body;
 
-      if (!vendorId || !leadId || !account_id || !created_by || !due_date) {
-        return res.status(400).json({
-          success: false,
-          message:
-            "vendorId, leadId, account_id, created_by and due_date are required",
-        });
+      const requiredFields = {
+        vendorId,
+        leadId,
+        account_id,
+        created_by,
+        due_date,
+      };
+
+      for (const [key, value] of Object.entries(requiredFields)) {
+        if (!value) {
+          return res.status(400).json({
+            success: false,
+            message: `${key} is required`,
+          });
+        }
       }
 
       const task = await service.createPendingMaterialTask(
