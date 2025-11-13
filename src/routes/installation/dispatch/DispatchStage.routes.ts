@@ -73,4 +73,9 @@ dispatchStageRoutes.get(
   controller.getPendingMaterialTasks
 );
 
+dispatchStageRoutes.get(
+  "/vendorId/:vendorId/get-order-login-summary",
+  controller.getOrderLoginSummaryByLead
+);
+
 export default dispatchStageRoutes;
