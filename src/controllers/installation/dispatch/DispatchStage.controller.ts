@@ -448,4 +448,37 @@ export class DispatchStageController {
       });
     }
   }
+
+  async getOrderLoginSummaryByLead(req: Request, res: Response) {
+    try {
+      const { vendorId } = req.params;
+      const { lead_id } = req.query; // from query
+
+      if (!vendorId || !lead_id) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and lead_id are required",
+        });
+      }
+
+      const orderLogins = await service.getOrderLoginSummaryByLead(
+        Number(vendorId),
+        Number(lead_id)
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Order login summary fetched successfully",
+        data: orderLogins,
+      });
+    } catch (error: any) {
+      console.error("Error fetching order login summary:", error);
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message:
+          error.message ||
+          "Internal server error while fetching order login summary",
+      });
+    }
+  }
 }

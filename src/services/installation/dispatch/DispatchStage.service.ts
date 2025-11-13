@@ -531,4 +531,35 @@ export class DispatchStageService {
 
     return tasks;
   }
+
+  // 📦 Service
+  async getOrderLoginSummaryByLead(vendorId: number, leadId: number) {
+    if (!vendorId || !leadId) {
+      const error = new Error("vendor_id and lead_id are required");
+      (error as any).statusCode = 400;
+      throw error;
+    }
+
+    const orderLogins = await prisma.orderLoginDetails.findMany({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+      },
+      orderBy: {
+        created_at: "asc",
+      },
+      select: {
+        id: true,
+        item_type: true,
+      },
+    });
+
+    if (orderLogins.length === 0) {
+      const error = new Error("No order login summary found for this lead.");
+      (error as any).statusCode = 404;
+      throw error;
+    }
+
+    return orderLogins;
+  }
 }
