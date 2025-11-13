@@ -477,9 +477,9 @@ export class PostProductionService {
       hardware_remark: hardwareRemarkExist,
       woodwork_docs: woodworkDocsExist,
       woodwork_remark: woodworkRemarkExist,
-      any_exists:
-        qcPhotosExist ||
-        hardwareDocsExist ||
+      all_exists:
+        qcPhotosExist &&
+        hardwareDocsExist &&
         woodworkDocsExist
     };
   }
