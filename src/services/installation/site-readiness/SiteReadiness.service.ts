@@ -156,7 +156,7 @@ export class SiteReadinessService {
       account_id: item.account_id,
       type: item.type,
       remark: item.remark || null,
-      value: item.value ?? false,
+      value: item.value ?? null,
       created_by: item.created_by,
     }));
 
