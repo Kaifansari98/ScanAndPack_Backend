@@ -70,6 +70,10 @@ model VendorMaster {
   CompanyVendorsMaster        CompanyVendorsMaster[]
   orderLoginDetails           OrderLoginDetails[]
   siteReadiness               SiteReadiness[]
+  installers                 InstallerUserMaster[]
+  installerMappings          InstallerUserMapping[]
+  installationUpdates         InstallationUpdate[]
+  installationUpdateDocs      InstallationUpdateDocuments[]
 }
 
 model VendorAddress {
@@ -178,6 +182,10 @@ model UserMaster {
 
   siteReadinessCreated SiteReadiness[] @relation("SiteReadinessCreatedBy")
   siteReadinessUpdated SiteReadiness[] @relation("SiteReadinessUpdatedBy")
+
+  installersCreated          InstallerUserMaster[]  @relation("InstallerUserCreatedBy")
+  installersAssigned         InstallerUserMapping[] @relation("InstallerAssignedBy")
+  installationUpdatesCreated InstallationUpdate[]
 }
 
 model UserDocument {
@@ -396,6 +404,15 @@ model LeadMaster {
   vehicle_no      String?   @db.VarChar(100)
   dispatch_remark String?   @db.VarChar(2000)
 
+  actual_installation_start_date DateTime?
+  expected_installation_end_date DateTime?
+
+  is_carcass_installation_completed    Boolean?  @default(false)
+  carcass_installation_completion_date DateTime?
+
+  is_shutter_installation_completed    Boolean?  @default(false)
+  shutter_installation_completion_date DateTime?
+
   vendor_id   Int
   assign_to   Int?
   assigned_by Int?
@@ -439,6 +456,8 @@ model LeadMaster {
   leadDocumentLogs            LeadDocumentLogs[]
   orderLoginDetails           OrderLoginDetails[]
   siteReadiness               SiteReadiness[]
+  installerMappings           InstallerUserMapping[]
+  installationUpdates         InstallationUpdate[]
 
   // ✅ Unique constraints for contact_no and email per vendor
   @@unique([contact_no, vendor_id], name: "unique_contact_per_vendor")
@@ -556,6 +575,8 @@ model AccountMaster {
   leadDocumentLogs            LeadDocumentLogs[]
   orderLoginDetails           OrderLoginDetails[]
   siteReadiness               SiteReadiness[]
+  installerMappings           InstallerUserMapping[]
+  installationUpdates         InstallationUpdate[]
 }
 
 model LeadProductMapping {
@@ -616,9 +637,10 @@ model LeadDocuments {
   createdBy UserMaster  @relation("DocumentCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   deletedBy UserMaster? @relation("DocumentDeletedBy", fields: [deleted_by], references: [id])
 
-  paymentInfo           PaymentInfo[]
-  leadDocumentLogs      LeadDocumentLogs[]
-  site_readiness_photos SiteReadiness[]
+  paymentInfo            PaymentInfo[]
+  leadDocumentLogs       LeadDocumentLogs[]
+  site_readiness_photos  SiteReadiness[]
+  installationUpdateDocs InstallationUpdateDocuments[] @relation("InstallationUpdateDocumentLink")
 }
 
 model ProductStructure {
@@ -987,4 +1009,68 @@ model SiteReadiness {
   site_readiness_photos LeadDocuments[]
 
   @@index([lead_id, vendor_id, type])
+}
+
+model InstallerUserMaster {
+  id            Int      @id @default(autoincrement())
+  vendor_id     Int
+  installer_name String
+  contact_number String?
+  status        String   @default("active")
+  created_by    Int
+  created_at    DateTime @default(now())
+
+  // ✅ Relations
+  vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdBy UserMaster   @relation("InstallerUserCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  mappings  InstallerUserMapping[]
+}
+
+
+model InstallerUserMapping {
+  id            Int      @id @default(autoincrement())
+  vendor_id     Int
+  account_id    Int
+  lead_id       Int
+  installer_id  Int
+  assigned_by   Int
+  assigned_date DateTime @default(now())
+
+  // ✅ Relations
+  vendor    VendorMaster       @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  account   AccountMaster      @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  lead      LeadMaster         @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  installer InstallerUserMaster @relation(fields: [installer_id], references: [id], onDelete: Cascade)
+  assigner  UserMaster         @relation("InstallerAssignedBy", fields: [assigned_by], references: [id], onDelete: Cascade)
+}
+
+
+model InstallationUpdate {
+  id          Int      @id @default(autoincrement())
+  vendor_id   Int
+  account_id  Int
+  lead_id     Int
+  update_date DateTime
+  remark      String?  @db.VarChar(2000)
+  created_by  Int
+  created_at  DateTime @default(now())
+
+  vendor    VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  account   AccountMaster @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  lead      LeadMaster    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  createdBy UserMaster    @relation(fields: [created_by], references: [id], onDelete: Cascade)
+
+  documents InstallationUpdateDocuments[]
+}
+
+model InstallationUpdateDocuments {
+  id                     Int      @id @default(autoincrement())
+  vendor_id              Int
+  installation_update_id Int
+  document_id            Int
+  created_at             DateTime @default(now())
+
+  installationUpdate InstallationUpdate @relation(fields: [installation_update_id], references: [id], onDelete: Cascade)
+  document           LeadDocuments      @relation("InstallationUpdateDocumentLink", fields: [document_id], references: [id], onDelete: Cascade)
+  vendor             VendorMaster       @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }

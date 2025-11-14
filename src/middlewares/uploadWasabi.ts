@@ -42,14 +42,28 @@ export const upload = multer({
   limits: fileLimits,
   fileFilter: (req, file, cb) => {
     const allowedMimeTypes = [
+      // Images
       "image/jpeg",
       "image/jpg",
       "image/png",
       "image/gif",
+      "image/webp",
+
+      // PDF & ZIP
       "application/pdf",
       "application/zip",
       "application/x-zip-compressed",
+
+      // Videos
+      "video/mp4",
+      "video/mpeg",
+      "video/ogg",
+      "video/webm",
+      "video/x-msvideo", // AVI
+      "video/quicktime", // MOV
+      "video/x-matroska", // MKV
     ];
+
     if (allowedMimeTypes.includes(file.mimetype)) {
       cb(null, true);
     } else {
@@ -237,6 +251,17 @@ export const uploadMeetingDocs = multer({
   limits: { files: 10 },
   fileFilter: (req, file, cb) => {
     const allowed = [".pdf", ".jpg", ".jpeg", ".png", ".doc", ".docx"];
+    const ext = path.extname(file.originalname).toLowerCase();
+    if (allowed.includes(ext)) cb(null, true);
+    else cb(new Error(`Unsupported file type: ${ext}`));
+  },
+});
+
+export const uploadToWasabiUnderInstallationDayWiseDocs = multer({
+  storage: multer.memoryStorage(),
+  limits: { files: 10 },
+  fileFilter: (req, file, cb) => {
+    const allowed = [".pdf", ".jpg", ".jpeg", ".png", ".doc", ".docx", ".mp4"];
     const ext = path.extname(file.originalname).toLowerCase();
     if (allowed.includes(ext)) cb(null, true);
     else cb(new Error(`Unsupported file type: ${ext}`));

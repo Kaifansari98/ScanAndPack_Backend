@@ -1,0 +1,362 @@
+// src/server.ts
+import { app } from "./app";
+import { env } from "./config/env";
+import logger from "./utils/logger";
+
+const PORT = env.PORT || 7777;
+
+const server = app.listen(PORT, () => {
+  logger.info("Server started", { port: PORT, env: process.env.NODE_ENV });
+});
+
+// Graceful shutdown (optional but recommended)
+const shutdown = (signal: string) => {
+  logger.warn(`Received ${signal}, shutting down...`);
+  server.close((err?: Error) => {
+    if (err) {
+      logger.error("Error during server close", { err });
+      process.exit(1);
+    }
+    logger.info("HTTP server closed");
+    process.exit(0);
+  });
+};
+
+process.on("SIGINT", () => shutdown("SIGINT"));
+process.on("SIGTERM", () => shutdown("SIGTERM"));
+
+// ✅ Root test route
+app.get('/', (_req, res) => {
+  res.send('✅ Root is working!');
+});
+
+// ✅ /api test route
+app.use('/api', router);
+
+router.use("/leads/installation/under-installation", underInstallationStageRoutes);
+
+/** ✅ POST → Upload Installation Updates (Day Wise) */
+underInstallationStageRoutes.post(
+  "/vendorId/:vendorId/leadId/:leadId/upload-installation-updates-day-wise",
+  upload.array("files", 10),
+  controller.uploadInstallationUpdatesDayWise
+);
+
+/** ✅ GET → Fetch Installation Updates – Day Wise */
+underInstallationStageRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/installation-updates-day-wise",
+  controller.getInstallationUpdatesDayWise
+);
+
+/**
+   * ✅ Upload Installation Updates (Day Wise)
+   * @route POST /leads/installation/under-installation/vendorId/:vendorId/leadId/:leadId/upload-installation-updates-day-wise
+   */
+  async uploadInstallationUpdatesDayWise(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+      const { account_id, created_by, remark, update_date } = req.body;
+      const files = req.files as Express.Multer.File[];
+
+      if (!vendorId || !leadId || !created_by) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId, leadId, and created_by are required",
+        });
+      }
+
+      if (!update_date) {
+        return res.status(400).json({
+          success: false,
+          message: "update_date is required for day-wise upload",
+        });
+      }
+
+      if (!files || files.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "At least one file must be uploaded",
+        });
+      }
+
+      const uploaded =
+        await UnderInstallationStageService.uploadInstallationUpdatesDayWise(
+          Number(vendorId),
+          Number(leadId),
+          account_id ? Number(account_id) : null,
+          Number(created_by),
+          new Date(update_date),
+          remark || null,
+          files
+        );
+
+      return res.status(200).json({
+        success: true,
+        message: "Installation Day Wise Updates uploaded successfully",
+        count: uploaded.length,
+        data: uploaded,
+      });
+    } catch (error: any) {
+      logger.error(
+        "[UnderInstallationStageController] uploadInstallationUpdatesDayWise Error:",
+        error
+      );
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message:
+          error.message ||
+          "Internal server error while uploading Installation Day Wise Updates",
+      });
+    }
+  }
+
+  /**
+   * ✅ Get Installation Updates – Day Wise
+   */
+  async getInstallationUpdatesDayWise(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+
+      if (!vendorId || !leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and leadId are required",
+        });
+      }
+
+      const data =
+        await UnderInstallationStageService.getInstallationUpdatesDayWise(
+          Number(vendorId),
+          Number(leadId)
+        );
+
+      return res.status(200).json({
+        success: true,
+        message: "Installation updates fetched successfully",
+        data,
+      });
+    } catch (error: any) {
+      logger.error(
+        "[UnderInstallationStageController] getInstallationUpdatesDayWise Error:",
+        error
+      );
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  }
+
+  /**
+   * ✅ Upload Installation Updates – Day Wise
+   */
+  static async uploadInstallationUpdatesDayWise(
+    vendorId: number,
+    leadId: number,
+    accountId: number | null,
+    userId: number,
+    updateDate: Date,
+    remark: string | null,
+    files: Express.Multer.File[]
+  ) {
+    if (!vendorId || !leadId || !userId)
+      throw Object.assign(
+        new Error("vendorId, leadId and userId are required"),
+        {
+          statusCode: 400,
+        }
+      );
+
+    // 🔹 Fetch document type (Type 23)
+    const docType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id: vendorId, tag: "Type 23" },
+    });
+
+    if (!docType)
+      throw Object.assign(
+        new Error(
+          "Document type (Type 23 – under-installation-day-wise-Documents) not found"
+        ),
+        { statusCode: 404 }
+      );
+
+    // 🔹 Validate Lead (for account_id fallback)
+    const lead = await prisma.leadMaster.findUnique({
+      where: { id: leadId },
+      select: { id: true, vendor_id: true, account_id: true },
+    });
+
+    if (!lead) throw new Error(`Lead ${leadId} not found`);
+    if (lead.vendor_id !== vendorId)
+      throw new Error(`Lead does not belong to vendor ${vendorId}`);
+
+    const finalAccountId = accountId || lead.account_id;
+    if (!finalAccountId)
+      throw new Error(`Lead ${leadId} does not have an associated account`);
+
+    return prisma.$transaction(async (tx) => {
+      // 1️⃣ Create InstallationUpdate entry
+      const installationUpdate = await tx.installationUpdate.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: finalAccountId,
+          update_date: updateDate,
+          remark,
+          created_by: userId,
+        },
+      });
+
+      // 2️⃣ Upload each file to Wasabi + create LeadDocument + link in InstallationUpdateDocuments
+      const uploadedDocs = [];
+
+      for (const file of files) {
+        const sysName = await uploadToWasabiUnderInstallationDayWiseDocuments(
+          file.buffer,
+          vendorId,
+          leadId,
+          file.originalname
+        );
+
+        // Create LeadDocument record
+        const doc = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: file.originalname,
+            doc_sys_name: sysName,
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: finalAccountId,
+            created_by: userId,
+            doc_type_id: docType.id,
+          },
+        });
+
+        // Link document to the InstallationUpdate
+        await tx.installationUpdateDocuments.create({
+          data: {
+            vendor_id: vendorId,
+            installation_update_id: installationUpdate.id,
+            document_id: doc.id,
+          },
+        });
+
+        uploadedDocs.push(doc);
+      }
+
+      // 3️⃣ Log detailed action
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: finalAccountId,
+          action: `Uploaded ${
+            files.length
+          } Installation Update document(s) for ${updateDate.toDateString()}`,
+          action_type: "UPLOAD",
+          created_by: userId,
+          created_at: new Date(),
+        },
+      });
+
+      return uploadedDocs;
+    });
+  }
+
+  /**
+   * ✅ Get Installation Updates – Day Wise
+   */
+  static async getInstallationUpdatesDayWise(vendorId: number, leadId: number) {
+    // 1️⃣ Fetch all updates (Day wise)
+    const updates = await prisma.installationUpdate.findMany({
+      where: { vendor_id: vendorId, lead_id: leadId },
+      include: {
+        documents: {
+          include: {
+            document: true, // LeadDocuments
+          },
+        },
+      },
+      orderBy: { update_date: "desc" },
+    });
+
+    // 2️⃣ Format data
+    const result = [];
+
+    for (const update of updates) {
+      const dayEntry = {
+        update_id: update.id,
+        update_date: update.update_date,
+        remark: update.remark,
+        documents: [] as any[],
+      };
+
+      // 3️⃣ Attach signed URLs for each file
+      for (const docMap of update.documents) {
+        const doc = docMap.document;
+
+        const signedUrl = await generateSignedUrl(
+          doc.doc_sys_name,
+          3600,
+          "inline" // show inline by default
+        );
+
+        dayEntry.documents.push({
+          document_id: doc.id,
+          original_name: doc.doc_og_name,
+          file_key: doc.doc_sys_name,
+          signed_url: signedUrl,
+          uploaded_at: doc.created_at,
+        });
+      }
+
+      result.push(dayEntry);
+    }
+
+    return result;
+  }
+
+  export const uploadToWasabiUnderInstallationDayWiseDocuments = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  originalName: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `under_installation_day_wise_documents/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: "application/octet-stream",
+    })
+  );
+
+  return sysName;
+};
+
+export const upload = multer({
+  storage: multer.memoryStorage(), // ✅ keep file in memory, don't auto-upload
+  limits: fileLimits,
+  fileFilter: (req, file, cb) => {
+    const allowedMimeTypes = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/gif",
+      "application/pdf",
+      "application/zip",
+      "application/x-zip-compressed",
+    ];
+    if (allowedMimeTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(
+        new Error(
+          `Only image files and PDFs and ZIP archives are allowed! Received: ${file.mimetype}`
+        )
+      );
+    }
+  },
+});
