@@ -1,287 +1,397 @@
 router.use("/leads/installation/under-installation", underInstallationStageRoutes);
 
-/**
- * POST → Create Miscellaneous Issue with documents
- */
 underInstallationStageRoutes.post(
-  "/vendorId/:vendorId/leadId/:leadId/create",
-  upload.array("files", 10), // max 10 docs
-  controller.createMiscellaneousEntry
+  "/issue-log/create",
+  controller.createInstallationIssueLog
 );
 
 underInstallationStageRoutes.get(
-  "/vendorId/:vendorId/leadId/:leadId/get-all",
-  controller.getAllMiscellaneousEntries
+  "/issue-log/vendor/:vendor_id/lead/:lead_id",
+  controller.getInstallationIssueLogs
 );
 
-  async createMiscellaneousEntry(req: Request, res: Response) {
-    try {
-      const vendorId = Number(req.params.vendorId);
-      const leadId = Number(req.params.leadId);
+underInstallationStageRoutes.get(
+  "/issue-log/:id",
+  controller.getInstallationIssueLogById
+);
 
+underInstallationStageRoutes.put(
+  "/issue-log/:id/update",
+  controller.updateInstallationIssueLog
+);
+
+ async createInstallationIssueLog(req: Request, res: Response) {
+    try {
       const {
+        vendor_id,
+        lead_id,
         account_id,
-        misc_type_id,
-        problem_description,
-        reorder_material_details,
-        quantity,
-        cost,
-        supervisor_remark,
-        expected_ready_date,
-        is_resolved,
-        teams, // comma-separated string "1,2,3"
+        issue_type_ids,
+        issue_description,
+        issue_impact,
+        responsible_team_ids,
         created_by,
       } = req.body;
 
-      const files = req.files as Express.Multer.File[];
-
-      const parsedTeams = teams
-        ? teams.split(",").map((t: string) => Number(t.trim()))
-        : [];
-
-      const payload = {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        account_id: Number(account_id),
-        misc_type_id: Number(misc_type_id),
-        problem_description,
-        reorder_material_details,
-        quantity: quantity ? Number(quantity) : undefined,
-        cost: cost ? Number(cost) : undefined,
-        supervisor_remark: supervisor_remark || undefined,
-        expected_ready_date: expected_ready_date
-          ? new Date(expected_ready_date)
-          : undefined,
-        is_resolved: is_resolved === "true" ? true : false,
-        created_by: Number(created_by),
-        teams: parsedTeams,
-        files,
-      };
-
-      const result =
-        await UnderInstallationStageService.createMiscellaneousService(payload);
-
-      return res.status(201).json({
-        success: true,
-        message: "Miscellaneous entry created successfully",
-        data: result,
-      });
-    } catch (err: any) {
-      console.error("❌ Error in createMiscellaneousEntry:", err.message);
-      return res.status(500).json({
-        success: false,
-        error: err.message || "Something went wrong",
-      });
-    }
-  }
-
-  async getAllMiscellaneousEntries(req: Request, res: Response) {
-    try {
-      const vendorId = Number(req.params.vendorId);
-      const leadId = Number(req.params.leadId);
-
-      const result =
-        await UnderInstallationStageService.getAllMiscellaneousService(
-          vendorId,
-          leadId
-        );
-
-      return res.status(200).json({
-        success: true,
-        data: result,
-      });
-    } catch (err: any) {
-      console.error("❌ Error in getAllMiscellaneousEntries:", err.message);
-      return res.status(500).json({
-        success: false,
-        error: err.message || "Something went wrong",
-      });
-    }
-  }
-
-  static async createMiscellaneousService(payload: MiscPayload) {
-    const {
-      vendor_id,
-      lead_id,
-      account_id,
-      misc_type_id,
-      problem_description,
-      reorder_material_details,
-      quantity,
-      cost,
-      supervisor_remark,
-      expected_ready_date,
-      is_resolved,
-      created_by,
-      teams,
-      files,
-    } = payload;
-
-    // -----------------------------------------------------
-    // 1. Upload all files FIRST (outside transaction)
-    // -----------------------------------------------------
-    let uploadedDocs: {
-      original_name: string;
-      sys_name: string;
-    }[] = [];
-
-    if (files && files.length > 0) {
-      for (const file of files) {
-        const sysName =
-          await uploadToWasabiUnderInstallationMiscellaneousDocuments(
-            file.buffer,
-            vendor_id,
-            lead_id,
-            file.originalname
-          );
-
-        uploadedDocs.push({
-          original_name: file.originalname,
-          sys_name: sysName,
+      // Mandatory checks
+      if (
+        !vendor_id ||
+        !lead_id ||
+        !account_id ||
+        !issue_type_ids?.length ||
+        !issue_description ||
+        !issue_impact ||
+        !responsible_team_ids?.length ||
+        !created_by
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "All fields are mandatory",
         });
       }
-    }
 
-    // -----------------------------------------------------
-    // 2. Now DB transaction
-    // -----------------------------------------------------
-    return await prisma.$transaction(async (tx) => {
-      // Create Misc entry
-      const misc = await tx.miscellaneousMaster.create({
+      const data = await UnderInstallationStageService.addInstallationIssueLog({
+        vendor_id,
+        lead_id,
+        account_id,
+        issue_type_ids,
+        issue_description,
+        issue_impact,
+        responsible_team_ids,
+        created_by,
+      });
+
+      return res.status(201).json({ success: true, data });
+    } catch (error: any) {
+      console.error("Error creating Installation Issue Log:", error.message);
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  }
+
+  async getInstallationIssueLogs(req: Request, res: Response) {
+    try {
+      const vendor_id = parseInt(req.params.vendor_id);
+      const lead_id = parseInt(req.params.lead_id);
+
+      if (!vendor_id || !lead_id) {
+        return res.status(400).json({
+          success: false,
+          message: "vendor_id and lead_id are required",
+        });
+      }
+
+      const data = await UnderInstallationStageService.getInstallationIssueLogs(
+        vendor_id,
+        lead_id
+      );
+
+      return res.status(200).json({ success: true, data });
+    } catch (err: any) {
+      console.error("Error fetching issue logs:", err.message);
+      return res.status(500).json({ success: false, error: err.message });
+    }
+  }
+
+  async getInstallationIssueLogById(req: Request, res: Response) {
+    try {
+      const id = parseInt(req.params.id);
+
+      if (!id) {
+        return res.status(400).json({
+          success: false,
+          message: "id is required",
+        });
+      }
+
+      const data =
+        await UnderInstallationStageService.getInstallationIssueLogById(id);
+
+      if (!data) {
+        return res.status(404).json({
+          success: false,
+          message: "Issue log not found",
+        });
+      }
+
+      return res.status(200).json({ success: true, data });
+    } catch (err: any) {
+      console.error("Error fetching issue log:", err.message);
+      return res.status(500).json({ success: false, error: err.message });
+    }
+  }
+
+  async updateInstallationIssueLog(req: Request, res: Response) {
+    try {
+      const id = parseInt(req.params.id);
+
+      if (!id)
+        return res.status(400).json({
+          success: false,
+          message: "id is required",
+        });
+
+      const {
+        issue_type_ids,
+        issue_description,
+        issue_impact,
+        responsible_team_ids,
+        updated_by,
+      } = req.body;
+
+      // Ensure at least one field is sent
+      if (
+        !issue_type_ids &&
+        !issue_description &&
+        !issue_impact &&
+        !responsible_team_ids
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "At least one field must be updated",
+        });
+      }
+
+      if (!updated_by) {
+        return res.status(400).json({
+          success: false,
+          message: "updated_by is required",
+        });
+      }
+
+      const data =
+        await UnderInstallationStageService.updateInstallationIssueLog(id, {
+          issue_type_ids,
+          issue_description,
+          issue_impact,
+          responsible_team_ids,
+          updated_by,
+        });
+
+      return res.status(200).json({ success: true, data });
+    } catch (error: any) {
+      console.error("Error updating issue log:", error.message);
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  }
+
+  static async addInstallationIssueLog(payload: InstallIssueLogPayload) {
+    return prisma.$transaction(async (tx) => {
+      const {
+        vendor_id,
+        lead_id,
+        account_id,
+        issue_type_ids,
+        issue_description,
+        issue_impact,
+        responsible_team_ids,
+        created_by,
+      } = payload;
+
+      // 1️⃣ Create main issue log master
+      const issueLog = await tx.installationIssueLogMaster.create({
         data: {
           vendor_id,
           lead_id,
           account_id,
-          misc_type_id,
-          problem_description,
-          reorder_material_details,
-          quantity,
-          cost,
-          supervisor_remark,
-          expected_ready_date,
-          is_resolved,
+          issue_description,
+          issue_impact,
           created_by,
         },
       });
 
-      // Insert teams
-      if (teams.length > 0) {
-        await tx.miscellaneousTeamMapping.createMany({
-          data: teams.map((teamId) => ({
-            miscellaneous_id: misc.id,
-            team_id: teamId,
-          })),
-        });
-      }
+      const issueLogId = issueLog.id;
 
-      // 🔹 Fetch document type (Type 24)
-      const docType = await prisma.documentTypeMaster.findFirst({
-        where: { vendor_id: vendor_id, tag: "Type 24" },
+      // 2️⃣ Create Issue Type Mappings
+      const typeData = issue_type_ids.map((type_id) => ({
+        issue_log_id: issueLogId,
+        type_id,
+      }));
+
+      await tx.issueLogTypeMapping.createMany({
+        data: typeData,
+        skipDuplicates: true,
       });
 
-      if (!docType)
-        throw Object.assign(
-          new Error(
-            "Document type (Type 24 – under-installation-miscellaneous-Documents) not found"
-          ),
-          { statusCode: 404 }
-        );
+      // 3️⃣ Create Responsible Teams Mappings
+      const teamData = responsible_team_ids.map((team_id) => ({
+        issue_log_id: issueLogId,
+        team_id,
+      }));
 
-      // Insert Documents → LeadDocuments + MiscDocuments
-      for (const doc of uploadedDocs) {
-        const leadDoc = await tx.leadDocuments.create({
-          data: {
-            doc_og_name: doc.original_name,
-            doc_sys_name: doc.sys_name,
-            vendor_id,
-            lead_id,
-            created_by,
-            doc_type_id: docType.id, // Type 24 → under-installation-miscellaneous-Documents
-          },
-        });
+      await tx.issueLogResponsibleTeamMapping.createMany({
+        data: teamData,
+        skipDuplicates: true,
+      });
 
-        await tx.miscellaneousDocument.create({
-          data: {
-            vendor_id,
-            miscellaneous_id: misc.id,
-            document_id: leadDoc.id,
-            created_by,
-          },
-        });
-      }
-
-      return misc;
+      // 4️⃣ Return full issue log with relations
+      return tx.installationIssueLogMaster.findUnique({
+        where: { id: issueLogId },
+        include: {
+          issueTypes: { include: { type: true } },
+          responsibleTeams: { include: { team: true } },
+        },
+      });
     });
   }
 
-  static async getAllMiscellaneousService(
-    vendor_id: number,
-    lead_id: number
-  ){
-    const miscList = await prisma.miscellaneousMaster.findMany({
-      where: { vendor_id, lead_id },
+  static async getInstallationIssueLogs(vendor_id: number, lead_id: number) {
+    return prisma.installationIssueLogMaster.findMany({
+      where: {
+        vendor_id,
+        lead_id,
+      },
       orderBy: { created_at: "desc" },
+
       include: {
-        type: true,
-        createdBy: { select: { id: true, user_name: true } },
-        teams: {
-          include: {
-            team: true,
+        createdBy: {
+          select: { id: true, user_name: true },
+        },
+        issueTypes: {
+          include: { type: true },
+        },
+        responsibleTeams: {
+          include: { team: true },
+        },
+      },
+    });
+  }
+
+  static async getInstallationIssueLogById(id: number) {
+    return prisma.installationIssueLogMaster.findUnique({
+      where: { id },
+
+      include: {
+        createdBy: {
+          select: { id: true, user_name: true },
+        },
+        issueTypes: {
+          include: { type: true },
+        },
+        responsibleTeams: {
+          include: { team: true },
+        },
+        lead: {
+          select: {
+            id: true,
+            lead_code: true,
+            firstname: true,
+            lastname: true,
           },
         },
-        documents: {
-          include: {
-            document: true,
+        account: {
+          select: {
+            id: true,
+            name: true,
+            contact_no: true,
           },
         },
       },
     });
-  
-    // ➜ Attach signed URLs for documents
-    const finalResult = await Promise.all(
-      miscList.map(async (m) => {
-        const docs = await Promise.all(
-          m.documents.map(async (docLink) => {
-            const signed_url = await generateSignedUrl(docLink.document.doc_sys_name);
-  
-            return {
-              document_id: docLink.document.id,
-              original_name: docLink.document.doc_og_name,
-              file_key: docLink.document.doc_sys_name,
-              signed_url,
-              uploaded_at: docLink.document.created_at,
-            };
-          })
-        );
-  
-        return {
-          id: m.id,
-          vendor_id: m.vendor_id,
-          lead_id: m.lead_id,
-          account_id: m.account_id,
-          type: {
-            id: m.type.id,
-            name: m.type.name,
-          },
-          problem_description: m.problem_description,
-          reorder_material_details: m.reorder_material_details,
-          quantity: m.quantity,
-          cost: m.cost,
-          supervisor_remark: m.supervisor_remark,
-          expected_ready_date: m.expected_ready_date,
-          is_resolved: m.is_resolved,
-          resolved_at: m.resolved_at,
-          created_by: m.created_by,
-          created_at: m.created_at,
-          created_user: m.createdBy,
-          teams: m.teams.map((t) => ({
-            team_id: t.team_id,
-            team_name: t.team.name,
+  }
+
+  static async updateInstallationIssueLog(
+    id: number,
+    payload: {
+      issue_type_ids?: number[];
+      issue_description?: string;
+      issue_impact?: string;
+      responsible_team_ids?: number[];
+      updated_by: number;
+    }
+  ) {
+    return prisma.$transaction(async (tx) => {
+      const existing = await tx.installationIssueLogMaster.findUnique({
+        where: { id },
+      });
+
+      if (!existing) throw new Error("Issue log not found");
+
+      const {
+        issue_type_ids,
+        issue_description,
+        issue_impact,
+        responsible_team_ids,
+      } = payload;
+
+      // 1️⃣ Update issue description / impact if provided
+      await tx.installationIssueLogMaster.update({
+        where: { id },
+        data: {
+          issue_description: issue_description ?? existing.issue_description,
+          issue_impact: issue_impact ?? existing.issue_impact,
+        },
+      });
+
+      // 2️⃣ Update Issue Types
+      if (issue_type_ids) {
+        await tx.issueLogTypeMapping.deleteMany({
+          where: { issue_log_id: id },
+        });
+
+        await tx.issueLogTypeMapping.createMany({
+          data: issue_type_ids.map((type_id) => ({
+            issue_log_id: id,
+            type_id,
           })),
-          documents: docs,
-        };
-      })
-    );
-  
-    return finalResult;
-  };
+        });
+      }
+
+      // 3️⃣ Update Responsible Teams
+      if (responsible_team_ids) {
+        await tx.issueLogResponsibleTeamMapping.deleteMany({
+          where: { issue_log_id: id },
+        });
+
+        await tx.issueLogResponsibleTeamMapping.createMany({
+          data: responsible_team_ids.map((team_id) => ({
+            issue_log_id: id,
+            team_id,
+          })),
+        });
+      }
+
+      // 4️⃣ Return updated full record
+      return tx.installationIssueLogMaster.findUnique({
+        where: { id },
+        include: {
+          issueTypes: { include: { type: true } },
+          responsibleTeams: { include: { team: true } },
+          createdBy: { select: { id: true, user_name: true } },
+        },
+      });
+    });
+  }
+
+  to get issuetype this issue type
+
+  router.use("/issue-logs", issueLogRoutes);
+
+  issueLogRoutes.get("/issue-type/vendor/:vendor_id", getIssueTypes);
+
+  // GET All Issue Types by Vendor
+export const getIssueTypes = async (req: Request, res: Response) => {
+  console.log("[CONTROLLER] getIssueTypes called", { params: req.params });
+
+  try {
+    const vendor_id = parseInt(req.params.vendor_id);
+
+    if (!vendor_id) {
+      return res.status(400).json({ success: false, error: "vendor_id is required" });
+    }
+
+    const list = await fetchIssueTypes(vendor_id);
+    return res.status(200).json({ success: true, data: list });
+  } catch (error: any) {
+    console.error("[CONTROLLER] Error fetching issue types", error.message);
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const fetchIssueTypes = async (vendor_id: number) => {
+  console.log("[SERVICE] fetchIssueTypes", { vendor_id });
+
+  return prisma.issueLogTypeMaster.findMany({
+    where: { vendor_id },
+    orderBy: { created_at: "desc" },
+  });
+};

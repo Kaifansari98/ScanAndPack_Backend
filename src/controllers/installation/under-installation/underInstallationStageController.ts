@@ -680,32 +680,186 @@ export class UnderInstallationStageController {
       const vendorId = Number(req.params.vendorId);
       const miscId = Number(req.params.miscId);
       const { expected_ready_date, updated_by } = req.body;
-  
+
       if (!vendorId || !miscId) {
         return res.status(400).json({
           success: false,
           error: "vendorId and miscId are required",
         });
       }
-  
+
       if (!expected_ready_date || !updated_by) {
         return res.status(400).json({
           success: false,
           error: "expected_ready_date and updated_by are required",
         });
       }
-  
+
       const data = await UnderInstallationStageService.updateERDService({
         vendor_id: vendorId,
         misc_id: miscId,
         expected_ready_date,
         updated_by,
       });
-  
+
       return res.status(200).json({ success: true, data });
     } catch (error: any) {
       console.error("Error updating ERD:", error.message);
       return res.status(500).json({ success: false, error: error.message });
     }
-  };
+  }
+
+  async createInstallationIssueLog(req: Request, res: Response) {
+    try {
+      const {
+        vendor_id,
+        lead_id,
+        account_id,
+        issue_type_ids,
+        issue_description,
+        issue_impact,
+        responsible_team_ids,
+        created_by,
+      } = req.body;
+
+      // Mandatory checks
+      if (
+        !vendor_id ||
+        !lead_id ||
+        !account_id ||
+        !issue_type_ids?.length ||
+        !issue_description ||
+        !issue_impact ||
+        !responsible_team_ids?.length ||
+        !created_by
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "All fields are mandatory",
+        });
+      }
+
+      const data = await UnderInstallationStageService.addInstallationIssueLog({
+        vendor_id,
+        lead_id,
+        account_id,
+        issue_type_ids,
+        issue_description,
+        issue_impact,
+        responsible_team_ids,
+        created_by,
+      });
+
+      return res.status(201).json({ success: true, data });
+    } catch (error: any) {
+      console.error("Error creating Installation Issue Log:", error.message);
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  }
+
+  async getInstallationIssueLogs(req: Request, res: Response) {
+    try {
+      const vendor_id = parseInt(req.params.vendor_id);
+      const lead_id = parseInt(req.params.lead_id);
+
+      if (!vendor_id || !lead_id) {
+        return res.status(400).json({
+          success: false,
+          message: "vendor_id and lead_id are required",
+        });
+      }
+
+      const data = await UnderInstallationStageService.getInstallationIssueLogs(
+        vendor_id,
+        lead_id
+      );
+
+      return res.status(200).json({ success: true, data });
+    } catch (err: any) {
+      console.error("Error fetching issue logs:", err.message);
+      return res.status(500).json({ success: false, error: err.message });
+    }
+  }
+
+  async getInstallationIssueLogById(req: Request, res: Response) {
+    try {
+      const id = parseInt(req.params.id);
+
+      if (!id) {
+        return res.status(400).json({
+          success: false,
+          message: "id is required",
+        });
+      }
+
+      const data =
+        await UnderInstallationStageService.getInstallationIssueLogById(id);
+
+      if (!data) {
+        return res.status(404).json({
+          success: false,
+          message: "Issue log not found",
+        });
+      }
+
+      return res.status(200).json({ success: true, data });
+    } catch (err: any) {
+      console.error("Error fetching issue log:", err.message);
+      return res.status(500).json({ success: false, error: err.message });
+    }
+  }
+
+  async updateInstallationIssueLog(req: Request, res: Response) {
+    try {
+      const id = parseInt(req.params.id);
+
+      if (!id)
+        return res.status(400).json({
+          success: false,
+          message: "id is required",
+        });
+
+      const {
+        issue_type_ids,
+        issue_description,
+        issue_impact,
+        responsible_team_ids,
+        updated_by,
+      } = req.body;
+
+      // Ensure at least one field is sent
+      if (
+        !issue_type_ids &&
+        !issue_description &&
+        !issue_impact &&
+        !responsible_team_ids
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "At least one field must be updated",
+        });
+      }
+
+      if (!updated_by) {
+        return res.status(400).json({
+          success: false,
+          message: "updated_by is required",
+        });
+      }
+
+      const data =
+        await UnderInstallationStageService.updateInstallationIssueLog(id, {
+          issue_type_ids,
+          issue_description,
+          issue_impact,
+          responsible_team_ids,
+          updated_by,
+        });
+
+      return res.status(200).json({ success: true, data });
+    } catch (error: any) {
+      console.error("Error updating issue log:", error.message);
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  }
 }

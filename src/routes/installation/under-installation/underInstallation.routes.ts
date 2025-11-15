@@ -1,6 +1,9 @@
 import { Router } from "express";
 import { UnderInstallationStageController } from "../../../controllers/installation/under-installation/underInstallationStageController";
-import { upload, uploadToWasabiUnderInstallationDayWiseDocs } from "../../../middlewares/uploadWasabi";
+import {
+  upload,
+  uploadToWasabiUnderInstallationDayWiseDocs,
+} from "../../../middlewares/uploadWasabi";
 
 const underInstallationStageRoutes = Router();
 const controller = new UnderInstallationStageController();
@@ -95,5 +98,24 @@ underInstallationStageRoutes.put(
   controller.updateMiscExpectedReadyDate
 );
 
+underInstallationStageRoutes.post(
+  "/issue-log/create",
+  controller.createInstallationIssueLog
+);
+
+underInstallationStageRoutes.get(
+  "/issue-log/vendor/:vendor_id/lead/:lead_id",
+  controller.getInstallationIssueLogs
+);
+
+underInstallationStageRoutes.get(
+  "/issue-log/:id",
+  controller.getInstallationIssueLogById
+);
+
+underInstallationStageRoutes.put(
+  "/issue-log/:id/update",
+  controller.updateInstallationIssueLog
+);
 
 export default underInstallationStageRoutes;

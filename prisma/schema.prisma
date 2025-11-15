@@ -78,6 +78,8 @@ model VendorMaster {
   miscellaneousTypeMaster     MiscellaneousTypeMaster[]
   miscellaneousTeamMaster     MiscellaneousTeamMaster[]
   miscellaneousDocument       MiscellaneousDocument[]
+  installationIssueLogMaster  InstallationIssueLogMaster[]
+  issueLogTypeMaster          IssueLogTypeMaster[]
 }
 
 model VendorAddress {
@@ -194,6 +196,8 @@ model UserMaster {
   miscUpdated                MiscellaneousMaster[]  @relation("MiscUpdatedBy")
 
   miscDocumentsCreated MiscellaneousDocument[] @relation("MiscDocCreatedBy")
+
+  installationIssueLogMaster InstallationIssueLogMaster[]
 }
 
 model UserDocument {
@@ -467,6 +471,7 @@ model LeadMaster {
   installerMappings           InstallerUserMapping[]
   installationUpdates         InstallationUpdate[]
   miscellaneousMaster         MiscellaneousMaster[]
+  installationIssueLogMaster  InstallationIssueLogMaster[]
 
   // ✅ Unique constraints for contact_no and email per vendor
   @@unique([contact_no, vendor_id], name: "unique_contact_per_vendor")
@@ -587,6 +592,7 @@ model AccountMaster {
   installerMappings           InstallerUserMapping[]
   installationUpdates         InstallationUpdate[]
   miscellaneousMaster         MiscellaneousMaster[]
+  installationIssueLogMaster  InstallationIssueLogMaster[]
 }
 
 model LeadProductMapping {
@@ -1140,6 +1146,7 @@ model MiscellaneousTeamMaster {
   vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
   miscTeamMapping MiscellaneousTeamMapping[]
+  issueLogResponsibleTeamMapping  IssueLogResponsibleTeamMapping[]
 }
 
 model MiscellaneousTeamMapping {
@@ -1165,4 +1172,60 @@ model MiscellaneousDocument {
   document      LeadDocuments       @relation(fields: [document_id], references: [id])
   vendor        VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   createdBy     UserMaster          @relation("MiscDocCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+}
+
+model InstallationIssueLogMaster {
+  id          Int      @id @default(autoincrement())
+  vendor_id   Int
+  lead_id     Int
+  account_id  Int
+
+  issue_description String
+  issue_impact      String?
+
+  created_by Int
+  created_at DateTime @default(now())
+
+  vendor  VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead    LeadMaster    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  account AccountMaster @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  createdBy UserMaster  @relation(fields: [created_by], references: [id], onDelete: Cascade)
+
+  issueTypes IssueLogTypeMapping[]
+  responsibleTeams IssueLogResponsibleTeamMapping[]
+}
+
+model IssueLogTypeMaster {
+  id        Int    @id @default(autoincrement())
+  vendor_id Int
+  name      String
+
+  created_by Int
+  created_at DateTime @default(now())
+
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  issueTypeMappings IssueLogTypeMapping[]
+}
+
+model IssueLogTypeMapping {
+  id              Int @id @default(autoincrement())
+  issue_log_id    Int
+  type_id         Int
+
+  issueLog InstallationIssueLogMaster @relation(fields: [issue_log_id], references: [id], onDelete: Cascade)
+  type     IssueLogTypeMaster         @relation(fields: [type_id], references: [id], onDelete: Cascade)
+
+  @@unique([issue_log_id, type_id])
+}
+
+model IssueLogResponsibleTeamMapping {
+  id              Int @id @default(autoincrement())
+  issue_log_id    Int
+  team_id         Int
+
+  issueLog InstallationIssueLogMaster @relation(fields: [issue_log_id], references: [id], onDelete: Cascade)
+  team     MiscellaneousTeamMaster    @relation(fields: [team_id], references: [id], onDelete: Cascade)
+
+  @@unique([issue_log_id, team_id])
 }

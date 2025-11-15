@@ -371,3 +371,45 @@ export const uploadToWasabiUnderInstallationMiscellaneousDocuments = async (
 
   return sysName;
 };
+
+export const uploadToWasabiUnderInstallationUsableHandoverFinalSitePhotos = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  originalName: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `under_installation_usable_handover/final_site_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: "application/octet-stream",
+    })
+  );
+
+  return sysName;
+};
+
+export const uploadToWasabiUnderInstallationUsableHandoverDocuments = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  originalName: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `under_installation_usable_handover/handover_documents/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: "application/octet-stream",
+    })
+  );
+
+  return sysName;
+};

@@ -25,11 +25,22 @@ interface MiscPayload {
 }
 
 interface UpdateERDInput {
-    vendor_id: number;
-    misc_id: number;
-    expected_ready_date: string;
-    updated_by: number;
-  }
+  vendor_id: number;
+  misc_id: number;
+  expected_ready_date: string;
+  updated_by: number;
+}
+
+interface InstallIssueLogPayload {
+  vendor_id: number;
+  lead_id: number;
+  account_id: number;
+  issue_type_ids: number[];
+  issue_description: string;
+  issue_impact: string;
+  responsible_team_ids: number[];
+  created_by: number;
+}
 
 export class UnderInstallationStageService {
   /**
@@ -1031,11 +1042,11 @@ export class UnderInstallationStageService {
     const existing = await prisma.miscellaneousMaster.findFirst({
       where: { id: misc_id, vendor_id },
     });
-  
+
     if (!existing) {
       throw new Error("Miscellaneous record not found");
     }
-  
+
     // Update only the ERD
     const updated = await prisma.miscellaneousMaster.update({
       where: { id: misc_id },
@@ -1044,7 +1055,195 @@ export class UnderInstallationStageService {
         updated_by,
       },
     });
-  
+
     return updated;
-  };
+  }
+
+  static async addInstallationIssueLog(payload: InstallIssueLogPayload) {
+    return prisma.$transaction(async (tx) => {
+      const {
+        vendor_id,
+        lead_id,
+        account_id,
+        issue_type_ids,
+        issue_description,
+        issue_impact,
+        responsible_team_ids,
+        created_by,
+      } = payload;
+
+      // 1️⃣ Create main issue log master
+      const issueLog = await tx.installationIssueLogMaster.create({
+        data: {
+          vendor_id,
+          lead_id,
+          account_id,
+          issue_description,
+          issue_impact,
+          created_by,
+        },
+      });
+
+      const issueLogId = issueLog.id;
+
+      // 2️⃣ Create Issue Type Mappings
+      const typeData = issue_type_ids.map((type_id) => ({
+        issue_log_id: issueLogId,
+        type_id,
+      }));
+
+      await tx.issueLogTypeMapping.createMany({
+        data: typeData,
+        skipDuplicates: true,
+      });
+
+      // 3️⃣ Create Responsible Teams Mappings
+      const teamData = responsible_team_ids.map((team_id) => ({
+        issue_log_id: issueLogId,
+        team_id,
+      }));
+
+      await tx.issueLogResponsibleTeamMapping.createMany({
+        data: teamData,
+        skipDuplicates: true,
+      });
+
+      // 4️⃣ Return full issue log with relations
+      return tx.installationIssueLogMaster.findUnique({
+        where: { id: issueLogId },
+        include: {
+          issueTypes: { include: { type: true } },
+          responsibleTeams: { include: { team: true } },
+        },
+      });
+    });
+  }
+
+  static async getInstallationIssueLogs(vendor_id: number, lead_id: number) {
+    return prisma.installationIssueLogMaster.findMany({
+      where: {
+        vendor_id,
+        lead_id,
+      },
+      orderBy: { created_at: "desc" },
+
+      include: {
+        createdBy: {
+          select: { id: true, user_name: true },
+        },
+        issueTypes: {
+          include: { type: true },
+        },
+        responsibleTeams: {
+          include: { team: true },
+        },
+      },
+    });
+  }
+
+  static async getInstallationIssueLogById(id: number) {
+    return prisma.installationIssueLogMaster.findUnique({
+      where: { id },
+
+      include: {
+        createdBy: {
+          select: { id: true, user_name: true },
+        },
+        issueTypes: {
+          include: { type: true },
+        },
+        responsibleTeams: {
+          include: { team: true },
+        },
+        lead: {
+          select: {
+            id: true,
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+          },
+        },
+        account: {
+          select: {
+            id: true,
+            name: true,
+            contact_no: true,
+          },
+        },
+      },
+    });
+  }
+
+  static async updateInstallationIssueLog(
+    id: number,
+    payload: {
+      issue_type_ids?: number[];
+      issue_description?: string;
+      issue_impact?: string;
+      responsible_team_ids?: number[];
+      updated_by: number;
+    }
+  ) {
+    return prisma.$transaction(async (tx) => {
+      const existing = await tx.installationIssueLogMaster.findUnique({
+        where: { id },
+      });
+
+      if (!existing) throw new Error("Issue log not found");
+
+      const {
+        issue_type_ids,
+        issue_description,
+        issue_impact,
+        responsible_team_ids,
+      } = payload;
+
+      // 1️⃣ Update issue description / impact if provided
+      await tx.installationIssueLogMaster.update({
+        where: { id },
+        data: {
+          issue_description: issue_description ?? existing.issue_description,
+          issue_impact: issue_impact ?? existing.issue_impact,
+        },
+      });
+
+      // 2️⃣ Update Issue Types
+      if (issue_type_ids) {
+        await tx.issueLogTypeMapping.deleteMany({
+          where: { issue_log_id: id },
+        });
+
+        await tx.issueLogTypeMapping.createMany({
+          data: issue_type_ids.map((type_id) => ({
+            issue_log_id: id,
+            type_id,
+          })),
+        });
+      }
+
+      // 3️⃣ Update Responsible Teams
+      if (responsible_team_ids) {
+        await tx.issueLogResponsibleTeamMapping.deleteMany({
+          where: { issue_log_id: id },
+        });
+
+        await tx.issueLogResponsibleTeamMapping.createMany({
+          data: responsible_team_ids.map((team_id) => ({
+            issue_log_id: id,
+            team_id,
+          })),
+        });
+      }
+
+      // 4️⃣ Return updated full record
+      return tx.installationIssueLogMaster.findUnique({
+        where: { id },
+        include: {
+          issueTypes: { include: { type: true } },
+          responsibleTeams: { include: { team: true } },
+          createdBy: { select: { id: true, user_name: true } },
+        },
+      });
+    });
+  }
 }
