@@ -34,6 +34,7 @@ import dispatchPlanningRoutes from "./installation/dispatch-planning/dispatchPla
 import dispatchStageRoutes from "./installation/dispatch/DispatchStage.routes";
 import installerUserRoutes from "./installerUser.routes";
 import underInstallationStageRoutes from "./installation/under-installation/underInstallation.routes";
+import miscRoutes from "./miscellaneousMaster.routes";
 
 const router = Router();
 
@@ -75,5 +76,6 @@ router.use("/leads/installation/dispatch", dispatchStageRoutes);
 router.use("/leads/installation/under-installation", underInstallationStageRoutes);
 
 router.use("/installer-users", installerUserRoutes);
+router.use("/miscellaneous-master", miscRoutes);
 
 export { router };

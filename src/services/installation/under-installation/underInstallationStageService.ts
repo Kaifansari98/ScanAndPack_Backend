@@ -4,7 +4,32 @@ import logger from "../../../utils/logger";
 import {
   generateSignedUrl,
   uploadToWasabiUnderInstallationDayWiseDocuments,
+  uploadToWasabiUnderInstallationMiscellaneousDocuments,
 } from "../../../utils/wasabiClient";
+
+interface MiscPayload {
+  vendor_id: number;
+  lead_id: number;
+  account_id: number;
+  misc_type_id: number;
+  problem_description: string;
+  reorder_material_details: string;
+  quantity?: number;
+  cost?: number;
+  supervisor_remark?: string;
+  expected_ready_date?: Date;
+  is_resolved: boolean;
+  created_by: number;
+  teams: number[];
+  files: Express.Multer.File[];
+}
+
+interface UpdateERDInput {
+    vendor_id: number;
+    misc_id: number;
+    expected_ready_date: string;
+    updated_by: number;
+  }
 
 export class UnderInstallationStageService {
   /**
@@ -809,4 +834,217 @@ export class UnderInstallationStageService {
 
     return result;
   }
+
+  static async createMiscellaneousService(payload: MiscPayload) {
+    const {
+      vendor_id,
+      lead_id,
+      account_id,
+      misc_type_id,
+      problem_description,
+      reorder_material_details,
+      quantity,
+      cost,
+      supervisor_remark,
+      expected_ready_date,
+      is_resolved,
+      created_by,
+      teams,
+      files,
+    } = payload;
+
+    // -----------------------------------------------------
+    // 1. Upload all files FIRST (outside transaction)
+    // -----------------------------------------------------
+    let uploadedDocs: {
+      original_name: string;
+      sys_name: string;
+    }[] = [];
+
+    if (files && files.length > 0) {
+      for (const file of files) {
+        const sysName =
+          await uploadToWasabiUnderInstallationMiscellaneousDocuments(
+            file.buffer,
+            vendor_id,
+            lead_id,
+            file.originalname
+          );
+
+        uploadedDocs.push({
+          original_name: file.originalname,
+          sys_name: sysName,
+        });
+      }
+    }
+
+    // -----------------------------------------------------
+    // 2. Now DB transaction
+    // -----------------------------------------------------
+    return await prisma.$transaction(async (tx) => {
+      // Create Misc entry
+      const misc = await tx.miscellaneousMaster.create({
+        data: {
+          vendor_id,
+          lead_id,
+          account_id,
+          misc_type_id,
+          problem_description,
+          reorder_material_details,
+          quantity,
+          cost,
+          supervisor_remark,
+          expected_ready_date,
+          is_resolved,
+          created_by,
+        },
+      });
+
+      // Insert teams
+      if (teams.length > 0) {
+        await tx.miscellaneousTeamMapping.createMany({
+          data: teams.map((teamId) => ({
+            miscellaneous_id: misc.id,
+            team_id: teamId,
+          })),
+        });
+      }
+
+      // 🔹 Fetch document type (Type 24)
+      const docType = await prisma.documentTypeMaster.findFirst({
+        where: { vendor_id: vendor_id, tag: "Type 24" },
+      });
+
+      if (!docType)
+        throw Object.assign(
+          new Error(
+            "Document type (Type 24 – under-installation-miscellaneous-Documents) not found"
+          ),
+          { statusCode: 404 }
+        );
+
+      // Insert Documents → LeadDocuments + MiscDocuments
+      for (const doc of uploadedDocs) {
+        const leadDoc = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: doc.original_name,
+            doc_sys_name: doc.sys_name,
+            vendor_id,
+            lead_id,
+            created_by,
+            doc_type_id: docType.id, // Type 24 → under-installation-miscellaneous-Documents
+          },
+        });
+
+        await tx.miscellaneousDocument.create({
+          data: {
+            vendor_id,
+            miscellaneous_id: misc.id,
+            document_id: leadDoc.id,
+            created_by,
+          },
+        });
+      }
+
+      return misc;
+    });
+  }
+
+  static async getAllMiscellaneousService(vendor_id: number, lead_id: number) {
+    const miscList = await prisma.miscellaneousMaster.findMany({
+      where: { vendor_id, lead_id },
+      orderBy: { created_at: "desc" },
+      include: {
+        type: true,
+        createdBy: { select: { id: true, user_name: true } },
+        teams: {
+          include: {
+            team: true,
+          },
+        },
+        documents: {
+          include: {
+            document: true,
+          },
+        },
+      },
+    });
+
+    // ➜ Attach signed URLs for documents
+    const finalResult = await Promise.all(
+      miscList.map(async (m) => {
+        const docs = await Promise.all(
+          m.documents.map(async (docLink) => {
+            const signed_url = await generateSignedUrl(
+              docLink.document.doc_sys_name
+            );
+
+            return {
+              document_id: docLink.document.id,
+              original_name: docLink.document.doc_og_name,
+              file_key: docLink.document.doc_sys_name,
+              signed_url,
+              uploaded_at: docLink.document.created_at,
+            };
+          })
+        );
+
+        return {
+          id: m.id,
+          vendor_id: m.vendor_id,
+          lead_id: m.lead_id,
+          account_id: m.account_id,
+          type: {
+            id: m.type.id,
+            name: m.type.name,
+          },
+          problem_description: m.problem_description,
+          reorder_material_details: m.reorder_material_details,
+          quantity: m.quantity,
+          cost: m.cost,
+          supervisor_remark: m.supervisor_remark,
+          expected_ready_date: m.expected_ready_date,
+          is_resolved: m.is_resolved,
+          resolved_at: m.resolved_at,
+          created_by: m.created_by,
+          created_at: m.created_at,
+          created_user: m.createdBy,
+          teams: m.teams.map((t) => ({
+            team_id: t.team_id,
+            team_name: t.team.name,
+          })),
+          documents: docs,
+        };
+      })
+    );
+
+    return finalResult;
+  }
+
+  static async updateERDService({
+    vendor_id,
+    misc_id,
+    expected_ready_date,
+    updated_by,
+  }: UpdateERDInput) {
+    // Ensure Misc entry exists & belongs to vendor
+    const existing = await prisma.miscellaneousMaster.findFirst({
+      where: { id: misc_id, vendor_id },
+    });
+  
+    if (!existing) {
+      throw new Error("Miscellaneous record not found");
+    }
+  
+    // Update only the ERD
+    const updated = await prisma.miscellaneousMaster.update({
+      where: { id: misc_id },
+      data: {
+        expected_ready_date: new Date(expected_ready_date),
+        updated_by,
+      },
+    });
+  
+    return updated;
+  };
 }

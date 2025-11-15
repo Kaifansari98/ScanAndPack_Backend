@@ -72,4 +72,28 @@ underInstallationStageRoutes.get(
   controller.getInstallationUpdatesDayWise
 );
 
+/**
+ * POST → Create Miscellaneous Issue with documents
+ */
+underInstallationStageRoutes.post(
+  "/vendorId/:vendorId/leadId/:leadId/create",
+  upload.array("files", 10), // max 10 docs
+  controller.createMiscellaneousEntry
+);
+
+underInstallationStageRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/get-all",
+  controller.getAllMiscellaneousEntries
+);
+
+/**
+ * ✅ PUT → Update Expected Ready Date
+ * @route PUT /miscellaneous/vendorId/:vendorId/miscId/:miscId/update-erd
+ */
+underInstallationStageRoutes.put(
+  "/vendorId/:vendorId/miscId/:miscId/update-erd",
+  controller.updateMiscExpectedReadyDate
+);
+
+
 export default underInstallationStageRoutes;

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { UnderInstallationStageService } from "../../../services/installation/under-installation/underInstallationStageService";
 import { ApiResponse } from "../../../utils/apiResponse";
 import logger from "../../../utils/logger";
+import underInstallationStageRoutes from "../../../routes/installation/under-installation/underInstallation.routes";
 
 const service = new UnderInstallationStageService();
 
@@ -588,4 +589,123 @@ export class UnderInstallationStageController {
       });
     }
   }
+
+  async createMiscellaneousEntry(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+
+      const {
+        account_id,
+        misc_type_id,
+        problem_description,
+        reorder_material_details,
+        quantity,
+        cost,
+        supervisor_remark,
+        expected_ready_date,
+        is_resolved,
+        teams, // comma-separated string "1,2,3"
+        created_by,
+      } = req.body;
+
+      const files = req.files as Express.Multer.File[];
+
+      const parsedTeams = teams
+        ? teams.split(",").map((t: string) => Number(t.trim()))
+        : [];
+
+      const payload = {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: Number(account_id),
+        misc_type_id: Number(misc_type_id),
+        problem_description,
+        reorder_material_details,
+        quantity: quantity ? Number(quantity) : undefined,
+        cost: cost ? Number(cost) : undefined,
+        supervisor_remark: supervisor_remark || undefined,
+        expected_ready_date: expected_ready_date
+          ? new Date(expected_ready_date)
+          : undefined,
+        is_resolved: is_resolved === "true" ? true : false,
+        created_by: Number(created_by),
+        teams: parsedTeams,
+        files,
+      };
+
+      const result =
+        await UnderInstallationStageService.createMiscellaneousService(payload);
+
+      return res.status(201).json({
+        success: true,
+        message: "Miscellaneous entry created successfully",
+        data: result,
+      });
+    } catch (err: any) {
+      console.error("❌ Error in createMiscellaneousEntry:", err.message);
+      return res.status(500).json({
+        success: false,
+        error: err.message || "Something went wrong",
+      });
+    }
+  }
+
+  async getAllMiscellaneousEntries(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+
+      const result =
+        await UnderInstallationStageService.getAllMiscellaneousService(
+          vendorId,
+          leadId
+        );
+
+      return res.status(200).json({
+        success: true,
+        data: result,
+      });
+    } catch (err: any) {
+      console.error("❌ Error in getAllMiscellaneousEntries:", err.message);
+      return res.status(500).json({
+        success: false,
+        error: err.message || "Something went wrong",
+      });
+    }
+  }
+
+  async updateMiscExpectedReadyDate(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const miscId = Number(req.params.miscId);
+      const { expected_ready_date, updated_by } = req.body;
+  
+      if (!vendorId || !miscId) {
+        return res.status(400).json({
+          success: false,
+          error: "vendorId and miscId are required",
+        });
+      }
+  
+      if (!expected_ready_date || !updated_by) {
+        return res.status(400).json({
+          success: false,
+          error: "expected_ready_date and updated_by are required",
+        });
+      }
+  
+      const data = await UnderInstallationStageService.updateERDService({
+        vendor_id: vendorId,
+        misc_id: miscId,
+        expected_ready_date,
+        updated_by,
+      });
+  
+      return res.status(200).json({ success: true, data });
+    } catch (error: any) {
+      console.error("Error updating ERD:", error.message);
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  };
 }

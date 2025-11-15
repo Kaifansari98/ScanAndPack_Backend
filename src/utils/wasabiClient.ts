@@ -350,3 +350,24 @@ export const uploadToWasabiUnderInstallationDayWiseDocuments = async (
 
   return sysName;
 };
+
+export const uploadToWasabiUnderInstallationMiscellaneousDocuments = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  originalName: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `under_installation_miscellaneous_documents/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: "application/octet-stream",
+    })
+  );
+
+  return sysName;
+};

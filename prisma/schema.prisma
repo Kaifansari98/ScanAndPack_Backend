@@ -70,10 +70,14 @@ model VendorMaster {
   CompanyVendorsMaster        CompanyVendorsMaster[]
   orderLoginDetails           OrderLoginDetails[]
   siteReadiness               SiteReadiness[]
-  installers                 InstallerUserMaster[]
-  installerMappings          InstallerUserMapping[]
+  installers                  InstallerUserMaster[]
+  installerMappings           InstallerUserMapping[]
   installationUpdates         InstallationUpdate[]
   installationUpdateDocs      InstallationUpdateDocuments[]
+  miscellaneousMaster         MiscellaneousMaster[]
+  miscellaneousTypeMaster     MiscellaneousTypeMaster[]
+  miscellaneousTeamMaster     MiscellaneousTeamMaster[]
+  miscellaneousDocument       MiscellaneousDocument[]
 }
 
 model VendorAddress {
@@ -186,6 +190,10 @@ model UserMaster {
   installersCreated          InstallerUserMaster[]  @relation("InstallerUserCreatedBy")
   installersAssigned         InstallerUserMapping[] @relation("InstallerAssignedBy")
   installationUpdatesCreated InstallationUpdate[]
+  miscCreated                MiscellaneousMaster[]  @relation("MiscCreatedBy")
+  miscUpdated                MiscellaneousMaster[]  @relation("MiscUpdatedBy")
+
+  miscDocumentsCreated MiscellaneousDocument[] @relation("MiscDocCreatedBy")
 }
 
 model UserDocument {
@@ -458,6 +466,7 @@ model LeadMaster {
   siteReadiness               SiteReadiness[]
   installerMappings           InstallerUserMapping[]
   installationUpdates         InstallationUpdate[]
+  miscellaneousMaster         MiscellaneousMaster[]
 
   // ✅ Unique constraints for contact_no and email per vendor
   @@unique([contact_no, vendor_id], name: "unique_contact_per_vendor")
@@ -577,6 +586,7 @@ model AccountMaster {
   siteReadiness               SiteReadiness[]
   installerMappings           InstallerUserMapping[]
   installationUpdates         InstallationUpdate[]
+  miscellaneousMaster         MiscellaneousMaster[]
 }
 
 model LeadProductMapping {
@@ -641,6 +651,7 @@ model LeadDocuments {
   leadDocumentLogs       LeadDocumentLogs[]
   site_readiness_photos  SiteReadiness[]
   installationUpdateDocs InstallationUpdateDocuments[] @relation("InstallationUpdateDocumentLink")
+  miscellaneousDocument  MiscellaneousDocument[]
 }
 
 model ProductStructure {
@@ -1012,20 +1023,19 @@ model SiteReadiness {
 }
 
 model InstallerUserMaster {
-  id            Int      @id @default(autoincrement())
-  vendor_id     Int
+  id             Int      @id @default(autoincrement())
+  vendor_id      Int
   installer_name String
   contact_number String?
-  status        String   @default("active")
-  created_by    Int
-  created_at    DateTime @default(now())
+  status         String   @default("active")
+  created_by     Int
+  created_at     DateTime @default(now())
 
   // ✅ Relations
-  vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  createdBy UserMaster   @relation("InstallerUserCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  vendor    VendorMaster           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdBy UserMaster             @relation("InstallerUserCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   mappings  InstallerUserMapping[]
 }
-
 
 model InstallerUserMapping {
   id            Int      @id @default(autoincrement())
@@ -1037,13 +1047,12 @@ model InstallerUserMapping {
   assigned_date DateTime @default(now())
 
   // ✅ Relations
-  vendor    VendorMaster       @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  account   AccountMaster      @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  lead      LeadMaster         @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  vendor    VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  account   AccountMaster       @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  lead      LeadMaster          @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   installer InstallerUserMaster @relation(fields: [installer_id], references: [id], onDelete: Cascade)
-  assigner  UserMaster         @relation("InstallerAssignedBy", fields: [assigned_by], references: [id], onDelete: Cascade)
+  assigner  UserMaster          @relation("InstallerAssignedBy", fields: [assigned_by], references: [id], onDelete: Cascade)
 }
-
 
 model InstallationUpdate {
   id          Int      @id @default(autoincrement())
@@ -1073,4 +1082,87 @@ model InstallationUpdateDocuments {
   installationUpdate InstallationUpdate @relation(fields: [installation_update_id], references: [id], onDelete: Cascade)
   document           LeadDocuments      @relation("InstallationUpdateDocumentLink", fields: [document_id], references: [id], onDelete: Cascade)
   vendor             VendorMaster       @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+}
+
+model MiscellaneousMaster {
+  id         Int @id @default(autoincrement())
+  vendor_id  Int
+  lead_id    Int
+  account_id Int
+
+  misc_type_id             Int
+  problem_description      String
+  reorder_material_details String
+  quantity                 Float?
+  cost                     Float?
+  supervisor_remark        String?
+  expected_ready_date      DateTime?
+  is_resolved              Boolean   @default(false)
+  resolved_at              DateTime?
+
+  created_by Int
+  updated_by Int?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  vendor    VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead      LeadMaster    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  account   AccountMaster @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  createdBy UserMaster    @relation("MiscCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  updatedBy UserMaster?   @relation("MiscUpdatedBy", fields: [updated_by], references: [id])
+
+  // Relations
+  type      MiscellaneousTypeMaster    @relation(fields: [misc_type_id], references: [id])
+  teams     MiscellaneousTeamMapping[]
+  documents MiscellaneousDocument[]
+}
+
+model MiscellaneousTypeMaster {
+  id        Int    @id @default(autoincrement())
+  vendor_id Int
+  name      String
+
+  created_by Int
+  created_at DateTime @default(now())
+
+  vendor VendorMaster          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  misc   MiscellaneousMaster[]
+}
+
+model MiscellaneousTeamMaster {
+  id        Int    @id @default(autoincrement())
+  vendor_id Int
+  name      String
+
+  created_by Int
+  created_at DateTime @default(now())
+
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  miscTeamMapping MiscellaneousTeamMapping[]
+}
+
+model MiscellaneousTeamMapping {
+  id               Int @id @default(autoincrement())
+  miscellaneous_id Int
+  team_id          Int
+
+  miscellaneous MiscellaneousMaster     @relation(fields: [miscellaneous_id], references: [id])
+  team          MiscellaneousTeamMaster @relation(fields: [team_id], references: [id])
+
+  @@unique([miscellaneous_id, team_id])
+}
+
+model MiscellaneousDocument {
+  id               Int      @id @default(autoincrement())
+  vendor_id        Int
+  miscellaneous_id Int
+  document_id      Int // FK to LeadDocuments
+  created_by       Int
+  created_at       DateTime @default(now())
+
+  miscellaneous MiscellaneousMaster @relation(fields: [miscellaneous_id], references: [id])
+  document      LeadDocuments       @relation(fields: [document_id], references: [id])
+  vendor        VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdBy     UserMaster          @relation("MiscDocCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
 }
