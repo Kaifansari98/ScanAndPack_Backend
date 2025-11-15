@@ -5,6 +5,8 @@ import {
   generateSignedUrl,
   uploadToWasabiUnderInstallationDayWiseDocuments,
   uploadToWasabiUnderInstallationMiscellaneousDocuments,
+  uploadToWasabiUnderInstallationUsableHandoverDocuments,
+  uploadToWasabiUnderInstallationUsableHandoverFinalSitePhotos,
 } from "../../../utils/wasabiClient";
 
 interface MiscPayload {
@@ -41,6 +43,15 @@ interface InstallIssueLogPayload {
   responsible_team_ids: number[];
   created_by: number;
 }
+
+interface UsableHandoverPayload {
+    vendor_id: number;
+    lead_id: number;
+    account_id: number;
+    created_by: number;
+    pending_work_details: string;
+    files: Express.Multer.File[];
+  }
 
 export class UnderInstallationStageService {
   /**
@@ -286,7 +297,7 @@ export class UnderInstallationStageService {
           vendor_id: vendorId,
           lead_id: lead.id,
           account_id: lead.account_id!,
-          action: `installation started on : ${actualInstallationStartDate.toISOString()}`,
+          action: `Installation has been started`,
           action_type: "UPDATE",
           created_by: updatedBy,
           created_at: new Date(),
@@ -1245,5 +1256,178 @@ export class UnderInstallationStageService {
         },
       });
     });
+  }
+
+  static async updateUsableHandover(payload: UsableHandoverPayload) {
+    const {
+      vendor_id,
+      lead_id,
+      account_id,
+      created_by,
+      pending_work_details,
+      files,
+    } = payload;
+
+    // -----------------------------------------
+    // 1️⃣ Update Pending Work Details
+    // -----------------------------------------
+    await prisma.leadMaster.update({
+      where: { id: lead_id },
+      data: {
+        usable_handover_pending_work_details: pending_work_details,
+      },
+    });
+
+    // -----------------------------------------
+    // 2️⃣ Fetch document types
+    // -----------------------------------------
+    const finalSitePhotoType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id, tag: "Type 25" },
+    });
+
+    if (!finalSitePhotoType)
+      throw new Error("Document type (Type 25) not found for this vendor");
+
+    const handoverDocType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id, tag: "Type 26" },
+    });
+
+    if (!handoverDocType)
+      throw new Error("Document type (Type 26) not found for this vendor");
+
+    // -----------------------------------------
+    // 3️⃣ Upload Documents
+    // -----------------------------------------
+    const uploadedDocs = [];
+
+    for (const file of files) {
+      const originalName = file.originalname;
+      const buffer = file.buffer;
+
+      let sysName = "";
+      let docTypeId = 0;
+
+      const isImage = file.mimetype.startsWith("image/");
+
+      if (isImage) {
+        sysName =
+          await uploadToWasabiUnderInstallationUsableHandoverFinalSitePhotos(
+            buffer,
+            vendor_id,
+            lead_id,
+            originalName
+          );
+
+        docTypeId = finalSitePhotoType.id;
+      } else {
+        sysName =
+          await uploadToWasabiUnderInstallationUsableHandoverDocuments(
+            buffer,
+            vendor_id,
+            lead_id,
+            originalName
+          );
+
+        docTypeId = handoverDocType.id;
+      }
+
+      const savedDoc = await prisma.leadDocuments.create({
+        data: {
+          vendor_id,
+          account_id,
+          lead_id,
+          created_by,
+          doc_type_id: docTypeId,
+          doc_og_name: originalName,
+          doc_sys_name: sysName,
+        },
+      });
+
+      uploadedDocs.push(savedDoc);
+    }
+
+    return {
+      pending_work_details,
+      uploaded_docs: uploadedDocs,
+    };
+  }
+
+  static async getUsableHandover(vendor_id: number, lead_id: number) {
+    // 1️⃣ Fetch pending work details from LeadMaster
+    const lead = await prisma.leadMaster.findUnique({
+      where: { id: lead_id },
+      select: { usable_handover_pending_work_details: true },
+    });
+
+    if (!lead) throw new Error("Lead not found");
+
+    // 2️⃣ Fetch final site photo type
+    const finalSitePhotoType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id, tag: "Type 25" },
+    });
+
+    // 3️⃣ Fetch handover document type
+    const handoverDocType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id, tag: "Type 26" },
+    });
+
+    const finalSitePhotos = finalSitePhotoType
+      ? await prisma.leadDocuments.findMany({
+          where: {
+            vendor_id,
+            lead_id,
+            doc_type_id: finalSitePhotoType.id,
+          },
+        })
+      : [];
+
+    const handoverDocuments = handoverDocType
+      ? await prisma.leadDocuments.findMany({
+          where: {
+            vendor_id,
+            lead_id,
+            doc_type_id: handoverDocType.id,
+          },
+        })
+      : [];
+
+    // 4️⃣ Attach Signed URLs
+    const finalSitePhotosWithUrl = await Promise.all(
+      finalSitePhotos.map(async (doc) => ({
+        ...doc,
+        signedUrl: await generateSignedUrl(doc.doc_sys_name),
+      }))
+    );
+
+    const handoverDocumentsWithUrl = await Promise.all(
+      handoverDocuments.map(async (doc) => ({
+        ...doc,
+        signedUrl: await generateSignedUrl(doc.doc_sys_name, 3600, "attachment"),
+      }))
+    );
+
+    return {
+      pending_work_details: lead.usable_handover_pending_work_details,
+      final_site_photos: finalSitePhotosWithUrl,
+      handover_documents: handoverDocumentsWithUrl,
+    };
+  }
+
+  // ----------------------------------------
+  // PUT API — Update Remarks Only
+  // ----------------------------------------
+  static async updateRemarks(
+    vendor_id: number,
+    lead_id: number,
+    pending_work_details: string
+  ) {
+    const updatedLead = await prisma.leadMaster.update({
+      where: { id: lead_id },
+      data: {
+        usable_handover_pending_work_details: pending_work_details,
+      },
+    });
+
+    return updatedLead;
   }
 }

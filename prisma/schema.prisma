@@ -425,6 +425,8 @@ model LeadMaster {
   is_shutter_installation_completed    Boolean?  @default(false)
   shutter_installation_completion_date DateTime?
 
+  usable_handover_pending_work_details String? @db.Text
+
   vendor_id   Int
   assign_to   Int?
   assigned_by Int?

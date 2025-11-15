@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { UnderInstallationStageService } from "../../../services/installation/under-installation/underInstallationStageService";
 import { ApiResponse } from "../../../utils/apiResponse";
 import logger from "../../../utils/logger";
-import underInstallationStageRoutes from "../../../routes/installation/under-installation/underInstallation.routes";
 
 const service = new UnderInstallationStageService();
 
@@ -859,6 +858,92 @@ export class UnderInstallationStageController {
       return res.status(200).json({ success: true, data });
     } catch (error: any) {
       console.error("Error updating issue log:", error.message);
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  }
+
+  async updateUsableHandover(req: Request, res: Response) {
+    try {
+      const {
+        vendor_id,
+        lead_id,
+        account_id,
+        created_by,
+        pending_work_details,
+      } = req.body;
+
+      if (!vendor_id || !lead_id || !account_id || !created_by) {
+        return res.status(400).json({
+          success: false,
+          message: "vendor_id, lead_id, account_id, created_by are required",
+        });
+      }
+
+      const files = (req.files as Express.Multer.File[]) || [];
+
+      const data = await UnderInstallationStageService.updateUsableHandover({
+        vendor_id: Number(vendor_id),
+        lead_id: Number(lead_id),
+        account_id: Number(account_id),
+        created_by: Number(created_by),
+        pending_work_details,
+        files,
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Usable Handover updated successfully",
+        data,
+      });
+    } catch (error: any) {
+      console.error("Error in updateUsableHandover:", error.message);
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+      });
+    }
+  }
+
+  async getUsableHandover(req: Request, res: Response) {
+    try {
+      const { vendor_id, lead_id } = req.params;
+
+      const data = await UnderInstallationStageService.getUsableHandover(
+        Number(vendor_id),
+        Number(lead_id)
+      );
+
+      return res.status(200).json({ success: true, data });
+    } catch (error: any) {
+      console.error("Error fetching usable handover:", error.message);
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  }
+
+  async updateRemarks(req: Request, res: Response) {
+    try {
+      const { vendor_id, lead_id, pending_work_details } = req.body;
+
+      if (!vendor_id || !lead_id) {
+        return res.status(400).json({
+          success: false,
+          message: "vendor_id and lead_id are required",
+        });
+      }
+
+      const data = await UnderInstallationStageService.updateRemarks(
+        Number(vendor_id),
+        Number(lead_id),
+        pending_work_details
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Remarks updated successfully",
+        data,
+      });
+    } catch (error: any) {
+      console.error("Error updating remarks:", error.message);
       return res.status(500).json({ success: false, error: error.message });
     }
   }

@@ -1,77 +1,84 @@
 router.use("/leads/installation/under-installation", underInstallationStageRoutes);
 
 underInstallationStageRoutes.post(
-  "/issue-log/create",
-  controller.createInstallationIssueLog
+  "/usable-handover/update",
+  upload.array("files"),   // multer — multiple files allowed
+  controller.updateUsableHandover
 );
 
+// GET usable handover
 underInstallationStageRoutes.get(
-  "/issue-log/vendor/:vendor_id/lead/:lead_id",
-  controller.getInstallationIssueLogs
+  "/:vendor_id/:lead_id",
+  controller.getUsableHandover
 );
 
-underInstallationStageRoutes.get(
-  "/issue-log/:id",
-  controller.getInstallationIssueLogById
-);
-
+// PUT update remarks
 underInstallationStageRoutes.put(
-  "/issue-log/:id/update",
-  controller.updateInstallationIssueLog
+  "/update-remarks",
+  controller.updateRemarks
 );
 
- async createInstallationIssueLog(req: Request, res: Response) {
+ async updateUsableHandover(req: Request, res: Response) {
     try {
       const {
         vendor_id,
         lead_id,
         account_id,
-        issue_type_ids,
-        issue_description,
-        issue_impact,
-        responsible_team_ids,
         created_by,
+        pending_work_details,
       } = req.body;
 
-      // Mandatory checks
-      if (
-        !vendor_id ||
-        !lead_id ||
-        !account_id ||
-        !issue_type_ids?.length ||
-        !issue_description ||
-        !issue_impact ||
-        !responsible_team_ids?.length ||
-        !created_by
-      ) {
+      if (!vendor_id || !lead_id || !account_id || !created_by) {
         return res.status(400).json({
           success: false,
-          message: "All fields are mandatory",
+          message: "vendor_id, lead_id, account_id, created_by are required",
         });
       }
 
-      const data = await UnderInstallationStageService.addInstallationIssueLog({
-        vendor_id,
-        lead_id,
-        account_id,
-        issue_type_ids,
-        issue_description,
-        issue_impact,
-        responsible_team_ids,
-        created_by,
+      const files = (req.files as Express.Multer.File[]) || [];
+
+      const data = await UnderInstallationStageService.updateUsableHandover({
+        vendor_id: Number(vendor_id),
+        lead_id: Number(lead_id),
+        account_id: Number(account_id),
+        created_by: Number(created_by),
+        pending_work_details,
+        files,
       });
 
-      return res.status(201).json({ success: true, data });
+      return res.status(200).json({
+        success: true,
+        message: "Usable Handover updated successfully",
+        data,
+      });
     } catch (error: any) {
-      console.error("Error creating Installation Issue Log:", error.message);
+      console.error("Error in updateUsableHandover:", error.message);
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+      });
+    }
+  }
+
+  async getUsableHandover(req: Request, res: Response) {
+    try {
+      const { vendor_id, lead_id } = req.params;
+
+      const data = await UnderInstallationStageService.getUsableHandover(
+        Number(vendor_id),
+        Number(lead_id)
+      );
+
+      return res.status(200).json({ success: true, data });
+    } catch (error: any) {
+      console.error("Error fetching usable handover:", error.message);
       return res.status(500).json({ success: false, error: error.message });
     }
   }
 
-  async getInstallationIssueLogs(req: Request, res: Response) {
+  async updateRemarks(req: Request, res: Response) {
     try {
-      const vendor_id = parseInt(req.params.vendor_id);
-      const lead_id = parseInt(req.params.lead_id);
+      const { vendor_id, lead_id, pending_work_details } = req.body;
 
       if (!vendor_id || !lead_id) {
         return res.status(400).json({
@@ -80,318 +87,192 @@ underInstallationStageRoutes.put(
         });
       }
 
-      const data = await UnderInstallationStageService.getInstallationIssueLogs(
-        vendor_id,
-        lead_id
+      const data = await UnderInstallationStageService.updateRemarks(
+        Number(vendor_id),
+        Number(lead_id),
+        pending_work_details
       );
 
-      return res.status(200).json({ success: true, data });
-    } catch (err: any) {
-      console.error("Error fetching issue logs:", err.message);
-      return res.status(500).json({ success: false, error: err.message });
-    }
-  }
-
-  async getInstallationIssueLogById(req: Request, res: Response) {
-    try {
-      const id = parseInt(req.params.id);
-
-      if (!id) {
-        return res.status(400).json({
-          success: false,
-          message: "id is required",
-        });
-      }
-
-      const data =
-        await UnderInstallationStageService.getInstallationIssueLogById(id);
-
-      if (!data) {
-        return res.status(404).json({
-          success: false,
-          message: "Issue log not found",
-        });
-      }
-
-      return res.status(200).json({ success: true, data });
-    } catch (err: any) {
-      console.error("Error fetching issue log:", err.message);
-      return res.status(500).json({ success: false, error: err.message });
-    }
-  }
-
-  async updateInstallationIssueLog(req: Request, res: Response) {
-    try {
-      const id = parseInt(req.params.id);
-
-      if (!id)
-        return res.status(400).json({
-          success: false,
-          message: "id is required",
-        });
-
-      const {
-        issue_type_ids,
-        issue_description,
-        issue_impact,
-        responsible_team_ids,
-        updated_by,
-      } = req.body;
-
-      // Ensure at least one field is sent
-      if (
-        !issue_type_ids &&
-        !issue_description &&
-        !issue_impact &&
-        !responsible_team_ids
-      ) {
-        return res.status(400).json({
-          success: false,
-          message: "At least one field must be updated",
-        });
-      }
-
-      if (!updated_by) {
-        return res.status(400).json({
-          success: false,
-          message: "updated_by is required",
-        });
-      }
-
-      const data =
-        await UnderInstallationStageService.updateInstallationIssueLog(id, {
-          issue_type_ids,
-          issue_description,
-          issue_impact,
-          responsible_team_ids,
-          updated_by,
-        });
-
-      return res.status(200).json({ success: true, data });
+      return res.status(200).json({
+        success: true,
+        message: "Remarks updated successfully",
+        data,
+      });
     } catch (error: any) {
-      console.error("Error updating issue log:", error.message);
+      console.error("Error updating remarks:", error.message);
       return res.status(500).json({ success: false, error: error.message });
     }
   }
 
-  static async addInstallationIssueLog(payload: InstallIssueLogPayload) {
-    return prisma.$transaction(async (tx) => {
-      const {
-        vendor_id,
-        lead_id,
-        account_id,
-        issue_type_ids,
-        issue_description,
-        issue_impact,
-        responsible_team_ids,
-        created_by,
-      } = payload;
+   static async updateUsableHandover(payload: UsableHandoverPayload) {
+    const {
+      vendor_id,
+      lead_id,
+      account_id,
+      created_by,
+      pending_work_details,
+      files,
+    } = payload;
 
-      // 1️⃣ Create main issue log master
-      const issueLog = await tx.installationIssueLogMaster.create({
+    // -----------------------------------------
+    // 1️⃣ Update Pending Work Details
+    // -----------------------------------------
+    await prisma.leadMaster.update({
+      where: { id: lead_id },
+      data: {
+        usable_handover_pending_work_details: pending_work_details,
+      },
+    });
+
+    // -----------------------------------------
+    // 2️⃣ Fetch document types
+    // -----------------------------------------
+    const finalSitePhotoType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id, tag: "Type 25" },
+    });
+
+    if (!finalSitePhotoType)
+      throw new Error("Document type (Type 25) not found for this vendor");
+
+    const handoverDocType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id, tag: "Type 26" },
+    });
+
+    if (!handoverDocType)
+      throw new Error("Document type (Type 26) not found for this vendor");
+
+    // -----------------------------------------
+    // 3️⃣ Upload Documents
+    // -----------------------------------------
+    const uploadedDocs = [];
+
+    for (const file of files) {
+      const originalName = file.originalname;
+      const buffer = file.buffer;
+
+      let sysName = "";
+      let docTypeId = 0;
+
+      const isImage = file.mimetype.startsWith("image/");
+
+      if (isImage) {
+        sysName =
+          await uploadToWasabiUnderInstallationUsableHandoverFinalSitePhotos(
+            buffer,
+            vendor_id,
+            lead_id,
+            originalName
+          );
+
+        docTypeId = finalSitePhotoType.id;
+      } else {
+        sysName =
+          await uploadToWasabiUnderInstallationUsableHandoverDocuments(
+            buffer,
+            vendor_id,
+            lead_id,
+            originalName
+          );
+
+        docTypeId = handoverDocType.id;
+      }
+
+      const savedDoc = await prisma.leadDocuments.create({
         data: {
           vendor_id,
-          lead_id,
           account_id,
-          issue_description,
-          issue_impact,
+          lead_id,
           created_by,
+          doc_type_id: docTypeId,
+          doc_og_name: originalName,
+          doc_sys_name: sysName,
         },
       });
 
-      const issueLogId = issueLog.id;
-
-      // 2️⃣ Create Issue Type Mappings
-      const typeData = issue_type_ids.map((type_id) => ({
-        issue_log_id: issueLogId,
-        type_id,
-      }));
-
-      await tx.issueLogTypeMapping.createMany({
-        data: typeData,
-        skipDuplicates: true,
-      });
-
-      // 3️⃣ Create Responsible Teams Mappings
-      const teamData = responsible_team_ids.map((team_id) => ({
-        issue_log_id: issueLogId,
-        team_id,
-      }));
-
-      await tx.issueLogResponsibleTeamMapping.createMany({
-        data: teamData,
-        skipDuplicates: true,
-      });
-
-      // 4️⃣ Return full issue log with relations
-      return tx.installationIssueLogMaster.findUnique({
-        where: { id: issueLogId },
-        include: {
-          issueTypes: { include: { type: true } },
-          responsibleTeams: { include: { team: true } },
-        },
-      });
-    });
-  }
-
-  static async getInstallationIssueLogs(vendor_id: number, lead_id: number) {
-    return prisma.installationIssueLogMaster.findMany({
-      where: {
-        vendor_id,
-        lead_id,
-      },
-      orderBy: { created_at: "desc" },
-
-      include: {
-        createdBy: {
-          select: { id: true, user_name: true },
-        },
-        issueTypes: {
-          include: { type: true },
-        },
-        responsibleTeams: {
-          include: { team: true },
-        },
-      },
-    });
-  }
-
-  static async getInstallationIssueLogById(id: number) {
-    return prisma.installationIssueLogMaster.findUnique({
-      where: { id },
-
-      include: {
-        createdBy: {
-          select: { id: true, user_name: true },
-        },
-        issueTypes: {
-          include: { type: true },
-        },
-        responsibleTeams: {
-          include: { team: true },
-        },
-        lead: {
-          select: {
-            id: true,
-            lead_code: true,
-            firstname: true,
-            lastname: true,
-          },
-        },
-        account: {
-          select: {
-            id: true,
-            name: true,
-            contact_no: true,
-          },
-        },
-      },
-    });
-  }
-
-  static async updateInstallationIssueLog(
-    id: number,
-    payload: {
-      issue_type_ids?: number[];
-      issue_description?: string;
-      issue_impact?: string;
-      responsible_team_ids?: number[];
-      updated_by: number;
+      uploadedDocs.push(savedDoc);
     }
+
+    return {
+      pending_work_details,
+      uploaded_docs: uploadedDocs,
+    };
+  }
+
+  static async getUsableHandover(vendor_id: number, lead_id: number) {
+    // 1️⃣ Fetch pending work details from LeadMaster
+    const lead = await prisma.leadMaster.findUnique({
+      where: { id: lead_id },
+      select: { usable_handover_pending_work_details: true },
+    });
+
+    if (!lead) throw new Error("Lead not found");
+
+    // 2️⃣ Fetch final site photo type
+    const finalSitePhotoType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id, tag: "Type 25" },
+    });
+
+    // 3️⃣ Fetch handover document type
+    const handoverDocType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id, tag: "Type 26" },
+    });
+
+    const finalSitePhotos = finalSitePhotoType
+      ? await prisma.leadDocuments.findMany({
+          where: {
+            vendor_id,
+            lead_id,
+            doc_type_id: finalSitePhotoType.id,
+          },
+        })
+      : [];
+
+    const handoverDocuments = handoverDocType
+      ? await prisma.leadDocuments.findMany({
+          where: {
+            vendor_id,
+            lead_id,
+            doc_type_id: handoverDocType.id,
+          },
+        })
+      : [];
+
+    // 4️⃣ Attach Signed URLs
+    const finalSitePhotosWithUrl = await Promise.all(
+      finalSitePhotos.map(async (doc) => ({
+        ...doc,
+        signedUrl: await generateSignedUrl(doc.doc_sys_name),
+      }))
+    );
+
+    const handoverDocumentsWithUrl = await Promise.all(
+      handoverDocuments.map(async (doc) => ({
+        ...doc,
+        signedUrl: await generateSignedUrl(doc.doc_sys_name, 3600, "attachment"),
+      }))
+    );
+
+    return {
+      pending_work_details: lead.usable_handover_pending_work_details,
+      final_site_photos: finalSitePhotosWithUrl,
+      handover_documents: handoverDocumentsWithUrl,
+    };
+  }
+
+  // ----------------------------------------
+  // PUT API — Update Remarks Only
+  // ----------------------------------------
+  static async updateRemarks(
+    vendor_id: number,
+    lead_id: number,
+    pending_work_details: string
   ) {
-    return prisma.$transaction(async (tx) => {
-      const existing = await tx.installationIssueLogMaster.findUnique({
-        where: { id },
-      });
-
-      if (!existing) throw new Error("Issue log not found");
-
-      const {
-        issue_type_ids,
-        issue_description,
-        issue_impact,
-        responsible_team_ids,
-      } = payload;
-
-      // 1️⃣ Update issue description / impact if provided
-      await tx.installationIssueLogMaster.update({
-        where: { id },
-        data: {
-          issue_description: issue_description ?? existing.issue_description,
-          issue_impact: issue_impact ?? existing.issue_impact,
-        },
-      });
-
-      // 2️⃣ Update Issue Types
-      if (issue_type_ids) {
-        await tx.issueLogTypeMapping.deleteMany({
-          where: { issue_log_id: id },
-        });
-
-        await tx.issueLogTypeMapping.createMany({
-          data: issue_type_ids.map((type_id) => ({
-            issue_log_id: id,
-            type_id,
-          })),
-        });
-      }
-
-      // 3️⃣ Update Responsible Teams
-      if (responsible_team_ids) {
-        await tx.issueLogResponsibleTeamMapping.deleteMany({
-          where: { issue_log_id: id },
-        });
-
-        await tx.issueLogResponsibleTeamMapping.createMany({
-          data: responsible_team_ids.map((team_id) => ({
-            issue_log_id: id,
-            team_id,
-          })),
-        });
-      }
-
-      // 4️⃣ Return updated full record
-      return tx.installationIssueLogMaster.findUnique({
-        where: { id },
-        include: {
-          issueTypes: { include: { type: true } },
-          responsibleTeams: { include: { team: true } },
-          createdBy: { select: { id: true, user_name: true } },
-        },
-      });
+    const updatedLead = await prisma.leadMaster.update({
+      where: { id: lead_id },
+      data: {
+        usable_handover_pending_work_details: pending_work_details,
+      },
     });
+
+    return updatedLead;
   }
-
-  to get issuetype this issue type
-
-  router.use("/issue-logs", issueLogRoutes);
-
-  issueLogRoutes.get("/issue-type/vendor/:vendor_id", getIssueTypes);
-
-  // GET All Issue Types by Vendor
-export const getIssueTypes = async (req: Request, res: Response) => {
-  console.log("[CONTROLLER] getIssueTypes called", { params: req.params });
-
-  try {
-    const vendor_id = parseInt(req.params.vendor_id);
-
-    if (!vendor_id) {
-      return res.status(400).json({ success: false, error: "vendor_id is required" });
-    }
-
-    const list = await fetchIssueTypes(vendor_id);
-    return res.status(200).json({ success: true, data: list });
-  } catch (error: any) {
-    console.error("[CONTROLLER] Error fetching issue types", error.message);
-    return res.status(500).json({ success: false, error: error.message });
-  }
-};
-
-export const fetchIssueTypes = async (vendor_id: number) => {
-  console.log("[SERVICE] fetchIssueTypes", { vendor_id });
-
-  return prisma.issueLogTypeMaster.findMany({
-    where: { vendor_id },
-    orderBy: { created_at: "desc" },
-  });
-};

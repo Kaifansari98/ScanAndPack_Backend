@@ -2,7 +2,6 @@ import { Router } from "express";
 import { UnderInstallationStageController } from "../../../controllers/installation/under-installation/underInstallationStageController";
 import {
   upload,
-  uploadToWasabiUnderInstallationDayWiseDocs,
 } from "../../../middlewares/uploadWasabi";
 
 const underInstallationStageRoutes = Router();
@@ -116,6 +115,24 @@ underInstallationStageRoutes.get(
 underInstallationStageRoutes.put(
   "/issue-log/:id/update",
   controller.updateInstallationIssueLog
+);
+
+underInstallationStageRoutes.post(
+  "/usable-handover/update",
+  upload.array("files"),   // multer — multiple files allowed
+  controller.updateUsableHandover
+);
+
+// GET usable handover
+underInstallationStageRoutes.get(
+  "/:vendor_id/:lead_id",
+  controller.getUsableHandover
+);
+
+// PUT update remarks
+underInstallationStageRoutes.put(
+  "/update-remarks",
+  controller.updateRemarks
 );
 
 export default underInstallationStageRoutes;
