@@ -32,6 +32,11 @@ import readyToDispatchRoutes from "./production/ready-to-dispatch/ReadyToDispatc
 import siteReadinessRoutes from "./installation/site-readiness/SiteReadiness.routes";
 import dispatchPlanningRoutes from "./installation/dispatch-planning/dispatchPlanning.routes";
 import dispatchStageRoutes from "./installation/dispatch/DispatchStage.routes";
+import installerUserRoutes from "./installerUser.routes";
+import underInstallationStageRoutes from "./installation/under-installation/underInstallation.routes";
+import miscRoutes from "./miscellaneousMaster.routes";
+import issueLogRoutes from "./issueLogRoutes";
+import finalHandoverStageRoutes from "./installation/final-handover/FinalHandoverStage.routes";
 
 const router = Router();
 
@@ -70,5 +75,12 @@ router.use("/leads/production/ready-to-dispatch", readyToDispatchRoutes);
 router.use("/leads/installation/site-readiness", siteReadinessRoutes);
 router.use("/leads/installation/dispatch-planning", dispatchPlanningRoutes);
 router.use("/leads/installation/dispatch", dispatchStageRoutes);
+router.use("/leads/installation/under-installation", underInstallationStageRoutes);
+
+router.use("/installer-users", installerUserRoutes);
+router.use("/miscellaneous-master", miscRoutes);
+router.use("/issue-logs", issueLogRoutes);
+
+router.use("/leads/installation/final-handover", finalHandoverStageRoutes);
 
 export { router };

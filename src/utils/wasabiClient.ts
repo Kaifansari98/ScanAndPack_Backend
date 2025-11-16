@@ -329,3 +329,192 @@ export const uploadToWasabiPostDispatchDocuments = async (
 
   return sysName;
 };
+
+export const uploadToWasabiUnderInstallationDayWiseDocuments = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  originalName: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `under_installation_day_wise_documents/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: "application/octet-stream",
+    })
+  );
+
+  return sysName;
+};
+
+export const uploadToWasabiUnderInstallationMiscellaneousDocuments = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  originalName: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `under_installation_miscellaneous_documents/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: "application/octet-stream",
+    })
+  );
+
+  return sysName;
+};
+
+export const uploadToWasabiUnderInstallationUsableHandoverFinalSitePhotos = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  originalName: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `under_installation_usable_handover/final_site_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: "application/octet-stream",
+    })
+  );
+
+  return sysName;
+};
+
+export const uploadToWasabiUnderInstallationUsableHandoverDocuments = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  originalName: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `under_installation_usable_handover/handover_documents/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: "application/octet-stream",
+    })
+  );
+
+  return sysName;
+};
+
+export const uploadToWasabiFinalHandoverFinalSitePhotos = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  originalName: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `final_handover/final_site_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: "application/octet-stream",
+    })
+  );
+
+  return sysName;
+};
+
+export const uploadToWasabiFinalHandoverWarrantyCardPhotos = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  originalName: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `final_handover/warranty_card_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: "application/octet-stream",
+    })
+  );
+
+  return sysName;
+};
+
+export const uploadToWasabiFinalHandoverBookletPhoto = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  originalName: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `final_handover/booklet_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: "application/octet-stream",
+    })
+  );
+
+  return sysName;
+};
+
+export const uploadToWasabiFinalHandoverFormPhoto = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  originalName: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `final_handover/form_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: "application/octet-stream",
+    })
+  );
+
+  return sysName;
+};
+
+export const uploadToWasabiFinalHandoverQCDocument = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  originalName: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `final_handover/qc_documents/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: "application/octet-stream",
+    })
+  );
+
+  return sysName;
+};
