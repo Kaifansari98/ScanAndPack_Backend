@@ -947,4 +947,52 @@ export class UnderInstallationStageController {
       return res.status(500).json({ success: false, error: error.message });
     }
   }
+
+  /**
+   * ✅ Move Lead to Final Handover Stage (Type 27)
+   * @route PUT /leads/installation/under-installation/vendorId/:vendorId/leadId/:leadId/move-to-final-handover
+   */
+  async moveLeadToFinalHandover(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+      const { updated_by } = req.body;
+
+      if (!vendorId || !leadId || !updated_by) {
+        return res
+          .status(400)
+          .json(
+            ApiResponse.error(
+              "vendorId, leadId, and updated_by are required",
+              400
+            )
+          );
+      }
+
+      const result =
+        await UnderInstallationStageService.moveLeadToFinalHandover(
+          vendorId,
+          leadId,
+          updated_by
+        );
+
+      return res
+        .status(200)
+        .json(
+          ApiResponse.success(
+            result,
+            "Lead successfully moved to Final Handover stage"
+          )
+        );
+    } catch (error: any) {
+      logger.error(
+        "[UnderInstallationStageController] moveLeadToFinalHandover Error:",
+        error
+      );
+
+      return res
+        .status(500)
+        .json(ApiResponse.error(error.message || "Internal server error"));
+    }
+  }
 }

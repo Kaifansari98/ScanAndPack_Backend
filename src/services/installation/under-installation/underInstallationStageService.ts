@@ -45,13 +45,13 @@ interface InstallIssueLogPayload {
 }
 
 interface UsableHandoverPayload {
-    vendor_id: number;
-    lead_id: number;
-    account_id: number;
-    created_by: number;
-    pending_work_details: string;
-    files: Express.Multer.File[];
-  }
+  vendor_id: number;
+  lead_id: number;
+  account_id: number;
+  created_by: number;
+  pending_work_details: string;
+  files: Express.Multer.File[];
+}
 
 export class UnderInstallationStageService {
   /**
@@ -1320,13 +1320,12 @@ export class UnderInstallationStageService {
 
         docTypeId = finalSitePhotoType.id;
       } else {
-        sysName =
-          await uploadToWasabiUnderInstallationUsableHandoverDocuments(
-            buffer,
-            vendor_id,
-            lead_id,
-            originalName
-          );
+        sysName = await uploadToWasabiUnderInstallationUsableHandoverDocuments(
+          buffer,
+          vendor_id,
+          lead_id,
+          originalName
+        );
 
         docTypeId = handoverDocType.id;
       }
@@ -1402,7 +1401,11 @@ export class UnderInstallationStageService {
     const handoverDocumentsWithUrl = await Promise.all(
       handoverDocuments.map(async (doc) => ({
         ...doc,
-        signedUrl: await generateSignedUrl(doc.doc_sys_name, 3600, "attachment"),
+        signedUrl: await generateSignedUrl(
+          doc.doc_sys_name,
+          3600,
+          "attachment"
+        ),
       }))
     );
 
@@ -1429,5 +1432,80 @@ export class UnderInstallationStageService {
     });
 
     return updatedLead;
+  }
+
+  /**
+   * ✅ Move Lead to Final Handover Stage (Type 27)
+   */
+  static async moveLeadToFinalHandover(
+    vendorId: number,
+    leadId: number,
+    updatedBy: number
+  ) {
+    return prisma.$transaction(async (tx) => {
+      // 1️⃣ Validate lead
+      const lead = await tx.leadMaster.findUnique({
+        where: { id: leadId },
+        select: { id: true, vendor_id: true, account_id: true },
+      });
+
+      if (!lead) throw new Error(`Lead ${leadId} not found`);
+      if (lead.vendor_id !== vendorId)
+        throw new Error(`Lead does not belong to vendor ${vendorId}`);
+
+      // 2️⃣ Fetch Final Handover StatusType (Type 16)
+      const toStatus = await tx.statusTypeMaster.findFirst({
+        where: { vendor_id: vendorId, tag: "Type 16" },
+        select: { id: true, type: true },
+      });
+
+      if (!toStatus)
+        throw new Error(
+          `Status 'Type 16' (Final Handover Stage) not found for vendor ${vendorId}`
+        );
+
+      // 3️⃣ Update Lead’s Status
+      const updatedLead = await tx.leadMaster.update({
+        where: { id: lead.id },
+        data: {
+          status_id: toStatus.id,
+          updated_by: updatedBy,
+          updated_at: new Date(),
+        },
+        select: {
+          id: true,
+          account_id: true,
+          vendor_id: true,
+          status_id: true,
+        },
+      });
+
+      // 4️⃣ Add Detailed Log Entry
+      const actionMessage = `Lead moved to Final Handover stage.`;
+
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: lead.id,
+          account_id: lead.account_id!,
+          action: actionMessage,
+          action_type: "UPDATE",
+          created_by: updatedBy,
+          created_at: new Date(),
+        },
+      });
+
+      logger.info("[SERVICE] Lead moved to Final Handover Stage", {
+        lead_id: lead.id,
+        vendor_id: vendorId,
+        updated_by: updatedBy,
+      });
+
+      return {
+        lead_id: lead.id,
+        vendor_id: vendorId,
+        new_status: toStatus.type,
+      };
+    });
   }
 }

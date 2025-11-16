@@ -135,4 +135,10 @@ underInstallationStageRoutes.put(
   controller.updateRemarks
 );
 
+/** ✅ PUT → Move Lead to Final Handover Stage (Type 27) */
+underInstallationStageRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/move-to-final-handover",
+  controller.moveLeadToFinalHandover
+);
+
 export default underInstallationStageRoutes;

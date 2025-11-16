@@ -36,6 +36,7 @@ import installerUserRoutes from "./installerUser.routes";
 import underInstallationStageRoutes from "./installation/under-installation/underInstallation.routes";
 import miscRoutes from "./miscellaneousMaster.routes";
 import issueLogRoutes from "./issueLogRoutes";
+import finalHandoverStageRoutes from "./installation/final-handover/FinalHandoverStage.routes";
 
 const router = Router();
 
@@ -79,5 +80,7 @@ router.use("/leads/installation/under-installation", underInstallationStageRoute
 router.use("/installer-users", installerUserRoutes);
 router.use("/miscellaneous-master", miscRoutes);
 router.use("/issue-logs", issueLogRoutes);
+
+router.use("/leads/installation/final-handover", finalHandoverStageRoutes);
 
 export { router };
