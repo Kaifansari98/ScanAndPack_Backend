@@ -67,6 +67,12 @@ dispatchStageRoutes.post(
   controller.createPendingMaterialTask
 );
 
+// ✅ POST → Create Pending Work Task
+dispatchStageRoutes.post(
+  "/vendorId/:vendorId/leadId/:leadId/create-pending-work",
+  controller.createPendingWorkTask
+);
+
 // ✅ GET → Fetch all Pending Material Tasks
 dispatchStageRoutes.get(
   "/vendorId/:vendorId/leadId/:leadId/pending-material-tasks",
@@ -76,6 +82,12 @@ dispatchStageRoutes.get(
 dispatchStageRoutes.get(
   "/vendorId/:vendorId/get-order-login-summary",
   controller.getOrderLoginSummaryByLead
+);
+
+// ✅ GET → Fetch all Pending Work Tasks
+dispatchStageRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/pending-work-tasks",
+  controller.getPendingWorkTasks
 );
 
 export default dispatchStageRoutes;

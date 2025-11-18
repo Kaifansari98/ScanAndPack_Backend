@@ -413,6 +413,57 @@ export class DispatchStageController {
     }
   }
 
+  // ✅ Create Pending Work Task
+  async createPendingWorkTask(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+      const { account_id, created_by, due_date, remark } = req.body;
+
+      const requiredFields = {
+        vendorId,
+        leadId,
+        account_id,
+        created_by,
+        due_date,
+      };
+
+      for (const [key, value] of Object.entries(requiredFields)) {
+        if (!value) {
+          return res.status(400).json({
+            success: false,
+            message: `${key} is required`,
+          });
+        }
+      }
+
+      const task = await service.createPendingWorkTask(
+        Number(vendorId),
+        Number(leadId),
+        Number(account_id),
+        Number(created_by),
+        due_date,
+        remark
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Pending Work task created successfully",
+        data: task,
+      });
+    } catch (error: any) {
+      logger.error(
+        "[PendingWorkController] createPendingWorkTask Error:",
+        error
+      );
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message:
+          error.message ||
+          "Internal server error while creating Pending Work task",
+      });
+    }
+  }
+
   // ✅ Fetch all Pending Material Tasks
   async getPendingMaterialTasks(req: Request, res: Response) {
     try {
@@ -478,6 +529,42 @@ export class DispatchStageController {
         message:
           error.message ||
           "Internal server error while fetching order login summary",
+      });
+    }
+  }
+
+  // ✅ Fetch all Pending Work Tasks
+  async getPendingWorkTasks(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+
+      if (!vendorId || !leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and leadId are required",
+        });
+      }
+
+      const tasks = await service.getPendingWorkTasks(
+        Number(vendorId),
+        Number(leadId)
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Pending work tasks fetched successfully",
+        data: tasks,
+      });
+    } catch (error: any) {
+      logger.error(
+        "[DispatchStageController] getPendingWorkTasks Error:",
+        error
+      );
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message:
+          error.message ||
+          "Internal server error while fetching pending work tasks",
       });
     }
   }

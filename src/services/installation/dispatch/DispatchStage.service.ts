@@ -505,6 +505,31 @@ export class DispatchStageService {
     return task;
   }
 
+  // ✅ Create Pending Work Task Service
+  async createPendingWorkTask(
+    vendorId: number,
+    leadId: number,
+    accountId: number,
+    createdBy: number,
+    dueDate: Date,
+    remark?: string
+  ) {
+    const task = await prisma.userLeadTask.create({
+      data: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        user_id: createdBy,
+        task_type: "Pending Work",
+        due_date: new Date(dueDate),
+        remark: remark || null,
+        created_by: createdBy,
+      },
+    });
+
+    return task;
+  }
+
   // ✅ Fetch all Pending Material Tasks
   async getPendingMaterialTasks(vendorId: number, leadId: number) {
     if (!vendorId || !leadId)
@@ -517,6 +542,33 @@ export class DispatchStageService {
         vendor_id: vendorId,
         lead_id: leadId,
         task_type: "Pending Materials",
+      },
+      orderBy: { created_at: "desc" },
+      select: {
+        id: true,
+        remark: true,
+        due_date: true,
+        status: true,
+        created_at: true,
+        user: { select: { user_name: true } },
+      },
+    });
+
+    return tasks;
+  }
+
+  // ✅ Fetch all Pending Work Tasks
+  async getPendingWorkTasks(vendorId: number, leadId: number) {
+    if (!vendorId || !leadId)
+      throw Object.assign(new Error("vendorId and leadId are required"), {
+        statusCode: 400,
+      });
+
+    const tasks = await prisma.userLeadTask.findMany({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        task_type: "Pending Work", // 👈 updated
       },
       orderBy: { created_at: "desc" },
       select: {
