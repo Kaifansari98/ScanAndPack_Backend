@@ -49,23 +49,33 @@ export class TechCheckController {
       const leadId = parseInt(req.params.leadId);
       const userId = parseInt(req.params.userId);
 
-      if (!vendorId || !leadId || !userId) {
+      const { assign_to_user_id, account_id } = req.body;
+
+      if (
+        !vendorId ||
+        !leadId ||
+        !userId ||
+        !assign_to_user_id ||
+        !account_id
+      ) {
         return res.status(400).json({
           success: false,
-          message: "Vendor ID, Lead ID, and User ID are required",
+          message:
+            "Missing required fields (vendorId, leadId, userId, assign_to_user_id, account_id)",
         });
       }
 
       const result = await techCheckService.approveTechCheck(
         vendorId,
         leadId,
-        userId
+        userId,
+        Number(assign_to_user_id),
+        Number(account_id)
       );
 
       return res.status(200).json({
         success: true,
-        message:
-          "Tech check approved and moved to Order Login stage successfully",
+        message: "Tech check approved & assigned to backend user",
         data: result,
       });
     } catch (error: any) {

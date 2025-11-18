@@ -6,10 +6,12 @@ export class TechCheckService {
   public async approveTechCheck(
     vendorId: number,
     leadId: number,
-    userId: number
+    userId: number,
+    assignToUserId: number,
+    accountId: number
   ) {
     return await prisma.$transaction(async (tx) => {
-      // 1️⃣ Get the Order Login status ID (Type 9)
+      // 1️⃣ Get Order Login Status (Type 9)
       const orderLoginStatus = await tx.statusTypeMaster.findFirst({
         where: { vendor_id: vendorId, tag: "Type 9" },
         select: { id: true },
@@ -17,43 +19,57 @@ export class TechCheckService {
 
       if (!orderLoginStatus) {
         throw new Error(
-          `Order Login status (Type 9) not found for vendor ${vendorId}`
+          `Order Login (Type 9) not configured for vendor ${vendorId}`
         );
       }
 
-      // 2️⃣ Update lead status
+      // 2️⃣ Update Lead status
       const updatedLead = await tx.leadMaster.update({
         where: { id: leadId },
         data: {
           status_id: orderLoginStatus.id,
           updated_by: userId,
+          updated_at: new Date(),
         },
       });
 
-      // 4️⃣ Log the action
-      await tx.leadDetailedLogs.create({
+      // 3️⃣ Assign to Backend User
+      const mapping = await tx.leadUserMapping.create({
         data: {
           vendor_id: vendorId,
           lead_id: leadId,
-          account_id: updatedLead.account_id!,
-          action: "Tech check approved - moved to Order Login stage",
-          action_type: "STATUS_CHANGE",
+          account_id: accountId,
+          user_id: assignToUserId,
+          type: "order-login-stage", // 👈 IMPORTANT
+          status: "active",
           created_by: userId,
         },
       });
 
-      // 5️⃣ Add status change record in LeadStatusLogs
+      // 4️⃣ Log status change
       await tx.leadStatusLogs.create({
         data: {
           vendor_id: vendorId,
           lead_id: leadId,
-          account_id: updatedLead.account_id!,
+          account_id: accountId,
           status_id: orderLoginStatus.id,
           created_by: userId,
         },
       });
 
-      return updatedLead;
+      // 5️⃣ Detailed Logs
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          action: `Tech Check approved and assigned to backend user ${assignToUserId}`,
+          action_type: "STATUS_CHANGE",
+          created_by: userId,
+        },
+      });
+
+      return { updatedLead, mapping };
     });
   }
 

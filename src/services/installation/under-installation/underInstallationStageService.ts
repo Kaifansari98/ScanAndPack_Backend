@@ -1508,4 +1508,207 @@ export class UnderInstallationStageService {
       };
     });
   }
+
+  /**
+   * ✔ Checks:
+   * 1. Carcass completion flag
+   * 2. Expected end date filled
+   * 3. At least one installer assigned
+   */
+  async checkUsableHandoverReady(vendorId: number, leadId: number) {
+    // Fetch base lead fields
+    const lead = await prisma.leadMaster.findFirst({
+      where: {
+        id: leadId,
+        vendor_id: vendorId,
+        is_deleted: false,
+      },
+      select: {
+        is_carcass_installation_completed: true,
+        expected_installation_end_date: true,
+      },
+    });
+
+    if (!lead) return null;
+
+    // Check installer count
+    const installerCount = await prisma.installerUserMapping.count({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+      },
+    });
+
+    const conditions = {
+      carcassCompleted: lead.is_carcass_installation_completed === true,
+      expectedEndDateFilled: lead.expected_installation_end_date !== null,
+      installersAssigned: installerCount > 0,
+    };
+
+    const isReady =
+      conditions.carcassCompleted &&
+      conditions.expectedEndDateFilled &&
+      conditions.installersAssigned;
+
+    return {
+      isReady,
+      details: {
+        carcassCompleted: conditions.carcassCompleted,
+        expectedEndDateFilled: conditions.expectedEndDateFilled,
+        installersAssigned: installerCount,
+      },
+    };
+  }
+
+  /** 🔥 Fully Independent Carcass + Installer + End Date Check */
+  private async checkInstallationBaseConditions(
+    vendorId: number,
+    leadId: number
+  ) {
+    // Get essential fields
+    const lead = await prisma.leadMaster.findFirst({
+      where: {
+        id: leadId,
+        vendor_id: vendorId,
+        is_deleted: false,
+      },
+      select: {
+        is_carcass_installation_completed: true,
+        expected_installation_end_date: true,
+      },
+    });
+
+    if (!lead) {
+      return {
+        ok: false,
+        msg: "Lead not found.",
+      };
+    }
+
+    // Installer check
+    const installerCount = await prisma.installerUserMapping.count({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+      },
+    });
+
+    // Compute readiness
+    const isReady =
+      lead.is_carcass_installation_completed === true &&
+      lead.expected_installation_end_date !== null &&
+      installerCount > 0;
+
+    return {
+      ok: isReady,
+      lead,
+      installerCount,
+      msg: isReady
+        ? null
+        : this.getInstallationFailMessage(
+            lead.is_carcass_installation_completed,
+            lead.expected_installation_end_date,
+            installerCount
+          ),
+    };
+  }
+
+  /** 🔥 Custom descriptive message for base installation check */
+  private getInstallationFailMessage(
+    carcass: boolean | null,
+    expectedEnd: Date | null,
+    installers: number
+  ) {
+    if (!carcass) return "Carcass installation is not completed.";
+    if (!expectedEnd)
+      return "Expected installation completion date is not set.";
+    if (installers === 0)
+      return "No installer assigned. Please assign at least one installer.";
+    return "Installation requirements not met.";
+  }
+
+  /** 🔥 Check Miscellaneous */
+  private async checkMiscellaneous(vendorId: number, leadId: number) {
+    const pending = await prisma.miscellaneousMaster.count({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        is_resolved: false,
+      },
+    });
+
+    return {
+      ok: pending === 0,
+      msg:
+        pending === 0
+          ? null
+          : "Miscellaneous items are still pending to be resolved.",
+    };
+  }
+
+  /** 🔥 Check Required Documents */
+  private async checkRequiredDocuments(vendorId: number, leadId: number) {
+    const requiredTags = ["Type 27", "Type 30", "Type 31"]; // Final Site + Handover Docs
+
+    const docs = await prisma.leadDocuments.findMany({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        is_deleted: false,
+        documentType: {
+          tag: { in: requiredTags },
+        },
+      },
+      include: {
+        documentType: true,
+      },
+    });
+
+    const uploadedTags = docs.map((d) => d.documentType.tag);
+    const missing = requiredTags.filter((tag) => !uploadedTags.includes(tag));
+
+    return {
+      ok: missing.length === 0,
+      msg:
+        missing.length === 0
+          ? null
+          : "Required final-site and handover documents are missing.",
+    };
+  }
+
+  /** 🔥 MASTER FUNCTION — fully independent */
+  async checkLeadReadyForFinalHandover(vendorId: number, leadId: number) {
+    // Step 1: Installation Base Conditions
+    const base = await this.checkInstallationBaseConditions(vendorId, leadId);
+    if (!base.ok)
+      return {
+        isReady: false,
+        message: base.msg,
+        step: "installationBase",
+      };
+
+    // Step 2: Miscellaneous
+    const misc = await this.checkMiscellaneous(vendorId, leadId);
+    if (!misc.ok)
+      return {
+        isReady: false,
+        message: misc.msg,
+        step: "miscPending",
+      };
+
+    // Step 3: Documents
+    const docs = await this.checkRequiredDocuments(vendorId, leadId);
+    if (!docs.ok)
+      return {
+        isReady: false,
+        message: docs.msg,
+        step: "docsMissing",
+      };
+
+    return {
+      isReady: true,
+      message: "Lead is fully ready for usable handover.",
+      step: "completed",
+    };
+  }
 }

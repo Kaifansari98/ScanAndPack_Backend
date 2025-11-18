@@ -995,4 +995,77 @@ export class UnderInstallationStageController {
         .json(ApiResponse.error(error.message || "Internal server error"));
     }
   }
+
+  /** 🔥 Check Carcass + End Date + Installer Assigned */
+  async checkUsableHandoverReadyFlag(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+
+      const result = await service.checkUsableHandoverReady(vendorId, leadId);
+
+      if (!result) {
+        return res.status(404).json({
+          success: false,
+          message: "Lead not found.",
+        });
+      }
+
+      const { isReady, details } = result;
+
+      const pending: string[] = [];
+      const completed: string[] = [];
+
+      if (details.carcassCompleted) completed.push("Carcass Installation");
+      else pending.push("Carcass Installation");
+
+      if (details.expectedEndDateFilled)
+        completed.push("Expected Installation End Date");
+      else pending.push("Expected Installation End Date");
+
+      if (details.installersAssigned > 0) completed.push("Installer Assigned");
+      else pending.push("Installer Assignment");
+
+      return res.json({
+        success: true,
+        data: {
+          isReady,
+          completed,
+          pending,
+          details,
+        },
+        message: isReady
+          ? "Lead is ready for Usable Handover."
+          : "Lead is NOT ready. Some steps are pending.",
+      });
+    } catch (error) {
+      console.error("Error checking usable handover flag:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error.",
+      });
+    }
+  }
+
+  async checkLeadReadyForFinalHandover(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+
+      const result = await service.checkLeadReadyForFinalHandover(
+        Number(vendorId),
+        Number(leadId)
+      );
+
+      return res.json({
+        success: true,
+        data: result,
+      });
+    } catch (error) {
+      console.error("Final handover readiness check failed:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error.",
+      });
+    }
+  }
 }

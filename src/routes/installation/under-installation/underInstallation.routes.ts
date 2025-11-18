@@ -1,8 +1,6 @@
 import { Router } from "express";
 import { UnderInstallationStageController } from "../../../controllers/installation/under-installation/underInstallationStageController";
-import {
-  upload,
-} from "../../../middlewares/uploadWasabi";
+import { upload } from "../../../middlewares/uploadWasabi";
 
 const underInstallationStageRoutes = Router();
 const controller = new UnderInstallationStageController();
@@ -119,7 +117,7 @@ underInstallationStageRoutes.put(
 
 underInstallationStageRoutes.post(
   "/usable-handover/update",
-  upload.array("files"),   // multer — multiple files allowed
+  upload.array("files"), // multer — multiple files allowed
   controller.updateUsableHandover
 );
 
@@ -130,15 +128,24 @@ underInstallationStageRoutes.get(
 );
 
 // PUT update remarks
-underInstallationStageRoutes.put(
-  "/update-remarks",
-  controller.updateRemarks
-);
+underInstallationStageRoutes.put("/update-remarks", controller.updateRemarks);
 
 /** ✅ PUT → Move Lead to Final Handover Stage (Type 27) */
 underInstallationStageRoutes.put(
   "/vendorId/:vendorId/leadId/:leadId/move-to-final-handover",
   controller.moveLeadToFinalHandover
+);
+
+/** ✅ GET → Check Installation Completion Flag */
+underInstallationStageRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/check-ready-flag",
+  controller.checkUsableHandoverReadyFlag
+);
+
+/** 🔥 Final Handover Readiness Check */
+underInstallationStageRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/check-final-handover-ready",
+  controller.checkLeadReadyForFinalHandover
 );
 
 export default underInstallationStageRoutes;
