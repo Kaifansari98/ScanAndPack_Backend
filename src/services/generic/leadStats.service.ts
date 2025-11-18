@@ -135,28 +135,71 @@ export class LeadStatsService {
       "dispatch-planning-stage"
     );
     const totalDispatchStageLeads = await countByStatus("dispatch-stage");
-    const totalUnderInstallationStageLeads = await countByStatus("under-installation-stage");
-    const totalFinalhandoverStageLeads = await countByStatus("final-handover-stage");
+    const totalUnderInstallationStageLeads = await countByStatus(
+      "under-installation-stage"
+    );
+    const totalFinalhandoverStageLeads = await countByStatus(
+      "final-handover-stage"
+    );
+
+    // GROUP TOTALS
+    const total_leads_group =
+      totalOpenLeads +
+      totalInitialSiteMeasurementLeads +
+      totalDesigningStageLeads +
+      totalBookingStageLeads;
+
+    const total_project_group =
+      totalFinalMeasurementStageLeads +
+      totalClientDocumentationStageLeads +
+      totalClientApprovalStageLeads;
+
+    const total_production_group =
+      totalTechCheckStageLeads +
+      totalOrderLoginStageLeads +
+      totalProductionStageLeads;
+
+    const total_installation_group =
+      totalSiteReadinessStageLeads +
+      totalDispatchPlanningStageLeads +
+      totalDispatchStageLeads +
+      totalUnderInstallationStageLeads +
+      totalFinalhandoverStageLeads;
 
     const stats = {
+      // =====================
+      // INDIVIDUAL COUNTS
+      // =====================
       total_leads: totalLeads,
+      total_my_tasks: totalMyTasks,
+
       total_open_leads: totalOpenLeads,
       total_initial_site_measurement_leads: totalInitialSiteMeasurementLeads,
       total_designing_stage_leads: totalDesigningStageLeads,
       total_booking_stage_leads: totalBookingStageLeads,
+
       total_final_measurement_leads: totalFinalMeasurementStageLeads,
       total_client_documentation_leads: totalClientDocumentationStageLeads,
       total_client_approval_leads: totalClientApprovalStageLeads,
-      total_my_tasks: totalMyTasks,
+      
       total_tech_check_leads: totalTechCheckStageLeads,
       total_order_login_leads: totalOrderLoginStageLeads,
       total_production_stage_leads: totalProductionStageLeads,
       total_ready_to_dispatch_leads: totalReadyToDispatchStageLeads,
+      
       total_site_readiness_stage_leads: totalSiteReadinessStageLeads,
       total_dispatch_planning_stage_leads: totalDispatchPlanningStageLeads,
       total_dispatch_stage_leads: totalDispatchStageLeads,
       total_under_installation_stage_leads: totalUnderInstallationStageLeads,
       total_final_handover_stage_leads: totalFinalhandoverStageLeads,
+
+      // =====================
+      // GROUP TOTALS (NEW)
+      // =====================
+      total_leads_group,
+      total_project_group,
+      total_production_group,
+      total_installation_group,
     };
 
     logger.debug("[LeadStatsService] Computed stats", stats);
