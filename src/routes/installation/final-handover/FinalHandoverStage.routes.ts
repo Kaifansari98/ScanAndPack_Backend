@@ -39,4 +39,15 @@ finalHandoverStageRoutes.get(
   controller.getFinalHandoverDocuments
 );
 
+finalHandoverStageRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/ready-status",
+  controller.getFinalHandoverReadyStatus
+);
+
+/** ✅ PUT → Move Lead to Project Completed Stage (Type 17) */
+finalHandoverStageRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/move-to-project-completed",
+  controller.moveLeadToProjectCompleted
+);
+
 export default finalHandoverStageRoutes;

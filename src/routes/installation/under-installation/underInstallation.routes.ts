@@ -130,7 +130,7 @@ underInstallationStageRoutes.get(
 // PUT update remarks
 underInstallationStageRoutes.put("/update-remarks", controller.updateRemarks);
 
-/** ✅ PUT → Move Lead to Final Handover Stage (Type 27) */
+/** ✅ PUT → Move Lead to Final Handover Stage (Type 16) */
 underInstallationStageRoutes.put(
   "/vendorId/:vendorId/leadId/:leadId/move-to-final-handover",
   controller.moveLeadToFinalHandover

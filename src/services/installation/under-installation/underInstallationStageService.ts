@@ -1435,7 +1435,7 @@ export class UnderInstallationStageService {
   }
 
   /**
-   * ✅ Move Lead to Final Handover Stage (Type 27)
+   * ✅ Move Lead to Final Handover Stage (Type 16)
    */
   static async moveLeadToFinalHandover(
     vendorId: number,
@@ -1648,7 +1648,7 @@ export class UnderInstallationStageService {
 
   /** 🔥 Check Required Documents */
   private async checkRequiredDocuments(vendorId: number, leadId: number) {
-    const requiredTags = ["Type 27", "Type 30", "Type 31"]; // Final Site + Handover Docs
+    const requiredTags = ["Type 25", "Type 26"]; // Final Site + Handover Docs
 
     const docs = await prisma.leadDocuments.findMany({
       where: {
