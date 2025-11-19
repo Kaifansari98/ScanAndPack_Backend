@@ -1,13 +1,14 @@
 import { prisma } from "../../../prisma/client";
 import { Prisma } from "@prisma/client";
 import {
-    generateSignedUrl,
+  generateSignedUrl,
   uploadToWasabiFinalHandoverBookletPhoto,
   uploadToWasabiFinalHandoverFinalSitePhotos,
   uploadToWasabiFinalHandoverFormPhoto,
   uploadToWasabiFinalHandoverQCDocument,
   uploadToWasabiFinalHandoverWarrantyCardPhotos,
 } from "../../../utils/wasabiClient";
+import logger from "../../../utils/logger";
 
 export class FinalHandoverStageService {
   /**
@@ -344,7 +345,11 @@ export class FinalHandoverStageService {
     // 🔹 Generate signed url for each document
     const documentsWithUrls = await Promise.all(
       docs.map(async (doc) => {
-        const signed_url = await generateSignedUrl(doc.doc_sys_name, 3600, "inline");
+        const signed_url = await generateSignedUrl(
+          doc.doc_sys_name,
+          3600,
+          "inline"
+        );
 
         return {
           ...doc,
@@ -355,5 +360,152 @@ export class FinalHandoverStageService {
     );
 
     return documentsWithUrls;
+  }
+
+  async getFinalHandoverReadyStatus(vendorId: number, leadId: number) {
+    if (!vendorId || !leadId)
+      throw Object.assign(new Error("vendorId and leadId are required"), {
+        statusCode: 400,
+      });
+
+    // 🔹 Required final handover document types
+    const REQUIRED_TAGS = [
+      "Type 27",
+      "Type 28",
+      "Type 29",
+      "Type 30",
+      "Type 31",
+    ];
+
+    // 1️⃣ Fetch document type ids
+    const docTypes = await prisma.documentTypeMaster.findMany({
+      where: { vendor_id: vendorId, tag: { in: REQUIRED_TAGS } },
+      select: { id: true, tag: true },
+    });
+
+    if (docTypes.length !== REQUIRED_TAGS.length) {
+      return {
+        docs_complete: false,
+        pending_tasks_clear: false,
+        can_move_to_final_handover: false,
+      };
+    }
+
+    const docTypeIds = docTypes.map((d) => d.id);
+
+    // 2️⃣ Fetch all documents for this lead
+    const docs = await prisma.leadDocuments.findMany({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        doc_type_id: { in: docTypeIds },
+        is_deleted: false,
+      },
+    });
+
+    // Group documents by doc_type_id
+    const docCountByType: Record<number, number> = {};
+    docs.forEach((doc) => {
+      docCountByType[doc.doc_type_id] =
+        (docCountByType[doc.doc_type_id] || 0) + 1;
+    });
+
+    // 3️⃣ Check if each required doc type has at least one file
+    const docs_complete = docTypes.every((dt) => docCountByType[dt.id] > 0);
+
+    // 4️⃣ Check pending work tasks status
+    const pendingTasks = await prisma.userLeadTask.findMany({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        task_type: "Pending Work",
+      },
+      select: { status: true },
+    });
+
+    const pending_tasks_clear = pendingTasks.every((t) =>
+      ["completed", "cancelled"].includes(t.status)
+    );
+
+    return {
+      docs_complete,
+      pending_tasks_clear,
+      can_move_to_final_handover: docs_complete && pending_tasks_clear,
+    };
+  }
+
+  /**
+   * ✅ Move Lead to Project Completed Stage (Type 17)
+   */
+  static async moveLeadToProjectCompleted(
+    vendorId: number,
+    leadId: number,
+    updatedBy: number
+  ) {
+    return prisma.$transaction(async (tx) => {
+      // 1️⃣ Validate Lead
+      const lead = await tx.leadMaster.findUnique({
+        where: { id: leadId },
+        select: { id: true, vendor_id: true, account_id: true },
+      });
+
+      if (!lead) throw new Error(`Lead ${leadId} not found`);
+      if (lead.vendor_id !== vendorId)
+        throw new Error(`Lead does not belong to vendor ${vendorId}`);
+
+      // 2️⃣ Fetch Status Type (PROJECT COMPLETED - Type 17)
+      const toStatus = await tx.statusTypeMaster.findFirst({
+        where: { vendor_id: vendorId, tag: "Type 17" },
+        select: { id: true, type: true },
+      });
+
+      if (!toStatus)
+        throw new Error(
+          `Status 'Type 17' (Project Completed) not found for vendor ${vendorId}`
+        );
+
+      // 3️⃣ Update Lead’s Status
+      const updatedLead = await tx.leadMaster.update({
+        where: { id: lead.id },
+        data: {
+          status_id: toStatus.id,
+          updated_by: updatedBy,
+          updated_at: new Date(),
+        },
+        select: {
+          id: true,
+          account_id: true,
+          vendor_id: true,
+          status_id: true,
+        },
+      });
+
+      // 4️⃣ Create Log Entry
+      const actionMessage = `Lead moved to Project Completed Stage.`;
+
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: lead.id,
+          account_id: lead.account_id!,
+          action: actionMessage,
+          action_type: "UPDATE",
+          created_by: updatedBy,
+          created_at: new Date(),
+        },
+      });
+
+      logger.info("[SERVICE] Lead moved to Project Completed Stage", {
+        lead_id: lead.id,
+        vendor_id: vendorId,
+        updated_by: updatedBy,
+      });
+
+      return {
+        lead_id: lead.id,
+        vendor_id: vendorId,
+        new_status: toStatus.type,
+      };
+    });
   }
 }

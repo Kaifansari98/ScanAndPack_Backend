@@ -949,7 +949,7 @@ export class UnderInstallationStageController {
   }
 
   /**
-   * ✅ Move Lead to Final Handover Stage (Type 27)
+   * ✅ Move Lead to Final Handover Stage (Type 16)
    * @route PUT /leads/installation/under-installation/vendorId/:vendorId/leadId/:leadId/move-to-final-handover
    */
   async moveLeadToFinalHandover(req: Request, res: Response) {
