@@ -370,7 +370,7 @@ export class SiteReadinessService {
       );
     }
 
-    // 🔹 2. Check for at least one Current Site Photo (Type 19)
+    // 🔹 2. Check for at least one Current Site Photo
     const sitePhotos = await prisma.leadDocuments.count({
       where: {
         vendor_id: vendorId,
@@ -382,25 +382,41 @@ export class SiteReadinessService {
 
     const hasPhoto = sitePhotos > 0;
 
-    // 🔹 3. Check for all 6 required Site Readiness items
-    const readinessCount = await prisma.siteReadiness.count({
+    // 🔹 3. Fetch all 6 site readiness rows
+    const readinessRows = await prisma.siteReadiness.findMany({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
       },
+      select: {
+        id: true,
+        type: true,
+        value: true, // <--- we need this
+      },
     });
 
-    const hasAllSixItems = readinessCount >= 6;
+    const totalItems = readinessRows.length;
 
-    // ✅ 4. Determine final status
-    const isCompleted = hasPhoto && hasAllSixItems;
+    // 🔹 All 6 items must exist
+    const hasSixRows = totalItems === 6;
+
+    // 🔹 All 6 items must have value === true
+    const allValuesPresent =
+      hasSixRows &&
+      readinessRows.every(
+        (item) => item.value !== null && item.value !== undefined
+      );
+
+    // 🔹 Final flag (photo + 6 items + all true)
+    const isCompleted = hasPhoto && allValuesPresent;
 
     return {
       vendor_id: vendorId,
       lead_id: leadId,
       has_photo: hasPhoto,
-      has_all_items: hasAllSixItems,
+      has_all_items: allValuesPresent,
       is_site_readiness_completed: isCompleted,
+      readiness_items: readinessRows, // optional: helpful for UI
     };
   }
 

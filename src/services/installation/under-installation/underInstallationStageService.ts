@@ -1711,4 +1711,40 @@ export class UnderInstallationStageService {
       step: "completed",
     };
   }
+
+  static async resolveMiscellaneousService(payload: {
+    vendor_id: number;
+    lead_id: number;
+    misc_id: number;
+    resolved_by: number;
+  }) {
+    const { vendor_id, lead_id, misc_id, resolved_by } = payload;
+
+    // Validate entry exists & belongs to vendor + lead
+    const existing = await prisma.miscellaneousMaster.findFirst({
+      where: {
+        id: misc_id,
+        vendor_id,
+        lead_id,
+      },
+    });
+
+    if (!existing) {
+      throw Object.assign(new Error("Miscellaneous entry not found"), {
+        statusCode: 404,
+      });
+    }
+
+    // Update entry to resolved
+    const updated = await prisma.miscellaneousMaster.update({
+      where: { id: misc_id },
+      data: {
+        is_resolved: true,
+        resolved_at: new Date(),
+        updated_by: resolved_by,
+      },
+    });
+
+    return updated;
+  }
 }

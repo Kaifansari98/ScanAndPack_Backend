@@ -1068,4 +1068,41 @@ export class UnderInstallationStageController {
       });
     }
   }
+
+  async resolveMiscellaneousEntry(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+      const miscId = Number(req.params.miscId);
+
+      const { resolved_by } = req.body; // userId
+
+      if (!resolved_by) {
+        return res.status(400).json({
+          success: false,
+          message: "resolved_by (userId) is required",
+        });
+      }
+
+      const result =
+        await UnderInstallationStageService.resolveMiscellaneousService({
+          vendor_id: vendorId,
+          lead_id: leadId,
+          misc_id: miscId,
+          resolved_by: Number(resolved_by),
+        });
+
+      return res.status(200).json({
+        success: true,
+        message: "Miscellaneous entry marked as resolved",
+        data: result,
+      });
+    } catch (err: any) {
+      console.error("❌ Error in resolveMiscellaneousEntry:", err.message);
+      return res.status(500).json({
+        success: false,
+        error: err.message || "Something went wrong",
+      });
+    }
+  }
 }
