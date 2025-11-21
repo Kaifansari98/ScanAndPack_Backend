@@ -148,4 +148,9 @@ underInstallationStageRoutes.get(
   controller.checkLeadReadyForFinalHandover
 );
 
+underInstallationStageRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/misc/:miscId/resolve",
+  controller.resolveMiscellaneousEntry
+);
+
 export default underInstallationStageRoutes;
