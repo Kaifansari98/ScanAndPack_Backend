@@ -1,13 +1,14 @@
-import { LeadPriority, DocumentType } from "@prisma/client";
 
 export interface ProductTypeInput {
     vendor_id: number;
     type: string;
+    tag: string;
 }
   
 export interface ProductType {
     id: number;
     type: string;
+    tag: string;
     vendor_id: number;
 }
 
@@ -56,14 +57,28 @@ export interface DocumentTypeValue{
     tag: string;
     vendor_id: number;
 }
+export interface PaymentTypeInput {
+    vendor_id: number;
+    type: string;
+    tag: string;
+}
+
+export interface PaymentTypeValue{
+    id: number;
+    type: string;
+    tag: string;
+    vendor_id: number;
+}
 export interface StatusTypeInput {
     vendor_id: number;
     type: string;
+    tag: string;
 }
 
 export interface StatusType{
     id: number;
     type: string;
+    tag: string;
     vendor_id: number;
 }
 
@@ -75,9 +90,8 @@ export interface CreateLeadDTO {
     alt_contact_no?: string;
     email?: string;
     site_address: string;
+    site_map_link?: string;
     site_type_id?: number;
-    priority: LeadPriority | string;
-    billing_name?: string;
     source_id: number;
     archetech_name?: string;
     designer_remark?: string;
@@ -86,13 +100,15 @@ export interface CreateLeadDTO {
     status_id: number;
     assign_to?: number;
     assigned_by?: number;
-    product_types?: number[];
-    product_structures?: number[];
+    product_types: number[];
+    product_structures: number[];
+    initial_site_measurement_date?: Date;
+    is_draft?: boolean;
 }
   
 export interface DocumentUpload {
     file: Express.Multer.File;
-    type?: DocumentType;
+    type?: string;
 }
 
 export interface UpdateLeadDTO {
@@ -103,18 +119,60 @@ export interface UpdateLeadDTO {
     alt_contact_no?: string;
     email?: string;
     site_address: string;
+    site_map_link?: string;
     site_type_id?: number;
-    priority: string;
-    billing_name?: string;
     source_id: number;
     archetech_name?: string;
     designer_remark?: string;
     updated_by: number;
     product_types?: number[];
     product_structures?: number[];
+    initial_site_measurement_date?: Date | string;
 }
 
 export interface SalesExecutiveData {
+    id: number;
+    vendor_id: number;
+    user_name: string;
+    user_contact: string;
+    user_email: string;
+    user_timezone: string;
+    status: string;
+    created_at: Date;
+    updated_at: Date;
+    user_type: {
+      id: number;
+      user_type: string;
+    };
+    documents: Array<{
+      id: number;
+      document_name: string;
+      document_number: string;
+      filename: string;
+    }>;
+}
+export interface SiteSupervisorData {
+    id: number;
+    vendor_id: number;
+    user_name: string;
+    user_contact: string;
+    user_email: string;
+    user_timezone: string;
+    status: string;
+    created_at: Date;
+    updated_at: Date;
+    user_type: {
+      id: number;
+      user_type: string;
+    };
+    documents: Array<{
+      id: number;
+      document_name: string;
+      document_number: string;
+      filename: string;
+    }>;
+}
+export interface BackendData {
     id: number;
     vendor_id: number;
     user_name: string;
@@ -193,6 +251,7 @@ export interface CreatePaymentUploadDto {
     vendor_id: number;
     created_by: number;
     client_id: number;
+    user_id: number;
     amount?: number;
     payment_date?: Date;
     payment_text?: string;
@@ -372,8 +431,6 @@ export interface CreatePaymentUploadDto {
     alt_contact_no: string | null;
     email: string | null;
     site_address: string;
-    priority: string;
-    billing_name: string | null;
     archetech_name: string | null;
     designer_remark: string | null;
     created_at: Date;
@@ -563,3 +620,21 @@ export interface ApiSuccessResponse<T = any> {
     hasPrev: boolean;
   };
 }
+
+export interface AssignTaskISMInput {
+  lead_id: number;
+  task_type: string;
+  due_date: string | Date;  // ISO from FE is fine
+  remark?: string;
+  assignee_user_id: number;
+  created_by: number;
+};
+
+export interface AssignTaskFMInput {
+  lead_id: number;
+  task_type: string;
+  due_date: string | Date;  // ISO from FE is fine
+  remark?: string;
+  assignee_user_id: number;
+  created_by: number;
+};

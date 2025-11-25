@@ -66,7 +66,7 @@ export const getBoxesByVendorAndProject = async (req: Request, res: Response) =>
 
     const boxes = await boxService.getBoxesByVendorAndProject(vendorId, projectId);
 
-    const transformed = boxes.map((box) => ({
+    const transformed = boxes.map((box: any) => ({
       ...box,
       items_count: box._count.items,
       _count: undefined, // Optional: remove raw _count

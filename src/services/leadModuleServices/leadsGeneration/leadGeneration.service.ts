@@ -1,100 +1,136 @@
 import { prisma } from "../../../prisma/client";
-import { CreateLeadDTO, UpdateLeadDTO } from "../../../types/leadModule.types";
-import { LeadPriority, DocumentType } from "@prisma/client";
-import { getDocumentTypeFromFile } from "../../../utils/fileUtils";
+import {
+  CreateLeadDTO,
+  SiteSupervisorData,
+  UpdateLeadDTO,
+} from "../../../types/leadModule.types";
 import fs from "fs";
 import { SalesExecutiveData } from "../../../types/leadModule.types";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import wasabi from "../../../utils/wasabiClient";
-import { AssignLeadPayload, LeadAssignmentResult } from "../../../types/leadModule.types";
-import { 
-  validateAdminUser, 
-  validateSalesExecutiveUser, 
-  validateLeadOwnership, 
-  getUserRole 
+import {
+  AssignLeadPayload,
+  LeadAssignmentResult,
+} from "../../../types/leadModule.types";
+import {
+  validateAdminUser,
+  validateSalesExecutiveUser,
+  getUserRole,
+  isLeadComplete,
 } from "../../../validations/leadValidation";
+import { generateSignedUrl } from "../../../utils/wasabiClient";
+import logger from "../../../utils/logger";
+import Joi from "joi";
+import { generateLeadCode } from "../../../utils/generateLeadCode";
 
-export const createLeadService = async (payload: CreateLeadDTO, files: Express.Multer.File[]) => {
-    console.log("[DEBUG] Service called with", files.length, "files");
+type EditTaskISMInput = {
+  lead_id: number;
+  task_id: number;
+  task_type?: string;
+  due_date?: string | Date;
+  remark?: string;
+  assignee_user_id?: number;
+  updated_by: number;
+  status?: string;
+  closed_at?: string | Date;
+  closed_by?: number;
+};
 
-    function sanitizeFilename(filename: string): string {
-      return filename.replace(/[^a-zA-Z0-9.\-_]/g, "_");
-    }
-    
-    // Debug file information
-    if (files && files.length > 0) {
-      console.log(`[INFO] Processing ${files.length} document(s)`);
-      files.forEach((file, index) => {
-        console.log(`[DEBUG] File ${index + 1}:`, {
-          originalname: file.originalname,
-          filename: file.filename,
-          size: file.size,
-          mimetype: file.mimetype,
-          path: (file as any).path,
-          destination: (file as any).destination,
-          key: (file as any).key,
-          location: (file as any).location
-        });
-        
-        // Check if file actually exists
-        const diskPath = (file as any).path as string | undefined;
-        if (diskPath && fs.existsSync(diskPath)) {
-          console.log(`[DEBUG] ✅ File ${index + 1} exists at:`, diskPath);
-          const stats = fs.statSync(diskPath);
-          console.log(`[DEBUG] File size on disk:`, stats.size, "bytes");
-        }
+const editTaskISMSchema = Joi.object({
+  lead_id: Joi.number().integer().positive().required(),
+  task_id: Joi.number().integer().positive().required(),
+  task_type: Joi.string().trim(),
+  due_date: Joi.alternatives().try(Joi.string().isoDate(), Joi.date()),
+  remark: Joi.string().allow("", null),
+  assignee_user_id: Joi.number().integer().positive(),
+  updated_by: Joi.number().integer().positive().required(),
+  status: Joi.string().trim(),
+  closed_at: Joi.alternatives().try(Joi.string().isoDate(), Joi.date()),
+  closed_by: Joi.number().integer().positive(),
+});
+
+export const createLeadService = async (
+  payload: CreateLeadDTO & { is_draft?: boolean },
+  files: Express.Multer.File[]
+) => {
+  logger.debug("[SERVICE] createLeadService called", {
+    fileCount: files.length,
+  });
+
+  function sanitizeFilename(filename: string): string {
+    return filename.replace(/[^a-zA-Z0-9.\-_]/g, "_");
+  }
+
+  // Debug file information
+  if (files && files.length > 0) {
+    logger.info(`Processing ${files.length} document(s)`);
+    files.forEach((file, index) => {
+      console.log(`[DEBUG] File ${index + 1}:`, {
+        originalname: file.originalname,
+        filename: file.filename,
+        size: file.size,
+        mimetype: file.mimetype,
+        path: (file as any).path,
+        destination: (file as any).destination,
+        key: (file as any).key,
+        location: (file as any).location,
       });
-    }
 
-    const {
-      firstname,
-      lastname,
-      country_code,
-      contact_no,
-      alt_contact_no,
-      email,
-      site_address,
-      site_type_id,
-      status_id,
-      priority,
-      billing_name,
-      source_id,
-      archetech_name,
-      designer_remark,
-      vendor_id,
-      created_by,
-      assign_to,
-      assigned_by,
-      product_types = [],
-      product_structures = []
-    } = payload;
-  
-    const leadPriority = priority.toLowerCase() as LeadPriority;
-    
-    // Validate priority
-    if (!Object.values(LeadPriority).includes(leadPriority)) {
-      throw new Error(`Invalid priority value: ${priority}. Must be one of: ${Object.values(LeadPriority).join(', ')}`);
-    }
-  
-    return prisma.$transaction(async (tx) => {
+      // Check if file actually exists
+      const diskPath = (file as any).path as string | undefined;
+      if (diskPath && fs.existsSync(diskPath)) {
+        console.log(`[DEBUG] ✅ File ${index + 1} exists at:`, diskPath);
+        const stats = fs.statSync(diskPath);
+        console.log(`[DEBUG] File size on disk:`, stats.size, "bytes");
+      }
+    });
+  }
+
+  const {
+    firstname,
+    lastname,
+    country_code,
+    contact_no,
+    alt_contact_no,
+    email,
+    site_address,
+    site_map_link,
+    site_type_id,
+    status_id,
+    source_id,
+    archetech_name,
+    designer_remark,
+    vendor_id,
+    created_by,
+    assign_to,
+    assigned_by,
+    product_types = [],
+    product_structures = [],
+    initial_site_measurement_date,
+  } = payload;
+
+  return prisma.$transaction(
+    async (tx) => {
       // Check for duplicate contact_no and email for the same vendor
       const existingContactLead = await tx.leadMaster.findFirst({
         where: {
           contact_no,
-          vendor_id
-        }
+          vendor_id,
+        },
       });
 
       if (existingContactLead) {
-        throw new Error(`Contact number ${contact_no} already exists for this vendor`);
+        throw new Error(
+          `Contact number ${contact_no} already exists for this vendor`
+        );
       }
 
       if (email) {
         const existingEmailLead = await tx.leadMaster.findFirst({
           where: {
             email,
-            vendor_id
-          }
+            vendor_id,
+          },
         });
 
         if (existingEmailLead) {
@@ -106,24 +142,28 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
       const existingContactAccount = await tx.accountMaster.findFirst({
         where: {
           contact_no,
-          vendor_id
-        }
+          vendor_id,
+        },
       });
 
       if (existingContactAccount) {
-        throw new Error(`Contact number ${contact_no} already exists in accounts for this vendor`);
+        throw new Error(
+          `Contact number ${contact_no} already exists in accounts for this vendor`
+        );
       }
 
       if (email) {
         const existingEmailAccount = await tx.accountMaster.findFirst({
           where: {
             email,
-            vendor_id
-          }
+            vendor_id,
+          },
         });
 
         if (existingEmailAccount) {
-          throw new Error(`Email ${email} already exists in accounts for this vendor`);
+          throw new Error(
+            `Email ${email} already exists in accounts for this vendor`
+          );
         }
       }
 
@@ -136,24 +176,27 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
           alt_contact_no,
           email,
           vendor_id,
-          created_by
-        }
+          created_by,
+        },
       });
 
-      // 2. LeadMaster (now with account_id reference)
+      // 2) ⬅️ NEW: generate lead_code for this vendor
+      const lead_code = await generateLeadCode(tx, vendor_id);
+
+      // 3) Create Lead with the generated code
       const lead = await tx.leadMaster.create({
         data: {
+          lead_code,
           firstname,
           lastname,
           country_code,
           contact_no,
           alt_contact_no,
-          email,
+          email: email ?? "",
           site_address,
+          site_map_link,
           site_type_id,
           status_id,
-          priority: leadPriority,
-          billing_name,
           source_id,
           archetech_name,
           designer_remark,
@@ -162,23 +205,69 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
           account_id: account.id, // Add account_id reference
           assign_to,
           assigned_by,
-        }
+          initial_site_measurement_date,
+          is_draft: !!payload.is_draft,
+        },
       });
-  
+
+      /* ✅ NEW: LeadUserMapping writes (cases: admin vs sales-executive)
+      - Both cases use: type="ISM", status="active"
+      */
+      const creator = await tx.userMaster.findUnique({
+        where: { id: created_by },
+        include: { user_type: true }, // joins UserTypeMaster
+      });
+
+      const creatorRole = creator?.user_type?.user_type?.toLowerCase(); // e.g., "admin" or "sales-executive"
+
+      // Base fields common to all LeadUserMapping rows
+      const mappingBase = {
+        vendor_id,
+        account_id: account.id,
+        lead_id: lead.id,
+        type: "ISM" as const,
+        status: "active" as const,
+        created_by, // actor creating the mapping
+      };
+
+      // Always insert mapping for the creator
+      await tx.leadUserMapping.create({
+        data: { ...mappingBase, user_id: created_by },
+      });
+
+      // If creator is admin -> also map the assignee (when provided)
+      if (creatorRole === "admin" && assign_to) {
+        await tx.leadUserMapping.create({
+          data: { ...mappingBase, user_id: assign_to },
+        });
+      }
+
+      if (payload.is_draft) {
+        logger.info(
+          "📝 Draft lead detected — skipping mappings, logs & uploads"
+        );
+        return { lead, account, draft: true };
+      }
+
+      // If creator is sales-executive -> nothing more to do (only his own mapping above)
+      // Any other/unknown role falls back to just the creator row
+
       // 3. Validate and create mappings for product types using IDs
       for (const productTypeId of product_types) {
-        console.log("[DEBUG] Processing product type ID:", productTypeId);
-        
+        logger.debug("Processing product type", { productTypeId });
+
         // Validate that the product type exists and belongs to the vendor
         const productType = await tx.productTypeMaster.findFirst({
-          where: { 
-            id: productTypeId, 
-            vendor_id 
-          }
+          where: {
+            id: productTypeId,
+            vendor_id,
+          },
         });
 
         if (!productType) {
-          throw new Error(`Product type with ID ${productTypeId} not found for vendor ${vendor_id}`);
+          throw new Error(
+            `Product type with ID ${productTypeId} not found for vendor ${vendor_id}`
+          );
         }
 
         await tx.leadProductMapping.create({
@@ -187,26 +276,28 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
             lead_id: lead.id,
             account_id: account.id,
             product_type_id: productTypeId,
-            created_by
-          }
+            created_by,
+          },
         });
-        console.log("[DEBUG] ✅ Product mapping created for type ID:", productTypeId);
+        logger.info("✅ Product mapping created", { productTypeId });
       }
 
       // 4. Validate and create mappings for product structures using IDs
       for (const productStructureId of product_structures) {
-        console.log("[DEBUG] Processing product structure ID:", productStructureId);
-        
+        logger.debug("Processing product structure", { productStructureId });
+
         // Validate that the product structure exists and belongs to the vendor
         const structure = await tx.productStructure.findFirst({
-          where: { 
-            id: productStructureId, 
-            vendor_id 
-          }
+          where: {
+            id: productStructureId,
+            vendor_id,
+          },
         });
 
         if (!structure) {
-          throw new Error(`Product structure with ID ${productStructureId} not found for vendor ${vendor_id}`);
+          throw new Error(
+            `Product structure with ID ${productStructureId} not found for vendor ${vendor_id}`
+          );
         }
 
         await tx.leadProductStructureMapping.create({
@@ -215,65 +306,65 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
             lead_id: lead.id,
             account_id: account.id,
             product_structure_id: productStructureId,
-            created_by
-          }
+            created_by,
+          },
         });
-        console.log("[DEBUG] ✅ Product structure mapping created for structure ID:", productStructureId);
+        logger.info("✅ Product structure mapping created", {
+          productStructureId,
+        });
       }
-  
+
       // 5. Documents (only if files are provided) with enhanced debugging
       let uploadedFiles: any[] = [];
-      
+
       if (files && files.length > 0) {
-        console.log(`[INFO] Processing ${files.length} document(s)`);
-        
+        logger.info(`Uploading ${files.length} document(s) to Wasabi`);
+
         for (const file of files) {
           const sanitizedFilename = sanitizeFilename(file.originalname);
           const fileKey = (file as any).key as string | undefined;
           const fileLocation = (file as any).location as string | undefined;
           const diskPath = (file as any).path as string | undefined;
           const fileExists = diskPath ? fs.existsSync(diskPath) : false;
-          console.log(`[DEBUG] File key: ${fileKey}, location: ${fileLocation}, disk exists: ${fileExists}`);
+          console.log(
+            `[DEBUG] File key: ${fileKey}, location: ${fileLocation}, disk exists: ${fileExists}`
+          );
 
-          // const resolvedDocType = getDocumentTypeFromFile(file) as unknown as string;
-          // let docTypeRecord = await tx.documentTypeMaster.findFirst({
-          //   where: { type: resolvedDocType, vendor_id }
-          // });
-          // if (!docTypeRecord) {
-          //   docTypeRecord = await tx.documentTypeMaster.create({
-          //     data: { type: resolvedDocType, vendor_id }
-          //   });
-          // }
-
-          const s3Key = `site-photos/${vendor_id}/${lead.id}/${Date.now()}-${sanitizedFilename}`;
+          const s3Key = `site-photos/${vendor_id}/${
+            lead.id
+          }/${Date.now()}-${sanitizedFilename}`;
 
           let docTypeRecord = await tx.documentTypeMaster.findFirst({
-            where: { vendor_id, tag: "Type 1" } // or tag: "site-photo" if you have a tag field
+            where: { vendor_id, tag: "Type 1" }, // or tag: "site-photo" if you have a tag field
           });
-          
+
           if (!docTypeRecord) {
-            throw new Error(`Document type "Type 1" not found for vendor ${vendor_id}`);
+            throw new Error(
+              `Document type "Type 1" not found for vendor ${vendor_id}`
+            );
           }
 
-          await wasabi.send(new PutObjectCommand({
-            Bucket: process.env.WASABI_BUCKET_NAME!,
-            Key: s3Key,
-            Body: file.buffer,           // <--- use Multer memory storage
-            ContentType: file.mimetype,
-          }));
-          
+          await wasabi.send(
+            new PutObjectCommand({
+              Bucket: process.env.WASABI_BUCKET_NAME!,
+              Key: s3Key,
+              Body: file.buffer, // <--- use Multer memory storage
+              ContentType: file.mimetype,
+            })
+          );
+
           const document = await tx.leadDocuments.create({
             data: {
               doc_og_name: file.originalname,
-              doc_sys_name: s3Key,  // store S3 path instead of raw filename
+              doc_sys_name: s3Key, // store S3 path instead of raw filename
               doc_type_id: docTypeRecord.id,
               vendor_id,
               lead_id: lead.id,
               account_id: account.id,
               created_by,
-            }
+            },
           });
-          
+
           uploadedFiles.push({
             id: document.id,
             type: 1,
@@ -282,31 +373,69 @@ export const createLeadService = async (payload: CreateLeadDTO, files: Express.M
             size: file.size,
           });
         }
-        
-        console.log("[DEBUG] Files uploaded to Wasabi and saved:", uploadedFiles.length);
+
+        console.log(
+          "[DEBUG] Files uploaded to Wasabi and saved:",
+          uploadedFiles.length
+        );
       } else {
-        console.log("[INFO] No documents to process - files are optional");
+        logger.info("No documents to process - files are optional");
       }
-  
-      return { 
-        lead, 
+
+      // 6. LeadStatusLogs entry
+      await tx.leadStatusLogs.create({
+        data: {
+          lead_id: lead.id,
+          account_id: account.id,
+          vendor_id,
+          status_id, // from openStatus.id earlier
+          created_by,
+          created_at: new Date(),
+        },
+      });
+      logger.info("✅ LeadStatusLogs entry created for initial stage", {
+        lead_id: lead.id,
+        status_id,
+      });
+
+      // 7. LeadDetailedLogs entry
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id,
+          lead_id: lead.id,
+          account_id: account.id,
+          action: "Lead has been created successfully",
+          action_type: "CREATE",
+          created_by,
+          created_at: new Date(),
+        },
+      });
+      logger.info("✅ LeadDetailedLogs entry created for lead creation", {
+        lead_id: lead.id,
+      });
+
+      // 8. Return final result
+      return {
+        lead,
         account,
         documentsProcessed: files ? files.length : 0,
-        uploadedFiles: uploadedFiles // Add this for debugging
+        uploadedFiles: uploadedFiles,
       };
-    },{
+    },
+    {
       timeout: 15000, // 15s instead of 5s
-    });
+    }
+  );
 };
 
 export const getLeadsByVendor = async (vendorId: number) => {
   return prisma.leadMaster.findMany({
-    where: { 
-      vendor_id: vendorId, 
+    where: {
+      vendor_id: vendorId,
       is_deleted: false,
       account: {
         is_deleted: false,
-      }
+      },
     },
     include: {
       account: true,
@@ -331,13 +460,18 @@ export const getLeadsByVendor = async (vendorId: number) => {
  * @param userId - User ID
  * @returns Promise<Lead[]>
  */
-export const getLeadsByVendorAndUser = async (vendorId: number, userId: number) => {
+export const getLeadsByVendorAndUser = async (
+  vendorId: number,
+  userId: number
+) => {
   try {
-    console.log(`[SERVICE] Fetching leads for vendor ${vendorId} and user ${userId}`);
+    console.log(
+      `[SERVICE] Fetching leads for vendor ${vendorId} and user ${userId}`
+    );
 
     // First, get user role information
     const userInfo = await getUserRole(userId, vendorId);
-    
+
     if (!userInfo.isValid) {
       throw new Error("User not found or inactive");
     }
@@ -358,32 +492,46 @@ export const getLeadsByVendorAndUser = async (vendorId: number, userId: number) 
     if (userType === "sales-executive") {
       // Sales executives can only see leads they created OR leads assigned to them
       whereCondition.OR = [
-        { created_by: userId },  // Leads created by them
-        { assign_to: userId },   // Leads assigned to them
+        { created_by: userId }, // Leads created by them
+        { assign_to: userId }, // Leads assigned to them
       ];
-      
-      console.log(`[SERVICE] Applied sales-executive filter for user ${userId}`);
+
+      console.log(
+        `[SERVICE] Applied sales-executive filter for user ${userId}`
+      );
     } else if (["admin", "super-admin"].includes(userType)) {
       // Admins and super-admins can see all leads for their vendor
       // No additional filtering needed beyond vendor_id
-      console.log(`[SERVICE] Admin/Super-admin access - showing all vendor leads`);
+      console.log(
+        `[SERVICE] Admin/Super-admin access - showing all vendor leads`
+      );
     } else {
       // Other roles (if any) - restrict to only their created leads
       whereCondition.created_by = userId;
-      console.log(`[SERVICE] Restricted access for role ${userType} - only created leads`);
+      console.log(
+        `[SERVICE] Restricted access for role ${userType} - only created leads`
+      );
     }
 
     const leads = await prisma.leadMaster.findMany({
       where: whereCondition,
       include: {
-        account: true,
         leadProductStructureMapping: {
-          include: { productStructure: true },
+          select: { productStructure: { select: { id: true, type: true } } },
         },
         productMappings: {
-          include: { productType: true },
+          select: { productType: { select: { id: true, type: true } } },
         },
-        documents: true,
+        documents: {
+          where: {
+            documentType: { tag: "Type 1", vendor_id: vendorId },
+          },
+          select: {
+            id: true,
+            doc_sys_name: true, // stored S3/Wasabi key
+            documentType: { select: { id: true, type: true, tag: true } },
+          },
+        },
         source: true,
         siteType: true,
         statusType: true,
@@ -415,10 +563,33 @@ export const getLeadsByVendorAndUser = async (vendorId: number, userId: number) 
       orderBy: { created_at: "desc" },
     });
 
-    console.log(`[SERVICE] Found ${leads.length} leads for user ${userId} (${userInfo.userType})`);
+    // ✅ Add signed URLs
+    const leadsWithSignedDocs = await Promise.all(
+      leads.map(async (lead) => {
+        const signedDocs = await Promise.all(
+          lead.documents.map(async (doc) => {
+            if (!doc.doc_sys_name) return doc;
+
+            try {
+              const signedUrl = await generateSignedUrl(
+                doc.doc_sys_name,
+                3600,
+                "inline"
+              ); // 1h
+              return { ...doc, signedUrl };
+            } catch (err) {
+              console.error(`[ERROR] Failed to sign doc ${doc.id}:`, err);
+              return { ...doc, signedUrl: null };
+            }
+          })
+        );
+
+        return { ...lead, documents: signedDocs };
+      })
+    );
 
     return {
-      leads,
+      leads: leadsWithSignedDocs,
       userInfo: {
         role: userType,
         canViewAllLeads: ["admin", "super-admin"].includes(userType),
@@ -432,98 +603,98 @@ export const getLeadsByVendorAndUser = async (vendorId: number, userId: number) 
 };
 
 // Service function to get a single lead by ID with role-based access control
-export const getLeadById = async (leadId: number, userId: number, vendorId: number) => {
+export const getLeadById = async (
+  leadId: number,
+  userId: number,
+  vendorId: number
+) => {
   try {
-    console.log(`[SERVICE] Fetching lead ${leadId} for user ${userId} in vendor ${vendorId}`);
+    console.log(
+      `[SERVICE] Fetching lead ${leadId} for user ${userId} in vendor ${vendorId}`
+    );
 
-    // First, get user role information
+    // 1️⃣ Get user role info
     const userInfo = await getUserRole(userId, vendorId);
-    
-    if (!userInfo.isValid) {
-      throw new Error("User not found or inactive");
-    }
+    if (!userInfo.isValid) throw new Error("User not found or inactive");
+    const userType = userInfo.userType?.toLowerCase() ?? "";
 
-    console.log(`[SERVICE] User role: ${userInfo.userType}`);
-
-    const userType = userInfo.userType ?? "";
-
-    // Base condition - lead must exist, belong to vendor, and not be deleted
+    // 2️⃣ Base condition (vendor-scoped)
     let whereCondition: any = {
       id: leadId,
       vendor_id: vendorId,
       is_deleted: false,
-      account: {
-        is_deleted: false,
-      },
+      account: { is_deleted: false },
     };
 
-    // Role-based filtering - same logic as the list API
-    if (userType === "sales-executive") {
-      // Sales executives can only see leads they created OR leads assigned to them
-      whereCondition.OR = [
-        { created_by: userId },  // Leads created by them
-        { assign_to: userId },   // Leads assigned to them
-      ];
-      
-      console.log(`[SERVICE] Applied sales-executive filter for user ${userId}`);
+    // 3️⃣ Access control
+    if (
+      userType === "sales-executive" ||
+      userType === "site-supervisor" ||
+      userType === "tech-check" ||
+      userType === "backend" ||
+      userType === "factory"
+    ) {
+      console.log("[SERVICE] Sales Executive – vendor scoped access granted");
     } else if (["admin", "super-admin"].includes(userType)) {
-      // Admins and super-admins can see all leads for their vendor
-      // No additional filtering needed beyond vendor_id and leadId
-      console.log(`[SERVICE] Admin/Super-admin access - can view any vendor lead`);
+      console.log("[SERVICE] Admin/Super-admin full access");
     } else {
-      // Other roles (if any) - restrict to only their created leads
-      whereCondition.created_by = userId;
-      console.log(`[SERVICE] Restricted access for role ${userType} - only created leads`);
+      console.log("[SERVICE] Limited role – assigned/created leads access");
+      whereCondition.OR = [{ created_by: userId }, { assigned_to: userId }];
     }
 
+    // 4️⃣ Fetch the lead
     const lead = await prisma.leadMaster.findFirst({
       where: whereCondition,
       include: {
-        account: true,
-        leadProductStructureMapping: {
-          include: { productStructure: true },
+        account: {
+          select: { id: true, name: true, email: true, contact_no: true },
         },
-        productMappings: {
-          include: { productType: true },
-        },
-        documents: true,
-        source: true,
         siteType: true,
+        source: true,
+        statusType: true,
+        productMappings: { include: { productType: true } },
+        leadProductStructureMapping: { include: { productStructure: true } },
+        documents: {
+          where: { deleted_at: null, documentType: { tag: "Type 1" } },
+        },
         createdBy: {
-          select: {
-            id: true,
-            user_name: true,
-            user_email: true,
-            user_contact: true,
-          },
+          select: { id: true, user_name: true, user_email: true },
         },
         assignedTo: {
-          select: {
-            id: true,
-            user_name: true,
-            user_email: true,
-            user_contact: true,
-          },
+          select: { id: true, user_name: true, user_email: true },
         },
         assignedBy: {
-          select: {
-            id: true,
-            user_name: true,
-            user_email: true,
-            user_contact: true,
-          },
+          select: { id: true, user_name: true, user_email: true },
         },
+        tasks: true,
       },
     });
 
     if (!lead) {
-      throw new Error("Lead not found or access denied");
+      throw new Error(`Lead ${leadId} not found for vendor ${vendorId}`);
     }
 
-    console.log(`[SERVICE] Found lead ${leadId} for user ${userId} (${userInfo.userType})`);
+    // ✅ Auto-unmark draft if completed
+    if (lead.is_draft && isLeadComplete(lead)) {
+      await prisma.leadMaster.update({
+        where: { id: lead.id },
+        data: { is_draft: false },
+      });
+      lead.is_draft = false;
+    }
+
+    // 5️⃣ Add signed URLs
+    const documentsWithUrls = await Promise.all(
+      lead.documents.map(async (doc) => {
+        const signedUrl = doc.doc_sys_name
+          ? await generateSignedUrl(doc.doc_sys_name, 3600, "inline")
+          : null;
+        return { ...doc, signedUrl };
+      })
+    );
 
     return {
-      lead,
+      lead: { ...lead, documents: documentsWithUrls },
       userInfo: {
         role: userType,
         canViewAllLeads: ["admin", "super-admin"].includes(userType),
@@ -540,7 +711,7 @@ export const softDeleteLead = async (leadId: number, deletedBy: number) => {
   // 1. Fetch the lead with its account
   const lead = await prisma.leadMaster.findUnique({
     where: { id: leadId },
-    include: { account: true }, // 👈 assumes LeadMaster has `account` relation
+    include: { account: true },
   });
 
   if (!lead) {
@@ -575,12 +746,32 @@ export const softDeleteLead = async (leadId: number, deletedBy: number) => {
       });
     }
 
+    // 3️⃣ Add log entry in LeadDetailedLogs
+    await tx.leadDetailedLogs.create({
+      data: {
+        vendor_id: lead.vendor_id,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: "Lead has been deleted successfully",
+        action_type: "DELETE",
+        created_by: deletedBy,
+        created_at: new Date(),
+      },
+    });
+
+    logger.info("✅ LeadDetailedLogs entry created for lead deletion", {
+      lead_id: lead.id,
+      deleted_by: deletedBy,
+    });
+
     return deletedLead;
   });
 };
 
-export const updateLeadService = async (leadId: number, payload: UpdateLeadDTO) => {
-  
+export const updateLeadService = async (
+  leadId: number,
+  payload: UpdateLeadDTO
+) => {
   const {
     firstname,
     lastname,
@@ -589,36 +780,27 @@ export const updateLeadService = async (leadId: number, payload: UpdateLeadDTO) 
     alt_contact_no,
     email,
     site_address,
+    site_map_link,
     site_type_id,
-    priority,
-    billing_name,
     source_id,
     archetech_name,
     designer_remark,
     updated_by,
     product_types = [],
-    product_structures = []
+    product_structures = [],
+    initial_site_measurement_date,
   } = payload;
-
-  // Validate priority only if provided
-  let leadPriority: LeadPriority | undefined;
-  if (priority !== undefined) {
-    leadPriority = priority.toLowerCase() as LeadPriority;
-    if (!Object.values(LeadPriority).includes(leadPriority)) {
-      throw new Error(`Invalid priority value: ${priority}. Must be one of: ${Object.values(LeadPriority).join(', ')}`);
-    }
-  }
 
   return prisma.$transaction(async (tx) => {
     // 1. Check if lead exists and get current data
     const existingLead = await tx.leadMaster.findFirst({
       where: {
         id: leadId,
-        is_deleted: false
+        is_deleted: false,
       },
       include: {
-        account: true
-      }
+        account: true,
+      },
     });
 
     if (!existingLead) {
@@ -634,24 +816,26 @@ export const updateLeadService = async (leadId: number, payload: UpdateLeadDTO) 
           contact_no,
           vendor_id,
           id: { not: leadId },
-          is_deleted: false
-        }
+          is_deleted: false,
+        },
       });
 
       if (existingContactLead) {
-        throw new Error(`Contact number ${contact_no} already exists for this vendor`);
+        throw new Error(
+          `Contact number ${contact_no} already exists for this vendor`
+        );
       }
     }
 
     // 3. Check for duplicate email (exclude current lead) - only if email is being updated
-    if (email !== undefined && email !== null && email.trim() !== '') {
+    if (email !== undefined && email !== null && email.trim() !== "") {
       const existingEmailLead = await tx.leadMaster.findFirst({
         where: {
           email,
           vendor_id,
           id: { not: leadId },
-          is_deleted: false
-        }
+          is_deleted: false,
+        },
       });
 
       if (existingEmailLead) {
@@ -665,179 +849,322 @@ export const updateLeadService = async (leadId: number, payload: UpdateLeadDTO) 
         where: {
           contact_no,
           vendor_id,
-          id: { not: existingLead.account_id },
-          is_deleted: false
-        }
+          id: { not: existingLead.account_id! },
+          is_deleted: false,
+        },
       });
 
       if (existingContactAccount) {
-        throw new Error(`Contact number ${contact_no} already exists in accounts for this vendor`);
+        throw new Error(
+          `Contact number ${contact_no} already exists in accounts for this vendor`
+        );
       }
     }
 
     // 5. Check for duplicate email in AccountMaster (exclude current account) - only if email is being updated
-    if (email !== undefined && email !== null && email.trim() !== '') {
+    if (email !== undefined && email !== null && email.trim() !== "") {
       const existingEmailAccount = await tx.accountMaster.findFirst({
         where: {
           email,
           vendor_id,
-          id: { not: existingLead.account_id },
-          is_deleted: false
-        }
+          id: { not: existingLead.account_id! },
+          is_deleted: false,
+        },
       });
 
       if (existingEmailAccount) {
-        throw new Error(`Email ${email} already exists in accounts for this vendor`);
+        throw new Error(
+          `Email ${email} already exists in accounts for this vendor`
+        );
       }
     }
 
     // 6. Build dynamic update data for AccountMaster
     const accountUpdateData: any = {
       updated_by,
-      updated_at: new Date()
+      updated_at: new Date(),
     };
 
     // Only update account fields if lead contact info is being updated
     if (firstname !== undefined || lastname !== undefined) {
-      accountUpdateData.name = `${firstname || existingLead.firstname} ${lastname || existingLead.lastname}`;
+      accountUpdateData.name = `${firstname || existingLead.firstname} ${
+        lastname || existingLead.lastname
+      }`;
     }
-    if (country_code !== undefined) accountUpdateData.country_code = country_code;
+    if (country_code !== undefined)
+      accountUpdateData.country_code = country_code;
     if (contact_no !== undefined) accountUpdateData.contact_no = contact_no;
-    if (alt_contact_no !== undefined) accountUpdateData.alt_contact_no = alt_contact_no;
+    if (alt_contact_no !== undefined)
+      accountUpdateData.alt_contact_no = alt_contact_no;
     if (email !== undefined) accountUpdateData.email = email;
 
     const updatedAccount = await tx.accountMaster.update({
-      where: { id: existingLead.account_id },
-      data: accountUpdateData
+      where: { id: existingLead.account_id! },
+      data: accountUpdateData,
     });
 
     // 7. Build dynamic update data for LeadMaster
     const leadUpdateData: any = {
       updated_by,
-      updated_at: new Date()
+      updated_at: new Date(),
     };
+
+    if (initial_site_measurement_date !== undefined) {
+      const dateValue = new Date(initial_site_measurement_date);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0); // normalize to start of day
+
+      if (dateValue < today) {
+        throw new Error(
+          `Invalid initial_site_measurement_date: ${initial_site_measurement_date}. Date must be today or a future date.`
+        );
+      }
+
+      leadUpdateData.initial_site_measurement_date = dateValue;
+    }
+
+    // ✅ Add site_map_link update
+    if (site_map_link !== undefined) {
+      leadUpdateData.site_map_link = site_map_link;
+    }
 
     // Only include fields that are actually being updated
     if (firstname !== undefined) leadUpdateData.firstname = firstname;
     if (lastname !== undefined) leadUpdateData.lastname = lastname;
     if (country_code !== undefined) leadUpdateData.country_code = country_code;
     if (contact_no !== undefined) leadUpdateData.contact_no = contact_no;
-    if (alt_contact_no !== undefined) leadUpdateData.alt_contact_no = alt_contact_no;
+    if (alt_contact_no !== undefined)
+      leadUpdateData.alt_contact_no = alt_contact_no;
     if (email !== undefined) leadUpdateData.email = email;
     if (site_address !== undefined) leadUpdateData.site_address = site_address;
     if (site_type_id !== undefined) leadUpdateData.site_type_id = site_type_id;
-    if (priority !== undefined) leadUpdateData.priority = leadPriority;
-    if (billing_name !== undefined) leadUpdateData.billing_name = billing_name;
     if (source_id !== undefined) leadUpdateData.source_id = source_id;
-    if (archetech_name !== undefined) leadUpdateData.archetech_name = archetech_name;
-    if (designer_remark !== undefined) leadUpdateData.designer_remark = designer_remark;
+    if (archetech_name !== undefined)
+      leadUpdateData.archetech_name = archetech_name;
+    if (designer_remark !== undefined)
+      leadUpdateData.designer_remark = designer_remark;
 
     const updatedLead = await tx.leadMaster.update({
       where: { id: leadId },
-      data: leadUpdateData
+      data: leadUpdateData,
     });
 
     // 8. Handle product_types updates (only if provided)
     if (product_types !== undefined) {
       console.log("[DEBUG] Updating product types for lead ID:", leadId);
-      
+
       // Delete existing product type mappings
       await tx.leadProductMapping.deleteMany({
         where: {
           lead_id: leadId,
-          vendor_id
-        }
+          vendor_id,
+        },
       });
 
       // Create new mappings
       for (const productTypeId of product_types) {
         console.log("[DEBUG] Processing product type ID:", productTypeId);
-        
+
         // Validate that the product type exists and belongs to the vendor
         const productType = await tx.productTypeMaster.findFirst({
-          where: { 
-            id: productTypeId, 
-            vendor_id 
-          }
+          where: {
+            id: productTypeId,
+            vendor_id,
+          },
         });
 
         if (!productType) {
-          throw new Error(`Product type with ID ${productTypeId} not found for vendor ${vendor_id}`);
+          throw new Error(
+            `Product type with ID ${productTypeId} not found for vendor ${vendor_id}`
+          );
         }
 
         await tx.leadProductMapping.create({
           data: {
             vendor_id,
             lead_id: leadId,
-            account_id: existingLead.account_id,
+            account_id: existingLead.account_id!,
             product_type_id: productTypeId,
-            created_by: updated_by
-          }
+            created_by: updated_by,
+          },
         });
-        console.log("[DEBUG] ✅ Product mapping created for type ID:", productTypeId);
+        console.log(
+          "[DEBUG] ✅ Product mapping created for type ID:",
+          productTypeId
+        );
       }
     }
 
     // 9. Handle product_structures updates (only if provided)
     if (product_structures !== undefined) {
       console.log("[DEBUG] Updating product structures for lead ID:", leadId);
-      
+
       // Delete existing product structure mappings
       await tx.leadProductStructureMapping.deleteMany({
         where: {
           lead_id: leadId,
-          vendor_id
-        }
+          vendor_id,
+        },
       });
 
       // Create new mappings
       for (const productStructureId of product_structures) {
-        console.log("[DEBUG] Processing product structure ID:", productStructureId);
-        
+        console.log(
+          "[DEBUG] Processing product structure ID:",
+          productStructureId
+        );
+
         // Validate that the product structure exists and belongs to the vendor
         const structure = await tx.productStructure.findFirst({
-          where: { 
-            id: productStructureId, 
-            vendor_id 
-          }
+          where: {
+            id: productStructureId,
+            vendor_id,
+          },
         });
 
         if (!structure) {
-          throw new Error(`Product structure with ID ${productStructureId} not found for vendor ${vendor_id}`);
+          throw new Error(
+            `Product structure with ID ${productStructureId} not found for vendor ${vendor_id}`
+          );
         }
 
         await tx.leadProductStructureMapping.create({
           data: {
             vendor_id,
             lead_id: leadId,
-            account_id: existingLead.account_id,
+            account_id: existingLead.account_id!,
             product_structure_id: productStructureId,
-            created_by: updated_by
-          }
+            created_by: updated_by,
+          },
         });
-        console.log("[DEBUG] ✅ Product structure mapping created for structure ID:", productStructureId);
+        console.log(
+          "[DEBUG] ✅ Product structure mapping created for structure ID:",
+          productStructureId
+        );
       }
     }
+
+    // 10. LeadDetailedLogs entry (audit trail)
+    const changes: string[] = [];
+    const fromValues: string[] = [];
+    const toValues: string[] = [];
+
+    // Helper to compare and collect changes
+    const collectChange = (label: string, oldVal: any, newVal: any) => {
+      if (newVal !== undefined && newVal !== oldVal) {
+        changes.push(label);
+        fromValues.push(oldVal ?? "null");
+        toValues.push(newVal ?? "null");
+      }
+    };
+
+    // Compare important fields
+    collectChange(
+      "Name",
+      `${existingLead.firstname} ${existingLead.lastname}`,
+      `${updatedLead.firstname} ${updatedLead.lastname}`
+    );
+    collectChange("Email", existingLead.email, updatedLead.email);
+    collectChange(
+      "Contact Number",
+      existingLead.contact_no,
+      updatedLead.contact_no
+    );
+    collectChange(
+      "Alternate Contact Number",
+      existingLead.alt_contact_no,
+      updatedLead.alt_contact_no
+    );
+    collectChange(
+      "Site Address",
+      existingLead.site_address,
+      updatedLead.site_address
+    );
+    collectChange(
+      "Site Map Link",
+      existingLead.site_map_link,
+      updatedLead.site_map_link
+    );
+    collectChange(
+      "Architect Name",
+      existingLead.archetech_name,
+      updatedLead.archetech_name
+    );
+    collectChange(
+      "Designer Remark",
+      existingLead.designer_remark,
+      updatedLead.designer_remark
+    );
+    collectChange(
+      "Initial Site Measurement Date",
+      existingLead.initial_site_measurement_date?.toISOString(),
+      updatedLead.initial_site_measurement_date?.toISOString()
+    );
+
+    // Helper to join list with commas and "and" before the last item
+    const joinWithAnd = (arr: string[]): string => {
+      if (arr.length === 1) return arr[0];
+      if (arr.length === 2) return `${arr[0]} and ${arr[1]}`;
+      return `${arr.slice(0, -1).join(", ")} and ${arr[arr.length - 1]}`;
+    };
+
+    // Build dynamic message
+    let actionMessage = "Lead has been updated.";
+    if (changes.length > 0) {
+      const fieldList = joinWithAnd(changes);
+      const fromList = joinWithAnd(fromValues.map((v) => `"${v}"`));
+      const toList = joinWithAnd(toValues.map((v) => `"${v}"`));
+
+      actionMessage = `${fieldList} ${
+        changes.length > 1 ? "have" : "has"
+      } been updated from ${fromList} to ${toList}.`;
+    }
+
+    // Insert into LeadDetailedLogs
+    await tx.leadDetailedLogs.create({
+      data: {
+        vendor_id,
+        lead_id: updatedLead.id,
+        account_id: updatedAccount.id,
+        action: actionMessage,
+        action_type: "UPDATE",
+        created_by: updated_by,
+        created_at: new Date(),
+      },
+    });
+
+    logger.info("✅ LeadDetailedLogs entry created for lead update", {
+      lead_id: updatedLead.id,
+      actionMessage,
+    });
 
     console.log("[INFO] Lead updated successfully:", {
       leadId,
       accountId: updatedAccount.id,
       productTypesCount: product_types.length,
-      productStructuresCount: product_structures.length
+      productStructuresCount: product_structures.length,
     });
 
-    return { 
-      lead: updatedLead, 
+    return {
+      lead: updatedLead,
       account: updatedAccount,
-      productTypesUpdated: product_types !== undefined ? product_types.length : 'not updated',
-      productStructuresUpdated: product_structures !== undefined ? product_structures.length : 'not updated'
+      productTypesUpdated:
+        product_types !== undefined ? product_types.length : "not updated",
+      productStructuresUpdated:
+        product_structures !== undefined
+          ? product_structures.length
+          : "not updated",
     };
   });
 };
 
-export const getSalesExecutivesByVendor = async (vendorId: number): Promise<SalesExecutiveData[]> => {
+export const getSalesExecutivesByVendor = async (
+  vendorId: number
+): Promise<SalesExecutiveData[]> => {
   try {
-    console.log(`[SERVICE] Fetching sales executives for vendor ID: ${vendorId}`);
+    console.log(
+      `[SERVICE] Fetching sales executives for vendor ID: ${vendorId}`
+    );
 
     // First, find the user type ID for 'sales-executive'
     const salesExecutiveType = await prisma.userTypeMaster.findFirst({
@@ -854,7 +1181,9 @@ export const getSalesExecutivesByVendor = async (vendorId: number): Promise<Sale
       return [];
     }
 
-    console.log(`[SERVICE] Found sales executive type ID: ${salesExecutiveType.id}`);
+    console.log(
+      `[SERVICE] Found sales executive type ID: ${salesExecutiveType.id}`
+    );
 
     // Fetch all users with sales-executive role for the specified vendor
     const salesExecutives = await prisma.userMaster.findMany({
@@ -876,32 +1205,112 @@ export const getSalesExecutivesByVendor = async (vendorId: number): Promise<Sale
     console.log(`[SERVICE] Found ${salesExecutives.length} sales executives`);
 
     // Transform the data to match our interface
-    const transformedData: SalesExecutiveData[] = salesExecutives.map((executive) => ({
-      id: executive.id,
-      vendor_id: executive.vendor_id,
-      user_name: executive.user_name,
-      user_contact: executive.user_contact,
-      user_email: executive.user_email,
-      user_timezone: executive.user_timezone,
-      status: executive.status,
-      created_at: executive.created_at,
-      updated_at: executive.updated_at,
-      user_type: {
-        id: executive.user_type.id,
-        user_type: executive.user_type.user_type,
-      },
-      documents: executive.documents.map((doc) => ({
-        id: doc.id,
-        document_name: doc.document_name,
-        document_number: doc.document_number,
-        filename: doc.filename,
-      })),
-    }));
+    const transformedData: SalesExecutiveData[] = salesExecutives.map(
+      (executive) => ({
+        id: executive.id,
+        vendor_id: executive.vendor_id,
+        user_name: executive.user_name,
+        user_contact: executive.user_contact,
+        user_email: executive.user_email,
+        user_timezone: executive.user_timezone,
+        status: executive.status,
+        created_at: executive.created_at,
+        updated_at: executive.updated_at,
+        user_type: {
+          id: executive.user_type.id,
+          user_type: executive.user_type.user_type,
+        },
+        documents: executive.documents.map((doc) => ({
+          id: doc.id,
+          document_name: doc.document_name,
+          document_number: doc.document_number,
+          filename: doc.filename,
+        })),
+      })
+    );
 
     return transformedData;
   } catch (error: any) {
     console.error("[SERVICE] Error fetching sales executives:", error);
     throw new Error(`Failed to fetch sales executives: ${error.message}`);
+  }
+};
+
+export const getSiteSupervisorByVendor = async (
+  vendorId: number
+): Promise<SiteSupervisorData[]> => {
+  try {
+    console.log(
+      `[SERVICE] Fetching Site Supervisor for vendor ID: ${vendorId}`
+    );
+
+    // First, find the user type ID for 'site-supervisor'
+    const SiteSupervisorType = await prisma.userTypeMaster.findFirst({
+      where: {
+        user_type: {
+          equals: "site-supervisor",
+          mode: "insensitive", // Case insensitive search
+        },
+      },
+    });
+
+    if (!SiteSupervisorType) {
+      console.log("[SERVICE] Site Supervisor user type not found");
+      return [];
+    }
+
+    console.log(
+      `[SERVICE] Found Site Supervisor type ID: ${SiteSupervisorType.id}`
+    );
+
+    // Fetch all users with sales-executive role for the specified vendor
+    const siteSupervisor = await prisma.userMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        user_type_id: SiteSupervisorType.id,
+        // Optionally filter only active users
+        status: "active",
+      },
+      include: {
+        user_type: true,
+        documents: true,
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+
+    console.log(`[SERVICE] Found ${siteSupervisor.length} Site Supervisors`);
+
+    // Transform the data to match our interface
+    const transformedData: SalesExecutiveData[] = siteSupervisor.map(
+      (supervisor) => ({
+        id: supervisor.id,
+        vendor_id: supervisor.vendor_id,
+        user_name: supervisor.user_name,
+        user_contact: supervisor.user_contact,
+        user_email: supervisor.user_email,
+        user_timezone: supervisor.user_timezone,
+        status: supervisor.status,
+        created_at: supervisor.created_at,
+        updated_at: supervisor.updated_at,
+        user_type: {
+          id: supervisor.user_type.id,
+          user_type: supervisor.user_type.user_type,
+        },
+        documents: supervisor.documents.map((doc) => ({
+          id: doc.id,
+          document_name: doc.document_name,
+          document_number: doc.document_number,
+          filename: doc.filename,
+        })),
+      })
+    );
+
+    return transformedData;
+  } catch (error: any) {
+    console.error("[SERVICE] Error fetching Site Supervisors:", error);
+    throw new Error(`Failed to fetch Site Supervisors: ${error.message}`);
   }
 };
 
@@ -916,7 +1325,9 @@ export const getSalesExecutiveById = async (
   userId: number
 ): Promise<SalesExecutiveData | null> => {
   try {
-    console.log(`[SERVICE] Fetching sales executive ID: ${userId} for vendor: ${vendorId}`);
+    console.log(
+      `[SERVICE] Fetching sales executive ID: ${userId} for vendor: ${vendorId}`
+    );
 
     // First, find the user type ID for 'sales-executive'
     const salesExecutiveType = await prisma.userTypeMaster.findFirst({
@@ -996,7 +1407,9 @@ export const assignLeadToUser = async (
   try {
     console.log(`[SERVICE] Starting lead assignment process`);
     console.log(`[SERVICE] Lead ID: ${leadId}, Vendor ID: ${vendorId}`);
-    console.log(`[SERVICE] Assign to: ${payload.assign_to}, Assign by: ${payload.assign_by}`);
+    console.log(
+      `[SERVICE] Assign to: ${payload.assign_to}, Assign by: ${payload.assign_by}`
+    );
 
     // Step 1: Validate admin user (assign_by)
     const adminUser = await validateAdminUser(payload.assign_by, vendorId);
@@ -1005,32 +1418,42 @@ export const assignLeadToUser = async (
     }
 
     // Step 2: Validate sales executive user (assign_to)
-    const salesExecutiveUser = await validateSalesExecutiveUser(payload.assign_to, vendorId);
+    const salesExecutiveUser = await validateSalesExecutiveUser(
+      payload.assign_to,
+      vendorId
+    );
     if (!salesExecutiveUser) {
       throw new Error("Invalid sales executive user or user is not active");
     }
 
     // Step 3: Validate lead ownership
-    const isValidLead = await validateLeadOwnership(leadId, vendorId);
-    if (!isValidLead) {
+    const lead = await prisma.leadMaster.findUnique({
+      where: { id: leadId },
+      include: { account: true },
+    });
+
+    if (!lead || lead.vendor_id !== vendorId) {
       throw new Error("Lead not found or doesn't belong to this vendor");
     }
 
     // Step 4: Check if lead is already assigned to the same user
-    const currentLead = await prisma.leadMaster.findUnique({
-      where: { id: leadId },
-      select: { assign_to: true, firstname: true, lastname: true },
-    });
+    const previousAssignee =
+      lead.assign_to !== null
+        ? await prisma.userMaster.findUnique({
+            where: { id: lead.assign_to },
+            select: { user_name: true },
+          })
+        : null;
 
-    if (currentLead?.assign_to === payload.assign_to) {
-      throw new Error(`Lead is already assigned to ${salesExecutiveUser.user_name}`);
+    if (lead.assign_to === payload.assign_to) {
+      throw new Error(
+        `Lead is already assigned to ${salesExecutiveUser.user_name}`
+      );
     }
 
     // Step 5: Update the lead assignment
     const updatedLead = await prisma.leadMaster.update({
-      where: {
-        id: leadId,
-      },
+      where: { id: leadId },
       data: {
         assign_to: payload.assign_to,
         assigned_by: payload.assign_by,
@@ -1050,22 +1473,50 @@ export const assignLeadToUser = async (
     });
 
     console.log(`[SERVICE] Lead assignment successful`);
-    console.log(`[SERVICE] Lead ${leadId} assigned to ${salesExecutiveUser.user_name} by ${adminUser.user_name}`);
+    console.log(
+      `[SERVICE] Lead ${leadId} assigned to ${salesExecutiveUser.user_name} by ${adminUser.user_name}`
+    );
 
-    // Step 6: Prepare response data
+    // Step 6: Insert LeadDetailedLogs entry (Audit Trail)
+    const oldAssigneeName = previousAssignee?.user_name ?? "Unassigned";
+    const newAssigneeName = salesExecutiveUser.user_name;
+
+    const actionMessage =
+      oldAssigneeName === "Unassigned"
+        ? `Lead has been assigned to ${newAssigneeName}.`
+        : `Lead has been reassigned from ${oldAssigneeName} to ${newAssigneeName}.`;
+
+    await prisma.leadDetailedLogs.create({
+      data: {
+        vendor_id: vendorId,
+        lead_id: lead.id,
+        account_id: lead.account?.id!,
+        action: actionMessage,
+        action_type: "UPDATE",
+        created_by: payload.assign_by,
+        created_at: new Date(),
+      },
+    });
+
+    logger.info("✅ LeadDetailedLogs entry created for lead assignment", {
+      lead_id: lead.id,
+      actionMessage,
+    });
+
+    // Step 7: Prepare response data
     const result: LeadAssignmentResult = {
       lead: updatedLead,
       assignedTo: {
         id: salesExecutiveUser.id,
         user_name: salesExecutiveUser.user_name,
-        user_contact: "", // Will be fetched separately if needed
-        user_email: "", // Will be fetched separately if needed
+        user_contact: "",
+        user_email: "",
       },
       assignedBy: {
         id: adminUser.id,
         user_name: adminUser.user_name,
-        user_contact: "", // Will be fetched separately if needed
-        user_email: "", // Will be fetched separately if needed
+        user_contact: "",
+        user_email: "",
       },
     };
 
@@ -1096,4 +1547,278 @@ export const assignLeadToUser = async (
     console.error("[SERVICE] Error assigning lead:", error);
     throw error;
   }
+};
+
+export const editTaskISMService = async (payload: EditTaskISMInput) => {
+  const { error, value } = editTaskISMSchema.validate(payload);
+  if (error) {
+    throw new Error(
+      `Validation failed: ${error.details.map((d) => d.message).join(", ")}`
+    );
+  }
+
+  const {
+    lead_id,
+    task_id,
+    task_type,
+    due_date,
+    remark,
+    assignee_user_id,
+    updated_by,
+    status,
+    closed_at,
+    closed_by,
+  } = value;
+
+  return prisma.$transaction(async (tx) => {
+    // 1️⃣ Validate task existence
+    const task = await tx.userLeadTask.findFirst({
+      where: { id: task_id, lead_id },
+      include: {
+        lead: {
+          select: {
+            vendor_id: true,
+            account_id: true,
+          },
+        },
+      },
+    });
+
+    if (!task) throw new Error(`Task ${task_id} not found for lead ${lead_id}`);
+
+    const vendor_id = task.lead.vendor_id;
+    const account_id = task.lead.account_id;
+
+    const updateData: any = {
+      updated_by,
+      updated_at: new Date(),
+    };
+
+    if (task_type !== undefined) updateData.task_type = task_type;
+    if (due_date !== undefined) updateData.due_date = new Date(due_date);
+    if (remark !== undefined) updateData.remark = remark;
+    if (status !== undefined) updateData.status = status;
+    if (closed_at !== undefined) updateData.closed_at = new Date(closed_at);
+
+    // 2️⃣ Validate assignee (if changed)
+    if (assignee_user_id !== undefined) {
+      const assignee = await tx.userMaster.findUnique({
+        where: { id: assignee_user_id },
+        select: { vendor_id: true },
+      });
+      if (!assignee || assignee.vendor_id !== vendor_id) {
+        throw new Error(
+          `Assignee ${assignee_user_id} does not belong to vendor ${vendor_id}`
+        );
+      }
+
+      updateData.user_id = assignee_user_id;
+    }
+
+    // 3️⃣ Validate closer (if changed)
+    if (closed_by !== undefined) {
+      const closer = await tx.userMaster.findUnique({
+        where: { id: closed_by },
+        select: { vendor_id: true },
+      });
+
+      if (!closer || closer.vendor_id !== vendor_id) {
+        throw new Error(
+          `Closed_by user ${closed_by} does not belong to vendor ${vendor_id}`
+        );
+      }
+
+      updateData.closed_by = closed_by;
+    }
+
+    // 4️⃣ Update the task
+    const updatedTask = await tx.userLeadTask.update({
+      where: { id: task_id },
+      data: updateData,
+    });
+
+    // 5️⃣ Prepare LeadDetailedLogs entry
+    let actionMessage = "";
+
+    // Case 1️⃣ - Reschedule (new due_date + remark)
+    if (due_date && remark) {
+      const formattedDate = new Date(due_date).toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
+      actionMessage = `Lead's Follow-up has been rescheduled on ${formattedDate}.`;
+    }
+
+    // Case 2️⃣ - Completed
+    if (status === "completed") {
+      actionMessage = "Lead's Follow-up has been marked as Completed.";
+    }
+
+    // Case 3️⃣ - Cancelled
+    if (status === "cancelled") {
+      actionMessage = "Lead's Follow-up has been marked as Cancelled.";
+    }
+
+    // ✅ Append remark if present
+    if (remark && remark.trim() !== "") {
+      actionMessage += ` — Remark: ${remark.trim()}`;
+    }
+
+    // 6️⃣ Insert into LeadDetailedLogs (if applicable)
+    if (actionMessage) {
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id,
+          lead_id,
+          account_id: account_id!,
+          action: actionMessage,
+          action_type: "UPDATE",
+          created_by: updated_by,
+          created_at: new Date(),
+        },
+      });
+
+      logger.info("✅ LeadDetailedLogs entry created for task update", {
+        lead_id,
+        task_id,
+        actionMessage,
+      });
+    }
+
+    logger.info("[SERVICE] editTaskISM completed", {
+      task_id,
+      lead_id,
+      updated_by,
+    });
+
+    return updatedTask;
+  });
+};
+
+export const verifyUserTokenService = async (token: string) => {
+  const vendorToken = await prisma.vendorTokens.findUnique({
+    where: { token },
+    include: {
+      vendor: {
+        select: {
+          // id: true,
+          vendor_name: true,
+          primary_contact_name: true,
+          primary_contact_number: true,
+          primary_contact_email: true,
+        },
+      },
+    },
+  });
+
+  if (!vendorToken) {
+    throw new Error("Invalid token");
+  }
+
+  if (new Date(vendorToken.expiry_date) < new Date()) {
+    throw new Error("Token expired");
+  }
+
+  return vendorToken.vendor;
+};
+
+export const getLeadLogsWithDocuments = async (params: {
+  lead_id: number;
+  vendor_id: number;
+  limit?: number;
+  cursor?: number;
+}) => {
+  const { lead_id, vendor_id, limit = 10, cursor } = params;
+
+  const logs = await prisma.leadDetailedLogs.findMany({
+    where: { lead_id, vendor_id },
+    include: {
+      user: {
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+        },
+      },
+      docLogs: {
+        include: {
+          doc: {
+            select: {
+              id: true,
+              doc_sys_name: true,
+              doc_og_name: true,
+            },
+          },
+        },
+      },
+    },
+    orderBy: { id: "desc" }, // stable chronological order
+    take: limit + 1, // fetch one extra record to check "hasNextPage"
+    ...(cursor && { cursor: { id: cursor }, skip: 1 }), // skip cursor itself
+  });
+
+  const hasMore = logs.length > limit;
+  const data = hasMore ? logs.slice(0, limit) : logs;
+
+  // Generate signed URLs efficiently in parallel
+  const formattedLogs = await Promise.all(
+    data.map(async (log) => {
+      const docs = await Promise.all(
+        log.docLogs.map(async (docLog) => {
+          const doc = docLog.doc;
+          const signedUrl = await generateSignedUrl(
+            doc.doc_sys_name,
+            3600,
+            "inline"
+          );
+          return {
+            id: doc.id,
+            original_name: doc.doc_og_name,
+            signedUrl,
+          };
+        })
+      );
+
+      return {
+        id: log.id,
+        action: log.action,
+        action_type: log.action_type,
+        created_at: log.created_at,
+        created_by: {
+          id: log.user.id,
+          name: log.user.user_name,
+          email: log.user.user_email,
+        },
+        docs,
+      };
+    })
+  );
+
+  return {
+    data: formattedLogs,
+    meta: {
+      hasMore,
+      nextCursor: hasMore ? data[data.length - 1].id : null,
+      count: formattedLogs.length,
+    },
+  };
+};
+
+export const getClientRequiredCompletionDate = async (
+  vendorId: number,
+  leadId: number
+): Promise<Date | null> => {
+  const lead = await prisma.leadMaster.findFirst({
+    where: {
+      id: leadId,
+      vendor_id: vendorId,
+      is_deleted: false,
+    },
+    select: {
+      client_required_order_login_complition_date: true,
+    },
+  });
+
+  return lead?.client_required_order_login_complition_date || null;
 };

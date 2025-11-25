@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "SiteReadiness" ALTER COLUMN "value" DROP NOT NULL,
+ALTER COLUMN "value" DROP DEFAULT;

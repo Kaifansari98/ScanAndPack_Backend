@@ -2,23 +2,45 @@ import express from 'express';
 import { router } from './routes';
 import path from 'path';
 import cors from 'cors';
+import logger from './utils/logger';
+import { requestLogger, errorLogger } from './middlewares/requestLogger';
 
 export const app = express();
 
 const allowedOrigins = [
+  'https://shambhala.furnixcrm.com',
+  'https://cadbid.com',
   'http://localhost:3000',
-  'https://your-production-frontend.com'
+  'http://localhost:5173', 
 ];
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); // allow REST clients, Postman, etc.
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      logger.warn(`❌ Blocked by CORS: ${origin}`);
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "X-Requested-With",
+      "Accept",
+      "Origin",
+    ],
   })
 );
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// ✅ Increase request size limits (fixes “CORS” caused by 413 Payload Too Large)
+app.use(express.json({ limit: '200mb' }));
+app.use(express.urlencoded({ extended: true, limit: '200mb' }));
+
+app.use(requestLogger);
 
 // ✅ Serve static assets (e.g., PDFs, images, etc.) from /assets
 app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
@@ -31,3 +53,5 @@ app.get('/', (_req, res) => {
 
 // ✅ /api test route
 app.use('/api', router);
+
+app.use(errorLogger);

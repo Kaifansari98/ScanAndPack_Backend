@@ -6,6 +6,19 @@ import wasabi from "../utils/wasabiClient";
 
 const bucketName = process.env.WASABI_BUCKET_NAME || "vloq-furnix";
 
+// 🔒 Ensure env variable exists
+const MAX_FILE_SIZE_MB = process.env.MAX_FILE_SIZE_MB;
+if (!MAX_FILE_SIZE_MB) {
+  throw new Error("❌ Missing environment variable: MAX_FILE_SIZE_MB");
+}
+
+const MAX_FILE_SIZE = parseInt(MAX_FILE_SIZE_MB, 10) * 1024 * 1024; // Convert MB → bytes
+
+// ✅ shared limits object
+const fileLimits = {
+  fileSize: MAX_FILE_SIZE,
+};
+
 const storage = multerS3({
   s3: wasabi,
   bucket: bucketName,
@@ -26,9 +39,46 @@ const storage = multerS3({
 
 export const upload = multer({
   storage: multer.memoryStorage(), // ✅ keep file in memory, don't auto-upload
-  limits: {
-    fileSize: parseInt(process.env.MAX_FILE_SIZE_MB || "5") * 1024 * 1024, // default 5MB
+  limits: fileLimits,
+  fileFilter: (req, file, cb) => {
+    const allowedMimeTypes = [
+      // Images
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/gif",
+      "image/webp",
+
+      // PDF & ZIP
+      "application/pdf",
+      "application/zip",
+      "application/x-zip-compressed",
+
+      // Videos
+      "video/mp4",
+      "video/mpeg",
+      "video/ogg",
+      "video/webm",
+      "video/x-msvideo", // AVI
+      "video/quicktime", // MOV
+      "video/x-matroska", // MKV
+    ];
+
+    if (allowedMimeTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(
+        new Error(
+          `Only image files and PDFs and ZIP archives are allowed! Received: ${file.mimetype}`
+        )
+      );
+    }
   },
+});
+
+export const uploadFinalMeasurement = multer({
+  storage: multer.memoryStorage(), // ✅ keep file in memory, don't auto-upload
+  limits: fileLimits,
   fileFilter: (req, file, cb) => {
     const allowedMimeTypes = [
       "image/jpeg",
@@ -40,7 +90,180 @@ export const upload = multer({
     if (allowedMimeTypes.includes(file.mimetype)) {
       cb(null, true);
     } else {
-      cb(new Error(`Only image files and PDFs are allowed! Received: ${file.mimetype}`));
+      cb(
+        new Error(
+          `Only image files and PDFs are allowed! Received: ${file.mimetype}`
+        )
+      );
     }
+  },
+});
+
+export const uploadClientApproval = multer({
+  storage: multer.memoryStorage(), // ✅ keep file in memory, don't auto-upload
+  limits: fileLimits,
+  fileFilter: (req, file, cb) => {
+    const allowedMimeTypes = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/gif",
+    ];
+    if (allowedMimeTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error(`Only image files are allowed! Received: ${file.mimetype}`));
+    }
+  },
+});
+
+export const uploadClientDocumentation = multer({
+  storage: multer.memoryStorage(), // ✅ keep file in memory
+  limits: fileLimits,
+  fileFilter: (req, file, cb) => {
+    const allowedMimeTypes = [
+      // Images
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+
+      // PDF
+      "application/pdf",
+
+      // Word
+      "application/msword", // .doc
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .docx
+
+      // PowerPoint
+      "application/vnd.ms-powerpoint", // .ppt
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation", // .pptx
+    ];
+
+    const allowedExtensions = [".pyo", ".zip"]; // ✅ custom extension
+
+    const ext = file.originalname
+      .slice(file.originalname.lastIndexOf("."))
+      .toLowerCase();
+
+    if (
+      allowedMimeTypes.includes(file.mimetype) ||
+      allowedExtensions.includes(ext)
+    ) {
+      cb(null, true);
+    } else {
+      cb(
+        new Error(
+          `Only .ppt, .pptx, .pdf, .jpg, .jpeg, .png, .doc, .docx, .pyo files are allowed! Received: ${file.originalname} (${file.mimetype})`
+        )
+      );
+    }
+  },
+});
+
+export const uploadDesigns = multer({
+  storage: multer.memoryStorage(),
+  limits: { ...fileLimits, files: 10 },
+  fileFilter: (req, file, cb) => {
+    // ✅ Allowed formats: CAD + PDF
+    const allowedExtensions = [
+      ".pdf", // ⬅️ added
+      ".pyo",
+      ".pytha", // custom
+      ".dwg",
+      ".dxf",
+      ".stl",
+      ".step",
+      ".stp",
+      ".iges",
+      ".igs",
+      ".3ds",
+      ".obj",
+      ".skp",
+      ".sldprt",
+      ".sldasm",
+      ".prt",
+      ".catpart",
+      ".catproduct",
+      ".zip",
+    ];
+
+    const ext = path.extname(file.originalname).toLowerCase();
+
+    if (allowedExtensions.includes(ext)) {
+      cb(null, true);
+    } else {
+      cb(
+        new Error(
+          `Only design files are allowed! Supported extensions: ${allowedExtensions.join(
+            ", "
+          )}. Received: ${ext}`
+        )
+      );
+    }
+  },
+});
+
+export const uploadProductionFiles = multer({
+  storage: multer.memoryStorage(),
+  limits: { ...fileLimits, files: 10 },
+  fileFilter: (req, file, cb) => {
+    // ✅ Allowed formats: CAD + PDF
+    const allowedExtensions = [
+      ".pdf", // ⬅️ added
+      ".pyo",
+      ".pytha", // custom
+      ".dwg",
+      ".dxf",
+      ".stl",
+      ".step",
+      ".stp",
+      ".iges",
+      ".igs",
+      ".3ds",
+      ".obj",
+      ".skp",
+      ".sldprt",
+      ".sldasm",
+      ".prt",
+      ".catpart",
+      ".catproduct",
+      ".zip",
+    ];
+
+    const ext = path.extname(file.originalname).toLowerCase();
+
+    if (allowedExtensions.includes(ext)) {
+      cb(null, true);
+    } else {
+      cb(
+        new Error(
+          `Only design files are allowed! Supported extensions: ${allowedExtensions.join(
+            ", "
+          )}. Received: ${ext}`
+        )
+      );
+    }
+  },
+});
+
+export const uploadMeetingDocs = multer({
+  storage: multer.memoryStorage(),
+  limits: { files: 10 },
+  fileFilter: (req, file, cb) => {
+    const allowed = [".pdf", ".jpg", ".jpeg", ".png", ".doc", ".docx"];
+    const ext = path.extname(file.originalname).toLowerCase();
+    if (allowed.includes(ext)) cb(null, true);
+    else cb(new Error(`Unsupported file type: ${ext}`));
+  },
+});
+
+export const uploadToWasabiUnderInstallationDayWiseDocs = multer({
+  storage: multer.memoryStorage(),
+  limits: { files: 10 },
+  fileFilter: (req, file, cb) => {
+    const allowed = [".pdf", ".jpg", ".jpeg", ".png", ".doc", ".docx", ".mp4"];
+    const ext = path.extname(file.originalname).toLowerCase();
+    if (allowed.includes(ext)) cb(null, true);
+    else cb(new Error(`Unsupported file type: ${ext}`));
   },
 });

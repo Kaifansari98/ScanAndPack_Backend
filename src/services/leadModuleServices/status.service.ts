@@ -19,6 +19,7 @@ export const addStatusType = async (payload: StatusTypeInput): Promise<StatusTyp
     const statusType = await prisma.statusTypeMaster.create({
         data: {
             type: payload.type,
+            tag: payload.tag,
             vendor_id: payload.vendor_id,
         }
     });
