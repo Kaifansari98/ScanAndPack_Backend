@@ -10,3 +10,5 @@ services:
     environment:
       NODE_ENV: production
     command: ["node", "dist/server.js"]
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
