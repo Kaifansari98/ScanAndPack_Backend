@@ -23,7 +23,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           source: "./*"
-          target: "~/furnix-backend-staging"
+          target: "/var/www/furnixcrm/furnix-backend-staging"
 
       # -----------------------
       # SSH & Deploy
@@ -35,7 +35,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd ~/furnix-backend-staging
+            cd /var/www/furnixcrm/furnix-backend-staging
             docker compose down || true
             docker compose up -d --build
             docker image prune -f
