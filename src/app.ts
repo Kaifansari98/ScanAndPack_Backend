@@ -9,6 +9,7 @@ export const app = express();
 
 const allowedOrigins = [
   'https://shambhala.furnixcrm.com',
+  'https://vloq.furnixcrm.com',
   'https://cadbid.com',
   'http://localhost:3000',
   'http://localhost:5173', 
