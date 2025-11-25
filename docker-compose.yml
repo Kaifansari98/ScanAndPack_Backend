@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  furnix-backend:
+    build: .
+    container_name: furnix-backend
+    restart: always
+    ports:
+      - "7777:7777"
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+    command: ["node", "dist/server.js"]
