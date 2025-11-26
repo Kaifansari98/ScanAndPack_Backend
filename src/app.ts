@@ -4,8 +4,13 @@ import path from 'path';
 import cors from 'cors';
 import logger from './utils/logger';
 import { requestLogger, errorLogger } from './middlewares/requestLogger';
+import { connectRedis } from "./config/redis";
 
 export const app = express();
+
+(async () => {
+  await connectRedis();
+})();
 
 const allowedOrigins = [
   'https://shambhala.furnixcrm.com',

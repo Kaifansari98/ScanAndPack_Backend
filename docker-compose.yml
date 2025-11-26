@@ -9,6 +9,6 @@ services:
       - .env
     environment:
       NODE_ENV: production
-    command: ["node", "dist/server.js"]
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - "host.docker.internal:host-gateway"  # Important for Linux VPS
+    command: sh -c "npx prisma generate && node dist/server.js"

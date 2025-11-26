@@ -5,4 +5,6 @@ const router = Router();
 
 router.post('/create-user', userController.createUserController);
 
+router.post("/reset-password-admin", userController.masterResetPasswordController);
+
 export default router;

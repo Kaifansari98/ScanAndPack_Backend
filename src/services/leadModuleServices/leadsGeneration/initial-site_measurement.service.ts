@@ -22,6 +22,7 @@ import Joi from "joi";
 import logger from "../../../utils/logger";
 import { Prisma } from "@prisma/client";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
+import { cache } from "../../../utils/cache";
 
 // ----------------------
 // AssignTaskISM (standalone)
@@ -85,6 +86,25 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
       },
     });
 
+    // 3B) Create LeadUserMapping for ISM task assignment
+    await tx.leadUserMapping.create({
+      data: {
+        vendor_id: lead.vendor_id,
+        account_id: lead.account_id!,
+        lead_id: lead.id,
+        user_id: assignee_user_id,
+        type: "ISM",
+        status: "active",
+        created_by,
+      },
+    });
+
+    // 🧹 Invalidate Dashboard Task Cache (Sales Executive Dashboard)
+    await cache.del(
+      `performance:snapshot:${lead.vendor_id}:${assignee_user_id}`
+    );
+    await cache.del(`performance:snapshot:${lead.vendor_id}:${created_by}`);
+
     // 4) Flip status only if NOT "Follow Up"
     let updatedLead: {
       id: number;
@@ -112,6 +132,17 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
           account_id: true,
           vendor_id: true,
           status_id: true,
+        },
+      });
+      
+      await tx.leadStatusLogs.create({
+        data: {
+          lead_id: lead.id,
+          account_id: lead.account_id!,
+          vendor_id: lead.vendor_id,
+          status_id: updatedLead.status_id!, // new status
+          created_by,
+          created_at: new Date(),
         },
       });
     }
@@ -599,6 +630,26 @@ export class PaymentUploadService {
             });
           }
 
+          // 6B. Insert into LeadStatusLogs
+          if (statusFrom && statusTo) {
+            await tx.leadStatusLogs.create({
+              data: {
+                lead_id: data.lead_id,
+                account_id: data.account_id,
+                vendor_id: data.vendor_id,
+                status_id: statusTo.id,
+                created_by: data.created_by,
+                created_at: new Date(),
+              },
+            });
+
+            logger.info("📌 LeadStatusLogs entry added for ISM → Type 3", {
+              lead_id: data.lead_id,
+              from: statusFrom.id,
+              to: statusTo.id,
+            });
+          }
+
           // 7. Mark related userLeadTask as completed
           await tx.userLeadTask.updateMany({
             where: {
@@ -615,6 +666,25 @@ export class PaymentUploadService {
               updated_at: new Date(),
             },
           });
+
+          // 🧹 Redis Cache Invalidation — Sales Executive Dashboard
+          // Fetch all users who were assigned the ISM task
+          const ismAssignees = await tx.userLeadTask.findMany({
+            where: {
+              vendor_id: data.vendor_id,
+              lead_id: data.lead_id,
+              task_type: "Initial Site Measurement",
+            },
+            select: { user_id: true },
+          });
+
+          // Invalidate cache for each assignee
+          for (const t of ismAssignees) {
+            await cache.del(`dashboard:tasks:${data.vendor_id}:${t.user_id}`);
+          }
+
+          // Also invalidate for the user completing this stage
+          await cache.del(`dashboard:tasks:${data.vendor_id}:${data.user_id}`);
 
           // 8️⃣ Create LeadDetailedLogs + LeadDocumentLogs (Audit Trail)
           let actionMessage = "";

@@ -20,6 +20,7 @@ import {
 } from "../../../validations/leadValidation";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
+import { cache } from "../../../utils/cache";
 import Joi from "joi";
 import { generateLeadCode } from "../../../utils/generateLeadCode";
 
@@ -241,6 +242,9 @@ export const createLeadService = async (
           data: { ...mappingBase, user_id: assign_to },
         });
       }
+
+      // 🧹 Invalidate Performance Snapshot Cache for creator
+      await cache.del(`performance:snapshot:${vendor_id}:${created_by}`);
 
       if (payload.is_draft) {
         logger.info(
@@ -746,6 +750,28 @@ export const softDeleteLead = async (leadId: number, deletedBy: number) => {
       });
     }
 
+    // Fetch all users mapped to this lead (active mappings only)
+    const mappings = await tx.leadUserMapping.findMany({
+      where: {
+        lead_id: leadId,
+        status: "active",
+      },
+      select: { user_id: true, vendor_id: true },
+    });
+
+    // 2️⃣ Soft delete LeadUserMapping (set status = inactive)
+    await tx.leadUserMapping.updateMany({
+      where: {
+        lead_id: leadId,
+        status: "active",
+      },
+      data: {
+        status: "inactive",
+        updated_by: deletedBy,
+        updated_at: new Date(),
+      },
+    });
+
     // 3️⃣ Add log entry in LeadDetailedLogs
     await tx.leadDetailedLogs.create({
       data: {
@@ -763,6 +789,16 @@ export const softDeleteLead = async (leadId: number, deletedBy: number) => {
       lead_id: lead.id,
       deleted_by: deletedBy,
     });
+
+    // 🧹 Clear Performance Snapshot cache for all mapped users
+    for (const mapping of mappings) {
+      await cache.del(
+        `performance:snapshot:${mapping.vendor_id}:${mapping.user_id}`
+      );
+    }
+
+    // 🧹 Also clear for the user who deleted
+    await cache.del(`performance:snapshot:${lead.vendor_id}:${deletedBy}`);
 
     return deletedLead;
   });
@@ -1472,6 +1508,52 @@ export const assignLeadToUser = async (
       },
     });
 
+    // -------------------------------------------
+    // 6️⃣ LeadUserMapping Updates
+    // -------------------------------------------
+
+    const oldAssignee = lead.assign_to;
+
+    // If lead was previously assigned, deactivate their mapping
+    if (oldAssignee) {
+      await prisma.leadUserMapping.updateMany({
+        where: {
+          lead_id: leadId,
+          user_id: oldAssignee,
+          status: "active",
+        },
+        data: {
+          status: "inactive",
+          updated_by: payload.assign_by,
+          updated_at: new Date(),
+        },
+      });
+    }
+
+    // Insert new mapping for the new assignee
+    await prisma.leadUserMapping.create({
+      data: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: lead.account?.id!,
+        user_id: payload.assign_to,
+        type: "ISM",
+        status: "active",
+        created_by: payload.assign_by,
+      },
+    });
+
+    // Invalidate old assignee snapshot
+    if (oldAssignee) {
+      await cache.del(`performance:snapshot:${vendorId}:${oldAssignee}`);
+    }
+
+    // Invalidate new assignee snapshot
+    await cache.del(`performance:snapshot:${vendorId}:${payload.assign_to}`);
+
+    // Invalidate admin user’s snapshot (assign_by)
+    await cache.del(`performance:snapshot:${vendorId}:${payload.assign_by}`);
+
     console.log(`[SERVICE] Lead assignment successful`);
     console.log(
       `[SERVICE] Lead ${leadId} assigned to ${salesExecutiveUser.user_name} by ${adminUser.user_name}`
@@ -1636,6 +1718,30 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
       where: { id: task_id },
       data: updateData,
     });
+
+    // 🧹 Invalidate Dashboard Task Cache (Sales Executive Dashboard)
+    const oldUserId = task.user_id; // user before update
+    const newUserId = updatedTask.user_id; // user after update
+
+    // Old user dashboard refresh
+    await cache.del(`dashboard:tasks:${vendor_id}:${oldUserId}`);
+
+    // New user dashboard refresh (only if reassigned)
+    if (newUserId !== oldUserId) {
+      await cache.del(`dashboard:tasks:${vendor_id}:${newUserId}`);
+    }
+
+    // Updater dashboard refresh
+    await cache.del(`dashboard:tasks:${vendor_id}:${updated_by}`);
+
+    // If closed_by exists → refresh closer dashboard too
+    if (closed_by) {
+      await cache.del(`dashboard:tasks:${vendor_id}:${closed_by}`);
+    }
+    // If status completed but closed_by was auto-set by system
+    if (status === "completed" && !closed_by && updatedTask.closed_by) {
+      await cache.del(`dashboard:tasks:${vendor_id}:${updatedTask.closed_by}`);
+    }
 
     // 5️⃣ Prepare LeadDetailedLogs entry
     let actionMessage = "";

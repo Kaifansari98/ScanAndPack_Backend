@@ -279,6 +279,37 @@ export class BookingStageService {
           },
         });
 
+        response.supervisorAssigned = supervisor;
+
+        // -----------------------------
+        // ⭐ 6️⃣ LeadUserMapping ENTRY (NEW)
+        // -----------------------------
+        await tx.leadUserMapping.create({
+          data: {
+            vendor_id: data.vendor_id,
+            account_id: data.account_id,
+            lead_id: data.lead_id,
+            user_id: data.siteSupervisorId,
+            type: "ISM",
+            status: "active",
+            created_by: data.created_by,
+          },
+        });
+
+        // -----------------------------
+        // ⭐ 7️⃣ LeadStatusLogs (NEW)
+        // -----------------------------
+        await tx.leadStatusLogs.create({
+          data: {
+            lead_id: data.lead_id,
+            account_id: data.account_id,
+            vendor_id: data.vendor_id,
+            status_id: bookingStatusId,
+            created_by: data.created_by,
+            created_at: new Date(),
+          },
+        });
+
         // 6️⃣ Create audit trail (LeadDetailedLogs + LeadDocumentLogs)
         const docCount = response.documentsUploaded.length;
         const hasDocs = docCount > 0;

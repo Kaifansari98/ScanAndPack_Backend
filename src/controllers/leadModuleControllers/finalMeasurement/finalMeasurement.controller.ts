@@ -262,7 +262,7 @@ export class FinalMeasurementController {
   };
 
   public async assignTaskFM(req: Request, res: Response): Promise<Response> {
-    logger.info("[CONTROLLER] assignTaskISM called");
+    logger.info("[CONTROLLER] assignTaskFM called");
     try {
       const leadId = Number(req.params.leadId);
       const {
