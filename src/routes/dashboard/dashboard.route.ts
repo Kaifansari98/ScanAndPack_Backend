@@ -14,4 +14,6 @@ DashboardRouter.get(
   dashboardController.getPerformanceSnapshot
 );
 
+DashboardRouter.get("/lead-status-wise-counts", dashboardController.getLeadStatusWiseCounts);
+
 export default DashboardRouter;

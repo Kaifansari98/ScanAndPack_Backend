@@ -78,4 +78,35 @@ export class DashboardController {
       });
     }
   };
+
+  public getLeadStatusWiseCounts = async (req: Request, res: Response) => {
+    try {
+      const vendor_id = Number(req.query.vendor_id);
+      const user_id = req.query.user_id ? Number(req.query.user_id) : undefined;
+
+      if (!vendor_id) {
+        return res.status(400).json({
+          success: false,
+          message: "vendor_id is required",
+        });
+      }
+
+      const result = await dashboardService.getLeadStatusWiseCounts(
+        vendor_id,
+        user_id
+      );
+
+      return res.status(200).json({
+        success: true,
+        fromCache: result.fromCache,
+        mode: user_id ? "my_leads" : "overall_leads",
+        data: result.data,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  };
 }

@@ -10,6 +10,7 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import logger from "../../utils/logger";
 import { Prisma, SupervisorStatus } from "@prisma/client";
 import { isLeadComplete } from "../../validations/leadValidation";
+import { cache } from "../../utils/cache";
 
 export class BookingStageService {
   // Helper to avoid repeating include structure
@@ -309,6 +310,9 @@ export class BookingStageService {
             created_at: new Date(),
           },
         });
+
+        await cache.del(`performance:snapshot:${data.vendor_id}:${data.created_by}`);
+        await cache.del(`dashboard:tasks:${data.vendor_id}:${data.siteSupervisorId}`);
 
         // 6️⃣ Create audit trail (LeadDetailedLogs + LeadDocumentLogs)
         const docCount = response.documentsUploaded.length;
