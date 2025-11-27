@@ -37,8 +37,11 @@ import underInstallationStageRoutes from "./installation/under-installation/unde
 import miscRoutes from "./miscellaneousMaster.routes";
 import issueLogRoutes from "./issueLogRoutes";
 import finalHandoverStageRoutes from "./installation/final-handover/FinalHandoverStage.routes";
+import DashboardRouter from "./dashboard/dashboard.route";
 
 const router = Router();
+
+router.use("/dashboard", DashboardRouter);
 
 router.use("/vendors", vendorRoutes);
 router.use("/vendor-address", vendorAddressRoutes);

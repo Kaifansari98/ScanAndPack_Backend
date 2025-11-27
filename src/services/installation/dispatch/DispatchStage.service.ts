@@ -5,6 +5,7 @@ import {
   uploadToWasabiDispatchDocuments,
   uploadToWasabiPostDispatchDocuments,
 } from "../../../utils/wasabiClient";
+import { cache } from "../../../utils/cache";
 
 export class DispatchStageService {
   /** ✅ Fetch all leads with status = Type 14 (Dispatch Stage) */
@@ -502,6 +503,10 @@ export class DispatchStageService {
       },
     });
 
+    // 🧹 Clear Redis cache for dashboard tasks of this user
+    const redisKey = `dashboard:tasks:${vendorId}:${createdBy}`;
+    await cache.del(redisKey);
+
     return task;
   }
 
@@ -526,6 +531,10 @@ export class DispatchStageService {
         created_by: createdBy,
       },
     });
+
+    // 🧹 Clear Redis Cache for Sales Executive Dashboard
+    const redisKey = `dashboard:tasks:${vendorId}:${createdBy}`;
+    await cache.del(redisKey);
 
     return task;
   }

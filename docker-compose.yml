@@ -1,0 +1,14 @@
+services:
+  furnix-backend:
+    build: .
+    container_name: furnix-backend
+    restart: always
+    ports:
+      - "7778:7777"
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+    extra_hosts:
+      - "host.docker.internal:host-gateway"  # Important for Linux VPS
+    command: sh -c "npx prisma generate && node dist/server.js"
