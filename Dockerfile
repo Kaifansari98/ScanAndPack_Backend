@@ -13,6 +13,7 @@ COPY package.json pnpm-lock.yaml ./
 # Install all dependencies (including devDependencies for building)
 RUN pnpm install --frozen-lockfile
 
+COPY .env ./
 # Copy source code and prisma schema
 COPY . .
 
