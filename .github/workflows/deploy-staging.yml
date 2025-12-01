@@ -1,14 +1,13 @@
-name: Deploy Furnix Backend (STAGING)
+name: Deploy Furnixcrm Backend Staging
 
 on:
   push:
     branches:
-      - staging  # 🚀 ONLY runs on staging branch
+      - staging
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
