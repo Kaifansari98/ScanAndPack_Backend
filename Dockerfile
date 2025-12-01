@@ -26,7 +26,7 @@ RUN pnpm build
 # -------------------------
 # 2️⃣ Production Runtime Image
 # -------------------------
-FROM node:20-alpine AS prod
+FROM node:24-alpine AS prod
 WORKDIR /app
 
 RUN apk add --no-cache openssl

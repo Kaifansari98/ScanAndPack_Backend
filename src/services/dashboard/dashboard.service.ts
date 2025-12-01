@@ -35,6 +35,62 @@ const getDateRanges = () => {
   };
 };
 
+const getMonthFourRanges = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth();
+
+  const totalDays = new Date(year, month + 1, 0).getDate();
+  const bucketSize = Math.ceil(totalDays / 4); // 4 buckets
+
+  const weeks: { start: Date; end: Date }[] = [];
+
+  let day = 1;
+  for (let i = 0; i < 4; i++) {
+    const start = new Date(year, month, day, 0, 0, 0);
+    let endDay = Math.min(day + bucketSize - 1, totalDays);
+    const end = new Date(year, month, endDay, 23, 59, 59, 999);
+
+    weeks.push({ start, end });
+    day = endDay + 1;
+  }
+
+  return weeks;
+};
+
+const getWeekDayRanges = () => {
+  const now = new Date();
+  const monday = new Date(now);
+  monday.setDate(now.getDate() - now.getDay() + 1); // Monday
+
+  const week: { start: Date; end: Date }[] = [];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(monday);
+    d.setDate(monday.getDate() + i);
+
+    const start = new Date(d);
+    start.setHours(0, 0, 0, 0);
+
+    const end = new Date(d);
+    end.setHours(23, 59, 59, 999);
+
+    week.push({ start, end });
+  }
+  return week;
+};
+
+const getYearMonthRanges = () => {
+  const year = new Date().getFullYear();
+  const months: { start: Date; end: Date }[] = [];
+
+  for (let m = 0; m < 12; m++) {
+    const start = new Date(year, m, 1, 0, 0, 0);
+    const end = new Date(year, m + 1, 0, 23, 59, 59, 999);
+    months.push({ start, end });
+  }
+  return months;
+};
+
 export class DashboardService {
   // -------------------------------------------------------
   // 1️⃣ SALES EXECUTIVE TASK STATS (Today / Upcoming / Overdue)
@@ -130,9 +186,13 @@ export class DashboardService {
       ? { vendor_id, status: LeadUserStatus.active }
       : { vendor_id, user_id, status: LeadUserStatus.active };
 
-    const totalLeadsAssigned = await prisma.leadUserMapping.count({
-      where: assignedWhere,
-    });
+    const totalLeadsAssigned = (
+      await prisma.leadUserMapping.groupBy({
+        by: ["lead_id"],
+        where: assignedWhere,
+        _count: { lead_id: true }, // ensures unique lead_id per group
+      })
+    ).length;
 
     // -------------------------------------
     // COMPLETED LEADS (Type 17)
@@ -174,27 +234,92 @@ export class DashboardService {
       select: { id: true },
     });
 
-    let booked = { today: 0, week: 0, month: 0, year: 0, overall: 0 };
+    let bookedToday = 0;
+    let bookedThisWeek: number[] = [];
+    let bookedThisMonth: number[] = [];
+    let bookedThisYear: number[] = [];
+    let bookedOverall = 0;
+    let bookedThisWeekTotal = 0;
+    let bookedThisMonthTotal = 0;
+    let bookedThisYearTotal = 0;
 
     if (bookingStatus) {
-      const countByRange = (start: Date, end: Date) =>
-        prisma.leadStatusLogs.count({
+      // ---------- TODAY ----------
+      bookedToday = await prisma.leadStatusLogs.count({
+        where: {
+          vendor_id,
+          status_id: bookingStatus.id,
+          created_at: { gte: ranges.today.start, lte: ranges.today.end },
+        },
+      });
+
+      // ---------- WEEK (Mon–Sun as array) ----------
+      const weekRanges = getWeekDayRanges();
+      for (const r of weekRanges) {
+        const count = await prisma.leadStatusLogs.count({
           where: {
             vendor_id,
             status_id: bookingStatus.id,
-            created_at: { gte: start, lte: end },
+            created_at: { gte: r.start, lte: r.end },
           },
         });
+        bookedThisWeek.push(count);
+      }
 
-      booked = {
-        today: await countByRange(ranges.today.start, ranges.today.end),
-        week: await countByRange(ranges.week.start, ranges.week.end),
-        month: await countByRange(ranges.month.start, ranges.month.end),
-        year: await countByRange(ranges.year.start, ranges.year.end),
-        overall: await prisma.leadStatusLogs.count({
-          where: { vendor_id, status_id: bookingStatus.id },
-        }),
-      };
+      // ---------- MONTH (1–28/29/30/31 array) ----------
+      bookedThisMonth = [];
+      const monthRanges = getMonthFourRanges();
+
+      for (const r of monthRanges) {
+        const count = await prisma.leadStatusLogs.count({
+          where: {
+            vendor_id,
+            status_id: bookingStatus.id,
+            created_at: { gte: r.start, lte: r.end },
+          },
+        });
+        bookedThisMonth.push(count);
+      }
+      bookedThisMonthTotal = await prisma.leadStatusLogs.count({
+        where: {
+          vendor_id,
+          status_id: bookingStatus.id,
+          created_at: { gte: ranges.month.start, lte: ranges.month.end },
+        },
+      });
+
+      // ---------- YEAR (Jan–Dec array) ----------
+      const yearRanges = getYearMonthRanges();
+      for (const r of yearRanges) {
+        const count = await prisma.leadStatusLogs.count({
+          where: {
+            vendor_id,
+            status_id: bookingStatus.id,
+            created_at: { gte: r.start, lte: r.end },
+          },
+        });
+        bookedThisYear.push(count);
+      }
+      bookedThisYearTotal = await prisma.leadStatusLogs.count({
+        where: {
+          vendor_id,
+          status_id: bookingStatus.id,
+          created_at: { gte: ranges.year.start, lte: ranges.year.end },
+        },
+      });
+
+      // ---------- OVERALL ----------
+      bookedOverall = await prisma.leadStatusLogs.count({
+        where: { vendor_id, status_id: bookingStatus.id },
+      });
+
+      bookedThisWeekTotal = await prisma.leadStatusLogs.count({
+        where: {
+          vendor_id,
+          status_id: bookingStatus.id,
+          created_at: { gte: ranges.week.start, lte: ranges.week.end },
+        },
+      });
     }
 
     // -------------------------------------
@@ -205,7 +330,10 @@ export class DashboardService {
       select: { id: true },
     });
 
-    let bookingValue = { today: 0, week: 0, month: 0, year: 0, overall: 0 };
+    let bookingValue = { week: 0, month: 0, year: 0, overall: 0 };
+    let bookingValueThisWeekArray: number[] = [];
+    let bookingValueThisMonthArray: number[] = [];
+    let bookingValueThisYearArray: number[] = [];
 
     if (bookingType) {
       const sumByRange = (start: Date, end: Date) =>
@@ -218,19 +346,33 @@ export class DashboardService {
           _sum: { amount: true },
         });
 
+      const weekRanges = getWeekDayRanges();
+      bookingValueThisWeekArray = [];
+      for (const r of weekRanges) {
+        const res = await sumByRange(r.start, r.end);
+        bookingValueThisWeekArray.push(res._sum.amount || 0);
+      }
+
+      const monthRanges = getMonthFourRanges();
+      bookingValueThisMonthArray = [];
+      for (const r of monthRanges) {
+        const res = await sumByRange(r.start, r.end);
+        bookingValueThisMonthArray.push(res._sum.amount || 0);
+      }
+
+      const yearRanges = getYearMonthRanges();
+      bookingValueThisYearArray = [];
+      for (const r of yearRanges) {
+        const res = await sumByRange(r.start, r.end);
+        bookingValueThisYearArray.push(res._sum.amount || 0);
+      }
+
+      const sumArray = (arr: number[]) => arr.reduce((acc, v) => acc + v, 0);
+
       bookingValue = {
-        today:
-          (await sumByRange(ranges.today.start, ranges.today.end))._sum
-            .amount || 0,
-        week:
-          (await sumByRange(ranges.week.start, ranges.week.end))._sum.amount ||
-          0,
-        month:
-          (await sumByRange(ranges.month.start, ranges.month.end))._sum
-            .amount || 0,
-        year:
-          (await sumByRange(ranges.year.start, ranges.year.end))._sum.amount ||
-          0,
+        week: sumArray(bookingValueThisWeekArray),
+        month: sumArray(bookingValueThisMonthArray),
+        year: sumArray(bookingValueThisYearArray),
         overall:
           (
             await prisma.paymentInfo.aggregate({
@@ -256,27 +398,41 @@ export class DashboardService {
       totalCompletedLeads,
       totalPendingLeads,
 
-      bookedToday: booked.today,
-      bookedThisWeek: booked.week,
-      bookedThisMonth: booked.month,
-      bookedThisYear: booked.year,
-      bookedOverall: booked.overall,
+      bookedToday,
+      bookedThisWeek,
+      bookedThisMonth,
+      bookedThisYear,
+      bookedOverall,
+      bookedThisWeekTotal,
+      bookedThisMonthTotal,
+      bookedThisYearTotal,
 
-      bookingValueToday: bookingValue.today,
       bookingValueThisWeek: bookingValue.week,
       bookingValueThisMonth: bookingValue.month,
       bookingValueThisYear: bookingValue.year,
       bookingValueOverall: bookingValue.overall,
+      bookingValueThisWeekArray,
+      bookingValueThisMonthArray,
+      bookingValueThisYearArray,
 
       avgDaysToBooking,
     };
   }
 
-  private async calculateAvgDaysToBooking(
+  public async calculateAvgDaysToBooking(
     vendor_id: number,
     user_id: number,
-    isAdmin: boolean
+    isAdmin?: boolean
   ) {
+    // Compute isAdmin if not provided (e.g., when called externally)
+    if (isAdmin === undefined) {
+      const user = await prisma.userMaster.findUnique({
+        where: { id: user_id },
+        include: { user_type: true },
+      });
+      isAdmin = user?.user_type?.user_type?.toLowerCase() === "admin";
+    }
+
     // Fetch Status IDs (Type 1 = Open, Type 4 = Booking)
     const [openStatus, bookingStatus] = await Promise.all([
       prisma.statusTypeMaster.findFirst({
@@ -398,7 +554,7 @@ export class DashboardService {
       ? `lead-status-counts:${vendor_id}:${user_id}`
       : `lead-status-counts:${vendor_id}:overall`;
 
-    // 🔥 1) Try Redis
+    // 🔥 1) Redis
     const cached = await cache.get(cacheKey);
     if (cached) {
       return { fromCache: true, data: JSON.parse(cached as string) };

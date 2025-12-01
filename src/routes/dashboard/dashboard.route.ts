@@ -16,4 +16,9 @@ DashboardRouter.get(
 
 DashboardRouter.get("/lead-status-wise-counts", dashboardController.getLeadStatusWiseCounts);
 
+DashboardRouter.get(
+  "/avg-days-to-convert-lead-to-booking",
+  dashboardController.getAvgDaysToConvertLeadToBooking
+);
+
 export default DashboardRouter;

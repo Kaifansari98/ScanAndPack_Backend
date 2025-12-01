@@ -207,6 +207,8 @@ export class BookingStageController {
       const vendorId = parseInt(req.params.vendorId);
       const userId = req.query.userId ? Number(req.query.userId) : null;
       const tag = req.query.tag as string;
+      const page = parseInt((req.query.page as string) || "1");
+      const limit = parseInt((req.query.limit as string) || "10");
 
       if (!vendorId || !tag) {
         logger.warn("Missing vendorId or tag", { vendorId, tag });
@@ -228,11 +230,22 @@ export class BookingStageController {
         count: leads.length,
       });
 
+      const start = (page - 1) * limit;
+      const paginatedLeads = leads.slice(start, start + limit);
+      const totalPages = Math.ceil(count / limit);
+
       return res.status(200).json({
         success: true,
         message: `Leads with tag ${tag} fetched successfully`,
         count,
-        data: leads,
+        data: paginatedLeads,
+        pagination: {
+          currentPage: page,
+          totalPages,
+          totalRecords: count,
+          hasNext: page < totalPages,
+          hasPrev: page > 1,
+        },
       });
     } catch (error: any) {
       logger.error("[BookingStageController] getVendorLeadsByTag Error", {
@@ -279,6 +292,62 @@ export class BookingStageController {
       });
     } catch (error: any) {
       logger.error("[BookingStageController] getOpenLeads Error", {
+        error: error.message,
+        stack: error.stack,
+      });
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Something went wrong",
+      });
+    }
+  };
+
+  public getUniversalTableData = async (req: Request, res: Response) => {
+    try {
+      const vendorId = parseInt(req.params.vendorId);
+      const userId = Number(req.query.userId || req.body.userId);
+      const tag = (req.query.tag as string) || (req.body.tag as string);
+      const page = parseInt((req.query.page as string) || "1");
+      const limit = parseInt((req.query.limit as string) || "10");
+
+      if (!vendorId || !userId) {
+        logger.warn("Missing vendorId or userId", { vendorId, userId, tag });
+        return res.status(400).json({
+          success: false,
+          message: "Vendor ID and User ID are required",
+        });
+      }
+
+      const { leads, count } = await BookingStageService.getUniversalTableData(
+        vendorId,
+        userId,
+        tag,
+        page,
+        limit
+      );
+
+      logger.info("Fetched universal table data successfully", {
+        vendorId,
+        userId,
+        tag,
+        count,
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Universal table data fetched successfully",
+        count,
+        data: leads,
+        pagination: {
+          currentPage: page,
+          totalPages: Math.ceil(count / limit),
+          totalRecords: count,
+          hasNext: page * limit < count,
+          hasPrev: page > 1,
+        },
+      });
+    } catch (error: any) {
+      logger.error("[BookingStageController] getUniversalTableData Error", {
         error: error.message,
         stack: error.stack,
       });

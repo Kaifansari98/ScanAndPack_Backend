@@ -62,7 +62,7 @@ export class DashboardController {
       );
 
       // Store in cache (10 minutes)
-      await cache.set(redisKey, JSON.stringify(snapshot), 600);
+      await cache.set(redisKey, JSON.stringify(snapshot), 1);
 
       return res.status(200).json({
         success: true,
@@ -106,6 +106,39 @@ export class DashboardController {
       return res.status(500).json({
         success: false,
         message: error.message,
+      });
+    }
+  };
+
+  public getAvgDaysToConvertLeadToBooking = async (
+    req: Request,
+    res: Response
+  ) => {
+    try {
+      const vendor_id = Number(req.query.vendor_id);
+      const user_id = Number(req.query.user_id);
+
+      if (!vendor_id || !user_id) {
+        return res.status(400).json({
+          success: false,
+          message: "vendor_id and user_id are required",
+        });
+      }
+
+      const result = await dashboardService.calculateAvgDaysToBooking(
+        vendor_id,
+        user_id,
+        false
+      );
+
+      return res.status(200).json({
+        success: true,
+        data: result,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
       });
     }
   };
