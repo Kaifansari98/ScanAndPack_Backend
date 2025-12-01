@@ -20,7 +20,7 @@ jobs:
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
+          key: ${{ secrets.VPS_KEY }}
           source: "./*"
           target: "/var/www/furnixcrm/furnix-backend-staging"
 

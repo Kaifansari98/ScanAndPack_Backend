@@ -44,4 +44,4 @@ COPY --from=builder /app/prisma ./prisma
 # Internal port
 EXPOSE 7777
 
-CMD ["node", "dist/server.js"]
+CMD ["node", "dist/src/server.js"]
