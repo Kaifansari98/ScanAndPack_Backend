@@ -1,5 +1,5 @@
 import path from 'path';
-import { DocumentType } from '@prisma/client';
+import { DocumentType } from '../prisma/generated';
 
 export const getDocumentTypeFromFile = (file: Express.Multer.File): DocumentType => {
   // You can extend this logic based on file types, field names, etc.

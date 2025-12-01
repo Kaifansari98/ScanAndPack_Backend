@@ -7,7 +7,7 @@ import {
   generateSignedUrl,
   uploadToWasabClientApprovalDocumentation,
 } from "../../../utils/wasabiClient";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "../../../prisma/generated";
 
 export class ClientApprovalService {
   public async submitClientApproval(data: ClientApprovalDto) {

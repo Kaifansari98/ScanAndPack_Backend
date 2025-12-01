@@ -5,7 +5,7 @@ import {
   uploadToWasabiMeetingDocs,
 } from "../../../utils/wasabiClient";
 import { z } from "zod";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "../../../prisma/generated";
 
 const editDesignMeetingSchema = z.object({
   meetingId: z.number().int().positive(),

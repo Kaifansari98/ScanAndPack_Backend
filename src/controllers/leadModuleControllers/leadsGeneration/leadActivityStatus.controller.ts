@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { LeadActivityStatusService } from "../../../services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { ApiResponse } from "../../../utils/apiResponse";
-import { ActivityStatus } from "@prisma/client";
+import { ActivityStatus } from "../../../prisma/generated";
 import logger from "../../../utils/logger";
 
 export class LeadActivityStatusController {

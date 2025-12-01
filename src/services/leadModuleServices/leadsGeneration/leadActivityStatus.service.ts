@@ -1,5 +1,5 @@
 import { prisma } from "../../../prisma/client";
-import { ActivityStatus } from "@prisma/client";
+import { ActivityStatus } from "../../../prisma/generated";
 import logger from "../../../utils/logger";
 import { cache } from "../../../utils/cache";
 

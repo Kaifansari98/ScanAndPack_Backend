@@ -5,7 +5,7 @@ import { sanitizeFilename } from "../../../utils/sanitizeFilename";
 import Joi = require("joi");
 import logger from "../../../utils/logger";
 import { AssignTaskFMInput } from "../../../types/leadModule.types";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "../../../prisma/generated";
 import { cache } from "../../../utils/cache";
 
 interface FinalMeasurementDto {

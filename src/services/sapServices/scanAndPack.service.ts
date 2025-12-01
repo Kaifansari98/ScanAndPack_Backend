@@ -1,5 +1,5 @@
-import {prisma} from '../../prisma/client';
-import { ItemStatus } from '@prisma/client'; // assuming status enum is defined there
+import { prisma } from '../../prisma/client';
+import { ItemStatus } from '../../prisma/generated'; // assuming status enum is defined there
 
 interface ScanPackPayload {
   project_id: number;

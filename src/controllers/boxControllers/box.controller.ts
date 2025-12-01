@@ -6,7 +6,7 @@ import {
   softDeleteBoxWithScanItems,
   getGroupedItemInfoByBoxId
  } from '../../services/boxServices/box.service';
-import { BoxStatus } from '@prisma/client';
+import { BoxStatus } from '../../prisma/generated';
 
 export const createBox = async (req: Request, res: Response) => {
   try {

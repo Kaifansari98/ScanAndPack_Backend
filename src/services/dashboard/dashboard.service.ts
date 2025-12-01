@@ -1,6 +1,6 @@
 import { prisma } from "../../prisma/client";
 import { cache } from "../../utils/cache";
-import { LeadUserStatus, LeadTaskStatus } from "@prisma/client";
+import { LeadUserStatus, LeadTaskStatus } from "../../prisma/generated";
 
 // Utility → Date ranges
 const getDateRanges = () => {

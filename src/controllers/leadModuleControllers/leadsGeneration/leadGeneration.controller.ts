@@ -905,10 +905,7 @@ export class LeadController {
 
       // This would require a separate table to track assignment history
       // For now, just return current assignment info
-      const prisma = require("@prisma/client").PrismaClient;
-      const db = new prisma();
-
-      const lead = await db.leadMaster.findFirst({
+      const lead = await prisma.leadMaster.findFirst({
         where: {
           id: leadId,
           vendor_id: vendorId,

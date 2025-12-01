@@ -1,4 +1,4 @@
-import { ActivityStatus } from "@prisma/client";
+import { ActivityStatus } from "../../prisma/generated";
 import { prisma } from "../../prisma/client";
 import logger from "../../utils/logger";
 

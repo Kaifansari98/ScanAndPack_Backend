@@ -20,7 +20,7 @@ import {
 import { prisma } from "../../../prisma/client";
 import Joi from "joi";
 import logger from "../../../utils/logger";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "../../../prisma/generated";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { cache } from "../../../utils/cache";
 

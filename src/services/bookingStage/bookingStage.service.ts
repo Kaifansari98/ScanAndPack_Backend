@@ -8,7 +8,7 @@ import wasabi, { generateSignedUrl } from "../../utils/wasabiClient";
 import { sanitizeFilename } from "../../utils/sanitizeFilename";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import logger from "../../utils/logger";
-import { Prisma, SupervisorStatus } from "@prisma/client";
+import { Prisma, SupervisorStatus } from "../../prisma/generated";
 import { isLeadComplete } from "../../validations/leadValidation";
 import { cache } from "../../utils/cache";
 
