@@ -54,7 +54,7 @@ app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
 
 // ✅ Root test route
 app.get('/', (_req, res) => {
-  res.send('✅ Root is working exactly like i wanted it to be!');
+  res.send('✅ Staging is working exactly like i wanted it to be!');
 });
 
 // ✅ /api test route
