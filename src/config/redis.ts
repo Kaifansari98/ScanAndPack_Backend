@@ -1,11 +1,7 @@
 import { createClient } from "redis";
 
 export const redis = createClient({
-  url: process.env.REDIS_URL || "redis://127.0.0.1:6379",
-  socket: {
-    host: "127.0.0.1",
-    port: 6379
-  }
+  url: process.env.REDIS_URL || "redis://redis:6379",
 });
 
 export const connectRedis = async () => {
