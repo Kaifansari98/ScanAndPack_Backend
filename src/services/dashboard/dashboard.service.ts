@@ -1,6 +1,10 @@
 import { prisma } from "../../prisma/client";
 import { cache } from "../../utils/cache";
-import { LeadUserStatus, LeadTaskStatus } from "../../prisma/generated";
+import {
+  LeadUserStatus,
+  LeadTaskStatus,
+  ActivityStatus,
+} from "../../prisma/generated";
 
 // Utility → Date ranges
 const getDateRanges = () => {
@@ -323,68 +327,66 @@ export class DashboardService {
     }
 
     // -------------------------------------
-    // BOOKING VALUE (Payment Type 2)
+    // BOOKING VALUE (LeadMaster.total_project_amount)
     // -------------------------------------
-    const bookingType = await prisma.paymentTypeMaster.findFirst({
-      where: { vendor_id, tag: "Type 2" },
-      select: { id: true },
-    });
-
     let bookingValue = { week: 0, month: 0, year: 0, overall: 0 };
     let bookingValueThisWeekArray: number[] = [];
     let bookingValueThisMonthArray: number[] = [];
     let bookingValueThisYearArray: number[] = [];
 
-    if (bookingType) {
-      const sumByRange = (start: Date, end: Date) =>
-        prisma.paymentInfo.aggregate({
-          where: {
-            vendor_id,
-            payment_type_id: bookingType.id,
-            payment_date: { gte: start, lte: end },
-          },
-          _sum: { amount: true },
-        });
-
-      const weekRanges = getWeekDayRanges();
-      bookingValueThisWeekArray = [];
-      for (const r of weekRanges) {
-        const res = await sumByRange(r.start, r.end);
-        bookingValueThisWeekArray.push(res._sum.amount || 0);
-      }
-
-      const monthRanges = getMonthFourRanges();
-      bookingValueThisMonthArray = [];
-      for (const r of monthRanges) {
-        const res = await sumByRange(r.start, r.end);
-        bookingValueThisMonthArray.push(res._sum.amount || 0);
-      }
-
-      const yearRanges = getYearMonthRanges();
-      bookingValueThisYearArray = [];
-      for (const r of yearRanges) {
-        const res = await sumByRange(r.start, r.end);
-        bookingValueThisYearArray.push(res._sum.amount || 0);
-      }
-
-      const sumArray = (arr: number[]) => arr.reduce((acc, v) => acc + v, 0);
-
-      bookingValue = {
-        week: sumArray(bookingValueThisWeekArray),
-        month: sumArray(bookingValueThisMonthArray),
-        year: sumArray(bookingValueThisYearArray),
-        overall:
-          (
-            await prisma.paymentInfo.aggregate({
-              where: {
-                vendor_id,
-                payment_type_id: bookingType.id,
-              },
-              _sum: { amount: true },
-            })
-          )._sum.amount || 0,
+    const leadValueFilter: any = { vendor_id };
+    if (!isAdmin) {
+      leadValueFilter.userMappings = {
+        some: { user_id, status: LeadUserStatus.active },
       };
     }
+
+    const sumByRange = (start: Date, end: Date) =>
+      prisma.leadMaster.aggregate({
+        where: {
+          ...leadValueFilter,
+          created_at: { gte: start, lte: end },
+        },
+        _sum: { total_project_amount: true },
+      });
+
+    const weekRanges = getWeekDayRanges();
+    bookingValueThisWeekArray = [];
+    for (const r of weekRanges) {
+      const res = await sumByRange(r.start, r.end);
+      bookingValueThisWeekArray.push(res._sum.total_project_amount || 0);
+    }
+
+    const monthRanges = getMonthFourRanges();
+    bookingValueThisMonthArray = [];
+    for (const r of monthRanges) {
+      const res = await sumByRange(r.start, r.end);
+      bookingValueThisMonthArray.push(res._sum.total_project_amount || 0);
+    }
+
+    const yearRanges = getYearMonthRanges();
+    bookingValueThisYearArray = [];
+    for (const r of yearRanges) {
+      const res = await sumByRange(r.start, r.end);
+      bookingValueThisYearArray.push(res._sum.total_project_amount || 0);
+    }
+
+    const sumArray = (arr: number[]) => arr.reduce((acc, v) => acc + v, 0);
+
+    bookingValue = {
+      week: sumArray(bookingValueThisWeekArray),
+      month: sumArray(bookingValueThisMonthArray),
+      year: sumArray(bookingValueThisYearArray),
+      overall:
+        (
+          await prisma.leadMaster.aggregate({
+            where: {
+              ...leadValueFilter,
+            },
+            _sum: { total_project_amount: true },
+          })
+        )._sum.total_project_amount || 0,
+    };
 
     const avgDaysToBooking = await this.calculateAvgDaysToBooking(
       vendor_id,
@@ -612,5 +614,343 @@ export class DashboardService {
     await cache.set(cacheKey, JSON.stringify(result), 600);
 
     return { fromCache: false, data: result };
+  }
+
+  // ----------------------------------------------------------------
+  // Admin Dashboard : Projects Overview (lead counts by created_at)
+  // ----------------------------------------------------------------
+  public async getProjectsOverview(vendor_id: number) {
+    const ranges = getDateRanges();
+    const baseWhere = { vendor_id, is_deleted: false };
+
+    const weekRanges = getWeekDayRanges();
+    const thisWeekArray: number[] = [];
+    for (const r of weekRanges) {
+      const count = await prisma.leadMaster.count({
+        where: {
+          ...baseWhere,
+          created_at: { gte: r.start, lte: r.end },
+        },
+      });
+      thisWeekArray.push(count);
+    }
+
+    const monthRanges = getMonthFourRanges();
+    const thisMonthArray: number[] = [];
+    for (const r of monthRanges) {
+      const count = await prisma.leadMaster.count({
+        where: {
+          ...baseWhere,
+          created_at: { gte: r.start, lte: r.end },
+        },
+      });
+      thisMonthArray.push(count);
+    }
+
+    const yearRanges = getYearMonthRanges();
+    const thisYearArray: number[] = [];
+    for (const r of yearRanges) {
+      const count = await prisma.leadMaster.count({
+        where: {
+          ...baseWhere,
+          created_at: { gte: r.start, lte: r.end },
+        },
+      });
+      thisYearArray.push(count);
+    }
+
+    const sum = (arr: number[]) => arr.reduce((acc, v) => acc + v, 0);
+    const overall = await prisma.leadMaster.count({ where: baseWhere });
+
+    return {
+      thisWeekArray,
+      thisMonthArray,
+      thisYearArray,
+      thisWeekTotal: sum(thisWeekArray),
+      thisMonthTotal: sum(thisMonthArray),
+      thisYearTotal: sum(thisYearArray),
+      overall,
+    };
+  }
+
+  // ----------------------------------------------------------------
+  // Admin Dashboard : Total Revenue (sum total_project_amount)
+  // ----------------------------------------------------------------
+  public async getTotalRevenue(vendor_id: number) {
+    const baseWhere = {
+      vendor_id,
+      is_deleted: false,
+      activity_status: {
+        notIn: [
+          ActivityStatus.lostApproval,
+          ActivityStatus.lost,
+          ActivityStatus.onHold,
+        ],
+      },
+    };
+
+    const sumByRange = (range?: { start: Date; end: Date }) =>
+      prisma.leadMaster.aggregate({
+        where: {
+          ...baseWhere,
+          ...(range && { created_at: { gte: range.start, lte: range.end } }),
+        },
+        _sum: { total_project_amount: true },
+      });
+
+    const weekRanges = getWeekDayRanges();
+    const thisWeekArray: number[] = [];
+    for (const r of weekRanges) {
+      const res = await sumByRange(r);
+      thisWeekArray.push(res._sum?.total_project_amount || 0);
+    }
+
+    const monthRanges = getMonthFourRanges();
+    const thisMonthArray: number[] = [];
+    for (const r of monthRanges) {
+      const res = await sumByRange(r);
+      thisMonthArray.push(res._sum?.total_project_amount || 0);
+    }
+
+    const yearRanges = getYearMonthRanges();
+    const thisYearArray: number[] = [];
+    for (const r of yearRanges) {
+      const res = await sumByRange(r);
+      thisYearArray.push(res._sum?.total_project_amount || 0);
+    }
+
+    const sum = (arr: number[]) => arr.reduce((acc, v) => acc + v, 0);
+    const overall =
+      (await sumByRange())._sum?.total_project_amount || 0;
+
+    return {
+      thisWeekArray,
+      thisMonthArray,
+      thisYearArray,
+      thisWeekTotal: sum(thisWeekArray),
+      thisMonthTotal: sum(thisMonthArray),
+      thisYearTotal: sum(thisYearArray),
+      overall,
+    };
+  }
+
+  // -------------------------------------------------------
+  // Sales Executive : Stage counts for selected tags
+  // -------------------------------------------------------
+  public async getSalesExecutiveStageCounts(
+    vendor_id: number,
+    user_id: number
+  ) {
+    const targetTags = [
+      "Type 1", // Open Lead
+      "Type 2", // ISM Lead
+      "Type 3", // Designing
+      "Type 4", // Booking Done
+      "Type 6", // Client Documentation
+      "Type 7", // Client Approval
+      "Type 8", // Tech Check
+      "Type 11", // Ready to Dispatch
+      "Type 13", // Dispatch Planning
+    ];
+
+    const statuses = await prisma.statusTypeMaster.findMany({
+      where: { vendor_id, tag: { in: targetTags } },
+      select: { id: true, tag: true },
+    });
+
+    const statusMap = new Map<string, number>();
+    statuses.forEach((s) => statusMap.set(s.tag, s.id));
+
+    const userFilter = {
+      userMappings: {
+        some: {
+          user_id,
+          status: LeadUserStatus.active,
+        },
+      },
+    };
+
+    const countForTag = async (tag: string) => {
+      const status_id = statusMap.get(tag);
+      if (!status_id) return 0;
+      return prisma.leadMaster.count({
+        where: {
+          vendor_id,
+          is_deleted: false,
+          status_id,
+          ...userFilter,
+        },
+      });
+    };
+
+    const [
+      openLead,
+      ismLead,
+      designing,
+      bookingDone,
+      clientDocumentation,
+      clientApproval,
+      techCheck,
+      readyToDispatch,
+      dispatchPlanning,
+    ] = await Promise.all([
+      countForTag("Type 1"),
+      countForTag("Type 2"),
+      countForTag("Type 3"),
+      countForTag("Type 4"),
+      countForTag("Type 6"),
+      countForTag("Type 7"),
+      countForTag("Type 8"),
+      countForTag("Type 11"),
+      countForTag("Type 13"),
+    ]);
+
+    return {
+      openLead,
+      ismLead,
+      designing,
+      bookingDone,
+      clientDocumentation,
+      clientApproval,
+      techCheck,
+      readyToDispatch,
+      dispatchPlanning,
+    };
+  }
+
+  // -------------------------------------------------------
+  // Sales Executive : Stage leads (minimal fields)
+  // -------------------------------------------------------
+  public async getSalesExecutiveStageLeads(
+    vendor_id: number,
+    user_id: number
+  ) {
+    const targetTags = [
+      { tag: "Type 1", key: "openLead" },
+      { tag: "Type 2", key: "ismLead" },
+      { tag: "Type 3", key: "designing" },
+      { tag: "Type 4", key: "bookingDone" },
+      { tag: "Type 6", key: "clientDocumentation" },
+      { tag: "Type 7", key: "clientApproval" },
+      { tag: "Type 8", key: "techCheck" },
+      { tag: "Type 11", key: "readyToDispatch" },
+      { tag: "Type 13", key: "dispatchPlanning" },
+    ] as const;
+
+    const statuses = await prisma.statusTypeMaster.findMany({
+      where: {
+        vendor_id,
+        tag: { in: targetTags.map((t) => t.tag) },
+      },
+      select: { id: true, tag: true },
+    });
+
+    const statusMap = new Map<string, number>();
+    statuses.forEach((s) => statusMap.set(s.tag, s.id));
+
+    const userFilter = {
+      userMappings: {
+        some: {
+          user_id,
+          status: LeadUserStatus.active,
+        },
+      },
+    };
+
+    const fetchLeadsForTag = async (tag: string) => {
+      const status_id = statusMap.get(tag);
+      if (!status_id) return [];
+
+      const leads = await prisma.leadMaster.findMany({
+        where: {
+          vendor_id,
+          is_deleted: false,
+          status_id,
+          ...userFilter,
+        },
+        select: {
+          id: true,
+          lead_code: true,
+          account_id: true,
+          firstname: true,
+          lastname: true,
+        },
+      });
+
+      return leads.map((lead) => ({
+        id: lead.id,
+        lead_code: lead.lead_code,
+        account_id: lead.account_id,
+        name: `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim(),
+      }));
+    };
+
+    const results: Record<string, any[]> = {};
+
+    for (const entry of targetTags) {
+      results[entry.key] = await fetchLeadsForTag(entry.tag);
+    }
+
+    return results as {
+      openLead: any[];
+      ismLead: any[];
+      designing: any[];
+      bookingDone: any[];
+      clientDocumentation: any[];
+      clientApproval: any[];
+      techCheck: any[];
+      readyToDispatch: any[];
+      dispatchPlanning: any[];
+    };
+  }
+
+  // -------------------------------------------------------
+  // Orders In Pipeline (lead counts by activity_status)
+  // -------------------------------------------------------
+  public async getOrdersInPipeline(vendor_id: number) {
+    const ranges = getDateRanges();
+    const statuses = ["onGoing", "onHold", "lostApproval", "lost"] as const;
+
+    const countByStatus = async (
+      status: (typeof statuses)[number],
+      range?: { start: Date; end: Date }
+    ) =>
+      prisma.leadMaster.count({
+        where: {
+          vendor_id,
+          is_deleted: false,
+          activity_status: status,
+          ...(range && { created_at: { gte: range.start, lte: range.end } }),
+        },
+      });
+
+    const results = await Promise.all(
+      statuses.map(async (status) => {
+        const [thisWeek, thisMonth, thisYear, overall] = await Promise.all([
+          countByStatus(status, ranges.week),
+          countByStatus(status, ranges.month),
+          countByStatus(status, ranges.year),
+          countByStatus(status),
+        ]);
+        return { status, thisWeek, thisMonth, thisYear, overall };
+      })
+    );
+
+    const mapResult = (status: (typeof statuses)[number]) => {
+      const item = results.find((r) => r.status === status)!;
+      return {
+        thisWeek: item.thisWeek,
+        thisMonth: item.thisMonth,
+        thisYear: item.thisYear,
+        overall: item.overall,
+      };
+    };
+
+    return {
+      onGoing: mapResult("onGoing"),
+      onHold: mapResult("onHold"),
+      lostApproval: mapResult("lostApproval"),
+      lost: mapResult("lost"),
+    };
   }
 }

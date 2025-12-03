@@ -142,4 +142,143 @@ export class DashboardController {
       });
     }
   };
+
+  public getProjectsOverview = async (req: Request, res: Response) => {
+    try {
+      const vendor_id = Number(req.query.vendor_id);
+
+      if (!vendor_id) {
+        return res.status(400).json({
+          success: false,
+          message: "vendor_id is required",
+        });
+      }
+
+      const data = await dashboardService.getProjectsOverview(vendor_id);
+
+      return res.status(200).json({
+        success: true,
+        data,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public getOrdersInPipeline = async (req: Request, res: Response) => {
+    try {
+      const vendor_id = Number(req.query.vendor_id);
+
+      if (!vendor_id) {
+        return res.status(400).json({
+          success: false,
+          message: "vendor_id is required",
+        });
+      }
+
+      const data = await dashboardService.getOrdersInPipeline(vendor_id);
+
+      return res.status(200).json({
+        success: true,
+        data,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public getTotalRevenue = async (req: Request, res: Response) => {
+    try {
+      const vendor_id = Number(req.query.vendor_id);
+
+      if (!vendor_id) {
+        return res.status(400).json({
+          success: false,
+          message: "vendor_id is required",
+        });
+      }
+
+      const data = await dashboardService.getTotalRevenue(vendor_id);
+
+      return res.status(200).json({
+        success: true,
+        data,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public getSalesExecutiveStageCounts = async (
+    req: Request,
+    res: Response
+  ) => {
+    try {
+      const vendor_id = Number(req.query.vendor_id);
+      const user_id = Number(req.query.user_id);
+
+      if (!vendor_id || !user_id) {
+        return res.status(400).json({
+          success: false,
+          message: "vendor_id and user_id are required",
+        });
+      }
+
+      const data = await dashboardService.getSalesExecutiveStageCounts(
+        vendor_id,
+        user_id
+      );
+
+      return res.status(200).json({
+        success: true,
+        data,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public getSalesExecutiveStageLeads = async (
+    req: Request,
+    res: Response
+  ) => {
+    try {
+      const vendor_id = Number(req.query.vendor_id);
+      const user_id = Number(req.query.user_id);
+
+      if (!vendor_id || !user_id) {
+        return res.status(400).json({
+          success: false,
+          message: "vendor_id and user_id are required",
+        });
+      }
+
+      const data = await dashboardService.getSalesExecutiveStageLeads(
+        vendor_id,
+        user_id
+      );
+
+      return res.status(200).json({
+        success: true,
+        data,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
 }
