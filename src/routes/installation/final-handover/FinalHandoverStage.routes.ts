@@ -44,6 +44,12 @@ finalHandoverStageRoutes.get(
   controller.getFinalHandoverReadyStatus
 );
 
+/** ✅ GET → Check if total project amount is fully paid */
+finalHandoverStageRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/is-total-project-amount-paid",
+  controller.isTotalProjectAmountPaid
+);
+
 /** ✅ PUT → Move Lead to Project Completed Stage (Type 17) */
 finalHandoverStageRoutes.put(
   "/vendorId/:vendorId/leadId/:leadId/move-to-project-completed",
