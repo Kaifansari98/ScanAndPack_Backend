@@ -617,50 +617,78 @@ export class DashboardService {
   }
 
   // ----------------------------------------------------------------
-  // Admin Dashboard : Projects Overview (lead counts by created_at)
+  // Admin Dashboard : Projects Overview (distinct lead counts by created_at)
+  // Only count leads whose FINAL status is between Type 4 ↠ Type 16
   // ----------------------------------------------------------------
   public async getProjectsOverview(vendor_id: number) {
-    const ranges = getDateRanges();
-    const baseWhere = { vendor_id, is_deleted: false };
+    // Get Type 4 (booking) ID
+    const type4 = await prisma.statusTypeMaster.findFirst({
+      where: { vendor_id, tag: "Type 4" },
+      select: { id: true },
+    });
 
+    // Get Type 16 (the upper bound) ID
+    const type16 = await prisma.statusTypeMaster.findFirst({
+      where: { vendor_id, tag: "Type 16" },
+      select: { id: true },
+    });
+
+    if (!type4?.id || !type16?.id) {
+      // Missing statuses => cannot compute reliably
+      return {
+        thisWeekArray: Array(7).fill(0),
+        thisMonthArray: Array(4).fill(0),
+        thisYearArray: Array(12).fill(0),
+        thisWeekTotal: 0,
+        thisMonthTotal: 0,
+        thisYearTotal: 0,
+        overall: 0,
+      };
+    }
+
+    const baseWhere = {
+      vendor_id,
+      is_deleted: false, // Only active leads
+      status_id: { gte: type4.id, lte: type16.id }, // Only Type 4 → Type 16
+    };
+
+    // Helper to count distinct leads in a date range
+    const countLeadsInRange = (range: { start: Date; end: Date }) => {
+      return prisma.leadMaster.count({
+        where: {
+          ...baseWhere,
+          created_at: { gte: range.start, lte: range.end },
+        },
+      });
+    };
+
+    // Weekly breakdown (7 days)
     const weekRanges = getWeekDayRanges();
-    const thisWeekArray: number[] = [];
+    const thisWeekArray = [];
     for (const r of weekRanges) {
-      const count = await prisma.leadMaster.count({
-        where: {
-          ...baseWhere,
-          created_at: { gte: r.start, lte: r.end },
-        },
-      });
-      thisWeekArray.push(count);
+      thisWeekArray.push(await countLeadsInRange(r));
     }
 
+    // Monthly breakdown (4 segments)
     const monthRanges = getMonthFourRanges();
-    const thisMonthArray: number[] = [];
+    const thisMonthArray = [];
     for (const r of monthRanges) {
-      const count = await prisma.leadMaster.count({
-        where: {
-          ...baseWhere,
-          created_at: { gte: r.start, lte: r.end },
-        },
-      });
-      thisMonthArray.push(count);
+      thisMonthArray.push(await countLeadsInRange(r));
     }
 
+    // Yearly breakdown (12 months)
     const yearRanges = getYearMonthRanges();
-    const thisYearArray: number[] = [];
+    const thisYearArray = [];
     for (const r of yearRanges) {
-      const count = await prisma.leadMaster.count({
-        where: {
-          ...baseWhere,
-          created_at: { gte: r.start, lte: r.end },
-        },
-      });
-      thisYearArray.push(count);
+      thisYearArray.push(await countLeadsInRange(r));
     }
 
+    // Totals
     const sum = (arr: number[]) => arr.reduce((acc, v) => acc + v, 0);
-    const overall = await prisma.leadMaster.count({ where: baseWhere });
+
+    const overall = await prisma.leadMaster.count({
+      where: baseWhere,
+    });
 
     return {
       thisWeekArray,
@@ -720,8 +748,7 @@ export class DashboardService {
     }
 
     const sum = (arr: number[]) => arr.reduce((acc, v) => acc + v, 0);
-    const overall =
-      (await sumByRange())._sum?.total_project_amount || 0;
+    const overall = (await sumByRange())._sum?.total_project_amount || 0;
 
     return {
       thisWeekArray,
@@ -821,10 +848,7 @@ export class DashboardService {
   // -------------------------------------------------------
   // Sales Executive : Stage leads (minimal fields)
   // -------------------------------------------------------
-  public async getSalesExecutiveStageLeads(
-    vendor_id: number,
-    user_id: number
-  ) {
+  public async getSalesExecutiveStageLeads(vendor_id: number, user_id: number) {
     const targetTags = [
       { tag: "Type 1", key: "openLead" },
       { tag: "Type 2", key: "ismLead" },
@@ -901,6 +925,100 @@ export class DashboardService {
       techCheck: any[];
       readyToDispatch: any[];
       dispatchPlanning: any[];
+    };
+  }
+
+  // -------------------------------------------------------
+  // Sales Executive : Post-booking stage leads (Type 4–16, excluding 17)
+  // -------------------------------------------------------
+  public async getSalesExecutivePostBookingStageLeads(
+    vendor_id: number,
+    user_id: number
+  ) {
+    const targetTags = [
+      { tag: "Type 4", key: "bookingStage" },
+      { tag: "Type 5", key: "finalSiteMeasurementStage" },
+      { tag: "Type 6", key: "clientDocumentationStage" },
+      { tag: "Type 7", key: "clientApprovalStage" },
+      { tag: "Type 8", key: "techCheckStage" },
+      { tag: "Type 9", key: "orderLoginStage" },
+      { tag: "Type 10", key: "productionStage" },
+      { tag: "Type 11", key: "readyToDispatchStage" },
+      { tag: "Type 12", key: "siteReadinessStage" },
+      { tag: "Type 13", key: "dispatchPlanningStage" },
+      { tag: "Type 14", key: "dispatchStage" },
+      { tag: "Type 15", key: "underInstallationStage" },
+      { tag: "Type 16", key: "finalHandoverStage" },
+    ] as const;
+
+    const statuses = await prisma.statusTypeMaster.findMany({
+      where: {
+        vendor_id,
+        tag: { in: targetTags.map((t) => t.tag) },
+      },
+      select: { id: true, tag: true },
+    });
+
+    const statusMap = new Map<string, number>();
+    statuses.forEach((s) => statusMap.set(s.tag, s.id));
+
+    const userFilter = {
+      userMappings: {
+        some: {
+          user_id,
+          status: LeadUserStatus.active,
+        },
+      },
+    };
+
+    const fetchLeadsForTag = async (tag: string) => {
+      const status_id = statusMap.get(tag);
+      if (!status_id) return [];
+
+      const leads = await prisma.leadMaster.findMany({
+        where: {
+          vendor_id,
+          is_deleted: false,
+          status_id,
+          ...userFilter,
+        },
+        select: {
+          id: true,
+          lead_code: true,
+          account_id: true,
+          firstname: true,
+          lastname: true,
+        },
+      });
+
+      return leads.map((lead) => ({
+        id: lead.id,
+        lead_code: lead.lead_code,
+        account_id: lead.account_id,
+        name: `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim(),
+      }));
+    };
+
+    const results: Record<string, any[]> = {};
+
+    for (const entry of targetTags) {
+      results[entry.key] = await fetchLeadsForTag(entry.tag);
+    }
+
+    return results as {
+      bookingStage: any[];
+      finalSiteMeasurementStage: any[];
+      clientDocumentationStage: any[];
+      clientApprovalStage: any[];
+      techCheckStage: any[];
+      orderLoginStage: any[];
+      productionStage: any[];
+      readyToDispatchStage: any[];
+      siteReadinessStage: any[];
+      dispatchPlanningStage: any[];
+      dispatchStage: any[];
+      underInstallationStage: any[];
+      finalHandoverStage: any[];
     };
   }
 

@@ -26,6 +26,10 @@ DashboardRouter.get(
   "/sales-executive/stage-leads",
   dashboardController.getSalesExecutiveStageLeads
 );
+DashboardRouter.get(
+  "/sales-executive/post-booking-stage-leads",
+  dashboardController.getSalesExecutivePostBookingStageLeads
+);
 
 // Admin
 DashboardRouter.get(
