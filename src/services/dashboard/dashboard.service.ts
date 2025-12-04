@@ -190,10 +190,23 @@ export class DashboardService {
       ? { vendor_id, status: LeadUserStatus.active }
       : { vendor_id, user_id, status: LeadUserStatus.active };
 
+    const activityStatusExclusion = {
+      lead: {
+        activity_status: {
+          notIn: [
+            ActivityStatus.onHold,
+            ActivityStatus.lostApproval,
+            ActivityStatus.lost,
+          ],
+        },
+        is_deleted: false,
+      },
+    };
+
     const totalLeadsAssigned = (
       await prisma.leadUserMapping.groupBy({
         by: ["lead_id"],
-        where: assignedWhere,
+        where: { ...assignedWhere, ...activityStatusExclusion },
         _count: { lead_id: true }, // ensures unique lead_id per group
       })
     ).length;
@@ -231,7 +244,7 @@ export class DashboardService {
     const totalPendingLeads = totalLeadsAssigned - totalCompletedLeads;
 
     // -------------------------------------
-    // BOOKED LEADS (Type 4)
+    // BOOKED LEADS (Type 4) — DISTINCT LEADS ONLY
     // -------------------------------------
     const bookingStatus = await prisma.statusTypeMaster.findFirst({
       where: { vendor_id, tag: "Type 4" },
@@ -248,145 +261,154 @@ export class DashboardService {
     let bookedThisYearTotal = 0;
 
     if (bookingStatus) {
+      // Helper function: return DISTINCT lead count
+      const countDistinct = async (range: { start: Date; end: Date }) => {
+        const logs = await prisma.leadStatusLogs.findMany({
+          where: {
+            vendor_id,
+            status_id: bookingStatus.id,
+            created_at: { gte: range.start, lte: range.end },
+          },
+          distinct: ["lead_id"],
+          select: { lead_id: true },
+        });
+        return logs.length;
+      };
+
       // ---------- TODAY ----------
-      bookedToday = await prisma.leadStatusLogs.count({
-        where: {
-          vendor_id,
-          status_id: bookingStatus.id,
-          created_at: { gte: ranges.today.start, lte: ranges.today.end },
-        },
-      });
+      bookedToday = await countDistinct(ranges.today);
 
-      // ---------- WEEK (Mon–Sun as array) ----------
+      // ---------- WEEK (Mon–Sun array) ----------
       const weekRanges = getWeekDayRanges();
+      bookedThisWeek = [];
       for (const r of weekRanges) {
-        const count = await prisma.leadStatusLogs.count({
-          where: {
-            vendor_id,
-            status_id: bookingStatus.id,
-            created_at: { gte: r.start, lte: r.end },
-          },
-        });
-        bookedThisWeek.push(count);
+        bookedThisWeek.push(await countDistinct(r));
       }
+      bookedThisWeekTotal = bookedThisWeek.reduce((a, b) => a + b, 0);
 
-      // ---------- MONTH (1–28/29/30/31 array) ----------
-      bookedThisMonth = [];
+      // ---------- MONTH (4 blocks array) ----------
       const monthRanges = getMonthFourRanges();
-
+      bookedThisMonth = [];
       for (const r of monthRanges) {
-        const count = await prisma.leadStatusLogs.count({
-          where: {
-            vendor_id,
-            status_id: bookingStatus.id,
-            created_at: { gte: r.start, lte: r.end },
-          },
-        });
-        bookedThisMonth.push(count);
+        bookedThisMonth.push(await countDistinct(r));
       }
-      bookedThisMonthTotal = await prisma.leadStatusLogs.count({
-        where: {
-          vendor_id,
-          status_id: bookingStatus.id,
-          created_at: { gte: ranges.month.start, lte: ranges.month.end },
-        },
-      });
+      bookedThisMonthTotal = await countDistinct(ranges.month);
 
       // ---------- YEAR (Jan–Dec array) ----------
       const yearRanges = getYearMonthRanges();
+      bookedThisYear = [];
       for (const r of yearRanges) {
-        const count = await prisma.leadStatusLogs.count({
-          where: {
-            vendor_id,
-            status_id: bookingStatus.id,
-            created_at: { gte: r.start, lte: r.end },
-          },
-        });
-        bookedThisYear.push(count);
+        bookedThisYear.push(await countDistinct(r));
       }
-      bookedThisYearTotal = await prisma.leadStatusLogs.count({
-        where: {
-          vendor_id,
-          status_id: bookingStatus.id,
-          created_at: { gte: ranges.year.start, lte: ranges.year.end },
-        },
-      });
+      bookedThisYearTotal = await countDistinct(ranges.year);
 
-      // ---------- OVERALL ----------
-      bookedOverall = await prisma.leadStatusLogs.count({
+      // ---------- OVERALL (distinct leads ever booked) ----------
+      const overallLogs = await prisma.leadStatusLogs.findMany({
         where: { vendor_id, status_id: bookingStatus.id },
+        distinct: ["lead_id"],
+        select: { lead_id: true },
       });
-
-      bookedThisWeekTotal = await prisma.leadStatusLogs.count({
-        where: {
-          vendor_id,
-          status_id: bookingStatus.id,
-          created_at: { gte: ranges.week.start, lte: ranges.week.end },
-        },
-      });
+      bookedOverall = overallLogs.length;
     }
 
     // -------------------------------------
-    // BOOKING VALUE (LeadMaster.total_project_amount)
+    // BOOKING VALUE (Distinct leads who reached Type 4)
     // -------------------------------------
+
     let bookingValue = { week: 0, month: 0, year: 0, overall: 0 };
     let bookingValueThisWeekArray: number[] = [];
     let bookingValueThisMonthArray: number[] = [];
     let bookingValueThisYearArray: number[] = [];
 
-    const leadValueFilter: any = { vendor_id };
-    if (!isAdmin) {
-      leadValueFilter.userMappings = {
-        some: { user_id, status: LeadUserStatus.active },
+    if (bookingStatus) {
+      // Filter for admin/user scopes
+      const userFilter = isAdmin
+        ? {}
+        : {
+            userMappings: {
+              some: { user_id, status: LeadUserStatus.active },
+            },
+          };
+
+      // Helper → get distinct booked leads in a date range
+      const getDistinctBookedLeads = async (start: Date, end: Date) => {
+        return prisma.leadStatusLogs.findMany({
+          where: {
+            vendor_id,
+            status_id: bookingStatus.id,
+            created_at: { gte: start, lte: end },
+          },
+          distinct: ["lead_id"],
+          select: { lead_id: true },
+        });
+      };
+
+      // Helper → sum booking values from a list of lead IDs
+      const sumBookingValues = async (leadIds: number[]) => {
+        if (leadIds.length === 0) return 0;
+
+        const res = await prisma.leadMaster.aggregate({
+          where: {
+            id: { in: leadIds },
+            ...userFilter,
+          },
+          _sum: { total_project_amount: true },
+        });
+
+        return res._sum.total_project_amount || 0;
+      };
+
+      // ---------------- WEEKLY ARRAY ----------------
+      const weekRanges = getWeekDayRanges();
+      bookingValueThisWeekArray = [];
+
+      for (const r of weekRanges) {
+        const leads = await getDistinctBookedLeads(r.start, r.end);
+        const total = await sumBookingValues(leads.map((l) => l.lead_id));
+        bookingValueThisWeekArray.push(total);
+      }
+
+      // ---------------- MONTH ARRAY ----------------
+      const monthRanges = getMonthFourRanges();
+      bookingValueThisMonthArray = [];
+
+      for (const r of monthRanges) {
+        const leads = await getDistinctBookedLeads(r.start, r.end);
+        const total = await sumBookingValues(leads.map((l) => l.lead_id));
+        bookingValueThisMonthArray.push(total);
+      }
+
+      // ---------------- YEAR ARRAY ----------------
+      const yearRanges = getYearMonthRanges();
+      bookingValueThisYearArray = [];
+
+      for (const r of yearRanges) {
+        const leads = await getDistinctBookedLeads(r.start, r.end);
+        const total = await sumBookingValues(leads.map((l) => l.lead_id));
+        bookingValueThisYearArray.push(total);
+      }
+
+      // SUM UTIL
+      const sumArray = (arr: number[]) => arr.reduce((acc, v) => acc + v, 0);
+
+      // ---------------- TOTALS ----------------
+      bookingValue = {
+        week: sumArray(bookingValueThisWeekArray),
+        month: sumArray(bookingValueThisMonthArray),
+        year: sumArray(bookingValueThisYearArray),
+
+        // OVERALL booking value (distinct Type 4 leads only)
+        overall: await (async () => {
+          const leads = await prisma.leadStatusLogs.findMany({
+            where: { vendor_id, status_id: bookingStatus.id },
+            distinct: ["lead_id"],
+            select: { lead_id: true },
+          });
+
+          return sumBookingValues(leads.map((l) => l.lead_id));
+        })(),
       };
     }
-
-    const sumByRange = (start: Date, end: Date) =>
-      prisma.leadMaster.aggregate({
-        where: {
-          ...leadValueFilter,
-          created_at: { gte: start, lte: end },
-        },
-        _sum: { total_project_amount: true },
-      });
-
-    const weekRanges = getWeekDayRanges();
-    bookingValueThisWeekArray = [];
-    for (const r of weekRanges) {
-      const res = await sumByRange(r.start, r.end);
-      bookingValueThisWeekArray.push(res._sum.total_project_amount || 0);
-    }
-
-    const monthRanges = getMonthFourRanges();
-    bookingValueThisMonthArray = [];
-    for (const r of monthRanges) {
-      const res = await sumByRange(r.start, r.end);
-      bookingValueThisMonthArray.push(res._sum.total_project_amount || 0);
-    }
-
-    const yearRanges = getYearMonthRanges();
-    bookingValueThisYearArray = [];
-    for (const r of yearRanges) {
-      const res = await sumByRange(r.start, r.end);
-      bookingValueThisYearArray.push(res._sum.total_project_amount || 0);
-    }
-
-    const sumArray = (arr: number[]) => arr.reduce((acc, v) => acc + v, 0);
-
-    bookingValue = {
-      week: sumArray(bookingValueThisWeekArray),
-      month: sumArray(bookingValueThisMonthArray),
-      year: sumArray(bookingValueThisYearArray),
-      overall:
-        (
-          await prisma.leadMaster.aggregate({
-            where: {
-              ...leadValueFilter,
-            },
-            _sum: { total_project_amount: true },
-          })
-        )._sum.total_project_amount || 0,
-    };
 
     const avgDaysToBooking = await this.calculateAvgDaysToBooking(
       vendor_id,

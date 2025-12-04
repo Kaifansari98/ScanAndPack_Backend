@@ -62,7 +62,7 @@ export class DashboardController {
       );
 
       // Store in cache (10 minutes)
-      await cache.set(redisKey, JSON.stringify(snapshot), 1);
+      await cache.set(redisKey, JSON.stringify(snapshot), 600);
 
       return res.status(200).json({
         success: true,
