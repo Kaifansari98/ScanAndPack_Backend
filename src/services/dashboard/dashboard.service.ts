@@ -576,7 +576,17 @@ export class DashboardService {
       ? { userMappings: { some: { user_id, status: LeadUserStatus.active } } }
       : {};
 
-    // Helper to count leads for a status
+    const activityStatusFilter = {
+      activity_status: {
+        notIn: [
+          ActivityStatus.onHold,
+          ActivityStatus.lostApproval,
+          ActivityStatus.lost,
+        ],
+      },
+    };
+
+    // Helper to count leads for a status (excluding onHold/lostApproval/lost)
     const countStatus = async (typeTag: string) => {
       const status_id = statusMap.get(typeTag);
       if (!status_id) return 0;
@@ -585,6 +595,8 @@ export class DashboardService {
         where: {
           vendor_id,
           status_id,
+          is_deleted: false,
+          ...activityStatusFilter,
           ...userFilter,
         },
       });
@@ -611,7 +623,7 @@ export class DashboardService {
     };
 
     // 🔐 Save to Redis for 10 minutes (600 sec)
-    await cache.set(cacheKey, JSON.stringify(result), 600);
+    await cache.set(cacheKey, JSON.stringify(result), 1);
 
     return { fromCache: false, data: result };
   }
@@ -797,6 +809,16 @@ export class DashboardService {
       },
     };
 
+    const activityStatusFilter = {
+      activity_status: {
+        notIn: [
+          ActivityStatus.onHold,
+          ActivityStatus.lostApproval,
+          ActivityStatus.lost,
+        ],
+      },
+    };
+
     const countForTag = async (tag: string) => {
       const status_id = statusMap.get(tag);
       if (!status_id) return 0;
@@ -805,6 +827,7 @@ export class DashboardService {
           vendor_id,
           is_deleted: false,
           status_id,
+          ...activityStatusFilter,
           ...userFilter,
         },
       });
@@ -843,6 +866,41 @@ export class DashboardService {
       readyToDispatch,
       dispatchPlanning,
     };
+  }
+
+  // -------------------------------------------------------
+  // Sales Executive : Activity status counts (onHold, lostApproval, lost)
+  // -------------------------------------------------------
+  public async getSalesExecutiveActivityStatusCounts(
+    vendor_id: number,
+    user_id: number
+  ) {
+    const statuses = ["onHold", "lostApproval", "lost"] as const;
+
+    const userFilter = {
+      userMappings: {
+        some: {
+          user_id,
+          status: LeadUserStatus.active,
+        },
+      },
+    };
+
+    const countByStatus = async (status: (typeof statuses)[number]) =>
+      prisma.leadMaster.count({
+        where: {
+          vendor_id,
+          is_deleted: false,
+          activity_status: status as any,
+          ...userFilter,
+        },
+      });
+
+    const [onHold, lostApproval, lost] = await Promise.all(
+      statuses.map((s) => countByStatus(s))
+    );
+
+    return { onHold, lostApproval, lost };
   }
 
   // -------------------------------------------------------

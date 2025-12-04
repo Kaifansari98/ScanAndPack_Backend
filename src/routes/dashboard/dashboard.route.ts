@@ -34,6 +34,12 @@ DashboardRouter.get(
   "/sales-executive/all-stage-leads",
   dashboardController.getSalesExecutiveAllStageLeads
 );
+DashboardRouter.get(
+  "/sales-executive/activity-status-counts",
+  dashboardController.getSalesExecutiveActivityStatusCounts
+);
+
+
 
 // Admin
 DashboardRouter.get(
