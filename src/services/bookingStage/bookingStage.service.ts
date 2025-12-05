@@ -313,6 +313,8 @@ export class BookingStageService {
 
         await cache.del(`performance:snapshot:${data.vendor_id}:${data.created_by}`);
         await cache.del(`dashboard:tasks:${data.vendor_id}:${data.siteSupervisorId}`);
+        await cache.del(`lead-status-counts:${data.vendor_id}:${data.created_by}`);
+        await cache.del(`lead-status-counts:${data.vendor_id}:overall`);
 
         // 6️⃣ Create audit trail (LeadDetailedLogs + LeadDocumentLogs)
         const docCount = response.documentsUploaded.length;
