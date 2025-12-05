@@ -112,62 +112,6 @@ export const createLeadService = async (
 
   return prisma.$transaction(
     async (tx) => {
-      // Check for duplicate contact_no and email for the same vendor
-      const existingContactLead = await tx.leadMaster.findFirst({
-        where: {
-          contact_no,
-          vendor_id,
-        },
-      });
-
-      if (existingContactLead) {
-        throw new Error(
-          `Contact number ${contact_no} already exists for this vendor`
-        );
-      }
-
-      if (email) {
-        const existingEmailLead = await tx.leadMaster.findFirst({
-          where: {
-            email,
-            vendor_id,
-          },
-        });
-
-        if (existingEmailLead) {
-          throw new Error(`Email ${email} already exists for this vendor`);
-        }
-      }
-
-      // Check for duplicate contact_no and email in AccountMaster for the same vendor
-      const existingContactAccount = await tx.accountMaster.findFirst({
-        where: {
-          contact_no,
-          vendor_id,
-        },
-      });
-
-      if (existingContactAccount) {
-        throw new Error(
-          `Contact number ${contact_no} already exists in accounts for this vendor`
-        );
-      }
-
-      if (email) {
-        const existingEmailAccount = await tx.accountMaster.findFirst({
-          where: {
-            email,
-            vendor_id,
-          },
-        });
-
-        if (existingEmailAccount) {
-          throw new Error(
-            `Email ${email} already exists in accounts for this vendor`
-          );
-        }
-      }
-
       // 1. AccountMaster (create first to get account_id)
       const account = await tx.accountMaster.create({
         data: {
@@ -845,77 +789,7 @@ export const updateLeadService = async (
 
     const vendor_id = existingLead.vendor_id;
 
-    // 2. Check for duplicate contact_no (exclude current lead) - only if contact_no is being updated
-    if (contact_no !== undefined) {
-      const existingContactLead = await tx.leadMaster.findFirst({
-        where: {
-          contact_no,
-          vendor_id,
-          id: { not: leadId },
-          is_deleted: false,
-        },
-      });
-
-      if (existingContactLead) {
-        throw new Error(
-          `Contact number ${contact_no} already exists for this vendor`
-        );
-      }
-    }
-
-    // 3. Check for duplicate email (exclude current lead) - only if email is being updated
-    if (email !== undefined && email !== null && email.trim() !== "") {
-      const existingEmailLead = await tx.leadMaster.findFirst({
-        where: {
-          email,
-          vendor_id,
-          id: { not: leadId },
-          is_deleted: false,
-        },
-      });
-
-      if (existingEmailLead) {
-        throw new Error(`Email ${email} already exists for this vendor`);
-      }
-    }
-
-    // 4. Check for duplicate contact_no in AccountMaster (exclude current account) - only if contact_no is being updated
-    if (contact_no !== undefined) {
-      const existingContactAccount = await tx.accountMaster.findFirst({
-        where: {
-          contact_no,
-          vendor_id,
-          id: { not: existingLead.account_id! },
-          is_deleted: false,
-        },
-      });
-
-      if (existingContactAccount) {
-        throw new Error(
-          `Contact number ${contact_no} already exists in accounts for this vendor`
-        );
-      }
-    }
-
-    // 5. Check for duplicate email in AccountMaster (exclude current account) - only if email is being updated
-    if (email !== undefined && email !== null && email.trim() !== "") {
-      const existingEmailAccount = await tx.accountMaster.findFirst({
-        where: {
-          email,
-          vendor_id,
-          id: { not: existingLead.account_id! },
-          is_deleted: false,
-        },
-      });
-
-      if (existingEmailAccount) {
-        throw new Error(
-          `Email ${email} already exists in accounts for this vendor`
-        );
-      }
-    }
-
-    // 6. Build dynamic update data for AccountMaster
+    // 2. Build dynamic update data for AccountMaster
     const accountUpdateData: any = {
       updated_by,
       updated_at: new Date(),
@@ -1192,6 +1066,56 @@ export const updateLeadService = async (
           : "not updated",
     };
   });
+};
+
+export const isContactOrEmailExists = async (
+  vendor_id: number,
+  payload: { phone_number?: string; alt_phone_number?: string; email?: string }
+) => {
+  const { phone_number, alt_phone_number, email } = payload;
+  const provided = [phone_number, alt_phone_number, email].filter(
+    (v) => v !== undefined && v !== null && String(v).trim() !== ""
+  );
+
+  if (provided.length !== 1) {
+    throw Object.assign(
+      new Error("Provide exactly one of phone_number, alt_phone_number, or email"),
+      { statusCode: 400 }
+    );
+  }
+
+  let whereClause: any = { vendor_id, is_deleted: false };
+  if (phone_number) whereClause.contact_no = phone_number;
+  if (alt_phone_number) whereClause.alt_contact_no = alt_phone_number;
+  if (email) whereClause.email = email;
+
+  const existingLead = await prisma.leadMaster.findFirst({
+    where: whereClause,
+    select: {
+      id: true,
+      lead_code: true,
+      firstname: true,
+      lastname: true,
+    },
+  });
+
+  return {
+    exists: Boolean(existingLead),
+    checked_field: phone_number
+      ? "phone_number"
+      : alt_phone_number
+      ? "alt_phone_number"
+      : "email",
+    lead: existingLead
+      ? {
+          lead_id: existingLead.id,
+          lead_code: existingLead.lead_code,
+          lead_name: `${existingLead.firstname ?? ""} ${
+            existingLead.lastname ?? ""
+          }`.trim(),
+        }
+      : null,
+  };
 };
 
 export const getSalesExecutivesByVendor = async (

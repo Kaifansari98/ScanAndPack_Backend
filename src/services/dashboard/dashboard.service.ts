@@ -961,6 +961,16 @@ export class DashboardService {
       },
     };
 
+    const activityStatusFilter = {
+      activity_status: {
+        notIn: [
+          ActivityStatus.onHold,
+          ActivityStatus.lostApproval,
+          ActivityStatus.lost,
+        ],
+      },
+    };
+
     const fetchLeadsForTag = async (tag: string) => {
       const status_id = statusMap.get(tag);
       if (!status_id) return [];
@@ -970,6 +980,7 @@ export class DashboardService {
           vendor_id,
           is_deleted: false,
           status_id,
+          ...activityStatusFilter,
           ...userFilter,
         },
         select: {
@@ -1051,6 +1062,16 @@ export class DashboardService {
       },
     };
 
+    const activityStatusFilter = {
+      activity_status: {
+        notIn: [
+          ActivityStatus.onHold,
+          ActivityStatus.lostApproval,
+          ActivityStatus.lost,
+        ],
+      },
+    };
+
     const fetchLeadsForTag = async (tag: string) => {
       const status_id = statusMap.get(tag);
       if (!status_id) return [];
@@ -1060,6 +1081,7 @@ export class DashboardService {
           vendor_id,
           is_deleted: false,
           status_id,
+          ...activityStatusFilter,
           ...userFilter,
         },
         select: {
@@ -1149,6 +1171,16 @@ export class DashboardService {
       },
     };
 
+    const activityStatusFilter = {
+      activity_status: {
+        notIn: [
+          ActivityStatus.onHold,
+          ActivityStatus.lostApproval,
+          ActivityStatus.lost,
+        ],
+      },
+    };
+
     const fetchLeadsForTag = async (tag: string) => {
       const status_id = statusMap.get(tag);
       if (!status_id) return [];
@@ -1158,13 +1190,7 @@ export class DashboardService {
           vendor_id,
           is_deleted: false,
           status_id,
-          activity_status: {
-            notIn: [
-              ActivityStatus.onHold,
-              ActivityStatus.lostApproval,
-              ActivityStatus.lost,
-            ],
-          },
+          ...activityStatusFilter,
           ...userFilter,
         },
         select: {

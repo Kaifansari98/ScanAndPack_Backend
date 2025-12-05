@@ -852,7 +852,6 @@ export type LeadMasterOrderByWithRelationInput = {
 
 export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  unique_contact_per_vendor?: Prisma.LeadMasterUnique_contact_per_vendorCompoundUniqueInput
   uniq_vendor_lead_code?: Prisma.LeadMasterUniq_vendor_lead_codeCompoundUniqueInput
   AND?: Prisma.LeadMasterWhereInput | Prisma.LeadMasterWhereInput[]
   OR?: Prisma.LeadMasterWhereInput[]
@@ -947,7 +946,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   installationUpdates?: Prisma.InstallationUpdateListRelationFilter
   miscellaneousMaster?: Prisma.MiscellaneousMasterListRelationFilter
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterListRelationFilter
-}, "id" | "unique_contact_per_vendor" | "uniq_vendor_lead_code">
+}, "id" | "uniq_vendor_lead_code">
 
 export type LeadMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -1613,11 +1612,6 @@ export type LeadMasterListRelationFilter = {
 
 export type LeadMasterOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type LeadMasterUnique_contact_per_vendorCompoundUniqueInput = {
-  contact_no: string
-  vendor_id: number
 }
 
 export type LeadMasterUniq_vendor_lead_codeCompoundUniqueInput = {

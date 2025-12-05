@@ -9,6 +9,7 @@ import {
   softDeleteLead,
   updateLeadService,
   verifyUserTokenService,
+  isContactOrEmailExists,
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import {
   createLeadSchema,
@@ -1232,6 +1233,34 @@ export class LeadController {
       });
     }
   }
+
+  checkContactNumberExists = async (req: Request, res: Response) => {
+    try {
+      const vendor_id = Number(req.params.vendorId);
+      const { phone_number, alt_phone_number, email } = req.body || {};
+
+      if (!vendor_id) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("vendorId is required", 400));
+      }
+
+      const result = await isContactOrEmailExists(vendor_id, {
+        phone_number,
+        alt_phone_number,
+        email,
+      });
+
+      return res
+        .status(200)
+        .json(ApiResponse.success(result, "Contact/email lookup completed"));
+    } catch (error: any) {
+      logger.error("[CONTROLLER] checkContactNumberExists error", error);
+      return res
+        .status(500)
+        .json(ApiResponse.error(error.message || "Internal server error"));
+    }
+  };
 }
 
 // Export a single instance of the controller

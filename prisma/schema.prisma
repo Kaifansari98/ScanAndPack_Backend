@@ -475,8 +475,7 @@ model LeadMaster {
   miscellaneousMaster         MiscellaneousMaster[]
   installationIssueLogMaster  InstallationIssueLogMaster[]
 
-  // ✅ Unique constraints for contact_no and email per vendor
-  @@unique([contact_no, vendor_id], name: "unique_contact_per_vendor")
+  // ✅ Unique constraint for lead code per vendor
   @@unique([vendor_id, lead_code], name: "uniq_vendor_lead_code")
 }
 
