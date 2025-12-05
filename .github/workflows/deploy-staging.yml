@@ -35,6 +35,8 @@ jobs:
           key: ${{ secrets.VPS_KEY }}
           script: |
             cd /var/www/furnixcrm/furnix-backend-staging
+            pnpm install --frozen-lockfile
+            pnpm prisma migrate deploy
             docker compose down || true
             docker compose build --no-cache
             docker compose up -d --force-recreate

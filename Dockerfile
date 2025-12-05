@@ -20,7 +20,6 @@ COPY . .
 
 # Generate Prisma Client
 RUN pnpm prisma generate
-RUN pnpm prisma migrate deploy
 
 # Build TypeScript to JavaScript
 RUN pnpm build
