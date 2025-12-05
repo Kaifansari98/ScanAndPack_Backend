@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import {
   generateSignedUrl,
@@ -7,6 +7,7 @@ import {
 import logger from "../../../utils/logger";
 import { AssignTaskFMInput } from "../../../types/leadModule.types";
 import Joi from "joi";
+import { cache } from "../../../utils/cache";
 
 const assignTaskSiteReadinessSchema = Joi.object({
   lead_id: Joi.number().required(),
@@ -327,6 +328,9 @@ export class ReadyToDispatchService {
           created_by,
         },
       });
+
+      // 🧹 Refresh Sales-Executive Dashboard Task Cache
+      await cache.del(`dashboard:tasks:${lead.vendor_id}:${assignee_user_id}`);
 
       // 4️⃣ Update lead status (if not Follow Up)
       let updatedLead: {

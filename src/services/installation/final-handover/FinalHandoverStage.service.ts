@@ -1,5 +1,5 @@
 import { prisma } from "../../../prisma/client";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "../../../prisma/generated";
 import {
   generateSignedUrl,
   uploadToWasabiFinalHandoverBookletPhoto,
@@ -431,6 +431,50 @@ export class FinalHandoverStageService {
       docs_complete,
       pending_tasks_clear,
       can_move_to_final_handover: docs_complete && pending_tasks_clear,
+    };
+  }
+
+  async isTotalProjectAmountPaid(vendorId: number, leadId: number) {
+    if (!vendorId || !leadId) {
+      throw Object.assign(new Error("vendorId and leadId are required"), {
+        statusCode: 400,
+      });
+    }
+
+    const lead = await prisma.leadMaster.findFirst({
+      where: { id: leadId, vendor_id: vendorId, is_deleted: false },
+      select: { pending_amount: true, total_project_amount: true },
+    });
+
+    if (!lead) {
+      throw Object.assign(new Error("Lead not found"), { statusCode: 404 });
+    }
+
+    const totalProjectAmount = lead.total_project_amount;
+    if (totalProjectAmount === null || totalProjectAmount === undefined) {
+      throw Object.assign(
+        new Error("total_project_amount must be provided"),
+        { statusCode: 400 }
+      );
+    }
+
+    if (totalProjectAmount <= 0) {
+      throw Object.assign(
+        new Error("total_project_amount must be a positive number"),
+        { statusCode: 400 }
+      );
+    }
+
+    const pendingAmount = lead.pending_amount;
+    const isPaid =
+      pendingAmount !== null && pendingAmount !== undefined
+        ? pendingAmount === 0
+        : false;
+
+    return {
+      is_paid: isPaid,
+      pending_amount: pendingAmount ?? 0,
+      total_project_amount: totalProjectAmount,
     };
   }
 

@@ -20,6 +20,7 @@ import {
 } from "../../../validations/leadValidation";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
+import { cache } from "../../../utils/cache";
 import Joi from "joi";
 import { generateLeadCode } from "../../../utils/generateLeadCode";
 
@@ -111,62 +112,6 @@ export const createLeadService = async (
 
   return prisma.$transaction(
     async (tx) => {
-      // Check for duplicate contact_no and email for the same vendor
-      const existingContactLead = await tx.leadMaster.findFirst({
-        where: {
-          contact_no,
-          vendor_id,
-        },
-      });
-
-      if (existingContactLead) {
-        throw new Error(
-          `Contact number ${contact_no} already exists for this vendor`
-        );
-      }
-
-      if (email) {
-        const existingEmailLead = await tx.leadMaster.findFirst({
-          where: {
-            email,
-            vendor_id,
-          },
-        });
-
-        if (existingEmailLead) {
-          throw new Error(`Email ${email} already exists for this vendor`);
-        }
-      }
-
-      // Check for duplicate contact_no and email in AccountMaster for the same vendor
-      const existingContactAccount = await tx.accountMaster.findFirst({
-        where: {
-          contact_no,
-          vendor_id,
-        },
-      });
-
-      if (existingContactAccount) {
-        throw new Error(
-          `Contact number ${contact_no} already exists in accounts for this vendor`
-        );
-      }
-
-      if (email) {
-        const existingEmailAccount = await tx.accountMaster.findFirst({
-          where: {
-            email,
-            vendor_id,
-          },
-        });
-
-        if (existingEmailAccount) {
-          throw new Error(
-            `Email ${email} already exists in accounts for this vendor`
-          );
-        }
-      }
-
       // 1. AccountMaster (create first to get account_id)
       const account = await tx.accountMaster.create({
         data: {
@@ -241,6 +186,9 @@ export const createLeadService = async (
           data: { ...mappingBase, user_id: assign_to },
         });
       }
+
+      // 🧹 Invalidate Performance Snapshot Cache for creator
+      await cache.del(`performance:snapshot:${vendor_id}:${created_by}`);
 
       if (payload.is_draft) {
         logger.info(
@@ -746,6 +694,28 @@ export const softDeleteLead = async (leadId: number, deletedBy: number) => {
       });
     }
 
+    // Fetch all users mapped to this lead (active mappings only)
+    const mappings = await tx.leadUserMapping.findMany({
+      where: {
+        lead_id: leadId,
+        status: "active",
+      },
+      select: { user_id: true, vendor_id: true },
+    });
+
+    // 2️⃣ Soft delete LeadUserMapping (set status = inactive)
+    await tx.leadUserMapping.updateMany({
+      where: {
+        lead_id: leadId,
+        status: "active",
+      },
+      data: {
+        status: "inactive",
+        updated_by: deletedBy,
+        updated_at: new Date(),
+      },
+    });
+
     // 3️⃣ Add log entry in LeadDetailedLogs
     await tx.leadDetailedLogs.create({
       data: {
@@ -763,6 +733,16 @@ export const softDeleteLead = async (leadId: number, deletedBy: number) => {
       lead_id: lead.id,
       deleted_by: deletedBy,
     });
+
+    // 🧹 Clear Performance Snapshot cache for all mapped users
+    for (const mapping of mappings) {
+      await cache.del(
+        `performance:snapshot:${mapping.vendor_id}:${mapping.user_id}`
+      );
+    }
+
+    // 🧹 Also clear for the user who deleted
+    await cache.del(`performance:snapshot:${lead.vendor_id}:${deletedBy}`);
 
     return deletedLead;
   });
@@ -809,77 +789,7 @@ export const updateLeadService = async (
 
     const vendor_id = existingLead.vendor_id;
 
-    // 2. Check for duplicate contact_no (exclude current lead) - only if contact_no is being updated
-    if (contact_no !== undefined) {
-      const existingContactLead = await tx.leadMaster.findFirst({
-        where: {
-          contact_no,
-          vendor_id,
-          id: { not: leadId },
-          is_deleted: false,
-        },
-      });
-
-      if (existingContactLead) {
-        throw new Error(
-          `Contact number ${contact_no} already exists for this vendor`
-        );
-      }
-    }
-
-    // 3. Check for duplicate email (exclude current lead) - only if email is being updated
-    if (email !== undefined && email !== null && email.trim() !== "") {
-      const existingEmailLead = await tx.leadMaster.findFirst({
-        where: {
-          email,
-          vendor_id,
-          id: { not: leadId },
-          is_deleted: false,
-        },
-      });
-
-      if (existingEmailLead) {
-        throw new Error(`Email ${email} already exists for this vendor`);
-      }
-    }
-
-    // 4. Check for duplicate contact_no in AccountMaster (exclude current account) - only if contact_no is being updated
-    if (contact_no !== undefined) {
-      const existingContactAccount = await tx.accountMaster.findFirst({
-        where: {
-          contact_no,
-          vendor_id,
-          id: { not: existingLead.account_id! },
-          is_deleted: false,
-        },
-      });
-
-      if (existingContactAccount) {
-        throw new Error(
-          `Contact number ${contact_no} already exists in accounts for this vendor`
-        );
-      }
-    }
-
-    // 5. Check for duplicate email in AccountMaster (exclude current account) - only if email is being updated
-    if (email !== undefined && email !== null && email.trim() !== "") {
-      const existingEmailAccount = await tx.accountMaster.findFirst({
-        where: {
-          email,
-          vendor_id,
-          id: { not: existingLead.account_id! },
-          is_deleted: false,
-        },
-      });
-
-      if (existingEmailAccount) {
-        throw new Error(
-          `Email ${email} already exists in accounts for this vendor`
-        );
-      }
-    }
-
-    // 6. Build dynamic update data for AccountMaster
+    // 2. Build dynamic update data for AccountMaster
     const accountUpdateData: any = {
       updated_by,
       updated_at: new Date(),
@@ -1156,6 +1066,56 @@ export const updateLeadService = async (
           : "not updated",
     };
   });
+};
+
+export const isContactOrEmailExists = async (
+  vendor_id: number,
+  payload: { phone_number?: string; alt_phone_number?: string; email?: string }
+) => {
+  const { phone_number, alt_phone_number, email } = payload;
+  const provided = [phone_number, alt_phone_number, email].filter(
+    (v) => v !== undefined && v !== null && String(v).trim() !== ""
+  );
+
+  if (provided.length !== 1) {
+    throw Object.assign(
+      new Error("Provide exactly one of phone_number, alt_phone_number, or email"),
+      { statusCode: 400 }
+    );
+  }
+
+  let whereClause: any = { vendor_id, is_deleted: false };
+  if (phone_number) whereClause.contact_no = phone_number;
+  if (alt_phone_number) whereClause.alt_contact_no = alt_phone_number;
+  if (email) whereClause.email = email;
+
+  const existingLead = await prisma.leadMaster.findFirst({
+    where: whereClause,
+    select: {
+      id: true,
+      lead_code: true,
+      firstname: true,
+      lastname: true,
+    },
+  });
+
+  return {
+    exists: Boolean(existingLead),
+    checked_field: phone_number
+      ? "phone_number"
+      : alt_phone_number
+      ? "alt_phone_number"
+      : "email",
+    lead: existingLead
+      ? {
+          lead_id: existingLead.id,
+          lead_code: existingLead.lead_code,
+          lead_name: `${existingLead.firstname ?? ""} ${
+            existingLead.lastname ?? ""
+          }`.trim(),
+        }
+      : null,
+  };
 };
 
 export const getSalesExecutivesByVendor = async (
@@ -1472,6 +1432,52 @@ export const assignLeadToUser = async (
       },
     });
 
+    // -------------------------------------------
+    // 6️⃣ LeadUserMapping Updates
+    // -------------------------------------------
+
+    const oldAssignee = lead.assign_to;
+
+    // If lead was previously assigned, deactivate their mapping
+    if (oldAssignee) {
+      await prisma.leadUserMapping.updateMany({
+        where: {
+          lead_id: leadId,
+          user_id: oldAssignee,
+          status: "active",
+        },
+        data: {
+          status: "inactive",
+          updated_by: payload.assign_by,
+          updated_at: new Date(),
+        },
+      });
+    }
+
+    // Insert new mapping for the new assignee
+    await prisma.leadUserMapping.create({
+      data: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: lead.account?.id!,
+        user_id: payload.assign_to,
+        type: "ISM",
+        status: "active",
+        created_by: payload.assign_by,
+      },
+    });
+
+    // Invalidate old assignee snapshot
+    if (oldAssignee) {
+      await cache.del(`performance:snapshot:${vendorId}:${oldAssignee}`);
+    }
+
+    // Invalidate new assignee snapshot
+    await cache.del(`performance:snapshot:${vendorId}:${payload.assign_to}`);
+
+    // Invalidate admin user’s snapshot (assign_by)
+    await cache.del(`performance:snapshot:${vendorId}:${payload.assign_by}`);
+
     console.log(`[SERVICE] Lead assignment successful`);
     console.log(
       `[SERVICE] Lead ${leadId} assigned to ${salesExecutiveUser.user_name} by ${adminUser.user_name}`
@@ -1636,6 +1642,30 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
       where: { id: task_id },
       data: updateData,
     });
+
+    // 🧹 Invalidate Dashboard Task Cache (Sales Executive Dashboard)
+    const oldUserId = task.user_id; // user before update
+    const newUserId = updatedTask.user_id; // user after update
+
+    // Old user dashboard refresh
+    await cache.del(`dashboard:tasks:${vendor_id}:${oldUserId}`);
+
+    // New user dashboard refresh (only if reassigned)
+    if (newUserId !== oldUserId) {
+      await cache.del(`dashboard:tasks:${vendor_id}:${newUserId}`);
+    }
+
+    // Updater dashboard refresh
+    await cache.del(`dashboard:tasks:${vendor_id}:${updated_by}`);
+
+    // If closed_by exists → refresh closer dashboard too
+    if (closed_by) {
+      await cache.del(`dashboard:tasks:${vendor_id}:${closed_by}`);
+    }
+    // If status completed but closed_by was auto-set by system
+    if (status === "completed" && !closed_by && updatedTask.closed_by) {
+      await cache.del(`dashboard:tasks:${vendor_id}:${updatedTask.closed_by}`);
+    }
 
     // 5️⃣ Prepare LeadDetailedLogs entry
     let actionMessage = "";

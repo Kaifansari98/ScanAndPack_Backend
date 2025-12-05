@@ -1,5 +1,5 @@
 import { prisma } from '../../prisma/client';
-import { BoxStatus } from '@prisma/client';
+import { BoxStatus } from '../../prisma/generated';
 import { CreateBoxInput } from '../../types/boxTypes';
 
 export const createBox = async (data: CreateBoxInput) => {

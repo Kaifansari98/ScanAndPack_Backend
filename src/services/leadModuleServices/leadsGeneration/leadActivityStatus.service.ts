@@ -1,6 +1,7 @@
 import { prisma } from "../../../prisma/client";
-import { ActivityStatus } from "@prisma/client";
+import { ActivityStatus } from "../../../prisma/generated";
 import logger from "../../../utils/logger";
+import { cache } from "../../../utils/cache";
 
 export class LeadActivityStatusService {
   // Change status (onHold / lostApproval / lost )
@@ -62,6 +63,9 @@ export class LeadActivityStatusService {
           },
         });
       }
+
+      // 🧹 Invalidate Sales-Executive Dashboard Cache
+      await cache.del(`dashboard:tasks:${vendorId}:${userId}`);
 
       // 4️⃣ Insert into LeadDetailedLogs (Audit Trail)
       let actionMessage = "";

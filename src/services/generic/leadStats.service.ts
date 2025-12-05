@@ -1,4 +1,4 @@
-import { ActivityStatus } from "@prisma/client";
+import { ActivityStatus } from "../../prisma/generated";
 import { prisma } from "../../prisma/client";
 import logger from "../../utils/logger";
 
@@ -43,22 +43,8 @@ export class LeadStatsService {
           select: { lead_id: true },
         });
 
-        // ✅ Leads from UserLeadTask (created_by OR assigned_to)
-        const taskLeads = await prisma.userLeadTask.findMany({
-          where: {
-            vendor_id: vendorId,
-            OR: [{ created_by: userId }, { user_id: userId }],
-          },
-          select: { lead_id: true },
-        });
-
-        // ✅ Union of both sources
-        const leadIds = [
-          ...new Set([
-            ...mappedLeads.map((m) => m.lead_id),
-            ...taskLeads.map((t) => t.lead_id),
-          ]),
-        ];
+        // ✅ Use only mapped leads (ignore userLeadTask)
+        const leadIds = [...new Set(mappedLeads.map((m) => m.lead_id))];
 
         whereClause = {
           ...whereClause,
@@ -67,21 +53,7 @@ export class LeadStatsService {
       }
       // ✅ Admin/super-admin → see all vendor leads
 
-      if (userType === "sales-executive" || userType === "site-supervisor") {
-        totalMyTasks = await prisma.userLeadTask.count({
-          where: {
-            vendor_id: vendorId,
-            // OR: [{ user_id: userId }, { created_by: userId }],
-            user_id: userId, // ✅ Only assigned tasks
-            status: "open",
-            closed_at: null,
-          },
-        });
-        logger.info("[LeadStatsService] totalMyTasks debug", {
-          userId,
-          totalMyTasks,
-        });
-      }
+      // userLeadTask counts are no longer included
     }
 
     // Helper: count leads by status type

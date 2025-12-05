@@ -1,0 +1,23 @@
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: furnix-redis
+    restart: always
+    ports:
+      - "6379:6379"
+  furnix-backend:
+    build: .
+    container_name: furnix-backend
+    restart: always
+    ports:
+      - "7778:7777"
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - redis
+    extra_hosts:
+      - "host.docker.internal:host-gateway"  # Important for Linux VPS
+    command: sh -c "npx prisma generate && node dist/src/server.js"

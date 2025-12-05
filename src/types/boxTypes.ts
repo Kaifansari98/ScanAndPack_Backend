@@ -1,5 +1,5 @@
 // src/types/boxTypes.ts
-import { BoxStatus } from '@prisma/client';
+import { BoxStatus } from '../prisma/generated';
 
 export type CreateBoxInput = {
   project_id: number;

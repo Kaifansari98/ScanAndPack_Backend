@@ -43,6 +43,11 @@ bookingStageRouter.get(
   bookingStageController.getOpenLeads
 );
 
+bookingStageRouter.get(
+  "/universal-table-data/vendorId/:vendorId",
+  bookingStageController.getUniversalTableData
+);
+
 bookingStageRouter.put("/edit", bookingStageController.editBookingStage);
 
 bookingStageRouter.post(

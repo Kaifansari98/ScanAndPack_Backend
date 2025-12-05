@@ -164,4 +164,9 @@ leadsRouter.get(
   leadController.getClientRequiredCompletionDate
 );
 
+leadsRouter.post(
+  "/vendorId/:vendorId/check-contact-number",
+  leadController.checkContactNumberExists
+);
+
 export default leadsRouter;

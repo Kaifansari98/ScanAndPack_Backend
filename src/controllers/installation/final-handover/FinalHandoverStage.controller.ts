@@ -148,6 +148,41 @@ export class FinalHandoverStageController {
     }
   }
 
+  async isTotalProjectAmountPaid(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+
+      if (!vendorId || !leadId) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("vendorId and leadId are required", 400));
+      }
+
+      const result = await service.isTotalProjectAmountPaid(vendorId, leadId);
+
+      return res
+        .status(200)
+        .json(
+          ApiResponse.success(
+            result,
+            result.is_paid
+              ? "Total project amount is fully paid"
+              : "Pending amount remaining"
+          )
+        );
+    } catch (error: any) {
+      return res
+        .status(error.statusCode || 500)
+        .json(
+          ApiResponse.error(
+            error.message || "Internal server error",
+            error.statusCode || 500
+          )
+        );
+    }
+  }
+
   /**
    * ✅ Move Lead to Project Completed Stage (Type 17)
    * @route PUT /leads/installation/final-handover/vendorId/:vendorId/leadId/:leadId/move-to-project-completed

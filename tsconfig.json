@@ -6,7 +6,12 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "outDir": "dist",
-    "rootDir": "src",
     "types": ["node"],
-  }
+    "baseUrl": ".",
+    "paths": {
+      "@prisma/client": ["./generated/prisma_client/client"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "generated"]
 }

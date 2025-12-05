@@ -8,8 +8,9 @@ import wasabi, { generateSignedUrl } from "../../utils/wasabiClient";
 import { sanitizeFilename } from "../../utils/sanitizeFilename";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import logger from "../../utils/logger";
-import { Prisma, SupervisorStatus } from "@prisma/client";
+import { Prisma, SupervisorStatus } from "../../prisma/generated";
 import { isLeadComplete } from "../../validations/leadValidation";
+import { cache } from "../../utils/cache";
 
 export class BookingStageService {
   // Helper to avoid repeating include structure
@@ -278,6 +279,42 @@ export class BookingStageService {
             created_by: data.created_by, // ✅ required field
           },
         });
+
+        response.supervisorAssigned = supervisor;
+
+        // -----------------------------
+        // ⭐ 6️⃣ LeadUserMapping ENTRY (NEW)
+        // -----------------------------
+        await tx.leadUserMapping.create({
+          data: {
+            vendor_id: data.vendor_id,
+            account_id: data.account_id,
+            lead_id: data.lead_id,
+            user_id: data.siteSupervisorId,
+            type: "ISM",
+            status: "active",
+            created_by: data.created_by,
+          },
+        });
+
+        // -----------------------------
+        // ⭐ 7️⃣ LeadStatusLogs (NEW)
+        // -----------------------------
+        await tx.leadStatusLogs.create({
+          data: {
+            lead_id: data.lead_id,
+            account_id: data.account_id,
+            vendor_id: data.vendor_id,
+            status_id: bookingStatusId,
+            created_by: data.created_by,
+            created_at: new Date(),
+          },
+        });
+
+        await cache.del(`performance:snapshot:${data.vendor_id}:${data.created_by}`);
+        await cache.del(`dashboard:tasks:${data.vendor_id}:${data.siteSupervisorId}`);
+        await cache.del(`lead-status-counts:${data.vendor_id}:${data.created_by}`);
+        await cache.del(`lead-status-counts:${data.vendor_id}:overall`);
 
         // 6️⃣ Create audit trail (LeadDetailedLogs + LeadDocumentLogs)
         const docCount = response.documentsUploaded.length;
@@ -705,13 +742,19 @@ export class BookingStageService {
   public static async getVendorLeadsByTag(
     vendorId: number,
     tag: string,
-    userId: number
+    userId: number,
+    page: number = 1,
+    limit: number = 10
   ) {
     logger.info("[BookingStageService] getVendorLeadsByTag called", {
       vendorId,
       tag,
       userId,
+      page,
+      limit,
     });
+
+    const skip = (page - 1) * limit;
 
     // 0️⃣ Exclude user-linked leads if userId provided
     let excludedLeadIds: number[] = [];
@@ -747,18 +790,25 @@ export class BookingStageService {
         `Status type with tag "${tag}" not found for vendor ${vendorId}`
       );
 
-    // 2️⃣ Fetch all leads that match (excluding user-linked)
-    const leads = await prisma.leadMaster.findMany({
-      where: {
-        vendor_id: vendorId,
-        is_deleted: false,
-        statusType: { tag, vendor_id: vendorId },
-        activity_status: "onGoing",
-        ...(excludedLeadIds.length > 0 && { id: { notIn: excludedLeadIds } }),
-      },
-      include: BookingStageService.leadIncludes(),
-      orderBy: { created_at: "desc" },
-    });
+    const whereClause: Prisma.LeadMasterWhereInput = {
+      vendor_id: vendorId,
+      is_deleted: false,
+      statusType: { tag, vendor_id: vendorId },
+      activity_status: "onGoing",
+      ...(excludedLeadIds.length > 0 && { id: { notIn: excludedLeadIds } }),
+    };
+
+    // 2️⃣ Fetch leads that match (excluding user-linked) with pagination
+    const [leads, total] = await Promise.all([
+      prisma.leadMaster.findMany({
+        where: whereClause,
+        include: BookingStageService.leadIncludes(),
+        orderBy: { created_at: "desc" },
+        skip,
+        take: limit,
+      }),
+      prisma.leadMaster.count({ where: whereClause }),
+    ]);
 
     // 3️⃣ Process and attach signed URLs
     const processedLeads = await Promise.all(
@@ -787,7 +837,7 @@ export class BookingStageService {
       })
     );
 
-    return { count: processedLeads.length, leads: processedLeads };
+    return { count: total, leads: processedLeads };
   }
 
   public static async getLeadsWithStatusOpen(vendorId: number, userId: number) {
@@ -927,6 +977,173 @@ export class BookingStageService {
         return { ...lead, documents: docsWithUrls };
       })
     );
+  }
+
+  public static async getUniversalTableData(
+    vendorId: number,
+    userId: number,
+    tag?: string,
+    page: number = 1,
+    limit: number = 10
+  ): Promise<{ leads: any[]; count: number }> {
+    logger.info("[BookingStageService] getUniversalTableData called", {
+      vendorId,
+      userId,
+      tag,
+      page,
+      limit,
+    });
+
+    if (!tag) {
+      throw new Error("Status tag is required to fetch universal table data");
+    }
+
+    const statusType = await prisma.statusTypeMaster.findFirst({
+      where: { vendor_id: vendorId, tag },
+      select: { id: true },
+    });
+
+    if (!statusType) {
+      throw new Error(`Status ${tag} not found for vendor ${vendorId}`);
+    }
+
+    const creator = await prisma.userMaster.findUnique({
+      where: { id: userId },
+      include: { user_type: true },
+    });
+
+    const isAdmin = creator?.user_type?.user_type?.toLowerCase() === "admin";
+    const skip = (page - 1) * limit;
+
+    // ============= Admin Flow =============
+    if (isAdmin) {
+      const whereClause: Prisma.LeadMasterWhereInput = {
+        vendor_id: vendorId,
+        is_deleted: false,
+        status_id: statusType.id,
+        statusType: { vendor_id: vendorId },
+        activity_status: { in: ["onGoing", "lostApproval"] },
+      };
+
+      const [leads, total] = await Promise.all([
+        prisma.leadMaster.findMany({
+          where: whereClause,
+          include: BookingStageService.leadIncludes(),
+          orderBy: { created_at: Prisma.SortOrder.desc },
+          skip,
+          take: limit,
+        }),
+        prisma.leadMaster.count({ where: whereClause }),
+      ]);
+
+      const processed = await Promise.all(
+        leads.map(async (lead: any) => {
+          if (lead.is_draft && isLeadComplete(lead)) {
+            await prisma.leadMaster.update({
+              where: { id: lead.id },
+              data: { is_draft: false },
+            });
+            lead.is_draft = false;
+          }
+
+          const docsWithUrls = await Promise.all(
+            lead.documents.map(async (doc: any) => {
+              const signed_url = await generateSignedUrl(doc.doc_sys_name);
+              return {
+                ...doc,
+                signed_url,
+                file_type: BookingStageService.getFileType(doc.doc_og_name),
+                is_image: BookingStageService.isImageFile(doc.doc_og_name),
+              };
+            })
+          );
+          return { ...lead, documents: docsWithUrls };
+        })
+      );
+      return { leads: processed, count: total };
+    }
+
+    // ============= Non-Admin Flow =============
+
+    const mappedLeads = await prisma.leadUserMapping.findMany({
+      where: {
+        vendor_id: vendorId,
+        user_id: userId,
+        status: "active",
+      },
+      select: { lead_id: true },
+    });
+
+    const taskLeads = await prisma.userLeadTask.findMany({
+      where: {
+        vendor_id: vendorId,
+        OR: [{ created_by: userId }, { user_id: userId }],
+      },
+      select: { lead_id: true },
+    });
+
+    const leadIds = [
+      ...new Set([
+        ...mappedLeads.map((m) => m.lead_id),
+        ...taskLeads.map((t) => t.lead_id),
+      ]),
+    ];
+
+    if (!leadIds.length) {
+      logger.info("No leads found for user (union empty)", {
+        userId,
+        vendorId,
+        tag,
+      });
+      return { leads: [], count: 0 };
+    }
+
+    const whereClause: Prisma.LeadMasterWhereInput = {
+      id: { in: leadIds },
+      is_deleted: false,
+      vendor_id: vendorId,
+      status_id: statusType.id,
+      statusType: { vendor_id: vendorId },
+      activity_status: { in: ["onGoing", "lostApproval"] },
+    };
+
+    const [leads, total] = await Promise.all([
+      prisma.leadMaster.findMany({
+        where: whereClause,
+        include: BookingStageService.leadIncludes(),
+        orderBy: { created_at: Prisma.SortOrder.desc },
+        skip,
+        take: limit,
+      }),
+      prisma.leadMaster.count({ where: whereClause }),
+    ]);
+
+    const processed = await Promise.all(
+      leads.map(async (lead: any) => {
+        if (lead.is_draft && isLeadComplete(lead)) {
+          await prisma.leadMaster.update({
+            where: { id: lead.id },
+            data: { is_draft: false },
+          });
+          lead.is_draft = false;
+        }
+
+        const docsWithUrls = await Promise.all(
+          lead.documents.map(async (doc: any) => {
+            const signed_url = await generateSignedUrl(doc.doc_sys_name);
+            return {
+              ...doc,
+              signed_url,
+              file_type: BookingStageService.getFileType(doc.doc_og_name),
+              is_image: BookingStageService.isImageFile(doc.doc_og_name),
+            };
+          })
+        );
+        return { ...lead, documents: docsWithUrls };
+      })
+    );
+
+    return { leads: processed, count: total };
   }
 
   // ✅ Helpers (you already have these in your other service)

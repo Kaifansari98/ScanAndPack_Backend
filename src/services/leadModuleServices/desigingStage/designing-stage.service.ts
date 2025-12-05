@@ -5,7 +5,7 @@ import {
   uploadToWasabiMeetingDocs,
 } from "../../../utils/wasabiClient";
 import { z } from "zod";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "../../../prisma/generated";
 
 const editDesignMeetingSchema = z.object({
   meetingId: z.number().int().positive(),
@@ -40,7 +40,7 @@ export class DesigingStage {
       throw new Error("Lead not found for this vendor");
     }
 
-    // Resolve the vendor's Designing status ID dynamically
+    // 3. Resolve the vendor's Designing status ID dynamically
     const DesigningStatus = await prisma.statusTypeMaster.findFirst({
       where: {
         vendor_id: vendor_id,
@@ -53,13 +53,13 @@ export class DesigingStage {
       throw new Error(`Open status (Type 1) not found for vendor ${vendor_id}`);
     }
 
-    // 3. Update lead status
+    // 4. Update lead status
     const updatedLead = await prisma.leadMaster.update({
       where: { id: lead_id },
       data: { status_id: DesigningStatus.id }, // ✅ Set to status 3
     });
 
-    // 4. Create log in LeadStatusLogs
+    // 5. Create log in LeadStatusLogs
     const log = await prisma.leadStatusLogs.create({
       data: {
         lead_id,
@@ -67,6 +67,19 @@ export class DesigingStage {
         created_by: user_id,
         vendor_id,
         status_id: DesigningStatus.id,
+      },
+    });
+
+    // ⭐ 6. LeadDetailedLogs entry (REQUIRED)
+    const detailedLog = await prisma.leadDetailedLogs.create({
+      data: {
+        vendor_id,
+        lead_id,
+        account_id: lead.account_id!,
+        action: `Lead has moved to Designing stage.`,
+        action_type: "UPDATE",
+        created_by: user_id,
+        created_at: new Date(),
       },
     });
 

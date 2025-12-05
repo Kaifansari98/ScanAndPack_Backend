@@ -1,5 +1,5 @@
 // src/utils/generateLeadCode.ts
-import { Prisma, PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "../prisma/generated";
 
 // Accept either the root client or a transaction client.
 type Tx = PrismaClient | Prisma.TransactionClient;

@@ -4,11 +4,17 @@ import path from 'path';
 import cors from 'cors';
 import logger from './utils/logger';
 import { requestLogger, errorLogger } from './middlewares/requestLogger';
+import { connectRedis } from "./config/redis";
 
 export const app = express();
 
+(async () => {
+  await connectRedis();
+})();
+
 const allowedOrigins = [
   'https://shambhala.furnixcrm.com',
+  'https://vloq.furnixcrm.com',
   'https://cadbid.com',
   'http://localhost:3000',
   'http://localhost:5173', 
@@ -48,7 +54,7 @@ app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
 
 // ✅ Root test route
 app.get('/', (_req, res) => {
-  res.send('✅ Root is working!');
+  res.send('✅ Staging is working exactly like i wanted it to be!');
 });
 
 // ✅ /api test route

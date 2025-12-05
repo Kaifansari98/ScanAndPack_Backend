@@ -1,0 +1,42 @@
+name: Deploy Furnixcrm Backend Staging
+
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # -----------------------
+      # Copy backend code to VPS
+      # -----------------------
+      - name: Copy Backend to VPS
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_KEY }}
+          source: "./*"
+          target: "/var/www/furnixcrm/furnix-backend-staging"
+
+      # -----------------------
+      # SSH & Deploy
+      # -----------------------
+      - name: SSH into VPS and deploy backend container
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_KEY }}
+          script: |
+            cd /var/www/furnixcrm/furnix-backend-staging
+            docker compose down || true
+            docker compose build --no-cache
+            docker compose up -d --force-recreate
+            docker image prune -f
+

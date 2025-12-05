@@ -2,7 +2,7 @@ import { prisma } from "../../../prisma/client";
 import { uploadToWasabClientDocumentation } from "../../../utils/wasabiClient";
 import { sanitizeFilename } from "../../../utils/sanitizeFilename";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "../../../prisma/generated";
 import logger from "../../../utils/logger";
 import type { Express } from "express";
 

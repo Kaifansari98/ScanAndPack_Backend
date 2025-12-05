@@ -7,6 +7,7 @@ const PORT = env.PORT || 7777;
 
 const server = app.listen(PORT, () => {
   logger.info("Server started", { port: PORT, env: process.env.NODE_ENV });
+  console.log('DATABASE_URL:', process.env.DATABASE_URL);
 });
 
 // Graceful shutdown (optional but recommended)

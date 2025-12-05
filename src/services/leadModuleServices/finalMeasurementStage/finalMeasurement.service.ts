@@ -5,7 +5,8 @@ import { sanitizeFilename } from "../../../utils/sanitizeFilename";
 import Joi = require("joi");
 import logger from "../../../utils/logger";
 import { AssignTaskFMInput } from "../../../types/leadModule.types";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "../../../prisma/generated";
+import { cache } from "../../../utils/cache";
 
 interface FinalMeasurementDto {
   lead_id: number;
@@ -154,6 +155,22 @@ export class FinalMeasurementService {
             updated_at: new Date(),
           },
         });
+
+        // 🧹 Redis Cache Invalidation — Sales Executive Dashboard
+        // Find all assignees of FM tasks for this lead
+        const fmAssignees = await tx.userLeadTask.findMany({
+          where: {
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            task_type: "Final Measurements",
+          },
+          select: { user_id: true },
+        });
+
+        // Clear dashboard cache for each assignee
+        for (const t of fmAssignees) {
+          await cache.del(`dashboard:tasks:${data.vendor_id}:${t.user_id}`);
+        }
 
         // 6️⃣ Create Action Log Entry
         const fmCount = response.measurementDocs.length;
@@ -651,6 +668,9 @@ export class FinalMeasurementService {
           created_by,
         },
       });
+
+      // 🧹 Invalidate Dashboard Task Cache (Sales Executive Dashboard)
+      await cache.del(`dashboard:tasks:${lead.vendor_id}:${assignee_user_id}`);
 
       // 4️⃣ Update lead status (if not Follow Up)
       let updatedLead: {
