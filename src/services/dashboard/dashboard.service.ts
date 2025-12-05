@@ -337,22 +337,23 @@ export class DashboardService {
     let bookingValueThisMonthArray: number[] = [];
     let bookingValueThisYearArray: number[] = [];
 
-    if (bookingStatus && (isAdmin || userBookingLeadIds.length > 0)) {
-      // Filter for admin/user scopes
+    if (bookingStatus) {
+      // Filter for admin/user scopes (userMappings)
       const userFilter = isAdmin
         ? {}
         : {
-            id: { in: userBookingLeadIds },
+            userMappings: {
+              some: { user_id, status: LeadUserStatus.active },
+            },
           };
 
       // Helper → get distinct booked leads in a date range
-      const getDistinctBookedLeads = async (start: Date, end: Date) => {
+      const getDistinctBookedLeads = async (start?: Date, end?: Date) => {
         return prisma.leadStatusLogs.findMany({
           where: {
             vendor_id,
             status_id: bookingStatus.id,
-            created_at: { gte: start, lte: end },
-            ...(isAdmin ? {} : { lead_id: { in: userBookingLeadIds } }),
+            ...(start && end ? { created_at: { gte: start, lte: end } } : {}),
           },
           distinct: ["lead_id"],
           select: { lead_id: true },
@@ -415,12 +416,7 @@ export class DashboardService {
 
         // OVERALL booking value (distinct Type 4 leads only)
         overall: await (async () => {
-          const leads = await prisma.leadStatusLogs.findMany({
-            where: { vendor_id, status_id: bookingStatus.id },
-            distinct: ["lead_id"],
-            select: { lead_id: true },
-          });
-
+          const leads = await getDistinctBookedLeads();
           return sumBookingValues(leads.map((l) => l.lead_id));
         })(),
       };
