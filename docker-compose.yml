@@ -1,43 +1,30 @@
 services:
-  # -------------------------
-  # STAGING REDIS (Default)
-  # -------------------------
   redis:
     image: redis:7-alpine
-    container_name: furnix-redis-staging
+    container_name: furnix-redis
     restart: always
     ports:
-      - "6379:6379" # staging redis on default port
-    command: ["redis-server", "--appendonly", "yes"]
+      - "6379:6379"
 
-  # -------------------------
-  # PRODUCTION REDIS
-  # -------------------------
   redis-prod:
     image: redis:7-alpine
     container_name: furnix-redis-prod
     restart: always
     ports:
-      - "6380:6379"  # host:container → prod redis uses 6380
-    command: ["redis-server", "--appendonly", "yes"]
-
-  # -------------------------
-  # STAGING BACKEND
-  # -------------------------
+      - "6380:6379"
   furnix-backend:
     build: .
-    container_name: furnix-backend-staging
+    container_name: furnix-backend
     restart: always
     ports:
-      - "7778:7777"   # staging API external → internal
+      - "7778:7777"
     env_file:
       - .env
     environment:
-      NODE_ENV: staging
-      REDIS_URL: redis://redis:6379   # connect to staging redis
-      DATABASE_URL: ${DATABASE_URL}
+      NODE_ENV: production
+      REDIS_URL: redis://redis:6379
     depends_on:
       - redis
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - "host.docker.internal:host-gateway"  # Important for Linux VPS
     command: sh -c "npx prisma generate && node dist/src/server.js"
