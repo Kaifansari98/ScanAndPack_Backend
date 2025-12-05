@@ -10,8 +10,9 @@
     "baseUrl": ".",
     "paths": {
       "@prisma/client": ["./generated/prisma_client/client"]
-    }
+    },
+    "rootDir": "."
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "generated"]
+  "include": ["src/**/*.ts", "generated/**/*.ts"],
+  "exclude": ["node_modules", "dist", "prisma/**", "prisma.config.ts"]
 }
