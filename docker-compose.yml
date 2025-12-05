@@ -5,6 +5,13 @@ services:
     restart: always
     ports:
       - "6379:6379"
+
+  redis-prod:
+    image: redis:7-alpine
+    container_name: furnix-redis-prod
+    restart: always
+    ports:
+      - "6380:6379"
   furnix-backend:
     build: .
     container_name: furnix-backend

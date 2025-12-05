@@ -260,7 +260,19 @@ export class DashboardService {
     let bookedThisMonthTotal = 0;
     let bookedThisYearTotal = 0;
 
-    if (bookingStatus) {
+    // User-scoped lead IDs for booking metrics (vendor + user)
+    const userBookingLeadIds = (
+      await prisma.leadUserMapping.findMany({
+        where: {
+          vendor_id,
+          user_id,
+          status: LeadUserStatus.active,
+        },
+        select: { lead_id: true },
+      })
+    ).map((m) => m.lead_id);
+
+    if (bookingStatus && (isAdmin || userBookingLeadIds.length > 0)) {
       // Helper function: return DISTINCT lead count
       const countDistinct = async (range: { start: Date; end: Date }) => {
         const logs = await prisma.leadStatusLogs.findMany({
@@ -268,6 +280,7 @@ export class DashboardService {
             vendor_id,
             status_id: bookingStatus.id,
             created_at: { gte: range.start, lte: range.end },
+            ...(isAdmin ? {} : { lead_id: { in: userBookingLeadIds } }),
           },
           distinct: ["lead_id"],
           select: { lead_id: true },
@@ -304,7 +317,11 @@ export class DashboardService {
 
       // ---------- OVERALL (distinct leads ever booked) ----------
       const overallLogs = await prisma.leadStatusLogs.findMany({
-        where: { vendor_id, status_id: bookingStatus.id },
+        where: {
+          vendor_id,
+          status_id: bookingStatus.id,
+          ...(isAdmin ? {} : { lead_id: { in: userBookingLeadIds } }),
+        },
         distinct: ["lead_id"],
         select: { lead_id: true },
       });
@@ -320,14 +337,12 @@ export class DashboardService {
     let bookingValueThisMonthArray: number[] = [];
     let bookingValueThisYearArray: number[] = [];
 
-    if (bookingStatus) {
+    if (bookingStatus && (isAdmin || userBookingLeadIds.length > 0)) {
       // Filter for admin/user scopes
       const userFilter = isAdmin
         ? {}
         : {
-            userMappings: {
-              some: { user_id, status: LeadUserStatus.active },
-            },
+            id: { in: userBookingLeadIds },
           };
 
       // Helper → get distinct booked leads in a date range
@@ -337,6 +352,7 @@ export class DashboardService {
             vendor_id,
             status_id: bookingStatus.id,
             created_at: { gte: start, lte: end },
+            ...(isAdmin ? {} : { lead_id: { in: userBookingLeadIds } }),
           },
           distinct: ["lead_id"],
           select: { lead_id: true },
