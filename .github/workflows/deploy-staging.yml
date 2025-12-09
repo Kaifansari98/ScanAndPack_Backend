@@ -1,4 +1,4 @@
-name: Deploy Furnixcrm Backend Staging
+name: 🚀 Deploy Backend to Staging
 
 on:
   push:
@@ -7,36 +7,39 @@ on:
 
 jobs:
   deploy:
+    name: Deploy Backend
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      # -----------------------
-      # Copy backend code to VPS
-      # -----------------------
-      - name: Copy Backend to VPS
-        uses: appleboy/scp-action@master
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_KEY }}
-          source: "./*"
-          target: "/var/www/furnixcrm/furnix-backend-staging"
-
-      # -----------------------
-      # SSH & Deploy
-      # -----------------------
-      - name: SSH into VPS and deploy backend container
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_KEY }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
           script: |
-            cd /var/www/furnixcrm/furnix-backend-staging
-            docker compose down || true
-            docker compose build --no-cache
-            docker compose up -d --force-recreate
-            docker image prune -f
+            echo "🔄 Pulling latest backend code..."
+            cd /var/www/furnixcrm/staging/backend-staging
+            git fetch --all
+            git reset --hard origin/staging
 
+            echo "📦 Installing dependencies..."
+            pnpm install --frozen-lockfile
+
+            echo "🔧 Generating Prisma Client..."
+            pnpm prisma generate
+
+            echo "🏗 Building backend..."
+            pnpm build
+
+            echo "🚀 Restarting PM2..."
+            pm2 restart furnix-backend-staging
+
+            echo "💾 Saving PM2 state..."
+            pm2 save
+
+            echo "🎉 Backend deployed successfully!"
