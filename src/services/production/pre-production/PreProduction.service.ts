@@ -1,4 +1,4 @@
-import { Prisma } from "../../../prisma/generated";
+import { LeadTaskStatus, Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 
 export class PreProductionService {
@@ -150,6 +150,16 @@ export class PreProductionService {
             `Order login record #${id} not found for vendor ${vendorId}`
           );
 
+        const normalizeCompletionFlag = (val: any) => {
+          if (typeof val === "string") {
+            const v = val.trim().toLowerCase();
+            return v === "true" || v === "1" || v === "yes";
+          }
+          return val === true || val === 1;
+        };
+
+        const completionFlag = normalizeCompletionFlag(is_completed);
+
         const updateData: any = {
           estimated_completion_date: estimated_completion_date
             ? new Date(estimated_completion_date)
@@ -158,7 +168,7 @@ export class PreProductionService {
         };
 
         // If user marks completed
-        if (is_completed) {
+        if (completionFlag) {
           updateData.is_completed = true;
           updateData.completion_date = new Date();
         }
@@ -167,6 +177,71 @@ export class PreProductionService {
           where: { id },
           data: updateData,
         });
+
+        const shouldCreateTask =
+          typeof estimated_completion_date !== "undefined" || completionFlag;
+
+        if (shouldCreateTask) {
+          const dueDate =
+            updateData.estimated_completion_date ||
+            updated.estimated_completion_date ||
+            new Date();
+
+          const status: LeadTaskStatus = completionFlag
+            ? "completed"
+            : "open";
+          const userId = Number(updated_by);
+
+          const remark = `${existing.item_type} - still needs to be marked as ready.`;
+
+          const existingTask = await prisma.userLeadTask.findFirst({
+            where: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: existing.account_id,
+              task_type: "Production Ready",
+              remark,
+            },
+            orderBy: { created_at: "desc" },
+          });
+
+          if (existingTask) {
+            const updateTaskData: any = {
+              due_date: new Date(dueDate),
+              remark,
+              status: completionFlag ? "completed" : existingTask.status,
+              updated_by: userId,
+              updated_at: new Date(),
+            };
+
+            if (completionFlag) {
+              updateTaskData.closed_by = userId;
+              updateTaskData.closed_at = new Date();
+            }
+
+            await prisma.userLeadTask.update({
+              where: { id: existingTask.id },
+              data: updateTaskData,
+            });
+          } else {
+            await prisma.userLeadTask.create({
+              data: {
+                vendor_id: vendorId,
+                lead_id: leadId,
+                account_id: existing.account_id,
+                user_id: userId,
+                task_type: "Production Ready",
+                due_date: new Date(dueDate),
+                remark,
+                status,
+                created_by: userId,
+                ...(completionFlag
+                  ? { closed_by: userId, closed_at: new Date() }
+                  : {}),
+              },
+            });
+          }
+        }
 
         results.push(updated);
       } catch (err: any) {
