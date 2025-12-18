@@ -1,7 +1,6 @@
 import { Router } from "express";
 import multer from "multer";
 import { BookingStageController } from "../../controllers/leadModuleControllers/bookingStage/bookingStage.controller";
-import { handleMulterError } from "../../middlewares/initial-site-measurement.middleware"
 
 const upload = multer();
 const bookingStageController = new BookingStageController();
@@ -88,7 +87,6 @@ const uploadFinalMeasurement = uploadCSPBooking.fields([
 bookingStageRouter.post(
   "/upload-CSP-booking",
   uploadFinalMeasurement,
-  handleMulterError,
   bookingStageController.uploadCSPBooking
 );
 

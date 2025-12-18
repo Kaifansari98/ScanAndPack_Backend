@@ -490,7 +490,6 @@ export class BookingStageController {
         lead_id,
         account_id,
         vendor_id,
-        assigned_to, // kept if frontend already sends it (not used now)
         created_by,
       } = req.body;
 
