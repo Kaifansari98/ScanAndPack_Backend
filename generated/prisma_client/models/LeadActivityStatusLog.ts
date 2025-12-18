@@ -268,10 +268,10 @@ export type LeadActivityStatusLogWhereInput = {
   activity_status_remark?: Prisma.StringNullableFilter<"LeadActivityStatusLog"> | string | null
   created_by?: Prisma.IntFilter<"LeadActivityStatusLog"> | number
   created_at?: Prisma.DateTimeFilter<"LeadActivityStatusLog"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type LeadActivityStatusLogOrderByWithRelationInput = {
@@ -284,10 +284,10 @@ export type LeadActivityStatusLogOrderByWithRelationInput = {
   activity_status_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
-  lead?: Prisma.LeadMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  lead?: Prisma.LeadMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type LeadActivityStatusLogWhereUniqueInput = Prisma.AtLeast<{
@@ -303,10 +303,10 @@ export type LeadActivityStatusLogWhereUniqueInput = Prisma.AtLeast<{
   activity_status_remark?: Prisma.StringNullableFilter<"LeadActivityStatusLog"> | string | null
   created_by?: Prisma.IntFilter<"LeadActivityStatusLog"> | number
   created_at?: Prisma.DateTimeFilter<"LeadActivityStatusLog"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type LeadActivityStatusLogOrderByWithAggregationInput = {
@@ -346,10 +346,10 @@ export type LeadActivityStatusLogCreateInput = {
   activity_status: $Enums.ActivityStatus
   activity_status_remark?: string | null
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadActivityStatusLogInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadActivityStatusLogInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadActivityStatusLogInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadActivityStatusLogInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadActivityStatusLogInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadActivityStatusLogInput
 }
 
 export type LeadActivityStatusLogUncheckedCreateInput = {
@@ -369,10 +369,10 @@ export type LeadActivityStatusLogUpdateInput = {
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
 }
 
 export type LeadActivityStatusLogUncheckedUpdateInput = {
@@ -656,8 +656,8 @@ export type LeadActivityStatusLogCreateWithoutVendorInput = {
   activity_status_remark?: string | null
   created_at?: Date | string
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadActivityStatusLogInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadActivityStatusLogInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadActivityStatusLogInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadActivityStatusLogInput
 }
 
 export type LeadActivityStatusLogUncheckedCreateWithoutVendorInput = {
@@ -717,9 +717,9 @@ export type LeadActivityStatusLogCreateWithoutCreatedByInput = {
   activity_status: $Enums.ActivityStatus
   activity_status_remark?: string | null
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadActivityStatusLogInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadActivityStatusLogInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLeadActivityStatusLogInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadActivityStatusLogInput
 }
 
 export type LeadActivityStatusLogUncheckedCreateWithoutCreatedByInput = {
@@ -764,9 +764,9 @@ export type LeadActivityStatusLogCreateWithoutLeadInput = {
   activity_status: $Enums.ActivityStatus
   activity_status_remark?: string | null
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadActivityStatusLogInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadActivityStatusLogInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadActivityStatusLogInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadActivityStatusLogInput
 }
 
 export type LeadActivityStatusLogUncheckedCreateWithoutLeadInput = {
@@ -811,9 +811,9 @@ export type LeadActivityStatusLogCreateWithoutAccountInput = {
   activity_status: $Enums.ActivityStatus
   activity_status_remark?: string | null
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadActivityStatusLogInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadActivityStatusLogInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadActivityStatusLogInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadActivityStatusLogInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadActivityStatusLogInput
 }
 
 export type LeadActivityStatusLogUncheckedCreateWithoutAccountInput = {
@@ -870,8 +870,8 @@ export type LeadActivityStatusLogUpdateWithoutVendorInput = {
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
 }
 
 export type LeadActivityStatusLogUncheckedUpdateWithoutVendorInput = {
@@ -912,9 +912,9 @@ export type LeadActivityStatusLogUpdateWithoutCreatedByInput = {
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
 }
 
 export type LeadActivityStatusLogUncheckedUpdateWithoutCreatedByInput = {
@@ -955,9 +955,9 @@ export type LeadActivityStatusLogUpdateWithoutLeadInput = {
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
 }
 
 export type LeadActivityStatusLogUncheckedUpdateWithoutLeadInput = {
@@ -998,9 +998,9 @@ export type LeadActivityStatusLogUpdateWithoutAccountInput = {
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInput
 }
 
 export type LeadActivityStatusLogUncheckedUpdateWithoutAccountInput = {
@@ -1037,10 +1037,10 @@ export type LeadActivityStatusLogSelect<ExtArgs extends runtime.Types.Extensions
   activity_status_remark?: boolean
   created_by?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadActivityStatusLog"]>
 
 export type LeadActivityStatusLogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1053,10 +1053,10 @@ export type LeadActivityStatusLogSelectCreateManyAndReturn<ExtArgs extends runti
   activity_status_remark?: boolean
   created_by?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadActivityStatusLog"]>
 
 export type LeadActivityStatusLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1069,10 +1069,10 @@ export type LeadActivityStatusLogSelectUpdateManyAndReturn<ExtArgs extends runti
   activity_status_remark?: boolean
   created_by?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadActivityStatusLog"]>
 
 export type LeadActivityStatusLogSelectScalar = {
@@ -1089,31 +1089,31 @@ export type LeadActivityStatusLogSelectScalar = {
 
 export type LeadActivityStatusLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "account_id" | "lead_id" | "user_id" | "activity_status" | "activity_status_remark" | "created_by" | "created_at", ExtArgs["result"]["leadActivityStatusLog"]>
 export type LeadActivityStatusLogInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadActivityStatusLogIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadActivityStatusLogIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $LeadActivityStatusLogPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadActivityStatusLog"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     account: Prisma.$AccountMasterPayload<ExtArgs>
-    lead: Prisma.$LeadMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    lead: Prisma.$LeadMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1519,10 +1519,10 @@ readonly fields: LeadActivityStatusLogFieldRefs;
  */
 export interface Prisma__LeadActivityStatusLogClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   account<T extends Prisma.AccountMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

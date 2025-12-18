@@ -1,10 +1,13 @@
 import { Router } from "express";
 import multer from "multer";
 import { BookingStageController } from "../../controllers/leadModuleControllers/bookingStage/bookingStage.controller";
+import { handleMulterError } from "src/middlewares/initial-site-measurement.middleware";
 
 const upload = multer();
 const bookingStageController = new BookingStageController();
 const bookingStageRouter = Router();
+
+const storage = multer.memoryStorage();
 
 bookingStageRouter.post(
   "/onboard",
@@ -59,6 +62,39 @@ bookingStageRouter.post(
 bookingStageRouter.get(
   "/payment-records/leadId/:leadId/payments",
   bookingStageController.getPayments
+);
+
+const uploadCSPBooking = multer({
+  storage,
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10MB
+  },
+  fileFilter: (req, file, cb) => {
+    const allowed = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/gif",
+    ];
+    if (allowed.includes(file.mimetype)) cb(null, true);
+    else cb(new Error("Only image files are allowed"));
+  },
+});
+
+const uploadFinalMeasurement = uploadCSPBooking.fields([
+  { name: "current_site_photos", maxCount: 10 },
+]);
+
+bookingStageRouter.post(
+  "/upload-CSP-booking",
+  uploadFinalMeasurement,
+  handleMulterError,
+  bookingStageController.uploadCSPBooking
+);
+
+bookingStageRouter.get(
+  "/get-CSP-booking/:vendorId/:leadId",
+  bookingStageController.getCSPBooking
 );
 
 export default bookingStageRouter;

@@ -240,10 +240,10 @@ export type MiscellaneousDocumentWhereInput = {
   document_id?: Prisma.IntFilter<"MiscellaneousDocument"> | number
   created_by?: Prisma.IntFilter<"MiscellaneousDocument"> | number
   created_at?: Prisma.DateTimeFilter<"MiscellaneousDocument"> | Date | string
-  miscellaneous?: Prisma.XOR<Prisma.MiscellaneousMasterScalarRelationFilter, Prisma.MiscellaneousMasterWhereInput>
-  document?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  document?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
+  miscellaneous?: Prisma.XOR<Prisma.MiscellaneousMasterScalarRelationFilter, Prisma.MiscellaneousMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type MiscellaneousDocumentOrderByWithRelationInput = {
@@ -253,10 +253,10 @@ export type MiscellaneousDocumentOrderByWithRelationInput = {
   document_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  miscellaneous?: Prisma.MiscellaneousMasterOrderByWithRelationInput
-  document?: Prisma.LeadDocumentsOrderByWithRelationInput
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  document?: Prisma.LeadDocumentsOrderByWithRelationInput
+  miscellaneous?: Prisma.MiscellaneousMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type MiscellaneousDocumentWhereUniqueInput = Prisma.AtLeast<{
@@ -269,10 +269,10 @@ export type MiscellaneousDocumentWhereUniqueInput = Prisma.AtLeast<{
   document_id?: Prisma.IntFilter<"MiscellaneousDocument"> | number
   created_by?: Prisma.IntFilter<"MiscellaneousDocument"> | number
   created_at?: Prisma.DateTimeFilter<"MiscellaneousDocument"> | Date | string
-  miscellaneous?: Prisma.XOR<Prisma.MiscellaneousMasterScalarRelationFilter, Prisma.MiscellaneousMasterWhereInput>
-  document?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  document?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
+  miscellaneous?: Prisma.XOR<Prisma.MiscellaneousMasterScalarRelationFilter, Prisma.MiscellaneousMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type MiscellaneousDocumentOrderByWithAggregationInput = {
@@ -303,10 +303,10 @@ export type MiscellaneousDocumentScalarWhereWithAggregatesInput = {
 
 export type MiscellaneousDocumentCreateInput = {
   created_at?: Date | string
-  miscellaneous: Prisma.MiscellaneousMasterCreateNestedOneWithoutDocumentsInput
-  document: Prisma.LeadDocumentsCreateNestedOneWithoutMiscellaneousDocumentInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousDocumentInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscDocumentsCreatedInput
+  document: Prisma.LeadDocumentsCreateNestedOneWithoutMiscellaneousDocumentInput
+  miscellaneous: Prisma.MiscellaneousMasterCreateNestedOneWithoutDocumentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousDocumentInput
 }
 
 export type MiscellaneousDocumentUncheckedCreateInput = {
@@ -320,10 +320,10 @@ export type MiscellaneousDocumentUncheckedCreateInput = {
 
 export type MiscellaneousDocumentUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  miscellaneous?: Prisma.MiscellaneousMasterUpdateOneRequiredWithoutDocumentsNestedInput
-  document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutMiscellaneousDocumentNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousDocumentNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscDocumentsCreatedNestedInput
+  document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutMiscellaneousDocumentNestedInput
+  miscellaneous?: Prisma.MiscellaneousMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousDocumentNestedInput
 }
 
 export type MiscellaneousDocumentUncheckedUpdateInput = {
@@ -580,9 +580,9 @@ export type MiscellaneousDocumentUncheckedUpdateManyWithoutMiscellaneousNestedIn
 
 export type MiscellaneousDocumentCreateWithoutVendorInput = {
   created_at?: Date | string
-  miscellaneous: Prisma.MiscellaneousMasterCreateNestedOneWithoutDocumentsInput
-  document: Prisma.LeadDocumentsCreateNestedOneWithoutMiscellaneousDocumentInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscDocumentsCreatedInput
+  document: Prisma.LeadDocumentsCreateNestedOneWithoutMiscellaneousDocumentInput
+  miscellaneous: Prisma.MiscellaneousMasterCreateNestedOneWithoutDocumentsInput
 }
 
 export type MiscellaneousDocumentUncheckedCreateWithoutVendorInput = {
@@ -633,8 +633,8 @@ export type MiscellaneousDocumentScalarWhereInput = {
 
 export type MiscellaneousDocumentCreateWithoutCreatedByInput = {
   created_at?: Date | string
-  miscellaneous: Prisma.MiscellaneousMasterCreateNestedOneWithoutDocumentsInput
   document: Prisma.LeadDocumentsCreateNestedOneWithoutMiscellaneousDocumentInput
+  miscellaneous: Prisma.MiscellaneousMasterCreateNestedOneWithoutDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousDocumentInput
 }
 
@@ -674,9 +674,9 @@ export type MiscellaneousDocumentUpdateManyWithWhereWithoutCreatedByInput = {
 
 export type MiscellaneousDocumentCreateWithoutDocumentInput = {
   created_at?: Date | string
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscDocumentsCreatedInput
   miscellaneous: Prisma.MiscellaneousMasterCreateNestedOneWithoutDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousDocumentInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscDocumentsCreatedInput
 }
 
 export type MiscellaneousDocumentUncheckedCreateWithoutDocumentInput = {
@@ -715,9 +715,9 @@ export type MiscellaneousDocumentUpdateManyWithWhereWithoutDocumentInput = {
 
 export type MiscellaneousDocumentCreateWithoutMiscellaneousInput = {
   created_at?: Date | string
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscDocumentsCreatedInput
   document: Prisma.LeadDocumentsCreateNestedOneWithoutMiscellaneousDocumentInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousDocumentInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscDocumentsCreatedInput
 }
 
 export type MiscellaneousDocumentUncheckedCreateWithoutMiscellaneousInput = {
@@ -764,9 +764,9 @@ export type MiscellaneousDocumentCreateManyVendorInput = {
 
 export type MiscellaneousDocumentUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  miscellaneous?: Prisma.MiscellaneousMasterUpdateOneRequiredWithoutDocumentsNestedInput
-  document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutMiscellaneousDocumentNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscDocumentsCreatedNestedInput
+  document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutMiscellaneousDocumentNestedInput
+  miscellaneous?: Prisma.MiscellaneousMasterUpdateOneRequiredWithoutDocumentsNestedInput
 }
 
 export type MiscellaneousDocumentUncheckedUpdateWithoutVendorInput = {
@@ -795,8 +795,8 @@ export type MiscellaneousDocumentCreateManyCreatedByInput = {
 
 export type MiscellaneousDocumentUpdateWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  miscellaneous?: Prisma.MiscellaneousMasterUpdateOneRequiredWithoutDocumentsNestedInput
   document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutMiscellaneousDocumentNestedInput
+  miscellaneous?: Prisma.MiscellaneousMasterUpdateOneRequiredWithoutDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousDocumentNestedInput
 }
 
@@ -826,9 +826,9 @@ export type MiscellaneousDocumentCreateManyDocumentInput = {
 
 export type MiscellaneousDocumentUpdateWithoutDocumentInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscDocumentsCreatedNestedInput
   miscellaneous?: Prisma.MiscellaneousMasterUpdateOneRequiredWithoutDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousDocumentNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscDocumentsCreatedNestedInput
 }
 
 export type MiscellaneousDocumentUncheckedUpdateWithoutDocumentInput = {
@@ -857,9 +857,9 @@ export type MiscellaneousDocumentCreateManyMiscellaneousInput = {
 
 export type MiscellaneousDocumentUpdateWithoutMiscellaneousInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscDocumentsCreatedNestedInput
   document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutMiscellaneousDocumentNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousDocumentNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscDocumentsCreatedNestedInput
 }
 
 export type MiscellaneousDocumentUncheckedUpdateWithoutMiscellaneousInput = {
@@ -887,10 +887,10 @@ export type MiscellaneousDocumentSelect<ExtArgs extends runtime.Types.Extensions
   document_id?: boolean
   created_by?: boolean
   created_at?: boolean
-  miscellaneous?: boolean | Prisma.MiscellaneousMasterDefaultArgs<ExtArgs>
-  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  miscellaneous?: boolean | Prisma.MiscellaneousMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["miscellaneousDocument"]>
 
 export type MiscellaneousDocumentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -900,10 +900,10 @@ export type MiscellaneousDocumentSelectCreateManyAndReturn<ExtArgs extends runti
   document_id?: boolean
   created_by?: boolean
   created_at?: boolean
-  miscellaneous?: boolean | Prisma.MiscellaneousMasterDefaultArgs<ExtArgs>
-  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  miscellaneous?: boolean | Prisma.MiscellaneousMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["miscellaneousDocument"]>
 
 export type MiscellaneousDocumentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -913,10 +913,10 @@ export type MiscellaneousDocumentSelectUpdateManyAndReturn<ExtArgs extends runti
   document_id?: boolean
   created_by?: boolean
   created_at?: boolean
-  miscellaneous?: boolean | Prisma.MiscellaneousMasterDefaultArgs<ExtArgs>
-  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  miscellaneous?: boolean | Prisma.MiscellaneousMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["miscellaneousDocument"]>
 
 export type MiscellaneousDocumentSelectScalar = {
@@ -930,31 +930,31 @@ export type MiscellaneousDocumentSelectScalar = {
 
 export type MiscellaneousDocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "miscellaneous_id" | "document_id" | "created_by" | "created_at", ExtArgs["result"]["miscellaneousDocument"]>
 export type MiscellaneousDocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  miscellaneous?: boolean | Prisma.MiscellaneousMasterDefaultArgs<ExtArgs>
-  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  miscellaneous?: boolean | Prisma.MiscellaneousMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type MiscellaneousDocumentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  miscellaneous?: boolean | Prisma.MiscellaneousMasterDefaultArgs<ExtArgs>
-  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  miscellaneous?: boolean | Prisma.MiscellaneousMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type MiscellaneousDocumentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  miscellaneous?: boolean | Prisma.MiscellaneousMasterDefaultArgs<ExtArgs>
-  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  miscellaneous?: boolean | Prisma.MiscellaneousMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $MiscellaneousDocumentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "MiscellaneousDocument"
   objects: {
-    miscellaneous: Prisma.$MiscellaneousMasterPayload<ExtArgs>
-    document: Prisma.$LeadDocumentsPayload<ExtArgs>
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    document: Prisma.$LeadDocumentsPayload<ExtArgs>
+    miscellaneous: Prisma.$MiscellaneousMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1357,10 +1357,10 @@ readonly fields: MiscellaneousDocumentFieldRefs;
  */
 export interface Prisma__MiscellaneousDocumentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  miscellaneous<T extends Prisma.MiscellaneousMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MiscellaneousMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__MiscellaneousMasterClient<runtime.Types.Result.GetResult<Prisma.$MiscellaneousMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  document<T extends Prisma.LeadDocumentsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocumentsDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadDocumentsClient<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  document<T extends Prisma.LeadDocumentsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocumentsDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadDocumentsClient<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  miscellaneous<T extends Prisma.MiscellaneousMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MiscellaneousMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__MiscellaneousMasterClient<runtime.Types.Result.GetResult<Prisma.$MiscellaneousMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

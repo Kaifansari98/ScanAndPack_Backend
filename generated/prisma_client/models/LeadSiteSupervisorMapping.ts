@@ -260,11 +260,11 @@ export type LeadSiteSupervisorMappingWhereInput = {
   status?: Prisma.EnumSupervisorStatusFilter<"LeadSiteSupervisorMapping"> | $Enums.SupervisorStatus
   created_by?: Prisma.IntFilter<"LeadSiteSupervisorMapping"> | number
   created_at?: Prisma.DateTimeFilter<"LeadSiteSupervisorMapping"> | Date | string
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  supervisor?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  supervisor?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type LeadSiteSupervisorMappingOrderByWithRelationInput = {
@@ -276,11 +276,11 @@ export type LeadSiteSupervisorMappingOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  lead?: Prisma.LeadMasterOrderByWithRelationInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  supervisor?: Prisma.UserMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  lead?: Prisma.LeadMasterOrderByWithRelationInput
+  supervisor?: Prisma.UserMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type LeadSiteSupervisorMappingWhereUniqueInput = Prisma.AtLeast<{
@@ -295,11 +295,11 @@ export type LeadSiteSupervisorMappingWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumSupervisorStatusFilter<"LeadSiteSupervisorMapping"> | $Enums.SupervisorStatus
   created_by?: Prisma.IntFilter<"LeadSiteSupervisorMapping"> | number
   created_at?: Prisma.DateTimeFilter<"LeadSiteSupervisorMapping"> | Date | string
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  supervisor?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  supervisor?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type LeadSiteSupervisorMappingOrderByWithAggregationInput = {
@@ -335,11 +335,11 @@ export type LeadSiteSupervisorMappingScalarWhereWithAggregatesInput = {
 export type LeadSiteSupervisorMappingCreateInput = {
   status?: $Enums.SupervisorStatus
   created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutSiteSupervisorsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutSiteSupervisorsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteSupervisorsInput
-  supervisor: Prisma.UserMasterCreateNestedOneWithoutSupervisorMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutSupervisorMappingsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutSiteSupervisorsInput
+  supervisor: Prisma.UserMasterCreateNestedOneWithoutSupervisorMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteSupervisorsInput
 }
 
 export type LeadSiteSupervisorMappingUncheckedCreateInput = {
@@ -356,11 +356,11 @@ export type LeadSiteSupervisorMappingUncheckedCreateInput = {
 export type LeadSiteSupervisorMappingUpdateInput = {
   status?: Prisma.EnumSupervisorStatusFieldUpdateOperationsInput | $Enums.SupervisorStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
-  supervisor?: Prisma.UserMasterUpdateOneRequiredWithoutSupervisorMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSupervisorMappingsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
+  supervisor?: Prisma.UserMasterUpdateOneRequiredWithoutSupervisorMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
 }
 
 export type LeadSiteSupervisorMappingUncheckedUpdateInput = {
@@ -504,13 +504,6 @@ export type LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
   deleteMany?: Prisma.LeadSiteSupervisorMappingScalarWhereInput | Prisma.LeadSiteSupervisorMappingScalarWhereInput[]
 }
 
-export type LeadSiteSupervisorMappingCreateNestedManyWithoutSupervisorInput = {
-  create?: Prisma.XOR<Prisma.LeadSiteSupervisorMappingCreateWithoutSupervisorInput, Prisma.LeadSiteSupervisorMappingUncheckedCreateWithoutSupervisorInput> | Prisma.LeadSiteSupervisorMappingCreateWithoutSupervisorInput[] | Prisma.LeadSiteSupervisorMappingUncheckedCreateWithoutSupervisorInput[]
-  connectOrCreate?: Prisma.LeadSiteSupervisorMappingCreateOrConnectWithoutSupervisorInput | Prisma.LeadSiteSupervisorMappingCreateOrConnectWithoutSupervisorInput[]
-  createMany?: Prisma.LeadSiteSupervisorMappingCreateManySupervisorInputEnvelope
-  connect?: Prisma.LeadSiteSupervisorMappingWhereUniqueInput | Prisma.LeadSiteSupervisorMappingWhereUniqueInput[]
-}
-
 export type LeadSiteSupervisorMappingCreateNestedManyWithoutCreatedByInput = {
   create?: Prisma.XOR<Prisma.LeadSiteSupervisorMappingCreateWithoutCreatedByInput, Prisma.LeadSiteSupervisorMappingUncheckedCreateWithoutCreatedByInput> | Prisma.LeadSiteSupervisorMappingCreateWithoutCreatedByInput[] | Prisma.LeadSiteSupervisorMappingUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.LeadSiteSupervisorMappingCreateOrConnectWithoutCreatedByInput | Prisma.LeadSiteSupervisorMappingCreateOrConnectWithoutCreatedByInput[]
@@ -518,7 +511,7 @@ export type LeadSiteSupervisorMappingCreateNestedManyWithoutCreatedByInput = {
   connect?: Prisma.LeadSiteSupervisorMappingWhereUniqueInput | Prisma.LeadSiteSupervisorMappingWhereUniqueInput[]
 }
 
-export type LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutSupervisorInput = {
+export type LeadSiteSupervisorMappingCreateNestedManyWithoutSupervisorInput = {
   create?: Prisma.XOR<Prisma.LeadSiteSupervisorMappingCreateWithoutSupervisorInput, Prisma.LeadSiteSupervisorMappingUncheckedCreateWithoutSupervisorInput> | Prisma.LeadSiteSupervisorMappingCreateWithoutSupervisorInput[] | Prisma.LeadSiteSupervisorMappingUncheckedCreateWithoutSupervisorInput[]
   connectOrCreate?: Prisma.LeadSiteSupervisorMappingCreateOrConnectWithoutSupervisorInput | Prisma.LeadSiteSupervisorMappingCreateOrConnectWithoutSupervisorInput[]
   createMany?: Prisma.LeadSiteSupervisorMappingCreateManySupervisorInputEnvelope
@@ -532,18 +525,11 @@ export type LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutCreatedByIn
   connect?: Prisma.LeadSiteSupervisorMappingWhereUniqueInput | Prisma.LeadSiteSupervisorMappingWhereUniqueInput[]
 }
 
-export type LeadSiteSupervisorMappingUpdateManyWithoutSupervisorNestedInput = {
+export type LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutSupervisorInput = {
   create?: Prisma.XOR<Prisma.LeadSiteSupervisorMappingCreateWithoutSupervisorInput, Prisma.LeadSiteSupervisorMappingUncheckedCreateWithoutSupervisorInput> | Prisma.LeadSiteSupervisorMappingCreateWithoutSupervisorInput[] | Prisma.LeadSiteSupervisorMappingUncheckedCreateWithoutSupervisorInput[]
   connectOrCreate?: Prisma.LeadSiteSupervisorMappingCreateOrConnectWithoutSupervisorInput | Prisma.LeadSiteSupervisorMappingCreateOrConnectWithoutSupervisorInput[]
-  upsert?: Prisma.LeadSiteSupervisorMappingUpsertWithWhereUniqueWithoutSupervisorInput | Prisma.LeadSiteSupervisorMappingUpsertWithWhereUniqueWithoutSupervisorInput[]
   createMany?: Prisma.LeadSiteSupervisorMappingCreateManySupervisorInputEnvelope
-  set?: Prisma.LeadSiteSupervisorMappingWhereUniqueInput | Prisma.LeadSiteSupervisorMappingWhereUniqueInput[]
-  disconnect?: Prisma.LeadSiteSupervisorMappingWhereUniqueInput | Prisma.LeadSiteSupervisorMappingWhereUniqueInput[]
-  delete?: Prisma.LeadSiteSupervisorMappingWhereUniqueInput | Prisma.LeadSiteSupervisorMappingWhereUniqueInput[]
   connect?: Prisma.LeadSiteSupervisorMappingWhereUniqueInput | Prisma.LeadSiteSupervisorMappingWhereUniqueInput[]
-  update?: Prisma.LeadSiteSupervisorMappingUpdateWithWhereUniqueWithoutSupervisorInput | Prisma.LeadSiteSupervisorMappingUpdateWithWhereUniqueWithoutSupervisorInput[]
-  updateMany?: Prisma.LeadSiteSupervisorMappingUpdateManyWithWhereWithoutSupervisorInput | Prisma.LeadSiteSupervisorMappingUpdateManyWithWhereWithoutSupervisorInput[]
-  deleteMany?: Prisma.LeadSiteSupervisorMappingScalarWhereInput | Prisma.LeadSiteSupervisorMappingScalarWhereInput[]
 }
 
 export type LeadSiteSupervisorMappingUpdateManyWithoutCreatedByNestedInput = {
@@ -560,7 +546,7 @@ export type LeadSiteSupervisorMappingUpdateManyWithoutCreatedByNestedInput = {
   deleteMany?: Prisma.LeadSiteSupervisorMappingScalarWhereInput | Prisma.LeadSiteSupervisorMappingScalarWhereInput[]
 }
 
-export type LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorNestedInput = {
+export type LeadSiteSupervisorMappingUpdateManyWithoutSupervisorNestedInput = {
   create?: Prisma.XOR<Prisma.LeadSiteSupervisorMappingCreateWithoutSupervisorInput, Prisma.LeadSiteSupervisorMappingUncheckedCreateWithoutSupervisorInput> | Prisma.LeadSiteSupervisorMappingCreateWithoutSupervisorInput[] | Prisma.LeadSiteSupervisorMappingUncheckedCreateWithoutSupervisorInput[]
   connectOrCreate?: Prisma.LeadSiteSupervisorMappingCreateOrConnectWithoutSupervisorInput | Prisma.LeadSiteSupervisorMappingCreateOrConnectWithoutSupervisorInput[]
   upsert?: Prisma.LeadSiteSupervisorMappingUpsertWithWhereUniqueWithoutSupervisorInput | Prisma.LeadSiteSupervisorMappingUpsertWithWhereUniqueWithoutSupervisorInput[]
@@ -585,6 +571,20 @@ export type LeadSiteSupervisorMappingUncheckedUpdateManyWithoutCreatedByNestedIn
   connect?: Prisma.LeadSiteSupervisorMappingWhereUniqueInput | Prisma.LeadSiteSupervisorMappingWhereUniqueInput[]
   update?: Prisma.LeadSiteSupervisorMappingUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.LeadSiteSupervisorMappingUpdateWithWhereUniqueWithoutCreatedByInput[]
   updateMany?: Prisma.LeadSiteSupervisorMappingUpdateManyWithWhereWithoutCreatedByInput | Prisma.LeadSiteSupervisorMappingUpdateManyWithWhereWithoutCreatedByInput[]
+  deleteMany?: Prisma.LeadSiteSupervisorMappingScalarWhereInput | Prisma.LeadSiteSupervisorMappingScalarWhereInput[]
+}
+
+export type LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadSiteSupervisorMappingCreateWithoutSupervisorInput, Prisma.LeadSiteSupervisorMappingUncheckedCreateWithoutSupervisorInput> | Prisma.LeadSiteSupervisorMappingCreateWithoutSupervisorInput[] | Prisma.LeadSiteSupervisorMappingUncheckedCreateWithoutSupervisorInput[]
+  connectOrCreate?: Prisma.LeadSiteSupervisorMappingCreateOrConnectWithoutSupervisorInput | Prisma.LeadSiteSupervisorMappingCreateOrConnectWithoutSupervisorInput[]
+  upsert?: Prisma.LeadSiteSupervisorMappingUpsertWithWhereUniqueWithoutSupervisorInput | Prisma.LeadSiteSupervisorMappingUpsertWithWhereUniqueWithoutSupervisorInput[]
+  createMany?: Prisma.LeadSiteSupervisorMappingCreateManySupervisorInputEnvelope
+  set?: Prisma.LeadSiteSupervisorMappingWhereUniqueInput | Prisma.LeadSiteSupervisorMappingWhereUniqueInput[]
+  disconnect?: Prisma.LeadSiteSupervisorMappingWhereUniqueInput | Prisma.LeadSiteSupervisorMappingWhereUniqueInput[]
+  delete?: Prisma.LeadSiteSupervisorMappingWhereUniqueInput | Prisma.LeadSiteSupervisorMappingWhereUniqueInput[]
+  connect?: Prisma.LeadSiteSupervisorMappingWhereUniqueInput | Prisma.LeadSiteSupervisorMappingWhereUniqueInput[]
+  update?: Prisma.LeadSiteSupervisorMappingUpdateWithWhereUniqueWithoutSupervisorInput | Prisma.LeadSiteSupervisorMappingUpdateWithWhereUniqueWithoutSupervisorInput[]
+  updateMany?: Prisma.LeadSiteSupervisorMappingUpdateManyWithWhereWithoutSupervisorInput | Prisma.LeadSiteSupervisorMappingUpdateManyWithWhereWithoutSupervisorInput[]
   deleteMany?: Prisma.LeadSiteSupervisorMappingScalarWhereInput | Prisma.LeadSiteSupervisorMappingScalarWhereInput[]
 }
 
@@ -679,10 +679,10 @@ export type EnumSupervisorStatusFieldUpdateOperationsInput = {
 export type LeadSiteSupervisorMappingCreateWithoutVendorInput = {
   status?: $Enums.SupervisorStatus
   created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutSiteSupervisorsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutSiteSupervisorsInput
-  supervisor: Prisma.UserMasterCreateNestedOneWithoutSupervisorMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutSupervisorMappingsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutSiteSupervisorsInput
+  supervisor: Prisma.UserMasterCreateNestedOneWithoutSupervisorMappingsInput
 }
 
 export type LeadSiteSupervisorMappingUncheckedCreateWithoutVendorInput = {
@@ -735,42 +735,13 @@ export type LeadSiteSupervisorMappingScalarWhereInput = {
   created_at?: Prisma.DateTimeFilter<"LeadSiteSupervisorMapping"> | Date | string
 }
 
-export type LeadSiteSupervisorMappingCreateWithoutSupervisorInput = {
-  status?: $Enums.SupervisorStatus
-  created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutSiteSupervisorsInput
-  account: Prisma.AccountMasterCreateNestedOneWithoutSiteSupervisorsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteSupervisorsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutSupervisorMappingsCreatedInput
-}
-
-export type LeadSiteSupervisorMappingUncheckedCreateWithoutSupervisorInput = {
-  id?: number
-  lead_id: number
-  account_id: number
-  vendor_id: number
-  status?: $Enums.SupervisorStatus
-  created_by: number
-  created_at?: Date | string
-}
-
-export type LeadSiteSupervisorMappingCreateOrConnectWithoutSupervisorInput = {
-  where: Prisma.LeadSiteSupervisorMappingWhereUniqueInput
-  create: Prisma.XOR<Prisma.LeadSiteSupervisorMappingCreateWithoutSupervisorInput, Prisma.LeadSiteSupervisorMappingUncheckedCreateWithoutSupervisorInput>
-}
-
-export type LeadSiteSupervisorMappingCreateManySupervisorInputEnvelope = {
-  data: Prisma.LeadSiteSupervisorMappingCreateManySupervisorInput | Prisma.LeadSiteSupervisorMappingCreateManySupervisorInput[]
-  skipDuplicates?: boolean
-}
-
 export type LeadSiteSupervisorMappingCreateWithoutCreatedByInput = {
   status?: $Enums.SupervisorStatus
   created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutSiteSupervisorsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutSiteSupervisorsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteSupervisorsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutSiteSupervisorsInput
   supervisor: Prisma.UserMasterCreateNestedOneWithoutSupervisorMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteSupervisorsInput
 }
 
 export type LeadSiteSupervisorMappingUncheckedCreateWithoutCreatedByInput = {
@@ -793,20 +764,33 @@ export type LeadSiteSupervisorMappingCreateManyCreatedByInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type LeadSiteSupervisorMappingUpsertWithWhereUniqueWithoutSupervisorInput = {
+export type LeadSiteSupervisorMappingCreateWithoutSupervisorInput = {
+  status?: $Enums.SupervisorStatus
+  created_at?: Date | string
+  account: Prisma.AccountMasterCreateNestedOneWithoutSiteSupervisorsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutSupervisorMappingsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutSiteSupervisorsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteSupervisorsInput
+}
+
+export type LeadSiteSupervisorMappingUncheckedCreateWithoutSupervisorInput = {
+  id?: number
+  lead_id: number
+  account_id: number
+  vendor_id: number
+  status?: $Enums.SupervisorStatus
+  created_by: number
+  created_at?: Date | string
+}
+
+export type LeadSiteSupervisorMappingCreateOrConnectWithoutSupervisorInput = {
   where: Prisma.LeadSiteSupervisorMappingWhereUniqueInput
-  update: Prisma.XOR<Prisma.LeadSiteSupervisorMappingUpdateWithoutSupervisorInput, Prisma.LeadSiteSupervisorMappingUncheckedUpdateWithoutSupervisorInput>
   create: Prisma.XOR<Prisma.LeadSiteSupervisorMappingCreateWithoutSupervisorInput, Prisma.LeadSiteSupervisorMappingUncheckedCreateWithoutSupervisorInput>
 }
 
-export type LeadSiteSupervisorMappingUpdateWithWhereUniqueWithoutSupervisorInput = {
-  where: Prisma.LeadSiteSupervisorMappingWhereUniqueInput
-  data: Prisma.XOR<Prisma.LeadSiteSupervisorMappingUpdateWithoutSupervisorInput, Prisma.LeadSiteSupervisorMappingUncheckedUpdateWithoutSupervisorInput>
-}
-
-export type LeadSiteSupervisorMappingUpdateManyWithWhereWithoutSupervisorInput = {
-  where: Prisma.LeadSiteSupervisorMappingScalarWhereInput
-  data: Prisma.XOR<Prisma.LeadSiteSupervisorMappingUpdateManyMutationInput, Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorInput>
+export type LeadSiteSupervisorMappingCreateManySupervisorInputEnvelope = {
+  data: Prisma.LeadSiteSupervisorMappingCreateManySupervisorInput | Prisma.LeadSiteSupervisorMappingCreateManySupervisorInput[]
+  skipDuplicates?: boolean
 }
 
 export type LeadSiteSupervisorMappingUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -825,13 +809,29 @@ export type LeadSiteSupervisorMappingUpdateManyWithWhereWithoutCreatedByInput = 
   data: Prisma.XOR<Prisma.LeadSiteSupervisorMappingUpdateManyMutationInput, Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutCreatedByInput>
 }
 
+export type LeadSiteSupervisorMappingUpsertWithWhereUniqueWithoutSupervisorInput = {
+  where: Prisma.LeadSiteSupervisorMappingWhereUniqueInput
+  update: Prisma.XOR<Prisma.LeadSiteSupervisorMappingUpdateWithoutSupervisorInput, Prisma.LeadSiteSupervisorMappingUncheckedUpdateWithoutSupervisorInput>
+  create: Prisma.XOR<Prisma.LeadSiteSupervisorMappingCreateWithoutSupervisorInput, Prisma.LeadSiteSupervisorMappingUncheckedCreateWithoutSupervisorInput>
+}
+
+export type LeadSiteSupervisorMappingUpdateWithWhereUniqueWithoutSupervisorInput = {
+  where: Prisma.LeadSiteSupervisorMappingWhereUniqueInput
+  data: Prisma.XOR<Prisma.LeadSiteSupervisorMappingUpdateWithoutSupervisorInput, Prisma.LeadSiteSupervisorMappingUncheckedUpdateWithoutSupervisorInput>
+}
+
+export type LeadSiteSupervisorMappingUpdateManyWithWhereWithoutSupervisorInput = {
+  where: Prisma.LeadSiteSupervisorMappingScalarWhereInput
+  data: Prisma.XOR<Prisma.LeadSiteSupervisorMappingUpdateManyMutationInput, Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorInput>
+}
+
 export type LeadSiteSupervisorMappingCreateWithoutLeadInput = {
   status?: $Enums.SupervisorStatus
   created_at?: Date | string
   account: Prisma.AccountMasterCreateNestedOneWithoutSiteSupervisorsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteSupervisorsInput
-  supervisor: Prisma.UserMasterCreateNestedOneWithoutSupervisorMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutSupervisorMappingsCreatedInput
+  supervisor: Prisma.UserMasterCreateNestedOneWithoutSupervisorMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteSupervisorsInput
 }
 
 export type LeadSiteSupervisorMappingUncheckedCreateWithoutLeadInput = {
@@ -873,10 +873,10 @@ export type LeadSiteSupervisorMappingUpdateManyWithWhereWithoutLeadInput = {
 export type LeadSiteSupervisorMappingCreateWithoutAccountInput = {
   status?: $Enums.SupervisorStatus
   created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutSiteSupervisorsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteSupervisorsInput
-  supervisor: Prisma.UserMasterCreateNestedOneWithoutSupervisorMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutSupervisorMappingsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutSiteSupervisorsInput
+  supervisor: Prisma.UserMasterCreateNestedOneWithoutSupervisorMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteSupervisorsInput
 }
 
 export type LeadSiteSupervisorMappingUncheckedCreateWithoutAccountInput = {
@@ -928,10 +928,10 @@ export type LeadSiteSupervisorMappingCreateManyVendorInput = {
 export type LeadSiteSupervisorMappingUpdateWithoutVendorInput = {
   status?: Prisma.EnumSupervisorStatusFieldUpdateOperationsInput | $Enums.SupervisorStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
-  supervisor?: Prisma.UserMasterUpdateOneRequiredWithoutSupervisorMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSupervisorMappingsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
+  supervisor?: Prisma.UserMasterUpdateOneRequiredWithoutSupervisorMappingsNestedInput
 }
 
 export type LeadSiteSupervisorMappingUncheckedUpdateWithoutVendorInput = {
@@ -954,16 +954,6 @@ export type LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type LeadSiteSupervisorMappingCreateManySupervisorInput = {
-  id?: number
-  lead_id: number
-  account_id: number
-  vendor_id: number
-  status?: $Enums.SupervisorStatus
-  created_by: number
-  created_at?: Date | string
-}
-
 export type LeadSiteSupervisorMappingCreateManyCreatedByInput = {
   id?: number
   lead_id: number
@@ -974,42 +964,23 @@ export type LeadSiteSupervisorMappingCreateManyCreatedByInput = {
   created_at?: Date | string
 }
 
-export type LeadSiteSupervisorMappingUpdateWithoutSupervisorInput = {
-  status?: Prisma.EnumSupervisorStatusFieldUpdateOperationsInput | $Enums.SupervisorStatus
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
-  account?: Prisma.AccountMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSupervisorMappingsCreatedNestedInput
-}
-
-export type LeadSiteSupervisorMappingUncheckedUpdateWithoutSupervisorInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumSupervisorStatusFieldUpdateOperationsInput | $Enums.SupervisorStatus
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumSupervisorStatusFieldUpdateOperationsInput | $Enums.SupervisorStatus
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type LeadSiteSupervisorMappingCreateManySupervisorInput = {
+  id?: number
+  lead_id: number
+  account_id: number
+  vendor_id: number
+  status?: $Enums.SupervisorStatus
+  created_by: number
+  created_at?: Date | string
 }
 
 export type LeadSiteSupervisorMappingUpdateWithoutCreatedByInput = {
   status?: Prisma.EnumSupervisorStatusFieldUpdateOperationsInput | $Enums.SupervisorStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
   supervisor?: Prisma.UserMasterUpdateOneRequiredWithoutSupervisorMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
 }
 
 export type LeadSiteSupervisorMappingUncheckedUpdateWithoutCreatedByInput = {
@@ -1032,6 +1003,35 @@ export type LeadSiteSupervisorMappingUncheckedUpdateManyWithoutCreatedByInput = 
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type LeadSiteSupervisorMappingUpdateWithoutSupervisorInput = {
+  status?: Prisma.EnumSupervisorStatusFieldUpdateOperationsInput | $Enums.SupervisorStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSupervisorMappingsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
+}
+
+export type LeadSiteSupervisorMappingUncheckedUpdateWithoutSupervisorInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumSupervisorStatusFieldUpdateOperationsInput | $Enums.SupervisorStatus
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumSupervisorStatusFieldUpdateOperationsInput | $Enums.SupervisorStatus
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type LeadSiteSupervisorMappingCreateManyLeadInput = {
   id?: number
   account_id: number
@@ -1046,9 +1046,9 @@ export type LeadSiteSupervisorMappingUpdateWithoutLeadInput = {
   status?: Prisma.EnumSupervisorStatusFieldUpdateOperationsInput | $Enums.SupervisorStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
-  supervisor?: Prisma.UserMasterUpdateOneRequiredWithoutSupervisorMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSupervisorMappingsCreatedNestedInput
+  supervisor?: Prisma.UserMasterUpdateOneRequiredWithoutSupervisorMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
 }
 
 export type LeadSiteSupervisorMappingUncheckedUpdateWithoutLeadInput = {
@@ -1084,10 +1084,10 @@ export type LeadSiteSupervisorMappingCreateManyAccountInput = {
 export type LeadSiteSupervisorMappingUpdateWithoutAccountInput = {
   status?: Prisma.EnumSupervisorStatusFieldUpdateOperationsInput | $Enums.SupervisorStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
-  supervisor?: Prisma.UserMasterUpdateOneRequiredWithoutSupervisorMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSupervisorMappingsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
+  supervisor?: Prisma.UserMasterUpdateOneRequiredWithoutSupervisorMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteSupervisorsNestedInput
 }
 
 export type LeadSiteSupervisorMappingUncheckedUpdateWithoutAccountInput = {
@@ -1121,11 +1121,11 @@ export type LeadSiteSupervisorMappingSelect<ExtArgs extends runtime.Types.Extens
   status?: boolean
   created_by?: boolean
   created_at?: boolean
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  supervisor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  supervisor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadSiteSupervisorMapping"]>
 
 export type LeadSiteSupervisorMappingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1137,11 +1137,11 @@ export type LeadSiteSupervisorMappingSelectCreateManyAndReturn<ExtArgs extends r
   status?: boolean
   created_by?: boolean
   created_at?: boolean
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  supervisor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  supervisor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadSiteSupervisorMapping"]>
 
 export type LeadSiteSupervisorMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1153,11 +1153,11 @@ export type LeadSiteSupervisorMappingSelectUpdateManyAndReturn<ExtArgs extends r
   status?: boolean
   created_by?: boolean
   created_at?: boolean
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  supervisor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  supervisor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadSiteSupervisorMapping"]>
 
 export type LeadSiteSupervisorMappingSelectScalar = {
@@ -1173,35 +1173,35 @@ export type LeadSiteSupervisorMappingSelectScalar = {
 
 export type LeadSiteSupervisorMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "vendor_id" | "user_id" | "status" | "created_by" | "created_at", ExtArgs["result"]["leadSiteSupervisorMapping"]>
 export type LeadSiteSupervisorMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  supervisor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  supervisor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadSiteSupervisorMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  supervisor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  supervisor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadSiteSupervisorMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  supervisor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  supervisor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $LeadSiteSupervisorMappingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadSiteSupervisorMapping"
   objects: {
-    lead: Prisma.$LeadMasterPayload<ExtArgs>
     account: Prisma.$AccountMasterPayload<ExtArgs>
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    supervisor: Prisma.$UserMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    lead: Prisma.$LeadMasterPayload<ExtArgs>
+    supervisor: Prisma.$UserMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1606,11 +1606,11 @@ readonly fields: LeadSiteSupervisorMappingFieldRefs;
  */
 export interface Prisma__LeadSiteSupervisorMappingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   account<T extends Prisma.AccountMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  supervisor<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  supervisor<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

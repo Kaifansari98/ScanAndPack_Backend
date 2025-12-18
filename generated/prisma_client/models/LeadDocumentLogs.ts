@@ -264,12 +264,12 @@ export type LeadDocumentLogsWhereInput = {
   lead_logs_id?: Prisma.IntFilter<"LeadDocumentLogs"> | number
   created_at?: Prisma.DateTimeFilter<"LeadDocumentLogs"> | Date | string
   created_by?: Prisma.IntFilter<"LeadDocumentLogs"> | number
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
-  doc?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
-  detailed_log?: Prisma.XOR<Prisma.LeadDetailedLogsScalarRelationFilter, Prisma.LeadDetailedLogsWhereInput>
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  doc?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  detailed_log?: Prisma.XOR<Prisma.LeadDetailedLogsScalarRelationFilter, Prisma.LeadDetailedLogsWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type LeadDocumentLogsOrderByWithRelationInput = {
@@ -281,12 +281,12 @@ export type LeadDocumentLogsOrderByWithRelationInput = {
   lead_logs_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  lead?: Prisma.LeadMasterOrderByWithRelationInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
-  doc?: Prisma.LeadDocumentsOrderByWithRelationInput
-  detailed_log?: Prisma.LeadDetailedLogsOrderByWithRelationInput
   user?: Prisma.UserMasterOrderByWithRelationInput
+  doc?: Prisma.LeadDocumentsOrderByWithRelationInput
+  lead?: Prisma.LeadMasterOrderByWithRelationInput
+  detailed_log?: Prisma.LeadDetailedLogsOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type LeadDocumentLogsWhereUniqueInput = Prisma.AtLeast<{
@@ -301,12 +301,12 @@ export type LeadDocumentLogsWhereUniqueInput = Prisma.AtLeast<{
   lead_logs_id?: Prisma.IntFilter<"LeadDocumentLogs"> | number
   created_at?: Prisma.DateTimeFilter<"LeadDocumentLogs"> | Date | string
   created_by?: Prisma.IntFilter<"LeadDocumentLogs"> | number
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
-  doc?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
-  detailed_log?: Prisma.XOR<Prisma.LeadDetailedLogsScalarRelationFilter, Prisma.LeadDetailedLogsWhereInput>
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  doc?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  detailed_log?: Prisma.XOR<Prisma.LeadDetailedLogsScalarRelationFilter, Prisma.LeadDetailedLogsWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type LeadDocumentLogsOrderByWithAggregationInput = {
@@ -341,12 +341,12 @@ export type LeadDocumentLogsScalarWhereWithAggregatesInput = {
 
 export type LeadDocumentLogsCreateInput = {
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadDocumentLogsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadDocumentLogsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadDocumentLogsInput
-  doc: Prisma.LeadDocumentsCreateNestedOneWithoutLeadDocumentLogsInput
-  detailed_log: Prisma.LeadDetailedLogsCreateNestedOneWithoutDocLogsInput
   user: Prisma.UserMasterCreateNestedOneWithoutLeadDocumentLogsInput
+  doc: Prisma.LeadDocumentsCreateNestedOneWithoutLeadDocumentLogsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadDocumentLogsInput
+  detailed_log: Prisma.LeadDetailedLogsCreateNestedOneWithoutDocLogsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadDocumentLogsInput
 }
 
 export type LeadDocumentLogsUncheckedCreateInput = {
@@ -362,12 +362,12 @@ export type LeadDocumentLogsUncheckedCreateInput = {
 
 export type LeadDocumentLogsUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
-  doc?: Prisma.LeadDocumentsUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
-  detailed_log?: Prisma.LeadDetailedLogsUpdateOneRequiredWithoutDocLogsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
+  doc?: Prisma.LeadDocumentsUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
+  detailed_log?: Prisma.LeadDetailedLogsUpdateOneRequiredWithoutDocLogsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
 }
 
 export type LeadDocumentLogsUncheckedUpdateInput = {
@@ -724,11 +724,11 @@ export type LeadDocumentLogsUncheckedUpdateManyWithoutDetailed_logNestedInput = 
 
 export type LeadDocumentLogsCreateWithoutVendorInput = {
   created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadDocumentLogsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadDocumentLogsInput
-  doc: Prisma.LeadDocumentsCreateNestedOneWithoutLeadDocumentLogsInput
-  detailed_log: Prisma.LeadDetailedLogsCreateNestedOneWithoutDocLogsInput
   user: Prisma.UserMasterCreateNestedOneWithoutLeadDocumentLogsInput
+  doc: Prisma.LeadDocumentsCreateNestedOneWithoutLeadDocumentLogsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadDocumentLogsInput
+  detailed_log: Prisma.LeadDetailedLogsCreateNestedOneWithoutDocLogsInput
 }
 
 export type LeadDocumentLogsUncheckedCreateWithoutVendorInput = {
@@ -783,11 +783,11 @@ export type LeadDocumentLogsScalarWhereInput = {
 
 export type LeadDocumentLogsCreateWithoutUserInput = {
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadDocumentLogsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadDocumentLogsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadDocumentLogsInput
   doc: Prisma.LeadDocumentsCreateNestedOneWithoutLeadDocumentLogsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadDocumentLogsInput
   detailed_log: Prisma.LeadDetailedLogsCreateNestedOneWithoutDocLogsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadDocumentLogsInput
 }
 
 export type LeadDocumentLogsUncheckedCreateWithoutUserInput = {
@@ -828,11 +828,11 @@ export type LeadDocumentLogsUpdateManyWithWhereWithoutUserInput = {
 
 export type LeadDocumentLogsCreateWithoutLeadInput = {
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadDocumentLogsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadDocumentLogsInput
+  user: Prisma.UserMasterCreateNestedOneWithoutLeadDocumentLogsInput
   doc: Prisma.LeadDocumentsCreateNestedOneWithoutLeadDocumentLogsInput
   detailed_log: Prisma.LeadDetailedLogsCreateNestedOneWithoutDocLogsInput
-  user: Prisma.UserMasterCreateNestedOneWithoutLeadDocumentLogsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadDocumentLogsInput
 }
 
 export type LeadDocumentLogsUncheckedCreateWithoutLeadInput = {
@@ -873,11 +873,11 @@ export type LeadDocumentLogsUpdateManyWithWhereWithoutLeadInput = {
 
 export type LeadDocumentLogsCreateWithoutAccountInput = {
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadDocumentLogsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadDocumentLogsInput
-  doc: Prisma.LeadDocumentsCreateNestedOneWithoutLeadDocumentLogsInput
-  detailed_log: Prisma.LeadDetailedLogsCreateNestedOneWithoutDocLogsInput
   user: Prisma.UserMasterCreateNestedOneWithoutLeadDocumentLogsInput
+  doc: Prisma.LeadDocumentsCreateNestedOneWithoutLeadDocumentLogsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadDocumentLogsInput
+  detailed_log: Prisma.LeadDetailedLogsCreateNestedOneWithoutDocLogsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadDocumentLogsInput
 }
 
 export type LeadDocumentLogsUncheckedCreateWithoutAccountInput = {
@@ -918,11 +918,11 @@ export type LeadDocumentLogsUpdateManyWithWhereWithoutAccountInput = {
 
 export type LeadDocumentLogsCreateWithoutDocInput = {
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadDocumentLogsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadDocumentLogsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadDocumentLogsInput
-  detailed_log: Prisma.LeadDetailedLogsCreateNestedOneWithoutDocLogsInput
   user: Prisma.UserMasterCreateNestedOneWithoutLeadDocumentLogsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadDocumentLogsInput
+  detailed_log: Prisma.LeadDetailedLogsCreateNestedOneWithoutDocLogsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadDocumentLogsInput
 }
 
 export type LeadDocumentLogsUncheckedCreateWithoutDocInput = {
@@ -963,11 +963,11 @@ export type LeadDocumentLogsUpdateManyWithWhereWithoutDocInput = {
 
 export type LeadDocumentLogsCreateWithoutDetailed_logInput = {
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadDocumentLogsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadDocumentLogsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadDocumentLogsInput
-  doc: Prisma.LeadDocumentsCreateNestedOneWithoutLeadDocumentLogsInput
   user: Prisma.UserMasterCreateNestedOneWithoutLeadDocumentLogsInput
+  doc: Prisma.LeadDocumentsCreateNestedOneWithoutLeadDocumentLogsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadDocumentLogsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadDocumentLogsInput
 }
 
 export type LeadDocumentLogsUncheckedCreateWithoutDetailed_logInput = {
@@ -1018,11 +1018,11 @@ export type LeadDocumentLogsCreateManyVendorInput = {
 
 export type LeadDocumentLogsUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
-  doc?: Prisma.LeadDocumentsUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
-  detailed_log?: Prisma.LeadDetailedLogsUpdateOneRequiredWithoutDocLogsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
+  doc?: Prisma.LeadDocumentsUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
+  detailed_log?: Prisma.LeadDetailedLogsUpdateOneRequiredWithoutDocLogsNestedInput
 }
 
 export type LeadDocumentLogsUncheckedUpdateWithoutVendorInput = {
@@ -1057,11 +1057,11 @@ export type LeadDocumentLogsCreateManyUserInput = {
 
 export type LeadDocumentLogsUpdateWithoutUserInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
   doc?: Prisma.LeadDocumentsUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
   detailed_log?: Prisma.LeadDetailedLogsUpdateOneRequiredWithoutDocLogsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
 }
 
 export type LeadDocumentLogsUncheckedUpdateWithoutUserInput = {
@@ -1096,11 +1096,11 @@ export type LeadDocumentLogsCreateManyLeadInput = {
 
 export type LeadDocumentLogsUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
   doc?: Prisma.LeadDocumentsUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
   detailed_log?: Prisma.LeadDetailedLogsUpdateOneRequiredWithoutDocLogsNestedInput
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
 }
 
 export type LeadDocumentLogsUncheckedUpdateWithoutLeadInput = {
@@ -1135,11 +1135,11 @@ export type LeadDocumentLogsCreateManyAccountInput = {
 
 export type LeadDocumentLogsUpdateWithoutAccountInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
-  doc?: Prisma.LeadDocumentsUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
-  detailed_log?: Prisma.LeadDetailedLogsUpdateOneRequiredWithoutDocLogsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
+  doc?: Prisma.LeadDocumentsUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
+  detailed_log?: Prisma.LeadDetailedLogsUpdateOneRequiredWithoutDocLogsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
 }
 
 export type LeadDocumentLogsUncheckedUpdateWithoutAccountInput = {
@@ -1174,11 +1174,11 @@ export type LeadDocumentLogsCreateManyDocInput = {
 
 export type LeadDocumentLogsUpdateWithoutDocInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
-  detailed_log?: Prisma.LeadDetailedLogsUpdateOneRequiredWithoutDocLogsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
+  detailed_log?: Prisma.LeadDetailedLogsUpdateOneRequiredWithoutDocLogsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
 }
 
 export type LeadDocumentLogsUncheckedUpdateWithoutDocInput = {
@@ -1213,11 +1213,11 @@ export type LeadDocumentLogsCreateManyDetailed_logInput = {
 
 export type LeadDocumentLogsUpdateWithoutDetailed_logInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
-  doc?: Prisma.LeadDocumentsUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
+  doc?: Prisma.LeadDocumentsUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput
 }
 
 export type LeadDocumentLogsUncheckedUpdateWithoutDetailed_logInput = {
@@ -1251,12 +1251,12 @@ export type LeadDocumentLogsSelect<ExtArgs extends runtime.Types.Extensions.Inte
   lead_logs_id?: boolean
   created_at?: boolean
   created_by?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  doc?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
-  detailed_log?: boolean | Prisma.LeadDetailedLogsDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  doc?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  detailed_log?: boolean | Prisma.LeadDetailedLogsDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadDocumentLogs"]>
 
 export type LeadDocumentLogsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1268,12 +1268,12 @@ export type LeadDocumentLogsSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   lead_logs_id?: boolean
   created_at?: boolean
   created_by?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  doc?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
-  detailed_log?: boolean | Prisma.LeadDetailedLogsDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  doc?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  detailed_log?: boolean | Prisma.LeadDetailedLogsDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadDocumentLogs"]>
 
 export type LeadDocumentLogsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1285,12 +1285,12 @@ export type LeadDocumentLogsSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   lead_logs_id?: boolean
   created_at?: boolean
   created_by?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  doc?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
-  detailed_log?: boolean | Prisma.LeadDetailedLogsDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  doc?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  detailed_log?: boolean | Prisma.LeadDetailedLogsDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadDocumentLogs"]>
 
 export type LeadDocumentLogsSelectScalar = {
@@ -1306,39 +1306,39 @@ export type LeadDocumentLogsSelectScalar = {
 
 export type LeadDocumentLogsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "doc_id" | "lead_logs_id" | "created_at" | "created_by", ExtArgs["result"]["leadDocumentLogs"]>
 export type LeadDocumentLogsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  doc?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
-  detailed_log?: boolean | Prisma.LeadDetailedLogsDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  doc?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  detailed_log?: boolean | Prisma.LeadDetailedLogsDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadDocumentLogsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  doc?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
-  detailed_log?: boolean | Prisma.LeadDetailedLogsDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  doc?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  detailed_log?: boolean | Prisma.LeadDetailedLogsDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadDocumentLogsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  doc?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
-  detailed_log?: boolean | Prisma.LeadDetailedLogsDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  doc?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  detailed_log?: boolean | Prisma.LeadDetailedLogsDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $LeadDocumentLogsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadDocumentLogs"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    lead: Prisma.$LeadMasterPayload<ExtArgs>
     account: Prisma.$AccountMasterPayload<ExtArgs>
-    doc: Prisma.$LeadDocumentsPayload<ExtArgs>
-    detailed_log: Prisma.$LeadDetailedLogsPayload<ExtArgs>
     user: Prisma.$UserMasterPayload<ExtArgs>
+    doc: Prisma.$LeadDocumentsPayload<ExtArgs>
+    lead: Prisma.$LeadMasterPayload<ExtArgs>
+    detailed_log: Prisma.$LeadDetailedLogsPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1743,12 +1743,12 @@ readonly fields: LeadDocumentLogsFieldRefs;
  */
 export interface Prisma__LeadDocumentLogsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   account<T extends Prisma.AccountMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  doc<T extends Prisma.LeadDocumentsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocumentsDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadDocumentsClient<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  detailed_log<T extends Prisma.LeadDetailedLogsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDetailedLogsDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadDetailedLogsClient<runtime.Types.Result.GetResult<Prisma.$LeadDetailedLogsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  doc<T extends Prisma.LeadDocumentsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocumentsDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadDocumentsClient<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  detailed_log<T extends Prisma.LeadDetailedLogsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDetailedLogsDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadDetailedLogsClient<runtime.Types.Result.GetResult<Prisma.$LeadDetailedLogsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

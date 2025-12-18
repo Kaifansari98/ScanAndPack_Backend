@@ -252,11 +252,11 @@ export type InstallerUserMappingWhereInput = {
   installer_id?: Prisma.IntFilter<"InstallerUserMapping"> | number
   assigned_by?: Prisma.IntFilter<"InstallerUserMapping"> | number
   assigned_date?: Prisma.DateTimeFilter<"InstallerUserMapping"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
-  installer?: Prisma.XOR<Prisma.InstallerUserMasterScalarRelationFilter, Prisma.InstallerUserMasterWhereInput>
   assigner?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  installer?: Prisma.XOR<Prisma.InstallerUserMasterScalarRelationFilter, Prisma.InstallerUserMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type InstallerUserMappingOrderByWithRelationInput = {
@@ -267,11 +267,11 @@ export type InstallerUserMappingOrderByWithRelationInput = {
   installer_id?: Prisma.SortOrder
   assigned_by?: Prisma.SortOrder
   assigned_date?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
-  lead?: Prisma.LeadMasterOrderByWithRelationInput
-  installer?: Prisma.InstallerUserMasterOrderByWithRelationInput
   assigner?: Prisma.UserMasterOrderByWithRelationInput
+  installer?: Prisma.InstallerUserMasterOrderByWithRelationInput
+  lead?: Prisma.LeadMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type InstallerUserMappingWhereUniqueInput = Prisma.AtLeast<{
@@ -285,11 +285,11 @@ export type InstallerUserMappingWhereUniqueInput = Prisma.AtLeast<{
   installer_id?: Prisma.IntFilter<"InstallerUserMapping"> | number
   assigned_by?: Prisma.IntFilter<"InstallerUserMapping"> | number
   assigned_date?: Prisma.DateTimeFilter<"InstallerUserMapping"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
-  installer?: Prisma.XOR<Prisma.InstallerUserMasterScalarRelationFilter, Prisma.InstallerUserMasterWhereInput>
   assigner?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  installer?: Prisma.XOR<Prisma.InstallerUserMasterScalarRelationFilter, Prisma.InstallerUserMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type InstallerUserMappingOrderByWithAggregationInput = {
@@ -322,11 +322,11 @@ export type InstallerUserMappingScalarWhereWithAggregatesInput = {
 
 export type InstallerUserMappingCreateInput = {
   assigned_date?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallerMappingsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutInstallerMappingsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallerMappingsInput
-  installer: Prisma.InstallerUserMasterCreateNestedOneWithoutMappingsInput
   assigner: Prisma.UserMasterCreateNestedOneWithoutInstallersAssignedInput
+  installer: Prisma.InstallerUserMasterCreateNestedOneWithoutMappingsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallerMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallerMappingsInput
 }
 
 export type InstallerUserMappingUncheckedCreateInput = {
@@ -341,11 +341,11 @@ export type InstallerUserMappingUncheckedCreateInput = {
 
 export type InstallerUserMappingUpdateInput = {
   assigned_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
-  installer?: Prisma.InstallerUserMasterUpdateOneRequiredWithoutMappingsNestedInput
   assigner?: Prisma.UserMasterUpdateOneRequiredWithoutInstallersAssignedNestedInput
+  installer?: Prisma.InstallerUserMasterUpdateOneRequiredWithoutMappingsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
 }
 
 export type InstallerUserMappingUncheckedUpdateInput = {
@@ -653,9 +653,9 @@ export type InstallerUserMappingUncheckedUpdateManyWithoutInstallerNestedInput =
 export type InstallerUserMappingCreateWithoutVendorInput = {
   assigned_date?: Date | string
   account: Prisma.AccountMasterCreateNestedOneWithoutInstallerMappingsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallerMappingsInput
-  installer: Prisma.InstallerUserMasterCreateNestedOneWithoutMappingsInput
   assigner: Prisma.UserMasterCreateNestedOneWithoutInstallersAssignedInput
+  installer: Prisma.InstallerUserMasterCreateNestedOneWithoutMappingsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallerMappingsInput
 }
 
 export type InstallerUserMappingUncheckedCreateWithoutVendorInput = {
@@ -708,10 +708,10 @@ export type InstallerUserMappingScalarWhereInput = {
 
 export type InstallerUserMappingCreateWithoutAssignerInput = {
   assigned_date?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallerMappingsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutInstallerMappingsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallerMappingsInput
   installer: Prisma.InstallerUserMasterCreateNestedOneWithoutMappingsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallerMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallerMappingsInput
 }
 
 export type InstallerUserMappingUncheckedCreateWithoutAssignerInput = {
@@ -751,10 +751,10 @@ export type InstallerUserMappingUpdateManyWithWhereWithoutAssignerInput = {
 
 export type InstallerUserMappingCreateWithoutLeadInput = {
   assigned_date?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallerMappingsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutInstallerMappingsInput
-  installer: Prisma.InstallerUserMasterCreateNestedOneWithoutMappingsInput
   assigner: Prisma.UserMasterCreateNestedOneWithoutInstallersAssignedInput
+  installer: Prisma.InstallerUserMasterCreateNestedOneWithoutMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallerMappingsInput
 }
 
 export type InstallerUserMappingUncheckedCreateWithoutLeadInput = {
@@ -794,10 +794,10 @@ export type InstallerUserMappingUpdateManyWithWhereWithoutLeadInput = {
 
 export type InstallerUserMappingCreateWithoutAccountInput = {
   assigned_date?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallerMappingsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallerMappingsInput
-  installer: Prisma.InstallerUserMasterCreateNestedOneWithoutMappingsInput
   assigner: Prisma.UserMasterCreateNestedOneWithoutInstallersAssignedInput
+  installer: Prisma.InstallerUserMasterCreateNestedOneWithoutMappingsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallerMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallerMappingsInput
 }
 
 export type InstallerUserMappingUncheckedCreateWithoutAccountInput = {
@@ -837,10 +837,10 @@ export type InstallerUserMappingUpdateManyWithWhereWithoutAccountInput = {
 
 export type InstallerUserMappingCreateWithoutInstallerInput = {
   assigned_date?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallerMappingsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutInstallerMappingsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallerMappingsInput
   assigner: Prisma.UserMasterCreateNestedOneWithoutInstallersAssignedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallerMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallerMappingsInput
 }
 
 export type InstallerUserMappingUncheckedCreateWithoutInstallerInput = {
@@ -890,9 +890,9 @@ export type InstallerUserMappingCreateManyVendorInput = {
 export type InstallerUserMappingUpdateWithoutVendorInput = {
   assigned_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
-  installer?: Prisma.InstallerUserMasterUpdateOneRequiredWithoutMappingsNestedInput
   assigner?: Prisma.UserMasterUpdateOneRequiredWithoutInstallersAssignedNestedInput
+  installer?: Prisma.InstallerUserMasterUpdateOneRequiredWithoutMappingsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
 }
 
 export type InstallerUserMappingUncheckedUpdateWithoutVendorInput = {
@@ -924,10 +924,10 @@ export type InstallerUserMappingCreateManyAssignerInput = {
 
 export type InstallerUserMappingUpdateWithoutAssignerInput = {
   assigned_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
   installer?: Prisma.InstallerUserMasterUpdateOneRequiredWithoutMappingsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
 }
 
 export type InstallerUserMappingUncheckedUpdateWithoutAssignerInput = {
@@ -959,10 +959,10 @@ export type InstallerUserMappingCreateManyLeadInput = {
 
 export type InstallerUserMappingUpdateWithoutLeadInput = {
   assigned_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
-  installer?: Prisma.InstallerUserMasterUpdateOneRequiredWithoutMappingsNestedInput
   assigner?: Prisma.UserMasterUpdateOneRequiredWithoutInstallersAssignedNestedInput
+  installer?: Prisma.InstallerUserMasterUpdateOneRequiredWithoutMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
 }
 
 export type InstallerUserMappingUncheckedUpdateWithoutLeadInput = {
@@ -994,10 +994,10 @@ export type InstallerUserMappingCreateManyAccountInput = {
 
 export type InstallerUserMappingUpdateWithoutAccountInput = {
   assigned_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
-  installer?: Prisma.InstallerUserMasterUpdateOneRequiredWithoutMappingsNestedInput
   assigner?: Prisma.UserMasterUpdateOneRequiredWithoutInstallersAssignedNestedInput
+  installer?: Prisma.InstallerUserMasterUpdateOneRequiredWithoutMappingsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
 }
 
 export type InstallerUserMappingUncheckedUpdateWithoutAccountInput = {
@@ -1029,10 +1029,10 @@ export type InstallerUserMappingCreateManyInstallerInput = {
 
 export type InstallerUserMappingUpdateWithoutInstallerInput = {
   assigned_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
   assigner?: Prisma.UserMasterUpdateOneRequiredWithoutInstallersAssignedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallerMappingsNestedInput
 }
 
 export type InstallerUserMappingUncheckedUpdateWithoutInstallerInput = {
@@ -1063,11 +1063,11 @@ export type InstallerUserMappingSelect<ExtArgs extends runtime.Types.Extensions.
   installer_id?: boolean
   assigned_by?: boolean
   assigned_date?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  installer?: boolean | Prisma.InstallerUserMasterDefaultArgs<ExtArgs>
   assigner?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  installer?: boolean | Prisma.InstallerUserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["installerUserMapping"]>
 
 export type InstallerUserMappingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1078,11 +1078,11 @@ export type InstallerUserMappingSelectCreateManyAndReturn<ExtArgs extends runtim
   installer_id?: boolean
   assigned_by?: boolean
   assigned_date?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  installer?: boolean | Prisma.InstallerUserMasterDefaultArgs<ExtArgs>
   assigner?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  installer?: boolean | Prisma.InstallerUserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["installerUserMapping"]>
 
 export type InstallerUserMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1093,11 +1093,11 @@ export type InstallerUserMappingSelectUpdateManyAndReturn<ExtArgs extends runtim
   installer_id?: boolean
   assigned_by?: boolean
   assigned_date?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  installer?: boolean | Prisma.InstallerUserMasterDefaultArgs<ExtArgs>
   assigner?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  installer?: boolean | Prisma.InstallerUserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["installerUserMapping"]>
 
 export type InstallerUserMappingSelectScalar = {
@@ -1112,35 +1112,35 @@ export type InstallerUserMappingSelectScalar = {
 
 export type InstallerUserMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "account_id" | "lead_id" | "installer_id" | "assigned_by" | "assigned_date", ExtArgs["result"]["installerUserMapping"]>
 export type InstallerUserMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  installer?: boolean | Prisma.InstallerUserMasterDefaultArgs<ExtArgs>
   assigner?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  installer?: boolean | Prisma.InstallerUserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type InstallerUserMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  installer?: boolean | Prisma.InstallerUserMasterDefaultArgs<ExtArgs>
   assigner?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  installer?: boolean | Prisma.InstallerUserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type InstallerUserMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  installer?: boolean | Prisma.InstallerUserMasterDefaultArgs<ExtArgs>
   assigner?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  installer?: boolean | Prisma.InstallerUserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $InstallerUserMappingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "InstallerUserMapping"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     account: Prisma.$AccountMasterPayload<ExtArgs>
-    lead: Prisma.$LeadMasterPayload<ExtArgs>
-    installer: Prisma.$InstallerUserMasterPayload<ExtArgs>
     assigner: Prisma.$UserMasterPayload<ExtArgs>
+    installer: Prisma.$InstallerUserMasterPayload<ExtArgs>
+    lead: Prisma.$LeadMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1544,11 +1544,11 @@ readonly fields: InstallerUserMappingFieldRefs;
  */
 export interface Prisma__InstallerUserMappingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   account<T extends Prisma.AccountMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  installer<T extends Prisma.InstallerUserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InstallerUserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__InstallerUserMasterClient<runtime.Types.Result.GetResult<Prisma.$InstallerUserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   assigner<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  installer<T extends Prisma.InstallerUserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InstallerUserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__InstallerUserMasterClient<runtime.Types.Result.GetResult<Prisma.$InstallerUserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

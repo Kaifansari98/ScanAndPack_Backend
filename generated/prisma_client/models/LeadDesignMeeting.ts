@@ -276,11 +276,11 @@ export type LeadDesignMeetingWhereInput = {
   updated_by?: Prisma.IntNullableFilter<"LeadDesignMeeting"> | number | null
   created_at?: Prisma.DateTimeFilter<"LeadDesignMeeting"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"LeadDesignMeeting"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingListRelationFilter
 }
 
@@ -295,11 +295,11 @@ export type LeadDesignMeetingOrderByWithRelationInput = {
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  lead?: Prisma.LeadMasterOrderByWithRelationInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  lead?: Prisma.LeadMasterOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingOrderByRelationAggregateInput
 }
 
@@ -317,11 +317,11 @@ export type LeadDesignMeetingWhereUniqueInput = Prisma.AtLeast<{
   updated_by?: Prisma.IntNullableFilter<"LeadDesignMeeting"> | number | null
   created_at?: Prisma.DateTimeFilter<"LeadDesignMeeting"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"LeadDesignMeeting"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingListRelationFilter
 }, "id">
 
@@ -364,11 +364,11 @@ export type LeadDesignMeetingCreateInput = {
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignMeetingInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignMeetingInput
   account: Prisma.AccountMasterCreateNestedOneWithoutDesignMeetingInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDesignMeetingsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignMeetingInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutDesignMeetingsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignMeetingInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutDesignMeetingInput
 }
 
@@ -391,11 +391,11 @@ export type LeadDesignMeetingUpdateInput = {
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDesignMeetingsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutDesignMeetingsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutDesignMeetingNestedInput
 }
 
@@ -747,9 +747,9 @@ export type LeadDesignMeetingCreateWithoutVendorInput = {
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignMeetingInput
   account: Prisma.AccountMasterCreateNestedOneWithoutDesignMeetingInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDesignMeetingsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignMeetingInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutDesignMeetingsUpdatedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutDesignMeetingInput
 }
@@ -814,10 +814,10 @@ export type LeadDesignMeetingCreateWithoutCreatedByInput = {
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignMeetingInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignMeetingInput
   account: Prisma.AccountMasterCreateNestedOneWithoutDesignMeetingInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignMeetingInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutDesignMeetingsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignMeetingInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutDesignMeetingInput
 }
 
@@ -849,10 +849,10 @@ export type LeadDesignMeetingCreateWithoutUpdatedByInput = {
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignMeetingInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignMeetingInput
   account: Prisma.AccountMasterCreateNestedOneWithoutDesignMeetingInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDesignMeetingsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignMeetingInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignMeetingInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutDesignMeetingInput
 }
 
@@ -916,10 +916,10 @@ export type LeadDesignMeetingCreateWithoutLeadInput = {
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignMeetingInput
   account: Prisma.AccountMasterCreateNestedOneWithoutDesignMeetingInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDesignMeetingsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutDesignMeetingsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignMeetingInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutDesignMeetingInput
 }
 
@@ -967,10 +967,10 @@ export type LeadDesignMeetingCreateWithoutAccountInput = {
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignMeetingInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignMeetingInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDesignMeetingsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignMeetingInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutDesignMeetingsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignMeetingInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutDesignMeetingInput
 }
 
@@ -1018,11 +1018,11 @@ export type LeadDesignMeetingCreateWithoutDesignMeetingDocsMappingInput = {
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignMeetingInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignMeetingInput
   account: Prisma.AccountMasterCreateNestedOneWithoutDesignMeetingInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDesignMeetingsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignMeetingInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutDesignMeetingsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignMeetingInput
 }
 
 export type LeadDesignMeetingUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
@@ -1059,11 +1059,11 @@ export type LeadDesignMeetingUpdateWithoutDesignMeetingDocsMappingInput = {
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDesignMeetingsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutDesignMeetingsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
 }
 
 export type LeadDesignMeetingUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
@@ -1096,9 +1096,9 @@ export type LeadDesignMeetingUpdateWithoutVendorInput = {
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDesignMeetingsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutDesignMeetingsUpdatedNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutDesignMeetingNestedInput
 }
@@ -1157,10 +1157,10 @@ export type LeadDesignMeetingUpdateWithoutCreatedByInput = {
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutDesignMeetingsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutDesignMeetingNestedInput
 }
 
@@ -1194,10 +1194,10 @@ export type LeadDesignMeetingUpdateWithoutUpdatedByInput = {
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDesignMeetingsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutDesignMeetingNestedInput
 }
 
@@ -1243,10 +1243,10 @@ export type LeadDesignMeetingUpdateWithoutLeadInput = {
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDesignMeetingsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutDesignMeetingsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutDesignMeetingNestedInput
 }
 
@@ -1292,10 +1292,10 @@ export type LeadDesignMeetingUpdateWithoutAccountInput = {
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDesignMeetingsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutDesignMeetingsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignMeetingNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutDesignMeetingNestedInput
 }
 
@@ -1366,11 +1366,11 @@ export type LeadDesignMeetingSelect<ExtArgs extends runtime.Types.Extensions.Int
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadDesignMeeting$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   designMeetingDocsMapping?: boolean | Prisma.LeadDesignMeeting$designMeetingDocsMappingArgs<ExtArgs>
   _count?: boolean | Prisma.LeadDesignMeetingCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadDesignMeeting"]>
@@ -1386,11 +1386,11 @@ export type LeadDesignMeetingSelectCreateManyAndReturn<ExtArgs extends runtime.T
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadDesignMeeting$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadDesignMeeting"]>
 
 export type LeadDesignMeetingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1404,11 +1404,11 @@ export type LeadDesignMeetingSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadDesignMeeting$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadDesignMeeting"]>
 
 export type LeadDesignMeetingSelectScalar = {
@@ -1426,37 +1426,37 @@ export type LeadDesignMeetingSelectScalar = {
 
 export type LeadDesignMeetingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "vendor_id" | "date" | "desc" | "created_by" | "updated_by" | "created_at" | "updated_at", ExtArgs["result"]["leadDesignMeeting"]>
 export type LeadDesignMeetingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadDesignMeeting$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   designMeetingDocsMapping?: boolean | Prisma.LeadDesignMeeting$designMeetingDocsMappingArgs<ExtArgs>
   _count?: boolean | Prisma.LeadDesignMeetingCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LeadDesignMeetingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadDesignMeeting$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadDesignMeetingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadDesignMeeting$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $LeadDesignMeetingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadDesignMeeting"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    lead: Prisma.$LeadMasterPayload<ExtArgs>
     account: Prisma.$AccountMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    lead: Prisma.$LeadMasterPayload<ExtArgs>
     updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     designMeetingDocsMapping: Prisma.$LeadDesignMeetingDocumentsMappingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1864,11 +1864,11 @@ readonly fields: LeadDesignMeetingFieldRefs;
  */
 export interface Prisma__LeadDesignMeetingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   account<T extends Prisma.AccountMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.LeadDesignMeeting$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDesignMeeting$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   designMeetingDocsMapping<T extends Prisma.LeadDesignMeeting$designMeetingDocsMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDesignMeeting$designMeetingDocsMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignMeetingDocumentsMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.

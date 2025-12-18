@@ -10,6 +10,7 @@ export interface CreateBookingStageDto {
   bookingAmountPaymentDetailsText?: string;
   finalBookingAmount: number;
   siteSupervisorId: number;
+  mrpValue: number;
 
   // Files
   finalDocuments: Express.Multer.File[];

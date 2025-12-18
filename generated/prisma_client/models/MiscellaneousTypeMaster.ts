@@ -224,8 +224,8 @@ export type MiscellaneousTypeMasterWhereInput = {
   name?: Prisma.StringFilter<"MiscellaneousTypeMaster"> | string
   created_by?: Prisma.IntFilter<"MiscellaneousTypeMaster"> | number
   created_at?: Prisma.DateTimeFilter<"MiscellaneousTypeMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   misc?: Prisma.MiscellaneousMasterListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type MiscellaneousTypeMasterOrderByWithRelationInput = {
@@ -234,8 +234,8 @@ export type MiscellaneousTypeMasterOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   misc?: Prisma.MiscellaneousMasterOrderByRelationAggregateInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type MiscellaneousTypeMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -247,8 +247,8 @@ export type MiscellaneousTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"MiscellaneousTypeMaster"> | string
   created_by?: Prisma.IntFilter<"MiscellaneousTypeMaster"> | number
   created_at?: Prisma.DateTimeFilter<"MiscellaneousTypeMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   misc?: Prisma.MiscellaneousMasterListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type MiscellaneousTypeMasterOrderByWithAggregationInput = {
@@ -279,8 +279,8 @@ export type MiscellaneousTypeMasterCreateInput = {
   name: string
   created_by: number
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousTypeMasterInput
   misc?: Prisma.MiscellaneousMasterCreateNestedManyWithoutTypeInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousTypeMasterInput
 }
 
 export type MiscellaneousTypeMasterUncheckedCreateInput = {
@@ -296,8 +296,8 @@ export type MiscellaneousTypeMasterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousTypeMasterNestedInput
   misc?: Prisma.MiscellaneousMasterUpdateManyWithoutTypeNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousTypeMasterNestedInput
 }
 
 export type MiscellaneousTypeMasterUncheckedUpdateInput = {
@@ -602,8 +602,8 @@ export type MiscellaneousTypeMasterSelect<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   created_by?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   misc?: boolean | Prisma.MiscellaneousTypeMaster$miscArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.MiscellaneousTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["miscellaneousTypeMaster"]>
 
@@ -635,8 +635,8 @@ export type MiscellaneousTypeMasterSelectScalar = {
 
 export type MiscellaneousTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "name" | "created_by" | "created_at", ExtArgs["result"]["miscellaneousTypeMaster"]>
 export type MiscellaneousTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   misc?: boolean | Prisma.MiscellaneousTypeMaster$miscArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.MiscellaneousTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MiscellaneousTypeMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -649,8 +649,8 @@ export type MiscellaneousTypeMasterIncludeUpdateManyAndReturn<ExtArgs extends ru
 export type $MiscellaneousTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "MiscellaneousTypeMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     misc: Prisma.$MiscellaneousMasterPayload<ExtArgs>[]
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1052,8 +1052,8 @@ readonly fields: MiscellaneousTypeMasterFieldRefs;
  */
 export interface Prisma__MiscellaneousTypeMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   misc<T extends Prisma.MiscellaneousTypeMaster$miscArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MiscellaneousTypeMaster$miscArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MiscellaneousMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

@@ -228,8 +228,8 @@ export type InstallationUpdateDocumentsWhereInput = {
   installation_update_id?: Prisma.IntFilter<"InstallationUpdateDocuments"> | number
   document_id?: Prisma.IntFilter<"InstallationUpdateDocuments"> | number
   created_at?: Prisma.DateTimeFilter<"InstallationUpdateDocuments"> | Date | string
-  installationUpdate?: Prisma.XOR<Prisma.InstallationUpdateScalarRelationFilter, Prisma.InstallationUpdateWhereInput>
   document?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
+  installationUpdate?: Prisma.XOR<Prisma.InstallationUpdateScalarRelationFilter, Prisma.InstallationUpdateWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
@@ -239,8 +239,8 @@ export type InstallationUpdateDocumentsOrderByWithRelationInput = {
   installation_update_id?: Prisma.SortOrder
   document_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  installationUpdate?: Prisma.InstallationUpdateOrderByWithRelationInput
   document?: Prisma.LeadDocumentsOrderByWithRelationInput
+  installationUpdate?: Prisma.InstallationUpdateOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
@@ -253,8 +253,8 @@ export type InstallationUpdateDocumentsWhereUniqueInput = Prisma.AtLeast<{
   installation_update_id?: Prisma.IntFilter<"InstallationUpdateDocuments"> | number
   document_id?: Prisma.IntFilter<"InstallationUpdateDocuments"> | number
   created_at?: Prisma.DateTimeFilter<"InstallationUpdateDocuments"> | Date | string
-  installationUpdate?: Prisma.XOR<Prisma.InstallationUpdateScalarRelationFilter, Prisma.InstallationUpdateWhereInput>
   document?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
+  installationUpdate?: Prisma.XOR<Prisma.InstallationUpdateScalarRelationFilter, Prisma.InstallationUpdateWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
@@ -284,8 +284,8 @@ export type InstallationUpdateDocumentsScalarWhereWithAggregatesInput = {
 
 export type InstallationUpdateDocumentsCreateInput = {
   created_at?: Date | string
-  installationUpdate: Prisma.InstallationUpdateCreateNestedOneWithoutDocumentsInput
   document: Prisma.LeadDocumentsCreateNestedOneWithoutInstallationUpdateDocsInput
+  installationUpdate: Prisma.InstallationUpdateCreateNestedOneWithoutDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallationUpdateDocsInput
 }
 
@@ -299,8 +299,8 @@ export type InstallationUpdateDocumentsUncheckedCreateInput = {
 
 export type InstallationUpdateDocumentsUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  installationUpdate?: Prisma.InstallationUpdateUpdateOneRequiredWithoutDocumentsNestedInput
   document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutInstallationUpdateDocsNestedInput
+  installationUpdate?: Prisma.InstallationUpdateUpdateOneRequiredWithoutDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallationUpdateDocsNestedInput
 }
 
@@ -508,8 +508,8 @@ export type InstallationUpdateDocumentsUncheckedUpdateManyWithoutInstallationUpd
 
 export type InstallationUpdateDocumentsCreateWithoutVendorInput = {
   created_at?: Date | string
-  installationUpdate: Prisma.InstallationUpdateCreateNestedOneWithoutDocumentsInput
   document: Prisma.LeadDocumentsCreateNestedOneWithoutInstallationUpdateDocsInput
+  installationUpdate: Prisma.InstallationUpdateCreateNestedOneWithoutDocumentsInput
 }
 
 export type InstallationUpdateDocumentsUncheckedCreateWithoutVendorInput = {
@@ -643,8 +643,8 @@ export type InstallationUpdateDocumentsCreateManyVendorInput = {
 
 export type InstallationUpdateDocumentsUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  installationUpdate?: Prisma.InstallationUpdateUpdateOneRequiredWithoutDocumentsNestedInput
   document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutInstallationUpdateDocsNestedInput
+  installationUpdate?: Prisma.InstallationUpdateUpdateOneRequiredWithoutDocumentsNestedInput
 }
 
 export type InstallationUpdateDocumentsUncheckedUpdateWithoutVendorInput = {
@@ -723,8 +723,8 @@ export type InstallationUpdateDocumentsSelect<ExtArgs extends runtime.Types.Exte
   installation_update_id?: boolean
   document_id?: boolean
   created_at?: boolean
-  installationUpdate?: boolean | Prisma.InstallationUpdateDefaultArgs<ExtArgs>
   document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  installationUpdate?: boolean | Prisma.InstallationUpdateDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["installationUpdateDocuments"]>
 
@@ -734,8 +734,8 @@ export type InstallationUpdateDocumentsSelectCreateManyAndReturn<ExtArgs extends
   installation_update_id?: boolean
   document_id?: boolean
   created_at?: boolean
-  installationUpdate?: boolean | Prisma.InstallationUpdateDefaultArgs<ExtArgs>
   document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  installationUpdate?: boolean | Prisma.InstallationUpdateDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["installationUpdateDocuments"]>
 
@@ -745,8 +745,8 @@ export type InstallationUpdateDocumentsSelectUpdateManyAndReturn<ExtArgs extends
   installation_update_id?: boolean
   document_id?: boolean
   created_at?: boolean
-  installationUpdate?: boolean | Prisma.InstallationUpdateDefaultArgs<ExtArgs>
   document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  installationUpdate?: boolean | Prisma.InstallationUpdateDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["installationUpdateDocuments"]>
 
@@ -760,26 +760,26 @@ export type InstallationUpdateDocumentsSelectScalar = {
 
 export type InstallationUpdateDocumentsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "installation_update_id" | "document_id" | "created_at", ExtArgs["result"]["installationUpdateDocuments"]>
 export type InstallationUpdateDocumentsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  installationUpdate?: boolean | Prisma.InstallationUpdateDefaultArgs<ExtArgs>
   document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  installationUpdate?: boolean | Prisma.InstallationUpdateDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type InstallationUpdateDocumentsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  installationUpdate?: boolean | Prisma.InstallationUpdateDefaultArgs<ExtArgs>
   document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  installationUpdate?: boolean | Prisma.InstallationUpdateDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type InstallationUpdateDocumentsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  installationUpdate?: boolean | Prisma.InstallationUpdateDefaultArgs<ExtArgs>
   document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  installationUpdate?: boolean | Prisma.InstallationUpdateDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $InstallationUpdateDocumentsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "InstallationUpdateDocuments"
   objects: {
-    installationUpdate: Prisma.$InstallationUpdatePayload<ExtArgs>
     document: Prisma.$LeadDocumentsPayload<ExtArgs>
+    installationUpdate: Prisma.$InstallationUpdatePayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1182,8 +1182,8 @@ readonly fields: InstallationUpdateDocumentsFieldRefs;
  */
 export interface Prisma__InstallationUpdateDocumentsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  installationUpdate<T extends Prisma.InstallationUpdateDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InstallationUpdateDefaultArgs<ExtArgs>>): Prisma.Prisma__InstallationUpdateClient<runtime.Types.Result.GetResult<Prisma.$InstallationUpdatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   document<T extends Prisma.LeadDocumentsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocumentsDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadDocumentsClient<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  installationUpdate<T extends Prisma.InstallationUpdateDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InstallationUpdateDefaultArgs<ExtArgs>>): Prisma.Prisma__InstallationUpdateClient<runtime.Types.Result.GetResult<Prisma.$InstallationUpdatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.

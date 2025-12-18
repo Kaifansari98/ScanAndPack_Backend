@@ -28,8 +28,8 @@ export type ItemStatus = (typeof ItemStatus)[keyof typeof ItemStatus]
 export const ActivityStatus = {
   onGoing: 'onGoing',
   onHold: 'onHold',
-  lostApproval: 'lostApproval',
-  lost: 'lost'
+  lost: 'lost',
+  lostApproval: 'lostApproval'
 } as const
 
 export type ActivityStatus = (typeof ActivityStatus)[keyof typeof ActivityStatus]
@@ -78,9 +78,9 @@ export type SupervisorStatus = (typeof SupervisorStatus)[keyof typeof Supervisor
 export const LeadTaskStatus = {
   open: 'open',
   closed: 'closed',
-  cancelled: 'cancelled',
   in_progress: 'in_progress',
-  completed: 'completed'
+  completed: 'completed',
+  cancelled: 'cancelled'
 } as const
 
 export type LeadTaskStatus = (typeof LeadTaskStatus)[keyof typeof LeadTaskStatus]

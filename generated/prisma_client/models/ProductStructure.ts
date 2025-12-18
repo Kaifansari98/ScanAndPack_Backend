@@ -204,16 +204,16 @@ export type ProductStructureWhereInput = {
   id?: Prisma.IntFilter<"ProductStructure"> | number
   type?: Prisma.StringFilter<"ProductStructure"> | string
   vendor_id?: Prisma.IntFilter<"ProductStructure"> | number
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type ProductStructureOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingOrderByRelationAggregateInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type ProductStructureWhereUniqueInput = Prisma.AtLeast<{
@@ -223,8 +223,8 @@ export type ProductStructureWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ProductStructureWhereInput | Prisma.ProductStructureWhereInput[]
   type?: Prisma.StringFilter<"ProductStructure"> | string
   vendor_id?: Prisma.IntFilter<"ProductStructure"> | number
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type ProductStructureOrderByWithAggregationInput = {
@@ -249,8 +249,8 @@ export type ProductStructureScalarWhereWithAggregatesInput = {
 
 export type ProductStructureCreateInput = {
   type: string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutProductStructureInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInput
 }
 
 export type ProductStructureUncheckedCreateInput = {
@@ -262,8 +262,8 @@ export type ProductStructureUncheckedCreateInput = {
 
 export type ProductStructureUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutProductStructureNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureNestedInput
 }
 
 export type ProductStructureUncheckedUpdateInput = {
@@ -528,8 +528,8 @@ export type ProductStructureSelect<ExtArgs extends runtime.Types.Extensions.Inte
   id?: boolean
   type?: boolean
   vendor_id?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   leadProductStructureMapping?: boolean | Prisma.ProductStructure$leadProductStructureMappingArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProductStructureCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productStructure"]>
 
@@ -555,8 +555,8 @@ export type ProductStructureSelectScalar = {
 
 export type ProductStructureOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id", ExtArgs["result"]["productStructure"]>
 export type ProductStructureInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   leadProductStructureMapping?: boolean | Prisma.ProductStructure$leadProductStructureMappingArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProductStructureCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProductStructureIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -569,8 +569,8 @@ export type ProductStructureIncludeUpdateManyAndReturn<ExtArgs extends runtime.T
 export type $ProductStructurePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProductStructure"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     leadProductStructureMapping: Prisma.$LeadProductStructureMappingPayload<ExtArgs>[]
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -970,8 +970,8 @@ readonly fields: ProductStructureFieldRefs;
  */
 export interface Prisma__ProductStructureClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   leadProductStructureMapping<T extends Prisma.ProductStructure$leadProductStructureMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductStructure$leadProductStructureMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

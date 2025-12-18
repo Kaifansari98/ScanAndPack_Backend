@@ -29,66 +29,66 @@ export type AggregateBoxMaster = {
 export type BoxMasterAvgAggregateOutputType = {
   id: number | null
   project_id: number | null
-  project_details_id: number | null
   vendor_id: number | null
   client_id: number | null
   created_by: number | null
   deleted_by: number | null
+  project_details_id: number | null
 }
 
 export type BoxMasterSumAggregateOutputType = {
   id: number | null
   project_id: number | null
-  project_details_id: number | null
   vendor_id: number | null
   client_id: number | null
   created_by: number | null
   deleted_by: number | null
+  project_details_id: number | null
 }
 
 export type BoxMasterMinAggregateOutputType = {
   id: number | null
   project_id: number | null
-  project_details_id: number | null
   vendor_id: number | null
   client_id: number | null
   box_name: string | null
   box_status: $Enums.BoxStatus | null
   created_by: number | null
   created_date: Date | null
-  is_deleted: boolean | null
-  deleted_by: number | null
   deleted_at: Date | null
+  deleted_by: number | null
+  is_deleted: boolean | null
+  project_details_id: number | null
 }
 
 export type BoxMasterMaxAggregateOutputType = {
   id: number | null
   project_id: number | null
-  project_details_id: number | null
   vendor_id: number | null
   client_id: number | null
   box_name: string | null
   box_status: $Enums.BoxStatus | null
   created_by: number | null
   created_date: Date | null
-  is_deleted: boolean | null
-  deleted_by: number | null
   deleted_at: Date | null
+  deleted_by: number | null
+  is_deleted: boolean | null
+  project_details_id: number | null
 }
 
 export type BoxMasterCountAggregateOutputType = {
   id: number
   project_id: number
-  project_details_id: number
   vendor_id: number
   client_id: number
   box_name: number
   box_status: number
   created_by: number
   created_date: number
-  is_deleted: number
-  deleted_by: number
   deleted_at: number
+  deleted_by: number
+  is_deleted: number
+  project_details_id: number
   _all: number
 }
 
@@ -96,66 +96,66 @@ export type BoxMasterCountAggregateOutputType = {
 export type BoxMasterAvgAggregateInputType = {
   id?: true
   project_id?: true
-  project_details_id?: true
   vendor_id?: true
   client_id?: true
   created_by?: true
   deleted_by?: true
+  project_details_id?: true
 }
 
 export type BoxMasterSumAggregateInputType = {
   id?: true
   project_id?: true
-  project_details_id?: true
   vendor_id?: true
   client_id?: true
   created_by?: true
   deleted_by?: true
+  project_details_id?: true
 }
 
 export type BoxMasterMinAggregateInputType = {
   id?: true
   project_id?: true
-  project_details_id?: true
   vendor_id?: true
   client_id?: true
   box_name?: true
   box_status?: true
   created_by?: true
   created_date?: true
-  is_deleted?: true
-  deleted_by?: true
   deleted_at?: true
+  deleted_by?: true
+  is_deleted?: true
+  project_details_id?: true
 }
 
 export type BoxMasterMaxAggregateInputType = {
   id?: true
   project_id?: true
-  project_details_id?: true
   vendor_id?: true
   client_id?: true
   box_name?: true
   box_status?: true
   created_by?: true
   created_date?: true
-  is_deleted?: true
-  deleted_by?: true
   deleted_at?: true
+  deleted_by?: true
+  is_deleted?: true
+  project_details_id?: true
 }
 
 export type BoxMasterCountAggregateInputType = {
   id?: true
   project_id?: true
-  project_details_id?: true
   vendor_id?: true
   client_id?: true
   box_name?: true
   box_status?: true
   created_by?: true
   created_date?: true
-  is_deleted?: true
-  deleted_by?: true
   deleted_at?: true
+  deleted_by?: true
+  is_deleted?: true
+  project_details_id?: true
   _all?: true
 }
 
@@ -248,16 +248,16 @@ export type BoxMasterGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 export type BoxMasterGroupByOutputType = {
   id: number
   project_id: number
-  project_details_id: number
   vendor_id: number
   client_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
   created_date: Date
-  is_deleted: boolean
-  deleted_by: number | null
   deleted_at: Date | null
+  deleted_by: number | null
+  is_deleted: boolean
+  project_details_id: number
   _count: BoxMasterCountAggregateOutputType | null
   _avg: BoxMasterAvgAggregateOutputType | null
   _sum: BoxMasterSumAggregateOutputType | null
@@ -286,41 +286,41 @@ export type BoxMasterWhereInput = {
   NOT?: Prisma.BoxMasterWhereInput | Prisma.BoxMasterWhereInput[]
   id?: Prisma.IntFilter<"BoxMaster"> | number
   project_id?: Prisma.IntFilter<"BoxMaster"> | number
-  project_details_id?: Prisma.IntFilter<"BoxMaster"> | number
   vendor_id?: Prisma.IntFilter<"BoxMaster"> | number
   client_id?: Prisma.IntFilter<"BoxMaster"> | number
   box_name?: Prisma.StringFilter<"BoxMaster"> | string
   box_status?: Prisma.EnumBoxStatusFilter<"BoxMaster"> | $Enums.BoxStatus
   created_by?: Prisma.IntFilter<"BoxMaster"> | number
   created_date?: Prisma.DateTimeFilter<"BoxMaster"> | Date | string
-  is_deleted?: Prisma.BoolFilter<"BoxMaster"> | boolean
-  deleted_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   deleted_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
+  deleted_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  is_deleted?: Prisma.BoolFilter<"BoxMaster"> | boolean
+  project_details_id?: Prisma.IntFilter<"BoxMaster"> | number
+  client?: Prisma.XOR<Prisma.ClientMasterScalarRelationFilter, Prisma.ClientMasterWhereInput>
+  details?: Prisma.XOR<Prisma.ProjectDetailsScalarRelationFilter, Prisma.ProjectDetailsWhereInput>
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   items?: Prisma.ScanAndPackItemListRelationFilter
-  details?: Prisma.XOR<Prisma.ProjectDetailsScalarRelationFilter, Prisma.ProjectDetailsWhereInput>
-  client?: Prisma.XOR<Prisma.ClientMasterScalarRelationFilter, Prisma.ClientMasterWhereInput>
 }
 
 export type BoxMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
-  project_details_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   box_name?: Prisma.SortOrder
   box_status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_date?: Prisma.SortOrder
-  is_deleted?: Prisma.SortOrder
-  deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  project_details_id?: Prisma.SortOrder
+  client?: Prisma.ClientMasterOrderByWithRelationInput
+  details?: Prisma.ProjectDetailsOrderByWithRelationInput
   project?: Prisma.ProjectMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   items?: Prisma.ScanAndPackItemOrderByRelationAggregateInput
-  details?: Prisma.ProjectDetailsOrderByWithRelationInput
-  client?: Prisma.ClientMasterOrderByWithRelationInput
 }
 
 export type BoxMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -329,36 +329,36 @@ export type BoxMasterWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.BoxMasterWhereInput[]
   NOT?: Prisma.BoxMasterWhereInput | Prisma.BoxMasterWhereInput[]
   project_id?: Prisma.IntFilter<"BoxMaster"> | number
-  project_details_id?: Prisma.IntFilter<"BoxMaster"> | number
   vendor_id?: Prisma.IntFilter<"BoxMaster"> | number
   client_id?: Prisma.IntFilter<"BoxMaster"> | number
   box_name?: Prisma.StringFilter<"BoxMaster"> | string
   box_status?: Prisma.EnumBoxStatusFilter<"BoxMaster"> | $Enums.BoxStatus
   created_by?: Prisma.IntFilter<"BoxMaster"> | number
   created_date?: Prisma.DateTimeFilter<"BoxMaster"> | Date | string
-  is_deleted?: Prisma.BoolFilter<"BoxMaster"> | boolean
-  deleted_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   deleted_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
+  deleted_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  is_deleted?: Prisma.BoolFilter<"BoxMaster"> | boolean
+  project_details_id?: Prisma.IntFilter<"BoxMaster"> | number
+  client?: Prisma.XOR<Prisma.ClientMasterScalarRelationFilter, Prisma.ClientMasterWhereInput>
+  details?: Prisma.XOR<Prisma.ProjectDetailsScalarRelationFilter, Prisma.ProjectDetailsWhereInput>
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   items?: Prisma.ScanAndPackItemListRelationFilter
-  details?: Prisma.XOR<Prisma.ProjectDetailsScalarRelationFilter, Prisma.ProjectDetailsWhereInput>
-  client?: Prisma.XOR<Prisma.ClientMasterScalarRelationFilter, Prisma.ClientMasterWhereInput>
 }, "id">
 
 export type BoxMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
-  project_details_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   box_name?: Prisma.SortOrder
   box_status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_date?: Prisma.SortOrder
-  is_deleted?: Prisma.SortOrder
-  deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  project_details_id?: Prisma.SortOrder
   _count?: Prisma.BoxMasterCountOrderByAggregateInput
   _avg?: Prisma.BoxMasterAvgOrderByAggregateInput
   _max?: Prisma.BoxMasterMaxOrderByAggregateInput
@@ -372,16 +372,16 @@ export type BoxMasterScalarWhereWithAggregatesInput = {
   NOT?: Prisma.BoxMasterScalarWhereWithAggregatesInput | Prisma.BoxMasterScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"BoxMaster"> | number
   project_id?: Prisma.IntWithAggregatesFilter<"BoxMaster"> | number
-  project_details_id?: Prisma.IntWithAggregatesFilter<"BoxMaster"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"BoxMaster"> | number
   client_id?: Prisma.IntWithAggregatesFilter<"BoxMaster"> | number
   box_name?: Prisma.StringWithAggregatesFilter<"BoxMaster"> | string
   box_status?: Prisma.EnumBoxStatusWithAggregatesFilter<"BoxMaster"> | $Enums.BoxStatus
   created_by?: Prisma.IntWithAggregatesFilter<"BoxMaster"> | number
   created_date?: Prisma.DateTimeWithAggregatesFilter<"BoxMaster"> | Date | string
-  is_deleted?: Prisma.BoolWithAggregatesFilter<"BoxMaster"> | boolean
-  deleted_by?: Prisma.IntNullableWithAggregatesFilter<"BoxMaster"> | number | null
   deleted_at?: Prisma.DateTimeNullableWithAggregatesFilter<"BoxMaster"> | Date | string | null
+  deleted_by?: Prisma.IntNullableWithAggregatesFilter<"BoxMaster"> | number | null
+  is_deleted?: Prisma.BoolWithAggregatesFilter<"BoxMaster"> | boolean
+  project_details_id?: Prisma.IntWithAggregatesFilter<"BoxMaster"> | number
 }
 
 export type BoxMasterCreateInput = {
@@ -389,29 +389,29 @@ export type BoxMasterCreateInput = {
   box_status: $Enums.BoxStatus
   created_by: number
   created_date?: Date | string
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  client: Prisma.ClientMasterCreateNestedOneWithoutBoxesInput
+  details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutBoxesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutBoxesInput
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
-  details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
-  client: Prisma.ClientMasterCreateNestedOneWithoutBoxesInput
 }
 
 export type BoxMasterUncheckedCreateInput = {
   id?: number
   project_id: number
-  project_details_id: number
   vendor_id: number
   client_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
   created_date?: Date | string
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  project_details_id: number
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
 }
 
@@ -420,45 +420,45 @@ export type BoxMasterUpdateInput = {
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client?: Prisma.ClientMasterUpdateOneRequiredWithoutBoxesNestedInput
+  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBoxesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBoxesNestedInput
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
-  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutBoxesNestedInput
 }
 
 export type BoxMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   client_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterCreateManyInput = {
   id?: number
   project_id: number
-  project_details_id: number
   vendor_id: number
   client_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
   created_date?: Date | string
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  project_details_id: number
 }
 
 export type BoxMasterUpdateManyMutationInput = {
@@ -466,24 +466,24 @@ export type BoxMasterUpdateManyMutationInput = {
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type BoxMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   client_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type BoxMasterListRelationFilter = {
@@ -499,66 +499,66 @@ export type BoxMasterOrderByRelationAggregateInput = {
 export type BoxMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
-  project_details_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   box_name?: Prisma.SortOrder
   box_status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_date?: Prisma.SortOrder
-  is_deleted?: Prisma.SortOrder
-  deleted_by?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
+  deleted_by?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  project_details_id?: Prisma.SortOrder
 }
 
 export type BoxMasterAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
-  project_details_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
+  project_details_id?: Prisma.SortOrder
 }
 
 export type BoxMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
-  project_details_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   box_name?: Prisma.SortOrder
   box_status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_date?: Prisma.SortOrder
-  is_deleted?: Prisma.SortOrder
-  deleted_by?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
+  deleted_by?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  project_details_id?: Prisma.SortOrder
 }
 
 export type BoxMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
-  project_details_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   box_name?: Prisma.SortOrder
   box_status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_date?: Prisma.SortOrder
-  is_deleted?: Prisma.SortOrder
-  deleted_by?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
+  deleted_by?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  project_details_id?: Prisma.SortOrder
 }
 
 export type BoxMasterSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
-  project_details_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
+  project_details_id?: Prisma.SortOrder
 }
 
 export type BoxMasterScalarRelationFilter = {
@@ -757,27 +757,27 @@ export type BoxMasterCreateWithoutVendorInput = {
   box_status: $Enums.BoxStatus
   created_by: number
   created_date?: Date | string
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  client: Prisma.ClientMasterCreateNestedOneWithoutBoxesInput
+  details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutBoxesInput
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
-  details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
-  client: Prisma.ClientMasterCreateNestedOneWithoutBoxesInput
 }
 
 export type BoxMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   project_id: number
-  project_details_id: number
   client_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
   created_date?: Date | string
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  project_details_id: number
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
 }
 
@@ -813,16 +813,16 @@ export type BoxMasterScalarWhereInput = {
   NOT?: Prisma.BoxMasterScalarWhereInput | Prisma.BoxMasterScalarWhereInput[]
   id?: Prisma.IntFilter<"BoxMaster"> | number
   project_id?: Prisma.IntFilter<"BoxMaster"> | number
-  project_details_id?: Prisma.IntFilter<"BoxMaster"> | number
   vendor_id?: Prisma.IntFilter<"BoxMaster"> | number
   client_id?: Prisma.IntFilter<"BoxMaster"> | number
   box_name?: Prisma.StringFilter<"BoxMaster"> | string
   box_status?: Prisma.EnumBoxStatusFilter<"BoxMaster"> | $Enums.BoxStatus
   created_by?: Prisma.IntFilter<"BoxMaster"> | number
   created_date?: Prisma.DateTimeFilter<"BoxMaster"> | Date | string
-  is_deleted?: Prisma.BoolFilter<"BoxMaster"> | boolean
-  deleted_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   deleted_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
+  deleted_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  is_deleted?: Prisma.BoolFilter<"BoxMaster"> | boolean
+  project_details_id?: Prisma.IntFilter<"BoxMaster"> | number
 }
 
 export type BoxMasterCreateWithoutProjectInput = {
@@ -830,27 +830,27 @@ export type BoxMasterCreateWithoutProjectInput = {
   box_status: $Enums.BoxStatus
   created_by: number
   created_date?: Date | string
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  client: Prisma.ClientMasterCreateNestedOneWithoutBoxesInput
+  details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutBoxesInput
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
-  details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
-  client: Prisma.ClientMasterCreateNestedOneWithoutBoxesInput
 }
 
 export type BoxMasterUncheckedCreateWithoutProjectInput = {
   id?: number
-  project_details_id: number
   vendor_id: number
   client_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
   created_date?: Date | string
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  project_details_id: number
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
 }
 
@@ -885,13 +885,13 @@ export type BoxMasterCreateWithoutDetailsInput = {
   box_status: $Enums.BoxStatus
   created_by: number
   created_date?: Date | string
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  client: Prisma.ClientMasterCreateNestedOneWithoutBoxesInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutBoxesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutBoxesInput
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
-  client: Prisma.ClientMasterCreateNestedOneWithoutBoxesInput
 }
 
 export type BoxMasterUncheckedCreateWithoutDetailsInput = {
@@ -903,9 +903,9 @@ export type BoxMasterUncheckedCreateWithoutDetailsInput = {
   box_status: $Enums.BoxStatus
   created_by: number
   created_date?: Date | string
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
 }
 
@@ -940,28 +940,28 @@ export type BoxMasterCreateWithoutItemsInput = {
   box_status: $Enums.BoxStatus
   created_by: number
   created_date?: Date | string
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  client: Prisma.ClientMasterCreateNestedOneWithoutBoxesInput
+  details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutBoxesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutBoxesInput
-  details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
-  client: Prisma.ClientMasterCreateNestedOneWithoutBoxesInput
 }
 
 export type BoxMasterUncheckedCreateWithoutItemsInput = {
   id?: number
   project_id: number
-  project_details_id: number
   vendor_id: number
   client_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
   created_date?: Date | string
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  project_details_id: number
 }
 
 export type BoxMasterCreateOrConnectWithoutItemsInput = {
@@ -985,28 +985,28 @@ export type BoxMasterUpdateWithoutItemsInput = {
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client?: Prisma.ClientMasterUpdateOneRequiredWithoutBoxesNestedInput
+  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBoxesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBoxesNestedInput
-  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutBoxesNestedInput
 }
 
 export type BoxMasterUncheckedUpdateWithoutItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   client_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type BoxMasterCreateWithoutClientInput = {
@@ -1014,27 +1014,27 @@ export type BoxMasterCreateWithoutClientInput = {
   box_status: $Enums.BoxStatus
   created_by: number
   created_date?: Date | string
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutBoxesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutBoxesInput
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
-  details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
 }
 
 export type BoxMasterUncheckedCreateWithoutClientInput = {
   id?: number
   project_id: number
-  project_details_id: number
   vendor_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
   created_date?: Date | string
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  project_details_id: number
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
 }
 
@@ -1067,15 +1067,15 @@ export type BoxMasterUpdateManyWithWhereWithoutClientInput = {
 export type BoxMasterCreateManyVendorInput = {
   id?: number
   project_id: number
-  project_details_id: number
   client_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
   created_date?: Date | string
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  project_details_id: number
 }
 
 export type BoxMasterUpdateWithoutVendorInput = {
@@ -1083,56 +1083,56 @@ export type BoxMasterUpdateWithoutVendorInput = {
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client?: Prisma.ClientMasterUpdateOneRequiredWithoutBoxesNestedInput
+  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBoxesNestedInput
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
-  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutBoxesNestedInput
 }
 
 export type BoxMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   client_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   client_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type BoxMasterCreateManyProjectInput = {
   id?: number
-  project_details_id: number
   vendor_id: number
   client_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
   created_date?: Date | string
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  project_details_id: number
 }
 
 export type BoxMasterUpdateWithoutProjectInput = {
@@ -1140,42 +1140,42 @@ export type BoxMasterUpdateWithoutProjectInput = {
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client?: Prisma.ClientMasterUpdateOneRequiredWithoutBoxesNestedInput
+  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBoxesNestedInput
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
-  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutBoxesNestedInput
 }
 
 export type BoxMasterUncheckedUpdateWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   client_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateManyWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   client_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type BoxMasterCreateManyDetailsInput = {
@@ -1187,9 +1187,9 @@ export type BoxMasterCreateManyDetailsInput = {
   box_status: $Enums.BoxStatus
   created_by: number
   created_date?: Date | string
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
 }
 
 export type BoxMasterUpdateWithoutDetailsInput = {
@@ -1197,13 +1197,13 @@ export type BoxMasterUpdateWithoutDetailsInput = {
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client?: Prisma.ClientMasterUpdateOneRequiredWithoutBoxesNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBoxesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBoxesNestedInput
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutBoxesNestedInput
 }
 
 export type BoxMasterUncheckedUpdateWithoutDetailsInput = {
@@ -1215,9 +1215,9 @@ export type BoxMasterUncheckedUpdateWithoutDetailsInput = {
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
 }
 
@@ -1230,23 +1230,23 @@ export type BoxMasterUncheckedUpdateManyWithoutDetailsInput = {
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type BoxMasterCreateManyClientInput = {
   id?: number
   project_id: number
-  project_details_id: number
   vendor_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
   created_date?: Date | string
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  project_details_id: number
 }
 
 export type BoxMasterUpdateWithoutClientInput = {
@@ -1254,42 +1254,42 @@ export type BoxMasterUpdateWithoutClientInput = {
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBoxesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBoxesNestedInput
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
-  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
 }
 
 export type BoxMasterUncheckedUpdateWithoutClientInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateManyWithoutClientInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -1326,121 +1326,121 @@ export type BoxMasterCountOutputTypeCountItemsArgs<ExtArgs extends runtime.Types
 export type BoxMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   project_id?: boolean
-  project_details_id?: boolean
   vendor_id?: boolean
   client_id?: boolean
   box_name?: boolean
   box_status?: boolean
   created_by?: boolean
   created_date?: boolean
-  is_deleted?: boolean
-  deleted_by?: boolean
   deleted_at?: boolean
+  deleted_by?: boolean
+  is_deleted?: boolean
+  project_details_id?: boolean
+  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   items?: boolean | Prisma.BoxMaster$itemsArgs<ExtArgs>
-  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.BoxMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["boxMaster"]>
 
 export type BoxMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   project_id?: boolean
-  project_details_id?: boolean
   vendor_id?: boolean
   client_id?: boolean
   box_name?: boolean
   box_status?: boolean
   created_by?: boolean
   created_date?: boolean
-  is_deleted?: boolean
-  deleted_by?: boolean
   deleted_at?: boolean
+  deleted_by?: boolean
+  is_deleted?: boolean
+  project_details_id?: boolean
+  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["boxMaster"]>
 
 export type BoxMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   project_id?: boolean
-  project_details_id?: boolean
   vendor_id?: boolean
   client_id?: boolean
   box_name?: boolean
   box_status?: boolean
   created_by?: boolean
   created_date?: boolean
-  is_deleted?: boolean
-  deleted_by?: boolean
   deleted_at?: boolean
+  deleted_by?: boolean
+  is_deleted?: boolean
+  project_details_id?: boolean
+  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["boxMaster"]>
 
 export type BoxMasterSelectScalar = {
   id?: boolean
   project_id?: boolean
-  project_details_id?: boolean
   vendor_id?: boolean
   client_id?: boolean
   box_name?: boolean
   box_status?: boolean
   created_by?: boolean
   created_date?: boolean
-  is_deleted?: boolean
-  deleted_by?: boolean
   deleted_at?: boolean
+  deleted_by?: boolean
+  is_deleted?: boolean
+  project_details_id?: boolean
 }
 
-export type BoxMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "project_details_id" | "vendor_id" | "client_id" | "box_name" | "box_status" | "created_by" | "created_date" | "is_deleted" | "deleted_by" | "deleted_at", ExtArgs["result"]["boxMaster"]>
+export type BoxMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "client_id" | "box_name" | "box_status" | "created_by" | "created_date" | "deleted_at" | "deleted_by" | "is_deleted" | "project_details_id", ExtArgs["result"]["boxMaster"]>
 export type BoxMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   items?: boolean | Prisma.BoxMaster$itemsArgs<ExtArgs>
-  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.BoxMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BoxMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
 }
 export type BoxMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
 }
 
 export type $BoxMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "BoxMaster"
   objects: {
+    client: Prisma.$ClientMasterPayload<ExtArgs>
+    details: Prisma.$ProjectDetailsPayload<ExtArgs>
     project: Prisma.$ProjectMasterPayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     items: Prisma.$ScanAndPackItemPayload<ExtArgs>[]
-    details: Prisma.$ProjectDetailsPayload<ExtArgs>
-    client: Prisma.$ClientMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     project_id: number
-    project_details_id: number
     vendor_id: number
     client_id: number
     box_name: string
     box_status: $Enums.BoxStatus
     created_by: number
     created_date: Date
-    is_deleted: boolean
-    deleted_by: number | null
     deleted_at: Date | null
+    deleted_by: number | null
+    is_deleted: boolean
+    project_details_id: number
   }, ExtArgs["result"]["boxMaster"]>
   composites: {}
 }
@@ -1835,11 +1835,11 @@ readonly fields: BoxMasterFieldRefs;
  */
 export interface Prisma__BoxMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  client<T extends Prisma.ClientMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ClientMasterClient<runtime.Types.Result.GetResult<Prisma.$ClientMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  details<T extends Prisma.ProjectDetailsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDetailsDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectDetailsClient<runtime.Types.Result.GetResult<Prisma.$ProjectDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   project<T extends Prisma.ProjectMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectMasterClient<runtime.Types.Result.GetResult<Prisma.$ProjectMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   items<T extends Prisma.BoxMaster$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoxMaster$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScanAndPackItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  details<T extends Prisma.ProjectDetailsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDetailsDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectDetailsClient<runtime.Types.Result.GetResult<Prisma.$ProjectDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  client<T extends Prisma.ClientMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ClientMasterClient<runtime.Types.Result.GetResult<Prisma.$ClientMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1871,16 +1871,16 @@ export interface Prisma__BoxMasterClient<T, Null = never, ExtArgs extends runtim
 export interface BoxMasterFieldRefs {
   readonly id: Prisma.FieldRef<"BoxMaster", 'Int'>
   readonly project_id: Prisma.FieldRef<"BoxMaster", 'Int'>
-  readonly project_details_id: Prisma.FieldRef<"BoxMaster", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"BoxMaster", 'Int'>
   readonly client_id: Prisma.FieldRef<"BoxMaster", 'Int'>
   readonly box_name: Prisma.FieldRef<"BoxMaster", 'String'>
   readonly box_status: Prisma.FieldRef<"BoxMaster", 'BoxStatus'>
   readonly created_by: Prisma.FieldRef<"BoxMaster", 'Int'>
   readonly created_date: Prisma.FieldRef<"BoxMaster", 'DateTime'>
-  readonly is_deleted: Prisma.FieldRef<"BoxMaster", 'Boolean'>
-  readonly deleted_by: Prisma.FieldRef<"BoxMaster", 'Int'>
   readonly deleted_at: Prisma.FieldRef<"BoxMaster", 'DateTime'>
+  readonly deleted_by: Prisma.FieldRef<"BoxMaster", 'Int'>
+  readonly is_deleted: Prisma.FieldRef<"BoxMaster", 'Boolean'>
+  readonly project_details_id: Prisma.FieldRef<"BoxMaster", 'Int'>
 }
     
 

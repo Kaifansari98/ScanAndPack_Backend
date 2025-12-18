@@ -280,11 +280,11 @@ export type LedgerWhereInput = {
   type?: Prisma.EnumLedgerTypeFilter<"Ledger"> | $Enums.LedgerType
   created_by?: Prisma.IntFilter<"Ledger"> | number
   created_at?: Prisma.DateTimeFilter<"Ledger"> | Date | string
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   client?: Prisma.XOR<Prisma.ClientMasterNullableScalarRelationFilter, Prisma.ClientMasterWhereInput> | null
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type LedgerOrderByWithRelationInput = {
@@ -298,11 +298,11 @@ export type LedgerOrderByWithRelationInput = {
   type?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  lead?: Prisma.LeadMasterOrderByWithRelationInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
   client?: Prisma.ClientMasterOrderByWithRelationInput
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  lead?: Prisma.LeadMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type LedgerWhereUniqueInput = Prisma.AtLeast<{
@@ -319,11 +319,11 @@ export type LedgerWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.EnumLedgerTypeFilter<"Ledger"> | $Enums.LedgerType
   created_by?: Prisma.IntFilter<"Ledger"> | number
   created_at?: Prisma.DateTimeFilter<"Ledger"> | Date | string
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   client?: Prisma.XOR<Prisma.ClientMasterNullableScalarRelationFilter, Prisma.ClientMasterWhereInput> | null
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type LedgerOrderByWithAggregationInput = {
@@ -365,11 +365,11 @@ export type LedgerCreateInput = {
   payment_date: Date | string
   type: $Enums.LedgerType
   created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLedgersInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutLedgersInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLedgersCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
 }
 
 export type LedgerUncheckedCreateInput = {
@@ -390,11 +390,11 @@ export type LedgerUpdateInput = {
   payment_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLedgersNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutLedgersNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLedgersCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
 }
 
 export type LedgerUncheckedUpdateInput = {
@@ -731,10 +731,10 @@ export type LedgerCreateWithoutVendorInput = {
   payment_date: Date | string
   type: $Enums.LedgerType
   created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLedgersInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutLedgersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLedgersCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
 }
 
 export type LedgerUncheckedCreateWithoutVendorInput = {
@@ -796,9 +796,9 @@ export type LedgerCreateWithoutCreatedByInput = {
   payment_date: Date | string
   type: $Enums.LedgerType
   created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLedgersInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutLedgersInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
 }
 
@@ -845,10 +845,10 @@ export type LedgerCreateWithoutClientInput = {
   payment_date: Date | string
   type: $Enums.LedgerType
   created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLedgersInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLedgersCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
 }
 
 export type LedgerUncheckedCreateWithoutClientInput = {
@@ -896,8 +896,8 @@ export type LedgerCreateWithoutLeadInput = {
   created_at?: Date | string
   account: Prisma.AccountMasterCreateNestedOneWithoutLedgersInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutLedgersInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLedgersCreatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
 }
 
 export type LedgerUncheckedCreateWithoutLeadInput = {
@@ -943,10 +943,10 @@ export type LedgerCreateWithoutAccountInput = {
   payment_date: Date | string
   type: $Enums.LedgerType
   created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutLedgersInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLedgersCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
 }
 
 export type LedgerUncheckedCreateWithoutAccountInput = {
@@ -1004,10 +1004,10 @@ export type LedgerUpdateWithoutVendorInput = {
   payment_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLedgersNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutLedgersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLedgersCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
 }
 
 export type LedgerUncheckedUpdateWithoutVendorInput = {
@@ -1051,9 +1051,9 @@ export type LedgerUpdateWithoutCreatedByInput = {
   payment_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLedgersNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutLedgersNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
 }
 
@@ -1098,10 +1098,10 @@ export type LedgerUpdateWithoutClientInput = {
   payment_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLedgersNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLedgersCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
 }
 
 export type LedgerUncheckedUpdateWithoutClientInput = {
@@ -1147,8 +1147,8 @@ export type LedgerUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLedgersNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutLedgersNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLedgersCreatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
 }
 
 export type LedgerUncheckedUpdateWithoutLeadInput = {
@@ -1192,10 +1192,10 @@ export type LedgerUpdateWithoutAccountInput = {
   payment_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutLedgersNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLedgersCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
 }
 
 export type LedgerUncheckedUpdateWithoutAccountInput = {
@@ -1235,11 +1235,11 @@ export type LedgerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   type?: boolean
   created_by?: boolean
   created_at?: boolean
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   client?: boolean | Prisma.Ledger$clientArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ledger"]>
 
 export type LedgerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1253,11 +1253,11 @@ export type LedgerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   type?: boolean
   created_by?: boolean
   created_at?: boolean
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   client?: boolean | Prisma.Ledger$clientArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ledger"]>
 
 export type LedgerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1271,11 +1271,11 @@ export type LedgerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   type?: boolean
   created_by?: boolean
   created_at?: boolean
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   client?: boolean | Prisma.Ledger$clientArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ledger"]>
 
 export type LedgerSelectScalar = {
@@ -1293,35 +1293,35 @@ export type LedgerSelectScalar = {
 
 export type LedgerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "client_id" | "vendor_id" | "amount" | "payment_date" | "type" | "created_by" | "created_at", ExtArgs["result"]["ledger"]>
 export type LedgerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   client?: boolean | Prisma.Ledger$clientArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LedgerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   client?: boolean | Prisma.Ledger$clientArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LedgerIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   client?: boolean | Prisma.Ledger$clientArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $LedgerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Ledger"
   objects: {
-    lead: Prisma.$LeadMasterPayload<ExtArgs>
     account: Prisma.$AccountMasterPayload<ExtArgs>
     client: Prisma.$ClientMasterPayload<ExtArgs> | null
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    lead: Prisma.$LeadMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1728,11 +1728,11 @@ readonly fields: LedgerFieldRefs;
  */
 export interface Prisma__LedgerClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   account<T extends Prisma.AccountMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   client<T extends Prisma.Ledger$clientArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ledger$clientArgs<ExtArgs>>): Prisma.Prisma__ClientMasterClient<runtime.Types.Result.GetResult<Prisma.$ClientMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

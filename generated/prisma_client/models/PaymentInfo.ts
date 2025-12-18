@@ -292,12 +292,12 @@ export type PaymentInfoWhereInput = {
   created_by?: Prisma.IntFilter<"PaymentInfo"> | number
   vendor_id?: Prisma.IntFilter<"PaymentInfo"> | number
   payment_type_id?: Prisma.IntFilter<"PaymentInfo"> | number
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   document?: Prisma.XOR<Prisma.LeadDocumentsNullableScalarRelationFilter, Prisma.LeadDocumentsWhereInput> | null
   paymentType?: Prisma.XOR<Prisma.PaymentTypeMasterScalarRelationFilter, Prisma.PaymentTypeMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type PaymentInfoOrderByWithRelationInput = {
@@ -312,12 +312,12 @@ export type PaymentInfoOrderByWithRelationInput = {
   created_by?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   payment_type_id?: Prisma.SortOrder
-  lead?: Prisma.LeadMasterOrderByWithRelationInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  lead?: Prisma.LeadMasterOrderByWithRelationInput
   document?: Prisma.LeadDocumentsOrderByWithRelationInput
   paymentType?: Prisma.PaymentTypeMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type PaymentInfoWhereUniqueInput = Prisma.AtLeast<{
@@ -335,12 +335,12 @@ export type PaymentInfoWhereUniqueInput = Prisma.AtLeast<{
   created_by?: Prisma.IntFilter<"PaymentInfo"> | number
   vendor_id?: Prisma.IntFilter<"PaymentInfo"> | number
   payment_type_id?: Prisma.IntFilter<"PaymentInfo"> | number
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   document?: Prisma.XOR<Prisma.LeadDocumentsNullableScalarRelationFilter, Prisma.LeadDocumentsWhereInput> | null
   paymentType?: Prisma.XOR<Prisma.PaymentTypeMasterScalarRelationFilter, Prisma.PaymentTypeMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type PaymentInfoOrderByWithAggregationInput = {
@@ -384,12 +384,12 @@ export type PaymentInfoCreateInput = {
   payment_date?: Date | string | null
   payment_text?: string | null
   created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutPaymentsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutPaymentsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPaymentsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutPaymentsInput
   document?: Prisma.LeadDocumentsCreateNestedOneWithoutPaymentInfoInput
   paymentType: Prisma.PaymentTypeMasterCreateNestedOneWithoutPaymentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentsInput
 }
 
 export type PaymentInfoUncheckedCreateInput = {
@@ -411,12 +411,12 @@ export type PaymentInfoUpdateInput = {
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutPaymentsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutPaymentsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPaymentsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutPaymentsNestedInput
   document?: Prisma.LeadDocumentsUpdateOneWithoutPaymentInfoNestedInput
   paymentType?: Prisma.PaymentTypeMasterUpdateOneRequiredWithoutPaymentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentsNestedInput
 }
 
 export type PaymentInfoUncheckedUpdateInput = {
@@ -799,9 +799,9 @@ export type PaymentInfoCreateWithoutVendorInput = {
   payment_date?: Date | string | null
   payment_text?: string | null
   created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutPaymentsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutPaymentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPaymentsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutPaymentsInput
   document?: Prisma.LeadDocumentsCreateNestedOneWithoutPaymentInfoInput
   paymentType: Prisma.PaymentTypeMasterCreateNestedOneWithoutPaymentsInput
 }
@@ -867,11 +867,11 @@ export type PaymentInfoCreateWithoutCreatedByInput = {
   payment_date?: Date | string | null
   payment_text?: string | null
   created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutPaymentsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutPaymentsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutPaymentsInput
   document?: Prisma.LeadDocumentsCreateNestedOneWithoutPaymentInfoInput
   paymentType: Prisma.PaymentTypeMasterCreateNestedOneWithoutPaymentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentsInput
 }
 
 export type PaymentInfoUncheckedCreateWithoutCreatedByInput = {
@@ -919,10 +919,10 @@ export type PaymentInfoCreateWithoutLeadInput = {
   payment_text?: string | null
   created_at?: Date | string
   account: Prisma.AccountMasterCreateNestedOneWithoutPaymentsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPaymentsCreatedInput
   document?: Prisma.LeadDocumentsCreateNestedOneWithoutPaymentInfoInput
   paymentType: Prisma.PaymentTypeMasterCreateNestedOneWithoutPaymentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentsInput
 }
 
 export type PaymentInfoUncheckedCreateWithoutLeadInput = {
@@ -969,11 +969,11 @@ export type PaymentInfoCreateWithoutAccountInput = {
   payment_date?: Date | string | null
   payment_text?: string | null
   created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutPaymentsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPaymentsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutPaymentsInput
   document?: Prisma.LeadDocumentsCreateNestedOneWithoutPaymentInfoInput
   paymentType: Prisma.PaymentTypeMasterCreateNestedOneWithoutPaymentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentsInput
 }
 
 export type PaymentInfoUncheckedCreateWithoutAccountInput = {
@@ -1020,11 +1020,11 @@ export type PaymentInfoCreateWithoutDocumentInput = {
   payment_date?: Date | string | null
   payment_text?: string | null
   created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutPaymentsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutPaymentsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPaymentsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutPaymentsInput
   paymentType: Prisma.PaymentTypeMasterCreateNestedOneWithoutPaymentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentsInput
 }
 
 export type PaymentInfoUncheckedCreateWithoutDocumentInput = {
@@ -1071,11 +1071,11 @@ export type PaymentInfoCreateWithoutPaymentTypeInput = {
   payment_date?: Date | string | null
   payment_text?: string | null
   created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutPaymentsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutPaymentsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPaymentsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutPaymentsInput
   document?: Prisma.LeadDocumentsCreateNestedOneWithoutPaymentInfoInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentsInput
 }
 
 export type PaymentInfoUncheckedCreateWithoutPaymentTypeInput = {
@@ -1135,9 +1135,9 @@ export type PaymentInfoUpdateWithoutVendorInput = {
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutPaymentsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutPaymentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPaymentsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutPaymentsNestedInput
   document?: Prisma.LeadDocumentsUpdateOneWithoutPaymentInfoNestedInput
   paymentType?: Prisma.PaymentTypeMasterUpdateOneRequiredWithoutPaymentsNestedInput
 }
@@ -1186,11 +1186,11 @@ export type PaymentInfoUpdateWithoutCreatedByInput = {
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutPaymentsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutPaymentsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutPaymentsNestedInput
   document?: Prisma.LeadDocumentsUpdateOneWithoutPaymentInfoNestedInput
   paymentType?: Prisma.PaymentTypeMasterUpdateOneRequiredWithoutPaymentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentsNestedInput
 }
 
 export type PaymentInfoUncheckedUpdateWithoutCreatedByInput = {
@@ -1238,10 +1238,10 @@ export type PaymentInfoUpdateWithoutLeadInput = {
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutPaymentsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPaymentsCreatedNestedInput
   document?: Prisma.LeadDocumentsUpdateOneWithoutPaymentInfoNestedInput
   paymentType?: Prisma.PaymentTypeMasterUpdateOneRequiredWithoutPaymentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentsNestedInput
 }
 
 export type PaymentInfoUncheckedUpdateWithoutLeadInput = {
@@ -1288,11 +1288,11 @@ export type PaymentInfoUpdateWithoutAccountInput = {
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutPaymentsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPaymentsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutPaymentsNestedInput
   document?: Prisma.LeadDocumentsUpdateOneWithoutPaymentInfoNestedInput
   paymentType?: Prisma.PaymentTypeMasterUpdateOneRequiredWithoutPaymentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentsNestedInput
 }
 
 export type PaymentInfoUncheckedUpdateWithoutAccountInput = {
@@ -1339,11 +1339,11 @@ export type PaymentInfoUpdateWithoutDocumentInput = {
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutPaymentsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutPaymentsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPaymentsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutPaymentsNestedInput
   paymentType?: Prisma.PaymentTypeMasterUpdateOneRequiredWithoutPaymentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentsNestedInput
 }
 
 export type PaymentInfoUncheckedUpdateWithoutDocumentInput = {
@@ -1390,11 +1390,11 @@ export type PaymentInfoUpdateWithoutPaymentTypeInput = {
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutPaymentsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutPaymentsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPaymentsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutPaymentsNestedInput
   document?: Prisma.LeadDocumentsUpdateOneWithoutPaymentInfoNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentsNestedInput
 }
 
 export type PaymentInfoUncheckedUpdateWithoutPaymentTypeInput = {
@@ -1437,12 +1437,12 @@ export type PaymentInfoSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   created_by?: boolean
   vendor_id?: boolean
   payment_type_id?: boolean
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   document?: boolean | Prisma.PaymentInfo$documentArgs<ExtArgs>
   paymentType?: boolean | Prisma.PaymentTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["paymentInfo"]>
 
 export type PaymentInfoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1457,12 +1457,12 @@ export type PaymentInfoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   created_by?: boolean
   vendor_id?: boolean
   payment_type_id?: boolean
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   document?: boolean | Prisma.PaymentInfo$documentArgs<ExtArgs>
   paymentType?: boolean | Prisma.PaymentTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["paymentInfo"]>
 
 export type PaymentInfoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1477,12 +1477,12 @@ export type PaymentInfoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   created_by?: boolean
   vendor_id?: boolean
   payment_type_id?: boolean
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   document?: boolean | Prisma.PaymentInfo$documentArgs<ExtArgs>
   paymentType?: boolean | Prisma.PaymentTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["paymentInfo"]>
 
 export type PaymentInfoSelectScalar = {
@@ -1501,39 +1501,39 @@ export type PaymentInfoSelectScalar = {
 
 export type PaymentInfoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "amount" | "payment_date" | "payment_text" | "payment_file_id" | "created_at" | "created_by" | "vendor_id" | "payment_type_id", ExtArgs["result"]["paymentInfo"]>
 export type PaymentInfoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   document?: boolean | Prisma.PaymentInfo$documentArgs<ExtArgs>
   paymentType?: boolean | Prisma.PaymentTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type PaymentInfoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   document?: boolean | Prisma.PaymentInfo$documentArgs<ExtArgs>
   paymentType?: boolean | Prisma.PaymentTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type PaymentInfoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   document?: boolean | Prisma.PaymentInfo$documentArgs<ExtArgs>
   paymentType?: boolean | Prisma.PaymentTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $PaymentInfoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PaymentInfo"
   objects: {
-    lead: Prisma.$LeadMasterPayload<ExtArgs>
     account: Prisma.$AccountMasterPayload<ExtArgs>
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    lead: Prisma.$LeadMasterPayload<ExtArgs>
     document: Prisma.$LeadDocumentsPayload<ExtArgs> | null
     paymentType: Prisma.$PaymentTypeMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1941,12 +1941,12 @@ readonly fields: PaymentInfoFieldRefs;
  */
 export interface Prisma__PaymentInfoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   account<T extends Prisma.AccountMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   document<T extends Prisma.PaymentInfo$documentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentInfo$documentArgs<ExtArgs>>): Prisma.Prisma__LeadDocumentsClient<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   paymentType<T extends Prisma.PaymentTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PaymentTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$PaymentTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

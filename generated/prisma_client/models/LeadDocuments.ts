@@ -30,20 +30,20 @@ export type LeadDocumentsAvgAggregateOutputType = {
   id: number | null
   created_by: number | null
   deleted_by: number | null
-  doc_type_id: number | null
   account_id: number | null
   lead_id: number | null
   vendor_id: number | null
+  doc_type_id: number | null
 }
 
 export type LeadDocumentsSumAggregateOutputType = {
   id: number | null
   created_by: number | null
   deleted_by: number | null
-  doc_type_id: number | null
   account_id: number | null
   lead_id: number | null
   vendor_id: number | null
+  doc_type_id: number | null
 }
 
 export type LeadDocumentsMinAggregateOutputType = {
@@ -54,11 +54,11 @@ export type LeadDocumentsMinAggregateOutputType = {
   created_at: Date | null
   deleted_by: number | null
   deleted_at: Date | null
-  is_deleted: boolean | null
-  doc_type_id: number | null
   account_id: number | null
   lead_id: number | null
   vendor_id: number | null
+  doc_type_id: number | null
+  is_deleted: boolean | null
   tech_check_status: $Enums.TechCheckStatus | null
 }
 
@@ -70,11 +70,11 @@ export type LeadDocumentsMaxAggregateOutputType = {
   created_at: Date | null
   deleted_by: number | null
   deleted_at: Date | null
-  is_deleted: boolean | null
-  doc_type_id: number | null
   account_id: number | null
   lead_id: number | null
   vendor_id: number | null
+  doc_type_id: number | null
+  is_deleted: boolean | null
   tech_check_status: $Enums.TechCheckStatus | null
 }
 
@@ -86,11 +86,11 @@ export type LeadDocumentsCountAggregateOutputType = {
   created_at: number
   deleted_by: number
   deleted_at: number
-  is_deleted: number
-  doc_type_id: number
   account_id: number
   lead_id: number
   vendor_id: number
+  doc_type_id: number
+  is_deleted: number
   tech_check_status: number
   _all: number
 }
@@ -100,20 +100,20 @@ export type LeadDocumentsAvgAggregateInputType = {
   id?: true
   created_by?: true
   deleted_by?: true
-  doc_type_id?: true
   account_id?: true
   lead_id?: true
   vendor_id?: true
+  doc_type_id?: true
 }
 
 export type LeadDocumentsSumAggregateInputType = {
   id?: true
   created_by?: true
   deleted_by?: true
-  doc_type_id?: true
   account_id?: true
   lead_id?: true
   vendor_id?: true
+  doc_type_id?: true
 }
 
 export type LeadDocumentsMinAggregateInputType = {
@@ -124,11 +124,11 @@ export type LeadDocumentsMinAggregateInputType = {
   created_at?: true
   deleted_by?: true
   deleted_at?: true
-  is_deleted?: true
-  doc_type_id?: true
   account_id?: true
   lead_id?: true
   vendor_id?: true
+  doc_type_id?: true
+  is_deleted?: true
   tech_check_status?: true
 }
 
@@ -140,11 +140,11 @@ export type LeadDocumentsMaxAggregateInputType = {
   created_at?: true
   deleted_by?: true
   deleted_at?: true
-  is_deleted?: true
-  doc_type_id?: true
   account_id?: true
   lead_id?: true
   vendor_id?: true
+  doc_type_id?: true
+  is_deleted?: true
   tech_check_status?: true
 }
 
@@ -156,11 +156,11 @@ export type LeadDocumentsCountAggregateInputType = {
   created_at?: true
   deleted_by?: true
   deleted_at?: true
-  is_deleted?: true
-  doc_type_id?: true
   account_id?: true
   lead_id?: true
   vendor_id?: true
+  doc_type_id?: true
+  is_deleted?: true
   tech_check_status?: true
   _all?: true
 }
@@ -259,11 +259,11 @@ export type LeadDocumentsGroupByOutputType = {
   created_at: Date
   deleted_by: number | null
   deleted_at: Date | null
-  is_deleted: boolean
-  doc_type_id: number
   account_id: number | null
   lead_id: number | null
   vendor_id: number
+  doc_type_id: number
+  is_deleted: boolean
   tech_check_status: $Enums.TechCheckStatus | null
   _count: LeadDocumentsCountAggregateOutputType | null
   _avg: LeadDocumentsAvgAggregateOutputType | null
@@ -298,23 +298,23 @@ export type LeadDocumentsWhereInput = {
   created_at?: Prisma.DateTimeFilter<"LeadDocuments"> | Date | string
   deleted_by?: Prisma.IntNullableFilter<"LeadDocuments"> | number | null
   deleted_at?: Prisma.DateTimeNullableFilter<"LeadDocuments"> | Date | string | null
-  is_deleted?: Prisma.BoolFilter<"LeadDocuments"> | boolean
-  doc_type_id?: Prisma.IntFilter<"LeadDocuments"> | number
   account_id?: Prisma.IntNullableFilter<"LeadDocuments"> | number | null
   lead_id?: Prisma.IntNullableFilter<"LeadDocuments"> | number | null
   vendor_id?: Prisma.IntFilter<"LeadDocuments"> | number
+  doc_type_id?: Prisma.IntFilter<"LeadDocuments"> | number
+  is_deleted?: Prisma.BoolFilter<"LeadDocuments"> | boolean
   tech_check_status?: Prisma.EnumTechCheckStatusNullableFilter<"LeadDocuments"> | $Enums.TechCheckStatus | null
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsListRelationFilter
+  leadDocumentLogs?: Prisma.LeadDocumentLogsListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterNullableScalarRelationFilter, Prisma.AccountMasterWhereInput> | null
-  lead?: Prisma.XOR<Prisma.LeadMasterNullableScalarRelationFilter, Prisma.LeadMasterWhereInput> | null
-  documentType?: Prisma.XOR<Prisma.DocumentTypeMasterScalarRelationFilter, Prisma.DocumentTypeMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   deletedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
-  paymentInfo?: Prisma.PaymentInfoListRelationFilter
-  leadDocumentLogs?: Prisma.LeadDocumentLogsListRelationFilter
-  site_readiness_photos?: Prisma.SiteReadinessListRelationFilter
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsListRelationFilter
+  documentType?: Prisma.XOR<Prisma.DocumentTypeMasterScalarRelationFilter, Prisma.DocumentTypeMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterNullableScalarRelationFilter, Prisma.LeadMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   miscellaneousDocument?: Prisma.MiscellaneousDocumentListRelationFilter
+  paymentInfo?: Prisma.PaymentInfoListRelationFilter
+  site_readiness_photos?: Prisma.SiteReadinessListRelationFilter
 }
 
 export type LeadDocumentsOrderByWithRelationInput = {
@@ -325,23 +325,23 @@ export type LeadDocumentsOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  is_deleted?: Prisma.SortOrder
-  doc_type_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrderInput | Prisma.SortOrder
   lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  doc_type_id?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
   tech_check_status?: Prisma.SortOrderInput | Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsOrderByRelationAggregateInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsOrderByRelationAggregateInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
-  lead?: Prisma.LeadMasterOrderByWithRelationInput
-  documentType?: Prisma.DocumentTypeMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   deletedBy?: Prisma.UserMasterOrderByWithRelationInput
-  paymentInfo?: Prisma.PaymentInfoOrderByRelationAggregateInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsOrderByRelationAggregateInput
-  site_readiness_photos?: Prisma.SiteReadinessOrderByRelationAggregateInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsOrderByRelationAggregateInput
+  documentType?: Prisma.DocumentTypeMasterOrderByWithRelationInput
+  lead?: Prisma.LeadMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentOrderByRelationAggregateInput
+  paymentInfo?: Prisma.PaymentInfoOrderByRelationAggregateInput
+  site_readiness_photos?: Prisma.SiteReadinessOrderByRelationAggregateInput
 }
 
 export type LeadDocumentsWhereUniqueInput = Prisma.AtLeast<{
@@ -355,23 +355,23 @@ export type LeadDocumentsWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"LeadDocuments"> | Date | string
   deleted_by?: Prisma.IntNullableFilter<"LeadDocuments"> | number | null
   deleted_at?: Prisma.DateTimeNullableFilter<"LeadDocuments"> | Date | string | null
-  is_deleted?: Prisma.BoolFilter<"LeadDocuments"> | boolean
-  doc_type_id?: Prisma.IntFilter<"LeadDocuments"> | number
   account_id?: Prisma.IntNullableFilter<"LeadDocuments"> | number | null
   lead_id?: Prisma.IntNullableFilter<"LeadDocuments"> | number | null
   vendor_id?: Prisma.IntFilter<"LeadDocuments"> | number
+  doc_type_id?: Prisma.IntFilter<"LeadDocuments"> | number
+  is_deleted?: Prisma.BoolFilter<"LeadDocuments"> | boolean
   tech_check_status?: Prisma.EnumTechCheckStatusNullableFilter<"LeadDocuments"> | $Enums.TechCheckStatus | null
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsListRelationFilter
+  leadDocumentLogs?: Prisma.LeadDocumentLogsListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterNullableScalarRelationFilter, Prisma.AccountMasterWhereInput> | null
-  lead?: Prisma.XOR<Prisma.LeadMasterNullableScalarRelationFilter, Prisma.LeadMasterWhereInput> | null
-  documentType?: Prisma.XOR<Prisma.DocumentTypeMasterScalarRelationFilter, Prisma.DocumentTypeMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   deletedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
-  paymentInfo?: Prisma.PaymentInfoListRelationFilter
-  leadDocumentLogs?: Prisma.LeadDocumentLogsListRelationFilter
-  site_readiness_photos?: Prisma.SiteReadinessListRelationFilter
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsListRelationFilter
+  documentType?: Prisma.XOR<Prisma.DocumentTypeMasterScalarRelationFilter, Prisma.DocumentTypeMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterNullableScalarRelationFilter, Prisma.LeadMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   miscellaneousDocument?: Prisma.MiscellaneousDocumentListRelationFilter
+  paymentInfo?: Prisma.PaymentInfoListRelationFilter
+  site_readiness_photos?: Prisma.SiteReadinessListRelationFilter
 }, "id">
 
 export type LeadDocumentsOrderByWithAggregationInput = {
@@ -382,11 +382,11 @@ export type LeadDocumentsOrderByWithAggregationInput = {
   created_at?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  is_deleted?: Prisma.SortOrder
-  doc_type_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrderInput | Prisma.SortOrder
   lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  doc_type_id?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
   tech_check_status?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.LeadDocumentsCountOrderByAggregateInput
   _avg?: Prisma.LeadDocumentsAvgOrderByAggregateInput
@@ -406,11 +406,11 @@ export type LeadDocumentsScalarWhereWithAggregatesInput = {
   created_at?: Prisma.DateTimeWithAggregatesFilter<"LeadDocuments"> | Date | string
   deleted_by?: Prisma.IntNullableWithAggregatesFilter<"LeadDocuments"> | number | null
   deleted_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadDocuments"> | Date | string | null
-  is_deleted?: Prisma.BoolWithAggregatesFilter<"LeadDocuments"> | boolean
-  doc_type_id?: Prisma.IntWithAggregatesFilter<"LeadDocuments"> | number
   account_id?: Prisma.IntNullableWithAggregatesFilter<"LeadDocuments"> | number | null
   lead_id?: Prisma.IntNullableWithAggregatesFilter<"LeadDocuments"> | number | null
   vendor_id?: Prisma.IntWithAggregatesFilter<"LeadDocuments"> | number
+  doc_type_id?: Prisma.IntWithAggregatesFilter<"LeadDocuments"> | number
+  is_deleted?: Prisma.BoolWithAggregatesFilter<"LeadDocuments"> | boolean
   tech_check_status?: Prisma.EnumTechCheckStatusNullableWithAggregatesFilter<"LeadDocuments"> | $Enums.TechCheckStatus | null
 }
 
@@ -421,17 +421,17 @@ export type LeadDocumentsCreateInput = {
   deleted_at?: Date | string | null
   is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
-  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
-  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
-  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
-  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
+  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
 }
 
 export type LeadDocumentsUncheckedCreateInput = {
@@ -442,17 +442,17 @@ export type LeadDocumentsUncheckedCreateInput = {
   created_at?: Date | string
   deleted_by?: number | null
   deleted_at?: Date | string | null
-  is_deleted?: boolean
-  doc_type_id: number
   account_id?: number | null
   lead_id?: number | null
   vendor_id: number
+  doc_type_id: number
+  is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
 }
 
 export type LeadDocumentsUpdateInput = {
@@ -462,17 +462,17 @@ export type LeadDocumentsUpdateInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
-  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
-  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
-  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
+  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateInput = {
@@ -483,17 +483,17 @@ export type LeadDocumentsUncheckedUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
 export type LeadDocumentsCreateManyInput = {
@@ -504,11 +504,11 @@ export type LeadDocumentsCreateManyInput = {
   created_at?: Date | string
   deleted_by?: number | null
   deleted_at?: Date | string | null
-  is_deleted?: boolean
-  doc_type_id: number
   account_id?: number | null
   lead_id?: number | null
   vendor_id: number
+  doc_type_id: number
+  is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
 }
 
@@ -529,11 +529,11 @@ export type LeadDocumentsUncheckedUpdateManyInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
 }
 
@@ -555,11 +555,11 @@ export type LeadDocumentsCountOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
-  is_deleted?: Prisma.SortOrder
-  doc_type_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  doc_type_id?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
   tech_check_status?: Prisma.SortOrder
 }
 
@@ -567,10 +567,10 @@ export type LeadDocumentsAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
-  doc_type_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  doc_type_id?: Prisma.SortOrder
 }
 
 export type LeadDocumentsMaxOrderByAggregateInput = {
@@ -581,11 +581,11 @@ export type LeadDocumentsMaxOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
-  is_deleted?: Prisma.SortOrder
-  doc_type_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  doc_type_id?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
   tech_check_status?: Prisma.SortOrder
 }
 
@@ -597,11 +597,11 @@ export type LeadDocumentsMinOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
-  is_deleted?: Prisma.SortOrder
-  doc_type_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  doc_type_id?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
   tech_check_status?: Prisma.SortOrder
 }
 
@@ -609,10 +609,10 @@ export type LeadDocumentsSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
-  doc_type_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  doc_type_id?: Prisma.SortOrder
 }
 
 export type LeadDocumentsNullableScalarRelationFilter = {
@@ -984,16 +984,16 @@ export type LeadDocumentsCreateWithoutVendorInput = {
   deleted_at?: Date | string | null
   is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
-  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
-  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
-  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
-  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
+  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutVendorInput = {
@@ -1004,16 +1004,16 @@ export type LeadDocumentsUncheckedCreateWithoutVendorInput = {
   created_at?: Date | string
   deleted_by?: number | null
   deleted_at?: Date | string | null
-  is_deleted?: boolean
-  doc_type_id: number
   account_id?: number | null
   lead_id?: number | null
+  doc_type_id: number
+  is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutVendorInput = {
@@ -1053,11 +1053,11 @@ export type LeadDocumentsScalarWhereInput = {
   created_at?: Prisma.DateTimeFilter<"LeadDocuments"> | Date | string
   deleted_by?: Prisma.IntNullableFilter<"LeadDocuments"> | number | null
   deleted_at?: Prisma.DateTimeNullableFilter<"LeadDocuments"> | Date | string | null
-  is_deleted?: Prisma.BoolFilter<"LeadDocuments"> | boolean
-  doc_type_id?: Prisma.IntFilter<"LeadDocuments"> | number
   account_id?: Prisma.IntNullableFilter<"LeadDocuments"> | number | null
   lead_id?: Prisma.IntNullableFilter<"LeadDocuments"> | number | null
   vendor_id?: Prisma.IntFilter<"LeadDocuments"> | number
+  doc_type_id?: Prisma.IntFilter<"LeadDocuments"> | number
+  is_deleted?: Prisma.BoolFilter<"LeadDocuments"> | boolean
   tech_check_status?: Prisma.EnumTechCheckStatusNullableFilter<"LeadDocuments"> | $Enums.TechCheckStatus | null
 }
 
@@ -1068,16 +1068,16 @@ export type LeadDocumentsCreateWithoutCreatedByInput = {
   deleted_at?: Date | string | null
   is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
-  account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
-  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
-  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
-  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
-  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
-  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
+  account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
+  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutCreatedByInput = {
@@ -1087,17 +1087,17 @@ export type LeadDocumentsUncheckedCreateWithoutCreatedByInput = {
   created_at?: Date | string
   deleted_by?: number | null
   deleted_at?: Date | string | null
-  is_deleted?: boolean
-  doc_type_id: number
   account_id?: number | null
   lead_id?: number | null
   vendor_id: number
+  doc_type_id: number
+  is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutCreatedByInput = {
@@ -1117,16 +1117,16 @@ export type LeadDocumentsCreateWithoutDeletedByInput = {
   deleted_at?: Date | string | null
   is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
-  account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
-  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
-  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
-  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
-  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
+  account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
+  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutDeletedByInput = {
@@ -1136,17 +1136,17 @@ export type LeadDocumentsUncheckedCreateWithoutDeletedByInput = {
   created_by: number
   created_at?: Date | string
   deleted_at?: Date | string | null
-  is_deleted?: boolean
-  doc_type_id: number
   account_id?: number | null
   lead_id?: number | null
   vendor_id: number
+  doc_type_id: number
+  is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutDeletedByInput = {
@@ -1198,16 +1198,16 @@ export type LeadDocumentsCreateWithoutLeadInput = {
   deleted_at?: Date | string | null
   is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
-  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
-  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
-  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
+  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutLeadInput = {
@@ -1218,16 +1218,16 @@ export type LeadDocumentsUncheckedCreateWithoutLeadInput = {
   created_at?: Date | string
   deleted_by?: number | null
   deleted_at?: Date | string | null
-  is_deleted?: boolean
-  doc_type_id: number
   account_id?: number | null
   vendor_id: number
+  doc_type_id: number
+  is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutLeadInput = {
@@ -1263,16 +1263,16 @@ export type LeadDocumentsCreateWithoutAccountInput = {
   deleted_at?: Date | string | null
   is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
-  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
-  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
-  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
-  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
+  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutAccountInput = {
@@ -1283,16 +1283,16 @@ export type LeadDocumentsUncheckedCreateWithoutAccountInput = {
   created_at?: Date | string
   deleted_by?: number | null
   deleted_at?: Date | string | null
-  is_deleted?: boolean
-  doc_type_id: number
   lead_id?: number | null
   vendor_id: number
+  doc_type_id: number
+  is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutAccountInput = {
@@ -1328,16 +1328,16 @@ export type LeadDocumentsCreateWithoutPaymentInfoInput = {
   deleted_at?: Date | string | null
   is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
-  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
-  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
-  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
+  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutPaymentInfoInput = {
@@ -1348,16 +1348,16 @@ export type LeadDocumentsUncheckedCreateWithoutPaymentInfoInput = {
   created_at?: Date | string
   deleted_by?: number | null
   deleted_at?: Date | string | null
-  is_deleted?: boolean
-  doc_type_id: number
   account_id?: number | null
   lead_id?: number | null
   vendor_id: number
+  doc_type_id: number
+  is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutPaymentInfoInput = {
@@ -1383,16 +1383,16 @@ export type LeadDocumentsUpdateWithoutPaymentInfoInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
-  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
-  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
+  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutPaymentInfoInput = {
@@ -1403,16 +1403,16 @@ export type LeadDocumentsUncheckedUpdateWithoutPaymentInfoInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
 export type LeadDocumentsCreateWithoutDocumentTypeInput = {
@@ -1422,16 +1422,16 @@ export type LeadDocumentsCreateWithoutDocumentTypeInput = {
   deleted_at?: Date | string | null
   is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
-  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
-  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
-  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutDocumentTypeInput = {
@@ -1442,16 +1442,16 @@ export type LeadDocumentsUncheckedCreateWithoutDocumentTypeInput = {
   created_at?: Date | string
   deleted_by?: number | null
   deleted_at?: Date | string | null
-  is_deleted?: boolean
   account_id?: number | null
   lead_id?: number | null
   vendor_id: number
+  is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutDocumentTypeInput = {
@@ -1487,16 +1487,16 @@ export type LeadDocumentsCreateWithoutLeadDocumentLogsInput = {
   deleted_at?: Date | string | null
   is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
-  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
-  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
+  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
-  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutLeadDocumentLogsInput = {
@@ -1507,16 +1507,16 @@ export type LeadDocumentsUncheckedCreateWithoutLeadDocumentLogsInput = {
   created_at?: Date | string
   deleted_by?: number | null
   deleted_at?: Date | string | null
-  is_deleted?: boolean
-  doc_type_id: number
   account_id?: number | null
   lead_id?: number | null
   vendor_id: number
+  doc_type_id: number
+  is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutLeadDocumentLogsInput = {
@@ -1542,16 +1542,16 @@ export type LeadDocumentsUpdateWithoutLeadDocumentLogsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
-  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
+  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
-  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutLeadDocumentLogsInput = {
@@ -1562,16 +1562,16 @@ export type LeadDocumentsUncheckedUpdateWithoutLeadDocumentLogsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
 export type LeadDocumentsCreateWithoutSite_readiness_photosInput = {
@@ -1581,16 +1581,16 @@ export type LeadDocumentsCreateWithoutSite_readiness_photosInput = {
   deleted_at?: Date | string | null
   is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
-  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
-  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
-  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
+  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutSite_readiness_photosInput = {
@@ -1601,16 +1601,16 @@ export type LeadDocumentsUncheckedCreateWithoutSite_readiness_photosInput = {
   created_at?: Date | string
   deleted_by?: number | null
   deleted_at?: Date | string | null
-  is_deleted?: boolean
-  doc_type_id: number
   account_id?: number | null
   lead_id?: number | null
   vendor_id: number
+  doc_type_id: number
+  is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutSite_readiness_photosInput = {
@@ -1641,16 +1641,16 @@ export type LeadDocumentsCreateWithoutInstallationUpdateDocsInput = {
   deleted_at?: Date | string | null
   is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
-  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
-  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
-  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
-  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
+  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutInstallationUpdateDocsInput = {
@@ -1661,16 +1661,16 @@ export type LeadDocumentsUncheckedCreateWithoutInstallationUpdateDocsInput = {
   created_at?: Date | string
   deleted_by?: number | null
   deleted_at?: Date | string | null
-  is_deleted?: boolean
-  doc_type_id: number
   account_id?: number | null
   lead_id?: number | null
   vendor_id: number
+  doc_type_id: number
+  is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutInstallationUpdateDocsInput = {
@@ -1696,16 +1696,16 @@ export type LeadDocumentsUpdateWithoutInstallationUpdateDocsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
-  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
-  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
-  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
+  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutInstallationUpdateDocsInput = {
@@ -1716,16 +1716,16 @@ export type LeadDocumentsUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
 export type LeadDocumentsCreateWithoutMiscellaneousDocumentInput = {
@@ -1735,16 +1735,16 @@ export type LeadDocumentsCreateWithoutMiscellaneousDocumentInput = {
   deleted_at?: Date | string | null
   is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
-  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
-  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
+  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutMiscellaneousDocumentInput = {
@@ -1755,16 +1755,16 @@ export type LeadDocumentsUncheckedCreateWithoutMiscellaneousDocumentInput = {
   created_at?: Date | string
   deleted_by?: number | null
   deleted_at?: Date | string | null
-  is_deleted?: boolean
-  doc_type_id: number
   account_id?: number | null
   lead_id?: number | null
   vendor_id: number
+  doc_type_id: number
+  is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutMiscellaneousDocumentInput = {
@@ -1790,16 +1790,16 @@ export type LeadDocumentsUpdateWithoutMiscellaneousDocumentInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
-  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
+  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutMiscellaneousDocumentInput = {
@@ -1810,16 +1810,16 @@ export type LeadDocumentsUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
 export type LeadDocumentsCreateManyVendorInput = {
@@ -1830,10 +1830,10 @@ export type LeadDocumentsCreateManyVendorInput = {
   created_at?: Date | string
   deleted_by?: number | null
   deleted_at?: Date | string | null
-  is_deleted?: boolean
-  doc_type_id: number
   account_id?: number | null
   lead_id?: number | null
+  doc_type_id: number
+  is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
 }
 
@@ -1844,16 +1844,16 @@ export type LeadDocumentsUpdateWithoutVendorInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
-  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
-  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
-  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
+  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutVendorInput = {
@@ -1864,16 +1864,16 @@ export type LeadDocumentsUncheckedUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateManyWithoutVendorInput = {
@@ -1884,10 +1884,10 @@ export type LeadDocumentsUncheckedUpdateManyWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
 }
 
@@ -1898,11 +1898,11 @@ export type LeadDocumentsCreateManyCreatedByInput = {
   created_at?: Date | string
   deleted_by?: number | null
   deleted_at?: Date | string | null
-  is_deleted?: boolean
-  doc_type_id: number
   account_id?: number | null
   lead_id?: number | null
   vendor_id: number
+  doc_type_id: number
+  is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
 }
 
@@ -1913,11 +1913,11 @@ export type LeadDocumentsCreateManyDeletedByInput = {
   created_by: number
   created_at?: Date | string
   deleted_at?: Date | string | null
-  is_deleted?: boolean
-  doc_type_id: number
   account_id?: number | null
   lead_id?: number | null
   vendor_id: number
+  doc_type_id: number
+  is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
 }
 
@@ -1928,16 +1928,16 @@ export type LeadDocumentsUpdateWithoutCreatedByInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
-  account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
-  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
-  deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
-  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
-  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
+  account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
+  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutCreatedByInput = {
@@ -1947,17 +1947,17 @@ export type LeadDocumentsUncheckedUpdateWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1967,11 +1967,11 @@ export type LeadDocumentsUncheckedUpdateManyWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
 }
 
@@ -1982,16 +1982,16 @@ export type LeadDocumentsUpdateWithoutDeletedByInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
-  account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
-  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
-  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
-  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
+  account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
+  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutDeletedByInput = {
@@ -2001,17 +2001,17 @@ export type LeadDocumentsUncheckedUpdateWithoutDeletedByInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateManyWithoutDeletedByInput = {
@@ -2021,11 +2021,11 @@ export type LeadDocumentsUncheckedUpdateManyWithoutDeletedByInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
 }
 
@@ -2037,10 +2037,10 @@ export type LeadDocumentsCreateManyLeadInput = {
   created_at?: Date | string
   deleted_by?: number | null
   deleted_at?: Date | string | null
-  is_deleted?: boolean
-  doc_type_id: number
   account_id?: number | null
   vendor_id: number
+  doc_type_id: number
+  is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
 }
 
@@ -2051,16 +2051,16 @@ export type LeadDocumentsUpdateWithoutLeadInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
-  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
-  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
-  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
+  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutLeadInput = {
@@ -2071,16 +2071,16 @@ export type LeadDocumentsUncheckedUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateManyWithoutLeadInput = {
@@ -2091,10 +2091,10 @@ export type LeadDocumentsUncheckedUpdateManyWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
 }
 
@@ -2106,10 +2106,10 @@ export type LeadDocumentsCreateManyAccountInput = {
   created_at?: Date | string
   deleted_by?: number | null
   deleted_at?: Date | string | null
-  is_deleted?: boolean
-  doc_type_id: number
   lead_id?: number | null
   vendor_id: number
+  doc_type_id: number
+  is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
 }
 
@@ -2120,16 +2120,16 @@ export type LeadDocumentsUpdateWithoutAccountInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
-  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
-  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
-  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
+  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutAccountInput = {
@@ -2140,16 +2140,16 @@ export type LeadDocumentsUncheckedUpdateWithoutAccountInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateManyWithoutAccountInput = {
@@ -2160,10 +2160,10 @@ export type LeadDocumentsUncheckedUpdateManyWithoutAccountInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
 }
 
@@ -2175,10 +2175,10 @@ export type LeadDocumentsCreateManyDocumentTypeInput = {
   created_at?: Date | string
   deleted_by?: number | null
   deleted_at?: Date | string | null
-  is_deleted?: boolean
   account_id?: number | null
   lead_id?: number | null
   vendor_id: number
+  is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
 }
 
@@ -2189,16 +2189,16 @@ export type LeadDocumentsUpdateWithoutDocumentTypeInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
-  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
-  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutDocumentTypeInput = {
@@ -2209,16 +2209,16 @@ export type LeadDocumentsUncheckedUpdateWithoutDocumentTypeInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
-  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateManyWithoutDocumentTypeInput = {
@@ -2229,10 +2229,10 @@ export type LeadDocumentsUncheckedUpdateManyWithoutDocumentTypeInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
 }
 
@@ -2243,16 +2243,16 @@ export type LeadDocumentsUpdateWithoutSite_readiness_photosInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
-  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
-  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
+  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutSite_readiness_photosInput = {
@@ -2263,16 +2263,16 @@ export type LeadDocumentsUncheckedUpdateWithoutSite_readiness_photosInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
-  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateManyWithoutSite_readiness_photosInput = {
@@ -2283,11 +2283,11 @@ export type LeadDocumentsUncheckedUpdateManyWithoutSite_readiness_photosInput = 
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
 }
 
@@ -2297,19 +2297,19 @@ export type LeadDocumentsUncheckedUpdateManyWithoutSite_readiness_photosInput = 
  */
 
 export type LeadDocumentsCountOutputType = {
-  paymentInfo: number
-  leadDocumentLogs: number
-  site_readiness_photos: number
   installationUpdateDocs: number
+  leadDocumentLogs: number
   miscellaneousDocument: number
+  paymentInfo: number
+  site_readiness_photos: number
 }
 
 export type LeadDocumentsCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  paymentInfo?: boolean | LeadDocumentsCountOutputTypeCountPaymentInfoArgs
-  leadDocumentLogs?: boolean | LeadDocumentsCountOutputTypeCountLeadDocumentLogsArgs
-  site_readiness_photos?: boolean | LeadDocumentsCountOutputTypeCountSite_readiness_photosArgs
   installationUpdateDocs?: boolean | LeadDocumentsCountOutputTypeCountInstallationUpdateDocsArgs
+  leadDocumentLogs?: boolean | LeadDocumentsCountOutputTypeCountLeadDocumentLogsArgs
   miscellaneousDocument?: boolean | LeadDocumentsCountOutputTypeCountMiscellaneousDocumentArgs
+  paymentInfo?: boolean | LeadDocumentsCountOutputTypeCountPaymentInfoArgs
+  site_readiness_photos?: boolean | LeadDocumentsCountOutputTypeCountSite_readiness_photosArgs
 }
 
 /**
@@ -2325,8 +2325,8 @@ export type LeadDocumentsCountOutputTypeDefaultArgs<ExtArgs extends runtime.Type
 /**
  * LeadDocumentsCountOutputType without action
  */
-export type LeadDocumentsCountOutputTypeCountPaymentInfoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PaymentInfoWhereInput
+export type LeadDocumentsCountOutputTypeCountInstallationUpdateDocsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InstallationUpdateDocumentsWhereInput
 }
 
 /**
@@ -2339,22 +2339,22 @@ export type LeadDocumentsCountOutputTypeCountLeadDocumentLogsArgs<ExtArgs extend
 /**
  * LeadDocumentsCountOutputType without action
  */
-export type LeadDocumentsCountOutputTypeCountSite_readiness_photosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SiteReadinessWhereInput
-}
-
-/**
- * LeadDocumentsCountOutputType without action
- */
-export type LeadDocumentsCountOutputTypeCountInstallationUpdateDocsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.InstallationUpdateDocumentsWhereInput
-}
-
-/**
- * LeadDocumentsCountOutputType without action
- */
 export type LeadDocumentsCountOutputTypeCountMiscellaneousDocumentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.MiscellaneousDocumentWhereInput
+}
+
+/**
+ * LeadDocumentsCountOutputType without action
+ */
+export type LeadDocumentsCountOutputTypeCountPaymentInfoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentInfoWhereInput
+}
+
+/**
+ * LeadDocumentsCountOutputType without action
+ */
+export type LeadDocumentsCountOutputTypeCountSite_readiness_photosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SiteReadinessWhereInput
 }
 
 
@@ -2366,23 +2366,23 @@ export type LeadDocumentsSelect<ExtArgs extends runtime.Types.Extensions.Interna
   created_at?: boolean
   deleted_by?: boolean
   deleted_at?: boolean
-  is_deleted?: boolean
-  doc_type_id?: boolean
   account_id?: boolean
   lead_id?: boolean
   vendor_id?: boolean
+  doc_type_id?: boolean
+  is_deleted?: boolean
   tech_check_status?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  installationUpdateDocs?: boolean | Prisma.LeadDocuments$installationUpdateDocsArgs<ExtArgs>
+  leadDocumentLogs?: boolean | Prisma.LeadDocuments$leadDocumentLogsArgs<ExtArgs>
   account?: boolean | Prisma.LeadDocuments$accountArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
-  documentType?: boolean | Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.LeadDocuments$deletedByArgs<ExtArgs>
-  paymentInfo?: boolean | Prisma.LeadDocuments$paymentInfoArgs<ExtArgs>
-  leadDocumentLogs?: boolean | Prisma.LeadDocuments$leadDocumentLogsArgs<ExtArgs>
-  site_readiness_photos?: boolean | Prisma.LeadDocuments$site_readiness_photosArgs<ExtArgs>
-  installationUpdateDocs?: boolean | Prisma.LeadDocuments$installationUpdateDocsArgs<ExtArgs>
+  documentType?: boolean | Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   miscellaneousDocument?: boolean | Prisma.LeadDocuments$miscellaneousDocumentArgs<ExtArgs>
+  paymentInfo?: boolean | Prisma.LeadDocuments$paymentInfoArgs<ExtArgs>
+  site_readiness_photos?: boolean | Prisma.LeadDocuments$site_readiness_photosArgs<ExtArgs>
   _count?: boolean | Prisma.LeadDocumentsCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadDocuments"]>
 
@@ -2394,18 +2394,18 @@ export type LeadDocumentsSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   created_at?: boolean
   deleted_by?: boolean
   deleted_at?: boolean
-  is_deleted?: boolean
-  doc_type_id?: boolean
   account_id?: boolean
   lead_id?: boolean
   vendor_id?: boolean
+  doc_type_id?: boolean
+  is_deleted?: boolean
   tech_check_status?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.LeadDocuments$accountArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
-  documentType?: boolean | Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.LeadDocuments$deletedByArgs<ExtArgs>
+  documentType?: boolean | Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadDocuments"]>
 
 export type LeadDocumentsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2416,18 +2416,18 @@ export type LeadDocumentsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   created_at?: boolean
   deleted_by?: boolean
   deleted_at?: boolean
-  is_deleted?: boolean
-  doc_type_id?: boolean
   account_id?: boolean
   lead_id?: boolean
   vendor_id?: boolean
+  doc_type_id?: boolean
+  is_deleted?: boolean
   tech_check_status?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.LeadDocuments$accountArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
-  documentType?: boolean | Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.LeadDocuments$deletedByArgs<ExtArgs>
+  documentType?: boolean | Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadDocuments"]>
 
 export type LeadDocumentsSelectScalar = {
@@ -2438,60 +2438,60 @@ export type LeadDocumentsSelectScalar = {
   created_at?: boolean
   deleted_by?: boolean
   deleted_at?: boolean
-  is_deleted?: boolean
-  doc_type_id?: boolean
   account_id?: boolean
   lead_id?: boolean
   vendor_id?: boolean
+  doc_type_id?: boolean
+  is_deleted?: boolean
   tech_check_status?: boolean
 }
 
-export type LeadDocumentsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "doc_og_name" | "doc_sys_name" | "created_by" | "created_at" | "deleted_by" | "deleted_at" | "is_deleted" | "doc_type_id" | "account_id" | "lead_id" | "vendor_id" | "tech_check_status", ExtArgs["result"]["leadDocuments"]>
+export type LeadDocumentsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "doc_og_name" | "doc_sys_name" | "created_by" | "created_at" | "deleted_by" | "deleted_at" | "account_id" | "lead_id" | "vendor_id" | "doc_type_id" | "is_deleted" | "tech_check_status", ExtArgs["result"]["leadDocuments"]>
 export type LeadDocumentsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  installationUpdateDocs?: boolean | Prisma.LeadDocuments$installationUpdateDocsArgs<ExtArgs>
+  leadDocumentLogs?: boolean | Prisma.LeadDocuments$leadDocumentLogsArgs<ExtArgs>
   account?: boolean | Prisma.LeadDocuments$accountArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
-  documentType?: boolean | Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.LeadDocuments$deletedByArgs<ExtArgs>
-  paymentInfo?: boolean | Prisma.LeadDocuments$paymentInfoArgs<ExtArgs>
-  leadDocumentLogs?: boolean | Prisma.LeadDocuments$leadDocumentLogsArgs<ExtArgs>
-  site_readiness_photos?: boolean | Prisma.LeadDocuments$site_readiness_photosArgs<ExtArgs>
-  installationUpdateDocs?: boolean | Prisma.LeadDocuments$installationUpdateDocsArgs<ExtArgs>
+  documentType?: boolean | Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   miscellaneousDocument?: boolean | Prisma.LeadDocuments$miscellaneousDocumentArgs<ExtArgs>
+  paymentInfo?: boolean | Prisma.LeadDocuments$paymentInfoArgs<ExtArgs>
+  site_readiness_photos?: boolean | Prisma.LeadDocuments$site_readiness_photosArgs<ExtArgs>
   _count?: boolean | Prisma.LeadDocumentsCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LeadDocumentsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.LeadDocuments$accountArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
-  documentType?: boolean | Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.LeadDocuments$deletedByArgs<ExtArgs>
+  documentType?: boolean | Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadDocumentsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.LeadDocuments$accountArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
-  documentType?: boolean | Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.LeadDocuments$deletedByArgs<ExtArgs>
+  documentType?: boolean | Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $LeadDocumentsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadDocuments"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
+    installationUpdateDocs: Prisma.$InstallationUpdateDocumentsPayload<ExtArgs>[]
+    leadDocumentLogs: Prisma.$LeadDocumentLogsPayload<ExtArgs>[]
     account: Prisma.$AccountMasterPayload<ExtArgs> | null
-    lead: Prisma.$LeadMasterPayload<ExtArgs> | null
-    documentType: Prisma.$DocumentTypeMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
     deletedBy: Prisma.$UserMasterPayload<ExtArgs> | null
-    paymentInfo: Prisma.$PaymentInfoPayload<ExtArgs>[]
-    leadDocumentLogs: Prisma.$LeadDocumentLogsPayload<ExtArgs>[]
-    site_readiness_photos: Prisma.$SiteReadinessPayload<ExtArgs>[]
-    installationUpdateDocs: Prisma.$InstallationUpdateDocumentsPayload<ExtArgs>[]
+    documentType: Prisma.$DocumentTypeMasterPayload<ExtArgs>
+    lead: Prisma.$LeadMasterPayload<ExtArgs> | null
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     miscellaneousDocument: Prisma.$MiscellaneousDocumentPayload<ExtArgs>[]
+    paymentInfo: Prisma.$PaymentInfoPayload<ExtArgs>[]
+    site_readiness_photos: Prisma.$SiteReadinessPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2501,11 +2501,11 @@ export type $LeadDocumentsPayload<ExtArgs extends runtime.Types.Extensions.Inter
     created_at: Date
     deleted_by: number | null
     deleted_at: Date | null
-    is_deleted: boolean
-    doc_type_id: number
     account_id: number | null
     lead_id: number | null
     vendor_id: number
+    doc_type_id: number
+    is_deleted: boolean
     tech_check_status: $Enums.TechCheckStatus | null
   }, ExtArgs["result"]["leadDocuments"]>
   composites: {}
@@ -2901,17 +2901,17 @@ readonly fields: LeadDocumentsFieldRefs;
  */
 export interface Prisma__LeadDocumentsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  installationUpdateDocs<T extends Prisma.LeadDocuments$installationUpdateDocsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$installationUpdateDocsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallationUpdateDocumentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadDocumentLogs<T extends Prisma.LeadDocuments$leadDocumentLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$leadDocumentLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDocumentLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   account<T extends Prisma.LeadDocuments$accountArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$accountArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  lead<T extends Prisma.LeadDocuments$leadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$leadArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  documentType<T extends Prisma.DocumentTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__DocumentTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$DocumentTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   deletedBy<T extends Prisma.LeadDocuments$deletedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$deletedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  paymentInfo<T extends Prisma.LeadDocuments$paymentInfoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$paymentInfoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentInfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  leadDocumentLogs<T extends Prisma.LeadDocuments$leadDocumentLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$leadDocumentLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDocumentLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  site_readiness_photos<T extends Prisma.LeadDocuments$site_readiness_photosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$site_readiness_photosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SiteReadinessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  installationUpdateDocs<T extends Prisma.LeadDocuments$installationUpdateDocsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$installationUpdateDocsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallationUpdateDocumentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documentType<T extends Prisma.DocumentTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__DocumentTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$DocumentTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadDocuments$leadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$leadArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   miscellaneousDocument<T extends Prisma.LeadDocuments$miscellaneousDocumentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$miscellaneousDocumentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MiscellaneousDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  paymentInfo<T extends Prisma.LeadDocuments$paymentInfoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$paymentInfoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentInfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  site_readiness_photos<T extends Prisma.LeadDocuments$site_readiness_photosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$site_readiness_photosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SiteReadinessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2948,11 +2948,11 @@ export interface LeadDocumentsFieldRefs {
   readonly created_at: Prisma.FieldRef<"LeadDocuments", 'DateTime'>
   readonly deleted_by: Prisma.FieldRef<"LeadDocuments", 'Int'>
   readonly deleted_at: Prisma.FieldRef<"LeadDocuments", 'DateTime'>
-  readonly is_deleted: Prisma.FieldRef<"LeadDocuments", 'Boolean'>
-  readonly doc_type_id: Prisma.FieldRef<"LeadDocuments", 'Int'>
   readonly account_id: Prisma.FieldRef<"LeadDocuments", 'Int'>
   readonly lead_id: Prisma.FieldRef<"LeadDocuments", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"LeadDocuments", 'Int'>
+  readonly doc_type_id: Prisma.FieldRef<"LeadDocuments", 'Int'>
+  readonly is_deleted: Prisma.FieldRef<"LeadDocuments", 'Boolean'>
   readonly tech_check_status: Prisma.FieldRef<"LeadDocuments", 'TechCheckStatus'>
 }
     
@@ -3350,84 +3350,27 @@ export type LeadDocumentsDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
- * LeadDocuments.account
+ * LeadDocuments.installationUpdateDocs
  */
-export type LeadDocuments$accountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type LeadDocuments$installationUpdateDocsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the AccountMaster
+   * Select specific fields to fetch from the InstallationUpdateDocuments
    */
-  select?: Prisma.AccountMasterSelect<ExtArgs> | null
+  select?: Prisma.InstallationUpdateDocumentsSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the AccountMaster
+   * Omit specific fields from the InstallationUpdateDocuments
    */
-  omit?: Prisma.AccountMasterOmit<ExtArgs> | null
+  omit?: Prisma.InstallationUpdateDocumentsOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.AccountMasterInclude<ExtArgs> | null
-  where?: Prisma.AccountMasterWhereInput
-}
-
-/**
- * LeadDocuments.lead
- */
-export type LeadDocuments$leadArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the LeadMaster
-   */
-  select?: Prisma.LeadMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the LeadMaster
-   */
-  omit?: Prisma.LeadMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LeadMasterInclude<ExtArgs> | null
-  where?: Prisma.LeadMasterWhereInput
-}
-
-/**
- * LeadDocuments.deletedBy
- */
-export type LeadDocuments$deletedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UserMaster
-   */
-  select?: Prisma.UserMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the UserMaster
-   */
-  omit?: Prisma.UserMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserMasterInclude<ExtArgs> | null
-  where?: Prisma.UserMasterWhereInput
-}
-
-/**
- * LeadDocuments.paymentInfo
- */
-export type LeadDocuments$paymentInfoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the PaymentInfo
-   */
-  select?: Prisma.PaymentInfoSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the PaymentInfo
-   */
-  omit?: Prisma.PaymentInfoOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PaymentInfoInclude<ExtArgs> | null
-  where?: Prisma.PaymentInfoWhereInput
-  orderBy?: Prisma.PaymentInfoOrderByWithRelationInput | Prisma.PaymentInfoOrderByWithRelationInput[]
-  cursor?: Prisma.PaymentInfoWhereUniqueInput
+  include?: Prisma.InstallationUpdateDocumentsInclude<ExtArgs> | null
+  where?: Prisma.InstallationUpdateDocumentsWhereInput
+  orderBy?: Prisma.InstallationUpdateDocumentsOrderByWithRelationInput | Prisma.InstallationUpdateDocumentsOrderByWithRelationInput[]
+  cursor?: Prisma.InstallationUpdateDocumentsWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.PaymentInfoScalarFieldEnum | Prisma.PaymentInfoScalarFieldEnum[]
+  distinct?: Prisma.InstallationUpdateDocumentsScalarFieldEnum | Prisma.InstallationUpdateDocumentsScalarFieldEnum[]
 }
 
 /**
@@ -3455,51 +3398,60 @@ export type LeadDocuments$leadDocumentLogsArgs<ExtArgs extends runtime.Types.Ext
 }
 
 /**
- * LeadDocuments.site_readiness_photos
+ * LeadDocuments.account
  */
-export type LeadDocuments$site_readiness_photosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type LeadDocuments$accountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the SiteReadiness
+   * Select specific fields to fetch from the AccountMaster
    */
-  select?: Prisma.SiteReadinessSelect<ExtArgs> | null
+  select?: Prisma.AccountMasterSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the SiteReadiness
+   * Omit specific fields from the AccountMaster
    */
-  omit?: Prisma.SiteReadinessOmit<ExtArgs> | null
+  omit?: Prisma.AccountMasterOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.SiteReadinessInclude<ExtArgs> | null
-  where?: Prisma.SiteReadinessWhereInput
-  orderBy?: Prisma.SiteReadinessOrderByWithRelationInput | Prisma.SiteReadinessOrderByWithRelationInput[]
-  cursor?: Prisma.SiteReadinessWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.SiteReadinessScalarFieldEnum | Prisma.SiteReadinessScalarFieldEnum[]
+  include?: Prisma.AccountMasterInclude<ExtArgs> | null
+  where?: Prisma.AccountMasterWhereInput
 }
 
 /**
- * LeadDocuments.installationUpdateDocs
+ * LeadDocuments.deletedBy
  */
-export type LeadDocuments$installationUpdateDocsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type LeadDocuments$deletedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the InstallationUpdateDocuments
+   * Select specific fields to fetch from the UserMaster
    */
-  select?: Prisma.InstallationUpdateDocumentsSelect<ExtArgs> | null
+  select?: Prisma.UserMasterSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the InstallationUpdateDocuments
+   * Omit specific fields from the UserMaster
    */
-  omit?: Prisma.InstallationUpdateDocumentsOmit<ExtArgs> | null
+  omit?: Prisma.UserMasterOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.InstallationUpdateDocumentsInclude<ExtArgs> | null
-  where?: Prisma.InstallationUpdateDocumentsWhereInput
-  orderBy?: Prisma.InstallationUpdateDocumentsOrderByWithRelationInput | Prisma.InstallationUpdateDocumentsOrderByWithRelationInput[]
-  cursor?: Prisma.InstallationUpdateDocumentsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.InstallationUpdateDocumentsScalarFieldEnum | Prisma.InstallationUpdateDocumentsScalarFieldEnum[]
+  include?: Prisma.UserMasterInclude<ExtArgs> | null
+  where?: Prisma.UserMasterWhereInput
+}
+
+/**
+ * LeadDocuments.lead
+ */
+export type LeadDocuments$leadArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadMaster
+   */
+  select?: Prisma.LeadMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadMaster
+   */
+  omit?: Prisma.LeadMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadMasterInclude<ExtArgs> | null
+  where?: Prisma.LeadMasterWhereInput
 }
 
 /**
@@ -3524,6 +3476,54 @@ export type LeadDocuments$miscellaneousDocumentArgs<ExtArgs extends runtime.Type
   take?: number
   skip?: number
   distinct?: Prisma.MiscellaneousDocumentScalarFieldEnum | Prisma.MiscellaneousDocumentScalarFieldEnum[]
+}
+
+/**
+ * LeadDocuments.paymentInfo
+ */
+export type LeadDocuments$paymentInfoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PaymentInfo
+   */
+  select?: Prisma.PaymentInfoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PaymentInfo
+   */
+  omit?: Prisma.PaymentInfoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentInfoInclude<ExtArgs> | null
+  where?: Prisma.PaymentInfoWhereInput
+  orderBy?: Prisma.PaymentInfoOrderByWithRelationInput | Prisma.PaymentInfoOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentInfoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentInfoScalarFieldEnum | Prisma.PaymentInfoScalarFieldEnum[]
+}
+
+/**
+ * LeadDocuments.site_readiness_photos
+ */
+export type LeadDocuments$site_readiness_photosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SiteReadiness
+   */
+  select?: Prisma.SiteReadinessSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SiteReadiness
+   */
+  omit?: Prisma.SiteReadinessOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SiteReadinessInclude<ExtArgs> | null
+  where?: Prisma.SiteReadinessWhereInput
+  orderBy?: Prisma.SiteReadinessOrderByWithRelationInput | Prisma.SiteReadinessOrderByWithRelationInput[]
+  cursor?: Prisma.SiteReadinessWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SiteReadinessScalarFieldEnum | Prisma.SiteReadinessScalarFieldEnum[]
 }
 
 /**

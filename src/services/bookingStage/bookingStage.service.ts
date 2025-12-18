@@ -258,6 +258,10 @@ export class BookingStageService {
 
         const bookingStatusId = bookingStatus.id;
 
+        if (data.mrpValue < data.finalBookingAmount) {
+          throw new Error("MRP value cannot be less than Total Booking Value");
+        }
+
         // 4. Update LeadMaster total_project_amount
         await tx.leadMaster.update({
           where: { id: data.lead_id },
@@ -265,6 +269,7 @@ export class BookingStageService {
             total_project_amount: data.finalBookingAmount,
             booking_amount: data.bookingAmount, // ➕ new field
             pending_amount: data.finalBookingAmount - data.bookingAmount, // ➕ new field
+            mrp_value: data.mrpValue,
             status_id: Number(bookingStatusId),
           },
         });
@@ -311,9 +316,15 @@ export class BookingStageService {
           },
         });
 
-        await cache.del(`performance:snapshot:${data.vendor_id}:${data.created_by}`);
-        await cache.del(`dashboard:tasks:${data.vendor_id}:${data.siteSupervisorId}`);
-        await cache.del(`lead-status-counts:${data.vendor_id}:${data.created_by}`);
+        await cache.del(
+          `performance:snapshot:${data.vendor_id}:${data.created_by}`
+        );
+        await cache.del(
+          `dashboard:tasks:${data.vendor_id}:${data.siteSupervisorId}`
+        );
+        await cache.del(
+          `lead-status-counts:${data.vendor_id}:${data.created_by}`
+        );
         await cache.del(`lead-status-counts:${data.vendor_id}:overall`);
 
         // 6️⃣ Create audit trail (LeadDetailedLogs + LeadDocumentLogs)
@@ -543,6 +554,7 @@ export class BookingStageService {
       leadId: lead.id,
       name: `${lead.firstname} ${lead.lastname}`,
       finalBookingAmount: lead.total_project_amount,
+      mrpValue: lead.mrp_value,
       vendorId: lead.vendor_id,
       documents: documentsWithUrls,
       payments: await Promise.all(
@@ -1465,6 +1477,7 @@ export class BookingStageService {
           total_project_amount: true,
           pending_amount: true,
           booking_amount: true,
+          mrp_value: true,
         },
       });
 
@@ -1522,6 +1535,7 @@ export class BookingStageService {
           total_project_amount: lead.total_project_amount,
           pending_amount: lead.pending_amount,
           booking_amount: lead.booking_amount,
+          mrp_value: lead.mrp_value,
         },
         payment_logs: paymentLogs,
       };
@@ -1531,5 +1545,161 @@ export class BookingStageService {
       });
       throw error;
     }
+  }
+
+  public async uploadCSPBookingService(data: {
+    lead_id: number;
+    account_id: number;
+    vendor_id: number;
+    created_by: number;
+    sitePhotos: Express.Multer.File[];
+  }) {
+    return prisma.$transaction(async (tx) => {
+      // 1️⃣ Validate document type
+      const docType = await tx.documentTypeMaster.findFirst({
+        where: {
+          vendor_id: data.vendor_id,
+          tag: "Type 32", // CSP at Booking Stage
+        },
+      });
+
+      if (!docType) {
+        throw new Error(
+          "Current site photos at Booking Stage document type not found"
+        );
+      }
+
+      const uploadedDocs: {
+        id: number;
+        originalName: string;
+        s3Key: string;
+      }[] = [];
+
+      // 2️⃣ Upload photos + create LeadDocuments
+      for (const photo of data.sitePhotos) {
+        const key = `current-site-photos-at-booking-stage/${data.vendor_id}/${
+          data.lead_id
+        }/${Date.now()}-${sanitizeFilename(photo.originalname)}`;
+
+        await wasabi.send(
+          new PutObjectCommand({
+            Bucket: process.env.WASABI_BUCKET_NAME!,
+            Key: key,
+            Body: photo.buffer,
+            ContentType: photo.mimetype,
+          })
+        );
+
+        const doc = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: photo.originalname,
+            doc_sys_name: key,
+            doc_type_id: docType.id,
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            account_id: data.account_id,
+            created_by: data.created_by,
+          },
+        });
+
+        uploadedDocs.push({
+          id: doc.id,
+          originalName: photo.originalname,
+          s3Key: key,
+        });
+      }
+
+      // 3️⃣ Create LeadDetailedLogs (parent log)
+      const detailedLog = await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          action:
+            "Current site photos uploaded at Booking stage for Final Measurement.",
+          action_type: "CREATE",
+          created_by: data.created_by,
+          created_at: new Date(),
+        },
+      });
+
+      // 4️⃣ Create LeadDocumentLogs (child logs for each document)
+      if (uploadedDocs.length > 0) {
+        const docLogsData = uploadedDocs.map((doc) => ({
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: data.created_by,
+          created_at: new Date(),
+        }));
+
+        await tx.leadDocumentLogs.createMany({
+          data: docLogsData,
+        });
+      }
+
+      return {
+        uploadedPhotosCount: uploadedDocs.length,
+        documents: uploadedDocs,
+      };
+    });
+  }
+
+  public async getCSPBookingService(data: {
+    vendor_id: number;
+    lead_id: number;
+  }) {
+    // 1️⃣ Get document type
+    const docType = await prisma.documentTypeMaster.findFirst({
+      where: {
+        vendor_id: data.vendor_id,
+        tag: "Type 32", // CSP at Booking Stage
+      },
+    });
+
+    if (!docType) {
+      throw new Error(
+        "Current site photos at Booking Stage document type not found"
+      );
+    }
+
+    // 2️⃣ Fetch documents
+    const documents = await prisma.leadDocuments.findMany({
+      where: {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        doc_type_id: docType.id,
+        is_deleted: false,
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+
+    // 3️⃣ Generate signed URLs
+    const docsWithSignedUrls = await Promise.all(
+      documents.map(async (doc) => {
+        const signedUrl = await generateSignedUrl(
+          doc.doc_sys_name,
+          3600,
+          "inline"
+        );
+
+        return {
+          id: doc.id,
+          originalName: doc.doc_og_name,
+          s3Key: doc.doc_sys_name,
+          signedUrl,
+          createdAt: doc.created_at,
+        };
+      })
+    );
+
+    return {
+      count: docsWithSignedUrls.length,
+      documents: docsWithSignedUrls,
+    };
   }
 }

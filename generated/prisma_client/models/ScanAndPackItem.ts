@@ -32,10 +32,10 @@ export type ScanAndPackItemAvgAggregateOutputType = {
   vendor_id: number | null
   client_id: number | null
   box_id: number | null
-  project_details_id: number | null
-  weight: number | null
   qty: number | null
   created_by: number | null
+  project_details_id: number | null
+  weight: number | null
 }
 
 export type ScanAndPackItemSumAggregateOutputType = {
@@ -44,10 +44,10 @@ export type ScanAndPackItemSumAggregateOutputType = {
   vendor_id: number | null
   client_id: number | null
   box_id: number | null
-  project_details_id: number | null
-  weight: number | null
   qty: number | null
   created_by: number | null
+  project_details_id: number | null
+  weight: number | null
 }
 
 export type ScanAndPackItemMinAggregateOutputType = {
@@ -56,14 +56,14 @@ export type ScanAndPackItemMinAggregateOutputType = {
   vendor_id: number | null
   client_id: number | null
   box_id: number | null
-  project_details_id: number | null
   unique_id: string | null
-  weight: number | null
   qty: number | null
   created_date: Date | null
   created_by: number | null
   status: $Enums.ItemStatus | null
+  project_details_id: number | null
   is_deleted: boolean | null
+  weight: number | null
 }
 
 export type ScanAndPackItemMaxAggregateOutputType = {
@@ -72,14 +72,14 @@ export type ScanAndPackItemMaxAggregateOutputType = {
   vendor_id: number | null
   client_id: number | null
   box_id: number | null
-  project_details_id: number | null
   unique_id: string | null
-  weight: number | null
   qty: number | null
   created_date: Date | null
   created_by: number | null
   status: $Enums.ItemStatus | null
+  project_details_id: number | null
   is_deleted: boolean | null
+  weight: number | null
 }
 
 export type ScanAndPackItemCountAggregateOutputType = {
@@ -88,14 +88,14 @@ export type ScanAndPackItemCountAggregateOutputType = {
   vendor_id: number
   client_id: number
   box_id: number
-  project_details_id: number
   unique_id: number
-  weight: number
   qty: number
   created_date: number
   created_by: number
   status: number
+  project_details_id: number
   is_deleted: number
+  weight: number
   _all: number
 }
 
@@ -106,10 +106,10 @@ export type ScanAndPackItemAvgAggregateInputType = {
   vendor_id?: true
   client_id?: true
   box_id?: true
-  project_details_id?: true
-  weight?: true
   qty?: true
   created_by?: true
+  project_details_id?: true
+  weight?: true
 }
 
 export type ScanAndPackItemSumAggregateInputType = {
@@ -118,10 +118,10 @@ export type ScanAndPackItemSumAggregateInputType = {
   vendor_id?: true
   client_id?: true
   box_id?: true
-  project_details_id?: true
-  weight?: true
   qty?: true
   created_by?: true
+  project_details_id?: true
+  weight?: true
 }
 
 export type ScanAndPackItemMinAggregateInputType = {
@@ -130,14 +130,14 @@ export type ScanAndPackItemMinAggregateInputType = {
   vendor_id?: true
   client_id?: true
   box_id?: true
-  project_details_id?: true
   unique_id?: true
-  weight?: true
   qty?: true
   created_date?: true
   created_by?: true
   status?: true
+  project_details_id?: true
   is_deleted?: true
+  weight?: true
 }
 
 export type ScanAndPackItemMaxAggregateInputType = {
@@ -146,14 +146,14 @@ export type ScanAndPackItemMaxAggregateInputType = {
   vendor_id?: true
   client_id?: true
   box_id?: true
-  project_details_id?: true
   unique_id?: true
-  weight?: true
   qty?: true
   created_date?: true
   created_by?: true
   status?: true
+  project_details_id?: true
   is_deleted?: true
+  weight?: true
 }
 
 export type ScanAndPackItemCountAggregateInputType = {
@@ -162,14 +162,14 @@ export type ScanAndPackItemCountAggregateInputType = {
   vendor_id?: true
   client_id?: true
   box_id?: true
-  project_details_id?: true
   unique_id?: true
-  weight?: true
   qty?: true
   created_date?: true
   created_by?: true
   status?: true
+  project_details_id?: true
   is_deleted?: true
+  weight?: true
   _all?: true
 }
 
@@ -265,14 +265,14 @@ export type ScanAndPackItemGroupByOutputType = {
   vendor_id: number
   client_id: number
   box_id: number
-  project_details_id: number
   unique_id: string
-  weight: number
   qty: number
   created_date: Date
   created_by: number
   status: $Enums.ItemStatus
+  project_details_id: number
   is_deleted: boolean
+  weight: number
   _count: ScanAndPackItemCountAggregateOutputType | null
   _avg: ScanAndPackItemAvgAggregateOutputType | null
   _sum: ScanAndPackItemSumAggregateOutputType | null
@@ -304,20 +304,20 @@ export type ScanAndPackItemWhereInput = {
   vendor_id?: Prisma.IntFilter<"ScanAndPackItem"> | number
   client_id?: Prisma.IntFilter<"ScanAndPackItem"> | number
   box_id?: Prisma.IntFilter<"ScanAndPackItem"> | number
-  project_details_id?: Prisma.IntFilter<"ScanAndPackItem"> | number
   unique_id?: Prisma.StringFilter<"ScanAndPackItem"> | string
-  weight?: Prisma.FloatFilter<"ScanAndPackItem"> | number
   qty?: Prisma.IntFilter<"ScanAndPackItem"> | number
   created_date?: Prisma.DateTimeFilter<"ScanAndPackItem"> | Date | string
   created_by?: Prisma.IntFilter<"ScanAndPackItem"> | number
   status?: Prisma.EnumItemStatusFilter<"ScanAndPackItem"> | $Enums.ItemStatus
+  project_details_id?: Prisma.IntFilter<"ScanAndPackItem"> | number
   is_deleted?: Prisma.BoolFilter<"ScanAndPackItem"> | boolean
-  project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  weight?: Prisma.FloatFilter<"ScanAndPackItem"> | number
   box?: Prisma.XOR<Prisma.BoxMasterScalarRelationFilter, Prisma.BoxMasterWhereInput>
+  client?: Prisma.XOR<Prisma.ClientMasterScalarRelationFilter, Prisma.ClientMasterWhereInput>
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   details?: Prisma.XOR<Prisma.ProjectDetailsScalarRelationFilter, Prisma.ProjectDetailsWhereInput>
-  client?: Prisma.XOR<Prisma.ClientMasterScalarRelationFilter, Prisma.ClientMasterWhereInput>
+  project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type ScanAndPackItemOrderByWithRelationInput = {
@@ -326,20 +326,20 @@ export type ScanAndPackItemOrderByWithRelationInput = {
   vendor_id?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   box_id?: Prisma.SortOrder
-  project_details_id?: Prisma.SortOrder
   unique_id?: Prisma.SortOrder
-  weight?: Prisma.SortOrder
   qty?: Prisma.SortOrder
   created_date?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  project_details_id?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
-  project?: Prisma.ProjectMasterOrderByWithRelationInput
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  weight?: Prisma.SortOrder
   box?: Prisma.BoxMasterOrderByWithRelationInput
+  client?: Prisma.ClientMasterOrderByWithRelationInput
   user?: Prisma.UserMasterOrderByWithRelationInput
   details?: Prisma.ProjectDetailsOrderByWithRelationInput
-  client?: Prisma.ClientMasterOrderByWithRelationInput
+  project?: Prisma.ProjectMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type ScanAndPackItemWhereUniqueInput = Prisma.AtLeast<{
@@ -351,20 +351,20 @@ export type ScanAndPackItemWhereUniqueInput = Prisma.AtLeast<{
   vendor_id?: Prisma.IntFilter<"ScanAndPackItem"> | number
   client_id?: Prisma.IntFilter<"ScanAndPackItem"> | number
   box_id?: Prisma.IntFilter<"ScanAndPackItem"> | number
-  project_details_id?: Prisma.IntFilter<"ScanAndPackItem"> | number
   unique_id?: Prisma.StringFilter<"ScanAndPackItem"> | string
-  weight?: Prisma.FloatFilter<"ScanAndPackItem"> | number
   qty?: Prisma.IntFilter<"ScanAndPackItem"> | number
   created_date?: Prisma.DateTimeFilter<"ScanAndPackItem"> | Date | string
   created_by?: Prisma.IntFilter<"ScanAndPackItem"> | number
   status?: Prisma.EnumItemStatusFilter<"ScanAndPackItem"> | $Enums.ItemStatus
+  project_details_id?: Prisma.IntFilter<"ScanAndPackItem"> | number
   is_deleted?: Prisma.BoolFilter<"ScanAndPackItem"> | boolean
-  project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  weight?: Prisma.FloatFilter<"ScanAndPackItem"> | number
   box?: Prisma.XOR<Prisma.BoxMasterScalarRelationFilter, Prisma.BoxMasterWhereInput>
+  client?: Prisma.XOR<Prisma.ClientMasterScalarRelationFilter, Prisma.ClientMasterWhereInput>
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   details?: Prisma.XOR<Prisma.ProjectDetailsScalarRelationFilter, Prisma.ProjectDetailsWhereInput>
-  client?: Prisma.XOR<Prisma.ClientMasterScalarRelationFilter, Prisma.ClientMasterWhereInput>
+  project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type ScanAndPackItemOrderByWithAggregationInput = {
@@ -373,14 +373,14 @@ export type ScanAndPackItemOrderByWithAggregationInput = {
   vendor_id?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   box_id?: Prisma.SortOrder
-  project_details_id?: Prisma.SortOrder
   unique_id?: Prisma.SortOrder
-  weight?: Prisma.SortOrder
   qty?: Prisma.SortOrder
   created_date?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  project_details_id?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
+  weight?: Prisma.SortOrder
   _count?: Prisma.ScanAndPackItemCountOrderByAggregateInput
   _avg?: Prisma.ScanAndPackItemAvgOrderByAggregateInput
   _max?: Prisma.ScanAndPackItemMaxOrderByAggregateInput
@@ -397,29 +397,29 @@ export type ScanAndPackItemScalarWhereWithAggregatesInput = {
   vendor_id?: Prisma.IntWithAggregatesFilter<"ScanAndPackItem"> | number
   client_id?: Prisma.IntWithAggregatesFilter<"ScanAndPackItem"> | number
   box_id?: Prisma.IntWithAggregatesFilter<"ScanAndPackItem"> | number
-  project_details_id?: Prisma.IntWithAggregatesFilter<"ScanAndPackItem"> | number
   unique_id?: Prisma.StringWithAggregatesFilter<"ScanAndPackItem"> | string
-  weight?: Prisma.FloatWithAggregatesFilter<"ScanAndPackItem"> | number
   qty?: Prisma.IntWithAggregatesFilter<"ScanAndPackItem"> | number
   created_date?: Prisma.DateTimeWithAggregatesFilter<"ScanAndPackItem"> | Date | string
   created_by?: Prisma.IntWithAggregatesFilter<"ScanAndPackItem"> | number
   status?: Prisma.EnumItemStatusWithAggregatesFilter<"ScanAndPackItem"> | $Enums.ItemStatus
+  project_details_id?: Prisma.IntWithAggregatesFilter<"ScanAndPackItem"> | number
   is_deleted?: Prisma.BoolWithAggregatesFilter<"ScanAndPackItem"> | boolean
+  weight?: Prisma.FloatWithAggregatesFilter<"ScanAndPackItem"> | number
 }
 
 export type ScanAndPackItemCreateInput = {
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   status: $Enums.ItemStatus
   is_deleted?: boolean
-  project: Prisma.ProjectMasterCreateNestedOneWithoutScanItemsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutScanItemsInput
+  weight?: number
   box: Prisma.BoxMasterCreateNestedOneWithoutItemsInput
+  client: Prisma.ClientMasterCreateNestedOneWithoutScanItemsInput
   user: Prisma.UserMasterCreateNestedOneWithoutScanItemsCreatedInput
   details: Prisma.ProjectDetailsCreateNestedOneWithoutScanItemsInput
-  client: Prisma.ClientMasterCreateNestedOneWithoutScanItemsInput
+  project: Prisma.ProjectMasterCreateNestedOneWithoutScanItemsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutScanItemsInput
 }
 
 export type ScanAndPackItemUncheckedCreateInput = {
@@ -428,29 +428,29 @@ export type ScanAndPackItemUncheckedCreateInput = {
   vendor_id: number
   client_id: number
   box_id: number
-  project_details_id: number
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   created_by: number
   status: $Enums.ItemStatus
+  project_details_id: number
   is_deleted?: boolean
+  weight?: number
 }
 
 export type ScanAndPackItemUpdateInput = {
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  project?: Prisma.ProjectMasterUpdateOneRequiredWithoutScanItemsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutScanItemsNestedInput
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   box?: Prisma.BoxMasterUpdateOneRequiredWithoutItemsNestedInput
+  client?: Prisma.ClientMasterUpdateOneRequiredWithoutScanItemsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutScanItemsCreatedNestedInput
   details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutScanItemsNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutScanItemsNestedInput
+  project?: Prisma.ProjectMasterUpdateOneRequiredWithoutScanItemsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutScanItemsNestedInput
 }
 
 export type ScanAndPackItemUncheckedUpdateInput = {
@@ -459,14 +459,14 @@ export type ScanAndPackItemUncheckedUpdateInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   client_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ScanAndPackItemCreateManyInput = {
@@ -475,23 +475,23 @@ export type ScanAndPackItemCreateManyInput = {
   vendor_id: number
   client_id: number
   box_id: number
-  project_details_id: number
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   created_by: number
   status: $Enums.ItemStatus
+  project_details_id: number
   is_deleted?: boolean
+  weight?: number
 }
 
 export type ScanAndPackItemUpdateManyMutationInput = {
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ScanAndPackItemUncheckedUpdateManyInput = {
@@ -500,14 +500,14 @@ export type ScanAndPackItemUncheckedUpdateManyInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   client_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ScanAndPackItemListRelationFilter = {
@@ -526,14 +526,14 @@ export type ScanAndPackItemCountOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   box_id?: Prisma.SortOrder
-  project_details_id?: Prisma.SortOrder
   unique_id?: Prisma.SortOrder
-  weight?: Prisma.SortOrder
   qty?: Prisma.SortOrder
   created_date?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  project_details_id?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
+  weight?: Prisma.SortOrder
 }
 
 export type ScanAndPackItemAvgOrderByAggregateInput = {
@@ -542,10 +542,10 @@ export type ScanAndPackItemAvgOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   box_id?: Prisma.SortOrder
-  project_details_id?: Prisma.SortOrder
-  weight?: Prisma.SortOrder
   qty?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
+  project_details_id?: Prisma.SortOrder
+  weight?: Prisma.SortOrder
 }
 
 export type ScanAndPackItemMaxOrderByAggregateInput = {
@@ -554,14 +554,14 @@ export type ScanAndPackItemMaxOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   box_id?: Prisma.SortOrder
-  project_details_id?: Prisma.SortOrder
   unique_id?: Prisma.SortOrder
-  weight?: Prisma.SortOrder
   qty?: Prisma.SortOrder
   created_date?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  project_details_id?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
+  weight?: Prisma.SortOrder
 }
 
 export type ScanAndPackItemMinOrderByAggregateInput = {
@@ -570,14 +570,14 @@ export type ScanAndPackItemMinOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   box_id?: Prisma.SortOrder
-  project_details_id?: Prisma.SortOrder
   unique_id?: Prisma.SortOrder
-  weight?: Prisma.SortOrder
   qty?: Prisma.SortOrder
   created_date?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  project_details_id?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
+  weight?: Prisma.SortOrder
 }
 
 export type ScanAndPackItemSumOrderByAggregateInput = {
@@ -586,10 +586,10 @@ export type ScanAndPackItemSumOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   box_id?: Prisma.SortOrder
-  project_details_id?: Prisma.SortOrder
-  weight?: Prisma.SortOrder
   qty?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
+  project_details_id?: Prisma.SortOrder
+  weight?: Prisma.SortOrder
 }
 
 export type ScanAndPackItemCreateNestedManyWithoutVendorInput = {
@@ -850,16 +850,16 @@ export type ScanAndPackItemUncheckedUpdateManyWithoutClientNestedInput = {
 
 export type ScanAndPackItemCreateWithoutVendorInput = {
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   status: $Enums.ItemStatus
   is_deleted?: boolean
-  project: Prisma.ProjectMasterCreateNestedOneWithoutScanItemsInput
+  weight?: number
   box: Prisma.BoxMasterCreateNestedOneWithoutItemsInput
+  client: Prisma.ClientMasterCreateNestedOneWithoutScanItemsInput
   user: Prisma.UserMasterCreateNestedOneWithoutScanItemsCreatedInput
   details: Prisma.ProjectDetailsCreateNestedOneWithoutScanItemsInput
-  client: Prisma.ClientMasterCreateNestedOneWithoutScanItemsInput
+  project: Prisma.ProjectMasterCreateNestedOneWithoutScanItemsInput
 }
 
 export type ScanAndPackItemUncheckedCreateWithoutVendorInput = {
@@ -867,14 +867,14 @@ export type ScanAndPackItemUncheckedCreateWithoutVendorInput = {
   project_id: number
   client_id: number
   box_id: number
-  project_details_id: number
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   created_by: number
   status: $Enums.ItemStatus
+  project_details_id: number
   is_deleted?: boolean
+  weight?: number
 }
 
 export type ScanAndPackItemCreateOrConnectWithoutVendorInput = {
@@ -912,28 +912,28 @@ export type ScanAndPackItemScalarWhereInput = {
   vendor_id?: Prisma.IntFilter<"ScanAndPackItem"> | number
   client_id?: Prisma.IntFilter<"ScanAndPackItem"> | number
   box_id?: Prisma.IntFilter<"ScanAndPackItem"> | number
-  project_details_id?: Prisma.IntFilter<"ScanAndPackItem"> | number
   unique_id?: Prisma.StringFilter<"ScanAndPackItem"> | string
-  weight?: Prisma.FloatFilter<"ScanAndPackItem"> | number
   qty?: Prisma.IntFilter<"ScanAndPackItem"> | number
   created_date?: Prisma.DateTimeFilter<"ScanAndPackItem"> | Date | string
   created_by?: Prisma.IntFilter<"ScanAndPackItem"> | number
   status?: Prisma.EnumItemStatusFilter<"ScanAndPackItem"> | $Enums.ItemStatus
+  project_details_id?: Prisma.IntFilter<"ScanAndPackItem"> | number
   is_deleted?: Prisma.BoolFilter<"ScanAndPackItem"> | boolean
+  weight?: Prisma.FloatFilter<"ScanAndPackItem"> | number
 }
 
 export type ScanAndPackItemCreateWithoutUserInput = {
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   status: $Enums.ItemStatus
   is_deleted?: boolean
+  weight?: number
+  box: Prisma.BoxMasterCreateNestedOneWithoutItemsInput
+  client: Prisma.ClientMasterCreateNestedOneWithoutScanItemsInput
+  details: Prisma.ProjectDetailsCreateNestedOneWithoutScanItemsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutScanItemsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutScanItemsInput
-  box: Prisma.BoxMasterCreateNestedOneWithoutItemsInput
-  details: Prisma.ProjectDetailsCreateNestedOneWithoutScanItemsInput
-  client: Prisma.ClientMasterCreateNestedOneWithoutScanItemsInput
 }
 
 export type ScanAndPackItemUncheckedCreateWithoutUserInput = {
@@ -942,13 +942,13 @@ export type ScanAndPackItemUncheckedCreateWithoutUserInput = {
   vendor_id: number
   client_id: number
   box_id: number
-  project_details_id: number
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   status: $Enums.ItemStatus
+  project_details_id: number
   is_deleted?: boolean
+  weight?: number
 }
 
 export type ScanAndPackItemCreateOrConnectWithoutUserInput = {
@@ -979,16 +979,16 @@ export type ScanAndPackItemUpdateManyWithWhereWithoutUserInput = {
 
 export type ScanAndPackItemCreateWithoutProjectInput = {
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   status: $Enums.ItemStatus
   is_deleted?: boolean
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutScanItemsInput
+  weight?: number
   box: Prisma.BoxMasterCreateNestedOneWithoutItemsInput
+  client: Prisma.ClientMasterCreateNestedOneWithoutScanItemsInput
   user: Prisma.UserMasterCreateNestedOneWithoutScanItemsCreatedInput
   details: Prisma.ProjectDetailsCreateNestedOneWithoutScanItemsInput
-  client: Prisma.ClientMasterCreateNestedOneWithoutScanItemsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutScanItemsInput
 }
 
 export type ScanAndPackItemUncheckedCreateWithoutProjectInput = {
@@ -996,14 +996,14 @@ export type ScanAndPackItemUncheckedCreateWithoutProjectInput = {
   vendor_id: number
   client_id: number
   box_id: number
-  project_details_id: number
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   created_by: number
   status: $Enums.ItemStatus
+  project_details_id: number
   is_deleted?: boolean
+  weight?: number
 }
 
 export type ScanAndPackItemCreateOrConnectWithoutProjectInput = {
@@ -1034,16 +1034,16 @@ export type ScanAndPackItemUpdateManyWithWhereWithoutProjectInput = {
 
 export type ScanAndPackItemCreateWithoutDetailsInput = {
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   status: $Enums.ItemStatus
   is_deleted?: boolean
+  weight?: number
+  box: Prisma.BoxMasterCreateNestedOneWithoutItemsInput
+  client: Prisma.ClientMasterCreateNestedOneWithoutScanItemsInput
+  user: Prisma.UserMasterCreateNestedOneWithoutScanItemsCreatedInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutScanItemsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutScanItemsInput
-  box: Prisma.BoxMasterCreateNestedOneWithoutItemsInput
-  user: Prisma.UserMasterCreateNestedOneWithoutScanItemsCreatedInput
-  client: Prisma.ClientMasterCreateNestedOneWithoutScanItemsInput
 }
 
 export type ScanAndPackItemUncheckedCreateWithoutDetailsInput = {
@@ -1053,12 +1053,12 @@ export type ScanAndPackItemUncheckedCreateWithoutDetailsInput = {
   client_id: number
   box_id: number
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   created_by: number
   status: $Enums.ItemStatus
   is_deleted?: boolean
+  weight?: number
 }
 
 export type ScanAndPackItemCreateOrConnectWithoutDetailsInput = {
@@ -1089,16 +1089,16 @@ export type ScanAndPackItemUpdateManyWithWhereWithoutDetailsInput = {
 
 export type ScanAndPackItemCreateWithoutBoxInput = {
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   status: $Enums.ItemStatus
   is_deleted?: boolean
-  project: Prisma.ProjectMasterCreateNestedOneWithoutScanItemsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutScanItemsInput
+  weight?: number
+  client: Prisma.ClientMasterCreateNestedOneWithoutScanItemsInput
   user: Prisma.UserMasterCreateNestedOneWithoutScanItemsCreatedInput
   details: Prisma.ProjectDetailsCreateNestedOneWithoutScanItemsInput
-  client: Prisma.ClientMasterCreateNestedOneWithoutScanItemsInput
+  project: Prisma.ProjectMasterCreateNestedOneWithoutScanItemsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutScanItemsInput
 }
 
 export type ScanAndPackItemUncheckedCreateWithoutBoxInput = {
@@ -1106,14 +1106,14 @@ export type ScanAndPackItemUncheckedCreateWithoutBoxInput = {
   project_id: number
   vendor_id: number
   client_id: number
-  project_details_id: number
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   created_by: number
   status: $Enums.ItemStatus
+  project_details_id: number
   is_deleted?: boolean
+  weight?: number
 }
 
 export type ScanAndPackItemCreateOrConnectWithoutBoxInput = {
@@ -1144,16 +1144,16 @@ export type ScanAndPackItemUpdateManyWithWhereWithoutBoxInput = {
 
 export type ScanAndPackItemCreateWithoutClientInput = {
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   status: $Enums.ItemStatus
   is_deleted?: boolean
-  project: Prisma.ProjectMasterCreateNestedOneWithoutScanItemsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutScanItemsInput
+  weight?: number
   box: Prisma.BoxMasterCreateNestedOneWithoutItemsInput
   user: Prisma.UserMasterCreateNestedOneWithoutScanItemsCreatedInput
   details: Prisma.ProjectDetailsCreateNestedOneWithoutScanItemsInput
+  project: Prisma.ProjectMasterCreateNestedOneWithoutScanItemsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutScanItemsInput
 }
 
 export type ScanAndPackItemUncheckedCreateWithoutClientInput = {
@@ -1161,14 +1161,14 @@ export type ScanAndPackItemUncheckedCreateWithoutClientInput = {
   project_id: number
   vendor_id: number
   box_id: number
-  project_details_id: number
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   created_by: number
   status: $Enums.ItemStatus
+  project_details_id: number
   is_deleted?: boolean
+  weight?: number
 }
 
 export type ScanAndPackItemCreateOrConnectWithoutClientInput = {
@@ -1202,28 +1202,28 @@ export type ScanAndPackItemCreateManyVendorInput = {
   project_id: number
   client_id: number
   box_id: number
-  project_details_id: number
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   created_by: number
   status: $Enums.ItemStatus
+  project_details_id: number
   is_deleted?: boolean
+  weight?: number
 }
 
 export type ScanAndPackItemUpdateWithoutVendorInput = {
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  project?: Prisma.ProjectMasterUpdateOneRequiredWithoutScanItemsNestedInput
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   box?: Prisma.BoxMasterUpdateOneRequiredWithoutItemsNestedInput
+  client?: Prisma.ClientMasterUpdateOneRequiredWithoutScanItemsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutScanItemsCreatedNestedInput
   details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutScanItemsNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutScanItemsNestedInput
+  project?: Prisma.ProjectMasterUpdateOneRequiredWithoutScanItemsNestedInput
 }
 
 export type ScanAndPackItemUncheckedUpdateWithoutVendorInput = {
@@ -1231,14 +1231,14 @@ export type ScanAndPackItemUncheckedUpdateWithoutVendorInput = {
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   client_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ScanAndPackItemUncheckedUpdateManyWithoutVendorInput = {
@@ -1246,14 +1246,14 @@ export type ScanAndPackItemUncheckedUpdateManyWithoutVendorInput = {
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   client_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ScanAndPackItemCreateManyUserInput = {
@@ -1262,27 +1262,27 @@ export type ScanAndPackItemCreateManyUserInput = {
   vendor_id: number
   client_id: number
   box_id: number
-  project_details_id: number
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   status: $Enums.ItemStatus
+  project_details_id: number
   is_deleted?: boolean
+  weight?: number
 }
 
 export type ScanAndPackItemUpdateWithoutUserInput = {
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  box?: Prisma.BoxMasterUpdateOneRequiredWithoutItemsNestedInput
+  client?: Prisma.ClientMasterUpdateOneRequiredWithoutScanItemsNestedInput
+  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutScanItemsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutScanItemsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutScanItemsNestedInput
-  box?: Prisma.BoxMasterUpdateOneRequiredWithoutItemsNestedInput
-  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutScanItemsNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutScanItemsNestedInput
 }
 
 export type ScanAndPackItemUncheckedUpdateWithoutUserInput = {
@@ -1291,13 +1291,13 @@ export type ScanAndPackItemUncheckedUpdateWithoutUserInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   client_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ScanAndPackItemUncheckedUpdateManyWithoutUserInput = {
@@ -1306,13 +1306,13 @@ export type ScanAndPackItemUncheckedUpdateManyWithoutUserInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   client_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ScanAndPackItemCreateManyProjectInput = {
@@ -1320,28 +1320,28 @@ export type ScanAndPackItemCreateManyProjectInput = {
   vendor_id: number
   client_id: number
   box_id: number
-  project_details_id: number
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   created_by: number
   status: $Enums.ItemStatus
+  project_details_id: number
   is_deleted?: boolean
+  weight?: number
 }
 
 export type ScanAndPackItemUpdateWithoutProjectInput = {
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutScanItemsNestedInput
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   box?: Prisma.BoxMasterUpdateOneRequiredWithoutItemsNestedInput
+  client?: Prisma.ClientMasterUpdateOneRequiredWithoutScanItemsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutScanItemsCreatedNestedInput
   details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutScanItemsNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutScanItemsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutScanItemsNestedInput
 }
 
 export type ScanAndPackItemUncheckedUpdateWithoutProjectInput = {
@@ -1349,14 +1349,14 @@ export type ScanAndPackItemUncheckedUpdateWithoutProjectInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   client_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ScanAndPackItemUncheckedUpdateManyWithoutProjectInput = {
@@ -1364,14 +1364,14 @@ export type ScanAndPackItemUncheckedUpdateManyWithoutProjectInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   client_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ScanAndPackItemCreateManyDetailsInput = {
@@ -1381,26 +1381,26 @@ export type ScanAndPackItemCreateManyDetailsInput = {
   client_id: number
   box_id: number
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   created_by: number
   status: $Enums.ItemStatus
   is_deleted?: boolean
+  weight?: number
 }
 
 export type ScanAndPackItemUpdateWithoutDetailsInput = {
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  box?: Prisma.BoxMasterUpdateOneRequiredWithoutItemsNestedInput
+  client?: Prisma.ClientMasterUpdateOneRequiredWithoutScanItemsNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutScanItemsCreatedNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutScanItemsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutScanItemsNestedInput
-  box?: Prisma.BoxMasterUpdateOneRequiredWithoutItemsNestedInput
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutScanItemsCreatedNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutScanItemsNestedInput
 }
 
 export type ScanAndPackItemUncheckedUpdateWithoutDetailsInput = {
@@ -1410,12 +1410,12 @@ export type ScanAndPackItemUncheckedUpdateWithoutDetailsInput = {
   client_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_id?: Prisma.IntFieldUpdateOperationsInput | number
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ScanAndPackItemUncheckedUpdateManyWithoutDetailsInput = {
@@ -1425,12 +1425,12 @@ export type ScanAndPackItemUncheckedUpdateManyWithoutDetailsInput = {
   client_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_id?: Prisma.IntFieldUpdateOperationsInput | number
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ScanAndPackItemCreateManyBoxInput = {
@@ -1438,28 +1438,28 @@ export type ScanAndPackItemCreateManyBoxInput = {
   project_id: number
   vendor_id: number
   client_id: number
-  project_details_id: number
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   created_by: number
   status: $Enums.ItemStatus
+  project_details_id: number
   is_deleted?: boolean
+  weight?: number
 }
 
 export type ScanAndPackItemUpdateWithoutBoxInput = {
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  project?: Prisma.ProjectMasterUpdateOneRequiredWithoutScanItemsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutScanItemsNestedInput
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  client?: Prisma.ClientMasterUpdateOneRequiredWithoutScanItemsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutScanItemsCreatedNestedInput
   details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutScanItemsNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutScanItemsNestedInput
+  project?: Prisma.ProjectMasterUpdateOneRequiredWithoutScanItemsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutScanItemsNestedInput
 }
 
 export type ScanAndPackItemUncheckedUpdateWithoutBoxInput = {
@@ -1467,14 +1467,14 @@ export type ScanAndPackItemUncheckedUpdateWithoutBoxInput = {
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   client_id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ScanAndPackItemUncheckedUpdateManyWithoutBoxInput = {
@@ -1482,14 +1482,14 @@ export type ScanAndPackItemUncheckedUpdateManyWithoutBoxInput = {
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   client_id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ScanAndPackItemCreateManyClientInput = {
@@ -1497,28 +1497,28 @@ export type ScanAndPackItemCreateManyClientInput = {
   project_id: number
   vendor_id: number
   box_id: number
-  project_details_id: number
   unique_id: string
-  weight?: number
   qty: number
   created_date?: Date | string
   created_by: number
   status: $Enums.ItemStatus
+  project_details_id: number
   is_deleted?: boolean
+  weight?: number
 }
 
 export type ScanAndPackItemUpdateWithoutClientInput = {
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  project?: Prisma.ProjectMasterUpdateOneRequiredWithoutScanItemsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutScanItemsNestedInput
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   box?: Prisma.BoxMasterUpdateOneRequiredWithoutItemsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutScanItemsCreatedNestedInput
   details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutScanItemsNestedInput
+  project?: Prisma.ProjectMasterUpdateOneRequiredWithoutScanItemsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutScanItemsNestedInput
 }
 
 export type ScanAndPackItemUncheckedUpdateWithoutClientInput = {
@@ -1526,14 +1526,14 @@ export type ScanAndPackItemUncheckedUpdateWithoutClientInput = {
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ScanAndPackItemUncheckedUpdateManyWithoutClientInput = {
@@ -1541,14 +1541,14 @@ export type ScanAndPackItemUncheckedUpdateManyWithoutClientInput = {
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 
@@ -1559,20 +1559,20 @@ export type ScanAndPackItemSelect<ExtArgs extends runtime.Types.Extensions.Inter
   vendor_id?: boolean
   client_id?: boolean
   box_id?: boolean
-  project_details_id?: boolean
   unique_id?: boolean
-  weight?: boolean
   qty?: boolean
   created_date?: boolean
   created_by?: boolean
   status?: boolean
+  project_details_id?: boolean
   is_deleted?: boolean
-  project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  weight?: boolean
   box?: boolean | Prisma.BoxMasterDefaultArgs<ExtArgs>
+  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["scanAndPackItem"]>
 
 export type ScanAndPackItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1581,20 +1581,20 @@ export type ScanAndPackItemSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   vendor_id?: boolean
   client_id?: boolean
   box_id?: boolean
-  project_details_id?: boolean
   unique_id?: boolean
-  weight?: boolean
   qty?: boolean
   created_date?: boolean
   created_by?: boolean
   status?: boolean
+  project_details_id?: boolean
   is_deleted?: boolean
-  project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  weight?: boolean
   box?: boolean | Prisma.BoxMasterDefaultArgs<ExtArgs>
+  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["scanAndPackItem"]>
 
 export type ScanAndPackItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1603,20 +1603,20 @@ export type ScanAndPackItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   vendor_id?: boolean
   client_id?: boolean
   box_id?: boolean
-  project_details_id?: boolean
   unique_id?: boolean
-  weight?: boolean
   qty?: boolean
   created_date?: boolean
   created_by?: boolean
   status?: boolean
+  project_details_id?: boolean
   is_deleted?: boolean
-  project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  weight?: boolean
   box?: boolean | Prisma.BoxMasterDefaultArgs<ExtArgs>
+  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["scanAndPackItem"]>
 
 export type ScanAndPackItemSelectScalar = {
@@ -1625,51 +1625,51 @@ export type ScanAndPackItemSelectScalar = {
   vendor_id?: boolean
   client_id?: boolean
   box_id?: boolean
-  project_details_id?: boolean
   unique_id?: boolean
-  weight?: boolean
   qty?: boolean
   created_date?: boolean
   created_by?: boolean
   status?: boolean
+  project_details_id?: boolean
   is_deleted?: boolean
+  weight?: boolean
 }
 
-export type ScanAndPackItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "client_id" | "box_id" | "project_details_id" | "unique_id" | "weight" | "qty" | "created_date" | "created_by" | "status" | "is_deleted", ExtArgs["result"]["scanAndPackItem"]>
+export type ScanAndPackItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "client_id" | "box_id" | "unique_id" | "qty" | "created_date" | "created_by" | "status" | "project_details_id" | "is_deleted" | "weight", ExtArgs["result"]["scanAndPackItem"]>
 export type ScanAndPackItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   box?: boolean | Prisma.BoxMasterDefaultArgs<ExtArgs>
+  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type ScanAndPackItemIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   box?: boolean | Prisma.BoxMasterDefaultArgs<ExtArgs>
+  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type ScanAndPackItemIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   box?: boolean | Prisma.BoxMasterDefaultArgs<ExtArgs>
+  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $ScanAndPackItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ScanAndPackItem"
   objects: {
-    project: Prisma.$ProjectMasterPayload<ExtArgs>
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     box: Prisma.$BoxMasterPayload<ExtArgs>
+    client: Prisma.$ClientMasterPayload<ExtArgs>
     user: Prisma.$UserMasterPayload<ExtArgs>
     details: Prisma.$ProjectDetailsPayload<ExtArgs>
-    client: Prisma.$ClientMasterPayload<ExtArgs>
+    project: Prisma.$ProjectMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1677,14 +1677,14 @@ export type $ScanAndPackItemPayload<ExtArgs extends runtime.Types.Extensions.Int
     vendor_id: number
     client_id: number
     box_id: number
-    project_details_id: number
     unique_id: string
-    weight: number
     qty: number
     created_date: Date
     created_by: number
     status: $Enums.ItemStatus
+    project_details_id: number
     is_deleted: boolean
+    weight: number
   }, ExtArgs["result"]["scanAndPackItem"]>
   composites: {}
 }
@@ -2079,12 +2079,12 @@ readonly fields: ScanAndPackItemFieldRefs;
  */
 export interface Prisma__ScanAndPackItemClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  project<T extends Prisma.ProjectMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectMasterClient<runtime.Types.Result.GetResult<Prisma.$ProjectMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   box<T extends Prisma.BoxMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoxMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__BoxMasterClient<runtime.Types.Result.GetResult<Prisma.$BoxMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  client<T extends Prisma.ClientMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ClientMasterClient<runtime.Types.Result.GetResult<Prisma.$ClientMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   details<T extends Prisma.ProjectDetailsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDetailsDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectDetailsClient<runtime.Types.Result.GetResult<Prisma.$ProjectDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  client<T extends Prisma.ClientMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ClientMasterClient<runtime.Types.Result.GetResult<Prisma.$ClientMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  project<T extends Prisma.ProjectMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectMasterClient<runtime.Types.Result.GetResult<Prisma.$ProjectMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2119,14 +2119,14 @@ export interface ScanAndPackItemFieldRefs {
   readonly vendor_id: Prisma.FieldRef<"ScanAndPackItem", 'Int'>
   readonly client_id: Prisma.FieldRef<"ScanAndPackItem", 'Int'>
   readonly box_id: Prisma.FieldRef<"ScanAndPackItem", 'Int'>
-  readonly project_details_id: Prisma.FieldRef<"ScanAndPackItem", 'Int'>
   readonly unique_id: Prisma.FieldRef<"ScanAndPackItem", 'String'>
-  readonly weight: Prisma.FieldRef<"ScanAndPackItem", 'Float'>
   readonly qty: Prisma.FieldRef<"ScanAndPackItem", 'Int'>
   readonly created_date: Prisma.FieldRef<"ScanAndPackItem", 'DateTime'>
   readonly created_by: Prisma.FieldRef<"ScanAndPackItem", 'Int'>
   readonly status: Prisma.FieldRef<"ScanAndPackItem", 'ItemStatus'>
+  readonly project_details_id: Prisma.FieldRef<"ScanAndPackItem", 'Int'>
   readonly is_deleted: Prisma.FieldRef<"ScanAndPackItem", 'Boolean'>
+  readonly weight: Prisma.FieldRef<"ScanAndPackItem", 'Float'>
 }
     
 

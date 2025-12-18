@@ -344,14 +344,14 @@ export type MiscellaneousMasterWhereInput = {
   updated_by?: Prisma.IntNullableFilter<"MiscellaneousMaster"> | number | null
   created_at?: Prisma.DateTimeFilter<"MiscellaneousMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"MiscellaneousMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  documents?: Prisma.MiscellaneousDocumentListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
-  updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   type?: Prisma.XOR<Prisma.MiscellaneousTypeMasterScalarRelationFilter, Prisma.MiscellaneousTypeMasterWhereInput>
+  updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   teams?: Prisma.MiscellaneousTeamMappingListRelationFilter
-  documents?: Prisma.MiscellaneousDocumentListRelationFilter
 }
 
 export type MiscellaneousMasterOrderByWithRelationInput = {
@@ -372,14 +372,14 @@ export type MiscellaneousMasterOrderByWithRelationInput = {
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  lead?: Prisma.LeadMasterOrderByWithRelationInput
+  documents?: Prisma.MiscellaneousDocumentOrderByRelationAggregateInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
-  updatedBy?: Prisma.UserMasterOrderByWithRelationInput
+  lead?: Prisma.LeadMasterOrderByWithRelationInput
   type?: Prisma.MiscellaneousTypeMasterOrderByWithRelationInput
+  updatedBy?: Prisma.UserMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   teams?: Prisma.MiscellaneousTeamMappingOrderByRelationAggregateInput
-  documents?: Prisma.MiscellaneousDocumentOrderByRelationAggregateInput
 }
 
 export type MiscellaneousMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -403,14 +403,14 @@ export type MiscellaneousMasterWhereUniqueInput = Prisma.AtLeast<{
   updated_by?: Prisma.IntNullableFilter<"MiscellaneousMaster"> | number | null
   created_at?: Prisma.DateTimeFilter<"MiscellaneousMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"MiscellaneousMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  documents?: Prisma.MiscellaneousDocumentListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
-  updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   type?: Prisma.XOR<Prisma.MiscellaneousTypeMasterScalarRelationFilter, Prisma.MiscellaneousTypeMasterWhereInput>
+  updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   teams?: Prisma.MiscellaneousTeamMappingListRelationFilter
-  documents?: Prisma.MiscellaneousDocumentListRelationFilter
 }, "id">
 
 export type MiscellaneousMasterOrderByWithAggregationInput = {
@@ -472,14 +472,14 @@ export type MiscellaneousMasterCreateInput = {
   resolved_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousMasterInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutMiscellaneousMasterInput
+  documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
   account: Prisma.AccountMasterCreateNestedOneWithoutMiscellaneousMasterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutMiscUpdatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutMiscellaneousMasterInput
   type: Prisma.MiscellaneousTypeMasterCreateNestedOneWithoutMiscInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutMiscUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousMasterInput
   teams?: Prisma.MiscellaneousTeamMappingCreateNestedManyWithoutMiscellaneousInput
-  documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
 }
 
 export type MiscellaneousMasterUncheckedCreateInput = {
@@ -500,8 +500,8 @@ export type MiscellaneousMasterUncheckedCreateInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
   documents?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutMiscellaneousInput
+  teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
 }
 
 export type MiscellaneousMasterUpdateInput = {
@@ -515,14 +515,14 @@ export type MiscellaneousMasterUpdateInput = {
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
+  documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutMiscUpdatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   type?: Prisma.MiscellaneousTypeMasterUpdateOneRequiredWithoutMiscNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutMiscUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   teams?: Prisma.MiscellaneousTeamMappingUpdateManyWithoutMiscellaneousNestedInput
-  documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
 }
 
 export type MiscellaneousMasterUncheckedUpdateInput = {
@@ -543,8 +543,8 @@ export type MiscellaneousMasterUncheckedUpdateInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
   documents?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutMiscellaneousNestedInput
+  teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
 }
 
 export type MiscellaneousMasterCreateManyInput = {
@@ -990,13 +990,13 @@ export type MiscellaneousMasterCreateWithoutVendorInput = {
   resolved_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutMiscellaneousMasterInput
+  documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
   account: Prisma.AccountMasterCreateNestedOneWithoutMiscellaneousMasterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutMiscUpdatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutMiscellaneousMasterInput
   type: Prisma.MiscellaneousTypeMasterCreateNestedOneWithoutMiscInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutMiscUpdatedInput
   teams?: Prisma.MiscellaneousTeamMappingCreateNestedManyWithoutMiscellaneousInput
-  documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
 }
 
 export type MiscellaneousMasterUncheckedCreateWithoutVendorInput = {
@@ -1016,8 +1016,8 @@ export type MiscellaneousMasterUncheckedCreateWithoutVendorInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
   documents?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutMiscellaneousInput
+  teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
 }
 
 export type MiscellaneousMasterCreateOrConnectWithoutVendorInput = {
@@ -1080,13 +1080,13 @@ export type MiscellaneousMasterCreateWithoutCreatedByInput = {
   resolved_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousMasterInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutMiscellaneousMasterInput
-  account: Prisma.AccountMasterCreateNestedOneWithoutMiscellaneousMasterInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutMiscUpdatedInput
-  type: Prisma.MiscellaneousTypeMasterCreateNestedOneWithoutMiscInput
-  teams?: Prisma.MiscellaneousTeamMappingCreateNestedManyWithoutMiscellaneousInput
   documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
+  account: Prisma.AccountMasterCreateNestedOneWithoutMiscellaneousMasterInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutMiscellaneousMasterInput
+  type: Prisma.MiscellaneousTypeMasterCreateNestedOneWithoutMiscInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutMiscUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousMasterInput
+  teams?: Prisma.MiscellaneousTeamMappingCreateNestedManyWithoutMiscellaneousInput
 }
 
 export type MiscellaneousMasterUncheckedCreateWithoutCreatedByInput = {
@@ -1106,8 +1106,8 @@ export type MiscellaneousMasterUncheckedCreateWithoutCreatedByInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
   documents?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutMiscellaneousInput
+  teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
 }
 
 export type MiscellaneousMasterCreateOrConnectWithoutCreatedByInput = {
@@ -1131,13 +1131,13 @@ export type MiscellaneousMasterCreateWithoutUpdatedByInput = {
   resolved_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousMasterInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutMiscellaneousMasterInput
+  documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
   account: Prisma.AccountMasterCreateNestedOneWithoutMiscellaneousMasterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutMiscellaneousMasterInput
   type: Prisma.MiscellaneousTypeMasterCreateNestedOneWithoutMiscInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousMasterInput
   teams?: Prisma.MiscellaneousTeamMappingCreateNestedManyWithoutMiscellaneousInput
-  documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
 }
 
 export type MiscellaneousMasterUncheckedCreateWithoutUpdatedByInput = {
@@ -1157,8 +1157,8 @@ export type MiscellaneousMasterUncheckedCreateWithoutUpdatedByInput = {
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
   documents?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutMiscellaneousInput
+  teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
 }
 
 export type MiscellaneousMasterCreateOrConnectWithoutUpdatedByInput = {
@@ -1214,13 +1214,13 @@ export type MiscellaneousMasterCreateWithoutLeadInput = {
   resolved_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousMasterInput
+  documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
   account: Prisma.AccountMasterCreateNestedOneWithoutMiscellaneousMasterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutMiscUpdatedInput
   type: Prisma.MiscellaneousTypeMasterCreateNestedOneWithoutMiscInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutMiscUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousMasterInput
   teams?: Prisma.MiscellaneousTeamMappingCreateNestedManyWithoutMiscellaneousInput
-  documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
 }
 
 export type MiscellaneousMasterUncheckedCreateWithoutLeadInput = {
@@ -1240,8 +1240,8 @@ export type MiscellaneousMasterUncheckedCreateWithoutLeadInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
   documents?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutMiscellaneousInput
+  teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
 }
 
 export type MiscellaneousMasterCreateOrConnectWithoutLeadInput = {
@@ -1281,13 +1281,13 @@ export type MiscellaneousMasterCreateWithoutAccountInput = {
   resolved_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousMasterInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutMiscellaneousMasterInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutMiscUpdatedInput
-  type: Prisma.MiscellaneousTypeMasterCreateNestedOneWithoutMiscInput
-  teams?: Prisma.MiscellaneousTeamMappingCreateNestedManyWithoutMiscellaneousInput
   documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutMiscellaneousMasterInput
+  type: Prisma.MiscellaneousTypeMasterCreateNestedOneWithoutMiscInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutMiscUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousMasterInput
+  teams?: Prisma.MiscellaneousTeamMappingCreateNestedManyWithoutMiscellaneousInput
 }
 
 export type MiscellaneousMasterUncheckedCreateWithoutAccountInput = {
@@ -1307,8 +1307,8 @@ export type MiscellaneousMasterUncheckedCreateWithoutAccountInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
   documents?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutMiscellaneousInput
+  teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
 }
 
 export type MiscellaneousMasterCreateOrConnectWithoutAccountInput = {
@@ -1348,13 +1348,13 @@ export type MiscellaneousMasterCreateWithoutTypeInput = {
   resolved_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousMasterInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutMiscellaneousMasterInput
+  documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
   account: Prisma.AccountMasterCreateNestedOneWithoutMiscellaneousMasterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutMiscellaneousMasterInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutMiscUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousMasterInput
   teams?: Prisma.MiscellaneousTeamMappingCreateNestedManyWithoutMiscellaneousInput
-  documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
 }
 
 export type MiscellaneousMasterUncheckedCreateWithoutTypeInput = {
@@ -1374,8 +1374,8 @@ export type MiscellaneousMasterUncheckedCreateWithoutTypeInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
   documents?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutMiscellaneousInput
+  teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
 }
 
 export type MiscellaneousMasterCreateOrConnectWithoutTypeInput = {
@@ -1415,13 +1415,13 @@ export type MiscellaneousMasterCreateWithoutTeamsInput = {
   resolved_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousMasterInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutMiscellaneousMasterInput
+  documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
   account: Prisma.AccountMasterCreateNestedOneWithoutMiscellaneousMasterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutMiscUpdatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutMiscellaneousMasterInput
   type: Prisma.MiscellaneousTypeMasterCreateNestedOneWithoutMiscInput
-  documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutMiscUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousMasterInput
 }
 
 export type MiscellaneousMasterUncheckedCreateWithoutTeamsInput = {
@@ -1472,13 +1472,13 @@ export type MiscellaneousMasterUpdateWithoutTeamsInput = {
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
+  documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutMiscUpdatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   type?: Prisma.MiscellaneousTypeMasterUpdateOneRequiredWithoutMiscNestedInput
-  documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutMiscUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
 }
 
 export type MiscellaneousMasterUncheckedUpdateWithoutTeamsInput = {
@@ -1513,12 +1513,12 @@ export type MiscellaneousMasterCreateWithoutDocumentsInput = {
   resolved_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousMasterInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutMiscellaneousMasterInput
   account: Prisma.AccountMasterCreateNestedOneWithoutMiscellaneousMasterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutMiscUpdatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutMiscellaneousMasterInput
   type: Prisma.MiscellaneousTypeMasterCreateNestedOneWithoutMiscInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutMiscUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousMasterInput
   teams?: Prisma.MiscellaneousTeamMappingCreateNestedManyWithoutMiscellaneousInput
 }
 
@@ -1570,12 +1570,12 @@ export type MiscellaneousMasterUpdateWithoutDocumentsInput = {
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutMiscUpdatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   type?: Prisma.MiscellaneousTypeMasterUpdateOneRequiredWithoutMiscNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutMiscUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   teams?: Prisma.MiscellaneousTeamMappingUpdateManyWithoutMiscellaneousNestedInput
 }
 
@@ -1630,13 +1630,13 @@ export type MiscellaneousMasterUpdateWithoutVendorInput = {
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
+  documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutMiscUpdatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   type?: Prisma.MiscellaneousTypeMasterUpdateOneRequiredWithoutMiscNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutMiscUpdatedNestedInput
   teams?: Prisma.MiscellaneousTeamMappingUpdateManyWithoutMiscellaneousNestedInput
-  documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
 }
 
 export type MiscellaneousMasterUncheckedUpdateWithoutVendorInput = {
@@ -1656,8 +1656,8 @@ export type MiscellaneousMasterUncheckedUpdateWithoutVendorInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
   documents?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutMiscellaneousNestedInput
+  teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
 }
 
 export type MiscellaneousMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -1728,13 +1728,13 @@ export type MiscellaneousMasterUpdateWithoutCreatedByInput = {
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
-  account?: Prisma.AccountMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutMiscUpdatedNestedInput
-  type?: Prisma.MiscellaneousTypeMasterUpdateOneRequiredWithoutMiscNestedInput
-  teams?: Prisma.MiscellaneousTeamMappingUpdateManyWithoutMiscellaneousNestedInput
   documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
+  type?: Prisma.MiscellaneousTypeMasterUpdateOneRequiredWithoutMiscNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutMiscUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
+  teams?: Prisma.MiscellaneousTeamMappingUpdateManyWithoutMiscellaneousNestedInput
 }
 
 export type MiscellaneousMasterUncheckedUpdateWithoutCreatedByInput = {
@@ -1754,8 +1754,8 @@ export type MiscellaneousMasterUncheckedUpdateWithoutCreatedByInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
   documents?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutMiscellaneousNestedInput
+  teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
 }
 
 export type MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1788,13 +1788,13 @@ export type MiscellaneousMasterUpdateWithoutUpdatedByInput = {
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
+  documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   type?: Prisma.MiscellaneousTypeMasterUpdateOneRequiredWithoutMiscNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   teams?: Prisma.MiscellaneousTeamMappingUpdateManyWithoutMiscellaneousNestedInput
-  documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
 }
 
 export type MiscellaneousMasterUncheckedUpdateWithoutUpdatedByInput = {
@@ -1814,8 +1814,8 @@ export type MiscellaneousMasterUncheckedUpdateWithoutUpdatedByInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
   documents?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutMiscellaneousNestedInput
+  teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
 }
 
 export type MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -1867,13 +1867,13 @@ export type MiscellaneousMasterUpdateWithoutLeadInput = {
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
+  documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutMiscUpdatedNestedInput
   type?: Prisma.MiscellaneousTypeMasterUpdateOneRequiredWithoutMiscNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutMiscUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   teams?: Prisma.MiscellaneousTeamMappingUpdateManyWithoutMiscellaneousNestedInput
-  documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
 }
 
 export type MiscellaneousMasterUncheckedUpdateWithoutLeadInput = {
@@ -1893,8 +1893,8 @@ export type MiscellaneousMasterUncheckedUpdateWithoutLeadInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
   documents?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutMiscellaneousNestedInput
+  teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
 }
 
 export type MiscellaneousMasterUncheckedUpdateManyWithoutLeadInput = {
@@ -1946,13 +1946,13 @@ export type MiscellaneousMasterUpdateWithoutAccountInput = {
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutMiscUpdatedNestedInput
-  type?: Prisma.MiscellaneousTypeMasterUpdateOneRequiredWithoutMiscNestedInput
-  teams?: Prisma.MiscellaneousTeamMappingUpdateManyWithoutMiscellaneousNestedInput
   documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
+  type?: Prisma.MiscellaneousTypeMasterUpdateOneRequiredWithoutMiscNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutMiscUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
+  teams?: Prisma.MiscellaneousTeamMappingUpdateManyWithoutMiscellaneousNestedInput
 }
 
 export type MiscellaneousMasterUncheckedUpdateWithoutAccountInput = {
@@ -1972,8 +1972,8 @@ export type MiscellaneousMasterUncheckedUpdateWithoutAccountInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
   documents?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutMiscellaneousNestedInput
+  teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
 }
 
 export type MiscellaneousMasterUncheckedUpdateManyWithoutAccountInput = {
@@ -2025,13 +2025,13 @@ export type MiscellaneousMasterUpdateWithoutTypeInput = {
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
+  documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutMiscUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   teams?: Prisma.MiscellaneousTeamMappingUpdateManyWithoutMiscellaneousNestedInput
-  documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
 }
 
 export type MiscellaneousMasterUncheckedUpdateWithoutTypeInput = {
@@ -2051,8 +2051,8 @@ export type MiscellaneousMasterUncheckedUpdateWithoutTypeInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
   documents?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutMiscellaneousNestedInput
+  teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
 }
 
 export type MiscellaneousMasterUncheckedUpdateManyWithoutTypeInput = {
@@ -2080,13 +2080,13 @@ export type MiscellaneousMasterUncheckedUpdateManyWithoutTypeInput = {
  */
 
 export type MiscellaneousMasterCountOutputType = {
-  teams: number
   documents: number
+  teams: number
 }
 
 export type MiscellaneousMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  teams?: boolean | MiscellaneousMasterCountOutputTypeCountTeamsArgs
   documents?: boolean | MiscellaneousMasterCountOutputTypeCountDocumentsArgs
+  teams?: boolean | MiscellaneousMasterCountOutputTypeCountTeamsArgs
 }
 
 /**
@@ -2102,15 +2102,15 @@ export type MiscellaneousMasterCountOutputTypeDefaultArgs<ExtArgs extends runtim
 /**
  * MiscellaneousMasterCountOutputType without action
  */
-export type MiscellaneousMasterCountOutputTypeCountTeamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MiscellaneousTeamMappingWhereInput
+export type MiscellaneousMasterCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MiscellaneousDocumentWhereInput
 }
 
 /**
  * MiscellaneousMasterCountOutputType without action
  */
-export type MiscellaneousMasterCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MiscellaneousDocumentWhereInput
+export type MiscellaneousMasterCountOutputTypeCountTeamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MiscellaneousTeamMappingWhereInput
 }
 
 
@@ -2132,14 +2132,14 @@ export type MiscellaneousMasterSelect<ExtArgs extends runtime.Types.Extensions.I
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  documents?: boolean | Prisma.MiscellaneousMaster$documentsArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.MiscellaneousMaster$updatedByArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   type?: boolean | Prisma.MiscellaneousTypeMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.MiscellaneousMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   teams?: boolean | Prisma.MiscellaneousMaster$teamsArgs<ExtArgs>
-  documents?: boolean | Prisma.MiscellaneousMaster$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.MiscellaneousMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["miscellaneousMaster"]>
 
@@ -2161,12 +2161,12 @@ export type MiscellaneousMasterSelectCreateManyAndReturn<ExtArgs extends runtime
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.MiscellaneousMaster$updatedByArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   type?: boolean | Prisma.MiscellaneousTypeMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.MiscellaneousMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["miscellaneousMaster"]>
 
 export type MiscellaneousMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2187,12 +2187,12 @@ export type MiscellaneousMasterSelectUpdateManyAndReturn<ExtArgs extends runtime
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.MiscellaneousMaster$updatedByArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   type?: boolean | Prisma.MiscellaneousTypeMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.MiscellaneousMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["miscellaneousMaster"]>
 
 export type MiscellaneousMasterSelectScalar = {
@@ -2217,44 +2217,44 @@ export type MiscellaneousMasterSelectScalar = {
 
 export type MiscellaneousMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "misc_type_id" | "problem_description" | "reorder_material_details" | "quantity" | "cost" | "supervisor_remark" | "expected_ready_date" | "is_resolved" | "resolved_at" | "created_by" | "updated_by" | "created_at" | "updated_at", ExtArgs["result"]["miscellaneousMaster"]>
 export type MiscellaneousMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  documents?: boolean | Prisma.MiscellaneousMaster$documentsArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.MiscellaneousMaster$updatedByArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   type?: boolean | Prisma.MiscellaneousTypeMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.MiscellaneousMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   teams?: boolean | Prisma.MiscellaneousMaster$teamsArgs<ExtArgs>
-  documents?: boolean | Prisma.MiscellaneousMaster$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.MiscellaneousMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MiscellaneousMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.MiscellaneousMaster$updatedByArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   type?: boolean | Prisma.MiscellaneousTypeMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.MiscellaneousMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type MiscellaneousMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.MiscellaneousMaster$updatedByArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   type?: boolean | Prisma.MiscellaneousTypeMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.MiscellaneousMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $MiscellaneousMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "MiscellaneousMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    lead: Prisma.$LeadMasterPayload<ExtArgs>
+    documents: Prisma.$MiscellaneousDocumentPayload<ExtArgs>[]
     account: Prisma.$AccountMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
-    updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    lead: Prisma.$LeadMasterPayload<ExtArgs>
     type: Prisma.$MiscellaneousTypeMasterPayload<ExtArgs>
+    updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     teams: Prisma.$MiscellaneousTeamMappingPayload<ExtArgs>[]
-    documents: Prisma.$MiscellaneousDocumentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2668,14 +2668,14 @@ readonly fields: MiscellaneousMasterFieldRefs;
  */
 export interface Prisma__MiscellaneousMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  documents<T extends Prisma.MiscellaneousMaster$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MiscellaneousMaster$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MiscellaneousDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   account<T extends Prisma.AccountMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  updatedBy<T extends Prisma.MiscellaneousMaster$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MiscellaneousMaster$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   type<T extends Prisma.MiscellaneousTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MiscellaneousTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__MiscellaneousTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$MiscellaneousTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  updatedBy<T extends Prisma.MiscellaneousMaster$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MiscellaneousMaster$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   teams<T extends Prisma.MiscellaneousMaster$teamsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MiscellaneousMaster$teamsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MiscellaneousTeamMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  documents<T extends Prisma.MiscellaneousMaster$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MiscellaneousMaster$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MiscellaneousDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3118,6 +3118,30 @@ export type MiscellaneousMasterDeleteManyArgs<ExtArgs extends runtime.Types.Exte
 }
 
 /**
+ * MiscellaneousMaster.documents
+ */
+export type MiscellaneousMaster$documentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MiscellaneousDocument
+   */
+  select?: Prisma.MiscellaneousDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MiscellaneousDocument
+   */
+  omit?: Prisma.MiscellaneousDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MiscellaneousDocumentInclude<ExtArgs> | null
+  where?: Prisma.MiscellaneousDocumentWhereInput
+  orderBy?: Prisma.MiscellaneousDocumentOrderByWithRelationInput | Prisma.MiscellaneousDocumentOrderByWithRelationInput[]
+  cursor?: Prisma.MiscellaneousDocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MiscellaneousDocumentScalarFieldEnum | Prisma.MiscellaneousDocumentScalarFieldEnum[]
+}
+
+/**
  * MiscellaneousMaster.updatedBy
  */
 export type MiscellaneousMaster$updatedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3158,30 +3182,6 @@ export type MiscellaneousMaster$teamsArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.MiscellaneousTeamMappingScalarFieldEnum | Prisma.MiscellaneousTeamMappingScalarFieldEnum[]
-}
-
-/**
- * MiscellaneousMaster.documents
- */
-export type MiscellaneousMaster$documentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the MiscellaneousDocument
-   */
-  select?: Prisma.MiscellaneousDocumentSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the MiscellaneousDocument
-   */
-  omit?: Prisma.MiscellaneousDocumentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MiscellaneousDocumentInclude<ExtArgs> | null
-  where?: Prisma.MiscellaneousDocumentWhereInput
-  orderBy?: Prisma.MiscellaneousDocumentOrderByWithRelationInput | Prisma.MiscellaneousDocumentOrderByWithRelationInput[]
-  cursor?: Prisma.MiscellaneousDocumentWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.MiscellaneousDocumentScalarFieldEnum | Prisma.MiscellaneousDocumentScalarFieldEnum[]
 }
 
 /**

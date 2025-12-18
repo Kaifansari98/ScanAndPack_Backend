@@ -212,8 +212,8 @@ export type PaymentTypeMasterWhereInput = {
   type?: Prisma.StringFilter<"PaymentTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"PaymentTypeMaster"> | number
   tag?: Prisma.StringFilter<"PaymentTypeMaster"> | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   payments?: Prisma.PaymentInfoListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type PaymentTypeMasterOrderByWithRelationInput = {
@@ -221,8 +221,8 @@ export type PaymentTypeMasterOrderByWithRelationInput = {
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   payments?: Prisma.PaymentInfoOrderByRelationAggregateInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type PaymentTypeMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -233,8 +233,8 @@ export type PaymentTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.StringFilter<"PaymentTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"PaymentTypeMaster"> | number
   tag?: Prisma.StringFilter<"PaymentTypeMaster"> | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   payments?: Prisma.PaymentInfoListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type PaymentTypeMasterOrderByWithAggregationInput = {
@@ -262,8 +262,8 @@ export type PaymentTypeMasterScalarWhereWithAggregatesInput = {
 export type PaymentTypeMasterCreateInput = {
   type: string
   tag: string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentTypeMasterInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutPaymentTypeInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentTypeMasterInput
 }
 
 export type PaymentTypeMasterUncheckedCreateInput = {
@@ -277,8 +277,8 @@ export type PaymentTypeMasterUncheckedCreateInput = {
 export type PaymentTypeMasterUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentTypeMasterNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutPaymentTypeNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentTypeMasterNestedInput
 }
 
 export type PaymentTypeMasterUncheckedUpdateInput = {
@@ -562,8 +562,8 @@ export type PaymentTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.Int
   type?: boolean
   vendor_id?: boolean
   tag?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   payments?: boolean | Prisma.PaymentTypeMaster$paymentsArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.PaymentTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["paymentTypeMaster"]>
 
@@ -592,8 +592,8 @@ export type PaymentTypeMasterSelectScalar = {
 
 export type PaymentTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id" | "tag", ExtArgs["result"]["paymentTypeMaster"]>
 export type PaymentTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   payments?: boolean | Prisma.PaymentTypeMaster$paymentsArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.PaymentTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PaymentTypeMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -606,8 +606,8 @@ export type PaymentTypeMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.
 export type $PaymentTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PaymentTypeMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     payments: Prisma.$PaymentInfoPayload<ExtArgs>[]
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1008,8 +1008,8 @@ readonly fields: PaymentTypeMasterFieldRefs;
  */
 export interface Prisma__PaymentTypeMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   payments<T extends Prisma.PaymentTypeMaster$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentTypeMaster$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentInfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

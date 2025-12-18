@@ -256,12 +256,12 @@ export type InstallationIssueLogMasterWhereInput = {
   issue_impact?: Prisma.StringNullableFilter<"InstallationIssueLogMaster"> | string | null
   created_by?: Prisma.IntFilter<"InstallationIssueLogMaster"> | number
   created_at?: Prisma.DateTimeFilter<"InstallationIssueLogMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
-  issueTypes?: Prisma.IssueLogTypeMappingListRelationFilter
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingListRelationFilter
+  issueTypes?: Prisma.IssueLogTypeMappingListRelationFilter
 }
 
 export type InstallationIssueLogMasterOrderByWithRelationInput = {
@@ -273,12 +273,12 @@ export type InstallationIssueLogMasterOrderByWithRelationInput = {
   issue_impact?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  lead?: Prisma.LeadMasterOrderByWithRelationInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
-  issueTypes?: Prisma.IssueLogTypeMappingOrderByRelationAggregateInput
+  lead?: Prisma.LeadMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingOrderByRelationAggregateInput
+  issueTypes?: Prisma.IssueLogTypeMappingOrderByRelationAggregateInput
 }
 
 export type InstallationIssueLogMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -293,12 +293,12 @@ export type InstallationIssueLogMasterWhereUniqueInput = Prisma.AtLeast<{
   issue_impact?: Prisma.StringNullableFilter<"InstallationIssueLogMaster"> | string | null
   created_by?: Prisma.IntFilter<"InstallationIssueLogMaster"> | number
   created_at?: Prisma.DateTimeFilter<"InstallationIssueLogMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
-  issueTypes?: Prisma.IssueLogTypeMappingListRelationFilter
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingListRelationFilter
+  issueTypes?: Prisma.IssueLogTypeMappingListRelationFilter
 }, "id">
 
 export type InstallationIssueLogMasterOrderByWithAggregationInput = {
@@ -335,12 +335,12 @@ export type InstallationIssueLogMasterCreateInput = {
   issue_description: string
   issue_impact?: string | null
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
   account: Prisma.AccountMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
-  issueTypes?: Prisma.IssueLogTypeMappingCreateNestedManyWithoutIssueLogInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingCreateNestedManyWithoutIssueLogInput
+  issueTypes?: Prisma.IssueLogTypeMappingCreateNestedManyWithoutIssueLogInput
 }
 
 export type InstallationIssueLogMasterUncheckedCreateInput = {
@@ -352,20 +352,20 @@ export type InstallationIssueLogMasterUncheckedCreateInput = {
   issue_impact?: string | null
   created_by: number
   created_at?: Date | string
-  issueTypes?: Prisma.IssueLogTypeMappingUncheckedCreateNestedManyWithoutIssueLogInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingUncheckedCreateNestedManyWithoutIssueLogInput
+  issueTypes?: Prisma.IssueLogTypeMappingUncheckedCreateNestedManyWithoutIssueLogInput
 }
 
 export type InstallationIssueLogMasterUpdateInput = {
   issue_description?: Prisma.StringFieldUpdateOperationsInput | string
   issue_impact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
-  issueTypes?: Prisma.IssueLogTypeMappingUpdateManyWithoutIssueLogNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingUpdateManyWithoutIssueLogNestedInput
+  issueTypes?: Prisma.IssueLogTypeMappingUpdateManyWithoutIssueLogNestedInput
 }
 
 export type InstallationIssueLogMasterUncheckedUpdateInput = {
@@ -377,8 +377,8 @@ export type InstallationIssueLogMasterUncheckedUpdateInput = {
   issue_impact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  issueTypes?: Prisma.IssueLogTypeMappingUncheckedUpdateManyWithoutIssueLogNestedInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingUncheckedUpdateManyWithoutIssueLogNestedInput
+  issueTypes?: Prisma.IssueLogTypeMappingUncheckedUpdateManyWithoutIssueLogNestedInput
 }
 
 export type InstallationIssueLogMasterCreateManyInput = {
@@ -673,11 +673,11 @@ export type InstallationIssueLogMasterCreateWithoutVendorInput = {
   issue_description: string
   issue_impact?: string | null
   created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
   account: Prisma.AccountMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
-  issueTypes?: Prisma.IssueLogTypeMappingCreateNestedManyWithoutIssueLogInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingCreateNestedManyWithoutIssueLogInput
+  issueTypes?: Prisma.IssueLogTypeMappingCreateNestedManyWithoutIssueLogInput
 }
 
 export type InstallationIssueLogMasterUncheckedCreateWithoutVendorInput = {
@@ -688,8 +688,8 @@ export type InstallationIssueLogMasterUncheckedCreateWithoutVendorInput = {
   issue_impact?: string | null
   created_by: number
   created_at?: Date | string
-  issueTypes?: Prisma.IssueLogTypeMappingUncheckedCreateNestedManyWithoutIssueLogInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingUncheckedCreateNestedManyWithoutIssueLogInput
+  issueTypes?: Prisma.IssueLogTypeMappingUncheckedCreateNestedManyWithoutIssueLogInput
 }
 
 export type InstallationIssueLogMasterCreateOrConnectWithoutVendorInput = {
@@ -736,11 +736,11 @@ export type InstallationIssueLogMasterCreateWithoutCreatedByInput = {
   issue_description: string
   issue_impact?: string | null
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
   account: Prisma.AccountMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
-  issueTypes?: Prisma.IssueLogTypeMappingCreateNestedManyWithoutIssueLogInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingCreateNestedManyWithoutIssueLogInput
+  issueTypes?: Prisma.IssueLogTypeMappingCreateNestedManyWithoutIssueLogInput
 }
 
 export type InstallationIssueLogMasterUncheckedCreateWithoutCreatedByInput = {
@@ -751,8 +751,8 @@ export type InstallationIssueLogMasterUncheckedCreateWithoutCreatedByInput = {
   issue_description: string
   issue_impact?: string | null
   created_at?: Date | string
-  issueTypes?: Prisma.IssueLogTypeMappingUncheckedCreateNestedManyWithoutIssueLogInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingUncheckedCreateNestedManyWithoutIssueLogInput
+  issueTypes?: Prisma.IssueLogTypeMappingUncheckedCreateNestedManyWithoutIssueLogInput
 }
 
 export type InstallationIssueLogMasterCreateOrConnectWithoutCreatedByInput = {
@@ -785,11 +785,11 @@ export type InstallationIssueLogMasterCreateWithoutLeadInput = {
   issue_description: string
   issue_impact?: string | null
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
   account: Prisma.AccountMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
-  issueTypes?: Prisma.IssueLogTypeMappingCreateNestedManyWithoutIssueLogInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingCreateNestedManyWithoutIssueLogInput
+  issueTypes?: Prisma.IssueLogTypeMappingCreateNestedManyWithoutIssueLogInput
 }
 
 export type InstallationIssueLogMasterUncheckedCreateWithoutLeadInput = {
@@ -800,8 +800,8 @@ export type InstallationIssueLogMasterUncheckedCreateWithoutLeadInput = {
   issue_impact?: string | null
   created_by: number
   created_at?: Date | string
-  issueTypes?: Prisma.IssueLogTypeMappingUncheckedCreateNestedManyWithoutIssueLogInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingUncheckedCreateNestedManyWithoutIssueLogInput
+  issueTypes?: Prisma.IssueLogTypeMappingUncheckedCreateNestedManyWithoutIssueLogInput
 }
 
 export type InstallationIssueLogMasterCreateOrConnectWithoutLeadInput = {
@@ -834,11 +834,11 @@ export type InstallationIssueLogMasterCreateWithoutAccountInput = {
   issue_description: string
   issue_impact?: string | null
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
-  issueTypes?: Prisma.IssueLogTypeMappingCreateNestedManyWithoutIssueLogInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingCreateNestedManyWithoutIssueLogInput
+  issueTypes?: Prisma.IssueLogTypeMappingCreateNestedManyWithoutIssueLogInput
 }
 
 export type InstallationIssueLogMasterUncheckedCreateWithoutAccountInput = {
@@ -849,8 +849,8 @@ export type InstallationIssueLogMasterUncheckedCreateWithoutAccountInput = {
   issue_impact?: string | null
   created_by: number
   created_at?: Date | string
-  issueTypes?: Prisma.IssueLogTypeMappingUncheckedCreateNestedManyWithoutIssueLogInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingUncheckedCreateNestedManyWithoutIssueLogInput
+  issueTypes?: Prisma.IssueLogTypeMappingUncheckedCreateNestedManyWithoutIssueLogInput
 }
 
 export type InstallationIssueLogMasterCreateOrConnectWithoutAccountInput = {
@@ -883,10 +883,10 @@ export type InstallationIssueLogMasterCreateWithoutIssueTypesInput = {
   issue_description: string
   issue_impact?: string | null
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
   account: Prisma.AccountMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingCreateNestedManyWithoutIssueLogInput
 }
 
@@ -922,10 +922,10 @@ export type InstallationIssueLogMasterUpdateWithoutIssueTypesInput = {
   issue_description?: Prisma.StringFieldUpdateOperationsInput | string
   issue_impact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingUpdateManyWithoutIssueLogNestedInput
 }
 
@@ -945,10 +945,10 @@ export type InstallationIssueLogMasterCreateWithoutResponsibleTeamsInput = {
   issue_description: string
   issue_impact?: string | null
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
   account: Prisma.AccountMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallationIssueLogMasterInput
   issueTypes?: Prisma.IssueLogTypeMappingCreateNestedManyWithoutIssueLogInput
 }
 
@@ -984,10 +984,10 @@ export type InstallationIssueLogMasterUpdateWithoutResponsibleTeamsInput = {
   issue_description?: Prisma.StringFieldUpdateOperationsInput | string
   issue_impact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
   issueTypes?: Prisma.IssueLogTypeMappingUpdateManyWithoutIssueLogNestedInput
 }
 
@@ -1017,11 +1017,11 @@ export type InstallationIssueLogMasterUpdateWithoutVendorInput = {
   issue_description?: Prisma.StringFieldUpdateOperationsInput | string
   issue_impact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
-  issueTypes?: Prisma.IssueLogTypeMappingUpdateManyWithoutIssueLogNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingUpdateManyWithoutIssueLogNestedInput
+  issueTypes?: Prisma.IssueLogTypeMappingUpdateManyWithoutIssueLogNestedInput
 }
 
 export type InstallationIssueLogMasterUncheckedUpdateWithoutVendorInput = {
@@ -1032,8 +1032,8 @@ export type InstallationIssueLogMasterUncheckedUpdateWithoutVendorInput = {
   issue_impact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  issueTypes?: Prisma.IssueLogTypeMappingUncheckedUpdateManyWithoutIssueLogNestedInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingUncheckedUpdateManyWithoutIssueLogNestedInput
+  issueTypes?: Prisma.IssueLogTypeMappingUncheckedUpdateManyWithoutIssueLogNestedInput
 }
 
 export type InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -1060,11 +1060,11 @@ export type InstallationIssueLogMasterUpdateWithoutCreatedByInput = {
   issue_description?: Prisma.StringFieldUpdateOperationsInput | string
   issue_impact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
-  issueTypes?: Prisma.IssueLogTypeMappingUpdateManyWithoutIssueLogNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingUpdateManyWithoutIssueLogNestedInput
+  issueTypes?: Prisma.IssueLogTypeMappingUpdateManyWithoutIssueLogNestedInput
 }
 
 export type InstallationIssueLogMasterUncheckedUpdateWithoutCreatedByInput = {
@@ -1075,8 +1075,8 @@ export type InstallationIssueLogMasterUncheckedUpdateWithoutCreatedByInput = {
   issue_description?: Prisma.StringFieldUpdateOperationsInput | string
   issue_impact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  issueTypes?: Prisma.IssueLogTypeMappingUncheckedUpdateManyWithoutIssueLogNestedInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingUncheckedUpdateManyWithoutIssueLogNestedInput
+  issueTypes?: Prisma.IssueLogTypeMappingUncheckedUpdateManyWithoutIssueLogNestedInput
 }
 
 export type InstallationIssueLogMasterUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1103,11 +1103,11 @@ export type InstallationIssueLogMasterUpdateWithoutLeadInput = {
   issue_description?: Prisma.StringFieldUpdateOperationsInput | string
   issue_impact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
-  issueTypes?: Prisma.IssueLogTypeMappingUpdateManyWithoutIssueLogNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingUpdateManyWithoutIssueLogNestedInput
+  issueTypes?: Prisma.IssueLogTypeMappingUpdateManyWithoutIssueLogNestedInput
 }
 
 export type InstallationIssueLogMasterUncheckedUpdateWithoutLeadInput = {
@@ -1118,8 +1118,8 @@ export type InstallationIssueLogMasterUncheckedUpdateWithoutLeadInput = {
   issue_impact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  issueTypes?: Prisma.IssueLogTypeMappingUncheckedUpdateManyWithoutIssueLogNestedInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingUncheckedUpdateManyWithoutIssueLogNestedInput
+  issueTypes?: Prisma.IssueLogTypeMappingUncheckedUpdateManyWithoutIssueLogNestedInput
 }
 
 export type InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadInput = {
@@ -1146,11 +1146,11 @@ export type InstallationIssueLogMasterUpdateWithoutAccountInput = {
   issue_description?: Prisma.StringFieldUpdateOperationsInput | string
   issue_impact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
-  issueTypes?: Prisma.IssueLogTypeMappingUpdateManyWithoutIssueLogNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallationIssueLogMasterNestedInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingUpdateManyWithoutIssueLogNestedInput
+  issueTypes?: Prisma.IssueLogTypeMappingUpdateManyWithoutIssueLogNestedInput
 }
 
 export type InstallationIssueLogMasterUncheckedUpdateWithoutAccountInput = {
@@ -1161,8 +1161,8 @@ export type InstallationIssueLogMasterUncheckedUpdateWithoutAccountInput = {
   issue_impact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  issueTypes?: Prisma.IssueLogTypeMappingUncheckedUpdateManyWithoutIssueLogNestedInput
   responsibleTeams?: Prisma.IssueLogResponsibleTeamMappingUncheckedUpdateManyWithoutIssueLogNestedInput
+  issueTypes?: Prisma.IssueLogTypeMappingUncheckedUpdateManyWithoutIssueLogNestedInput
 }
 
 export type InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountInput = {
@@ -1181,13 +1181,13 @@ export type InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountInput = {
  */
 
 export type InstallationIssueLogMasterCountOutputType = {
-  issueTypes: number
   responsibleTeams: number
+  issueTypes: number
 }
 
 export type InstallationIssueLogMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  issueTypes?: boolean | InstallationIssueLogMasterCountOutputTypeCountIssueTypesArgs
   responsibleTeams?: boolean | InstallationIssueLogMasterCountOutputTypeCountResponsibleTeamsArgs
+  issueTypes?: boolean | InstallationIssueLogMasterCountOutputTypeCountIssueTypesArgs
 }
 
 /**
@@ -1203,15 +1203,15 @@ export type InstallationIssueLogMasterCountOutputTypeDefaultArgs<ExtArgs extends
 /**
  * InstallationIssueLogMasterCountOutputType without action
  */
-export type InstallationIssueLogMasterCountOutputTypeCountIssueTypesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.IssueLogTypeMappingWhereInput
+export type InstallationIssueLogMasterCountOutputTypeCountResponsibleTeamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.IssueLogResponsibleTeamMappingWhereInput
 }
 
 /**
  * InstallationIssueLogMasterCountOutputType without action
  */
-export type InstallationIssueLogMasterCountOutputTypeCountResponsibleTeamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.IssueLogResponsibleTeamMappingWhereInput
+export type InstallationIssueLogMasterCountOutputTypeCountIssueTypesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.IssueLogTypeMappingWhereInput
 }
 
 
@@ -1224,12 +1224,12 @@ export type InstallationIssueLogMasterSelect<ExtArgs extends runtime.Types.Exten
   issue_impact?: boolean
   created_by?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  issueTypes?: boolean | Prisma.InstallationIssueLogMaster$issueTypesArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   responsibleTeams?: boolean | Prisma.InstallationIssueLogMaster$responsibleTeamsArgs<ExtArgs>
+  issueTypes?: boolean | Prisma.InstallationIssueLogMaster$issueTypesArgs<ExtArgs>
   _count?: boolean | Prisma.InstallationIssueLogMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["installationIssueLogMaster"]>
 
@@ -1242,10 +1242,10 @@ export type InstallationIssueLogMasterSelectCreateManyAndReturn<ExtArgs extends 
   issue_impact?: boolean
   created_by?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["installationIssueLogMaster"]>
 
 export type InstallationIssueLogMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1257,10 +1257,10 @@ export type InstallationIssueLogMasterSelectUpdateManyAndReturn<ExtArgs extends 
   issue_impact?: boolean
   created_by?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["installationIssueLogMaster"]>
 
 export type InstallationIssueLogMasterSelectScalar = {
@@ -1276,36 +1276,36 @@ export type InstallationIssueLogMasterSelectScalar = {
 
 export type InstallationIssueLogMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "issue_description" | "issue_impact" | "created_by" | "created_at", ExtArgs["result"]["installationIssueLogMaster"]>
 export type InstallationIssueLogMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  issueTypes?: boolean | Prisma.InstallationIssueLogMaster$issueTypesArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   responsibleTeams?: boolean | Prisma.InstallationIssueLogMaster$responsibleTeamsArgs<ExtArgs>
+  issueTypes?: boolean | Prisma.InstallationIssueLogMaster$issueTypesArgs<ExtArgs>
   _count?: boolean | Prisma.InstallationIssueLogMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type InstallationIssueLogMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type InstallationIssueLogMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $InstallationIssueLogMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "InstallationIssueLogMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    lead: Prisma.$LeadMasterPayload<ExtArgs>
     account: Prisma.$AccountMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
-    issueTypes: Prisma.$IssueLogTypeMappingPayload<ExtArgs>[]
+    lead: Prisma.$LeadMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     responsibleTeams: Prisma.$IssueLogResponsibleTeamMappingPayload<ExtArgs>[]
+    issueTypes: Prisma.$IssueLogTypeMappingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1710,12 +1710,12 @@ readonly fields: InstallationIssueLogMasterFieldRefs;
  */
 export interface Prisma__InstallationIssueLogMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   account<T extends Prisma.AccountMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  issueTypes<T extends Prisma.InstallationIssueLogMaster$issueTypesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InstallationIssueLogMaster$issueTypesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IssueLogTypeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   responsibleTeams<T extends Prisma.InstallationIssueLogMaster$responsibleTeamsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InstallationIssueLogMaster$responsibleTeamsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IssueLogResponsibleTeamMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  issueTypes<T extends Prisma.InstallationIssueLogMaster$issueTypesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InstallationIssueLogMaster$issueTypesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IssueLogTypeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2149,30 +2149,6 @@ export type InstallationIssueLogMasterDeleteManyArgs<ExtArgs extends runtime.Typ
 }
 
 /**
- * InstallationIssueLogMaster.issueTypes
- */
-export type InstallationIssueLogMaster$issueTypesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the IssueLogTypeMapping
-   */
-  select?: Prisma.IssueLogTypeMappingSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the IssueLogTypeMapping
-   */
-  omit?: Prisma.IssueLogTypeMappingOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.IssueLogTypeMappingInclude<ExtArgs> | null
-  where?: Prisma.IssueLogTypeMappingWhereInput
-  orderBy?: Prisma.IssueLogTypeMappingOrderByWithRelationInput | Prisma.IssueLogTypeMappingOrderByWithRelationInput[]
-  cursor?: Prisma.IssueLogTypeMappingWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.IssueLogTypeMappingScalarFieldEnum | Prisma.IssueLogTypeMappingScalarFieldEnum[]
-}
-
-/**
  * InstallationIssueLogMaster.responsibleTeams
  */
 export type InstallationIssueLogMaster$responsibleTeamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2194,6 +2170,30 @@ export type InstallationIssueLogMaster$responsibleTeamsArgs<ExtArgs extends runt
   take?: number
   skip?: number
   distinct?: Prisma.IssueLogResponsibleTeamMappingScalarFieldEnum | Prisma.IssueLogResponsibleTeamMappingScalarFieldEnum[]
+}
+
+/**
+ * InstallationIssueLogMaster.issueTypes
+ */
+export type InstallationIssueLogMaster$issueTypesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the IssueLogTypeMapping
+   */
+  select?: Prisma.IssueLogTypeMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the IssueLogTypeMapping
+   */
+  omit?: Prisma.IssueLogTypeMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IssueLogTypeMappingInclude<ExtArgs> | null
+  where?: Prisma.IssueLogTypeMappingWhereInput
+  orderBy?: Prisma.IssueLogTypeMappingOrderByWithRelationInput | Prisma.IssueLogTypeMappingOrderByWithRelationInput[]
+  cursor?: Prisma.IssueLogTypeMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.IssueLogTypeMappingScalarFieldEnum | Prisma.IssueLogTypeMappingScalarFieldEnum[]
 }
 
 /**

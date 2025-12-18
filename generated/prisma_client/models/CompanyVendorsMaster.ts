@@ -55,9 +55,9 @@ export type CompanyVendorsMasterMinAggregateOutputType = {
   created_by: number | null
   updated_at: Date | null
   updated_by: number | null
-  is_deleted: boolean | null
-  deleted_by: number | null
   deleted_at: Date | null
+  deleted_by: number | null
+  is_deleted: boolean | null
 }
 
 export type CompanyVendorsMasterMaxAggregateOutputType = {
@@ -73,9 +73,9 @@ export type CompanyVendorsMasterMaxAggregateOutputType = {
   created_by: number | null
   updated_at: Date | null
   updated_by: number | null
-  is_deleted: boolean | null
-  deleted_by: number | null
   deleted_at: Date | null
+  deleted_by: number | null
+  is_deleted: boolean | null
 }
 
 export type CompanyVendorsMasterCountAggregateOutputType = {
@@ -91,9 +91,9 @@ export type CompanyVendorsMasterCountAggregateOutputType = {
   created_by: number
   updated_at: number
   updated_by: number
-  is_deleted: number
-  deleted_by: number
   deleted_at: number
+  deleted_by: number
+  is_deleted: number
   _all: number
 }
 
@@ -127,9 +127,9 @@ export type CompanyVendorsMasterMinAggregateInputType = {
   created_by?: true
   updated_at?: true
   updated_by?: true
-  is_deleted?: true
-  deleted_by?: true
   deleted_at?: true
+  deleted_by?: true
+  is_deleted?: true
 }
 
 export type CompanyVendorsMasterMaxAggregateInputType = {
@@ -145,9 +145,9 @@ export type CompanyVendorsMasterMaxAggregateInputType = {
   created_by?: true
   updated_at?: true
   updated_by?: true
-  is_deleted?: true
-  deleted_by?: true
   deleted_at?: true
+  deleted_by?: true
+  is_deleted?: true
 }
 
 export type CompanyVendorsMasterCountAggregateInputType = {
@@ -163,9 +163,9 @@ export type CompanyVendorsMasterCountAggregateInputType = {
   created_by?: true
   updated_at?: true
   updated_by?: true
-  is_deleted?: true
-  deleted_by?: true
   deleted_at?: true
+  deleted_by?: true
+  is_deleted?: true
   _all?: true
 }
 
@@ -268,9 +268,9 @@ export type CompanyVendorsMasterGroupByOutputType = {
   created_by: number
   updated_at: Date
   updated_by: number
-  is_deleted: boolean
-  deleted_by: number | null
   deleted_at: Date | null
+  deleted_by: number | null
+  is_deleted: boolean
   _count: CompanyVendorsMasterCountAggregateOutputType | null
   _avg: CompanyVendorsMasterAvgAggregateOutputType | null
   _sum: CompanyVendorsMasterSumAggregateOutputType | null
@@ -309,13 +309,13 @@ export type CompanyVendorsMasterWhereInput = {
   created_by?: Prisma.IntFilter<"CompanyVendorsMaster"> | number
   updated_at?: Prisma.DateTimeFilter<"CompanyVendorsMaster"> | Date | string
   updated_by?: Prisma.IntFilter<"CompanyVendorsMaster"> | number
-  is_deleted?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
-  deleted_by?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   deleted_at?: Prisma.DateTimeNullableFilter<"CompanyVendorsMaster"> | Date | string | null
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  deleted_by?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
+  is_deleted?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
-  updatedBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   deletedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  updatedBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   orderLoginLinks?: Prisma.OrderLoginDetailsListRelationFilter
 }
 
@@ -332,13 +332,13 @@ export type CompanyVendorsMasterOrderByWithRelationInput = {
   created_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
-  is_deleted?: Prisma.SortOrder
-  deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
-  updatedBy?: Prisma.UserMasterOrderByWithRelationInput
   deletedBy?: Prisma.UserMasterOrderByWithRelationInput
+  updatedBy?: Prisma.UserMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   orderLoginLinks?: Prisma.OrderLoginDetailsOrderByRelationAggregateInput
 }
 
@@ -358,13 +358,13 @@ export type CompanyVendorsMasterWhereUniqueInput = Prisma.AtLeast<{
   created_by?: Prisma.IntFilter<"CompanyVendorsMaster"> | number
   updated_at?: Prisma.DateTimeFilter<"CompanyVendorsMaster"> | Date | string
   updated_by?: Prisma.IntFilter<"CompanyVendorsMaster"> | number
-  is_deleted?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
-  deleted_by?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   deleted_at?: Prisma.DateTimeNullableFilter<"CompanyVendorsMaster"> | Date | string | null
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  deleted_by?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
+  is_deleted?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
-  updatedBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   deletedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  updatedBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   orderLoginLinks?: Prisma.OrderLoginDetailsListRelationFilter
 }, "id">
 
@@ -381,9 +381,9 @@ export type CompanyVendorsMasterOrderByWithAggregationInput = {
   created_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
-  is_deleted?: Prisma.SortOrder
-  deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
   _count?: Prisma.CompanyVendorsMasterCountOrderByAggregateInput
   _avg?: Prisma.CompanyVendorsMasterAvgOrderByAggregateInput
   _max?: Prisma.CompanyVendorsMasterMaxOrderByAggregateInput
@@ -407,9 +407,9 @@ export type CompanyVendorsMasterScalarWhereWithAggregatesInput = {
   created_by?: Prisma.IntWithAggregatesFilter<"CompanyVendorsMaster"> | number
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"CompanyVendorsMaster"> | Date | string
   updated_by?: Prisma.IntWithAggregatesFilter<"CompanyVendorsMaster"> | number
-  is_deleted?: Prisma.BoolWithAggregatesFilter<"CompanyVendorsMaster"> | boolean
-  deleted_by?: Prisma.IntNullableWithAggregatesFilter<"CompanyVendorsMaster"> | number | null
   deleted_at?: Prisma.DateTimeNullableWithAggregatesFilter<"CompanyVendorsMaster"> | Date | string | null
+  deleted_by?: Prisma.IntNullableWithAggregatesFilter<"CompanyVendorsMaster"> | number | null
+  is_deleted?: Prisma.BoolWithAggregatesFilter<"CompanyVendorsMaster"> | boolean
 }
 
 export type CompanyVendorsMasterCreateInput = {
@@ -421,12 +421,12 @@ export type CompanyVendorsMasterCreateInput = {
   address?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  is_deleted?: boolean
   deleted_at?: Date | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsCreatedInput
-  updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsDeletedInput
+  updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
   orderLoginLinks?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCompanyVendorInput
 }
 
@@ -443,9 +443,9 @@ export type CompanyVendorsMasterUncheckedCreateInput = {
   created_by: number
   updated_at?: Date | string
   updated_by: number
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCompanyVendorInput
 }
 
@@ -458,12 +458,12 @@ export type CompanyVendorsMasterUpdateInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutCompanyVendorsDeletedNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
   orderLoginLinks?: Prisma.OrderLoginDetailsUpdateManyWithoutCompanyVendorNestedInput
 }
 
@@ -480,9 +480,9 @@ export type CompanyVendorsMasterUncheckedUpdateInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput
 }
 
@@ -499,9 +499,9 @@ export type CompanyVendorsMasterCreateManyInput = {
   created_by: number
   updated_at?: Date | string
   updated_by: number
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
 }
 
 export type CompanyVendorsMasterUpdateManyMutationInput = {
@@ -513,8 +513,8 @@ export type CompanyVendorsMasterUpdateManyMutationInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type CompanyVendorsMasterUncheckedUpdateManyInput = {
@@ -530,9 +530,9 @@ export type CompanyVendorsMasterUncheckedUpdateManyInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type CompanyVendorsMasterListRelationFilter = {
@@ -558,9 +558,9 @@ export type CompanyVendorsMasterCountOrderByAggregateInput = {
   created_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
-  is_deleted?: Prisma.SortOrder
-  deleted_by?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
+  deleted_by?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
 }
 
 export type CompanyVendorsMasterAvgOrderByAggregateInput = {
@@ -584,9 +584,9 @@ export type CompanyVendorsMasterMaxOrderByAggregateInput = {
   created_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
-  is_deleted?: Prisma.SortOrder
-  deleted_by?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
+  deleted_by?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
 }
 
 export type CompanyVendorsMasterMinOrderByAggregateInput = {
@@ -602,9 +602,9 @@ export type CompanyVendorsMasterMinOrderByAggregateInput = {
   created_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
-  is_deleted?: Prisma.SortOrder
-  deleted_by?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
+  deleted_by?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
 }
 
 export type CompanyVendorsMasterSumOrderByAggregateInput = {
@@ -669,17 +669,17 @@ export type CompanyVendorsMasterCreateNestedManyWithoutCreatedByInput = {
   connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
 }
 
-export type CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput = {
-  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutUpdatedByInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput> | Prisma.CompanyVendorsMasterCreateWithoutUpdatedByInput[] | Prisma.CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutUpdatedByInput | Prisma.CompanyVendorsMasterCreateOrConnectWithoutUpdatedByInput[]
-  createMany?: Prisma.CompanyVendorsMasterCreateManyUpdatedByInputEnvelope
-  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
-}
-
 export type CompanyVendorsMasterCreateNestedManyWithoutDeletedByInput = {
   create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutDeletedByInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutDeletedByInput> | Prisma.CompanyVendorsMasterCreateWithoutDeletedByInput[] | Prisma.CompanyVendorsMasterUncheckedCreateWithoutDeletedByInput[]
   connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutDeletedByInput | Prisma.CompanyVendorsMasterCreateOrConnectWithoutDeletedByInput[]
   createMany?: Prisma.CompanyVendorsMasterCreateManyDeletedByInputEnvelope
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+}
+
+export type CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutUpdatedByInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput> | Prisma.CompanyVendorsMasterCreateWithoutUpdatedByInput[] | Prisma.CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput[]
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutUpdatedByInput | Prisma.CompanyVendorsMasterCreateOrConnectWithoutUpdatedByInput[]
+  createMany?: Prisma.CompanyVendorsMasterCreateManyUpdatedByInputEnvelope
   connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
 }
 
@@ -690,17 +690,17 @@ export type CompanyVendorsMasterUncheckedCreateNestedManyWithoutCreatedByInput =
   connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
 }
 
-export type CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput = {
-  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutUpdatedByInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput> | Prisma.CompanyVendorsMasterCreateWithoutUpdatedByInput[] | Prisma.CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutUpdatedByInput | Prisma.CompanyVendorsMasterCreateOrConnectWithoutUpdatedByInput[]
-  createMany?: Prisma.CompanyVendorsMasterCreateManyUpdatedByInputEnvelope
-  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
-}
-
 export type CompanyVendorsMasterUncheckedCreateNestedManyWithoutDeletedByInput = {
   create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutDeletedByInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutDeletedByInput> | Prisma.CompanyVendorsMasterCreateWithoutDeletedByInput[] | Prisma.CompanyVendorsMasterUncheckedCreateWithoutDeletedByInput[]
   connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutDeletedByInput | Prisma.CompanyVendorsMasterCreateOrConnectWithoutDeletedByInput[]
   createMany?: Prisma.CompanyVendorsMasterCreateManyDeletedByInputEnvelope
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+}
+
+export type CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutUpdatedByInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput> | Prisma.CompanyVendorsMasterCreateWithoutUpdatedByInput[] | Prisma.CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput[]
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutUpdatedByInput | Prisma.CompanyVendorsMasterCreateOrConnectWithoutUpdatedByInput[]
+  createMany?: Prisma.CompanyVendorsMasterCreateManyUpdatedByInputEnvelope
   connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
 }
 
@@ -718,20 +718,6 @@ export type CompanyVendorsMasterUpdateManyWithoutCreatedByNestedInput = {
   deleteMany?: Prisma.CompanyVendorsMasterScalarWhereInput | Prisma.CompanyVendorsMasterScalarWhereInput[]
 }
 
-export type CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput = {
-  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutUpdatedByInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput> | Prisma.CompanyVendorsMasterCreateWithoutUpdatedByInput[] | Prisma.CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutUpdatedByInput | Prisma.CompanyVendorsMasterCreateOrConnectWithoutUpdatedByInput[]
-  upsert?: Prisma.CompanyVendorsMasterUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.CompanyVendorsMasterUpsertWithWhereUniqueWithoutUpdatedByInput[]
-  createMany?: Prisma.CompanyVendorsMasterCreateManyUpdatedByInputEnvelope
-  set?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
-  disconnect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
-  delete?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
-  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
-  update?: Prisma.CompanyVendorsMasterUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.CompanyVendorsMasterUpdateWithWhereUniqueWithoutUpdatedByInput[]
-  updateMany?: Prisma.CompanyVendorsMasterUpdateManyWithWhereWithoutUpdatedByInput | Prisma.CompanyVendorsMasterUpdateManyWithWhereWithoutUpdatedByInput[]
-  deleteMany?: Prisma.CompanyVendorsMasterScalarWhereInput | Prisma.CompanyVendorsMasterScalarWhereInput[]
-}
-
 export type CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput = {
   create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutDeletedByInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutDeletedByInput> | Prisma.CompanyVendorsMasterCreateWithoutDeletedByInput[] | Prisma.CompanyVendorsMasterUncheckedCreateWithoutDeletedByInput[]
   connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutDeletedByInput | Prisma.CompanyVendorsMasterCreateOrConnectWithoutDeletedByInput[]
@@ -743,6 +729,20 @@ export type CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput = {
   connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
   update?: Prisma.CompanyVendorsMasterUpdateWithWhereUniqueWithoutDeletedByInput | Prisma.CompanyVendorsMasterUpdateWithWhereUniqueWithoutDeletedByInput[]
   updateMany?: Prisma.CompanyVendorsMasterUpdateManyWithWhereWithoutDeletedByInput | Prisma.CompanyVendorsMasterUpdateManyWithWhereWithoutDeletedByInput[]
+  deleteMany?: Prisma.CompanyVendorsMasterScalarWhereInput | Prisma.CompanyVendorsMasterScalarWhereInput[]
+}
+
+export type CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutUpdatedByInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput> | Prisma.CompanyVendorsMasterCreateWithoutUpdatedByInput[] | Prisma.CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput[]
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutUpdatedByInput | Prisma.CompanyVendorsMasterCreateOrConnectWithoutUpdatedByInput[]
+  upsert?: Prisma.CompanyVendorsMasterUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.CompanyVendorsMasterUpsertWithWhereUniqueWithoutUpdatedByInput[]
+  createMany?: Prisma.CompanyVendorsMasterCreateManyUpdatedByInputEnvelope
+  set?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  disconnect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  delete?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  update?: Prisma.CompanyVendorsMasterUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.CompanyVendorsMasterUpdateWithWhereUniqueWithoutUpdatedByInput[]
+  updateMany?: Prisma.CompanyVendorsMasterUpdateManyWithWhereWithoutUpdatedByInput | Prisma.CompanyVendorsMasterUpdateManyWithWhereWithoutUpdatedByInput[]
   deleteMany?: Prisma.CompanyVendorsMasterScalarWhereInput | Prisma.CompanyVendorsMasterScalarWhereInput[]
 }
 
@@ -760,20 +760,6 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByNestedInput =
   deleteMany?: Prisma.CompanyVendorsMasterScalarWhereInput | Prisma.CompanyVendorsMasterScalarWhereInput[]
 }
 
-export type CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput = {
-  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutUpdatedByInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput> | Prisma.CompanyVendorsMasterCreateWithoutUpdatedByInput[] | Prisma.CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutUpdatedByInput | Prisma.CompanyVendorsMasterCreateOrConnectWithoutUpdatedByInput[]
-  upsert?: Prisma.CompanyVendorsMasterUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.CompanyVendorsMasterUpsertWithWhereUniqueWithoutUpdatedByInput[]
-  createMany?: Prisma.CompanyVendorsMasterCreateManyUpdatedByInputEnvelope
-  set?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
-  disconnect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
-  delete?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
-  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
-  update?: Prisma.CompanyVendorsMasterUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.CompanyVendorsMasterUpdateWithWhereUniqueWithoutUpdatedByInput[]
-  updateMany?: Prisma.CompanyVendorsMasterUpdateManyWithWhereWithoutUpdatedByInput | Prisma.CompanyVendorsMasterUpdateManyWithWhereWithoutUpdatedByInput[]
-  deleteMany?: Prisma.CompanyVendorsMasterScalarWhereInput | Prisma.CompanyVendorsMasterScalarWhereInput[]
-}
-
 export type CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput = {
   create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutDeletedByInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutDeletedByInput> | Prisma.CompanyVendorsMasterCreateWithoutDeletedByInput[] | Prisma.CompanyVendorsMasterUncheckedCreateWithoutDeletedByInput[]
   connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutDeletedByInput | Prisma.CompanyVendorsMasterCreateOrConnectWithoutDeletedByInput[]
@@ -785,6 +771,20 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput =
   connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
   update?: Prisma.CompanyVendorsMasterUpdateWithWhereUniqueWithoutDeletedByInput | Prisma.CompanyVendorsMasterUpdateWithWhereUniqueWithoutDeletedByInput[]
   updateMany?: Prisma.CompanyVendorsMasterUpdateManyWithWhereWithoutDeletedByInput | Prisma.CompanyVendorsMasterUpdateManyWithWhereWithoutDeletedByInput[]
+  deleteMany?: Prisma.CompanyVendorsMasterScalarWhereInput | Prisma.CompanyVendorsMasterScalarWhereInput[]
+}
+
+export type CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutUpdatedByInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput> | Prisma.CompanyVendorsMasterCreateWithoutUpdatedByInput[] | Prisma.CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput[]
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutUpdatedByInput | Prisma.CompanyVendorsMasterCreateOrConnectWithoutUpdatedByInput[]
+  upsert?: Prisma.CompanyVendorsMasterUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.CompanyVendorsMasterUpsertWithWhereUniqueWithoutUpdatedByInput[]
+  createMany?: Prisma.CompanyVendorsMasterCreateManyUpdatedByInputEnvelope
+  set?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  disconnect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  delete?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  update?: Prisma.CompanyVendorsMasterUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.CompanyVendorsMasterUpdateWithWhereUniqueWithoutUpdatedByInput[]
+  updateMany?: Prisma.CompanyVendorsMasterUpdateManyWithWhereWithoutUpdatedByInput | Prisma.CompanyVendorsMasterUpdateManyWithWhereWithoutUpdatedByInput[]
   deleteMany?: Prisma.CompanyVendorsMasterScalarWhereInput | Prisma.CompanyVendorsMasterScalarWhereInput[]
 }
 
@@ -813,11 +813,11 @@ export type CompanyVendorsMasterCreateWithoutVendorInput = {
   address?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  is_deleted?: boolean
   deleted_at?: Date | string | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsCreatedInput
-  updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsDeletedInput
+  updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
   orderLoginLinks?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCompanyVendorInput
 }
 
@@ -833,9 +833,9 @@ export type CompanyVendorsMasterUncheckedCreateWithoutVendorInput = {
   created_by: number
   updated_at?: Date | string
   updated_by: number
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCompanyVendorInput
 }
 
@@ -881,9 +881,9 @@ export type CompanyVendorsMasterScalarWhereInput = {
   created_by?: Prisma.IntFilter<"CompanyVendorsMaster"> | number
   updated_at?: Prisma.DateTimeFilter<"CompanyVendorsMaster"> | Date | string
   updated_by?: Prisma.IntFilter<"CompanyVendorsMaster"> | number
-  is_deleted?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
-  deleted_by?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   deleted_at?: Prisma.DateTimeNullableFilter<"CompanyVendorsMaster"> | Date | string | null
+  deleted_by?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
+  is_deleted?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
 }
 
 export type CompanyVendorsMasterCreateWithoutCreatedByInput = {
@@ -895,11 +895,11 @@ export type CompanyVendorsMasterCreateWithoutCreatedByInput = {
   address?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  is_deleted?: boolean
   deleted_at?: Date | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
-  updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
+  is_deleted?: boolean
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsDeletedInput
+  updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
   orderLoginLinks?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCompanyVendorInput
 }
 
@@ -915,9 +915,9 @@ export type CompanyVendorsMasterUncheckedCreateWithoutCreatedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
   updated_by: number
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCompanyVendorInput
 }
 
@@ -931,51 +931,6 @@ export type CompanyVendorsMasterCreateManyCreatedByInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type CompanyVendorsMasterCreateWithoutUpdatedByInput = {
-  vendor_code: string
-  company_name: string
-  point_of_contact: string
-  contact_no: string
-  email?: string | null
-  address?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  is_deleted?: boolean
-  deleted_at?: Date | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsCreatedInput
-  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsDeletedInput
-  orderLoginLinks?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCompanyVendorInput
-}
-
-export type CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput = {
-  id?: number
-  vendor_id: number
-  vendor_code: string
-  company_name: string
-  point_of_contact: string
-  contact_no: string
-  email?: string | null
-  address?: string | null
-  created_at?: Date | string
-  created_by: number
-  updated_at?: Date | string
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
-  orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCompanyVendorInput
-}
-
-export type CompanyVendorsMasterCreateOrConnectWithoutUpdatedByInput = {
-  where: Prisma.CompanyVendorsMasterWhereUniqueInput
-  create: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutUpdatedByInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput>
-}
-
-export type CompanyVendorsMasterCreateManyUpdatedByInputEnvelope = {
-  data: Prisma.CompanyVendorsMasterCreateManyUpdatedByInput | Prisma.CompanyVendorsMasterCreateManyUpdatedByInput[]
-  skipDuplicates?: boolean
-}
-
 export type CompanyVendorsMasterCreateWithoutDeletedByInput = {
   vendor_code: string
   company_name: string
@@ -985,11 +940,11 @@ export type CompanyVendorsMasterCreateWithoutDeletedByInput = {
   address?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  is_deleted?: boolean
   deleted_at?: Date | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsCreatedInput
   updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
   orderLoginLinks?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCompanyVendorInput
 }
 
@@ -1006,8 +961,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutDeletedByInput = {
   created_by: number
   updated_at?: Date | string
   updated_by: number
-  is_deleted?: boolean
   deleted_at?: Date | string | null
+  is_deleted?: boolean
   orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCompanyVendorInput
 }
 
@@ -1018,6 +973,51 @@ export type CompanyVendorsMasterCreateOrConnectWithoutDeletedByInput = {
 
 export type CompanyVendorsMasterCreateManyDeletedByInputEnvelope = {
   data: Prisma.CompanyVendorsMasterCreateManyDeletedByInput | Prisma.CompanyVendorsMasterCreateManyDeletedByInput[]
+  skipDuplicates?: boolean
+}
+
+export type CompanyVendorsMasterCreateWithoutUpdatedByInput = {
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  is_deleted?: boolean
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsCreatedInput
+  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsDeletedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
+  orderLoginLinks?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCompanyVendorInput
+}
+
+export type CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput = {
+  id?: number
+  vendor_id: number
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  created_by: number
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCompanyVendorInput
+}
+
+export type CompanyVendorsMasterCreateOrConnectWithoutUpdatedByInput = {
+  where: Prisma.CompanyVendorsMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutUpdatedByInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput>
+}
+
+export type CompanyVendorsMasterCreateManyUpdatedByInputEnvelope = {
+  data: Prisma.CompanyVendorsMasterCreateManyUpdatedByInput | Prisma.CompanyVendorsMasterCreateManyUpdatedByInput[]
   skipDuplicates?: boolean
 }
 
@@ -1037,22 +1037,6 @@ export type CompanyVendorsMasterUpdateManyWithWhereWithoutCreatedByInput = {
   data: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateManyMutationInput, Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByInput>
 }
 
-export type CompanyVendorsMasterUpsertWithWhereUniqueWithoutUpdatedByInput = {
-  where: Prisma.CompanyVendorsMasterWhereUniqueInput
-  update: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutUpdatedByInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutUpdatedByInput>
-  create: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutUpdatedByInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput>
-}
-
-export type CompanyVendorsMasterUpdateWithWhereUniqueWithoutUpdatedByInput = {
-  where: Prisma.CompanyVendorsMasterWhereUniqueInput
-  data: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutUpdatedByInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutUpdatedByInput>
-}
-
-export type CompanyVendorsMasterUpdateManyWithWhereWithoutUpdatedByInput = {
-  where: Prisma.CompanyVendorsMasterScalarWhereInput
-  data: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateManyMutationInput, Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByInput>
-}
-
 export type CompanyVendorsMasterUpsertWithWhereUniqueWithoutDeletedByInput = {
   where: Prisma.CompanyVendorsMasterWhereUniqueInput
   update: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutDeletedByInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutDeletedByInput>
@@ -1069,6 +1053,22 @@ export type CompanyVendorsMasterUpdateManyWithWhereWithoutDeletedByInput = {
   data: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateManyMutationInput, Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByInput>
 }
 
+export type CompanyVendorsMasterUpsertWithWhereUniqueWithoutUpdatedByInput = {
+  where: Prisma.CompanyVendorsMasterWhereUniqueInput
+  update: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutUpdatedByInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutUpdatedByInput>
+  create: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutUpdatedByInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput>
+}
+
+export type CompanyVendorsMasterUpdateWithWhereUniqueWithoutUpdatedByInput = {
+  where: Prisma.CompanyVendorsMasterWhereUniqueInput
+  data: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutUpdatedByInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutUpdatedByInput>
+}
+
+export type CompanyVendorsMasterUpdateManyWithWhereWithoutUpdatedByInput = {
+  where: Prisma.CompanyVendorsMasterScalarWhereInput
+  data: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateManyMutationInput, Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByInput>
+}
+
 export type CompanyVendorsMasterCreateWithoutOrderLoginLinksInput = {
   vendor_code: string
   company_name: string
@@ -1078,12 +1078,12 @@ export type CompanyVendorsMasterCreateWithoutOrderLoginLinksInput = {
   address?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  is_deleted?: boolean
   deleted_at?: Date | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsCreatedInput
-  updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsDeletedInput
+  updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
 }
 
 export type CompanyVendorsMasterUncheckedCreateWithoutOrderLoginLinksInput = {
@@ -1099,9 +1099,9 @@ export type CompanyVendorsMasterUncheckedCreateWithoutOrderLoginLinksInput = {
   created_by: number
   updated_at?: Date | string
   updated_by: number
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
 }
 
 export type CompanyVendorsMasterCreateOrConnectWithoutOrderLoginLinksInput = {
@@ -1129,12 +1129,12 @@ export type CompanyVendorsMasterUpdateWithoutOrderLoginLinksInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutCompanyVendorsDeletedNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
 }
 
 export type CompanyVendorsMasterUncheckedUpdateWithoutOrderLoginLinksInput = {
@@ -1150,9 +1150,9 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutOrderLoginLinksInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type CompanyVendorsMasterCreateManyVendorInput = {
@@ -1167,9 +1167,9 @@ export type CompanyVendorsMasterCreateManyVendorInput = {
   created_by: number
   updated_at?: Date | string
   updated_by: number
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
 }
 
 export type CompanyVendorsMasterUpdateWithoutVendorInput = {
@@ -1181,11 +1181,11 @@ export type CompanyVendorsMasterUpdateWithoutVendorInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutCompanyVendorsDeletedNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
   orderLoginLinks?: Prisma.OrderLoginDetailsUpdateManyWithoutCompanyVendorNestedInput
 }
 
@@ -1201,9 +1201,9 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutVendorInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput
 }
 
@@ -1219,9 +1219,9 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutVendorInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type CompanyVendorsMasterCreateManyCreatedByInput = {
@@ -1236,26 +1236,9 @@ export type CompanyVendorsMasterCreateManyCreatedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
   updated_by: number
-  is_deleted?: boolean
-  deleted_by?: number | null
   deleted_at?: Date | string | null
-}
-
-export type CompanyVendorsMasterCreateManyUpdatedByInput = {
-  id?: number
-  vendor_id: number
-  vendor_code: string
-  company_name: string
-  point_of_contact: string
-  contact_no: string
-  email?: string | null
-  address?: string | null
-  created_at?: Date | string
-  created_by: number
-  updated_at?: Date | string
-  is_deleted?: boolean
   deleted_by?: number | null
-  deleted_at?: Date | string | null
+  is_deleted?: boolean
 }
 
 export type CompanyVendorsMasterCreateManyDeletedByInput = {
@@ -1271,8 +1254,25 @@ export type CompanyVendorsMasterCreateManyDeletedByInput = {
   created_by: number
   updated_at?: Date | string
   updated_by: number
-  is_deleted?: boolean
   deleted_at?: Date | string | null
+  is_deleted?: boolean
+}
+
+export type CompanyVendorsMasterCreateManyUpdatedByInput = {
+  id?: number
+  vendor_id: number
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  created_by: number
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
 }
 
 export type CompanyVendorsMasterUpdateWithoutCreatedByInput = {
@@ -1284,11 +1284,11 @@ export type CompanyVendorsMasterUpdateWithoutCreatedByInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedBy?: Prisma.UserMasterUpdateOneWithoutCompanyVendorsDeletedNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
   orderLoginLinks?: Prisma.OrderLoginDetailsUpdateManyWithoutCompanyVendorNestedInput
 }
 
@@ -1304,9 +1304,9 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput
 }
 
@@ -1322,61 +1322,9 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-}
-
-export type CompanyVendorsMasterUpdateWithoutUpdatedByInput = {
-  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
-  company_name?: Prisma.StringFieldUpdateOperationsInput | string
-  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
-  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsCreatedNestedInput
-  deletedBy?: Prisma.UserMasterUpdateOneWithoutCompanyVendorsDeletedNestedInput
-  orderLoginLinks?: Prisma.OrderLoginDetailsUpdateManyWithoutCompanyVendorNestedInput
-}
-
-export type CompanyVendorsMasterUncheckedUpdateWithoutUpdatedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
-  company_name?: Prisma.StringFieldUpdateOperationsInput | string
-  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
-  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput
-}
-
-export type CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
-  company_name?: Prisma.StringFieldUpdateOperationsInput | string
-  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
-  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CompanyVendorsMasterUpdateWithoutDeletedByInput = {
@@ -1388,11 +1336,11 @@ export type CompanyVendorsMasterUpdateWithoutDeletedByInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
   orderLoginLinks?: Prisma.OrderLoginDetailsUpdateManyWithoutCompanyVendorNestedInput
 }
 
@@ -1409,8 +1357,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutDeletedByInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput
 }
 
@@ -1427,8 +1375,60 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+}
+
+export type CompanyVendorsMasterUpdateWithoutUpdatedByInput = {
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsCreatedNestedInput
+  deletedBy?: Prisma.UserMasterUpdateOneWithoutCompanyVendorsDeletedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
+  orderLoginLinks?: Prisma.OrderLoginDetailsUpdateManyWithoutCompanyVendorNestedInput
+}
+
+export type CompanyVendorsMasterUncheckedUpdateWithoutUpdatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput
+}
+
+export type CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -1475,13 +1475,13 @@ export type CompanyVendorsMasterSelect<ExtArgs extends runtime.Types.Extensions.
   created_by?: boolean
   updated_at?: boolean
   updated_by?: boolean
-  is_deleted?: boolean
-  deleted_by?: boolean
   deleted_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  deleted_by?: boolean
+  is_deleted?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.CompanyVendorsMaster$deletedByArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   orderLoginLinks?: boolean | Prisma.CompanyVendorsMaster$orderLoginLinksArgs<ExtArgs>
   _count?: boolean | Prisma.CompanyVendorsMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["companyVendorsMaster"]>
@@ -1499,13 +1499,13 @@ export type CompanyVendorsMasterSelectCreateManyAndReturn<ExtArgs extends runtim
   created_by?: boolean
   updated_at?: boolean
   updated_by?: boolean
-  is_deleted?: boolean
-  deleted_by?: boolean
   deleted_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  deleted_by?: boolean
+  is_deleted?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.CompanyVendorsMaster$deletedByArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["companyVendorsMaster"]>
 
 export type CompanyVendorsMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1521,13 +1521,13 @@ export type CompanyVendorsMasterSelectUpdateManyAndReturn<ExtArgs extends runtim
   created_by?: boolean
   updated_at?: boolean
   updated_by?: boolean
-  is_deleted?: boolean
-  deleted_by?: boolean
   deleted_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  deleted_by?: boolean
+  is_deleted?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.CompanyVendorsMaster$deletedByArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["companyVendorsMaster"]>
 
 export type CompanyVendorsMasterSelectScalar = {
@@ -1543,40 +1543,40 @@ export type CompanyVendorsMasterSelectScalar = {
   created_by?: boolean
   updated_at?: boolean
   updated_by?: boolean
-  is_deleted?: boolean
-  deleted_by?: boolean
   deleted_at?: boolean
+  deleted_by?: boolean
+  is_deleted?: boolean
 }
 
-export type CompanyVendorsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "vendor_code" | "company_name" | "point_of_contact" | "contact_no" | "email" | "address" | "created_at" | "created_by" | "updated_at" | "updated_by" | "is_deleted" | "deleted_by" | "deleted_at", ExtArgs["result"]["companyVendorsMaster"]>
+export type CompanyVendorsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "vendor_code" | "company_name" | "point_of_contact" | "contact_no" | "email" | "address" | "created_at" | "created_by" | "updated_at" | "updated_by" | "deleted_at" | "deleted_by" | "is_deleted", ExtArgs["result"]["companyVendorsMaster"]>
 export type CompanyVendorsMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.CompanyVendorsMaster$deletedByArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   orderLoginLinks?: boolean | Prisma.CompanyVendorsMaster$orderLoginLinksArgs<ExtArgs>
   _count?: boolean | Prisma.CompanyVendorsMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CompanyVendorsMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.CompanyVendorsMaster$deletedByArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type CompanyVendorsMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.CompanyVendorsMaster$deletedByArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $CompanyVendorsMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CompanyVendorsMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
-    updatedBy: Prisma.$UserMasterPayload<ExtArgs>
     deletedBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    updatedBy: Prisma.$UserMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     orderLoginLinks: Prisma.$OrderLoginDetailsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1592,9 +1592,9 @@ export type $CompanyVendorsMasterPayload<ExtArgs extends runtime.Types.Extension
     created_by: number
     updated_at: Date
     updated_by: number
-    is_deleted: boolean
-    deleted_by: number | null
     deleted_at: Date | null
+    deleted_by: number | null
+    is_deleted: boolean
   }, ExtArgs["result"]["companyVendorsMaster"]>
   composites: {}
 }
@@ -1989,10 +1989,10 @@ readonly fields: CompanyVendorsMasterFieldRefs;
  */
 export interface Prisma__CompanyVendorsMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  updatedBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   deletedBy<T extends Prisma.CompanyVendorsMaster$deletedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMaster$deletedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  updatedBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   orderLoginLinks<T extends Prisma.CompanyVendorsMaster$orderLoginLinksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMaster$orderLoginLinksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderLoginDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2035,9 +2035,9 @@ export interface CompanyVendorsMasterFieldRefs {
   readonly created_by: Prisma.FieldRef<"CompanyVendorsMaster", 'Int'>
   readonly updated_at: Prisma.FieldRef<"CompanyVendorsMaster", 'DateTime'>
   readonly updated_by: Prisma.FieldRef<"CompanyVendorsMaster", 'Int'>
-  readonly is_deleted: Prisma.FieldRef<"CompanyVendorsMaster", 'Boolean'>
-  readonly deleted_by: Prisma.FieldRef<"CompanyVendorsMaster", 'Int'>
   readonly deleted_at: Prisma.FieldRef<"CompanyVendorsMaster", 'DateTime'>
+  readonly deleted_by: Prisma.FieldRef<"CompanyVendorsMaster", 'Int'>
+  readonly is_deleted: Prisma.FieldRef<"CompanyVendorsMaster", 'Boolean'>
 }
     
 

@@ -224,8 +224,8 @@ export type IssueLogTypeMasterWhereInput = {
   name?: Prisma.StringFilter<"IssueLogTypeMaster"> | string
   created_by?: Prisma.IntFilter<"IssueLogTypeMaster"> | number
   created_at?: Prisma.DateTimeFilter<"IssueLogTypeMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   issueTypeMappings?: Prisma.IssueLogTypeMappingListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type IssueLogTypeMasterOrderByWithRelationInput = {
@@ -234,8 +234,8 @@ export type IssueLogTypeMasterOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   issueTypeMappings?: Prisma.IssueLogTypeMappingOrderByRelationAggregateInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type IssueLogTypeMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -247,8 +247,8 @@ export type IssueLogTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"IssueLogTypeMaster"> | string
   created_by?: Prisma.IntFilter<"IssueLogTypeMaster"> | number
   created_at?: Prisma.DateTimeFilter<"IssueLogTypeMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   issueTypeMappings?: Prisma.IssueLogTypeMappingListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type IssueLogTypeMasterOrderByWithAggregationInput = {
@@ -279,8 +279,8 @@ export type IssueLogTypeMasterCreateInput = {
   name: string
   created_by: number
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutIssueLogTypeMasterInput
   issueTypeMappings?: Prisma.IssueLogTypeMappingCreateNestedManyWithoutTypeInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutIssueLogTypeMasterInput
 }
 
 export type IssueLogTypeMasterUncheckedCreateInput = {
@@ -296,8 +296,8 @@ export type IssueLogTypeMasterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutIssueLogTypeMasterNestedInput
   issueTypeMappings?: Prisma.IssueLogTypeMappingUpdateManyWithoutTypeNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutIssueLogTypeMasterNestedInput
 }
 
 export type IssueLogTypeMasterUncheckedUpdateInput = {
@@ -602,8 +602,8 @@ export type IssueLogTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.In
   name?: boolean
   created_by?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   issueTypeMappings?: boolean | Prisma.IssueLogTypeMaster$issueTypeMappingsArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.IssueLogTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["issueLogTypeMaster"]>
 
@@ -635,8 +635,8 @@ export type IssueLogTypeMasterSelectScalar = {
 
 export type IssueLogTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "name" | "created_by" | "created_at", ExtArgs["result"]["issueLogTypeMaster"]>
 export type IssueLogTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   issueTypeMappings?: boolean | Prisma.IssueLogTypeMaster$issueTypeMappingsArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.IssueLogTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type IssueLogTypeMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -649,8 +649,8 @@ export type IssueLogTypeMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime
 export type $IssueLogTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "IssueLogTypeMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     issueTypeMappings: Prisma.$IssueLogTypeMappingPayload<ExtArgs>[]
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1052,8 +1052,8 @@ readonly fields: IssueLogTypeMasterFieldRefs;
  */
 export interface Prisma__IssueLogTypeMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   issueTypeMappings<T extends Prisma.IssueLogTypeMaster$issueTypeMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.IssueLogTypeMaster$issueTypeMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IssueLogTypeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

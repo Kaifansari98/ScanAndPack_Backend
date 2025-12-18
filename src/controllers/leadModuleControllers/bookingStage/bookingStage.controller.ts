@@ -24,6 +24,7 @@ export class BookingStageController {
         bookingAmountPaymentDetailsText,
         finalBookingAmount,
         siteSupervisorId,
+        mrpValue,
       } = req.body;
 
       if (
@@ -34,7 +35,8 @@ export class BookingStageController {
         !client_id ||
         !bookingAmount ||
         !finalBookingAmount ||
-        !siteSupervisorId
+        !siteSupervisorId ||
+        !mrpValue
       ) {
         res
           .status(400)
@@ -53,6 +55,14 @@ export class BookingStageController {
         return;
       }
 
+      if (Number(mrpValue) < Number(finalBookingAmount)) {
+        res.status(400).json({
+          success: false,
+          message: "MRP value cannot be less than Total Booking Value",
+        });
+        return;
+      }
+
       const dto: CreateBookingStageDto = {
         lead_id: parseInt(lead_id),
         account_id: parseInt(account_id),
@@ -60,6 +70,7 @@ export class BookingStageController {
         created_by: parseInt(created_by),
         client_id: parseInt(client_id),
         bookingAmount: parseFloat(bookingAmount),
+        mrpValue: parseFloat(mrpValue),
         bookingAmountPaymentDetailsText,
         finalBookingAmount: parseFloat(finalBookingAmount),
         siteSupervisorId: parseInt(siteSupervisorId),
@@ -472,4 +483,87 @@ export class BookingStageController {
       res.status(500).json({ success: false, message: error.message });
     }
   };
+
+  public uploadCSPBooking = async (req: Request, res: Response) => {
+    try {
+      const {
+        lead_id,
+        account_id,
+        vendor_id,
+        assigned_to, // kept if frontend already sends it (not used now)
+        created_by,
+      } = req.body;
+
+      if (!lead_id || !account_id || !vendor_id || !created_by) {
+        return res.status(400).json({
+          success: false,
+          message: "Missing required fields",
+        });
+      }
+
+      const files = req.files as {
+        [key: string]: Express.Multer.File[];
+      };
+
+      const sitePhotos = files?.current_site_photos || [];
+
+      // 🔴 HARD RULE
+      if (sitePhotos.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "Current site photos are mandatory",
+        });
+      }
+
+      const result = await this.bookingStageService.uploadCSPBookingService({
+        lead_id: +lead_id,
+        account_id: +account_id,
+        vendor_id: +vendor_id,
+        created_by: +created_by,
+        sitePhotos,
+      });
+
+      res.status(201).json({
+        success: true,
+        message: "Current site photos uploaded successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  };
+
+  public getCSPBooking = async (req: Request, res: Response) => {
+    try {
+      const { vendorId, leadId } = req.params;
+  
+      if (!vendorId || !leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and leadId are required",
+        });
+      }
+  
+      const result =
+        await this.bookingStageService.getCSPBookingService({
+          vendor_id: +vendorId,
+          lead_id: +leadId,
+        });
+  
+      return res.status(200).json({
+        success: true,
+        data: result,
+      });
+    } catch (error: any) {
+      console.error("[getCSPBooking] Error:", error);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  };
+  
 }

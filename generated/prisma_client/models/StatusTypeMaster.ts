@@ -39,22 +39,22 @@ export type StatusTypeMasterSumAggregateOutputType = {
 export type StatusTypeMasterMinAggregateOutputType = {
   id: number | null
   type: string | null
-  tag: string | null
   vendor_id: number | null
+  tag: string | null
 }
 
 export type StatusTypeMasterMaxAggregateOutputType = {
   id: number | null
   type: string | null
-  tag: string | null
   vendor_id: number | null
+  tag: string | null
 }
 
 export type StatusTypeMasterCountAggregateOutputType = {
   id: number
   type: number
-  tag: number
   vendor_id: number
+  tag: number
   _all: number
 }
 
@@ -72,22 +72,22 @@ export type StatusTypeMasterSumAggregateInputType = {
 export type StatusTypeMasterMinAggregateInputType = {
   id?: true
   type?: true
-  tag?: true
   vendor_id?: true
+  tag?: true
 }
 
 export type StatusTypeMasterMaxAggregateInputType = {
   id?: true
   type?: true
-  tag?: true
   vendor_id?: true
+  tag?: true
 }
 
 export type StatusTypeMasterCountAggregateInputType = {
   id?: true
   type?: true
-  tag?: true
   vendor_id?: true
+  tag?: true
   _all?: true
 }
 
@@ -180,8 +180,8 @@ export type StatusTypeMasterGroupByArgs<ExtArgs extends runtime.Types.Extensions
 export type StatusTypeMasterGroupByOutputType = {
   id: number
   type: string
-  tag: string
   vendor_id: number
+  tag: string
   _count: StatusTypeMasterCountAggregateOutputType | null
   _avg: StatusTypeMasterAvgAggregateOutputType | null
   _sum: StatusTypeMasterSumAggregateOutputType | null
@@ -210,21 +210,21 @@ export type StatusTypeMasterWhereInput = {
   NOT?: Prisma.StatusTypeMasterWhereInput | Prisma.StatusTypeMasterWhereInput[]
   id?: Prisma.IntFilter<"StatusTypeMaster"> | number
   type?: Prisma.StringFilter<"StatusTypeMaster"> | string
-  tag?: Prisma.StringFilter<"StatusTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"StatusTypeMaster"> | number
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  tag?: Prisma.StringFilter<"StatusTypeMaster"> | string
   leads?: Prisma.LeadMasterListRelationFilter
   leadStatusLogs?: Prisma.LeadStatusLogsListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type StatusTypeMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  tag?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  tag?: Prisma.SortOrder
   leads?: Prisma.LeadMasterOrderByRelationAggregateInput
   leadStatusLogs?: Prisma.LeadStatusLogsOrderByRelationAggregateInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type StatusTypeMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -233,18 +233,18 @@ export type StatusTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.StatusTypeMasterWhereInput[]
   NOT?: Prisma.StatusTypeMasterWhereInput | Prisma.StatusTypeMasterWhereInput[]
   type?: Prisma.StringFilter<"StatusTypeMaster"> | string
-  tag?: Prisma.StringFilter<"StatusTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"StatusTypeMaster"> | number
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  tag?: Prisma.StringFilter<"StatusTypeMaster"> | string
   leads?: Prisma.LeadMasterListRelationFilter
   leadStatusLogs?: Prisma.LeadStatusLogsListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type StatusTypeMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  tag?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  tag?: Prisma.SortOrder
   _count?: Prisma.StatusTypeMasterCountOrderByAggregateInput
   _avg?: Prisma.StatusTypeMasterAvgOrderByAggregateInput
   _max?: Prisma.StatusTypeMasterMaxOrderByAggregateInput
@@ -258,23 +258,23 @@ export type StatusTypeMasterScalarWhereWithAggregatesInput = {
   NOT?: Prisma.StatusTypeMasterScalarWhereWithAggregatesInput | Prisma.StatusTypeMasterScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"StatusTypeMaster"> | number
   type?: Prisma.StringWithAggregatesFilter<"StatusTypeMaster"> | string
-  tag?: Prisma.StringWithAggregatesFilter<"StatusTypeMaster"> | string
   vendor_id?: Prisma.IntWithAggregatesFilter<"StatusTypeMaster"> | number
+  tag?: Prisma.StringWithAggregatesFilter<"StatusTypeMaster"> | string
 }
 
 export type StatusTypeMasterCreateInput = {
   type: string
   tag: string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutStatusTypesInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutStatusTypeInput
   leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutStatusTypeInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutStatusTypesInput
 }
 
 export type StatusTypeMasterUncheckedCreateInput = {
   id?: number
   type: string
-  tag: string
   vendor_id: number
+  tag: string
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutStatusTypeInput
   leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutStatusTypeInput
 }
@@ -282,16 +282,16 @@ export type StatusTypeMasterUncheckedCreateInput = {
 export type StatusTypeMasterUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutStatusTypesNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutStatusTypeNestedInput
   leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutStatusTypeNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutStatusTypesNestedInput
 }
 
 export type StatusTypeMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  tag?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutStatusTypeNestedInput
   leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutStatusTypeNestedInput
 }
@@ -299,8 +299,8 @@ export type StatusTypeMasterUncheckedUpdateInput = {
 export type StatusTypeMasterCreateManyInput = {
   id?: number
   type: string
-  tag: string
   vendor_id: number
+  tag: string
 }
 
 export type StatusTypeMasterUpdateManyMutationInput = {
@@ -311,8 +311,8 @@ export type StatusTypeMasterUpdateManyMutationInput = {
 export type StatusTypeMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  tag?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type StatusTypeMasterListRelationFilter = {
@@ -333,8 +333,8 @@ export type StatusTypeMasterNullableScalarRelationFilter = {
 export type StatusTypeMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  tag?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  tag?: Prisma.SortOrder
 }
 
 export type StatusTypeMasterAvgOrderByAggregateInput = {
@@ -345,15 +345,15 @@ export type StatusTypeMasterAvgOrderByAggregateInput = {
 export type StatusTypeMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  tag?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  tag?: Prisma.SortOrder
 }
 
 export type StatusTypeMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  tag?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  tag?: Prisma.SortOrder
 }
 
 export type StatusTypeMasterSumOrderByAggregateInput = {
@@ -485,22 +485,22 @@ export type StatusTypeMasterScalarWhereInput = {
   NOT?: Prisma.StatusTypeMasterScalarWhereInput | Prisma.StatusTypeMasterScalarWhereInput[]
   id?: Prisma.IntFilter<"StatusTypeMaster"> | number
   type?: Prisma.StringFilter<"StatusTypeMaster"> | string
-  tag?: Prisma.StringFilter<"StatusTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"StatusTypeMaster"> | number
+  tag?: Prisma.StringFilter<"StatusTypeMaster"> | string
 }
 
 export type StatusTypeMasterCreateWithoutLeadsInput = {
   type: string
   tag: string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutStatusTypesInput
   leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutStatusTypeInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutStatusTypesInput
 }
 
 export type StatusTypeMasterUncheckedCreateWithoutLeadsInput = {
   id?: number
   type: string
-  tag: string
   vendor_id: number
+  tag: string
   leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutStatusTypeInput
 }
 
@@ -523,30 +523,30 @@ export type StatusTypeMasterUpdateToOneWithWhereWithoutLeadsInput = {
 export type StatusTypeMasterUpdateWithoutLeadsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutStatusTypesNestedInput
   leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutStatusTypeNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutStatusTypesNestedInput
 }
 
 export type StatusTypeMasterUncheckedUpdateWithoutLeadsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  tag?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
   leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutStatusTypeNestedInput
 }
 
 export type StatusTypeMasterCreateWithoutLeadStatusLogsInput = {
   type: string
   tag: string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutStatusTypesInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutStatusTypeInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutStatusTypesInput
 }
 
 export type StatusTypeMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   id?: number
   type: string
-  tag: string
   vendor_id: number
+  tag: string
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutStatusTypeInput
 }
 
@@ -569,15 +569,15 @@ export type StatusTypeMasterUpdateToOneWithWhereWithoutLeadStatusLogsInput = {
 export type StatusTypeMasterUpdateWithoutLeadStatusLogsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutStatusTypesNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutStatusTypeNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutStatusTypesNestedInput
 }
 
 export type StatusTypeMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  tag?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutStatusTypeNestedInput
 }
 
@@ -651,42 +651,42 @@ export type StatusTypeMasterCountOutputTypeCountLeadStatusLogsArgs<ExtArgs exten
 export type StatusTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
-  tag?: boolean
   vendor_id?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  tag?: boolean
   leads?: boolean | Prisma.StatusTypeMaster$leadsArgs<ExtArgs>
   leadStatusLogs?: boolean | Prisma.StatusTypeMaster$leadStatusLogsArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.StatusTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["statusTypeMaster"]>
 
 export type StatusTypeMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
-  tag?: boolean
   vendor_id?: boolean
+  tag?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["statusTypeMaster"]>
 
 export type StatusTypeMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
-  tag?: boolean
   vendor_id?: boolean
+  tag?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["statusTypeMaster"]>
 
 export type StatusTypeMasterSelectScalar = {
   id?: boolean
   type?: boolean
-  tag?: boolean
   vendor_id?: boolean
+  tag?: boolean
 }
 
-export type StatusTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "tag" | "vendor_id", ExtArgs["result"]["statusTypeMaster"]>
+export type StatusTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id" | "tag", ExtArgs["result"]["statusTypeMaster"]>
 export type StatusTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   leads?: boolean | Prisma.StatusTypeMaster$leadsArgs<ExtArgs>
   leadStatusLogs?: boolean | Prisma.StatusTypeMaster$leadStatusLogsArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.StatusTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StatusTypeMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -699,15 +699,15 @@ export type StatusTypeMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.T
 export type $StatusTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "StatusTypeMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     leads: Prisma.$LeadMasterPayload<ExtArgs>[]
     leadStatusLogs: Prisma.$LeadStatusLogsPayload<ExtArgs>[]
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     type: string
-    tag: string
     vendor_id: number
+    tag: string
   }, ExtArgs["result"]["statusTypeMaster"]>
   composites: {}
 }
@@ -1102,9 +1102,9 @@ readonly fields: StatusTypeMasterFieldRefs;
  */
 export interface Prisma__StatusTypeMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   leads<T extends Prisma.StatusTypeMaster$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StatusTypeMaster$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadStatusLogs<T extends Prisma.StatusTypeMaster$leadStatusLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StatusTypeMaster$leadStatusLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadStatusLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1136,8 +1136,8 @@ export interface Prisma__StatusTypeMasterClient<T, Null = never, ExtArgs extends
 export interface StatusTypeMasterFieldRefs {
   readonly id: Prisma.FieldRef<"StatusTypeMaster", 'Int'>
   readonly type: Prisma.FieldRef<"StatusTypeMaster", 'String'>
-  readonly tag: Prisma.FieldRef<"StatusTypeMaster", 'String'>
   readonly vendor_id: Prisma.FieldRef<"StatusTypeMaster", 'Int'>
+  readonly tag: Prisma.FieldRef<"StatusTypeMaster", 'String'>
 }
     
 

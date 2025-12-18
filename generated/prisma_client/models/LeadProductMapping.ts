@@ -252,11 +252,11 @@ export type LeadProductMappingWhereInput = {
   product_type_id?: Prisma.IntFilter<"LeadProductMapping"> | number
   created_by?: Prisma.IntFilter<"LeadProductMapping"> | number
   created_at?: Prisma.DateTimeFilter<"LeadProductMapping"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
-  productType?: Prisma.XOR<Prisma.ProductTypeMasterScalarRelationFilter, Prisma.ProductTypeMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  productType?: Prisma.XOR<Prisma.ProductTypeMasterScalarRelationFilter, Prisma.ProductTypeMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type LeadProductMappingOrderByWithRelationInput = {
@@ -267,11 +267,11 @@ export type LeadProductMappingOrderByWithRelationInput = {
   product_type_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  lead?: Prisma.LeadMasterOrderByWithRelationInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
-  productType?: Prisma.ProductTypeMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  lead?: Prisma.LeadMasterOrderByWithRelationInput
+  productType?: Prisma.ProductTypeMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type LeadProductMappingWhereUniqueInput = Prisma.AtLeast<{
@@ -285,11 +285,11 @@ export type LeadProductMappingWhereUniqueInput = Prisma.AtLeast<{
   product_type_id?: Prisma.IntFilter<"LeadProductMapping"> | number
   created_by?: Prisma.IntFilter<"LeadProductMapping"> | number
   created_at?: Prisma.DateTimeFilter<"LeadProductMapping"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
-  productType?: Prisma.XOR<Prisma.ProductTypeMasterScalarRelationFilter, Prisma.ProductTypeMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  productType?: Prisma.XOR<Prisma.ProductTypeMasterScalarRelationFilter, Prisma.ProductTypeMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type LeadProductMappingOrderByWithAggregationInput = {
@@ -322,11 +322,11 @@ export type LeadProductMappingScalarWhereWithAggregatesInput = {
 
 export type LeadProductMappingCreateInput = {
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadProductMapsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutProductMappingsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadsMappingInput
-  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutLeadsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadProductsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductMappingsInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutLeadsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadProductMapsInput
 }
 
 export type LeadProductMappingUncheckedCreateInput = {
@@ -341,11 +341,11 @@ export type LeadProductMappingUncheckedCreateInput = {
 
 export type LeadProductMappingUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadProductMapsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductMappingsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadsMappingNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutLeadsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadProductsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductMappingsNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutLeadsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadProductMapsNestedInput
 }
 
 export type LeadProductMappingUncheckedUpdateInput = {
@@ -652,10 +652,10 @@ export type LeadProductMappingUncheckedUpdateManyWithoutProductTypeNestedInput =
 
 export type LeadProductMappingCreateWithoutVendorInput = {
   created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutProductMappingsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadsMappingInput
-  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutLeadsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadProductsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductMappingsInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutLeadsInput
 }
 
 export type LeadProductMappingUncheckedCreateWithoutVendorInput = {
@@ -708,10 +708,10 @@ export type LeadProductMappingScalarWhereInput = {
 
 export type LeadProductMappingCreateWithoutCreatedByInput = {
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadProductMapsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutProductMappingsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadsMappingInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductMappingsInput
   productType: Prisma.ProductTypeMasterCreateNestedOneWithoutLeadsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadProductMapsInput
 }
 
 export type LeadProductMappingUncheckedCreateWithoutCreatedByInput = {
@@ -751,10 +751,10 @@ export type LeadProductMappingUpdateManyWithWhereWithoutCreatedByInput = {
 
 export type LeadProductMappingCreateWithoutLeadInput = {
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadProductMapsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadsMappingInput
-  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutLeadsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadProductsCreatedInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutLeadsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadProductMapsInput
 }
 
 export type LeadProductMappingUncheckedCreateWithoutLeadInput = {
@@ -794,10 +794,10 @@ export type LeadProductMappingUpdateManyWithWhereWithoutLeadInput = {
 
 export type LeadProductMappingCreateWithoutAccountInput = {
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadProductMapsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadProductsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutProductMappingsInput
   productType: Prisma.ProductTypeMasterCreateNestedOneWithoutLeadsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadProductsCreatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadProductMapsInput
 }
 
 export type LeadProductMappingUncheckedCreateWithoutAccountInput = {
@@ -837,10 +837,10 @@ export type LeadProductMappingUpdateManyWithWhereWithoutAccountInput = {
 
 export type LeadProductMappingCreateWithoutProductTypeInput = {
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadProductMapsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutProductMappingsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadsMappingInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadProductsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadProductMapsInput
 }
 
 export type LeadProductMappingUncheckedCreateWithoutProductTypeInput = {
@@ -889,10 +889,10 @@ export type LeadProductMappingCreateManyVendorInput = {
 
 export type LeadProductMappingUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductMappingsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadsMappingNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutLeadsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadProductsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductMappingsNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutLeadsNestedInput
 }
 
 export type LeadProductMappingUncheckedUpdateWithoutVendorInput = {
@@ -924,10 +924,10 @@ export type LeadProductMappingCreateManyCreatedByInput = {
 
 export type LeadProductMappingUpdateWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadProductMapsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductMappingsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadsMappingNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductMappingsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutLeadsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadProductMapsNestedInput
 }
 
 export type LeadProductMappingUncheckedUpdateWithoutCreatedByInput = {
@@ -959,10 +959,10 @@ export type LeadProductMappingCreateManyLeadInput = {
 
 export type LeadProductMappingUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadProductMapsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadsMappingNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutLeadsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadProductsCreatedNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutLeadsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadProductMapsNestedInput
 }
 
 export type LeadProductMappingUncheckedUpdateWithoutLeadInput = {
@@ -994,10 +994,10 @@ export type LeadProductMappingCreateManyAccountInput = {
 
 export type LeadProductMappingUpdateWithoutAccountInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadProductMapsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadProductsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductMappingsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutLeadsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadProductsCreatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadProductMapsNestedInput
 }
 
 export type LeadProductMappingUncheckedUpdateWithoutAccountInput = {
@@ -1029,10 +1029,10 @@ export type LeadProductMappingCreateManyProductTypeInput = {
 
 export type LeadProductMappingUpdateWithoutProductTypeInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadProductMapsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductMappingsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadsMappingNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadProductsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadProductMapsNestedInput
 }
 
 export type LeadProductMappingUncheckedUpdateWithoutProductTypeInput = {
@@ -1063,11 +1063,11 @@ export type LeadProductMappingSelect<ExtArgs extends runtime.Types.Extensions.In
   product_type_id?: boolean
   created_by?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadProductMapping"]>
 
 export type LeadProductMappingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1078,11 +1078,11 @@ export type LeadProductMappingSelectCreateManyAndReturn<ExtArgs extends runtime.
   product_type_id?: boolean
   created_by?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadProductMapping"]>
 
 export type LeadProductMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1093,11 +1093,11 @@ export type LeadProductMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.
   product_type_id?: boolean
   created_by?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadProductMapping"]>
 
 export type LeadProductMappingSelectScalar = {
@@ -1112,35 +1112,35 @@ export type LeadProductMappingSelectScalar = {
 
 export type LeadProductMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "product_type_id" | "created_by" | "created_at", ExtArgs["result"]["leadProductMapping"]>
 export type LeadProductMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadProductMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadProductMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $LeadProductMappingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadProductMapping"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    lead: Prisma.$LeadMasterPayload<ExtArgs>
     account: Prisma.$AccountMasterPayload<ExtArgs>
-    productType: Prisma.$ProductTypeMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    lead: Prisma.$LeadMasterPayload<ExtArgs>
+    productType: Prisma.$ProductTypeMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1544,11 +1544,11 @@ readonly fields: LeadProductMappingFieldRefs;
  */
 export interface Prisma__LeadProductMappingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   account<T extends Prisma.AccountMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  productType<T extends Prisma.ProductTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$ProductTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  productType<T extends Prisma.ProductTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$ProductTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

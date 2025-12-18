@@ -288,12 +288,12 @@ export type LeadUserMappingWhereInput = {
   created_at?: Prisma.DateTimeFilter<"LeadUserMapping"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"LeadUserMapping"> | number | null
   updated_at?: Prisma.DateTimeFilter<"LeadUserMapping"> | Date | string
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type LeadUserMappingOrderByWithRelationInput = {
@@ -308,12 +308,12 @@ export type LeadUserMappingOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  lead?: Prisma.LeadMasterOrderByWithRelationInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  user?: Prisma.UserMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  lead?: Prisma.LeadMasterOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
+  user?: Prisma.UserMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type LeadUserMappingWhereUniqueInput = Prisma.AtLeast<{
@@ -331,12 +331,12 @@ export type LeadUserMappingWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"LeadUserMapping"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"LeadUserMapping"> | number | null
   updated_at?: Prisma.DateTimeFilter<"LeadUserMapping"> | Date | string
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type LeadUserMappingOrderByWithAggregationInput = {
@@ -380,12 +380,12 @@ export type LeadUserMappingCreateInput = {
   status?: $Enums.LeadUserStatus
   created_at?: Date | string
   updated_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutUserMappingsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadUserMappingsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadUserMappingsInput
-  user: Prisma.UserMasterCreateNestedOneWithoutLeadUserAsUserInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadUserCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutUserMappingsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadUserUpdatedInput
+  user: Prisma.UserMasterCreateNestedOneWithoutLeadUserAsUserInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadUserMappingsInput
 }
 
 export type LeadUserMappingUncheckedCreateInput = {
@@ -407,12 +407,12 @@ export type LeadUserMappingUpdateInput = {
   status?: Prisma.EnumLeadUserStatusFieldUpdateOperationsInput | $Enums.LeadUserStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutUserMappingsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadUserMappingsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadUserMappingsNestedInput
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadUserAsUserNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadUserCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutUserMappingsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadUserUpdatedNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadUserAsUserNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadUserMappingsNestedInput
 }
 
 export type LeadUserMappingUncheckedUpdateInput = {
@@ -578,13 +578,6 @@ export type LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput = {
   deleteMany?: Prisma.LeadUserMappingScalarWhereInput | Prisma.LeadUserMappingScalarWhereInput[]
 }
 
-export type LeadUserMappingCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.LeadUserMappingCreateWithoutUserInput, Prisma.LeadUserMappingUncheckedCreateWithoutUserInput> | Prisma.LeadUserMappingCreateWithoutUserInput[] | Prisma.LeadUserMappingUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.LeadUserMappingCreateOrConnectWithoutUserInput | Prisma.LeadUserMappingCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.LeadUserMappingCreateManyUserInputEnvelope
-  connect?: Prisma.LeadUserMappingWhereUniqueInput | Prisma.LeadUserMappingWhereUniqueInput[]
-}
-
 export type LeadUserMappingCreateNestedManyWithoutCreatedByInput = {
   create?: Prisma.XOR<Prisma.LeadUserMappingCreateWithoutCreatedByInput, Prisma.LeadUserMappingUncheckedCreateWithoutCreatedByInput> | Prisma.LeadUserMappingCreateWithoutCreatedByInput[] | Prisma.LeadUserMappingUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.LeadUserMappingCreateOrConnectWithoutCreatedByInput | Prisma.LeadUserMappingCreateOrConnectWithoutCreatedByInput[]
@@ -599,7 +592,7 @@ export type LeadUserMappingCreateNestedManyWithoutUpdatedByInput = {
   connect?: Prisma.LeadUserMappingWhereUniqueInput | Prisma.LeadUserMappingWhereUniqueInput[]
 }
 
-export type LeadUserMappingUncheckedCreateNestedManyWithoutUserInput = {
+export type LeadUserMappingCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.LeadUserMappingCreateWithoutUserInput, Prisma.LeadUserMappingUncheckedCreateWithoutUserInput> | Prisma.LeadUserMappingCreateWithoutUserInput[] | Prisma.LeadUserMappingUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.LeadUserMappingCreateOrConnectWithoutUserInput | Prisma.LeadUserMappingCreateOrConnectWithoutUserInput[]
   createMany?: Prisma.LeadUserMappingCreateManyUserInputEnvelope
@@ -620,18 +613,11 @@ export type LeadUserMappingUncheckedCreateNestedManyWithoutUpdatedByInput = {
   connect?: Prisma.LeadUserMappingWhereUniqueInput | Prisma.LeadUserMappingWhereUniqueInput[]
 }
 
-export type LeadUserMappingUpdateManyWithoutUserNestedInput = {
+export type LeadUserMappingUncheckedCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.LeadUserMappingCreateWithoutUserInput, Prisma.LeadUserMappingUncheckedCreateWithoutUserInput> | Prisma.LeadUserMappingCreateWithoutUserInput[] | Prisma.LeadUserMappingUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.LeadUserMappingCreateOrConnectWithoutUserInput | Prisma.LeadUserMappingCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.LeadUserMappingUpsertWithWhereUniqueWithoutUserInput | Prisma.LeadUserMappingUpsertWithWhereUniqueWithoutUserInput[]
   createMany?: Prisma.LeadUserMappingCreateManyUserInputEnvelope
-  set?: Prisma.LeadUserMappingWhereUniqueInput | Prisma.LeadUserMappingWhereUniqueInput[]
-  disconnect?: Prisma.LeadUserMappingWhereUniqueInput | Prisma.LeadUserMappingWhereUniqueInput[]
-  delete?: Prisma.LeadUserMappingWhereUniqueInput | Prisma.LeadUserMappingWhereUniqueInput[]
   connect?: Prisma.LeadUserMappingWhereUniqueInput | Prisma.LeadUserMappingWhereUniqueInput[]
-  update?: Prisma.LeadUserMappingUpdateWithWhereUniqueWithoutUserInput | Prisma.LeadUserMappingUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.LeadUserMappingUpdateManyWithWhereWithoutUserInput | Prisma.LeadUserMappingUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.LeadUserMappingScalarWhereInput | Prisma.LeadUserMappingScalarWhereInput[]
 }
 
 export type LeadUserMappingUpdateManyWithoutCreatedByNestedInput = {
@@ -662,7 +648,7 @@ export type LeadUserMappingUpdateManyWithoutUpdatedByNestedInput = {
   deleteMany?: Prisma.LeadUserMappingScalarWhereInput | Prisma.LeadUserMappingScalarWhereInput[]
 }
 
-export type LeadUserMappingUncheckedUpdateManyWithoutUserNestedInput = {
+export type LeadUserMappingUpdateManyWithoutUserNestedInput = {
   create?: Prisma.XOR<Prisma.LeadUserMappingCreateWithoutUserInput, Prisma.LeadUserMappingUncheckedCreateWithoutUserInput> | Prisma.LeadUserMappingCreateWithoutUserInput[] | Prisma.LeadUserMappingUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.LeadUserMappingCreateOrConnectWithoutUserInput | Prisma.LeadUserMappingCreateOrConnectWithoutUserInput[]
   upsert?: Prisma.LeadUserMappingUpsertWithWhereUniqueWithoutUserInput | Prisma.LeadUserMappingUpsertWithWhereUniqueWithoutUserInput[]
@@ -701,6 +687,20 @@ export type LeadUserMappingUncheckedUpdateManyWithoutUpdatedByNestedInput = {
   connect?: Prisma.LeadUserMappingWhereUniqueInput | Prisma.LeadUserMappingWhereUniqueInput[]
   update?: Prisma.LeadUserMappingUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.LeadUserMappingUpdateWithWhereUniqueWithoutUpdatedByInput[]
   updateMany?: Prisma.LeadUserMappingUpdateManyWithWhereWithoutUpdatedByInput | Prisma.LeadUserMappingUpdateManyWithWhereWithoutUpdatedByInput[]
+  deleteMany?: Prisma.LeadUserMappingScalarWhereInput | Prisma.LeadUserMappingScalarWhereInput[]
+}
+
+export type LeadUserMappingUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadUserMappingCreateWithoutUserInput, Prisma.LeadUserMappingUncheckedCreateWithoutUserInput> | Prisma.LeadUserMappingCreateWithoutUserInput[] | Prisma.LeadUserMappingUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.LeadUserMappingCreateOrConnectWithoutUserInput | Prisma.LeadUserMappingCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.LeadUserMappingUpsertWithWhereUniqueWithoutUserInput | Prisma.LeadUserMappingUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.LeadUserMappingCreateManyUserInputEnvelope
+  set?: Prisma.LeadUserMappingWhereUniqueInput | Prisma.LeadUserMappingWhereUniqueInput[]
+  disconnect?: Prisma.LeadUserMappingWhereUniqueInput | Prisma.LeadUserMappingWhereUniqueInput[]
+  delete?: Prisma.LeadUserMappingWhereUniqueInput | Prisma.LeadUserMappingWhereUniqueInput[]
+  connect?: Prisma.LeadUserMappingWhereUniqueInput | Prisma.LeadUserMappingWhereUniqueInput[]
+  update?: Prisma.LeadUserMappingUpdateWithWhereUniqueWithoutUserInput | Prisma.LeadUserMappingUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.LeadUserMappingUpdateManyWithWhereWithoutUserInput | Prisma.LeadUserMappingUpdateManyWithWhereWithoutUserInput[]
   deleteMany?: Prisma.LeadUserMappingScalarWhereInput | Prisma.LeadUserMappingScalarWhereInput[]
 }
 
@@ -797,11 +797,11 @@ export type LeadUserMappingCreateWithoutVendorInput = {
   status?: $Enums.LeadUserStatus
   created_at?: Date | string
   updated_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutUserMappingsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadUserMappingsInput
-  user: Prisma.UserMasterCreateNestedOneWithoutLeadUserAsUserInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadUserCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutUserMappingsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadUserUpdatedInput
+  user: Prisma.UserMasterCreateNestedOneWithoutLeadUserAsUserInput
 }
 
 export type LeadUserMappingUncheckedCreateWithoutVendorInput = {
@@ -860,51 +860,16 @@ export type LeadUserMappingScalarWhereInput = {
   updated_at?: Prisma.DateTimeFilter<"LeadUserMapping"> | Date | string
 }
 
-export type LeadUserMappingCreateWithoutUserInput = {
-  type: string
-  status?: $Enums.LeadUserStatus
-  created_at?: Date | string
-  updated_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutUserMappingsInput
-  account: Prisma.AccountMasterCreateNestedOneWithoutLeadUserMappingsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadUserMappingsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadUserCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadUserUpdatedInput
-}
-
-export type LeadUserMappingUncheckedCreateWithoutUserInput = {
-  id?: number
-  account_id: number
-  lead_id: number
-  vendor_id: number
-  type: string
-  status?: $Enums.LeadUserStatus
-  created_by: number
-  created_at?: Date | string
-  updated_by?: number | null
-  updated_at?: Date | string
-}
-
-export type LeadUserMappingCreateOrConnectWithoutUserInput = {
-  where: Prisma.LeadUserMappingWhereUniqueInput
-  create: Prisma.XOR<Prisma.LeadUserMappingCreateWithoutUserInput, Prisma.LeadUserMappingUncheckedCreateWithoutUserInput>
-}
-
-export type LeadUserMappingCreateManyUserInputEnvelope = {
-  data: Prisma.LeadUserMappingCreateManyUserInput | Prisma.LeadUserMappingCreateManyUserInput[]
-  skipDuplicates?: boolean
-}
-
 export type LeadUserMappingCreateWithoutCreatedByInput = {
   type: string
   status?: $Enums.LeadUserStatus
   created_at?: Date | string
   updated_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutUserMappingsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadUserMappingsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadUserMappingsInput
-  user: Prisma.UserMasterCreateNestedOneWithoutLeadUserAsUserInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutUserMappingsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadUserUpdatedInput
+  user: Prisma.UserMasterCreateNestedOneWithoutLeadUserAsUserInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadUserMappingsInput
 }
 
 export type LeadUserMappingUncheckedCreateWithoutCreatedByInput = {
@@ -935,11 +900,11 @@ export type LeadUserMappingCreateWithoutUpdatedByInput = {
   status?: $Enums.LeadUserStatus
   created_at?: Date | string
   updated_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutUserMappingsInput
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadUserMappingsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadUserMappingsInput
-  user: Prisma.UserMasterCreateNestedOneWithoutLeadUserAsUserInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadUserCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutUserMappingsInput
+  user: Prisma.UserMasterCreateNestedOneWithoutLeadUserAsUserInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadUserMappingsInput
 }
 
 export type LeadUserMappingUncheckedCreateWithoutUpdatedByInput = {
@@ -965,20 +930,39 @@ export type LeadUserMappingCreateManyUpdatedByInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type LeadUserMappingUpsertWithWhereUniqueWithoutUserInput = {
+export type LeadUserMappingCreateWithoutUserInput = {
+  type: string
+  status?: $Enums.LeadUserStatus
+  created_at?: Date | string
+  updated_at?: Date | string
+  account: Prisma.AccountMasterCreateNestedOneWithoutLeadUserMappingsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadUserCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutUserMappingsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadUserUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadUserMappingsInput
+}
+
+export type LeadUserMappingUncheckedCreateWithoutUserInput = {
+  id?: number
+  account_id: number
+  lead_id: number
+  vendor_id: number
+  type: string
+  status?: $Enums.LeadUserStatus
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+}
+
+export type LeadUserMappingCreateOrConnectWithoutUserInput = {
   where: Prisma.LeadUserMappingWhereUniqueInput
-  update: Prisma.XOR<Prisma.LeadUserMappingUpdateWithoutUserInput, Prisma.LeadUserMappingUncheckedUpdateWithoutUserInput>
   create: Prisma.XOR<Prisma.LeadUserMappingCreateWithoutUserInput, Prisma.LeadUserMappingUncheckedCreateWithoutUserInput>
 }
 
-export type LeadUserMappingUpdateWithWhereUniqueWithoutUserInput = {
-  where: Prisma.LeadUserMappingWhereUniqueInput
-  data: Prisma.XOR<Prisma.LeadUserMappingUpdateWithoutUserInput, Prisma.LeadUserMappingUncheckedUpdateWithoutUserInput>
-}
-
-export type LeadUserMappingUpdateManyWithWhereWithoutUserInput = {
-  where: Prisma.LeadUserMappingScalarWhereInput
-  data: Prisma.XOR<Prisma.LeadUserMappingUpdateManyMutationInput, Prisma.LeadUserMappingUncheckedUpdateManyWithoutUserInput>
+export type LeadUserMappingCreateManyUserInputEnvelope = {
+  data: Prisma.LeadUserMappingCreateManyUserInput | Prisma.LeadUserMappingCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type LeadUserMappingUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -1013,16 +997,32 @@ export type LeadUserMappingUpdateManyWithWhereWithoutUpdatedByInput = {
   data: Prisma.XOR<Prisma.LeadUserMappingUpdateManyMutationInput, Prisma.LeadUserMappingUncheckedUpdateManyWithoutUpdatedByInput>
 }
 
+export type LeadUserMappingUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.LeadUserMappingWhereUniqueInput
+  update: Prisma.XOR<Prisma.LeadUserMappingUpdateWithoutUserInput, Prisma.LeadUserMappingUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.LeadUserMappingCreateWithoutUserInput, Prisma.LeadUserMappingUncheckedCreateWithoutUserInput>
+}
+
+export type LeadUserMappingUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.LeadUserMappingWhereUniqueInput
+  data: Prisma.XOR<Prisma.LeadUserMappingUpdateWithoutUserInput, Prisma.LeadUserMappingUncheckedUpdateWithoutUserInput>
+}
+
+export type LeadUserMappingUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.LeadUserMappingScalarWhereInput
+  data: Prisma.XOR<Prisma.LeadUserMappingUpdateManyMutationInput, Prisma.LeadUserMappingUncheckedUpdateManyWithoutUserInput>
+}
+
 export type LeadUserMappingCreateWithoutLeadInput = {
   type: string
   status?: $Enums.LeadUserStatus
   created_at?: Date | string
   updated_at?: Date | string
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadUserMappingsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadUserMappingsInput
-  user: Prisma.UserMasterCreateNestedOneWithoutLeadUserAsUserInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadUserCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadUserUpdatedInput
+  user: Prisma.UserMasterCreateNestedOneWithoutLeadUserAsUserInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadUserMappingsInput
 }
 
 export type LeadUserMappingUncheckedCreateWithoutLeadInput = {
@@ -1069,11 +1069,11 @@ export type LeadUserMappingCreateWithoutAccountInput = {
   status?: $Enums.LeadUserStatus
   created_at?: Date | string
   updated_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutUserMappingsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadUserMappingsInput
-  user: Prisma.UserMasterCreateNestedOneWithoutLeadUserAsUserInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadUserCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutUserMappingsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadUserUpdatedInput
+  user: Prisma.UserMasterCreateNestedOneWithoutLeadUserAsUserInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadUserMappingsInput
 }
 
 export type LeadUserMappingUncheckedCreateWithoutAccountInput = {
@@ -1133,11 +1133,11 @@ export type LeadUserMappingUpdateWithoutVendorInput = {
   status?: Prisma.EnumLeadUserStatusFieldUpdateOperationsInput | $Enums.LeadUserStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutUserMappingsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadUserMappingsNestedInput
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadUserAsUserNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadUserCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutUserMappingsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadUserUpdatedNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadUserAsUserNestedInput
 }
 
 export type LeadUserMappingUncheckedUpdateWithoutVendorInput = {
@@ -1166,19 +1166,6 @@ export type LeadUserMappingUncheckedUpdateManyWithoutVendorInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type LeadUserMappingCreateManyUserInput = {
-  id?: number
-  account_id: number
-  lead_id: number
-  vendor_id: number
-  type: string
-  status?: $Enums.LeadUserStatus
-  created_by: number
-  created_at?: Date | string
-  updated_by?: number | null
-  updated_at?: Date | string
-}
-
 export type LeadUserMappingCreateManyCreatedByInput = {
   id?: number
   account_id: number
@@ -1205,42 +1192,17 @@ export type LeadUserMappingCreateManyUpdatedByInput = {
   updated_at?: Date | string
 }
 
-export type LeadUserMappingUpdateWithoutUserInput = {
-  type?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumLeadUserStatusFieldUpdateOperationsInput | $Enums.LeadUserStatus
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutUserMappingsNestedInput
-  account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadUserMappingsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadUserMappingsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadUserCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadUserUpdatedNestedInput
-}
-
-export type LeadUserMappingUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumLeadUserStatusFieldUpdateOperationsInput | $Enums.LeadUserStatus
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type LeadUserMappingUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumLeadUserStatusFieldUpdateOperationsInput | $Enums.LeadUserStatus
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type LeadUserMappingCreateManyUserInput = {
+  id?: number
+  account_id: number
+  lead_id: number
+  vendor_id: number
+  type: string
+  status?: $Enums.LeadUserStatus
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
 }
 
 export type LeadUserMappingUpdateWithoutCreatedByInput = {
@@ -1248,11 +1210,11 @@ export type LeadUserMappingUpdateWithoutCreatedByInput = {
   status?: Prisma.EnumLeadUserStatusFieldUpdateOperationsInput | $Enums.LeadUserStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutUserMappingsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadUserMappingsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadUserMappingsNestedInput
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadUserAsUserNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutUserMappingsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadUserUpdatedNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadUserAsUserNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadUserMappingsNestedInput
 }
 
 export type LeadUserMappingUncheckedUpdateWithoutCreatedByInput = {
@@ -1286,11 +1248,11 @@ export type LeadUserMappingUpdateWithoutUpdatedByInput = {
   status?: Prisma.EnumLeadUserStatusFieldUpdateOperationsInput | $Enums.LeadUserStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutUserMappingsNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadUserMappingsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadUserMappingsNestedInput
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadUserAsUserNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadUserCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutUserMappingsNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadUserAsUserNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadUserMappingsNestedInput
 }
 
 export type LeadUserMappingUncheckedUpdateWithoutUpdatedByInput = {
@@ -1319,6 +1281,44 @@ export type LeadUserMappingUncheckedUpdateManyWithoutUpdatedByInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type LeadUserMappingUpdateWithoutUserInput = {
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumLeadUserStatusFieldUpdateOperationsInput | $Enums.LeadUserStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadUserMappingsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadUserCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutUserMappingsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadUserUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadUserMappingsNestedInput
+}
+
+export type LeadUserMappingUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumLeadUserStatusFieldUpdateOperationsInput | $Enums.LeadUserStatus
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type LeadUserMappingUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumLeadUserStatusFieldUpdateOperationsInput | $Enums.LeadUserStatus
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type LeadUserMappingCreateManyLeadInput = {
   id?: number
   account_id: number
@@ -1338,10 +1338,10 @@ export type LeadUserMappingUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadUserMappingsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadUserMappingsNestedInput
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadUserAsUserNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadUserCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadUserUpdatedNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadUserAsUserNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadUserMappingsNestedInput
 }
 
 export type LeadUserMappingUncheckedUpdateWithoutLeadInput = {
@@ -1388,11 +1388,11 @@ export type LeadUserMappingUpdateWithoutAccountInput = {
   status?: Prisma.EnumLeadUserStatusFieldUpdateOperationsInput | $Enums.LeadUserStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutUserMappingsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadUserMappingsNestedInput
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadUserAsUserNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadUserCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutUserMappingsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadUserUpdatedNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadUserAsUserNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadUserMappingsNestedInput
 }
 
 export type LeadUserMappingUncheckedUpdateWithoutAccountInput = {
@@ -1435,12 +1435,12 @@ export type LeadUserMappingSelect<ExtArgs extends runtime.Types.Extensions.Inter
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadUserMapping$updatedByArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadUserMapping"]>
 
 export type LeadUserMappingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1455,12 +1455,12 @@ export type LeadUserMappingSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadUserMapping$updatedByArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadUserMapping"]>
 
 export type LeadUserMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1475,12 +1475,12 @@ export type LeadUserMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadUserMapping$updatedByArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadUserMapping"]>
 
 export type LeadUserMappingSelectScalar = {
@@ -1499,39 +1499,39 @@ export type LeadUserMappingSelectScalar = {
 
 export type LeadUserMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "account_id" | "lead_id" | "vendor_id" | "user_id" | "type" | "status" | "created_by" | "created_at" | "updated_by" | "updated_at", ExtArgs["result"]["leadUserMapping"]>
 export type LeadUserMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadUserMapping$updatedByArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadUserMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadUserMapping$updatedByArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadUserMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadUserMapping$updatedByArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $LeadUserMappingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadUserMapping"
   objects: {
-    lead: Prisma.$LeadMasterPayload<ExtArgs>
     account: Prisma.$AccountMasterPayload<ExtArgs>
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    user: Prisma.$UserMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    lead: Prisma.$LeadMasterPayload<ExtArgs>
     updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    user: Prisma.$UserMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1939,12 +1939,12 @@ readonly fields: LeadUserMappingFieldRefs;
  */
 export interface Prisma__LeadUserMappingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   account<T extends Prisma.AccountMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.LeadUserMapping$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadUserMapping$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

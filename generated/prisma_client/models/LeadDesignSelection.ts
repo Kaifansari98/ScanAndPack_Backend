@@ -276,11 +276,11 @@ export type LeadDesignSelectionWhereInput = {
   updated_by?: Prisma.IntNullableFilter<"LeadDesignSelection"> | number | null
   created_at?: Prisma.DateTimeFilter<"LeadDesignSelection"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"LeadDesignSelection"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type LeadDesignSelectionOrderByWithRelationInput = {
@@ -294,11 +294,11 @@ export type LeadDesignSelectionOrderByWithRelationInput = {
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  lead?: Prisma.LeadMasterOrderByWithRelationInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  lead?: Prisma.LeadMasterOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type LeadDesignSelectionWhereUniqueInput = Prisma.AtLeast<{
@@ -315,11 +315,11 @@ export type LeadDesignSelectionWhereUniqueInput = Prisma.AtLeast<{
   updated_by?: Prisma.IntNullableFilter<"LeadDesignSelection"> | number | null
   created_at?: Prisma.DateTimeFilter<"LeadDesignSelection"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"LeadDesignSelection"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type LeadDesignSelectionOrderByWithAggregationInput = {
@@ -361,11 +361,11 @@ export type LeadDesignSelectionCreateInput = {
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignSelectionInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignSelectionInput
   account: Prisma.AccountMasterCreateNestedOneWithoutDesignSelectionInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDesignSelectionsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignSelectionInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutDesignSelectionsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignSelectionInput
 }
 
 export type LeadDesignSelectionUncheckedCreateInput = {
@@ -386,11 +386,11 @@ export type LeadDesignSelectionUpdateInput = {
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDesignSelectionsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutDesignSelectionsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
 }
 
 export type LeadDesignSelectionUncheckedUpdateInput = {
@@ -721,9 +721,9 @@ export type LeadDesignSelectionCreateWithoutVendorInput = {
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignSelectionInput
   account: Prisma.AccountMasterCreateNestedOneWithoutDesignSelectionInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDesignSelectionsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignSelectionInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutDesignSelectionsUpdatedInput
 }
 
@@ -786,10 +786,10 @@ export type LeadDesignSelectionCreateWithoutCreatedByInput = {
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignSelectionInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignSelectionInput
   account: Prisma.AccountMasterCreateNestedOneWithoutDesignSelectionInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignSelectionInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutDesignSelectionsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignSelectionInput
 }
 
 export type LeadDesignSelectionUncheckedCreateWithoutCreatedByInput = {
@@ -819,10 +819,10 @@ export type LeadDesignSelectionCreateWithoutUpdatedByInput = {
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignSelectionInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignSelectionInput
   account: Prisma.AccountMasterCreateNestedOneWithoutDesignSelectionInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDesignSelectionsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignSelectionInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignSelectionInput
 }
 
 export type LeadDesignSelectionUncheckedCreateWithoutUpdatedByInput = {
@@ -884,10 +884,10 @@ export type LeadDesignSelectionCreateWithoutLeadInput = {
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignSelectionInput
   account: Prisma.AccountMasterCreateNestedOneWithoutDesignSelectionInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDesignSelectionsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutDesignSelectionsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignSelectionInput
 }
 
 export type LeadDesignSelectionUncheckedCreateWithoutLeadInput = {
@@ -933,10 +933,10 @@ export type LeadDesignSelectionCreateWithoutAccountInput = {
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignSelectionInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignSelectionInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDesignSelectionsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignSelectionInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutDesignSelectionsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignSelectionInput
 }
 
 export type LeadDesignSelectionUncheckedCreateWithoutAccountInput = {
@@ -994,9 +994,9 @@ export type LeadDesignSelectionUpdateWithoutVendorInput = {
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDesignSelectionsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutDesignSelectionsUpdatedNestedInput
 }
 
@@ -1053,10 +1053,10 @@ export type LeadDesignSelectionUpdateWithoutCreatedByInput = {
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutDesignSelectionsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
 }
 
 export type LeadDesignSelectionUncheckedUpdateWithoutCreatedByInput = {
@@ -1088,10 +1088,10 @@ export type LeadDesignSelectionUpdateWithoutUpdatedByInput = {
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDesignSelectionsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
 }
 
 export type LeadDesignSelectionUncheckedUpdateWithoutUpdatedByInput = {
@@ -1135,10 +1135,10 @@ export type LeadDesignSelectionUpdateWithoutLeadInput = {
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDesignSelectionsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutDesignSelectionsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
 }
 
 export type LeadDesignSelectionUncheckedUpdateWithoutLeadInput = {
@@ -1182,10 +1182,10 @@ export type LeadDesignSelectionUpdateWithoutAccountInput = {
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDesignSelectionsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutDesignSelectionsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
 }
 
 export type LeadDesignSelectionUncheckedUpdateWithoutAccountInput = {
@@ -1225,11 +1225,11 @@ export type LeadDesignSelectionSelect<ExtArgs extends runtime.Types.Extensions.I
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadDesignSelection$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadDesignSelection"]>
 
 export type LeadDesignSelectionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1243,11 +1243,11 @@ export type LeadDesignSelectionSelectCreateManyAndReturn<ExtArgs extends runtime
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadDesignSelection$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadDesignSelection"]>
 
 export type LeadDesignSelectionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1261,11 +1261,11 @@ export type LeadDesignSelectionSelectUpdateManyAndReturn<ExtArgs extends runtime
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadDesignSelection$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadDesignSelection"]>
 
 export type LeadDesignSelectionSelectScalar = {
@@ -1283,35 +1283,35 @@ export type LeadDesignSelectionSelectScalar = {
 
 export type LeadDesignSelectionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "vendor_id" | "type" | "desc" | "created_by" | "updated_by" | "created_at" | "updated_at", ExtArgs["result"]["leadDesignSelection"]>
 export type LeadDesignSelectionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadDesignSelection$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadDesignSelectionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadDesignSelection$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadDesignSelectionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadDesignSelection$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $LeadDesignSelectionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadDesignSelection"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    lead: Prisma.$LeadMasterPayload<ExtArgs>
     account: Prisma.$AccountMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    lead: Prisma.$LeadMasterPayload<ExtArgs>
     updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1718,11 +1718,11 @@ readonly fields: LeadDesignSelectionFieldRefs;
  */
 export interface Prisma__LeadDesignSelectionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   account<T extends Prisma.AccountMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.LeadDesignSelection$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDesignSelection$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

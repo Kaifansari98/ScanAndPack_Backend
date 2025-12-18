@@ -32,8 +32,8 @@ export type ProjectItemsMasterAvgAggregateOutputType = {
   vendor_id: number | null
   client_id: number | null
   qty: number | null
-  weight: number | null
   project_details_id: number | null
+  weight: number | null
 }
 
 export type ProjectItemsMasterSumAggregateOutputType = {
@@ -42,8 +42,8 @@ export type ProjectItemsMasterSumAggregateOutputType = {
   vendor_id: number | null
   client_id: number | null
   qty: number | null
-  weight: number | null
   project_details_id: number | null
+  weight: number | null
 }
 
 export type ProjectItemsMasterMinAggregateOutputType = {
@@ -58,9 +58,9 @@ export type ProjectItemsMasterMinAggregateOutputType = {
   L2: string | null
   L3: string | null
   qty: number | null
-  weight: number | null
-  group: string | null
   project_details_id: number | null
+  group: string | null
+  weight: number | null
 }
 
 export type ProjectItemsMasterMaxAggregateOutputType = {
@@ -75,9 +75,9 @@ export type ProjectItemsMasterMaxAggregateOutputType = {
   L2: string | null
   L3: string | null
   qty: number | null
-  weight: number | null
-  group: string | null
   project_details_id: number | null
+  group: string | null
+  weight: number | null
 }
 
 export type ProjectItemsMasterCountAggregateOutputType = {
@@ -92,9 +92,9 @@ export type ProjectItemsMasterCountAggregateOutputType = {
   L2: number
   L3: number
   qty: number
-  weight: number
-  group: number
   project_details_id: number
+  group: number
+  weight: number
   _all: number
 }
 
@@ -105,8 +105,8 @@ export type ProjectItemsMasterAvgAggregateInputType = {
   vendor_id?: true
   client_id?: true
   qty?: true
-  weight?: true
   project_details_id?: true
+  weight?: true
 }
 
 export type ProjectItemsMasterSumAggregateInputType = {
@@ -115,8 +115,8 @@ export type ProjectItemsMasterSumAggregateInputType = {
   vendor_id?: true
   client_id?: true
   qty?: true
-  weight?: true
   project_details_id?: true
+  weight?: true
 }
 
 export type ProjectItemsMasterMinAggregateInputType = {
@@ -131,9 +131,9 @@ export type ProjectItemsMasterMinAggregateInputType = {
   L2?: true
   L3?: true
   qty?: true
-  weight?: true
-  group?: true
   project_details_id?: true
+  group?: true
+  weight?: true
 }
 
 export type ProjectItemsMasterMaxAggregateInputType = {
@@ -148,9 +148,9 @@ export type ProjectItemsMasterMaxAggregateInputType = {
   L2?: true
   L3?: true
   qty?: true
-  weight?: true
-  group?: true
   project_details_id?: true
+  group?: true
+  weight?: true
 }
 
 export type ProjectItemsMasterCountAggregateInputType = {
@@ -165,9 +165,9 @@ export type ProjectItemsMasterCountAggregateInputType = {
   L2?: true
   L3?: true
   qty?: true
-  weight?: true
-  group?: true
   project_details_id?: true
+  group?: true
+  weight?: true
   _all?: true
 }
 
@@ -269,9 +269,9 @@ export type ProjectItemsMasterGroupByOutputType = {
   L2: string
   L3: string
   qty: number
-  weight: number
-  group: string
   project_details_id: number
+  group: string
+  weight: number
   _count: ProjectItemsMasterCountAggregateOutputType | null
   _avg: ProjectItemsMasterAvgAggregateOutputType | null
   _sum: ProjectItemsMasterSumAggregateOutputType | null
@@ -309,13 +309,13 @@ export type ProjectItemsMasterWhereInput = {
   L2?: Prisma.StringFilter<"ProjectItemsMaster"> | string
   L3?: Prisma.StringFilter<"ProjectItemsMaster"> | string
   qty?: Prisma.IntFilter<"ProjectItemsMaster"> | number
-  weight?: Prisma.FloatFilter<"ProjectItemsMaster"> | number
-  group?: Prisma.StringFilter<"ProjectItemsMaster"> | string
   project_details_id?: Prisma.IntFilter<"ProjectItemsMaster"> | number
+  group?: Prisma.StringFilter<"ProjectItemsMaster"> | string
+  weight?: Prisma.FloatFilter<"ProjectItemsMaster"> | number
+  client?: Prisma.XOR<Prisma.ClientMasterScalarRelationFilter, Prisma.ClientMasterWhereInput>
+  details?: Prisma.XOR<Prisma.ProjectDetailsScalarRelationFilter, Prisma.ProjectDetailsWhereInput>
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  details?: Prisma.XOR<Prisma.ProjectDetailsScalarRelationFilter, Prisma.ProjectDetailsWhereInput>
-  client?: Prisma.XOR<Prisma.ClientMasterScalarRelationFilter, Prisma.ClientMasterWhereInput>
 }
 
 export type ProjectItemsMasterOrderByWithRelationInput = {
@@ -330,13 +330,13 @@ export type ProjectItemsMasterOrderByWithRelationInput = {
   L2?: Prisma.SortOrder
   L3?: Prisma.SortOrder
   qty?: Prisma.SortOrder
-  weight?: Prisma.SortOrder
-  group?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
+  group?: Prisma.SortOrder
+  weight?: Prisma.SortOrder
+  client?: Prisma.ClientMasterOrderByWithRelationInput
+  details?: Prisma.ProjectDetailsOrderByWithRelationInput
   project?: Prisma.ProjectMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  details?: Prisma.ProjectDetailsOrderByWithRelationInput
-  client?: Prisma.ClientMasterOrderByWithRelationInput
 }
 
 export type ProjectItemsMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -354,13 +354,13 @@ export type ProjectItemsMasterWhereUniqueInput = Prisma.AtLeast<{
   L2?: Prisma.StringFilter<"ProjectItemsMaster"> | string
   L3?: Prisma.StringFilter<"ProjectItemsMaster"> | string
   qty?: Prisma.IntFilter<"ProjectItemsMaster"> | number
-  weight?: Prisma.FloatFilter<"ProjectItemsMaster"> | number
-  group?: Prisma.StringFilter<"ProjectItemsMaster"> | string
   project_details_id?: Prisma.IntFilter<"ProjectItemsMaster"> | number
+  group?: Prisma.StringFilter<"ProjectItemsMaster"> | string
+  weight?: Prisma.FloatFilter<"ProjectItemsMaster"> | number
+  client?: Prisma.XOR<Prisma.ClientMasterScalarRelationFilter, Prisma.ClientMasterWhereInput>
+  details?: Prisma.XOR<Prisma.ProjectDetailsScalarRelationFilter, Prisma.ProjectDetailsWhereInput>
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  details?: Prisma.XOR<Prisma.ProjectDetailsScalarRelationFilter, Prisma.ProjectDetailsWhereInput>
-  client?: Prisma.XOR<Prisma.ClientMasterScalarRelationFilter, Prisma.ClientMasterWhereInput>
 }, "id">
 
 export type ProjectItemsMasterOrderByWithAggregationInput = {
@@ -375,9 +375,9 @@ export type ProjectItemsMasterOrderByWithAggregationInput = {
   L2?: Prisma.SortOrder
   L3?: Prisma.SortOrder
   qty?: Prisma.SortOrder
-  weight?: Prisma.SortOrder
-  group?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
+  group?: Prisma.SortOrder
+  weight?: Prisma.SortOrder
   _count?: Prisma.ProjectItemsMasterCountOrderByAggregateInput
   _avg?: Prisma.ProjectItemsMasterAvgOrderByAggregateInput
   _max?: Prisma.ProjectItemsMasterMaxOrderByAggregateInput
@@ -400,9 +400,9 @@ export type ProjectItemsMasterScalarWhereWithAggregatesInput = {
   L2?: Prisma.StringWithAggregatesFilter<"ProjectItemsMaster"> | string
   L3?: Prisma.StringWithAggregatesFilter<"ProjectItemsMaster"> | string
   qty?: Prisma.IntWithAggregatesFilter<"ProjectItemsMaster"> | number
-  weight?: Prisma.FloatWithAggregatesFilter<"ProjectItemsMaster"> | number
-  group?: Prisma.StringWithAggregatesFilter<"ProjectItemsMaster"> | string
   project_details_id?: Prisma.IntWithAggregatesFilter<"ProjectItemsMaster"> | number
+  group?: Prisma.StringWithAggregatesFilter<"ProjectItemsMaster"> | string
+  weight?: Prisma.FloatWithAggregatesFilter<"ProjectItemsMaster"> | number
 }
 
 export type ProjectItemsMasterCreateInput = {
@@ -413,12 +413,12 @@ export type ProjectItemsMasterCreateInput = {
   L2: string
   L3: string
   qty: number
-  weight?: number
   group: string
+  weight?: number
+  client: Prisma.ClientMasterCreateNestedOneWithoutItemsInput
+  details: Prisma.ProjectDetailsCreateNestedOneWithoutItemsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutItemsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectItemsInput
-  details: Prisma.ProjectDetailsCreateNestedOneWithoutItemsInput
-  client: Prisma.ClientMasterCreateNestedOneWithoutItemsInput
 }
 
 export type ProjectItemsMasterUncheckedCreateInput = {
@@ -433,9 +433,9 @@ export type ProjectItemsMasterUncheckedCreateInput = {
   L2: string
   L3: string
   qty: number
-  weight?: number
-  group: string
   project_details_id: number
+  group: string
+  weight?: number
 }
 
 export type ProjectItemsMasterUpdateInput = {
@@ -446,12 +446,12 @@ export type ProjectItemsMasterUpdateInput = {
   L2?: Prisma.StringFieldUpdateOperationsInput | string
   L3?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   group?: Prisma.StringFieldUpdateOperationsInput | string
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  client?: Prisma.ClientMasterUpdateOneRequiredWithoutItemsNestedInput
+  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutItemsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutItemsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectItemsNestedInput
-  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutItemsNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutItemsNestedInput
 }
 
 export type ProjectItemsMasterUncheckedUpdateInput = {
@@ -466,9 +466,9 @@ export type ProjectItemsMasterUncheckedUpdateInput = {
   L2?: Prisma.StringFieldUpdateOperationsInput | string
   L3?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  group?: Prisma.StringFieldUpdateOperationsInput | string
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  group?: Prisma.StringFieldUpdateOperationsInput | string
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ProjectItemsMasterCreateManyInput = {
@@ -483,9 +483,9 @@ export type ProjectItemsMasterCreateManyInput = {
   L2: string
   L3: string
   qty: number
-  weight?: number
-  group: string
   project_details_id: number
+  group: string
+  weight?: number
 }
 
 export type ProjectItemsMasterUpdateManyMutationInput = {
@@ -496,8 +496,8 @@ export type ProjectItemsMasterUpdateManyMutationInput = {
   L2?: Prisma.StringFieldUpdateOperationsInput | string
   L3?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   group?: Prisma.StringFieldUpdateOperationsInput | string
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ProjectItemsMasterUncheckedUpdateManyInput = {
@@ -512,9 +512,9 @@ export type ProjectItemsMasterUncheckedUpdateManyInput = {
   L2?: Prisma.StringFieldUpdateOperationsInput | string
   L3?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  group?: Prisma.StringFieldUpdateOperationsInput | string
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  group?: Prisma.StringFieldUpdateOperationsInput | string
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ProjectItemsMasterListRelationFilter = {
@@ -539,9 +539,9 @@ export type ProjectItemsMasterCountOrderByAggregateInput = {
   L2?: Prisma.SortOrder
   L3?: Prisma.SortOrder
   qty?: Prisma.SortOrder
-  weight?: Prisma.SortOrder
-  group?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
+  group?: Prisma.SortOrder
+  weight?: Prisma.SortOrder
 }
 
 export type ProjectItemsMasterAvgOrderByAggregateInput = {
@@ -550,8 +550,8 @@ export type ProjectItemsMasterAvgOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   qty?: Prisma.SortOrder
-  weight?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
+  weight?: Prisma.SortOrder
 }
 
 export type ProjectItemsMasterMaxOrderByAggregateInput = {
@@ -566,9 +566,9 @@ export type ProjectItemsMasterMaxOrderByAggregateInput = {
   L2?: Prisma.SortOrder
   L3?: Prisma.SortOrder
   qty?: Prisma.SortOrder
-  weight?: Prisma.SortOrder
-  group?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
+  group?: Prisma.SortOrder
+  weight?: Prisma.SortOrder
 }
 
 export type ProjectItemsMasterMinOrderByAggregateInput = {
@@ -583,9 +583,9 @@ export type ProjectItemsMasterMinOrderByAggregateInput = {
   L2?: Prisma.SortOrder
   L3?: Prisma.SortOrder
   qty?: Prisma.SortOrder
-  weight?: Prisma.SortOrder
-  group?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
+  group?: Prisma.SortOrder
+  weight?: Prisma.SortOrder
 }
 
 export type ProjectItemsMasterSumOrderByAggregateInput = {
@@ -594,8 +594,8 @@ export type ProjectItemsMasterSumOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   qty?: Prisma.SortOrder
-  weight?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
+  weight?: Prisma.SortOrder
 }
 
 export type ProjectItemsMasterCreateNestedManyWithoutVendorInput = {
@@ -782,11 +782,11 @@ export type ProjectItemsMasterCreateWithoutVendorInput = {
   L2: string
   L3: string
   qty: number
-  weight?: number
   group: string
-  project: Prisma.ProjectMasterCreateNestedOneWithoutItemsInput
-  details: Prisma.ProjectDetailsCreateNestedOneWithoutItemsInput
+  weight?: number
   client: Prisma.ClientMasterCreateNestedOneWithoutItemsInput
+  details: Prisma.ProjectDetailsCreateNestedOneWithoutItemsInput
+  project: Prisma.ProjectMasterCreateNestedOneWithoutItemsInput
 }
 
 export type ProjectItemsMasterUncheckedCreateWithoutVendorInput = {
@@ -800,9 +800,9 @@ export type ProjectItemsMasterUncheckedCreateWithoutVendorInput = {
   L2: string
   L3: string
   qty: number
-  weight?: number
-  group: string
   project_details_id: number
+  group: string
+  weight?: number
 }
 
 export type ProjectItemsMasterCreateOrConnectWithoutVendorInput = {
@@ -846,9 +846,9 @@ export type ProjectItemsMasterScalarWhereInput = {
   L2?: Prisma.StringFilter<"ProjectItemsMaster"> | string
   L3?: Prisma.StringFilter<"ProjectItemsMaster"> | string
   qty?: Prisma.IntFilter<"ProjectItemsMaster"> | number
-  weight?: Prisma.FloatFilter<"ProjectItemsMaster"> | number
-  group?: Prisma.StringFilter<"ProjectItemsMaster"> | string
   project_details_id?: Prisma.IntFilter<"ProjectItemsMaster"> | number
+  group?: Prisma.StringFilter<"ProjectItemsMaster"> | string
+  weight?: Prisma.FloatFilter<"ProjectItemsMaster"> | number
 }
 
 export type ProjectItemsMasterCreateWithoutProjectInput = {
@@ -859,11 +859,11 @@ export type ProjectItemsMasterCreateWithoutProjectInput = {
   L2: string
   L3: string
   qty: number
-  weight?: number
   group: string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectItemsInput
-  details: Prisma.ProjectDetailsCreateNestedOneWithoutItemsInput
+  weight?: number
   client: Prisma.ClientMasterCreateNestedOneWithoutItemsInput
+  details: Prisma.ProjectDetailsCreateNestedOneWithoutItemsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectItemsInput
 }
 
 export type ProjectItemsMasterUncheckedCreateWithoutProjectInput = {
@@ -877,9 +877,9 @@ export type ProjectItemsMasterUncheckedCreateWithoutProjectInput = {
   L2: string
   L3: string
   qty: number
-  weight?: number
-  group: string
   project_details_id: number
+  group: string
+  weight?: number
 }
 
 export type ProjectItemsMasterCreateOrConnectWithoutProjectInput = {
@@ -916,11 +916,11 @@ export type ProjectItemsMasterCreateWithoutDetailsInput = {
   L2: string
   L3: string
   qty: number
-  weight?: number
   group: string
+  weight?: number
+  client: Prisma.ClientMasterCreateNestedOneWithoutItemsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutItemsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectItemsInput
-  client: Prisma.ClientMasterCreateNestedOneWithoutItemsInput
 }
 
 export type ProjectItemsMasterUncheckedCreateWithoutDetailsInput = {
@@ -935,8 +935,8 @@ export type ProjectItemsMasterUncheckedCreateWithoutDetailsInput = {
   L2: string
   L3: string
   qty: number
-  weight?: number
   group: string
+  weight?: number
 }
 
 export type ProjectItemsMasterCreateOrConnectWithoutDetailsInput = {
@@ -973,11 +973,11 @@ export type ProjectItemsMasterCreateWithoutClientInput = {
   L2: string
   L3: string
   qty: number
-  weight?: number
   group: string
+  weight?: number
+  details: Prisma.ProjectDetailsCreateNestedOneWithoutItemsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutItemsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectItemsInput
-  details: Prisma.ProjectDetailsCreateNestedOneWithoutItemsInput
 }
 
 export type ProjectItemsMasterUncheckedCreateWithoutClientInput = {
@@ -991,9 +991,9 @@ export type ProjectItemsMasterUncheckedCreateWithoutClientInput = {
   L2: string
   L3: string
   qty: number
-  weight?: number
-  group: string
   project_details_id: number
+  group: string
+  weight?: number
 }
 
 export type ProjectItemsMasterCreateOrConnectWithoutClientInput = {
@@ -1033,9 +1033,9 @@ export type ProjectItemsMasterCreateManyVendorInput = {
   L2: string
   L3: string
   qty: number
-  weight?: number
-  group: string
   project_details_id: number
+  group: string
+  weight?: number
 }
 
 export type ProjectItemsMasterUpdateWithoutVendorInput = {
@@ -1046,11 +1046,11 @@ export type ProjectItemsMasterUpdateWithoutVendorInput = {
   L2?: Prisma.StringFieldUpdateOperationsInput | string
   L3?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   group?: Prisma.StringFieldUpdateOperationsInput | string
-  project?: Prisma.ProjectMasterUpdateOneRequiredWithoutItemsNestedInput
-  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutItemsNestedInput
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   client?: Prisma.ClientMasterUpdateOneRequiredWithoutItemsNestedInput
+  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutItemsNestedInput
+  project?: Prisma.ProjectMasterUpdateOneRequiredWithoutItemsNestedInput
 }
 
 export type ProjectItemsMasterUncheckedUpdateWithoutVendorInput = {
@@ -1064,9 +1064,9 @@ export type ProjectItemsMasterUncheckedUpdateWithoutVendorInput = {
   L2?: Prisma.StringFieldUpdateOperationsInput | string
   L3?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  group?: Prisma.StringFieldUpdateOperationsInput | string
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  group?: Prisma.StringFieldUpdateOperationsInput | string
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ProjectItemsMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -1080,9 +1080,9 @@ export type ProjectItemsMasterUncheckedUpdateManyWithoutVendorInput = {
   L2?: Prisma.StringFieldUpdateOperationsInput | string
   L3?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  group?: Prisma.StringFieldUpdateOperationsInput | string
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  group?: Prisma.StringFieldUpdateOperationsInput | string
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ProjectItemsMasterCreateManyProjectInput = {
@@ -1096,9 +1096,9 @@ export type ProjectItemsMasterCreateManyProjectInput = {
   L2: string
   L3: string
   qty: number
-  weight?: number
-  group: string
   project_details_id: number
+  group: string
+  weight?: number
 }
 
 export type ProjectItemsMasterUpdateWithoutProjectInput = {
@@ -1109,11 +1109,11 @@ export type ProjectItemsMasterUpdateWithoutProjectInput = {
   L2?: Prisma.StringFieldUpdateOperationsInput | string
   L3?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   group?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectItemsNestedInput
-  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutItemsNestedInput
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   client?: Prisma.ClientMasterUpdateOneRequiredWithoutItemsNestedInput
+  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutItemsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectItemsNestedInput
 }
 
 export type ProjectItemsMasterUncheckedUpdateWithoutProjectInput = {
@@ -1127,9 +1127,9 @@ export type ProjectItemsMasterUncheckedUpdateWithoutProjectInput = {
   L2?: Prisma.StringFieldUpdateOperationsInput | string
   L3?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  group?: Prisma.StringFieldUpdateOperationsInput | string
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  group?: Prisma.StringFieldUpdateOperationsInput | string
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ProjectItemsMasterUncheckedUpdateManyWithoutProjectInput = {
@@ -1143,9 +1143,9 @@ export type ProjectItemsMasterUncheckedUpdateManyWithoutProjectInput = {
   L2?: Prisma.StringFieldUpdateOperationsInput | string
   L3?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  group?: Prisma.StringFieldUpdateOperationsInput | string
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  group?: Prisma.StringFieldUpdateOperationsInput | string
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ProjectItemsMasterCreateManyDetailsInput = {
@@ -1160,8 +1160,8 @@ export type ProjectItemsMasterCreateManyDetailsInput = {
   L2: string
   L3: string
   qty: number
-  weight?: number
   group: string
+  weight?: number
 }
 
 export type ProjectItemsMasterUpdateWithoutDetailsInput = {
@@ -1172,11 +1172,11 @@ export type ProjectItemsMasterUpdateWithoutDetailsInput = {
   L2?: Prisma.StringFieldUpdateOperationsInput | string
   L3?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   group?: Prisma.StringFieldUpdateOperationsInput | string
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  client?: Prisma.ClientMasterUpdateOneRequiredWithoutItemsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutItemsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectItemsNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutItemsNestedInput
 }
 
 export type ProjectItemsMasterUncheckedUpdateWithoutDetailsInput = {
@@ -1191,8 +1191,8 @@ export type ProjectItemsMasterUncheckedUpdateWithoutDetailsInput = {
   L2?: Prisma.StringFieldUpdateOperationsInput | string
   L3?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   group?: Prisma.StringFieldUpdateOperationsInput | string
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ProjectItemsMasterUncheckedUpdateManyWithoutDetailsInput = {
@@ -1207,8 +1207,8 @@ export type ProjectItemsMasterUncheckedUpdateManyWithoutDetailsInput = {
   L2?: Prisma.StringFieldUpdateOperationsInput | string
   L3?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   group?: Prisma.StringFieldUpdateOperationsInput | string
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ProjectItemsMasterCreateManyClientInput = {
@@ -1222,9 +1222,9 @@ export type ProjectItemsMasterCreateManyClientInput = {
   L2: string
   L3: string
   qty: number
-  weight?: number
-  group: string
   project_details_id: number
+  group: string
+  weight?: number
 }
 
 export type ProjectItemsMasterUpdateWithoutClientInput = {
@@ -1235,11 +1235,11 @@ export type ProjectItemsMasterUpdateWithoutClientInput = {
   L2?: Prisma.StringFieldUpdateOperationsInput | string
   L3?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
   group?: Prisma.StringFieldUpdateOperationsInput | string
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutItemsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutItemsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectItemsNestedInput
-  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutItemsNestedInput
 }
 
 export type ProjectItemsMasterUncheckedUpdateWithoutClientInput = {
@@ -1253,9 +1253,9 @@ export type ProjectItemsMasterUncheckedUpdateWithoutClientInput = {
   L2?: Prisma.StringFieldUpdateOperationsInput | string
   L3?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  group?: Prisma.StringFieldUpdateOperationsInput | string
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  group?: Prisma.StringFieldUpdateOperationsInput | string
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ProjectItemsMasterUncheckedUpdateManyWithoutClientInput = {
@@ -1269,9 +1269,9 @@ export type ProjectItemsMasterUncheckedUpdateManyWithoutClientInput = {
   L2?: Prisma.StringFieldUpdateOperationsInput | string
   L3?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  group?: Prisma.StringFieldUpdateOperationsInput | string
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  group?: Prisma.StringFieldUpdateOperationsInput | string
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 
@@ -1288,13 +1288,13 @@ export type ProjectItemsMasterSelect<ExtArgs extends runtime.Types.Extensions.In
   L2?: boolean
   L3?: boolean
   qty?: boolean
-  weight?: boolean
-  group?: boolean
   project_details_id?: boolean
+  group?: boolean
+  weight?: boolean
+  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectItemsMaster"]>
 
 export type ProjectItemsMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1309,13 +1309,13 @@ export type ProjectItemsMasterSelectCreateManyAndReturn<ExtArgs extends runtime.
   L2?: boolean
   L3?: boolean
   qty?: boolean
-  weight?: boolean
-  group?: boolean
   project_details_id?: boolean
+  group?: boolean
+  weight?: boolean
+  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectItemsMaster"]>
 
 export type ProjectItemsMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1330,13 +1330,13 @@ export type ProjectItemsMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.
   L2?: boolean
   L3?: boolean
   qty?: boolean
-  weight?: boolean
-  group?: boolean
   project_details_id?: boolean
+  group?: boolean
+  weight?: boolean
+  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectItemsMaster"]>
 
 export type ProjectItemsMasterSelectScalar = {
@@ -1351,38 +1351,38 @@ export type ProjectItemsMasterSelectScalar = {
   L2?: boolean
   L3?: boolean
   qty?: boolean
-  weight?: boolean
-  group?: boolean
   project_details_id?: boolean
+  group?: boolean
+  weight?: boolean
 }
 
-export type ProjectItemsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "client_id" | "category" | "unique_id" | "item_name" | "L1" | "L2" | "L3" | "qty" | "weight" | "group" | "project_details_id", ExtArgs["result"]["projectItemsMaster"]>
+export type ProjectItemsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "client_id" | "category" | "unique_id" | "item_name" | "L1" | "L2" | "L3" | "qty" | "project_details_id" | "group" | "weight", ExtArgs["result"]["projectItemsMaster"]>
 export type ProjectItemsMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
 }
 export type ProjectItemsMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
 }
 export type ProjectItemsMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
 }
 
 export type $ProjectItemsMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProjectItemsMaster"
   objects: {
+    client: Prisma.$ClientMasterPayload<ExtArgs>
+    details: Prisma.$ProjectDetailsPayload<ExtArgs>
     project: Prisma.$ProjectMasterPayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    details: Prisma.$ProjectDetailsPayload<ExtArgs>
-    client: Prisma.$ClientMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1396,9 +1396,9 @@ export type $ProjectItemsMasterPayload<ExtArgs extends runtime.Types.Extensions.
     L2: string
     L3: string
     qty: number
-    weight: number
-    group: string
     project_details_id: number
+    group: string
+    weight: number
   }, ExtArgs["result"]["projectItemsMaster"]>
   composites: {}
 }
@@ -1793,10 +1793,10 @@ readonly fields: ProjectItemsMasterFieldRefs;
  */
 export interface Prisma__ProjectItemsMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  client<T extends Prisma.ClientMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ClientMasterClient<runtime.Types.Result.GetResult<Prisma.$ClientMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  details<T extends Prisma.ProjectDetailsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDetailsDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectDetailsClient<runtime.Types.Result.GetResult<Prisma.$ProjectDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   project<T extends Prisma.ProjectMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectMasterClient<runtime.Types.Result.GetResult<Prisma.$ProjectMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  details<T extends Prisma.ProjectDetailsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDetailsDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectDetailsClient<runtime.Types.Result.GetResult<Prisma.$ProjectDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  client<T extends Prisma.ClientMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ClientMasterClient<runtime.Types.Result.GetResult<Prisma.$ClientMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1837,9 +1837,9 @@ export interface ProjectItemsMasterFieldRefs {
   readonly L2: Prisma.FieldRef<"ProjectItemsMaster", 'String'>
   readonly L3: Prisma.FieldRef<"ProjectItemsMaster", 'String'>
   readonly qty: Prisma.FieldRef<"ProjectItemsMaster", 'Int'>
-  readonly weight: Prisma.FieldRef<"ProjectItemsMaster", 'Float'>
-  readonly group: Prisma.FieldRef<"ProjectItemsMaster", 'String'>
   readonly project_details_id: Prisma.FieldRef<"ProjectItemsMaster", 'Int'>
+  readonly group: Prisma.FieldRef<"ProjectItemsMaster", 'String'>
+  readonly weight: Prisma.FieldRef<"ProjectItemsMaster", 'Float'>
 }
     
 

@@ -206,13 +206,13 @@ export type UserDocumentScalarFieldEnum = (typeof UserDocumentScalarFieldEnum)[k
 
 export const ProjectMasterScalarFieldEnum = {
   id: 'id',
-  unique_project_id: 'unique_project_id',
   project_name: 'project_name',
   vendor_id: 'vendor_id',
   client_id: 'client_id',
   created_by: 'created_by',
   project_status: 'project_status',
   created_at: 'created_at',
+  unique_project_id: 'unique_project_id',
   is_grouping: 'is_grouping'
 } as const
 
@@ -227,11 +227,11 @@ export const ProjectDetailsScalarFieldEnum = {
   total_items: 'total_items',
   total_packed: 'total_packed',
   total_unpacked: 'total_unpacked',
-  start_date: 'start_date',
-  estimated_completion_date: 'estimated_completion_date',
   actual_completion_date: 'actual_completion_date',
-  room_name: 'room_name',
-  is_grouping: 'is_grouping'
+  estimated_completion_date: 'estimated_completion_date',
+  start_date: 'start_date',
+  is_grouping: 'is_grouping',
+  room_name: 'room_name'
 } as const
 
 export type ProjectDetailsScalarFieldEnum = (typeof ProjectDetailsScalarFieldEnum)[keyof typeof ProjectDetailsScalarFieldEnum]
@@ -249,9 +249,9 @@ export const ProjectItemsMasterScalarFieldEnum = {
   L2: 'L2',
   L3: 'L3',
   qty: 'qty',
-  weight: 'weight',
+  project_details_id: 'project_details_id',
   group: 'group',
-  project_details_id: 'project_details_id'
+  weight: 'weight'
 } as const
 
 export type ProjectItemsMasterScalarFieldEnum = (typeof ProjectItemsMasterScalarFieldEnum)[keyof typeof ProjectItemsMasterScalarFieldEnum]
@@ -260,16 +260,16 @@ export type ProjectItemsMasterScalarFieldEnum = (typeof ProjectItemsMasterScalar
 export const BoxMasterScalarFieldEnum = {
   id: 'id',
   project_id: 'project_id',
-  project_details_id: 'project_details_id',
   vendor_id: 'vendor_id',
   client_id: 'client_id',
   box_name: 'box_name',
   box_status: 'box_status',
   created_by: 'created_by',
   created_date: 'created_date',
-  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at',
   deleted_by: 'deleted_by',
-  deleted_at: 'deleted_at'
+  is_deleted: 'is_deleted',
+  project_details_id: 'project_details_id'
 } as const
 
 export type BoxMasterScalarFieldEnum = (typeof BoxMasterScalarFieldEnum)[keyof typeof BoxMasterScalarFieldEnum]
@@ -281,14 +281,14 @@ export const ScanAndPackItemScalarFieldEnum = {
   vendor_id: 'vendor_id',
   client_id: 'client_id',
   box_id: 'box_id',
-  project_details_id: 'project_details_id',
   unique_id: 'unique_id',
-  weight: 'weight',
   qty: 'qty',
   created_date: 'created_date',
   created_by: 'created_by',
   status: 'status',
-  is_deleted: 'is_deleted'
+  project_details_id: 'project_details_id',
+  is_deleted: 'is_deleted',
+  weight: 'weight'
 } as const
 
 export type ScanAndPackItemScalarFieldEnum = (typeof ScanAndPackItemScalarFieldEnum)[keyof typeof ScanAndPackItemScalarFieldEnum]
@@ -323,7 +323,6 @@ export type ClientMasterScalarFieldEnum = (typeof ClientMasterScalarFieldEnum)[k
 
 export const LeadMasterScalarFieldEnum = {
   id: 'id',
-  lead_code: 'lead_code',
   firstname: 'firstname',
   lastname: 'lastname',
   country_code: 'country_code',
@@ -331,58 +330,60 @@ export const LeadMasterScalarFieldEnum = {
   alt_contact_no: 'alt_contact_no',
   email: 'email',
   site_address: 'site_address',
-  site_map_link: 'site_map_link',
   site_type_id: 'site_type_id',
-  status_id: 'status_id',
   source_id: 'source_id',
-  account_id: 'account_id',
   archetech_name: 'archetech_name',
   designer_remark: 'designer_remark',
-  activity_status: 'activity_status',
-  is_draft: 'is_draft',
-  activity_status_remark: 'activity_status_remark',
-  final_desc_note: 'final_desc_note',
-  initial_site_measurement_date: 'initial_site_measurement_date',
-  pending_amount: 'pending_amount',
-  booking_amount: 'booking_amount',
-  total_project_amount: 'total_project_amount',
-  advance_payment_date: 'advance_payment_date',
-  no_of_client_documents_initially_submitted: 'no_of_client_documents_initially_submitted',
-  is_client_approval_submitted: 'is_client_approval_submitted',
-  client_required_order_login_complition_date: 'client_required_order_login_complition_date',
-  expected_order_login_ready_date: 'expected_order_login_ready_date',
-  hardware_packing_details_remark: 'hardware_packing_details_remark',
-  woodwork_packing_details_remark: 'woodwork_packing_details_remark',
-  no_of_boxes: 'no_of_boxes',
-  required_date_for_dispatch: 'required_date_for_dispatch',
-  onsite_contact_person_name: 'onsite_contact_person_name',
-  onsite_contact_person_number: 'onsite_contact_person_number',
-  alt_onsite_contact_person_name: 'alt_onsite_contact_person_name',
-  alt_onsite_contact_person_number: 'alt_onsite_contact_person_number',
-  material_lift_availability: 'material_lift_availability',
-  dispatch_planning_remark: 'dispatch_planning_remark',
-  dispatch_date: 'dispatch_date',
-  driver_name: 'driver_name',
-  driver_number: 'driver_number',
-  vehicle_no: 'vehicle_no',
-  dispatch_remark: 'dispatch_remark',
-  actual_installation_start_date: 'actual_installation_start_date',
-  expected_installation_end_date: 'expected_installation_end_date',
-  is_carcass_installation_completed: 'is_carcass_installation_completed',
-  carcass_installation_completion_date: 'carcass_installation_completion_date',
-  is_shutter_installation_completed: 'is_shutter_installation_completed',
-  shutter_installation_completion_date: 'shutter_installation_completion_date',
-  usable_handover_pending_work_details: 'usable_handover_pending_work_details',
-  vendor_id: 'vendor_id',
-  assign_to: 'assign_to',
-  assigned_by: 'assigned_by',
-  is_deleted: 'is_deleted',
-  deleted_by: 'deleted_by',
-  deleted_at: 'deleted_at',
   created_by: 'created_by',
   created_at: 'created_at',
   updated_by: 'updated_by',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  vendor_id: 'vendor_id',
+  assign_to: 'assign_to',
+  assigned_by: 'assigned_by',
+  account_id: 'account_id',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted',
+  status_id: 'status_id',
+  initial_site_measurement_date: 'initial_site_measurement_date',
+  final_desc_note: 'final_desc_note',
+  advance_payment_date: 'advance_payment_date',
+  site_map_link: 'site_map_link',
+  activity_status: 'activity_status',
+  activity_status_remark: 'activity_status_remark',
+  booking_amount: 'booking_amount',
+  pending_amount: 'pending_amount',
+  total_project_amount: 'total_project_amount',
+  is_draft: 'is_draft',
+  lead_code: 'lead_code',
+  is_client_approval_submitted: 'is_client_approval_submitted',
+  client_required_order_login_complition_date: 'client_required_order_login_complition_date',
+  expected_order_login_ready_date: 'expected_order_login_ready_date',
+  no_of_client_documents_initially_submitted: 'no_of_client_documents_initially_submitted',
+  hardware_packing_details_remark: 'hardware_packing_details_remark',
+  woodwork_packing_details_remark: 'woodwork_packing_details_remark',
+  no_of_boxes: 'no_of_boxes',
+  dispatch_planning_remark: 'dispatch_planning_remark',
+  material_lift_availability: 'material_lift_availability',
+  onsite_contact_person_name: 'onsite_contact_person_name',
+  onsite_contact_person_number: 'onsite_contact_person_number',
+  required_date_for_dispatch: 'required_date_for_dispatch',
+  alt_onsite_contact_person_name: 'alt_onsite_contact_person_name',
+  alt_onsite_contact_person_number: 'alt_onsite_contact_person_number',
+  dispatch_date: 'dispatch_date',
+  dispatch_remark: 'dispatch_remark',
+  driver_name: 'driver_name',
+  driver_number: 'driver_number',
+  vehicle_no: 'vehicle_no',
+  actual_installation_start_date: 'actual_installation_start_date',
+  carcass_installation_completion_date: 'carcass_installation_completion_date',
+  expected_installation_end_date: 'expected_installation_end_date',
+  is_carcass_installation_completed: 'is_carcass_installation_completed',
+  is_shutter_installation_completed: 'is_shutter_installation_completed',
+  shutter_installation_completion_date: 'shutter_installation_completion_date',
+  usable_handover_pending_work_details: 'usable_handover_pending_work_details',
+  mrp_value: 'mrp_value'
 } as const
 
 export type LeadMasterScalarFieldEnum = (typeof LeadMasterScalarFieldEnum)[keyof typeof LeadMasterScalarFieldEnum]
@@ -446,13 +447,13 @@ export const AccountMasterScalarFieldEnum = {
   alt_contact_no: 'alt_contact_no',
   email: 'email',
   vendor_id: 'vendor_id',
-  is_deleted: 'is_deleted',
-  deleted_by: 'deleted_by',
-  deleted_at: 'deleted_at',
   created_by: 'created_by',
   created_at: 'created_at',
   updated_by: 'updated_by',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted'
 } as const
 
 export type AccountMasterScalarFieldEnum = (typeof AccountMasterScalarFieldEnum)[keyof typeof AccountMasterScalarFieldEnum]
@@ -489,11 +490,11 @@ export const LeadDocumentsScalarFieldEnum = {
   created_at: 'created_at',
   deleted_by: 'deleted_by',
   deleted_at: 'deleted_at',
-  is_deleted: 'is_deleted',
-  doc_type_id: 'doc_type_id',
   account_id: 'account_id',
   lead_id: 'lead_id',
   vendor_id: 'vendor_id',
+  doc_type_id: 'doc_type_id',
+  is_deleted: 'is_deleted',
   tech_check_status: 'tech_check_status'
 } as const
 
@@ -568,8 +569,8 @@ export type DocumentTypeMasterScalarFieldEnum = (typeof DocumentTypeMasterScalar
 export const StatusTypeMasterScalarFieldEnum = {
   id: 'id',
   type: 'type',
-  tag: 'tag',
-  vendor_id: 'vendor_id'
+  vendor_id: 'vendor_id',
+  tag: 'tag'
 } as const
 
 export type StatusTypeMasterScalarFieldEnum = (typeof StatusTypeMasterScalarFieldEnum)[keyof typeof StatusTypeMasterScalarFieldEnum]
@@ -672,8 +673,8 @@ export const UserLeadTaskScalarFieldEnum = {
   closed_at: 'closed_at',
   created_by: 'created_by',
   created_at: 'created_at',
-  updated_by: 'updated_by',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  updated_by: 'updated_by'
 } as const
 
 export type UserLeadTaskScalarFieldEnum = (typeof UserLeadTaskScalarFieldEnum)[keyof typeof UserLeadTaskScalarFieldEnum]
@@ -720,9 +721,9 @@ export const CompanyVendorsMasterScalarFieldEnum = {
   created_by: 'created_by',
   updated_at: 'updated_at',
   updated_by: 'updated_by',
-  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at',
   deleted_by: 'deleted_by',
-  deleted_at: 'deleted_at'
+  is_deleted: 'is_deleted'
 } as const
 
 export type CompanyVendorsMasterScalarFieldEnum = (typeof CompanyVendorsMasterScalarFieldEnum)[keyof typeof CompanyVendorsMasterScalarFieldEnum]
@@ -735,15 +736,15 @@ export const OrderLoginDetailsScalarFieldEnum = {
   vendor_id: 'vendor_id',
   item_type: 'item_type',
   item_desc: 'item_desc',
-  company_vendor_id: 'company_vendor_id',
-  factory_user_vendor_selection_remark: 'factory_user_vendor_selection_remark',
   estimated_completion_date: 'estimated_completion_date',
   completion_date: 'completion_date',
   is_completed: 'is_completed',
   created_at: 'created_at',
   created_by: 'created_by',
+  company_vendor_id: 'company_vendor_id',
   updated_at: 'updated_at',
-  updated_by: 'updated_by'
+  updated_by: 'updated_by',
+  factory_user_vendor_selection_remark: 'factory_user_vendor_selection_remark'
 } as const
 
 export type OrderLoginDetailsScalarFieldEnum = (typeof OrderLoginDetailsScalarFieldEnum)[keyof typeof OrderLoginDetailsScalarFieldEnum]

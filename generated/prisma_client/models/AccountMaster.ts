@@ -29,17 +29,17 @@ export type AggregateAccountMaster = {
 export type AccountMasterAvgAggregateOutputType = {
   id: number | null
   vendor_id: number | null
-  deleted_by: number | null
   created_by: number | null
   updated_by: number | null
+  deleted_by: number | null
 }
 
 export type AccountMasterSumAggregateOutputType = {
   id: number | null
   vendor_id: number | null
-  deleted_by: number | null
   created_by: number | null
   updated_by: number | null
+  deleted_by: number | null
 }
 
 export type AccountMasterMinAggregateOutputType = {
@@ -50,13 +50,13 @@ export type AccountMasterMinAggregateOutputType = {
   alt_contact_no: string | null
   email: string | null
   vendor_id: number | null
-  is_deleted: boolean | null
-  deleted_by: number | null
-  deleted_at: Date | null
   created_by: number | null
   created_at: Date | null
   updated_by: number | null
   updated_at: Date | null
+  deleted_at: Date | null
+  deleted_by: number | null
+  is_deleted: boolean | null
 }
 
 export type AccountMasterMaxAggregateOutputType = {
@@ -67,13 +67,13 @@ export type AccountMasterMaxAggregateOutputType = {
   alt_contact_no: string | null
   email: string | null
   vendor_id: number | null
-  is_deleted: boolean | null
-  deleted_by: number | null
-  deleted_at: Date | null
   created_by: number | null
   created_at: Date | null
   updated_by: number | null
   updated_at: Date | null
+  deleted_at: Date | null
+  deleted_by: number | null
+  is_deleted: boolean | null
 }
 
 export type AccountMasterCountAggregateOutputType = {
@@ -84,13 +84,13 @@ export type AccountMasterCountAggregateOutputType = {
   alt_contact_no: number
   email: number
   vendor_id: number
-  is_deleted: number
-  deleted_by: number
-  deleted_at: number
   created_by: number
   created_at: number
   updated_by: number
   updated_at: number
+  deleted_at: number
+  deleted_by: number
+  is_deleted: number
   _all: number
 }
 
@@ -98,17 +98,17 @@ export type AccountMasterCountAggregateOutputType = {
 export type AccountMasterAvgAggregateInputType = {
   id?: true
   vendor_id?: true
-  deleted_by?: true
   created_by?: true
   updated_by?: true
+  deleted_by?: true
 }
 
 export type AccountMasterSumAggregateInputType = {
   id?: true
   vendor_id?: true
-  deleted_by?: true
   created_by?: true
   updated_by?: true
+  deleted_by?: true
 }
 
 export type AccountMasterMinAggregateInputType = {
@@ -119,13 +119,13 @@ export type AccountMasterMinAggregateInputType = {
   alt_contact_no?: true
   email?: true
   vendor_id?: true
-  is_deleted?: true
-  deleted_by?: true
-  deleted_at?: true
   created_by?: true
   created_at?: true
   updated_by?: true
   updated_at?: true
+  deleted_at?: true
+  deleted_by?: true
+  is_deleted?: true
 }
 
 export type AccountMasterMaxAggregateInputType = {
@@ -136,13 +136,13 @@ export type AccountMasterMaxAggregateInputType = {
   alt_contact_no?: true
   email?: true
   vendor_id?: true
-  is_deleted?: true
-  deleted_by?: true
-  deleted_at?: true
   created_by?: true
   created_at?: true
   updated_by?: true
   updated_at?: true
+  deleted_at?: true
+  deleted_by?: true
+  is_deleted?: true
 }
 
 export type AccountMasterCountAggregateInputType = {
@@ -153,13 +153,13 @@ export type AccountMasterCountAggregateInputType = {
   alt_contact_no?: true
   email?: true
   vendor_id?: true
-  is_deleted?: true
-  deleted_by?: true
-  deleted_at?: true
   created_by?: true
   created_at?: true
   updated_by?: true
   updated_at?: true
+  deleted_at?: true
+  deleted_by?: true
+  is_deleted?: true
   _all?: true
 }
 
@@ -257,13 +257,13 @@ export type AccountMasterGroupByOutputType = {
   alt_contact_no: string | null
   email: string | null
   vendor_id: number
-  is_deleted: boolean
-  deleted_by: number | null
-  deleted_at: Date | null
   created_by: number
   created_at: Date
   updated_by: number | null
   updated_at: Date
+  deleted_at: Date | null
+  deleted_by: number | null
+  is_deleted: boolean
   _count: AccountMasterCountAggregateOutputType | null
   _avg: AccountMasterAvgAggregateOutputType | null
   _sum: AccountMasterSumAggregateOutputType | null
@@ -297,38 +297,38 @@ export type AccountMasterWhereInput = {
   alt_contact_no?: Prisma.StringNullableFilter<"AccountMaster"> | string | null
   email?: Prisma.StringNullableFilter<"AccountMaster"> | string | null
   vendor_id?: Prisma.IntFilter<"AccountMaster"> | number
-  is_deleted?: Prisma.BoolFilter<"AccountMaster"> | boolean
-  deleted_by?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
-  deleted_at?: Prisma.DateTimeNullableFilter<"AccountMaster"> | Date | string | null
   created_by?: Prisma.IntFilter<"AccountMaster"> | number
   created_at?: Prisma.DateTimeFilter<"AccountMaster"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
   updated_at?: Prisma.DateTimeFilter<"AccountMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  deleted_at?: Prisma.DateTimeNullableFilter<"AccountMaster"> | Date | string | null
+  deleted_by?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
+  is_deleted?: Prisma.BoolFilter<"AccountMaster"> | boolean
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
-  leadsMapping?: Prisma.LeadProductMappingListRelationFilter
-  documents?: Prisma.LeadDocumentsListRelationFilter
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingListRelationFilter
-  leads?: Prisma.LeadMasterListRelationFilter
-  payments?: Prisma.PaymentInfoListRelationFilter
-  ledgers?: Prisma.LedgerListRelationFilter
-  leadStatusLogs?: Prisma.LeadStatusLogsListRelationFilter
-  designMeeting?: Prisma.LeadDesignMeetingListRelationFilter
-  designSelection?: Prisma.LeadDesignSelectionListRelationFilter
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingListRelationFilter
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingListRelationFilter
-  leadUserMappings?: Prisma.LeadUserMappingListRelationFilter
-  tasks?: Prisma.UserLeadTaskListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterListRelationFilter
+  installationUpdates?: Prisma.InstallationUpdateListRelationFilter
+  installerMappings?: Prisma.InstallerUserMappingListRelationFilter
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogListRelationFilter
+  designMeeting?: Prisma.LeadDesignMeetingListRelationFilter
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingListRelationFilter
+  designSelection?: Prisma.LeadDesignSelectionListRelationFilter
   leadDetailedLogs?: Prisma.LeadDetailedLogsListRelationFilter
   leadDocumentLogs?: Prisma.LeadDocumentLogsListRelationFilter
-  orderLoginDetails?: Prisma.OrderLoginDetailsListRelationFilter
-  siteReadiness?: Prisma.SiteReadinessListRelationFilter
-  installerMappings?: Prisma.InstallerUserMappingListRelationFilter
-  installationUpdates?: Prisma.InstallationUpdateListRelationFilter
+  documents?: Prisma.LeadDocumentsListRelationFilter
+  leads?: Prisma.LeadMasterListRelationFilter
+  leadsMapping?: Prisma.LeadProductMappingListRelationFilter
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingListRelationFilter
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingListRelationFilter
+  leadStatusLogs?: Prisma.LeadStatusLogsListRelationFilter
+  leadUserMappings?: Prisma.LeadUserMappingListRelationFilter
+  ledgers?: Prisma.LedgerListRelationFilter
   miscellaneousMaster?: Prisma.MiscellaneousMasterListRelationFilter
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterListRelationFilter
+  orderLoginDetails?: Prisma.OrderLoginDetailsListRelationFilter
+  payments?: Prisma.PaymentInfoListRelationFilter
+  siteReadiness?: Prisma.SiteReadinessListRelationFilter
+  tasks?: Prisma.UserLeadTaskListRelationFilter
 }
 
 export type AccountMasterOrderByWithRelationInput = {
@@ -339,38 +339,38 @@ export type AccountMasterOrderByWithRelationInput = {
   alt_contact_no?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  is_deleted?: Prisma.SortOrder
-  deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
-  deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
-  leadsMapping?: Prisma.LeadProductMappingOrderByRelationAggregateInput
-  documents?: Prisma.LeadDocumentsOrderByRelationAggregateInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingOrderByRelationAggregateInput
-  leads?: Prisma.LeadMasterOrderByRelationAggregateInput
-  payments?: Prisma.PaymentInfoOrderByRelationAggregateInput
-  ledgers?: Prisma.LedgerOrderByRelationAggregateInput
-  leadStatusLogs?: Prisma.LeadStatusLogsOrderByRelationAggregateInput
-  designMeeting?: Prisma.LeadDesignMeetingOrderByRelationAggregateInput
-  designSelection?: Prisma.LeadDesignSelectionOrderByRelationAggregateInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingOrderByRelationAggregateInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingOrderByRelationAggregateInput
-  leadUserMappings?: Prisma.LeadUserMappingOrderByRelationAggregateInput
-  tasks?: Prisma.UserLeadTaskOrderByRelationAggregateInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterOrderByRelationAggregateInput
+  installationUpdates?: Prisma.InstallationUpdateOrderByRelationAggregateInput
+  installerMappings?: Prisma.InstallerUserMappingOrderByRelationAggregateInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogOrderByRelationAggregateInput
+  designMeeting?: Prisma.LeadDesignMeetingOrderByRelationAggregateInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingOrderByRelationAggregateInput
+  designSelection?: Prisma.LeadDesignSelectionOrderByRelationAggregateInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsOrderByRelationAggregateInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsOrderByRelationAggregateInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsOrderByRelationAggregateInput
-  siteReadiness?: Prisma.SiteReadinessOrderByRelationAggregateInput
-  installerMappings?: Prisma.InstallerUserMappingOrderByRelationAggregateInput
-  installationUpdates?: Prisma.InstallationUpdateOrderByRelationAggregateInput
+  documents?: Prisma.LeadDocumentsOrderByRelationAggregateInput
+  leads?: Prisma.LeadMasterOrderByRelationAggregateInput
+  leadsMapping?: Prisma.LeadProductMappingOrderByRelationAggregateInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingOrderByRelationAggregateInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingOrderByRelationAggregateInput
+  leadStatusLogs?: Prisma.LeadStatusLogsOrderByRelationAggregateInput
+  leadUserMappings?: Prisma.LeadUserMappingOrderByRelationAggregateInput
+  ledgers?: Prisma.LedgerOrderByRelationAggregateInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterOrderByRelationAggregateInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterOrderByRelationAggregateInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsOrderByRelationAggregateInput
+  payments?: Prisma.PaymentInfoOrderByRelationAggregateInput
+  siteReadiness?: Prisma.SiteReadinessOrderByRelationAggregateInput
+  tasks?: Prisma.UserLeadTaskOrderByRelationAggregateInput
 }
 
 export type AccountMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -384,38 +384,38 @@ export type AccountMasterWhereUniqueInput = Prisma.AtLeast<{
   alt_contact_no?: Prisma.StringNullableFilter<"AccountMaster"> | string | null
   email?: Prisma.StringNullableFilter<"AccountMaster"> | string | null
   vendor_id?: Prisma.IntFilter<"AccountMaster"> | number
-  is_deleted?: Prisma.BoolFilter<"AccountMaster"> | boolean
-  deleted_by?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
-  deleted_at?: Prisma.DateTimeNullableFilter<"AccountMaster"> | Date | string | null
   created_by?: Prisma.IntFilter<"AccountMaster"> | number
   created_at?: Prisma.DateTimeFilter<"AccountMaster"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
   updated_at?: Prisma.DateTimeFilter<"AccountMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  deleted_at?: Prisma.DateTimeNullableFilter<"AccountMaster"> | Date | string | null
+  deleted_by?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
+  is_deleted?: Prisma.BoolFilter<"AccountMaster"> | boolean
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
-  leadsMapping?: Prisma.LeadProductMappingListRelationFilter
-  documents?: Prisma.LeadDocumentsListRelationFilter
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingListRelationFilter
-  leads?: Prisma.LeadMasterListRelationFilter
-  payments?: Prisma.PaymentInfoListRelationFilter
-  ledgers?: Prisma.LedgerListRelationFilter
-  leadStatusLogs?: Prisma.LeadStatusLogsListRelationFilter
-  designMeeting?: Prisma.LeadDesignMeetingListRelationFilter
-  designSelection?: Prisma.LeadDesignSelectionListRelationFilter
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingListRelationFilter
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingListRelationFilter
-  leadUserMappings?: Prisma.LeadUserMappingListRelationFilter
-  tasks?: Prisma.UserLeadTaskListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterListRelationFilter
+  installationUpdates?: Prisma.InstallationUpdateListRelationFilter
+  installerMappings?: Prisma.InstallerUserMappingListRelationFilter
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogListRelationFilter
+  designMeeting?: Prisma.LeadDesignMeetingListRelationFilter
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingListRelationFilter
+  designSelection?: Prisma.LeadDesignSelectionListRelationFilter
   leadDetailedLogs?: Prisma.LeadDetailedLogsListRelationFilter
   leadDocumentLogs?: Prisma.LeadDocumentLogsListRelationFilter
-  orderLoginDetails?: Prisma.OrderLoginDetailsListRelationFilter
-  siteReadiness?: Prisma.SiteReadinessListRelationFilter
-  installerMappings?: Prisma.InstallerUserMappingListRelationFilter
-  installationUpdates?: Prisma.InstallationUpdateListRelationFilter
+  documents?: Prisma.LeadDocumentsListRelationFilter
+  leads?: Prisma.LeadMasterListRelationFilter
+  leadsMapping?: Prisma.LeadProductMappingListRelationFilter
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingListRelationFilter
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingListRelationFilter
+  leadStatusLogs?: Prisma.LeadStatusLogsListRelationFilter
+  leadUserMappings?: Prisma.LeadUserMappingListRelationFilter
+  ledgers?: Prisma.LedgerListRelationFilter
   miscellaneousMaster?: Prisma.MiscellaneousMasterListRelationFilter
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterListRelationFilter
+  orderLoginDetails?: Prisma.OrderLoginDetailsListRelationFilter
+  payments?: Prisma.PaymentInfoListRelationFilter
+  siteReadiness?: Prisma.SiteReadinessListRelationFilter
+  tasks?: Prisma.UserLeadTaskListRelationFilter
 }, "id">
 
 export type AccountMasterOrderByWithAggregationInput = {
@@ -426,13 +426,13 @@ export type AccountMasterOrderByWithAggregationInput = {
   alt_contact_no?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  is_deleted?: Prisma.SortOrder
-  deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
-  deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
   _count?: Prisma.AccountMasterCountOrderByAggregateInput
   _avg?: Prisma.AccountMasterAvgOrderByAggregateInput
   _max?: Prisma.AccountMasterMaxOrderByAggregateInput
@@ -451,13 +451,13 @@ export type AccountMasterScalarWhereWithAggregatesInput = {
   alt_contact_no?: Prisma.StringNullableWithAggregatesFilter<"AccountMaster"> | string | null
   email?: Prisma.StringNullableWithAggregatesFilter<"AccountMaster"> | string | null
   vendor_id?: Prisma.IntWithAggregatesFilter<"AccountMaster"> | number
-  is_deleted?: Prisma.BoolWithAggregatesFilter<"AccountMaster"> | boolean
-  deleted_by?: Prisma.IntNullableWithAggregatesFilter<"AccountMaster"> | number | null
-  deleted_at?: Prisma.DateTimeNullableWithAggregatesFilter<"AccountMaster"> | Date | string | null
   created_by?: Prisma.IntWithAggregatesFilter<"AccountMaster"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"AccountMaster"> | Date | string
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"AccountMaster"> | number | null
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"AccountMaster"> | Date | string
+  deleted_at?: Prisma.DateTimeNullableWithAggregatesFilter<"AccountMaster"> | Date | string | null
+  deleted_by?: Prisma.IntNullableWithAggregatesFilter<"AccountMaster"> | number | null
+  is_deleted?: Prisma.BoolWithAggregatesFilter<"AccountMaster"> | boolean
 }
 
 export type AccountMasterCreateInput = {
@@ -466,36 +466,36 @@ export type AccountMasterCreateInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateInput = {
@@ -506,35 +506,35 @@ export type AccountMasterUncheckedCreateInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUpdateInput = {
@@ -543,36 +543,36 @@ export type AccountMasterUpdateInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateInput = {
@@ -583,35 +583,35 @@ export type AccountMasterUncheckedUpdateInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateManyInput = {
@@ -622,13 +622,13 @@ export type AccountMasterCreateManyInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
 }
 
 export type AccountMasterUpdateManyMutationInput = {
@@ -637,11 +637,11 @@ export type AccountMasterUpdateManyMutationInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type AccountMasterUncheckedUpdateManyInput = {
@@ -652,13 +652,13 @@ export type AccountMasterUncheckedUpdateManyInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type AccountMasterListRelationFilter = {
@@ -689,21 +689,21 @@ export type AccountMasterCountOrderByAggregateInput = {
   alt_contact_no?: Prisma.SortOrder
   email?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  is_deleted?: Prisma.SortOrder
-  deleted_by?: Prisma.SortOrder
-  deleted_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
+  deleted_by?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
 }
 
 export type AccountMasterAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  deleted_by?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  deleted_by?: Prisma.SortOrder
 }
 
 export type AccountMasterMaxOrderByAggregateInput = {
@@ -714,13 +714,13 @@ export type AccountMasterMaxOrderByAggregateInput = {
   alt_contact_no?: Prisma.SortOrder
   email?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  is_deleted?: Prisma.SortOrder
-  deleted_by?: Prisma.SortOrder
-  deleted_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
+  deleted_by?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
 }
 
 export type AccountMasterMinOrderByAggregateInput = {
@@ -731,21 +731,21 @@ export type AccountMasterMinOrderByAggregateInput = {
   alt_contact_no?: Prisma.SortOrder
   email?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  is_deleted?: Prisma.SortOrder
-  deleted_by?: Prisma.SortOrder
-  deleted_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
+  deleted_by?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
 }
 
 export type AccountMasterSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  deleted_by?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  deleted_by?: Prisma.SortOrder
 }
 
 export type AccountMasterCreateNestedManyWithoutVendorInput = {
@@ -1192,35 +1192,35 @@ export type AccountMasterCreateWithoutVendorInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutVendorInput = {
@@ -1230,35 +1230,35 @@ export type AccountMasterUncheckedCreateWithoutVendorInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutVendorInput = {
@@ -1298,13 +1298,13 @@ export type AccountMasterScalarWhereInput = {
   alt_contact_no?: Prisma.StringNullableFilter<"AccountMaster"> | string | null
   email?: Prisma.StringNullableFilter<"AccountMaster"> | string | null
   vendor_id?: Prisma.IntFilter<"AccountMaster"> | number
-  is_deleted?: Prisma.BoolFilter<"AccountMaster"> | boolean
-  deleted_by?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
-  deleted_at?: Prisma.DateTimeNullableFilter<"AccountMaster"> | Date | string | null
   created_by?: Prisma.IntFilter<"AccountMaster"> | number
   created_at?: Prisma.DateTimeFilter<"AccountMaster"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
   updated_at?: Prisma.DateTimeFilter<"AccountMaster"> | Date | string
+  deleted_at?: Prisma.DateTimeNullableFilter<"AccountMaster"> | Date | string | null
+  deleted_by?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
+  is_deleted?: Prisma.BoolFilter<"AccountMaster"> | boolean
 }
 
 export type AccountMasterCreateWithoutCreatedByInput = {
@@ -1313,35 +1313,35 @@ export type AccountMasterCreateWithoutCreatedByInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutCreatedByInput = {
@@ -1352,34 +1352,34 @@ export type AccountMasterUncheckedCreateWithoutCreatedByInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutCreatedByInput = {
@@ -1398,35 +1398,35 @@ export type AccountMasterCreateWithoutUpdatedByInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutUpdatedByInput = {
@@ -1437,34 +1437,34 @@ export type AccountMasterUncheckedCreateWithoutUpdatedByInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutUpdatedByInput = {
@@ -1515,35 +1515,35 @@ export type AccountMasterCreateWithoutLeadsInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadsInput = {
@@ -1554,34 +1554,34 @@ export type AccountMasterUncheckedCreateWithoutLeadsInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadsInput = {
@@ -1606,35 +1606,35 @@ export type AccountMasterUpdateWithoutLeadsInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadsInput = {
@@ -1645,34 +1645,34 @@ export type AccountMasterUncheckedUpdateWithoutLeadsInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadUserMappingsInput = {
@@ -1681,35 +1681,35 @@ export type AccountMasterCreateWithoutLeadUserMappingsInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadUserMappingsInput = {
@@ -1720,34 +1720,34 @@ export type AccountMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadUserMappingsInput = {
@@ -1772,35 +1772,35 @@ export type AccountMasterUpdateWithoutLeadUserMappingsInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
@@ -1811,34 +1811,34 @@ export type AccountMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadActivityStatusLogInput = {
@@ -1847,35 +1847,35 @@ export type AccountMasterCreateWithoutLeadActivityStatusLogInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
@@ -1886,34 +1886,34 @@ export type AccountMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadActivityStatusLogInput = {
@@ -1938,35 +1938,35 @@ export type AccountMasterUpdateWithoutLeadActivityStatusLogInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
@@ -1977,34 +1977,34 @@ export type AccountMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadsMappingInput = {
@@ -2013,35 +2013,35 @@ export type AccountMasterCreateWithoutLeadsMappingInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadsMappingInput = {
@@ -2052,34 +2052,34 @@ export type AccountMasterUncheckedCreateWithoutLeadsMappingInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadsMappingInput = {
@@ -2104,35 +2104,35 @@ export type AccountMasterUpdateWithoutLeadsMappingInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadsMappingInput = {
@@ -2143,34 +2143,34 @@ export type AccountMasterUncheckedUpdateWithoutLeadsMappingInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutDocumentsInput = {
@@ -2179,35 +2179,35 @@ export type AccountMasterCreateWithoutDocumentsInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutDocumentsInput = {
@@ -2218,34 +2218,34 @@ export type AccountMasterUncheckedCreateWithoutDocumentsInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutDocumentsInput = {
@@ -2270,35 +2270,35 @@ export type AccountMasterUpdateWithoutDocumentsInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutDocumentsInput = {
@@ -2309,34 +2309,34 @@ export type AccountMasterUncheckedUpdateWithoutDocumentsInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadProductStructureMappingInput = {
@@ -2345,35 +2345,35 @@ export type AccountMasterCreateWithoutLeadProductStructureMappingInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
@@ -2384,34 +2384,34 @@ export type AccountMasterUncheckedCreateWithoutLeadProductStructureMappingInput 
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadProductStructureMappingInput = {
@@ -2436,35 +2436,35 @@ export type AccountMasterUpdateWithoutLeadProductStructureMappingInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
@@ -2475,34 +2475,34 @@ export type AccountMasterUncheckedUpdateWithoutLeadProductStructureMappingInput 
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutPaymentsInput = {
@@ -2511,35 +2511,35 @@ export type AccountMasterCreateWithoutPaymentsInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
-  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutPaymentsInput = {
@@ -2550,34 +2550,34 @@ export type AccountMasterUncheckedCreateWithoutPaymentsInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
-  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutPaymentsInput = {
@@ -2602,35 +2602,35 @@ export type AccountMasterUpdateWithoutPaymentsInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
-  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutPaymentsInput = {
@@ -2641,34 +2641,34 @@ export type AccountMasterUncheckedUpdateWithoutPaymentsInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
-  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLedgersInput = {
@@ -2677,35 +2677,35 @@ export type AccountMasterCreateWithoutLedgersInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLedgersInput = {
@@ -2716,34 +2716,34 @@ export type AccountMasterUncheckedCreateWithoutLedgersInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLedgersInput = {
@@ -2768,35 +2768,35 @@ export type AccountMasterUpdateWithoutLedgersInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLedgersInput = {
@@ -2807,34 +2807,34 @@ export type AccountMasterUncheckedUpdateWithoutLedgersInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadStatusLogsInput = {
@@ -2843,35 +2843,35 @@ export type AccountMasterCreateWithoutLeadStatusLogsInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadStatusLogsInput = {
@@ -2882,34 +2882,34 @@ export type AccountMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadStatusLogsInput = {
@@ -2934,35 +2934,35 @@ export type AccountMasterUpdateWithoutLeadStatusLogsInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
@@ -2973,34 +2973,34 @@ export type AccountMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutDesignMeetingInput = {
@@ -3009,35 +3009,35 @@ export type AccountMasterCreateWithoutDesignMeetingInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutDesignMeetingInput = {
@@ -3048,34 +3048,34 @@ export type AccountMasterUncheckedCreateWithoutDesignMeetingInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutDesignMeetingInput = {
@@ -3100,35 +3100,35 @@ export type AccountMasterUpdateWithoutDesignMeetingInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutDesignMeetingInput = {
@@ -3139,34 +3139,34 @@ export type AccountMasterUncheckedUpdateWithoutDesignMeetingInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutDesignMeetingDocsMappingInput = {
@@ -3175,35 +3175,35 @@ export type AccountMasterCreateWithoutDesignMeetingDocsMappingInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
@@ -3214,34 +3214,34 @@ export type AccountMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutDesignMeetingDocsMappingInput = {
@@ -3266,35 +3266,35 @@ export type AccountMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
@@ -3305,34 +3305,34 @@ export type AccountMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutDesignSelectionInput = {
@@ -3341,35 +3341,35 @@ export type AccountMasterCreateWithoutDesignSelectionInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutDesignSelectionInput = {
@@ -3380,34 +3380,34 @@ export type AccountMasterUncheckedCreateWithoutDesignSelectionInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutDesignSelectionInput = {
@@ -3432,35 +3432,35 @@ export type AccountMasterUpdateWithoutDesignSelectionInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutDesignSelectionInput = {
@@ -3471,34 +3471,34 @@ export type AccountMasterUncheckedUpdateWithoutDesignSelectionInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutSiteSupervisorsInput = {
@@ -3507,35 +3507,35 @@ export type AccountMasterCreateWithoutSiteSupervisorsInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutSiteSupervisorsInput = {
@@ -3546,34 +3546,34 @@ export type AccountMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutSiteSupervisorsInput = {
@@ -3598,35 +3598,35 @@ export type AccountMasterUpdateWithoutSiteSupervisorsInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
@@ -3637,34 +3637,34 @@ export type AccountMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutTasksInput = {
@@ -3673,35 +3673,35 @@ export type AccountMasterCreateWithoutTasksInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutTasksInput = {
@@ -3712,34 +3712,34 @@ export type AccountMasterUncheckedCreateWithoutTasksInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutTasksInput = {
@@ -3764,35 +3764,35 @@ export type AccountMasterUpdateWithoutTasksInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutTasksInput = {
@@ -3803,34 +3803,34 @@ export type AccountMasterUncheckedUpdateWithoutTasksInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadDetailedLogsInput = {
@@ -3839,35 +3839,35 @@ export type AccountMasterCreateWithoutLeadDetailedLogsInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
-  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
@@ -3878,34 +3878,34 @@ export type AccountMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
-  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadDetailedLogsInput = {
@@ -3930,35 +3930,35 @@ export type AccountMasterUpdateWithoutLeadDetailedLogsInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
-  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
@@ -3969,34 +3969,34 @@ export type AccountMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
-  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadDocumentLogsInput = {
@@ -4005,35 +4005,35 @@ export type AccountMasterCreateWithoutLeadDocumentLogsInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
-  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
-  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
@@ -4044,34 +4044,34 @@ export type AccountMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
-  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
-  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadDocumentLogsInput = {
@@ -4096,35 +4096,35 @@ export type AccountMasterUpdateWithoutLeadDocumentLogsInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
-  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
-  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
@@ -4135,34 +4135,34 @@ export type AccountMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
-  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
-  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutOrderLoginDetailsInput = {
@@ -4171,35 +4171,35 @@ export type AccountMasterCreateWithoutOrderLoginDetailsInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
@@ -4210,34 +4210,34 @@ export type AccountMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutOrderLoginDetailsInput = {
@@ -4262,35 +4262,35 @@ export type AccountMasterUpdateWithoutOrderLoginDetailsInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
@@ -4301,34 +4301,34 @@ export type AccountMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutSiteReadinessInput = {
@@ -4337,35 +4337,35 @@ export type AccountMasterCreateWithoutSiteReadinessInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutSiteReadinessInput = {
@@ -4376,34 +4376,34 @@ export type AccountMasterUncheckedCreateWithoutSiteReadinessInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutSiteReadinessInput = {
@@ -4428,35 +4428,35 @@ export type AccountMasterUpdateWithoutSiteReadinessInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutSiteReadinessInput = {
@@ -4467,34 +4467,34 @@ export type AccountMasterUncheckedUpdateWithoutSiteReadinessInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutInstallerMappingsInput = {
@@ -4503,35 +4503,35 @@ export type AccountMasterCreateWithoutInstallerMappingsInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutInstallerMappingsInput = {
@@ -4542,34 +4542,34 @@ export type AccountMasterUncheckedCreateWithoutInstallerMappingsInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutInstallerMappingsInput = {
@@ -4594,35 +4594,35 @@ export type AccountMasterUpdateWithoutInstallerMappingsInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutInstallerMappingsInput = {
@@ -4633,34 +4633,34 @@ export type AccountMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutInstallationUpdatesInput = {
@@ -4669,35 +4669,35 @@ export type AccountMasterCreateWithoutInstallationUpdatesInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutInstallationUpdatesInput = {
@@ -4708,34 +4708,34 @@ export type AccountMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutInstallationUpdatesInput = {
@@ -4760,35 +4760,35 @@ export type AccountMasterUpdateWithoutInstallationUpdatesInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
@@ -4799,34 +4799,34 @@ export type AccountMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutMiscellaneousMasterInput = {
@@ -4835,35 +4835,35 @@ export type AccountMasterCreateWithoutMiscellaneousMasterInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
@@ -4874,34 +4874,34 @@ export type AccountMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutMiscellaneousMasterInput = {
@@ -4926,35 +4926,35 @@ export type AccountMasterUpdateWithoutMiscellaneousMasterInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
@@ -4965,34 +4965,34 @@ export type AccountMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutInstallationIssueLogMasterInput = {
@@ -5001,35 +5001,35 @@ export type AccountMasterCreateWithoutInstallationIssueLogMasterInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
-  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
@@ -5040,34 +5040,34 @@ export type AccountMasterUncheckedCreateWithoutInstallationIssueLogMasterInput =
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutInstallationIssueLogMasterInput = {
@@ -5092,35 +5092,35 @@ export type AccountMasterUpdateWithoutInstallationIssueLogMasterInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
@@ -5131,34 +5131,34 @@ export type AccountMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput =
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateManyVendorInput = {
@@ -5168,13 +5168,13 @@ export type AccountMasterCreateManyVendorInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
 }
 
 export type AccountMasterUpdateWithoutVendorInput = {
@@ -5183,35 +5183,35 @@ export type AccountMasterUpdateWithoutVendorInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutVendorInput = {
@@ -5221,35 +5221,35 @@ export type AccountMasterUncheckedUpdateWithoutVendorInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -5259,13 +5259,13 @@ export type AccountMasterUncheckedUpdateManyWithoutVendorInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type AccountMasterCreateManyCreatedByInput = {
@@ -5276,12 +5276,12 @@ export type AccountMasterCreateManyCreatedByInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
 }
 
 export type AccountMasterCreateManyUpdatedByInput = {
@@ -5292,12 +5292,12 @@ export type AccountMasterCreateManyUpdatedByInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  is_deleted?: boolean
-  deleted_by?: number | null
-  deleted_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
 }
 
 export type AccountMasterUpdateWithoutCreatedByInput = {
@@ -5306,35 +5306,35 @@ export type AccountMasterUpdateWithoutCreatedByInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutCreatedByInput = {
@@ -5345,34 +5345,34 @@ export type AccountMasterUncheckedUpdateWithoutCreatedByInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateManyWithoutCreatedByInput = {
@@ -5383,12 +5383,12 @@ export type AccountMasterUncheckedUpdateManyWithoutCreatedByInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type AccountMasterUpdateWithoutUpdatedByInput = {
@@ -5397,35 +5397,35 @@ export type AccountMasterUpdateWithoutUpdatedByInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
-  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutUpdatedByInput = {
@@ -5436,34 +5436,34 @@ export type AccountMasterUncheckedUpdateWithoutUpdatedByInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -5474,12 +5474,12 @@ export type AccountMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -5488,53 +5488,53 @@ export type AccountMasterUncheckedUpdateManyWithoutUpdatedByInput = {
  */
 
 export type AccountMasterCountOutputType = {
-  leadsMapping: number
-  documents: number
-  leadProductStructureMapping: number
-  leads: number
-  payments: number
-  ledgers: number
-  leadStatusLogs: number
-  designMeeting: number
-  designSelection: number
-  designMeetingDocsMapping: number
-  siteSupervisors: number
-  leadUserMappings: number
-  tasks: number
+  installationIssueLogMaster: number
+  installationUpdates: number
+  installerMappings: number
   leadActivityStatusLog: number
+  designMeeting: number
+  designMeetingDocsMapping: number
+  designSelection: number
   leadDetailedLogs: number
   leadDocumentLogs: number
-  orderLoginDetails: number
-  siteReadiness: number
-  installerMappings: number
-  installationUpdates: number
+  documents: number
+  leads: number
+  leadsMapping: number
+  leadProductStructureMapping: number
+  siteSupervisors: number
+  leadStatusLogs: number
+  leadUserMappings: number
+  ledgers: number
   miscellaneousMaster: number
-  installationIssueLogMaster: number
+  orderLoginDetails: number
+  payments: number
+  siteReadiness: number
+  tasks: number
 }
 
 export type AccountMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  leadsMapping?: boolean | AccountMasterCountOutputTypeCountLeadsMappingArgs
-  documents?: boolean | AccountMasterCountOutputTypeCountDocumentsArgs
-  leadProductStructureMapping?: boolean | AccountMasterCountOutputTypeCountLeadProductStructureMappingArgs
-  leads?: boolean | AccountMasterCountOutputTypeCountLeadsArgs
-  payments?: boolean | AccountMasterCountOutputTypeCountPaymentsArgs
-  ledgers?: boolean | AccountMasterCountOutputTypeCountLedgersArgs
-  leadStatusLogs?: boolean | AccountMasterCountOutputTypeCountLeadStatusLogsArgs
-  designMeeting?: boolean | AccountMasterCountOutputTypeCountDesignMeetingArgs
-  designSelection?: boolean | AccountMasterCountOutputTypeCountDesignSelectionArgs
-  designMeetingDocsMapping?: boolean | AccountMasterCountOutputTypeCountDesignMeetingDocsMappingArgs
-  siteSupervisors?: boolean | AccountMasterCountOutputTypeCountSiteSupervisorsArgs
-  leadUserMappings?: boolean | AccountMasterCountOutputTypeCountLeadUserMappingsArgs
-  tasks?: boolean | AccountMasterCountOutputTypeCountTasksArgs
+  installationIssueLogMaster?: boolean | AccountMasterCountOutputTypeCountInstallationIssueLogMasterArgs
+  installationUpdates?: boolean | AccountMasterCountOutputTypeCountInstallationUpdatesArgs
+  installerMappings?: boolean | AccountMasterCountOutputTypeCountInstallerMappingsArgs
   leadActivityStatusLog?: boolean | AccountMasterCountOutputTypeCountLeadActivityStatusLogArgs
+  designMeeting?: boolean | AccountMasterCountOutputTypeCountDesignMeetingArgs
+  designMeetingDocsMapping?: boolean | AccountMasterCountOutputTypeCountDesignMeetingDocsMappingArgs
+  designSelection?: boolean | AccountMasterCountOutputTypeCountDesignSelectionArgs
   leadDetailedLogs?: boolean | AccountMasterCountOutputTypeCountLeadDetailedLogsArgs
   leadDocumentLogs?: boolean | AccountMasterCountOutputTypeCountLeadDocumentLogsArgs
-  orderLoginDetails?: boolean | AccountMasterCountOutputTypeCountOrderLoginDetailsArgs
-  siteReadiness?: boolean | AccountMasterCountOutputTypeCountSiteReadinessArgs
-  installerMappings?: boolean | AccountMasterCountOutputTypeCountInstallerMappingsArgs
-  installationUpdates?: boolean | AccountMasterCountOutputTypeCountInstallationUpdatesArgs
+  documents?: boolean | AccountMasterCountOutputTypeCountDocumentsArgs
+  leads?: boolean | AccountMasterCountOutputTypeCountLeadsArgs
+  leadsMapping?: boolean | AccountMasterCountOutputTypeCountLeadsMappingArgs
+  leadProductStructureMapping?: boolean | AccountMasterCountOutputTypeCountLeadProductStructureMappingArgs
+  siteSupervisors?: boolean | AccountMasterCountOutputTypeCountSiteSupervisorsArgs
+  leadStatusLogs?: boolean | AccountMasterCountOutputTypeCountLeadStatusLogsArgs
+  leadUserMappings?: boolean | AccountMasterCountOutputTypeCountLeadUserMappingsArgs
+  ledgers?: boolean | AccountMasterCountOutputTypeCountLedgersArgs
   miscellaneousMaster?: boolean | AccountMasterCountOutputTypeCountMiscellaneousMasterArgs
-  installationIssueLogMaster?: boolean | AccountMasterCountOutputTypeCountInstallationIssueLogMasterArgs
+  orderLoginDetails?: boolean | AccountMasterCountOutputTypeCountOrderLoginDetailsArgs
+  payments?: boolean | AccountMasterCountOutputTypeCountPaymentsArgs
+  siteReadiness?: boolean | AccountMasterCountOutputTypeCountSiteReadinessArgs
+  tasks?: boolean | AccountMasterCountOutputTypeCountTasksArgs
 }
 
 /**
@@ -5550,50 +5550,29 @@ export type AccountMasterCountOutputTypeDefaultArgs<ExtArgs extends runtime.Type
 /**
  * AccountMasterCountOutputType without action
  */
-export type AccountMasterCountOutputTypeCountLeadsMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadProductMappingWhereInput
+export type AccountMasterCountOutputTypeCountInstallationIssueLogMasterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InstallationIssueLogMasterWhereInput
 }
 
 /**
  * AccountMasterCountOutputType without action
  */
-export type AccountMasterCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadDocumentsWhereInput
+export type AccountMasterCountOutputTypeCountInstallationUpdatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InstallationUpdateWhereInput
 }
 
 /**
  * AccountMasterCountOutputType without action
  */
-export type AccountMasterCountOutputTypeCountLeadProductStructureMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadProductStructureMappingWhereInput
+export type AccountMasterCountOutputTypeCountInstallerMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InstallerUserMappingWhereInput
 }
 
 /**
  * AccountMasterCountOutputType without action
  */
-export type AccountMasterCountOutputTypeCountLeadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadMasterWhereInput
-}
-
-/**
- * AccountMasterCountOutputType without action
- */
-export type AccountMasterCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PaymentInfoWhereInput
-}
-
-/**
- * AccountMasterCountOutputType without action
- */
-export type AccountMasterCountOutputTypeCountLedgersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LedgerWhereInput
-}
-
-/**
- * AccountMasterCountOutputType without action
- */
-export type AccountMasterCountOutputTypeCountLeadStatusLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadStatusLogsWhereInput
+export type AccountMasterCountOutputTypeCountLeadActivityStatusLogArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadActivityStatusLogWhereInput
 }
 
 /**
@@ -5606,13 +5585,6 @@ export type AccountMasterCountOutputTypeCountDesignMeetingArgs<ExtArgs extends r
 /**
  * AccountMasterCountOutputType without action
  */
-export type AccountMasterCountOutputTypeCountDesignSelectionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadDesignSelectionWhereInput
-}
-
-/**
- * AccountMasterCountOutputType without action
- */
 export type AccountMasterCountOutputTypeCountDesignMeetingDocsMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LeadDesignMeetingDocumentsMappingWhereInput
 }
@@ -5620,29 +5592,8 @@ export type AccountMasterCountOutputTypeCountDesignMeetingDocsMappingArgs<ExtArg
 /**
  * AccountMasterCountOutputType without action
  */
-export type AccountMasterCountOutputTypeCountSiteSupervisorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadSiteSupervisorMappingWhereInput
-}
-
-/**
- * AccountMasterCountOutputType without action
- */
-export type AccountMasterCountOutputTypeCountLeadUserMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadUserMappingWhereInput
-}
-
-/**
- * AccountMasterCountOutputType without action
- */
-export type AccountMasterCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserLeadTaskWhereInput
-}
-
-/**
- * AccountMasterCountOutputType without action
- */
-export type AccountMasterCountOutputTypeCountLeadActivityStatusLogArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadActivityStatusLogWhereInput
+export type AccountMasterCountOutputTypeCountDesignSelectionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadDesignSelectionWhereInput
 }
 
 /**
@@ -5662,29 +5613,57 @@ export type AccountMasterCountOutputTypeCountLeadDocumentLogsArgs<ExtArgs extend
 /**
  * AccountMasterCountOutputType without action
  */
-export type AccountMasterCountOutputTypeCountOrderLoginDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.OrderLoginDetailsWhereInput
+export type AccountMasterCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadDocumentsWhereInput
 }
 
 /**
  * AccountMasterCountOutputType without action
  */
-export type AccountMasterCountOutputTypeCountSiteReadinessArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SiteReadinessWhereInput
+export type AccountMasterCountOutputTypeCountLeadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadMasterWhereInput
 }
 
 /**
  * AccountMasterCountOutputType without action
  */
-export type AccountMasterCountOutputTypeCountInstallerMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.InstallerUserMappingWhereInput
+export type AccountMasterCountOutputTypeCountLeadsMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadProductMappingWhereInput
 }
 
 /**
  * AccountMasterCountOutputType without action
  */
-export type AccountMasterCountOutputTypeCountInstallationUpdatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.InstallationUpdateWhereInput
+export type AccountMasterCountOutputTypeCountLeadProductStructureMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadProductStructureMappingWhereInput
+}
+
+/**
+ * AccountMasterCountOutputType without action
+ */
+export type AccountMasterCountOutputTypeCountSiteSupervisorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadSiteSupervisorMappingWhereInput
+}
+
+/**
+ * AccountMasterCountOutputType without action
+ */
+export type AccountMasterCountOutputTypeCountLeadStatusLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadStatusLogsWhereInput
+}
+
+/**
+ * AccountMasterCountOutputType without action
+ */
+export type AccountMasterCountOutputTypeCountLeadUserMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadUserMappingWhereInput
+}
+
+/**
+ * AccountMasterCountOutputType without action
+ */
+export type AccountMasterCountOutputTypeCountLedgersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LedgerWhereInput
 }
 
 /**
@@ -5697,8 +5676,29 @@ export type AccountMasterCountOutputTypeCountMiscellaneousMasterArgs<ExtArgs ext
 /**
  * AccountMasterCountOutputType without action
  */
-export type AccountMasterCountOutputTypeCountInstallationIssueLogMasterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.InstallationIssueLogMasterWhereInput
+export type AccountMasterCountOutputTypeCountOrderLoginDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrderLoginDetailsWhereInput
+}
+
+/**
+ * AccountMasterCountOutputType without action
+ */
+export type AccountMasterCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentInfoWhereInput
+}
+
+/**
+ * AccountMasterCountOutputType without action
+ */
+export type AccountMasterCountOutputTypeCountSiteReadinessArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SiteReadinessWhereInput
+}
+
+/**
+ * AccountMasterCountOutputType without action
+ */
+export type AccountMasterCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserLeadTaskWhereInput
 }
 
 
@@ -5710,38 +5710,38 @@ export type AccountMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   alt_contact_no?: boolean
   email?: boolean
   vendor_id?: boolean
-  is_deleted?: boolean
-  deleted_by?: boolean
-  deleted_at?: boolean
   created_by?: boolean
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  deleted_at?: boolean
+  deleted_by?: boolean
+  is_deleted?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.AccountMaster$updatedByArgs<ExtArgs>
-  leadsMapping?: boolean | Prisma.AccountMaster$leadsMappingArgs<ExtArgs>
-  documents?: boolean | Prisma.AccountMaster$documentsArgs<ExtArgs>
-  leadProductStructureMapping?: boolean | Prisma.AccountMaster$leadProductStructureMappingArgs<ExtArgs>
-  leads?: boolean | Prisma.AccountMaster$leadsArgs<ExtArgs>
-  payments?: boolean | Prisma.AccountMaster$paymentsArgs<ExtArgs>
-  ledgers?: boolean | Prisma.AccountMaster$ledgersArgs<ExtArgs>
-  leadStatusLogs?: boolean | Prisma.AccountMaster$leadStatusLogsArgs<ExtArgs>
-  designMeeting?: boolean | Prisma.AccountMaster$designMeetingArgs<ExtArgs>
-  designSelection?: boolean | Prisma.AccountMaster$designSelectionArgs<ExtArgs>
-  designMeetingDocsMapping?: boolean | Prisma.AccountMaster$designMeetingDocsMappingArgs<ExtArgs>
-  siteSupervisors?: boolean | Prisma.AccountMaster$siteSupervisorsArgs<ExtArgs>
-  leadUserMappings?: boolean | Prisma.AccountMaster$leadUserMappingsArgs<ExtArgs>
-  tasks?: boolean | Prisma.AccountMaster$tasksArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  installationIssueLogMaster?: boolean | Prisma.AccountMaster$installationIssueLogMasterArgs<ExtArgs>
+  installationUpdates?: boolean | Prisma.AccountMaster$installationUpdatesArgs<ExtArgs>
+  installerMappings?: boolean | Prisma.AccountMaster$installerMappingsArgs<ExtArgs>
   leadActivityStatusLog?: boolean | Prisma.AccountMaster$leadActivityStatusLogArgs<ExtArgs>
+  designMeeting?: boolean | Prisma.AccountMaster$designMeetingArgs<ExtArgs>
+  designMeetingDocsMapping?: boolean | Prisma.AccountMaster$designMeetingDocsMappingArgs<ExtArgs>
+  designSelection?: boolean | Prisma.AccountMaster$designSelectionArgs<ExtArgs>
   leadDetailedLogs?: boolean | Prisma.AccountMaster$leadDetailedLogsArgs<ExtArgs>
   leadDocumentLogs?: boolean | Prisma.AccountMaster$leadDocumentLogsArgs<ExtArgs>
-  orderLoginDetails?: boolean | Prisma.AccountMaster$orderLoginDetailsArgs<ExtArgs>
-  siteReadiness?: boolean | Prisma.AccountMaster$siteReadinessArgs<ExtArgs>
-  installerMappings?: boolean | Prisma.AccountMaster$installerMappingsArgs<ExtArgs>
-  installationUpdates?: boolean | Prisma.AccountMaster$installationUpdatesArgs<ExtArgs>
+  documents?: boolean | Prisma.AccountMaster$documentsArgs<ExtArgs>
+  leads?: boolean | Prisma.AccountMaster$leadsArgs<ExtArgs>
+  leadsMapping?: boolean | Prisma.AccountMaster$leadsMappingArgs<ExtArgs>
+  leadProductStructureMapping?: boolean | Prisma.AccountMaster$leadProductStructureMappingArgs<ExtArgs>
+  siteSupervisors?: boolean | Prisma.AccountMaster$siteSupervisorsArgs<ExtArgs>
+  leadStatusLogs?: boolean | Prisma.AccountMaster$leadStatusLogsArgs<ExtArgs>
+  leadUserMappings?: boolean | Prisma.AccountMaster$leadUserMappingsArgs<ExtArgs>
+  ledgers?: boolean | Prisma.AccountMaster$ledgersArgs<ExtArgs>
   miscellaneousMaster?: boolean | Prisma.AccountMaster$miscellaneousMasterArgs<ExtArgs>
-  installationIssueLogMaster?: boolean | Prisma.AccountMaster$installationIssueLogMasterArgs<ExtArgs>
+  orderLoginDetails?: boolean | Prisma.AccountMaster$orderLoginDetailsArgs<ExtArgs>
+  payments?: boolean | Prisma.AccountMaster$paymentsArgs<ExtArgs>
+  siteReadiness?: boolean | Prisma.AccountMaster$siteReadinessArgs<ExtArgs>
+  tasks?: boolean | Prisma.AccountMaster$tasksArgs<ExtArgs>
   _count?: boolean | Prisma.AccountMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["accountMaster"]>
 
@@ -5753,16 +5753,16 @@ export type AccountMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   alt_contact_no?: boolean
   email?: boolean
   vendor_id?: boolean
-  is_deleted?: boolean
-  deleted_by?: boolean
-  deleted_at?: boolean
   created_by?: boolean
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  deleted_at?: boolean
+  deleted_by?: boolean
+  is_deleted?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.AccountMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["accountMaster"]>
 
 export type AccountMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -5773,16 +5773,16 @@ export type AccountMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   alt_contact_no?: boolean
   email?: boolean
   vendor_id?: boolean
-  is_deleted?: boolean
-  deleted_by?: boolean
-  deleted_at?: boolean
   created_by?: boolean
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  deleted_at?: boolean
+  deleted_by?: boolean
+  is_deleted?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.AccountMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["accountMaster"]>
 
 export type AccountMasterSelectScalar = {
@@ -5793,83 +5793,83 @@ export type AccountMasterSelectScalar = {
   alt_contact_no?: boolean
   email?: boolean
   vendor_id?: boolean
-  is_deleted?: boolean
-  deleted_by?: boolean
-  deleted_at?: boolean
   created_by?: boolean
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
+  deleted_at?: boolean
+  deleted_by?: boolean
+  is_deleted?: boolean
 }
 
-export type AccountMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "vendor_id" | "is_deleted" | "deleted_by" | "deleted_at" | "created_by" | "created_at" | "updated_by" | "updated_at", ExtArgs["result"]["accountMaster"]>
+export type AccountMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "vendor_id" | "created_by" | "created_at" | "updated_by" | "updated_at" | "deleted_at" | "deleted_by" | "is_deleted", ExtArgs["result"]["accountMaster"]>
 export type AccountMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.AccountMaster$updatedByArgs<ExtArgs>
-  leadsMapping?: boolean | Prisma.AccountMaster$leadsMappingArgs<ExtArgs>
-  documents?: boolean | Prisma.AccountMaster$documentsArgs<ExtArgs>
-  leadProductStructureMapping?: boolean | Prisma.AccountMaster$leadProductStructureMappingArgs<ExtArgs>
-  leads?: boolean | Prisma.AccountMaster$leadsArgs<ExtArgs>
-  payments?: boolean | Prisma.AccountMaster$paymentsArgs<ExtArgs>
-  ledgers?: boolean | Prisma.AccountMaster$ledgersArgs<ExtArgs>
-  leadStatusLogs?: boolean | Prisma.AccountMaster$leadStatusLogsArgs<ExtArgs>
-  designMeeting?: boolean | Prisma.AccountMaster$designMeetingArgs<ExtArgs>
-  designSelection?: boolean | Prisma.AccountMaster$designSelectionArgs<ExtArgs>
-  designMeetingDocsMapping?: boolean | Prisma.AccountMaster$designMeetingDocsMappingArgs<ExtArgs>
-  siteSupervisors?: boolean | Prisma.AccountMaster$siteSupervisorsArgs<ExtArgs>
-  leadUserMappings?: boolean | Prisma.AccountMaster$leadUserMappingsArgs<ExtArgs>
-  tasks?: boolean | Prisma.AccountMaster$tasksArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  installationIssueLogMaster?: boolean | Prisma.AccountMaster$installationIssueLogMasterArgs<ExtArgs>
+  installationUpdates?: boolean | Prisma.AccountMaster$installationUpdatesArgs<ExtArgs>
+  installerMappings?: boolean | Prisma.AccountMaster$installerMappingsArgs<ExtArgs>
   leadActivityStatusLog?: boolean | Prisma.AccountMaster$leadActivityStatusLogArgs<ExtArgs>
+  designMeeting?: boolean | Prisma.AccountMaster$designMeetingArgs<ExtArgs>
+  designMeetingDocsMapping?: boolean | Prisma.AccountMaster$designMeetingDocsMappingArgs<ExtArgs>
+  designSelection?: boolean | Prisma.AccountMaster$designSelectionArgs<ExtArgs>
   leadDetailedLogs?: boolean | Prisma.AccountMaster$leadDetailedLogsArgs<ExtArgs>
   leadDocumentLogs?: boolean | Prisma.AccountMaster$leadDocumentLogsArgs<ExtArgs>
-  orderLoginDetails?: boolean | Prisma.AccountMaster$orderLoginDetailsArgs<ExtArgs>
-  siteReadiness?: boolean | Prisma.AccountMaster$siteReadinessArgs<ExtArgs>
-  installerMappings?: boolean | Prisma.AccountMaster$installerMappingsArgs<ExtArgs>
-  installationUpdates?: boolean | Prisma.AccountMaster$installationUpdatesArgs<ExtArgs>
+  documents?: boolean | Prisma.AccountMaster$documentsArgs<ExtArgs>
+  leads?: boolean | Prisma.AccountMaster$leadsArgs<ExtArgs>
+  leadsMapping?: boolean | Prisma.AccountMaster$leadsMappingArgs<ExtArgs>
+  leadProductStructureMapping?: boolean | Prisma.AccountMaster$leadProductStructureMappingArgs<ExtArgs>
+  siteSupervisors?: boolean | Prisma.AccountMaster$siteSupervisorsArgs<ExtArgs>
+  leadStatusLogs?: boolean | Prisma.AccountMaster$leadStatusLogsArgs<ExtArgs>
+  leadUserMappings?: boolean | Prisma.AccountMaster$leadUserMappingsArgs<ExtArgs>
+  ledgers?: boolean | Prisma.AccountMaster$ledgersArgs<ExtArgs>
   miscellaneousMaster?: boolean | Prisma.AccountMaster$miscellaneousMasterArgs<ExtArgs>
-  installationIssueLogMaster?: boolean | Prisma.AccountMaster$installationIssueLogMasterArgs<ExtArgs>
+  orderLoginDetails?: boolean | Prisma.AccountMaster$orderLoginDetailsArgs<ExtArgs>
+  payments?: boolean | Prisma.AccountMaster$paymentsArgs<ExtArgs>
+  siteReadiness?: boolean | Prisma.AccountMaster$siteReadinessArgs<ExtArgs>
+  tasks?: boolean | Prisma.AccountMaster$tasksArgs<ExtArgs>
   _count?: boolean | Prisma.AccountMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type AccountMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.AccountMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type AccountMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.AccountMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $AccountMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "AccountMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
     updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
-    leadsMapping: Prisma.$LeadProductMappingPayload<ExtArgs>[]
-    documents: Prisma.$LeadDocumentsPayload<ExtArgs>[]
-    leadProductStructureMapping: Prisma.$LeadProductStructureMappingPayload<ExtArgs>[]
-    leads: Prisma.$LeadMasterPayload<ExtArgs>[]
-    payments: Prisma.$PaymentInfoPayload<ExtArgs>[]
-    ledgers: Prisma.$LedgerPayload<ExtArgs>[]
-    leadStatusLogs: Prisma.$LeadStatusLogsPayload<ExtArgs>[]
-    designMeeting: Prisma.$LeadDesignMeetingPayload<ExtArgs>[]
-    designSelection: Prisma.$LeadDesignSelectionPayload<ExtArgs>[]
-    designMeetingDocsMapping: Prisma.$LeadDesignMeetingDocumentsMappingPayload<ExtArgs>[]
-    siteSupervisors: Prisma.$LeadSiteSupervisorMappingPayload<ExtArgs>[]
-    leadUserMappings: Prisma.$LeadUserMappingPayload<ExtArgs>[]
-    tasks: Prisma.$UserLeadTaskPayload<ExtArgs>[]
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
+    installationIssueLogMaster: Prisma.$InstallationIssueLogMasterPayload<ExtArgs>[]
+    installationUpdates: Prisma.$InstallationUpdatePayload<ExtArgs>[]
+    installerMappings: Prisma.$InstallerUserMappingPayload<ExtArgs>[]
     leadActivityStatusLog: Prisma.$LeadActivityStatusLogPayload<ExtArgs>[]
+    designMeeting: Prisma.$LeadDesignMeetingPayload<ExtArgs>[]
+    designMeetingDocsMapping: Prisma.$LeadDesignMeetingDocumentsMappingPayload<ExtArgs>[]
+    designSelection: Prisma.$LeadDesignSelectionPayload<ExtArgs>[]
     leadDetailedLogs: Prisma.$LeadDetailedLogsPayload<ExtArgs>[]
     leadDocumentLogs: Prisma.$LeadDocumentLogsPayload<ExtArgs>[]
-    orderLoginDetails: Prisma.$OrderLoginDetailsPayload<ExtArgs>[]
-    siteReadiness: Prisma.$SiteReadinessPayload<ExtArgs>[]
-    installerMappings: Prisma.$InstallerUserMappingPayload<ExtArgs>[]
-    installationUpdates: Prisma.$InstallationUpdatePayload<ExtArgs>[]
+    documents: Prisma.$LeadDocumentsPayload<ExtArgs>[]
+    leads: Prisma.$LeadMasterPayload<ExtArgs>[]
+    leadsMapping: Prisma.$LeadProductMappingPayload<ExtArgs>[]
+    leadProductStructureMapping: Prisma.$LeadProductStructureMappingPayload<ExtArgs>[]
+    siteSupervisors: Prisma.$LeadSiteSupervisorMappingPayload<ExtArgs>[]
+    leadStatusLogs: Prisma.$LeadStatusLogsPayload<ExtArgs>[]
+    leadUserMappings: Prisma.$LeadUserMappingPayload<ExtArgs>[]
+    ledgers: Prisma.$LedgerPayload<ExtArgs>[]
     miscellaneousMaster: Prisma.$MiscellaneousMasterPayload<ExtArgs>[]
-    installationIssueLogMaster: Prisma.$InstallationIssueLogMasterPayload<ExtArgs>[]
+    orderLoginDetails: Prisma.$OrderLoginDetailsPayload<ExtArgs>[]
+    payments: Prisma.$PaymentInfoPayload<ExtArgs>[]
+    siteReadiness: Prisma.$SiteReadinessPayload<ExtArgs>[]
+    tasks: Prisma.$UserLeadTaskPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -5879,13 +5879,13 @@ export type $AccountMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     alt_contact_no: string | null
     email: string | null
     vendor_id: number
-    is_deleted: boolean
-    deleted_by: number | null
-    deleted_at: Date | null
     created_by: number
     created_at: Date
     updated_by: number | null
     updated_at: Date
+    deleted_at: Date | null
+    deleted_by: number | null
+    is_deleted: boolean
   }, ExtArgs["result"]["accountMaster"]>
   composites: {}
 }
@@ -6280,31 +6280,31 @@ readonly fields: AccountMasterFieldRefs;
  */
 export interface Prisma__AccountMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.AccountMaster$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  leadsMapping<T extends Prisma.AccountMaster$leadsMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadsMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  documents<T extends Prisma.AccountMaster$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  leadProductStructureMapping<T extends Prisma.AccountMaster$leadProductStructureMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadProductStructureMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  leads<T extends Prisma.AccountMaster$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  payments<T extends Prisma.AccountMaster$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentInfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  ledgers<T extends Prisma.AccountMaster$ledgersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$ledgersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  leadStatusLogs<T extends Prisma.AccountMaster$leadStatusLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadStatusLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadStatusLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  designMeeting<T extends Prisma.AccountMaster$designMeetingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$designMeetingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignMeetingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  designSelection<T extends Prisma.AccountMaster$designSelectionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$designSelectionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignSelectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  designMeetingDocsMapping<T extends Prisma.AccountMaster$designMeetingDocsMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$designMeetingDocsMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignMeetingDocumentsMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  siteSupervisors<T extends Prisma.AccountMaster$siteSupervisorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$siteSupervisorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadSiteSupervisorMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  leadUserMappings<T extends Prisma.AccountMaster$leadUserMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadUserMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadUserMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  tasks<T extends Prisma.AccountMaster$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserLeadTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  installationIssueLogMaster<T extends Prisma.AccountMaster$installationIssueLogMasterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$installationIssueLogMasterArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallationIssueLogMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  installationUpdates<T extends Prisma.AccountMaster$installationUpdatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$installationUpdatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallationUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  installerMappings<T extends Prisma.AccountMaster$installerMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$installerMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallerUserMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadActivityStatusLog<T extends Prisma.AccountMaster$leadActivityStatusLogArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadActivityStatusLogArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadActivityStatusLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  designMeeting<T extends Prisma.AccountMaster$designMeetingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$designMeetingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignMeetingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  designMeetingDocsMapping<T extends Prisma.AccountMaster$designMeetingDocsMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$designMeetingDocsMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignMeetingDocumentsMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  designSelection<T extends Prisma.AccountMaster$designSelectionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$designSelectionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignSelectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadDetailedLogs<T extends Prisma.AccountMaster$leadDetailedLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadDetailedLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDetailedLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadDocumentLogs<T extends Prisma.AccountMaster$leadDocumentLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadDocumentLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDocumentLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  orderLoginDetails<T extends Prisma.AccountMaster$orderLoginDetailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$orderLoginDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderLoginDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  siteReadiness<T extends Prisma.AccountMaster$siteReadinessArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$siteReadinessArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SiteReadinessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  installerMappings<T extends Prisma.AccountMaster$installerMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$installerMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallerUserMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  installationUpdates<T extends Prisma.AccountMaster$installationUpdatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$installationUpdatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallationUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documents<T extends Prisma.AccountMaster$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leads<T extends Prisma.AccountMaster$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadsMapping<T extends Prisma.AccountMaster$leadsMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadsMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadProductStructureMapping<T extends Prisma.AccountMaster$leadProductStructureMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadProductStructureMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  siteSupervisors<T extends Prisma.AccountMaster$siteSupervisorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$siteSupervisorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadSiteSupervisorMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadStatusLogs<T extends Prisma.AccountMaster$leadStatusLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadStatusLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadStatusLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadUserMappings<T extends Prisma.AccountMaster$leadUserMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadUserMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadUserMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ledgers<T extends Prisma.AccountMaster$ledgersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$ledgersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   miscellaneousMaster<T extends Prisma.AccountMaster$miscellaneousMasterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$miscellaneousMasterArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MiscellaneousMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  installationIssueLogMaster<T extends Prisma.AccountMaster$installationIssueLogMasterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$installationIssueLogMasterArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallationIssueLogMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  orderLoginDetails<T extends Prisma.AccountMaster$orderLoginDetailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$orderLoginDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderLoginDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  payments<T extends Prisma.AccountMaster$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentInfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  siteReadiness<T extends Prisma.AccountMaster$siteReadinessArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$siteReadinessArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SiteReadinessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tasks<T extends Prisma.AccountMaster$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserLeadTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6341,13 +6341,13 @@ export interface AccountMasterFieldRefs {
   readonly alt_contact_no: Prisma.FieldRef<"AccountMaster", 'String'>
   readonly email: Prisma.FieldRef<"AccountMaster", 'String'>
   readonly vendor_id: Prisma.FieldRef<"AccountMaster", 'Int'>
-  readonly is_deleted: Prisma.FieldRef<"AccountMaster", 'Boolean'>
-  readonly deleted_by: Prisma.FieldRef<"AccountMaster", 'Int'>
-  readonly deleted_at: Prisma.FieldRef<"AccountMaster", 'DateTime'>
   readonly created_by: Prisma.FieldRef<"AccountMaster", 'Int'>
   readonly created_at: Prisma.FieldRef<"AccountMaster", 'DateTime'>
   readonly updated_by: Prisma.FieldRef<"AccountMaster", 'Int'>
   readonly updated_at: Prisma.FieldRef<"AccountMaster", 'DateTime'>
+  readonly deleted_at: Prisma.FieldRef<"AccountMaster", 'DateTime'>
+  readonly deleted_by: Prisma.FieldRef<"AccountMaster", 'Int'>
+  readonly is_deleted: Prisma.FieldRef<"AccountMaster", 'Boolean'>
 }
     
 
@@ -6763,171 +6763,99 @@ export type AccountMaster$updatedByArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
- * AccountMaster.leadsMapping
+ * AccountMaster.installationIssueLogMaster
  */
-export type AccountMaster$leadsMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type AccountMaster$installationIssueLogMasterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the LeadProductMapping
+   * Select specific fields to fetch from the InstallationIssueLogMaster
    */
-  select?: Prisma.LeadProductMappingSelect<ExtArgs> | null
+  select?: Prisma.InstallationIssueLogMasterSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the LeadProductMapping
+   * Omit specific fields from the InstallationIssueLogMaster
    */
-  omit?: Prisma.LeadProductMappingOmit<ExtArgs> | null
+  omit?: Prisma.InstallationIssueLogMasterOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.LeadProductMappingInclude<ExtArgs> | null
-  where?: Prisma.LeadProductMappingWhereInput
-  orderBy?: Prisma.LeadProductMappingOrderByWithRelationInput | Prisma.LeadProductMappingOrderByWithRelationInput[]
-  cursor?: Prisma.LeadProductMappingWhereUniqueInput
+  include?: Prisma.InstallationIssueLogMasterInclude<ExtArgs> | null
+  where?: Prisma.InstallationIssueLogMasterWhereInput
+  orderBy?: Prisma.InstallationIssueLogMasterOrderByWithRelationInput | Prisma.InstallationIssueLogMasterOrderByWithRelationInput[]
+  cursor?: Prisma.InstallationIssueLogMasterWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.LeadProductMappingScalarFieldEnum | Prisma.LeadProductMappingScalarFieldEnum[]
+  distinct?: Prisma.InstallationIssueLogMasterScalarFieldEnum | Prisma.InstallationIssueLogMasterScalarFieldEnum[]
 }
 
 /**
- * AccountMaster.documents
+ * AccountMaster.installationUpdates
  */
-export type AccountMaster$documentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type AccountMaster$installationUpdatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the LeadDocuments
+   * Select specific fields to fetch from the InstallationUpdate
    */
-  select?: Prisma.LeadDocumentsSelect<ExtArgs> | null
+  select?: Prisma.InstallationUpdateSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the LeadDocuments
+   * Omit specific fields from the InstallationUpdate
    */
-  omit?: Prisma.LeadDocumentsOmit<ExtArgs> | null
+  omit?: Prisma.InstallationUpdateOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.LeadDocumentsInclude<ExtArgs> | null
-  where?: Prisma.LeadDocumentsWhereInput
-  orderBy?: Prisma.LeadDocumentsOrderByWithRelationInput | Prisma.LeadDocumentsOrderByWithRelationInput[]
-  cursor?: Prisma.LeadDocumentsWhereUniqueInput
+  include?: Prisma.InstallationUpdateInclude<ExtArgs> | null
+  where?: Prisma.InstallationUpdateWhereInput
+  orderBy?: Prisma.InstallationUpdateOrderByWithRelationInput | Prisma.InstallationUpdateOrderByWithRelationInput[]
+  cursor?: Prisma.InstallationUpdateWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.LeadDocumentsScalarFieldEnum | Prisma.LeadDocumentsScalarFieldEnum[]
+  distinct?: Prisma.InstallationUpdateScalarFieldEnum | Prisma.InstallationUpdateScalarFieldEnum[]
 }
 
 /**
- * AccountMaster.leadProductStructureMapping
+ * AccountMaster.installerMappings
  */
-export type AccountMaster$leadProductStructureMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type AccountMaster$installerMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the LeadProductStructureMapping
+   * Select specific fields to fetch from the InstallerUserMapping
    */
-  select?: Prisma.LeadProductStructureMappingSelect<ExtArgs> | null
+  select?: Prisma.InstallerUserMappingSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the LeadProductStructureMapping
+   * Omit specific fields from the InstallerUserMapping
    */
-  omit?: Prisma.LeadProductStructureMappingOmit<ExtArgs> | null
+  omit?: Prisma.InstallerUserMappingOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.LeadProductStructureMappingInclude<ExtArgs> | null
-  where?: Prisma.LeadProductStructureMappingWhereInput
-  orderBy?: Prisma.LeadProductStructureMappingOrderByWithRelationInput | Prisma.LeadProductStructureMappingOrderByWithRelationInput[]
-  cursor?: Prisma.LeadProductStructureMappingWhereUniqueInput
+  include?: Prisma.InstallerUserMappingInclude<ExtArgs> | null
+  where?: Prisma.InstallerUserMappingWhereInput
+  orderBy?: Prisma.InstallerUserMappingOrderByWithRelationInput | Prisma.InstallerUserMappingOrderByWithRelationInput[]
+  cursor?: Prisma.InstallerUserMappingWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.LeadProductStructureMappingScalarFieldEnum | Prisma.LeadProductStructureMappingScalarFieldEnum[]
+  distinct?: Prisma.InstallerUserMappingScalarFieldEnum | Prisma.InstallerUserMappingScalarFieldEnum[]
 }
 
 /**
- * AccountMaster.leads
+ * AccountMaster.leadActivityStatusLog
  */
-export type AccountMaster$leadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type AccountMaster$leadActivityStatusLogArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the LeadMaster
+   * Select specific fields to fetch from the LeadActivityStatusLog
    */
-  select?: Prisma.LeadMasterSelect<ExtArgs> | null
+  select?: Prisma.LeadActivityStatusLogSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the LeadMaster
+   * Omit specific fields from the LeadActivityStatusLog
    */
-  omit?: Prisma.LeadMasterOmit<ExtArgs> | null
+  omit?: Prisma.LeadActivityStatusLogOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.LeadMasterInclude<ExtArgs> | null
-  where?: Prisma.LeadMasterWhereInput
-  orderBy?: Prisma.LeadMasterOrderByWithRelationInput | Prisma.LeadMasterOrderByWithRelationInput[]
-  cursor?: Prisma.LeadMasterWhereUniqueInput
+  include?: Prisma.LeadActivityStatusLogInclude<ExtArgs> | null
+  where?: Prisma.LeadActivityStatusLogWhereInput
+  orderBy?: Prisma.LeadActivityStatusLogOrderByWithRelationInput | Prisma.LeadActivityStatusLogOrderByWithRelationInput[]
+  cursor?: Prisma.LeadActivityStatusLogWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.LeadMasterScalarFieldEnum | Prisma.LeadMasterScalarFieldEnum[]
-}
-
-/**
- * AccountMaster.payments
- */
-export type AccountMaster$paymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the PaymentInfo
-   */
-  select?: Prisma.PaymentInfoSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the PaymentInfo
-   */
-  omit?: Prisma.PaymentInfoOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PaymentInfoInclude<ExtArgs> | null
-  where?: Prisma.PaymentInfoWhereInput
-  orderBy?: Prisma.PaymentInfoOrderByWithRelationInput | Prisma.PaymentInfoOrderByWithRelationInput[]
-  cursor?: Prisma.PaymentInfoWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.PaymentInfoScalarFieldEnum | Prisma.PaymentInfoScalarFieldEnum[]
-}
-
-/**
- * AccountMaster.ledgers
- */
-export type AccountMaster$ledgersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Ledger
-   */
-  select?: Prisma.LedgerSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Ledger
-   */
-  omit?: Prisma.LedgerOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LedgerInclude<ExtArgs> | null
-  where?: Prisma.LedgerWhereInput
-  orderBy?: Prisma.LedgerOrderByWithRelationInput | Prisma.LedgerOrderByWithRelationInput[]
-  cursor?: Prisma.LedgerWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LedgerScalarFieldEnum | Prisma.LedgerScalarFieldEnum[]
-}
-
-/**
- * AccountMaster.leadStatusLogs
- */
-export type AccountMaster$leadStatusLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the LeadStatusLogs
-   */
-  select?: Prisma.LeadStatusLogsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the LeadStatusLogs
-   */
-  omit?: Prisma.LeadStatusLogsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LeadStatusLogsInclude<ExtArgs> | null
-  where?: Prisma.LeadStatusLogsWhereInput
-  orderBy?: Prisma.LeadStatusLogsOrderByWithRelationInput | Prisma.LeadStatusLogsOrderByWithRelationInput[]
-  cursor?: Prisma.LeadStatusLogsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LeadStatusLogsScalarFieldEnum | Prisma.LeadStatusLogsScalarFieldEnum[]
+  distinct?: Prisma.LeadActivityStatusLogScalarFieldEnum | Prisma.LeadActivityStatusLogScalarFieldEnum[]
 }
 
 /**
@@ -6955,30 +6883,6 @@ export type AccountMaster$designMeetingArgs<ExtArgs extends runtime.Types.Extens
 }
 
 /**
- * AccountMaster.designSelection
- */
-export type AccountMaster$designSelectionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the LeadDesignSelection
-   */
-  select?: Prisma.LeadDesignSelectionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the LeadDesignSelection
-   */
-  omit?: Prisma.LeadDesignSelectionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LeadDesignSelectionInclude<ExtArgs> | null
-  where?: Prisma.LeadDesignSelectionWhereInput
-  orderBy?: Prisma.LeadDesignSelectionOrderByWithRelationInput | Prisma.LeadDesignSelectionOrderByWithRelationInput[]
-  cursor?: Prisma.LeadDesignSelectionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LeadDesignSelectionScalarFieldEnum | Prisma.LeadDesignSelectionScalarFieldEnum[]
-}
-
-/**
  * AccountMaster.designMeetingDocsMapping
  */
 export type AccountMaster$designMeetingDocsMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -7003,99 +6907,27 @@ export type AccountMaster$designMeetingDocsMappingArgs<ExtArgs extends runtime.T
 }
 
 /**
- * AccountMaster.siteSupervisors
+ * AccountMaster.designSelection
  */
-export type AccountMaster$siteSupervisorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type AccountMaster$designSelectionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the LeadSiteSupervisorMapping
+   * Select specific fields to fetch from the LeadDesignSelection
    */
-  select?: Prisma.LeadSiteSupervisorMappingSelect<ExtArgs> | null
+  select?: Prisma.LeadDesignSelectionSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the LeadSiteSupervisorMapping
+   * Omit specific fields from the LeadDesignSelection
    */
-  omit?: Prisma.LeadSiteSupervisorMappingOmit<ExtArgs> | null
+  omit?: Prisma.LeadDesignSelectionOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.LeadSiteSupervisorMappingInclude<ExtArgs> | null
-  where?: Prisma.LeadSiteSupervisorMappingWhereInput
-  orderBy?: Prisma.LeadSiteSupervisorMappingOrderByWithRelationInput | Prisma.LeadSiteSupervisorMappingOrderByWithRelationInput[]
-  cursor?: Prisma.LeadSiteSupervisorMappingWhereUniqueInput
+  include?: Prisma.LeadDesignSelectionInclude<ExtArgs> | null
+  where?: Prisma.LeadDesignSelectionWhereInput
+  orderBy?: Prisma.LeadDesignSelectionOrderByWithRelationInput | Prisma.LeadDesignSelectionOrderByWithRelationInput[]
+  cursor?: Prisma.LeadDesignSelectionWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.LeadSiteSupervisorMappingScalarFieldEnum | Prisma.LeadSiteSupervisorMappingScalarFieldEnum[]
-}
-
-/**
- * AccountMaster.leadUserMappings
- */
-export type AccountMaster$leadUserMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the LeadUserMapping
-   */
-  select?: Prisma.LeadUserMappingSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the LeadUserMapping
-   */
-  omit?: Prisma.LeadUserMappingOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LeadUserMappingInclude<ExtArgs> | null
-  where?: Prisma.LeadUserMappingWhereInput
-  orderBy?: Prisma.LeadUserMappingOrderByWithRelationInput | Prisma.LeadUserMappingOrderByWithRelationInput[]
-  cursor?: Prisma.LeadUserMappingWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LeadUserMappingScalarFieldEnum | Prisma.LeadUserMappingScalarFieldEnum[]
-}
-
-/**
- * AccountMaster.tasks
- */
-export type AccountMaster$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UserLeadTask
-   */
-  select?: Prisma.UserLeadTaskSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the UserLeadTask
-   */
-  omit?: Prisma.UserLeadTaskOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserLeadTaskInclude<ExtArgs> | null
-  where?: Prisma.UserLeadTaskWhereInput
-  orderBy?: Prisma.UserLeadTaskOrderByWithRelationInput | Prisma.UserLeadTaskOrderByWithRelationInput[]
-  cursor?: Prisma.UserLeadTaskWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.UserLeadTaskScalarFieldEnum | Prisma.UserLeadTaskScalarFieldEnum[]
-}
-
-/**
- * AccountMaster.leadActivityStatusLog
- */
-export type AccountMaster$leadActivityStatusLogArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the LeadActivityStatusLog
-   */
-  select?: Prisma.LeadActivityStatusLogSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the LeadActivityStatusLog
-   */
-  omit?: Prisma.LeadActivityStatusLogOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LeadActivityStatusLogInclude<ExtArgs> | null
-  where?: Prisma.LeadActivityStatusLogWhereInput
-  orderBy?: Prisma.LeadActivityStatusLogOrderByWithRelationInput | Prisma.LeadActivityStatusLogOrderByWithRelationInput[]
-  cursor?: Prisma.LeadActivityStatusLogWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LeadActivityStatusLogScalarFieldEnum | Prisma.LeadActivityStatusLogScalarFieldEnum[]
+  distinct?: Prisma.LeadDesignSelectionScalarFieldEnum | Prisma.LeadDesignSelectionScalarFieldEnum[]
 }
 
 /**
@@ -7147,99 +6979,195 @@ export type AccountMaster$leadDocumentLogsArgs<ExtArgs extends runtime.Types.Ext
 }
 
 /**
- * AccountMaster.orderLoginDetails
+ * AccountMaster.documents
  */
-export type AccountMaster$orderLoginDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type AccountMaster$documentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the OrderLoginDetails
+   * Select specific fields to fetch from the LeadDocuments
    */
-  select?: Prisma.OrderLoginDetailsSelect<ExtArgs> | null
+  select?: Prisma.LeadDocumentsSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the OrderLoginDetails
+   * Omit specific fields from the LeadDocuments
    */
-  omit?: Prisma.OrderLoginDetailsOmit<ExtArgs> | null
+  omit?: Prisma.LeadDocumentsOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OrderLoginDetailsInclude<ExtArgs> | null
-  where?: Prisma.OrderLoginDetailsWhereInput
-  orderBy?: Prisma.OrderLoginDetailsOrderByWithRelationInput | Prisma.OrderLoginDetailsOrderByWithRelationInput[]
-  cursor?: Prisma.OrderLoginDetailsWhereUniqueInput
+  include?: Prisma.LeadDocumentsInclude<ExtArgs> | null
+  where?: Prisma.LeadDocumentsWhereInput
+  orderBy?: Prisma.LeadDocumentsOrderByWithRelationInput | Prisma.LeadDocumentsOrderByWithRelationInput[]
+  cursor?: Prisma.LeadDocumentsWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.OrderLoginDetailsScalarFieldEnum | Prisma.OrderLoginDetailsScalarFieldEnum[]
+  distinct?: Prisma.LeadDocumentsScalarFieldEnum | Prisma.LeadDocumentsScalarFieldEnum[]
 }
 
 /**
- * AccountMaster.siteReadiness
+ * AccountMaster.leads
  */
-export type AccountMaster$siteReadinessArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type AccountMaster$leadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the SiteReadiness
+   * Select specific fields to fetch from the LeadMaster
    */
-  select?: Prisma.SiteReadinessSelect<ExtArgs> | null
+  select?: Prisma.LeadMasterSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the SiteReadiness
+   * Omit specific fields from the LeadMaster
    */
-  omit?: Prisma.SiteReadinessOmit<ExtArgs> | null
+  omit?: Prisma.LeadMasterOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.SiteReadinessInclude<ExtArgs> | null
-  where?: Prisma.SiteReadinessWhereInput
-  orderBy?: Prisma.SiteReadinessOrderByWithRelationInput | Prisma.SiteReadinessOrderByWithRelationInput[]
-  cursor?: Prisma.SiteReadinessWhereUniqueInput
+  include?: Prisma.LeadMasterInclude<ExtArgs> | null
+  where?: Prisma.LeadMasterWhereInput
+  orderBy?: Prisma.LeadMasterOrderByWithRelationInput | Prisma.LeadMasterOrderByWithRelationInput[]
+  cursor?: Prisma.LeadMasterWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.SiteReadinessScalarFieldEnum | Prisma.SiteReadinessScalarFieldEnum[]
+  distinct?: Prisma.LeadMasterScalarFieldEnum | Prisma.LeadMasterScalarFieldEnum[]
 }
 
 /**
- * AccountMaster.installerMappings
+ * AccountMaster.leadsMapping
  */
-export type AccountMaster$installerMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type AccountMaster$leadsMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the InstallerUserMapping
+   * Select specific fields to fetch from the LeadProductMapping
    */
-  select?: Prisma.InstallerUserMappingSelect<ExtArgs> | null
+  select?: Prisma.LeadProductMappingSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the InstallerUserMapping
+   * Omit specific fields from the LeadProductMapping
    */
-  omit?: Prisma.InstallerUserMappingOmit<ExtArgs> | null
+  omit?: Prisma.LeadProductMappingOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.InstallerUserMappingInclude<ExtArgs> | null
-  where?: Prisma.InstallerUserMappingWhereInput
-  orderBy?: Prisma.InstallerUserMappingOrderByWithRelationInput | Prisma.InstallerUserMappingOrderByWithRelationInput[]
-  cursor?: Prisma.InstallerUserMappingWhereUniqueInput
+  include?: Prisma.LeadProductMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadProductMappingWhereInput
+  orderBy?: Prisma.LeadProductMappingOrderByWithRelationInput | Prisma.LeadProductMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadProductMappingWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.InstallerUserMappingScalarFieldEnum | Prisma.InstallerUserMappingScalarFieldEnum[]
+  distinct?: Prisma.LeadProductMappingScalarFieldEnum | Prisma.LeadProductMappingScalarFieldEnum[]
 }
 
 /**
- * AccountMaster.installationUpdates
+ * AccountMaster.leadProductStructureMapping
  */
-export type AccountMaster$installationUpdatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type AccountMaster$leadProductStructureMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the InstallationUpdate
+   * Select specific fields to fetch from the LeadProductStructureMapping
    */
-  select?: Prisma.InstallationUpdateSelect<ExtArgs> | null
+  select?: Prisma.LeadProductStructureMappingSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the InstallationUpdate
+   * Omit specific fields from the LeadProductStructureMapping
    */
-  omit?: Prisma.InstallationUpdateOmit<ExtArgs> | null
+  omit?: Prisma.LeadProductStructureMappingOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.InstallationUpdateInclude<ExtArgs> | null
-  where?: Prisma.InstallationUpdateWhereInput
-  orderBy?: Prisma.InstallationUpdateOrderByWithRelationInput | Prisma.InstallationUpdateOrderByWithRelationInput[]
-  cursor?: Prisma.InstallationUpdateWhereUniqueInput
+  include?: Prisma.LeadProductStructureMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadProductStructureMappingWhereInput
+  orderBy?: Prisma.LeadProductStructureMappingOrderByWithRelationInput | Prisma.LeadProductStructureMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadProductStructureMappingWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.InstallationUpdateScalarFieldEnum | Prisma.InstallationUpdateScalarFieldEnum[]
+  distinct?: Prisma.LeadProductStructureMappingScalarFieldEnum | Prisma.LeadProductStructureMappingScalarFieldEnum[]
+}
+
+/**
+ * AccountMaster.siteSupervisors
+ */
+export type AccountMaster$siteSupervisorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadSiteSupervisorMapping
+   */
+  select?: Prisma.LeadSiteSupervisorMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadSiteSupervisorMapping
+   */
+  omit?: Prisma.LeadSiteSupervisorMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadSiteSupervisorMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadSiteSupervisorMappingWhereInput
+  orderBy?: Prisma.LeadSiteSupervisorMappingOrderByWithRelationInput | Prisma.LeadSiteSupervisorMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadSiteSupervisorMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadSiteSupervisorMappingScalarFieldEnum | Prisma.LeadSiteSupervisorMappingScalarFieldEnum[]
+}
+
+/**
+ * AccountMaster.leadStatusLogs
+ */
+export type AccountMaster$leadStatusLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadStatusLogs
+   */
+  select?: Prisma.LeadStatusLogsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadStatusLogs
+   */
+  omit?: Prisma.LeadStatusLogsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadStatusLogsInclude<ExtArgs> | null
+  where?: Prisma.LeadStatusLogsWhereInput
+  orderBy?: Prisma.LeadStatusLogsOrderByWithRelationInput | Prisma.LeadStatusLogsOrderByWithRelationInput[]
+  cursor?: Prisma.LeadStatusLogsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadStatusLogsScalarFieldEnum | Prisma.LeadStatusLogsScalarFieldEnum[]
+}
+
+/**
+ * AccountMaster.leadUserMappings
+ */
+export type AccountMaster$leadUserMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadUserMapping
+   */
+  select?: Prisma.LeadUserMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadUserMapping
+   */
+  omit?: Prisma.LeadUserMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadUserMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadUserMappingWhereInput
+  orderBy?: Prisma.LeadUserMappingOrderByWithRelationInput | Prisma.LeadUserMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadUserMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadUserMappingScalarFieldEnum | Prisma.LeadUserMappingScalarFieldEnum[]
+}
+
+/**
+ * AccountMaster.ledgers
+ */
+export type AccountMaster$ledgersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ledger
+   */
+  select?: Prisma.LedgerSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ledger
+   */
+  omit?: Prisma.LedgerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LedgerInclude<ExtArgs> | null
+  where?: Prisma.LedgerWhereInput
+  orderBy?: Prisma.LedgerOrderByWithRelationInput | Prisma.LedgerOrderByWithRelationInput[]
+  cursor?: Prisma.LedgerWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LedgerScalarFieldEnum | Prisma.LedgerScalarFieldEnum[]
 }
 
 /**
@@ -7267,27 +7195,99 @@ export type AccountMaster$miscellaneousMasterArgs<ExtArgs extends runtime.Types.
 }
 
 /**
- * AccountMaster.installationIssueLogMaster
+ * AccountMaster.orderLoginDetails
  */
-export type AccountMaster$installationIssueLogMasterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type AccountMaster$orderLoginDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the InstallationIssueLogMaster
+   * Select specific fields to fetch from the OrderLoginDetails
    */
-  select?: Prisma.InstallationIssueLogMasterSelect<ExtArgs> | null
+  select?: Prisma.OrderLoginDetailsSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the InstallationIssueLogMaster
+   * Omit specific fields from the OrderLoginDetails
    */
-  omit?: Prisma.InstallationIssueLogMasterOmit<ExtArgs> | null
+  omit?: Prisma.OrderLoginDetailsOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.InstallationIssueLogMasterInclude<ExtArgs> | null
-  where?: Prisma.InstallationIssueLogMasterWhereInput
-  orderBy?: Prisma.InstallationIssueLogMasterOrderByWithRelationInput | Prisma.InstallationIssueLogMasterOrderByWithRelationInput[]
-  cursor?: Prisma.InstallationIssueLogMasterWhereUniqueInput
+  include?: Prisma.OrderLoginDetailsInclude<ExtArgs> | null
+  where?: Prisma.OrderLoginDetailsWhereInput
+  orderBy?: Prisma.OrderLoginDetailsOrderByWithRelationInput | Prisma.OrderLoginDetailsOrderByWithRelationInput[]
+  cursor?: Prisma.OrderLoginDetailsWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.InstallationIssueLogMasterScalarFieldEnum | Prisma.InstallationIssueLogMasterScalarFieldEnum[]
+  distinct?: Prisma.OrderLoginDetailsScalarFieldEnum | Prisma.OrderLoginDetailsScalarFieldEnum[]
+}
+
+/**
+ * AccountMaster.payments
+ */
+export type AccountMaster$paymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PaymentInfo
+   */
+  select?: Prisma.PaymentInfoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PaymentInfo
+   */
+  omit?: Prisma.PaymentInfoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentInfoInclude<ExtArgs> | null
+  where?: Prisma.PaymentInfoWhereInput
+  orderBy?: Prisma.PaymentInfoOrderByWithRelationInput | Prisma.PaymentInfoOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentInfoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentInfoScalarFieldEnum | Prisma.PaymentInfoScalarFieldEnum[]
+}
+
+/**
+ * AccountMaster.siteReadiness
+ */
+export type AccountMaster$siteReadinessArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SiteReadiness
+   */
+  select?: Prisma.SiteReadinessSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SiteReadiness
+   */
+  omit?: Prisma.SiteReadinessOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SiteReadinessInclude<ExtArgs> | null
+  where?: Prisma.SiteReadinessWhereInput
+  orderBy?: Prisma.SiteReadinessOrderByWithRelationInput | Prisma.SiteReadinessOrderByWithRelationInput[]
+  cursor?: Prisma.SiteReadinessWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SiteReadinessScalarFieldEnum | Prisma.SiteReadinessScalarFieldEnum[]
+}
+
+/**
+ * AccountMaster.tasks
+ */
+export type AccountMaster$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserLeadTask
+   */
+  select?: Prisma.UserLeadTaskSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserLeadTask
+   */
+  omit?: Prisma.UserLeadTaskOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserLeadTaskInclude<ExtArgs> | null
+  where?: Prisma.UserLeadTaskWhereInput
+  orderBy?: Prisma.UserLeadTaskOrderByWithRelationInput | Prisma.UserLeadTaskOrderByWithRelationInput[]
+  cursor?: Prisma.UserLeadTaskWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserLeadTaskScalarFieldEnum | Prisma.UserLeadTaskScalarFieldEnum[]
 }
 
 /**

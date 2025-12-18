@@ -204,16 +204,16 @@ export type SourceMasterWhereInput = {
   id?: Prisma.IntFilter<"SourceMaster"> | number
   type?: Prisma.StringFilter<"SourceMaster"> | string
   vendor_id?: Prisma.IntFilter<"SourceMaster"> | number
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   leads?: Prisma.LeadMasterListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type SourceMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   leads?: Prisma.LeadMasterOrderByRelationAggregateInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type SourceMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -223,8 +223,8 @@ export type SourceMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.SourceMasterWhereInput | Prisma.SourceMasterWhereInput[]
   type?: Prisma.StringFilter<"SourceMaster"> | string
   vendor_id?: Prisma.IntFilter<"SourceMaster"> | number
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   leads?: Prisma.LeadMasterListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type SourceMasterOrderByWithAggregationInput = {
@@ -249,8 +249,8 @@ export type SourceMasterScalarWhereWithAggregatesInput = {
 
 export type SourceMasterCreateInput = {
   type: string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutSourcesInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutSourceInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutSourcesInput
 }
 
 export type SourceMasterUncheckedCreateInput = {
@@ -262,8 +262,8 @@ export type SourceMasterUncheckedCreateInput = {
 
 export type SourceMasterUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSourcesNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutSourceNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSourcesNestedInput
 }
 
 export type SourceMasterUncheckedUpdateInput = {
@@ -530,8 +530,8 @@ export type SourceMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   id?: boolean
   type?: boolean
   vendor_id?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   leads?: boolean | Prisma.SourceMaster$leadsArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.SourceMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sourceMaster"]>
 
@@ -557,8 +557,8 @@ export type SourceMasterSelectScalar = {
 
 export type SourceMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id", ExtArgs["result"]["sourceMaster"]>
 export type SourceMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   leads?: boolean | Prisma.SourceMaster$leadsArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.SourceMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SourceMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -571,8 +571,8 @@ export type SourceMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types
 export type $SourceMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SourceMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     leads: Prisma.$LeadMasterPayload<ExtArgs>[]
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -972,8 +972,8 @@ readonly fields: SourceMasterFieldRefs;
  */
 export interface Prisma__SourceMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   leads<T extends Prisma.SourceMaster$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SourceMaster$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
