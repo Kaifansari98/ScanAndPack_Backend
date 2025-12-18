@@ -1,7 +1,7 @@
 import { Router } from "express";
 import multer from "multer";
 import { BookingStageController } from "../../controllers/leadModuleControllers/bookingStage/bookingStage.controller";
-import { handleMulterError } from "src/middlewares/initial-site-measurement.middleware";
+import { handleMulterError } from "../../middlewares/initial-site-measurement.middleware"
 
 const upload = multer();
 const bookingStageController = new BookingStageController();
