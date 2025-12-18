@@ -680,7 +680,11 @@ export class FinalMeasurementService {
         status_id: number | null;
       } = { ...lead, status_id: null };
 
-      if (task_type.toLowerCase() !== "follow up") {
+      // Treat both "BookingDone - ISM" and "follow up" as special cases (do not update status for them)
+      if (
+        task_type.toLowerCase() !== "follow up" &&
+        task_type.toLowerCase() !== "bookingdone - ism"
+      ) {
         const toStatus = await tx.statusTypeMaster.findFirst({
           where: { vendor_id: lead.vendor_id, tag: "Type 5" },
           select: { id: true },

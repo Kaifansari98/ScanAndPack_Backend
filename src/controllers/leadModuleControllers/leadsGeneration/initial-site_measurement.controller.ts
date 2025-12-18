@@ -267,6 +267,102 @@ export class PaymentUploadController {
     }
   };
 
+  public createBookingDoneIsmUpload = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const { lead_id, account_id, vendor_id, created_by, client_id, user_id } =
+        req.body;
+
+      if (
+        !lead_id ||
+        !account_id ||
+        !vendor_id ||
+        !created_by ||
+        !client_id ||
+        !user_id
+      ) {
+        res.status(400).json({
+          success: false,
+          message: "Required fields are missing",
+        });
+        return;
+      }
+
+      const files = req.files as { [key: string]: Express.Multer.File[] };
+
+      const dto: CreatePaymentUploadDto = {
+        lead_id: +lead_id,
+        account_id: +account_id,
+        vendor_id: +vendor_id,
+        created_by: +created_by,
+        client_id: +client_id,
+        user_id: +user_id,
+        amount: req.body.amount ? +req.body.amount : undefined,
+        payment_date: req.body.payment_date
+          ? new Date(req.body.payment_date)
+          : undefined,
+        payment_text: req.body.payment_text || undefined,
+        sitePhotos: files?.current_site_photos || [],
+        pdfFile: files?.upload_pdf?.[0],
+        paymentImageFile: files?.payment_image?.[0],
+      };
+
+      const result = await this.paymentUploadService.createBDISMPaymentUpload(
+        dto
+      );
+
+      res.status(201).json({
+        success: true,
+        message: "Booking Done – ISM uploaded successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error("[BookingDoneISMController]", error);
+      res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  };
+
+  public getBookingDoneIsmDetails = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const leadId = Number(req.params.leadId);
+      const vendorId = Number(req.query.vendor_id);
+  
+      if (!leadId || !vendorId) {
+        res.status(400).json({
+          success: false,
+          message: "leadId and vendor_id are required",
+        });
+        return;
+      }
+  
+      const data =
+        await this.paymentUploadService.getBDISMPaymentUploadDetails(
+          leadId,
+          vendorId
+        );
+  
+      res.status(200).json({
+        success: true,
+        data,
+      });
+    } catch (error: any) {
+      logger.error("[BookingDoneISMController:get]", error);
+      res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  };
+  
+
   // GET /api/payment-upload/documents/signed-url/:s3Key
   public generateSignedUrl = async (
     req: Request,

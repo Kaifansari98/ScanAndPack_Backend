@@ -24,6 +24,21 @@ import { Prisma } from "../../../prisma/generated";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { cache } from "../../../utils/cache";
 
+export interface CreateBDISMPaymentUploadDto {
+  lead_id: number;
+  account_id: number;
+  vendor_id: number;
+  created_by: number;
+  client_id: number;
+  user_id: number;
+  amount?: number;
+  payment_date?: Date;
+  payment_text?: string;
+  sitePhotos?: Express.Multer.File[];
+  pdfFile?: Express.Multer.File;
+  paymentImageFile?: Express.Multer.File;
+}
+
 // ----------------------
 // AssignTaskISM (standalone)
 // ----------------------
@@ -134,7 +149,7 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
           status_id: true,
         },
       });
-      
+
       await tx.leadStatusLogs.create({
         data: {
           lead_id: lead.id,
@@ -758,6 +773,383 @@ export class PaymentUploadService {
       console.error("[PaymentUploadService] Error:", error);
       throw new Error(`Failed to create payment upload: ${error.message}`);
     }
+  }
+
+  public async createBDISMPaymentUpload(
+    data: CreateBDISMPaymentUploadDto
+  ): Promise<PaymentUploadResponseDto> {
+    try {
+      return await prisma.$transaction(
+        async (tx) => {
+          const response: PaymentUploadResponseDto = {
+            paymentInfo: null,
+            ledgerEntry: null,
+            documentsUploaded: [],
+            message: "Booking Done – ISM upload completed successfully",
+          };
+
+          /* ----------------------------------
+             1️⃣ Current Site Photos
+          ---------------------------------- */
+          if (data.sitePhotos?.length) {
+            const docType = await tx.documentTypeMaster.findFirst({
+              where: { vendor_id: data.vendor_id, tag: "Type 33" },
+            });
+
+            if (!docType) {
+              throw new Error("Document type for BD-ISM site photos not found");
+            }
+
+            for (const photo of data.sitePhotos) {
+              const fileName = sanitizeFilename(photo.originalname);
+              const s3Key = `bd_ism_current_site_photos/${data.vendor_id}/${
+                data.lead_id
+              }/${Date.now()}-${fileName}`;
+
+              await wasabi.send(
+                new PutObjectCommand({
+                  Bucket: process.env.WASABI_BUCKET_NAME!,
+                  Key: s3Key,
+                  Body: photo.buffer,
+                  ContentType: photo.mimetype,
+                })
+              );
+
+              const doc = await tx.leadDocuments.create({
+                data: {
+                  doc_og_name: photo.originalname,
+                  doc_sys_name: s3Key,
+                  doc_type_id: docType.id,
+                  created_by: data.created_by,
+                  lead_id: data.lead_id,
+                  account_id: data.account_id,
+                  vendor_id: data.vendor_id,
+                },
+              });
+
+              response.documentsUploaded.push({
+                id: doc.id,
+                type: "bd_ism_current_site_photo",
+                originalName: photo.originalname,
+                s3Key,
+              });
+            }
+          }
+
+          /* ----------------------------------
+             2️⃣ PDF Upload (MANDATORY)
+          ---------------------------------- */
+          if (!data.pdfFile) {
+            throw new Error("BD-ISM PDF document is mandatory");
+          }
+
+          const pdfType = await tx.documentTypeMaster.findFirst({
+            where: { vendor_id: data.vendor_id, tag: "Type 34" },
+          });
+
+          if (!pdfType) {
+            throw new Error("Document type for BD-ISM PDF not found");
+          }
+
+          const pdfKey = `bd_initial_site_measurement_documents/${
+            data.vendor_id
+          }/${data.lead_id}/${Date.now()}-${sanitizeFilename(
+            data.pdfFile.originalname
+          )}`;
+
+          await wasabi.send(
+            new PutObjectCommand({
+              Bucket: process.env.WASABI_BUCKET_NAME!,
+              Key: pdfKey,
+              Body: data.pdfFile.buffer,
+              ContentType: data.pdfFile.mimetype,
+            })
+          );
+
+          const pdfDoc = await tx.leadDocuments.create({
+            data: {
+              doc_og_name: data.pdfFile.originalname,
+              doc_sys_name: pdfKey,
+              doc_type_id: pdfType.id,
+              created_by: data.created_by,
+              lead_id: data.lead_id,
+              account_id: data.account_id,
+              vendor_id: data.vendor_id,
+            },
+          });
+
+          response.documentsUploaded.push({
+            id: pdfDoc.id,
+            type: "bd_ism_pdf",
+            originalName: data.pdfFile.originalname,
+            s3Key: pdfKey,
+          });
+
+          /* ----------------------------------
+             3️⃣ Payment Image (Optional)
+          ---------------------------------- */
+          let paymentFileId: number | null = null;
+
+          if (data.paymentImageFile) {
+            const payType = await tx.documentTypeMaster.findFirst({
+              where: { vendor_id: data.vendor_id, tag: "Type 35" },
+            });
+
+            if (!payType) {
+              throw new Error("Payment document type not found");
+            }
+
+            const paymentKey = `bd_initial-site-measurement-payment-images/${
+              data.vendor_id
+            }/${data.lead_id}/${Date.now()}-${sanitizeFilename(
+              data.paymentImageFile.originalname
+            )}`;
+
+            await wasabi.send(
+              new PutObjectCommand({
+                Bucket: process.env.WASABI_BUCKET_NAME!,
+                Key: paymentKey,
+                Body: data.paymentImageFile.buffer,
+                ContentType: data.paymentImageFile.mimetype,
+              })
+            );
+
+            const payDoc = await tx.leadDocuments.create({
+              data: {
+                doc_og_name: data.paymentImageFile.originalname,
+                doc_sys_name: paymentKey,
+                doc_type_id: payType.id,
+                created_by: data.created_by,
+                lead_id: data.lead_id,
+                account_id: data.account_id,
+                vendor_id: data.vendor_id,
+              },
+            });
+
+            paymentFileId = payDoc.id;
+
+            response.documentsUploaded.push({
+              id: payDoc.id,
+              type: "bd_ism_payment_image",
+              originalName: data.paymentImageFile.originalname,
+              s3Key: paymentKey,
+            });
+          }
+
+          /* ----------------------------------
+             4️⃣ Payment + Ledger (Optional)
+          ---------------------------------- */
+          if (data.amount && data.payment_date) {
+            const payType = await tx.paymentTypeMaster.findFirst({
+              where: { vendor_id: data.vendor_id, tag: "Type 6" },
+            });
+
+            if (!payType) {
+              throw new Error("Payment type not found");
+            }
+
+            const payment = await tx.paymentInfo.create({
+              data: {
+                lead_id: data.lead_id,
+                account_id: data.account_id,
+                vendor_id: data.vendor_id,
+                created_by: data.created_by,
+                amount: data.amount,
+                payment_date: data.payment_date,
+                payment_text: data.payment_text || null,
+                payment_file_id: paymentFileId,
+                payment_type_id: payType.id,
+              },
+            });
+
+            response.paymentInfo = {
+              id: payment.id,
+              amount: payment.amount,
+              payment_date: payment.payment_date,
+              payment_text: payment.payment_text,
+            };
+
+            const ledger = await tx.ledger.create({
+              data: {
+                lead_id: data.lead_id,
+                account_id: data.account_id,
+                client_id: data.client_id,
+                vendor_id: data.vendor_id,
+                amount: data.amount,
+                payment_date: data.payment_date,
+                type: "credit",
+                created_by: data.created_by,
+              },
+            });
+
+            response.ledgerEntry = {
+              id: ledger.id,
+              amount: ledger.amount,
+              type: ledger.type,
+              payment_date: ledger.payment_date,
+            };
+          }
+
+          /* ----------------------------------
+             5️⃣ Complete Task (NO LEAD STATUS CHANGE)
+          ---------------------------------- */
+          await tx.userLeadTask.updateMany({
+            where: {
+              vendor_id: data.vendor_id,
+              lead_id: data.lead_id,
+              task_type: "BookingDone - ISM",
+              status: "open",
+            },
+            data: {
+              status: "completed",
+              closed_by: data.user_id,
+              closed_at: new Date(),
+              updated_by: data.user_id,
+              updated_at: new Date(),
+            },
+          });
+
+          /* ----------------------------------
+             6️⃣ Logs
+          ---------------------------------- */
+          const log = await tx.leadDetailedLogs.create({
+            data: {
+              vendor_id: data.vendor_id,
+              lead_id: data.lead_id,
+              account_id: data.account_id,
+              action: "Booking Done – ISM documents uploaded successfully.",
+              action_type: "CREATE",
+              created_by: data.created_by,
+              created_at: new Date(),
+            },
+          });
+
+          if (response.documentsUploaded.length) {
+            await tx.leadDocumentLogs.createMany({
+              data: response.documentsUploaded.map((d: any) => ({
+                vendor_id: data.vendor_id,
+                lead_id: data.lead_id,
+                account_id: data.account_id,
+                doc_id: d.id,
+                lead_logs_id: log.id,
+                created_by: data.created_by,
+                created_at: new Date(),
+              })),
+            });
+          }
+
+          return response;
+        },
+        { timeout: 20000 }
+      );
+    } catch (error: any) {
+      logger.error("[BD-ISM PaymentUploadService]", error);
+      throw new Error(`BD-ISM upload failed: ${error.message}`);
+    }
+  }
+
+  public async getBDISMPaymentUploadDetails(leadId: number, vendorId: number) {
+    const BD_ISM_TAGS = ["Type 33", "Type 34", "Type 35"];
+
+    /* ------------------------------
+       1️⃣ Document Types
+    ------------------------------ */
+    const docTypes = await prisma.documentTypeMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        tag: { in: BD_ISM_TAGS },
+      },
+      select: { id: true, tag: true },
+    });
+
+    const docTypeMap = new Map(docTypes.map((d) => [d.id, d.tag]));
+
+    /* ------------------------------
+       2️⃣ Documents
+    ------------------------------ */
+    const documents = await prisma.leadDocuments.findMany({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        doc_type_id: { in: docTypes.map((d) => d.id) },
+      },
+      orderBy: { created_at: "desc" },
+    });
+
+    const docsWithSignedUrl = await Promise.all(
+      documents.map(async (doc) => ({
+        id: doc.id,
+        originalName: doc.doc_og_name,
+        s3Key: doc.doc_sys_name,
+        signedUrl: await generateSignedUrl(doc.doc_sys_name),
+        docTypeTag: docTypeMap.get(doc.doc_type_id),
+        createdAt: doc.created_at,
+      }))
+    );
+
+    /* ------------------------------
+       3️⃣ Payment Info (BD-ISM)
+       payment_type tag = Type 6
+    ------------------------------ */
+    const paymentInfo = await prisma.paymentInfo.findFirst({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+        paymentType: { tag: "Type 6" },
+      },
+      orderBy: { created_at: "desc" },
+      select: {
+        amount: true,
+        payment_date: true,
+        payment_text: true,
+        created_at: true,
+      },
+    });
+
+    /* ------------------------------
+       4️⃣ Ledger Entry
+    ------------------------------ */
+    const ledgerEntry = await prisma.ledger.findFirst({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+        type: "credit",
+      },
+      orderBy: { created_at: "desc" },
+      select: {
+        amount: true,
+        payment_date: true,
+        type: true,
+      },
+    });
+
+    /* ------------------------------
+       5️⃣ Final Response
+    ------------------------------ */
+    return {
+      current_site_photos: docsWithSignedUrl.filter(
+        (d) => d.docTypeTag === "Type 33"
+      ),
+      pdf_documents: docsWithSignedUrl.filter(
+        (d) => d.docTypeTag === "Type 34"
+      ),
+      payment_images: docsWithSignedUrl.filter(
+        (d) => d.docTypeTag === "Type 35"
+      ),
+
+      payment_info: paymentInfo
+        ? {
+            amount: paymentInfo.amount,
+            payment_date: paymentInfo.payment_date,
+            payment_text: paymentInfo.payment_text,
+          }
+        : null,
+
+      ledger_entry: ledgerEntry ?? null,
+
+      uploaded_at:
+        paymentInfo?.created_at || docsWithSignedUrl[0]?.createdAt || null,
+    };
   }
 
   // Generate signed URL for file access

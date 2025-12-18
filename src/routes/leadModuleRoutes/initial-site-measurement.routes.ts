@@ -71,6 +71,22 @@ router.post(
   paymentUploadController.createPaymentUpload
 );
 
+router.post(
+  "/booking-done-ism/upload",
+  uploadFields,
+  handleMulterError,
+  validatePaymentUpload,
+  validateFiles,
+  paymentUploadController.createBookingDoneIsmUpload
+);
+
+// routes/booking-done-ism.routes.ts
+router.get(
+  "/booking-done-ism/:leadId",
+  paymentUploadController.getBookingDoneIsmDetails
+);
+
+
 /**
  * GET /api/payment-upload/lead/:leadId
  * Get all payment uploads for a specific lead
