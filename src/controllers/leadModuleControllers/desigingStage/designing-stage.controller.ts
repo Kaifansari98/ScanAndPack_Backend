@@ -82,6 +82,18 @@ export class DesigingStageController {
     try {
       const { vendorId, leadId, userId, accountId } = req.body;
 
+      console.log("---- Upload Designs Debug ----");
+      console.log("Body:", req.body);
+      console.log("Files count:", (req.files as any)?.length);
+      console.log(
+        "Files:",
+        (req.files as Express.Multer.File[])?.map((f) => ({
+          name: f.originalname,
+          type: f.mimetype,
+          size: f.size,
+        }))
+      );
+
       if (
         !req.files ||
         !(req.files instanceof Array) ||
@@ -1514,5 +1526,5 @@ export class DesigingStageController {
         error: error.message,
       });
     }
-  };
+  }
 }

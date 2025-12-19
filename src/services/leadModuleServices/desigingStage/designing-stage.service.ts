@@ -411,10 +411,14 @@ export class DesigingStage {
       });
 
       if (!quotationDocType) {
+        console.error("Quotation DocType missing", {
+          vendorId: data.vendorId,
+          tag: "Type 5",
+        });
         throw new Error(
-          "Document type for quotation not found for this vendor"
+          "Quotation document type (Type 5) is not configured for this vendor"
         );
-      }
+      }      
 
       const uploadedDocs: any[] = [];
 
