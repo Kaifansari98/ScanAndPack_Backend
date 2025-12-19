@@ -377,10 +377,31 @@ export class DesigingStage {
     vendorId: number;
     leadId: number;
     userId: number;
-    accountId: number;
   }) {
     return prisma.$transaction(async (tx) => {
-      // Normalize files so we always have an array of { buffer, originalName: string }
+      // 0️⃣ Fetch lead → derive account_id
+      const lead = await tx.leadMaster.findFirst({
+        where: {
+          id: data.leadId,
+          vendor_id: data.vendorId,
+          is_deleted: false,
+        },
+        select: {
+          account_id: true,
+        },
+      });
+
+      if (!lead) {
+        throw new Error(`Invalid leadId ${data.leadId} for this vendor`);
+      }
+
+      if (!lead.account_id) {
+        throw new Error("No account linked with this lead");
+      }
+
+      const accountId = lead.account_id; // ✅ backend-owned
+
+      // 1️⃣ Normalize files
       const files =
         Array.isArray(data.fileBuffer) && Array.isArray(data.originalName)
           ? data.fileBuffer.map((buf, idx) => ({
@@ -405,24 +426,23 @@ export class DesigingStage {
               },
             ];
 
-      // 1️⃣ Get doc type for quotations
+      // 2️⃣ Get quotation doc type
       const quotationDocType = await tx.documentTypeMaster.findFirst({
-        where: { vendor_id: data.vendorId, tag: "Type 5" },
+        where: {
+          vendor_id: data.vendorId,
+          tag: "Type 5", // Quotation
+        },
       });
 
       if (!quotationDocType) {
-        console.error("Quotation DocType missing", {
-          vendorId: data.vendorId,
-          tag: "Type 5",
-        });
         throw new Error(
           "Quotation document type (Type 5) is not configured for this vendor"
         );
-      }      
+      }
 
       const uploadedDocs: any[] = [];
 
-      // 2️⃣ Upload to Wasabi + insert into LeadDocuments
+      // 3️⃣ Upload + LeadDocuments
       for (const file of files) {
         const sysName = await uploadToWasabi(
           file.buffer,
@@ -433,11 +453,11 @@ export class DesigingStage {
 
         const document = await tx.leadDocuments.create({
           data: {
-            doc_og_name: file.originalName, // ✅ always string now
+            doc_og_name: file.originalName,
             doc_sys_name: sysName,
             vendor_id: data.vendorId,
             lead_id: data.leadId,
-            account_id: data.accountId,
+            account_id: accountId,
             doc_type_id: quotationDocType.id,
             created_by: data.userId,
           },
@@ -446,17 +466,18 @@ export class DesigingStage {
         uploadedDocs.push(document);
       }
 
-      // 3️⃣ Build Action message
+      // 4️⃣ Logs
       const count = uploadedDocs.length;
-      const plural = count > 1 ? "Quotations have" : "Quotation has";
-      const actionMessage = `${count} ${plural} been uploaded successfully.`;
+      const actionMessage =
+        count > 1
+          ? `${count} Quotations have been uploaded successfully.`
+          : "Quotation has been uploaded successfully.";
 
-      // 4️⃣ Create LeadDetailedLogs
       const detailedLog = await tx.leadDetailedLogs.create({
         data: {
           vendor_id: data.vendorId,
           lead_id: data.leadId,
-          account_id: data.accountId,
+          account_id: accountId,
           action: actionMessage,
           action_type: "CREATE",
           created_by: data.userId,
@@ -464,18 +485,17 @@ export class DesigingStage {
         },
       });
 
-      // 5️⃣ Create LeadDocumentLogs
-      const docLogsData = uploadedDocs.map((doc) => ({
-        vendor_id: data.vendorId,
-        lead_id: data.leadId,
-        account_id: data.accountId,
-        doc_id: doc.id,
-        lead_logs_id: detailedLog.id,
-        created_by: data.userId,
-        created_at: new Date(),
-      }));
-
-      await tx.leadDocumentLogs.createMany({ data: docLogsData });
+      await tx.leadDocumentLogs.createMany({
+        data: uploadedDocs.map((doc) => ({
+          vendor_id: data.vendorId,
+          lead_id: data.leadId,
+          account_id: accountId,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: data.userId,
+          created_at: new Date(),
+        })),
+      });
 
       return uploadedDocs;
     });

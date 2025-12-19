@@ -80,55 +80,42 @@ export class DesigingStageController {
 
   public static async upload(req: Request, res: Response) {
     try {
-      const { vendorId, leadId, userId, accountId } = req.body;
-
-      console.log("---- Upload Designs Debug ----");
-      console.log("Body:", req.body);
-      console.log("Files count:", (req.files as any)?.length);
-      console.log(
-        "Files:",
-        (req.files as Express.Multer.File[])?.map((f) => ({
-          name: f.originalname,
-          type: f.mimetype,
-          size: f.size,
-        }))
-      );
-
-      if (
-        !req.files ||
-        !(req.files instanceof Array) ||
-        req.files.length === 0
-      ) {
-        return res
-          .status(400)
-          .json({ success: false, message: "At least one file is required" });
+      const { vendorId, leadId, userId } = req.body;
+  
+      if (!req.files || !Array.isArray(req.files) || req.files.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "At least one file is required",
+        });
       }
-
+  
       const buffers = (req.files as Express.Multer.File[]).map((f) => f.buffer);
       const originalNames = (req.files as Express.Multer.File[]).map(
         (f) => f.originalname
       );
-
+  
       const docs = await DesigingStage.uploadQuotation({
-        fileBuffer: buffers, // now array of Buffers
-        originalName: originalNames, // now array of strings
+        fileBuffer: buffers,
+        originalName: originalNames,
         vendorId: Number(vendorId),
         leadId: Number(leadId),
         userId: Number(userId),
-        accountId: Number(accountId),
       });
-
-      res.json({
+  
+      return res.json({
         success: true,
-        message: `${docs.length} quotation${
-          docs.length > 1 ? "s" : ""
-        } uploaded successfully`,
+        message: `${docs.length} quotation${docs.length > 1 ? "s" : ""} uploaded successfully`,
         documents: docs,
       });
     } catch (error: any) {
-      res.status(500).json({ success: false, message: error.message });
+      console.error("uploadQuotation error:", error);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
   }
+  
 
   public static async getDesignQuotationDocuments(req: Request, res: Response) {
     try {
