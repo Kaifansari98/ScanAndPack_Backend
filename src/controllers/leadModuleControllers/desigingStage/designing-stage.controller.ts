@@ -748,6 +748,10 @@ export class DesigingStageController {
             "Document type for designs (Type 6) not found for this vendor",
         });
       }
+      
+      if (!account) {
+        throw new Error(`Invalid accountId ${accountId}`);
+      }      
 
       // ✅ Upload and save each file
       for (const file of files) {
