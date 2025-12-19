@@ -81,19 +81,19 @@ export class DesigingStageController {
   public static async upload(req: Request, res: Response) {
     try {
       const { vendorId, leadId, userId } = req.body;
-  
+
       if (!req.files || !Array.isArray(req.files) || req.files.length === 0) {
         return res.status(400).json({
           success: false,
           message: "At least one file is required",
         });
       }
-  
+
       const buffers = (req.files as Express.Multer.File[]).map((f) => f.buffer);
       const originalNames = (req.files as Express.Multer.File[]).map(
         (f) => f.originalname
       );
-  
+
       const docs = await DesigingStage.uploadQuotation({
         fileBuffer: buffers,
         originalName: originalNames,
@@ -101,10 +101,12 @@ export class DesigingStageController {
         leadId: Number(leadId),
         userId: Number(userId),
       });
-  
+
       return res.json({
         success: true,
-        message: `${docs.length} quotation${docs.length > 1 ? "s" : ""} uploaded successfully`,
+        message: `${docs.length} quotation${
+          docs.length > 1 ? "s" : ""
+        } uploaded successfully`,
         documents: docs,
       });
     } catch (error: any) {
@@ -115,7 +117,6 @@ export class DesigingStageController {
       });
     }
   }
-  
 
   public static async getDesignQuotationDocuments(req: Request, res: Response) {
     try {
@@ -372,7 +373,7 @@ export class DesigingStageController {
         return res.status(400).json({ success: false, logs: errors.array() });
       }
 
-      const { leadId, vendorId, userId, accountId, date, desc } = req.body;
+      const { leadId, vendorId, userId, date, desc } = req.body;
       const logs: any[] = [];
       const files = (req.files as Express.Multer.File[]) || [];
 
@@ -386,7 +387,6 @@ export class DesigingStageController {
           .json({ success: false, logs: ["Unauthorized: User not in vendor"] });
       logs.push("User verified");
 
-      // 2️⃣ Check lead existence
       const lead = await prisma.leadMaster.findFirst({
         where: {
           id: Number(leadId),
@@ -394,11 +394,20 @@ export class DesigingStageController {
           is_deleted: false,
         },
       });
+
       if (!lead)
         return res
           .status(404)
           .json({ success: false, logs: ["Lead not found"] });
+
       logs.push("Lead verified");
+
+      const accountId = lead.account_id;
+
+      if (!accountId)
+        return res
+          .status(400)
+          .json({ success: false, logs: ["No account linked with this lead"] });
 
       // 3️⃣ Create Design Meeting entry
       const meeting = await prisma.leadDesignMeeting.create({
@@ -526,7 +535,7 @@ export class DesigingStageController {
 
   public static async addMeetingDocs(req: Request, res: Response) {
     try {
-      const { vendorId, leadId, userId, accountId, meetingId } = req.body;
+      const { vendorId, leadId, userId, meetingId } = req.body;
       const files = req.files as Express.Multer.File[];
 
       if (!meetingId)
@@ -538,6 +547,24 @@ export class DesigingStageController {
         return res
           .status(400)
           .json({ success: false, message: "No files uploaded" });
+
+      const lead = await prisma.leadMaster.findFirst({
+        where: {
+          id: Number(leadId),
+          vendor_id: Number(vendorId),
+          is_deleted: false,
+        },
+        select: { account_id: true },
+      });
+
+      if (!lead || !lead.account_id) {
+        return res.status(400).json({
+          success: false,
+          message: "No account linked with this lead",
+        });
+      }
+
+      const accountId = lead.account_id;
 
       // ✅ 1. Check meeting exists
       const meeting = await prisma.leadDesignMeeting.findFirst({
