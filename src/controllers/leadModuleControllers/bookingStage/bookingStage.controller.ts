@@ -484,56 +484,56 @@ export class BookingStageController {
     }
   };
 
-  // public uploadCSPBooking = async (req: Request, res: Response) => {
-  //   try {
-  //     const {
-  //       lead_id,
-  //       account_id,
-  //       vendor_id,
-  //       created_by,
-  //     } = req.body;
+  public uploadCSPBooking = async (req: Request, res: Response) => {
+    try {
+      const {
+        lead_id,
+        account_id,
+        vendor_id,
+        created_by,
+      } = req.body;
 
-  //     if (!lead_id || !account_id || !vendor_id || !created_by) {
-  //       return res.status(400).json({
-  //         success: false,
-  //         message: "Missing required fields",
-  //       });
-  //     }
+      if (!lead_id || !account_id || !vendor_id || !created_by) {
+        return res.status(400).json({
+          success: false,
+          message: "Missing required fields",
+        });
+      }
 
-  //     const files = req.files as {
-  //       [key: string]: Express.Multer.File[];
-  //     };
+      const files = req.files as {
+        [key: string]: Express.Multer.File[];
+      };
 
-  //     const sitePhotos = files?.current_site_photos || [];
+      const sitePhotos = files?.current_site_photos || [];
 
-  //     // 🔴 HARD RULE
-  //     if (sitePhotos.length === 0) {
-  //       return res.status(400).json({
-  //         success: false,
-  //         message: "Current site photos are mandatory",
-  //       });
-  //     }
+      // 🔴 HARD RULE
+      if (sitePhotos.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "Current site photos are mandatory",
+        });
+      }
 
-  //     const result = await this.bookingStageService.uploadCSPBookingService({
-  //       lead_id: +lead_id,
-  //       account_id: +account_id,
-  //       vendor_id: +vendor_id,
-  //       created_by: +created_by,
-  //       sitePhotos,
-  //     });
+      const result = await this.bookingStageService.uploadCSPBookingService({
+        lead_id: +lead_id,
+        account_id: +account_id,
+        vendor_id: +vendor_id,
+        created_by: +created_by,
+        sitePhotos,
+      });
 
-  //     res.status(201).json({
-  //       success: true,
-  //       message: "Current site photos uploaded successfully",
-  //       data: result,
-  //     });
-  //   } catch (error: any) {
-  //     res.status(500).json({
-  //       success: false,
-  //       message: error.message,
-  //     });
-  //   }
-  // };
+      res.status(201).json({
+        success: true,
+        message: "Current site photos uploaded successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  };
 
   public getCSPBooking = async (req: Request, res: Response) => {
     try {

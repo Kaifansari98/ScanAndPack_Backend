@@ -1547,105 +1547,105 @@ export class BookingStageService {
     }
   }
 
-  // public async uploadCSPBookingService(data: {
-  //   lead_id: number;
-  //   account_id: number;
-  //   vendor_id: number;
-  //   created_by: number;
-  //   sitePhotos: Express.Multer.File[];
-  // }) {
-  //   return prisma.$transaction(async (tx) => {
-  //     // 1️⃣ Validate document type
-  //     const docType = await tx.documentTypeMaster.findFirst({
-  //       where: {
-  //         vendor_id: data.vendor_id,
-  //         tag: "Type 32", // CSP at Booking Stage
-  //       },
-  //     });
+  public async uploadCSPBookingService(data: {
+    lead_id: number;
+    account_id: number;
+    vendor_id: number;
+    created_by: number;
+    sitePhotos: Express.Multer.File[];
+  }) {
+    return prisma.$transaction(async (tx) => {
+      // 1️⃣ Validate document type
+      const docType = await tx.documentTypeMaster.findFirst({
+        where: {
+          vendor_id: data.vendor_id,
+          tag: "Type 32", // CSP at Booking Stage
+        },
+      });
 
-  //     if (!docType) {
-  //       throw new Error(
-  //         "Current site photos at Booking Stage document type not found"
-  //       );
-  //     }
+      if (!docType) {
+        throw new Error(
+          "Current site photos at Booking Stage document type not found"
+        );
+      }
 
-  //     const uploadedDocs: {
-  //       id: number;
-  //       originalName: string;
-  //       s3Key: string;
-  //     }[] = [];
+      const uploadedDocs: {
+        id: number;
+        originalName: string;
+        s3Key: string;
+      }[] = [];
 
-  //     // 2️⃣ Upload photos + create LeadDocuments
-  //     for (const photo of data.sitePhotos) {
-  //       const key = `current-site-photos-at-booking-stage/${data.vendor_id}/${
-  //         data.lead_id
-  //       }/${Date.now()}-${sanitizeFilename(photo.originalname)}`;
+      // 2️⃣ Upload photos + create LeadDocuments
+      for (const photo of data.sitePhotos) {
+        const key = `current-site-photos-at-booking-stage/${data.vendor_id}/${
+          data.lead_id
+        }/${Date.now()}-${sanitizeFilename(photo.originalname)}`;
 
-  //       await wasabi.send(
-  //         new PutObjectCommand({
-  //           Bucket: process.env.WASABI_BUCKET_NAME!,
-  //           Key: key,
-  //           Body: photo.buffer,
-  //           ContentType: photo.mimetype,
-  //         })
-  //       );
+        await wasabi.send(
+          new PutObjectCommand({
+            Bucket: process.env.WASABI_BUCKET_NAME!,
+            Key: key,
+            Body: photo.buffer,
+            ContentType: photo.mimetype,
+          })
+        );
 
-  //       const doc = await tx.leadDocuments.create({
-  //         data: {
-  //           doc_og_name: photo.originalname,
-  //           doc_sys_name: key,
-  //           doc_type_id: docType.id,
-  //           vendor_id: data.vendor_id,
-  //           lead_id: data.lead_id,
-  //           account_id: data.account_id,
-  //           created_by: data.created_by,
-  //         },
-  //       });
+        const doc = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: photo.originalname,
+            doc_sys_name: key,
+            doc_type_id: docType.id,
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            account_id: data.account_id,
+            created_by: data.created_by,
+          },
+        });
 
-  //       uploadedDocs.push({
-  //         id: doc.id,
-  //         originalName: photo.originalname,
-  //         s3Key: key,
-  //       });
-  //     }
+        uploadedDocs.push({
+          id: doc.id,
+          originalName: photo.originalname,
+          s3Key: key,
+        });
+      }
 
-  //     // 3️⃣ Create LeadDetailedLogs (parent log)
-  //     const detailedLog = await tx.leadDetailedLogs.create({
-  //       data: {
-  //         vendor_id: data.vendor_id,
-  //         lead_id: data.lead_id,
-  //         account_id: data.account_id,
-  //         action:
-  //           "Current site photos uploaded at Booking stage for Final Measurement.",
-  //         action_type: "CREATE",
-  //         created_by: data.created_by,
-  //         created_at: new Date(),
-  //       },
-  //     });
+      // 3️⃣ Create LeadDetailedLogs (parent log)
+      const detailedLog = await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          action:
+            "Current site photos uploaded at Booking stage for Final Measurement.",
+          action_type: "CREATE",
+          created_by: data.created_by,
+          created_at: new Date(),
+        },
+      });
 
-  //     // 4️⃣ Create LeadDocumentLogs (child logs for each document)
-  //     if (uploadedDocs.length > 0) {
-  //       const docLogsData = uploadedDocs.map((doc) => ({
-  //         vendor_id: data.vendor_id,
-  //         lead_id: data.lead_id,
-  //         account_id: data.account_id,
-  //         doc_id: doc.id,
-  //         lead_logs_id: detailedLog.id,
-  //         created_by: data.created_by,
-  //         created_at: new Date(),
-  //       }));
+      // 4️⃣ Create LeadDocumentLogs (child logs for each document)
+      if (uploadedDocs.length > 0) {
+        const docLogsData = uploadedDocs.map((doc) => ({
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: data.created_by,
+          created_at: new Date(),
+        }));
 
-  //       await tx.leadDocumentLogs.createMany({
-  //         data: docLogsData,
-  //       });
-  //     }
+        await tx.leadDocumentLogs.createMany({
+          data: docLogsData,
+        });
+      }
 
-  //     return {
-  //       uploadedPhotosCount: uploadedDocs.length,
-  //       documents: uploadedDocs,
-  //     };
-  //   });
-  // }
+      return {
+        uploadedPhotosCount: uploadedDocs.length,
+        documents: uploadedDocs,
+      };
+    });
+  }
 
   public async getCSPBookingService(data: {
     vendor_id: number;

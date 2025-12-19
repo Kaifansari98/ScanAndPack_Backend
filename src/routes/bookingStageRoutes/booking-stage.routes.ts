@@ -63,32 +63,32 @@ bookingStageRouter.get(
   bookingStageController.getPayments
 );
 
-// const uploadCSPBooking = multer({
-//   storage,
-//   limits: {
-//     fileSize: 10 * 1024 * 1024, // 10MB
-//   },
-//   fileFilter: (req, file, cb) => {
-//     const allowed = [
-//       "image/jpeg",
-//       "image/jpg",
-//       "image/png",
-//       "image/gif",
-//     ];
-//     if (allowed.includes(file.mimetype)) cb(null, true);
-//     else cb(new Error("Only image files are allowed"));
-//   },
-// });
+const uploadCSPBooking = multer({
+  storage,
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10MB
+  },
+  fileFilter: (req, file, cb) => {
+    const allowed = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/gif",
+    ];
+    if (allowed.includes(file.mimetype)) cb(null, true);
+    else cb(new Error("Only image files are allowed"));
+  },
+});
 
-// const uploadFinalMeasurement = uploadCSPBooking.fields([
-//   { name: "current_site_photos", maxCount: 10 },
-// ]);
+const uploadFinalMeasurement = uploadCSPBooking.fields([
+  { name: "current_site_photos", maxCount: 10 },
+]);
 
-// bookingStageRouter.post(
-//   "/upload-CSP-booking",
-//   uploadFinalMeasurement,
-//   bookingStageController.uploadCSPBooking
-// );
+bookingStageRouter.post(
+  "/upload-CSP-booking",
+  uploadFinalMeasurement,
+  bookingStageController.uploadCSPBooking
+);
 
 bookingStageRouter.get(
   "/get-CSP-booking/:vendorId/:leadId",
