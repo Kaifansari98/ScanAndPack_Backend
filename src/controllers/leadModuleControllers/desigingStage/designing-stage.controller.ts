@@ -711,49 +711,63 @@ export class DesigingStageController {
 
   public static async uploadDesigns(req: Request, res: Response) {
     try {
-      const { vendorId, leadId, userId, accountId } = req.body;
+      const { vendorId, leadId, userId } = req.body;
 
       if (!req.files || (req.files as Express.Multer.File[]).length === 0) {
-        return res
-          .status(400)
-          .json({ success: false, message: "At least one file is required" });
-      }
-
-      const files = req.files as Express.Multer.File[];
-      const uploadedDocs: any[] = [];
-
-      // ✅ Validate vendor & account existence
-      const account = await prisma.accountMaster.findUnique({
-        where: { id: Number(accountId) },
-      });
-
-      if (!account) {
         return res.status(400).json({
           success: false,
-          message: `Invalid account_id: ${accountId}`,
+          message: "At least one file is required",
         });
       }
 
+      // 1️⃣ Fetch lead → derive account_id
+      const lead = await prisma.leadMaster.findFirst({
+        where: {
+          id: Number(leadId),
+          vendor_id: Number(vendorId),
+          is_deleted: false,
+        },
+        select: {
+          id: true,
+          account_id: true,
+        },
+      });
+
+      if (!lead) {
+        return res.status(404).json({
+          success: false,
+          message: `Invalid leadId ${leadId} for this vendor`,
+        });
+      }
+
+      if (!lead.account_id) {
+        return res.status(400).json({
+          success: false,
+          message: "No account linked with this lead",
+        });
+      }
+
+      const accountId = lead.account_id; // ✅ derived safely
+
+      // 2️⃣ Fetch document type
       const designDocType = await prisma.documentTypeMaster.findFirst({
         where: {
           vendor_id: Number(vendorId),
-          tag: "Type 6", // Type 6 = Design documents
+          tag: "Type 6",
         },
       });
 
       if (!designDocType) {
         return res.status(404).json({
           success: false,
-          message:
-            "Document type for designs (Type 6) not found for this vendor",
+          message: "Design document type (Type 6) not found",
         });
       }
-      
-      if (!account) {
-        throw new Error(`Invalid accountId ${accountId}`);
-      }      
 
-      // ✅ Upload and save each file
+      const files = req.files as Express.Multer.File[];
+      const uploadedDocs: any[] = [];
+
+      // 3️⃣ Upload + DB insert
       for (const file of files) {
         const sysName = await uploadToWasabStage1Desings(
           file.buffer,
@@ -768,7 +782,7 @@ export class DesigingStageController {
             doc_sys_name: sysName,
             vendor_id: Number(vendorId),
             lead_id: Number(leadId),
-            account_id: Number(accountId),
+            account_id: Number(accountId), // ✅ backend-owned
             doc_type_id: designDocType.id,
             created_by: Number(userId),
           },
@@ -777,10 +791,11 @@ export class DesigingStageController {
         uploadedDocs.push(doc);
       }
 
-      // ✅ Step 2: Log entry in LeadDetailedLogs
-      const count = uploadedDocs.length;
-      const plural = count > 1 ? "Designs have" : "Design has";
-      const actionMessage = `${count} ${plural} been added successfully.`;
+      // 4️⃣ Logs
+      const actionMessage =
+        uploadedDocs.length > 1
+          ? `${uploadedDocs.length} Designs have been added successfully.`
+          : "Design has been added successfully.";
 
       const detailedLog = await prisma.leadDetailedLogs.create({
         data: {
@@ -794,29 +809,29 @@ export class DesigingStageController {
         },
       });
 
-      // ✅ Step 3: Link uploaded docs → LeadDocumentLogs
-      const docLogsData = uploadedDocs.map((doc) => ({
-        vendor_id: Number(vendorId),
-        lead_id: Number(leadId),
-        account_id: Number(accountId),
-        doc_id: doc.id,
-        lead_logs_id: detailedLog.id,
-        created_by: Number(userId),
-        created_at: new Date(),
-      }));
+      await prisma.leadDocumentLogs.createMany({
+        data: uploadedDocs.map((doc) => ({
+          vendor_id: Number(vendorId),
+          lead_id: Number(leadId),
+          account_id: Number(accountId),
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: Number(userId),
+          created_at: new Date(),
+        })),
+      });
 
-      if (docLogsData.length > 0) {
-        await prisma.leadDocumentLogs.createMany({ data: docLogsData });
-      }
-
-      // ✅ Step 4: Return success response
       return res.status(201).json({
         success: true,
         message: actionMessage,
         documents: uploadedDocs,
       });
     } catch (error: any) {
-      return res.status(500).json({ success: false, message: error.message });
+      console.error("uploadDesigns error:", error);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
   }
 
