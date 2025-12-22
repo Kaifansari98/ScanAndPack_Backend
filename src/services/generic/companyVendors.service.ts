@@ -64,6 +64,102 @@ export class CompanyVendorsService {
     return newVendor;
   }
 
+  async createCompanyVendorsBulk(vendorId: number, payload: any) {
+    if (!vendorId) {
+      const error = new Error("vendor_id is required");
+      (error as any).statusCode = 400;
+      throw error;
+    }
+
+    const entries = Array.isArray(payload) ? payload : [payload];
+
+    if (entries.length === 0) {
+      const error = new Error("At least one company vendor is required");
+      (error as any).statusCode = 400;
+      throw error;
+    }
+
+    const missingFields: string[] = [];
+    const vendorCodes: string[] = [];
+
+    entries.forEach((item, index) => {
+      if (!item?.vendor_code) missingFields.push(`index ${index}: vendor_code`);
+      if (!item?.company_name)
+        missingFields.push(`index ${index}: company_name`);
+      if (!item?.point_of_contact)
+        missingFields.push(`index ${index}: point_of_contact`);
+      if (!item?.contact_no) missingFields.push(`index ${index}: contact_no`);
+      if (!item?.created_by) missingFields.push(`index ${index}: created_by`);
+
+      if (item?.vendor_code) vendorCodes.push(item.vendor_code);
+    });
+
+    if (missingFields.length > 0) {
+      const error = new Error(
+        `Missing required field(s): ${missingFields.join(", ")}`
+      );
+      (error as any).statusCode = 400;
+      throw error;
+    }
+
+    const seen = new Set<string>();
+    const duplicateCodes = vendorCodes.filter((code) => {
+      if (seen.has(code)) return true;
+      seen.add(code);
+      return false;
+    });
+
+    if (duplicateCodes.length > 0) {
+      const error = new Error(
+        `Duplicate vendor_code in request: ${[
+          ...new Set(duplicateCodes),
+        ].join(", ")}`
+      );
+      (error as any).statusCode = 409;
+      throw error;
+    }
+
+    const existing = await prisma.companyVendorsMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        vendor_code: { in: vendorCodes },
+      },
+      select: { vendor_code: true },
+    });
+
+    if (existing.length > 0) {
+      const existingCodes = existing.map((item) => item.vendor_code);
+      const error = new Error(
+        `Vendor with vendor_code already exists for this vendor: ${existingCodes.join(
+          ", "
+        )}`
+      );
+      (error as any).statusCode = 409;
+      throw error;
+    }
+
+    const dataToInsert = entries.map((item) => ({
+      vendor_id: vendorId,
+      vendor_code: item.vendor_code,
+      company_name: item.company_name,
+      point_of_contact: item.point_of_contact,
+      contact_no: item.contact_no,
+      email: item.email ?? null,
+      address: item.address ?? null,
+      created_by: Number(item.created_by),
+      updated_by: Number(item.created_by),
+    }));
+
+    const result = await prisma.companyVendorsMaster.createMany({
+      data: dataToInsert,
+    });
+
+    return {
+      insertedCount: result.count,
+      records: dataToInsert,
+    };
+  }
+
   async getCompanyVendorsByVendorId(vendorId: number) {
     if (!vendorId) {
       const error = new Error("vendor_id is required");

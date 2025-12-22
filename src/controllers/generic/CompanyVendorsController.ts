@@ -30,6 +30,53 @@ export class CompanyVendorsController {
     }
   }
 
+  async createCompanyVendorsBulk(req: Request, res: Response) {
+    try {
+      const { vendorId } = req.params;
+
+      let payload: any;
+
+      if (req.body.data) {
+        try {
+          payload = JSON.parse(req.body.data);
+        } catch {
+          return res.status(400).json({
+            success: false,
+            message: "Invalid JSON in 'data' field",
+          });
+        }
+      } else {
+        payload = req.body;
+      }
+
+      if (!Array.isArray(payload)) {
+        return res.status(400).json({
+          success: false,
+          message: "Expected an array of company vendor objects",
+        });
+      }
+
+      const result = await service.createCompanyVendorsBulk(
+        Number(vendorId),
+        payload
+      );
+
+      return res.status(201).json({
+        success: true,
+        message: "Company vendors created successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error("Error creating company vendors (bulk):", error);
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message:
+          error.message ||
+          "Internal server error while creating company vendors",
+      });
+    }
+  }
+
   async getCompanyVendorsByVendorId(req: Request, res: Response) {
     try {
       const { vendorId } = req.params;

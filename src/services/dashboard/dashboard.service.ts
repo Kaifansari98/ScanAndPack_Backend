@@ -808,6 +808,94 @@ export class DashboardService {
   }
 
   // -------------------------------------------------------
+  // Admin Dashboard : Stage Counts (Type 1 → Type 17 buckets)
+  // -------------------------------------------------------
+  public async getAdminStageCounts(vendor_id: number) {
+    const statuses = await prisma.statusTypeMaster.findMany({
+      where: { vendor_id },
+      select: { id: true, tag: true },
+    });
+
+    const statusMap = new Map<string, number>();
+    statuses.forEach((s) => statusMap.set(s.tag, s.id));
+
+    const baseWhere = {
+      vendor_id,
+      is_deleted: false,
+      activity_status: {
+        notIn: [
+          ActivityStatus.onHold,
+          ActivityStatus.lostApproval,
+          ActivityStatus.lost,
+        ],
+      },
+    };
+
+    const countByTags = async (tags: string[]) => {
+      const statusIds = tags
+        .map((tag) => statusMap.get(tag))
+        .filter((id): id is number => Boolean(id));
+
+      if (statusIds.length === 0) return 0;
+
+      return prisma.leadMaster.count({
+        where: {
+          ...baseWhere,
+          status_id: { in: statusIds },
+        },
+      });
+    };
+
+    const sumByTags = async (tags: string[]) => {
+      const statusIds = tags
+        .map((tag) => statusMap.get(tag))
+        .filter((id): id is number => Boolean(id));
+
+      if (statusIds.length === 0) return 0;
+
+      const result = await prisma.leadMaster.aggregate({
+        where: {
+          ...baseWhere,
+          status_id: { in: statusIds },
+        },
+        _sum: { total_project_amount: true },
+      });
+
+      return result._sum?.total_project_amount || 0;
+    };
+
+    const [leads, project, production, installation] = await Promise.all([
+      countByTags(["Type 1", "Type 2", "Type 3", "Type 4"]),
+      countByTags(["Type 5", "Type 6", "Type 7"]),
+      countByTags(["Type 8", "Type 9", "Type 10", "Type 11"]),
+      countByTags(["Type 12", "Type 13", "Type 14", "Type 15", "Type 16", "Type 17"]),
+    ]);
+
+    const [
+      leadsAmount,
+      projectAmount,
+      productionAmount,
+      installationAmount,
+    ] = await Promise.all([
+      sumByTags(["Type 1", "Type 2", "Type 3", "Type 4"]),
+      sumByTags(["Type 5", "Type 6", "Type 7"]),
+      sumByTags(["Type 8", "Type 9", "Type 10", "Type 11"]),
+      sumByTags(["Type 12", "Type 13", "Type 14", "Type 15", "Type 16", "Type 17"]),
+    ]);
+
+    return {
+      leads,
+      leadsAmount,
+      project,
+      projectAmount,
+      production,
+      productionAmount,
+      installation,
+      installationAmount,
+    };
+  }
+
+  // -------------------------------------------------------
   // Sales Executive : Stage counts for selected tags
   // -------------------------------------------------------
   public async getSalesExecutiveStageCounts(

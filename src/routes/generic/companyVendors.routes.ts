@@ -13,6 +13,13 @@ companyVendorsRoutes.post(
   controller.createCompanyVendor
 );
 
+// ✅ POST → Create multiple company vendors (form-data or JSON array)
+companyVendorsRoutes.post(
+  "/vendorId/:vendorId/create/bulk",
+  upload.none(),
+  controller.createCompanyVendorsBulk
+);
+
 // ✅ Fetch all company vendors by vendor_id
 companyVendorsRoutes.get(
   "/vendorId/:vendorId",

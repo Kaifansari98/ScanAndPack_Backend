@@ -13,7 +13,9 @@ DashboardRouter.get(
   "/sales-executive/performance-snapshot",
   dashboardController.getPerformanceSnapshot
 );
-DashboardRouter.get("/lead-status-wise-counts", dashboardController.getLeadStatusWiseCounts);
+DashboardRouter.get(
+  "/lead-status-wise-counts", 
+  dashboardController.getLeadStatusWiseCounts);
 DashboardRouter.get(
   "/avg-days-to-convert-lead-to-booking",
   dashboardController.getAvgDaysToConvertLeadToBooking
@@ -39,8 +41,6 @@ DashboardRouter.get(
   dashboardController.getSalesExecutiveActivityStatusCounts
 );
 
-
-
 // Admin
 DashboardRouter.get(
   "/admin/projects-overview",
@@ -54,6 +54,9 @@ DashboardRouter.get(
   "/admin/total-revenue",
   dashboardController.getTotalRevenue
 );
-
+DashboardRouter.get(
+  "/admin/stage-counts",
+  dashboardController.getAdminStageCounts
+);
 
 export default DashboardRouter;
