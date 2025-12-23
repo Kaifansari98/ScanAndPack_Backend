@@ -23,7 +23,7 @@ import logger from "../../../utils/logger";
 import { cache } from "../../../utils/cache";
 import Joi from "joi";
 import { generateLeadCode } from "../../../utils/generateLeadCode";
-import { logDbError } from "src/utils/prismaErrorLogger";
+import { logDbError } from "../../../utils/prismaErrorLogger";
 
 type EditTaskISMInput = {
   lead_id: number;
