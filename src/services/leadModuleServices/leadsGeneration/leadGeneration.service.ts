@@ -23,6 +23,7 @@ import logger from "../../../utils/logger";
 import { cache } from "../../../utils/cache";
 import Joi from "joi";
 import { generateLeadCode } from "../../../utils/generateLeadCode";
+import { logDbError } from "src/utils/prismaErrorLogger";
 
 type EditTaskISMInput = {
   lead_id: number;
@@ -112,6 +113,15 @@ export const createLeadService = async (
 
   return prisma.$transaction(
     async (tx) => {
+      try {
+        // 🔍 optional input snapshot
+        logger.debug("[SERVICE] createLead input", {
+          vendor_id,
+          created_by,
+          product_types,
+          product_structures,
+          fileCount: files.length,
+        });
       // 1. AccountMaster (create first to get account_id)
       const account = await tx.accountMaster.create({
         data: {
@@ -292,6 +302,12 @@ export const createLeadService = async (
             );
           }
 
+          logger.info("[FILE CHECK]", {
+            name: file.originalname,
+            size: file.size,
+            hasBuffer: !!file.buffer,
+          });          
+
           await wasabi.send(
             new PutObjectCommand({
               Bucket: process.env.WASABI_BUCKET_NAME!,
@@ -369,11 +385,119 @@ export const createLeadService = async (
         documentsProcessed: files ? files.length : 0,
         uploadedFiles: uploadedFiles,
       };
-    },
-    {
-      timeout: 15000, // 15s instead of 5s
+    } catch (err) {
+      logDbError(err, "createLeadService.transaction", {
+        vendor_id,
+        created_by,
+      });
+      throw err; // IMPORTANT
     }
-  );
+  },
+  { timeout: 15000 }
+);};
+
+
+export const uploadMoreSitePhotosService = async (
+  payload: { vendor_id: number; lead_id: number; created_by: number },
+  files: Express.Multer.File[]
+) => {
+  const { vendor_id, lead_id, created_by } = payload;
+
+  if (!vendor_id || !lead_id || !created_by) {
+    throw new Error("vendor_id, lead_id, and created_by are required");
+  }
+
+  if (!files || files.length === 0) {
+    throw new Error("At least one file must be uploaded");
+  }
+
+  function sanitizeFilename(filename: string): string {
+    return filename.replace(/[^a-zA-Z0-9.\-_]/g, "_");
+  }
+
+  return prisma.$transaction(async (tx) => {
+    const lead = await tx.leadMaster.findFirst({
+      where: {
+        id: lead_id,
+        vendor_id,
+        is_deleted: false,
+      },
+      select: {
+        id: true,
+        account_id: true,
+      },
+    });
+
+    if (!lead) {
+      throw new Error(`Lead ${lead_id} not found for vendor ${vendor_id}`);
+    }
+
+    const docTypeRecord = await tx.documentTypeMaster.findFirst({
+      where: { vendor_id, tag: "Type 1" },
+    });
+
+    if (!docTypeRecord) {
+      throw new Error(`Document type "Type 1" not found for vendor ${vendor_id}`);
+    }
+
+    const uploadedDocs = [];
+
+    for (const file of files) {
+      const sanitizedFilename = sanitizeFilename(file.originalname);
+      const s3Key = `site-photos/${vendor_id}/${
+        lead.id
+      }/${Date.now()}-${sanitizedFilename}`;
+
+      await wasabi.send(
+        new PutObjectCommand({
+          Bucket: process.env.WASABI_BUCKET_NAME!,
+          Key: s3Key,
+          Body: file.buffer,
+          ContentType: file.mimetype,
+        })
+      );
+
+      const document = await tx.leadDocuments.create({
+        data: {
+          doc_og_name: file.originalname,
+          doc_sys_name: s3Key,
+          doc_type_id: docTypeRecord.id,
+          vendor_id,
+          lead_id: lead.id,
+          account_id: lead.account_id,
+          created_by,
+        },
+      });
+
+      uploadedDocs.push(document);
+    }
+
+    const detailedLog = await tx.leadDetailedLogs.create({
+      data: {
+        vendor_id,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: `Additional site photos uploaded (${uploadedDocs.length})`,
+        action_type: "CREATE",
+        created_by,
+        created_at: new Date(),
+      },
+    });
+
+    await tx.leadDocumentLogs.createMany({
+      data: uploadedDocs.map((doc) => ({
+        vendor_id,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        doc_id: doc.id,
+        lead_logs_id: detailedLog.id,
+        created_by,
+        created_at: new Date(),
+      })),
+    });
+
+    return uploadedDocs;
+  });
 };
 
 export const getLeadsByVendor = async (vendorId: number) => {

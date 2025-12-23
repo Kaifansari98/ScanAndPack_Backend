@@ -10,6 +10,7 @@ import {
   updateLeadService,
   verifyUserTokenService,
   isContactOrEmailExists,
+  uploadMoreSitePhotosService,
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import {
   createLeadSchema,
@@ -144,6 +145,68 @@ export class LeadController {
         stack: error.stack,
       });
       console.error("[ERROR] createLead:", error);
+      return res.status(500).json({
+        success: false,
+        error: "Internal server error",
+        details:
+          process.env.NODE_ENV === "development" ? error.message : undefined,
+      });
+    }
+  }
+
+  /**
+   * Upload more site photos for an existing lead
+   */
+  async uploadMoreSitePhotos(req: Request, res: Response): Promise<Response> {
+    logger.info("[CONTROLLER] uploadMoreSitePhotos called");
+
+    try {
+      const files = (req.files as Express.Multer.File[]) || [];
+      const { vendor_id, lead_id, created_by } = req.body;
+
+      if (!vendor_id || !lead_id || !created_by) {
+        return res.status(400).json({
+          success: false,
+          error: "vendor_id, lead_id, and created_by are required",
+        });
+      }
+
+      if (files.length === 0) {
+        return res.status(400).json({
+          success: false,
+          error: "At least one file must be uploaded",
+        });
+      }
+
+      if (files.length > 10) {
+        logger.warn("Too many files uploaded", { count: files.length });
+        return res.status(400).json({
+          success: false,
+          error: "Too many files",
+          details: "Maximum 10 files allowed",
+        });
+      }
+
+      const uploadedDocs = await uploadMoreSitePhotosService(
+        {
+          vendor_id: Number(vendor_id),
+          lead_id: Number(lead_id),
+          created_by: Number(created_by),
+        },
+        files
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Additional site photos uploaded successfully",
+        count: uploadedDocs.length,
+        data: uploadedDocs,
+      });
+    } catch (error: any) {
+      logger.error("[ERROR] uploadMoreSitePhotos failed", {
+        error: error.message,
+        stack: error.stack,
+      });
       return res.status(500).json({
         success: false,
         error: "Internal server error",

@@ -73,6 +73,12 @@ leadsRouter.post(
   leadController.createLead
 );
 
+leadsRouter.post(
+  "/upload-more-site-photos",
+  upload.array("documents", 10),
+  leadController.uploadMoreSitePhotos
+);
+
 // GET all leads by vendorId
 leadsRouter.get(
   "/get-vendor-leads/vendor/:vendorId",
