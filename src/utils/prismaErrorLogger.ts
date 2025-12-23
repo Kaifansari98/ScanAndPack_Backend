@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Prisma } from "../prisma/generated";
 import logger from "./logger";
 
 export function logDbError(error: unknown, context: string, meta?: any) {
