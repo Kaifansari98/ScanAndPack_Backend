@@ -460,6 +460,179 @@ export class BookingStageController {
     }
   };
 
+  public reassignSiteSupervisor = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const leadId = parseInt(req.params.leadId);
+      const vendorId = parseInt(req.params.vendorId);
+      const siteSupervisorId = parseInt(req.body.siteSupervisorId);
+      const createdBy = parseInt(req.body.created_by);
+
+      if (!leadId || !vendorId || !siteSupervisorId || !createdBy) {
+        res.status(400).json({
+          success: false,
+          message:
+            "leadId, vendorId, siteSupervisorId, and created_by are required",
+        });
+        return;
+      }
+
+      const result = await this.bookingStageService.reassignSiteSupervisor({
+        lead_id: leadId,
+        vendor_id: vendorId,
+        siteSupervisorId,
+        created_by: createdBy,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Site supervisor reassigned successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error("[BookingStageController] Reassign Error:", error);
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public updateMrpValue = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const leadId = parseInt(req.params.leadId);
+      const vendorId = parseInt(req.params.vendorId);
+      const mrpValue = Number(req.body.mrp_value);
+      const updatedBy = parseInt(req.body.updated_by);
+
+      if (!leadId || !vendorId || Number.isNaN(mrpValue) || !updatedBy) {
+        res.status(400).json({
+          success: false,
+          message:
+            "leadId, vendorId, mrp_value, and updated_by are required",
+        });
+        return;
+      }
+
+      const result = await this.bookingStageService.updateMrpValue({
+        lead_id: leadId,
+        vendor_id: vendorId,
+        mrp_value: mrpValue,
+        updated_by: updatedBy,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "MRP value updated successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error("[BookingStageController] updateMrpValue Error:", error);
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public updateTotalProjectAmount = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const leadId = parseInt(req.params.leadId);
+      const vendorId = parseInt(req.params.vendorId);
+      const totalProjectAmount = Number(req.body.total_project_amount);
+      const updatedBy = parseInt(req.body.updated_by);
+
+      if (
+        !leadId ||
+        !vendorId ||
+        Number.isNaN(totalProjectAmount) ||
+        !updatedBy
+      ) {
+        res.status(400).json({
+          success: false,
+          message:
+            "leadId, vendorId, total_project_amount, and updated_by are required",
+        });
+        return;
+      }
+
+      const result = await this.bookingStageService.updateTotalProjectAmount({
+        lead_id: leadId,
+        vendor_id: vendorId,
+        total_project_amount: totalProjectAmount,
+        updated_by: updatedBy,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Total project amount updated successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error(
+        "[BookingStageController] updateTotalProjectAmount Error:",
+        error
+      );
+      res.status(error.statusCode || 500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public updateBookingAmount = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const leadId = parseInt(req.params.leadId);
+      const vendorId = parseInt(req.params.vendorId);
+      const bookingAmount = Number(req.body.booking_amount);
+      const updatedBy = parseInt(req.body.updated_by);
+
+      if (
+        !leadId ||
+        !vendorId ||
+        Number.isNaN(bookingAmount) ||
+        !updatedBy
+      ) {
+        res.status(400).json({
+          success: false,
+          message:
+            "leadId, vendorId, booking_amount, and updated_by are required",
+        });
+        return;
+      }
+
+      const result = await this.bookingStageService.updateBookingAmount({
+        lead_id: leadId,
+        vendor_id: vendorId,
+        booking_amount: bookingAmount,
+        updated_by: updatedBy,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Booking amount updated successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error("[BookingStageController] updateBookingAmount Error:", error);
+      res.status(error.statusCode || 500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
   public getPayments = async (req: Request, res: Response) => {
     // 👈 arrow fn preserves `this`
     try {

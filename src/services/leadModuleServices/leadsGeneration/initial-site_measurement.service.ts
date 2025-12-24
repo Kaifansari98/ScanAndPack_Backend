@@ -39,9 +39,9 @@ export interface CreateBDISMPaymentUploadDto {
   paymentImageFile?: Express.Multer.File;
 }
 
-// ----------------------
+// ----------------------------
 // AssignTaskISM (standalone)
-// ----------------------
+// ----------------------------
 
 const assignTaskISMSchema = Joi.object({
   lead_id: Joi.number().integer().positive().required(),
@@ -2068,6 +2068,126 @@ export class PaymentUploadService {
 
       throw new Error(`Failed to delete document: ${error.message}`);
     }
+  }
+
+  public async replacePdfDocument(
+    documentId: number,
+    userId: number,
+    vendorId: number,
+    pdfFile: Express.Multer.File
+  ) {
+    if (!pdfFile) {
+      throw Object.assign(new Error("PDF file is required"), {
+        statusCode: 400,
+      });
+    }
+
+    return prisma.$transaction(async (tx) => {
+      const user = await tx.userMaster.findFirst({
+        where: {
+          id: userId,
+          vendor_id: vendorId,
+          status: "active",
+        },
+      });
+
+      if (!user) {
+        throw Object.assign(
+          new Error("User not found or not authorized for this vendor"),
+          { statusCode: 403 }
+        );
+      }
+
+      const existingDoc = await tx.leadDocuments.findFirst({
+        where: {
+          id: documentId,
+          vendor_id: vendorId,
+          is_deleted: false,
+        },
+        include: {
+          documentType: {
+            select: {
+              id: true,
+              tag: true,
+              type: true,
+            },
+          },
+        },
+      });
+
+      if (!existingDoc) {
+        throw Object.assign(
+          new Error("Document not found or already deleted"),
+          { statusCode: 404 }
+        );
+      }
+
+      if (existingDoc.documentType?.tag !== "Type 3") {
+        throw Object.assign(
+          new Error("Only PDF documents can be replaced via this endpoint"),
+          { statusCode: 400 }
+        );
+      }
+
+      await tx.leadDocuments.update({
+        where: { id: documentId },
+        data: {
+          is_deleted: true,
+          deleted_by: userId,
+          deleted_at: new Date(),
+        },
+      });
+
+      const sanitizedPdfName = sanitizeFilename(pdfFile.originalname);
+      const pdfS3Key = `initial_site_measurement_documents/${vendorId}/${
+        existingDoc.lead_id
+      }/${Date.now()}-${sanitizedPdfName}`;
+
+      await wasabi.send(
+        new PutObjectCommand({
+          Bucket: process.env.WASABI_BUCKET_NAME || "your-bucket-name",
+          Key: pdfS3Key,
+          Body: pdfFile.buffer,
+          ContentType: pdfFile.mimetype,
+        })
+      );
+
+      const newDocument = await tx.leadDocuments.create({
+        data: {
+          doc_og_name: pdfFile.originalname,
+          doc_sys_name: pdfS3Key,
+          created_by: userId,
+          doc_type_id: existingDoc.doc_type_id,
+          account_id: existingDoc.account_id!,
+          lead_id: existingDoc.lead_id!,
+          vendor_id: vendorId,
+        },
+      });
+
+      const signed_url = await generateSignedUrl(pdfS3Key);
+
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: existingDoc.lead_id!,
+          account_id: existingDoc.account_id!,
+          action: "Initial Site Measurement PDF updated successfully.",
+          action_type: "UPDATE",
+          created_by: userId,
+          created_at: new Date(),
+        },
+      });
+
+      return {
+        old_document_id: existingDoc.id,
+        document: {
+          id: newDocument.id,
+          originalName: newDocument.doc_og_name,
+          s3Key: newDocument.doc_sys_name,
+          signed_url,
+        },
+      };
+    });
   }
 
   // Restore a soft deleted document (bonus method)

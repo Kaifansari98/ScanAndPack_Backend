@@ -472,7 +472,6 @@ export class FinalMeasurementService {
   public async addMoreFinalMeasurementFiles(data: {
     lead_id: number;
     vendor_id: number;
-    account_id: number;
     created_by: number;
     sitePhotos?: Express.Multer.File[];
   }) {
@@ -481,6 +480,21 @@ export class FinalMeasurementService {
         const response: any = {
           sitePhotos: [],
         };
+
+        const lead = await tx.leadMaster.findFirst({
+          where: {
+            id: data.lead_id,
+            vendor_id: data.vendor_id,
+            is_deleted: false,
+          },
+          select: { account_id: true },
+        });
+
+        if (!lead?.account_id) {
+          throw new Error(
+            "Lead not found or account_id missing for this vendor"
+          );
+        }
 
         // Upload Additional Site Photos (Type 10)
         if (data.sitePhotos && data.sitePhotos.length > 0) {
@@ -513,7 +527,7 @@ export class FinalMeasurementService {
                 doc_sys_name: s3Key,
                 created_by: data.created_by,
                 doc_type_id: sitePhotoType.id,
-                account_id: data.account_id,
+                account_id: lead.account_id,
                 lead_id: data.lead_id,
                 vendor_id: data.vendor_id,
               },
@@ -521,6 +535,150 @@ export class FinalMeasurementService {
 
             response.sitePhotos.push(doc);
           }
+        }
+
+        return response;
+      },
+      { timeout: 15000 }
+    );
+  }
+
+  public async addMoreFinalMeasurementSitePhotos(data: {
+    lead_id: number;
+    vendor_id: number;
+    created_by: number;
+    sitePhotos: Express.Multer.File[];
+  }) {
+    return await prisma.$transaction(
+      async (tx: any) => {
+        const response: any = {
+          sitePhotos: [],
+        };
+
+        const lead = await tx.leadMaster.findFirst({
+          where: {
+            id: data.lead_id,
+            vendor_id: data.vendor_id,
+            is_deleted: false,
+          },
+          select: { account_id: true },
+        });
+
+        if (!lead?.account_id) {
+          throw new Error(
+            "Lead not found or account_id missing for this vendor"
+          );
+        }
+
+        const sitePhotoType = await tx.documentTypeMaster.findFirst({
+          where: { vendor_id: data.vendor_id, tag: "Type 10" },
+        });
+        if (!sitePhotoType) {
+          throw new Error(
+            "Document type (Site Photos) not found for this vendor"
+          );
+        }
+
+        for (const file of data.sitePhotos) {
+          const sanitizedName = sanitizeFilename(file.originalname);
+          const s3Key = `final-current-site-photos/${data.vendor_id}/${
+            data.lead_id
+          }/${Date.now()}-${sanitizedName}`;
+
+          await wasabi.send(
+            new PutObjectCommand({
+              Bucket: process.env.WASABI_BUCKET_NAME!,
+              Key: s3Key,
+              Body: file.buffer,
+              ContentType: file.mimetype,
+            })
+          );
+
+          const doc = await tx.leadDocuments.create({
+            data: {
+              doc_og_name: file.originalname,
+              doc_sys_name: s3Key,
+              created_by: data.created_by,
+              doc_type_id: sitePhotoType.id,
+              account_id: lead.account_id,
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+            },
+          });
+
+          response.sitePhotos.push(doc);
+        }
+
+        return response;
+      },
+      { timeout: 15000 }
+    );
+  }
+
+  public async addMoreFinalMeasurementDocs(data: {
+    lead_id: number;
+    vendor_id: number;
+    created_by: number;
+    finalMeasurementDocs: Express.Multer.File[];
+  }) {
+    return await prisma.$transaction(
+      async (tx: any) => {
+        const response: any = {
+          measurementDocs: [],
+        };
+
+        const lead = await tx.leadMaster.findFirst({
+          where: {
+            id: data.lead_id,
+            vendor_id: data.vendor_id,
+            is_deleted: false,
+          },
+          select: { account_id: true },
+        });
+
+        if (!lead?.account_id) {
+          throw new Error(
+            "Lead not found or account_id missing for this vendor"
+          );
+        }
+
+        const measurementDocType = await tx.documentTypeMaster.findFirst({
+          where: { vendor_id: data.vendor_id, tag: "Type 9" },
+        });
+        if (!measurementDocType) {
+          throw new Error(
+            "Document type (Final Measurement) not found for this vendor"
+          );
+        }
+
+        for (const file of data.finalMeasurementDocs) {
+          const sanitizedName = sanitizeFilename(file.originalname);
+          const s3Key = `final-measurement-documents/${data.vendor_id}/${
+            data.lead_id
+          }/${Date.now()}-${sanitizedName}`;
+
+          await wasabi.send(
+            new PutObjectCommand({
+              Bucket: process.env.WASABI_BUCKET_NAME!,
+              Key: s3Key,
+              Body: file.buffer,
+              ContentType: file.mimetype,
+            })
+          );
+
+          const doc = await tx.leadDocuments.create({
+            data: {
+              doc_og_name: file.originalname,
+              doc_sys_name: s3Key,
+              created_by: data.created_by,
+              doc_type_id: measurementDocType.id,
+              account_id: lead.account_id,
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+            },
+          });
+
+          response.measurementDocs.push(doc);
         }
 
         return response;

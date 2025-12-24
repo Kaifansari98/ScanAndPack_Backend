@@ -211,6 +211,12 @@ router.put(
   paymentUploadController.updatePaymentUpload
 );
 
+router.put(
+  "/documents/:documentId/replace-pdf",
+  upload.fields([{ name: "upload_pdf", maxCount: 1 }]),
+  paymentUploadController.replacePdfDocument
+);
+
 // Soft delete document
 router.put(
   "/documents/:documentId/delete",

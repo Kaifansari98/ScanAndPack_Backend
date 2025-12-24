@@ -1046,6 +1046,102 @@ export class PaymentUploadController {
     }
   };
 
+  // PUT /api/payment-upload/documents/:documentId/replace-pdf
+  public replacePdfDocument = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const { documentId } = req.params;
+      const { user_id, vendor_id } = req.body;
+      const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+      const pdfFile = files?.upload_pdf?.[0];
+
+      if (!documentId) {
+        res.status(400).json({
+          success: false,
+          message: "Document ID is required in URL parameters",
+        });
+        return;
+      }
+
+      if (!user_id || !vendor_id) {
+        res.status(400).json({
+          success: false,
+          message: "user_id and vendor_id are required in request body",
+        });
+        return;
+      }
+
+      if (!pdfFile) {
+        res.status(400).json({
+          success: false,
+          message: "upload_pdf file is required",
+        });
+        return;
+      }
+
+      if (pdfFile.mimetype !== "application/pdf") {
+        res.status(400).json({
+          success: false,
+          message: "Upload file must be a PDF",
+        });
+        return;
+      }
+
+      const documentIdNum = parseInt(documentId);
+      const userIdNum = parseInt(user_id);
+      const vendorIdNum = parseInt(vendor_id);
+
+      if (isNaN(documentIdNum) || documentIdNum <= 0) {
+        res.status(400).json({
+          success: false,
+          message: "Invalid document ID. Must be a positive number",
+        });
+        return;
+      }
+
+      if (isNaN(userIdNum) || userIdNum <= 0) {
+        res.status(400).json({
+          success: false,
+          message: "Invalid user_id. Must be a positive number",
+        });
+        return;
+      }
+
+      if (isNaN(vendorIdNum) || vendorIdNum <= 0) {
+        res.status(400).json({
+          success: false,
+          message: "Invalid vendor_id. Must be a positive number",
+        });
+        return;
+      }
+
+      const result = await this.paymentUploadService.replacePdfDocument(
+        documentIdNum,
+        userIdNum,
+        vendorIdNum,
+        pdfFile
+      );
+
+      res.status(200).json({
+        success: true,
+        message: "PDF document updated successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error(
+        "[PaymentUploadController] Error replacing PDF document:",
+        error
+      );
+
+      res.status(error.statusCode || 500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
   // PUT /api/payment-upload/documents/:documentId/restore
   public restoreDocument = async (
     req: Request,

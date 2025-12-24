@@ -329,6 +329,7 @@ export class SiteReadinessService {
         vendor_id: vendorId,
         lead_id: leadId,
         doc_type_id: sitePhotoDocType.id,
+        is_deleted: false,
       },
       orderBy: { created_at: "desc" },
     });

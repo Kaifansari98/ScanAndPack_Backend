@@ -52,6 +52,26 @@ bookingStageRouter.get(
 
 bookingStageRouter.put("/edit", bookingStageController.editBookingStage);
 
+bookingStageRouter.put(
+  "/reassign-site-supervisor/vendor/:vendorId/lead/:leadId",
+  bookingStageController.reassignSiteSupervisor
+);
+
+bookingStageRouter.put(
+  "/update-mrp/vendor/:vendorId/lead/:leadId",
+  bookingStageController.updateMrpValue
+);
+
+bookingStageRouter.put(
+  "/update-total-project-amount/vendor/:vendorId/lead/:leadId",
+  bookingStageController.updateTotalProjectAmount
+);
+
+bookingStageRouter.put(
+  "/update-booking-amount/vendor/:vendorId/lead/:leadId",
+  bookingStageController.updateBookingAmount
+);
+
 bookingStageRouter.post(
   "/add-additional-payment",
   upload.fields([{ name: "payment_file", maxCount: 1 }]),

@@ -661,6 +661,8 @@ export class DesigingStageController {
     }
   }
 
+  // This API will IGNORE deleted docs -- it will not include them. 
+  // As per the code below, only non-deleted docs are picked by being explicit in the doc lookup.
   public static async getDesignMeetings(req: Request, res: Response) {
     try {
       const { leadId, vendorId } = req.params;
@@ -683,29 +685,34 @@ export class DesigingStageController {
         orderBy: { created_at: "desc" },
       });
 
-      // Attach signed URLs to documents
+      // Attach signed URLs to only existing, non-deleted documents
       const meetingsWithUrls = await Promise.all(
         meetings.map(async (meeting: any) => {
           const mappings = (meeting as any).designMeetingDocsMapping as any[];
           const docsWithUrls = await Promise.all(
             mappings.map(async (map: any) => {
-              const document = await prisma.leadDocuments.findUnique({
-                where: { id: map.document_id },
+              // Only include document if it exists and is not deleted
+              const document = await prisma.leadDocuments.findFirst({
+                where: {
+                  id: map.document_id,
+                  is_deleted: false,
+                },
               });
-              const signedUrl = document
-                ? await generateSignedUrl(document.doc_sys_name, 3600, "inline") // 👈 always inline
-                : null;
-
+              if (!document) {
+                return null; // filter out mapping if doc is deleted
+              }
+              const signedUrl = await generateSignedUrl(document.doc_sys_name, 3600, "inline");
               return {
                 ...map,
-                document: document ? { ...document, signedUrl } : null,
+                document: { ...document, signedUrl },
               };
             })
           );
 
+          // Filter out mappings for deleted/non-existing documents
           return {
             ...meeting,
-            designMeetingDocsMapping: docsWithUrls,
+            designMeetingDocsMapping: docsWithUrls.filter(Boolean),
           };
         })
       );

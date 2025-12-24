@@ -1031,6 +1031,11 @@ export class UnderInstallationStageService {
           include: {
             document: true,
           },
+          where: {
+            document: {
+              is_deleted: false,
+            },
+          },
         },
       },
     });
@@ -1435,6 +1440,7 @@ export class UnderInstallationStageService {
             vendor_id,
             lead_id,
             doc_type_id: finalSitePhotoType.id,
+            is_deleted: false
           },
         })
       : [];
@@ -1445,6 +1451,7 @@ export class UnderInstallationStageService {
             vendor_id,
             lead_id,
             doc_type_id: handoverDocType.id,
+            is_deleted: false
           },
         })
       : [];

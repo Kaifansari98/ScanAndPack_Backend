@@ -190,6 +190,9 @@ export class ClientDocumentationService {
           include: {
             documentType: true, // To easily identify Type 11 / Type 12
           },
+          where: {
+            is_deleted: false,
+          }
         },
       },
     });

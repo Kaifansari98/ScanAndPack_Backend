@@ -181,9 +181,9 @@ export class FinalMeasurementController {
     res: Response
   ): Promise<void> => {
     try {
-      const { lead_id, vendor_id, account_id, created_by } = req.body;
+      const { lead_id, vendor_id, created_by } = req.body;
 
-      if (!lead_id || !vendor_id || !account_id || !created_by) {
+      if (!lead_id || !vendor_id || !created_by) {
         res
           .status(400)
           .json({ success: false, message: "Missing required fields" });
@@ -206,7 +206,6 @@ export class FinalMeasurementController {
         {
           lead_id: parseInt(lead_id),
           vendor_id: parseInt(vendor_id),
-          account_id: parseInt(account_id),
           created_by: parseInt(created_by),
           sitePhotos,
         }
@@ -215,6 +214,100 @@ export class FinalMeasurementController {
       res.status(201).json({
         success: true,
         message: "Additional files uploaded successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error("[FinalMeasurementController] Error:", error);
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public addMoreFinalMeasurementSitePhotos = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const { lead_id, vendor_id, created_by } = req.body;
+
+      if (!lead_id || !vendor_id || !created_by) {
+        res
+          .status(400)
+          .json({ success: false, message: "Missing required fields" });
+        return;
+      }
+
+      const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+      const sitePhotos = files?.site_photos || [];
+
+      if (!sitePhotos || sitePhotos.length === 0) {
+        res.status(400).json({
+          success: false,
+          message: "At least one site photo is required",
+        });
+        return;
+      }
+
+      const result =
+        await finalMeasurementService.addMoreFinalMeasurementSitePhotos({
+          lead_id: parseInt(lead_id),
+          vendor_id: parseInt(vendor_id),
+          created_by: parseInt(created_by),
+          sitePhotos,
+        });
+
+      res.status(201).json({
+        success: true,
+        message: "Additional site photos uploaded successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error("[FinalMeasurementController] Error:", error);
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public addMoreFinalMeasurementDocs = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const { lead_id, vendor_id, created_by } = req.body;
+
+      if (!lead_id || !vendor_id || !created_by) {
+        res
+          .status(400)
+          .json({ success: false, message: "Missing required fields" });
+        return;
+      }
+
+      const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+      const finalMeasurementDocs = files?.final_measurement_doc || [];
+
+      if (!finalMeasurementDocs || finalMeasurementDocs.length === 0) {
+        res.status(400).json({
+          success: false,
+          message: "At least one final measurement document is required",
+        });
+        return;
+      }
+
+      const result =
+        await finalMeasurementService.addMoreFinalMeasurementDocs({
+          lead_id: parseInt(lead_id),
+          vendor_id: parseInt(vendor_id),
+          created_by: parseInt(created_by),
+          finalMeasurementDocs,
+        });
+
+      res.status(201).json({
+        success: true,
+        message: "Additional final measurement documents uploaded successfully",
         data: result,
       });
     } catch (error: any) {

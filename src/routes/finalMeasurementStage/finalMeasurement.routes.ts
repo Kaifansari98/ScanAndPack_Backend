@@ -38,6 +38,18 @@ finalMeasurementRouter.post(
     finalMeasurementController.addMoreFinalMeasurementFiles
 );
 
+finalMeasurementRouter.post(
+    "/add-site-photos",
+    uploadFinalMeasurement.fields([{ name: "site_photos", maxCount: 10 }]),
+    finalMeasurementController.addMoreFinalMeasurementSitePhotos
+);
+
+finalMeasurementRouter.post(
+    "/add-final-measurement-docs",
+    uploadFinalMeasurement.fields([{ name: "final_measurement_doc", maxCount: 10 }]),
+    finalMeasurementController.addMoreFinalMeasurementDocs
+);
+
 finalMeasurementRouter.get(
     "/allLeads/vendorId/:vendorId/userId/:userId",
     finalMeasurementController.getFinalMeasurementLeads

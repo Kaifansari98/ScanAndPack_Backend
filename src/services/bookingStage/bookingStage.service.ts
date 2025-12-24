@@ -296,7 +296,7 @@ export class BookingStageService {
             account_id: data.account_id,
             lead_id: data.lead_id,
             user_id: data.siteSupervisorId,
-            type: "ISM",
+            type: "site-supervisor",
             status: "active",
             created_by: data.created_by,
           },
@@ -554,6 +554,7 @@ export class BookingStageService {
       leadId: lead.id,
       name: `${lead.firstname} ${lead.lastname}`,
       finalBookingAmount: lead.total_project_amount,
+      bookingAmount: lead.booking_amount,
       mrpValue: lead.mrp_value,
       vendorId: lead.vendor_id,
       documents: documentsWithUrls,
@@ -1701,5 +1702,351 @@ export class BookingStageService {
       count: docsWithSignedUrls.length,
       documents: docsWithSignedUrls,
     };
+  }
+
+  public async reassignSiteSupervisor(data: {
+    lead_id: number;
+    vendor_id: number;
+    siteSupervisorId: number;
+    created_by: number;
+  }) {
+    return await prisma.$transaction(async (tx) => {
+      const lead = await tx.leadMaster.findFirst({
+        where: {
+          id: data.lead_id,
+          vendor_id: data.vendor_id,
+          is_deleted: false,
+        },
+        select: {
+          id: true,
+          account_id: true,
+        },
+      });
+
+      if (!lead) {
+        throw new Error(
+          `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`
+        );
+      }
+
+      const siteSupervisorType = await tx.userTypeMaster.findFirst({
+        where: {
+          user_type: {
+            equals: "site-supervisor",
+            mode: "insensitive",
+          },
+        },
+        select: { id: true },
+      });
+
+      if (!siteSupervisorType) {
+        throw new Error("Site supervisor user type not found");
+      }
+
+      const supervisor = await tx.userMaster.findFirst({
+        where: {
+          id: data.siteSupervisorId,
+          vendor_id: data.vendor_id,
+          user_type_id: siteSupervisorType.id,
+          status: "active",
+        },
+        select: { id: true, user_name: true },
+      });
+
+      if (!supervisor) {
+        throw new Error("Invalid or inactive site supervisor");
+      }
+
+      await tx.leadSiteSupervisorMapping.updateMany({
+        where: {
+          lead_id: lead.id,
+          vendor_id: data.vendor_id,
+          account_id: lead.account_id!,
+        },
+        data: {
+          status: "inactive",
+        },
+      });
+
+      const existingSupervisor = await tx.leadSiteSupervisorMapping.findFirst({
+        where: {
+          lead_id: lead.id,
+          user_id: data.siteSupervisorId,
+          vendor_id: data.vendor_id,
+          account_id: lead.account_id!,
+        },
+      });
+
+      let updatedSupervisor;
+      if (existingSupervisor) {
+        updatedSupervisor = await tx.leadSiteSupervisorMapping.update({
+          where: { id: existingSupervisor.id },
+          data: { status: "active" },
+        });
+      } else {
+        updatedSupervisor = await tx.leadSiteSupervisorMapping.create({
+          data: {
+            lead_id: lead.id,
+            user_id: data.siteSupervisorId,
+            vendor_id: data.vendor_id,
+            account_id: lead.account_id!,
+            created_by: data.created_by,
+            status: "active",
+          },
+        });
+      }
+
+      await tx.leadUserMapping.updateMany({
+        where: {
+          lead_id: lead.id,
+          vendor_id: data.vendor_id,
+          account_id: lead.account_id!,
+          type: "ISM",
+          status: "active",
+        },
+        data: {
+          status: "inactive",
+          updated_by: data.created_by,
+          updated_at: new Date(),
+        },
+      });
+
+      const existingLeadUserMapping = await tx.leadUserMapping.findFirst({
+        where: {
+          lead_id: lead.id,
+          vendor_id: data.vendor_id,
+          account_id: lead.account_id!,
+          user_id: data.siteSupervisorId,
+          type: "ISM",
+        },
+      });
+
+      if (existingLeadUserMapping) {
+        await tx.leadUserMapping.update({
+          where: { id: existingLeadUserMapping.id },
+          data: {
+            status: "active",
+            updated_by: data.created_by,
+            updated_at: new Date(),
+          },
+        });
+      } else {
+        await tx.leadUserMapping.create({
+          data: {
+            vendor_id: data.vendor_id,
+            account_id: lead.account_id!,
+            lead_id: lead.id,
+            user_id: data.siteSupervisorId,
+            type: "ISM",
+            status: "active",
+            created_by: data.created_by,
+          },
+        });
+      }
+
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: data.vendor_id,
+          lead_id: lead.id,
+          account_id: lead.account_id!,
+          action: `Site supervisor reassigned to ${supervisor.user_name}`,
+          action_type: "UPDATE",
+          created_by: data.created_by,
+          created_at: new Date(),
+        },
+      });
+
+      return {
+        supervisor: updatedSupervisor,
+        supervisor_user: supervisor,
+      };
+    });
+  }
+
+  public async updateMrpValue(data: {
+    lead_id: number;
+    vendor_id: number;
+    mrp_value: number;
+    updated_by: number;
+  }) {
+    const lead = await prisma.leadMaster.findFirst({
+      where: {
+        id: data.lead_id,
+        vendor_id: data.vendor_id,
+        is_deleted: false,
+      },
+      select: {
+        id: true,
+        total_project_amount: true,
+      },
+    });
+
+    if (!lead) {
+      throw new Error(
+        `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`
+      );
+    }
+
+    if (
+      lead.total_project_amount !== null &&
+      data.mrp_value < Number(lead.total_project_amount)
+    ) {
+      throw new Error("MRP value cannot be less than total project value");
+    }
+
+    return await prisma.leadMaster.update({
+      where: { id: lead.id },
+      data: {
+        mrp_value: data.mrp_value,
+        updated_by: data.updated_by,
+        updated_at: new Date(),
+      },
+      select: {
+        id: true,
+        mrp_value: true,
+        total_project_amount: true,
+        updated_at: true,
+      },
+    });
+  }
+
+  public async updateTotalProjectAmount(data: {
+    lead_id: number;
+    vendor_id: number;
+    total_project_amount: number;
+    updated_by: number;
+  }) {
+    const lead = await prisma.leadMaster.findFirst({
+      where: {
+        id: data.lead_id,
+        vendor_id: data.vendor_id,
+        is_deleted: false,
+      },
+      select: {
+        id: true,
+        total_project_amount: true,
+        mrp_value: true,
+        pending_amount: true,
+      },
+    });
+
+    if (!lead) {
+      throw Object.assign(
+        new Error(
+          `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`
+        ),
+        { statusCode: 404 }
+      );
+    }
+
+    if (
+      lead.mrp_value !== null &&
+      Number(lead.mrp_value) > 0 &&
+      data.total_project_amount > Number(lead.mrp_value)
+    ) {
+      throw Object.assign(
+        new Error("Total project amount cannot be greater than MRP value"),
+        { statusCode: 400 }
+      );
+    }
+
+    const currentPending = Number(lead.pending_amount ?? 0);
+    const currentTotal = Number(lead.total_project_amount ?? 0);
+    const totalDelta = data.total_project_amount - currentTotal;
+    const updatedPending = currentPending + totalDelta;
+
+    if (updatedPending < 0) {
+      throw Object.assign(
+        new Error("Pending amount cannot be negative"),
+        { statusCode: 400 }
+      );
+    }
+
+    if (updatedPending > data.total_project_amount) {
+      throw Object.assign(
+        new Error("Total project amount cannot be smaller than pending amount"),
+        { statusCode: 400 }
+      );
+    }
+
+    return await prisma.leadMaster.update({
+      where: { id: lead.id },
+      data: {
+        total_project_amount: data.total_project_amount,
+        pending_amount: updatedPending,
+        updated_by: data.updated_by,
+        updated_at: new Date(),
+      },
+      select: {
+        id: true,
+        total_project_amount: true,
+        mrp_value: true,
+        pending_amount: true,
+        updated_at: true,
+      },
+    });
+  }
+
+  public async updateBookingAmount(data: {
+    lead_id: number;
+    vendor_id: number;
+    booking_amount: number;
+    updated_by: number;
+  }) {
+    const lead = await prisma.leadMaster.findFirst({
+      where: {
+        id: data.lead_id,
+        vendor_id: data.vendor_id,
+        is_deleted: false,
+      },
+      select: {
+        id: true,
+        booking_amount: true,
+        pending_amount: true,
+      },
+    });
+
+    if (!lead) {
+      throw Object.assign(
+        new Error(
+          `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`
+        ),
+        { statusCode: 404 }
+      );
+    }
+
+    const currentBooking = Number(lead.booking_amount ?? 0);
+    const currentPending = Number(lead.pending_amount ?? 0);
+    const bookingDelta = data.booking_amount - currentBooking;
+    const updatedPending = currentPending - bookingDelta;
+
+    if (updatedPending < 0) {
+      throw Object.assign(new Error("Pending amount cannot be negative"), {
+        statusCode: 400,
+      });
+    }
+
+    if (data.booking_amount > updatedPending) {
+      throw Object.assign(
+        new Error("Booking amount cannot be greater than pending amount"),
+        { statusCode: 400 }
+      );
+    }
+
+    return await prisma.leadMaster.update({
+      where: { id: lead.id },
+      data: {
+        booking_amount: data.booking_amount,
+        pending_amount: updatedPending,
+        updated_by: data.updated_by,
+        updated_at: new Date(),
+      },
+      select: {
+        id: true,
+        booking_amount: true,
+        pending_amount: true,
+        updated_at: true,
+      },
+    });
   }
 }
