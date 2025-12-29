@@ -1,5 +1,11 @@
 import { Request, Response } from "express";
 import { PostProductionService } from "../../../../services/production/post-production/postProduction.service";
+import {
+  uploadToWasabiProductionFilesHardwarePackingDocsFile,
+  uploadToWasabiProductionFilesQcPhotosFile,
+  uploadToWasabiProductionFilesWoodworkPackingDocsFile,
+} from "../../../../utils/wasabiClient";
+import fs from "node:fs/promises";
 
 const service = new PostProductionService();
 
@@ -24,12 +30,31 @@ export class PostProductionController {
         });
       }
 
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+      for (const file of files) {
+        const sysName = await uploadToWasabiProductionFilesQcPhotosFile(
+          file.path,
+          Number(vendorId),
+          Number(leadId),
+          file.originalname,
+          file.mimetype
+        );
+
+        await fs.unlink(file.path);
+
+        uploadedFiles.push({
+          originalName: file.originalname,
+          sysName,
+        });
+      }
+
       const uploaded = await service.uploadQcPhotos(
         Number(vendorId),
         Number(leadId),
         account_id ? Number(account_id) : null,
         Number(created_by),
-        files
+        uploadedFiles
       );
 
       return res.status(200).json({
@@ -69,13 +94,35 @@ export class PostProductionController {
         });
       }
 
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+      if (files && files.length > 0) {
+        for (const file of files) {
+          const sysName =
+            await uploadToWasabiProductionFilesHardwarePackingDocsFile(
+              file.path,
+              Number(vendorId),
+              Number(leadId),
+              file.originalname,
+              file.mimetype
+            );
+
+          await fs.unlink(file.path);
+
+          uploadedFiles.push({
+            originalName: file.originalname,
+            sysName,
+          });
+        }
+      }
+
       const uploaded = await service.uploadHardwarePackingDetails(
         Number(vendorId),
         Number(leadId),
         account_id ? Number(account_id) : null,
         Number(created_by),
         remark,
-        files
+        uploadedFiles
       );
 
       return res.status(200).json({
@@ -117,13 +164,35 @@ export class PostProductionController {
         });
       }
 
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+      if (files && files.length > 0) {
+        for (const file of files) {
+          const sysName =
+            await uploadToWasabiProductionFilesWoodworkPackingDocsFile(
+              file.path,
+              Number(vendorId),
+              Number(leadId),
+              file.originalname,
+              file.mimetype
+            );
+
+          await fs.unlink(file.path);
+
+          uploadedFiles.push({
+            originalName: file.originalname,
+            sysName,
+          });
+        }
+      }
+
       const uploaded = await service.uploadWoodworkPackingDetails(
         Number(vendorId),
         Number(leadId),
         account_id ? Number(account_id) : null,
         Number(created_by),
         remark,
-        files
+        uploadedFiles
       );
 
       return res.status(200).json({

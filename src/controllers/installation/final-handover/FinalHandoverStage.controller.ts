@@ -1,7 +1,15 @@
 import { Request, Response } from "express";
 import { FinalHandoverStageService } from "../../../services/installation/final-handover/FinalHandoverStage.service";
+import {
+  uploadToWasabiFinalHandoverBookletPhotoFile,
+  uploadToWasabiFinalHandoverFinalSitePhotosFile,
+  uploadToWasabiFinalHandoverFormPhotoFile,
+  uploadToWasabiFinalHandoverQCDocumentFile,
+  uploadToWasabiFinalHandoverWarrantyCardPhotosFile,
+} from "../../../utils/wasabiClient";
 import { ApiResponse } from "../../../utils/apiResponse";
 import logger from "../../../utils/logger";
+import fs from "node:fs/promises";
 
 const service = new FinalHandoverStageService();
 
@@ -63,14 +71,72 @@ export class FinalHandoverStageController {
         });
       }
 
-      const files = req.files as any;
+      const files = req.files as {
+        [fieldname: string]: Express.Multer.File[];
+      };
+
+      const uploadFiles = async (
+        docs: Express.Multer.File[] | undefined,
+        uploader: (
+          filePath: string,
+          vendorId: number,
+          leadId: number,
+          originalName: string,
+          contentType: string
+        ) => Promise<string>
+      ) => {
+        if (!docs || docs.length === 0) return [];
+        const uploaded: { originalName: string; sysName: string }[] = [];
+
+        for (const doc of docs) {
+          const sysName = await uploader(
+            doc.path,
+            vendorId,
+            leadId,
+            doc.originalname,
+            doc.mimetype
+          );
+
+          await fs.unlink(doc.path);
+
+          uploaded.push({
+            originalName: doc.originalname,
+            sysName,
+          });
+        }
+
+        return uploaded;
+      };
+
+      const uploadedFiles = {
+        final_site_photos: await uploadFiles(
+          files?.final_site_photos,
+          uploadToWasabiFinalHandoverFinalSitePhotosFile
+        ),
+        warranty_card_photo: await uploadFiles(
+          files?.warranty_card_photo,
+          uploadToWasabiFinalHandoverWarrantyCardPhotosFile
+        ),
+        handover_booklet_photo: await uploadFiles(
+          files?.handover_booklet_photo,
+          uploadToWasabiFinalHandoverBookletPhotoFile
+        ),
+        final_handover_form_photo: await uploadFiles(
+          files?.final_handover_form_photo,
+          uploadToWasabiFinalHandoverFormPhotoFile
+        ),
+        qc_document: await uploadFiles(
+          files?.qc_document,
+          uploadToWasabiFinalHandoverQCDocumentFile
+        ),
+      };
 
       const result = await service.uploadFinalHandoverDocuments(
         vendorId,
         leadId,
         accountId,
         userId,
-        files
+        uploadedFiles
       );
 
       return res.status(200).json({

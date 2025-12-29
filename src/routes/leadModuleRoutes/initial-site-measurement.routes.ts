@@ -9,18 +9,19 @@ import {
   validatePaginationRequest,
   handleGetErrors,
 } from "../../middlewares/initial-site-measurement.middleware";
+import { uploadInitialSiteMeasurement } from "../../utils/wasabiClient";
 
 const router = Router();
 const paymentUploadController = new PaymentUploadController();
 
-// Configure multer for file uploads
-const storage = multer.memoryStorage();
-const upload = multer({
-  storage,
+// Configure memory storage for legacy endpoints
+const memoryStorage = multer.memoryStorage();
+const memoryUpload = multer({
+  storage: memoryStorage,
   limits: {
     fileSize: 10 * 1024 * 1024, // 10MB limit per file
   },
-  fileFilter: (req, file, cb) => {
+  fileFilter: (_req, file, cb) => {
     const allowedMimeTypes = [
       "application/pdf",
       "image/jpeg",
@@ -37,8 +38,13 @@ const upload = multer({
   },
 });
 
-// Define the fields for multer
-const uploadFields = upload.fields([
+const diskUploadFields = uploadInitialSiteMeasurement.fields([
+  { name: "current_site_photos", maxCount: 10 },
+  { name: "upload_pdf", maxCount: 1 },
+  { name: "payment_image", maxCount: 1 },
+]);
+
+const memoryUploadFields = memoryUpload.fields([
   { name: "current_site_photos", maxCount: 10 }, // Allow up to 10 site photos
   { name: "upload_pdf", maxCount: 1 }, // Only 1 PDF file
   { name: "payment_image", maxCount: 1 }, // Only 1 payment image
@@ -64,7 +70,7 @@ const uploadFields = upload.fields([
  */
 router.post(
   "/payment-upload",
-  uploadFields,
+  diskUploadFields,
   handleMulterError,
   validatePaymentUpload,
   validateFiles,
@@ -73,7 +79,7 @@ router.post(
 
 router.post(
   "/booking-done-ism/upload",
-  uploadFields,
+  diskUploadFields,
   handleMulterError,
   validatePaymentUpload,
   validateFiles,
@@ -204,7 +210,7 @@ router.post(
 
 router.put(
   "/:paymentId",
-  upload.fields([
+  memoryUpload.fields([
     { name: "current_site_photos", maxCount: 10 },
     { name: "payment_detail_photos", maxCount: 10 },
   ]),
@@ -213,7 +219,7 @@ router.put(
 
 router.put(
   "/documents/:documentId/replace-pdf",
-  upload.fields([{ name: "upload_pdf", maxCount: 1 }]),
+  memoryUpload.fields([{ name: "upload_pdf", maxCount: 1 }]),
   paymentUploadController.replacePdfDocument
 );
 

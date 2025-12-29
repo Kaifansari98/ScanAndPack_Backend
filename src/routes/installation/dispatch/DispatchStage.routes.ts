@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { DispatchStageController } from "../../../controllers/installation/dispatch/DispatchStage.controller";
-import { upload } from "../../../middlewares/uploadWasabi";
+import { uploadDispatchStageDocuments } from "../../../middlewares/uploadWasabi";
 
 const dispatchStageRoutes = Router();
 const controller = new DispatchStageController();
@@ -32,7 +32,7 @@ dispatchStageRoutes.get(
 // ✅ POST → Upload Dispatch Photos & Documents
 dispatchStageRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-dispatch-documents",
-  upload.array("files", 10), // accept up to 10 images/docs
+  uploadDispatchStageDocuments.array("files", 10), // accept up to 10 images/docs
   controller.uploadDispatchDocuments
 );
 
@@ -51,7 +51,7 @@ dispatchStageRoutes.get(
 // ✅ POST → Upload Post Dispatch Photos & Documents
 dispatchStageRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-post-dispatch-documents",
-  upload.array("files", 10), // accept up to 10 images/docs
+  uploadDispatchStageDocuments.array("files", 10), // accept up to 10 images/docs
   controller.uploadPostDispatchDocuments
 );
 

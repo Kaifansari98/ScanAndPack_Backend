@@ -406,6 +406,12 @@ export const ModelName = {
   LeadProductMapping: 'LeadProductMapping',
   ProductTypeMaster: 'ProductTypeMaster',
   LeadDocuments: 'LeadDocuments',
+  LeadChatRoom: 'LeadChatRoom',
+  LeadChatMember: 'LeadChatMember',
+  LeadChatMessage: 'LeadChatMessage',
+  LeadChatAttachment: 'LeadChatAttachment',
+  LeadChatMention: 'LeadChatMention',
+  LeadChatDocument: 'LeadChatDocument',
   ProductStructure: 'ProductStructure',
   LeadProductStructureMapping: 'LeadProductStructureMapping',
   PaymentInfo: 'PaymentInfo',
@@ -452,7 +458,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "productStructure" | "leadProductStructureMapping" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2081,6 +2087,450 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.LeadDocumentsCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.LeadDocumentsCountAggregateOutputType> | number
+        }
+      }
+    }
+    LeadChatRoom: {
+      payload: Prisma.$LeadChatRoomPayload<ExtArgs>
+      fields: Prisma.LeadChatRoomFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadChatRoomFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatRoomPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadChatRoomFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatRoomPayload>
+        }
+        findFirst: {
+          args: Prisma.LeadChatRoomFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatRoomPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadChatRoomFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatRoomPayload>
+        }
+        findMany: {
+          args: Prisma.LeadChatRoomFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatRoomPayload>[]
+        }
+        create: {
+          args: Prisma.LeadChatRoomCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatRoomPayload>
+        }
+        createMany: {
+          args: Prisma.LeadChatRoomCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadChatRoomCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatRoomPayload>[]
+        }
+        delete: {
+          args: Prisma.LeadChatRoomDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatRoomPayload>
+        }
+        update: {
+          args: Prisma.LeadChatRoomUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatRoomPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadChatRoomDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadChatRoomUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadChatRoomUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatRoomPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadChatRoomUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatRoomPayload>
+        }
+        aggregate: {
+          args: Prisma.LeadChatRoomAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadChatRoom>
+        }
+        groupBy: {
+          args: Prisma.LeadChatRoomGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadChatRoomGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadChatRoomCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadChatRoomCountAggregateOutputType> | number
+        }
+      }
+    }
+    LeadChatMember: {
+      payload: Prisma.$LeadChatMemberPayload<ExtArgs>
+      fields: Prisma.LeadChatMemberFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadChatMemberFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMemberPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadChatMemberFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMemberPayload>
+        }
+        findFirst: {
+          args: Prisma.LeadChatMemberFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMemberPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadChatMemberFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMemberPayload>
+        }
+        findMany: {
+          args: Prisma.LeadChatMemberFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMemberPayload>[]
+        }
+        create: {
+          args: Prisma.LeadChatMemberCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMemberPayload>
+        }
+        createMany: {
+          args: Prisma.LeadChatMemberCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadChatMemberCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMemberPayload>[]
+        }
+        delete: {
+          args: Prisma.LeadChatMemberDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMemberPayload>
+        }
+        update: {
+          args: Prisma.LeadChatMemberUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMemberPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadChatMemberDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadChatMemberUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadChatMemberUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMemberPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadChatMemberUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMemberPayload>
+        }
+        aggregate: {
+          args: Prisma.LeadChatMemberAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadChatMember>
+        }
+        groupBy: {
+          args: Prisma.LeadChatMemberGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadChatMemberGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadChatMemberCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadChatMemberCountAggregateOutputType> | number
+        }
+      }
+    }
+    LeadChatMessage: {
+      payload: Prisma.$LeadChatMessagePayload<ExtArgs>
+      fields: Prisma.LeadChatMessageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadChatMessageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMessagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadChatMessageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMessagePayload>
+        }
+        findFirst: {
+          args: Prisma.LeadChatMessageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMessagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadChatMessageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMessagePayload>
+        }
+        findMany: {
+          args: Prisma.LeadChatMessageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMessagePayload>[]
+        }
+        create: {
+          args: Prisma.LeadChatMessageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMessagePayload>
+        }
+        createMany: {
+          args: Prisma.LeadChatMessageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadChatMessageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMessagePayload>[]
+        }
+        delete: {
+          args: Prisma.LeadChatMessageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMessagePayload>
+        }
+        update: {
+          args: Prisma.LeadChatMessageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMessagePayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadChatMessageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadChatMessageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadChatMessageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMessagePayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadChatMessageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMessagePayload>
+        }
+        aggregate: {
+          args: Prisma.LeadChatMessageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadChatMessage>
+        }
+        groupBy: {
+          args: Prisma.LeadChatMessageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadChatMessageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadChatMessageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadChatMessageCountAggregateOutputType> | number
+        }
+      }
+    }
+    LeadChatAttachment: {
+      payload: Prisma.$LeadChatAttachmentPayload<ExtArgs>
+      fields: Prisma.LeadChatAttachmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadChatAttachmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatAttachmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadChatAttachmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatAttachmentPayload>
+        }
+        findFirst: {
+          args: Prisma.LeadChatAttachmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatAttachmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadChatAttachmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatAttachmentPayload>
+        }
+        findMany: {
+          args: Prisma.LeadChatAttachmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatAttachmentPayload>[]
+        }
+        create: {
+          args: Prisma.LeadChatAttachmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatAttachmentPayload>
+        }
+        createMany: {
+          args: Prisma.LeadChatAttachmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadChatAttachmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatAttachmentPayload>[]
+        }
+        delete: {
+          args: Prisma.LeadChatAttachmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatAttachmentPayload>
+        }
+        update: {
+          args: Prisma.LeadChatAttachmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatAttachmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadChatAttachmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadChatAttachmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadChatAttachmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatAttachmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadChatAttachmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatAttachmentPayload>
+        }
+        aggregate: {
+          args: Prisma.LeadChatAttachmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadChatAttachment>
+        }
+        groupBy: {
+          args: Prisma.LeadChatAttachmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadChatAttachmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadChatAttachmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadChatAttachmentCountAggregateOutputType> | number
+        }
+      }
+    }
+    LeadChatMention: {
+      payload: Prisma.$LeadChatMentionPayload<ExtArgs>
+      fields: Prisma.LeadChatMentionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadChatMentionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMentionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadChatMentionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMentionPayload>
+        }
+        findFirst: {
+          args: Prisma.LeadChatMentionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMentionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadChatMentionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMentionPayload>
+        }
+        findMany: {
+          args: Prisma.LeadChatMentionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMentionPayload>[]
+        }
+        create: {
+          args: Prisma.LeadChatMentionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMentionPayload>
+        }
+        createMany: {
+          args: Prisma.LeadChatMentionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadChatMentionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMentionPayload>[]
+        }
+        delete: {
+          args: Prisma.LeadChatMentionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMentionPayload>
+        }
+        update: {
+          args: Prisma.LeadChatMentionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMentionPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadChatMentionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadChatMentionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadChatMentionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMentionPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadChatMentionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatMentionPayload>
+        }
+        aggregate: {
+          args: Prisma.LeadChatMentionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadChatMention>
+        }
+        groupBy: {
+          args: Prisma.LeadChatMentionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadChatMentionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadChatMentionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadChatMentionCountAggregateOutputType> | number
+        }
+      }
+    }
+    LeadChatDocument: {
+      payload: Prisma.$LeadChatDocumentPayload<ExtArgs>
+      fields: Prisma.LeadChatDocumentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadChatDocumentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatDocumentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadChatDocumentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatDocumentPayload>
+        }
+        findFirst: {
+          args: Prisma.LeadChatDocumentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatDocumentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadChatDocumentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatDocumentPayload>
+        }
+        findMany: {
+          args: Prisma.LeadChatDocumentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatDocumentPayload>[]
+        }
+        create: {
+          args: Prisma.LeadChatDocumentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatDocumentPayload>
+        }
+        createMany: {
+          args: Prisma.LeadChatDocumentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadChatDocumentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatDocumentPayload>[]
+        }
+        delete: {
+          args: Prisma.LeadChatDocumentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatDocumentPayload>
+        }
+        update: {
+          args: Prisma.LeadChatDocumentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatDocumentPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadChatDocumentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadChatDocumentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadChatDocumentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatDocumentPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadChatDocumentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadChatDocumentPayload>
+        }
+        aggregate: {
+          args: Prisma.LeadChatDocumentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadChatDocument>
+        }
+        groupBy: {
+          args: Prisma.LeadChatDocumentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadChatDocumentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadChatDocumentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadChatDocumentCountAggregateOutputType> | number
         }
       }
     }
@@ -4796,6 +5246,76 @@ export const LeadDocumentsScalarFieldEnum = {
 export type LeadDocumentsScalarFieldEnum = (typeof LeadDocumentsScalarFieldEnum)[keyof typeof LeadDocumentsScalarFieldEnum]
 
 
+export const LeadChatRoomScalarFieldEnum = {
+  id: 'id',
+  lead_id: 'lead_id',
+  vendor_id: 'vendor_id',
+  created_at: 'created_at'
+} as const
+
+export type LeadChatRoomScalarFieldEnum = (typeof LeadChatRoomScalarFieldEnum)[keyof typeof LeadChatRoomScalarFieldEnum]
+
+
+export const LeadChatMemberScalarFieldEnum = {
+  id: 'id',
+  chat_room_id: 'chat_room_id',
+  user_id: 'user_id',
+  joined_at: 'joined_at',
+  added_by: 'added_by'
+} as const
+
+export type LeadChatMemberScalarFieldEnum = (typeof LeadChatMemberScalarFieldEnum)[keyof typeof LeadChatMemberScalarFieldEnum]
+
+
+export const LeadChatMessageScalarFieldEnum = {
+  id: 'id',
+  chat_room_id: 'chat_room_id',
+  sender_id: 'sender_id',
+  message_type: 'message_type',
+  message_text: 'message_text',
+  created_at: 'created_at'
+} as const
+
+export type LeadChatMessageScalarFieldEnum = (typeof LeadChatMessageScalarFieldEnum)[keyof typeof LeadChatMessageScalarFieldEnum]
+
+
+export const LeadChatAttachmentScalarFieldEnum = {
+  id: 'id',
+  msg_id: 'msg_id',
+  doc_id: 'doc_id',
+  created_at: 'created_at'
+} as const
+
+export type LeadChatAttachmentScalarFieldEnum = (typeof LeadChatAttachmentScalarFieldEnum)[keyof typeof LeadChatAttachmentScalarFieldEnum]
+
+
+export const LeadChatMentionScalarFieldEnum = {
+  id: 'id',
+  msg_id: 'msg_id',
+  mentioned_user_id: 'mentioned_user_id',
+  created_at: 'created_at'
+} as const
+
+export type LeadChatMentionScalarFieldEnum = (typeof LeadChatMentionScalarFieldEnum)[keyof typeof LeadChatMentionScalarFieldEnum]
+
+
+export const LeadChatDocumentScalarFieldEnum = {
+  id: 'id',
+  doc_og_name: 'doc_og_name',
+  doc_sys_name: 'doc_sys_name',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  deleted_by: 'deleted_by',
+  deleted_at: 'deleted_at',
+  account_id: 'account_id',
+  lead_id: 'lead_id',
+  vendor_id: 'vendor_id',
+  is_deleted: 'is_deleted'
+} as const
+
+export type LeadChatDocumentScalarFieldEnum = (typeof LeadChatDocumentScalarFieldEnum)[keyof typeof LeadChatDocumentScalarFieldEnum]
+
+
 export const ProductStructureScalarFieldEnum = {
   id: 'id',
   type: 'type',
@@ -5386,6 +5906,20 @@ export type ListEnumTechCheckStatusFieldRefInput<$PrismaModel> = FieldRefInputTy
 
 
 /**
+ * Reference to a field of type 'LeadChatMessageType'
+ */
+export type EnumLeadChatMessageTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadChatMessageType'>
+    
+
+
+/**
+ * Reference to a field of type 'LeadChatMessageType[]'
+ */
+export type ListEnumLeadChatMessageTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadChatMessageType[]'>
+    
+
+
+/**
  * Reference to a field of type 'LedgerType'
  */
 export type EnumLedgerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LedgerType'>
@@ -5541,6 +6075,12 @@ export type GlobalOmitConfig = {
   leadProductMapping?: Prisma.LeadProductMappingOmit
   productTypeMaster?: Prisma.ProductTypeMasterOmit
   leadDocuments?: Prisma.LeadDocumentsOmit
+  leadChatRoom?: Prisma.LeadChatRoomOmit
+  leadChatMember?: Prisma.LeadChatMemberOmit
+  leadChatMessage?: Prisma.LeadChatMessageOmit
+  leadChatAttachment?: Prisma.LeadChatAttachmentOmit
+  leadChatMention?: Prisma.LeadChatMentionOmit
+  leadChatDocument?: Prisma.LeadChatDocumentOmit
   productStructure?: Prisma.ProductStructureOmit
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingOmit
   paymentInfo?: Prisma.PaymentInfoOmit

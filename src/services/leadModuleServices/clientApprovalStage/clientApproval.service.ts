@@ -2,12 +2,9 @@ import { prisma } from "../../../prisma/client";
 import { ClientApprovalDto } from "../../../types/clientApproval.dto";
 import { BackendData } from "../../../types/leadModule.types";
 import { formatIndianCurrency } from "../../../utils/formatIndianCurrency";
-import { sanitizeFilename } from "../../../utils/sanitizeFilename";
-import {
-  generateSignedUrl,
-  uploadToWasabClientApprovalDocumentation,
-} from "../../../utils/wasabiClient";
+import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { Prisma } from "../../../prisma/generated";
+import logger from "src/utils/logger";
 
 export class ClientApprovalService {
   public async submitClientApproval(data: ClientApprovalDto) {
@@ -20,17 +17,10 @@ export class ClientApprovalService {
     if (!approvalDocType) throw new Error("Doc Type (Type 13) not found");
 
     for (const doc of data.approvalScreenshots) {
-      const sanitized = sanitizeFilename(doc.originalname);
-      const sysName = await uploadToWasabClientApprovalDocumentation(
-        doc.buffer,
-        data.vendor_id,
-        data.lead_id,
-        sanitized
-      );
       const docEntry = await prisma.leadDocuments.create({
         data: {
-          doc_og_name: doc.originalname,
-          doc_sys_name: sysName,
+          doc_og_name: doc.originalName,
+          doc_sys_name: doc.sysName,
           created_by: data.created_by,
           doc_type_id: approvalDocType.id,
           account_id: data.account_id,
@@ -67,18 +57,10 @@ export class ClientApprovalService {
       if (data.payment_files && data.payment_files.length > 0) {
         const uploadedPaymentDocs = [];
         for (const doc of data.payment_files) {
-          const sanitized = sanitizeFilename(doc.originalname);
-          const sysName = await uploadToWasabClientApprovalDocumentation(
-            doc.buffer,
-            data.vendor_id,
-            data.lead_id,
-            sanitized
-          );
-
           const docEntry = await prisma.leadDocuments.create({
             data: {
-              doc_og_name: doc.originalname,
-              doc_sys_name: sysName,
+              doc_og_name: doc.originalName,
+              doc_sys_name: doc.sysName,
               created_by: data.created_by,
               doc_type_id: approvalDocType.id,
               account_id: data.account_id,
@@ -502,6 +484,49 @@ export class ClientApprovalService {
         created_by: data.created_by,
       },
     });
+
+    // ✅ Ensure assigned tech-check user is in lead chat members
+    let chatRoom = await prisma.leadChatRoom.findFirst({
+      where: {
+        lead_id: data.lead_id,
+        vendor_id: data.vendor_id,
+      },
+      select: { id: true },
+    });
+
+    if (!chatRoom) {
+      chatRoom = await prisma.leadChatRoom.create({
+        data: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+        },
+        select: { id: true },
+      });
+    }
+
+    const existingMember = await prisma.leadChatMember.findFirst({
+      where: {
+        chat_room_id: chatRoom.id,
+        user_id: data.assign_to_user_id,
+      },
+      select: { id: true },
+    });
+
+    if (existingMember) {
+      logger.info("[SERVICE] LeadChatMember already exists, skipping insert", {
+        lead_id: data.lead_id,
+        chat_room_id: chatRoom.id,
+        user_id: data.assign_to_user_id,
+      });
+    } else {
+      await prisma.leadChatMember.create({
+        data: {
+          chat_room_id: chatRoom.id,
+          user_id: data.assign_to_user_id,
+          added_by: data.created_by,
+        },
+      });
+    }
 
     // Step 4. Log the action
     await prisma.leadDetailedLogs.create({

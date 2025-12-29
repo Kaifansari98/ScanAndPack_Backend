@@ -13,8 +13,13 @@ export interface CreateBookingStageDto {
   mrpValue: number;
 
   // Files
-  finalDocuments: Express.Multer.File[];
-  bookingAmountPaymentDetailsFile?: Express.Multer.File;
+  finalDocuments: UploadedFileRef[];
+  bookingAmountPaymentDetailsFile?: UploadedFileRef;
+}
+
+export interface UploadedFileRef {
+  originalName: string;
+  sysName: string;
 }
 
 export interface AddPaymentDto {
@@ -26,5 +31,5 @@ export interface AddPaymentDto {
   amount: number;
   payment_text: string;       // ✅ mandatory
   payment_date: string;       // ✅ mandatory
-  payment_file?: Express.Multer.File; // optional
+  payment_file?: UploadedFileRef; // optional
 }

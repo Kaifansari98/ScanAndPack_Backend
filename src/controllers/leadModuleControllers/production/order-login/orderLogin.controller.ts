@@ -1,8 +1,12 @@
 import { Request, Response } from "express";
 import { OrderLoginService } from "../../../../services/production/order-login/orderLogin.service";
 import { prisma } from "../../../../prisma/client";
-import { generateSignedUrl } from "../../../../utils/wasabiClient";
+import {
+  generateSignedUrl,
+  uploadToWasabiProductionFilesFile,
+} from "../../../../utils/wasabiClient";
 import { ApiResponse } from "../../../../utils/apiResponse";
+import fs from "node:fs/promises";
 
 const service = new OrderLoginService();
 
@@ -275,12 +279,31 @@ export class OrderLoginController {
       const { account_id, created_by } = req.body;
       const files = req.files as Express.Multer.File[];
 
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+      for (const file of files) {
+        const sysName = await uploadToWasabiProductionFilesFile(
+          file.path,
+          Number(vendorId),
+          Number(leadId),
+          file.originalname,
+          file.mimetype
+        );
+
+        await fs.unlink(file.path);
+
+        uploadedFiles.push({
+          originalName: file.originalname,
+          sysName,
+        });
+      }
+
       const uploaded = await service.uploadProductionFiles(
         Number(vendorId),
         Number(leadId),
         account_id ? Number(account_id) : null,
         Number(created_by),
-        files
+        uploadedFiles
       );
 
       return res.status(200).json({

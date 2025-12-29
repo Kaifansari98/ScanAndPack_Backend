@@ -2,7 +2,11 @@ import { Request, Response } from "express";
 import { DispatchPlanningService } from "../../../services/installation/dispatch-planning/DispatchPlanning.service";
 import { ApiResponse } from "../../../utils/apiResponse";
 import logger from "../../../utils/logger";
-import { generateSignedUrl } from "../../../utils/wasabiClient";
+import {
+  generateSignedUrl,
+  uploadToWasabiPaymentProffDispatchPlanningFile,
+} from "../../../utils/wasabiClient";
+import fs from "node:fs/promises";
 
 const service = new DispatchPlanningService();
 
@@ -138,13 +142,34 @@ export class DispatchPlanningController {
 
       const file = req.file || null;
 
+      let uploadedPaymentFile:
+        | { originalName: string; sysName: string }
+        | null = null;
+
+      if (file) {
+        const sysName = await uploadToWasabiPaymentProffDispatchPlanningFile(
+          file.path,
+          vendorId,
+          leadId,
+          file.originalname,
+          file.mimetype
+        );
+
+        await fs.unlink(file.path);
+
+        uploadedPaymentFile = {
+          originalName: file.originalname,
+          sysName,
+        };
+      }
+
       const result = await service.saveDispatchPlanningPaymentService({
         vendor_id: vendorId,
         lead_id: leadId,
         account_id: Number(account_id),
         pending_payment: pending_payment ? parseFloat(pending_payment) : 0,
         pending_payment_details,
-        payment_proof_file: file,
+        payment_proof_file: uploadedPaymentFile,
         created_by: Number(created_by),
       });
 

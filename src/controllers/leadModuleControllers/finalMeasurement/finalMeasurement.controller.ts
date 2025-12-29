@@ -1,6 +1,11 @@
 import { Request, Response } from "express";
 import { FinalMeasurementService } from "../../../services/leadModuleServices/finalMeasurementStage/finalMeasurement.service";
 import logger from "../../../utils/logger";
+import {
+  uploadToWasabiFinalMeasurementDocFile,
+  uploadToWasabiFinalMeasurementSitePhotoFile,
+} from "../../../utils/wasabiClient";
+import fs from "node:fs/promises";
 
 const finalMeasurementService = new FinalMeasurementService();
 
@@ -44,14 +49,58 @@ export class FinalMeasurementController {
         return;
       }
 
+      const uploadedFinalMeasurementDocs: {
+        originalName: string;
+        sysName: string;
+      }[] = [];
+
+      for (const doc of finalMeasurementDocs) {
+        const sysName = await uploadToWasabiFinalMeasurementDocFile(
+          doc.path,
+          Number(vendor_id),
+          Number(lead_id),
+          doc.originalname,
+          doc.mimetype
+        );
+
+        await fs.unlink(doc.path);
+
+        uploadedFinalMeasurementDocs.push({
+          originalName: doc.originalname,
+          sysName,
+        });
+      }
+
+      const uploadedSitePhotos: {
+        originalName: string;
+        sysName: string;
+      }[] = [];
+
+      for (const photo of sitePhotos) {
+        const sysName = await uploadToWasabiFinalMeasurementSitePhotoFile(
+          photo.path,
+          Number(vendor_id),
+          Number(lead_id),
+          photo.originalname,
+          photo.mimetype
+        );
+
+        await fs.unlink(photo.path);
+
+        uploadedSitePhotos.push({
+          originalName: photo.originalname,
+          sysName,
+        });
+      }
+
       const dto = {
         lead_id: parseInt(lead_id),
         account_id: parseInt(account_id),
         vendor_id: parseInt(vendor_id),
         created_by: parseInt(created_by),
         critical_discussion_notes: critical_discussion_notes || null,
-        finalMeasurementDocs,
-        sitePhotos,
+        finalMeasurementDocs: uploadedFinalMeasurementDocs,
+        sitePhotos: uploadedSitePhotos,
       };
 
       const result = await finalMeasurementService.createFinalMeasurementStage(
@@ -202,12 +251,34 @@ export class FinalMeasurementController {
         return;
       }
 
+      const uploadedSitePhotos: {
+        originalName: string;
+        sysName: string;
+      }[] = [];
+
+      for (const photo of sitePhotos) {
+        const sysName = await uploadToWasabiFinalMeasurementSitePhotoFile(
+          photo.path,
+          Number(vendor_id),
+          Number(lead_id),
+          photo.originalname,
+          photo.mimetype
+        );
+
+        await fs.unlink(photo.path);
+
+        uploadedSitePhotos.push({
+          originalName: photo.originalname,
+          sysName,
+        });
+      }
+
       const result = await finalMeasurementService.addMoreFinalMeasurementFiles(
         {
           lead_id: parseInt(lead_id),
           vendor_id: parseInt(vendor_id),
           created_by: parseInt(created_by),
-          sitePhotos,
+          sitePhotos: uploadedSitePhotos,
         }
       );
 
@@ -250,12 +321,34 @@ export class FinalMeasurementController {
         return;
       }
 
+      const uploadedSitePhotos: {
+        originalName: string;
+        sysName: string;
+      }[] = [];
+
+      for (const photo of sitePhotos) {
+        const sysName = await uploadToWasabiFinalMeasurementSitePhotoFile(
+          photo.path,
+          Number(vendor_id),
+          Number(lead_id),
+          photo.originalname,
+          photo.mimetype
+        );
+
+        await fs.unlink(photo.path);
+
+        uploadedSitePhotos.push({
+          originalName: photo.originalname,
+          sysName,
+        });
+      }
+
       const result =
         await finalMeasurementService.addMoreFinalMeasurementSitePhotos({
           lead_id: parseInt(lead_id),
           vendor_id: parseInt(vendor_id),
           created_by: parseInt(created_by),
-          sitePhotos,
+          sitePhotos: uploadedSitePhotos,
         });
 
       res.status(201).json({
@@ -297,12 +390,34 @@ export class FinalMeasurementController {
         return;
       }
 
+      const uploadedFinalMeasurementDocs: {
+        originalName: string;
+        sysName: string;
+      }[] = [];
+
+      for (const doc of finalMeasurementDocs) {
+        const sysName = await uploadToWasabiFinalMeasurementDocFile(
+          doc.path,
+          Number(vendor_id),
+          Number(lead_id),
+          doc.originalname,
+          doc.mimetype
+        );
+
+        await fs.unlink(doc.path);
+
+        uploadedFinalMeasurementDocs.push({
+          originalName: doc.originalname,
+          sysName,
+        });
+      }
+
       const result =
         await finalMeasurementService.addMoreFinalMeasurementDocs({
           lead_id: parseInt(lead_id),
           vendor_id: parseInt(vendor_id),
           created_by: parseInt(created_by),
-          finalMeasurementDocs,
+          finalMeasurementDocs: uploadedFinalMeasurementDocs,
         });
 
       res.status(201).json({

@@ -1,7 +1,5 @@
 import { prisma } from "../../../prisma/client";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
-import wasabi, { generateSignedUrl } from "../../../utils/wasabiClient"; // your existing Wasabi config
-import { sanitizeFilename } from "../../../utils/sanitizeFilename";
+import { generateSignedUrl } from "../../../utils/wasabiClient"; // your existing Wasabi config
 import Joi = require("joi");
 import logger from "../../../utils/logger";
 import { AssignTaskFMInput } from "../../../types/leadModule.types";
@@ -14,8 +12,8 @@ interface FinalMeasurementDto {
   vendor_id: number;
   created_by: number;
   critical_discussion_notes?: string | null;
-  finalMeasurementDocs: Express.Multer.File[];
-  sitePhotos: Express.Multer.File[];
+  finalMeasurementDocs: { originalName: string; sysName: string }[];
+  sitePhotos: { originalName: string; sysName: string }[];
 }
 
 const assignTaskISMSchema = Joi.object({
@@ -50,24 +48,10 @@ export class FinalMeasurementService {
         }
 
         for (const doc of data.finalMeasurementDocs) {
-          const sanitizedDocName = sanitizeFilename(doc.originalname);
-          const docKey = `final-measurement-documents/${data.vendor_id}/${
-            data.lead_id
-          }/${Date.now()}-${sanitizedDocName}`;
-
-          await wasabi.send(
-            new PutObjectCommand({
-              Bucket: process.env.WASABI_BUCKET_NAME!,
-              Key: docKey,
-              Body: doc.buffer,
-              ContentType: doc.mimetype,
-            })
-          );
-
           const measurementDoc = await tx.leadDocuments.create({
             data: {
-              doc_og_name: doc.originalname,
-              doc_sys_name: docKey,
+              doc_og_name: doc.originalName,
+              doc_sys_name: doc.sysName,
               created_by: data.created_by,
               doc_type_id: measurementDocType.id,
               account_id: data.account_id,
@@ -90,24 +74,10 @@ export class FinalMeasurementService {
         }
 
         for (const photo of data.sitePhotos) {
-          const sanitizedPhotoName = sanitizeFilename(photo.originalname);
-          const photoKey = `final-current-site-photos/${data.vendor_id}/${
-            data.lead_id
-          }/${Date.now()}-${sanitizedPhotoName}`;
-
-          await wasabi.send(
-            new PutObjectCommand({
-              Bucket: process.env.WASABI_BUCKET_NAME!,
-              Key: photoKey,
-              Body: photo.buffer,
-              ContentType: photo.mimetype,
-            })
-          );
-
           const siteDoc = await tx.leadDocuments.create({
             data: {
-              doc_og_name: photo.originalname,
-              doc_sys_name: photoKey,
+              doc_og_name: photo.originalName,
+              doc_sys_name: photo.sysName,
               created_by: data.created_by,
               doc_type_id: sitePhotoType.id,
               account_id: data.account_id,
@@ -473,7 +443,7 @@ export class FinalMeasurementService {
     lead_id: number;
     vendor_id: number;
     created_by: number;
-    sitePhotos?: Express.Multer.File[];
+    sitePhotos?: { originalName: string; sysName: string }[];
   }) {
     return await prisma.$transaction(
       async (tx: any) => {
@@ -508,23 +478,10 @@ export class FinalMeasurementService {
           }
 
           for (const file of data.sitePhotos) {
-            const s3Key = `final-current-site-photos/${data.vendor_id}/${
-              data.lead_id
-            }/${Date.now()}-${file.originalname}`;
-
-            await wasabi.send(
-              new PutObjectCommand({
-                Bucket: process.env.WASABI_BUCKET_NAME!,
-                Key: s3Key,
-                Body: file.buffer,
-                ContentType: file.mimetype,
-              })
-            );
-
             const doc = await tx.leadDocuments.create({
               data: {
-                doc_og_name: file.originalname,
-                doc_sys_name: s3Key,
+                doc_og_name: file.originalName,
+                doc_sys_name: file.sysName,
                 created_by: data.created_by,
                 doc_type_id: sitePhotoType.id,
                 account_id: lead.account_id,
@@ -547,7 +504,7 @@ export class FinalMeasurementService {
     lead_id: number;
     vendor_id: number;
     created_by: number;
-    sitePhotos: Express.Multer.File[];
+    sitePhotos: { originalName: string; sysName: string }[];
   }) {
     return await prisma.$transaction(
       async (tx: any) => {
@@ -580,24 +537,10 @@ export class FinalMeasurementService {
         }
 
         for (const file of data.sitePhotos) {
-          const sanitizedName = sanitizeFilename(file.originalname);
-          const s3Key = `final-current-site-photos/${data.vendor_id}/${
-            data.lead_id
-          }/${Date.now()}-${sanitizedName}`;
-
-          await wasabi.send(
-            new PutObjectCommand({
-              Bucket: process.env.WASABI_BUCKET_NAME!,
-              Key: s3Key,
-              Body: file.buffer,
-              ContentType: file.mimetype,
-            })
-          );
-
           const doc = await tx.leadDocuments.create({
             data: {
-              doc_og_name: file.originalname,
-              doc_sys_name: s3Key,
+              doc_og_name: file.originalName,
+              doc_sys_name: file.sysName,
               created_by: data.created_by,
               doc_type_id: sitePhotoType.id,
               account_id: lead.account_id,
@@ -619,7 +562,7 @@ export class FinalMeasurementService {
     lead_id: number;
     vendor_id: number;
     created_by: number;
-    finalMeasurementDocs: Express.Multer.File[];
+    finalMeasurementDocs: { originalName: string; sysName: string }[];
   }) {
     return await prisma.$transaction(
       async (tx: any) => {
@@ -652,24 +595,10 @@ export class FinalMeasurementService {
         }
 
         for (const file of data.finalMeasurementDocs) {
-          const sanitizedName = sanitizeFilename(file.originalname);
-          const s3Key = `final-measurement-documents/${data.vendor_id}/${
-            data.lead_id
-          }/${Date.now()}-${sanitizedName}`;
-
-          await wasabi.send(
-            new PutObjectCommand({
-              Bucket: process.env.WASABI_BUCKET_NAME!,
-              Key: s3Key,
-              Body: file.buffer,
-              ContentType: file.mimetype,
-            })
-          );
-
           const doc = await tx.leadDocuments.create({
             data: {
-              doc_og_name: file.originalname,
-              doc_sys_name: s3Key,
+              doc_og_name: file.originalName,
+              doc_sys_name: file.sysName,
               created_by: data.created_by,
               doc_type_id: measurementDocType.id,
               account_id: lead.account_id,
@@ -826,6 +755,49 @@ export class FinalMeasurementService {
           created_by,
         },
       });
+
+      // ✅ Ensure assignee is in lead chat members
+      let chatRoom = await tx.leadChatRoom.findFirst({
+        where: {
+          lead_id: lead.id,
+          vendor_id: lead.vendor_id,
+        },
+        select: { id: true },
+      });
+
+      if (!chatRoom) {
+        chatRoom = await tx.leadChatRoom.create({
+          data: {
+            lead_id: lead.id,
+            vendor_id: lead.vendor_id,
+          },
+          select: { id: true },
+        });
+      }
+
+      const existingMember = await tx.leadChatMember.findFirst({
+        where: {
+          chat_room_id: chatRoom.id,
+          user_id: assignee_user_id,
+        },
+        select: { id: true },
+      });
+
+      if (existingMember) {
+        logger.info("[SERVICE] LeadChatMember already exists, skipping insert", {
+          lead_id: lead.id,
+          chat_room_id: chatRoom.id,
+          user_id: assignee_user_id,
+        });
+      } else {
+        await tx.leadChatMember.create({
+          data: {
+            chat_room_id: chatRoom.id,
+            user_id: assignee_user_id,
+            added_by: created_by,
+          },
+        });
+      }
 
       // 🧹 Invalidate Dashboard Task Cache (Sales Executive Dashboard)
       await cache.del(`dashboard:tasks:${lead.vendor_id}:${assignee_user_id}`);

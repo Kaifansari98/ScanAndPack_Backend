@@ -1,9 +1,6 @@
 import { Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
-import {
-  generateSignedUrl,
-  uploadToWasabiCurrentSitePhotosSiteReadiness,
-} from "../../../utils/wasabiClient";
+import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
 
 interface SiteReadinessPayload {
@@ -256,7 +253,7 @@ export class SiteReadinessService {
     leadId: number,
     accountId: number | null,
     userId: number,
-    files: Express.Multer.File[]
+    files: { originalName: string; sysName: string }[]
   ) {
     if (!vendorId || !leadId || !userId)
       throw Object.assign(
@@ -279,18 +276,11 @@ export class SiteReadinessService {
 
     // 🔹 Iterate through each uploaded file
     for (const file of files) {
-      const sysName = await uploadToWasabiCurrentSitePhotosSiteReadiness(
-        file.buffer,
-        vendorId,
-        leadId,
-        file.originalname
-      );
-
       // 🔹 Save in DB
       const doc = await prisma.leadDocuments.create({
         data: {
-          doc_og_name: file.originalname,
-          doc_sys_name: sysName,
+          doc_og_name: file.originalName,
+          doc_sys_name: file.sysName,
           vendor_id: vendorId,
           lead_id: leadId,
           account_id: accountId,

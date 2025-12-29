@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { ClientApprovalService } from "../../../services/leadModuleServices/clientApprovalStage/clientApproval.service";
 import { ApiResponse } from "../../../utils/apiResponse";
+import { uploadToWasabClientApprovalDocumentationFile } from "../../../utils/wasabiClient";
+import fs from "node:fs/promises";
 
 const clientApprovalService = new ClientApprovalService();
 
@@ -38,17 +40,63 @@ export class ClientApprovalController {
         return;
       }
 
+      const uploadedApprovalScreenshots: {
+        originalName: string;
+        sysName: string;
+      }[] = [];
+
+      for (const doc of approvalScreenshots) {
+        const sysName = await uploadToWasabClientApprovalDocumentationFile(
+          doc.path,
+          Number(vendorId),
+          Number(leadId),
+          doc.originalname,
+          doc.mimetype
+        );
+
+        await fs.unlink(doc.path);
+
+        uploadedApprovalScreenshots.push({
+          originalName: doc.originalname,
+          sysName,
+        });
+      }
+
+      const uploadedPaymentFiles: {
+        originalName: string;
+        sysName: string;
+      }[] = [];
+
+      if (payment_files && payment_files.length > 0) {
+        for (const doc of payment_files) {
+          const sysName = await uploadToWasabClientApprovalDocumentationFile(
+            doc.path,
+            Number(vendorId),
+            Number(leadId),
+            doc.originalname,
+            doc.mimetype
+          );
+
+          await fs.unlink(doc.path);
+
+          uploadedPaymentFiles.push({
+            originalName: doc.originalname,
+            sysName,
+          });
+        }
+      }
+
       const dto = {
         lead_id: parseInt(leadId),
         vendor_id: parseInt(vendorId),
         account_id: parseInt(account_id),
         client_id: parseInt(client_id),
         created_by: parseInt(created_by),
-        approvalScreenshots,
+        approvalScreenshots: uploadedApprovalScreenshots,
         advance_payment_date,
         amount_paid: parseFloat(amount_paid),
         payment_text,
-        payment_files,
+        payment_files: uploadedPaymentFiles,
       };
 
       const result = await clientApprovalService.submitClientApproval(dto);

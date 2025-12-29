@@ -1,7 +1,6 @@
 import { Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import logger from "../../../utils/logger";
-import { uploadToWasabiPaymentProffDispatchPlanning } from "../../../utils/wasabiClient";
 
 export class DispatchPlanningService {
   /** ✅ Fetch all leads with status = Type 13 (Dispatch Planning) */
@@ -192,13 +191,6 @@ export class DispatchPlanningService {
         if (!docType)
           throw new Error("Document type (Type 20) not found for this vendor");
 
-        const sysName = await uploadToWasabiPaymentProffDispatchPlanning(
-          payment_proof_file.buffer,
-          vendor_id,
-          lead_id,
-          payment_proof_file.originalname
-        );
-
         uploadedDocument = await tx.leadDocuments.create({
           data: {
             vendor_id,
@@ -206,8 +198,8 @@ export class DispatchPlanningService {
             account_id,
             created_by,
             doc_type_id: docType.id,
-            doc_og_name: payment_proof_file.originalname,
-            doc_sys_name: sysName,
+            doc_og_name: payment_proof_file.originalName,
+            doc_sys_name: payment_proof_file.sysName,
           },
         });
       }

@@ -73,6 +73,12 @@ export const ModelName = {
   LeadProductMapping: 'LeadProductMapping',
   ProductTypeMaster: 'ProductTypeMaster',
   LeadDocuments: 'LeadDocuments',
+  LeadChatRoom: 'LeadChatRoom',
+  LeadChatMember: 'LeadChatMember',
+  LeadChatMessage: 'LeadChatMessage',
+  LeadChatAttachment: 'LeadChatAttachment',
+  LeadChatMention: 'LeadChatMention',
+  LeadChatDocument: 'LeadChatDocument',
   ProductStructure: 'ProductStructure',
   LeadProductStructureMapping: 'LeadProductStructureMapping',
   PaymentInfo: 'PaymentInfo',
@@ -499,6 +505,76 @@ export const LeadDocumentsScalarFieldEnum = {
 } as const
 
 export type LeadDocumentsScalarFieldEnum = (typeof LeadDocumentsScalarFieldEnum)[keyof typeof LeadDocumentsScalarFieldEnum]
+
+
+export const LeadChatRoomScalarFieldEnum = {
+  id: 'id',
+  lead_id: 'lead_id',
+  vendor_id: 'vendor_id',
+  created_at: 'created_at'
+} as const
+
+export type LeadChatRoomScalarFieldEnum = (typeof LeadChatRoomScalarFieldEnum)[keyof typeof LeadChatRoomScalarFieldEnum]
+
+
+export const LeadChatMemberScalarFieldEnum = {
+  id: 'id',
+  chat_room_id: 'chat_room_id',
+  user_id: 'user_id',
+  joined_at: 'joined_at',
+  added_by: 'added_by'
+} as const
+
+export type LeadChatMemberScalarFieldEnum = (typeof LeadChatMemberScalarFieldEnum)[keyof typeof LeadChatMemberScalarFieldEnum]
+
+
+export const LeadChatMessageScalarFieldEnum = {
+  id: 'id',
+  chat_room_id: 'chat_room_id',
+  sender_id: 'sender_id',
+  message_type: 'message_type',
+  message_text: 'message_text',
+  created_at: 'created_at'
+} as const
+
+export type LeadChatMessageScalarFieldEnum = (typeof LeadChatMessageScalarFieldEnum)[keyof typeof LeadChatMessageScalarFieldEnum]
+
+
+export const LeadChatAttachmentScalarFieldEnum = {
+  id: 'id',
+  msg_id: 'msg_id',
+  doc_id: 'doc_id',
+  created_at: 'created_at'
+} as const
+
+export type LeadChatAttachmentScalarFieldEnum = (typeof LeadChatAttachmentScalarFieldEnum)[keyof typeof LeadChatAttachmentScalarFieldEnum]
+
+
+export const LeadChatMentionScalarFieldEnum = {
+  id: 'id',
+  msg_id: 'msg_id',
+  mentioned_user_id: 'mentioned_user_id',
+  created_at: 'created_at'
+} as const
+
+export type LeadChatMentionScalarFieldEnum = (typeof LeadChatMentionScalarFieldEnum)[keyof typeof LeadChatMentionScalarFieldEnum]
+
+
+export const LeadChatDocumentScalarFieldEnum = {
+  id: 'id',
+  doc_og_name: 'doc_og_name',
+  doc_sys_name: 'doc_sys_name',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  deleted_by: 'deleted_by',
+  deleted_at: 'deleted_at',
+  account_id: 'account_id',
+  lead_id: 'lead_id',
+  vendor_id: 'vendor_id',
+  is_deleted: 'is_deleted'
+} as const
+
+export type LeadChatDocumentScalarFieldEnum = (typeof LeadChatDocumentScalarFieldEnum)[keyof typeof LeadChatDocumentScalarFieldEnum]
 
 
 export const ProductStructureScalarFieldEnum = {

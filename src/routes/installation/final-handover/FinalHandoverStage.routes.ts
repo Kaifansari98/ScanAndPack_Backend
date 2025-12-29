@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { FinalHandoverStageController } from "../../../controllers/installation/final-handover/FinalHandoverStage.controller";
-import { upload } from "../../../middlewares/uploadWasabi";
+import { uploadFinalHandoverFiles } from "../../../middlewares/uploadWasabi";
 
 const finalHandoverStageRoutes = Router();
 const controller = new FinalHandoverStageController();
@@ -20,7 +20,7 @@ finalHandoverStageRoutes.get(
  */
 finalHandoverStageRoutes.post(
   "/upload",
-  upload.fields([
+  uploadFinalHandoverFiles.fields([
     { name: "final_site_photos", maxCount: 20 },
     { name: "warranty_card_photo", maxCount: 5 },
     { name: "handover_booklet_photo", maxCount: 5 },

@@ -4,6 +4,8 @@ import {
   ClientDocumentationService,
   CustomMulterFile,
 } from "../../../services/leadModuleServices/clientDocumentationStage/clientDocumentation.service";
+import { uploadToWasabClientDocumentationFile } from "../../../utils/wasabiClient";
+import fs from "node:fs/promises";
 
 const clientDocumentationService = new ClientDocumentationService();
 
@@ -31,15 +33,42 @@ export class ClientDocumentationController {
         return;
       }
 
-      // ✅ helper ensures type correctness
-      const tagFiles = (
-        files: Express.Multer.File[],
+      const uploadTaggedFiles = async (
+        docs: Express.Multer.File[],
         tag: "Type 11" | "Type 12"
-      ) => files.map((f) => ({ ...f, docTypeTag: tag } as CustomMulterFile));
+      ): Promise<CustomMulterFile[]> => {
+        const folder =
+          tag === "Type 11"
+            ? "client_documentations/client_documentations_ppt"
+            : "client_documentations/client_documentations_pytha";
+
+        const uploaded: CustomMulterFile[] = [];
+
+        for (const doc of docs) {
+          const sysName = await uploadToWasabClientDocumentationFile(
+            doc.path,
+            Number(vendor_id),
+            Number(lead_id),
+            doc.originalname,
+            doc.mimetype,
+            folder
+          );
+
+          await fs.unlink(doc.path);
+
+          uploaded.push({
+            originalName: doc.originalname,
+            sysName,
+            docTypeTag: tag,
+          });
+        }
+
+        return uploaded;
+      };
 
       const documents: CustomMulterFile[] = [
-        ...tagFiles(pptFiles, "Type 11"),
-        ...tagFiles(pythaFiles, "Type 12"),
+        ...(await uploadTaggedFiles(pptFiles, "Type 11")),
+        ...(await uploadTaggedFiles(pythaFiles, "Type 12")),
       ];
 
       const dto: ClientDocumentationDto = {
@@ -124,15 +153,42 @@ export class ClientDocumentationController {
         return;
       }
 
-      // Tag files properly
-      const tagFiles = (
-        files: Express.Multer.File[],
+      const uploadTaggedFiles = async (
+        docs: Express.Multer.File[],
         tag: "Type 11" | "Type 12"
-      ) => files.map((f) => ({ ...f, docTypeTag: tag } as CustomMulterFile));
+      ): Promise<CustomMulterFile[]> => {
+        const folder =
+          tag === "Type 11"
+            ? "client_documentations/client_documentations_ppt"
+            : "client_documentations/client_documentations_pytha";
+
+        const uploaded: CustomMulterFile[] = [];
+
+        for (const doc of docs) {
+          const sysName = await uploadToWasabClientDocumentationFile(
+            doc.path,
+            Number(vendor_id),
+            Number(lead_id),
+            doc.originalname,
+            doc.mimetype,
+            folder
+          );
+
+          await fs.unlink(doc.path);
+
+          uploaded.push({
+            originalName: doc.originalname,
+            sysName,
+            docTypeTag: tag,
+          });
+        }
+
+        return uploaded;
+      };
 
       const documents: CustomMulterFile[] = [
-        ...tagFiles(pptFiles, "Type 11"),
-        ...tagFiles(pythaFiles, "Type 12"),
+        ...(await uploadTaggedFiles(pptFiles, "Type 11")),
+        ...(await uploadTaggedFiles(pythaFiles, "Type 12")),
       ];
 
       const dto: ClientDocumentationDto = {

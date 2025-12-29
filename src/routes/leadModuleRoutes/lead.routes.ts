@@ -20,6 +20,7 @@ import {
   removeProductStructureType,
 } from "../../controllers/leadModuleControllers/productStructureType.controller";
 import { upload } from "../../middlewares/uploadWasabi";
+import { uploadLeadSitePhotos } from "../../utils/wasabiClient";
 import { leadController } from "../../controllers/leadModuleControllers/leadsGeneration/leadGeneration.controller";
 import {
   createDocumentType,
@@ -69,13 +70,13 @@ leadsRouter.delete("/delete-payment-type/:id", removePaymentType);
 
 leadsRouter.post(
   "/create",
-  upload.array("documents", 10),
+  uploadLeadSitePhotos.array("documents", 10),
   leadController.createLead
 );
 
 leadsRouter.post(
   "/upload-more-site-photos",
-  upload.array("documents", 10),
+  uploadLeadSitePhotos.array("documents", 10),
   leadController.uploadMoreSitePhotos
 );
 

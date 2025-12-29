@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { DispatchPlanningController } from "../../../controllers/installation/dispatch-planning/DispatchPlanning.controller";
-import { upload } from "../../../middlewares/uploadWasabi";
+import { uploadDispatchPlanningPayment } from "../../../middlewares/uploadWasabi";
 
 const dispatchPlanningRoutes = Router();
 const controller = new DispatchPlanningController();
@@ -20,7 +20,7 @@ dispatchPlanningRoutes.post(
 // 2️⃣ Dispatch Planning Payment (multipart/form-data)
 dispatchPlanningRoutes.post(
   "/payment/vendorId/:vendorId/leadId/:leadId",
-  upload.single("payment_proof_file"),
+  uploadDispatchPlanningPayment.single("payment_proof_file"),
   controller.saveDispatchPlanningPayment
 );
 

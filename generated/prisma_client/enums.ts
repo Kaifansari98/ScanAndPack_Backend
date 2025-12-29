@@ -96,3 +96,13 @@ export const ActionType = {
 } as const
 
 export type ActionType = (typeof ActionType)[keyof typeof ActionType]
+
+
+export const LeadChatMessageType = {
+  text: 'text',
+  attachment: 'attachment',
+  system: 'system',
+  textWithAttachment: 'textWithAttachment'
+} as const
+
+export type LeadChatMessageType = (typeof LeadChatMessageType)[keyof typeof LeadChatMessageType]

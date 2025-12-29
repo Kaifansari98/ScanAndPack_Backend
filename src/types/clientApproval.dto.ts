@@ -6,7 +6,7 @@ export interface ClientApprovalDto {
     created_by: number;
   
     // Step 1 - Approval Screenshot
-    approvalScreenshots: Express.Multer.File[];
+    approvalScreenshots: UploadedFileRef[];
   
     // Step 2 - Advance Payment Date
     advance_payment_date: string; // ISO date
@@ -16,6 +16,11 @@ export interface ClientApprovalDto {
   
     // Step 4 - Transaction ID / Remarks
     payment_text?: string; // remarks or transaction ID
-    payment_files?: Express.Multer.File[];
+    payment_files?: UploadedFileRef[];
   }
+
+export interface UploadedFileRef {
+  originalName: string;
+  sysName: string;
+}
   

@@ -1,26 +1,25 @@
 import { Router } from "express";
-import multer from "multer";
 import { PostProductionController } from "../../../controllers/leadModuleControllers/production/post-production/postProduction.controller";
+import { uploadPostProductionFiles } from "../../../middlewares/uploadWasabi";
 
-const upload = multer();
 const postProductionRoutes = Router();
 const controller = new PostProductionController();
 
 postProductionRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-qc-photos",
-  upload.array("files", 10), // accept up to 10 images
+  uploadPostProductionFiles.array("files", 10), // accept up to 10 images
   controller.uploadQcPhotos
 );
 
 postProductionRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-hardware-packing-details",
-  upload.array("files", 10), // multiple docs
+  uploadPostProductionFiles.array("files", 10), // multiple docs
   controller.uploadHardwarePackingDetails
 );
 
 postProductionRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-woodwork-packing-details",
-  upload.array("files", 10),
+  uploadPostProductionFiles.array("files", 10),
   controller.uploadWoodworkPackingDetails
 );
 
@@ -44,7 +43,7 @@ postProductionRoutes.get(
 
 postProductionRoutes.put(
   "/vendorId/:vendorId/leadId/:leadId/update-no-of-boxes",
-  upload.none(),
+  uploadPostProductionFiles.none(),
   controller.updateNoOfBoxes
 );
 

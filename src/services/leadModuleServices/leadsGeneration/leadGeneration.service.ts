@@ -7,7 +7,9 @@ import {
 import fs from "fs";
 import { SalesExecutiveData } from "../../../types/leadModule.types";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import wasabi from "../../../utils/wasabiClient";
+import wasabi, {
+  uploadToWasabiLeadSitePhoto,
+} from "../../../utils/wasabiClient";
 import {
   AssignLeadPayload,
   LeadAssignmentResult,
@@ -59,10 +61,6 @@ export const createLeadService = async (
     fileCount: files.length,
   });
 
-  function sanitizeFilename(filename: string): string {
-    return filename.replace(/[^a-zA-Z0-9.\-_]/g, "_");
-  }
-
   // Debug file information
   if (files && files.length > 0) {
     logger.info(`Processing ${files.length} document(s)`);
@@ -111,7 +109,7 @@ export const createLeadService = async (
     initial_site_measurement_date,
   } = payload;
 
-  return prisma.$transaction(
+  const transactionResult = await prisma.$transaction(
     async (tx) => {
       try {
         // 🔍 optional input snapshot
@@ -122,18 +120,18 @@ export const createLeadService = async (
           product_structures,
           fileCount: files.length,
         });
-      // 1. AccountMaster (create first to get account_id)
-      const account = await tx.accountMaster.create({
-        data: {
-          name: `${firstname} ${lastname}`,
-          country_code,
-          contact_no,
-          alt_contact_no,
-          email,
-          vendor_id,
-          created_by,
-        },
-      });
+        // 1. AccountMaster (create first to get account_id)
+        const account = await tx.accountMaster.create({
+          data: {
+            name: `${firstname} ${lastname}`,
+            country_code,
+            contact_no,
+            alt_contact_no,
+            email,
+            vendor_id,
+            created_by,
+          },
+        });
 
       // 2) ⬅️ NEW: generate lead_code for this vendor
       const lead_code = await generateLeadCode(tx, vendor_id);
@@ -194,6 +192,41 @@ export const createLeadService = async (
       if (creatorRole === "admin" && assign_to) {
         await tx.leadUserMapping.create({
           data: { ...mappingBase, user_id: assign_to },
+        });
+      }
+
+      // ✅ Create lead chat room and seed members (all admins + creator + assigned user)
+      const chatRoom = await tx.leadChatRoom.create({
+        data: {
+          lead_id: lead.id,
+          vendor_id,
+        },
+      });
+
+      const adminUsers = await tx.userMaster.findMany({
+        where: {
+          vendor_id,
+          status: "active",
+          user_type: { user_type: { in: ["admin", "super-admin"] } },
+        },
+        select: { id: true },
+      });
+
+      const memberIds = new Set<number>(adminUsers.map((user) => user.id));
+      memberIds.add(created_by);
+
+      if (creatorRole === "admin" && assign_to) {
+        memberIds.add(assign_to);
+      }
+
+      if (memberIds.size > 0) {
+        await tx.leadChatMember.createMany({
+          data: Array.from(memberIds).map((user_id) => ({
+            chat_room_id: chatRoom.id,
+            user_id,
+            added_by: created_by,
+          })),
+          skipDuplicates: true,
         });
       }
 
@@ -272,80 +305,6 @@ export const createLeadService = async (
         });
       }
 
-      // 5. Documents (only if files are provided) with enhanced debugging
-      let uploadedFiles: any[] = [];
-
-      if (files && files.length > 0) {
-        logger.info(`Uploading ${files.length} document(s) to Wasabi`);
-
-        for (const file of files) {
-          const sanitizedFilename = sanitizeFilename(file.originalname);
-          const fileKey = (file as any).key as string | undefined;
-          const fileLocation = (file as any).location as string | undefined;
-          const diskPath = (file as any).path as string | undefined;
-          const fileExists = diskPath ? fs.existsSync(diskPath) : false;
-          console.log(
-            `[DEBUG] File key: ${fileKey}, location: ${fileLocation}, disk exists: ${fileExists}`
-          );
-
-          const s3Key = `site-photos/${vendor_id}/${
-            lead.id
-          }/${Date.now()}-${sanitizedFilename}`;
-
-          let docTypeRecord = await tx.documentTypeMaster.findFirst({
-            where: { vendor_id, tag: "Type 1" }, // or tag: "site-photo" if you have a tag field
-          });
-
-          if (!docTypeRecord) {
-            throw new Error(
-              `Document type "Type 1" not found for vendor ${vendor_id}`
-            );
-          }
-
-          logger.info("[FILE CHECK]", {
-            name: file.originalname,
-            size: file.size,
-            hasBuffer: !!file.buffer,
-          });          
-
-          await wasabi.send(
-            new PutObjectCommand({
-              Bucket: process.env.WASABI_BUCKET_NAME!,
-              Key: s3Key,
-              Body: file.buffer, // <--- use Multer memory storage
-              ContentType: file.mimetype,
-            })
-          );
-
-          const document = await tx.leadDocuments.create({
-            data: {
-              doc_og_name: file.originalname,
-              doc_sys_name: s3Key, // store S3 path instead of raw filename
-              doc_type_id: docTypeRecord.id,
-              vendor_id,
-              lead_id: lead.id,
-              account_id: account.id,
-              created_by,
-            },
-          });
-
-          uploadedFiles.push({
-            id: document.id,
-            type: 1,
-            originalName: file.originalname,
-            s3Key,
-            size: file.size,
-          });
-        }
-
-        console.log(
-          "[DEBUG] Files uploaded to Wasabi and saved:",
-          uploadedFiles.length
-        );
-      } else {
-        logger.info("No documents to process - files are optional");
-      }
-
       // 6. LeadStatusLogs entry
       await tx.leadStatusLogs.create({
         data: {
@@ -382,8 +341,7 @@ export const createLeadService = async (
       return {
         lead,
         account,
-        documentsProcessed: files ? files.length : 0,
-        uploadedFiles: uploadedFiles,
+        draft: !!payload.is_draft,
       };
     } catch (err) {
       logDbError(err, "createLeadService.transaction", {
@@ -394,7 +352,89 @@ export const createLeadService = async (
     }
   },
   { timeout: 15000 }
-);};
+  );
+
+  if (transactionResult.draft) {
+    return {
+      ...transactionResult,
+      documentsProcessed: 0,
+      uploadedFiles: [],
+    };
+  }
+
+  let uploadedFiles: any[] = [];
+
+  if (files && files.length > 0) {
+    logger.info(`Uploading ${files.length} document(s) to Wasabi`);
+
+    const docTypeRecord = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id, tag: "Type 1" },
+    });
+
+    if (!docTypeRecord) {
+      throw new Error(
+        `Document type "Type 1" not found for vendor ${vendor_id}`
+      );
+    }
+
+    for (const file of files) {
+      const diskPath = file.path;
+      const fileExists = diskPath ? fs.existsSync(diskPath) : false;
+      console.log(
+        `[DEBUG] File path: ${diskPath}, disk exists: ${fileExists}`
+      );
+
+      logger.info("[FILE CHECK]", {
+        name: file.originalname,
+        size: file.size,
+        path: file.path,
+      });
+
+      const s3Key = await uploadToWasabiLeadSitePhoto(
+        file.path,
+        vendor_id,
+        transactionResult.lead.id,
+        file.originalname,
+        file.mimetype
+      );
+
+      await fs.promises.unlink(file.path);
+
+      const document = await prisma.leadDocuments.create({
+        data: {
+          doc_og_name: file.originalname,
+          doc_sys_name: s3Key,
+          doc_type_id: docTypeRecord.id,
+          vendor_id,
+          lead_id: transactionResult.lead.id,
+          account_id: transactionResult.account.id,
+          created_by,
+        },
+      });
+
+      uploadedFiles.push({
+        id: document.id,
+        type: 1,
+        originalName: file.originalname,
+        s3Key,
+        size: file.size,
+      });
+    }
+
+    console.log(
+      "[DEBUG] Files uploaded to Wasabi and saved:",
+      uploadedFiles.length
+    );
+  } else {
+    logger.info("No documents to process - files are optional");
+  }
+
+  return {
+    ...transactionResult,
+    documentsProcessed: files ? files.length : 0,
+    uploadedFiles,
+  };
+};
 
 
 export const uploadMoreSitePhotosService = async (
@@ -411,56 +451,60 @@ export const uploadMoreSitePhotosService = async (
     throw new Error("At least one file must be uploaded");
   }
 
-  function sanitizeFilename(filename: string): string {
-    return filename.replace(/[^a-zA-Z0-9.\-_]/g, "_");
+  const lead = await prisma.leadMaster.findFirst({
+    where: {
+      id: lead_id,
+      vendor_id,
+      is_deleted: false,
+    },
+    select: {
+      id: true,
+      account_id: true,
+    },
+  });
+
+  if (!lead) {
+    throw new Error(`Lead ${lead_id} not found for vendor ${vendor_id}`);
+  }
+
+  const docTypeRecord = await prisma.documentTypeMaster.findFirst({
+    where: { vendor_id, tag: "Type 1" },
+  });
+
+  if (!docTypeRecord) {
+    throw new Error(`Document type "Type 1" not found for vendor ${vendor_id}`);
+  }
+
+  const uploadedDocsData: {
+    originalName: string;
+    s3Key: string;
+  }[] = [];
+
+  for (const file of files) {
+    const s3Key = await uploadToWasabiLeadSitePhoto(
+      file.path,
+      vendor_id,
+      lead.id,
+      file.originalname,
+      file.mimetype
+    );
+
+    await fs.promises.unlink(file.path);
+
+    uploadedDocsData.push({
+      originalName: file.originalname,
+      s3Key,
+    });
   }
 
   return prisma.$transaction(async (tx) => {
-    const lead = await tx.leadMaster.findFirst({
-      where: {
-        id: lead_id,
-        vendor_id,
-        is_deleted: false,
-      },
-      select: {
-        id: true,
-        account_id: true,
-      },
-    });
-
-    if (!lead) {
-      throw new Error(`Lead ${lead_id} not found for vendor ${vendor_id}`);
-    }
-
-    const docTypeRecord = await tx.documentTypeMaster.findFirst({
-      where: { vendor_id, tag: "Type 1" },
-    });
-
-    if (!docTypeRecord) {
-      throw new Error(`Document type "Type 1" not found for vendor ${vendor_id}`);
-    }
-
     const uploadedDocs = [];
 
-    for (const file of files) {
-      const sanitizedFilename = sanitizeFilename(file.originalname);
-      const s3Key = `site-photos/${vendor_id}/${
-        lead.id
-      }/${Date.now()}-${sanitizedFilename}`;
-
-      await wasabi.send(
-        new PutObjectCommand({
-          Bucket: process.env.WASABI_BUCKET_NAME!,
-          Key: s3Key,
-          Body: file.buffer,
-          ContentType: file.mimetype,
-        })
-      );
-
+    for (const uploaded of uploadedDocsData) {
       const document = await tx.leadDocuments.create({
         data: {
-          doc_og_name: file.originalname,
-          doc_sys_name: s3Key,
+          doc_og_name: uploaded.originalName,
+          doc_sys_name: uploaded.s3Key,
           doc_type_id: docTypeRecord.id,
           vendor_id,
           lead_id: lead.id,

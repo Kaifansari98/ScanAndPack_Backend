@@ -3,6 +3,7 @@ import multerS3 from "multer-s3";
 import path from "path";
 import { sanitizeFilename } from "../utils/fileUtils";
 import wasabi from "../utils/wasabiClient";
+import fs from 'fs'
 
 const bucketName = process.env.WASABI_BUCKET_NAME || "vloq-furnix";
 
@@ -76,9 +77,66 @@ export const upload = multer({
   },
 });
 
+export const uploadDesignMeetingFiles = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/design_meeting_docs";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 10 },
+  fileFilter: (req, file, cb) => {
+    const allowedMimeTypes = [
+      // Images
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/gif",
+      "image/webp",
+
+      // PDF & ZIP
+      "application/pdf",
+      "application/zip",
+      "application/x-zip-compressed",
+
+      // Videos
+      "video/mp4",
+      "video/mpeg",
+      "video/ogg",
+      "video/webm",
+      "video/x-msvideo", // AVI
+      "video/quicktime", // MOV
+      "video/x-matroska", // MKV
+    ];
+
+    if (allowedMimeTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(
+        new Error(
+          `Only image files and PDFs and ZIP archives are allowed! Received: ${file.mimetype}`
+        )
+      );
+    }
+  },
+});
+
 export const uploadFinalMeasurement = multer({
-  storage: multer.memoryStorage(), // ✅ keep file in memory, don't auto-upload
-  limits: fileLimits,
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/final_measurement";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 20 },
   fileFilter: (req, file, cb) => {
     const allowedMimeTypes = [
       "image/jpeg",
@@ -100,8 +158,17 @@ export const uploadFinalMeasurement = multer({
 });
 
 export const uploadClientApproval = multer({
-  storage: multer.memoryStorage(), // ✅ keep file in memory, don't auto-upload
-  limits: fileLimits,
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/client_approval";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 15 },
   fileFilter: (req, file, cb) => {
     const allowedMimeTypes = [
       "image/jpeg",
@@ -118,8 +185,17 @@ export const uploadClientApproval = multer({
 });
 
 export const uploadClientDocumentation = multer({
-  storage: multer.memoryStorage(), // ✅ keep file in memory
-  limits: fileLimits,
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/client_documentations";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 20 },
   fileFilter: (req, file, cb) => {
     const allowedMimeTypes = [
       // Images
@@ -161,8 +237,17 @@ export const uploadClientDocumentation = multer({
 });
 
 export const uploadDesigns = multer({
-  storage: multer.memoryStorage(),
-  limits: { ...fileLimits, files: 10 },
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/design_stage1";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 10 },
   fileFilter: (req, file, cb) => {
     // ✅ Allowed formats: CAD + PDF
     const allowedExtensions = [
@@ -204,8 +289,17 @@ export const uploadDesigns = multer({
 });
 
 export const uploadProductionFiles = multer({
-  storage: multer.memoryStorage(),
-  limits: { ...fileLimits, files: 10 },
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/production_files";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 10 },
   fileFilter: (req, file, cb) => {
     // ✅ Allowed formats: CAD + PDF
     const allowedExtensions = [
@@ -246,14 +340,180 @@ export const uploadProductionFiles = multer({
   },
 });
 
+export const uploadPostProductionFiles = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/post_production";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 10 },
+});
+
+export const uploadReadyToDispatchPhotos = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/ready_to_dispatch";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 10 },
+});
+
+export const uploadSiteReadinessPhotos = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/site_readiness";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 10 },
+});
+
+export const uploadDispatchPlanningPayment = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/dispatch_planning_payment";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 1 },
+});
+
+export const uploadDispatchStageDocuments = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/dispatch_stage";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 10 },
+});
+
+export const uploadUnderInstallationFiles = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/under_installation";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 10 },
+});
+
+export const uploadFinalHandoverFiles = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/final_handover";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 40 },
+});
+
 export const uploadMeetingDocs = multer({
-  storage: multer.memoryStorage(),
-  limits: { files: 10 },
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/design_meeting_docs";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 10 },
   fileFilter: (req, file, cb) => {
     const allowed = [".pdf", ".jpg", ".jpeg", ".png", ".doc", ".docx"];
     const ext = path.extname(file.originalname).toLowerCase();
     if (allowed.includes(ext)) cb(null, true);
     else cb(new Error(`Unsupported file type: ${ext}`));
+  },
+});
+
+export const uploadBookingStageFiles = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/booking_stage";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 11 },
+});
+
+export const uploadCSPBookingFiles = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/csp_booking";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: {
+    fileSize: 200 * 1024 * 1024, // 200MB
+    files: 10,
+  },
+  fileFilter: (req, file, cb) => {
+    const allowed = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/gif",
+    ];
+    if (allowed.includes(file.mimetype)) cb(null, true);
+    else cb(new Error("Only image files are allowed"));
+  },
+});
+
+const CHAT_MAX_FILE_SIZE = 50 * 1024 * 1024; // 50 MB per file
+
+const uploadChatAttachments = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/chat_uploads";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: {
+    fileSize: 200 * 1024 * 1024, // 200 MB
   },
 });
 

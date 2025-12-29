@@ -128,6 +128,36 @@ export type ProductTypeMaster = Prisma.ProductTypeMasterModel
  */
 export type LeadDocuments = Prisma.LeadDocumentsModel
 /**
+ * Model LeadChatRoom
+ * 
+ */
+export type LeadChatRoom = Prisma.LeadChatRoomModel
+/**
+ * Model LeadChatMember
+ * 
+ */
+export type LeadChatMember = Prisma.LeadChatMemberModel
+/**
+ * Model LeadChatMessage
+ * 
+ */
+export type LeadChatMessage = Prisma.LeadChatMessageModel
+/**
+ * Model LeadChatAttachment
+ * 
+ */
+export type LeadChatAttachment = Prisma.LeadChatAttachmentModel
+/**
+ * Model LeadChatMention
+ * 
+ */
+export type LeadChatMention = Prisma.LeadChatMentionModel
+/**
+ * Model LeadChatDocument
+ * 
+ */
+export type LeadChatDocument = Prisma.LeadChatDocumentModel
+/**
  * Model ProductStructure
  * 
  */

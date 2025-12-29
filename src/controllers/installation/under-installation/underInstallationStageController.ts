@@ -1,7 +1,14 @@
 import { Request, Response } from "express";
 import { UnderInstallationStageService } from "../../../services/installation/under-installation/underInstallationStageService";
 import { ApiResponse } from "../../../utils/apiResponse";
+import {
+  uploadToWasabiUnderInstallationDayWiseDocumentsFile,
+  uploadToWasabiUnderInstallationMiscellaneousDocumentsFile,
+  uploadToWasabiUnderInstallationUsableHandoverDocumentsFile,
+  uploadToWasabiUnderInstallationUsableHandoverFinalSitePhotosFile,
+} from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
+import fs from "node:fs/promises";
 
 const service = new UnderInstallationStageService();
 
@@ -521,6 +528,26 @@ export class UnderInstallationStageController {
         });
       }
 
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+      for (const file of files) {
+        const sysName =
+          await uploadToWasabiUnderInstallationDayWiseDocumentsFile(
+            file.path,
+            Number(vendorId),
+            Number(leadId),
+            file.originalname,
+            file.mimetype
+          );
+
+        await fs.unlink(file.path);
+
+        uploadedFiles.push({
+          originalName: file.originalname,
+          sysName,
+        });
+      }
+
       const uploaded =
         await UnderInstallationStageService.uploadInstallationUpdatesDayWise(
           Number(vendorId),
@@ -529,7 +556,7 @@ export class UnderInstallationStageController {
           Number(created_by),
           new Date(update_date),
           remark || null,
-          files
+          uploadedFiles
         );
 
       return res.status(200).json({
@@ -614,6 +641,28 @@ export class UnderInstallationStageController {
         ? teams.split(",").map((t: string) => Number(t.trim()))
         : [];
 
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+      if (files && files.length > 0) {
+        for (const file of files) {
+          const sysName =
+            await uploadToWasabiUnderInstallationMiscellaneousDocumentsFile(
+              file.path,
+              Number(vendorId),
+              Number(leadId),
+              file.originalname,
+              file.mimetype
+            );
+
+          await fs.unlink(file.path);
+
+          uploadedFiles.push({
+            originalName: file.originalname,
+            sysName,
+          });
+        }
+      }
+
       const payload = {
         vendor_id: vendorId,
         lead_id: leadId,
@@ -630,7 +679,7 @@ export class UnderInstallationStageController {
         is_resolved: is_resolved === "true" ? true : false,
         created_by: Number(created_by),
         teams: parsedTeams,
-        files,
+        files: uploadedFiles,
       };
 
       const result =
@@ -881,13 +930,46 @@ export class UnderInstallationStageController {
 
       const files = (req.files as Express.Multer.File[]) || [];
 
+      const uploadedFiles: {
+        originalName: string;
+        sysName: string;
+        isImage: boolean;
+      }[] = [];
+
+      for (const file of files) {
+        const isImage = file.mimetype.startsWith("image/");
+        const sysName = isImage
+          ? await uploadToWasabiUnderInstallationUsableHandoverFinalSitePhotosFile(
+              file.path,
+              Number(vendor_id),
+              Number(lead_id),
+              file.originalname,
+              file.mimetype
+            )
+          : await uploadToWasabiUnderInstallationUsableHandoverDocumentsFile(
+              file.path,
+              Number(vendor_id),
+              Number(lead_id),
+              file.originalname,
+              file.mimetype
+            );
+
+        await fs.unlink(file.path);
+
+        uploadedFiles.push({
+          originalName: file.originalname,
+          sysName,
+          isImage,
+        });
+      }
+
       const data = await UnderInstallationStageService.updateUsableHandover({
         vendor_id: Number(vendor_id),
         lead_id: Number(lead_id),
         account_id: Number(account_id),
         created_by: Number(created_by),
         pending_work_details,
-        files,
+        files: uploadedFiles,
       });
 
       return res.status(200).json({

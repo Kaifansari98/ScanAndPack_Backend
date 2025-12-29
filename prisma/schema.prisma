@@ -37,6 +37,8 @@ model VendorMaster {
   designSelection             LeadDesignSelection[]
   leadDetailedLogs            LeadDetailedLogs[]
   leadDocumentLogs            LeadDocumentLogs[]
+  leadChatRooms               LeadChatRoom[]
+  leadChatDocuments           LeadChatDocument[]
   documents                   LeadDocuments[]
   leads                       LeadMaster[]
   leadProductMaps             LeadProductMapping[]
@@ -127,6 +129,12 @@ model UserMaster {
   designSelectionsUpdated              LeadDesignSelection[]               @relation("DesignSelectionUpdatedBy")
   leadDetailedLogs                     LeadDetailedLogs[]
   leadDocumentLogs                     LeadDocumentLogs[]
+  leadChatMembers                      LeadChatMember[]                     @relation("LeadChatMemberUser")
+  leadChatMembersAdded                 LeadChatMember[]                     @relation("LeadChatMemberAddedBy")
+  leadChatMessagesSent                 LeadChatMessage[]                    @relation("LeadChatMessageSender")
+  leadChatMentions                     LeadChatMention[]                    @relation("LeadChatMentionUser")
+  leadChatDocumentsCreated             LeadChatDocument[]                   @relation("LeadChatDocumentCreatedBy")
+  leadChatDocumentsDeleted             LeadChatDocument[]                   @relation("LeadChatDocumentDeletedBy")
   documentsCreated                     LeadDocuments[]                     @relation("DocumentCreatedBy")
   documentsDeleted                     LeadDocuments[]                     @relation("DocumentDeletedBy")
   leadsAssigned                        LeadMaster[]                        @relation("LeadAssignedTo")
@@ -371,6 +379,8 @@ model LeadMaster {
   designSelection                             LeadDesignSelection[]
   leadDetailedLogs                            LeadDetailedLogs[]
   leadDocumentLogs                            LeadDocumentLogs[]
+  leadChatRooms                               LeadChatRoom[]
+  leadChatDocuments                           LeadChatDocument[]
   documents                                   LeadDocuments[]
   account                                     AccountMaster?                      @relation(fields: [account_id], references: [id], onDelete: Cascade)
   assignedTo                                  UserMaster?                         @relation("LeadAssignedTo", fields: [assign_to], references: [id])
@@ -488,6 +498,7 @@ model AccountMaster {
   payments                    PaymentInfo[]
   siteReadiness               SiteReadiness[]
   tasks                       UserLeadTask[]
+  leadChatDocument            LeadChatDocument[]
 }
 
 model LeadProductMapping {
@@ -539,6 +550,87 @@ model LeadDocuments {
   miscellaneousDocument  MiscellaneousDocument[]
   paymentInfo            PaymentInfo[]
   site_readiness_photos  SiteReadiness[]               @relation("LeadDocumentsToSiteReadiness")
+}
+
+model LeadChatRoom {
+  id         Int              @id @default(autoincrement())
+  lead_id    Int
+  vendor_id  Int
+  created_at DateTime         @default(now())
+  lead       LeadMaster       @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  vendor     VendorMaster     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  members    LeadChatMember[]
+  messages   LeadChatMessage[]
+
+  @@unique([lead_id, vendor_id], name: "uniq_lead_vendor_chat_room")
+}
+
+model LeadChatMember {
+  id           Int          @id @default(autoincrement())
+  chat_room_id Int
+  user_id      Int
+  joined_at    DateTime     @default(now())
+  added_by     Int?
+  chatRoom     LeadChatRoom @relation(fields: [chat_room_id], references: [id], onDelete: Cascade)
+  user         UserMaster   @relation("LeadChatMemberUser", fields: [user_id], references: [id], onDelete: Cascade)
+  addedBy      UserMaster?  @relation("LeadChatMemberAddedBy", fields: [added_by], references: [id])
+
+  @@unique([chat_room_id, user_id], name: "uniq_chat_member")
+}
+
+model LeadChatMessage {
+  id           Int                 @id @default(autoincrement())
+  chat_room_id Int
+  sender_id    Int
+  message_type LeadChatMessageType @default(text)
+  message_text String?             @db.Text
+  created_at   DateTime            @default(now())
+  chatRoom     LeadChatRoom        @relation(fields: [chat_room_id], references: [id], onDelete: Cascade)
+  sender       UserMaster          @relation("LeadChatMessageSender", fields: [sender_id], references: [id], onDelete: Cascade)
+  attachments  LeadChatAttachment[]
+  mentions     LeadChatMention[]
+}
+
+model LeadChatAttachment {
+  id         Int             @id @default(autoincrement())
+  msg_id     Int
+  doc_id     Int
+  created_at DateTime        @default(now())
+  message    LeadChatMessage @relation(fields: [msg_id], references: [id], onDelete: Cascade)
+  document   LeadChatDocument @relation(fields: [doc_id], references: [id], onDelete: Cascade)
+
+  @@unique([msg_id, doc_id])
+}
+
+model LeadChatMention {
+  id                Int             @id @default(autoincrement())
+  msg_id            Int
+  mentioned_user_id Int
+  created_at        DateTime        @default(now())
+  message           LeadChatMessage @relation(fields: [msg_id], references: [id], onDelete: Cascade)
+  mentionedUser     UserMaster      @relation("LeadChatMentionUser", fields: [mentioned_user_id], references: [id], onDelete: Cascade)
+
+  @@unique([msg_id, mentioned_user_id])
+}
+
+model LeadChatDocument {
+  id           Int                 @id @default(autoincrement())
+  doc_og_name  String
+  doc_sys_name String
+  created_by   Int
+  created_at   DateTime            @default(now())
+  deleted_by   Int?
+  deleted_at   DateTime?
+  account_id   Int?
+  lead_id      Int?
+  vendor_id    Int
+  is_deleted   Boolean             @default(false)
+  attachments  LeadChatAttachment[]
+  account      AccountMaster?      @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  createdBy    UserMaster          @relation("LeadChatDocumentCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  deletedBy    UserMaster?         @relation("LeadChatDocumentDeletedBy", fields: [deleted_by], references: [id])
+  lead         LeadMaster?         @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  vendor       VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
 model ProductStructure {
@@ -1072,3 +1164,9 @@ enum ActionType {
   OTHER
 }
 
+enum LeadChatMessageType {
+  text
+  attachment
+  system
+  textWithAttachment
+}

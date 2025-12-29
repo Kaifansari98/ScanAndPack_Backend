@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { UnderInstallationStageController } from "../../../controllers/installation/under-installation/underInstallationStageController";
-import { upload } from "../../../middlewares/uploadWasabi";
+import { uploadUnderInstallationFiles } from "../../../middlewares/uploadWasabi";
 
 const underInstallationStageRoutes = Router();
 const controller = new UnderInstallationStageController();
@@ -62,7 +62,7 @@ underInstallationStageRoutes.put(
 /** ✅ POST → Upload Installation Updates (Day Wise) */
 underInstallationStageRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-installation-updates-day-wise",
-  upload.array("files", 10),
+  uploadUnderInstallationFiles.array("files", 10),
   controller.uploadInstallationUpdatesDayWise
 );
 
@@ -77,7 +77,7 @@ underInstallationStageRoutes.get(
  */
 underInstallationStageRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/create",
-  upload.array("files", 10), // max 10 docs
+  uploadUnderInstallationFiles.array("files", 10), // max 10 docs
   controller.createMiscellaneousEntry
 );
 
@@ -117,7 +117,7 @@ underInstallationStageRoutes.put(
 
 underInstallationStageRoutes.post(
   "/usable-handover/update",
-  upload.array("files"), // multer — multiple files allowed
+  uploadUnderInstallationFiles.array("files"), // multer — multiple files allowed
   controller.updateUsableHandover
 );
 

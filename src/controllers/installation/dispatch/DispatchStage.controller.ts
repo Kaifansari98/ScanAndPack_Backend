@@ -1,7 +1,12 @@
 import { Request, Response } from "express";
 import { DispatchStageService } from "../../../services/installation/dispatch/DispatchStage.service";
 import { ApiResponse } from "../../../utils/apiResponse";
+import {
+  uploadToWasabiDispatchDocumentsFile,
+  uploadToWasabiPostDispatchDocumentsFile,
+} from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
+import fs from "node:fs/promises";
 
 const service = new DispatchStageService();
 
@@ -176,12 +181,31 @@ export class DispatchStageController {
         });
       }
 
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+      for (const file of files) {
+        const sysName = await uploadToWasabiDispatchDocumentsFile(
+          file.path,
+          Number(vendorId),
+          Number(leadId),
+          file.originalname,
+          file.mimetype
+        );
+
+        await fs.unlink(file.path);
+
+        uploadedFiles.push({
+          originalName: file.originalname,
+          sysName,
+        });
+      }
+
       const uploaded = await service.uploadDispatchDocuments(
         Number(vendorId),
         Number(leadId),
         account_id ? Number(account_id) : null,
         Number(created_by),
-        files
+        uploadedFiles
       );
 
       return res.status(200).json({
@@ -297,12 +321,31 @@ export class DispatchStageController {
         });
       }
 
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+      for (const file of files) {
+        const sysName = await uploadToWasabiPostDispatchDocumentsFile(
+          file.path,
+          Number(vendorId),
+          Number(leadId),
+          file.originalname,
+          file.mimetype
+        );
+
+        await fs.unlink(file.path);
+
+        uploadedFiles.push({
+          originalName: file.originalname,
+          sysName,
+        });
+      }
+
       const uploaded = await service.uploadPostDispatchDocuments(
         Number(vendorId),
         Number(leadId),
         account_id ? Number(account_id) : null,
         Number(created_by),
-        files
+        uploadedFiles
       );
 
       return res.status(200).json({

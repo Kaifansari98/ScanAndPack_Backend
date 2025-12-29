@@ -7,8 +7,10 @@ import {
   generateSignedUrl,
   uploadToWasabi,
   uploadToWasabiMeetingDocs,
-  uploadToWasabStage1Desings,
+  uploadToWasabiMeetingDocsFile,
+  uploadToWasabStage1DesingsFile,
 } from "../../../utils/wasabiClient";
+import fs from "node:fs/promises";
 
 export class DesigingStageController {
   public static async addToDesigingStage(req: Request, res: Response) {
@@ -89,14 +91,10 @@ export class DesigingStageController {
         });
       }
 
-      const buffers = (req.files as Express.Multer.File[]).map((f) => f.buffer);
-      const originalNames = (req.files as Express.Multer.File[]).map(
-        (f) => f.originalname
-      );
+      const files = req.files as Express.Multer.File[];
 
       const docs = await DesigingStage.uploadQuotation({
-        fileBuffer: buffers,
-        originalName: originalNames,
+        files,
         vendorId: Number(vendorId),
         leadId: Number(leadId),
         userId: Number(userId),
@@ -409,116 +407,132 @@ export class DesigingStageController {
           .status(400)
           .json({ success: false, logs: ["No account linked with this lead"] });
 
-      // 3️⃣ Create Design Meeting entry
-      const meeting = await prisma.leadDesignMeeting.create({
-        data: {
-          lead_id: Number(leadId),
-          account_id: Number(accountId),
-          vendor_id: Number(vendorId),
-          date: new Date(date),
-          desc,
-          created_by: Number(userId),
-        },
-      });
-      logs.push({ meetingCreated: meeting });
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
 
-      const documents: any[] = [];
-      const mapping: any[] = [];
+      for (const file of files) {
+        const sysName = await uploadToWasabiMeetingDocsFile(
+          file.path,
+          Number(vendorId),
+          Number(leadId),
+          file.originalname,
+          file.mimetype
+        );
 
-      // 4️⃣ Upload documents (if any)
-      if (files.length > 0) {
-        for (const file of files) {
-          const sysName = await uploadToWasabiMeetingDocs(
-            file.buffer,
-            Number(vendorId),
-            Number(leadId),
-            file.originalname
-          );
-          logs.push({ fileUploaded: file.originalname, sysName });
+        await fs.unlink(file.path);
 
-          const meetingDocType = await prisma.documentTypeMaster.findFirst({
-            where: { vendor_id: Number(vendorId), tag: "Type 7" },
+        uploadedFiles.push({ originalName: file.originalname, sysName });
+        logs.push({ fileUploaded: file.originalname, sysName });
+      }
+
+      const { meeting, documents, mapping } = await prisma.$transaction(
+        async (tx) => {
+          // 3️⃣ Create Design Meeting entry
+          const newMeeting = await tx.leadDesignMeeting.create({
+            data: {
+              lead_id: Number(leadId),
+              account_id: Number(accountId),
+              vendor_id: Number(vendorId),
+              date: new Date(date),
+              desc,
+              created_by: Number(userId),
+            },
           });
+          logs.push({ meetingCreated: newMeeting });
 
-          if (!meetingDocType) {
-            return res.status(404).json({
-              success: false,
-              message:
-                "Document type for meeting documents (Type 7) not found for this vendor",
+          const newDocuments: any[] = [];
+          const newMapping: any[] = [];
+
+          if (uploadedFiles.length > 0) {
+            const meetingDocType = await tx.documentTypeMaster.findFirst({
+              where: { vendor_id: Number(vendorId), tag: "Type 7" },
             });
+
+            if (!meetingDocType) {
+              throw new Error(
+                "Document type for meeting documents (Type 7) not found for this vendor"
+              );
+            }
+
+            for (const file of uploadedFiles) {
+              const doc = await tx.leadDocuments.create({
+                data: {
+                  doc_og_name: file.originalName,
+                  doc_sys_name: file.sysName,
+                  vendor_id: Number(vendorId),
+                  lead_id: Number(leadId),
+                  account_id: Number(accountId),
+                  doc_type_id: meetingDocType.id,
+                  created_by: Number(userId),
+                },
+              });
+              newDocuments.push(doc);
+              logs.push({ documentCreated: doc });
+
+              const map = await tx.leadDesignMeetingDocumentsMapping.create({
+                data: {
+                  lead_id: Number(leadId),
+                  account_id: Number(accountId),
+                  vendor_id: Number(vendorId),
+                  meeting_id: newMeeting.id,
+                  document_id: doc.id,
+                  created_at: new Date(),
+                  created_by: Number(userId),
+                },
+              });
+              newMapping.push(map);
+              logs.push({ mappingCreated: map });
+            }
+          } else {
+            logs.push("No files uploaded");
           }
 
-          const doc = await prisma.leadDocuments.create({
-            data: {
-              doc_og_name: file.originalname,
-              doc_sys_name: sysName,
-              vendor_id: Number(vendorId),
-              lead_id: Number(leadId),
-              account_id: Number(accountId),
-              doc_type_id: meetingDocType.id,
-              created_by: Number(userId),
-            },
+          // 5️⃣ Create LeadDetailedLogs entry
+          const formattedDate = new Date(date).toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
           });
-          documents.push(doc);
-          logs.push({ documentCreated: doc });
 
-          const map = await prisma.leadDesignMeetingDocumentsMapping.create({
+          const actionMessage = `Meeting scheduled on ${formattedDate} has been added successfully.`;
+          const remarkText = desc || "No description provided.";
+
+          const detailedLog = await tx.leadDetailedLogs.create({
             data: {
+              vendor_id: Number(vendorId),
               lead_id: Number(leadId),
               account_id: Number(accountId),
-              vendor_id: Number(vendorId),
-              meeting_id: meeting.id,
-              document_id: doc.id,
+              action: actionMessage,
+              action_type: "CREATE",
+              created_by: Number(userId),
               created_at: new Date(),
-              created_by: Number(userId),
             },
           });
-          mapping.push(map);
-          logs.push({ mappingCreated: map });
+
+          logs.push({ leadDetailedLogCreated: detailedLog });
+
+          // 6️⃣ Create LeadDocumentLogs (only if files were uploaded)
+          if (newDocuments.length > 0) {
+            const docLogsData = newDocuments.map((doc) => ({
+              vendor_id: Number(vendorId),
+              lead_id: Number(leadId),
+              account_id: Number(accountId),
+              doc_id: doc.id,
+              lead_logs_id: detailedLog.id,
+              created_by: Number(userId),
+              created_at: new Date(),
+            }));
+
+            await tx.leadDocumentLogs.createMany({ data: docLogsData });
+            logs.push("LeadDocumentLogs created");
+          }
+
+          return {
+            meeting: newMeeting,
+            documents: newDocuments,
+            mapping: newMapping,
+          };
         }
-      } else {
-        logs.push("No files uploaded");
-      }
-
-      // 5️⃣ Create LeadDetailedLogs entry
-      const formattedDate = new Date(date).toLocaleDateString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      });
-
-      const actionMessage = `Meeting scheduled on ${formattedDate} has been added successfully.`;
-      const remarkText = desc || "No description provided.";
-
-      const detailedLog = await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: Number(vendorId),
-          lead_id: Number(leadId),
-          account_id: Number(accountId),
-          action: actionMessage,
-          action_type: "CREATE",
-          created_by: Number(userId),
-          created_at: new Date(),
-        },
-      });
-
-      logs.push({ leadDetailedLogCreated: detailedLog });
-
-      // 6️⃣ Create LeadDocumentLogs (only if files were uploaded)
-      if (documents.length > 0) {
-        const docLogsData = documents.map((doc) => ({
-          vendor_id: Number(vendorId),
-          lead_id: Number(leadId),
-          account_id: Number(accountId),
-          doc_id: doc.id,
-          lead_logs_id: detailedLog.id,
-          created_by: Number(userId),
-          created_at: new Date(),
-        }));
-
-        await prisma.leadDocumentLogs.createMany({ data: docLogsData });
-        logs.push("LeadDocumentLogs created");
-      }
+      );
 
       return res.status(201).json({
         success: true,
@@ -548,107 +562,114 @@ export class DesigingStageController {
           .status(400)
           .json({ success: false, message: "No files uploaded" });
 
-      const lead = await prisma.leadMaster.findFirst({
-        where: {
-          id: Number(leadId),
-          vendor_id: Number(vendorId),
-          is_deleted: false,
-        },
-        select: { account_id: true },
-      });
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
 
-      if (!lead || !lead.account_id) {
-        return res.status(400).json({
-          success: false,
-          message: "No account linked with this lead",
-        });
-      }
-
-      const accountId = lead.account_id;
-
-      // ✅ 1. Check meeting exists
-      const meeting = await prisma.leadDesignMeeting.findFirst({
-        where: { id: Number(meetingId), vendor_id: Number(vendorId) },
-      });
-      if (!meeting)
-        return res
-          .status(404)
-          .json({ success: false, message: "Meeting not found" });
-
-      const meetingDocType = await prisma.documentTypeMaster.findFirst({
-        where: { vendor_id: Number(vendorId), tag: "Type 7" },
-      });
-
-      if (!meetingDocType) {
-        return res.status(404).json({
-          success: false,
-          message:
-            "Document type for meeting documents (Type 7) not found for this vendor",
-        });
-      }
-
-      // ✅ 2. Upload and save docs
-      const uploadedDocs = [];
       for (const file of files) {
-        const sysName = await uploadToWasabiMeetingDocs(
-          file.buffer,
+        const sysName = await uploadToWasabiMeetingDocsFile(
+          file.path,
           Number(vendorId),
           Number(leadId),
-          file.originalname
+          file.originalname,
+          file.mimetype
         );
 
-        const doc = await prisma.leadDocuments.create({
-          data: {
-            doc_og_name: file.originalname,
-            doc_sys_name: sysName,
+        await fs.unlink(file.path);
+
+        uploadedFiles.push({ originalName: file.originalname, sysName });
+      }
+
+      const { uploadedDocs } = await prisma.$transaction(async (tx) => {
+        const lead = await tx.leadMaster.findFirst({
+          where: {
+            id: Number(leadId),
             vendor_id: Number(vendorId),
-            lead_id: Number(leadId),
-            account_id: Number(accountId),
-            doc_type_id: meetingDocType.id /* Type 7 - Meeting Doc */,
-            created_by: Number(userId),
+            is_deleted: false,
           },
+          select: { account_id: true },
         });
 
-        uploadedDocs.push(doc);
+        if (!lead || !lead.account_id) {
+          throw new Error("No account linked with this lead");
+        }
 
-        await prisma.leadDesignMeetingDocumentsMapping.create({
+        const accountId = lead.account_id;
+
+        // ✅ 1. Check meeting exists
+        const meeting = await tx.leadDesignMeeting.findFirst({
+          where: { id: Number(meetingId), vendor_id: Number(vendorId) },
+        });
+        if (!meeting) {
+          throw new Error("Meeting not found");
+        }
+
+        const meetingDocType = await tx.documentTypeMaster.findFirst({
+          where: { vendor_id: Number(vendorId), tag: "Type 7" },
+        });
+
+        if (!meetingDocType) {
+          throw new Error(
+            "Document type for meeting documents (Type 7) not found for this vendor"
+          );
+        }
+
+        // ✅ 2. Save docs
+        const newDocs = [];
+        for (const file of uploadedFiles) {
+          const doc = await tx.leadDocuments.create({
+            data: {
+              doc_og_name: file.originalName,
+              doc_sys_name: file.sysName,
+              vendor_id: Number(vendorId),
+              lead_id: Number(leadId),
+              account_id: Number(accountId),
+              doc_type_id: meetingDocType.id /* Type 7 - Meeting Doc */,
+              created_by: Number(userId),
+            },
+          });
+
+          newDocs.push(doc);
+
+          await tx.leadDesignMeetingDocumentsMapping.create({
+            data: {
+              vendor_id: Number(vendorId),
+              lead_id: Number(leadId),
+              account_id: Number(accountId),
+              meeting_id: Number(meetingId),
+              document_id: doc.id,
+              created_by: Number(userId),
+              created_at: new Date(),
+            },
+          });
+        }
+
+        // ✅ 3. Log into LeadDetailedLogs
+        const actionMsg = `${newDocs.length} meeting file(s) added`;
+        const logEntry = await tx.leadDetailedLogs.create({
           data: {
             vendor_id: Number(vendorId),
             lead_id: Number(leadId),
             account_id: Number(accountId),
-            meeting_id: Number(meetingId),
-            document_id: doc.id,
+            action: actionMsg,
+            action_type: "UPDATE",
             created_by: Number(userId),
             created_at: new Date(),
           },
         });
-      }
 
-      // ✅ 3. Log into LeadDetailedLogs
-      const actionMsg = `${uploadedDocs.length} meeting file(s) added`;
-      const logEntry = await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: Number(vendorId),
-          lead_id: Number(leadId),
-          account_id: Number(accountId),
-          action: actionMsg,
-          action_type: "UPDATE",
-          created_by: Number(userId),
-          created_at: new Date(),
-        },
-      });
+        // ✅ 4. Link documents to logs
+        await tx.leadDocumentLogs.createMany({
+          data: newDocs.map((doc) => ({
+            vendor_id: Number(vendorId),
+            lead_id: Number(leadId),
+            account_id: Number(accountId),
+            doc_id: doc.id,
+            lead_logs_id: logEntry.id,
+            created_by: Number(userId),
+            created_at: new Date(),
+          })),
+        });
 
-      // ✅ 4. Link documents to logs
-      await prisma.leadDocumentLogs.createMany({
-        data: uploadedDocs.map((doc) => ({
-          vendor_id: Number(vendorId),
-          lead_id: Number(leadId),
-          account_id: Number(accountId),
-          doc_id: doc.id,
-          lead_logs_id: logEntry.id,
-          created_by: Number(userId),
-          created_at: new Date(),
-        })),
+        return { uploadedDocs: newDocs };
       });
 
       return res.status(201).json({
@@ -741,106 +762,112 @@ export class DesigingStageController {
         });
       }
 
-      // 1️⃣ Fetch lead → derive account_id
-      const lead = await prisma.leadMaster.findFirst({
-        where: {
-          id: Number(leadId),
-          vendor_id: Number(vendorId),
-          is_deleted: false,
-        },
-        select: {
-          id: true,
-          account_id: true,
-        },
-      });
-
-      if (!lead) {
-        return res.status(404).json({
-          success: false,
-          message: `Invalid leadId ${leadId} for this vendor`,
-        });
-      }
-
-      if (!lead.account_id) {
-        return res.status(400).json({
-          success: false,
-          message: "No account linked with this lead",
-        });
-      }
-
-      const accountId = lead.account_id; // ✅ derived safely
-
-      // 2️⃣ Fetch document type
-      const designDocType = await prisma.documentTypeMaster.findFirst({
-        where: {
-          vendor_id: Number(vendorId),
-          tag: "Type 6",
-        },
-      });
-
-      if (!designDocType) {
-        return res.status(404).json({
-          success: false,
-          message: "Design document type (Type 6) not found",
-        });
-      }
-
       const files = req.files as Express.Multer.File[];
-      const uploadedDocs: any[] = [];
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
 
-      // 3️⃣ Upload + DB insert
       for (const file of files) {
-        const sysName = await uploadToWasabStage1Desings(
-          file.buffer,
+        const sysName = await uploadToWasabStage1DesingsFile(
+          file.path,
           Number(vendorId),
           Number(leadId),
-          file.originalname
+          file.originalname,
+          file.mimetype
         );
 
-        const doc = await prisma.leadDocuments.create({
-          data: {
-            doc_og_name: file.originalname,
-            doc_sys_name: sysName,
-            vendor_id: Number(vendorId),
-            lead_id: Number(leadId),
-            account_id: Number(accountId), // ✅ backend-owned
-            doc_type_id: designDocType.id,
-            created_by: Number(userId),
-          },
-        });
+        await fs.unlink(file.path);
 
-        uploadedDocs.push(doc);
+        uploadedFiles.push({ originalName: file.originalname, sysName });
       }
 
-      // 4️⃣ Logs
-      const actionMessage =
-        uploadedDocs.length > 1
-          ? `${uploadedDocs.length} Designs have been added successfully.`
-          : "Design has been added successfully.";
+      const { uploadedDocs, actionMessage } = await prisma.$transaction(
+        async (tx) => {
+          // 1️⃣ Fetch lead → derive account_id
+          const lead = await tx.leadMaster.findFirst({
+            where: {
+              id: Number(leadId),
+              vendor_id: Number(vendorId),
+              is_deleted: false,
+            },
+            select: {
+              id: true,
+              account_id: true,
+            },
+          });
 
-      const detailedLog = await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: Number(vendorId),
-          lead_id: Number(leadId),
-          account_id: Number(accountId),
-          action: actionMessage,
-          action_type: "CREATE",
-          created_by: Number(userId),
-          created_at: new Date(),
-        },
-      });
+          if (!lead) {
+            throw new Error(`Invalid leadId ${leadId} for this vendor`);
+          }
 
-      await prisma.leadDocumentLogs.createMany({
-        data: uploadedDocs.map((doc) => ({
-          vendor_id: Number(vendorId),
-          lead_id: Number(leadId),
-          account_id: Number(accountId),
-          doc_id: doc.id,
-          lead_logs_id: detailedLog.id,
-          created_by: Number(userId),
-          created_at: new Date(),
-        })),
-      });
+          if (!lead.account_id) {
+            throw new Error("No account linked with this lead");
+          }
+
+          const accountId = lead.account_id; // ✅ derived safely
+
+          // 2️⃣ Fetch document type
+          const designDocType = await tx.documentTypeMaster.findFirst({
+            where: {
+              vendor_id: Number(vendorId),
+              tag: "Type 6",
+            },
+          });
+
+          if (!designDocType) {
+            throw new Error("Design document type (Type 6) not found");
+          }
+
+          const newDocs: any[] = [];
+
+          // 3️⃣ DB insert
+          for (const file of uploadedFiles) {
+            const doc = await tx.leadDocuments.create({
+              data: {
+                doc_og_name: file.originalName,
+                doc_sys_name: file.sysName,
+                vendor_id: Number(vendorId),
+                lead_id: Number(leadId),
+                account_id: Number(accountId), // ✅ backend-owned
+                doc_type_id: designDocType.id,
+                created_by: Number(userId),
+              },
+            });
+
+            newDocs.push(doc);
+          }
+
+          // 4️⃣ Logs
+          const message =
+            newDocs.length > 1
+              ? `${newDocs.length} Designs have been added successfully.`
+              : "Design has been added successfully.";
+
+          const detailedLog = await tx.leadDetailedLogs.create({
+            data: {
+              vendor_id: Number(vendorId),
+              lead_id: Number(leadId),
+              account_id: Number(accountId),
+              action: message,
+              action_type: "CREATE",
+              created_by: Number(userId),
+              created_at: new Date(),
+            },
+          });
+
+          await tx.leadDocumentLogs.createMany({
+            data: newDocs.map((doc) => ({
+              vendor_id: Number(vendorId),
+              lead_id: Number(leadId),
+              account_id: Number(accountId),
+              doc_id: doc.id,
+              lead_logs_id: detailedLog.id,
+              created_by: Number(userId),
+              created_at: new Date(),
+            })),
+          });
+
+          return { uploadedDocs: newDocs, actionMessage: message };
+        }
+      );
 
       return res.status(201).json({
         success: true,

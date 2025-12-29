@@ -2,11 +2,6 @@ import { prisma } from "../../../prisma/client";
 import { Prisma } from "../../../prisma/generated";
 import {
   generateSignedUrl,
-  uploadToWasabiFinalHandoverBookletPhoto,
-  uploadToWasabiFinalHandoverFinalSitePhotos,
-  uploadToWasabiFinalHandoverFormPhoto,
-  uploadToWasabiFinalHandoverQCDocument,
-  uploadToWasabiFinalHandoverWarrantyCardPhotos,
 } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
 
@@ -144,7 +139,13 @@ export class FinalHandoverStageService {
     leadId: number,
     accountId: number,
     userId: number,
-    files: any
+    files: {
+      final_site_photos?: { originalName: string; sysName: string }[];
+      warranty_card_photo?: { originalName: string; sysName: string }[];
+      handover_booklet_photo?: { originalName: string; sysName: string }[];
+      final_handover_form_photo?: { originalName: string; sysName: string }[];
+      qc_document?: { originalName: string; sysName: string }[];
+    }
   ) {
     const uploadedDocs: any[] = [];
 
@@ -171,21 +172,14 @@ export class FinalHandoverStageService {
      * ------------------------------------------------------ */
     if (files.final_site_photos) {
       for (const file of files.final_site_photos) {
-        const sysName = await uploadToWasabiFinalHandoverFinalSitePhotos(
-          file.buffer,
-          vendorId,
-          leadId,
-          file.originalname
-        );
-
         const saved = await prisma.leadDocuments.create({
           data: {
             vendor_id: vendorId,
             account_id: accountId,
             lead_id: leadId,
             created_by: userId,
-            doc_og_name: file.originalname,
-            doc_sys_name: sysName,
+            doc_og_name: file.originalName,
+            doc_sys_name: file.sysName,
             doc_type_id: getDocTypeId("Type 27"),
           },
         });
@@ -199,21 +193,14 @@ export class FinalHandoverStageService {
      * ------------------------------------------------------ */
     if (files.warranty_card_photo) {
       for (const file of files.warranty_card_photo) {
-        const sysName = await uploadToWasabiFinalHandoverWarrantyCardPhotos(
-          file.buffer,
-          vendorId,
-          leadId,
-          file.originalname
-        );
-
         const saved = await prisma.leadDocuments.create({
           data: {
             vendor_id: vendorId,
             account_id: accountId,
             lead_id: leadId,
             created_by: userId,
-            doc_og_name: file.originalname,
-            doc_sys_name: sysName,
+            doc_og_name: file.originalName,
+            doc_sys_name: file.sysName,
             doc_type_id: getDocTypeId("Type 28"),
           },
         });
@@ -227,21 +214,14 @@ export class FinalHandoverStageService {
      * ------------------------------------------------------ */
     if (files.handover_booklet_photo) {
       for (const file of files.handover_booklet_photo) {
-        const sysName = await uploadToWasabiFinalHandoverBookletPhoto(
-          file.buffer,
-          vendorId,
-          leadId,
-          file.originalname
-        );
-
         const saved = await prisma.leadDocuments.create({
           data: {
             vendor_id: vendorId,
             account_id: accountId,
             lead_id: leadId,
             created_by: userId,
-            doc_og_name: file.originalname,
-            doc_sys_name: sysName,
+            doc_og_name: file.originalName,
+            doc_sys_name: file.sysName,
             doc_type_id: getDocTypeId("Type 29"),
           },
         });
@@ -255,21 +235,14 @@ export class FinalHandoverStageService {
      * ------------------------------------------------------ */
     if (files.final_handover_form_photo) {
       for (const file of files.final_handover_form_photo) {
-        const sysName = await uploadToWasabiFinalHandoverFormPhoto(
-          file.buffer,
-          vendorId,
-          leadId,
-          file.originalname
-        );
-
         const saved = await prisma.leadDocuments.create({
           data: {
             vendor_id: vendorId,
             account_id: accountId,
             lead_id: leadId,
             created_by: userId,
-            doc_og_name: file.originalname,
-            doc_sys_name: sysName,
+            doc_og_name: file.originalName,
+            doc_sys_name: file.sysName,
             doc_type_id: getDocTypeId("Type 30"),
           },
         });
@@ -283,21 +256,14 @@ export class FinalHandoverStageService {
      * ------------------------------------------------------ */
     if (files.qc_document) {
       for (const file of files.qc_document) {
-        const sysName = await uploadToWasabiFinalHandoverQCDocument(
-          file.buffer,
-          vendorId,
-          leadId,
-          file.originalname
-        );
-
         const saved = await prisma.leadDocuments.create({
           data: {
             vendor_id: vendorId,
             account_id: accountId,
             lead_id: leadId,
             created_by: userId,
-            doc_og_name: file.originalname,
-            doc_sys_name: sysName,
+            doc_og_name: file.originalName,
+            doc_sys_name: file.sysName,
             doc_type_id: getDocTypeId("Type 31"),
           },
         });

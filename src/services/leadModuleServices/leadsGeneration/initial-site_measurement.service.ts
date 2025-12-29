@@ -1,5 +1,6 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import wasabi from "../../../utils/wasabiClient";
+import { uploadToWasabiInitialSiteMeasurementFile } from "../../../utils/wasabiClient";
 import { sanitizeFilename } from "../../../utils/fileUtils";
 import {
   CreatePaymentUploadDto,
@@ -23,6 +24,7 @@ import logger from "../../../utils/logger";
 import { Prisma } from "../../../prisma/generated";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { cache } from "../../../utils/cache";
+import fs from "node:fs/promises";
 
 export interface CreateBDISMPaymentUploadDto {
   lead_id: number;
@@ -113,6 +115,49 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
         created_by,
       },
     });
+
+    // 3C) Ensure assignee is in lead chat members
+    let chatRoom = await tx.leadChatRoom.findFirst({
+      where: {
+        lead_id: lead.id,
+        vendor_id: lead.vendor_id,
+      },
+      select: { id: true },
+    });
+
+    if (!chatRoom) {
+      chatRoom = await tx.leadChatRoom.create({
+        data: {
+          lead_id: lead.id,
+          vendor_id: lead.vendor_id,
+        },
+        select: { id: true },
+      });
+    }
+
+    const existingMember = await tx.leadChatMember.findFirst({
+      where: {
+        chat_room_id: chatRoom.id,
+        user_id: assignee_user_id,
+      },
+      select: { id: true },
+    });
+
+    if (existingMember) {
+      logger.info("[SERVICE] LeadChatMember already exists, skipping insert", {
+        lead_id: lead.id,
+        chat_room_id: chatRoom.id,
+        user_id: assignee_user_id,
+      });
+    } else {
+      await tx.leadChatMember.create({
+        data: {
+          chat_room_id: chatRoom.id,
+          user_id: assignee_user_id,
+          added_by: created_by,
+        },
+      });
+    }
 
     // 🧹 Invalidate Dashboard Task Cache (Sales Executive Dashboard)
     await cache.del(
@@ -404,19 +449,65 @@ export class PaymentUploadService {
     data: CreatePaymentUploadDto
   ): Promise<PaymentUploadResponseDto> {
     try {
-      // Start a transaction to ensure data consistency
+      if (!data.pdfFile) {
+        throw new Error("PDF file is mandatory");
+      }
+
+      const response: PaymentUploadResponseDto = {
+        paymentInfo: null,
+        ledgerEntry: null,
+        documentsUploaded: [],
+        message: "Upload completed successfully",
+      };
+
+      const uploadedSitePhotos: { originalName: string; s3Key: string }[] = [];
+      if (data.sitePhotos && data.sitePhotos.length > 0) {
+        for (const photo of data.sitePhotos) {
+          const s3Key = await uploadToWasabiInitialSiteMeasurementFile(
+            photo.path,
+            data.vendor_id,
+            data.lead_id,
+            photo.originalname,
+            photo.mimetype,
+            "current_site_photos"
+          );
+
+          await fs.unlink(photo.path);
+          uploadedSitePhotos.push({
+            originalName: photo.originalname,
+            s3Key,
+          });
+        }
+      }
+
+      const pdfS3Key = await uploadToWasabiInitialSiteMeasurementFile(
+        data.pdfFile.path,
+        data.vendor_id,
+        data.lead_id,
+        data.pdfFile.originalname,
+        data.pdfFile.mimetype,
+        "initial_site_measurement_documents"
+      );
+      await fs.unlink(data.pdfFile.path);
+
+      let paymentImageS3Key: string | null = null;
+      if (data.paymentImageFile) {
+        paymentImageS3Key = await uploadToWasabiInitialSiteMeasurementFile(
+          data.paymentImageFile.path,
+          data.vendor_id,
+          data.lead_id,
+          data.paymentImageFile.originalname,
+          data.paymentImageFile.mimetype,
+          "initial-site-measurement-payment-images"
+        );
+        await fs.unlink(data.paymentImageFile.path);
+      }
+
+      // Start a transaction to ensure data consistency (no file uploads here)
       const result = await prisma.$transaction(
         async (tx: any) => {
-          const response: PaymentUploadResponseDto = {
-            paymentInfo: null,
-            ledgerEntry: null,
-            documentsUploaded: [],
-            message: "Upload completed successfully",
-          };
-
-          // 1. Upload site photos to Wasabi and save to LeadDocuments (doc_type = 1)
-          if (data.sitePhotos && data.sitePhotos.length > 0) {
-            // Validate that document type with id = 1 exists for this vendor
+          // 1. Save site photos to LeadDocuments (doc_type = 2)
+          if (uploadedSitePhotos.length > 0) {
             const sitePhotoDocType = await tx.documentTypeMaster.findFirst({
               where: { vendor_id: data.vendor_id, tag: "Type 2" },
             });
@@ -427,27 +518,11 @@ export class PaymentUploadService {
               );
             }
 
-            for (const photo of data.sitePhotos) {
-              const sanitizedFilename = sanitizeFilename(photo.originalname);
-              const s3Key = `current_site_photos/${data.vendor_id}/${
-                data.lead_id
-              }/${Date.now()}-${sanitizedFilename}`;
-
-              // Upload to Wasabi
-              await wasabi.send(
-                new PutObjectCommand({
-                  Bucket: process.env.WASABI_BUCKET_NAME || "your-bucket-name",
-                  Key: s3Key,
-                  Body: photo.buffer,
-                  ContentType: photo.mimetype,
-                })
-              );
-
-              // Save document info to database
+            for (const uploaded of uploadedSitePhotos) {
               const document = await tx.leadDocuments.create({
                 data: {
-                  doc_og_name: photo.originalname,
-                  doc_sys_name: s3Key,
+                  doc_og_name: uploaded.originalName,
+                  doc_sys_name: uploaded.s3Key,
                   created_by: data.created_by,
                   doc_type_id: sitePhotoDocType.id,
                   account_id: data.account_id,
@@ -459,18 +534,13 @@ export class PaymentUploadService {
               response.documentsUploaded.push({
                 id: document.id,
                 type: "current_site_photo",
-                originalName: photo.originalname,
-                s3Key: s3Key,
+                originalName: uploaded.originalName,
+                s3Key: uploaded.s3Key,
               });
             }
           }
 
-          // 2. Upload PDF file (doc_type = 3) - Mandatory field
-          if (!data.pdfFile) {
-            throw new Error("PDF file is mandatory");
-          }
-
-          // Validate that document type with id = 3 exists for this vendor
+          // 2. Save PDF document
           const pdfDocType = await tx.documentTypeMaster.findFirst({
             where: { vendor_id: data.vendor_id, tag: "Type 3" },
           });
@@ -481,28 +551,12 @@ export class PaymentUploadService {
             );
           }
 
-          const sanitizedPdfName = sanitizeFilename(data.pdfFile.originalname);
-          const pdfS3Key = `initial_site_measurement_documents/${
-            data.vendor_id
-          }/${data.lead_id}/${Date.now()}-${sanitizedPdfName}`;
-
-          // Upload PDF to Wasabi
-          await wasabi.send(
-            new PutObjectCommand({
-              Bucket: process.env.WASABI_BUCKET_NAME || "your-bucket-name",
-              Key: pdfS3Key,
-              Body: data.pdfFile.buffer,
-              ContentType: data.pdfFile.mimetype,
-            })
-          );
-
-          // Create document entry using the document type id
           const pdfDocument = await tx.leadDocuments.create({
             data: {
-              doc_og_name: data.pdfFile.originalname,
+              doc_og_name: data.pdfFile!.originalname,
               doc_sys_name: pdfS3Key,
               created_by: data.created_by,
-              doc_type_id: pdfDocType.id, // PDF document type ID
+              doc_type_id: pdfDocType.id,
               account_id: data.account_id,
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
@@ -512,20 +566,13 @@ export class PaymentUploadService {
           response.documentsUploaded.push({
             id: pdfDocument.id,
             type: "pdf_upload",
-            originalName: data.pdfFile.originalname,
+            originalName: data.pdfFile!.originalname,
             s3Key: pdfS3Key,
           });
 
           // 3. Handle payment image file (optional)
           let paymentFileId: number | null = null;
-          if (data.paymentImageFile) {
-            const sanitizedPaymentImageName = sanitizeFilename(
-              data.paymentImageFile.originalname
-            );
-            const paymentImageS3Key = `initial-site-measurement-payment-images/${
-              data.vendor_id
-            }/${data.lead_id}/${Date.now()}-${sanitizedPaymentImageName}`;
-
+          if (paymentImageS3Key) {
             const paymentDocType = await tx.documentTypeMaster.findFirst({
               where: { vendor_id: data.vendor_id, tag: "Type 4" },
             });
@@ -536,20 +583,9 @@ export class PaymentUploadService {
               );
             }
 
-            // Upload payment image to Wasabi
-            await wasabi.send(
-              new PutObjectCommand({
-                Bucket: process.env.WASABI_BUCKET_NAME || "your-bucket-name",
-                Key: paymentImageS3Key,
-                Body: data.paymentImageFile.buffer,
-                ContentType: data.paymentImageFile.mimetype,
-              })
-            );
-
-            // Save document info to database with doc_type_id = 3 (hardcoded for payments)
             const paymentDocument = await tx.leadDocuments.create({
               data: {
-                doc_og_name: data.paymentImageFile.originalname,
+                doc_og_name: data.paymentImageFile!.originalname,
                 doc_sys_name: paymentImageS3Key,
                 created_by: data.created_by,
                 doc_type_id: paymentDocType.id,
@@ -564,7 +600,7 @@ export class PaymentUploadService {
             response.documentsUploaded.push({
               id: paymentDocument.id,
               type: "initial_site_measurement_payment_details",
-              originalName: data.paymentImageFile.originalname,
+              originalName: data.paymentImageFile!.originalname,
               s3Key: paymentImageS3Key,
             });
           }
@@ -779,19 +815,66 @@ export class PaymentUploadService {
     data: CreateBDISMPaymentUploadDto
   ): Promise<PaymentUploadResponseDto> {
     try {
+      if (!data.pdfFile) {
+        throw new Error("BD-ISM PDF document is mandatory");
+      }
+
+      const response: PaymentUploadResponseDto = {
+        paymentInfo: null,
+        ledgerEntry: null,
+        documentsUploaded: [],
+        message: "Booking Done – ISM upload completed successfully",
+      };
+
+      const uploadedSitePhotos: { originalName: string; s3Key: string }[] = [];
+      if (data.sitePhotos?.length) {
+        for (const photo of data.sitePhotos) {
+          const s3Key = await uploadToWasabiInitialSiteMeasurementFile(
+            photo.path,
+            data.vendor_id,
+            data.lead_id,
+            photo.originalname,
+            photo.mimetype,
+            "bd_ism_current_site_photos"
+          );
+
+          await fs.unlink(photo.path);
+          uploadedSitePhotos.push({
+            originalName: photo.originalname,
+            s3Key,
+          });
+        }
+      }
+
+      const pdfKey = await uploadToWasabiInitialSiteMeasurementFile(
+        data.pdfFile.path,
+        data.vendor_id,
+        data.lead_id,
+        data.pdfFile.originalname,
+        data.pdfFile.mimetype,
+        "bd_initial_site_measurement_documents"
+      );
+      await fs.unlink(data.pdfFile.path);
+
+      let paymentKey: string | null = null;
+      if (data.paymentImageFile) {
+        paymentKey = await uploadToWasabiInitialSiteMeasurementFile(
+          data.paymentImageFile.path,
+          data.vendor_id,
+          data.lead_id,
+          data.paymentImageFile.originalname,
+          data.paymentImageFile.mimetype,
+          "bd_initial-site-measurement-payment-images"
+        );
+        await fs.unlink(data.paymentImageFile.path);
+      }
+
       return await prisma.$transaction(
         async (tx) => {
-          const response: PaymentUploadResponseDto = {
-            paymentInfo: null,
-            ledgerEntry: null,
-            documentsUploaded: [],
-            message: "Booking Done – ISM upload completed successfully",
-          };
-
           /* ----------------------------------
              1️⃣ Current Site Photos
           ---------------------------------- */
-          if (data.sitePhotos?.length) {
+          if (uploadedSitePhotos.length) {
             const docType = await tx.documentTypeMaster.findFirst({
               where: { vendor_id: data.vendor_id, tag: "Type 33" },
             });
@@ -800,25 +883,11 @@ export class PaymentUploadService {
               throw new Error("Document type for BD-ISM site photos not found");
             }
 
-            for (const photo of data.sitePhotos) {
-              const fileName = sanitizeFilename(photo.originalname);
-              const s3Key = `bd_ism_current_site_photos/${data.vendor_id}/${
-                data.lead_id
-              }/${Date.now()}-${fileName}`;
-
-              await wasabi.send(
-                new PutObjectCommand({
-                  Bucket: process.env.WASABI_BUCKET_NAME!,
-                  Key: s3Key,
-                  Body: photo.buffer,
-                  ContentType: photo.mimetype,
-                })
-              );
-
+            for (const uploaded of uploadedSitePhotos) {
               const doc = await tx.leadDocuments.create({
                 data: {
-                  doc_og_name: photo.originalname,
-                  doc_sys_name: s3Key,
+                  doc_og_name: uploaded.originalName,
+                  doc_sys_name: uploaded.s3Key,
                   doc_type_id: docType.id,
                   created_by: data.created_by,
                   lead_id: data.lead_id,
@@ -830,8 +899,8 @@ export class PaymentUploadService {
               response.documentsUploaded.push({
                 id: doc.id,
                 type: "bd_ism_current_site_photo",
-                originalName: photo.originalname,
-                s3Key,
+                originalName: uploaded.originalName,
+                s3Key: uploaded.s3Key,
               });
             }
           }
@@ -839,10 +908,6 @@ export class PaymentUploadService {
           /* ----------------------------------
              2️⃣ PDF Upload (MANDATORY)
           ---------------------------------- */
-          if (!data.pdfFile) {
-            throw new Error("BD-ISM PDF document is mandatory");
-          }
-
           const pdfType = await tx.documentTypeMaster.findFirst({
             where: { vendor_id: data.vendor_id, tag: "Type 34" },
           });
@@ -851,24 +916,9 @@ export class PaymentUploadService {
             throw new Error("Document type for BD-ISM PDF not found");
           }
 
-          const pdfKey = `bd_initial_site_measurement_documents/${
-            data.vendor_id
-          }/${data.lead_id}/${Date.now()}-${sanitizeFilename(
-            data.pdfFile.originalname
-          )}`;
-
-          await wasabi.send(
-            new PutObjectCommand({
-              Bucket: process.env.WASABI_BUCKET_NAME!,
-              Key: pdfKey,
-              Body: data.pdfFile.buffer,
-              ContentType: data.pdfFile.mimetype,
-            })
-          );
-
           const pdfDoc = await tx.leadDocuments.create({
             data: {
-              doc_og_name: data.pdfFile.originalname,
+              doc_og_name: data.pdfFile!.originalname,
               doc_sys_name: pdfKey,
               doc_type_id: pdfType.id,
               created_by: data.created_by,
@@ -881,7 +931,7 @@ export class PaymentUploadService {
           response.documentsUploaded.push({
             id: pdfDoc.id,
             type: "bd_ism_pdf",
-            originalName: data.pdfFile.originalname,
+            originalName: data.pdfFile!.originalname,
             s3Key: pdfKey,
           });
 
@@ -890,7 +940,7 @@ export class PaymentUploadService {
           ---------------------------------- */
           let paymentFileId: number | null = null;
 
-          if (data.paymentImageFile) {
+          if (paymentKey) {
             const payType = await tx.documentTypeMaster.findFirst({
               where: { vendor_id: data.vendor_id, tag: "Type 35" },
             });
@@ -899,24 +949,9 @@ export class PaymentUploadService {
               throw new Error("Payment document type not found");
             }
 
-            const paymentKey = `bd_initial-site-measurement-payment-images/${
-              data.vendor_id
-            }/${data.lead_id}/${Date.now()}-${sanitizeFilename(
-              data.paymentImageFile.originalname
-            )}`;
-
-            await wasabi.send(
-              new PutObjectCommand({
-                Bucket: process.env.WASABI_BUCKET_NAME!,
-                Key: paymentKey,
-                Body: data.paymentImageFile.buffer,
-                ContentType: data.paymentImageFile.mimetype,
-              })
-            );
-
             const payDoc = await tx.leadDocuments.create({
               data: {
-                doc_og_name: data.paymentImageFile.originalname,
+                doc_og_name: data.paymentImageFile!.originalname,
                 doc_sys_name: paymentKey,
                 doc_type_id: payType.id,
                 created_by: data.created_by,
@@ -931,7 +966,7 @@ export class PaymentUploadService {
             response.documentsUploaded.push({
               id: payDoc.id,
               type: "bd_ism_payment_image",
-              originalName: data.paymentImageFile.originalname,
+              originalName: data.paymentImageFile!.originalname,
               s3Key: paymentKey,
             });
           }

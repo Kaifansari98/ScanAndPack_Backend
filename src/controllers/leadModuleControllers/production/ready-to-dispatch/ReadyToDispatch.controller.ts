@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { ReadyToDispatchService } from "../../../../services/production/ready-to-dispatch/ReadyToDispatch.service";
+import { uploadToWasabiCurrentSitePhotosReadyToDispatchFile } from "../../../../utils/wasabiClient";
 import logger from "../../../../utils/logger";
+import fs from "node:fs/promises";
 
 const service = new ReadyToDispatchService();
 
@@ -67,12 +69,31 @@ export class ReadyToDispatchController {
         });
       }
 
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+      for (const file of files) {
+        const sysName = await uploadToWasabiCurrentSitePhotosReadyToDispatchFile(
+          file.path,
+          Number(vendorId),
+          Number(leadId),
+          file.originalname,
+          file.mimetype
+        );
+
+        await fs.unlink(file.path);
+
+        uploadedFiles.push({
+          originalName: file.originalname,
+          sysName,
+        });
+      }
+
       const uploaded = await service.uploadCurrentSitePhotosAtReadyToDispatch(
         Number(vendorId),
         Number(leadId),
         account_id ? Number(account_id) : null,
         Number(created_by),
-        files
+        uploadedFiles
       );
 
       return res.status(200).json({

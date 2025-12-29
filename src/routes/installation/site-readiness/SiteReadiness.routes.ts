@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { SiteReadinessController } from "../../../controllers/installation/site-readiness/SiteReadiness.controller";
-import { upload } from "../../../middlewares/uploadWasabi";
+import { uploadSiteReadinessPhotos } from "../../../middlewares/uploadWasabi";
 
 const siteReadinessRoutes = Router();
 const controller = new SiteReadinessController();
@@ -32,7 +32,7 @@ siteReadinessRoutes.put(
 // ✅ POST → Upload Current Site Photos at Site Readiness
 siteReadinessRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-current-site-photos",
-  upload.array("files", 10), // accept up to 10 images
+  uploadSiteReadinessPhotos.array("files", 10), // accept up to 10 images
   controller.uploadCurrentSitePhotosAtSiteReadiness
 );
 

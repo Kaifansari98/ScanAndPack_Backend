@@ -52,7 +52,7 @@ export class LeadController {
     logger.info("[CONTROLLER] createLead called");
 
     try {
-      const files = (req.files as Express.MulterS3.File[]) || [];
+      const files = (req.files as Express.Multer.File[]) || [];
       const { vendor_id, is_draft } = req.body;
       const draftMode = String(is_draft) === "true";
 

@@ -1,11 +1,12 @@
 import { prisma } from "../../../prisma/client";
 import {
   generateSignedUrl,
-  uploadToWasabi,
   uploadToWasabiMeetingDocs,
+  uploadToWasabiDesignQuotationFile,
 } from "../../../utils/wasabiClient";
 import { z } from "zod";
 import { Prisma } from "../../../prisma/generated";
+import fs from "node:fs/promises";
 
 const editDesignMeetingSchema = z.object({
   meetingId: z.number().int().positive(),
@@ -372,12 +373,30 @@ export class DesigingStage {
   }
 
   public static async uploadQuotation(data: {
-    fileBuffer: Buffer | Buffer[];
-    originalName: string | string[];
+    files: Express.Multer.File[];
     vendorId: number;
     leadId: number;
     userId: number;
   }) {
+    const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+    for (const file of data.files) {
+      const sysName = await uploadToWasabiDesignQuotationFile(
+        file.path,
+        data.vendorId,
+        data.leadId,
+        file.originalname,
+        file.mimetype
+      );
+
+      await fs.unlink(file.path);
+
+      uploadedFiles.push({
+        originalName: file.originalname,
+        sysName,
+      });
+    }
+
     return prisma.$transaction(async (tx) => {
       // 0️⃣ Fetch lead → derive account_id
       const lead = await tx.leadMaster.findFirst({
@@ -401,31 +420,6 @@ export class DesigingStage {
 
       const accountId = lead.account_id; // ✅ backend-owned
 
-      // 1️⃣ Normalize files
-      const files =
-        Array.isArray(data.fileBuffer) && Array.isArray(data.originalName)
-          ? data.fileBuffer.map((buf, idx) => ({
-              buffer: buf,
-              originalName: data.originalName[idx] ?? `file_${idx + 1}`,
-            }))
-          : Array.isArray(data.fileBuffer)
-          ? data.fileBuffer.map((buf, idx) => ({
-              buffer: buf,
-              originalName:
-                typeof data.originalName === "string"
-                  ? data.originalName
-                  : data.originalName[idx] ?? `file_${idx + 1}`,
-            }))
-          : [
-              {
-                buffer: data.fileBuffer as Buffer,
-                originalName:
-                  typeof data.originalName === "string"
-                    ? data.originalName
-                    : data.originalName[0] ?? "file_1",
-              },
-            ];
-
       // 2️⃣ Get quotation doc type
       const quotationDocType = await tx.documentTypeMaster.findFirst({
         where: {
@@ -443,18 +437,11 @@ export class DesigingStage {
       const uploadedDocs: any[] = [];
 
       // 3️⃣ Upload + LeadDocuments
-      for (const file of files) {
-        const sysName = await uploadToWasabi(
-          file.buffer,
-          data.vendorId,
-          data.leadId,
-          file.originalName
-        );
-
+      for (const file of uploadedFiles) {
         const document = await tx.leadDocuments.create({
           data: {
             doc_og_name: file.originalName,
-            doc_sys_name: sysName,
+            doc_sys_name: file.sysName,
             vendor_id: data.vendorId,
             lead_id: data.leadId,
             account_id: accountId,

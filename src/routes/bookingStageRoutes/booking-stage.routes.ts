@@ -1,16 +1,16 @@
 import { Router } from "express";
-import multer from "multer";
+import {
+  uploadBookingStageFiles,
+  uploadCSPBookingFiles,
+} from "../../middlewares/uploadWasabi";
 import { BookingStageController } from "../../controllers/leadModuleControllers/bookingStage/bookingStage.controller";
 
-const upload = multer();
 const bookingStageController = new BookingStageController();
 const bookingStageRouter = Router();
 
-const storage = multer.memoryStorage();
-
 bookingStageRouter.post(
   "/onboard",
-  upload.fields([
+  uploadBookingStageFiles.fields([
     { name: "final_documents", maxCount: 10 },
     { name: "booking_payment_file", maxCount: 1 },
   ]),
@@ -19,7 +19,7 @@ bookingStageRouter.post(
 
 bookingStageRouter.post(
   "/add-more-files",
-  upload.fields([{ name: "final_documents", maxCount: 10 }]),
+  uploadBookingStageFiles.fields([{ name: "final_documents", maxCount: 10 }]),
   bookingStageController.addBookingStageFiles
 );
 
@@ -74,7 +74,7 @@ bookingStageRouter.put(
 
 bookingStageRouter.post(
   "/add-additional-payment",
-  upload.fields([{ name: "payment_file", maxCount: 1 }]),
+  uploadBookingStageFiles.fields([{ name: "payment_file", maxCount: 1 }]),
   bookingStageController.addPayment
 );
 
@@ -83,24 +83,7 @@ bookingStageRouter.get(
   bookingStageController.getPayments
 );
 
-const uploadCSPBooking = multer({
-  storage,
-  limits: {
-    fileSize: 10 * 1024 * 1024, // 10MB
-  },
-  fileFilter: (req, file, cb) => {
-    const allowed = [
-      "image/jpeg",
-      "image/jpg",
-      "image/png",
-      "image/gif",
-    ];
-    if (allowed.includes(file.mimetype)) cb(null, true);
-    else cb(new Error("Only image files are allowed"));
-  },
-});
-
-const uploadFinalMeasurement = uploadCSPBooking.fields([
+const uploadFinalMeasurement = uploadCSPBookingFiles.fields([
   { name: "current_site_photos", maxCount: 10 },
 ]);
 

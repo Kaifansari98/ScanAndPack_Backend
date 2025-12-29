@@ -3,8 +3,16 @@ import { BookingStageService } from "../../../services/bookingStage/bookingStage
 import {
   AddPaymentDto,
   CreateBookingStageDto,
+  UploadedFileRef,
 } from "../../../types/booking-stage.dto";
 import logger, { log } from "../../../utils/logger";
+import {
+  uploadToWasabiAdditionalPaymentFile,
+  uploadToWasabiBookingFinalDocumentFile,
+  uploadToWasabiBookingPaymentDetailsFile,
+  uploadToWasabiCSPBookingPhotoFile,
+} from "../../../utils/wasabiClient";
+import fs from "node:fs/promises";
 
 export class BookingStageController {
   private bookingStageService = new BookingStageService();
@@ -63,6 +71,44 @@ export class BookingStageController {
         return;
       }
 
+      const uploadedFinalDocuments: UploadedFileRef[] = [];
+
+      for (const file of finalDocuments) {
+        const sysName = await uploadToWasabiBookingFinalDocumentFile(
+          file.path,
+          Number(vendor_id),
+          Number(lead_id),
+          file.originalname,
+          file.mimetype
+        );
+
+        await fs.unlink(file.path);
+
+        uploadedFinalDocuments.push({
+          originalName: file.originalname,
+          sysName,
+        });
+      }
+
+      let uploadedPaymentFile: UploadedFileRef | undefined;
+
+      if (bookingAmountPaymentDetailsFile) {
+        const sysName = await uploadToWasabiBookingPaymentDetailsFile(
+          bookingAmountPaymentDetailsFile.path,
+          Number(vendor_id),
+          Number(lead_id),
+          bookingAmountPaymentDetailsFile.originalname,
+          bookingAmountPaymentDetailsFile.mimetype
+        );
+
+        await fs.unlink(bookingAmountPaymentDetailsFile.path);
+
+        uploadedPaymentFile = {
+          originalName: bookingAmountPaymentDetailsFile.originalname,
+          sysName,
+        };
+      }
+
       const dto: CreateBookingStageDto = {
         lead_id: parseInt(lead_id),
         account_id: parseInt(account_id),
@@ -74,8 +120,8 @@ export class BookingStageController {
         bookingAmountPaymentDetailsText,
         finalBookingAmount: parseFloat(finalBookingAmount),
         siteSupervisorId: parseInt(siteSupervisorId),
-        finalDocuments,
-        bookingAmountPaymentDetailsFile,
+        finalDocuments: uploadedFinalDocuments,
+        bookingAmountPaymentDetailsFile: uploadedPaymentFile,
       };
 
       const result = await this.bookingStageService.createBookingStage(dto);
@@ -119,12 +165,31 @@ export class BookingStageController {
         return;
       }
 
+      const uploadedFinalDocuments: UploadedFileRef[] = [];
+
+      for (const file of finalDocuments) {
+        const sysName = await uploadToWasabiBookingFinalDocumentFile(
+          file.path,
+          Number(vendor_id),
+          Number(lead_id),
+          file.originalname,
+          file.mimetype
+        );
+
+        await fs.unlink(file.path);
+
+        uploadedFinalDocuments.push({
+          originalName: file.originalname,
+          sysName,
+        });
+      }
+
       const dto = {
         lead_id: parseInt(lead_id),
         account_id: parseInt(account_id),
         vendor_id: parseInt(vendor_id),
         created_by: parseInt(created_by),
-        finalDocuments,
+        finalDocuments: uploadedFinalDocuments,
       };
 
       const result = await this.bookingStageService.addBookingStageFiles(dto);
@@ -439,6 +504,25 @@ export class BookingStageController {
       const files = req.files as { [fieldname: string]: Express.Multer.File[] };
       const payment_file = files?.payment_file?.[0];
 
+      let uploadedPaymentFile: UploadedFileRef | undefined;
+
+      if (payment_file) {
+        const sysName = await uploadToWasabiAdditionalPaymentFile(
+          payment_file.path,
+          Number(vendor_id),
+          Number(lead_id),
+          payment_file.originalname,
+          payment_file.mimetype
+        );
+
+        await fs.unlink(payment_file.path);
+
+        uploadedPaymentFile = {
+          originalName: payment_file.originalname,
+          sysName,
+        };
+      }
+
       const dto: AddPaymentDto = {
         lead_id: parseInt(lead_id),
         account_id: parseInt(account_id),
@@ -448,7 +532,7 @@ export class BookingStageController {
         amount: parseFloat(amount),
         payment_text,
         payment_date,
-        payment_file,
+        payment_file: uploadedPaymentFile,
       };
 
       const result = await this.bookingStageService.addPayment(dto);
@@ -687,12 +771,31 @@ export class BookingStageController {
         });
       }
 
+      const uploadedSitePhotos: UploadedFileRef[] = [];
+
+      for (const photo of sitePhotos) {
+        const sysName = await uploadToWasabiCSPBookingPhotoFile(
+          photo.path,
+          Number(vendor_id),
+          Number(lead_id),
+          photo.originalname,
+          photo.mimetype
+        );
+
+        await fs.unlink(photo.path);
+
+        uploadedSitePhotos.push({
+          originalName: photo.originalname,
+          sysName,
+        });
+      }
+
       const result = await this.bookingStageService.uploadCSPBookingService({
         lead_id: +lead_id,
         account_id: +account_id,
         vendor_id: +vendor_id,
         created_by: +created_by,
-        sitePhotos,
+        sitePhotos: uploadedSitePhotos,
       });
 
       res.status(201).json({

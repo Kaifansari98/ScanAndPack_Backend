@@ -1,14 +1,13 @@
 import { prisma } from "../../../prisma/client";
-import { uploadToWasabClientDocumentation } from "../../../utils/wasabiClient";
-import { sanitizeFilename } from "../../../utils/sanitizeFilename";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { Prisma } from "../../../prisma/generated";
 import logger from "../../../utils/logger";
-import type { Express } from "express";
 
 export type DocTypeTag = "Type 11" | "Type 12";
 
-export interface CustomMulterFile extends Express.Multer.File {
+export interface CustomMulterFile {
+  originalName: string;
+  sysName: string;
   docTypeTag: DocTypeTag;
 }
 
@@ -22,41 +21,7 @@ export interface ClientDocumentationDto {
 
 export class ClientDocumentationService {
   public async createClientDocumentationStage(data: ClientDocumentationDto) {
-    // ✅ Step 1: Upload files to Wasabi (outside transaction)
-    const uploadedDocs: {
-      originalname: string;
-      sysName: string;
-      docTypeTag: "Type 11" | "Type 12";
-    }[] = [];
-
-    for (const doc of data.documents) {
-      const sanitizedName = sanitizeFilename(doc.originalname);
-
-      // Select folder based on docTypeTag
-      let folder = "client_documentations";
-      if (doc.docTypeTag === "Type 11") {
-        folder = "client_documentations/client_documentations_ppt";
-      } else if (doc.docTypeTag === "Type 12") {
-        folder = "client_documentations/client_documentations_pytha";
-      }
-
-      // Upload to Wasabi
-      const sysName = await uploadToWasabClientDocumentation(
-        doc.buffer,
-        data.vendor_id,
-        data.lead_id,
-        sanitizedName,
-        folder
-      );
-
-      uploadedDocs.push({
-        originalname: doc.originalname,
-        sysName,
-        docTypeTag: doc.docTypeTag,
-      });
-    }
-
-    // ✅ Step 2: Run DB operations inside a short transaction
+    // ✅ Step 1: Run DB operations inside a short transaction
     return await prisma.$transaction(async (tx) => {
       const response: any = {
         documents: [],
@@ -64,21 +29,21 @@ export class ClientDocumentationService {
       };
 
       // Insert lead documents
-      for (const uploaded of uploadedDocs) {
+      for (const doc of data.documents) {
         const docType = await tx.documentTypeMaster.findFirst({
-          where: { vendor_id: data.vendor_id, tag: uploaded.docTypeTag },
+          where: { vendor_id: data.vendor_id, tag: doc.docTypeTag },
         });
 
         if (!docType) {
           throw new Error(
-            `Document type ${uploaded.docTypeTag} not found for vendor ${data.vendor_id}`
+            `Document type ${doc.docTypeTag} not found for vendor ${data.vendor_id}`
           );
         }
 
         const docEntry = await tx.leadDocuments.create({
           data: {
-            doc_og_name: uploaded.originalname,
-            doc_sys_name: uploaded.sysName,
+            doc_og_name: doc.originalName,
+            doc_sys_name: doc.sysName,
             created_by: data.created_by,
             doc_type_id: docType.id,
             account_id: data.account_id,
@@ -261,31 +226,6 @@ export class ClientDocumentationService {
       docTypeTag: "Type 11" | "Type 12";
     }[] = [];
 
-    for (const doc of data.documents) {
-      const sanitizedName = sanitizeFilename(doc.originalname);
-
-      let folder = "client_documentations";
-      if (doc.docTypeTag === "Type 11") {
-        folder = "client_documentations/client_documentations_ppt";
-      } else if (doc.docTypeTag === "Type 12") {
-        folder = "client_documentations/client_documentations_pytha";
-      }
-
-      const sysName = await uploadToWasabClientDocumentation(
-        doc.buffer,
-        data.vendor_id,
-        data.lead_id,
-        sanitizedName,
-        folder
-      );
-
-      uploadedDocs.push({
-        originalname: doc.originalname,
-        sysName,
-        docTypeTag: doc.docTypeTag,
-      });
-    }
-
     // DB Transaction
     return await prisma.$transaction(async (tx) => {
       const response: any = {
@@ -293,15 +233,15 @@ export class ClientDocumentationService {
         message: "Additional client documentation uploaded successfully",
       };
 
-      for (const uploaded of uploadedDocs) {
+      for (const doc of data.documents) {
         const docType = await tx.documentTypeMaster.findFirst({
-          where: { vendor_id: data.vendor_id, tag: uploaded.docTypeTag },
+          where: { vendor_id: data.vendor_id, tag: doc.docTypeTag },
         });
 
         const docEntry = await tx.leadDocuments.create({
           data: {
-            doc_og_name: uploaded.originalname,
-            doc_sys_name: uploaded.sysName,
+            doc_og_name: doc.originalName,
+            doc_sys_name: doc.sysName,
             created_by: data.created_by,
             doc_type_id: docType?.id!,
             account_id: data.account_id,

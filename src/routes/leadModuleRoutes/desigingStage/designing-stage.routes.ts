@@ -5,7 +5,8 @@ import {
   updateLeadStatusValidation,
   updateDesignSelectionValidation,
 } from "../../../validations/designing-stage.validation";
-import { upload, uploadDesigns, uploadMeetingDocs } from "../../../middlewares/uploadWasabi";
+import { upload, uploadDesignMeetingFiles, uploadDesigns, uploadMeetingDocs } from "../../../middlewares/uploadWasabi";
+import { uploadDesignQuotationFiles } from "../../../utils/wasabiClient";
 
 const DesigningStageRouter = Router();
 
@@ -25,7 +26,7 @@ DesigningStageRouter.get(
 
 DesigningStageRouter.post(
   "/upload-quotation",
-  upload.array("files"), // file field in form-data
+  uploadDesignQuotationFiles.array("files", 10), // file field in form-data
   (req, res) => DesigingStageController.upload(req, res)
 );
 
@@ -33,7 +34,7 @@ DesigningStageRouter.post(
 // Form-data: leadId, vendorId, userId, accountId, date, desc, files[]
 DesigningStageRouter.post(
   "/design-meeting",
-  upload.array("files"), // multiple files
+  uploadDesignMeetingFiles.array("files"), // multiple files
   DesigingStageController.addDesignMeeting
 );
 

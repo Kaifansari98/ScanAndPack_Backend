@@ -1,5 +1,6 @@
 import { Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
+import logger from "../../../utils/logger";
 
 export class TechCheckService {
   // ✅ Approve Tech Check
@@ -45,6 +46,49 @@ export class TechCheckService {
           created_by: userId,
         },
       });
+
+      // ✅ Ensure assigned backend user is in lead chat members
+      let chatRoom = await tx.leadChatRoom.findFirst({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+        },
+        select: { id: true },
+      });
+
+      if (!chatRoom) {
+        chatRoom = await tx.leadChatRoom.create({
+          data: {
+            lead_id: leadId,
+            vendor_id: vendorId,
+          },
+          select: { id: true },
+        });
+      }
+
+      const existingMember = await tx.leadChatMember.findFirst({
+        where: {
+          chat_room_id: chatRoom.id,
+          user_id: assignToUserId,
+        },
+        select: { id: true },
+      });
+
+      if (existingMember) {
+        logger.info("[SERVICE] LeadChatMember already exists, skipping insert", {
+          lead_id: leadId,
+          chat_room_id: chatRoom.id,
+          user_id: assignToUserId,
+        });
+      } else {
+        await tx.leadChatMember.create({
+          data: {
+            chat_room_id: chatRoom.id,
+            user_id: assignToUserId,
+            added_by: userId,
+          },
+        });
+      }
 
       // 4️⃣ Log status change
       await tx.leadStatusLogs.create({

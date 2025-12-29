@@ -3,9 +3,8 @@ import {
   AddPaymentDto,
   CreateBookingStageDto,
 } from "../../types/booking-stage.dto";
-import { GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
+import { GetObjectCommand } from "@aws-sdk/client-s3";
 import wasabi, { generateSignedUrl } from "../../utils/wasabiClient";
-import { sanitizeFilename } from "../../utils/sanitizeFilename";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import logger from "../../utils/logger";
 import { Prisma, SupervisorStatus } from "../../prisma/generated";
@@ -134,24 +133,10 @@ export class BookingStageService {
         }
 
         for (const file of data.finalDocuments) {
-          const sanitizedName = sanitizeFilename(file.originalname);
-          const s3Key = `final-documents-booking/${data.vendor_id}/${
-            data.lead_id
-          }/${Date.now()}-${sanitizedName}`;
-
-          await wasabi.send(
-            new PutObjectCommand({
-              Bucket: process.env.WASABI_BUCKET_NAME!,
-              Key: s3Key,
-              Body: file.buffer,
-              ContentType: file.mimetype,
-            })
-          );
-
           const document = await tx.leadDocuments.create({
             data: {
-              doc_og_name: file.originalname,
-              doc_sys_name: s3Key,
+              doc_og_name: file.originalName,
+              doc_sys_name: file.sysName,
               created_by: data.created_by,
               doc_type_id: finalDocType.id,
               account_id: data.account_id,
@@ -163,8 +148,8 @@ export class BookingStageService {
           response.documentsUploaded.push({
             id: document.id,
             type: "final_document",
-            originalName: file.originalname,
-            s3Key,
+            originalName: file.originalName,
+            s3Key: file.sysName,
           });
         }
 
@@ -195,26 +180,10 @@ export class BookingStageService {
         // 3. Booking Amount Payment Details
         let paymentFileId: number | null = null;
         if (data.bookingAmountPaymentDetailsFile) {
-          const sanitizedName = sanitizeFilename(
-            data.bookingAmountPaymentDetailsFile.originalname
-          );
-          const s3Key = `booking-amount-payment-details/${data.vendor_id}/${
-            data.lead_id
-          }/${Date.now()}-${sanitizedName}`;
-
-          await wasabi.send(
-            new PutObjectCommand({
-              Bucket: process.env.WASABI_BUCKET_NAME!,
-              Key: s3Key,
-              Body: data.bookingAmountPaymentDetailsFile.buffer,
-              ContentType: data.bookingAmountPaymentDetailsFile.mimetype,
-            })
-          );
-
           const document = await tx.leadDocuments.create({
             data: {
-              doc_og_name: data.bookingAmountPaymentDetailsFile.originalname,
-              doc_sys_name: s3Key,
+              doc_og_name: data.bookingAmountPaymentDetailsFile.originalName,
+              doc_sys_name: data.bookingAmountPaymentDetailsFile.sysName,
               created_by: data.created_by,
               doc_type_id: finalDocType.id,
               account_id: data.account_id,
@@ -301,6 +270,50 @@ export class BookingStageService {
             created_by: data.created_by,
           },
         });
+
+        // ✅ Ensure site supervisor is in lead chat members
+        let chatRoom = await tx.leadChatRoom.findFirst({
+          where: {
+            lead_id: data.lead_id,
+            vendor_id: data.vendor_id,
+          },
+          select: { id: true },
+        });
+
+        if (!chatRoom) {
+          chatRoom = await tx.leadChatRoom.create({
+            data: {
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+              created_by: data.created_by,
+            },
+            select: { id: true },
+          });
+        }
+
+        const existingMember = await tx.leadChatMember.findFirst({
+          where: {
+            chat_room_id: chatRoom.id,
+            user_id: data.siteSupervisorId,
+          },
+          select: { id: true },
+        });
+
+        if (existingMember) {
+          logger.info("[SERVICE] LeadChatMember already exists, skipping insert", {
+            lead_id: data.lead_id,
+            chat_room_id: chatRoom.id,
+            user_id: data.siteSupervisorId,
+          });
+        } else {
+          await tx.leadChatMember.create({
+            data: {
+              chat_room_id: chatRoom.id,
+              user_id: data.siteSupervisorId,
+              added_by: data.created_by,
+            },
+          });
+        }
 
         // -----------------------------
         // ⭐ 7️⃣ LeadStatusLogs (NEW)
@@ -390,14 +403,14 @@ export class BookingStageService {
     account_id: number;
     vendor_id: number;
     created_by: number;
-    finalDocuments?: Express.Multer.File[];
+    finalDocuments?: { originalName: string; sysName: string }[];
   }) {
     return await prisma.$transaction(async (tx: any) => {
       const response: any = {
         documentsUploaded: [],
       };
 
-      // 1️⃣ Upload Final Documents
+      // 1️⃣ Save Final Documents
       if (data.finalDocuments && data.finalDocuments.length > 0) {
         const finalDocType = await tx.documentTypeMaster.findFirst({
           where: { vendor_id: data.vendor_id, tag: "Type 8" }, // Final Documents
@@ -407,26 +420,11 @@ export class BookingStageService {
           throw new Error("Final Document type not found for this vendor");
 
         for (const file of data.finalDocuments) {
-          const sanitizedName = sanitizeFilename(file.originalname);
-          const s3Key = `final-documents-booking/${data.vendor_id}/${
-            data.lead_id
-          }/${Date.now()}-${sanitizedName}`;
-
-          // Upload to Wasabi
-          await wasabi.send(
-            new PutObjectCommand({
-              Bucket: process.env.WASABI_BUCKET_NAME!,
-              Key: s3Key,
-              Body: file.buffer,
-              ContentType: file.mimetype,
-            })
-          );
-
           // Create LeadDocuments entry
           const document = await tx.leadDocuments.create({
             data: {
-              doc_og_name: file.originalname,
-              doc_sys_name: s3Key,
+              doc_og_name: file.originalName,
+              doc_sys_name: file.sysName,
               created_by: data.created_by,
               doc_type_id: finalDocType.id,
               account_id: data.account_id,
@@ -438,8 +436,8 @@ export class BookingStageService {
           response.documentsUploaded.push({
             id: document.id,
             type: "final_document",
-            originalName: file.originalname,
-            s3Key,
+            originalName: file.originalName,
+            s3Key: file.sysName,
           });
         }
       }
@@ -1339,27 +1337,13 @@ export class BookingStageService {
         );
       }
 
-      // 4️⃣ Upload Payment Proof (Optional)
+      // 4️⃣ Save Payment Proof (Optional)
       let paymentFileId: number | null = null;
       if (data.payment_file) {
-        const sanitizedName = sanitizeFilename(data.payment_file.originalname);
-        const s3Key = `additional-payments/${data.vendor_id}/${
-          data.lead_id
-        }/${Date.now()}-${sanitizedName}`;
-
-        await wasabi.send(
-          new PutObjectCommand({
-            Bucket: process.env.WASABI_BUCKET_NAME!,
-            Key: s3Key,
-            Body: data.payment_file.buffer,
-            ContentType: data.payment_file.mimetype,
-          })
-        );
-
         const document = await tx.leadDocuments.create({
           data: {
-            doc_og_name: data.payment_file.originalname,
-            doc_sys_name: s3Key,
+            doc_og_name: data.payment_file.originalName,
+            doc_sys_name: data.payment_file.sysName,
             created_by: data.created_by,
             doc_type_id: paymentType.id,
             account_id: data.account_id,
@@ -1553,7 +1537,7 @@ export class BookingStageService {
     account_id: number;
     vendor_id: number;
     created_by: number;
-    sitePhotos: Express.Multer.File[];
+    sitePhotos: { originalName: string; sysName: string }[];
   }) {
     return prisma.$transaction(async (tx) => {
       // 1️⃣ Validate document type
@@ -1576,25 +1560,12 @@ export class BookingStageService {
         s3Key: string;
       }[] = [];
 
-      // 2️⃣ Upload photos + create LeadDocuments
+      // 2️⃣ Create LeadDocuments
       for (const photo of data.sitePhotos) {
-        const key = `current-site-photos-at-booking-stage/${data.vendor_id}/${
-          data.lead_id
-        }/${Date.now()}-${sanitizeFilename(photo.originalname)}`;
-
-        await wasabi.send(
-          new PutObjectCommand({
-            Bucket: process.env.WASABI_BUCKET_NAME!,
-            Key: key,
-            Body: photo.buffer,
-            ContentType: photo.mimetype,
-          })
-        );
-
         const doc = await tx.leadDocuments.create({
           data: {
-            doc_og_name: photo.originalname,
-            doc_sys_name: key,
+            doc_og_name: photo.originalName,
+            doc_sys_name: photo.sysName,
             doc_type_id: docType.id,
             vendor_id: data.vendor_id,
             lead_id: data.lead_id,
@@ -1605,8 +1576,8 @@ export class BookingStageService {
 
         uploadedDocs.push({
           id: doc.id,
-          originalName: photo.originalname,
-          s3Key: key,
+          originalName: photo.originalName,
+          s3Key: photo.sysName,
         });
       }
 

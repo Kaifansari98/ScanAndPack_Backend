@@ -354,6 +354,23 @@ export type EnumTechCheckStatusNullableWithAggregatesFilter<$PrismaModel = never
   _max?: Prisma.NestedEnumTechCheckStatusNullableFilter<$PrismaModel>
 }
 
+export type EnumLeadChatMessageTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadChatMessageType | Prisma.EnumLeadChatMessageTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadChatMessageType[] | Prisma.ListEnumLeadChatMessageTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadChatMessageType[] | Prisma.ListEnumLeadChatMessageTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadChatMessageTypeFilter<$PrismaModel> | $Enums.LeadChatMessageType
+}
+
+export type EnumLeadChatMessageTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadChatMessageType | Prisma.EnumLeadChatMessageTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadChatMessageType[] | Prisma.ListEnumLeadChatMessageTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadChatMessageType[] | Prisma.ListEnumLeadChatMessageTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadChatMessageTypeWithAggregatesFilter<$PrismaModel> | $Enums.LeadChatMessageType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumLeadChatMessageTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumLeadChatMessageTypeFilter<$PrismaModel>
+}
+
 export type EnumLedgerTypeFilter<$PrismaModel = never> = {
   equals?: $Enums.LedgerType | Prisma.EnumLedgerTypeFieldRefInput<$PrismaModel>
   in?: $Enums.LedgerType[] | Prisma.ListEnumLedgerTypeFieldRefInput<$PrismaModel>
@@ -751,6 +768,23 @@ export type NestedEnumTechCheckStatusNullableWithAggregatesFilter<$PrismaModel =
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumTechCheckStatusNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumTechCheckStatusNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumLeadChatMessageTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadChatMessageType | Prisma.EnumLeadChatMessageTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadChatMessageType[] | Prisma.ListEnumLeadChatMessageTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadChatMessageType[] | Prisma.ListEnumLeadChatMessageTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadChatMessageTypeFilter<$PrismaModel> | $Enums.LeadChatMessageType
+}
+
+export type NestedEnumLeadChatMessageTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadChatMessageType | Prisma.EnumLeadChatMessageTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadChatMessageType[] | Prisma.ListEnumLeadChatMessageTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadChatMessageType[] | Prisma.ListEnumLeadChatMessageTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadChatMessageTypeWithAggregatesFilter<$PrismaModel> | $Enums.LeadChatMessageType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumLeadChatMessageTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumLeadChatMessageTypeFilter<$PrismaModel>
 }
 
 export type NestedEnumLedgerTypeFilter<$PrismaModel = never> = {

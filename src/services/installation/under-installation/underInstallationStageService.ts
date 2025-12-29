@@ -1,13 +1,7 @@
 import { Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import logger from "../../../utils/logger";
-import {
-  generateSignedUrl,
-  uploadToWasabiUnderInstallationDayWiseDocuments,
-  uploadToWasabiUnderInstallationMiscellaneousDocuments,
-  uploadToWasabiUnderInstallationUsableHandoverDocuments,
-  uploadToWasabiUnderInstallationUsableHandoverFinalSitePhotos,
-} from "../../../utils/wasabiClient";
+import { generateSignedUrl } from "../../../utils/wasabiClient";
 
 interface MiscPayload {
   vendor_id: number;
@@ -23,7 +17,7 @@ interface MiscPayload {
   is_resolved: boolean;
   created_by: number;
   teams: number[];
-  files: Express.Multer.File[];
+  files: { originalName: string; sysName: string }[];
 }
 
 interface UpdateERDInput {
@@ -50,7 +44,7 @@ interface UsableHandoverPayload {
   account_id: number;
   created_by: number;
   pending_work_details: string;
-  files: Express.Multer.File[];
+  files: { originalName: string; sysName: string; isImage: boolean }[];
 }
 
 export class UnderInstallationStageService {
@@ -686,7 +680,7 @@ export class UnderInstallationStageService {
     userId: number,
     updateDate: Date,
     remark: string | null,
-    files: Express.Multer.File[]
+    files: { originalName: string; sysName: string }[]
   ) {
     if (!vendorId || !leadId || !userId)
       throw Object.assign(
@@ -724,26 +718,7 @@ export class UnderInstallationStageService {
       throw new Error(`Lead ${leadId} does not have an associated account`);
 
     // ------------------------------------------
-    // 1️⃣ UPLOAD FILES TO WASABI (OUTSIDE TX)
-    // ------------------------------------------
-    const uploadedFiles: { sysName: string; originalName: string }[] = [];
-
-    for (const file of files) {
-      const sysName = await uploadToWasabiUnderInstallationDayWiseDocuments(
-        file.buffer,
-        vendorId,
-        leadId,
-        file.originalname
-      );
-
-      uploadedFiles.push({
-        sysName,
-        originalName: file.originalname,
-      });
-    }
-
-    // ------------------------------------------
-    // 2️⃣ RUN PRISMA TRANSACTION (FAST, SAFE)
+    // 1️⃣ RUN PRISMA TRANSACTION (FAST, SAFE)
     // ------------------------------------------
     return prisma.$transaction(async (tx) => {
       // Create InstallationUpdate entry
@@ -761,7 +736,7 @@ export class UnderInstallationStageService {
       const uploadedDocs = [];
 
       // Create documents & links
-      for (const file of uploadedFiles) {
+      for (const file of files) {
         const doc = await tx.leadDocuments.create({
           data: {
             doc_og_name: file.originalName,
@@ -791,9 +766,7 @@ export class UnderInstallationStageService {
           vendor_id: vendorId,
           lead_id: leadId,
           account_id: finalAccountId,
-          action: `Uploaded ${
-            files.length
-          } Installation Update document(s) for ${updateDate.toDateString()}`,
+          action: `Uploaded ${files.length} Installation Update document(s) for ${updateDate.toDateString()}`,
           action_type: "UPLOAD",
           created_by: userId,
           created_at: new Date(),
@@ -876,32 +849,7 @@ export class UnderInstallationStageService {
     } = payload;
 
     // -----------------------------------------------------
-    // 1. Upload all files FIRST (outside transaction)
-    // -----------------------------------------------------
-    let uploadedDocs: {
-      original_name: string;
-      sys_name: string;
-    }[] = [];
-
-    if (files && files.length > 0) {
-      for (const file of files) {
-        const sysName =
-          await uploadToWasabiUnderInstallationMiscellaneousDocuments(
-            file.buffer,
-            vendor_id,
-            lead_id,
-            file.originalname
-          );
-
-        uploadedDocs.push({
-          original_name: file.originalname,
-          sys_name: sysName,
-        });
-      }
-    }
-
-    // -----------------------------------------------------
-    // 2. Now DB transaction
+    // 1. Now DB transaction
     // -----------------------------------------------------
     return await prisma.$transaction(async (tx) => {
       // Create Misc entry
@@ -989,11 +937,11 @@ export class UnderInstallationStageService {
         );
 
       // Insert Documents → LeadDocuments + MiscDocuments
-      for (const doc of uploadedDocs) {
+      for (const doc of files) {
         const leadDoc = await tx.leadDocuments.create({
           data: {
-            doc_og_name: doc.original_name,
-            doc_sys_name: doc.sys_name,
+            doc_og_name: doc.originalName,
+            doc_sys_name: doc.sysName,
             vendor_id,
             lead_id,
             created_by,
@@ -1360,39 +1308,14 @@ export class UnderInstallationStageService {
       throw new Error("Document type (Type 26) not found for this vendor");
 
     // -----------------------------------------
-    // 3️⃣ Upload Documents
+    // 3️⃣ Save Documents
     // -----------------------------------------
     const uploadedDocs = [];
 
     for (const file of files) {
-      const originalName = file.originalname;
-      const buffer = file.buffer;
-
-      let sysName = "";
-      let docTypeId = 0;
-
-      const isImage = file.mimetype.startsWith("image/");
-
-      if (isImage) {
-        sysName =
-          await uploadToWasabiUnderInstallationUsableHandoverFinalSitePhotos(
-            buffer,
-            vendor_id,
-            lead_id,
-            originalName
-          );
-
-        docTypeId = finalSitePhotoType.id;
-      } else {
-        sysName = await uploadToWasabiUnderInstallationUsableHandoverDocuments(
-          buffer,
-          vendor_id,
-          lead_id,
-          originalName
-        );
-
-        docTypeId = handoverDocType.id;
-      }
+      const docTypeId = file.isImage
+        ? finalSitePhotoType.id
+        : handoverDocType.id;
 
       const savedDoc = await prisma.leadDocuments.create({
         data: {
@@ -1401,8 +1324,8 @@ export class UnderInstallationStageService {
           lead_id,
           created_by,
           doc_type_id: docTypeId,
-          doc_og_name: originalName,
-          doc_sys_name: sysName,
+          doc_og_name: file.originalName,
+          doc_sys_name: file.sysName,
         },
       });
 

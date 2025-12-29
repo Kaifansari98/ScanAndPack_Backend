@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { ReadyToDispatchController } from "../../../controllers/leadModuleControllers/production/ready-to-dispatch/ReadyToDispatch.controller";
-import { upload } from "../../../middlewares/uploadWasabi";
+import { uploadReadyToDispatchPhotos } from "../../../middlewares/uploadWasabi";
 
 const readyToDispatchRoutes = Router();
 const controller = new ReadyToDispatchController();
@@ -14,7 +14,7 @@ readyToDispatchRoutes.get(
 // ✅ POST → Upload Current Site Photos at Ready-To-Dispatch
 readyToDispatchRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-current-site-photos",
-  upload.array("files", 10), // accept up to 10 images
+  uploadReadyToDispatchPhotos.array("files", 10), // accept up to 10 images
   controller.uploadCurrentSitePhotosAtReadyToDispatch
 );
 

@@ -85,7 +85,7 @@ export const validateFiles = (req: Request, res: Response, next: NextFunction) =
     }
 
     // Validate file sizes
-    const maxFileSize = 10 * 1024 * 1024; // 10MB
+    const maxFileSize = 200 * 1024 * 1024; // 200MB
     const allFiles = [
       ...(files.current_site_photos || []),
       ...(files.upload_pdf || []),
@@ -96,7 +96,7 @@ export const validateFiles = (req: Request, res: Response, next: NextFunction) =
       if (file.size > maxFileSize) {
         return res.status(400).json({
           success: false,
-          message: `File ${file.originalname} exceeds maximum size of 10MB`
+          message: `File ${file.originalname} exceeds maximum size of 200MB`
         });
       }
     }
@@ -117,7 +117,7 @@ export const handleMulterError = (err: any, req: Request, res: Response, next: N
     if (err.code === 'LIMIT_FILE_SIZE') {
       return res.status(400).json({
         success: false,
-        message: 'File size exceeds limit of 10MB'
+        message: 'File size exceeds limit of 200MB'
       });
     }
     

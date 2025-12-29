@@ -1,5 +1,5 @@
 import { prisma } from "../../../prisma/client";
-import { uploadToWasabiProductionFiles } from "../../../utils/wasabiClient";
+import logger from "../../../utils/logger";
 
 // 🧩 Define this at the top of your service file
 
@@ -460,7 +460,7 @@ export class OrderLoginService {
     leadId: number,
     accountId: number | null,
     userId: number,
-    files: Express.Multer.File[]
+    files: { originalName: string; sysName: string }[]
   ) {
     if (!vendorId || !leadId || !userId) {
       const error = new Error("vendorId, leadId, and userId are required");
@@ -483,19 +483,11 @@ export class OrderLoginService {
     if (!ProductionDocType) throw new Error("Doc Type (Type 14) not found");
 
     for (const file of files) {
-      // ✅ Upload to Wasabi
-      const sysName = await uploadToWasabiProductionFiles(
-        file.buffer,
-        vendorId,
-        leadId,
-        file.originalname
-      );
-
       // ✅ Store record in DB
       const savedDoc = await prisma.leadDocuments.create({
         data: {
-          doc_og_name: file.originalname,
-          doc_sys_name: sysName,
+          doc_og_name: file.originalName,
+          doc_sys_name: file.sysName,
           created_by: userId,
           vendor_id: vendorId,
           lead_id: leadId,
@@ -564,6 +556,49 @@ export class OrderLoginService {
         created_by: userId,
       },
     });
+
+    // ✅ Ensure assigned production user is in lead chat members
+    let chatRoom = await prisma.leadChatRoom.findFirst({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+      },
+      select: { id: true },
+    });
+
+    if (!chatRoom) {
+      chatRoom = await prisma.leadChatRoom.create({
+        data: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+        },
+        select: { id: true },
+      });
+    }
+
+    const existingMember = await prisma.leadChatMember.findFirst({
+      where: {
+        chat_room_id: chatRoom.id,
+        user_id: assignToUserId,
+      },
+      select: { id: true },
+    });
+
+    if (existingMember) {
+      logger.info("[SERVICE] LeadChatMember already exists, skipping insert", {
+        lead_id: leadId,
+        chat_room_id: chatRoom.id,
+        user_id: assignToUserId,
+      });
+    } else {
+      await prisma.leadChatMember.create({
+        data: {
+          chat_room_id: chatRoom.id,
+          user_id: assignToUserId,
+          added_by: userId,
+        },
+      });
+    }
 
     // ✅ 4. Log in LeadStatusLogs
     await prisma.leadStatusLogs.create({

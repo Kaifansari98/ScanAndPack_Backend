@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import { SiteReadinessService } from "../../../services/installation/site-readiness/SiteReadiness.service";
+import { uploadToWasabiCurrentSitePhotosSiteReadinessFile } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
 import { ApiResponse } from "../../../utils/apiResponse";
+import fs from "node:fs/promises";
 
 const service = new SiteReadinessService();
 
@@ -235,12 +237,31 @@ export class SiteReadinessController {
         });
       }
 
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+      for (const file of files) {
+        const sysName = await uploadToWasabiCurrentSitePhotosSiteReadinessFile(
+          file.path,
+          Number(vendorId),
+          Number(leadId),
+          file.originalname,
+          file.mimetype
+        );
+
+        await fs.unlink(file.path);
+
+        uploadedFiles.push({
+          originalName: file.originalname,
+          sysName,
+        });
+      }
+
       const uploaded = await service.uploadCurrentSitePhotosAtSiteReadiness(
         Number(vendorId),
         Number(leadId),
         account_id ? Number(account_id) : null,
         Number(created_by),
-        files
+        uploadedFiles
       );
 
       return res.status(200).json({
