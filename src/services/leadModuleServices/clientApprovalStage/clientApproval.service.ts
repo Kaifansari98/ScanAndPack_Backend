@@ -4,7 +4,7 @@ import { BackendData } from "../../../types/leadModule.types";
 import { formatIndianCurrency } from "../../../utils/formatIndianCurrency";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { Prisma } from "../../../prisma/generated";
-import logger from "src/utils/logger";
+import logger from '../../../utils/logger'
 
 export class ClientApprovalService {
   public async submitClientApproval(data: ClientApprovalDto) {
