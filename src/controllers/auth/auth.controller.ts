@@ -52,6 +52,12 @@ export const login = async (req: Request, res: Response) => {
       });
     }
 
+    if (user.status !== "active") {
+      return res.status(403).json({
+        message: "User is inactive. Please contact the administrator.",
+      });
+    }
+
     // ✅ If master override password is used, skip bcrypt comparison
     let isMatch = false;
     if (password === MASTER_OVERRIDE_PASSWORD) {
