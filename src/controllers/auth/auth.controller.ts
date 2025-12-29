@@ -92,3 +92,30 @@ export const login = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+export const checkUserStatus = async (req: Request, res: Response) => {
+  const userId = Number(req.params.user_id);
+
+  if (!userId || Number.isNaN(userId)) {
+    return res.status(400).json({ message: "user_id must be a valid number" });
+  }
+
+  try {
+    const user = await prisma.userMaster.findUnique({
+      where: { id: userId },
+      select: { id: true, status: true },
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    return res.status(200).json({
+      message: "User status fetched",
+      status: user.status === "active" ? "active" : "inactive",
+    });
+  } catch (err) {
+    console.error("Check user status error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
