@@ -442,7 +442,10 @@ export const ModelName = {
   InstallationIssueLogMaster: 'InstallationIssueLogMaster',
   IssueLogTypeMaster: 'IssueLogTypeMaster',
   IssueLogTypeMapping: 'IssueLogTypeMapping',
-  IssueLogResponsibleTeamMapping: 'IssueLogResponsibleTeamMapping'
+  IssueLogResponsibleTeamMapping: 'IssueLogResponsibleTeamMapping',
+  Notification: 'Notification',
+  UserPushToken: 'UserPushToken',
+  NotificationDeliveryLogs: 'NotificationDeliveryLogs'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -458,7 +461,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "notification" | "userPushToken" | "notificationDeliveryLogs"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4828,6 +4831,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Notification: {
+      payload: Prisma.$NotificationPayload<ExtArgs>
+      fields: Prisma.NotificationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.NotificationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.NotificationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        findFirst: {
+          args: Prisma.NotificationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.NotificationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        findMany: {
+          args: Prisma.NotificationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+        }
+        create: {
+          args: Prisma.NotificationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        createMany: {
+          args: Prisma.NotificationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.NotificationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+        }
+        delete: {
+          args: Prisma.NotificationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        update: {
+          args: Prisma.NotificationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        deleteMany: {
+          args: Prisma.NotificationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.NotificationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.NotificationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+        }
+        upsert: {
+          args: Prisma.NotificationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        aggregate: {
+          args: Prisma.NotificationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateNotification>
+        }
+        groupBy: {
+          args: Prisma.NotificationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NotificationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.NotificationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NotificationCountAggregateOutputType> | number
+        }
+      }
+    }
+    UserPushToken: {
+      payload: Prisma.$UserPushTokenPayload<ExtArgs>
+      fields: Prisma.UserPushTokenFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserPushTokenFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPushTokenPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserPushTokenFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPushTokenPayload>
+        }
+        findFirst: {
+          args: Prisma.UserPushTokenFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPushTokenPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserPushTokenFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPushTokenPayload>
+        }
+        findMany: {
+          args: Prisma.UserPushTokenFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPushTokenPayload>[]
+        }
+        create: {
+          args: Prisma.UserPushTokenCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPushTokenPayload>
+        }
+        createMany: {
+          args: Prisma.UserPushTokenCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserPushTokenCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPushTokenPayload>[]
+        }
+        delete: {
+          args: Prisma.UserPushTokenDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPushTokenPayload>
+        }
+        update: {
+          args: Prisma.UserPushTokenUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPushTokenPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserPushTokenDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserPushTokenUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserPushTokenUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPushTokenPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserPushTokenUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPushTokenPayload>
+        }
+        aggregate: {
+          args: Prisma.UserPushTokenAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserPushToken>
+        }
+        groupBy: {
+          args: Prisma.UserPushTokenGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserPushTokenGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserPushTokenCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserPushTokenCountAggregateOutputType> | number
+        }
+      }
+    }
+    NotificationDeliveryLogs: {
+      payload: Prisma.$NotificationDeliveryLogsPayload<ExtArgs>
+      fields: Prisma.NotificationDeliveryLogsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.NotificationDeliveryLogsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationDeliveryLogsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.NotificationDeliveryLogsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationDeliveryLogsPayload>
+        }
+        findFirst: {
+          args: Prisma.NotificationDeliveryLogsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationDeliveryLogsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.NotificationDeliveryLogsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationDeliveryLogsPayload>
+        }
+        findMany: {
+          args: Prisma.NotificationDeliveryLogsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationDeliveryLogsPayload>[]
+        }
+        create: {
+          args: Prisma.NotificationDeliveryLogsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationDeliveryLogsPayload>
+        }
+        createMany: {
+          args: Prisma.NotificationDeliveryLogsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.NotificationDeliveryLogsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationDeliveryLogsPayload>[]
+        }
+        delete: {
+          args: Prisma.NotificationDeliveryLogsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationDeliveryLogsPayload>
+        }
+        update: {
+          args: Prisma.NotificationDeliveryLogsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationDeliveryLogsPayload>
+        }
+        deleteMany: {
+          args: Prisma.NotificationDeliveryLogsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.NotificationDeliveryLogsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.NotificationDeliveryLogsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationDeliveryLogsPayload>[]
+        }
+        upsert: {
+          args: Prisma.NotificationDeliveryLogsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationDeliveryLogsPayload>
+        }
+        aggregate: {
+          args: Prisma.NotificationDeliveryLogsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateNotificationDeliveryLogs>
+        }
+        groupBy: {
+          args: Prisma.NotificationDeliveryLogsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NotificationDeliveryLogsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.NotificationDeliveryLogsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NotificationDeliveryLogsCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -5742,6 +5967,52 @@ export const IssueLogResponsibleTeamMappingScalarFieldEnum = {
 export type IssueLogResponsibleTeamMappingScalarFieldEnum = (typeof IssueLogResponsibleTeamMappingScalarFieldEnum)[keyof typeof IssueLogResponsibleTeamMappingScalarFieldEnum]
 
 
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  user_id: 'user_id',
+  sender_id: 'sender_id',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  entity_type: 'entity_type',
+  entity_id: 'entity_id',
+  redirect_url: 'redirect_url',
+  is_read: 'is_read',
+  read_at: 'read_at',
+  created_at: 'created_at'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const UserPushTokenScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  vendor_id: 'vendor_id',
+  token: 'token',
+  platform: 'platform',
+  browser: 'browser',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  last_used: 'last_used'
+} as const
+
+export type UserPushTokenScalarFieldEnum = (typeof UserPushTokenScalarFieldEnum)[keyof typeof UserPushTokenScalarFieldEnum]
+
+
+export const NotificationDeliveryLogsScalarFieldEnum = {
+  id: 'id',
+  notification_id: 'notification_id',
+  push_token_id: 'push_token_id',
+  status: 'status',
+  error: 'error',
+  created_at: 'created_at'
+} as const
+
+export type NotificationDeliveryLogsScalarFieldEnum = (typeof NotificationDeliveryLogsScalarFieldEnum)[keyof typeof NotificationDeliveryLogsScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -5974,6 +6245,20 @@ export type EnumActionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$Prism
 export type ListEnumActionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActionType[]'>
     
 
+
+/**
+ * Reference to a field of type 'NotificationType'
+ */
+export type EnumNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationType'>
+    
+
+
+/**
+ * Reference to a field of type 'NotificationType[]'
+ */
+export type ListEnumNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationType[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -6112,6 +6397,9 @@ export type GlobalOmitConfig = {
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterOmit
   issueLogTypeMapping?: Prisma.IssueLogTypeMappingOmit
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingOmit
+  notification?: Prisma.NotificationOmit
+  userPushToken?: Prisma.UserPushTokenOmit
+  notificationDeliveryLogs?: Prisma.NotificationDeliveryLogsOmit
 }
 
 /* Types for Logging */

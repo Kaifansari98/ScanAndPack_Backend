@@ -329,6 +329,8 @@ export type VendorMasterWhereInput = {
   statusTypes?: Prisma.StatusTypeMasterListRelationFilter
   userLeadTasks?: Prisma.UserLeadTaskListRelationFilter
   users?: Prisma.UserMasterListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
+  userPushTokens?: Prisma.UserPushTokenListRelationFilter
   addresses?: Prisma.VendorAddressListRelationFilter
   taxInfo?: Prisma.VendorTaxInfoListRelationFilter
   tokens?: Prisma.VendorTokensListRelationFilter
@@ -393,6 +395,8 @@ export type VendorMasterOrderByWithRelationInput = {
   statusTypes?: Prisma.StatusTypeMasterOrderByRelationAggregateInput
   userLeadTasks?: Prisma.UserLeadTaskOrderByRelationAggregateInput
   users?: Prisma.UserMasterOrderByRelationAggregateInput
+  notifications?: Prisma.NotificationOrderByRelationAggregateInput
+  userPushTokens?: Prisma.UserPushTokenOrderByRelationAggregateInput
   addresses?: Prisma.VendorAddressOrderByRelationAggregateInput
   taxInfo?: Prisma.VendorTaxInfoOrderByRelationAggregateInput
   tokens?: Prisma.VendorTokensOrderByRelationAggregateInput
@@ -460,6 +464,8 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   statusTypes?: Prisma.StatusTypeMasterListRelationFilter
   userLeadTasks?: Prisma.UserLeadTaskListRelationFilter
   users?: Prisma.UserMasterListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
+  userPushTokens?: Prisma.UserPushTokenListRelationFilter
   addresses?: Prisma.VendorAddressListRelationFilter
   taxInfo?: Prisma.VendorTaxInfoListRelationFilter
   tokens?: Prisma.VendorTokensListRelationFilter
@@ -563,6 +569,8 @@ export type VendorMasterCreateInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -627,6 +635,8 @@ export type VendorMasterUncheckedCreateInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -690,6 +700,8 @@ export type VendorMasterUpdateInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -754,6 +766,8 @@ export type VendorMasterUncheckedUpdateInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -1565,6 +1579,34 @@ export type VendorMasterUpdateOneRequiredWithoutIssueLogTypeMasterNestedInput = 
   update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutIssueLogTypeMasterInput, Prisma.VendorMasterUpdateWithoutIssueLogTypeMasterInput>, Prisma.VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput>
 }
 
+export type VendorMasterCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutNotificationsInput, Prisma.VendorMasterUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutNotificationsInput, Prisma.VendorMasterUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.VendorMasterUpsertWithoutNotificationsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutNotificationsInput, Prisma.VendorMasterUpdateWithoutNotificationsInput>, Prisma.VendorMasterUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type VendorMasterCreateNestedOneWithoutUserPushTokensInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutUserPushTokensInput, Prisma.VendorMasterUncheckedCreateWithoutUserPushTokensInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutUserPushTokensInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutUserPushTokensNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutUserPushTokensInput, Prisma.VendorMasterUncheckedCreateWithoutUserPushTokensInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutUserPushTokensInput
+  upsert?: Prisma.VendorMasterUpsertWithoutUserPushTokensInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutUserPushTokensInput, Prisma.VendorMasterUpdateWithoutUserPushTokensInput>, Prisma.VendorMasterUncheckedUpdateWithoutUserPushTokensInput>
+}
+
 export type VendorMasterCreateWithoutAddressesInput = {
   vendor_name: string
   vendor_code: string
@@ -1623,6 +1665,8 @@ export type VendorMasterCreateWithoutAddressesInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
 }
@@ -1686,6 +1730,8 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
 }
@@ -1764,6 +1810,8 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
 }
@@ -1827,6 +1875,8 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
 }
@@ -1889,6 +1939,8 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
 }
@@ -1952,6 +2004,8 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
 }
@@ -2030,6 +2084,8 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
 }
@@ -2093,6 +2149,8 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
 }
@@ -2154,6 +2212,8 @@ export type VendorMasterCreateWithoutUsersInput = {
   sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -2217,6 +2277,8 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -2295,6 +2357,8 @@ export type VendorMasterUpdateWithoutUsersInput = {
   sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -2358,6 +2422,8 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -2420,6 +2486,8 @@ export type VendorMasterCreateWithoutProjectsInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -2483,6 +2551,8 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -2561,6 +2631,8 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -2624,6 +2696,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -2686,6 +2760,8 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -2749,6 +2825,8 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -2827,6 +2905,8 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -2890,6 +2970,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -2952,6 +3034,8 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -3015,6 +3099,8 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -3093,6 +3179,8 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -3156,6 +3244,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -3218,6 +3308,8 @@ export type VendorMasterCreateWithoutBoxesInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -3281,6 +3373,8 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -3359,6 +3453,8 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -3422,6 +3518,8 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -3484,6 +3582,8 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -3547,6 +3647,8 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -3625,6 +3727,8 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -3688,6 +3792,8 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -3751,6 +3857,8 @@ export type VendorMasterCreateWithoutTokensInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
 }
@@ -3814,6 +3922,8 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
 }
@@ -3892,6 +4002,8 @@ export type VendorMasterUpdateWithoutTokensInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
 }
@@ -3955,6 +4067,8 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
 }
@@ -4016,6 +4130,8 @@ export type VendorMasterCreateWithoutLeadsInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -4079,6 +4195,8 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -4157,6 +4275,8 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -4220,6 +4340,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -4282,6 +4404,8 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -4345,6 +4469,8 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -4423,6 +4549,8 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -4486,6 +4614,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -4548,6 +4678,8 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -4611,6 +4743,8 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -4689,6 +4823,8 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -4752,6 +4888,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -4814,6 +4952,8 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -4877,6 +5017,8 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -4955,6 +5097,8 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -5018,6 +5162,8 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -5080,6 +5226,8 @@ export type VendorMasterCreateWithoutSourcesInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -5143,6 +5291,8 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -5221,6 +5371,8 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -5284,6 +5436,8 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -5346,6 +5500,8 @@ export type VendorMasterCreateWithoutAccountsInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -5409,6 +5565,8 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -5487,6 +5645,8 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -5550,6 +5710,8 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -5612,6 +5774,8 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -5675,6 +5839,8 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -5753,6 +5919,8 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -5816,6 +5984,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -5878,6 +6048,8 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -5941,6 +6113,8 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -6019,6 +6193,8 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -6082,6 +6258,8 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -6144,6 +6322,8 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -6207,6 +6387,8 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -6285,6 +6467,8 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -6348,6 +6532,8 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -6410,6 +6596,8 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -6473,6 +6661,8 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -6551,6 +6741,8 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -6614,6 +6806,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -6676,6 +6870,8 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -6739,6 +6935,8 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -6817,6 +7015,8 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -6880,6 +7080,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -6942,6 +7144,8 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -7005,6 +7209,8 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -7083,6 +7289,8 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -7146,6 +7354,8 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -7208,6 +7418,8 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -7271,6 +7483,8 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -7349,6 +7563,8 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -7412,6 +7628,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -7474,6 +7692,8 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -7537,6 +7757,8 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -7615,6 +7837,8 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -7678,6 +7902,8 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -7740,6 +7966,8 @@ export type VendorMasterCreateWithoutLedgersInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -7803,6 +8031,8 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -7881,6 +8111,8 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -7944,6 +8176,8 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -8006,6 +8240,8 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -8069,6 +8305,8 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -8147,6 +8385,8 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -8210,6 +8450,8 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -8272,6 +8514,8 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -8335,6 +8579,8 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -8413,6 +8659,8 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -8476,6 +8724,8 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -8538,6 +8788,8 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -8601,6 +8853,8 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -8679,6 +8933,8 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -8742,6 +8998,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -8804,6 +9062,8 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -8867,6 +9127,8 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -8945,6 +9207,8 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -9008,6 +9272,8 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -9070,6 +9336,8 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -9133,6 +9401,8 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -9211,6 +9481,8 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -9274,6 +9546,8 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -9336,6 +9610,8 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -9399,6 +9675,8 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -9477,6 +9755,8 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -9540,6 +9820,8 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -9602,6 +9884,8 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -9665,6 +9949,8 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -9743,6 +10029,8 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -9806,6 +10094,8 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -9868,6 +10158,8 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -9931,6 +10223,8 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -10009,6 +10303,8 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -10072,6 +10368,8 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -10134,6 +10432,8 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -10197,6 +10497,8 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -10275,6 +10577,8 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -10338,6 +10642,8 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -10400,6 +10706,8 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -10463,6 +10771,8 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -10541,6 +10851,8 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -10604,6 +10916,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -10666,6 +10980,8 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -10729,6 +11045,8 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -10807,6 +11125,8 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -10870,6 +11190,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -10932,6 +11254,8 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -10995,6 +11319,8 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -11073,6 +11399,8 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -11136,6 +11464,8 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -11198,6 +11528,8 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -11261,6 +11593,8 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -11339,6 +11673,8 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -11402,6 +11738,8 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -11464,6 +11802,8 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -11527,6 +11867,8 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -11605,6 +11947,8 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -11668,6 +12012,8 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -11730,6 +12076,8 @@ export type VendorMasterCreateWithoutInstallersInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -11793,6 +12141,8 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -11871,6 +12221,8 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -11934,6 +12286,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -11996,6 +12350,8 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -12059,6 +12415,8 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -12137,6 +12495,8 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -12200,6 +12560,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -12262,6 +12624,8 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -12325,6 +12689,8 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -12403,6 +12769,8 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -12466,6 +12834,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -12528,6 +12898,8 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -12591,6 +12963,8 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -12669,6 +13043,8 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -12732,6 +13108,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -12794,6 +13172,8 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -12857,6 +13237,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -12935,6 +13317,8 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -12998,6 +13382,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -13060,6 +13446,8 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -13123,6 +13511,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -13201,6 +13591,8 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -13264,6 +13656,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -13326,6 +13720,8 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -13389,6 +13785,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -13467,6 +13865,8 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -13530,6 +13930,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -13592,6 +13994,8 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -13655,6 +14059,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -13733,6 +14139,8 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -13796,6 +14204,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -13858,6 +14268,8 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -13921,6 +14333,8 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -13999,6 +14413,8 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -14062,6 +14478,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -14124,6 +14542,8 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
@@ -14187,6 +14607,8 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
@@ -14265,6 +14687,8 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
@@ -14328,6 +14752,556 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutNotificationsInput = {
+  vendor_name: string
+  vendor_code: string
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutNotificationsInput, Prisma.VendorMasterUncheckedCreateWithoutNotificationsInput>
+}
+
+export type VendorMasterUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutNotificationsInput, Prisma.VendorMasterUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutNotificationsInput, Prisma.VendorMasterUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutNotificationsInput, Prisma.VendorMasterUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type VendorMasterUpdateWithoutNotificationsInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutUserPushTokensInput = {
+  vendor_name: string
+  vendor_code: string
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutUserPushTokensInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutUserPushTokensInput, Prisma.VendorMasterUncheckedCreateWithoutUserPushTokensInput>
+}
+
+export type VendorMasterUpsertWithoutUserPushTokensInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutUserPushTokensInput, Prisma.VendorMasterUncheckedUpdateWithoutUserPushTokensInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutUserPushTokensInput, Prisma.VendorMasterUncheckedCreateWithoutUserPushTokensInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutUserPushTokensInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutUserPushTokensInput, Prisma.VendorMasterUncheckedUpdateWithoutUserPushTokensInput>
+}
+
+export type VendorMasterUpdateWithoutUserPushTokensInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
@@ -14384,6 +15358,8 @@ export type VendorMasterCountOutputType = {
   statusTypes: number
   userLeadTasks: number
   users: number
+  notifications: number
+  userPushTokens: number
   addresses: number
   taxInfo: number
   tokens: number
@@ -14435,6 +15411,8 @@ export type VendorMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   statusTypes?: boolean | VendorMasterCountOutputTypeCountStatusTypesArgs
   userLeadTasks?: boolean | VendorMasterCountOutputTypeCountUserLeadTasksArgs
   users?: boolean | VendorMasterCountOutputTypeCountUsersArgs
+  notifications?: boolean | VendorMasterCountOutputTypeCountNotificationsArgs
+  userPushTokens?: boolean | VendorMasterCountOutputTypeCountUserPushTokensArgs
   addresses?: boolean | VendorMasterCountOutputTypeCountAddressesArgs
   taxInfo?: boolean | VendorMasterCountOutputTypeCountTaxInfoArgs
   tokens?: boolean | VendorMasterCountOutputTypeCountTokensArgs
@@ -14768,6 +15746,20 @@ export type VendorMasterCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Ty
 /**
  * VendorMasterCountOutputType without action
  */
+export type VendorMasterCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
+/**
+ * VendorMasterCountOutputType without action
+ */
+export type VendorMasterCountOutputTypeCountUserPushTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserPushTokenWhereInput
+}
+
+/**
+ * VendorMasterCountOutputType without action
+ */
 export type VendorMasterCountOutputTypeCountAddressesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.VendorAddressWhereInput
 }
@@ -14846,6 +15838,8 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   statusTypes?: boolean | Prisma.VendorMaster$statusTypesArgs<ExtArgs>
   userLeadTasks?: boolean | Prisma.VendorMaster$userLeadTasksArgs<ExtArgs>
   users?: boolean | Prisma.VendorMaster$usersArgs<ExtArgs>
+  notifications?: boolean | Prisma.VendorMaster$notificationsArgs<ExtArgs>
+  userPushTokens?: boolean | Prisma.VendorMaster$userPushTokensArgs<ExtArgs>
   addresses?: boolean | Prisma.VendorMaster$addressesArgs<ExtArgs>
   taxInfo?: boolean | Prisma.VendorMaster$taxInfoArgs<ExtArgs>
   tokens?: boolean | Prisma.VendorMaster$tokensArgs<ExtArgs>
@@ -14947,6 +15941,8 @@ export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.Interna
   statusTypes?: boolean | Prisma.VendorMaster$statusTypesArgs<ExtArgs>
   userLeadTasks?: boolean | Prisma.VendorMaster$userLeadTasksArgs<ExtArgs>
   users?: boolean | Prisma.VendorMaster$usersArgs<ExtArgs>
+  notifications?: boolean | Prisma.VendorMaster$notificationsArgs<ExtArgs>
+  userPushTokens?: boolean | Prisma.VendorMaster$userPushTokensArgs<ExtArgs>
   addresses?: boolean | Prisma.VendorMaster$addressesArgs<ExtArgs>
   taxInfo?: boolean | Prisma.VendorMaster$taxInfoArgs<ExtArgs>
   tokens?: boolean | Prisma.VendorMaster$tokensArgs<ExtArgs>
@@ -15003,6 +15999,8 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     statusTypes: Prisma.$StatusTypeMasterPayload<ExtArgs>[]
     userLeadTasks: Prisma.$UserLeadTaskPayload<ExtArgs>[]
     users: Prisma.$UserMasterPayload<ExtArgs>[]
+    notifications: Prisma.$NotificationPayload<ExtArgs>[]
+    userPushTokens: Prisma.$UserPushTokenPayload<ExtArgs>[]
     addresses: Prisma.$VendorAddressPayload<ExtArgs>[]
     taxInfo: Prisma.$VendorTaxInfoPayload<ExtArgs>[]
     tokens: Prisma.$VendorTokensPayload<ExtArgs>[]
@@ -15460,6 +16458,8 @@ export interface Prisma__VendorMasterClient<T, Null = never, ExtArgs extends run
   statusTypes<T extends Prisma.VendorMaster$statusTypesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$statusTypesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StatusTypeMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userLeadTasks<T extends Prisma.VendorMaster$userLeadTasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$userLeadTasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserLeadTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   users<T extends Prisma.VendorMaster$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notifications<T extends Prisma.VendorMaster$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  userPushTokens<T extends Prisma.VendorMaster$userPushTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$userPushTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPushTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   addresses<T extends Prisma.VendorMaster$addressesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$addressesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VendorAddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   taxInfo<T extends Prisma.VendorMaster$taxInfoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$taxInfoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VendorTaxInfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tokens<T extends Prisma.VendorMaster$tokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$tokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VendorTokensPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -16970,6 +17970,54 @@ export type VendorMaster$usersArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.UserMasterScalarFieldEnum | Prisma.UserMasterScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.notifications
+ */
+export type VendorMaster$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.userPushTokens
+ */
+export type VendorMaster$userPushTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserPushToken
+   */
+  select?: Prisma.UserPushTokenSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserPushToken
+   */
+  omit?: Prisma.UserPushTokenOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserPushTokenInclude<ExtArgs> | null
+  where?: Prisma.UserPushTokenWhereInput
+  orderBy?: Prisma.UserPushTokenOrderByWithRelationInput | Prisma.UserPushTokenOrderByWithRelationInput[]
+  cursor?: Prisma.UserPushTokenWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserPushTokenScalarFieldEnum | Prisma.UserPushTokenScalarFieldEnum[]
 }
 
 /**

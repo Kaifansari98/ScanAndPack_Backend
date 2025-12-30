@@ -332,3 +332,18 @@ export type IssueLogTypeMapping = Prisma.IssueLogTypeMappingModel
  * 
  */
 export type IssueLogResponsibleTeamMapping = Prisma.IssueLogResponsibleTeamMappingModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
+ * Model UserPushToken
+ * 
+ */
+export type UserPushToken = Prisma.UserPushTokenModel
+/**
+ * Model NotificationDeliveryLogs
+ * 
+ */
+export type NotificationDeliveryLogs = Prisma.NotificationDeliveryLogsModel

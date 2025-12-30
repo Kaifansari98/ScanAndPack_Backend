@@ -26,6 +26,8 @@ import { cache } from "../../../utils/cache";
 import Joi from "joi";
 import { generateLeadCode } from "../../../utils/generateLeadCode";
 import { logDbError } from "../../../utils/prismaErrorLogger";
+import { NotificationService } from "../../notification/notification.service";
+import { NotificationType } from "../../../prisma/generated";
 
 type EditTaskISMInput = {
   lead_id: number;
@@ -1676,6 +1678,36 @@ export const assignLeadToUser = async (
       lead_id: lead.id,
       actionMessage,
     });
+
+    try {
+      const leadName = `${lead.firstname} ${lead.lastname}`.trim();
+      const title =
+        oldAssigneeName === "Unassigned"
+          ? "New lead assigned"
+          : "Lead reassigned";
+      const message =
+        oldAssigneeName === "Unassigned"
+          ? `Lead ${leadName} has been assigned to you.`
+          : `Lead ${leadName} has been reassigned to you.`;
+
+      await NotificationService.createAndSend({
+        vendor_id: vendorId,
+        user_id: payload.assign_to,
+        sender_id: payload.assign_by,
+        type: NotificationType.LEAD_ASSIGNED,
+        title,
+        message,
+        entity_type: "lead",
+        entity_id: lead.id,
+        redirect_url: `/dashboard/leads/leadstable/details/${lead.id}?accountId=${lead.account_id}`,
+      });
+    } catch (notificationError: any) {
+      logger.warn("⚠️ Failed to create lead assignment notification", {
+        error: notificationError?.message,
+        lead_id: lead.id,
+        assign_to: payload.assign_to,
+      });
+    }
 
     // Step 7: Prepare response data
     const result: LeadAssignmentResult = {

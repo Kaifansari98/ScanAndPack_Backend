@@ -28,6 +28,8 @@ import {
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import { prisma } from "../../../prisma/client";
 import logger from "../../../utils/logger";
+import { NotificationService } from "../../../services/notification/notification.service";
+import { NotificationType } from "../../../prisma/generated";
 
 export class LeadController {
   /**
@@ -130,6 +132,31 @@ export class LeadController {
         { ...value, is_draft: draftMode },
         files
       );
+
+      if (!result.draft && value.assign_to) {
+        try {
+          const leadName = `${result.lead.firstname} ${result.lead.lastname}`.trim();
+          const senderId = value.assigned_by ?? value.created_by;
+
+          await NotificationService.createAndSend({
+            vendor_id: value.vendor_id,
+            user_id: value.assign_to,
+            sender_id: senderId,
+            type: NotificationType.LEAD_ASSIGNED,
+            title: "New lead assigned",
+            message: `Lead ${leadName} has been assigned to you.`,
+            entity_type: "lead",
+            entity_id: result.lead.id,
+            redirect_url: `/dashboard/leads/leadstable/details/${result.lead.id}?accountId=${result.lead.account_id}`,
+          });
+        } catch (notificationError: any) {
+          logger.warn("⚠️ Failed to create lead assignment notification", {
+            error: notificationError?.message,
+            lead_id: result.lead.id,
+            assign_to: value.assign_to,
+          });
+        }
+      }
 
       return res.status(201).json({
         success: true,

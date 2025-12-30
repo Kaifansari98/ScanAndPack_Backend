@@ -66,6 +66,8 @@ model VendorMaster {
   statusTypes                 StatusTypeMaster[]
   userLeadTasks               UserLeadTask[]
   users                       UserMaster[]
+  notifications               Notification[]
+  userPushTokens              UserPushToken[]
   addresses                   VendorAddress[]
   taxInfo                     VendorTaxInfo[]
   tokens                      VendorTokens[]
@@ -163,6 +165,9 @@ model UserMaster {
   leadTasksClosed                      UserLeadTask[]                      @relation("LeadTask_ClosedBy")
   leadTasksCreated                     UserLeadTask[]                      @relation("LeadTask_CreatedBy")
   leadTasksAssigned                    UserLeadTask[]                      @relation("LeadTask_User")
+  notificationsReceived                Notification[]                     @relation("NotificationUser")
+  notificationsSent                    Notification[]                     @relation("NotificationSender")
+  pushTokens                           UserPushToken[]
   user_type                            UserTypeMaster                      @relation(fields: [user_type_id], references: [id])
   vendor                               VendorMaster                        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
@@ -1103,6 +1108,64 @@ model IssueLogResponsibleTeamMapping {
   team         MiscellaneousTeamMaster    @relation(fields: [team_id], references: [id], onDelete: Cascade)
 
   @@unique([issue_log_id, team_id])
+}
+
+model Notification {
+  id           Int              @id @default(autoincrement())
+  vendor_id    Int
+  user_id      Int              // receiver
+  sender_id    Int?             // who triggered it
+  type         NotificationType
+  title        String
+  message      String
+  entity_type  String?          // "lead", "task", "chat"
+  entity_id    Int?             // lead_id, task_id, etc
+  redirect_url String?          // frontend deep link
+  is_read      Boolean          @default(false)
+  read_at      DateTime?
+  created_at   DateTime         @default(now())
+  user         UserMaster       @relation("NotificationUser", fields: [user_id], references: [id])
+  sender       UserMaster?      @relation("NotificationSender", fields: [sender_id], references: [id])
+  vendor       VendorMaster     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  deliveryLogs NotificationDeliveryLogs[]
+
+  @@index([user_id, is_read])
+  @@index([vendor_id])
+}
+
+model UserPushToken {
+  id         Int          @id @default(autoincrement())
+  user_id    Int
+  vendor_id  Int
+  token      String       @unique
+  platform   String       // "web"
+  browser    String?      // chrome, edge, firefox
+  is_active  Boolean      @default(true)
+  created_at DateTime     @default(now())
+  last_used  DateTime?
+  user       UserMaster   @relation(fields: [user_id], references: [id])
+  vendor     VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  deliveryLogs NotificationDeliveryLogs[]
+
+  @@index([user_id, vendor_id])
+}
+
+model NotificationDeliveryLogs {
+  id              Int              @id @default(autoincrement())
+  notification_id Int
+  push_token_id   Int
+  status          String           // SENT, FAILED
+  error           String?
+  created_at      DateTime         @default(now())
+  notification    Notification     @relation(fields: [notification_id], references: [id])
+  pushToken       UserPushToken     @relation(fields: [push_token_id], references: [id])
+}
+
+enum NotificationType {
+  LEAD_ASSIGNED
+  TASK_ASSIGNED
+  CHAT_MENTION
+  LEAD_MILESTONE
 }
 
 enum BoxStatus {

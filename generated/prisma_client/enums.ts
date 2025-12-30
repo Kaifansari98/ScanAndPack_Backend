@@ -9,6 +9,16 @@
 * 🟢 You can import this file directly.
 */
 
+export const NotificationType = {
+  LEAD_ASSIGNED: 'LEAD_ASSIGNED',
+  TASK_ASSIGNED: 'TASK_ASSIGNED',
+  CHAT_MENTION: 'CHAT_MENTION',
+  LEAD_MILESTONE: 'LEAD_MILESTONE'
+} as const
+
+export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
+
+
 export const BoxStatus = {
   packed: 'packed',
   unpacked: 'unpacked'

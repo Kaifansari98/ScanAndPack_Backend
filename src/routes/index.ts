@@ -39,6 +39,7 @@ import issueLogRoutes from "./issueLogRoutes";
 import finalHandoverStageRoutes from "./installation/final-handover/FinalHandoverStage.routes";
 import DashboardRouter from "./dashboard/dashboard.route";
 import chatRoutes from "./chat/chat.routes";
+import notificationRoutes from "./notification/notification.routes";
 
 const router = Router();
 
@@ -87,5 +88,6 @@ router.use("/issue-logs", issueLogRoutes);
 
 router.use("/leads/installation/final-handover", finalHandoverStageRoutes);
 router.use("/leads/chats", chatRoutes);
+router.use("/notifications", notificationRoutes);
 
 export { router };

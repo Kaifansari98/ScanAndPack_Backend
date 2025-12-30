@@ -109,7 +109,10 @@ export const ModelName = {
   InstallationIssueLogMaster: 'InstallationIssueLogMaster',
   IssueLogTypeMaster: 'IssueLogTypeMaster',
   IssueLogTypeMapping: 'IssueLogTypeMapping',
-  IssueLogResponsibleTeamMapping: 'IssueLogResponsibleTeamMapping'
+  IssueLogResponsibleTeamMapping: 'IssueLogResponsibleTeamMapping',
+  Notification: 'Notification',
+  UserPushToken: 'UserPushToken',
+  NotificationDeliveryLogs: 'NotificationDeliveryLogs'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1001,6 +1004,52 @@ export const IssueLogResponsibleTeamMappingScalarFieldEnum = {
 } as const
 
 export type IssueLogResponsibleTeamMappingScalarFieldEnum = (typeof IssueLogResponsibleTeamMappingScalarFieldEnum)[keyof typeof IssueLogResponsibleTeamMappingScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  user_id: 'user_id',
+  sender_id: 'sender_id',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  entity_type: 'entity_type',
+  entity_id: 'entity_id',
+  redirect_url: 'redirect_url',
+  is_read: 'is_read',
+  read_at: 'read_at',
+  created_at: 'created_at'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const UserPushTokenScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  vendor_id: 'vendor_id',
+  token: 'token',
+  platform: 'platform',
+  browser: 'browser',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  last_used: 'last_used'
+} as const
+
+export type UserPushTokenScalarFieldEnum = (typeof UserPushTokenScalarFieldEnum)[keyof typeof UserPushTokenScalarFieldEnum]
+
+
+export const NotificationDeliveryLogsScalarFieldEnum = {
+  id: 'id',
+  notification_id: 'notification_id',
+  push_token_id: 'push_token_id',
+  status: 'status',
+  error: 'error',
+  created_at: 'created_at'
+} as const
+
+export type NotificationDeliveryLogsScalarFieldEnum = (typeof NotificationDeliveryLogsScalarFieldEnum)[keyof typeof NotificationDeliveryLogsScalarFieldEnum]
 
 
 export const SortOrder = {
