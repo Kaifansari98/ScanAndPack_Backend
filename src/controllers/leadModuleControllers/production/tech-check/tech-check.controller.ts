@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { TechCheckService } from "../../../../services/production/tech-check/tech-check.service";
 import { prisma } from "../../../../prisma/client";
 import { NotificationService } from "../../../../services/notification/notification.service";
-import { NotificationType } from "@prisma/client";
+import { NotificationType } from "../../../../prisma/generated";
 
 const techCheckService = new TechCheckService();
 

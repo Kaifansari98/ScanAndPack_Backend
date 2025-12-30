@@ -8,7 +8,7 @@ import { prisma } from "../../../prisma/client";
 import logger from "../../../utils/logger";
 import { assignTaskISMService } from "../../../services/leadModuleServices/leadsGeneration/initial-site_measurement.service";
 import { NotificationService } from "../../../services/notification/notification.service";
-import { NotificationType } from "@prisma/client";
+import { NotificationType } from "../../../prisma/generated";
 
 export class PaymentUploadController {
   private paymentUploadService: PaymentUploadService;

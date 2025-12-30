@@ -3,7 +3,7 @@ import { FinalMeasurementService } from "../../../services/leadModuleServices/fi
 import logger from "../../../utils/logger";
 import { prisma } from "../../../prisma/client";
 import { NotificationService } from "../../../services/notification/notification.service";
-import { NotificationType } from "@prisma/client";
+import { NotificationType } from "../../../prisma/generated";
 import {
   uploadToWasabiFinalMeasurementDocFile,
   uploadToWasabiFinalMeasurementSitePhotoFile,

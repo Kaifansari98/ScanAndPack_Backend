@@ -5,7 +5,7 @@ import { uploadToWasabClientApprovalDocumentationFile } from "../../../utils/was
 import fs from "node:fs/promises";
 import { prisma } from "../../../prisma/client";
 import { NotificationService } from "../../../services/notification/notification.service";
-import { NotificationType } from "@prisma/client";
+import { NotificationType } from "../../../prisma/generated";
 
 const clientApprovalService = new ClientApprovalService();
 

@@ -1,6 +1,6 @@
 import { prisma } from "../../prisma/client";
 import { NotificationService } from "../notification/notification.service";
-import { NotificationType } from "@prisma/client";
+import { NotificationType, Prisma, SupervisorStatus } from "../../prisma/generated";
 import {
   AddPaymentDto,
   CreateBookingStageDto,
@@ -9,7 +9,6 @@ import { GetObjectCommand } from "@aws-sdk/client-s3";
 import wasabi, { generateSignedUrl } from "../../utils/wasabiClient";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import logger from "../../utils/logger";
-import { Prisma, SupervisorStatus } from "../../prisma/generated";
 import { isLeadComplete } from "../../validations/leadValidation";
 import { cache } from "../../utils/cache";
 

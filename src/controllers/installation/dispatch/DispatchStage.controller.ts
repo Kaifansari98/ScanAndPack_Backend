@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { prisma } from "../../../prisma/client";
 import { NotificationService } from "../../../services/notification/notification.service";
-import { NotificationType } from "@prisma/client";
+import { NotificationType } from "../../../prisma/generated";
 import { DispatchStageService } from "../../../services/installation/dispatch/DispatchStage.service";
 import { ApiResponse } from "../../../utils/apiResponse";
 import {

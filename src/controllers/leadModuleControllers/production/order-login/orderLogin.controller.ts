@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { OrderLoginService } from "../../../../services/production/order-login/orderLogin.service";
 import { prisma } from "../../../../prisma/client";
 import { NotificationService } from "../../../../services/notification/notification.service";
-import { NotificationType } from "@prisma/client";
+import { NotificationType } from "../../../../prisma/generated";
 import {
   generateSignedUrl,
   uploadToWasabiProductionFilesFile,

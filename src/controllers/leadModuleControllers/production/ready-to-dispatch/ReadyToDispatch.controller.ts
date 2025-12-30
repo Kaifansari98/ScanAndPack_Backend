@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { prisma } from "../../../../prisma/client";
 import { NotificationService } from "../../../../services/notification/notification.service";
-import { NotificationType } from "@prisma/client";
+import { NotificationType } from "../../../../prisma/generated";
 import { ReadyToDispatchService } from "../../../../services/production/ready-to-dispatch/ReadyToDispatch.service";
 import { uploadToWasabiCurrentSitePhotosReadyToDispatchFile } from "../../../../utils/wasabiClient";
 import logger from "../../../../utils/logger";

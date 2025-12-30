@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { NotificationService } from "../../services/notification/notification.service";
-import { NotificationType } from "@prisma/client";
+import { NotificationType } from "../../prisma/generated";
 
 export class NotificationController {
   static async send(req: Request, res: Response) {
