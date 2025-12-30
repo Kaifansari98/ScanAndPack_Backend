@@ -1,5 +1,8 @@
 import { Request, Response } from "express";
 import { TechCheckService } from "../../../../services/production/tech-check/tech-check.service";
+import { prisma } from "../../../../prisma/client";
+import { NotificationService } from "../../../../services/notification/notification.service";
+import { NotificationType } from "@prisma/client";
 
 const techCheckService = new TechCheckService();
 
@@ -72,6 +75,44 @@ export class TechCheckController {
         Number(assign_to_user_id),
         Number(account_id)
       );
+
+      try {
+        const assignee = await prisma.userMaster.findUnique({
+          where: { id: Number(assign_to_user_id) },
+          select: {
+            user_type: { select: { user_type: true } },
+          },
+        });
+        const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
+        if (assigneeRole !== "admin" && assigneeRole !== "super-admin") {
+          const lead = await prisma.leadMaster.findUnique({
+            where: { id: leadId },
+            select: { firstname: true, lastname: true },
+          });
+          const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+
+          await NotificationService.createAndSend({
+            vendor_id: vendorId,
+            user_id: Number(assign_to_user_id),
+            sender_id: userId,
+            type: NotificationType.LEAD_ASSIGNED,
+            title: "Lead assigned",
+            message:
+              leadName.length > 0
+                ? `Lead ${leadName} has been assigned to you.`
+                : "A lead has been assigned to you.",
+            entity_type: "lead",
+            entity_id: leadId,
+            redirect_url: `/dashboard/leads/details/${leadId}?accountId=${account_id}`,
+          });
+        }
+      } catch (notificationError: any) {
+        console.error("⚠️ Failed to send order-login assignment notification", {
+          error: notificationError?.message,
+          lead_id: leadId,
+          assignee_user_id: assign_to_user_id,
+        });
+      }
 
       return res.status(200).json({
         success: true,

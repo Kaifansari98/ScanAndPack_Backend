@@ -147,7 +147,7 @@ export class LeadController {
             message: `Lead ${leadName} has been assigned to you.`,
             entity_type: "lead",
             entity_id: result.lead.id,
-            redirect_url: `/dashboard/leads/leadstable/details/${result.lead.id}?accountId=${result.lead.account_id}`,
+            redirect_url: `/dashboard/leads/details/${result.lead.id}?accountId=${result.lead.account_id}`,
           });
         } catch (notificationError: any) {
           logger.warn("⚠️ Failed to create lead assignment notification", {

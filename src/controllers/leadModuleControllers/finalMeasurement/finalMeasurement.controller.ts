@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import { FinalMeasurementService } from "../../../services/leadModuleServices/finalMeasurementStage/finalMeasurement.service";
 import logger from "../../../utils/logger";
+import { prisma } from "../../../prisma/client";
+import { NotificationService } from "../../../services/notification/notification.service";
+import { NotificationType } from "@prisma/client";
 import {
   uploadToWasabiFinalMeasurementDocFile,
   uploadToWasabiFinalMeasurementSitePhotoFile,
@@ -510,6 +513,45 @@ export class FinalMeasurementController {
         assignee_user_id: Number(user_id),
         created_by: Number(actorId),
       });
+
+      try {
+        const assignee = await prisma.userMaster.findUnique({
+          where: { id: Number(user_id) },
+          select: {
+            id: true,
+            user_type: { select: { user_type: true } },
+          },
+        });
+        const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
+        if (assigneeRole !== "admin" && assigneeRole !== "super-admin") {
+          const lead = await prisma.leadMaster.findUnique({
+            where: { id: leadId },
+            select: { firstname: true, lastname: true },
+          });
+          const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+
+          await NotificationService.createAndSend({
+            vendor_id: result.lead.vendor_id,
+            user_id: Number(user_id),
+            sender_id: Number(actorId) || null,
+            type: NotificationType.TASK_ASSIGNED,
+            title: "New task assigned",
+            message:
+              leadName.length > 0
+                ? `Task assigned for ${leadName}: ${task_type}.`
+                : `Task assigned: ${task_type}.`,
+            entity_type: "task",
+            entity_id: result.task.id,
+            redirect_url: `/dashboard/my-tasks?taskId=${result.task.id}`,
+          });
+        }
+      } catch (notificationError: any) {
+        logger.warn("⚠️ Failed to send FM task assignment notification", {
+          error: notificationError?.message,
+          lead_id: leadId,
+          assignee_user_id: user_id,
+        });
+      }
 
       return res.status(201).json({
         success: true,

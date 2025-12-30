@@ -3,6 +3,9 @@ import { ClientApprovalService } from "../../../services/leadModuleServices/clie
 import { ApiResponse } from "../../../utils/apiResponse";
 import { uploadToWasabClientApprovalDocumentationFile } from "../../../utils/wasabiClient";
 import fs from "node:fs/promises";
+import { prisma } from "../../../prisma/client";
+import { NotificationService } from "../../../services/notification/notification.service";
+import { NotificationType } from "@prisma/client";
 
 const clientApprovalService = new ClientApprovalService();
 
@@ -291,6 +294,44 @@ export class ClientApprovalController {
       };
   
       const result = await clientApprovalService.requestToTechCheck(dto);
+
+      try {
+        const assignee = await prisma.userMaster.findUnique({
+          where: { id: dto.assign_to_user_id },
+          select: {
+            user_type: { select: { user_type: true } },
+          },
+        });
+        const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
+        if (assigneeRole !== "admin" && assigneeRole !== "super-admin") {
+          const lead = await prisma.leadMaster.findUnique({
+            where: { id: dto.lead_id },
+            select: { firstname: true, lastname: true },
+          });
+          const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+
+          await NotificationService.createAndSend({
+            vendor_id: dto.vendor_id,
+            user_id: dto.assign_to_user_id,
+            sender_id: dto.created_by,
+            type: NotificationType.LEAD_ASSIGNED,
+            title: "Lead assigned",
+            message:
+              leadName.length > 0
+                ? `Lead ${leadName} has been assigned to you.`
+                : "A lead has been assigned to you.",
+            entity_type: "lead",
+            entity_id: dto.lead_id,
+            redirect_url: `/dashboard/leads/details/${dto.lead_id}?accountId=${dto.account_id}`,
+          });
+        }
+      } catch (notificationError: any) {
+        console.error("⚠️ Failed to send tech-check assignment notification", {
+          error: notificationError?.message,
+          lead_id: dto.lead_id,
+          assignee_user_id: dto.assign_to_user_id,
+        });
+      }
   
       res.status(200).json({
         success: true,

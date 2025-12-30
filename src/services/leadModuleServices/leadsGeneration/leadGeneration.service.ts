@@ -438,7 +438,6 @@ export const createLeadService = async (
   };
 };
 
-
 export const uploadMoreSitePhotosService = async (
   payload: { vendor_id: number; lead_id: number; created_by: number },
   files: Express.Multer.File[]
@@ -1699,7 +1698,7 @@ export const assignLeadToUser = async (
         message,
         entity_type: "lead",
         entity_id: lead.id,
-        redirect_url: `/dashboard/leads/leadstable/details/${lead.id}?accountId=${lead.account_id}`,
+        redirect_url: `/dashboard/leads/details/${lead.id}?accountId=${lead.account_id}`,
       });
     } catch (notificationError: any) {
       logger.warn("⚠️ Failed to create lead assignment notification", {

@@ -1,4 +1,6 @@
 import { prisma } from "../../prisma/client";
+import { NotificationService } from "../notification/notification.service";
+import { NotificationType } from "@prisma/client";
 import {
   AddPaymentDto,
   CreateBookingStageDto,
@@ -109,7 +111,7 @@ export class BookingStageService {
   }
 
   public async createBookingStage(data: CreateBookingStageDto) {
-    return await prisma.$transaction(
+    const response = await prisma.$transaction(
       async (tx: any) => {
         const response: any = {
           documentsUploaded: [],
@@ -396,6 +398,48 @@ export class BookingStageService {
         timeout: 15000, // 15 seconds instead of 5
       }
     );
+
+    try {
+      const supervisor = await prisma.userMaster.findUnique({
+        where: { id: data.siteSupervisorId },
+        select: {
+          user_name: true,
+          user_type: { select: { user_type: true } },
+        },
+      });
+      const supervisorRole = supervisor?.user_type?.user_type?.toLowerCase();
+
+      if (supervisorRole === "site-supervisor") {
+        const lead = await prisma.leadMaster.findUnique({
+          where: { id: data.lead_id },
+          select: { firstname: true, lastname: true },
+        });
+        const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+
+        await NotificationService.createAndSend({
+          vendor_id: data.vendor_id,
+          user_id: data.siteSupervisorId,
+          sender_id: data.created_by,
+          type: NotificationType.LEAD_ASSIGNED,
+          title: "Lead assigned",
+          message:
+            leadName.length > 0
+              ? `Lead ${leadName} has been assigned to you.`
+              : "A lead has been assigned to you.",
+          entity_type: "lead",
+          entity_id: data.lead_id,
+          redirect_url: `/dashboard/leads/details/${data.lead_id}?accountId=${data.account_id}`,
+        });
+      }
+    } catch (notificationError: any) {
+      logger.warn("⚠️ Failed to send site supervisor assignment notification", {
+        error: notificationError?.message,
+        lead_id: data.lead_id,
+        assignee_user_id: data.siteSupervisorId,
+      });
+    }
+
+    return response;
   }
 
   public async addBookingStageFiles(data: {
