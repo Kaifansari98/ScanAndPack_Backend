@@ -1,4 +1,7 @@
 import { Request, Response } from "express";
+import { prisma } from "../../../prisma/client";
+import { NotificationService } from "../../../services/notification/notification.service";
+import { NotificationType } from "@prisma/client";
 import { DispatchStageService } from "../../../services/installation/dispatch/DispatchStage.service";
 import { ApiResponse } from "../../../utils/apiResponse";
 import {
@@ -437,6 +440,44 @@ export class DispatchStageController {
         remark
       );
 
+      try {
+        const assignee = await prisma.userMaster.findUnique({
+          where: { id: Number(created_by) },
+          select: {
+            user_type: { select: { user_type: true } },
+          },
+        });
+        const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
+        if (assigneeRole !== "admin" && assigneeRole !== "super-admin") {
+          const lead = await prisma.leadMaster.findUnique({
+            where: { id: Number(leadId) },
+            select: { firstname: true, lastname: true },
+          });
+          const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+
+          await NotificationService.createAndSend({
+            vendor_id: Number(vendorId),
+            user_id: Number(created_by),
+            sender_id: Number(created_by),
+            type: NotificationType.TASK_ASSIGNED,
+            title: "New task assigned",
+            message:
+              leadName.length > 0
+                ? `Task assigned for ${leadName}: Pending Materials.`
+                : "Task assigned: Pending Materials.",
+            entity_type: "task",
+            entity_id: task.id,
+            redirect_url: `/dashboard/my-tasks?taskId=${task.id}`,
+          });
+        }
+      } catch (notificationError: any) {
+        logger.warn("⚠️ Failed to send pending material notification", {
+          error: notificationError?.message,
+          lead_id: leadId,
+          assignee_user_id: created_by,
+        });
+      }
+
       return res.status(200).json({
         success: true,
         message: "Pending Material task created successfully",
@@ -487,6 +528,44 @@ export class DispatchStageController {
         due_date,
         remark
       );
+
+      try {
+        const assignee = await prisma.userMaster.findUnique({
+          where: { id: Number(created_by) },
+          select: {
+            user_type: { select: { user_type: true } },
+          },
+        });
+        const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
+        if (assigneeRole !== "admin" && assigneeRole !== "super-admin") {
+          const lead = await prisma.leadMaster.findUnique({
+            where: { id: Number(leadId) },
+            select: { firstname: true, lastname: true },
+          });
+          const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+
+          await NotificationService.createAndSend({
+            vendor_id: Number(vendorId),
+            user_id: Number(created_by),
+            sender_id: Number(created_by),
+            type: NotificationType.TASK_ASSIGNED,
+            title: "New task assigned",
+            message:
+              leadName.length > 0
+                ? `Task assigned for ${leadName}: Pending Work.`
+                : "Task assigned: Pending Work.",
+            entity_type: "task",
+            entity_id: task.id,
+            redirect_url: `/dashboard/my-tasks?taskId=${task.id}`,
+          });
+        }
+      } catch (notificationError: any) {
+        logger.warn("⚠️ Failed to send pending work notification", {
+          error: notificationError?.message,
+          lead_id: leadId,
+          assignee_user_id: created_by,
+        });
+      }
 
       return res.status(200).json({
         success: true,

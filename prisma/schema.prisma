@@ -1140,9 +1140,10 @@ model UserPushToken {
   token      String       @unique
   platform   String       // "web"
   browser    String?      // chrome, edge, firefox
+  device_id  String?      // optional fingerprint
   is_active  Boolean      @default(true)
   created_at DateTime     @default(now())
-  last_used  DateTime?
+  last_used_at DateTime?  @map("last_used")
   user       UserMaster   @relation(fields: [user_id], references: [id])
   vendor     VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   deliveryLogs NotificationDeliveryLogs[]

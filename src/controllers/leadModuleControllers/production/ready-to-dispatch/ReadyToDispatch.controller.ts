@@ -273,6 +273,67 @@ export class ReadyToDispatchController {
         });
       }
 
+      try {
+        const vendorId = result.lead.vendor_id;
+        const accountId = result.lead.account_id;
+        const [admins, mappings, lead] = await Promise.all([
+          prisma.userMaster.findMany({
+            where: {
+              vendor_id: vendorId,
+              user_type: { user_type: { in: ["admin", "super-admin"] } },
+            },
+            select: { id: true },
+          }),
+          prisma.leadUserMapping.findMany({
+            where: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              status: "active",
+            },
+            select: { user_id: true },
+          }),
+          prisma.leadMaster.findUnique({
+            where: { id: leadId },
+            select: { firstname: true, lastname: true },
+          }),
+        ]);
+
+        const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+        const recipientIds = new Set<number>();
+        admins.forEach((admin) => recipientIds.add(admin.id));
+        mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
+
+        if (recipientIds.size > 0) {
+          const redirectUrl = accountId
+            ? `/dashboard/leads/details/${leadId}?accountId=${accountId}`
+            : `/dashboard/leads/details/${leadId}`;
+
+          await Promise.all(
+            Array.from(recipientIds).map((recipientId) =>
+              NotificationService.createAndSend({
+                vendor_id: vendorId,
+                user_id: recipientId,
+                sender_id: Number(actorId) || null,
+                type: NotificationType.LEAD_MILESTONE,
+                title: "Lead moved to Installation",
+                message:
+                  leadName.length > 0
+                    ? `Lead ${leadName} moved to Installation stage.`
+                    : "Lead moved to Installation stage.",
+                entity_type: "lead",
+                entity_id: leadId,
+                redirect_url: redirectUrl,
+              })
+            )
+          );
+        }
+      } catch (milestoneError: any) {
+        logger.warn("⚠️ Failed to send production-to-installation notification", {
+          error: milestoneError?.message,
+          lead_id: leadId,
+        });
+      }
+
       return res.status(201).json({
         success: true,
         message: "Site Readiness task assigned and lead status updated",

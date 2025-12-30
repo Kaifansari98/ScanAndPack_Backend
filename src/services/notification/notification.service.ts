@@ -28,6 +28,7 @@ export type RegisterPushTokenInput = {
   token: string;
   platform: string;
   browser?: string | null;
+  device_id?: string | null;
 };
 
 export type PushDeliverySummary = {
@@ -155,7 +156,7 @@ export const NotificationService = {
 
     await prisma.userPushToken.updateMany({
       where: { id: { in: tokens.map((item) => item.id) } },
-      data: { last_used: new Date() },
+      data: { last_used_at: new Date() },
     });
 
     const invalidTokenIds = response.responses
@@ -269,8 +270,9 @@ export const NotificationService = {
         vendor_id: input.vendor_id,
         platform: input.platform,
         browser: input.browser ?? null,
+        device_id: input.device_id ?? null,
         is_active: true,
-        last_used: new Date(),
+        last_used_at: new Date(),
       },
       create: {
         user_id: input.user_id,
@@ -278,8 +280,9 @@ export const NotificationService = {
         token: input.token,
         platform: input.platform,
         browser: input.browser ?? null,
+        device_id: input.device_id ?? null,
         is_active: true,
-        last_used: new Date(),
+        last_used_at: new Date(),
       },
     });
   },

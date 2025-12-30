@@ -5993,9 +5993,10 @@ export const UserPushTokenScalarFieldEnum = {
   token: 'token',
   platform: 'platform',
   browser: 'browser',
+  device_id: 'device_id',
   is_active: 'is_active',
   created_at: 'created_at',
-  last_used: 'last_used'
+  last_used_at: 'last_used_at'
 } as const
 
 export type UserPushTokenScalarFieldEnum = (typeof UserPushTokenScalarFieldEnum)[keyof typeof UserPushTokenScalarFieldEnum]

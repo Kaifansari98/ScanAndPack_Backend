@@ -332,6 +332,65 @@ export class ClientApprovalController {
           assignee_user_id: dto.assign_to_user_id,
         });
       }
+
+      try {
+        const [admins, mappings, lead] = await Promise.all([
+          prisma.userMaster.findMany({
+            where: {
+              vendor_id: dto.vendor_id,
+              user_type: { user_type: { in: ["admin", "super-admin"] } },
+            },
+            select: { id: true },
+          }),
+          prisma.leadUserMapping.findMany({
+            where: {
+              vendor_id: dto.vendor_id,
+              lead_id: dto.lead_id,
+              status: "active",
+            },
+            select: { user_id: true },
+          }),
+          prisma.leadMaster.findUnique({
+            where: { id: dto.lead_id },
+            select: { firstname: true, lastname: true },
+          }),
+        ]);
+
+        const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+        const recipientIds = new Set<number>();
+        admins.forEach((admin) => recipientIds.add(admin.id));
+        mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
+
+        if (recipientIds.size > 0) {
+          const redirectUrl = dto.account_id
+            ? `/dashboard/leads/details/${dto.lead_id}?accountId=${dto.account_id}`
+            : `/dashboard/leads/details/${dto.lead_id}`;
+
+          await Promise.all(
+            Array.from(recipientIds).map((recipientId) =>
+              NotificationService.createAndSend({
+                vendor_id: dto.vendor_id,
+                user_id: recipientId,
+                sender_id: dto.created_by,
+                type: NotificationType.LEAD_MILESTONE,
+                title: "Lead moved to Production",
+                message:
+                  leadName.length > 0
+                    ? `Lead ${leadName} moved to Production stage.`
+                    : "Lead moved to Production stage.",
+                entity_type: "lead",
+                entity_id: dto.lead_id,
+                redirect_url: redirectUrl,
+              })
+            )
+          );
+        }
+      } catch (milestoneError: any) {
+        console.error("⚠️ Failed to send project-to-production notification", {
+          error: milestoneError?.message,
+          lead_id: dto.lead_id,
+        });
+      }
   
       res.status(200).json({
         success: true,

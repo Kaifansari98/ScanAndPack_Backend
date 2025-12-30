@@ -142,6 +142,8 @@ export class NotificationController {
       const platform = String(req.body.platform || "").trim();
       const browser =
         req.body.browser !== undefined ? String(req.body.browser) : null;
+      const deviceId =
+        req.body.device_id !== undefined ? String(req.body.device_id) : null;
 
       if (!vendorId || !userId || !token || !platform) {
         return res.status(400).json({
@@ -156,6 +158,7 @@ export class NotificationController {
         token,
         platform,
         browser,
+        device_id: deviceId,
       });
 
       return res.status(200).json({
