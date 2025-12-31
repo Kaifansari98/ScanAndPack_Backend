@@ -1,4 +1,7 @@
 import { prisma } from "../../prisma/client";
+import { NotificationType } from "../../prisma/generated";
+import { NotificationService } from "../notification/notification.service";
+import logger from "../../utils/logger";
 import {
   generateSignedUrl,
   uploadToWasabiLeadChatAttachment,
@@ -32,7 +35,7 @@ export class ChatService {
   }
 
   static async createChatRoomIfMissing(leadId: number, userId: number) {
-    return await prisma.$transaction(async (tx) => {
+    const messageResult = await prisma.$transaction(async (tx) => {
       const lead = await tx.leadMaster.findUnique({
         where: { id: leadId },
         select: { id: true, vendor_id: true },
@@ -225,7 +228,7 @@ export class ChatService {
     // ==============================
     // PHASE 2: DATABASE TRANSACTION
     // ==============================
-    return await prisma.$transaction(async (tx) => {
+    const messageResult = await prisma.$transaction(async (tx) => {
       const lead = await tx.leadMaster.findFirst({
         where: { id: leadId, vendor_id: vendorId, is_deleted: false },
         select: { id: true, vendor_id: true, account_id: true },
@@ -319,6 +322,58 @@ export class ChatService {
         attachments,
       };
     });
+
+    const mentionIds = Array.from(
+      new Set((mentionUserIds || []).filter((id) => id && id > 0))
+    ).filter((id) => id !== userId);
+
+    if (mentionIds.length > 0) {
+      try {
+        const [lead, sender] = await Promise.all([
+          prisma.leadMaster.findUnique({
+            where: { id: leadId },
+            select: { account_id: true, firstname: true, lastname: true },
+          }),
+          prisma.userMaster.findUnique({
+            where: { id: userId },
+            select: { user_name: true },
+          }),
+        ]);
+
+        const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+        const senderName = sender?.user_name ?? "Someone";
+        const redirectUrl = lead?.account_id
+          ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}&tab=chats&messageId=${messageResult.id}`
+          : `/dashboard/leads/details/${leadId}?tab=chats&messageId=${messageResult.id}`;
+
+        await Promise.all(
+          mentionIds.map((mentionedUserId) =>
+            NotificationService.createAndSend({
+              vendor_id: vendorId,
+              user_id: mentionedUserId,
+              sender_id: userId,
+              type: NotificationType.CHAT_MENTION,
+              title: "Mentioned in chat",
+              message:
+                leadName.length > 0
+                  ? `${senderName} mentioned you in ${leadName}.`
+                  : `${senderName} mentioned you in a lead chat.`,
+              entity_type: "chat",
+              entity_id: messageResult.id,
+              redirect_url: redirectUrl,
+            })
+          )
+        );
+      } catch (error: any) {
+        logger.warn("⚠️ Failed to send chat mention notifications", {
+          error: error?.message,
+          lead_id: leadId,
+          mention_ids: mentionIds,
+        });
+      }
+    }
+
+    return messageResult;
   }
 
   static async getMessagesByLead(params: {
