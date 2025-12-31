@@ -135,6 +135,8 @@ export class ChatService {
 
       return { created: true, room };
     });
+
+    return messageResult;
   }
 
   static async getChatMembersByLead(leadId: number, vendorId: number) {
