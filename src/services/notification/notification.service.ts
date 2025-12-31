@@ -43,6 +43,9 @@ export type NotificationWithDelivery = Notification & {
     sent: number;
     failed: number;
   };
+  sender?: {
+    user_name: string;
+  } | null;
 };
 
 export type ListNotificationsResult = {
@@ -204,6 +207,13 @@ export const NotificationService = {
       orderBy: { created_at: "desc" },
       take,
       skip,
+      include: {
+        sender: {
+          select: {
+            user_name: true,
+          },
+        },
+      },
     });
 
     const unread_count = await prisma.notification.count({
