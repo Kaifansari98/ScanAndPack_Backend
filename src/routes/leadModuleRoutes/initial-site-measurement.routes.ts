@@ -65,7 +65,7 @@ const memoryUploadFields = memoryUpload.fields([
  *
  * File fields expected:
  * - current_site_photos (optional): multiple image files (JPEG, JPG, PNG, GIF) - doc_type_id = 1
- * - upload_pdf (required): single PDF file - doc_type_id = 3
+ * - upload_pdf (required): single PDF or image file - doc_type_id = 3
  * - payment_image (optional): single image file - if uploaded, payment_text becomes required
  */
 router.post(

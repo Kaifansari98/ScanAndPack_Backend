@@ -450,7 +450,7 @@ export class PaymentUploadService {
   ): Promise<PaymentUploadResponseDto> {
     try {
       if (!data.pdfFile) {
-        throw new Error("PDF file is mandatory");
+        throw new Error("Document file is mandatory");
       }
 
       const response: PaymentUploadResponseDto = {
@@ -547,7 +547,7 @@ export class PaymentUploadService {
 
           if (!pdfDocType) {
             throw new Error(
-              "Document type (PDF uploads) not found for this vendor"
+              "Document type (measurement documents) not found for this vendor"
             );
           }
 
@@ -816,7 +816,7 @@ export class PaymentUploadService {
   ): Promise<PaymentUploadResponseDto> {
     try {
       if (!data.pdfFile) {
-        throw new Error("BD-ISM PDF document is mandatory");
+        throw new Error("BD-ISM document is mandatory");
       }
 
       const response: PaymentUploadResponseDto = {
@@ -913,7 +913,7 @@ export class PaymentUploadService {
           });
 
           if (!pdfType) {
-            throw new Error("Document type for BD-ISM PDF not found");
+            throw new Error("Document type for BD-ISM document not found");
           }
 
           const pdfDoc = await tx.leadDocuments.create({
@@ -2112,7 +2112,7 @@ export class PaymentUploadService {
     pdfFile: Express.Multer.File
   ) {
     if (!pdfFile) {
-      throw Object.assign(new Error("PDF file is required"), {
+      throw Object.assign(new Error("Document file is required"), {
         statusCode: 400,
       });
     }
@@ -2159,7 +2159,9 @@ export class PaymentUploadService {
 
       if (existingDoc.documentType?.tag !== "Type 3") {
         throw Object.assign(
-          new Error("Only PDF documents can be replaced via this endpoint"),
+          new Error(
+            "Only initial site measurement documents can be replaced via this endpoint"
+          ),
           { statusCode: 400 }
         );
       }
@@ -2206,7 +2208,7 @@ export class PaymentUploadService {
           vendor_id: vendorId,
           lead_id: existingDoc.lead_id!,
           account_id: existingDoc.account_id!,
-          action: "Initial Site Measurement PDF updated successfully.",
+          action: "Initial Site Measurement document updated successfully.",
           action_type: "UPDATE",
           created_by: userId,
           created_at: new Date(),

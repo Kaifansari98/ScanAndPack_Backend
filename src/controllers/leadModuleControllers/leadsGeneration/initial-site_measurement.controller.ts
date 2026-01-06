@@ -212,11 +212,18 @@ export class PaymentUploadController {
       const pdfFile = files?.upload_pdf?.[0];
       const paymentImageFile = files?.payment_image?.[0];
 
-      // Validate PDF file if provided
-      if (pdfFile && pdfFile.mimetype !== "application/pdf") {
+      // Validate document file if provided (PDF or image)
+      const validDocumentTypes = [
+        "application/pdf",
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/gif",
+      ];
+      if (pdfFile && !validDocumentTypes.includes(pdfFile.mimetype)) {
         res.status(400).json({
           success: false,
-          message: "Upload file must be a PDF",
+          message: "Upload file must be a PDF or image",
         });
         return;
       }
@@ -1122,10 +1129,17 @@ export class PaymentUploadController {
         return;
       }
 
-      if (pdfFile.mimetype !== "application/pdf") {
+      const validDocumentTypes = [
+        "application/pdf",
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/gif",
+      ];
+      if (!validDocumentTypes.includes(pdfFile.mimetype)) {
         res.status(400).json({
           success: false,
-          message: "Upload file must be a PDF",
+          message: "Upload file must be a PDF or image",
         });
         return;
       }
@@ -1167,7 +1181,7 @@ export class PaymentUploadController {
 
       res.status(200).json({
         success: true,
-        message: "PDF document updated successfully",
+        message: "Document updated successfully",
         data: result,
       });
     } catch (error: any) {
