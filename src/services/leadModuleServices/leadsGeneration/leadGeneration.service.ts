@@ -122,18 +122,46 @@ export const createLeadService = async (
           product_structures,
           fileCount: files.length,
         });
-        // 1. AccountMaster (create first to get account_id)
-        const account = await tx.accountMaster.create({
-          data: {
-            name: `${firstname} ${lastname}`,
-            country_code,
-            contact_no,
-            alt_contact_no,
-            email,
-            vendor_id,
-            created_by,
-          },
-        });
+        // 1. AccountMaster (reuse if same phone/email exists for this vendor)
+        const matchConditions: Array<Record<string, string>> = [];
+        const normalizedEmail = email?.trim();
+
+        if (contact_no) {
+          matchConditions.push({ contact_no });
+          matchConditions.push({ alt_contact_no: contact_no });
+        }
+        if (alt_contact_no) {
+          matchConditions.push({ contact_no: alt_contact_no });
+          matchConditions.push({ alt_contact_no });
+        }
+        if (normalizedEmail) {
+          matchConditions.push({ email: normalizedEmail });
+        }
+
+        const existingAccount =
+          matchConditions.length > 0
+            ? await tx.accountMaster.findFirst({
+                where: {
+                  vendor_id,
+                  is_deleted: false,
+                  OR: matchConditions,
+                },
+              })
+            : null;
+
+        const account =
+          existingAccount ??
+          (await tx.accountMaster.create({
+            data: {
+              name: `${firstname} ${lastname}`,
+              country_code,
+              contact_no,
+              alt_contact_no,
+              email: normalizedEmail,
+              vendor_id,
+              created_by,
+            },
+          }));
 
       // 2) ⬅️ NEW: generate lead_code for this vendor
       const lead_code = await generateLeadCode(tx, vendor_id);
