@@ -247,6 +247,7 @@ export class ClientDocumentationService {
             account_id: data.account_id,
             lead_id: data.lead_id,
             vendor_id: data.vendor_id,
+            tech_check_status: "REVISED",
           },
         });
 

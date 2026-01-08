@@ -63,7 +63,8 @@ export type DocumentType = (typeof DocumentType)[keyof typeof DocumentType]
 export const TechCheckStatus = {
   PENDING: 'PENDING',
   APPROVED: 'APPROVED',
-  REJECTED: 'REJECTED'
+  REJECTED: 'REJECTED',
+  REVISED: 'REVISED'
 } as const
 
 export type TechCheckStatus = (typeof TechCheckStatus)[keyof typeof TechCheckStatus]

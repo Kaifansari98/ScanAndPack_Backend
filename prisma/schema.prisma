@@ -1199,6 +1199,7 @@ enum TechCheckStatus {
   PENDING
   APPROVED
   REJECTED
+  REVISED
 }
 
 enum LedgerType {
