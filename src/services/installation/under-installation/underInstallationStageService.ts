@@ -894,6 +894,19 @@ export class UnderInstallationStageService {
         factoryAssigneeId = factoryMapping?.user_id ?? null;
       }
 
+      const leadStageRecord = await tx.leadMaster.findUnique({
+        where: { id: lead_id },
+        select: { status_id: true },
+      });
+      const leadStage = leadStageRecord?.status_id
+        ? (
+            await tx.statusTypeMaster.findUnique({
+              where: { id: leadStageRecord.status_id },
+              select: { type: true },
+            })
+          )?.type ?? null
+        : null;
+
       const miscRemark = `**${reorder_material_details}** - ${problem_description}`;
 
       await tx.userLeadTask.create({
@@ -903,6 +916,7 @@ export class UnderInstallationStageService {
           account_id,
           user_id: factoryAssigneeId ?? created_by,
           task_type: "Miscellaneous",
+          lead_stage: leadStage,
           // due_date cannot be null in schema; use expected date when provided else now.
           due_date: expected_ready_date
             ? new Date(expected_ready_date)

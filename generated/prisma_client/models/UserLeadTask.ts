@@ -55,6 +55,7 @@ export type UserLeadTaskMinAggregateOutputType = {
   vendor_id: number | null
   user_id: number | null
   task_type: string | null
+  lead_stage: string | null
   due_date: Date | null
   remark: string | null
   status: $Enums.LeadTaskStatus | null
@@ -73,6 +74,7 @@ export type UserLeadTaskMaxAggregateOutputType = {
   vendor_id: number | null
   user_id: number | null
   task_type: string | null
+  lead_stage: string | null
   due_date: Date | null
   remark: string | null
   status: $Enums.LeadTaskStatus | null
@@ -91,6 +93,7 @@ export type UserLeadTaskCountAggregateOutputType = {
   vendor_id: number
   user_id: number
   task_type: number
+  lead_stage: number
   due_date: number
   remark: number
   status: number
@@ -133,6 +136,7 @@ export type UserLeadTaskMinAggregateInputType = {
   vendor_id?: true
   user_id?: true
   task_type?: true
+  lead_stage?: true
   due_date?: true
   remark?: true
   status?: true
@@ -151,6 +155,7 @@ export type UserLeadTaskMaxAggregateInputType = {
   vendor_id?: true
   user_id?: true
   task_type?: true
+  lead_stage?: true
   due_date?: true
   remark?: true
   status?: true
@@ -169,6 +174,7 @@ export type UserLeadTaskCountAggregateInputType = {
   vendor_id?: true
   user_id?: true
   task_type?: true
+  lead_stage?: true
   due_date?: true
   remark?: true
   status?: true
@@ -274,6 +280,7 @@ export type UserLeadTaskGroupByOutputType = {
   vendor_id: number
   user_id: number
   task_type: string
+  lead_stage: string | null
   due_date: Date
   remark: string | null
   status: $Enums.LeadTaskStatus
@@ -315,6 +322,7 @@ export type UserLeadTaskWhereInput = {
   vendor_id?: Prisma.IntFilter<"UserLeadTask"> | number
   user_id?: Prisma.IntFilter<"UserLeadTask"> | number
   task_type?: Prisma.StringFilter<"UserLeadTask"> | string
+  lead_stage?: Prisma.StringNullableFilter<"UserLeadTask"> | string | null
   due_date?: Prisma.DateTimeFilter<"UserLeadTask"> | Date | string
   remark?: Prisma.StringNullableFilter<"UserLeadTask"> | string | null
   status?: Prisma.EnumLeadTaskStatusFilter<"UserLeadTask"> | $Enums.LeadTaskStatus
@@ -339,6 +347,7 @@ export type UserLeadTaskOrderByWithRelationInput = {
   vendor_id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   task_type?: Prisma.SortOrder
+  lead_stage?: Prisma.SortOrderInput | Prisma.SortOrder
   due_date?: Prisma.SortOrder
   remark?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -366,6 +375,7 @@ export type UserLeadTaskWhereUniqueInput = Prisma.AtLeast<{
   vendor_id?: Prisma.IntFilter<"UserLeadTask"> | number
   user_id?: Prisma.IntFilter<"UserLeadTask"> | number
   task_type?: Prisma.StringFilter<"UserLeadTask"> | string
+  lead_stage?: Prisma.StringNullableFilter<"UserLeadTask"> | string | null
   due_date?: Prisma.DateTimeFilter<"UserLeadTask"> | Date | string
   remark?: Prisma.StringNullableFilter<"UserLeadTask"> | string | null
   status?: Prisma.EnumLeadTaskStatusFilter<"UserLeadTask"> | $Enums.LeadTaskStatus
@@ -390,6 +400,7 @@ export type UserLeadTaskOrderByWithAggregationInput = {
   vendor_id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   task_type?: Prisma.SortOrder
+  lead_stage?: Prisma.SortOrderInput | Prisma.SortOrder
   due_date?: Prisma.SortOrder
   remark?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -416,6 +427,7 @@ export type UserLeadTaskScalarWhereWithAggregatesInput = {
   vendor_id?: Prisma.IntWithAggregatesFilter<"UserLeadTask"> | number
   user_id?: Prisma.IntWithAggregatesFilter<"UserLeadTask"> | number
   task_type?: Prisma.StringWithAggregatesFilter<"UserLeadTask"> | string
+  lead_stage?: Prisma.StringNullableWithAggregatesFilter<"UserLeadTask"> | string | null
   due_date?: Prisma.DateTimeWithAggregatesFilter<"UserLeadTask"> | Date | string
   remark?: Prisma.StringNullableWithAggregatesFilter<"UserLeadTask"> | string | null
   status?: Prisma.EnumLeadTaskStatusWithAggregatesFilter<"UserLeadTask"> | $Enums.LeadTaskStatus
@@ -429,6 +441,7 @@ export type UserLeadTaskScalarWhereWithAggregatesInput = {
 
 export type UserLeadTaskCreateInput = {
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -451,6 +464,7 @@ export type UserLeadTaskUncheckedCreateInput = {
   vendor_id: number
   user_id: number
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -464,6 +478,7 @@ export type UserLeadTaskUncheckedCreateInput = {
 
 export type UserLeadTaskUpdateInput = {
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -486,6 +501,7 @@ export type UserLeadTaskUncheckedUpdateInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -504,6 +520,7 @@ export type UserLeadTaskCreateManyInput = {
   vendor_id: number
   user_id: number
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -517,6 +534,7 @@ export type UserLeadTaskCreateManyInput = {
 
 export type UserLeadTaskUpdateManyMutationInput = {
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -533,6 +551,7 @@ export type UserLeadTaskUncheckedUpdateManyInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -561,6 +580,7 @@ export type UserLeadTaskCountOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   task_type?: Prisma.SortOrder
+  lead_stage?: Prisma.SortOrder
   due_date?: Prisma.SortOrder
   remark?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -590,6 +610,7 @@ export type UserLeadTaskMaxOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   task_type?: Prisma.SortOrder
+  lead_stage?: Prisma.SortOrder
   due_date?: Prisma.SortOrder
   remark?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -608,6 +629,7 @@ export type UserLeadTaskMinOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   task_type?: Prisma.SortOrder
+  lead_stage?: Prisma.SortOrder
   due_date?: Prisma.SortOrder
   remark?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -888,6 +910,7 @@ export type EnumLeadTaskStatusFieldUpdateOperationsInput = {
 
 export type UserLeadTaskCreateWithoutVendorInput = {
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -908,6 +931,7 @@ export type UserLeadTaskUncheckedCreateWithoutVendorInput = {
   account_id: number
   user_id: number
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -955,6 +979,7 @@ export type UserLeadTaskScalarWhereInput = {
   vendor_id?: Prisma.IntFilter<"UserLeadTask"> | number
   user_id?: Prisma.IntFilter<"UserLeadTask"> | number
   task_type?: Prisma.StringFilter<"UserLeadTask"> | string
+  lead_stage?: Prisma.StringNullableFilter<"UserLeadTask"> | string | null
   due_date?: Prisma.DateTimeFilter<"UserLeadTask"> | Date | string
   remark?: Prisma.StringNullableFilter<"UserLeadTask"> | string | null
   status?: Prisma.EnumLeadTaskStatusFilter<"UserLeadTask"> | $Enums.LeadTaskStatus
@@ -968,6 +993,7 @@ export type UserLeadTaskScalarWhereInput = {
 
 export type UserLeadTaskCreateWithoutClosedByInput = {
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -989,6 +1015,7 @@ export type UserLeadTaskUncheckedCreateWithoutClosedByInput = {
   vendor_id: number
   user_id: number
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -1011,6 +1038,7 @@ export type UserLeadTaskCreateManyClosedByInputEnvelope = {
 
 export type UserLeadTaskCreateWithoutCreatedByInput = {
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -1032,6 +1060,7 @@ export type UserLeadTaskUncheckedCreateWithoutCreatedByInput = {
   vendor_id: number
   user_id: number
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -1054,6 +1083,7 @@ export type UserLeadTaskCreateManyCreatedByInputEnvelope = {
 
 export type UserLeadTaskCreateWithoutUserInput = {
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -1074,6 +1104,7 @@ export type UserLeadTaskUncheckedCreateWithoutUserInput = {
   account_id: number
   vendor_id: number
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -1145,6 +1176,7 @@ export type UserLeadTaskUpdateManyWithWhereWithoutUserInput = {
 
 export type UserLeadTaskCreateWithoutLeadInput = {
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -1165,6 +1197,7 @@ export type UserLeadTaskUncheckedCreateWithoutLeadInput = {
   vendor_id: number
   user_id: number
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -1204,6 +1237,7 @@ export type UserLeadTaskUpdateManyWithWhereWithoutLeadInput = {
 
 export type UserLeadTaskCreateWithoutAccountInput = {
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -1224,6 +1258,7 @@ export type UserLeadTaskUncheckedCreateWithoutAccountInput = {
   vendor_id: number
   user_id: number
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -1267,6 +1302,7 @@ export type UserLeadTaskCreateManyVendorInput = {
   account_id: number
   user_id: number
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -1280,6 +1316,7 @@ export type UserLeadTaskCreateManyVendorInput = {
 
 export type UserLeadTaskUpdateWithoutVendorInput = {
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -1300,6 +1337,7 @@ export type UserLeadTaskUncheckedUpdateWithoutVendorInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -1317,6 +1355,7 @@ export type UserLeadTaskUncheckedUpdateManyWithoutVendorInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -1335,6 +1374,7 @@ export type UserLeadTaskCreateManyClosedByInput = {
   vendor_id: number
   user_id: number
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -1352,6 +1392,7 @@ export type UserLeadTaskCreateManyCreatedByInput = {
   vendor_id: number
   user_id: number
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -1368,6 +1409,7 @@ export type UserLeadTaskCreateManyUserInput = {
   account_id: number
   vendor_id: number
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -1381,6 +1423,7 @@ export type UserLeadTaskCreateManyUserInput = {
 
 export type UserLeadTaskUpdateWithoutClosedByInput = {
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -1402,6 +1445,7 @@ export type UserLeadTaskUncheckedUpdateWithoutClosedByInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -1419,6 +1463,7 @@ export type UserLeadTaskUncheckedUpdateManyWithoutClosedByInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -1431,6 +1476,7 @@ export type UserLeadTaskUncheckedUpdateManyWithoutClosedByInput = {
 
 export type UserLeadTaskUpdateWithoutCreatedByInput = {
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -1452,6 +1498,7 @@ export type UserLeadTaskUncheckedUpdateWithoutCreatedByInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -1469,6 +1516,7 @@ export type UserLeadTaskUncheckedUpdateManyWithoutCreatedByInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -1481,6 +1529,7 @@ export type UserLeadTaskUncheckedUpdateManyWithoutCreatedByInput = {
 
 export type UserLeadTaskUpdateWithoutUserInput = {
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -1501,6 +1550,7 @@ export type UserLeadTaskUncheckedUpdateWithoutUserInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -1518,6 +1568,7 @@ export type UserLeadTaskUncheckedUpdateManyWithoutUserInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -1535,6 +1586,7 @@ export type UserLeadTaskCreateManyLeadInput = {
   vendor_id: number
   user_id: number
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -1548,6 +1600,7 @@ export type UserLeadTaskCreateManyLeadInput = {
 
 export type UserLeadTaskUpdateWithoutLeadInput = {
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -1568,6 +1621,7 @@ export type UserLeadTaskUncheckedUpdateWithoutLeadInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -1585,6 +1639,7 @@ export type UserLeadTaskUncheckedUpdateManyWithoutLeadInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -1602,6 +1657,7 @@ export type UserLeadTaskCreateManyAccountInput = {
   vendor_id: number
   user_id: number
   task_type: string
+  lead_stage?: string | null
   due_date: Date | string
   remark?: string | null
   status?: $Enums.LeadTaskStatus
@@ -1615,6 +1671,7 @@ export type UserLeadTaskCreateManyAccountInput = {
 
 export type UserLeadTaskUpdateWithoutAccountInput = {
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -1635,6 +1692,7 @@ export type UserLeadTaskUncheckedUpdateWithoutAccountInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -1652,6 +1710,7 @@ export type UserLeadTaskUncheckedUpdateManyWithoutAccountInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
@@ -1672,6 +1731,7 @@ export type UserLeadTaskSelect<ExtArgs extends runtime.Types.Extensions.Internal
   vendor_id?: boolean
   user_id?: boolean
   task_type?: boolean
+  lead_stage?: boolean
   due_date?: boolean
   remark?: boolean
   status?: boolean
@@ -1696,6 +1756,7 @@ export type UserLeadTaskSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   vendor_id?: boolean
   user_id?: boolean
   task_type?: boolean
+  lead_stage?: boolean
   due_date?: boolean
   remark?: boolean
   status?: boolean
@@ -1720,6 +1781,7 @@ export type UserLeadTaskSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   vendor_id?: boolean
   user_id?: boolean
   task_type?: boolean
+  lead_stage?: boolean
   due_date?: boolean
   remark?: boolean
   status?: boolean
@@ -1744,6 +1806,7 @@ export type UserLeadTaskSelectScalar = {
   vendor_id?: boolean
   user_id?: boolean
   task_type?: boolean
+  lead_stage?: boolean
   due_date?: boolean
   remark?: boolean
   status?: boolean
@@ -1755,7 +1818,7 @@ export type UserLeadTaskSelectScalar = {
   updated_by?: boolean
 }
 
-export type UserLeadTaskOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "vendor_id" | "user_id" | "task_type" | "due_date" | "remark" | "status" | "closed_by" | "closed_at" | "created_by" | "created_at" | "updated_at" | "updated_by", ExtArgs["result"]["userLeadTask"]>
+export type UserLeadTaskOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "vendor_id" | "user_id" | "task_type" | "lead_stage" | "due_date" | "remark" | "status" | "closed_by" | "closed_at" | "created_by" | "created_at" | "updated_at" | "updated_by", ExtArgs["result"]["userLeadTask"]>
 export type UserLeadTaskInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   closedBy?: boolean | Prisma.UserLeadTask$closedByArgs<ExtArgs>
@@ -1798,6 +1861,7 @@ export type $UserLeadTaskPayload<ExtArgs extends runtime.Types.Extensions.Intern
     vendor_id: number
     user_id: number
     task_type: string
+    lead_stage: string | null
     due_date: Date
     remark: string | null
     status: $Enums.LeadTaskStatus
@@ -2242,6 +2306,7 @@ export interface UserLeadTaskFieldRefs {
   readonly vendor_id: Prisma.FieldRef<"UserLeadTask", 'Int'>
   readonly user_id: Prisma.FieldRef<"UserLeadTask", 'Int'>
   readonly task_type: Prisma.FieldRef<"UserLeadTask", 'String'>
+  readonly lead_stage: Prisma.FieldRef<"UserLeadTask", 'String'>
   readonly due_date: Prisma.FieldRef<"UserLeadTask", 'DateTime'>
   readonly remark: Prisma.FieldRef<"UserLeadTask", 'String'>
   readonly status: Prisma.FieldRef<"UserLeadTask", 'LeadTaskStatus'>

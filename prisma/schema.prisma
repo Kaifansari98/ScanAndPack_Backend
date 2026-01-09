@@ -817,6 +817,7 @@ model UserLeadTask {
   vendor_id  Int
   user_id    Int
   task_type  String
+  lead_stage String?
   due_date   DateTime
   remark     String?        @db.VarChar(2000)
   status     LeadTaskStatus @default(open)

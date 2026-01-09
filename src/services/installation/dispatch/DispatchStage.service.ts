@@ -472,6 +472,19 @@ export class DispatchStageService {
     dueDate: Date,
     remark?: string
   ) {
+    const leadStageRecord = await prisma.leadMaster.findUnique({
+      where: { id: leadId },
+      select: { status_id: true },
+    });
+    const leadStage = leadStageRecord?.status_id
+      ? (
+          await prisma.statusTypeMaster.findUnique({
+            where: { id: leadStageRecord.status_id },
+            select: { type: true },
+          })
+        )?.type ?? null
+      : null;
+
     const task = await prisma.userLeadTask.create({
       data: {
         vendor_id: vendorId,
@@ -479,6 +492,7 @@ export class DispatchStageService {
         account_id: accountId,
         user_id: createdBy, // 👈 same as created_by
         task_type: "Pending Materials",
+        lead_stage: leadStage,
         due_date: new Date(dueDate),
         remark: remark || null,
         created_by: createdBy,
@@ -501,6 +515,19 @@ export class DispatchStageService {
     dueDate: Date,
     remark?: string
   ) {
+    const leadStageRecord = await prisma.leadMaster.findUnique({
+      where: { id: leadId },
+      select: { status_id: true },
+    });
+    const leadStage = leadStageRecord?.status_id
+      ? (
+          await prisma.statusTypeMaster.findUnique({
+            where: { id: leadStageRecord.status_id },
+            select: { type: true },
+          })
+        )?.type ?? null
+      : null;
+
     const task = await prisma.userLeadTask.create({
       data: {
         vendor_id: vendorId,
@@ -508,6 +535,7 @@ export class DispatchStageService {
         account_id: accountId,
         user_id: createdBy,
         task_type: "Pending Work",
+        lead_stage: leadStage,
         due_date: new Date(dueDate),
         remark: remark || null,
         created_by: createdBy,

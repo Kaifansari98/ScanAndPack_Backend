@@ -49,6 +49,15 @@ export class LeadActivityStatusService {
           throw new Error("Due date is required when marking lead as On Hold.");
         }
 
+        const leadStage = lead.status_id
+          ? (
+              await tx.statusTypeMaster.findUnique({
+                where: { id: lead.status_id },
+                select: { type: true },
+              })
+            )?.type ?? null
+          : null;
+
         await tx.userLeadTask.create({
           data: {
             lead_id: leadId,
@@ -56,6 +65,7 @@ export class LeadActivityStatusService {
             vendor_id: vendorId,
             user_id: userId,
             task_type: "Follow Up",
+            lead_stage: leadStage,
             due_date: new Date(dueDate),
             remark: remark,
             status: "open", // default anyway

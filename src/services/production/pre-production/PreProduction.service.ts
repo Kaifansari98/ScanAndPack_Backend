@@ -131,6 +131,19 @@ export class PreProductionService {
     leadId: number,
     updates: any[]
   ) {
+    const leadStageRecord = await prisma.leadMaster.findFirst({
+      where: { id: leadId, vendor_id: vendorId },
+      select: { status_id: true },
+    });
+    const leadStage = leadStageRecord?.status_id
+      ? (
+          await prisma.statusTypeMaster.findUnique({
+            where: { id: leadStageRecord.status_id },
+            select: { type: true },
+          })
+        )?.type ?? null
+      : null;
+
     const results = [];
     const errors = [];
 
@@ -231,6 +244,7 @@ export class PreProductionService {
                 account_id: existing.account_id,
                 user_id: userId,
                 task_type: "Production Ready",
+                lead_stage: leadStage,
                 due_date: new Date(dueDate),
                 remark,
                 status,

@@ -724,9 +724,18 @@ export class FinalMeasurementService {
       // 1️⃣ Validate lead
       const lead = await tx.leadMaster.findUnique({
         where: { id: lead_id },
-        select: { id: true, vendor_id: true, account_id: true },
+        select: { id: true, vendor_id: true, account_id: true, status_id: true },
       });
       if (!lead) throw new Error(`Lead ${lead_id} not found`);
+
+      const leadStage = lead.status_id
+        ? (
+            await tx.statusTypeMaster.findUnique({
+              where: { id: lead.status_id },
+              select: { type: true },
+            })
+          )?.type ?? null
+        : null;
 
       // 2️⃣ Validate assignee
       const assignee = await tx.userMaster.findUnique({
@@ -749,6 +758,7 @@ export class FinalMeasurementService {
           vendor_id: lead.vendor_id,
           user_id: assignee_user_id,
           task_type,
+          lead_stage: leadStage,
           due_date: new Date(due_date),
           remark: remark || null,
           status: "open",

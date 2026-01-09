@@ -27,4 +27,10 @@ taskRouter.get(
   TaskController.getFinalMeasurementTasks
 );
 
+// GET /api/tasks/vendorId/:vendorId/leadId/:leadId/active-tasks
+taskRouter.get(
+  "/vendorId/:vendorId/leadId/:leadId/active-tasks",
+  TaskController.getActiveTasksByVendorAndLead
+);
+
 export default taskRouter;

@@ -82,5 +82,34 @@ export class TaskController {
     }
   }
 
-  
+  static async getActiveTasksByVendorAndLead(req: Request, res: Response) {
+    try {
+      const vendorId = parseInt(req.params.vendorId, 10);
+      const leadId = parseInt(req.params.leadId, 10);
+
+      if (isNaN(vendorId) || isNaN(leadId)) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Invalid vendorId or leadId" });
+      }
+
+      const tasks = await TaskService.getActiveTasksByVendorAndLead(
+        vendorId,
+        leadId
+      );
+      return res
+        .status(200)
+        .json({ success: true, count: tasks.length, data: tasks });
+    } catch (error: any) {
+      console.error(
+        "[TaskController] getActiveTasksByVendorAndLead error:",
+        error
+      );
+      return res.status(500).json({
+        success: false,
+        message: "Failed to fetch active tasks",
+        error: error.message,
+      });
+    }
+  }
 }

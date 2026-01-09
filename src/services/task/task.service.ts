@@ -139,4 +139,36 @@ export class TaskService {
   static async getFinalMeasurementTasks(userId: number, leadId: number) {
     return this.getTasksByUserAndLead(userId, leadId, "Final Measurements");
   }
+
+  static async getActiveTasksByVendorAndLead(
+    vendorId: number,
+    leadId: number
+  ) {
+    return prisma.userLeadTask.findMany({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        status: { in: ["open", "in_progress"] },
+      },
+      select: {
+        task_type: true,
+        lead_stage: true,
+        due_date: true,
+        remark: true,
+        status: true,
+        created_by: true,
+        user: {
+          select: {
+            user_name: true,
+          },
+        },
+        createdBy: {
+          select: {
+            user_name: true,
+          },
+        },
+      },
+      orderBy: { created_at: "desc" },
+    });
+  }
 }
