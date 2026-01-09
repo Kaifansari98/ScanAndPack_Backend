@@ -82,6 +82,34 @@ export class TaskController {
     }
   }
 
+  static async getTasksByVendor(req: Request, res: Response) {
+    try {
+      const vendorId = parseInt(req.params.vendorId, 10);
+
+      if (isNaN(vendorId)) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid vendorId",
+        });
+      }
+
+      const tasks = await TaskService.getTasksByVendor(vendorId);
+
+      return res.status(200).json({
+        success: true,
+        count: tasks.length,
+        data: tasks,
+      });
+    } catch (error: any) {
+      console.error("[TaskController] getTasksByVendor error:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Failed to fetch tasks",
+        error: error.message,
+      });
+    }
+  }
+
   static async getActiveTasksByVendorAndLead(req: Request, res: Response) {
     try {
       const vendorId = parseInt(req.params.vendorId, 10);

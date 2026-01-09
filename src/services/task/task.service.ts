@@ -1,6 +1,43 @@
 import { prisma } from "../../prisma/client"; // adjust your path
 
 export class TaskService {
+  private static mapTaskWithLead(task: any) {
+    return {
+      userLeadTask: {
+        id: task.id,
+        status: task.status,
+        due_date: task.due_date,
+        task_type: task.task_type,
+        remark: task.remark,
+        closed_by: task.closed_by,
+        closed_at: task.closed_at,
+        created_by: task.created_by,
+        created_by_name: task.createdBy?.user_name || null,
+        assigned_to_name: task.user?.user_name || null,
+        created_at: task.created_at,
+        updated_by: task.updated_by,
+        updated_at: task.updated_at,
+      },
+      leadMaster: {
+        id: task.lead?.id,
+        account_id: task.lead?.account_id,
+        vendor_id: task?.lead?.vendor_id,
+        lead_code: task.lead?.lead_code,
+        site_map_link: task.lead?.site_map_link,
+        name: `${task.lead?.firstname} ${task.lead?.lastname}`,
+        phone_number: task.lead?.contact_no,
+        site_type: task.lead?.siteType?.type,
+        lead_status: task.lead?.statusType?.type,
+        product_type: task.lead?.productMappings.map(
+          (pm: any) => pm.productType.type
+        ),
+        product_structure: task.lead?.leadProductStructureMapping.map(
+          (ps: any) => ps.productStructure.type
+        ),
+      },
+    };
+  }
+
   /**
    * Get all tasks for a given vendor and user, including relations
    */
@@ -26,6 +63,12 @@ export class TaskService {
 
         // 👤 Who created the task
         createdBy: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+        user: {
           select: {
             id: true,
             user_name: true,
@@ -58,39 +101,67 @@ export class TaskService {
     });
 
     // ✅ Shape data into your desired format
-    return tasks.map((task) => ({
-      userLeadTask: {
-        id: task.id,
-        status: task.status,
-        due_date: task.due_date,
-        task_type: task.task_type,
-        remark: task.remark,
-        closed_by: task.closed_by,
-        closed_at: task.closed_at,
-        created_by: task.created_by,
-        created_by_name: task.createdBy?.user_name || null, // 👈 human readable
-        created_at: task.created_at,
-        updated_by: task.updated_by,
-        updated_at: task.updated_at,
+    return tasks.map((task) => this.mapTaskWithLead(task));
+  }
+
+  /**
+   * Get all tasks for a given vendor (admin view)
+   */
+  static async getTasksByVendor(vendorId: number) {
+    const tasks = await prisma.userLeadTask.findMany({
+      where: {
+        vendor_id: vendorId,
+        status: { in: ["open", "in_progress"] },
       },
-      leadMaster: {
-        id: task.lead?.id,
-        account_id: task.lead?.account_id,
-        vendor_id: task?.lead?.vendor_id,
-        lead_code: task.lead?.lead_code,
-        site_map_link: task.lead?.site_map_link,
-        name: `${task.lead?.firstname} ${task.lead?.lastname}`,
-        phone_number: task.lead?.contact_no,
-        site_type: task.lead?.siteType?.type,
-        lead_status: task.lead?.statusType?.type,
-        product_type: task.lead?.productMappings.map(
-          (pm) => pm.productType.type
-        ),
-        product_structure: task.lead?.leadProductStructureMapping.map(
-          (ps) => ps.productStructure.type
-        ),
+      select: {
+        id: true,
+        status: true,
+        due_date: true,
+        task_type: true,
+        remark: true,
+        closed_by: true,
+        closed_at: true,
+        created_by: true,
+        created_at: true,
+        updated_by: true,
+        updated_at: true,
+        createdBy: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+        user: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+        lead: {
+          select: {
+            id: true,
+            account_id: true,
+            vendor_id: true,
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            contact_no: true,
+            site_map_link: true,
+            statusType: { select: { type: true } },
+            siteType: { select: { type: true } },
+            productMappings: {
+              select: { productType: { select: { type: true } } },
+            },
+            leadProductStructureMapping: {
+              select: { productStructure: { select: { type: true } } },
+            },
+          },
+        },
       },
-    }));
+      orderBy: { created_at: "desc" },
+    });
+
+    return tasks.map((task) => this.mapTaskWithLead(task));
   }
 
   /**

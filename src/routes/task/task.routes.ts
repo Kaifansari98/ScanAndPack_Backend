@@ -9,6 +9,12 @@ taskRouter.get(
   TaskController.getTasks
 );
 
+// GET /api/tasks/vendorId/:vendorId/tasks/all
+taskRouter.get(
+  "/vendorId/:vendorId/tasks/all",
+  TaskController.getTasksByVendor
+);
+
 // GET /api/tasks/user/:userId/lead/:leadId/initial-site-measurement
 taskRouter.get(
   "/user/:userId/lead/:leadId/initial-site-measurement",
