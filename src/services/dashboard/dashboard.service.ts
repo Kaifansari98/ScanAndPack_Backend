@@ -1338,6 +1338,96 @@ export class DashboardService {
   }
 
   // -------------------------------------------------------
+  // Admin : All stage leads (Type 1–17) onGoing only, not deleted
+  // -------------------------------------------------------
+  public async getAdminAllStageLeads(vendor_id: number) {
+    const targetTags = [
+      { tag: "Type 1", key: "openStage" },
+      { tag: "Type 2", key: "initialSiteMeasurementStage" },
+      { tag: "Type 3", key: "designingStage" },
+      { tag: "Type 4", key: "bookingStage" },
+      { tag: "Type 5", key: "finalSiteMeasurementStage" },
+      { tag: "Type 6", key: "clientDocumentationStage" },
+      { tag: "Type 7", key: "clientApprovalStage" },
+      { tag: "Type 8", key: "techCheckStage" },
+      { tag: "Type 9", key: "orderLoginStage" },
+      { tag: "Type 10", key: "productionStage" },
+      { tag: "Type 11", key: "readyToDispatchStage" },
+      { tag: "Type 12", key: "siteReadinessStage" },
+      { tag: "Type 13", key: "dispatchPlanningStage" },
+      { tag: "Type 14", key: "dispatchStage" },
+      { tag: "Type 15", key: "underInstallationStage" },
+      { tag: "Type 16", key: "finalHandoverStage" },
+      { tag: "Type 17", key: "projectCompletedStage" },
+    ] as const;
+
+    const statuses = await prisma.statusTypeMaster.findMany({
+      where: {
+        vendor_id,
+        tag: { in: targetTags.map((t) => t.tag) },
+      },
+      select: { id: true, tag: true },
+    });
+
+    const statusMap = new Map<string, number>();
+    statuses.forEach((s) => statusMap.set(s.tag, s.id));
+
+    const fetchLeadsForTag = async (tag: string) => {
+      const status_id = statusMap.get(tag);
+      if (!status_id) return [];
+
+      const leads = await prisma.leadMaster.findMany({
+        where: {
+          vendor_id,
+          is_deleted: false,
+          status_id,
+          activity_status: ActivityStatus.onGoing,
+        },
+        select: {
+          id: true,
+          lead_code: true,
+          account_id: true,
+          firstname: true,
+          lastname: true,
+        },
+      });
+
+      return leads.map((lead) => ({
+        id: lead.id,
+        lead_code: lead.lead_code,
+        account_id: lead.account_id,
+        name: `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim(),
+      }));
+    };
+
+    const results: Record<string, any[]> = {};
+
+    for (const entry of targetTags) {
+      results[entry.key] = await fetchLeadsForTag(entry.tag);
+    }
+
+    return results as {
+      openStage: any[];
+      initialSiteMeasurementStage: any[];
+      designingStage: any[];
+      bookingStage: any[];
+      finalSiteMeasurementStage: any[];
+      clientDocumentationStage: any[];
+      clientApprovalStage: any[];
+      techCheckStage: any[];
+      orderLoginStage: any[];
+      productionStage: any[];
+      readyToDispatchStage: any[];
+      siteReadinessStage: any[];
+      dispatchPlanningStage: any[];
+      dispatchStage: any[];
+      underInstallationStage: any[];
+      finalHandoverStage: any[];
+      projectCompletedStage: any[];
+    };
+  }
+
+  // -------------------------------------------------------
   // Orders In Pipeline (lead counts by activity_status)
   // -------------------------------------------------------
   public async getOrdersInPipeline(vendor_id: number) {

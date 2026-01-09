@@ -58,5 +58,9 @@ DashboardRouter.get(
   "/admin/stage-counts",
   dashboardController.getAdminStageCounts
 );
+DashboardRouter.get(
+  "/admin/all-stage-leads",
+  dashboardController.getAdminAllStageLeads
+);
 
 export default DashboardRouter;
