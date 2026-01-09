@@ -1052,13 +1052,50 @@ export class BookingStageService {
       throw new Error("Status tag is required to fetch universal table data");
     }
 
-    const statusType = await prisma.statusTypeMaster.findFirst({
-      where: { vendor_id: vendorId, tag },
-      select: { id: true },
-    });
+    const isAllStages = tag.toUpperCase() === "ALL";
 
-    if (!statusType) {
-      throw new Error(`Status ${tag} not found for vendor ${vendorId}`);
+    let statusIds: number[] = [];
+
+    if (isAllStages) {
+      const targetTags = [
+        "Type 1",
+        "Type 2",
+        "Type 3",
+        "Type 4",
+        "Type 5",
+        "Type 6",
+        "Type 7",
+        "Type 8",
+        "Type 9",
+        "Type 10",
+        "Type 11",
+        "Type 12",
+        "Type 13",
+        "Type 14",
+        "Type 15",
+        "Type 16",
+        "Type 17",
+      ];
+
+      const statuses = await prisma.statusTypeMaster.findMany({
+        where: { vendor_id: vendorId, tag: { in: targetTags } },
+        select: { id: true },
+      });
+      statusIds = statuses.map((s) => s.id);
+    } else {
+      const statusType = await prisma.statusTypeMaster.findFirst({
+        where: { vendor_id: vendorId, tag },
+        select: { id: true },
+      });
+
+      if (!statusType) {
+        throw new Error(`Status ${tag} not found for vendor ${vendorId}`);
+      }
+      statusIds = [statusType.id];
+    }
+
+    if (!statusIds.length) {
+      return { leads: [], count: 0 };
     }
 
     const creator = await prisma.userMaster.findUnique({
@@ -1074,9 +1111,9 @@ export class BookingStageService {
       const whereClause: Prisma.LeadMasterWhereInput = {
         vendor_id: vendorId,
         is_deleted: false,
-        status_id: statusType.id,
+        status_id: { in: statusIds },
         statusType: { vendor_id: vendorId },
-        activity_status: { in: ["onGoing", "lostApproval"] },
+        activity_status: isAllStages ? "onGoing" : { in: ["onGoing", "lostApproval"] },
       };
 
       const [leads, total] = await Promise.all([
@@ -1156,9 +1193,9 @@ export class BookingStageService {
       id: { in: leadIds },
       is_deleted: false,
       vendor_id: vendorId,
-      status_id: statusType.id,
+      status_id: { in: statusIds },
       statusType: { vendor_id: vendorId },
-      activity_status: { in: ["onGoing", "lostApproval"] },
+      activity_status: isAllStages ? "onGoing" : { in: ["onGoing", "lostApproval"] },
     };
 
     const [leads, total] = await Promise.all([

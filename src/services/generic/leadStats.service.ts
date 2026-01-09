@@ -36,6 +36,14 @@ export class LeadStatsService {
 
       const userType = user.user_type.user_type.toLowerCase();
 
+      totalMyTasks = await prisma.userLeadTask.count({
+        where: {
+          vendor_id: vendorId,
+          user_id: userId,
+          status: { in: ["open", "in_progress"] },
+        },
+      });
+
       if (userType === "sales-executive" || userType === "site-supervisor") {
         // ✅ Leads from LeadUserMapping
         const mappedLeads = await prisma.leadUserMapping.findMany({
@@ -76,6 +84,34 @@ export class LeadStatsService {
         activity_status: {
           in: [ActivityStatus.onGoing, ActivityStatus.lostApproval],
         },
+      },
+    });
+
+    const overallStatusTags = [
+      "Type 1",
+      "Type 2",
+      "Type 3",
+      "Type 4",
+      "Type 5",
+      "Type 6",
+      "Type 7",
+      "Type 8",
+      "Type 9",
+      "Type 10",
+      "Type 11",
+      "Type 12",
+      "Type 13",
+      "Type 14",
+      "Type 15",
+      "Type 16",
+      "Type 17",
+    ];
+
+    const totalOverallLeads = await prisma.leadMaster.count({
+      where: {
+        ...whereClause,
+        statusType: { vendor_id: vendorId, tag: { in: overallStatusTags } },
+        activity_status: ActivityStatus.onGoing,
       },
     });
 
@@ -143,6 +179,7 @@ export class LeadStatsService {
       // INDIVIDUAL COUNTS
       // =====================
       total_leads: totalLeads,
+      total_overall_leads: totalOverallLeads,
       total_my_tasks: totalMyTasks,
 
       total_open_leads: totalOpenLeads,
