@@ -433,7 +433,8 @@ export type LeadActivityStatusLogScalarFieldEnum = (typeof LeadActivityStatusLog
 export const SiteTypeMasterScalarFieldEnum = {
   id: 'id',
   type: 'type',
-  vendor_id: 'vendor_id'
+  vendor_id: 'vendor_id',
+  status: 'status'
 } as const
 
 export type SiteTypeMasterScalarFieldEnum = (typeof SiteTypeMasterScalarFieldEnum)[keyof typeof SiteTypeMasterScalarFieldEnum]
@@ -442,7 +443,8 @@ export type SiteTypeMasterScalarFieldEnum = (typeof SiteTypeMasterScalarFieldEnu
 export const SourceMasterScalarFieldEnum = {
   id: 'id',
   type: 'type',
-  vendor_id: 'vendor_id'
+  vendor_id: 'vendor_id',
+  status: 'status'
 } as const
 
 export type SourceMasterScalarFieldEnum = (typeof SourceMasterScalarFieldEnum)[keyof typeof SourceMasterScalarFieldEnum]
@@ -485,7 +487,8 @@ export const ProductTypeMasterScalarFieldEnum = {
   id: 'id',
   type: 'type',
   vendor_id: 'vendor_id',
-  tag: 'tag'
+  tag: 'tag',
+  status: 'status'
 } as const
 
 export type ProductTypeMasterScalarFieldEnum = (typeof ProductTypeMasterScalarFieldEnum)[keyof typeof ProductTypeMasterScalarFieldEnum]
@@ -583,7 +586,9 @@ export type LeadChatDocumentScalarFieldEnum = (typeof LeadChatDocumentScalarFiel
 export const ProductStructureScalarFieldEnum = {
   id: 'id',
   type: 'type',
-  vendor_id: 'vendor_id'
+  vendor_id: 'vendor_id',
+  parent: 'parent',
+  status: 'status'
 } as const
 
 export type ProductStructureScalarFieldEnum = (typeof ProductStructureScalarFieldEnum)[keyof typeof ProductStructureScalarFieldEnum]

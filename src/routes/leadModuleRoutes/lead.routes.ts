@@ -3,20 +3,24 @@ import {
   createProductType,
   fetchAllProductTypes,
   removeProductType,
+  toggleProductTypeStatus,
 } from "../../controllers/leadModuleControllers/productType.controller";
 import {
   createSiteType,
   fetchAllSiteTypes,
   removeSiteType,
+  toggleSiteTypeStatus,
 } from "../../controllers/leadModuleControllers/siteType.controller";
 import {
   createSourceType,
   fetchAllSourceTypes,
   removeSourceType,
+  toggleSourceTypeStatus,
 } from "../../controllers/leadModuleControllers/sourceType.controller";
 import {
   createProductStructureType,
   fetchAllProductStructureTypes,
+  editProductStructureParent,
   removeProductStructureType,
 } from "../../controllers/leadModuleControllers/productStructureType.controller";
 import { upload } from "../../middlewares/uploadWasabi";
@@ -52,11 +56,17 @@ leadsRouter.get("/get-all-payment-types/:vendor_id", fetchAllPaymentTypes);
 leadsRouter.get("/get-all-document-types/:vendor_id", fetchAllDocumentTypes);
 leadsRouter.get("/get-all-product-types/:vendor_id", fetchAllProductTypes);
 leadsRouter.delete("/delete-product-type/:id", removeProductType);
+leadsRouter.patch("/update-product-type-status/:id", toggleProductTypeStatus);
 leadsRouter.get("/get-all-site-types/:vendor_id", fetchAllSiteTypes);
 leadsRouter.delete("/delete-site-type/:id", removeSiteType);
+leadsRouter.patch("/update-site-type-status/:id", toggleSiteTypeStatus);
 leadsRouter.get(
   "/get-all-productStructure-types/:vendor_id",
   fetchAllProductStructureTypes
+);
+leadsRouter.patch(
+  "/update-productStructure-type/:id",
+  editProductStructureParent
 );
 leadsRouter.delete(
   "/delete-productStructure-type/:id",
@@ -64,6 +74,7 @@ leadsRouter.delete(
 );
 leadsRouter.get("/get-all-source-types/:vendor_id", fetchAllSourceTypes);
 leadsRouter.delete("/delete-source-type/:id", removeSourceType);
+leadsRouter.patch("/update-source-type-status/:id", toggleSourceTypeStatus);
 leadsRouter.delete("/delete-document-type/:id", removeDocumentType);
 leadsRouter.delete("/delete-status-type/:id", removeStatusType);
 leadsRouter.delete("/delete-payment-type/:id", removePaymentType);

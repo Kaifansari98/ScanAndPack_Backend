@@ -41,6 +41,7 @@ export type ProductTypeMasterMinAggregateOutputType = {
   type: string | null
   vendor_id: number | null
   tag: string | null
+  status: string | null
 }
 
 export type ProductTypeMasterMaxAggregateOutputType = {
@@ -48,6 +49,7 @@ export type ProductTypeMasterMaxAggregateOutputType = {
   type: string | null
   vendor_id: number | null
   tag: string | null
+  status: string | null
 }
 
 export type ProductTypeMasterCountAggregateOutputType = {
@@ -55,6 +57,7 @@ export type ProductTypeMasterCountAggregateOutputType = {
   type: number
   vendor_id: number
   tag: number
+  status: number
   _all: number
 }
 
@@ -74,6 +77,7 @@ export type ProductTypeMasterMinAggregateInputType = {
   type?: true
   vendor_id?: true
   tag?: true
+  status?: true
 }
 
 export type ProductTypeMasterMaxAggregateInputType = {
@@ -81,6 +85,7 @@ export type ProductTypeMasterMaxAggregateInputType = {
   type?: true
   vendor_id?: true
   tag?: true
+  status?: true
 }
 
 export type ProductTypeMasterCountAggregateInputType = {
@@ -88,6 +93,7 @@ export type ProductTypeMasterCountAggregateInputType = {
   type?: true
   vendor_id?: true
   tag?: true
+  status?: true
   _all?: true
 }
 
@@ -182,6 +188,7 @@ export type ProductTypeMasterGroupByOutputType = {
   type: string
   vendor_id: number
   tag: string
+  status: string
   _count: ProductTypeMasterCountAggregateOutputType | null
   _avg: ProductTypeMasterAvgAggregateOutputType | null
   _sum: ProductTypeMasterSumAggregateOutputType | null
@@ -212,6 +219,7 @@ export type ProductTypeMasterWhereInput = {
   type?: Prisma.StringFilter<"ProductTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"ProductTypeMaster"> | number
   tag?: Prisma.StringFilter<"ProductTypeMaster"> | string
+  status?: Prisma.StringFilter<"ProductTypeMaster"> | string
   leads?: Prisma.LeadProductMappingListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
@@ -221,6 +229,7 @@ export type ProductTypeMasterOrderByWithRelationInput = {
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   leads?: Prisma.LeadProductMappingOrderByRelationAggregateInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
@@ -233,6 +242,7 @@ export type ProductTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.StringFilter<"ProductTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"ProductTypeMaster"> | number
   tag?: Prisma.StringFilter<"ProductTypeMaster"> | string
+  status?: Prisma.StringFilter<"ProductTypeMaster"> | string
   leads?: Prisma.LeadProductMappingListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
@@ -242,6 +252,7 @@ export type ProductTypeMasterOrderByWithAggregationInput = {
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   _count?: Prisma.ProductTypeMasterCountOrderByAggregateInput
   _avg?: Prisma.ProductTypeMasterAvgOrderByAggregateInput
   _max?: Prisma.ProductTypeMasterMaxOrderByAggregateInput
@@ -257,11 +268,13 @@ export type ProductTypeMasterScalarWhereWithAggregatesInput = {
   type?: Prisma.StringWithAggregatesFilter<"ProductTypeMaster"> | string
   vendor_id?: Prisma.IntWithAggregatesFilter<"ProductTypeMaster"> | number
   tag?: Prisma.StringWithAggregatesFilter<"ProductTypeMaster"> | string
+  status?: Prisma.StringWithAggregatesFilter<"ProductTypeMaster"> | string
 }
 
 export type ProductTypeMasterCreateInput = {
   type: string
   tag: string
+  status?: string
   leads?: Prisma.LeadProductMappingCreateNestedManyWithoutProductTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
 }
@@ -271,12 +284,14 @@ export type ProductTypeMasterUncheckedCreateInput = {
   type: string
   vendor_id: number
   tag: string
+  status?: string
   leads?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   leads?: Prisma.LeadProductMappingUpdateManyWithoutProductTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
 }
@@ -286,6 +301,7 @@ export type ProductTypeMasterUncheckedUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   leads?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutProductTypeNestedInput
 }
 
@@ -294,11 +310,13 @@ export type ProductTypeMasterCreateManyInput = {
   type: string
   vendor_id: number
   tag: string
+  status?: string
 }
 
 export type ProductTypeMasterUpdateManyMutationInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProductTypeMasterUncheckedUpdateManyInput = {
@@ -306,6 +324,7 @@ export type ProductTypeMasterUncheckedUpdateManyInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProductTypeMasterListRelationFilter = {
@@ -328,6 +347,7 @@ export type ProductTypeMasterCountOrderByAggregateInput = {
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type ProductTypeMasterAvgOrderByAggregateInput = {
@@ -340,6 +360,7 @@ export type ProductTypeMasterMaxOrderByAggregateInput = {
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type ProductTypeMasterMinOrderByAggregateInput = {
@@ -347,6 +368,7 @@ export type ProductTypeMasterMinOrderByAggregateInput = {
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type ProductTypeMasterSumOrderByAggregateInput = {
@@ -413,6 +435,7 @@ export type ProductTypeMasterUpdateOneRequiredWithoutLeadsNestedInput = {
 export type ProductTypeMasterCreateWithoutVendorInput = {
   type: string
   tag: string
+  status?: string
   leads?: Prisma.LeadProductMappingCreateNestedManyWithoutProductTypeInput
 }
 
@@ -420,6 +443,7 @@ export type ProductTypeMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   type: string
   tag: string
+  status?: string
   leads?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutProductTypeInput
 }
 
@@ -457,11 +481,13 @@ export type ProductTypeMasterScalarWhereInput = {
   type?: Prisma.StringFilter<"ProductTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"ProductTypeMaster"> | number
   tag?: Prisma.StringFilter<"ProductTypeMaster"> | string
+  status?: Prisma.StringFilter<"ProductTypeMaster"> | string
 }
 
 export type ProductTypeMasterCreateWithoutLeadsInput = {
   type: string
   tag: string
+  status?: string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
 }
 
@@ -470,6 +496,7 @@ export type ProductTypeMasterUncheckedCreateWithoutLeadsInput = {
   type: string
   vendor_id: number
   tag: string
+  status?: string
 }
 
 export type ProductTypeMasterCreateOrConnectWithoutLeadsInput = {
@@ -491,6 +518,7 @@ export type ProductTypeMasterUpdateToOneWithWhereWithoutLeadsInput = {
 export type ProductTypeMasterUpdateWithoutLeadsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
 }
 
@@ -499,17 +527,20 @@ export type ProductTypeMasterUncheckedUpdateWithoutLeadsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProductTypeMasterCreateManyVendorInput = {
   id?: number
   type: string
   tag: string
+  status?: string
 }
 
 export type ProductTypeMasterUpdateWithoutVendorInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   leads?: Prisma.LeadProductMappingUpdateManyWithoutProductTypeNestedInput
 }
 
@@ -517,6 +548,7 @@ export type ProductTypeMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   leads?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutProductTypeNestedInput
 }
 
@@ -524,6 +556,7 @@ export type ProductTypeMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -562,6 +595,7 @@ export type ProductTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.Int
   type?: boolean
   vendor_id?: boolean
   tag?: boolean
+  status?: boolean
   leads?: boolean | Prisma.ProductTypeMaster$leadsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProductTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
@@ -572,6 +606,7 @@ export type ProductTypeMasterSelectCreateManyAndReturn<ExtArgs extends runtime.T
   type?: boolean
   vendor_id?: boolean
   tag?: boolean
+  status?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productTypeMaster"]>
 
@@ -580,6 +615,7 @@ export type ProductTypeMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   type?: boolean
   vendor_id?: boolean
   tag?: boolean
+  status?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productTypeMaster"]>
 
@@ -588,9 +624,10 @@ export type ProductTypeMasterSelectScalar = {
   type?: boolean
   vendor_id?: boolean
   tag?: boolean
+  status?: boolean
 }
 
-export type ProductTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id" | "tag", ExtArgs["result"]["productTypeMaster"]>
+export type ProductTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id" | "tag" | "status", ExtArgs["result"]["productTypeMaster"]>
 export type ProductTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   leads?: boolean | Prisma.ProductTypeMaster$leadsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -614,6 +651,7 @@ export type $ProductTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.I
     type: string
     vendor_id: number
     tag: string
+    status: string
   }, ExtArgs["result"]["productTypeMaster"]>
   composites: {}
 }
@@ -1043,6 +1081,7 @@ export interface ProductTypeMasterFieldRefs {
   readonly type: Prisma.FieldRef<"ProductTypeMaster", 'String'>
   readonly vendor_id: Prisma.FieldRef<"ProductTypeMaster", 'Int'>
   readonly tag: Prisma.FieldRef<"ProductTypeMaster", 'String'>
+  readonly status: Prisma.FieldRef<"ProductTypeMaster", 'String'>
 }
     
 

@@ -1,5 +1,10 @@
 import { Request, Response } from "express";
-import { addSiteType, deleteSiteType, getAllSiteTypes } from "../../services/leadModuleServices/siteType.service";
+import {
+    addSiteType,
+    deleteSiteType,
+    getAllSiteTypes,
+    updateSiteTypeStatus,
+} from "../../services/leadModuleServices/siteType.service";
 import { SiteTypeInput } from "../../types/leadModule.types";
 
 export const createSiteType = async (req: Request, res: Response) => {
@@ -65,5 +70,43 @@ export const removeSiteType = async (req: Request, res: Response) => {
     } catch (error: any) {
       console.error("[CONTROLLER] Error deleting site type", { error: error.message });
       return res.status(500).json({ success: false, error: error.message });
+    }
+};
+
+export const toggleSiteTypeStatus = async (req: Request, res: Response) => {
+    console.log("[CONTROLLER] toggleSiteTypeStatus called", {
+        params: req.params,
+        body: req.body,
+    });
+
+    try {
+        const id = parseInt(req.params.id);
+        const { status } = req.body as { status?: string };
+
+        if (!id) {
+            console.warn("[CONTROLLER] Missing site type id");
+            return res.status(400).json({ error: "id is required" });
+        }
+
+        if (!status) {
+            console.warn("[CONTROLLER] Missing status");
+            return res.status(400).json({ error: "status is required" });
+        }
+
+        const normalizedStatus = status.toLowerCase();
+        if (!["active", "inactive"].includes(normalizedStatus)) {
+            console.warn("[CONTROLLER] Invalid status value", { status });
+            return res.status(400).json({
+                error: "status must be either 'active' or 'inactive'",
+            });
+        }
+
+        const updated = await updateSiteTypeStatus(id, normalizedStatus);
+        return res.status(200).json({ success: true, data: updated });
+    } catch (error: any) {
+        console.error("[CONTROLLER] Error updating site type status", {
+            error: error.message,
+        });
+        return res.status(500).json({ success: false, error: error.message });
     }
 };

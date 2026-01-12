@@ -41,7 +41,7 @@ export const getAllSiteTypes = async (vendor_id: number): Promise<SiteType[]> =>
     }
 
     const types = await prisma.siteTypeMaster.findMany({
-        where: { vendor_id: vendor_id },
+        where: { vendor_id: vendor_id, status: "active" },
     })
 
     console.log("[SERVICE] Found site types", { count: types.length });
@@ -61,4 +61,25 @@ export const deleteSiteType = async (id: number): Promise<boolean> => {
     console.log("[SERVICE] SiteType deleted successfully", { id });
 
     return true;
+};
+
+export const updateSiteTypeStatus = async (
+    id: number,
+    status: string
+): Promise<SiteType> => {
+    console.log("[SERVICE] updateSiteTypeStatus called", { id, status });
+
+    const existing = await prisma.siteTypeMaster.findUnique({ where: { id } });
+    if (!existing) {
+        console.error("[SERVICE] SiteType not found for status update", { id });
+        throw new Error("SiteType not found");
+    }
+
+    const updated = await prisma.siteTypeMaster.update({
+        where: { id },
+        data: { status },
+    });
+
+    console.log("[SERVICE] SiteType status updated successfully", updated);
+    return updated as SiteType;
 };

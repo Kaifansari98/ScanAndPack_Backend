@@ -61,3 +61,24 @@ export const deleteSourceType = async (id: number): Promise<boolean> => {
 
     return true;
 };
+
+export const updateSourceTypeStatus = async (
+    id: number,
+    status: string
+): Promise<SourceType> => {
+    console.log("[SERVICE] updateSourceTypeStatus called", { id, status });
+
+    const existing = await prisma.sourceMaster.findUnique({ where: { id } });
+    if (!existing) {
+        console.error("[SERVICE] Source not found for status update", { id });
+        throw new Error("Source not found");
+    }
+
+    const updated = await prisma.sourceMaster.update({
+        where: { id },
+        data: { status },
+    });
+
+    console.log("[SERVICE] Source status updated successfully", updated);
+    return updated as SourceType;
+};

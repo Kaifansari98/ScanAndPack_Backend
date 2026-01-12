@@ -451,6 +451,7 @@ model SiteTypeMaster {
   id        Int          @id @default(autoincrement())
   type      String
   vendor_id Int
+  status    String       @default("active")
   leads     LeadMaster[]
   vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
@@ -459,6 +460,7 @@ model SourceMaster {
   id        Int          @id @default(autoincrement())
   type      String
   vendor_id Int
+  status    String       @default("active")
   leads     LeadMaster[]
   vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
@@ -526,6 +528,7 @@ model ProductTypeMaster {
   type      String
   vendor_id Int
   tag       String
+  status    String               @default("active")
   leads     LeadProductMapping[]
   vendor    VendorMaster         @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
@@ -642,6 +645,8 @@ model ProductStructure {
   id                          Int                           @id @default(autoincrement())
   type                        String
   vendor_id                   Int
+  parent                      String?          
+  status                      String               @default("active")
   leadProductStructureMapping LeadProductStructureMapping[]
   vendor                      VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }

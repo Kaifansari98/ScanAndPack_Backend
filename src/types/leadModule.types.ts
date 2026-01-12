@@ -10,6 +10,7 @@ export interface ProductType {
     type: string;
     tag: string;
     vendor_id: number;
+    status?: string;
 }
 
 export interface SiteTypeInput {
@@ -21,6 +22,7 @@ export interface SiteType{
     id: number;
     type: string;
     vendor_id: number;
+    status?: string;
 }
 
 export interface SourceTypeInput {
@@ -32,17 +34,21 @@ export interface SourceType{
     id: number;
     type: string;
     vendor_id: number;
+    status?: string;
 }
 
 export interface ProductStructureTypeInput {
     vendor_id: number;
     type: string;
+    parent: string;
 }
 
 export interface ProductStructureType{
     id: number;
     type: string;
     vendor_id: number;
+    parent?: string | null;
+    status?: string;
 }
 
 export interface DocumentTypeInput {

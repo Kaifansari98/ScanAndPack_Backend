@@ -62,3 +62,24 @@ export const deleteProductType = async (id: number): Promise<boolean> => {
 
     return true;
 };
+
+export const updateProductTypeStatus = async (
+    id: number,
+    status: string
+): Promise<ProductType> => {
+    console.log("[SERVICE] updateProductTypeStatus called", { id, status });
+
+    const existing = await prisma.productTypeMaster.findUnique({ where: { id } });
+    if (!existing) {
+        console.error("[SERVICE] ProductType not found for status update", { id });
+        throw new Error("ProductType not found");
+    }
+
+    const updated = await prisma.productTypeMaster.update({
+        where: { id },
+        data: { status },
+    });
+
+    console.log("[SERVICE] ProductType status updated successfully", updated);
+    return updated as ProductType;
+};

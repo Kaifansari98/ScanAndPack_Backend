@@ -19,6 +19,7 @@ export const addProductStructureType = async (payload: ProductStructureTypeInput
     const productStructureType = await prisma.productStructure.create({
         data: {
             type: payload.type,
+            parent: payload.parent,
             vendor_id: payload.vendor_id,
         }
     });
@@ -41,7 +42,7 @@ export const getAllProductStructureTypes = async (vendor_id: number): Promise<Pr
     }
 
     const types = await prisma.productStructure.findMany({
-        where: { vendor_id: vendor_id },
+        where: { vendor_id: vendor_id, status: "active" },
     })
 
     console.log("[SERVICE] Found productStructure types", { count: types.length });
@@ -61,4 +62,25 @@ export const deleteProductStructureType = async (id: number): Promise<boolean> =
     console.log("[SERVICE] productStructure deleted successfully", { id });
 
     return true;
+};
+
+export const updateProductStructureTypeParent = async (
+    id: number,
+    parent: string
+): Promise<ProductStructureType> => {
+    console.log("[SERVICE] updateProductStructureTypeParent called", { id, parent });
+
+    const existing = await prisma.productStructure.findUnique({ where: { id } });
+    if (!existing) {
+        console.error("[SERVICE] productStructure not found for update", { id });
+        throw new Error("productStructure not found");
+    }
+
+    const updated = await prisma.productStructure.update({
+        where: { id },
+        data: { parent },
+    });
+
+    console.log("[SERVICE] ProductStructure parent updated successfully", updated);
+    return updated as ProductStructureType;
 };

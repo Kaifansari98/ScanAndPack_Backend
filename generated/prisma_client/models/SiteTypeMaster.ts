@@ -40,18 +40,21 @@ export type SiteTypeMasterMinAggregateOutputType = {
   id: number | null
   type: string | null
   vendor_id: number | null
+  status: string | null
 }
 
 export type SiteTypeMasterMaxAggregateOutputType = {
   id: number | null
   type: string | null
   vendor_id: number | null
+  status: string | null
 }
 
 export type SiteTypeMasterCountAggregateOutputType = {
   id: number
   type: number
   vendor_id: number
+  status: number
   _all: number
 }
 
@@ -70,18 +73,21 @@ export type SiteTypeMasterMinAggregateInputType = {
   id?: true
   type?: true
   vendor_id?: true
+  status?: true
 }
 
 export type SiteTypeMasterMaxAggregateInputType = {
   id?: true
   type?: true
   vendor_id?: true
+  status?: true
 }
 
 export type SiteTypeMasterCountAggregateInputType = {
   id?: true
   type?: true
   vendor_id?: true
+  status?: true
   _all?: true
 }
 
@@ -175,6 +181,7 @@ export type SiteTypeMasterGroupByOutputType = {
   id: number
   type: string
   vendor_id: number
+  status: string
   _count: SiteTypeMasterCountAggregateOutputType | null
   _avg: SiteTypeMasterAvgAggregateOutputType | null
   _sum: SiteTypeMasterSumAggregateOutputType | null
@@ -204,6 +211,7 @@ export type SiteTypeMasterWhereInput = {
   id?: Prisma.IntFilter<"SiteTypeMaster"> | number
   type?: Prisma.StringFilter<"SiteTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"SiteTypeMaster"> | number
+  status?: Prisma.StringFilter<"SiteTypeMaster"> | string
   leads?: Prisma.LeadMasterListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
@@ -212,6 +220,7 @@ export type SiteTypeMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   leads?: Prisma.LeadMasterOrderByRelationAggregateInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
@@ -223,6 +232,7 @@ export type SiteTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.SiteTypeMasterWhereInput | Prisma.SiteTypeMasterWhereInput[]
   type?: Prisma.StringFilter<"SiteTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"SiteTypeMaster"> | number
+  status?: Prisma.StringFilter<"SiteTypeMaster"> | string
   leads?: Prisma.LeadMasterListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
@@ -231,6 +241,7 @@ export type SiteTypeMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   _count?: Prisma.SiteTypeMasterCountOrderByAggregateInput
   _avg?: Prisma.SiteTypeMasterAvgOrderByAggregateInput
   _max?: Prisma.SiteTypeMasterMaxOrderByAggregateInput
@@ -245,10 +256,12 @@ export type SiteTypeMasterScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"SiteTypeMaster"> | number
   type?: Prisma.StringWithAggregatesFilter<"SiteTypeMaster"> | string
   vendor_id?: Prisma.IntWithAggregatesFilter<"SiteTypeMaster"> | number
+  status?: Prisma.StringWithAggregatesFilter<"SiteTypeMaster"> | string
 }
 
 export type SiteTypeMasterCreateInput = {
   type: string
+  status?: string
   leads?: Prisma.LeadMasterCreateNestedManyWithoutSiteTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteTypesInput
 }
@@ -257,11 +270,13 @@ export type SiteTypeMasterUncheckedCreateInput = {
   id?: number
   type: string
   vendor_id: number
+  status?: string
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutSiteTypeInput
 }
 
 export type SiteTypeMasterUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   leads?: Prisma.LeadMasterUpdateManyWithoutSiteTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteTypesNestedInput
 }
@@ -270,6 +285,7 @@ export type SiteTypeMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutSiteTypeNestedInput
 }
 
@@ -277,16 +293,19 @@ export type SiteTypeMasterCreateManyInput = {
   id?: number
   type: string
   vendor_id: number
+  status?: string
 }
 
 export type SiteTypeMasterUpdateManyMutationInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SiteTypeMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SiteTypeMasterListRelationFilter = {
@@ -308,6 +327,7 @@ export type SiteTypeMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type SiteTypeMasterAvgOrderByAggregateInput = {
@@ -319,12 +339,14 @@ export type SiteTypeMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type SiteTypeMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type SiteTypeMasterSumOrderByAggregateInput = {
@@ -392,12 +414,14 @@ export type SiteTypeMasterUpdateOneWithoutLeadsNestedInput = {
 
 export type SiteTypeMasterCreateWithoutVendorInput = {
   type: string
+  status?: string
   leads?: Prisma.LeadMasterCreateNestedManyWithoutSiteTypeInput
 }
 
 export type SiteTypeMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   type: string
+  status?: string
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutSiteTypeInput
 }
 
@@ -434,10 +458,12 @@ export type SiteTypeMasterScalarWhereInput = {
   id?: Prisma.IntFilter<"SiteTypeMaster"> | number
   type?: Prisma.StringFilter<"SiteTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"SiteTypeMaster"> | number
+  status?: Prisma.StringFilter<"SiteTypeMaster"> | string
 }
 
 export type SiteTypeMasterCreateWithoutLeadsInput = {
   type: string
+  status?: string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteTypesInput
 }
 
@@ -445,6 +471,7 @@ export type SiteTypeMasterUncheckedCreateWithoutLeadsInput = {
   id?: number
   type: string
   vendor_id: number
+  status?: string
 }
 
 export type SiteTypeMasterCreateOrConnectWithoutLeadsInput = {
@@ -465,6 +492,7 @@ export type SiteTypeMasterUpdateToOneWithWhereWithoutLeadsInput = {
 
 export type SiteTypeMasterUpdateWithoutLeadsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteTypesNestedInput
 }
 
@@ -472,27 +500,32 @@ export type SiteTypeMasterUncheckedUpdateWithoutLeadsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SiteTypeMasterCreateManyVendorInput = {
   id?: number
   type: string
+  status?: string
 }
 
 export type SiteTypeMasterUpdateWithoutVendorInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   leads?: Prisma.LeadMasterUpdateManyWithoutSiteTypeNestedInput
 }
 
 export type SiteTypeMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutSiteTypeNestedInput
 }
 
 export type SiteTypeMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -530,6 +563,7 @@ export type SiteTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.Intern
   id?: boolean
   type?: boolean
   vendor_id?: boolean
+  status?: boolean
   leads?: boolean | Prisma.SiteTypeMaster$leadsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.SiteTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
@@ -539,6 +573,7 @@ export type SiteTypeMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   id?: boolean
   type?: boolean
   vendor_id?: boolean
+  status?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["siteTypeMaster"]>
 
@@ -546,6 +581,7 @@ export type SiteTypeMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   id?: boolean
   type?: boolean
   vendor_id?: boolean
+  status?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["siteTypeMaster"]>
 
@@ -553,9 +589,10 @@ export type SiteTypeMasterSelectScalar = {
   id?: boolean
   type?: boolean
   vendor_id?: boolean
+  status?: boolean
 }
 
-export type SiteTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id", ExtArgs["result"]["siteTypeMaster"]>
+export type SiteTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id" | "status", ExtArgs["result"]["siteTypeMaster"]>
 export type SiteTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   leads?: boolean | Prisma.SiteTypeMaster$leadsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -578,6 +615,7 @@ export type $SiteTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.Inte
     id: number
     type: string
     vendor_id: number
+    status: string
   }, ExtArgs["result"]["siteTypeMaster"]>
   composites: {}
 }
@@ -1006,6 +1044,7 @@ export interface SiteTypeMasterFieldRefs {
   readonly id: Prisma.FieldRef<"SiteTypeMaster", 'Int'>
   readonly type: Prisma.FieldRef<"SiteTypeMaster", 'String'>
   readonly vendor_id: Prisma.FieldRef<"SiteTypeMaster", 'Int'>
+  readonly status: Prisma.FieldRef<"SiteTypeMaster", 'String'>
 }
     
 
