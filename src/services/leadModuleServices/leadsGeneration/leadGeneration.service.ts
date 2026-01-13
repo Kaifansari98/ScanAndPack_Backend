@@ -338,7 +338,11 @@ export const createLeadService = async (
 
       // 5. Create product structure instances (quantity_index always 1)
       const instanceProductTypeId = product_types[0];
-      const instanceSource =
+      const instanceSource: {
+        product_structure_id: number;
+        title?: string;
+        description?: string;
+      }[] =
         product_structure_instances.length > 0
           ? product_structure_instances
           : product_structures.map((product_structure_id) => ({
@@ -1220,7 +1224,11 @@ export const updateLeadService = async (
       });
       const instanceProductTypeId =
         product_types[0] ?? existingProductType?.product_type_id;
-      const instanceSource =
+      const instanceSource: {
+        product_structure_id: number;
+        title?: string;
+        description?: string;
+      }[] =
         product_structure_instances.length > 0
           ? product_structure_instances
           : product_structures.map((product_structure_id) => ({
