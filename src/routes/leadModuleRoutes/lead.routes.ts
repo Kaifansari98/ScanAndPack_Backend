@@ -155,6 +155,11 @@ leadsRouter.get(
   "/get-lead/:leadId/vendor/:vendorId/user/:userId",
   leadController.fetchLeadById
 );
+// GET product structure instances for a lead and vendor
+leadsRouter.get(
+  "/lead/:leadId/vendor/:vendorId/product-structure-instances",
+  leadController.fetchLeadProductStructureInstances
+);
 
 // PATCH /leads/:leadId/tasks/:taskId/assign-ism
 leadsRouter.patch(

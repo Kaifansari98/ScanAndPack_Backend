@@ -5,6 +5,7 @@ import {
   getLeadLogsWithDocuments,
   getLeadsByVendor,
   getLeadsByVendorAndUser,
+  getLeadProductStructureInstances,
   getSiteSupervisorByVendor,
   softDeleteLead,
   updateLeadService,
@@ -57,6 +58,18 @@ export class LeadController {
       const files = (req.files as Express.Multer.File[]) || [];
       const { vendor_id, is_draft } = req.body;
       const draftMode = String(is_draft) === "true";
+      let productStructureInstances = req.body.product_structure_instances;
+
+      if (typeof productStructureInstances === "string") {
+        try {
+          productStructureInstances = JSON.parse(productStructureInstances);
+        } catch (parseError) {
+          logger.warn("Invalid product_structure_instances payload", {
+            error: (parseError as Error).message,
+          });
+          productStructureInstances = undefined;
+        }
+      }
 
       // 1. Resolve the vendor's Open status ID dynamically
       const openStatus = await prisma.statusTypeMaster.findFirst({
@@ -91,6 +104,9 @@ export class LeadController {
           : undefined,
         product_structures: req.body.product_structures
           ? [].concat(req.body.product_structures)
+          : undefined,
+        product_structure_instances: Array.isArray(productStructureInstances)
+          ? productStructureInstances
           : undefined,
         initial_site_measurement_date: req.body.initial_site_measurement_date
           ? new Date(req.body.initial_site_measurement_date)
@@ -439,6 +455,51 @@ export class LeadController {
         details:
           process.env.NODE_ENV === "development" ? error.message : undefined,
       });
+    }
+  };
+
+  fetchLeadProductStructureInstances = async (
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
+    try {
+      const leadId = Number(req.params.leadId);
+      const vendorId = Number(req.params.vendorId);
+
+      if (!leadId || Number.isNaN(leadId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid lead ID provided", 400));
+      }
+
+      if (!vendorId || Number.isNaN(vendorId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid vendor ID provided", 400));
+      }
+
+      const instances = await getLeadProductStructureInstances(
+        leadId,
+        vendorId
+      );
+
+      return res.status(200).json(
+        ApiResponse.success(
+          instances,
+          "Lead product structure instances fetched successfully",
+          200
+        )
+      );
+    } catch (error: any) {
+      console.error(
+        "[CONTROLLER] fetchLeadProductStructureInstances error:",
+        error
+      );
+      return res
+        .status(500)
+        .json(
+          ApiResponse.error("Failed to fetch product structure instances", 500)
+        );
     }
   };
 

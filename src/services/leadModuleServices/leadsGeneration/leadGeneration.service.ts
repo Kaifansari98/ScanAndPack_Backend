@@ -108,6 +108,7 @@ export const createLeadService = async (
     assigned_by,
     product_types = [],
     product_structures = [],
+    product_structure_instances = [],
     initial_site_measurement_date,
   } = payload;
 
@@ -333,6 +334,68 @@ export const createLeadService = async (
         logger.info("✅ Product structure mapping created", {
           productStructureId,
         });
+      }
+
+      // 5. Create product structure instances (quantity_index always 1)
+      const instanceProductTypeId = product_types[0];
+      const instanceSource =
+        product_structure_instances.length > 0
+          ? product_structure_instances
+          : product_structures.map((product_structure_id) => ({
+              product_structure_id,
+            }));
+
+      if (!instanceProductTypeId) {
+        logger.warn(
+          "⚠️ Skipping structure instances: product_types is empty",
+          { lead_id: lead.id }
+        );
+      } else {
+        const structureIds = Array.from(
+          new Set(instanceSource.map((instance) => instance.product_structure_id))
+        );
+        const structures = await tx.productStructure.findMany({
+          where: {
+            id: { in: structureIds },
+            vendor_id,
+          },
+        });
+        const structureMap = new Map(
+          structures.map((structure) => [structure.id, structure])
+        );
+
+        if (structureMap.size !== structureIds.length) {
+          const missingIds = structureIds.filter((id) => !structureMap.has(id));
+          throw new Error(
+            `Product structure with ID(s) ${missingIds.join(
+              ", "
+            )} not found for vendor ${vendor_id}`
+          );
+        }
+
+        const quantityIndexMap = new Map<number, number>();
+        for (const instance of instanceSource) {
+          const structure = structureMap.get(instance.product_structure_id);
+          if (!structure) continue;
+
+          const nextIndex =
+            (quantityIndexMap.get(instance.product_structure_id) || 0) + 1;
+          quantityIndexMap.set(instance.product_structure_id, nextIndex);
+
+          await tx.leadProductStructureInstance.create({
+            data: {
+              vendor_id,
+              lead_id: lead.id,
+              account_id: account.id,
+              product_type_id: instanceProductTypeId,
+              product_structure_id: instance.product_structure_id,
+              quantity_index: nextIndex,
+              title: instance.title?.trim() || structure.type,
+              description: instance.description?.trim() || null,
+              created_by,
+            },
+          });
+        }
       }
 
       // 6. LeadStatusLogs entry
@@ -852,6 +915,33 @@ export const getLeadById = async (
   }
 };
 
+export const getLeadProductStructureInstances = async (
+  leadId: number,
+  vendorId: number
+) => {
+  try {
+    return await prisma.leadProductStructureInstance.findMany({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+      },
+      include: {
+        productStructure: true,
+        productType: true,
+      },
+      orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+    });
+  } catch (error: any) {
+    console.error(
+      "[SERVICE] Error fetching lead product structure instances:",
+      error
+    );
+    throw new Error(
+      `Failed to fetch lead product structure instances: ${error.message}`
+    );
+  }
+};
+
 export const softDeleteLead = async (leadId: number, deletedBy: number) => {
   // 1. Fetch the lead with its account
   const lead = await prisma.leadMaster.findUnique({
@@ -965,6 +1055,7 @@ export const updateLeadService = async (
     updated_by,
     product_types = [],
     product_structures = [],
+    product_structure_instances = [],
     initial_site_measurement_date,
   } = payload;
 
@@ -1113,6 +1204,28 @@ export const updateLeadService = async (
           vendor_id,
         },
       });
+      await tx.leadProductStructureInstance.deleteMany({
+        where: {
+          lead_id: leadId,
+          vendor_id,
+        },
+      });
+
+      const existingProductType = await tx.leadProductMapping.findFirst({
+        where: {
+          lead_id: leadId,
+          vendor_id,
+        },
+        select: { product_type_id: true },
+      });
+      const instanceProductTypeId =
+        product_types[0] ?? existingProductType?.product_type_id;
+      const instanceSource =
+        product_structure_instances.length > 0
+          ? product_structure_instances
+          : product_structures.map((product_structure_id) => ({
+              product_structure_id,
+            }));
 
       // Create new mappings
       for (const productStructureId of product_structures) {
@@ -1148,6 +1261,59 @@ export const updateLeadService = async (
           "[DEBUG] ✅ Product structure mapping created for structure ID:",
           productStructureId
         );
+      }
+
+      if (!instanceProductTypeId) {
+        logger.warn(
+          "⚠️ Skipping structure instances: product_types is empty",
+          { lead_id: leadId }
+        );
+      } else {
+        const structureIds = Array.from(
+          new Set(instanceSource.map((instance) => instance.product_structure_id))
+        );
+        const structures = await tx.productStructure.findMany({
+          where: {
+            id: { in: structureIds },
+            vendor_id,
+          },
+        });
+        const structureMap = new Map(
+          structures.map((structure) => [structure.id, structure])
+        );
+
+        if (structureMap.size !== structureIds.length) {
+          const missingIds = structureIds.filter((id) => !structureMap.has(id));
+          throw new Error(
+            `Product structure with ID(s) ${missingIds.join(
+              ", "
+            )} not found for vendor ${vendor_id}`
+          );
+        }
+
+        const quantityIndexMap = new Map<number, number>();
+        for (const instance of instanceSource) {
+          const structure = structureMap.get(instance.product_structure_id);
+          if (!structure) continue;
+
+          const nextIndex =
+            (quantityIndexMap.get(instance.product_structure_id) || 0) + 1;
+          quantityIndexMap.set(instance.product_structure_id, nextIndex);
+
+          await tx.leadProductStructureInstance.create({
+            data: {
+              vendor_id,
+              lead_id: leadId,
+              account_id: existingLead.account_id!,
+              product_type_id: instanceProductTypeId,
+              product_structure_id: instance.product_structure_id,
+              quantity_index: nextIndex,
+              title: instance.title?.trim() || structure.type,
+              description: instance.description?.trim() || null,
+              created_by: updated_by,
+            },
+          });
+        }
       }
     }
 

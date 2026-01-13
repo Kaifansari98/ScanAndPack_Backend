@@ -108,6 +108,11 @@ export interface CreateLeadDTO {
     assigned_by?: number;
     product_types: number[];
     product_structures: number[];
+    product_structure_instances?: {
+      product_structure_id: number;
+      title: string;
+      description?: string;
+    }[];
     initial_site_measurement_date?: Date;
     is_draft?: boolean;
 }
@@ -133,6 +138,11 @@ export interface UpdateLeadDTO {
     updated_by: number;
     product_types?: number[];
     product_structures?: number[];
+    product_structure_instances?: {
+      product_structure_id: number;
+      title: string;
+      description?: string;
+    }[];
     initial_site_measurement_date?: Date | string;
 }
 

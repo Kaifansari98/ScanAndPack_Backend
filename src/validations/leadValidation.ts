@@ -13,6 +13,12 @@ const numberLike = Joi.alternatives()
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 
+const structureInstanceSchema = Joi.object({
+  product_structure_id: numberLike.required(),
+  title: Joi.string().trim().min(1).max(300).required(),
+  description: Joi.string().trim().max(2000).optional().allow("", null),
+});
+
 export const createLeadSchema = Joi.object({
   firstname: Joi.string().trim().min(2).max(50).required(),
   lastname: Joi.string().trim().min(2).max(50).required(),
@@ -59,6 +65,9 @@ export const createLeadSchema = Joi.object({
     "any.required": "At least one product structure is required",
     "array.min": "At least one product structure must be selected",
   }),
+  product_structure_instances: Joi.array()
+    .items(structureInstanceSchema)
+    .optional(),
 
   initial_site_measurement_date: Joi.date().min(today).optional().messages({
     "date.min": "Initial site measurement date cannot be in the past",
@@ -102,6 +111,9 @@ export const createLeadDraftSchema = Joi.object({
   status_id: numberLike.optional(), // ✅ allow missing
   product_types: Joi.array().items(numberLike).optional(),
   product_structures: Joi.array().items(numberLike).optional(),
+  product_structure_instances: Joi.array()
+    .items(structureInstanceSchema)
+    .optional(),
   initial_site_measurement_date: Joi.date().optional().allow(null),
 
   is_draft: Joi.boolean().optional(),
