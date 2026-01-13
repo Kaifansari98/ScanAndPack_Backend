@@ -188,6 +188,11 @@ export type ProductStructure = Prisma.ProductStructureModel
  */
 export type LeadProductStructureMapping = Prisma.LeadProductStructureMappingModel
 /**
+ * Model LeadProductStructureInstance
+ * 
+ */
+export type LeadProductStructureInstance = Prisma.LeadProductStructureInstanceModel
+/**
  * Model PaymentInfo
  * 
  */

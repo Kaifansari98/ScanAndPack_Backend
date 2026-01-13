@@ -414,6 +414,7 @@ export const ModelName = {
   LeadChatDocument: 'LeadChatDocument',
   ProductStructure: 'ProductStructure',
   LeadProductStructureMapping: 'LeadProductStructureMapping',
+  LeadProductStructureInstance: 'LeadProductStructureInstance',
   PaymentInfo: 'PaymentInfo',
   Ledger: 'Ledger',
   DocumentTypeMaster: 'DocumentTypeMaster',
@@ -461,7 +462,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "notification" | "userPushToken" | "notificationDeliveryLogs"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "notification" | "userPushToken" | "notificationDeliveryLogs"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2682,6 +2683,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.LeadProductStructureMappingCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.LeadProductStructureMappingCountAggregateOutputType> | number
+        }
+      }
+    }
+    LeadProductStructureInstance: {
+      payload: Prisma.$LeadProductStructureInstancePayload<ExtArgs>
+      fields: Prisma.LeadProductStructureInstanceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadProductStructureInstanceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadProductStructureInstancePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadProductStructureInstanceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadProductStructureInstancePayload>
+        }
+        findFirst: {
+          args: Prisma.LeadProductStructureInstanceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadProductStructureInstancePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadProductStructureInstanceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadProductStructureInstancePayload>
+        }
+        findMany: {
+          args: Prisma.LeadProductStructureInstanceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadProductStructureInstancePayload>[]
+        }
+        create: {
+          args: Prisma.LeadProductStructureInstanceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadProductStructureInstancePayload>
+        }
+        createMany: {
+          args: Prisma.LeadProductStructureInstanceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadProductStructureInstanceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadProductStructureInstancePayload>[]
+        }
+        delete: {
+          args: Prisma.LeadProductStructureInstanceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadProductStructureInstancePayload>
+        }
+        update: {
+          args: Prisma.LeadProductStructureInstanceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadProductStructureInstancePayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadProductStructureInstanceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadProductStructureInstanceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadProductStructureInstanceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadProductStructureInstancePayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadProductStructureInstanceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadProductStructureInstancePayload>
+        }
+        aggregate: {
+          args: Prisma.LeadProductStructureInstanceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadProductStructureInstance>
+        }
+        groupBy: {
+          args: Prisma.LeadProductStructureInstanceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadProductStructureInstanceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadProductStructureInstanceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadProductStructureInstanceCountAggregateOutputType> | number
         }
       }
     }
@@ -5568,6 +5643,26 @@ export const LeadProductStructureMappingScalarFieldEnum = {
 export type LeadProductStructureMappingScalarFieldEnum = (typeof LeadProductStructureMappingScalarFieldEnum)[keyof typeof LeadProductStructureMappingScalarFieldEnum]
 
 
+export const LeadProductStructureInstanceScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  account_id: 'account_id',
+  product_type_id: 'product_type_id',
+  product_structure_id: 'product_structure_id',
+  quantity_index: 'quantity_index',
+  title: 'title',
+  status: 'status',
+  description: 'description',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at'
+} as const
+
+export type LeadProductStructureInstanceScalarFieldEnum = (typeof LeadProductStructureInstanceScalarFieldEnum)[keyof typeof LeadProductStructureInstanceScalarFieldEnum]
+
+
 export const PaymentInfoScalarFieldEnum = {
   id: 'id',
   lead_id: 'lead_id',
@@ -6198,6 +6293,20 @@ export type ListEnumLeadChatMessageTypeFieldRefInput<$PrismaModel> = FieldRefInp
 
 
 /**
+ * Reference to a field of type 'ProductInstanceStatus'
+ */
+export type EnumProductInstanceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductInstanceStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ProductInstanceStatus[]'
+ */
+export type ListEnumProductInstanceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductInstanceStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'LedgerType'
  */
 export type EnumLedgerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LedgerType'>
@@ -6375,6 +6484,7 @@ export type GlobalOmitConfig = {
   leadChatDocument?: Prisma.LeadChatDocumentOmit
   productStructure?: Prisma.ProductStructureOmit
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingOmit
+  leadProductStructureInstance?: Prisma.LeadProductStructureInstanceOmit
   paymentInfo?: Prisma.PaymentInfoOmit
   ledger?: Prisma.LedgerOmit
   documentTypeMaster?: Prisma.DocumentTypeMasterOmit

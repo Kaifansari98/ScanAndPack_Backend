@@ -371,6 +371,23 @@ export type EnumLeadChatMessageTypeWithAggregatesFilter<$PrismaModel = never> = 
   _max?: Prisma.NestedEnumLeadChatMessageTypeFilter<$PrismaModel>
 }
 
+export type EnumProductInstanceStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ProductInstanceStatus | Prisma.EnumProductInstanceStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ProductInstanceStatus[] | Prisma.ListEnumProductInstanceStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ProductInstanceStatus[] | Prisma.ListEnumProductInstanceStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumProductInstanceStatusFilter<$PrismaModel> | $Enums.ProductInstanceStatus
+}
+
+export type EnumProductInstanceStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ProductInstanceStatus | Prisma.EnumProductInstanceStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ProductInstanceStatus[] | Prisma.ListEnumProductInstanceStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ProductInstanceStatus[] | Prisma.ListEnumProductInstanceStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumProductInstanceStatusWithAggregatesFilter<$PrismaModel> | $Enums.ProductInstanceStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumProductInstanceStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumProductInstanceStatusFilter<$PrismaModel>
+}
+
 export type EnumLedgerTypeFilter<$PrismaModel = never> = {
   equals?: $Enums.LedgerType | Prisma.EnumLedgerTypeFieldRefInput<$PrismaModel>
   in?: $Enums.LedgerType[] | Prisma.ListEnumLedgerTypeFieldRefInput<$PrismaModel>
@@ -802,6 +819,23 @@ export type NestedEnumLeadChatMessageTypeWithAggregatesFilter<$PrismaModel = nev
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumLeadChatMessageTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumLeadChatMessageTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumProductInstanceStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ProductInstanceStatus | Prisma.EnumProductInstanceStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ProductInstanceStatus[] | Prisma.ListEnumProductInstanceStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ProductInstanceStatus[] | Prisma.ListEnumProductInstanceStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumProductInstanceStatusFilter<$PrismaModel> | $Enums.ProductInstanceStatus
+}
+
+export type NestedEnumProductInstanceStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ProductInstanceStatus | Prisma.EnumProductInstanceStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ProductInstanceStatus[] | Prisma.ListEnumProductInstanceStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ProductInstanceStatus[] | Prisma.ListEnumProductInstanceStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumProductInstanceStatusWithAggregatesFilter<$PrismaModel> | $Enums.ProductInstanceStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumProductInstanceStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumProductInstanceStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumLedgerTypeFilter<$PrismaModel = never> = {

@@ -71,6 +71,8 @@ model VendorMaster {
   addresses                   VendorAddress[]
   taxInfo                     VendorTaxInfo[]
   tokens                      VendorTokens[]
+  productStructureInstances   LeadProductStructureInstance[]
+
 }
 
 model VendorAddress {
@@ -170,6 +172,8 @@ model UserMaster {
   pushTokens                           UserPushToken[]
   user_type                            UserTypeMaster                      @relation(fields: [user_type_id], references: [id])
   vendor                               VendorMaster                        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  productStructureInstances LeadProductStructureInstance[]
+
 }
 
 model UserDocument {
@@ -407,6 +411,8 @@ model LeadMaster {
   payments                                    PaymentInfo[]
   siteReadiness                               SiteReadiness[]
   tasks                                       UserLeadTask[]
+  productStructureInstances                   LeadProductStructureInstance[]
+
 
   @@unique([vendor_id, lead_code], name: "uniq_vendor_lead_code")
 }
@@ -506,6 +512,7 @@ model AccountMaster {
   siteReadiness               SiteReadiness[]
   tasks                       UserLeadTask[]
   leadChatDocument            LeadChatDocument[]
+  productStructureInstances   LeadProductStructureInstance[]
 }
 
 model LeadProductMapping {
@@ -530,6 +537,8 @@ model ProductTypeMaster {
   tag       String
   status    String               @default("active")
   leads     LeadProductMapping[]
+  productStructureInstances LeadProductStructureInstance[]
+
   vendor    VendorMaster         @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
@@ -648,6 +657,8 @@ model ProductStructure {
   parent                      String?          
   status                      String               @default("active")
   leadProductStructureMapping LeadProductStructureMapping[]
+  productStructureInstances   LeadProductStructureInstance[]
+
   vendor                      VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
@@ -663,6 +674,32 @@ model LeadProductStructureMapping {
   lead                 LeadMaster       @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   productStructure     ProductStructure @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
   vendor               VendorMaster     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+}
+
+model LeadProductStructureInstance {
+  id                   Int              @id @default(autoincrement())
+  vendor_id            Int
+  lead_id              Int
+  account_id           Int
+  product_type_id      Int
+  product_structure_id Int
+  quantity_index       Int              // 1, 2, 3...
+  title                String           // Wardrobe 1
+  status               ProductInstanceStatus @default(open)
+  description          String?          @db.VarChar(2000)
+  created_by           Int
+  created_at           DateTime         @default(now())
+  updated_by           Int?
+  updated_at           DateTime         @updatedAt
+
+  vendor               VendorMaster     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead                 LeadMaster       @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  account              AccountMaster    @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  productType          ProductTypeMaster @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
+  productStructure     ProductStructure @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
+  updatedBy            UserMaster?      @relation(fields: [updated_by], references: [id])
+
+  @@unique([lead_id, vendor_id, product_structure_id, quantity_index], name: "uniq_structure_instance")
 }
 
 model PaymentInfo {
@@ -1240,4 +1277,11 @@ enum LeadChatMessageType {
   attachment
   system
   textWithAttachment
+}
+
+enum ProductInstanceStatus {
+  open
+  onHold
+  lostApproval
+  lost
 }

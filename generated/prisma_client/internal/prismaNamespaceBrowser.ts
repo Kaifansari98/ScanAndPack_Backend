@@ -81,6 +81,7 @@ export const ModelName = {
   LeadChatDocument: 'LeadChatDocument',
   ProductStructure: 'ProductStructure',
   LeadProductStructureMapping: 'LeadProductStructureMapping',
+  LeadProductStructureInstance: 'LeadProductStructureInstance',
   PaymentInfo: 'PaymentInfo',
   Ledger: 'Ledger',
   DocumentTypeMaster: 'DocumentTypeMaster',
@@ -605,6 +606,26 @@ export const LeadProductStructureMappingScalarFieldEnum = {
 } as const
 
 export type LeadProductStructureMappingScalarFieldEnum = (typeof LeadProductStructureMappingScalarFieldEnum)[keyof typeof LeadProductStructureMappingScalarFieldEnum]
+
+
+export const LeadProductStructureInstanceScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  account_id: 'account_id',
+  product_type_id: 'product_type_id',
+  product_structure_id: 'product_structure_id',
+  quantity_index: 'quantity_index',
+  title: 'title',
+  status: 'status',
+  description: 'description',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at'
+} as const
+
+export type LeadProductStructureInstanceScalarFieldEnum = (typeof LeadProductStructureInstanceScalarFieldEnum)[keyof typeof LeadProductStructureInstanceScalarFieldEnum]
 
 
 export const PaymentInfoScalarFieldEnum = {

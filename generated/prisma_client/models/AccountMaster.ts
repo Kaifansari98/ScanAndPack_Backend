@@ -330,6 +330,7 @@ export type AccountMasterWhereInput = {
   siteReadiness?: Prisma.SiteReadinessListRelationFilter
   tasks?: Prisma.UserLeadTaskListRelationFilter
   leadChatDocument?: Prisma.LeadChatDocumentListRelationFilter
+  productStructureInstances?: Prisma.LeadProductStructureInstanceListRelationFilter
 }
 
 export type AccountMasterOrderByWithRelationInput = {
@@ -373,6 +374,7 @@ export type AccountMasterOrderByWithRelationInput = {
   siteReadiness?: Prisma.SiteReadinessOrderByRelationAggregateInput
   tasks?: Prisma.UserLeadTaskOrderByRelationAggregateInput
   leadChatDocument?: Prisma.LeadChatDocumentOrderByRelationAggregateInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceOrderByRelationAggregateInput
 }
 
 export type AccountMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -419,6 +421,7 @@ export type AccountMasterWhereUniqueInput = Prisma.AtLeast<{
   siteReadiness?: Prisma.SiteReadinessListRelationFilter
   tasks?: Prisma.UserLeadTaskListRelationFilter
   leadChatDocument?: Prisma.LeadChatDocumentListRelationFilter
+  productStructureInstances?: Prisma.LeadProductStructureInstanceListRelationFilter
 }, "id">
 
 export type AccountMasterOrderByWithAggregationInput = {
@@ -500,6 +503,7 @@ export type AccountMasterCreateInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateInput = {
@@ -540,6 +544,7 @@ export type AccountMasterUncheckedCreateInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUpdateInput = {
@@ -579,6 +584,7 @@ export type AccountMasterUpdateInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateInput = {
@@ -619,6 +625,7 @@ export type AccountMasterUncheckedUpdateInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateManyInput = {
@@ -985,6 +992,20 @@ export type AccountMasterUpdateOneRequiredWithoutLeadProductStructureMappingNest
   update?: Prisma.XOR<Prisma.XOR<Prisma.AccountMasterUpdateToOneWithWhereWithoutLeadProductStructureMappingInput, Prisma.AccountMasterUpdateWithoutLeadProductStructureMappingInput>, Prisma.AccountMasterUncheckedUpdateWithoutLeadProductStructureMappingInput>
 }
 
+export type AccountMasterCreateNestedOneWithoutProductStructureInstancesInput = {
+  create?: Prisma.XOR<Prisma.AccountMasterCreateWithoutProductStructureInstancesInput, Prisma.AccountMasterUncheckedCreateWithoutProductStructureInstancesInput>
+  connectOrCreate?: Prisma.AccountMasterCreateOrConnectWithoutProductStructureInstancesInput
+  connect?: Prisma.AccountMasterWhereUniqueInput
+}
+
+export type AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput = {
+  create?: Prisma.XOR<Prisma.AccountMasterCreateWithoutProductStructureInstancesInput, Prisma.AccountMasterUncheckedCreateWithoutProductStructureInstancesInput>
+  connectOrCreate?: Prisma.AccountMasterCreateOrConnectWithoutProductStructureInstancesInput
+  upsert?: Prisma.AccountMasterUpsertWithoutProductStructureInstancesInput
+  connect?: Prisma.AccountMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AccountMasterUpdateToOneWithWhereWithoutProductStructureInstancesInput, Prisma.AccountMasterUpdateWithoutProductStructureInstancesInput>, Prisma.AccountMasterUncheckedUpdateWithoutProductStructureInstancesInput>
+}
+
 export type AccountMasterCreateNestedOneWithoutPaymentsInput = {
   create?: Prisma.XOR<Prisma.AccountMasterCreateWithoutPaymentsInput, Prisma.AccountMasterUncheckedCreateWithoutPaymentsInput>
   connectOrCreate?: Prisma.AccountMasterCreateOrConnectWithoutPaymentsInput
@@ -1245,6 +1266,7 @@ export type AccountMasterCreateWithoutVendorInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutVendorInput = {
@@ -1284,6 +1306,7 @@ export type AccountMasterUncheckedCreateWithoutVendorInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutVendorInput = {
@@ -1368,6 +1391,7 @@ export type AccountMasterCreateWithoutCreatedByInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutCreatedByInput = {
@@ -1407,6 +1431,7 @@ export type AccountMasterUncheckedCreateWithoutCreatedByInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutCreatedByInput = {
@@ -1455,6 +1480,7 @@ export type AccountMasterCreateWithoutUpdatedByInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutUpdatedByInput = {
@@ -1494,6 +1520,7 @@ export type AccountMasterUncheckedCreateWithoutUpdatedByInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutUpdatedByInput = {
@@ -1574,6 +1601,7 @@ export type AccountMasterCreateWithoutLeadsInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadsInput = {
@@ -1613,6 +1641,7 @@ export type AccountMasterUncheckedCreateWithoutLeadsInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadsInput = {
@@ -1667,6 +1696,7 @@ export type AccountMasterUpdateWithoutLeadsInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadsInput = {
@@ -1706,6 +1736,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadsInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadUserMappingsInput = {
@@ -1744,6 +1775,7 @@ export type AccountMasterCreateWithoutLeadUserMappingsInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadUserMappingsInput = {
@@ -1783,6 +1815,7 @@ export type AccountMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadUserMappingsInput = {
@@ -1837,6 +1870,7 @@ export type AccountMasterUpdateWithoutLeadUserMappingsInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
@@ -1876,6 +1910,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadActivityStatusLogInput = {
@@ -1914,6 +1949,7 @@ export type AccountMasterCreateWithoutLeadActivityStatusLogInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
@@ -1953,6 +1989,7 @@ export type AccountMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadActivityStatusLogInput = {
@@ -2007,6 +2044,7 @@ export type AccountMasterUpdateWithoutLeadActivityStatusLogInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
@@ -2046,6 +2084,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadsMappingInput = {
@@ -2084,6 +2123,7 @@ export type AccountMasterCreateWithoutLeadsMappingInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadsMappingInput = {
@@ -2123,6 +2163,7 @@ export type AccountMasterUncheckedCreateWithoutLeadsMappingInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadsMappingInput = {
@@ -2177,6 +2218,7 @@ export type AccountMasterUpdateWithoutLeadsMappingInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadsMappingInput = {
@@ -2216,6 +2258,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadsMappingInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutDocumentsInput = {
@@ -2254,6 +2297,7 @@ export type AccountMasterCreateWithoutDocumentsInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutDocumentsInput = {
@@ -2293,6 +2337,7 @@ export type AccountMasterUncheckedCreateWithoutDocumentsInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutDocumentsInput = {
@@ -2347,6 +2392,7 @@ export type AccountMasterUpdateWithoutDocumentsInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutDocumentsInput = {
@@ -2386,6 +2432,7 @@ export type AccountMasterUncheckedUpdateWithoutDocumentsInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadChatDocumentInput = {
@@ -2424,6 +2471,7 @@ export type AccountMasterCreateWithoutLeadChatDocumentInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadChatDocumentInput = {
@@ -2463,6 +2511,7 @@ export type AccountMasterUncheckedCreateWithoutLeadChatDocumentInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadChatDocumentInput = {
@@ -2517,6 +2566,7 @@ export type AccountMasterUpdateWithoutLeadChatDocumentInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadChatDocumentInput = {
@@ -2556,6 +2606,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadChatDocumentInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadProductStructureMappingInput = {
@@ -2594,6 +2645,7 @@ export type AccountMasterCreateWithoutLeadProductStructureMappingInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
@@ -2633,6 +2685,7 @@ export type AccountMasterUncheckedCreateWithoutLeadProductStructureMappingInput 
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadProductStructureMappingInput = {
@@ -2687,6 +2740,7 @@ export type AccountMasterUpdateWithoutLeadProductStructureMappingInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
@@ -2716,6 +2770,181 @@ export type AccountMasterUncheckedUpdateWithoutLeadProductStructureMappingInput 
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+  leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
+}
+
+export type AccountMasterCreateWithoutProductStructureInstancesInput = {
+  name: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+  leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+}
+
+export type AccountMasterUncheckedCreateWithoutProductStructureInstancesInput = {
+  id?: number
+  name: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  vendor_id: number
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+  leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+}
+
+export type AccountMasterCreateOrConnectWithoutProductStructureInstancesInput = {
+  where: Prisma.AccountMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.AccountMasterCreateWithoutProductStructureInstancesInput, Prisma.AccountMasterUncheckedCreateWithoutProductStructureInstancesInput>
+}
+
+export type AccountMasterUpsertWithoutProductStructureInstancesInput = {
+  update: Prisma.XOR<Prisma.AccountMasterUpdateWithoutProductStructureInstancesInput, Prisma.AccountMasterUncheckedUpdateWithoutProductStructureInstancesInput>
+  create: Prisma.XOR<Prisma.AccountMasterCreateWithoutProductStructureInstancesInput, Prisma.AccountMasterUncheckedCreateWithoutProductStructureInstancesInput>
+  where?: Prisma.AccountMasterWhereInput
+}
+
+export type AccountMasterUpdateToOneWithWhereWithoutProductStructureInstancesInput = {
+  where?: Prisma.AccountMasterWhereInput
+  data: Prisma.XOR<Prisma.AccountMasterUpdateWithoutProductStructureInstancesInput, Prisma.AccountMasterUncheckedUpdateWithoutProductStructureInstancesInput>
+}
+
+export type AccountMasterUpdateWithoutProductStructureInstancesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+  leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+}
+
+export type AccountMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
   siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -2764,6 +2993,7 @@ export type AccountMasterCreateWithoutPaymentsInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutPaymentsInput = {
@@ -2803,6 +3033,7 @@ export type AccountMasterUncheckedCreateWithoutPaymentsInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutPaymentsInput = {
@@ -2857,6 +3088,7 @@ export type AccountMasterUpdateWithoutPaymentsInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutPaymentsInput = {
@@ -2896,6 +3128,7 @@ export type AccountMasterUncheckedUpdateWithoutPaymentsInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLedgersInput = {
@@ -2934,6 +3167,7 @@ export type AccountMasterCreateWithoutLedgersInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLedgersInput = {
@@ -2973,6 +3207,7 @@ export type AccountMasterUncheckedCreateWithoutLedgersInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLedgersInput = {
@@ -3027,6 +3262,7 @@ export type AccountMasterUpdateWithoutLedgersInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLedgersInput = {
@@ -3066,6 +3302,7 @@ export type AccountMasterUncheckedUpdateWithoutLedgersInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadStatusLogsInput = {
@@ -3104,6 +3341,7 @@ export type AccountMasterCreateWithoutLeadStatusLogsInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadStatusLogsInput = {
@@ -3143,6 +3381,7 @@ export type AccountMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadStatusLogsInput = {
@@ -3197,6 +3436,7 @@ export type AccountMasterUpdateWithoutLeadStatusLogsInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
@@ -3236,6 +3476,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutDesignMeetingInput = {
@@ -3274,6 +3515,7 @@ export type AccountMasterCreateWithoutDesignMeetingInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutDesignMeetingInput = {
@@ -3313,6 +3555,7 @@ export type AccountMasterUncheckedCreateWithoutDesignMeetingInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutDesignMeetingInput = {
@@ -3367,6 +3610,7 @@ export type AccountMasterUpdateWithoutDesignMeetingInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutDesignMeetingInput = {
@@ -3406,6 +3650,7 @@ export type AccountMasterUncheckedUpdateWithoutDesignMeetingInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutDesignMeetingDocsMappingInput = {
@@ -3444,6 +3689,7 @@ export type AccountMasterCreateWithoutDesignMeetingDocsMappingInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
@@ -3483,6 +3729,7 @@ export type AccountMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutDesignMeetingDocsMappingInput = {
@@ -3537,6 +3784,7 @@ export type AccountMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
@@ -3576,6 +3824,7 @@ export type AccountMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutDesignSelectionInput = {
@@ -3614,6 +3863,7 @@ export type AccountMasterCreateWithoutDesignSelectionInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutDesignSelectionInput = {
@@ -3653,6 +3903,7 @@ export type AccountMasterUncheckedCreateWithoutDesignSelectionInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutDesignSelectionInput = {
@@ -3707,6 +3958,7 @@ export type AccountMasterUpdateWithoutDesignSelectionInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutDesignSelectionInput = {
@@ -3746,6 +3998,7 @@ export type AccountMasterUncheckedUpdateWithoutDesignSelectionInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutSiteSupervisorsInput = {
@@ -3784,6 +4037,7 @@ export type AccountMasterCreateWithoutSiteSupervisorsInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutSiteSupervisorsInput = {
@@ -3823,6 +4077,7 @@ export type AccountMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutSiteSupervisorsInput = {
@@ -3877,6 +4132,7 @@ export type AccountMasterUpdateWithoutSiteSupervisorsInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
@@ -3916,6 +4172,7 @@ export type AccountMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutTasksInput = {
@@ -3954,6 +4211,7 @@ export type AccountMasterCreateWithoutTasksInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutTasksInput = {
@@ -3993,6 +4251,7 @@ export type AccountMasterUncheckedCreateWithoutTasksInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutTasksInput = {
@@ -4047,6 +4306,7 @@ export type AccountMasterUpdateWithoutTasksInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutTasksInput = {
@@ -4086,6 +4346,7 @@ export type AccountMasterUncheckedUpdateWithoutTasksInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadDetailedLogsInput = {
@@ -4124,6 +4385,7 @@ export type AccountMasterCreateWithoutLeadDetailedLogsInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
@@ -4163,6 +4425,7 @@ export type AccountMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadDetailedLogsInput = {
@@ -4217,6 +4480,7 @@ export type AccountMasterUpdateWithoutLeadDetailedLogsInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
@@ -4256,6 +4520,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadDocumentLogsInput = {
@@ -4294,6 +4559,7 @@ export type AccountMasterCreateWithoutLeadDocumentLogsInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
@@ -4333,6 +4599,7 @@ export type AccountMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadDocumentLogsInput = {
@@ -4387,6 +4654,7 @@ export type AccountMasterUpdateWithoutLeadDocumentLogsInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
@@ -4426,6 +4694,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutOrderLoginDetailsInput = {
@@ -4464,6 +4733,7 @@ export type AccountMasterCreateWithoutOrderLoginDetailsInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
@@ -4503,6 +4773,7 @@ export type AccountMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutOrderLoginDetailsInput = {
@@ -4557,6 +4828,7 @@ export type AccountMasterUpdateWithoutOrderLoginDetailsInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
@@ -4596,6 +4868,7 @@ export type AccountMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutSiteReadinessInput = {
@@ -4634,6 +4907,7 @@ export type AccountMasterCreateWithoutSiteReadinessInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutSiteReadinessInput = {
@@ -4673,6 +4947,7 @@ export type AccountMasterUncheckedCreateWithoutSiteReadinessInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutSiteReadinessInput = {
@@ -4727,6 +5002,7 @@ export type AccountMasterUpdateWithoutSiteReadinessInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutSiteReadinessInput = {
@@ -4766,6 +5042,7 @@ export type AccountMasterUncheckedUpdateWithoutSiteReadinessInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutInstallerMappingsInput = {
@@ -4804,6 +5081,7 @@ export type AccountMasterCreateWithoutInstallerMappingsInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutInstallerMappingsInput = {
@@ -4843,6 +5121,7 @@ export type AccountMasterUncheckedCreateWithoutInstallerMappingsInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutInstallerMappingsInput = {
@@ -4897,6 +5176,7 @@ export type AccountMasterUpdateWithoutInstallerMappingsInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutInstallerMappingsInput = {
@@ -4936,6 +5216,7 @@ export type AccountMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutInstallationUpdatesInput = {
@@ -4974,6 +5255,7 @@ export type AccountMasterCreateWithoutInstallationUpdatesInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutInstallationUpdatesInput = {
@@ -5013,6 +5295,7 @@ export type AccountMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutInstallationUpdatesInput = {
@@ -5067,6 +5350,7 @@ export type AccountMasterUpdateWithoutInstallationUpdatesInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
@@ -5106,6 +5390,7 @@ export type AccountMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutMiscellaneousMasterInput = {
@@ -5144,6 +5429,7 @@ export type AccountMasterCreateWithoutMiscellaneousMasterInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
@@ -5183,6 +5469,7 @@ export type AccountMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutMiscellaneousMasterInput = {
@@ -5237,6 +5524,7 @@ export type AccountMasterUpdateWithoutMiscellaneousMasterInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
@@ -5276,6 +5564,7 @@ export type AccountMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutInstallationIssueLogMasterInput = {
@@ -5314,6 +5603,7 @@ export type AccountMasterCreateWithoutInstallationIssueLogMasterInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
@@ -5353,6 +5643,7 @@ export type AccountMasterUncheckedCreateWithoutInstallationIssueLogMasterInput =
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutInstallationIssueLogMasterInput = {
@@ -5407,6 +5698,7 @@ export type AccountMasterUpdateWithoutInstallationIssueLogMasterInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
@@ -5446,6 +5738,7 @@ export type AccountMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput =
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateManyVendorInput = {
@@ -5500,6 +5793,7 @@ export type AccountMasterUpdateWithoutVendorInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutVendorInput = {
@@ -5539,6 +5833,7 @@ export type AccountMasterUncheckedUpdateWithoutVendorInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -5625,6 +5920,7 @@ export type AccountMasterUpdateWithoutCreatedByInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutCreatedByInput = {
@@ -5664,6 +5960,7 @@ export type AccountMasterUncheckedUpdateWithoutCreatedByInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateManyWithoutCreatedByInput = {
@@ -5718,6 +6015,7 @@ export type AccountMasterUpdateWithoutUpdatedByInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutUpdatedByInput = {
@@ -5757,6 +6055,7 @@ export type AccountMasterUncheckedUpdateWithoutUpdatedByInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -5804,6 +6103,7 @@ export type AccountMasterCountOutputType = {
   siteReadiness: number
   tasks: number
   leadChatDocument: number
+  productStructureInstances: number
 }
 
 export type AccountMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5830,6 +6130,7 @@ export type AccountMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Ext
   siteReadiness?: boolean | AccountMasterCountOutputTypeCountSiteReadinessArgs
   tasks?: boolean | AccountMasterCountOutputTypeCountTasksArgs
   leadChatDocument?: boolean | AccountMasterCountOutputTypeCountLeadChatDocumentArgs
+  productStructureInstances?: boolean | AccountMasterCountOutputTypeCountProductStructureInstancesArgs
 }
 
 /**
@@ -6003,6 +6304,13 @@ export type AccountMasterCountOutputTypeCountLeadChatDocumentArgs<ExtArgs extend
   where?: Prisma.LeadChatDocumentWhereInput
 }
 
+/**
+ * AccountMasterCountOutputType without action
+ */
+export type AccountMasterCountOutputTypeCountProductStructureInstancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+}
+
 
 export type AccountMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -6045,6 +6353,7 @@ export type AccountMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   siteReadiness?: boolean | Prisma.AccountMaster$siteReadinessArgs<ExtArgs>
   tasks?: boolean | Prisma.AccountMaster$tasksArgs<ExtArgs>
   leadChatDocument?: boolean | Prisma.AccountMaster$leadChatDocumentArgs<ExtArgs>
+  productStructureInstances?: boolean | Prisma.AccountMaster$productStructureInstancesArgs<ExtArgs>
   _count?: boolean | Prisma.AccountMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["accountMaster"]>
 
@@ -6133,6 +6442,7 @@ export type AccountMasterInclude<ExtArgs extends runtime.Types.Extensions.Intern
   siteReadiness?: boolean | Prisma.AccountMaster$siteReadinessArgs<ExtArgs>
   tasks?: boolean | Prisma.AccountMaster$tasksArgs<ExtArgs>
   leadChatDocument?: boolean | Prisma.AccountMaster$leadChatDocumentArgs<ExtArgs>
+  productStructureInstances?: boolean | Prisma.AccountMaster$productStructureInstancesArgs<ExtArgs>
   _count?: boolean | Prisma.AccountMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type AccountMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6175,6 +6485,7 @@ export type $AccountMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     siteReadiness: Prisma.$SiteReadinessPayload<ExtArgs>[]
     tasks: Prisma.$UserLeadTaskPayload<ExtArgs>[]
     leadChatDocument: Prisma.$LeadChatDocumentPayload<ExtArgs>[]
+    productStructureInstances: Prisma.$LeadProductStructureInstancePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -6611,6 +6922,7 @@ export interface Prisma__AccountMasterClient<T, Null = never, ExtArgs extends ru
   siteReadiness<T extends Prisma.AccountMaster$siteReadinessArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$siteReadinessArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SiteReadinessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tasks<T extends Prisma.AccountMaster$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserLeadTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadChatDocument<T extends Prisma.AccountMaster$leadChatDocumentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadChatDocumentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadChatDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  productStructureInstances<T extends Prisma.AccountMaster$productStructureInstancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$productStructureInstancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureInstancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7618,6 +7930,30 @@ export type AccountMaster$leadChatDocumentArgs<ExtArgs extends runtime.Types.Ext
   take?: number
   skip?: number
   distinct?: Prisma.LeadChatDocumentScalarFieldEnum | Prisma.LeadChatDocumentScalarFieldEnum[]
+}
+
+/**
+ * AccountMaster.productStructureInstances
+ */
+export type AccountMaster$productStructureInstancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadProductStructureInstance
+   */
+  select?: Prisma.LeadProductStructureInstanceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadProductStructureInstance
+   */
+  omit?: Prisma.LeadProductStructureInstanceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadProductStructureInstanceInclude<ExtArgs> | null
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+  orderBy?: Prisma.LeadProductStructureInstanceOrderByWithRelationInput | Prisma.LeadProductStructureInstanceOrderByWithRelationInput[]
+  cursor?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadProductStructureInstanceScalarFieldEnum | Prisma.LeadProductStructureInstanceScalarFieldEnum[]
 }
 
 /**

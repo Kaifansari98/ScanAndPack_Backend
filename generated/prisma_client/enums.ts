@@ -117,3 +117,13 @@ export const LeadChatMessageType = {
 } as const
 
 export type LeadChatMessageType = (typeof LeadChatMessageType)[keyof typeof LeadChatMessageType]
+
+
+export const ProductInstanceStatus = {
+  open: 'open',
+  onHold: 'onHold',
+  lostApproval: 'lostApproval',
+  lost: 'lost'
+} as const
+
+export type ProductInstanceStatus = (typeof ProductInstanceStatus)[keyof typeof ProductInstanceStatus]
