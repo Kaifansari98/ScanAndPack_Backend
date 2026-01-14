@@ -949,10 +949,11 @@ export const getLeadProductStructureInstances = async (
 export const deleteLeadProductStructureInstance = async (
   leadId: number,
   vendorId: number,
-  instanceId: number
+  instanceId: number,
+  deletedBy?: number | null
 ) => {
   try {
-    const result = await prisma.leadProductStructureInstance.deleteMany({
+    const existing = await prisma.leadProductStructureInstance.findFirst({
       where: {
         id: instanceId,
         lead_id: leadId,
@@ -960,11 +961,27 @@ export const deleteLeadProductStructureInstance = async (
       },
     });
 
-    if (result.count === 0) {
+    if (!existing) {
       throw new Error("Instance not found");
     }
 
-    return result;
+    await prisma.leadProductStructureInstance.delete({
+      where: { id: existing.id },
+    });
+
+    await prisma.leadDetailedLogs.create({
+      data: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: existing.account_id,
+        action: `Product structure instance deleted : ${existing.title}`,
+        action_type: "DELETE",
+        created_by: deletedBy ?? existing.updated_by ?? existing.created_by,
+        created_at: new Date(),
+      },
+    });
+
+    return { count: 1 };
   } catch (error: any) {
     console.error(
       "[SERVICE] Error deleting lead product structure instance:",
@@ -1030,7 +1047,7 @@ export const updateLeadProductStructureInstance = async ({
       nextQuantityIndex = (maxIndex._max.quantity_index || 0) + 1;
     }
 
-    return await prisma.leadProductStructureInstance.update({
+    const updated = await prisma.leadProductStructureInstance.update({
       where: { id: existing.id },
       data: {
         product_structure_id,
@@ -1040,6 +1057,20 @@ export const updateLeadProductStructureInstance = async ({
         updated_by: updated_by ?? null,
       },
     });
+
+    await prisma.leadDetailedLogs.create({
+      data: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: existing.account_id,
+        action: `Product structure instance updated for ${updated.title}`,
+        action_type: "UPDATE",
+        created_by: updated_by ?? existing.updated_by ?? existing.created_by,
+        created_at: new Date(),
+      },
+    });
+
+    return updated;
   } catch (error: any) {
     console.error(
       "[SERVICE] Error updating lead product structure instance:",

@@ -514,6 +514,9 @@ export class LeadController {
       const leadId = Number(req.params.leadId);
       const vendorId = Number(req.params.vendorId);
       const instanceId = Number(req.params.instanceId);
+      const deletedBy = req.body?.updated_by
+        ? Number(req.body.updated_by)
+        : null;
 
       if (!leadId || Number.isNaN(leadId)) {
         return res
@@ -533,7 +536,12 @@ export class LeadController {
           .json(ApiResponse.error("Invalid instance ID provided", 400));
       }
 
-      await deleteLeadProductStructureInstance(leadId, vendorId, instanceId);
+      await deleteLeadProductStructureInstance(
+        leadId,
+        vendorId,
+        instanceId,
+        deletedBy
+      );
 
       return res.status(200).json(
         ApiResponse.success(
