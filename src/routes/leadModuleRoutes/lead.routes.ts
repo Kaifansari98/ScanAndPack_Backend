@@ -160,6 +160,21 @@ leadsRouter.get(
   "/lead/:leadId/vendor/:vendorId/product-structure-instances",
   leadController.fetchLeadProductStructureInstances
 );
+// DELETE product structure instance for a lead and vendor
+leadsRouter.delete(
+  "/lead/:leadId/vendor/:vendorId/product-structure-instances/:instanceId",
+  leadController.deleteLeadProductStructureInstance
+);
+// UPDATE product structure instance for a lead and vendor
+leadsRouter.put(
+  "/lead/:leadId/vendor/:vendorId/product-structure-instances/:instanceId",
+  leadController.updateLeadProductStructureInstance
+);
+// CREATE product structure instance for a lead and vendor
+leadsRouter.post(
+  "/lead/:leadId/vendor/:vendorId/product-structure-instances",
+  leadController.createLeadProductStructureInstance
+);
 
 // PATCH /leads/:leadId/tasks/:taskId/assign-ism
 leadsRouter.patch(

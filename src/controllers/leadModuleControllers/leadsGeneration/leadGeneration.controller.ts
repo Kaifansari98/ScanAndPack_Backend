@@ -6,6 +6,9 @@ import {
   getLeadsByVendor,
   getLeadsByVendorAndUser,
   getLeadProductStructureInstances,
+  deleteLeadProductStructureInstance,
+  updateLeadProductStructureInstance,
+  createLeadProductStructureInstance,
   getSiteSupervisorByVendor,
   softDeleteLead,
   updateLeadService,
@@ -500,6 +503,224 @@ export class LeadController {
         .json(
           ApiResponse.error("Failed to fetch product structure instances", 500)
         );
+    }
+  };
+
+  deleteLeadProductStructureInstance = async (
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
+    try {
+      const leadId = Number(req.params.leadId);
+      const vendorId = Number(req.params.vendorId);
+      const instanceId = Number(req.params.instanceId);
+
+      if (!leadId || Number.isNaN(leadId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid lead ID provided", 400));
+      }
+
+      if (!vendorId || Number.isNaN(vendorId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid vendor ID provided", 400));
+      }
+
+      if (!instanceId || Number.isNaN(instanceId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid instance ID provided", 400));
+      }
+
+      await deleteLeadProductStructureInstance(leadId, vendorId, instanceId);
+
+      return res.status(200).json(
+        ApiResponse.success(
+          null,
+          "Lead product structure instance deleted successfully",
+          200
+        )
+      );
+    } catch (error: any) {
+      const message = error?.message || "Failed to delete instance";
+      if (message === "Instance not found") {
+        return res.status(404).json(ApiResponse.notFound(message));
+      }
+      console.error(
+        "[CONTROLLER] deleteLeadProductStructureInstance error:",
+        error
+      );
+      return res
+        .status(500)
+        .json(ApiResponse.error("Failed to delete instance", 500));
+    }
+  };
+
+  updateLeadProductStructureInstance = async (
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
+    try {
+      const leadId = Number(req.params.leadId);
+      const vendorId = Number(req.params.vendorId);
+      const instanceId = Number(req.params.instanceId);
+      const productStructureId = Number(req.body.product_structure_id);
+      const title = String(req.body.title || "").trim();
+      const description =
+        req.body.description !== undefined ? String(req.body.description) : "";
+      const updatedBy = req.body.updated_by
+        ? Number(req.body.updated_by)
+        : null;
+
+      if (!leadId || Number.isNaN(leadId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid lead ID provided", 400));
+      }
+
+      if (!vendorId || Number.isNaN(vendorId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid vendor ID provided", 400));
+      }
+
+      if (!instanceId || Number.isNaN(instanceId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid instance ID provided", 400));
+      }
+
+      if (!productStructureId || Number.isNaN(productStructureId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid product structure ID provided", 400));
+      }
+
+      if (!title) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Title is required", 400));
+      }
+
+      const updated = await updateLeadProductStructureInstance({
+        leadId,
+        vendorId,
+        instanceId,
+        product_structure_id: productStructureId,
+        title,
+        description,
+        updated_by: updatedBy,
+      });
+
+      return res.status(200).json(
+        ApiResponse.success(
+          updated,
+          "Lead product structure instance updated successfully",
+          200
+        )
+      );
+    } catch (error: any) {
+      const message = error?.message || "Failed to update instance";
+      if (message.includes("Instance not found")) {
+        return res.status(404).json(ApiResponse.notFound("Instance not found"));
+      }
+      if (message.includes("Product structure not found")) {
+        return res
+          .status(404)
+          .json(ApiResponse.notFound("Product structure not found"));
+      }
+      console.error(
+        "[CONTROLLER] updateLeadProductStructureInstance error:",
+        error
+      );
+      return res
+        .status(500)
+        .json(ApiResponse.error("Failed to update instance", 500));
+    }
+  };
+
+  createLeadProductStructureInstance = async (
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
+    try {
+      const leadId = Number(req.params.leadId);
+      const vendorId = Number(req.params.vendorId);
+      const productStructureId = Number(req.body.product_structure_id);
+      const title = String(req.body.title || "").trim();
+      const description =
+        req.body.description !== undefined ? String(req.body.description) : "";
+      const createdBy = Number(req.body.created_by);
+
+      if (!leadId || Number.isNaN(leadId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid lead ID provided", 400));
+      }
+
+      if (!vendorId || Number.isNaN(vendorId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid vendor ID provided", 400));
+      }
+
+      if (!productStructureId || Number.isNaN(productStructureId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid product structure ID provided", 400));
+      }
+
+      if (!title) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Title is required", 400));
+      }
+
+      if (!createdBy || Number.isNaN(createdBy)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid created_by provided", 400));
+      }
+
+      const created = await createLeadProductStructureInstance({
+        leadId,
+        vendorId,
+        product_structure_id: productStructureId,
+        title,
+        description,
+        created_by: createdBy,
+      });
+
+      return res.status(201).json(
+        ApiResponse.success(
+          created,
+          "Lead product structure instance created successfully",
+          201
+        )
+      );
+    } catch (error: any) {
+      const message = error?.message || "Failed to create instance";
+      if (message.includes("Lead not found")) {
+        return res.status(404).json(ApiResponse.notFound("Lead not found"));
+      }
+      if (message.includes("Product structure not found")) {
+        return res
+          .status(404)
+          .json(ApiResponse.notFound("Product structure not found"));
+      }
+      if (message.includes("Product type not found")) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Product type not found", 400));
+      }
+      console.error(
+        "[CONTROLLER] createLeadProductStructureInstance error:",
+        error
+      );
+      return res
+        .status(500)
+        .json(ApiResponse.error("Failed to create instance", 500));
     }
   };
 

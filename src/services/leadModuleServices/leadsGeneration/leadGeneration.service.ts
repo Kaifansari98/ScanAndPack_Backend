@@ -946,6 +946,232 @@ export const getLeadProductStructureInstances = async (
   }
 };
 
+export const deleteLeadProductStructureInstance = async (
+  leadId: number,
+  vendorId: number,
+  instanceId: number
+) => {
+  try {
+    const result = await prisma.leadProductStructureInstance.deleteMany({
+      where: {
+        id: instanceId,
+        lead_id: leadId,
+        vendor_id: vendorId,
+      },
+    });
+
+    if (result.count === 0) {
+      throw new Error("Instance not found");
+    }
+
+    return result;
+  } catch (error: any) {
+    console.error(
+      "[SERVICE] Error deleting lead product structure instance:",
+      error
+    );
+    throw new Error(
+      `Failed to delete lead product structure instance: ${error.message}`
+    );
+  }
+};
+
+export const updateLeadProductStructureInstance = async ({
+  leadId,
+  vendorId,
+  instanceId,
+  product_structure_id,
+  title,
+  description,
+  updated_by,
+}: {
+  leadId: number;
+  vendorId: number;
+  instanceId: number;
+  product_structure_id: number;
+  title: string;
+  description?: string | null;
+  updated_by?: number | null;
+}) => {
+  try {
+    const existing = await prisma.leadProductStructureInstance.findFirst({
+      where: {
+        id: instanceId,
+        lead_id: leadId,
+        vendor_id: vendorId,
+      },
+    });
+
+    if (!existing) {
+      throw new Error("Instance not found");
+    }
+
+    const structure = await prisma.productStructure.findFirst({
+      where: {
+        id: product_structure_id,
+        vendor_id: vendorId,
+      },
+    });
+
+    if (!structure) {
+      throw new Error("Product structure not found");
+    }
+
+    let nextQuantityIndex = existing.quantity_index;
+    if (existing.product_structure_id !== product_structure_id) {
+      const maxIndex = await prisma.leadProductStructureInstance.aggregate({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+          product_structure_id,
+        },
+        _max: { quantity_index: true },
+      });
+      nextQuantityIndex = (maxIndex._max.quantity_index || 0) + 1;
+    }
+
+    return await prisma.leadProductStructureInstance.update({
+      where: { id: existing.id },
+      data: {
+        product_structure_id,
+        quantity_index: nextQuantityIndex,
+        title: title.trim(),
+        description: description?.trim() || null,
+        updated_by: updated_by ?? null,
+      },
+    });
+  } catch (error: any) {
+    console.error(
+      "[SERVICE] Error updating lead product structure instance:",
+      error
+    );
+    throw new Error(
+      `Failed to update lead product structure instance: ${error.message}`
+    );
+  }
+};
+
+export const createLeadProductStructureInstance = async ({
+  leadId,
+  vendorId,
+  product_structure_id,
+  title,
+  description,
+  created_by,
+}: {
+  leadId: number;
+  vendorId: number;
+  product_structure_id: number;
+  title: string;
+  description?: string | null;
+  created_by: number;
+}) => {
+  try {
+    const lead = await prisma.leadMaster.findFirst({
+      where: {
+        id: leadId,
+        vendor_id: vendorId,
+        is_deleted: false,
+      },
+      select: { account_id: true },
+    });
+
+    if (!lead?.account_id) {
+      throw new Error("Lead not found");
+    }
+
+    const structure = await prisma.productStructure.findFirst({
+      where: {
+        id: product_structure_id,
+        vendor_id: vendorId,
+      },
+    });
+
+    if (!structure) {
+      throw new Error("Product structure not found");
+    }
+
+    const productType = await prisma.leadProductMapping.findFirst({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+      },
+      select: { product_type_id: true },
+    });
+
+    if (!productType?.product_type_id) {
+      throw new Error("Product type not found");
+    }
+
+    const existingMapping = await prisma.leadProductStructureMapping.findFirst({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+        product_structure_id,
+      },
+    });
+
+    if (!existingMapping) {
+      await prisma.leadProductStructureMapping.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: lead.account_id,
+          product_structure_id,
+          created_by,
+        },
+      });
+    }
+
+    const maxIndex = await prisma.leadProductStructureInstance.aggregate({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+        product_structure_id,
+      },
+      _max: { quantity_index: true },
+    });
+
+    const quantityIndex = (maxIndex._max.quantity_index || 0) + 1;
+
+    const instance = await prisma.leadProductStructureInstance.create({
+      data: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: lead.account_id,
+        product_type_id: productType.product_type_id,
+        product_structure_id,
+        quantity_index: quantityIndex,
+        title: title.trim(),
+        description: description?.trim() || null,
+        created_by,
+      },
+    });
+
+    await prisma.leadDetailedLogs.create({
+      data: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: lead.account_id,
+        action: `Product structure instance added : ${instance.title}`,
+        action_type: "UPDATE",
+        created_by,
+        created_at: new Date(),
+      },
+    });
+
+    return instance;
+  } catch (error: any) {
+    console.error(
+      "[SERVICE] Error creating lead product structure instance:",
+      error
+    );
+    throw new Error(
+      `Failed to create lead product structure instance: ${error.message}`
+    );
+  }
+};
+
 export const softDeleteLead = async (leadId: number, deletedBy: number) => {
   // 1. Fetch the lead with its account
   const lead = await prisma.leadMaster.findUnique({
