@@ -1103,6 +1103,71 @@ export const createLeadProductStructureInstance = async ({
       throw new Error("Product type not found");
     }
 
+    const productTypeMaster = await prisma.productTypeMaster.findFirst({
+      where: {
+        id: productType.product_type_id,
+        vendor_id: vendorId,
+      },
+      select: { type: true },
+    });
+
+    const isKitchenType = String(productTypeMaster?.type || "")
+      .toLowerCase()
+      .includes("kitchen");
+
+    if (!isKitchenType) {
+      const existingMappings = await prisma.leadProductStructureMapping.findMany(
+        {
+          where: {
+            lead_id: leadId,
+            vendor_id: vendorId,
+          },
+          select: { product_structure_id: true },
+        }
+      );
+
+      if (existingMappings.length > 0) {
+        const existingInstanceStructureIds =
+          await prisma.leadProductStructureInstance.findMany({
+            where: {
+              lead_id: leadId,
+              vendor_id: vendorId,
+            },
+            select: { product_structure_id: true },
+          });
+
+        const existingInstanceSet = new Set(
+          existingInstanceStructureIds.map((row) => row.product_structure_id)
+        );
+
+        for (const mapping of existingMappings) {
+          if (existingInstanceSet.has(mapping.product_structure_id)) continue;
+          const mappingStructure = await prisma.productStructure.findFirst({
+            where: {
+              id: mapping.product_structure_id,
+              vendor_id: vendorId,
+            },
+          });
+
+          if (!mappingStructure) continue;
+
+          await prisma.leadProductStructureInstance.create({
+            data: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: lead.account_id,
+              product_type_id: productType.product_type_id,
+              product_structure_id: mapping.product_structure_id,
+              quantity_index: 1,
+              title: mappingStructure.type,
+              description: null,
+              created_by,
+            },
+          });
+        }
+      }
+    }
+
     const existingMapping = await prisma.leadProductStructureMapping.findFirst({
       where: {
         lead_id: leadId,
