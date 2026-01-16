@@ -7,7 +7,7 @@ import { prisma } from "../../../prisma/client";
 import { NotificationService } from "../../../services/notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
 import { sendLeadAssignedEmail } from "../../../services/email/brevoEmail.service";
-import logger from "src/utils/logger";
+import logger from "../../../utils/logger";
 
 const resolveClientBaseUrl = (req: Request): string => {
   const origin = req.headers.origin;
