@@ -13,6 +13,26 @@ import {
   uploadToWasabiCSPBookingPhotoFile,
 } from "../../../utils/wasabiClient";
 import fs from "node:fs/promises";
+import { prisma } from "../../../prisma/client";
+import { sendLeadAssignedToSiteSupervisorEmail } from "../../../services/email/brevoEmail.service";
+
+const resolveClientBaseUrl = (req: Request): string => {
+  const origin = req.headers.origin;
+  if (typeof origin === "string" && origin.trim().length > 0) {
+    return origin.replace(/\/$/, "");
+  }
+
+  const referer = req.headers.referer;
+  if (typeof referer === "string" && referer.trim().length > 0) {
+    try {
+      return new URL(referer).origin;
+    } catch {
+      return "http://localhost:3000";
+    }
+  }
+
+  return "http://localhost:3000";
+};
 
 export class BookingStageController {
   private bookingStageService = new BookingStageService();
@@ -125,6 +145,94 @@ export class BookingStageController {
       };
 
       const result = await this.bookingStageService.createBookingStage(dto);
+
+      try {
+        if (dto.siteSupervisorId !== dto.created_by) {
+          const [supervisor, createdBy, lead] = await Promise.all([
+            prisma.userMaster.findUnique({
+              where: { id: dto.siteSupervisorId },
+              select: { user_name: true, user_email: true },
+            }),
+            prisma.userMaster.findUnique({
+              where: { id: dto.created_by },
+              select: { user_name: true },
+            }),
+            prisma.leadMaster.findUnique({
+              where: { id: dto.lead_id },
+              select: {
+                id: true,
+                lead_code: true,
+                firstname: true,
+                lastname: true,
+                country_code: true,
+                contact_no: true,
+                created_at: true,
+                productMappings: {
+                  select: { productType: { select: { type: true } } },
+                },
+                leadProductStructureMapping: {
+                  select: { productStructure: { select: { type: true } } },
+                },
+              },
+            }),
+          ]);
+
+          const supervisorEmail = supervisor?.user_email?.trim();
+          if (!supervisorEmail) {
+            logger.warn("Booking stage email skipped: missing supervisor email", {
+              lead_id: dto.lead_id,
+              assignee_user_id: dto.siteSupervisorId,
+            });
+          } else if (lead) {
+            const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+            const leadCode =
+              lead.lead_code ?? `LEAD-${String(lead.id).padStart(4, "0")}`;
+            const contactDetails = `${lead.country_code ?? ""} ${
+              lead.contact_no ?? ""
+            }`.trim();
+            const furnitureType =
+              lead.productMappings
+                ?.map((item) => item.productType?.type)
+                .filter(Boolean)
+                .join(", ") || "—";
+            const furnitureStructure =
+              lead.leadProductStructureMapping
+                ?.map((item) => item.productStructure?.type)
+                .filter(Boolean)
+                .join(", ") || "—";
+            const createdDate = lead.created_at
+              ? new Date(lead.created_at).toLocaleDateString("en-IN", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })
+              : "—";
+            const createdByName = createdBy?.user_name ?? "Admin";
+            const clientBaseUrl = resolveClientBaseUrl(req);
+            const leadUrl = `${clientBaseUrl}/dashboard/leads/details/${dto.lead_id}?accountId=${dto.account_id}`;
+
+            await sendLeadAssignedToSiteSupervisorEmail({
+              toEmail: supervisorEmail,
+              toName: supervisor?.user_name ?? undefined,
+              leadCode,
+              leadName: leadName || "—",
+              contact: contactDetails || "—",
+              furnitureType,
+              furnitureStructure,
+              createdDate,
+              createdBy: createdByName,
+              leadUrl,
+            });
+          }
+        }
+      } catch (emailError: any) {
+        logger.warn("⚠️ Failed to send booking stage assignment email", {
+          error: emailError?.message,
+          lead_id: dto.lead_id,
+          assignee_user_id: dto.siteSupervisorId,
+        });
+      }
+
       res.status(201).json({
         success: true,
         message: "Booking stage completed",

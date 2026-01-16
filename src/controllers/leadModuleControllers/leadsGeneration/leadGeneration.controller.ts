@@ -34,6 +34,28 @@ import { prisma } from "../../../prisma/client";
 import logger from "../../../utils/logger";
 import { NotificationService } from "../../../services/notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
+import {
+  sendLeadCreatedEmail,
+  sendLeadAssignedEmail,
+} from "../../../services/email/brevoEmail.service";
+
+const resolveClientBaseUrl = (req: Request): string => {
+  const origin = req.headers.origin;
+  if (typeof origin === "string" && origin.trim().length > 0) {
+    return origin.replace(/\/$/, "");
+  }
+
+  const referer = req.headers.referer;
+  if (typeof referer === "string" && referer.trim().length > 0) {
+    try {
+      return new URL(referer).origin;
+    } catch {
+      return "http://localhost:3000";
+    }
+  }
+
+  return "http://localhost:3000";
+};
 
 export class LeadController {
   /**
@@ -152,22 +174,165 @@ export class LeadController {
         files
       );
 
-      if (!result.draft && value.assign_to) {
+      if (!result.draft) {
         try {
           const leadName = `${result.lead.firstname} ${result.lead.lastname}`.trim();
           const senderId = value.assigned_by ?? value.created_by;
 
-          await NotificationService.createAndSend({
-            vendor_id: value.vendor_id,
-            user_id: value.assign_to,
-            sender_id: senderId,
-            type: NotificationType.LEAD_ASSIGNED,
-            title: "New lead assigned",
-            message: `Lead ${leadName} has been assigned to you.`,
-            entity_type: "lead",
-            entity_id: result.lead.id,
-            redirect_url: `/dashboard/leads/details/${result.lead.id}?accountId=${result.lead.account_id}`,
-          });
+          const [assignedUser, createdByUser] = await Promise.all([
+            value.assign_to
+              ? prisma.userMaster.findUnique({
+                  where: { id: value.assign_to },
+                  select: { user_email: true, user_name: true },
+                })
+              : Promise.resolve(null),
+            prisma.userMaster.findUnique({
+              where: { id: value.created_by },
+              select: {
+                user_name: true,
+                user_type: { select: { user_type: true } },
+              },
+            }),
+          ]);
+
+          const creatorRole = createdByUser?.user_type?.user_type?.toLowerCase();
+          const isAdminCreator =
+            creatorRole === "admin" || creatorRole === "super-admin";
+          const isCreatorAssignee =
+            Boolean(value.assign_to) &&
+            value.assign_to === value.created_by;
+
+          const clientBaseUrl = resolveClientBaseUrl(req);
+          const leadUrl = `${clientBaseUrl}/dashboard/leads/details/${result.lead.id}?accountId=${result.lead.account_id}`;
+          const createdOn = result.lead.created_at
+            ? new Date(result.lead.created_at).toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })
+            : new Date().toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              });
+          const createdByName =
+            createdByUser?.user_name ?? assignedUser?.user_name ?? "System";
+          const leadCode =
+            (result.lead as any).lead_code ??
+            `LEAD-${String(result.lead.id).padStart(4, "0")}`;
+          const contactDetails = `${result.lead.country_code ?? ""} ${
+            result.lead.contact_no ?? ""
+          }`.trim();
+
+          const productTypeIds = Array.isArray(value.product_types)
+            ? value.product_types
+            : [];
+          const productStructureIds = Array.isArray(value.product_structures)
+            ? value.product_structures
+            : [];
+          const [productTypes, productStructures] = await Promise.all([
+            productTypeIds.length
+              ? prisma.productTypeMaster.findMany({
+                  where: {
+                    vendor_id: value.vendor_id,
+                    id: { in: productTypeIds },
+                  },
+                  select: { type: true },
+                })
+              : Promise.resolve([]),
+            productStructureIds.length
+              ? prisma.productStructure.findMany({
+                  where: {
+                    vendor_id: value.vendor_id,
+                    id: { in: productStructureIds },
+                  },
+                  select: { type: true },
+                })
+              : Promise.resolve([]),
+          ]);
+          const furnitureType =
+            productTypes.map((item) => item.type).join(", ") || "—";
+          const furnitureStructure =
+            productStructures.map((item) => item.type).join(", ") || "—";
+
+          if (value.assign_to) {
+            await NotificationService.createAndSend({
+              vendor_id: value.vendor_id,
+              user_id: value.assign_to,
+              sender_id: senderId,
+              type: NotificationType.LEAD_ASSIGNED,
+              title: "New lead assigned",
+              message: `Lead ${leadName} has been assigned to you.`,
+              entity_type: "lead",
+              entity_id: result.lead.id,
+              redirect_url: `/dashboard/leads/details/${result.lead.id}?accountId=${result.lead.account_id}`,
+            });
+          }
+
+          const emailPayload = {
+            leadCode,
+            leadName,
+            contact: contactDetails || "—",
+            furnitureType,
+            furnitureStructure,
+            createdDate: createdOn,
+            createdBy: createdByName,
+            leadUrl,
+          };
+
+          if (isAdminCreator && value.assign_to && !isCreatorAssignee) {
+            const assigneeEmail = assignedUser?.user_email?.trim();
+            if (assigneeEmail) {
+              await sendLeadAssignedEmail({
+                ...emailPayload,
+                toEmail: assigneeEmail,
+                toName: assignedUser?.user_name ?? undefined,
+              });
+            } else {
+              logger.warn(
+                "Lead assignment email skipped: missing assignee email",
+                {
+                  lead_id: result.lead.id,
+                  assign_to: value.assign_to,
+                }
+              );
+            }
+          } else {
+            const adminUsers = await prisma.userMaster.findMany({
+              where: {
+                vendor_id: value.vendor_id,
+                status: "active",
+                user_type: {
+                  user_type: {
+                    in: ["admin", "super-admin"],
+                    mode: "insensitive",
+                  },
+                },
+              },
+              select: { id: true, user_email: true, user_name: true },
+            });
+
+            const recipients = adminUsers.filter(
+              (user) => user.id !== value.created_by && user.user_email
+            );
+
+            if (recipients.length === 0) {
+              logger.warn("Lead created email skipped: no admin recipients", {
+                lead_id: result.lead.id,
+                created_by: value.created_by,
+              });
+            } else {
+              await Promise.allSettled(
+                recipients.map((recipient) =>
+                  sendLeadCreatedEmail({
+                    ...emailPayload,
+                    toEmail: recipient.user_email!,
+                    toName: recipient.user_name ?? undefined,
+                  })
+                )
+              );
+            }
+          }
         } catch (notificationError: any) {
           logger.warn("⚠️ Failed to create lead assignment notification", {
             error: notificationError?.message,
@@ -805,10 +970,14 @@ export class LeadController {
       console.log("[DEBUG] Update payload:", req.body);
 
       // Call service to update lead
-      const result = await updateLeadService(leadId, {
-        ...req.body,
-        updated_by: updatedBy,
-      });
+      const result = await updateLeadService(
+        leadId,
+        {
+          ...req.body,
+          updated_by: updatedBy,
+        },
+        resolveClientBaseUrl(req)
+      );
 
       console.log("[INFO] Lead updated successfully:", {
         leadId: result.lead.id,
@@ -1148,7 +1317,8 @@ export class LeadController {
       const result = await assignLeadToUser(
         leadId,
         vendorId,
-        assignmentPayload
+        assignmentPayload,
+        resolveClientBaseUrl(req)
       );
 
       console.log(`[CONTROLLER] Lead assignment successful`);

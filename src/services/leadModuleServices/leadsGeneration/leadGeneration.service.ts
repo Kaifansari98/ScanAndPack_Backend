@@ -28,6 +28,12 @@ import { generateLeadCode } from "../../../utils/generateLeadCode";
 import { logDbError } from "../../../utils/prismaErrorLogger";
 import { NotificationService } from "../../notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
+import {
+  sendLeadAssignedEmail,
+  sendLeadCreatedEmail,
+  type LeadCreatedEmailPayload,
+} from "../../email/brevoEmail.service";
+import { sendBrevoEmail } from "../../email/brevoEmail.service";
 
 type EditTaskISMInput = {
   lead_id: number;
@@ -1363,8 +1369,10 @@ export const softDeleteLead = async (leadId: number, deletedBy: number) => {
 
 export const updateLeadService = async (
   leadId: number,
-  payload: UpdateLeadDTO
+  payload: UpdateLeadDTO,
+  clientBaseUrl?: string
 ) => {
+  let leadCreatedEmailPayload: LeadCreatedEmailPayload | null = null;
   const {
     firstname,
     lastname,
@@ -1385,7 +1393,7 @@ export const updateLeadService = async (
     initial_site_measurement_date,
   } = payload;
 
-  return prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx) => {
     // 1. Check if lead exists and get current data
     const existingLead = await tx.leadMaster.findFirst({
       where: {
@@ -1647,6 +1655,76 @@ export const updateLeadService = async (
       }
     }
 
+    // ✅ Auto-unmark draft if completed and prepare email payload
+    if (existingLead.is_draft) {
+      const hydratedLead = await tx.leadMaster.findFirst({
+        where: { id: leadId },
+        include: {
+          productMappings: { include: { productType: true } },
+          leadProductStructureMapping: { include: { productStructure: true } },
+          assignedTo: { select: { user_email: true, user_name: true } },
+          createdBy: { select: { user_name: true } },
+        },
+      });
+
+      if (hydratedLead && isLeadComplete(hydratedLead)) {
+        await tx.leadMaster.update({
+          where: { id: leadId },
+          data: { is_draft: false },
+        });
+
+        const assigneeEmail = hydratedLead.assignedTo?.user_email?.trim();
+        if (hydratedLead.assign_to && assigneeEmail) {
+          const leadName = `${hydratedLead.firstname ?? ""} ${
+            hydratedLead.lastname ?? ""
+          }`.trim();
+          const leadCode =
+            (hydratedLead as any).lead_code ??
+            `LEAD-${String(hydratedLead.id).padStart(4, "0")}`;
+          const contactDetails = `${hydratedLead.country_code ?? ""} ${
+            hydratedLead.contact_no ?? ""
+          }`.trim();
+          const furnitureType =
+            hydratedLead.productMappings
+              ?.map((item) => item.productType?.type)
+              .filter(Boolean)
+              .join(", ") || "—";
+          const furnitureStructure =
+            hydratedLead.leadProductStructureMapping
+              ?.map((item) => item.productStructure?.type)
+              .filter(Boolean)
+              .join(", ") || "—";
+          const createdDate = hydratedLead.created_at
+            ? new Date(hydratedLead.created_at).toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })
+            : new Date().toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              });
+          const createdByName = hydratedLead.createdBy?.user_name ?? "System";
+          const baseUrl = clientBaseUrl || "http://localhost:3000";
+          const leadUrl = `${baseUrl}/dashboard/leads/details/${hydratedLead.id}?accountId=${hydratedLead.account_id}`;
+
+          leadCreatedEmailPayload = {
+            toEmail: assigneeEmail,
+            toName: hydratedLead.assignedTo?.user_name ?? undefined,
+            leadCode,
+            leadName: leadName || "—",
+            contact: contactDetails || "—",
+            furnitureType,
+            furnitureStructure,
+            createdDate,
+            createdBy: createdByName,
+            leadUrl,
+          };
+        }
+      }
+    }
+
     // 10. LeadDetailedLogs entry (audit trail)
     const changes: string[] = [];
     const fromValues: string[] = [];
@@ -1759,6 +1837,18 @@ export const updateLeadService = async (
           : "not updated",
     };
   });
+
+  if (leadCreatedEmailPayload) {
+    try {
+      await sendLeadCreatedEmail(leadCreatedEmailPayload);
+    } catch (emailError: any) {
+      logger.warn("⚠️ Failed to send lead created email after draft completion", {
+        error: emailError?.message,
+      });
+    }
+  }
+
+  return result;
 };
 
 export const isContactOrEmailExists = async (
@@ -2055,7 +2145,8 @@ export const getSalesExecutiveById = async (
 export const assignLeadToUser = async (
   leadId: number,
   vendorId: number,
-  payload: AssignLeadPayload
+  payload: AssignLeadPayload,
+  clientBaseUrl?: string
 ): Promise<LeadAssignmentResult> => {
   try {
     console.log(`[SERVICE] Starting lead assignment process`);
@@ -2269,6 +2360,87 @@ export const assignLeadToUser = async (
     if (assignedByDetails) {
       result.assignedBy.user_contact = assignedByDetails.user_contact;
       result.assignedBy.user_email = assignedByDetails.user_email;
+    }
+
+    try {
+      const assigneeEmail = assignedToDetails?.user_email?.trim();
+      if (!assigneeEmail) {
+        logger.warn("Lead assignment email skipped: missing assignee email", {
+          lead_id: lead.id,
+          assign_to: payload.assign_to,
+        });
+      } else {
+        const leadDetails = await prisma.leadMaster.findUnique({
+          where: { id: leadId },
+          select: {
+            id: true,
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            country_code: true,
+            contact_no: true,
+            created_at: true,
+            account_id: true,
+            productMappings: {
+              select: { productType: { select: { type: true } } },
+            },
+            leadProductStructureMapping: {
+              select: { productStructure: { select: { type: true } } },
+            },
+          },
+        });
+
+        if (leadDetails) {
+          const leadName = `${leadDetails.firstname ?? ""} ${
+            leadDetails.lastname ?? ""
+          }`.trim();
+          const leadCode =
+            leadDetails.lead_code ??
+            `LEAD-${String(leadDetails.id).padStart(4, "0")}`;
+          const contactDetails = `${leadDetails.country_code ?? ""} ${
+            leadDetails.contact_no ?? ""
+          }`.trim();
+          const furnitureType =
+            leadDetails.productMappings
+              ?.map((item) => item.productType?.type)
+              .filter(Boolean)
+              .join(", ") || "—";
+          const furnitureStructure =
+            leadDetails.leadProductStructureMapping
+              ?.map((item) => item.productStructure?.type)
+              .filter(Boolean)
+              .join(", ") || "—";
+          const createdDate = leadDetails.created_at
+            ? new Date(leadDetails.created_at).toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })
+            : "—";
+          const createdByName = adminUser.user_name ?? "Admin";
+          const baseUrl = clientBaseUrl || "http://localhost:3000";
+          const leadUrl = `${baseUrl}/dashboard/leads/details/${leadDetails.id}?accountId=${leadDetails.account_id}`;
+
+          await sendLeadAssignedEmail({
+            toEmail: assigneeEmail,
+            toName: salesExecutiveUser.user_name,
+            leadCode,
+            leadName: leadName || "—",
+            contact: contactDetails || "—",
+            furnitureType,
+            furnitureStructure,
+            createdDate,
+            createdBy: createdByName,
+            leadUrl,
+          });
+        }
+      }
+    } catch (emailError: any) {
+      logger.warn("⚠️ Failed to send lead assignment email", {
+        error: emailError?.message,
+        lead_id: lead.id,
+        assign_to: payload.assign_to,
+      });
     }
 
     return result;

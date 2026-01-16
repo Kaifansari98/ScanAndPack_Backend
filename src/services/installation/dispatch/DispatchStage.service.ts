@@ -468,6 +468,7 @@ export class DispatchStageService {
     vendorId: number,
     leadId: number,
     accountId: number,
+    assigneeUserId: number,
     createdBy: number,
     dueDate: Date,
     remark?: string
@@ -490,7 +491,7 @@ export class DispatchStageService {
         vendor_id: vendorId,
         lead_id: leadId,
         account_id: accountId,
-        user_id: createdBy, // 👈 same as created_by
+        user_id: assigneeUserId,
         task_type: "Pending Materials",
         lead_stage: leadStage,
         due_date: new Date(dueDate),
@@ -500,7 +501,7 @@ export class DispatchStageService {
     });
 
     // 🧹 Clear Redis cache for dashboard tasks of this user
-    const redisKey = `dashboard:tasks:${vendorId}:${createdBy}`;
+    const redisKey = `dashboard:tasks:${vendorId}:${assigneeUserId}`;
     await cache.del(redisKey);
 
     return task;
@@ -511,6 +512,7 @@ export class DispatchStageService {
     vendorId: number,
     leadId: number,
     accountId: number,
+    assigneeUserId: number,
     createdBy: number,
     dueDate: Date,
     remark?: string
@@ -533,7 +535,7 @@ export class DispatchStageService {
         vendor_id: vendorId,
         lead_id: leadId,
         account_id: accountId,
-        user_id: createdBy,
+        user_id: assigneeUserId,
         task_type: "Pending Work",
         lead_stage: leadStage,
         due_date: new Date(dueDate),
@@ -543,7 +545,7 @@ export class DispatchStageService {
     });
 
     // 🧹 Clear Redis Cache for Sales Executive Dashboard
-    const redisKey = `dashboard:tasks:${vendorId}:${createdBy}`;
+    const redisKey = `dashboard:tasks:${vendorId}:${assigneeUserId}`;
     await cache.del(redisKey);
 
     return task;

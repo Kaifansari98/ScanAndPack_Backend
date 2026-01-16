@@ -289,7 +289,13 @@ export class ChatService {
       }
   
       // Attachments
-      const attachments = [];
+      const attachments: {
+        id: number;
+        doc_og_name: string;
+        doc_sys_name: string;
+        created_at: Date;
+        signed_url: string;
+      }[] = [];
   
       for (const file of uploadedFiles) {
         const doc = await tx.leadChatDocument.create({

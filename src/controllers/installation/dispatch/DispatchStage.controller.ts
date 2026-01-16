@@ -2,6 +2,25 @@ import { Request, Response } from "express";
 import { prisma } from "../../../prisma/client";
 import { NotificationService } from "../../../services/notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
+import { sendTaskAssignedEmail } from "../../../services/email/brevoEmail.service";
+
+const resolveClientBaseUrl = (req: Request): string => {
+  const origin = req.headers.origin;
+  if (typeof origin === "string" && origin.trim().length > 0) {
+    return origin.replace(/\/$/, "");
+  }
+
+  const referer = req.headers.referer;
+  if (typeof referer === "string" && referer.trim().length > 0) {
+    try {
+      return new URL(referer).origin;
+    } catch {
+      return "http://localhost:3000";
+    }
+  }
+
+  return "http://localhost:3000";
+};
 import { DispatchStageService } from "../../../services/installation/dispatch/DispatchStage.service";
 import { ApiResponse } from "../../../utils/apiResponse";
 import {
@@ -431,33 +450,70 @@ export class DispatchStageController {
         }
       }
 
+      const factoryUser = await prisma.userMaster.findFirst({
+        where: {
+          vendor_id: Number(vendorId),
+          status: "active",
+          user_type: {
+            user_type: {
+              equals: "factory",
+              mode: "insensitive",
+            },
+          },
+        },
+        select: { id: true, user_name: true, user_email: true },
+      });
+
+      if (!factoryUser) {
+        return res.status(400).json({
+          success: false,
+          message: "Factory user not found for this vendor",
+        });
+      }
+
       const task = await service.createPendingMaterialTask(
         Number(vendorId),
         Number(leadId),
         Number(account_id),
+        factoryUser.id,
         Number(created_by),
         due_date,
         remark
       );
 
       try {
-        const assignee = await prisma.userMaster.findUnique({
-          where: { id: Number(created_by) },
-          select: {
-            user_type: { select: { user_type: true } },
-          },
-        });
-        const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
-        if (assigneeRole !== "admin" && assigneeRole !== "super-admin") {
-          const lead = await prisma.leadMaster.findUnique({
+        const [assignee, lead, assignedBy] = await Promise.all([
+          prisma.userMaster.findUnique({
+            where: { id: factoryUser.id },
+            select: {
+              id: true,
+              user_name: true,
+              user_email: true,
+              user_type: { select: { user_type: true } },
+            },
+          }),
+          prisma.leadMaster.findUnique({
             where: { id: Number(leadId) },
             select: { firstname: true, lastname: true },
-          });
-          const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+          }),
+          prisma.userMaster.findUnique({
+            where: { id: Number(created_by) },
+            select: { user_name: true },
+          }),
+        ]);
 
+        const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+        const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
+        const isSelfAssigned = Number(created_by) === Number(assignee?.id);
+
+        if (
+          !isSelfAssigned &&
+          assigneeRole !== "admin" &&
+          assigneeRole !== "super-admin"
+        ) {
           await NotificationService.createAndSend({
             vendor_id: Number(vendorId),
-            user_id: Number(created_by),
+            user_id: factoryUser.id,
             sender_id: Number(created_by),
             type: NotificationType.TASK_ASSIGNED,
             title: "New task assigned",
@@ -470,11 +526,43 @@ export class DispatchStageController {
             redirect_url: `/dashboard/my-tasks?taskId=${task.id}`,
           });
         }
+
+        let assigneeEmail = assignee?.user_email?.trim();
+        if (!assigneeEmail && assignee?.id) {
+          const fallbackAssignee = await prisma.userMaster.findUnique({
+            where: { id: assignee.id },
+            select: { user_email: true },
+          });
+          assigneeEmail = fallbackAssignee?.user_email?.trim();
+        }
+
+        if (assigneeEmail && !isSelfAssigned) {
+          const clientBaseUrl = resolveClientBaseUrl(req);
+          const taskUrl = `${clientBaseUrl}/dashboard/my-tasks`;
+          const dueDate = due_date
+            ? new Date(due_date).toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })
+            : "—";
+          const assignedByName = assignedBy?.user_name ?? "Admin";
+
+          await sendTaskAssignedEmail({
+            toEmail: assigneeEmail,
+            toName: assignee?.user_name ?? undefined,
+            taskTitle: "Pending Materials",
+            leadName: leadName || "—",
+            assignedBy: assignedByName,
+            dueDate,
+            taskUrl,
+          });
+        }
       } catch (notificationError: any) {
         logger.warn("⚠️ Failed to send pending material notification", {
           error: notificationError?.message,
           lead_id: leadId,
-          assignee_user_id: created_by,
+          assignee_user_id: factoryUser.id,
         });
       }
 
@@ -520,33 +608,70 @@ export class DispatchStageController {
         }
       }
 
+      const factoryUser = await prisma.userMaster.findFirst({
+        where: {
+          vendor_id: Number(vendorId),
+          status: "active",
+          user_type: {
+            user_type: {
+              equals: "factory",
+              mode: "insensitive",
+            },
+          },
+        },
+        select: { id: true, user_name: true, user_email: true },
+      });
+
+      if (!factoryUser) {
+        return res.status(400).json({
+          success: false,
+          message: "Factory user not found for this vendor",
+        });
+      }
+
       const task = await service.createPendingWorkTask(
         Number(vendorId),
         Number(leadId),
         Number(account_id),
+        factoryUser.id,
         Number(created_by),
         due_date,
         remark
       );
 
       try {
-        const assignee = await prisma.userMaster.findUnique({
-          where: { id: Number(created_by) },
-          select: {
-            user_type: { select: { user_type: true } },
-          },
-        });
-        const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
-        if (assigneeRole !== "admin" && assigneeRole !== "super-admin") {
-          const lead = await prisma.leadMaster.findUnique({
+        const [assignee, lead, assignedBy] = await Promise.all([
+          prisma.userMaster.findUnique({
+            where: { id: factoryUser.id },
+            select: {
+              id: true,
+              user_name: true,
+              user_email: true,
+              user_type: { select: { user_type: true } },
+            },
+          }),
+          prisma.leadMaster.findUnique({
             where: { id: Number(leadId) },
             select: { firstname: true, lastname: true },
-          });
-          const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+          }),
+          prisma.userMaster.findUnique({
+            where: { id: Number(created_by) },
+            select: { user_name: true },
+          }),
+        ]);
 
+        const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+        const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
+        const isSelfAssigned = Number(created_by) === Number(assignee?.id);
+
+        if (
+          !isSelfAssigned &&
+          assigneeRole !== "admin" &&
+          assigneeRole !== "super-admin"
+        ) {
           await NotificationService.createAndSend({
             vendor_id: Number(vendorId),
-            user_id: Number(created_by),
+            user_id: factoryUser.id,
             sender_id: Number(created_by),
             type: NotificationType.TASK_ASSIGNED,
             title: "New task assigned",
@@ -559,11 +684,43 @@ export class DispatchStageController {
             redirect_url: `/dashboard/my-tasks?taskId=${task.id}`,
           });
         }
+
+        let assigneeEmail = assignee?.user_email?.trim();
+        if (!assigneeEmail && assignee?.id) {
+          const fallbackAssignee = await prisma.userMaster.findUnique({
+            where: { id: assignee.id },
+            select: { user_email: true },
+          });
+          assigneeEmail = fallbackAssignee?.user_email?.trim();
+        }
+
+        if (assigneeEmail && !isSelfAssigned) {
+          const clientBaseUrl = resolveClientBaseUrl(req);
+          const taskUrl = `${clientBaseUrl}/dashboard/my-tasks`;
+          const dueDate = due_date
+            ? new Date(due_date).toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })
+            : "—";
+          const assignedByName = assignedBy?.user_name ?? "Admin";
+
+          await sendTaskAssignedEmail({
+            toEmail: assigneeEmail,
+            toName: assignee?.user_name ?? undefined,
+            taskTitle: "Pending Work",
+            leadName: leadName || "—",
+            assignedBy: assignedByName,
+            dueDate,
+            taskUrl,
+          });
+        }
       } catch (notificationError: any) {
         logger.warn("⚠️ Failed to send pending work notification", {
           error: notificationError?.message,
           lead_id: leadId,
-          assignee_user_id: created_by,
+          assignee_user_id: factoryUser.id,
         });
       }
 

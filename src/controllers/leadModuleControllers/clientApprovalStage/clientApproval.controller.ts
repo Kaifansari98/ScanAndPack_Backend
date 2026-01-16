@@ -6,6 +6,26 @@ import fs from "node:fs/promises";
 import { prisma } from "../../../prisma/client";
 import { NotificationService } from "../../../services/notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
+import { sendLeadAssignedEmail } from "../../../services/email/brevoEmail.service";
+import logger from "src/utils/logger";
+
+const resolveClientBaseUrl = (req: Request): string => {
+  const origin = req.headers.origin;
+  if (typeof origin === "string" && origin.trim().length > 0) {
+    return origin.replace(/\/$/, "");
+  }
+
+  const referer = req.headers.referer;
+  if (typeof referer === "string" && referer.trim().length > 0) {
+    try {
+      return new URL(referer).origin;
+    } catch {
+      return "http://localhost:3000";
+    }
+  }
+
+  return "http://localhost:3000";
+};
 
 const clientApprovalService = new ClientApprovalService();
 
@@ -299,6 +319,8 @@ export class ClientApprovalController {
         const assignee = await prisma.userMaster.findUnique({
           where: { id: dto.assign_to_user_id },
           select: {
+            user_name: true,
+            user_email: true,
             user_type: { select: { user_type: true } },
           },
         });
@@ -328,6 +350,94 @@ export class ClientApprovalController {
       } catch (notificationError: any) {
         console.error("⚠️ Failed to send tech-check assignment notification", {
           error: notificationError?.message,
+          lead_id: dto.lead_id,
+          assignee_user_id: dto.assign_to_user_id,
+        });
+      }
+
+      try {
+        if (dto.assign_to_user_id !== dto.created_by) {
+          const [assignee, assignedBy, lead] = await Promise.all([
+            prisma.userMaster.findUnique({
+              where: { id: dto.assign_to_user_id },
+              select: { user_name: true, user_email: true },
+            }),
+            prisma.userMaster.findUnique({
+              where: { id: dto.created_by },
+              select: { user_name: true },
+            }),
+            prisma.leadMaster.findUnique({
+              where: { id: dto.lead_id },
+              select: {
+                id: true,
+                lead_code: true,
+                firstname: true,
+                lastname: true,
+                country_code: true,
+                contact_no: true,
+                created_at: true,
+                productMappings: {
+                  select: { productType: { select: { type: true } } },
+                },
+                leadProductStructureMapping: {
+                  select: { productStructure: { select: { type: true } } },
+                },
+              },
+            }),
+          ]);
+
+          const assigneeEmail = assignee?.user_email?.trim();
+          if (!assigneeEmail) {
+            logger.warn("Tech-check email skipped: missing assignee email", {
+              lead_id: dto.lead_id,
+              assignee_user_id: dto.assign_to_user_id,
+            });
+          } else if (lead) {
+            const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+            const leadCode =
+              lead.lead_code ??
+              `LEAD-${String(lead.id).padStart(4, "0")}`;
+            const contactDetails = `${lead.country_code ?? ""} ${
+              lead.contact_no ?? ""
+            }`.trim();
+            const furnitureType =
+              lead.productMappings
+                ?.map((item) => item.productType?.type)
+                .filter(Boolean)
+                .join(", ") || "—";
+            const furnitureStructure =
+              lead.leadProductStructureMapping
+                ?.map((item) => item.productStructure?.type)
+                .filter(Boolean)
+                .join(", ") || "—";
+            const createdDate = lead.created_at
+              ? new Date(lead.created_at).toLocaleDateString("en-IN", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })
+              : "—";
+            const createdByName = assignedBy?.user_name ?? "Admin";
+            const clientBaseUrl = resolveClientBaseUrl(req);
+            const leadUrl = `${clientBaseUrl}/dashboard/leads/details/${dto.lead_id}?accountId=${dto.account_id}`;
+
+            await sendLeadAssignedEmail({
+              toEmail: assigneeEmail,
+              toName: assignee?.user_name ?? undefined,
+              leadCode,
+              leadName: leadName || "—",
+              contact: contactDetails || "—",
+              furnitureType,
+              furnitureStructure,
+              createdDate,
+              createdBy: createdByName,
+              leadUrl,
+            });
+          }
+        }
+      } catch (emailError: any) {
+        logger.warn("⚠️ Failed to send tech-check assignment email", {
+          error: emailError?.message,
           lead_id: dto.lead_id,
           assignee_user_id: dto.assign_to_user_id,
         });

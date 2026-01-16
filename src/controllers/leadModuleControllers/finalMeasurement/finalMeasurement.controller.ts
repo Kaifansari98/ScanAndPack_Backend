@@ -4,6 +4,25 @@ import logger from "../../../utils/logger";
 import { prisma } from "../../../prisma/client";
 import { NotificationService } from "../../../services/notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
+import { sendTaskAssignedEmail } from "../../../services/email/brevoEmail.service";
+
+const resolveClientBaseUrl = (req: Request): string => {
+  const origin = req.headers.origin;
+  if (typeof origin === "string" && origin.trim().length > 0) {
+    return origin.replace(/\/$/, "");
+  }
+
+  const referer = req.headers.referer;
+  if (typeof referer === "string" && referer.trim().length > 0) {
+    try {
+      return new URL(referer).origin;
+    } catch {
+      return "http://localhost:3000";
+    }
+  }
+
+  return "http://localhost:3000";
+};
 import {
   uploadToWasabiFinalMeasurementDocFile,
   uploadToWasabiFinalMeasurementSitePhotoFile,
@@ -515,21 +534,38 @@ export class FinalMeasurementController {
       });
 
       try {
-        const assignee = await prisma.userMaster.findUnique({
-          where: { id: Number(user_id) },
-          select: {
-            id: true,
-            user_type: { select: { user_type: true } },
-          },
-        });
-        const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
-        if (assigneeRole !== "admin" && assigneeRole !== "super-admin") {
-          const lead = await prisma.leadMaster.findUnique({
+        const [assignee, lead, assignedBy] = await Promise.all([
+          prisma.userMaster.findUnique({
+            where: { id: Number(user_id) },
+            select: {
+              id: true,
+              user_name: true,
+              user_email: true,
+              user_type: { select: { user_type: true } },
+            },
+          }),
+          prisma.leadMaster.findUnique({
             where: { id: leadId },
             select: { firstname: true, lastname: true },
-          });
-          const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+          }),
+          actorId
+            ? prisma.userMaster.findUnique({
+                where: { id: Number(actorId) },
+                select: { user_name: true },
+              })
+            : Promise.resolve(null),
+        ]);
 
+        const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+        const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
+        const isSelfAssigned =
+          Boolean(actorId) && Number(actorId) === Number(user_id);
+
+        if (
+          !isSelfAssigned &&
+          assigneeRole !== "admin" &&
+          assigneeRole !== "super-admin"
+        ) {
           await NotificationService.createAndSend({
             vendor_id: result.lead.vendor_id,
             user_id: Number(user_id),
@@ -543,6 +579,38 @@ export class FinalMeasurementController {
             entity_type: "task",
             entity_id: result.task.id,
             redirect_url: `/dashboard/my-tasks?taskId=${result.task.id}`,
+          });
+        }
+
+        let assigneeEmail = assignee?.user_email?.trim();
+        if (!assigneeEmail && assignee?.id) {
+          const fallbackAssignee = await prisma.userMaster.findUnique({
+            where: { id: assignee.id },
+            select: { user_email: true },
+          });
+          assigneeEmail = fallbackAssignee?.user_email?.trim();
+        }
+
+        if (assigneeEmail && !isSelfAssigned) {
+          const clientBaseUrl = resolveClientBaseUrl(req);
+          const taskUrl = `${clientBaseUrl}/dashboard/my-tasks`;
+          const dueDate = due_date
+            ? new Date(due_date).toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })
+            : "—";
+          const assignedByName = assignedBy?.user_name ?? "Admin";
+
+          await sendTaskAssignedEmail({
+            toEmail: assigneeEmail,
+            toName: assignee?.user_name ?? undefined,
+            taskTitle: task_type,
+            leadName: leadName || "—",
+            assignedBy: assignedByName,
+            dueDate,
+            taskUrl,
           });
         }
       } catch (notificationError: any) {
