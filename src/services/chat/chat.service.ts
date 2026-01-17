@@ -1,6 +1,7 @@
 import { prisma } from "../../prisma/client";
 import { NotificationType } from "../../prisma/generated";
 import { NotificationService } from "../notification/notification.service";
+import { sendChatMentionEmail } from "../email/brevoEmail.service";
 import logger from "../../utils/logger";
 import {
   generateSignedUrl,
@@ -183,9 +184,17 @@ export class ChatService {
     messageText?: string;
     files?: Express.Multer.File[];
     mentionUserIds?: number[];
+    clientBaseUrl?: string;
   }) {
-    const { leadId, vendorId, userId, messageText, files, mentionUserIds } =
-      params;
+    const {
+      leadId,
+      vendorId,
+      userId,
+      messageText,
+      files,
+      mentionUserIds,
+      clientBaseUrl,
+    } = params;
   
     const trimmedText = messageText?.trim() || "";
     const attachmentFiles = files || [];
@@ -371,6 +380,35 @@ export class ChatService {
               redirect_url: redirectUrl,
             })
           )
+        );
+
+        const mentionedUsers = await prisma.userMaster.findMany({
+          where: {
+            id: { in: mentionIds },
+            vendor_id: vendorId,
+            status: "active",
+          },
+          select: { id: true, user_name: true, user_email: true },
+        });
+
+        const baseUrl = clientBaseUrl || "http://localhost:3000";
+        const conversationUrl = `${baseUrl}${redirectUrl}`;
+        const mentionText =
+          trimmedText.length > 0 ? trimmedText : "Attachment shared.";
+
+        await Promise.allSettled(
+          mentionedUsers
+            .filter((user) => user.user_email && user.id !== userId)
+            .map((user) =>
+              sendChatMentionEmail({
+                toEmail: user.user_email!,
+                toName: user.user_name ?? undefined,
+                senderName,
+                leadName: leadName || "Lead",
+                messageText: mentionText,
+                conversationUrl,
+              })
+            )
         );
       } catch (error: any) {
         logger.warn("⚠️ Failed to send chat mention notifications", {

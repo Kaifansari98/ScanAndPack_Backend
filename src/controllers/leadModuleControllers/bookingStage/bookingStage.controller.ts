@@ -14,7 +14,10 @@ import {
 } from "../../../utils/wasabiClient";
 import fs from "node:fs/promises";
 import { prisma } from "../../../prisma/client";
-import { sendLeadAssignedToSiteSupervisorEmail } from "../../../services/email/brevoEmail.service";
+import {
+  sendLeadAssignedToSiteSupervisorEmail,
+  sendMajorMilestoneEmail,
+} from "../../../services/email/brevoEmail.service";
 
 const resolveClientBaseUrl = (req: Request): string => {
   const origin = req.headers.origin;
@@ -230,6 +233,73 @@ export class BookingStageController {
           error: emailError?.message,
           lead_id: dto.lead_id,
           assignee_user_id: dto.siteSupervisorId,
+        });
+      }
+
+      try {
+        const [admins, mappings, lead] = await Promise.all([
+          prisma.userMaster.findMany({
+            where: {
+              vendor_id: dto.vendor_id,
+              status: "active",
+              user_type: { user_type: { in: ["admin", "super-admin"] } },
+            },
+            select: { id: true },
+          }),
+          prisma.leadUserMapping.findMany({
+            where: {
+              vendor_id: dto.vendor_id,
+              lead_id: dto.lead_id,
+              status: "active",
+            },
+            select: { user_id: true },
+          }),
+          prisma.leadMaster.findUnique({
+            where: { id: dto.lead_id },
+            select: { firstname: true, lastname: true },
+          }),
+        ]);
+
+        const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+        const recipientIds = new Set<number>();
+        admins.forEach((admin) => recipientIds.add(admin.id));
+        mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
+
+        if (recipientIds.size > 0) {
+          const users = await prisma.userMaster.findMany({
+            where: {
+              id: { in: Array.from(recipientIds) },
+              status: "active",
+            },
+            select: { id: true, user_name: true, user_email: true },
+          });
+          const clientBaseUrl = resolveClientBaseUrl(req);
+          const detailsUrl = `${clientBaseUrl}/dashboard/leads/details/${dto.lead_id}?accountId=${dto.account_id}`;
+          const completedOn = new Date().toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          });
+
+          await Promise.allSettled(
+            users
+              .filter((user) => user.user_email)
+              .map((user) =>
+                sendMajorMilestoneEmail({
+                  toEmail: user.user_email!,
+                  toName: user.user_name ?? undefined,
+                  leadName: leadName || "Lead",
+                  milestoneName: "Lead to Project",
+                  completedOn,
+                  detailsUrl,
+                })
+              )
+          );
+        }
+      } catch (emailError: any) {
+        logger.warn("⚠️ Failed to send lead-to-project milestone email", {
+          error: emailError?.message,
+          lead_id: dto.lead_id,
         });
       }
 
@@ -948,5 +1018,5 @@ export class BookingStageController {
       });
     }
   };
-  
+
 }

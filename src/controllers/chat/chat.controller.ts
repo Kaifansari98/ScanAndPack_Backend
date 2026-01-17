@@ -2,6 +2,23 @@ import { Request, Response } from "express";
 import { ChatService } from "../../services/chat/chat.service";
 
 export class ChatController {
+  private static resolveClientBaseUrl(req: Request): string {
+    const origin = req.headers.origin;
+    if (typeof origin === "string" && origin.trim().length > 0) {
+      return origin.replace(/\/$/, "");
+    }
+
+    const referer = req.headers.referer;
+    if (typeof referer === "string" && referer.trim().length > 0) {
+      try {
+        return new URL(referer).origin;
+      } catch {
+        return "http://localhost:3000";
+      }
+    }
+
+    return "http://localhost:3000";
+  }
   static async checkLeadChatRoom(req: Request, res: Response) {
     try {
       const leadId = parseInt(req.params.leadId, 10);
@@ -120,6 +137,7 @@ export class ChatController {
         messageText,
         files,
         mentionUserIds,
+        clientBaseUrl: ChatController.resolveClientBaseUrl(req),
       });
 
       return res.status(200).json({

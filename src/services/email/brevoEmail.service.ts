@@ -38,6 +38,24 @@ export type TaskAssignedEmailPayload = {
   taskUrl?: string;
 };
 
+export type ChatMentionEmailPayload = {
+  toEmail: string;
+  toName?: string | null;
+  senderName: string;
+  leadName: string;
+  messageText: string;
+  conversationUrl?: string;
+};
+
+export type MajorMilestoneEmailPayload = {
+  toEmail: string;
+  toName?: string | null;
+  leadName: string;
+  milestoneName: string;
+  completedOn: string;
+  detailsUrl?: string;
+};
+
 const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
 
 export const sendBrevoEmail = async (
@@ -465,6 +483,142 @@ export const sendTaskAssignedEmail = async (
                   rel="noopener noreferrer"
                 >
                   View Task &amp; Lead
+                </a>
+              </p>`
+            : ""
+        }
+      </div>
+    </div>
+  `;
+
+  return sendBrevoEmail({
+    toEmail: payload.toEmail,
+    toName: payload.toName,
+    subject,
+    text,
+    html,
+  });
+};
+
+export const sendChatMentionEmail = async (
+  payload: ChatMentionEmailPayload
+): Promise<BrevoEmailResult> => {
+  const subject = `You Were Mentioned on Lead: ${payload.leadName}`;
+  const text = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `You were mentioned by ${payload.senderName} in a conversation related to the following lead:`,
+    `Lead: ${payload.leadName}`,
+    "Message:",
+    `"${payload.messageText}"`,
+    "",
+    "Please review the message and respond if required.",
+    payload.conversationUrl ? `View Conversation: ${payload.conversationUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const html = `
+    <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
+      <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
+        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">You Were Mentioned</h2>
+        <p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p>
+        <p style="margin: 0 0 16px; color: #4b5563;">
+          You were mentioned by <strong>${payload.senderName}</strong> in a conversation related to the following lead:
+        </p>
+        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
+          <p style="margin: 0 0 8px; font-weight: 600; color: #111827;">Lead</p>
+          <p style="margin: 0; color: #111827;">${payload.leadName}</p>
+        </div>
+        <div style="margin-top: 12px; border-left: 3px solid #111827; padding-left: 12px; color: #111827;">
+          <p style="margin: 0 0 6px; font-weight: 600;">Message</p>
+          <p style="margin: 0;">“${payload.messageText}”</p>
+        </div>
+        <p style="margin: 16px 0 0; color: #4b5563;">
+          Please review the message and respond if required.
+        </p>
+        ${
+          payload.conversationUrl
+            ? `<p style="margin: 16px 0 0;">
+                <a
+                  href="${payload.conversationUrl}"
+                  style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 16px; border-radius: 6px;"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Conversation
+                </a>
+              </p>`
+            : ""
+        }
+      </div>
+    </div>
+  `;
+
+  return sendBrevoEmail({
+    toEmail: payload.toEmail,
+    toName: payload.toName,
+    subject,
+    text,
+    html,
+  });
+};
+
+export const sendMajorMilestoneEmail = async (
+  payload: MajorMilestoneEmailPayload
+): Promise<BrevoEmailResult> => {
+  const subject = `Milestone Achieved: ${payload.milestoneName} – ${payload.leadName}`;
+  const text = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "A major milestone has been achieved for the following lead:",
+    `Lead Name: ${payload.leadName}`,
+    `Milestone: ${payload.milestoneName}`,
+    `Completed On: ${payload.completedOn}`,
+    "",
+    "This marks an important progression in the project lifecycle. Please review the details and proceed with the next required actions.",
+    payload.detailsUrl ? `View Lead / Project Details: ${payload.detailsUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const html = `
+    <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
+      <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
+        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Milestone Achieved</h2>
+        <p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p>
+        <p style="margin: 0 0 16px; color: #4b5563;">
+          A major milestone has been achieved for the following lead:
+        </p>
+        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;">
+            <tr>
+              <td style="padding: 4px 0; color: #6b7280;">Lead Name</td>
+              <td style="padding: 4px 0; font-weight: 600;">${payload.leadName}</td>
+            </tr>
+            <tr>
+              <td style="padding: 4px 0; color: #6b7280;">Milestone</td>
+              <td style="padding: 4px 0; font-weight: 600;">${payload.milestoneName}</td>
+            </tr>
+            <tr>
+              <td style="padding: 4px 0; color: #6b7280;">Completed On</td>
+              <td style="padding: 4px 0; font-weight: 600;">${payload.completedOn}</td>
+            </tr>
+          </table>
+        </div>
+        <p style="margin: 16px 0 0; color: #4b5563;">
+          This marks an important progression in the project lifecycle. Please review the details and proceed with the next required actions.
+        </p>
+        ${
+          payload.detailsUrl
+            ? `<p style="margin: 16px 0 0;">
+                <a
+                  href="${payload.detailsUrl}"
+                  style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 16px; border-radius: 6px;"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Lead / Project Details
                 </a>
               </p>`
             : ""

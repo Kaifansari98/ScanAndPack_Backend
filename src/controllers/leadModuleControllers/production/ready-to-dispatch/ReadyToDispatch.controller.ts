@@ -2,7 +2,10 @@ import { Request, Response } from "express";
 import { prisma } from "../../../../prisma/client";
 import { NotificationService } from "../../../../services/notification/notification.service";
 import { NotificationType } from "../../../../prisma/generated";
-import { sendTaskAssignedEmail } from "../../../../services/email/brevoEmail.service";
+import {
+  sendTaskAssignedEmail,
+  sendMajorMilestoneEmail,
+} from "../../../../services/email/brevoEmail.service";
 
 const resolveClientBaseUrl = (req: Request): string => {
   const origin = req.headers.origin;
@@ -394,6 +397,36 @@ export class ReadyToDispatchController {
                 redirect_url: redirectUrl,
               })
             )
+          );
+
+          const users = await prisma.userMaster.findMany({
+            where: {
+              id: { in: Array.from(recipientIds) },
+              status: "active",
+            },
+            select: { id: true, user_name: true, user_email: true },
+          });
+          const clientBaseUrl = resolveClientBaseUrl(req);
+          const detailsUrl = `${clientBaseUrl}${redirectUrl}`;
+          const completedOn = new Date().toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          });
+
+          await Promise.allSettled(
+            users
+              .filter((user) => user.user_email)
+              .map((user) =>
+                sendMajorMilestoneEmail({
+                  toEmail: user.user_email!,
+                  toName: user.user_name ?? undefined,
+                  leadName: leadName || "Lead",
+                  milestoneName: "Production to Installation",
+                  completedOn,
+                  detailsUrl,
+                })
+              )
           );
         }
       } catch (milestoneError: any) {

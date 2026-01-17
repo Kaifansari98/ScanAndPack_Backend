@@ -10,6 +10,26 @@ import {
 import { ApiResponse } from "../../../utils/apiResponse";
 import logger from "../../../utils/logger";
 import fs from "node:fs/promises";
+import { prisma } from "../../../prisma/client";
+import { sendMajorMilestoneEmail } from "../../../services/email/brevoEmail.service";
+
+const resolveClientBaseUrl = (req: Request): string => {
+  const origin = req.headers.origin;
+  if (typeof origin === "string" && origin.trim().length > 0) {
+    return origin.replace(/\/$/, "");
+  }
+
+  const referer = req.headers.referer;
+  if (typeof referer === "string" && referer.trim().length > 0) {
+    try {
+      return new URL(referer).origin;
+    } catch {
+      return "http://localhost:3000";
+    }
+  }
+
+  return "http://localhost:3000";
+};
 
 const service = new FinalHandoverStageService();
 
@@ -275,6 +295,75 @@ export class FinalHandoverStageController {
         leadId,
         updated_by
       );
+
+      try {
+        const [admins, mappings, lead] = await Promise.all([
+          prisma.userMaster.findMany({
+            where: {
+              vendor_id: vendorId,
+              status: "active",
+              user_type: { user_type: { in: ["admin", "super-admin"] } },
+            },
+            select: { id: true },
+          }),
+          prisma.leadUserMapping.findMany({
+            where: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              status: "active",
+            },
+            select: { user_id: true },
+          }),
+          prisma.leadMaster.findUnique({
+            where: { id: leadId },
+            select: { firstname: true, lastname: true, account_id: true },
+          }),
+        ]);
+
+        const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+        const recipientIds = new Set<number>();
+        admins.forEach((admin) => recipientIds.add(admin.id));
+        mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
+
+        if (recipientIds.size > 0) {
+          const users = await prisma.userMaster.findMany({
+            where: {
+              id: { in: Array.from(recipientIds) },
+              status: "active",
+            },
+            select: { id: true, user_name: true, user_email: true },
+          });
+          const clientBaseUrl = resolveClientBaseUrl(req);
+          const detailsUrl = lead?.account_id
+            ? `${clientBaseUrl}/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
+            : `${clientBaseUrl}/dashboard/leads/details/${leadId}`;
+          const completedOn = new Date().toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          });
+
+          await Promise.allSettled(
+            users
+              .filter((user) => user.user_email)
+              .map((user) =>
+                sendMajorMilestoneEmail({
+                  toEmail: user.user_email!,
+                  toName: user.user_name ?? undefined,
+                  leadName: leadName || "Lead",
+                  milestoneName: "Completion of project",
+                  completedOn,
+                  detailsUrl,
+                })
+              )
+          );
+        }
+      } catch (emailError: any) {
+        logger.warn("⚠️ Failed to send completion milestone email", {
+          error: emailError?.message,
+          lead_id: leadId,
+        });
+      }
 
       return res
         .status(200)
