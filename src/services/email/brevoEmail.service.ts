@@ -573,7 +573,7 @@ export const sendLeadAssignedToSiteSupervisorEmail = async (
 export const sendTaskAssignedEmail = async (
   payload: TaskAssignedEmailPayload
 ): Promise<BrevoEmailResult> => {
-  const defaultSubject = `Task Assigned: ${payload.leadCode} - ${payload.taskTitle}`;
+  const defaultSubject = `Task Assigned: ${payload.taskTitle} - ${payload.leadCode} ${payload.leadName}`;
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
