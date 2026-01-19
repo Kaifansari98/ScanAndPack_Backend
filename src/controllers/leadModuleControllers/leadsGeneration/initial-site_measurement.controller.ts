@@ -225,6 +225,7 @@ export class PaymentUploadController {
             leadName: leadName || "—",
             assignedBy: assignedByName,
             dueDate,
+            remark,
             taskUrl,
           });
         } else {

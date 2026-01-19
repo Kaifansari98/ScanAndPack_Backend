@@ -50,8 +50,8 @@ bookingStageRouter.get(
   bookingStageController.getUniversalTableData
 );
 bookingStageRouter.post(
-  "/universal-table-data/vendorId/:vendorId",
-  bookingStageController.getUniversalTableData
+  "/universal-table-data-2/vendorId/:vendorId",
+  bookingStageController.getUniversalTableData2
 );
 
 bookingStageRouter.put("/edit", bookingStageController.editBookingStage);

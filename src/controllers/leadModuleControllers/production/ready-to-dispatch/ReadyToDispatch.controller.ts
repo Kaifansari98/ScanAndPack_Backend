@@ -338,6 +338,7 @@ export class ReadyToDispatchController {
             leadName: leadName || "—",
             assignedBy: assignedByName,
             dueDate,
+            remark,
             taskUrl,
           });
         }

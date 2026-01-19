@@ -39,6 +39,7 @@ export type TaskAssignedEmailPayload = {
   leadName: string;
   assignedBy: string;
   dueDate: string;
+  remark?: string | null;
   taskUrl?: string;
 };
 
@@ -580,9 +581,11 @@ export const sendTaskAssignedEmail = async (
     "You have been assigned a new task in the CRM.",
     "Task Details",
     `Task: ${payload.taskTitle}`,
-    `Related Lead: ${payload.leadName}`,
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
     `Assigned By: ${payload.assignedBy}`,
     `Due Date: ${payload.dueDate}`,
+    `Remarks: ${payload.remark ?? "—"}`,
     "",
     "Please review the task and take the necessary action within the defined timeline.",
     payload.taskUrl ? `View Task: ${payload.taskUrl}` : "",
@@ -606,7 +609,11 @@ export const sendTaskAssignedEmail = async (
               <td style="padding: 4px 0; font-weight: 600;">${payload.taskTitle}</td>
             </tr>
             <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Related Lead</td>
+              <td style="padding: 4px 0; color: #6b7280;">Lead Code</td>
+              <td style="padding: 4px 0; font-weight: 600;">${payload.leadCode}</td>
+            </tr>
+            <tr>
+              <td style="padding: 4px 0; color: #6b7280;">Lead Name</td>
               <td style="padding: 4px 0; font-weight: 600;">${payload.leadName}</td>
             </tr>
             <tr>
@@ -616,6 +623,10 @@ export const sendTaskAssignedEmail = async (
             <tr>
               <td style="padding: 4px 0; color: #6b7280;">Due Date</td>
               <td style="padding: 4px 0; font-weight: 600;">${payload.dueDate}</td>
+            </tr>
+            <tr>
+              <td style="padding: 4px 0; color: #6b7280;">Remarks</td>
+              <td style="padding: 4px 0; font-weight: 600;">${payload.remark ?? "—"}</td>
             </tr>
           </table>
         </div>
@@ -647,6 +658,7 @@ export const sendTaskAssignedEmail = async (
     leadName: payload.leadName,
     assignedBy: payload.assignedBy,
     dueDate: payload.dueDate,
+    remark: payload.remark ?? "",
     taskUrl: payload.taskUrl ?? "",
   };
 
@@ -697,7 +709,7 @@ export const sendChatMentionEmail = async (
     `Hello ${payload.toName ?? "there"},`,
     "",
     `You were mentioned by ${payload.senderName} in a conversation related to the following lead:`,
-    `Lead: ${payload.leadName}`,
+    `Lead: ${payload.leadCode} - ${payload.leadName}`,
     "Message:",
     `"${payload.messageText}"`,
     "",

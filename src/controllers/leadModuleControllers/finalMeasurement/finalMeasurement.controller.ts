@@ -614,6 +614,7 @@ export class FinalMeasurementController {
             leadName: leadName || "—",
             assignedBy: assignedByName,
             dueDate,
+            remark,
             taskUrl,
           });
         }

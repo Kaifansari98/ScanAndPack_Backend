@@ -564,14 +564,67 @@ export class BookingStageController {
   public getUniversalTableData = async (req: Request, res: Response) => {
     try {
       const vendorId = parseInt(req.params.vendorId);
-      const userId = Number(req.query.userId || req.body.userId);
-      const tag = (req.query.tag as string) || (req.body.tag as string);
-      const page = parseInt(
-        (req.query.page as string) || (req.body.page as string) || "1"
+      const userId = Number(req.query.userId);
+      const tag = req.query.tag as string;
+      const page = parseInt((req.query.page as string) || "1");
+      const limit = parseInt((req.query.limit as string) || "10");
+
+      if (!vendorId || !userId) {
+        logger.warn("Missing vendorId or userId", { vendorId, userId, tag });
+        return res.status(400).json({
+          success: false,
+          message: "Vendor ID and User ID are required",
+        });
+      }
+
+      const { leads, count } = await BookingStageService.getUniversalTableData(
+        vendorId,
+        userId,
+        tag,
+        page,
+        limit,
+        {}
       );
-      const limit = parseInt(
-        (req.query.limit as string) || (req.body.limit as string) || "10"
-      );
+
+      logger.info("Fetched universal table data successfully", {
+        vendorId,
+        userId,
+        tag,
+        count,
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Universal table data fetched successfully",
+        count,
+        data: leads,
+        pagination: {
+          currentPage: page,
+          totalPages: Math.ceil(count / limit),
+          totalRecords: count,
+          hasNext: page * limit < count,
+          hasPrev: page > 1,
+        },
+      });
+    } catch (error: any) {
+      logger.error("[BookingStageController] getUniversalTableData Error", {
+        error: error.message,
+        stack: error.stack,
+      });
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Something went wrong",
+      });
+    }
+  };
+
+  public getUniversalTableData2 = async (req: Request, res: Response) => {
+    try {
+      const vendorId = parseInt(req.params.vendorId);
+      const userId = Number(req.body.userId);
+      const tag = req.body.tag as string;
+      const page = parseInt((req.body.page as string) || "1");
+      const limit = parseInt((req.body.limit as string) || "10");
       const filters = {
         filter_lead_code: req.body.filter_lead_code,
         filter_name: req.body.filter_name,
@@ -628,7 +681,7 @@ export class BookingStageController {
         },
       });
     } catch (error: any) {
-      logger.error("[BookingStageController] getUniversalTableData Error", {
+      logger.error("[BookingStageController] getUniversalTableData2 Error", {
         error: error.message,
         stack: error.stack,
       });

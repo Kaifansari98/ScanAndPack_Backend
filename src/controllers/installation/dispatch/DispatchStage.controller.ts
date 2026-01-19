@@ -559,6 +559,7 @@ export class DispatchStageController {
             leadName: leadName || "—",
             assignedBy: assignedByName,
             dueDate,
+            remark,
             taskUrl,
           });
         }
@@ -721,6 +722,7 @@ export class DispatchStageController {
             leadName: leadName || "—",
             assignedBy: assignedByName,
             dueDate,
+            remark,
             taskUrl,
           });
         }
