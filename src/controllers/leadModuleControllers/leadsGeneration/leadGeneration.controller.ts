@@ -270,6 +270,7 @@ export class LeadController {
           }
 
           const emailPayload = {
+            vendor_id: value.vendor_id,
             leadCode,
             leadName,
             contact: contactDetails || "—",

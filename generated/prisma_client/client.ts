@@ -31,7 +31,7 @@ export * from "./enums"
  * const vendorMasters = await prisma.vendorMaster.findMany()
  * ```
  * 
- * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
+ * Read more in our [docs](https://pris.ly/d/client).
  */
 export const PrismaClient = $Class.getPrismaClientClass()
 export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts extends Prisma.PrismaClientOptions["omit"] = Prisma.PrismaClientOptions["omit"], ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = $Class.PrismaClient<LogOpts, OmitOpts, ExtArgs>
@@ -337,6 +337,11 @@ export type IssueLogTypeMapping = Prisma.IssueLogTypeMappingModel
  * 
  */
 export type IssueLogResponsibleTeamMapping = Prisma.IssueLogResponsibleTeamMappingModel
+/**
+ * Model EmailNotificationMaster
+ * 
+ */
+export type EmailNotificationMaster = Prisma.EmailNotificationMasterModel
 /**
  * Model Notification
  * 

@@ -316,11 +316,13 @@ export class FinalHandoverStageController {
           }),
           prisma.leadMaster.findUnique({
             where: { id: leadId },
-            select: { firstname: true, lastname: true, account_id: true },
+            select: { firstname: true, lastname: true, account_id: true, lead_code: true },
           }),
         ]);
 
         const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+        const leadCode =
+          lead?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
         const recipientIds = new Set<number>();
         admins.forEach((admin) => recipientIds.add(admin.id));
         mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
@@ -348,8 +350,10 @@ export class FinalHandoverStageController {
               .filter((user) => user.user_email)
               .map((user) =>
                 sendMajorMilestoneEmail({
+                  vendor_id: result.lead.vendor_id,
                   toEmail: user.user_email!,
                   toName: user.user_name ?? undefined,
+                  leadCode,
                   leadName: leadName || "Lead",
                   milestoneName: "Completion of project",
                   completedOn,

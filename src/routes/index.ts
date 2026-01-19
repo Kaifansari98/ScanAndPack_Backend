@@ -40,6 +40,7 @@ import finalHandoverStageRoutes from "./installation/final-handover/FinalHandove
 import DashboardRouter from "./dashboard/dashboard.route";
 import chatRoutes from "./chat/chat.routes";
 import notificationRoutes from "./notification/notification.routes";
+import emailNotificationMasterRoutes from "./notification/emailNotificationMaster.routes";
 
 const router = Router();
 
@@ -89,5 +90,6 @@ router.use("/issue-logs", issueLogRoutes);
 router.use("/leads/installation/final-handover", finalHandoverStageRoutes);
 router.use("/leads/chats", chatRoutes);
 router.use("/notifications", notificationRoutes);
+router.use("/email-notification-master", emailNotificationMasterRoutes);
 
 export { router };

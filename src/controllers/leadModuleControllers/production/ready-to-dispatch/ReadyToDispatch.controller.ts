@@ -270,7 +270,7 @@ export class ReadyToDispatchController {
           }),
           prisma.leadMaster.findUnique({
             where: { id: leadId },
-            select: { firstname: true, lastname: true },
+            select: { firstname: true, lastname: true, lead_code: true },
           }),
           actorId
             ? prisma.userMaster.findUnique({
@@ -281,6 +281,8 @@ export class ReadyToDispatchController {
         ]);
 
         const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+        const leadCode =
+          lead?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
         const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
         const isSelfAssigned =
           Boolean(actorId) && Number(actorId) === Number(user_id);
@@ -328,8 +330,10 @@ export class ReadyToDispatchController {
           const assignedByName = assignedBy?.user_name ?? "Admin";
 
           await sendTaskAssignedEmail({
+            vendor_id: result.lead.vendor_id,
             toEmail: assigneeEmail,
             toName: assignee?.user_name ?? undefined,
+            leadCode,
             taskTitle: task_type,
             leadName: leadName || "—",
             assignedBy: assignedByName,
@@ -366,11 +370,13 @@ export class ReadyToDispatchController {
           }),
           prisma.leadMaster.findUnique({
             where: { id: leadId },
-            select: { firstname: true, lastname: true },
+            select: { firstname: true, lastname: true, lead_code: true },
           }),
         ]);
 
         const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+        const leadCode =
+          lead?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
         const recipientIds = new Set<number>();
         admins.forEach((admin) => recipientIds.add(admin.id));
         mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
@@ -419,8 +425,10 @@ export class ReadyToDispatchController {
               .filter((user) => user.user_email)
               .map((user) =>
                 sendMajorMilestoneEmail({
+                  vendor_id: result.lead.vendor_id,
                   toEmail: user.user_email!,
                   toName: user.user_name ?? undefined,
+                  leadCode,
                   leadName: leadName || "Lead",
                   milestoneName: "Production to Installation",
                   completedOn,

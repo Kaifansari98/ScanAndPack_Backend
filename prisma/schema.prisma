@@ -67,6 +67,7 @@ model VendorMaster {
   userLeadTasks               UserLeadTask[]
   users                       UserMaster[]
   notifications               Notification[]
+  notificationMasters         EmailNotificationMaster[]
   userPushTokens              UserPushToken[]
   addresses                   VendorAddress[]
   taxInfo                     VendorTaxInfo[]
@@ -1151,6 +1152,21 @@ model IssueLogResponsibleTeamMapping {
   team         MiscellaneousTeamMaster    @relation(fields: [team_id], references: [id], onDelete: Cascade)
 
   @@unique([issue_log_id, team_id])
+}
+
+model EmailNotificationMaster {
+  id           Int          @id @default(autoincrement())
+  vendor_id    Int
+  template_key String
+  subject      String
+  text         String
+  html         String
+  active       Boolean      @default(true)
+  created_at   DateTime     @default(now())
+  vendor       VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id])
+  @@unique([vendor_id, template_key])
 }
 
 model Notification {

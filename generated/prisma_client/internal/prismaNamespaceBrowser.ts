@@ -111,6 +111,7 @@ export const ModelName = {
   IssueLogTypeMaster: 'IssueLogTypeMaster',
   IssueLogTypeMapping: 'IssueLogTypeMapping',
   IssueLogResponsibleTeamMapping: 'IssueLogResponsibleTeamMapping',
+  EmailNotificationMaster: 'EmailNotificationMaster',
   Notification: 'Notification',
   UserPushToken: 'UserPushToken',
   NotificationDeliveryLogs: 'NotificationDeliveryLogs'
@@ -1031,6 +1032,20 @@ export const IssueLogResponsibleTeamMappingScalarFieldEnum = {
 } as const
 
 export type IssueLogResponsibleTeamMappingScalarFieldEnum = (typeof IssueLogResponsibleTeamMappingScalarFieldEnum)[keyof typeof IssueLogResponsibleTeamMappingScalarFieldEnum]
+
+
+export const EmailNotificationMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  template_key: 'template_key',
+  subject: 'subject',
+  text: 'text',
+  html: 'html',
+  active: 'active',
+  created_at: 'created_at'
+} as const
+
+export type EmailNotificationMasterScalarFieldEnum = (typeof EmailNotificationMasterScalarFieldEnum)[keyof typeof EmailNotificationMasterScalarFieldEnum]
 
 
 export const NotificationScalarFieldEnum = {

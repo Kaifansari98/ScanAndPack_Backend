@@ -494,7 +494,7 @@ export class DispatchStageController {
           }),
           prisma.leadMaster.findUnique({
             where: { id: Number(leadId) },
-            select: { firstname: true, lastname: true },
+            select: { firstname: true, lastname: true, lead_code: true },
           }),
           prisma.userMaster.findUnique({
             where: { id: Number(created_by) },
@@ -503,6 +503,8 @@ export class DispatchStageController {
         ]);
 
         const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+        const leadCode =
+          lead?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
         const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
         const isSelfAssigned = Number(created_by) === Number(assignee?.id);
 
@@ -549,8 +551,10 @@ export class DispatchStageController {
           const assignedByName = assignedBy?.user_name ?? "Admin";
 
           await sendTaskAssignedEmail({
+            vendor_id: Number(vendorId),
             toEmail: assigneeEmail,
             toName: assignee?.user_name ?? undefined,
+            leadCode,
             taskTitle: "Pending Materials",
             leadName: leadName || "—",
             assignedBy: assignedByName,
@@ -652,7 +656,7 @@ export class DispatchStageController {
           }),
           prisma.leadMaster.findUnique({
             where: { id: Number(leadId) },
-            select: { firstname: true, lastname: true },
+            select: { firstname: true, lastname: true, lead_code: true },
           }),
           prisma.userMaster.findUnique({
             where: { id: Number(created_by) },
@@ -661,6 +665,8 @@ export class DispatchStageController {
         ]);
 
         const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+        const leadCode =
+          lead?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
         const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
         const isSelfAssigned = Number(created_by) === Number(assignee?.id);
 
@@ -707,8 +713,10 @@ export class DispatchStageController {
           const assignedByName = assignedBy?.user_name ?? "Admin";
 
           await sendTaskAssignedEmail({
+            vendor_id: Number(vendorId),
             toEmail: assigneeEmail,
             toName: assignee?.user_name ?? undefined,
+            leadCode,
             taskTitle: "Pending Work",
             leadName: leadName || "—",
             assignedBy: assignedByName,

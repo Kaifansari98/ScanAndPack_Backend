@@ -318,6 +318,11 @@ export type IssueLogTypeMapping = Prisma.IssueLogTypeMappingModel
  */
 export type IssueLogResponsibleTeamMapping = Prisma.IssueLogResponsibleTeamMappingModel
 /**
+ * Model EmailNotificationMaster
+ * 
+ */
+export type EmailNotificationMaster = Prisma.EmailNotificationMasterModel
+/**
  * Model Notification
  * 
  */

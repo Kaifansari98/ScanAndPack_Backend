@@ -1710,6 +1710,7 @@ export const updateLeadService = async (
           const leadUrl = `${baseUrl}/dashboard/leads/details/${hydratedLead.id}?accountId=${hydratedLead.account_id}`;
 
           leadCreatedEmailPayload = {
+            vendor_id: hydratedLead.vendor_id,
             toEmail: assigneeEmail,
             toName: hydratedLead.assignedTo?.user_name ?? undefined,
             leadCode,
@@ -2374,6 +2375,7 @@ export const assignLeadToUser = async (
           where: { id: leadId },
           select: {
             id: true,
+            vendor_id: true,
             lead_code: true,
             firstname: true,
             lastname: true,
@@ -2422,6 +2424,7 @@ export const assignLeadToUser = async (
           const leadUrl = `${baseUrl}/dashboard/leads/details/${leadDetails.id}?accountId=${leadDetails.account_id}`;
 
           await sendLeadAssignedEmail({
+            vendor_id: leadDetails.vendor_id,
             toEmail: assigneeEmail,
             toName: salesExecutiveUser.user_name,
             leadCode,

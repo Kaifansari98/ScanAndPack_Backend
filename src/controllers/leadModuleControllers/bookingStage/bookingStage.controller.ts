@@ -215,6 +215,7 @@ export class BookingStageController {
             const leadUrl = `${clientBaseUrl}/dashboard/leads/details/${dto.lead_id}?accountId=${dto.account_id}`;
 
             await sendLeadAssignedToSiteSupervisorEmail({
+              vendor_id: dto.vendor_id,
               toEmail: supervisorEmail,
               toName: supervisor?.user_name ?? undefined,
               leadCode,
@@ -256,11 +257,13 @@ export class BookingStageController {
           }),
           prisma.leadMaster.findUnique({
             where: { id: dto.lead_id },
-            select: { firstname: true, lastname: true },
+            select: { firstname: true, lastname: true, lead_code: true },
           }),
         ]);
 
         const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+        const leadCode =
+          lead?.lead_code ?? `LEAD-${String(dto.lead_id).padStart(4, "0")}`;
         const recipientIds = new Set<number>();
         admins.forEach((admin) => recipientIds.add(admin.id));
         mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
@@ -286,8 +289,10 @@ export class BookingStageController {
               .filter((user) => user.user_email)
               .map((user) =>
                 sendMajorMilestoneEmail({
+                  vendor_id: dto.vendor_id,
                   toEmail: user.user_email!,
                   toName: user.user_name ?? undefined,
+                  leadCode,
                   leadName: leadName || "Lead",
                   milestoneName: "Lead to Project",
                   completedOn,

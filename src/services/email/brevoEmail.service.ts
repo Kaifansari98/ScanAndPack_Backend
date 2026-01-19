@@ -1,5 +1,6 @@
 "use strict";
 
+import { prisma } from "../../prisma/client";
 import logger from "../../utils/logger";
 
 export type BrevoEmailPayload = {
@@ -16,6 +17,7 @@ export type BrevoEmailResult =
   | { success: false; skipped: true; reason: string };
 
 export type LeadCreatedEmailPayload = {
+  vendor_id: number;
   toEmail: string;
   toName?: string | null;
   leadCode: string;
@@ -29,8 +31,10 @@ export type LeadCreatedEmailPayload = {
 };
 
 export type TaskAssignedEmailPayload = {
+  vendor_id: number;
   toEmail: string;
   toName?: string | null;
+  leadCode: string;
   taskTitle: string;
   leadName: string;
   assignedBy: string;
@@ -39,8 +43,10 @@ export type TaskAssignedEmailPayload = {
 };
 
 export type ChatMentionEmailPayload = {
+  vendor_id: number;
   toEmail: string;
   toName?: string | null;
+  leadCode: string;
   senderName: string;
   leadName: string;
   messageText: string;
@@ -48,8 +54,10 @@ export type ChatMentionEmailPayload = {
 };
 
 export type MajorMilestoneEmailPayload = {
+  vendor_id: number;
   toEmail: string;
   toName?: string | null;
+  leadCode: string;
   leadName: string;
   milestoneName: string;
   completedOn: string;
@@ -57,6 +65,21 @@ export type MajorMilestoneEmailPayload = {
 };
 
 const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
+const LEAD_CREATED_TEMPLATE_KEY = "LEAD_CREATED";
+const LEAD_ASSIGNED_TEMPLATE_KEY = "LEAD_ASSIGNED";
+const LEAD_ASSIGNED_SITE_SUPERVISOR_TEMPLATE_KEY = "LEAD_ASSIGNED_SITE_SUPERVISOR";
+const TASK_ASSIGNED_TEMPLATE_KEY = "TASK_ASSIGNED";
+const CHAT_MENTION_TEMPLATE_KEY = "CHAT_MENTION";
+const MILESTONE_TEMPLATE_KEY = "MILESTONE_ACHIEVED";
+
+
+const renderTemplate = (template: string, values: Record<string, string>) => {
+  return template.replace(/{{\s*([a-zA-Z0-9_]+)\s*}}/g, (match, key) => {
+    return Object.prototype.hasOwnProperty.call(values, key)
+      ? values[key]
+      : match;
+  });
+};
 
 export const sendBrevoEmail = async (
   payload: BrevoEmailPayload
@@ -154,8 +177,8 @@ export const sendBrevoEmail = async (
 export const sendLeadCreatedEmail = async (
   payload: LeadCreatedEmailPayload
 ): Promise<BrevoEmailResult> => {
-  const subject = `New Lead Created: ${payload.leadCode} - ${payload.leadName}`;
-  const text = [
+  const defaultSubject = `New Lead Created: ${payload.leadCode} - ${payload.leadName}`;
+  const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
     "A new lead has been created.",
@@ -174,7 +197,7 @@ export const sendLeadCreatedEmail = async (
     .filter(Boolean)
     .join("\n");
 
-  const html = `
+  const defaultHtml = `
     <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
       <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
         <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">New Lead Created</h2>
@@ -234,6 +257,48 @@ export const sendLeadCreatedEmail = async (
     </div>
   `;
 
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    contact: payload.contact,
+    furnitureType: payload.furnitureType,
+    furnitureStructure: payload.furnitureStructure,
+    createdDate: payload.createdDate,
+    createdBy: payload.createdBy,
+    leadUrl: payload.leadUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_CREATED_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  if (template) {
+    logger.info("Brevo email template source: db", {
+      template_key: LEAD_CREATED_TEMPLATE_KEY,
+      vendor_id: payload.vendor_id,
+    });
+  } else {
+    logger.info("Brevo email template source: default", {
+      template_key: LEAD_CREATED_TEMPLATE_KEY,
+      vendor_id: payload.vendor_id,
+    });
+  }
+
+  const subject = template
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+  const text = template
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+  const html = template
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
   return sendBrevoEmail({
     toEmail: payload.toEmail,
     toName: payload.toName,
@@ -246,11 +311,11 @@ export const sendLeadCreatedEmail = async (
 export const sendLeadAssignedEmail = async (
   payload: LeadCreatedEmailPayload
 ): Promise<BrevoEmailResult> => {
-  const subject = `New Lead Assigned to You: ${payload.leadCode} - ${payload.leadName}`;
-  const text = [
+  const defaultSubject = `Lead Assigned: ${payload.leadCode} - ${payload.leadName}`;
+  const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
-    "A new lead has been assigned to you by the admin.",
+    "A lead has been assigned to you.",
     "Lead Summary",
     `Lead Code: ${payload.leadCode}`,
     `Lead Name: ${payload.leadName}`,
@@ -260,18 +325,18 @@ export const sendLeadAssignedEmail = async (
     `Created Date: ${payload.createdDate}`,
     "",
     "Please connect with the client and initiate the sales process.",
-    payload.leadUrl ? `View Assigned Lead: ${payload.leadUrl}` : "",
+    payload.leadUrl ? `View Lead: ${payload.leadUrl}` : "",
   ]
     .filter(Boolean)
     .join("\n");
 
-  const html = `
+  const defaultHtml = `
     <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
       <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
         <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Lead Assigned</h2>
         <p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p>
         <p style="margin: 0 0 16px; color: #4b5563;">
-          A new lead has been assigned to you by the admin.
+          A lead has been assigned to you.
         </p>
         <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
           <p style="margin: 0 0 8px; font-weight: 600; color: #111827;">Lead Summary</p>
@@ -314,7 +379,7 @@ export const sendLeadAssignedEmail = async (
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  View Assigned Lead
+                  View Lead
                 </a>
               </p>`
             : ""
@@ -322,6 +387,48 @@ export const sendLeadAssignedEmail = async (
       </div>
     </div>
   `;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    contact: payload.contact,
+    furnitureType: payload.furnitureType,
+    furnitureStructure: payload.furnitureStructure,
+    createdDate: payload.createdDate,
+    createdBy: payload.createdBy,
+    leadUrl: payload.leadUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_ASSIGNED_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  if (template) {
+    logger.info("Brevo email template source: db", {
+      template_key: LEAD_ASSIGNED_TEMPLATE_KEY,
+      vendor_id: payload.vendor_id,
+    });
+  } else {
+    logger.info("Brevo email template source: default", {
+      template_key: LEAD_ASSIGNED_TEMPLATE_KEY,
+      vendor_id: payload.vendor_id,
+    });
+  }
+
+  const subject = template
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+  const text = template
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+  const html = template
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
 
   return sendBrevoEmail({
     toEmail: payload.toEmail,
@@ -335,11 +442,11 @@ export const sendLeadAssignedEmail = async (
 export const sendLeadAssignedToSiteSupervisorEmail = async (
   payload: LeadCreatedEmailPayload
 ): Promise<BrevoEmailResult> => {
-  const subject = `Lead Assigned to Site Supervisor: ${payload.leadCode} - ${payload.leadName}`;
-  const text = [
+  const defaultSubject = `Lead Assigned: ${payload.leadCode} - ${payload.leadName}`;
+  const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
-    "You have been assigned a lead as the site supervisor.",
+    "A lead has been assigned to you.",
     "Lead Summary",
     `Lead Code: ${payload.leadCode}`,
     `Lead Name: ${payload.leadName}`,
@@ -354,13 +461,13 @@ export const sendLeadAssignedToSiteSupervisorEmail = async (
     .filter(Boolean)
     .join("\n");
 
-  const html = `
+  const defaultHtml = `
     <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
       <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
-        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Lead Assigned to Site Supervisor</h2>
+        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Lead Assigned</h2>
         <p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p>
         <p style="margin: 0 0 16px; color: #4b5563;">
-          You have been assigned a lead as the site supervisor.
+          A lead has been assigned to you.
         </p>
         <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
           <p style="margin: 0 0 8px; font-weight: 600; color: #111827;">Lead Summary</p>
@@ -412,6 +519,48 @@ export const sendLeadAssignedToSiteSupervisorEmail = async (
     </div>
   `;
 
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    contact: payload.contact,
+    furnitureType: payload.furnitureType,
+    furnitureStructure: payload.furnitureStructure,
+    createdDate: payload.createdDate,
+    createdBy: payload.createdBy,
+    leadUrl: payload.leadUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_ASSIGNED_SITE_SUPERVISOR_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  if (template) {
+    logger.info("Brevo email template source: db", {
+      template_key: LEAD_ASSIGNED_SITE_SUPERVISOR_TEMPLATE_KEY,
+      vendor_id: payload.vendor_id,
+    });
+  } else {
+    logger.info("Brevo email template source: default", {
+      template_key: LEAD_ASSIGNED_SITE_SUPERVISOR_TEMPLATE_KEY,
+      vendor_id: payload.vendor_id,
+    });
+  }
+
+  const subject = template
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+  const text = template
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+  const html = template
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
   return sendBrevoEmail({
     toEmail: payload.toEmail,
     toName: payload.toName,
@@ -424,8 +573,8 @@ export const sendLeadAssignedToSiteSupervisorEmail = async (
 export const sendTaskAssignedEmail = async (
   payload: TaskAssignedEmailPayload
 ): Promise<BrevoEmailResult> => {
-  const subject = `New Task Assigned: ${payload.taskTitle}`;
-  const text = [
+  const defaultSubject = `Task Assigned: ${payload.leadCode} - ${payload.taskTitle}`;
+  const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
     "You have been assigned a new task in the CRM.",
@@ -436,12 +585,12 @@ export const sendTaskAssignedEmail = async (
     `Due Date: ${payload.dueDate}`,
     "",
     "Please review the task and take the necessary action within the defined timeline.",
-    payload.taskUrl ? `View Task & Lead: ${payload.taskUrl}` : "",
+    payload.taskUrl ? `View Task: ${payload.taskUrl}` : "",
   ]
     .filter(Boolean)
     .join("\n");
 
-  const html = `
+  const defaultHtml = `
     <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
       <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
         <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Task Assigned</h2>
@@ -482,7 +631,7 @@ export const sendTaskAssignedEmail = async (
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  View Task &amp; Lead
+                  View Task
                 </a>
               </p>`
             : ""
@@ -490,6 +639,46 @@ export const sendTaskAssignedEmail = async (
       </div>
     </div>
   `;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    taskTitle: payload.taskTitle,
+    leadName: payload.leadName,
+    assignedBy: payload.assignedBy,
+    dueDate: payload.dueDate,
+    taskUrl: payload.taskUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: TASK_ASSIGNED_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  if (template) {
+    logger.info("Brevo email template source: db", {
+      template_key: TASK_ASSIGNED_TEMPLATE_KEY,
+      vendor_id: payload.vendor_id,
+    });
+  } else {
+    logger.info("Brevo email template source: default", {
+      template_key: TASK_ASSIGNED_TEMPLATE_KEY,
+      vendor_id: payload.vendor_id,
+    });
+  }
+
+  const subject = template
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+  const text = template
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+  const html = template
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
 
   return sendBrevoEmail({
     toEmail: payload.toEmail,
@@ -503,8 +692,8 @@ export const sendTaskAssignedEmail = async (
 export const sendChatMentionEmail = async (
   payload: ChatMentionEmailPayload
 ): Promise<BrevoEmailResult> => {
-  const subject = `You Were Mentioned on Lead: ${payload.leadName}`;
-  const text = [
+  const defaultSubject = `You Were Mentioned: ${payload.leadCode} - ${payload.leadName}`;
+  const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
     `You were mentioned by ${payload.senderName} in a conversation related to the following lead:`,
@@ -518,7 +707,7 @@ export const sendChatMentionEmail = async (
     .filter(Boolean)
     .join("\n");
 
-  const html = `
+  const defaultHtml = `
     <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
       <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
         <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">You Were Mentioned</h2>
@@ -555,6 +744,45 @@ export const sendChatMentionEmail = async (
     </div>
   `;
 
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    senderName: payload.senderName,
+    leadName: payload.leadName,
+    messageText: payload.messageText,
+    conversationUrl: payload.conversationUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: CHAT_MENTION_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  if (template) {
+    logger.info("Brevo email template source: db", {
+      template_key: CHAT_MENTION_TEMPLATE_KEY,
+      vendor_id: payload.vendor_id,
+    });
+  } else {
+    logger.info("Brevo email template source: default", {
+      template_key: CHAT_MENTION_TEMPLATE_KEY,
+      vendor_id: payload.vendor_id,
+    });
+  }
+
+  const subject = template
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+  const text = template
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+  const html = template
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
   return sendBrevoEmail({
     toEmail: payload.toEmail,
     toName: payload.toName,
@@ -567,8 +795,8 @@ export const sendChatMentionEmail = async (
 export const sendMajorMilestoneEmail = async (
   payload: MajorMilestoneEmailPayload
 ): Promise<BrevoEmailResult> => {
-  const subject = `Milestone Achieved: ${payload.milestoneName} – ${payload.leadName}`;
-  const text = [
+  const defaultSubject = `Milestone Achieved: ${payload.leadCode} - ${payload.milestoneName}`;
+  const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
     "A major milestone has been achieved for the following lead:",
@@ -582,7 +810,7 @@ export const sendMajorMilestoneEmail = async (
     .filter(Boolean)
     .join("\n");
 
-  const html = `
+  const defaultHtml = `
     <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
       <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
         <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Milestone Achieved</h2>
@@ -626,6 +854,45 @@ export const sendMajorMilestoneEmail = async (
       </div>
     </div>
   `;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    milestoneName: payload.milestoneName,
+    completedOn: payload.completedOn,
+    detailsUrl: payload.detailsUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: MILESTONE_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  if (template) {
+    logger.info("Brevo email template source: db", {
+      template_key: MILESTONE_TEMPLATE_KEY,
+      vendor_id: payload.vendor_id,
+    });
+  } else {
+    logger.info("Brevo email template source: default", {
+      template_key: MILESTONE_TEMPLATE_KEY,
+      vendor_id: payload.vendor_id,
+    });
+  }
+
+  const subject = template
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+  const text = template
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+  const html = template
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
 
   return sendBrevoEmail({
     toEmail: payload.toEmail,

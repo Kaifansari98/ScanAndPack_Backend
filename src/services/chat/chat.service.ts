@@ -349,7 +349,7 @@ export class ChatService {
         const [lead, sender] = await Promise.all([
           prisma.leadMaster.findUnique({
             where: { id: leadId },
-            select: { account_id: true, firstname: true, lastname: true },
+            select: { account_id: true, firstname: true, lastname: true, lead_code: true },
           }),
           prisma.userMaster.findUnique({
             where: { id: userId },
@@ -358,6 +358,8 @@ export class ChatService {
         ]);
 
         const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+        const leadCode =
+          lead?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
         const senderName = sender?.user_name ?? "Someone";
         const redirectUrl = lead?.account_id
           ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}&tab=chats&messageId=${messageResult.id}`
@@ -401,8 +403,10 @@ export class ChatService {
             .filter((user) => user.user_email && user.id !== userId)
             .map((user) =>
               sendChatMentionEmail({
+                vendor_id: vendorId,
                 toEmail: user.user_email!,
                 toName: user.user_name ?? undefined,
+                leadCode,
                 senderName,
                 leadName: leadName || "Lead",
                 messageText: mentionText,

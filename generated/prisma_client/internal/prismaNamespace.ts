@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.0.1
- * Query Engine version: f09f2815f091dbba658cdcd2264306d88bb5bda6
+ * Prisma Client JS version: 7.2.0
+ * Query Engine version: 0c8ef2ce45c83248ab3df073180d5eda9e8be7a3
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.0.1",
-  engine: "f09f2815f091dbba658cdcd2264306d88bb5bda6"
+  client: "7.2.0",
+  engine: "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3"
 }
 
 /**
@@ -444,6 +444,7 @@ export const ModelName = {
   IssueLogTypeMaster: 'IssueLogTypeMaster',
   IssueLogTypeMapping: 'IssueLogTypeMapping',
   IssueLogResponsibleTeamMapping: 'IssueLogResponsibleTeamMapping',
+  EmailNotificationMaster: 'EmailNotificationMaster',
   Notification: 'Notification',
   UserPushToken: 'UserPushToken',
   NotificationDeliveryLogs: 'NotificationDeliveryLogs'
@@ -462,7 +463,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "notification" | "userPushToken" | "notificationDeliveryLogs"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4906,6 +4907,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    EmailNotificationMaster: {
+      payload: Prisma.$EmailNotificationMasterPayload<ExtArgs>
+      fields: Prisma.EmailNotificationMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EmailNotificationMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailNotificationMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EmailNotificationMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailNotificationMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.EmailNotificationMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailNotificationMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EmailNotificationMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailNotificationMasterPayload>
+        }
+        findMany: {
+          args: Prisma.EmailNotificationMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailNotificationMasterPayload>[]
+        }
+        create: {
+          args: Prisma.EmailNotificationMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailNotificationMasterPayload>
+        }
+        createMany: {
+          args: Prisma.EmailNotificationMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EmailNotificationMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailNotificationMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.EmailNotificationMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailNotificationMasterPayload>
+        }
+        update: {
+          args: Prisma.EmailNotificationMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailNotificationMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.EmailNotificationMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EmailNotificationMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EmailNotificationMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailNotificationMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.EmailNotificationMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailNotificationMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.EmailNotificationMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEmailNotificationMaster>
+        }
+        groupBy: {
+          args: Prisma.EmailNotificationMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EmailNotificationMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EmailNotificationMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EmailNotificationMasterCountAggregateOutputType> | number
+        }
+      }
+    }
     Notification: {
       payload: Prisma.$NotificationPayload<ExtArgs>
       fields: Prisma.NotificationFieldRefs
@@ -6068,6 +6143,20 @@ export const IssueLogResponsibleTeamMappingScalarFieldEnum = {
 export type IssueLogResponsibleTeamMappingScalarFieldEnum = (typeof IssueLogResponsibleTeamMappingScalarFieldEnum)[keyof typeof IssueLogResponsibleTeamMappingScalarFieldEnum]
 
 
+export const EmailNotificationMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  template_key: 'template_key',
+  subject: 'subject',
+  text: 'text',
+  html: 'html',
+  active: 'active',
+  created_at: 'created_at'
+} as const
+
+export type EmailNotificationMasterScalarFieldEnum = (typeof EmailNotificationMasterScalarFieldEnum)[keyof typeof EmailNotificationMasterScalarFieldEnum]
+
+
 export const NotificationScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
@@ -6424,7 +6513,7 @@ export type PrismaClientOptions = ({
    *  { emit: 'stdout', level: 'error' }
    * 
    * ```
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
+   * Read more in our [docs](https://pris.ly/d/logging).
    */
   log?: (LogLevel | LogDefinition)[]
   /**
@@ -6452,6 +6541,22 @@ export type PrismaClientOptions = ({
    * ```
    */
   omit?: GlobalOmitConfig
+  /**
+   * SQL commenter plugins that add metadata to SQL queries as comments.
+   * Comments follow the sqlcommenter format: https://google.github.io/sqlcommenter/
+   * 
+   * @example
+   * ```
+   * const prisma = new PrismaClient({
+   *   adapter,
+   *   comments: [
+   *     traceContext(),
+   *     queryInsights(),
+   *   ],
+   * })
+   * ```
+   */
+  comments?: runtime.SqlCommenterPlugin[]
 }
 export type GlobalOmitConfig = {
   vendorMaster?: Prisma.VendorMasterOmit
@@ -6514,6 +6619,7 @@ export type GlobalOmitConfig = {
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterOmit
   issueLogTypeMapping?: Prisma.IssueLogTypeMappingOmit
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingOmit
+  emailNotificationMaster?: Prisma.EmailNotificationMasterOmit
   notification?: Prisma.NotificationOmit
   userPushToken?: Prisma.UserPushTokenOmit
   notificationDeliveryLogs?: Prisma.NotificationDeliveryLogsOmit

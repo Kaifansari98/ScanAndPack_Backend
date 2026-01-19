@@ -157,7 +157,7 @@ export class PaymentUploadController {
           }),
           prisma.leadMaster.findUnique({
             where: { id: leadId },
-            select: { firstname: true, lastname: true },
+            select: { firstname: true, lastname: true, lead_code: true },
           }),
           actorId
             ? prisma.userMaster.findUnique({
@@ -168,6 +168,8 @@ export class PaymentUploadController {
         ]);
 
         const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+        const leadCode =
+          lead?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
         const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
         const isSelfAssigned =
           Boolean(actorId) && Number(actorId) === Number(user_id);
@@ -215,8 +217,10 @@ export class PaymentUploadController {
             : "—";
 
           await sendTaskAssignedEmail({
+            vendor_id: result.lead.vendor_id,
             toEmail: assigneeEmail,
             toName: assignee?.user_name ?? undefined,
+            leadCode,
             taskTitle: task_type,
             leadName: leadName || "—",
             assignedBy: assignedByName,
