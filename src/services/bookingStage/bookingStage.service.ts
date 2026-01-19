@@ -1168,12 +1168,32 @@ export class BookingStageService {
 
       const nameFilter = toString(filters.filter_name);
       if (nameFilter) {
-        addAnd({
-          OR: [
-            { firstname: { contains: nameFilter, mode: "insensitive" } },
-            { lastname: { contains: nameFilter, mode: "insensitive" } },
-          ],
-        });
+        const nameParts = nameFilter.split(/\s+/).filter(Boolean);
+        if (nameParts.length >= 2) {
+          addAnd({
+            AND: [
+              {
+                firstname: {
+                  contains: nameParts[0],
+                  mode: "insensitive",
+                },
+              },
+              {
+                lastname: {
+                  contains: nameParts.slice(1).join(" "),
+                  mode: "insensitive",
+                },
+              },
+            ],
+          });
+        } else {
+          addAnd({
+            OR: [
+              { firstname: { contains: nameFilter, mode: "insensitive" } },
+              { lastname: { contains: nameFilter, mode: "insensitive" } },
+            ],
+          });
+        }
       }
 
       const contactFilter = toString(filters.contact);
