@@ -901,6 +901,34 @@ export const getLeadById = async (
       lead.is_draft = false;
     }
 
+    const latestActivityStatus = await prisma.leadActivityStatusLog.findFirst({
+      where: {
+        lead_id: lead.id,
+        vendor_id: vendorId,
+      },
+      orderBy: { created_at: "desc" },
+      select: {
+        user_id: true,
+        activity_status: true,
+        activity_status_remark: true,
+        created_by: true,
+        created_at: true,
+        createdBy: { select: { user_name: true } },
+      },
+    });
+
+    const activityStatusPayload =
+      latestActivityStatus && latestActivityStatus.activity_status !== "onGoing"
+        ? {
+            user_id: latestActivityStatus.user_id,
+            activity_status: latestActivityStatus.activity_status,
+            activity_status_remark: latestActivityStatus.activity_status_remark,
+            created_by: latestActivityStatus.created_by,
+            created_by_name: latestActivityStatus.createdBy?.user_name ?? null,
+            created_at: latestActivityStatus.created_at,
+          }
+        : null;
+
     // 5️⃣ Add signed URLs
     const documentsWithUrls = await Promise.all(
       lead.documents.map(async (doc) => {
@@ -912,7 +940,11 @@ export const getLeadById = async (
     );
 
     return {
-      lead: { ...lead, documents: documentsWithUrls },
+      lead: {
+        ...lead,
+        documents: documentsWithUrls,
+        latest_activity_status: activityStatusPayload,
+      },
       userInfo: {
         role: userType,
         canViewAllLeads: ["admin", "super-admin"].includes(userType),
