@@ -350,7 +350,7 @@ export class FinalHandoverStageController {
               .filter((user) => user.user_email)
               .map((user) =>
                 sendMajorMilestoneEmail({
-                  vendor_id: result.lead.vendor_id,
+                  vendor_id: vendorId,
                   toEmail: user.user_email!,
                   toName: user.user_name ?? undefined,
                   leadCode,
