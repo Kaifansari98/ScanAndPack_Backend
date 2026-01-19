@@ -1038,7 +1038,24 @@ export class BookingStageService {
     userId: number,
     tag?: string,
     page: number = 1,
-    limit: number = 10
+    limit: number = 10,
+    filters: {
+      filter_lead_code?: string;
+      filter_name?: string;
+      contact?: string;
+      furniture_type?: Array<number | string>;
+      furniture_structure?: Array<number | string>;
+      site_map_link?: boolean;
+      site_type?: Array<number | string>;
+      assign_to?: number | string;
+      site_address?: string;
+      archetech_name?: string;
+      source?: Array<number | string>;
+      created_at?: "asc" | "desc";
+      alt_contact_no?: string;
+      email?: string;
+      designer_remark?: string;
+    } = {}
   ): Promise<{ leads: any[]; count: number }> {
     logger.info("[BookingStageService] getUniversalTableData called", {
       vendorId,
@@ -1105,22 +1122,186 @@ export class BookingStageService {
 
     const isAdmin = creator?.user_type?.user_type?.toLowerCase() === "admin";
     const skip = (page - 1) * limit;
+    const orderBy = {
+      created_at:
+        filters.created_at === "asc"
+          ? Prisma.SortOrder.asc
+          : Prisma.SortOrder.desc,
+    };
+
+    const addFilterConditions = (
+      whereClause: Prisma.LeadMasterWhereInput
+    ): Prisma.LeadMasterWhereInput => {
+      const addAnd = (condition: Prisma.LeadMasterWhereInput) => {
+        if (!whereClause.AND) whereClause.AND = [];
+        if (Array.isArray(whereClause.AND)) {
+          whereClause.AND.push(condition);
+        } else {
+          whereClause.AND = [whereClause.AND, condition];
+        }
+      };
+
+      const toString = (value: unknown) =>
+        typeof value === "string" ? value.trim() : "";
+
+      const toArray = (value: unknown): Array<number | string> => {
+        if (Array.isArray(value)) return value;
+        if (value === undefined || value === null) return [];
+        return [value as number | string];
+      };
+
+      const parseNumberList = (value: unknown) => {
+        const raw = toArray(value);
+        const numbers = raw
+          .map((item) => Number(item))
+          .filter((item) => !Number.isNaN(item));
+        const strings = raw
+          .filter((item) => Number.isNaN(Number(item)))
+          .map((item) => String(item));
+        return { numbers, strings };
+      };
+
+      const leadCode = toString(filters.filter_lead_code);
+      if (leadCode) {
+        addAnd({ lead_code: { contains: leadCode, mode: "insensitive" } });
+      }
+
+      const nameFilter = toString(filters.filter_name);
+      if (nameFilter) {
+        addAnd({
+          OR: [
+            { firstname: { contains: nameFilter, mode: "insensitive" } },
+            { lastname: { contains: nameFilter, mode: "insensitive" } },
+          ],
+        });
+      }
+
+      const contactFilter = toString(filters.contact);
+      if (contactFilter) {
+        addAnd({ contact_no: { contains: contactFilter, mode: "insensitive" } });
+      }
+
+      const altContactFilter = toString(filters.alt_contact_no);
+      if (altContactFilter) {
+        addAnd({
+          alt_contact_no: { contains: altContactFilter, mode: "insensitive" },
+        });
+      }
+
+      const emailFilter = toString(filters.email);
+      if (emailFilter) {
+        addAnd({ email: { contains: emailFilter, mode: "insensitive" } });
+      }
+
+      const siteAddressFilter = toString(filters.site_address);
+      if (siteAddressFilter) {
+        addAnd({
+          site_address: { contains: siteAddressFilter, mode: "insensitive" },
+        });
+      }
+
+      const archetechFilter = toString(filters.archetech_name);
+      if (archetechFilter) {
+        addAnd({
+          archetech_name: { contains: archetechFilter, mode: "insensitive" },
+        });
+      }
+
+      const designerRemarkFilter = toString(filters.designer_remark);
+      if (designerRemarkFilter) {
+        addAnd({
+          designer_remark: { contains: designerRemarkFilter, mode: "insensitive" },
+        });
+      }
+
+      if (filters.assign_to !== undefined && filters.assign_to !== null) {
+        const assignTo = Number(filters.assign_to);
+        if (!Number.isNaN(assignTo)) {
+          addAnd({ assign_to: assignTo });
+        }
+      }
+
+      const siteTypeList = parseNumberList(filters.site_type);
+      if (siteTypeList.numbers.length > 0) {
+        addAnd({ site_type_id: { in: siteTypeList.numbers } });
+      } else if (siteTypeList.strings.length > 0) {
+        addAnd({ siteType: { type: { in: siteTypeList.strings } } });
+      }
+
+      const sourceList = parseNumberList(filters.source);
+      if (sourceList.numbers.length > 0) {
+        addAnd({ source_id: { in: sourceList.numbers } });
+      } else if (sourceList.strings.length > 0) {
+        addAnd({ source: { type: { in: sourceList.strings } } });
+      }
+
+      const furnitureTypes = parseNumberList(filters.furniture_type);
+      if (furnitureTypes.numbers.length > 0) {
+        addAnd({
+          productMappings: {
+            some: { product_type_id: { in: furnitureTypes.numbers } },
+          },
+        });
+      } else if (furnitureTypes.strings.length > 0) {
+        addAnd({
+          productMappings: {
+            some: { productType: { type: { in: furnitureTypes.strings } } },
+          },
+        });
+      }
+
+      const furnitureStructures = parseNumberList(filters.furniture_structure);
+      if (furnitureStructures.numbers.length > 0) {
+        addAnd({
+          leadProductStructureMapping: {
+            some: {
+              product_structure_id: { in: furnitureStructures.numbers },
+            },
+          },
+        });
+      } else if (furnitureStructures.strings.length > 0) {
+        addAnd({
+          leadProductStructureMapping: {
+            some: {
+              productStructure: { type: { in: furnitureStructures.strings } },
+            },
+          },
+        });
+      }
+
+      if (typeof filters.site_map_link === "boolean") {
+        if (filters.site_map_link) {
+          addAnd({
+            AND: [
+              { site_map_link: { not: null } },
+              { site_map_link: { not: "" } },
+            ],
+          });
+        } else {
+          addAnd({
+            OR: [{ site_map_link: null }, { site_map_link: "" }],
+          });
+        }
+      }
+
+      return whereClause;
+    };
 
     // ============= Admin Flow =============
     if (isAdmin) {
-      const whereClause: Prisma.LeadMasterWhereInput = {
+      const whereClause = addFilterConditions({
         vendor_id: vendorId,
         is_deleted: false,
         status_id: { in: statusIds },
         statusType: { vendor_id: vendorId },
         activity_status: isAllStages ? "onGoing" : { in: ["onGoing", "lostApproval"] },
-      };
+      });
 
       const [leads, total] = await Promise.all([
         prisma.leadMaster.findMany({
           where: whereClause,
           include: BookingStageService.leadIncludes(),
-          orderBy: { created_at: Prisma.SortOrder.desc },
+          orderBy,
           skip,
           take: limit,
         }),
@@ -1189,20 +1370,20 @@ export class BookingStageService {
       return { leads: [], count: 0 };
     }
 
-    const whereClause: Prisma.LeadMasterWhereInput = {
+    const whereClause = addFilterConditions({
       id: { in: leadIds },
       is_deleted: false,
       vendor_id: vendorId,
       status_id: { in: statusIds },
       statusType: { vendor_id: vendorId },
       activity_status: isAllStages ? "onGoing" : { in: ["onGoing", "lostApproval"] },
-    };
+    });
 
     const [leads, total] = await Promise.all([
       prisma.leadMaster.findMany({
         where: whereClause,
         include: BookingStageService.leadIncludes(),
-        orderBy: { created_at: Prisma.SortOrder.desc },
+        orderBy,
         skip,
         take: limit,
       }),

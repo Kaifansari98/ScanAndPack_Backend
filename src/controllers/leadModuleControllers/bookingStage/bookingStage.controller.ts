@@ -566,8 +566,29 @@ export class BookingStageController {
       const vendorId = parseInt(req.params.vendorId);
       const userId = Number(req.query.userId || req.body.userId);
       const tag = (req.query.tag as string) || (req.body.tag as string);
-      const page = parseInt((req.query.page as string) || "1");
-      const limit = parseInt((req.query.limit as string) || "10");
+      const page = parseInt(
+        (req.query.page as string) || (req.body.page as string) || "1"
+      );
+      const limit = parseInt(
+        (req.query.limit as string) || (req.body.limit as string) || "10"
+      );
+      const filters = {
+        filter_lead_code: req.body.filter_lead_code,
+        filter_name: req.body.filter_name,
+        contact: req.body.contact,
+        furniture_type: req.body.furniture_type,
+        furniture_structure: req.body.furniture_structure,
+        site_map_link: req.body.site_map_link,
+        site_type: req.body.site_type,
+        assign_to: req.body.assign_to,
+        site_address: req.body.site_address,
+        archetech_name: req.body.archetech_name,
+        source: req.body.source,
+        created_at: req.body.created_at,
+        alt_contact_no: req.body.alt_contact_no,
+        email: req.body.email,
+        designer_remark: req.body.designer_remark,
+      };
 
       if (!vendorId || !userId) {
         logger.warn("Missing vendorId or userId", { vendorId, userId, tag });
@@ -582,7 +603,8 @@ export class BookingStageController {
         userId,
         tag,
         page,
-        limit
+        limit,
+        filters
       );
 
       logger.info("Fetched universal table data successfully", {
