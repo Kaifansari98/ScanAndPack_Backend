@@ -608,61 +608,63 @@ export class LeadActivityStatusService {
         }
       }
 
-      const lostApprovalLog = await prisma.leadActivityStatusLog.findFirst({
-        where: {
-          lead_id: leadId,
-          vendor_id: vendorId,
-          activity_status: ActivityStatus.lostApproval,
-        },
-        orderBy: { created_at: "desc" },
-        select: { created_by: true },
-      });
-
-      const latestLeadTask = await prisma.userLeadTask.findFirst({
-        where: { lead_id: leadId, vendor_id: vendorId },
-        orderBy: { created_at: "desc" },
-        select: { created_by: true },
-      });
-
-      const salesExecId =
-        latestLeadTask?.created_by ??
-        lostApprovalLog?.created_by ??
-        leadInfo?.created_by ??
-        null;
-      const salesExec = salesExecId
-        ? await prisma.userMaster.findUnique({
-            where: { id: salesExecId },
-            select: { id: true, user_name: true, user_email: true },
-          })
-        : null;
-
-      if (salesExec?.id) {
-        await NotificationService.createAndSend({
-          vendor_id: vendorId,
-          user_id: salesExec.id,
-          sender_id: createdBy,
-          type: NotificationType.LEAD_ACTION,
-          title: "Lost lead request rejected",
-          message: `Lost request for lead ${leadCode} - ${leadName} rejected by ${rejectedByName}.`,
-          entity_type: "lead",
-          entity_id: leadId,
-          redirect_url: `/dashboard/leads/details/${leadId}${
-            leadInfo?.account_id ? `?accountId=${leadInfo.account_id}` : ""
-          }`,
+      if (previousStatus === ActivityStatus.lostApproval) {
+        const lostApprovalLog = await prisma.leadActivityStatusLog.findFirst({
+          where: {
+            lead_id: leadId,
+            vendor_id: vendorId,
+            activity_status: ActivityStatus.lostApproval,
+          },
+          orderBy: { created_at: "desc" },
+          select: { created_by: true },
         });
 
-        if (salesExec.user_email) {
-          await sendLeadLostRejectedEmail({
+        const latestLeadTask = await prisma.userLeadTask.findFirst({
+          where: { lead_id: leadId, vendor_id: vendorId },
+          orderBy: { created_at: "desc" },
+          select: { created_by: true },
+        });
+
+        const salesExecId =
+          latestLeadTask?.created_by ??
+          lostApprovalLog?.created_by ??
+          leadInfo?.created_by ??
+          null;
+        const salesExec = salesExecId
+          ? await prisma.userMaster.findUnique({
+              where: { id: salesExecId },
+              select: { id: true, user_name: true, user_email: true },
+            })
+          : null;
+
+        if (salesExec?.id) {
+          await NotificationService.createAndSend({
             vendor_id: vendorId,
-            toEmail: salesExec.user_email,
-            toName: salesExec.user_name ?? undefined,
-            leadCode,
-            leadName: leadName || "Lead",
-            rejectedBy: rejectedByName,
-            rejectedAt,
-            remark,
-            leadUrl: leadDetailsUrl,
+            user_id: salesExec.id,
+            sender_id: createdBy,
+            type: NotificationType.LEAD_ACTION,
+            title: "Lost lead request rejected",
+            message: `Lost request for lead ${leadCode} - ${leadName} rejected by ${rejectedByName}.`,
+            entity_type: "lead",
+            entity_id: leadId,
+            redirect_url: `/dashboard/leads/details/${leadId}${
+              leadInfo?.account_id ? `?accountId=${leadInfo.account_id}` : ""
+            }`,
           });
+
+          if (salesExec.user_email) {
+            await sendLeadLostRejectedEmail({
+              vendor_id: vendorId,
+              toEmail: salesExec.user_email,
+              toName: salesExec.user_name ?? undefined,
+              leadCode,
+              leadName: leadName || "Lead",
+              rejectedBy: rejectedByName,
+              rejectedAt,
+              remark,
+              leadUrl: leadDetailsUrl,
+            });
+          }
         }
       }
     } catch (notifyError: any) {
