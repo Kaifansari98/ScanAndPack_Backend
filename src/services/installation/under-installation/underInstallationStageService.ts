@@ -1528,6 +1528,7 @@ export class UnderInstallationStageService {
       },
       select: {
         is_carcass_installation_completed: true,
+        is_shutter_installation_completed: true,
         expected_installation_end_date: true,
       },
     });
@@ -1544,12 +1545,14 @@ export class UnderInstallationStageService {
 
     const conditions = {
       carcassCompleted: lead.is_carcass_installation_completed === true,
+      shutterCompleted: lead.is_shutter_installation_completed === true,
       expectedEndDateFilled: lead.expected_installation_end_date !== null,
       installersAssigned: installerCount > 0,
     };
 
     const isReady =
       conditions.carcassCompleted &&
+      conditions.shutterCompleted &&
       conditions.expectedEndDateFilled &&
       conditions.installersAssigned;
 
@@ -1557,6 +1560,7 @@ export class UnderInstallationStageService {
       isReady,
       details: {
         carcassCompleted: conditions.carcassCompleted,
+        shutterCompleted: conditions.shutterCompleted,
         expectedEndDateFilled: conditions.expectedEndDateFilled,
         installersAssigned: installerCount,
       },
@@ -1577,6 +1581,7 @@ export class UnderInstallationStageService {
       },
       select: {
         is_carcass_installation_completed: true,
+        is_shutter_installation_completed: true,
         expected_installation_end_date: true,
       },
     });
@@ -1599,6 +1604,7 @@ export class UnderInstallationStageService {
     // Compute readiness
     const isReady =
       lead.is_carcass_installation_completed === true &&
+      lead.is_shutter_installation_completed === true &&
       lead.expected_installation_end_date !== null &&
       installerCount > 0;
 
@@ -1610,6 +1616,7 @@ export class UnderInstallationStageService {
         ? null
         : this.getInstallationFailMessage(
             lead.is_carcass_installation_completed,
+            lead.is_shutter_installation_completed,
             lead.expected_installation_end_date,
             installerCount
           ),
@@ -1619,10 +1626,14 @@ export class UnderInstallationStageService {
   /** 🔥 Custom descriptive message for base installation check */
   private getInstallationFailMessage(
     carcass: boolean | null,
+    shutter: boolean | null,
     expectedEnd: Date | null,
     installers: number
   ) {
+    if (!carcass && !shutter)
+      return "Carcass and shutter installation is not completed.";
     if (!carcass) return "Carcass installation is not completed.";
+    if (!shutter) return "Shutter installation is not completed.";
     if (!expectedEnd)
       return "Expected installation completion date is not set.";
     if (installers === 0)
