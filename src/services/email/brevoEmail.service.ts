@@ -351,15 +351,18 @@ export const sendLeadCreatedEmail = async (
     });
   }
 
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
+  const subject =
+    template?.subject?.trim().length
+      ? renderTemplate(template.subject, templateValues)
+      : defaultSubject;
+  const text =
+    template?.text?.trim().length
+      ? renderTemplate(template.text, templateValues)
+      : defaultText;
+  const html =
+    template?.html?.trim().length
+      ? renderTemplate(template.html, templateValues)
+      : defaultHtml;
 
   return sendBrevoEmail({
     toEmail: payload.toEmail,
