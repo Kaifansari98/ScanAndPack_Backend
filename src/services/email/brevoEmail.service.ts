@@ -376,11 +376,11 @@ export const sendLeadCreatedEmail = async (
 export const sendLeadAssignedEmail = async (
   payload: LeadCreatedEmailPayload
 ): Promise<BrevoEmailResult> => {
-  const defaultSubject = `Lead Assigned: ${payload.leadCode} - ${payload.leadName}`;
+  const defaultSubject = `New Lead Assigned: ${payload.leadCode} - ${payload.leadName}`;
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
-    "A lead has been assigned to you.",
+    "New lead has been assigned to you.",
     "Lead Summary",
     `Lead Code: ${payload.leadCode}`,
     `Lead Name: ${payload.leadName}`,
@@ -389,7 +389,7 @@ export const sendLeadAssignedEmail = async (
     `Furniture Structure: ${payload.furnitureStructure}`,
     `Created Date: ${payload.createdDate}`,
     "",
-    "Please connect with the client and initiate the sales process.",
+    "Please connect with the client and start capturing requirements.",
     payload.leadUrl ? `View Lead: ${payload.leadUrl}` : "",
   ]
     .filter(Boolean)
@@ -398,10 +398,10 @@ export const sendLeadAssignedEmail = async (
   const defaultHtml = `
     <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
       <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
-        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Lead Assigned</h2>
+        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">New Lead Assigned</h2>
         <p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p>
         <p style="margin: 0 0 16px; color: #4b5563;">
-          A lead has been assigned to you.
+          New lead has been assigned to you.
         </p>
         <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
           <p style="margin: 0 0 8px; font-weight: 600; color: #111827;">Lead Summary</p>
@@ -433,7 +433,7 @@ export const sendLeadAssignedEmail = async (
           </table>
         </div>
         <p style="margin: 16px 0 0; color: #4b5563;">
-          Please connect with the client and initiate the sales process.
+          Please connect with the client and start capturing requirements.
         </p>
         ${
           payload.leadUrl
