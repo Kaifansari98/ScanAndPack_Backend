@@ -768,7 +768,7 @@ export const sendTaskAssignedEmail = async (
 export const sendChatMentionEmail = async (
   payload: ChatMentionEmailPayload
 ): Promise<BrevoEmailResult> => {
-  const defaultSubject = `You Were Mentioned: ${payload.leadCode} - ${payload.leadName}`;
+  const defaultSubject = `You Were Mentioned on ${payload.leadCode} - ${payload.leadName}`;
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
