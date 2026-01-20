@@ -871,6 +871,16 @@ export const sendChatMentionEmail = async (
 export const sendMajorMilestoneEmail = async (
   payload: MajorMilestoneEmailPayload
 ): Promise<BrevoEmailResult> => {
+  const formatMilestoneDate = (value: string) => {
+    const parsed = new Date(value);
+    if (Number.isNaN(parsed.getTime())) return value;
+    return parsed.toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  };
+  const completedOn = formatMilestoneDate(payload.completedOn);
   const defaultSubject = `Milestone Achieved: ${payload.milestoneName} on ${payload.leadCode} - ${payload.leadName}`;
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
@@ -879,7 +889,7 @@ export const sendMajorMilestoneEmail = async (
     `Lead Code: ${payload.leadCode}`,
     `Lead Name: ${payload.leadName}`,
     `Milestone: ${payload.milestoneName}`,
-    `Achieved On: ${payload.completedOn}`,
+    `Achieved On: ${completedOn}`,
     "",
     "This marks an important progression in the project lifecycle. Please review the details and proceed with the next required actions.",
     payload.detailsUrl ? `View Lead / Project Details: ${payload.detailsUrl}` : "",
@@ -911,7 +921,7 @@ export const sendMajorMilestoneEmail = async (
             </tr>
             <tr>
               <td style="padding: 4px 0; color: #6b7280;">Achieved On</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.completedOn}</td>
+              <td style="padding: 4px 0; font-weight: 600;">${completedOn}</td>
             </tr>
           </table>
         </div>

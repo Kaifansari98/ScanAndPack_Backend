@@ -145,7 +145,11 @@ export class LeadActivityStatusService {
         }),
         prisma.userMaster.findUnique({
           where: { id: createdBy },
-          select: { id: true, user_name: true },
+          select: {
+            id: true,
+            user_name: true,
+            user_type: { select: { user_type: true } },
+          },
         }),
       ]);
 
@@ -155,6 +159,9 @@ export class LeadActivityStatusService {
         leadInfo?.lastname ?? ""
       }`.trim();
       const updatedByName = updatedByUser?.user_name ?? "Sales Executive";
+      const updatedByRole = updatedByUser?.user_type?.user_type?.toLowerCase();
+      const isAdminActor =
+        updatedByRole === "admin" || updatedByRole === "super-admin";
       const updatedAt = new Date().toLocaleString("en-IN", {
         day: "2-digit",
         month: "short",
@@ -191,7 +198,9 @@ export class LeadActivityStatusService {
         const leadUrl = isOnHold ? onHoldUrl : lostApprovalUrl;
 
         await Promise.allSettled(
-          admins.map(async (admin) => {
+          admins
+            .filter((admin) => admin.id !== createdBy)
+            .map(async (admin) => {
             await NotificationService.createAndSend({
               vendor_id: vendorId,
               user_id: admin.id,
@@ -233,8 +242,65 @@ export class LeadActivityStatusService {
                 leadUrl,
               });
             }
-          })
+            })
         );
+
+        if (isOnHold && isAdminActor) {
+          const mappings = await prisma.leadUserMapping.findMany({
+            where: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              status: "active",
+            },
+            select: { user_id: true },
+          });
+          const mappedUserIds = Array.from(
+            new Set(mappings.map((mapping) => mapping.user_id))
+          ).filter((id) => id !== createdBy);
+
+          if (mappedUserIds.length > 0) {
+            const salesExecutives = await prisma.userMaster.findMany({
+              where: {
+                id: { in: mappedUserIds },
+                status: "active",
+                user_type: {
+                  user_type: { in: ["sales-executive"], mode: "insensitive" },
+                },
+              },
+              select: { id: true, user_name: true, user_email: true },
+            });
+
+            await Promise.allSettled(
+              salesExecutives.map(async (salesExec) => {
+                await NotificationService.createAndSend({
+                  vendor_id: vendorId,
+                  user_id: salesExec.id,
+                  sender_id: createdBy,
+                  type: NotificationType.LEAD_ACTION,
+                  title: "Lead placed On Hold",
+                  message: `Lead ${leadCode} - ${leadName} placed On Hold by ${updatedByName}.`,
+                  entity_type: "lead",
+                  entity_id: leadId,
+                  redirect_url: redirectUrl,
+                });
+
+                if (!salesExec.user_email) return;
+
+                await sendLeadOnHoldEmail({
+                  vendor_id: vendorId,
+                  toEmail: salesExec.user_email,
+                  toName: salesExec.user_name ?? undefined,
+                  leadCode,
+                  leadName: leadName || "Lead",
+                  updatedBy: updatedByName,
+                  updatedAt,
+                  remark,
+                  leadUrl,
+                });
+              })
+            );
+          }
+        }
       }
 
       if (status === ActivityStatus.lost) {
