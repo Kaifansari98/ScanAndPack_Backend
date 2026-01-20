@@ -7,6 +7,7 @@ import {
   sendLeadLostApprovalEmail,
   sendLeadLostApprovedEmail,
   sendLeadLostRejectedEmail,
+  sendLeadActiveEmail,
   sendLeadOnHoldEmail,
 } from "../../email/brevoEmail.service";
 
@@ -392,7 +393,14 @@ export class LeadActivityStatusService {
       throw new Error("Remark is required when reverting to onGoing.");
     }
 
+    let previousStatus: ActivityStatus | null = null;
     const lead = await prisma.$transaction(async (tx) => {
+      const existingLead = await tx.leadMaster.findUnique({
+        where: { id: leadId, vendor_id: vendorId },
+        select: { activity_status: true },
+      });
+      previousStatus = existingLead?.activity_status ?? null;
+
       // 1️⃣ Update LeadMaster
       const updatedLead = await tx.leadMaster.update({
         where: { id: leadId, vendor_id: vendorId },
@@ -462,7 +470,11 @@ export class LeadActivityStatusService {
         }),
         prisma.userMaster.findUnique({
           where: { id: createdBy },
-          select: { id: true, user_name: true },
+          select: {
+            id: true,
+            user_name: true,
+            user_type: { select: { user_type: true } },
+          },
         }),
       ]);
 
@@ -472,6 +484,10 @@ export class LeadActivityStatusService {
         leadInfo?.lastname ?? ""
       }`.trim();
       const rejectedByName = rejectedByUser?.user_name ?? "Admin";
+      const rejectedByRole = rejectedByUser?.user_type?.user_type?.toLowerCase();
+      const isAdminActor =
+        rejectedByRole === "admin" || rejectedByRole === "super-admin";
+      const rejectedByRoleLabel = isAdminActor ? "Admin" : "Sales Executive";
       const rejectedAt = new Date().toLocaleString("en-IN", {
         day: "2-digit",
         month: "short",
@@ -487,6 +503,110 @@ export class LeadActivityStatusService {
       const leadDetailsUrl = leadInfo?.account_id
         ? `${baseUrl}/dashboard/leads/details/${leadId}?accountId=${leadInfo.account_id}`
         : `${baseUrl}/dashboard/leads/details/${leadId}`;
+      const onGoingUrl = `${baseUrl}/dashboard/leads/leadstable?tab=onGoing`;
+
+      if (previousStatus === ActivityStatus.onHold) {
+        if (isAdminActor) {
+          const mappings = await prisma.leadUserMapping.findMany({
+            where: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              status: "active",
+            },
+            select: { user_id: true },
+          });
+          const mappedUserIds = Array.from(
+            new Set(mappings.map((mapping) => mapping.user_id))
+          ).filter((id) => id !== createdBy);
+
+          if (mappedUserIds.length > 0) {
+            const salesExecutives = await prisma.userMaster.findMany({
+              where: {
+                id: { in: mappedUserIds },
+                status: "active",
+                user_type: {
+                  user_type: { in: ["sales-executive"], mode: "insensitive" },
+                },
+              },
+              select: { id: true, user_name: true, user_email: true },
+            });
+
+            await Promise.allSettled(
+              salesExecutives.map(async (salesExec) => {
+                await NotificationService.createAndSend({
+                  vendor_id: vendorId,
+                  user_id: salesExec.id,
+                  sender_id: createdBy,
+                  type: NotificationType.LEAD_ACTION,
+                  title: "Lead marked Active",
+                  message: `Lead ${leadCode} - ${leadName} marked Active by ${rejectedByName}.`,
+                  entity_type: "lead",
+                  entity_id: leadId,
+                  redirect_url: "/dashboard/leads/leadstable?tab=onGoing",
+                });
+
+                if (!salesExec.user_email) return;
+
+                await sendLeadActiveEmail({
+                  vendor_id: vendorId,
+                  toEmail: salesExec.user_email,
+                  toName: salesExec.user_name ?? undefined,
+                  leadCode,
+                  leadName: leadName || "Lead",
+                  updatedBy: rejectedByName,
+                  updatedByRole: rejectedByRoleLabel,
+                  updatedAt: rejectedAt,
+                  remark,
+                  leadUrl: onGoingUrl,
+                });
+              })
+            );
+          }
+        } else {
+          const admins = await prisma.userMaster.findMany({
+            where: {
+              vendor_id: vendorId,
+              status: "active",
+              user_type: {
+                user_type: { in: ["admin", "super-admin"], mode: "insensitive" },
+              },
+              id: { not: createdBy },
+            },
+            select: { id: true, user_name: true, user_email: true },
+          });
+
+          await Promise.allSettled(
+            admins.map(async (admin) => {
+              await NotificationService.createAndSend({
+                vendor_id: vendorId,
+                user_id: admin.id,
+                sender_id: createdBy,
+                type: NotificationType.LEAD_ACTION,
+                title: "Lead marked Active",
+                message: `Lead ${leadCode} - ${leadName} marked Active by ${rejectedByName}.`,
+                entity_type: "lead",
+                entity_id: leadId,
+                redirect_url: "/dashboard/leads/leadstable?tab=onGoing",
+              });
+
+              if (!admin.user_email) return;
+
+              await sendLeadActiveEmail({
+                vendor_id: vendorId,
+                toEmail: admin.user_email,
+                toName: admin.user_name ?? undefined,
+                leadCode,
+                leadName: leadName || "Lead",
+                updatedBy: rejectedByName,
+                updatedByRole: rejectedByRoleLabel,
+                updatedAt: rejectedAt,
+                remark,
+                leadUrl: onGoingUrl,
+              });
+            })
+          );
+        }
+      }
 
       const lostApprovalLog = await prisma.leadActivityStatusLog.findFirst({
         where: {

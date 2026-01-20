@@ -78,6 +78,19 @@ export type LeadOnHoldEmailPayload = {
   leadUrl?: string;
 };
 
+export type LeadActiveEmailPayload = {
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  leadCode: string;
+  leadName: string;
+  updatedBy: string;
+  updatedByRole?: string;
+  updatedAt: string;
+  remark: string;
+  leadUrl?: string;
+};
+
 export type LeadLostApprovalEmailPayload = {
   vendor_id: number;
   toEmail: string;
@@ -134,6 +147,7 @@ const TASK_ASSIGNED_TEMPLATE_KEY = "TASK_ASSIGNED";
 const CHAT_MENTION_TEMPLATE_KEY = "CHAT_MENTION";
 const MILESTONE_TEMPLATE_KEY = "MILESTONE_ACHIEVED";
 const LEAD_ON_HOLD_TEMPLATE_KEY = "LEAD_ON_HOLD";
+const LEAD_ACTIVE_TEMPLATE_KEY = "LEAD_ACTIVE";
 const LEAD_LOST_APPROVAL_TEMPLATE_KEY = "LEAD_LOST_APPROVAL";
 const LEAD_LOST_APPROVED_TEMPLATE_KEY = "LEAD_LOST_APPROVED";
 const LEAD_LOST_REJECTED_TEMPLATE_KEY = "LEAD_LOST_REJECTED";
@@ -1103,6 +1117,137 @@ export const sendLeadOnHoldEmail = async (
   } else {
     logger.info("Brevo email template source: default", {
       template_key: LEAD_ON_HOLD_TEMPLATE_KEY,
+      vendor_id: payload.vendor_id,
+    });
+  }
+
+  const subject = template
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+  const text = template
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+  const html = template
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail({
+    toEmail: payload.toEmail,
+    toName: payload.toName,
+    subject,
+    text,
+    html,
+  });
+};
+
+export const sendLeadActiveEmail = async (
+  payload: LeadActiveEmailPayload
+): Promise<BrevoEmailResult> => {
+  const formatActiveDate = (value: string) => {
+    const parsed = new Date(value);
+    if (Number.isNaN(parsed.getTime())) return value;
+    return parsed.toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  };
+  const updatedAt = formatActiveDate(payload.updatedAt);
+  const updatedByRole = payload.updatedByRole?.trim() || "Sales Executive";
+  const defaultSubject = `Lead marked Active: ${payload.leadCode} - ${payload.leadName}`;
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `The following lead has been marked Active by the ${updatedByRole}.`,
+    "Lead Details",
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
+    `Updated By: ${payload.updatedBy}`,
+    `Marked on: ${updatedAt}`,
+    "Remark Provided:",
+    `"${payload.remark}"`,
+    "",
+    payload.leadUrl ? `View Lead Details: ${payload.leadUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+    <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
+      <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
+        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Lead marked Active</h2>
+        <p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p>
+        <p style="margin: 0 0 16px; color: #4b5563;">
+          The following lead has been marked Active by the ${updatedByRole}.
+        </p>
+        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
+          <p style="margin: 0 0 8px; font-weight: 600; color: #111827;">Lead Details</p>
+          <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;">
+            <tr>
+              <td style="padding: 4px 0; color: #6b7280;">Lead Code</td>
+              <td style="padding: 4px 0; font-weight: 600;">${payload.leadCode}</td>
+            </tr>
+            <tr>
+              <td style="padding: 4px 0; color: #6b7280;">Lead Name</td>
+              <td style="padding: 4px 0; font-weight: 600;">${payload.leadName}</td>
+            </tr>
+            <tr>
+              <td style="padding: 4px 0; color: #6b7280;">Updated By</td>
+              <td style="padding: 4px 0; font-weight: 600;">${payload.updatedBy}</td>
+            </tr>
+            <tr>
+              <td style="padding: 4px 0; color: #6b7280;">Marked on</td>
+              <td style="padding: 4px 0; font-weight: 600;">${updatedAt}</td>
+            </tr>
+          </table>
+        </div>
+        <p style="margin: 16px 0 6px; color: #4b5563;">Remark Provided:</p>
+        <p style="margin: 0; color: #111827;">"${payload.remark}"</p>
+        ${
+          payload.leadUrl
+            ? `<p style="margin: 16px 0 0;">
+                <a
+                  href="${payload.leadUrl}"
+                  style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 16px; border-radius: 6px;"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Lead Details
+                </a>
+              </p>`
+            : ""
+        }
+      </div>
+    </div>
+  `;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    updatedBy: payload.updatedBy,
+    updatedAt,
+    updatedByRole,
+    remark: payload.remark,
+    leadUrl: payload.leadUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_ACTIVE_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  if (template) {
+    logger.info("Brevo email template source: db", {
+      template_key: LEAD_ACTIVE_TEMPLATE_KEY,
+      vendor_id: payload.vendor_id,
+    });
+  } else {
+    logger.info("Brevo email template source: default", {
+      template_key: LEAD_ACTIVE_TEMPLATE_KEY,
       vendor_id: payload.vendor_id,
     });
   }
