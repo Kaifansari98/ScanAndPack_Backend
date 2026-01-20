@@ -257,7 +257,6 @@ export const sendLeadCreatedEmail = async (
     `Created Date: ${payload.createdDate}`,
     `Created By: ${payload.createdBy}`,
     "",
-    "Please connect with the client and start capturing requirements.",
     payload.leadUrl ? `View Lead: ${payload.leadUrl}` : "",
   ]
     .filter(Boolean)
@@ -302,9 +301,6 @@ export const sendLeadCreatedEmail = async (
             </tr>
           </table>
         </div>
-        <p style="margin: 16px 0 0; color: #4b5563;">
-          Please connect with the client and start capturing requirements.
-        </p>
         ${
           payload.leadUrl
             ? `<p style="margin: 16px 0 0;">
