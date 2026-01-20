@@ -72,6 +72,7 @@ export type LeadOnHoldEmailPayload = {
   leadCode: string;
   leadName: string;
   updatedBy: string;
+  updatedByRole?: string;
   updatedAt: string;
   remark: string;
   leadUrl?: string;
@@ -997,16 +998,27 @@ export const sendMajorMilestoneEmail = async (
 export const sendLeadOnHoldEmail = async (
   payload: LeadOnHoldEmailPayload
 ): Promise<BrevoEmailResult> => {
+  const formatOnHoldDate = (value: string) => {
+    const parsed = new Date(value);
+    if (Number.isNaN(parsed.getTime())) return value;
+    return parsed.toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  };
+  const updatedAt = formatOnHoldDate(payload.updatedAt);
+  const updatedByRole = payload.updatedByRole?.trim() || "Sales Executive";
   const defaultSubject = `Lead Placed On Hold: ${payload.leadCode} - ${payload.leadName}`;
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
-    "The following lead has been marked On Hold by the Sales Executive.",
+    `The following lead has been marked On Hold by the ${updatedByRole}.`,
     "Lead Details",
     `Lead Code: ${payload.leadCode}`,
     `Lead Name: ${payload.leadName}`,
     `Updated By: ${payload.updatedBy}`,
-    `Marked on Hold on: ${payload.updatedAt}`,
+    `Marked on: ${updatedAt}`,
     "Remark Provided:",
     `"${payload.remark}"`,
     "",
@@ -1021,7 +1033,7 @@ export const sendLeadOnHoldEmail = async (
         <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Lead Placed On Hold</h2>
         <p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p>
         <p style="margin: 0 0 16px; color: #4b5563;">
-          The following lead has been marked On Hold by the Sales Executive.
+          The following lead has been marked On Hold by the ${updatedByRole}.
         </p>
         <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
           <p style="margin: 0 0 8px; font-weight: 600; color: #111827;">Lead Details</p>
@@ -1039,8 +1051,8 @@ export const sendLeadOnHoldEmail = async (
               <td style="padding: 4px 0; font-weight: 600;">${payload.updatedBy}</td>
             </tr>
             <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Marked on Hold on</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.updatedAt}</td>
+              <td style="padding: 4px 0; color: #6b7280;">Marked on</td>
+              <td style="padding: 4px 0; font-weight: 600;">${updatedAt}</td>
             </tr>
           </table>
         </div>
@@ -1069,7 +1081,8 @@ export const sendLeadOnHoldEmail = async (
     leadCode: payload.leadCode,
     leadName: payload.leadName,
     updatedBy: payload.updatedBy,
-    updatedAt: payload.updatedAt,
+    updatedAt,
+    updatedByRole,
     remark: payload.remark,
     leadUrl: payload.leadUrl ?? "",
   };

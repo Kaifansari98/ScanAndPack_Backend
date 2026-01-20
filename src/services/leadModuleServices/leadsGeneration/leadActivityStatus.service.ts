@@ -162,6 +162,7 @@ export class LeadActivityStatusService {
       const updatedByRole = updatedByUser?.user_type?.user_type?.toLowerCase();
       const isAdminActor =
         updatedByRole === "admin" || updatedByRole === "super-admin";
+      const updatedByRoleLabel = isAdminActor ? "Admin" : "Sales Executive";
       const updatedAt = new Date().toLocaleString("en-IN", {
         day: "2-digit",
         month: "short",
@@ -225,6 +226,7 @@ export class LeadActivityStatusService {
                 leadCode,
                 leadName: leadName || "Lead",
                 updatedBy: updatedByName,
+                updatedByRole: updatedByRoleLabel,
                 updatedAt,
                 remark,
                 leadUrl,
@@ -293,6 +295,7 @@ export class LeadActivityStatusService {
                   leadCode,
                   leadName: leadName || "Lead",
                   updatedBy: updatedByName,
+                  updatedByRole: updatedByRoleLabel,
                   updatedAt,
                   remark,
                   leadUrl,
