@@ -871,14 +871,15 @@ export const sendChatMentionEmail = async (
 export const sendMajorMilestoneEmail = async (
   payload: MajorMilestoneEmailPayload
 ): Promise<BrevoEmailResult> => {
-  const defaultSubject = `Milestone Achieved: ${payload.leadCode} - ${payload.milestoneName}`;
+  const defaultSubject = `Milestone Achieved: ${payload.milestoneName} on ${payload.leadCode} - ${payload.leadName}`;
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
     "A major milestone has been achieved for the following lead:",
+    `Lead Code: ${payload.leadCode}`,
     `Lead Name: ${payload.leadName}`,
     `Milestone: ${payload.milestoneName}`,
-    `Completed On: ${payload.completedOn}`,
+    `Achieved On: ${payload.completedOn}`,
     "",
     "This marks an important progression in the project lifecycle. Please review the details and proceed with the next required actions.",
     payload.detailsUrl ? `View Lead / Project Details: ${payload.detailsUrl}` : "",
@@ -897,6 +898,10 @@ export const sendMajorMilestoneEmail = async (
         <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
           <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;">
             <tr>
+              <td style="padding: 4px 0; color: #6b7280;">Lead Code</td>
+              <td style="padding: 4px 0; font-weight: 600;">${payload.leadCode}</td>
+            </tr>
+            <tr>
               <td style="padding: 4px 0; color: #6b7280;">Lead Name</td>
               <td style="padding: 4px 0; font-weight: 600;">${payload.leadName}</td>
             </tr>
@@ -905,7 +910,7 @@ export const sendMajorMilestoneEmail = async (
               <td style="padding: 4px 0; font-weight: 600;">${payload.milestoneName}</td>
             </tr>
             <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Completed On</td>
+              <td style="padding: 4px 0; color: #6b7280;">Achieved On</td>
               <td style="padding: 4px 0; font-weight: 600;">${payload.completedOn}</td>
             </tr>
           </table>
