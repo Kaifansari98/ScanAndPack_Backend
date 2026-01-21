@@ -153,4 +153,9 @@ underInstallationStageRoutes.put(
   controller.resolveMiscellaneousEntry
 );
 
+underInstallationStageRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/misc/:miscId/mark-ready",
+  controller.markMiscellaneousTaskReady
+);
+
 export default underInstallationStageRoutes;

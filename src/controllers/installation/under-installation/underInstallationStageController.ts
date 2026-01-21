@@ -1187,4 +1187,39 @@ export class UnderInstallationStageController {
       });
     }
   }
+
+  async markMiscellaneousTaskReady(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+      const miscId = Number(req.params.miscId);
+
+      const { ready_by } = req.body;
+
+      if (!ready_by) {
+        return res.status(400).json({
+          success: false,
+          message: "ready_by (userId) is required",
+        });
+      }
+
+      await UnderInstallationStageService.markMiscTaskReady({
+        vendor_id: vendorId,
+        lead_id: leadId,
+        misc_id: miscId,
+        ready_by: Number(ready_by),
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Miscellaneous task marked as ready",
+      });
+    } catch (err: any) {
+      console.error("❌ Error in markMiscellaneousTaskReady:", err.message);
+      return res.status(500).json({
+        success: false,
+        error: err.message || "Something went wrong",
+      });
+    }
+  }
 }
