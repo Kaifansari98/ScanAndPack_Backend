@@ -1397,7 +1397,7 @@ export const sendLeadLostApprovalEmail = async (
 export const sendLeadLostApprovedEmail = async (
   payload: LeadLostApprovedEmailPayload
 ): Promise<BrevoEmailResult> => {
-  const defaultSubject = `Lost Lead Approved: ${payload.leadCode} - ${payload.leadName}`;
+  const defaultSubject = `Lost Lead Request Approved: ${payload.leadCode} - ${payload.leadName}`;
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
