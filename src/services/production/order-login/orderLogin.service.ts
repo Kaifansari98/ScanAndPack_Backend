@@ -347,6 +347,28 @@ export class OrderLoginService {
     return { results, errors };
   }
 
+  async deleteOrderLogin(vendorId: number, orderLoginId: number) {
+    if (!vendorId || !orderLoginId) {
+      const error = new Error("vendorId and orderLoginId are required");
+      (error as any).statusCode = 400;
+      throw error;
+    }
+
+    const existing = await prisma.orderLoginDetails.findFirst({
+      where: { id: orderLoginId, vendor_id: vendorId },
+    });
+
+    if (!existing) {
+      const error = new Error("Order login record not found.");
+      (error as any).statusCode = 404;
+      throw error;
+    }
+
+    return prisma.orderLoginDetails.delete({
+      where: { id: orderLoginId },
+    });
+  }
+
   async getLeadsWithStatusOrderLogin(
     vendorId: number,
     userId: number,

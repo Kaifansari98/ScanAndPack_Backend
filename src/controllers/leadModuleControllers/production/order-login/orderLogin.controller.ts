@@ -162,6 +162,37 @@ export class OrderLoginController {
     }
   }
 
+  async deleteOrderLogin(req: Request, res: Response) {
+    try {
+      const { vendorId, orderLoginId } = req.params;
+
+      if (!vendorId || !orderLoginId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and orderLoginId are required",
+        });
+      }
+
+      const deleted = await service.deleteOrderLogin(
+        Number(vendorId),
+        Number(orderLoginId)
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Order login deleted successfully",
+        data: deleted,
+      });
+    } catch (error: any) {
+      console.error("Error deleting order login:", error);
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message:
+          error.message || "Internal server error while deleting order login",
+      });
+    }
+  }
+
   async getAllOrderLoginLeads(req: Request, res: Response) {
     try {
       const vendorId = parseInt(req.params.vendorId);

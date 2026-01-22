@@ -31,6 +31,11 @@ orderLoginRoutes.put(
   controller.updateOrderLogin
 );
 
+orderLoginRoutes.delete(
+  "/vendorId/:vendorId/order-login-id/:orderLoginId/delete",
+  controller.deleteOrderLogin
+);
+
 orderLoginRoutes.put(
   "/vendorId/:vendorId/leadId/:leadId/update-multiple",
   upload.none(),
