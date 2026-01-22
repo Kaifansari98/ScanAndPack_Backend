@@ -1056,6 +1056,10 @@ export class BookingStageService {
       alt_contact_no?: string;
       email?: string;
       designer_remark?: string;
+    } = {},
+    options: {
+      requireMiscellaneous?: boolean;
+      requirePendingMiscellaneous?: boolean;
     } = {}
   ): Promise<{ leads: any[]; count: number }> {
     logger.info("[BookingStageService] getUniversalTableData called", {
@@ -1303,6 +1307,12 @@ export class BookingStageService {
             OR: [{ site_map_link: null }, { site_map_link: "" }],
           });
         }
+      }
+
+      if (options.requirePendingMiscellaneous) {
+        addAnd({ miscellaneousMaster: { some: { is_resolved: false } } });
+      } else if (options.requireMiscellaneous) {
+        addAnd({ miscellaneousMaster: { some: {} } });
       }
 
       return whereClause;

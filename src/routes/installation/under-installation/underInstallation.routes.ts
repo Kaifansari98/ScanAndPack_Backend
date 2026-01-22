@@ -17,6 +17,12 @@ underInstallationStageRoutes.get(
   controller.getAllUnderInstallationStageLeads
 );
 
+/** ✅ POST → Fetch Under Installation leads that have any Miscellaneous items */
+underInstallationStageRoutes.post(
+  "/vendorId/:vendorId/get-all-leads-which-includes-any-miscellaneous-item",
+  controller.getAllLeadsWhichIncludesAnyMiscellaneousItem
+);
+
 /** ✅ PUT → Set actual installation start date for a lead */
 underInstallationStageRoutes.put(
   "/vendorId/:vendorId/leadId/:leadId/set-actual-installation-start-date",
