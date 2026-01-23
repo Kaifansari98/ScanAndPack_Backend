@@ -10,6 +10,7 @@ finalMeasurementRouter.post(
     uploadFinalMeasurement.fields([
         { name: "final_measurement_doc", maxCount: 10 },
         { name: "site_photos", maxCount: 10 },
+        { name: "site_photos[]", maxCount: 10 },
     ]),
     finalMeasurementController.createFinalMeasurementStage
 );
@@ -34,6 +35,7 @@ finalMeasurementRouter.post(
     "/add-files",
     uploadFinalMeasurement.fields([
         { name: "site_photos", maxCount: 10 },
+        { name: "site_photos[]", maxCount: 10 },
     ]),
     finalMeasurementController.addMoreFinalMeasurementFiles
 );
@@ -41,7 +43,10 @@ finalMeasurementRouter.post(
 
 finalMeasurementRouter.post(
     "/add-site-photos",
-    uploadFinalMeasurement.fields([{ name: "site_photos", maxCount: 10 }]),
+    uploadFinalMeasurement.fields([
+        { name: "site_photos", maxCount: 10 },
+        { name: "site_photos[]", maxCount: 10 },
+    ]),
     finalMeasurementController.addMoreFinalMeasurementSitePhotos
 );
 
