@@ -136,7 +136,7 @@ export const uploadFinalMeasurement = multer({
       cb(null, `${Date.now()}-${file.originalname}`);
     },
   }),
-  limits: { fileSize: 200 * 1024 * 1024, files: 20 },
+  limits: { fileSize: 200 * 1024 * 1024, files: 100 },
   fileFilter: (req, file, cb) => {
     const allowedMimeTypes = [
       "image/jpeg",
