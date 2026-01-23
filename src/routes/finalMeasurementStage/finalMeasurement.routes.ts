@@ -44,8 +44,8 @@ finalMeasurementRouter.post(
 finalMeasurementRouter.post(
     "/add-site-photos",
     uploadFinalMeasurement.fields([
-        { name: "site_photos", maxCount: 10 },
-        { name: "site_photos[]", maxCount: 10 },
+        { name: "site_photos", maxCount: 30 },
+        { name: "site_photos[]", maxCount: 30 },
     ]),
     finalMeasurementController.addMoreFinalMeasurementSitePhotos
 );
