@@ -270,6 +270,14 @@ export const uploadDesigns = multer({
       ".catpart",
       ".catproduct",
       ".zip",
+      ".jpg",
+      ".jpeg",
+      ".png",
+      ".gif",
+      ".webp",
+      ".bmp",
+      ".tif",
+      ".tiff",
     ];
 
     const ext = path.extname(file.originalname).toLowerCase();
@@ -279,7 +287,7 @@ export const uploadDesigns = multer({
     } else {
       cb(
         new Error(
-          `Only design files are allowed! Supported extensions: ${allowedExtensions.join(
+          `Only design or image files are allowed! Supported extensions: ${allowedExtensions.join(
             ", "
           )}. Received: ${ext}`
         )
