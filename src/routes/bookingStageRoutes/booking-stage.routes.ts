@@ -14,77 +14,84 @@ bookingStageRouter.post(
     { name: "final_documents", maxCount: 10 },
     { name: "booking_payment_file", maxCount: 1 },
   ]),
-  bookingStageController.createBookingStage
+  bookingStageController.createBookingStage,
 );
 
 bookingStageRouter.post(
   "/add-more-files",
   uploadBookingStageFiles.fields([{ name: "final_documents", maxCount: 10 }]),
-  bookingStageController.addBookingStageFiles
+  bookingStageController.addBookingStageFiles,
 );
 
 bookingStageRouter.get(
   "/vendor/:vendorId/lead/:leadId",
-  bookingStageController.getBookingStage
+  bookingStageController.getBookingStage,
 );
 
 // GET /api/leads/status-4
 bookingStageRouter.get(
   "/status4-leads/:vendorId",
-  bookingStageController.getBookingLeads
+  bookingStageController.getBookingLeads,
 );
 
 bookingStageRouter.get(
   "/vendorId/:vendorId/all-leads",
-  bookingStageController.getVendorLeadsByTag // can now accept ?tag=Type1&userId=123
+  bookingStageController.getVendorLeadsByTag, // can now accept ?tag=Type1&userId=123
 );
 
 // Example: GET /api/leads/status1-leads/:vendorId?userId=123
 bookingStageRouter.get(
   "/status1-leads/vendorId/:vendorId",
-  bookingStageController.getOpenLeads
+  bookingStageController.getOpenLeads,
 );
 
 bookingStageRouter.get(
   "/universal-table-data/vendorId/:vendorId",
-  bookingStageController.getUniversalTableData
+  bookingStageController.getUniversalTableData,
 );
+
+// post filter route route
 bookingStageRouter.post(
   "/universal-table-data-2/vendorId/:vendorId",
-  bookingStageController.getUniversalTableData2
+  bookingStageController.getUniversalTableData2,
+);
+
+bookingStageRouter.post(
+  "/vendorId/:vendorId/vendor-leads-by-tag/all-leads",
+  bookingStageController.getVendorLeadsByTag2,
 );
 
 bookingStageRouter.put("/edit", bookingStageController.editBookingStage);
 
 bookingStageRouter.put(
   "/reassign-site-supervisor/vendor/:vendorId/lead/:leadId",
-  bookingStageController.reassignSiteSupervisor
+  bookingStageController.reassignSiteSupervisor,
 );
 
 bookingStageRouter.put(
   "/update-mrp/vendor/:vendorId/lead/:leadId",
-  bookingStageController.updateMrpValue
+  bookingStageController.updateMrpValue,
 );
 
 bookingStageRouter.put(
   "/update-total-project-amount/vendor/:vendorId/lead/:leadId",
-  bookingStageController.updateTotalProjectAmount
+  bookingStageController.updateTotalProjectAmount,
 );
 
 bookingStageRouter.put(
   "/update-booking-amount/vendor/:vendorId/lead/:leadId",
-  bookingStageController.updateBookingAmount
+  bookingStageController.updateBookingAmount,
 );
 
 bookingStageRouter.post(
   "/add-additional-payment",
   uploadBookingStageFiles.fields([{ name: "payment_file", maxCount: 1 }]),
-  bookingStageController.addPayment
+  bookingStageController.addPayment,
 );
 
 bookingStageRouter.get(
   "/payment-records/leadId/:leadId/payments",
-  bookingStageController.getPayments
+  bookingStageController.getPayments,
 );
 
 const uploadFinalMeasurement = uploadCSPBookingFiles.fields([
@@ -94,12 +101,12 @@ const uploadFinalMeasurement = uploadCSPBookingFiles.fields([
 bookingStageRouter.post(
   "/upload-CSP-booking",
   uploadFinalMeasurement,
-  bookingStageController.uploadCSPBooking
+  bookingStageController.uploadCSPBooking,
 );
 
 bookingStageRouter.get(
   "/get-CSP-booking/:vendorId/:leadId",
-  bookingStageController.getCSPBooking
+  bookingStageController.getCSPBooking,
 );
 
 export default bookingStageRouter;

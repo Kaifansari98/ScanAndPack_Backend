@@ -1,6 +1,10 @@
 import { prisma } from "../../prisma/client";
 import { NotificationService } from "../notification/notification.service";
-import { NotificationType, Prisma, SupervisorStatus } from "../../prisma/generated";
+import {
+  NotificationType,
+  Prisma,
+  SupervisorStatus,
+} from "../../prisma/generated";
 import {
   AddPaymentDto,
   CreateBookingStageDto,
@@ -73,7 +77,7 @@ export class BookingStageService {
   public async generateSignedUrl(
     s3Key: string,
     vendorId: number,
-    expiresIn: number = 3600
+    expiresIn: number = 3600,
   ): Promise<string> {
     try {
       // Validate that the file belongs to the vendor (security check)
@@ -103,7 +107,7 @@ export class BookingStageService {
     } catch (error: any) {
       console.error(
         "[PaymentUploadService] Error generating signed URL:",
-        error
+        error,
       );
       throw new Error(`Failed to generate signed URL: ${error.message}`);
     }
@@ -129,7 +133,7 @@ export class BookingStageService {
         });
         if (!finalDocType) {
           throw new Error(
-            "Document type (Final Documents) not found for this vendor"
+            "Document type (Final Documents) not found for this vendor",
           );
         }
 
@@ -160,7 +164,7 @@ export class BookingStageService {
         });
         if (!bookingPaymentType) {
           throw new Error(
-            "Payment type (Booking Amount) not found for this vendor"
+            "Payment type (Booking Amount) not found for this vendor",
           );
         }
 
@@ -222,7 +226,7 @@ export class BookingStageService {
 
         if (!bookingStatus) {
           throw new Error(
-            `Booking status (Type 4) not found for vendor ${data.vendor_id}`
+            `Booking status (Type 4) not found for vendor ${data.vendor_id}`,
           );
         }
 
@@ -301,11 +305,14 @@ export class BookingStageService {
         });
 
         if (existingMember) {
-          logger.info("[SERVICE] LeadChatMember already exists, skipping insert", {
-            lead_id: data.lead_id,
-            chat_room_id: chatRoom.id,
-            user_id: data.siteSupervisorId,
-          });
+          logger.info(
+            "[SERVICE] LeadChatMember already exists, skipping insert",
+            {
+              lead_id: data.lead_id,
+              chat_room_id: chatRoom.id,
+              user_id: data.siteSupervisorId,
+            },
+          );
         } else {
           await tx.leadChatMember.create({
             data: {
@@ -331,13 +338,13 @@ export class BookingStageService {
         });
 
         await cache.del(
-          `performance:snapshot:${data.vendor_id}:${data.created_by}`
+          `performance:snapshot:${data.vendor_id}:${data.created_by}`,
         );
         await cache.del(
-          `dashboard:tasks:${data.vendor_id}:${data.siteSupervisorId}`
+          `dashboard:tasks:${data.vendor_id}:${data.siteSupervisorId}`,
         );
         await cache.del(
-          `lead-status-counts:${data.vendor_id}:${data.created_by}`
+          `lead-status-counts:${data.vendor_id}:${data.created_by}`,
         );
         await cache.del(`lead-status-counts:${data.vendor_id}:overall`);
 
@@ -395,7 +402,7 @@ export class BookingStageService {
       },
       {
         timeout: 15000, // 15 seconds instead of 5
-      }
+      },
     );
 
     try {
@@ -413,7 +420,8 @@ export class BookingStageService {
           where: { id: data.lead_id },
           select: { firstname: true, lastname: true },
         });
-        const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+        const leadName =
+          `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
 
         await NotificationService.createAndSend({
           vendor_id: data.vendor_id,
@@ -579,7 +587,7 @@ export class BookingStageService {
         const signedUrl = await generateSignedUrl(
           doc.doc_sys_name,
           3600,
-          "inline"
+          "inline",
         );
         return {
           id: doc.id,
@@ -588,7 +596,7 @@ export class BookingStageService {
           type: doc.documentType?.tag,
           signedUrl, // ✅ added signed URL
         };
-      })
+      }),
     );
 
     return {
@@ -606,7 +614,7 @@ export class BookingStageService {
             const signedUrl = await generateSignedUrl(
               p.document.doc_sys_name,
               3600,
-              "inline"
+              "inline",
             );
             file = {
               id: p.document.id,
@@ -623,7 +631,7 @@ export class BookingStageService {
             type: p.paymentType?.tag,
             file,
           };
-        })
+        }),
       ),
       // ledger: lead.ledgers.map((l) => ({
       //   id: l.id,
@@ -642,7 +650,7 @@ export class BookingStageService {
 
   public static async getLeadsWithStatusBooking(
     vendorId: number,
-    userId: number
+    userId: number,
   ) {
     // 1️⃣ Get Booking status (Type 4)
     const bookingStatus = await prisma.statusTypeMaster.findFirst({
@@ -652,7 +660,7 @@ export class BookingStageService {
 
     if (!bookingStatus) {
       throw new Error(
-        `Booking status (Type 4) not found for vendor ${vendorId}`
+        `Booking status (Type 4) not found for vendor ${vendorId}`,
       );
     }
 
@@ -776,7 +784,7 @@ export class BookingStageService {
               file_type: BookingStageService.getFileType(doc.doc_og_name),
               is_image: BookingStageService.isImageFile(doc.doc_og_name),
             };
-          })
+          }),
         );
 
         return {
@@ -784,7 +792,7 @@ export class BookingStageService {
           documents: docsWithUrls,
           siteSupervisors: lead.siteSupervisors.map((s: any) => s.supervisor),
         };
-      })
+      }),
     );
 
     return data;
@@ -798,7 +806,7 @@ export class BookingStageService {
     tag: string,
     userId: number,
     page: number = 1,
-    limit: number = 10
+    limit: number = 10,
   ) {
     logger.info("[BookingStageService] getVendorLeadsByTag called", {
       vendorId,
@@ -841,7 +849,7 @@ export class BookingStageService {
     });
     if (!statusType)
       throw new Error(
-        `Status type with tag "${tag}" not found for vendor ${vendorId}`
+        `Status type with tag "${tag}" not found for vendor ${vendorId}`,
       );
 
     const whereClause: Prisma.LeadMasterWhereInput = {
@@ -884,11 +892,11 @@ export class BookingStageService {
               file_type: BookingStageService.getFileType(doc.doc_og_name),
               is_image: BookingStageService.isImageFile(doc.doc_og_name),
             };
-          })
+          }),
         );
 
         return { ...lead, documents: docsWithUrls };
-      })
+      }),
     );
 
     return { count: total, leads: processedLeads };
@@ -951,10 +959,10 @@ export class BookingStageService {
                 file_type: BookingStageService.getFileType(doc.doc_og_name),
                 is_image: BookingStageService.isImageFile(doc.doc_og_name),
               };
-            })
+            }),
           );
           return { ...lead, documents: docsWithUrls };
-        })
+        }),
       );
     }
 
@@ -1026,28 +1034,31 @@ export class BookingStageService {
               file_type: BookingStageService.getFileType(doc.doc_og_name),
               is_image: BookingStageService.isImageFile(doc.doc_og_name),
             };
-          })
+          }),
         );
         return { ...lead, documents: docsWithUrls };
-      })
+      }),
     );
   }
 
-  public static async getUniversalTableData(
+  // post filter service
+  public static async getVendorLeadsByTag2(
     vendorId: number,
-    userId: number,
-    tag?: string,
+    tag: string,
+    userId: number | null,
     page: number = 1,
     limit: number = 10,
     filters: {
+      global_search?: string;
       filter_lead_code?: string;
       filter_name?: string;
       contact?: string;
+      stagetag?: string;
       furniture_type?: Array<number | string>;
       furniture_structure?: Array<number | string>;
       site_map_link?: boolean;
       site_type?: Array<number | string>;
-      assign_to?: number | string;
+      assign_to?: Array<number | string>;
       site_address?: string;
       archetech_name?: string;
       source?: Array<number | string>;
@@ -1055,7 +1066,387 @@ export class BookingStageService {
       alt_contact_no?: string;
       email?: string;
       designer_remark?: string;
-    } = {}
+      date_range?: { from: string; to: string };
+    },
+  ): Promise<{ leads: any[]; count: number }> {
+    logger.info("[BookingStageService] getVendorLeadsByTag2 called", {
+      vendorId,
+      tag,
+      userId,
+      page,
+      limit,
+    });
+
+    const skip = (page - 1) * limit;
+
+    const orderBy = {
+      created_at:
+        filters.created_at === "asc"
+          ? Prisma.SortOrder.asc
+          : Prisma.SortOrder.desc,
+    };
+
+    // ============================
+    // STATUS RESOLUTION
+    // ============================
+
+    const statusType = await prisma.statusTypeMaster.findFirst({
+      where: { vendor_id: vendorId, tag },
+      select: { id: true },
+    });
+
+    if (!statusType) {
+      throw new Error(`Status ${tag} not found for vendor ${vendorId}`);
+    }
+
+    // ============================
+    // EXCLUDE USER LINKED LEADS
+    // ============================
+
+    let excludedLeadIds: number[] = [];
+
+    if (userId) {
+      const mappedLeads = await prisma.leadUserMapping.findMany({
+        where: {
+          vendor_id: vendorId,
+          user_id: userId,
+          status: "active",
+        },
+        select: { lead_id: true },
+      });
+
+      const taskLeads = await prisma.userLeadTask.findMany({
+        where: {
+          vendor_id: vendorId,
+          OR: [{ created_by: userId }, { user_id: userId }],
+        },
+        select: { lead_id: true },
+      });
+
+      excludedLeadIds = [
+        ...new Set([
+          ...mappedLeads.map((m) => m.lead_id),
+          ...taskLeads.map((t) => t.lead_id),
+        ]),
+      ];
+    }
+
+    // ============================
+    // FILTER ENGINE (UNIVERSAL STYLE)
+    // ============================
+
+    const addFilterConditions = (
+      whereClause: Prisma.LeadMasterWhereInput,
+    ): Prisma.LeadMasterWhereInput => {
+      const addAnd = (condition: Prisma.LeadMasterWhereInput) => {
+        if (!whereClause.AND) whereClause.AND = [];
+        if (Array.isArray(whereClause.AND)) {
+          whereClause.AND.push(condition);
+        } else {
+          whereClause.AND = [whereClause.AND, condition];
+        }
+      };
+
+      const toString = (val: unknown) =>
+        typeof val === "string" ? val.trim() : "";
+
+      const toArray = (val: unknown): Array<number | string> => {
+        if (Array.isArray(val)) return val;
+        if (!val) return [];
+        return [val as number | string];
+      };
+
+      const parseNumberList = (val: unknown) => {
+        const raw = toArray(val);
+        const numbers = raw.map(Number).filter((n) => !isNaN(n));
+        const strings = raw.filter((v) => isNaN(Number(v))).map(String);
+        return { numbers, strings };
+      };
+
+      // ---------- GLOBAL SEARCH ----------
+
+      const globalSearch = toString(filters.global_search);
+
+      if (globalSearch) {
+        const parts = globalSearch.split(/\s+/).filter(Boolean);
+
+        if (parts.length >= 2) {
+          addAnd({
+            OR: [
+              {
+                AND: [
+                  { firstname: { contains: parts[0], mode: "insensitive" } },
+                  {
+                    lastname: {
+                      contains: parts.slice(1).join(" "),
+                      mode: "insensitive",
+                    },
+                  },
+                ],
+              },
+              { lead_code: { contains: globalSearch, mode: "insensitive" } },
+              { contact_no: { contains: globalSearch, mode: "insensitive" } },
+            ],
+          });
+        } else {
+          addAnd({
+            OR: [
+              { firstname: { contains: globalSearch, mode: "insensitive" } },
+              { lastname: { contains: globalSearch, mode: "insensitive" } },
+              { lead_code: { contains: globalSearch, mode: "insensitive" } },
+              { contact_no: { contains: globalSearch, mode: "insensitive" } },
+            ],
+          });
+        }
+      }
+
+      const leadCode = toString(filters.filter_lead_code);
+      if (leadCode) {
+        addAnd({ lead_code: { contains: leadCode, mode: "insensitive" } });
+      }
+
+      const nameFilter = toString(filters.filter_name);
+      if (nameFilter) {
+        addAnd({
+          OR: [
+            { firstname: { contains: nameFilter, mode: "insensitive" } },
+            { lastname: { contains: nameFilter, mode: "insensitive" } },
+          ],
+        });
+      }
+
+      const contact = toString(filters.contact);
+      if (contact) {
+        addAnd({ contact_no: { contains: contact, mode: "insensitive" } });
+      }
+
+      const siteTypeList = parseNumberList(filters.site_type);
+      if (siteTypeList.numbers.length) {
+        addAnd({ site_type_id: { in: siteTypeList.numbers } });
+      }
+
+      const furnitureTypes = parseNumberList(filters.furniture_type);
+      if (furnitureTypes.numbers.length) {
+        addAnd({
+          productMappings: {
+            some: { product_type_id: { in: furnitureTypes.numbers } },
+          },
+        });
+      }
+
+      const sourceList = parseNumberList(filters.source);
+
+      if (sourceList.numbers.length > 0) {
+        addAnd({
+          source_id: { in: sourceList.numbers },
+        });
+      } else if (sourceList.strings.length > 0) {
+        addAnd({
+          source: {
+            type: { in: sourceList.strings },
+          },
+        });
+      }
+
+      // --------------------
+      // CREATED DATE RANGE FILTER
+      // --------------------
+
+      const dateRange = filters.date_range;
+
+      if (dateRange && (dateRange.from || dateRange.to)) {
+        let fromDate: Date | null = null;
+        let toDate: Date | null = null;
+
+        // Parse 'from' date - START of day (00:00:00.000)
+        if (dateRange.from) {
+          fromDate = new Date(dateRange.from);
+          fromDate.setHours(0, 0, 0, 0);
+        }
+
+        // Parse 'to' date - END of day (23:59:59.999)
+        if (dateRange.to) {
+          toDate = new Date(dateRange.to);
+          toDate.setHours(23, 59, 59, 999);
+        }
+
+        // ✅ Main case: Both dates exist (includes single date scenario)
+        // Controller already normalizes single date to: { from: "2024-01-15", to: "2024-01-15" }
+        if (fromDate && toDate) {
+          addAnd({
+            created_at: {
+              gte: fromDate, // Start: 2024-01-15 00:00:00.000
+              lte: toDate, // End:   2024-01-15 23:59:59.999
+            },
+          });
+        }
+
+        // ✅ Edge case: Only 'from' provided (shouldn't happen after controller normalization)
+        else if (fromDate) {
+          const endOfDay = new Date(fromDate);
+          endOfDay.setHours(23, 59, 59, 999);
+
+          addAnd({
+            created_at: {
+              gte: fromDate,
+              lte: endOfDay,
+            },
+          });
+        }
+
+        // ✅ Edge case: Only 'to' provided
+        else if (toDate) {
+          addAnd({
+            created_at: {
+              lte: toDate,
+            },
+          });
+        }
+      }
+
+      // --------------------
+      // ASSIGN TO (MULTI SELECT)
+      // --------------------
+
+      if (Array.isArray(filters.assign_to) && filters.assign_to.length > 0) {
+        const assignIds = filters.assign_to
+          .map(Number)
+          .filter((id) => !Number.isNaN(id));
+
+        if (assignIds.length > 0) {
+          addAnd({
+            assign_to: {
+              in: assignIds,
+            },
+          });
+        }
+      }
+
+      const furnitureStructures = parseNumberList(filters.furniture_structure);
+      if (furnitureStructures.numbers.length) {
+        addAnd({
+          leadProductStructureMapping: {
+            some: { product_structure_id: { in: furnitureStructures.numbers } },
+          },
+        });
+      }
+
+      if (Array.isArray(filters.stagetag) && filters.stagetag.length > 0) {
+        const normalizedTags = filters.stagetag
+          .map((tag) => String(tag).trim())
+          .filter(Boolean);
+
+        if (normalizedTags.length > 0) {
+          addAnd({
+            statusType: {
+              type: {
+                in: normalizedTags,
+              },
+            },
+          });
+        }
+      }
+
+      if (typeof filters.site_map_link === "boolean") {
+        if (filters.site_map_link) {
+          addAnd({
+            AND: [
+              { site_map_link: { not: null } },
+              { site_map_link: { not: "" } },
+            ],
+          });
+        } else {
+          addAnd({
+            OR: [{ site_map_link: null }, { site_map_link: "" }],
+          });
+        }
+      }
+
+      return whereClause;
+    };
+
+    // ============================
+    // FINAL QUERY
+    // ============================
+
+    const whereClause = addFilterConditions({
+      vendor_id: vendorId,
+      is_deleted: false,
+      status_id: statusType.id,
+      activity_status: "onGoing",
+      ...(excludedLeadIds.length && { id: { notIn: excludedLeadIds } }),
+    });
+
+    const [leads, total] = await Promise.all([
+      prisma.leadMaster.findMany({
+        where: whereClause,
+        include: BookingStageService.leadIncludes(),
+        orderBy,
+        skip,
+        take: limit,
+      }),
+
+      prisma.leadMaster.count({
+        where: whereClause,
+      }),
+    ]);
+
+    const processed = await Promise.all(
+      leads.map(async (lead: any) => {
+        if (lead.is_draft && isLeadComplete(lead)) {
+          await prisma.leadMaster.update({
+            where: { id: lead.id },
+            data: { is_draft: false },
+          });
+          lead.is_draft = false;
+        }
+
+        const docsWithUrls = await Promise.all(
+          lead.documents.map(async (doc: any) => {
+            const signed_url = await generateSignedUrl(doc.doc_sys_name);
+            return {
+              ...doc,
+              signed_url,
+              file_type: BookingStageService.getFileType(doc.doc_og_name),
+              is_image: BookingStageService.isImageFile(doc.doc_og_name),
+            };
+          }),
+        );
+
+        return { ...lead, documents: docsWithUrls };
+      }),
+    );
+
+    return { leads: processed, count: total };
+  }
+
+  // post filter service
+  public static async getUniversalTableData(
+    vendorId: number,
+    userId: number,
+    tag?: string,
+    page: number = 1,
+    limit: number = 10,
+    filters: {
+      global_search?: string;
+      filter_lead_code?: string;
+      filter_name?: string;
+      contact?: string;
+      stagetag?: string[];
+      furniture_type?: Array<number | string>;
+      furniture_structure?: Array<number | string>;
+      site_map_link?: boolean;
+      site_type?: Array<number | string>;
+      assign_to?: Array<number | string>;
+      site_address?: string;
+      archetech_name?: string;
+      source?: Array<number | string>;
+      created_at?: "asc" | "desc";
+      alt_contact_no?: string;
+      email?: string;
+      designer_remark?: string;
+      date_range?: { from: string; to: string };
+    } = {},
   ): Promise<{ leads: any[]; count: number }> {
     logger.info("[BookingStageService] getUniversalTableData called", {
       vendorId,
@@ -1130,7 +1521,7 @@ export class BookingStageService {
     };
 
     const addFilterConditions = (
-      whereClause: Prisma.LeadMasterWhereInput
+      whereClause: Prisma.LeadMasterWhereInput,
     ): Prisma.LeadMasterWhereInput => {
       const addAnd = (condition: Prisma.LeadMasterWhereInput) => {
         if (!whereClause.AND) whereClause.AND = [];
@@ -1196,9 +1587,84 @@ export class BookingStageService {
         }
       }
 
+      const globalSearch = toString(filters.global_search);
+
+      if (globalSearch) {
+        const nameParts = globalSearch.split(/\s+/).filter(Boolean);
+
+        // Full name search (Firstname + Lastname)
+        if (nameParts.length >= 2) {
+          addAnd({
+            OR: [
+              {
+                AND: [
+                  {
+                    firstname: {
+                      contains: nameParts[0],
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    lastname: {
+                      contains: nameParts.slice(1).join(" "),
+                      mode: "insensitive",
+                    },
+                  },
+                ],
+              },
+              {
+                lead_code: {
+                  contains: globalSearch,
+                  mode: "insensitive",
+                },
+              },
+              {
+                contact_no: {
+                  contains: globalSearch,
+                  mode: "insensitive",
+                },
+              },
+            ],
+          });
+        }
+        // Single word search
+        else {
+          addAnd({
+            OR: [
+              {
+                firstname: {
+                  contains: globalSearch,
+                  mode: "insensitive",
+                },
+              },
+              {
+                lastname: {
+                  contains: globalSearch,
+                  mode: "insensitive",
+                },
+              },
+              {
+                lead_code: {
+                  contains: globalSearch,
+                  mode: "insensitive",
+                },
+              },
+              {
+                contact_no: {
+                  contains: globalSearch,
+                  mode: "insensitive",
+                },
+              },
+            ],
+          });
+        }
+      }
+
       const contactFilter = toString(filters.contact);
       if (contactFilter) {
-        addAnd({ contact_no: { contains: contactFilter, mode: "insensitive" } });
+        addAnd({
+          contact_no: { contains: contactFilter, mode: "insensitive" },
+        });
       }
 
       const altContactFilter = toString(filters.alt_contact_no);
@@ -1230,14 +1696,78 @@ export class BookingStageService {
       const designerRemarkFilter = toString(filters.designer_remark);
       if (designerRemarkFilter) {
         addAnd({
-          designer_remark: { contains: designerRemarkFilter, mode: "insensitive" },
+          designer_remark: {
+            contains: designerRemarkFilter,
+            mode: "insensitive",
+          },
         });
       }
 
-      if (filters.assign_to !== undefined && filters.assign_to !== null) {
-        const assignTo = Number(filters.assign_to);
-        if (!Number.isNaN(assignTo)) {
-          addAnd({ assign_to: assignTo });
+      // ========== DATE RANGE FILTER ==========
+
+      const dateRange = filters.date_range;
+
+      if (dateRange && (dateRange.from || dateRange.to)) {
+        let fromDate: Date | null = null;
+        let toDate: Date | null = null;
+
+        // Parse 'from' date - START of day (00:00:00.000)
+        if (dateRange.from) {
+          fromDate = new Date(dateRange.from);
+          fromDate.setHours(0, 0, 0, 0);
+        }
+
+        // Parse 'to' date - END of day (23:59:59.999)
+        if (dateRange.to) {
+          toDate = new Date(dateRange.to);
+          toDate.setHours(23, 59, 59, 999);
+        }
+
+        // ✅ Main case: Both dates exist (includes single date scenario)
+        // Controller already normalizes single date to: { from: "2024-01-15", to: "2024-01-15" }
+        if (fromDate && toDate) {
+          addAnd({
+            created_at: {
+              gte: fromDate, // Start: 2024-01-15 00:00:00.000
+              lte: toDate, // End:   2024-01-15 23:59:59.999
+            },
+          });
+        }
+
+        // ✅ Edge case: Only 'from' provided (shouldn't happen after controller normalization)
+        else if (fromDate) {
+          const endOfDay = new Date(fromDate);
+          endOfDay.setHours(23, 59, 59, 999);
+
+          addAnd({
+            created_at: {
+              gte: fromDate,
+              lte: endOfDay,
+            },
+          });
+        }
+
+        // ✅ Edge case: Only 'to' provided
+        else if (toDate) {
+          addAnd({
+            created_at: {
+              lte: toDate,
+            },
+          });
+        }
+      }
+
+      if (Array.isArray(filters.assign_to) && filters.assign_to.length > 0) {
+        const assignIds = filters.assign_to
+          .map(Number)
+          .filter((id) => !Number.isNaN(id));
+
+        if (assignIds.length > 0) {
+          addAnd({
+            assign_to: {
+              in: assignIds,
+            },
+          });
         }
       }
 
@@ -1268,6 +1798,22 @@ export class BookingStageService {
             some: { productType: { type: { in: furnitureTypes.strings } } },
           },
         });
+      }
+
+      if (Array.isArray(filters.stagetag) && filters.stagetag.length > 0) {
+        const normalizedTags = filters.stagetag
+          .map((tag) => String(tag).trim())
+          .filter(Boolean);
+
+        if (normalizedTags.length > 0) {
+          addAnd({
+            statusType: {
+              type: {
+                in: normalizedTags,
+              },
+            },
+          });
+        }
       }
 
       const furnitureStructures = parseNumberList(filters.furniture_structure);
@@ -1314,7 +1860,9 @@ export class BookingStageService {
         is_deleted: false,
         status_id: { in: statusIds },
         statusType: { vendor_id: vendorId },
-        activity_status: isAllStages ? "onGoing" : { in: ["onGoing", "lostApproval"] },
+        activity_status: isAllStages
+          ? "onGoing"
+          : { in: ["onGoing", "lostApproval"] },
       });
 
       const [leads, total] = await Promise.all([
@@ -1347,10 +1895,10 @@ export class BookingStageService {
                 file_type: BookingStageService.getFileType(doc.doc_og_name),
                 is_image: BookingStageService.isImageFile(doc.doc_og_name),
               };
-            })
+            }),
           );
           return { ...lead, documents: docsWithUrls };
-        })
+        }),
       );
       return { leads: processed, count: total };
     }
@@ -1396,7 +1944,9 @@ export class BookingStageService {
       vendor_id: vendorId,
       status_id: { in: statusIds },
       statusType: { vendor_id: vendorId },
-      activity_status: isAllStages ? "onGoing" : { in: ["onGoing", "lostApproval"] },
+      activity_status: isAllStages
+        ? "onGoing"
+        : { in: ["onGoing", "lostApproval"] },
     });
 
     const [leads, total] = await Promise.all([
@@ -1429,10 +1979,10 @@ export class BookingStageService {
               file_type: BookingStageService.getFileType(doc.doc_og_name),
               is_image: BookingStageService.isImageFile(doc.doc_og_name),
             };
-          })
+          }),
         );
         return { ...lead, documents: docsWithUrls };
-      })
+      }),
     );
 
     return { leads: processed, count: total };
@@ -1553,7 +2103,7 @@ export class BookingStageService {
               vendor_id: data.vendor_id!,
               account_id: data.account_id!,
             },
-          }
+          },
         );
 
         let supervisor;
@@ -1604,7 +2154,7 @@ export class BookingStageService {
       // 2️⃣ Validate Amount
       if (data.amount > pendingAmount) {
         throw new Error(
-          `Payment exceeds pending amount. Pending: ${pendingAmount}`
+          `Payment exceeds pending amount. Pending: ${pendingAmount}`,
         );
       }
 
@@ -1614,7 +2164,7 @@ export class BookingStageService {
       });
       if (!paymentType) {
         throw new Error(
-          "Payment type (Additional Payment) not found for this vendor"
+          "Payment type (Additional Payment) not found for this vendor",
         );
       }
 
@@ -1683,7 +2233,7 @@ export class BookingStageService {
           day: "2-digit",
           month: "short",
           year: "numeric",
-        }
+        },
       );
 
       let actionMessage = `Additional payment of ₹${data.amount.toLocaleString()} received successfully on ${formattedDate}. — Payment Details: ${
@@ -1778,7 +2328,7 @@ export class BookingStageService {
             signedUrl = await generateSignedUrl(
               doc.doc_sys_name,
               3600,
-              "inline"
+              "inline",
             );
           }
         }
@@ -1831,7 +2381,7 @@ export class BookingStageService {
 
       if (!docType) {
         throw new Error(
-          "Current site photos at Booking Stage document type not found"
+          "Current site photos at Booking Stage document type not found",
         );
       }
 
@@ -1914,7 +2464,7 @@ export class BookingStageService {
 
     if (!docType) {
       throw new Error(
-        "Current site photos at Booking Stage document type not found"
+        "Current site photos at Booking Stage document type not found",
       );
     }
 
@@ -1937,7 +2487,7 @@ export class BookingStageService {
         const signedUrl = await generateSignedUrl(
           doc.doc_sys_name,
           3600,
-          "inline"
+          "inline",
         );
 
         return {
@@ -1947,7 +2497,7 @@ export class BookingStageService {
           signedUrl,
           createdAt: doc.created_at,
         };
-      })
+      }),
     );
 
     return {
@@ -1977,7 +2527,7 @@ export class BookingStageService {
 
       if (!lead) {
         throw new Error(
-          `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`
+          `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`,
         );
       }
 
@@ -2135,7 +2685,7 @@ export class BookingStageService {
 
     if (!lead) {
       throw new Error(
-        `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`
+        `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`,
       );
     }
 
@@ -2185,9 +2735,9 @@ export class BookingStageService {
     if (!lead) {
       throw Object.assign(
         new Error(
-          `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`
+          `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`,
         ),
-        { statusCode: 404 }
+        { statusCode: 404 },
       );
     }
 
@@ -2198,7 +2748,7 @@ export class BookingStageService {
     ) {
       throw Object.assign(
         new Error("Total project amount cannot be greater than MRP value"),
-        { statusCode: 400 }
+        { statusCode: 400 },
       );
     }
 
@@ -2208,16 +2758,15 @@ export class BookingStageService {
     const updatedPending = currentPending + totalDelta;
 
     if (updatedPending < 0) {
-      throw Object.assign(
-        new Error("Pending amount cannot be negative"),
-        { statusCode: 400 }
-      );
+      throw Object.assign(new Error("Pending amount cannot be negative"), {
+        statusCode: 400,
+      });
     }
 
     if (updatedPending > data.total_project_amount) {
       throw Object.assign(
         new Error("Total project amount cannot be smaller than pending amount"),
-        { statusCode: 400 }
+        { statusCode: 400 },
       );
     }
 
@@ -2261,9 +2810,9 @@ export class BookingStageService {
     if (!lead) {
       throw Object.assign(
         new Error(
-          `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`
+          `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`,
         ),
-        { statusCode: 404 }
+        { statusCode: 404 },
       );
     }
 
@@ -2281,7 +2830,7 @@ export class BookingStageService {
     if (data.booking_amount > updatedPending) {
       throw Object.assign(
         new Error("Booking amount cannot be greater than pending amount"),
-        { statusCode: 400 }
+        { statusCode: 400 },
       );
     }
 

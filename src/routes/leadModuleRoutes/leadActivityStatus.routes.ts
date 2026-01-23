@@ -45,6 +45,13 @@ leadActivityStatusRouter.get(
   LeadActivityStatusController.getOnHoldLeads
 );
 
+
+leadActivityStatusRouter.post(
+  "/vendor/:vendorId/leads/onHold/filter",
+  LeadActivityStatusController.getOnHoldLeadsFilter
+);
+
+
 // Fetch lost leads
 /*
   GET /vendor/:vendorId/leads/lost
@@ -54,6 +61,11 @@ leadActivityStatusRouter.get(
   LeadActivityStatusController.getLostLeads
 );
 
+leadActivityStatusRouter.post(
+  "/vendor/:vendorId/leads/lost/filter",
+  LeadActivityStatusController.getLostLeadsFilter
+);
+
 // Fetch lostApproval leads
 /*
   GET /vendor/:vendorId/leads/lostApproval
@@ -61,6 +73,11 @@ leadActivityStatusRouter.get(
 leadActivityStatusRouter.get(
   "/vendor/:vendorId/leads/lostApproval",
   LeadActivityStatusController.getLostApprovalLeads
+);
+
+leadActivityStatusRouter.post(
+  "/vendor/:vendorId/leads/lostApproval/filter",
+  LeadActivityStatusController.getLostApprovalLeadsFilter
 );
 
 // Fetch counts of leads grouped by activity_status (onGoing, onHold, lostApproval, lost)

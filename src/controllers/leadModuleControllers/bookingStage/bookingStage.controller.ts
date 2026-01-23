@@ -42,7 +42,7 @@ export class BookingStageController {
 
   public createBookingStage = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const {
@@ -102,7 +102,7 @@ export class BookingStageController {
           Number(vendor_id),
           Number(lead_id),
           file.originalname,
-          file.mimetype
+          file.mimetype,
         );
 
         await fs.unlink(file.path);
@@ -121,7 +121,7 @@ export class BookingStageController {
           Number(vendor_id),
           Number(lead_id),
           bookingAmountPaymentDetailsFile.originalname,
-          bookingAmountPaymentDetailsFile.mimetype
+          bookingAmountPaymentDetailsFile.mimetype,
         );
 
         await fs.unlink(bookingAmountPaymentDetailsFile.path);
@@ -182,12 +182,16 @@ export class BookingStageController {
 
           const supervisorEmail = supervisor?.user_email?.trim();
           if (!supervisorEmail) {
-            logger.warn("Booking stage email skipped: missing supervisor email", {
-              lead_id: dto.lead_id,
-              assignee_user_id: dto.siteSupervisorId,
-            });
+            logger.warn(
+              "Booking stage email skipped: missing supervisor email",
+              {
+                lead_id: dto.lead_id,
+                assignee_user_id: dto.siteSupervisorId,
+              },
+            );
           } else if (lead) {
-            const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+            const leadName =
+              `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
             const leadCode =
               lead.lead_code ?? `LEAD-${String(lead.id).padStart(4, "0")}`;
             const contactDetails = `${lead.country_code ?? ""} ${
@@ -261,7 +265,8 @@ export class BookingStageController {
           }),
         ]);
 
-        const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+        const leadName =
+          `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
         const leadCode =
           lead?.lead_code ?? `LEAD-${String(dto.lead_id).padStart(4, "0")}`;
         const recipientIds = new Set<number>();
@@ -297,8 +302,8 @@ export class BookingStageController {
                   milestoneName: "Lead to Project",
                   completedOn,
                   detailsUrl,
-                })
-              )
+                }),
+              ),
           );
         }
       } catch (emailError: any) {
@@ -324,7 +329,7 @@ export class BookingStageController {
 
   public addBookingStageFiles = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const { lead_id, account_id, vendor_id, created_by } = req.body;
@@ -356,7 +361,7 @@ export class BookingStageController {
           Number(vendor_id),
           Number(lead_id),
           file.originalname,
-          file.mimetype
+          file.mimetype,
         );
 
         await fs.unlink(file.path);
@@ -392,7 +397,7 @@ export class BookingStageController {
 
   public getBookingStage = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const leadId = parseInt(req.params.leadId);
@@ -405,7 +410,7 @@ export class BookingStageController {
 
       const result = await this.bookingStageService.getBookingStage(
         leadId,
-        vendorId
+        vendorId,
       );
 
       res.status(200).json({
@@ -436,7 +441,7 @@ export class BookingStageController {
 
       const leads = await BookingStageService.getLeadsWithStatusBooking(
         vendorId,
-        userId
+        userId,
       );
 
       const count = leads.length;
@@ -480,7 +485,7 @@ export class BookingStageController {
       const { count, leads } = await BookingStageService.getVendorLeadsByTag(
         vendorId,
         tag,
-        userId!
+        userId!,
       );
 
       logger.info("Fetched vendor leads successfully", {
@@ -518,6 +523,254 @@ export class BookingStageController {
     }
   };
 
+  // CONTROLLER 1: getVendorLeadsByTag2
+  public getVendorLeadsByTag2 = async (req: Request, res: Response) => {
+    try {
+      const vendorId = parseInt(req.params.vendorId);
+      const userId = req.body.userId ? Number(req.body.userId) : null;
+      const tag = req.body.tag as string;
+
+      const page = parseInt((req.body.page as string) || "1");
+      const limit = parseInt((req.body.limit as string) || "10");
+
+      // ============================
+      // DATE RANGE VALIDATION & NORMALIZATION
+      // ============================
+      let dateRange: { from: string; to: string } | undefined;
+
+      // ✅ CORRECT CONTROLLER CODE
+      if (req.body.date_range) {
+        const { from, to } = req.body.date_range;
+
+        // Validate
+        if (from && isNaN(Date.parse(from))) {
+          return res.status(400).json({
+            success: false,
+            message: "Invalid 'from' date format. Use YYYY-MM-DD or ISO format",
+          });
+        }
+
+        if (to && isNaN(Date.parse(to))) {
+          return res.status(400).json({
+            success: false,
+            message: "Invalid 'to' date format. Use YYYY-MM-DD or ISO format",
+          });
+        }
+
+        // 🔥 NORMALIZE: Single date becomes range
+        if (from && !to) {
+          dateRange = { from, to: from }; // ✅ This is the key!
+        } else if (from && to) {
+          if (new Date(from) > new Date(to)) {
+            return res.status(400).json({
+              success: false,
+              message: "'from' date cannot be after 'to' date",
+            });
+          }
+          dateRange = { from, to };
+        } else if (!from && to) {
+          dateRange = { from: to, to };
+        }
+      }
+
+      const filters = {
+        global_search: req.body.global_search,
+        filter_lead_code: req.body.filter_lead_code,
+        filter_name: req.body.filter_name,
+        contact: req.body.contact,
+        furniture_type: req.body.furniture_type,
+        furniture_structure: req.body.furniture_structure,
+        site_map_link: req.body.site_map_link,
+        site_type: req.body.site_type,
+        assign_to: req.body.assign_to,
+        stagetag: req.body.stagetag,
+        site_address: req.body.site_address,
+        archetech_name: req.body.archetech_name,
+        source: req.body.source,
+        created_at: req.body.created_at,
+        alt_contact_no: req.body.alt_contact_no,
+        email: req.body.email,
+        designer_remark: req.body.designer_remark,
+        date_range: dateRange, // Normalized date range
+      };
+
+      // ============================
+      // VALIDATION GATE
+      // ============================
+      if (!vendorId || !tag) {
+        logger.warn("[BookingStageController] Missing vendorId or tag", {
+          vendorId,
+          tag,
+        });
+
+        return res.status(400).json({
+          success: false,
+          message: "Vendor ID and tag are required",
+        });
+      }
+
+      logger.info("[BookingStageController] getVendorLeadsByTag2 called", {
+        vendorId,
+        tag,
+        page,
+        limit,
+        dateRange,
+      });
+
+      const { leads, count } = await BookingStageService.getVendorLeadsByTag2(
+        vendorId,
+        tag,
+        userId,
+        page,
+        limit,
+        filters,
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Vendor leads fetched successfully",
+        count,
+        data: leads,
+        pagination: {
+          currentPage: page,
+          totalPages: Math.ceil(count / limit),
+          totalRecords: count,
+          hasNext: page * limit < count,
+          hasPrev: page > 1,
+        },
+      });
+    } catch (error: any) {
+      logger.error("[BookingStageController] getVendorLeadsByTag2 Error", {
+        error: error.message,
+        stack: error.stack,
+      });
+
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Something went wrong",
+      });
+    }
+  };
+
+  // CONTROLLER 2: getUniversalTableData2
+  public getUniversalTableData2 = async (req: Request, res: Response) => {
+    try {
+      const vendorId = parseInt(req.params.vendorId);
+      const userId = Number(req.body.userId);
+      const tag = req.body.tag as string;
+      const page = parseInt((req.body.page as string) || "1");
+      const limit = parseInt((req.body.limit as string) || "10");
+
+      // ============================
+      // DATE RANGE VALIDATION & NORMALIZATION
+      // ============================
+      let dateRange: { from: string; to: string } | undefined;
+
+      // ✅ CORRECT CONTROLLER CODE
+      if (req.body.date_range) {
+        const { from, to } = req.body.date_range;
+
+        // Validate
+        if (from && isNaN(Date.parse(from))) {
+          return res.status(400).json({
+            success: false,
+            message: "Invalid 'from' date format. Use YYYY-MM-DD or ISO format",
+          });
+        }
+
+        if (to && isNaN(Date.parse(to))) {
+          return res.status(400).json({
+            success: false,
+            message: "Invalid 'to' date format. Use YYYY-MM-DD or ISO format",
+          });
+        }
+
+        // 🔥 NORMALIZE: Single date becomes range
+        if (from && !to) {
+          dateRange = { from, to: from }; // ✅ This is the key!
+        } else if (from && to) {
+          if (new Date(from) > new Date(to)) {
+            return res.status(400).json({
+              success: false,
+              message: "'from' date cannot be after 'to' date",
+            });
+          }
+          dateRange = { from, to };
+        } else if (!from && to) {
+          dateRange = { from: to, to };
+        }
+      }
+
+      const filters = {
+        global_search: req.body.global_search,
+        filter_lead_code: req.body.filter_lead_code,
+        filter_name: req.body.filter_name,
+        contact: req.body.contact,
+        furniture_type: req.body.furniture_type,
+        furniture_structure: req.body.furniture_structure,
+        site_map_link: req.body.site_map_link,
+        site_type: req.body.site_type,
+        assign_to: req.body.assign_to,
+        stagetag: req.body.stagetag,
+        site_address: req.body.site_address,
+        archetech_name: req.body.archetech_name,
+        source: req.body.source,
+        created_at: req.body.created_at,
+        alt_contact_no: req.body.alt_contact_no,
+        email: req.body.email,
+        designer_remark: req.body.designer_remark,
+        date_range: dateRange, // Normalized date range
+      };
+
+      if (!vendorId || !userId) {
+        logger.warn("Missing vendorId or userId", { vendorId, userId, tag });
+        return res.status(400).json({
+          success: false,
+          message: "Vendor ID and User ID are required",
+        });
+      }
+
+      logger.info("[BookingStageController] getUniversalTableData2 called", {
+        vendorId,
+        userId,
+        tag,
+        dateRange,
+      });
+
+      const { leads, count } = await BookingStageService.getUniversalTableData(
+        vendorId,
+        userId,
+        tag,
+        page,
+        limit,
+        filters,
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Universal table data fetched successfully",
+        count,
+        data: leads,
+        pagination: {
+          currentPage: page,
+          totalPages: Math.ceil(count / limit),
+          totalRecords: count,
+          hasNext: page * limit < count,
+          hasPrev: page > 1,
+        },
+      });
+    } catch (error: any) {
+      logger.error("[BookingStageController] getUniversalTableData2 Error", {
+        error: error.message,
+        stack: error.stack,
+      });
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Something went wrong",
+      });
+    }
+  };
+
   public getOpenLeads = async (req: Request, res: Response) => {
     try {
       const vendorId = parseInt(req.params.vendorId);
@@ -533,7 +786,7 @@ export class BookingStageController {
 
       const leads = await BookingStageService.getLeadsWithStatusOpen(
         vendorId,
-        userId
+        userId,
       );
       const count = leads.length;
 
@@ -583,7 +836,7 @@ export class BookingStageController {
         tag,
         page,
         limit,
-        {}
+        {},
       );
 
       logger.info("Fetched universal table data successfully", {
@@ -608,80 +861,6 @@ export class BookingStageController {
       });
     } catch (error: any) {
       logger.error("[BookingStageController] getUniversalTableData Error", {
-        error: error.message,
-        stack: error.stack,
-      });
-      return res.status(500).json({
-        success: false,
-        message: error.message || "Something went wrong",
-      });
-    }
-  };
-
-  public getUniversalTableData2 = async (req: Request, res: Response) => {
-    try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = Number(req.body.userId);
-      const tag = req.body.tag as string;
-      const page = parseInt((req.body.page as string) || "1");
-      const limit = parseInt((req.body.limit as string) || "10");
-      const filters = {
-        filter_lead_code: req.body.filter_lead_code,
-        filter_name: req.body.filter_name,
-        contact: req.body.contact,
-        furniture_type: req.body.furniture_type,
-        furniture_structure: req.body.furniture_structure,
-        site_map_link: req.body.site_map_link,
-        site_type: req.body.site_type,
-        assign_to: req.body.assign_to,
-        site_address: req.body.site_address,
-        archetech_name: req.body.archetech_name,
-        source: req.body.source,
-        created_at: req.body.created_at,
-        alt_contact_no: req.body.alt_contact_no,
-        email: req.body.email,
-        designer_remark: req.body.designer_remark,
-      };
-
-      if (!vendorId || !userId) {
-        logger.warn("Missing vendorId or userId", { vendorId, userId, tag });
-        return res.status(400).json({
-          success: false,
-          message: "Vendor ID and User ID are required",
-        });
-      }
-
-      const { leads, count } = await BookingStageService.getUniversalTableData(
-        vendorId,
-        userId,
-        tag,
-        page,
-        limit,
-        filters
-      );
-
-      logger.info("Fetched universal table data successfully", {
-        vendorId,
-        userId,
-        tag,
-        count,
-      });
-
-      return res.status(200).json({
-        success: true,
-        message: "Universal table data fetched successfully",
-        count,
-        data: leads,
-        pagination: {
-          currentPage: page,
-          totalPages: Math.ceil(count / limit),
-          totalRecords: count,
-          hasNext: page * limit < count,
-          hasPrev: page > 1,
-        },
-      });
-    } catch (error: any) {
-      logger.error("[BookingStageController] getUniversalTableData2 Error", {
         error: error.message,
         stack: error.stack,
       });
@@ -770,7 +949,7 @@ export class BookingStageController {
           Number(vendor_id),
           Number(lead_id),
           payment_file.originalname,
-          payment_file.mimetype
+          payment_file.mimetype,
         );
 
         await fs.unlink(payment_file.path);
@@ -804,7 +983,7 @@ export class BookingStageController {
 
   public reassignSiteSupervisor = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const leadId = parseInt(req.params.leadId);
@@ -844,7 +1023,7 @@ export class BookingStageController {
 
   public updateMrpValue = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const leadId = parseInt(req.params.leadId);
@@ -855,8 +1034,7 @@ export class BookingStageController {
       if (!leadId || !vendorId || Number.isNaN(mrpValue) || !updatedBy) {
         res.status(400).json({
           success: false,
-          message:
-            "leadId, vendorId, mrp_value, and updated_by are required",
+          message: "leadId, vendorId, mrp_value, and updated_by are required",
         });
         return;
       }
@@ -884,7 +1062,7 @@ export class BookingStageController {
 
   public updateTotalProjectAmount = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const leadId = parseInt(req.params.leadId);
@@ -921,7 +1099,7 @@ export class BookingStageController {
     } catch (error: any) {
       console.error(
         "[BookingStageController] updateTotalProjectAmount Error:",
-        error
+        error,
       );
       res.status(error.statusCode || 500).json({
         success: false,
@@ -932,7 +1110,7 @@ export class BookingStageController {
 
   public updateBookingAmount = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const leadId = parseInt(req.params.leadId);
@@ -940,12 +1118,7 @@ export class BookingStageController {
       const bookingAmount = Number(req.body.booking_amount);
       const updatedBy = parseInt(req.body.updated_by);
 
-      if (
-        !leadId ||
-        !vendorId ||
-        Number.isNaN(bookingAmount) ||
-        !updatedBy
-      ) {
+      if (!leadId || !vendorId || Number.isNaN(bookingAmount) || !updatedBy) {
         res.status(400).json({
           success: false,
           message:
@@ -967,7 +1140,10 @@ export class BookingStageController {
         data: result,
       });
     } catch (error: any) {
-      console.error("[BookingStageController] updateBookingAmount Error:", error);
+      console.error(
+        "[BookingStageController] updateBookingAmount Error:",
+        error,
+      );
       res.status(error.statusCode || 500).json({
         success: false,
         message: error.message || "Internal server error",
@@ -990,7 +1166,7 @@ export class BookingStageController {
 
       const result = await this.bookingStageService.getPaymentsByLead(
         leadId,
-        vendorId
+        vendorId,
       );
       res.json({ success: true, ...result });
     } catch (error: any) {
@@ -1001,12 +1177,7 @@ export class BookingStageController {
 
   public uploadCSPBooking = async (req: Request, res: Response) => {
     try {
-      const {
-        lead_id,
-        account_id,
-        vendor_id,
-        created_by,
-      } = req.body;
+      const { lead_id, account_id, vendor_id, created_by } = req.body;
 
       if (!lead_id || !account_id || !vendor_id || !created_by) {
         return res.status(400).json({
@@ -1037,7 +1208,7 @@ export class BookingStageController {
           Number(vendor_id),
           Number(lead_id),
           photo.originalname,
-          photo.mimetype
+          photo.mimetype,
         );
 
         await fs.unlink(photo.path);
@@ -1072,20 +1243,19 @@ export class BookingStageController {
   public getCSPBooking = async (req: Request, res: Response) => {
     try {
       const { vendorId, leadId } = req.params;
-  
+
       if (!vendorId || !leadId) {
         return res.status(400).json({
           success: false,
           message: "vendorId and leadId are required",
         });
       }
-  
-      const result =
-        await this.bookingStageService.getCSPBookingService({
-          vendor_id: +vendorId,
-          lead_id: +leadId,
-        });
-  
+
+      const result = await this.bookingStageService.getCSPBookingService({
+        vendor_id: +vendorId,
+        lead_id: +leadId,
+      });
+
       return res.status(200).json({
         success: true,
         data: result,
@@ -1098,5 +1268,4 @@ export class BookingStageController {
       });
     }
   };
-
 }

@@ -1,4 +1,4 @@
-import { prisma } from '../prisma/client';
+import { prisma } from "../prisma/client";
 
 interface VendorTaxInfoPayload {
   tax_no: string;
@@ -18,7 +18,7 @@ export const createVendor = async (data: any) => {
     head_office_id,
     status,
     logo,
-    time_zone
+    time_zone,
   } = data;
 
   return await prisma.vendorMaster.create({
@@ -41,4 +41,46 @@ export const getAllVendors = async () => {
   return await prisma.vendorMaster.findMany({
     include: { addresses: true },
   });
+};
+
+export const getVendorUsers = async (vendorId: number) => {
+  const users = await prisma.userMaster.findMany({
+    where: {
+      vendor_id: vendorId,
+
+      // Exclude Admin and Super Admin
+      NOT: {
+        user_type_id: {
+          in: [1],
+        },
+      },
+    },
+
+    select: {
+      id: true,
+      user_name: true,
+    },
+  });
+
+  return users;
+};
+
+export const getVendorStatusTypes = async (vendorId: number) => {
+  const statusTypes = await prisma.statusTypeMaster.findMany({
+    where: {
+      vendor_id: vendorId,
+    },
+
+    select: {
+      id: true,
+      type: true,
+      tag: true,
+    },
+
+    orderBy: {
+      id: "asc",
+    },
+  });
+
+  return statusTypes;
 };
