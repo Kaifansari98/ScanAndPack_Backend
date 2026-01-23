@@ -8,9 +8,9 @@ const finalMeasurementController = new FinalMeasurementController();
 finalMeasurementRouter.post(
     "/onboard",
     uploadFinalMeasurement.fields([
-        { name: "final_measurement_doc", maxCount: 10 },
-        { name: "site_photos", maxCount: 10 },
-        { name: "site_photos[]", maxCount: 10 },
+        { name: "final_measurement_doc", maxCount: 30 },
+        { name: "site_photos", maxCount: 30 },
+        { name: "site_photos[]", maxCount: 30 },
     ]),
     finalMeasurementController.createFinalMeasurementStage
 );
@@ -34,8 +34,8 @@ finalMeasurementRouter.put(
 finalMeasurementRouter.post(
     "/add-files",
     uploadFinalMeasurement.fields([
-        { name: "site_photos", maxCount: 10 },
-        { name: "site_photos[]", maxCount: 10 },
+        { name: "site_photos", maxCount: 30 },
+        { name: "site_photos[]", maxCount: 30 },
     ]),
     finalMeasurementController.addMoreFinalMeasurementFiles
 );
