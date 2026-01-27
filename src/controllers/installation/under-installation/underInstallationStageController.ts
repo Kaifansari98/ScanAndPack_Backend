@@ -30,8 +30,8 @@ export class UnderInstallationStageController {
           .json(
             ApiResponse.error(
               "vendorId, leadId, and updated_by are required",
-              400
-            )
+              400,
+            ),
           );
       }
 
@@ -39,7 +39,7 @@ export class UnderInstallationStageController {
         await UnderInstallationStageService.moveLeadToUnderInstallation(
           vendorId,
           leadId,
-          updated_by
+          updated_by,
         );
 
       return res
@@ -47,13 +47,13 @@ export class UnderInstallationStageController {
         .json(
           ApiResponse.success(
             result,
-            "Lead successfully moved to Under Installation stage"
-          )
+            "Lead successfully moved to Under Installation stage",
+          ),
         );
     } catch (error: any) {
       logger.error(
         "[UnderInstallationStageController] moveLeadToUnderInstallation Error:",
-        error
+        error,
       );
       return res
         .status(500)
@@ -80,7 +80,7 @@ export class UnderInstallationStageController {
         vendorId,
         userId,
         limit,
-        page
+        page,
       );
 
       return res
@@ -88,13 +88,13 @@ export class UnderInstallationStageController {
         .json(
           ApiResponse.success(
             leads,
-            "Under Installation Stage leads fetched successfully"
-          )
+            "Under Installation Stage leads fetched successfully",
+          ),
         );
     } catch (error: any) {
       logger.error(
         "[UnderInstallationStageController] getAllUnderInstallationStageLeads Error:",
-        error
+        error,
       );
       return res
         .status(500)
@@ -108,17 +108,64 @@ export class UnderInstallationStageController {
    */
   async getAllLeadsWhichIncludesAnyMiscellaneousItem(
     req: Request,
-    res: Response
+    res: Response,
   ) {
     try {
       const vendorId = parseInt(req.params.vendorId);
       const userId = Number(req.body.userId);
       const page = parseInt((req.body.page as string) || "1");
       const limit = parseInt((req.body.limit as string) || "10");
+
+      // ============================
+      // DATE RANGE VALIDATION & NORMALIZATION
+      // ============================
+      let dateRange: { from: string; to: string } | undefined;
+
+      if (req.body.date_range) {
+        const { from, to } = req.body.date_range;
+
+        // Validate 'from' date
+        if (from && isNaN(Date.parse(from))) {
+          return res.status(400).json({
+            success: false,
+            message: "Invalid 'from' date format. Use YYYY-MM-DD or ISO format",
+          });
+        }
+
+        // Validate 'to' date
+        if (to && isNaN(Date.parse(to))) {
+          return res.status(400).json({
+            success: false,
+            message: "Invalid 'to' date format. Use YYYY-MM-DD or ISO format",
+          });
+        }
+
+        // 🔥 NORMALIZE: Single date becomes range
+        if (from && !to) {
+          dateRange = { from, to: from }; // Single date selection
+        } else if (from && to) {
+          // Validate from <= to
+          if (new Date(from) > new Date(to)) {
+            return res.status(400).json({
+              success: false,
+              message: "'from' date cannot be after 'to' date",
+            });
+          }
+          dateRange = { from, to };
+        } else if (!from && to) {
+          dateRange = { from: to, to }; // Only 'to' provided
+        }
+      }
+
+      // ============================
+      // COMPLETE FILTERS OBJECT
+      // ============================
       const filters = {
+        global_search: req.body.global_search,
         filter_lead_code: req.body.filter_lead_code,
         filter_name: req.body.filter_name,
         contact: req.body.contact,
+        stagetag: req.body.stagetag,
         furniture_type: req.body.furniture_type,
         furniture_structure: req.body.furniture_structure,
         site_map_link: req.body.site_map_link,
@@ -131,16 +178,41 @@ export class UnderInstallationStageController {
         alt_contact_no: req.body.alt_contact_no,
         email: req.body.email,
         designer_remark: req.body.designer_remark,
+        date_range: dateRange, // Normalized date range
       };
 
+      // ============================
+      // VALIDATION GATE
+      // ============================
       if (!vendorId || !userId) {
-        logger.warn("Missing vendorId or userId", { vendorId, userId });
+        logger.warn(
+          "[UnderInstallationStageController] Missing vendorId or userId",
+          {
+            vendorId,
+            userId,
+          },
+        );
         return res.status(400).json({
           success: false,
           message: "Vendor ID and User ID are required",
         });
       }
 
+      logger.info(
+        "[UnderInstallationStageController] getAllLeadsWhichIncludesAnyMiscellaneousItem called",
+        {
+          vendorId,
+          userId,
+          page,
+          limit,
+          dateRange,
+          filters,
+        },
+      );
+
+      // ============================
+      // SERVICE CALL
+      // ============================
       const { leads, count } = await BookingStageService.getUniversalTableData(
         vendorId,
         userId,
@@ -148,9 +220,12 @@ export class UnderInstallationStageController {
         page,
         limit,
         filters,
-        { requirePendingMiscellaneous: true }
+        { requirePendingMiscellaneous: true },
       );
 
+      // ============================
+      // RESPONSE
+      // ============================
       return res.status(200).json({
         success: true,
         message: "Universal table data fetched successfully",
@@ -170,7 +245,7 @@ export class UnderInstallationStageController {
         {
           error: error.message,
           stack: error.stack,
-        }
+        },
       );
       return res.status(500).json({
         success: false,
@@ -200,8 +275,8 @@ export class UnderInstallationStageController {
           .json(
             ApiResponse.error(
               "vendorId, leadId, updated_by, and actual_installation_start_date are required",
-              400
-            )
+              400,
+            ),
           );
       }
 
@@ -210,7 +285,7 @@ export class UnderInstallationStageController {
           vendorId,
           leadId,
           updated_by,
-          new Date(actual_installation_start_date)
+          new Date(actual_installation_start_date),
         );
 
       return res
@@ -218,13 +293,13 @@ export class UnderInstallationStageController {
         .json(
           ApiResponse.success(
             result,
-            "Actual installation start date updated successfully"
-          )
+            "Actual installation start date updated successfully",
+          ),
         );
     } catch (error: any) {
       logger.error(
         "[UnderInstallationStageController] setActualInstallationStartDate Error:",
-        error
+        error,
       );
       return res
         .status(500)
@@ -250,18 +325,18 @@ export class UnderInstallationStageController {
       const details =
         await UnderInstallationStageService.getUnderInstallationDetails(
           vendorId,
-          leadId
+          leadId,
         );
 
       return res
         .status(200)
         .json(
-          ApiResponse.success(details, "Under Installation details fetched")
+          ApiResponse.success(details, "Under Installation details fetched"),
         );
     } catch (error: any) {
       logger.error(
         "[UnderInstallationStageController] getUnderInstallationDetails Error:",
-        error
+        error,
       );
       return res
         .status(500)
@@ -286,8 +361,8 @@ export class UnderInstallationStageController {
           .json(
             ApiResponse.error(
               "vendorId, leadId, and updated_by are required",
-              400
-            )
+              400,
+            ),
           );
       }
 
@@ -295,7 +370,10 @@ export class UnderInstallationStageController {
         return res
           .status(400)
           .json(
-            ApiResponse.error("expected_installation_end_date is required", 400)
+            ApiResponse.error(
+              "expected_installation_end_date is required",
+              400,
+            ),
           );
       }
 
@@ -311,7 +389,7 @@ export class UnderInstallationStageController {
           leadId,
           updated_by,
           new Date(expected_installation_end_date),
-          installers
+          installers,
         );
 
       return res
@@ -319,13 +397,13 @@ export class UnderInstallationStageController {
         .json(
           ApiResponse.success(
             result,
-            "Installers added and expected installation end date updated successfully"
-          )
+            "Installers added and expected installation end date updated successfully",
+          ),
         );
     } catch (error: any) {
       logger.error(
         "[UnderInstallationStageController] addInstallersAndSetEndDate Error:",
-        error
+        error,
       );
       return res
         .status(500)
@@ -351,7 +429,7 @@ export class UnderInstallationStageController {
       const installers =
         await UnderInstallationStageService.getMappedInstallers(
           vendorId,
-          leadId
+          leadId,
         );
 
       return res
@@ -359,13 +437,13 @@ export class UnderInstallationStageController {
         .json(
           ApiResponse.success(
             installers,
-            "Mapped installers fetched successfully"
-          )
+            "Mapped installers fetched successfully",
+          ),
         );
     } catch (error: any) {
       logger.error(
         "[UnderInstallationStageController] getMappedInstallers Error:",
-        error
+        error,
       );
       return res
         .status(500)
@@ -390,8 +468,8 @@ export class UnderInstallationStageController {
           .json(
             ApiResponse.error(
               "vendorId, leadId, and updated_by are required",
-              400
-            )
+              400,
+            ),
           );
       }
 
@@ -404,8 +482,8 @@ export class UnderInstallationStageController {
           .json(
             ApiResponse.error(
               "At least one of expected_installation_end_date or installers must be provided",
-              400
-            )
+              400,
+            ),
           );
       }
 
@@ -417,7 +495,7 @@ export class UnderInstallationStageController {
           expected_installation_end_date
             ? new Date(expected_installation_end_date)
             : undefined,
-          installers
+          installers,
         );
 
       return res
@@ -425,13 +503,13 @@ export class UnderInstallationStageController {
         .json(
           ApiResponse.success(
             result,
-            "Installation details updated successfully"
-          )
+            "Installation details updated successfully",
+          ),
         );
     } catch (error: any) {
       logger.error(
         "[UnderInstallationStageController] updateInstallationDetails Error:",
-        error
+        error,
       );
       return res
         .status(500)
@@ -459,8 +537,8 @@ export class UnderInstallationStageController {
           .json(
             ApiResponse.error(
               "vendorId, leadId, and updated_by are required",
-              400
-            )
+              400,
+            ),
           );
       }
 
@@ -473,8 +551,8 @@ export class UnderInstallationStageController {
           .json(
             ApiResponse.error(
               "At least one of is_carcass_installation_completed or is_shutter_installation_completed must be provided",
-              400
-            )
+              400,
+            ),
           );
       }
 
@@ -484,7 +562,7 @@ export class UnderInstallationStageController {
           leadId,
           updated_by,
           is_carcass_installation_completed,
-          is_shutter_installation_completed
+          is_shutter_installation_completed,
         );
 
       return res
@@ -492,13 +570,13 @@ export class UnderInstallationStageController {
         .json(
           ApiResponse.success(
             result,
-            "Installation completion status updated successfully"
-          )
+            "Installation completion status updated successfully",
+          ),
         );
     } catch (error: any) {
       logger.error(
         "[UnderInstallationStageController] setInstallationCompletionStatus Error:",
-        error
+        error,
       );
       return res
         .status(500)
@@ -526,8 +604,8 @@ export class UnderInstallationStageController {
           .json(
             ApiResponse.error(
               "vendorId, leadId, and updated_by are required",
-              400
-            )
+              400,
+            ),
           );
       }
 
@@ -540,8 +618,8 @@ export class UnderInstallationStageController {
           .json(
             ApiResponse.error(
               "At least one of is_carcass_installation_completed or is_shutter_installation_completed must be provided",
-              400
-            )
+              400,
+            ),
           );
       }
 
@@ -552,7 +630,7 @@ export class UnderInstallationStageController {
           leadId,
           updated_by,
           is_carcass_installation_completed,
-          is_shutter_installation_completed
+          is_shutter_installation_completed,
         );
 
       return res
@@ -560,13 +638,13 @@ export class UnderInstallationStageController {
         .json(
           ApiResponse.success(
             result,
-            "Installation completion status updated successfully"
-          )
+            "Installation completion status updated successfully",
+          ),
         );
     } catch (error: any) {
       logger.error(
         "[UnderInstallationStageController] updateInstallationCompletionStatus Error:",
-        error
+        error,
       );
       return res
         .status(500)
@@ -615,7 +693,7 @@ export class UnderInstallationStageController {
             Number(vendorId),
             Number(leadId),
             file.originalname,
-            file.mimetype
+            file.mimetype,
           );
 
         await fs.unlink(file.path);
@@ -634,7 +712,7 @@ export class UnderInstallationStageController {
           Number(created_by),
           new Date(update_date),
           remark || null,
-          uploadedFiles
+          uploadedFiles,
         );
 
       return res.status(200).json({
@@ -646,7 +724,7 @@ export class UnderInstallationStageController {
     } catch (error: any) {
       logger.error(
         "[UnderInstallationStageController] uploadInstallationUpdatesDayWise Error:",
-        error
+        error,
       );
       return res.status(error.statusCode || 500).json({
         success: false,
@@ -674,7 +752,7 @@ export class UnderInstallationStageController {
       const data =
         await UnderInstallationStageService.getInstallationUpdatesDayWise(
           Number(vendorId),
-          Number(leadId)
+          Number(leadId),
         );
 
       return res.status(200).json({
@@ -685,7 +763,7 @@ export class UnderInstallationStageController {
     } catch (error: any) {
       logger.error(
         "[UnderInstallationStageController] getInstallationUpdatesDayWise Error:",
-        error
+        error,
       );
       return res.status(error.statusCode || 500).json({
         success: false,
@@ -729,7 +807,7 @@ export class UnderInstallationStageController {
               Number(vendorId),
               Number(leadId),
               file.originalname,
-              file.mimetype
+              file.mimetype,
             );
 
           await fs.unlink(file.path);
@@ -785,7 +863,7 @@ export class UnderInstallationStageController {
       const result =
         await UnderInstallationStageService.getAllMiscellaneousService(
           vendorId,
-          leadId
+          leadId,
         );
 
       return res.status(200).json({
@@ -897,7 +975,7 @@ export class UnderInstallationStageController {
 
       const data = await UnderInstallationStageService.getInstallationIssueLogs(
         vendor_id,
-        lead_id
+        lead_id,
       );
 
       return res.status(200).json({ success: true, data });
@@ -1022,14 +1100,14 @@ export class UnderInstallationStageController {
               Number(vendor_id),
               Number(lead_id),
               file.originalname,
-              file.mimetype
+              file.mimetype,
             )
           : await uploadToWasabiUnderInstallationUsableHandoverDocumentsFile(
               file.path,
               Number(vendor_id),
               Number(lead_id),
               file.originalname,
-              file.mimetype
+              file.mimetype,
             );
 
         await fs.unlink(file.path);
@@ -1070,7 +1148,7 @@ export class UnderInstallationStageController {
 
       const data = await UnderInstallationStageService.getUsableHandover(
         Number(vendor_id),
-        Number(lead_id)
+        Number(lead_id),
       );
 
       return res.status(200).json({ success: true, data });
@@ -1094,7 +1172,7 @@ export class UnderInstallationStageController {
       const data = await UnderInstallationStageService.updateRemarks(
         Number(vendor_id),
         Number(lead_id),
-        pending_work_details
+        pending_work_details,
       );
 
       return res.status(200).json({
@@ -1124,8 +1202,8 @@ export class UnderInstallationStageController {
           .json(
             ApiResponse.error(
               "vendorId, leadId, and updated_by are required",
-              400
-            )
+              400,
+            ),
           );
       }
 
@@ -1133,7 +1211,7 @@ export class UnderInstallationStageController {
         await UnderInstallationStageService.moveLeadToFinalHandover(
           vendorId,
           leadId,
-          updated_by
+          updated_by,
         );
 
       return res
@@ -1141,13 +1219,13 @@ export class UnderInstallationStageController {
         .json(
           ApiResponse.success(
             result,
-            "Lead successfully moved to Final Handover stage"
-          )
+            "Lead successfully moved to Final Handover stage",
+          ),
         );
     } catch (error: any) {
       logger.error(
         "[UnderInstallationStageController] moveLeadToFinalHandover Error:",
-        error
+        error,
       );
 
       return res
@@ -1213,7 +1291,7 @@ export class UnderInstallationStageController {
 
       const result = await service.checkLeadReadyForFinalHandover(
         Number(vendorId),
-        Number(leadId)
+        Number(leadId),
       );
 
       return res.json({

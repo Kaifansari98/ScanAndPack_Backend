@@ -14,7 +14,10 @@ import {
 } from "../../../utils/wasabiClient";
 import fs from "node:fs/promises";
 import { prisma } from "../../../prisma/client";
-import { sendLeadAssignedToSiteSupervisorEmail, sendMajorMilestoneEmail } from "../../../services/email/brevoEmail.service";
+import {
+  sendLeadAssignedToSiteSupervisorEmail,
+  sendMajorMilestoneEmail,
+} from "../../../services/email/brevoEmail.service";
 
 const resolveClientBaseUrl = (req: Request): string => {
   const origin = req.headers.origin;
