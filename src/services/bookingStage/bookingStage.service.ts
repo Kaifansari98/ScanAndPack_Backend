@@ -1446,11 +1446,11 @@ export class BookingStageService {
       alt_contact_no?: string;
       email?: string;
       designer_remark?: string;
+      date_range?: { from: string; to: string };
     } = {},
     options: {
       requireMiscellaneous?: boolean;
       requirePendingMiscellaneous?: boolean;
-      date_range?: { from: string; to: string };
     } = {},
   ): Promise<{ leads: any[]; count: number }> {
     logger.info("[BookingStageService] getUniversalTableData called", {
