@@ -1,4 +1,5 @@
 import { prisma } from "../../../prisma/client";
+import { sanitizeFilename } from "../../../utils/sanitizeFilename";
 import logger from "../../../utils/logger";
 
 // 🧩 Define this at the top of your service file
@@ -26,6 +27,27 @@ interface BackendData {
 }
 
 export class OrderLoginService {
+  private async getOrderLoginPoDocType(
+    vendorId: number,
+    createIfMissing: boolean = true
+  ) {
+    let docType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id: vendorId, tag: "Type 18" },
+    });
+
+    if (!docType && createIfMissing) {
+      docType = await prisma.documentTypeMaster.create({
+        data: {
+          vendor_id: vendorId,
+          tag: "Type 18",
+          type: "Order Login PO Files",
+        },
+      });
+    }
+
+    return docType;
+  }
+
   async uploadFileBreakups(vendorId: number, payload: any) {
     const {
       lead_id,
@@ -522,6 +544,96 @@ export class OrderLoginService {
     }
 
     return uploadedDocs;
+  }
+
+  async uploadOrderLoginPoFiles(
+    vendorId: number,
+    leadId: number,
+    accountId: number,
+    userId: number,
+    files: { originalName: string; sysName: string }[]
+  ) {
+    if (!vendorId || !leadId || !accountId || !userId) {
+      const error = new Error("vendorId, leadId, accountId, and userId are required");
+      (error as any).statusCode = 400;
+      throw error;
+    }
+
+    if (!files || files.length === 0) {
+      const error = new Error("No files provided for upload");
+      (error as any).statusCode = 400;
+      throw error;
+    }
+
+    const docType = await this.getOrderLoginPoDocType(vendorId);
+    if (!docType) throw new Error("Doc Type (Type 18) not found");
+
+    const uploadedDocs = [];
+
+    for (const file of files) {
+      const savedDoc = await prisma.leadDocuments.create({
+        data: {
+          doc_og_name: file.originalName,
+          doc_sys_name: file.sysName,
+          created_by: userId,
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          doc_type_id: docType.id,
+        },
+      });
+
+      uploadedDocs.push(savedDoc);
+    }
+
+    return uploadedDocs;
+  }
+
+  async getOrderLoginPoFiles(
+    vendorId: number,
+    leadId: number,
+    orderLoginId: number
+  ) {
+    if (!vendorId || !leadId || !orderLoginId) {
+      const error = new Error("vendorId, leadId, and orderLoginId are required");
+      (error as any).statusCode = 400;
+      throw error;
+    }
+
+    const orderLogin = await prisma.orderLoginDetails.findFirst({
+      where: { id: orderLoginId, vendor_id: vendorId, lead_id: leadId },
+    });
+
+    if (!orderLogin) {
+      const error = new Error("Order login record not found.");
+      (error as any).statusCode = 404;
+      throw error;
+    }
+
+    const docType = await this.getOrderLoginPoDocType(vendorId, false);
+    if (!docType) {
+      return [];
+    }
+
+    const safeCardName = sanitizeFilename(orderLogin.item_type || "card");
+    const prefix = `order_login_po/${vendorId}/${leadId}/${safeCardName}/`;
+
+    return prisma.leadDocuments.findMany({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        doc_type_id: docType.id,
+        is_deleted: false,
+        doc_sys_name: { startsWith: prefix },
+      },
+      orderBy: { created_at: "asc" },
+      select: {
+        id: true,
+        doc_og_name: true,
+        doc_sys_name: true,
+        created_at: true,
+      },
+    });
   }
 
   async updateLeadToProductionStage({

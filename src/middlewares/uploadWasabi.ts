@@ -356,6 +356,65 @@ export const uploadProductionFiles = multer({
   },
 });
 
+export const uploadOrderLoginPoFiles = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/order_login_po_files";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 10 },
+  fileFilter: (req, file, cb) => {
+    const allowedExtensions = [
+      ".pdf",
+      ".pyo",
+      ".pytha",
+      ".dwg",
+      ".dxf",
+      ".stl",
+      ".step",
+      ".stp",
+      ".iges",
+      ".igs",
+      ".3ds",
+      ".obj",
+      ".skp",
+      ".sldprt",
+      ".sldasm",
+      ".prt",
+      ".catpart",
+      ".catproduct",
+      ".zip",
+      ".jpg",
+      ".jpeg",
+      ".png",
+      ".gif",
+      ".webp",
+      ".bmp",
+      ".tif",
+      ".tiff",
+    ];
+
+    const ext = path.extname(file.originalname).toLowerCase();
+
+    if (allowedExtensions.includes(ext)) {
+      cb(null, true);
+    } else {
+      cb(
+        new Error(
+          `Only design or image files are allowed! Supported extensions: ${allowedExtensions.join(
+            ", "
+          )}. Received: ${ext}`
+        )
+      );
+    }
+  },
+});
+
 export const uploadPostProductionFiles = multer({
   storage: multer.diskStorage({
     destination: (_req, _file, cb) => {
