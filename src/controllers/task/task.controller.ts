@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { TaskService } from "../../services/task/task.service";
-import logger from "src/utils/logger";
+import logger from "../../../src/utils/logger";
 import { date } from "joi";
 
 export class TaskController {
