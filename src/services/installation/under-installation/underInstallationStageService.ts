@@ -907,7 +907,9 @@ export class UnderInstallationStageService {
           )?.type ?? null
         : null;
 
-      const miscRemark = `**${reorder_material_details}** - ${problem_description}`;
+      const miscTaskKey = `[misc:${misc.id}]`;
+      const miscRemarkDetail = `**${reorder_material_details}** - ${problem_description}`;
+      const miscRemark = `${miscTaskKey} ${miscRemarkDetail}`;
 
       await tx.userLeadTask.create({
         data: {
@@ -1007,9 +1009,8 @@ export class UnderInstallationStageService {
         vendor_id,
         lead_id,
         task_type: "Miscellaneous",
-        status: "open",
       },
-      select: { id: true, task_type: true, remark: true },
+      select: { id: true, task_type: true, remark: true, status: true },
     });
 
     // ➜ Attach signed URLs for documents
@@ -1032,7 +1033,12 @@ export class UnderInstallationStageService {
         );
 
         const remarkKey = `**${m.reorder_material_details}** - ${m.problem_description}`;
-        const taskForMisc = miscTasks.find((t) => t.remark === remarkKey);
+        const miscTaskKey = `[misc:${m.id}]`;
+        const taskForMisc = miscTasks.find(
+          (t) =>
+            (t.remark && t.remark.includes(miscTaskKey)) ||
+            t.remark === remarkKey
+        );
 
         return {
           id: m.id,
@@ -1060,7 +1066,11 @@ export class UnderInstallationStageService {
           })),
           documents: docs,
           task: taskForMisc
-            ? { id: taskForMisc.id, task_type: taskForMisc.task_type }
+            ? {
+                id: taskForMisc.id,
+                task_type: taskForMisc.task_type,
+                status: taskForMisc.status,
+              }
             : null,
         };
       })
@@ -1075,25 +1085,102 @@ export class UnderInstallationStageService {
     expected_ready_date,
     updated_by,
   }: UpdateERDInput) {
-    // Ensure Misc entry exists & belongs to vendor
-    const existing = await prisma.miscellaneousMaster.findFirst({
-      where: { id: misc_id, vendor_id },
+    return prisma.$transaction(async (tx) => {
+      // Ensure Misc entry exists & belongs to vendor
+      const existing = await tx.miscellaneousMaster.findFirst({
+        where: { id: misc_id, vendor_id },
+        select: {
+          id: true,
+          lead_id: true,
+          account_id: true,
+          reorder_material_details: true,
+          problem_description: true,
+        },
+      });
+
+      if (!existing) {
+        throw new Error("Miscellaneous record not found");
+      }
+
+      // Update only the ERD
+      const updated = await tx.miscellaneousMaster.update({
+        where: { id: misc_id },
+        data: {
+          expected_ready_date: new Date(expected_ready_date),
+          updated_by,
+        },
+      });
+
+      const miscTaskKey = `[misc:${existing.id}]`;
+      const miscRemarkDetail = `**${existing.reorder_material_details}** - ${existing.problem_description}`;
+      const miscRemark = `${miscTaskKey} ${miscRemarkDetail}`;
+      const factoryUser = await tx.userMaster.findFirst({
+        where: {
+          vendor_id,
+          status: "active",
+          user_type: { user_type: { equals: "factory", mode: "insensitive" } },
+        },
+        select: { id: true },
+      });
+
+      if (!factoryUser) {
+        throw new Error("Factory user not found for this vendor.");
+      }
+
+      const leadStageRecord = await tx.leadMaster.findUnique({
+        where: { id: existing.lead_id },
+        select: { status_id: true },
+      });
+      const leadStage = leadStageRecord?.status_id
+        ? (
+            await tx.statusTypeMaster.findUnique({
+              where: { id: leadStageRecord.status_id },
+              select: { type: true },
+            })
+          )?.type ?? null
+        : null;
+
+      const existingTask = await tx.userLeadTask.findFirst({
+        where: {
+          vendor_id,
+          lead_id: existing.lead_id,
+          task_type: "Miscellaneous",
+          OR: [
+            { remark: { contains: miscTaskKey } },
+            { remark: miscRemarkDetail },
+          ],
+        },
+        select: { id: true },
+      });
+
+      if (existingTask) {
+        await tx.userLeadTask.update({
+          where: { id: existingTask.id },
+          data: {
+            due_date: new Date(expected_ready_date),
+            remark: `${miscTaskKey} ERD date set. Mark as completed when it is ready.`,
+            updated_by,
+          },
+        });
+      } else {
+        await tx.userLeadTask.create({
+          data: {
+            vendor_id,
+            lead_id: existing.lead_id,
+            account_id: existing.account_id,
+            user_id: factoryUser.id,
+            task_type: "Miscellaneous",
+            lead_stage: leadStage,
+            due_date: new Date(expected_ready_date),
+            remark: miscRemark,
+            status: "open",
+            created_by: updated_by,
+          },
+        });
+      }
+
+      return updated;
     });
-
-    if (!existing) {
-      throw new Error("Miscellaneous record not found");
-    }
-
-    // Update only the ERD
-    const updated = await prisma.miscellaneousMaster.update({
-      where: { id: misc_id },
-      data: {
-        expected_ready_date: new Date(expected_ready_date),
-        updated_by,
-      },
-    });
-
-    return updated;
   }
 
   static async addInstallationIssueLog(payload: InstallIssueLogPayload) {
@@ -1528,6 +1615,7 @@ export class UnderInstallationStageService {
       },
       select: {
         is_carcass_installation_completed: true,
+        is_shutter_installation_completed: true,
         expected_installation_end_date: true,
       },
     });
@@ -1544,12 +1632,14 @@ export class UnderInstallationStageService {
 
     const conditions = {
       carcassCompleted: lead.is_carcass_installation_completed === true,
+      shutterCompleted: lead.is_shutter_installation_completed === true,
       expectedEndDateFilled: lead.expected_installation_end_date !== null,
       installersAssigned: installerCount > 0,
     };
 
     const isReady =
       conditions.carcassCompleted &&
+      conditions.shutterCompleted &&
       conditions.expectedEndDateFilled &&
       conditions.installersAssigned;
 
@@ -1557,6 +1647,7 @@ export class UnderInstallationStageService {
       isReady,
       details: {
         carcassCompleted: conditions.carcassCompleted,
+        shutterCompleted: conditions.shutterCompleted,
         expectedEndDateFilled: conditions.expectedEndDateFilled,
         installersAssigned: installerCount,
       },
@@ -1577,6 +1668,7 @@ export class UnderInstallationStageService {
       },
       select: {
         is_carcass_installation_completed: true,
+        is_shutter_installation_completed: true,
         expected_installation_end_date: true,
       },
     });
@@ -1599,6 +1691,7 @@ export class UnderInstallationStageService {
     // Compute readiness
     const isReady =
       lead.is_carcass_installation_completed === true &&
+      lead.is_shutter_installation_completed === true &&
       lead.expected_installation_end_date !== null &&
       installerCount > 0;
 
@@ -1610,6 +1703,7 @@ export class UnderInstallationStageService {
         ? null
         : this.getInstallationFailMessage(
             lead.is_carcass_installation_completed,
+            lead.is_shutter_installation_completed,
             lead.expected_installation_end_date,
             installerCount
           ),
@@ -1619,10 +1713,14 @@ export class UnderInstallationStageService {
   /** 🔥 Custom descriptive message for base installation check */
   private getInstallationFailMessage(
     carcass: boolean | null,
+    shutter: boolean | null,
     expectedEnd: Date | null,
     installers: number
   ) {
+    if (!carcass && !shutter)
+      return "Carcass and shutter installation is not completed.";
     if (!carcass) return "Carcass installation is not completed.";
+    if (!shutter) return "Shutter installation is not completed.";
     if (!expectedEnd)
       return "Expected installation completion date is not set.";
     if (installers === 0)
@@ -1749,8 +1847,35 @@ export class UnderInstallationStageService {
         },
       });
 
-      // Mark the corresponding Miscellaneous task as completed (if present)
-      const miscRemark = `**${existing.reorder_material_details}** - ${existing.problem_description}`;
+      return updated;
+    });
+  }
+
+  static async markMiscTaskReady(payload: {
+    vendor_id: number;
+    lead_id: number;
+    misc_id: number;
+    ready_by: number;
+  }) {
+    const { vendor_id, lead_id, misc_id, ready_by } = payload;
+
+    return prisma.$transaction(async (tx) => {
+      const existing = await tx.miscellaneousMaster.findFirst({
+        where: {
+          id: misc_id,
+          vendor_id,
+          lead_id,
+        },
+      });
+
+      if (!existing) {
+        throw Object.assign(new Error("Miscellaneous entry not found"), {
+          statusCode: 404,
+        });
+      }
+
+      const miscTaskKey = `[misc:${existing.id}]`;
+      const miscRemarkDetail = `**${existing.reorder_material_details}** - ${existing.problem_description}`;
 
       await tx.userLeadTask.updateMany({
         where: {
@@ -1758,19 +1883,22 @@ export class UnderInstallationStageService {
           lead_id,
           account_id: existing.account_id,
           task_type: "Miscellaneous",
-          remark: miscRemark,
+          OR: [
+            { remark: { contains: miscTaskKey } },
+            { remark: miscRemarkDetail },
+          ],
           status: "open",
         },
         data: {
           status: "completed",
-          closed_by: resolved_by,
+          closed_by: ready_by,
           closed_at: new Date(),
-          updated_by: resolved_by,
+          updated_by: ready_by,
           updated_at: new Date(),
         },
       });
 
-      return updated;
+      return { ok: true };
     });
   }
 }

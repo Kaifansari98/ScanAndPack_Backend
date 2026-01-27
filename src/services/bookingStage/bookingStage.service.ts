@@ -15,6 +15,7 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import logger from "../../utils/logger";
 import { isLeadComplete } from "../../validations/leadValidation";
 import { cache } from "../../utils/cache";
+import { sendPaymentAddedEmail } from "../email/brevoEmail.service";
 
 export class BookingStageService {
   // Helper to avoid repeating include structure
@@ -1445,6 +1446,10 @@ export class BookingStageService {
       alt_contact_no?: string;
       email?: string;
       designer_remark?: string;
+    } = {},
+    options: {
+      requireMiscellaneous?: boolean;
+      requirePendingMiscellaneous?: boolean;
       date_range?: { from: string; to: string };
     } = {},
   ): Promise<{ leads: any[]; count: number }> {
@@ -1850,6 +1855,12 @@ export class BookingStageService {
         }
       }
 
+      if (options.requirePendingMiscellaneous) {
+        addAnd({ miscellaneousMaster: { some: { is_resolved: false } } });
+      } else if (options.requireMiscellaneous) {
+        addAnd({ miscellaneousMaster: { some: {} } });
+      }
+
       return whereClause;
     };
 
@@ -2135,12 +2146,13 @@ export class BookingStageService {
   }
 
   public async addPayment(data: AddPaymentDto) {
-    return await prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx) => {
       const response: any = {
         payment: null,
         ledger: null,
         documentsUploaded: [],
         message: "Payment recorded successfully",
+        paymentTypeName: null,
       };
 
       // 1️⃣ Fetch Lead
@@ -2167,6 +2179,7 @@ export class BookingStageService {
           "Payment type (Additional Payment) not found for this vendor",
         );
       }
+      response.paymentTypeName = paymentType.type;
 
       // 4️⃣ Save Payment Proof (Optional)
       let paymentFileId: number | null = null;
@@ -2282,6 +2295,89 @@ export class BookingStageService {
 
       return response;
     });
+
+    try {
+      const [leadInfo, updatedByUser, admins] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: data.lead_id },
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            account_id: true,
+          },
+        }),
+        prisma.userMaster.findUnique({
+          where: { id: data.created_by },
+          select: { user_name: true },
+        }),
+        prisma.userMaster.findMany({
+          where: {
+            vendor_id: data.vendor_id,
+            status: "active",
+            user_type: {
+              user_type: { in: ["admin", "super-admin"], mode: "insensitive" },
+            },
+          },
+          select: { id: true, user_name: true, user_email: true },
+        }),
+      ]);
+
+      const leadCode =
+        leadInfo?.lead_code ?? `LEAD-${String(data.lead_id).padStart(4, "0")}`;
+      const leadName = `${leadInfo?.firstname ?? ""} ${
+        leadInfo?.lastname ?? ""
+      }`.trim();
+      const updatedByName = updatedByUser?.user_name ?? "User";
+      const amountText = `₹${data.amount.toLocaleString("en-IN")}`;
+      const paymentTypeName = result.paymentTypeName || "Payment";
+      const baseUrl =
+        process.env.CLIENT_BASE_URL ||
+        process.env.FRONTEND_URL ||
+        "http://localhost:3000";
+      const leadUrl = leadInfo?.account_id
+        ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${leadInfo.account_id}`
+        : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;
+
+      await Promise.allSettled(
+        admins.map(async (admin) => {
+          await NotificationService.createAndSend({
+            vendor_id: data.vendor_id,
+            user_id: admin.id,
+            sender_id: data.created_by,
+            type: NotificationType.LEAD_ACTION,
+            title: "Payment added",
+            message: `Payment added for ${leadCode} - ${leadName} by ${updatedByName}.`,
+            entity_type: "lead",
+            entity_id: data.lead_id,
+            redirect_url: `/dashboard/leads/details/${data.lead_id}${
+              leadInfo?.account_id ? `?accountId=${leadInfo.account_id}` : ""
+            }`,
+          });
+
+          if (!admin.user_email) return;
+
+          await sendPaymentAddedEmail({
+            vendor_id: data.vendor_id,
+            toEmail: admin.user_email,
+            toName: admin.user_name ?? undefined,
+            leadCode,
+            leadName: leadName || "Lead",
+            amount: amountText,
+            paymentType: paymentTypeName,
+            updatedBy: updatedByName,
+            leadUrl,
+          });
+        })
+      );
+    } catch (notifyError: any) {
+      logger.warn("⚠️ Failed to send payment notifications", {
+        error: notifyError?.message,
+        lead_id: data.lead_id,
+      });
+    }
+
+    return result;
   }
 
   public async getPaymentsByLead(leadId: number, vendorId: number) {

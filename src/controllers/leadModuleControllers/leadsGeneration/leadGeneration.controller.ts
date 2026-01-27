@@ -198,6 +198,7 @@ export class LeadController {
           const creatorRole = createdByUser?.user_type?.user_type?.toLowerCase();
           const isAdminCreator =
             creatorRole === "admin" || creatorRole === "super-admin";
+          const isSalesExecutiveCreator = creatorRole === "sales-executive";
           const isCreatorAssignee =
             Boolean(value.assign_to) &&
             value.assign_to === value.created_by;
@@ -255,7 +256,10 @@ export class LeadController {
           const furnitureStructure =
             productStructures.map((item) => item.type).join(", ") || "—";
 
-          if (value.assign_to) {
+          if (
+            value.assign_to &&
+            !(isSalesExecutiveCreator && isCreatorAssignee)
+          ) {
             await NotificationService.createAndSend({
               vendor_id: value.vendor_id,
               user_id: value.assign_to,

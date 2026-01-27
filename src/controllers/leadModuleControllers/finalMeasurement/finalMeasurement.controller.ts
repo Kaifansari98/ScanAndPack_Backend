@@ -4,7 +4,10 @@ import logger from "../../../utils/logger";
 import { prisma } from "../../../prisma/client";
 import { NotificationService } from "../../../services/notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
-import { sendTaskAssignedEmail } from "../../../services/email/brevoEmail.service";
+import {
+  sendMajorMilestoneEmail,
+  sendTaskAssignedEmail,
+} from "../../../services/email/brevoEmail.service";
 
 const resolveClientBaseUrl = (req: Request): string => {
   const origin = req.headers.origin;
@@ -629,56 +632,94 @@ export class FinalMeasurementController {
       try {
         const vendorId = result.lead.vendor_id;
         const accountId = result.lead.account_id;
-        const [admins, mappings, lead] = await Promise.all([
-          prisma.userMaster.findMany({
-            where: {
-              vendor_id: vendorId,
-              user_type: { user_type: { in: ["admin", "super-admin"] } },
-            },
-            select: { id: true },
-          }),
-          prisma.leadUserMapping.findMany({
-            where: {
-              vendor_id: vendorId,
-              lead_id: leadId,
-              status: "active",
-            },
-            select: { user_id: true },
-          }),
-          prisma.leadMaster.findUnique({
-            where: { id: leadId },
-            select: { firstname: true, lastname: true },
-          }),
-        ]);
-
-        const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
-        const recipientIds = new Set<number>();
-        admins.forEach((admin) => recipientIds.add(admin.id));
-        mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
-
-        if (recipientIds.size > 0) {
-          const redirectUrl = accountId
-            ? `/dashboard/leads/details/${leadId}?accountId=${accountId}`
-            : `/dashboard/leads/details/${leadId}`;
-
-          await Promise.all(
-            Array.from(recipientIds).map((recipientId) =>
-              NotificationService.createAndSend({
+        const isFinalMeasurements =
+          task_type.trim().toLowerCase() === "final measurements";
+        if (isFinalMeasurements) {
+          const [admins, mappings, lead] = await Promise.all([
+            prisma.userMaster.findMany({
+              where: {
                 vendor_id: vendorId,
-                user_id: recipientId,
-                sender_id: Number(actorId) || null,
-                type: NotificationType.LEAD_MILESTONE,
-                title: "Lead moved to Project",
-                message:
-                  leadName.length > 0
-                    ? `Lead ${leadName} moved to Project stage.`
-                    : "Lead moved to Project stage.",
-                entity_type: "lead",
-                entity_id: leadId,
-                redirect_url: redirectUrl,
-              })
-            )
-          );
+                user_type: { user_type: { in: ["admin", "super-admin"] } },
+              },
+              select: { id: true },
+            }),
+            prisma.leadUserMapping.findMany({
+              where: {
+                vendor_id: vendorId,
+                lead_id: leadId,
+                status: "active",
+              },
+              select: { user_id: true },
+            }),
+            prisma.leadMaster.findUnique({
+              where: { id: leadId },
+              select: { firstname: true, lastname: true, lead_code: true },
+            }),
+          ]);
+
+          const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+          const leadCode =
+            lead?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+          const recipientIds = new Set<number>();
+          admins.forEach((admin) => recipientIds.add(admin.id));
+          mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
+
+          if (recipientIds.size > 0) {
+            const redirectUrl = accountId
+              ? `/dashboard/leads/details/${leadId}?accountId=${accountId}`
+              : `/dashboard/leads/details/${leadId}`;
+
+            await Promise.all(
+              Array.from(recipientIds).map((recipientId) =>
+                NotificationService.createAndSend({
+                  vendor_id: vendorId,
+                  user_id: recipientId,
+                  sender_id: Number(actorId) || null,
+                  type: NotificationType.LEAD_MILESTONE,
+                  title: "Lead moved to Project",
+                  message:
+                    leadName.length > 0
+                      ? `Lead ${leadName} moved to Project stage.`
+                      : "Lead moved to Project stage.",
+                  entity_type: "lead",
+                  entity_id: leadId,
+                  redirect_url: redirectUrl,
+                })
+              )
+            );
+
+            const users = await prisma.userMaster.findMany({
+              where: {
+                id: { in: Array.from(recipientIds) },
+                status: "active",
+              },
+              select: { id: true, user_name: true, user_email: true },
+            });
+            const clientBaseUrl = resolveClientBaseUrl(req);
+            const detailsUrl = `${clientBaseUrl}${redirectUrl}`;
+            const completedOn = new Date().toLocaleDateString("en-IN", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            });
+
+            await Promise.allSettled(
+              users
+                .filter((user) => user.user_email)
+                .map((user) =>
+                  sendMajorMilestoneEmail({
+                    vendor_id: vendorId,
+                    toEmail: user.user_email!,
+                    toName: user.user_name ?? undefined,
+                    leadCode,
+                    leadName: leadName || "Lead",
+                    milestoneName: "Lead to Project",
+                    completedOn,
+                    detailsUrl,
+                  })
+                )
+            );
+          }
         }
       } catch (milestoneError: any) {
         logger.warn("⚠️ Failed to send lead milestone notification", {

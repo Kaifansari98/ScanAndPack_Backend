@@ -9,6 +9,7 @@ import {
 } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
 import fs from "node:fs/promises";
+import { BookingStageService } from "../../../services/bookingStage/bookingStage.service";
 
 const service = new UnderInstallationStageService();
 
@@ -98,6 +99,83 @@ export class UnderInstallationStageController {
       return res
         .status(500)
         .json(ApiResponse.error(error.message || "Internal server error", 500));
+    }
+  }
+
+  /**
+   * ✅ Get all Under Installation leads with any Miscellaneous items
+   * @route POST /installation/under-installation/vendorId/:vendorId/get-all-leads-which-includes-any-miscellaneous-item
+   */
+  async getAllLeadsWhichIncludesAnyMiscellaneousItem(
+    req: Request,
+    res: Response
+  ) {
+    try {
+      const vendorId = parseInt(req.params.vendorId);
+      const userId = Number(req.body.userId);
+      const page = parseInt((req.body.page as string) || "1");
+      const limit = parseInt((req.body.limit as string) || "10");
+      const filters = {
+        filter_lead_code: req.body.filter_lead_code,
+        filter_name: req.body.filter_name,
+        contact: req.body.contact,
+        furniture_type: req.body.furniture_type,
+        furniture_structure: req.body.furniture_structure,
+        site_map_link: req.body.site_map_link,
+        site_type: req.body.site_type,
+        assign_to: req.body.assign_to,
+        site_address: req.body.site_address,
+        archetech_name: req.body.archetech_name,
+        source: req.body.source,
+        created_at: req.body.created_at,
+        alt_contact_no: req.body.alt_contact_no,
+        email: req.body.email,
+        designer_remark: req.body.designer_remark,
+      };
+
+      if (!vendorId || !userId) {
+        logger.warn("Missing vendorId or userId", { vendorId, userId });
+        return res.status(400).json({
+          success: false,
+          message: "Vendor ID and User ID are required",
+        });
+      }
+
+      const { leads, count } = await BookingStageService.getUniversalTableData(
+        vendorId,
+        userId,
+        "Type 15",
+        page,
+        limit,
+        filters,
+        { requirePendingMiscellaneous: true }
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Universal table data fetched successfully",
+        count,
+        data: leads,
+        pagination: {
+          currentPage: page,
+          totalPages: Math.ceil(count / limit),
+          totalRecords: count,
+          hasNext: page * limit < count,
+          hasPrev: page > 1,
+        },
+      });
+    } catch (error: any) {
+      logger.error(
+        "[UnderInstallationStageController] getAllLeadsWhichIncludesAnyMiscellaneousItem Error:",
+        {
+          error: error.message,
+          stack: error.stack,
+        }
+      );
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Something went wrong",
+      });
     }
   }
 
@@ -1181,6 +1259,41 @@ export class UnderInstallationStageController {
       });
     } catch (err: any) {
       console.error("❌ Error in resolveMiscellaneousEntry:", err.message);
+      return res.status(500).json({
+        success: false,
+        error: err.message || "Something went wrong",
+      });
+    }
+  }
+
+  async markMiscellaneousTaskReady(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+      const miscId = Number(req.params.miscId);
+
+      const { ready_by } = req.body;
+
+      if (!ready_by) {
+        return res.status(400).json({
+          success: false,
+          message: "ready_by (userId) is required",
+        });
+      }
+
+      await UnderInstallationStageService.markMiscTaskReady({
+        vendor_id: vendorId,
+        lead_id: leadId,
+        misc_id: miscId,
+        ready_by: Number(ready_by),
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Miscellaneous task marked as ready",
+      });
+    } catch (err: any) {
+      console.error("❌ Error in markMiscellaneousTaskReady:", err.message);
       return res.status(500).json({
         success: false,
         error: err.message || "Something went wrong",

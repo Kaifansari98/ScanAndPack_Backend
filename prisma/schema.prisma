@@ -1226,6 +1226,7 @@ enum NotificationType {
   TASK_ASSIGNED
   CHAT_MENTION
   LEAD_MILESTONE
+  LEAD_ACTION
 }
 
 enum BoxStatus {

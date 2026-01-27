@@ -51,6 +51,7 @@ bookingStageRouter.get(
 );
 
 // post filter route route
+
 bookingStageRouter.post(
   "/universal-table-data-2/vendorId/:vendorId",
   bookingStageController.getUniversalTableData2,
