@@ -48,6 +48,7 @@ export type CompanyVendorsMasterMinAggregateOutputType = {
   vendor_code: string | null
   company_name: string | null
   point_of_contact: string | null
+  in_house: boolean | null
   contact_no: string | null
   email: string | null
   address: string | null
@@ -66,6 +67,7 @@ export type CompanyVendorsMasterMaxAggregateOutputType = {
   vendor_code: string | null
   company_name: string | null
   point_of_contact: string | null
+  in_house: boolean | null
   contact_no: string | null
   email: string | null
   address: string | null
@@ -84,6 +86,7 @@ export type CompanyVendorsMasterCountAggregateOutputType = {
   vendor_code: number
   company_name: number
   point_of_contact: number
+  in_house: number
   contact_no: number
   email: number
   address: number
@@ -120,6 +123,7 @@ export type CompanyVendorsMasterMinAggregateInputType = {
   vendor_code?: true
   company_name?: true
   point_of_contact?: true
+  in_house?: true
   contact_no?: true
   email?: true
   address?: true
@@ -138,6 +142,7 @@ export type CompanyVendorsMasterMaxAggregateInputType = {
   vendor_code?: true
   company_name?: true
   point_of_contact?: true
+  in_house?: true
   contact_no?: true
   email?: true
   address?: true
@@ -156,6 +161,7 @@ export type CompanyVendorsMasterCountAggregateInputType = {
   vendor_code?: true
   company_name?: true
   point_of_contact?: true
+  in_house?: true
   contact_no?: true
   email?: true
   address?: true
@@ -261,6 +267,7 @@ export type CompanyVendorsMasterGroupByOutputType = {
   vendor_code: string
   company_name: string
   point_of_contact: string
+  in_house: boolean
   contact_no: string
   email: string | null
   address: string | null
@@ -302,6 +309,7 @@ export type CompanyVendorsMasterWhereInput = {
   vendor_code?: Prisma.StringFilter<"CompanyVendorsMaster"> | string
   company_name?: Prisma.StringFilter<"CompanyVendorsMaster"> | string
   point_of_contact?: Prisma.StringFilter<"CompanyVendorsMaster"> | string
+  in_house?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
   contact_no?: Prisma.StringFilter<"CompanyVendorsMaster"> | string
   email?: Prisma.StringNullableFilter<"CompanyVendorsMaster"> | string | null
   address?: Prisma.StringNullableFilter<"CompanyVendorsMaster"> | string | null
@@ -325,6 +333,7 @@ export type CompanyVendorsMasterOrderByWithRelationInput = {
   vendor_code?: Prisma.SortOrder
   company_name?: Prisma.SortOrder
   point_of_contact?: Prisma.SortOrder
+  in_house?: Prisma.SortOrder
   contact_no?: Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -351,6 +360,7 @@ export type CompanyVendorsMasterWhereUniqueInput = Prisma.AtLeast<{
   vendor_code?: Prisma.StringFilter<"CompanyVendorsMaster"> | string
   company_name?: Prisma.StringFilter<"CompanyVendorsMaster"> | string
   point_of_contact?: Prisma.StringFilter<"CompanyVendorsMaster"> | string
+  in_house?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
   contact_no?: Prisma.StringFilter<"CompanyVendorsMaster"> | string
   email?: Prisma.StringNullableFilter<"CompanyVendorsMaster"> | string | null
   address?: Prisma.StringNullableFilter<"CompanyVendorsMaster"> | string | null
@@ -374,6 +384,7 @@ export type CompanyVendorsMasterOrderByWithAggregationInput = {
   vendor_code?: Prisma.SortOrder
   company_name?: Prisma.SortOrder
   point_of_contact?: Prisma.SortOrder
+  in_house?: Prisma.SortOrder
   contact_no?: Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -400,6 +411,7 @@ export type CompanyVendorsMasterScalarWhereWithAggregatesInput = {
   vendor_code?: Prisma.StringWithAggregatesFilter<"CompanyVendorsMaster"> | string
   company_name?: Prisma.StringWithAggregatesFilter<"CompanyVendorsMaster"> | string
   point_of_contact?: Prisma.StringWithAggregatesFilter<"CompanyVendorsMaster"> | string
+  in_house?: Prisma.BoolWithAggregatesFilter<"CompanyVendorsMaster"> | boolean
   contact_no?: Prisma.StringWithAggregatesFilter<"CompanyVendorsMaster"> | string
   email?: Prisma.StringNullableWithAggregatesFilter<"CompanyVendorsMaster"> | string | null
   address?: Prisma.StringNullableWithAggregatesFilter<"CompanyVendorsMaster"> | string | null
@@ -416,6 +428,7 @@ export type CompanyVendorsMasterCreateInput = {
   vendor_code: string
   company_name: string
   point_of_contact: string
+  in_house?: boolean
   contact_no: string
   email?: string | null
   address?: string | null
@@ -436,6 +449,7 @@ export type CompanyVendorsMasterUncheckedCreateInput = {
   vendor_code: string
   company_name: string
   point_of_contact: string
+  in_house?: boolean
   contact_no: string
   email?: string | null
   address?: string | null
@@ -453,6 +467,7 @@ export type CompanyVendorsMasterUpdateInput = {
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   company_name?: Prisma.StringFieldUpdateOperationsInput | string
   point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -473,6 +488,7 @@ export type CompanyVendorsMasterUncheckedUpdateInput = {
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   company_name?: Prisma.StringFieldUpdateOperationsInput | string
   point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -492,6 +508,7 @@ export type CompanyVendorsMasterCreateManyInput = {
   vendor_code: string
   company_name: string
   point_of_contact: string
+  in_house?: boolean
   contact_no: string
   email?: string | null
   address?: string | null
@@ -508,6 +525,7 @@ export type CompanyVendorsMasterUpdateManyMutationInput = {
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   company_name?: Prisma.StringFieldUpdateOperationsInput | string
   point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -523,6 +541,7 @@ export type CompanyVendorsMasterUncheckedUpdateManyInput = {
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   company_name?: Prisma.StringFieldUpdateOperationsInput | string
   point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -551,6 +570,7 @@ export type CompanyVendorsMasterCountOrderByAggregateInput = {
   vendor_code?: Prisma.SortOrder
   company_name?: Prisma.SortOrder
   point_of_contact?: Prisma.SortOrder
+  in_house?: Prisma.SortOrder
   contact_no?: Prisma.SortOrder
   email?: Prisma.SortOrder
   address?: Prisma.SortOrder
@@ -577,6 +597,7 @@ export type CompanyVendorsMasterMaxOrderByAggregateInput = {
   vendor_code?: Prisma.SortOrder
   company_name?: Prisma.SortOrder
   point_of_contact?: Prisma.SortOrder
+  in_house?: Prisma.SortOrder
   contact_no?: Prisma.SortOrder
   email?: Prisma.SortOrder
   address?: Prisma.SortOrder
@@ -595,6 +616,7 @@ export type CompanyVendorsMasterMinOrderByAggregateInput = {
   vendor_code?: Prisma.SortOrder
   company_name?: Prisma.SortOrder
   point_of_contact?: Prisma.SortOrder
+  in_house?: Prisma.SortOrder
   contact_no?: Prisma.SortOrder
   email?: Prisma.SortOrder
   address?: Prisma.SortOrder
@@ -808,6 +830,7 @@ export type CompanyVendorsMasterCreateWithoutVendorInput = {
   vendor_code: string
   company_name: string
   point_of_contact: string
+  in_house?: boolean
   contact_no: string
   email?: string | null
   address?: string | null
@@ -826,6 +849,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutVendorInput = {
   vendor_code: string
   company_name: string
   point_of_contact: string
+  in_house?: boolean
   contact_no: string
   email?: string | null
   address?: string | null
@@ -874,6 +898,7 @@ export type CompanyVendorsMasterScalarWhereInput = {
   vendor_code?: Prisma.StringFilter<"CompanyVendorsMaster"> | string
   company_name?: Prisma.StringFilter<"CompanyVendorsMaster"> | string
   point_of_contact?: Prisma.StringFilter<"CompanyVendorsMaster"> | string
+  in_house?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
   contact_no?: Prisma.StringFilter<"CompanyVendorsMaster"> | string
   email?: Prisma.StringNullableFilter<"CompanyVendorsMaster"> | string | null
   address?: Prisma.StringNullableFilter<"CompanyVendorsMaster"> | string | null
@@ -890,6 +915,7 @@ export type CompanyVendorsMasterCreateWithoutCreatedByInput = {
   vendor_code: string
   company_name: string
   point_of_contact: string
+  in_house?: boolean
   contact_no: string
   email?: string | null
   address?: string | null
@@ -909,6 +935,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutCreatedByInput = {
   vendor_code: string
   company_name: string
   point_of_contact: string
+  in_house?: boolean
   contact_no: string
   email?: string | null
   address?: string | null
@@ -935,6 +962,7 @@ export type CompanyVendorsMasterCreateWithoutDeletedByInput = {
   vendor_code: string
   company_name: string
   point_of_contact: string
+  in_house?: boolean
   contact_no: string
   email?: string | null
   address?: string | null
@@ -954,6 +982,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutDeletedByInput = {
   vendor_code: string
   company_name: string
   point_of_contact: string
+  in_house?: boolean
   contact_no: string
   email?: string | null
   address?: string | null
@@ -980,6 +1009,7 @@ export type CompanyVendorsMasterCreateWithoutUpdatedByInput = {
   vendor_code: string
   company_name: string
   point_of_contact: string
+  in_house?: boolean
   contact_no: string
   email?: string | null
   address?: string | null
@@ -999,6 +1029,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput = {
   vendor_code: string
   company_name: string
   point_of_contact: string
+  in_house?: boolean
   contact_no: string
   email?: string | null
   address?: string | null
@@ -1073,6 +1104,7 @@ export type CompanyVendorsMasterCreateWithoutOrderLoginLinksInput = {
   vendor_code: string
   company_name: string
   point_of_contact: string
+  in_house?: boolean
   contact_no: string
   email?: string | null
   address?: string | null
@@ -1092,6 +1124,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutOrderLoginLinksInput = {
   vendor_code: string
   company_name: string
   point_of_contact: string
+  in_house?: boolean
   contact_no: string
   email?: string | null
   address?: string | null
@@ -1124,6 +1157,7 @@ export type CompanyVendorsMasterUpdateWithoutOrderLoginLinksInput = {
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   company_name?: Prisma.StringFieldUpdateOperationsInput | string
   point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1143,6 +1177,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutOrderLoginLinksInput = {
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   company_name?: Prisma.StringFieldUpdateOperationsInput | string
   point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1160,6 +1195,7 @@ export type CompanyVendorsMasterCreateManyVendorInput = {
   vendor_code: string
   company_name: string
   point_of_contact: string
+  in_house?: boolean
   contact_no: string
   email?: string | null
   address?: string | null
@@ -1176,6 +1212,7 @@ export type CompanyVendorsMasterUpdateWithoutVendorInput = {
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   company_name?: Prisma.StringFieldUpdateOperationsInput | string
   point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1194,6 +1231,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutVendorInput = {
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   company_name?: Prisma.StringFieldUpdateOperationsInput | string
   point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1212,6 +1250,7 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutVendorInput = {
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   company_name?: Prisma.StringFieldUpdateOperationsInput | string
   point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1230,6 +1269,7 @@ export type CompanyVendorsMasterCreateManyCreatedByInput = {
   vendor_code: string
   company_name: string
   point_of_contact: string
+  in_house?: boolean
   contact_no: string
   email?: string | null
   address?: string | null
@@ -1247,6 +1287,7 @@ export type CompanyVendorsMasterCreateManyDeletedByInput = {
   vendor_code: string
   company_name: string
   point_of_contact: string
+  in_house?: boolean
   contact_no: string
   email?: string | null
   address?: string | null
@@ -1264,6 +1305,7 @@ export type CompanyVendorsMasterCreateManyUpdatedByInput = {
   vendor_code: string
   company_name: string
   point_of_contact: string
+  in_house?: boolean
   contact_no: string
   email?: string | null
   address?: string | null
@@ -1279,6 +1321,7 @@ export type CompanyVendorsMasterUpdateWithoutCreatedByInput = {
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   company_name?: Prisma.StringFieldUpdateOperationsInput | string
   point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1298,6 +1341,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutCreatedByInput = {
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   company_name?: Prisma.StringFieldUpdateOperationsInput | string
   point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1316,6 +1360,7 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByInput = {
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   company_name?: Prisma.StringFieldUpdateOperationsInput | string
   point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1331,6 +1376,7 @@ export type CompanyVendorsMasterUpdateWithoutDeletedByInput = {
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   company_name?: Prisma.StringFieldUpdateOperationsInput | string
   point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1350,6 +1396,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutDeletedByInput = {
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   company_name?: Prisma.StringFieldUpdateOperationsInput | string
   point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1368,6 +1415,7 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByInput = {
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   company_name?: Prisma.StringFieldUpdateOperationsInput | string
   point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1383,6 +1431,7 @@ export type CompanyVendorsMasterUpdateWithoutUpdatedByInput = {
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   company_name?: Prisma.StringFieldUpdateOperationsInput | string
   point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1402,6 +1451,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutUpdatedByInput = {
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   company_name?: Prisma.StringFieldUpdateOperationsInput | string
   point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1420,6 +1470,7 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   company_name?: Prisma.StringFieldUpdateOperationsInput | string
   point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1468,6 +1519,7 @@ export type CompanyVendorsMasterSelect<ExtArgs extends runtime.Types.Extensions.
   vendor_code?: boolean
   company_name?: boolean
   point_of_contact?: boolean
+  in_house?: boolean
   contact_no?: boolean
   email?: boolean
   address?: boolean
@@ -1492,6 +1544,7 @@ export type CompanyVendorsMasterSelectCreateManyAndReturn<ExtArgs extends runtim
   vendor_code?: boolean
   company_name?: boolean
   point_of_contact?: boolean
+  in_house?: boolean
   contact_no?: boolean
   email?: boolean
   address?: boolean
@@ -1514,6 +1567,7 @@ export type CompanyVendorsMasterSelectUpdateManyAndReturn<ExtArgs extends runtim
   vendor_code?: boolean
   company_name?: boolean
   point_of_contact?: boolean
+  in_house?: boolean
   contact_no?: boolean
   email?: boolean
   address?: boolean
@@ -1536,6 +1590,7 @@ export type CompanyVendorsMasterSelectScalar = {
   vendor_code?: boolean
   company_name?: boolean
   point_of_contact?: boolean
+  in_house?: boolean
   contact_no?: boolean
   email?: boolean
   address?: boolean
@@ -1548,7 +1603,7 @@ export type CompanyVendorsMasterSelectScalar = {
   is_deleted?: boolean
 }
 
-export type CompanyVendorsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "vendor_code" | "company_name" | "point_of_contact" | "contact_no" | "email" | "address" | "created_at" | "created_by" | "updated_at" | "updated_by" | "deleted_at" | "deleted_by" | "is_deleted", ExtArgs["result"]["companyVendorsMaster"]>
+export type CompanyVendorsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "vendor_code" | "company_name" | "point_of_contact" | "in_house" | "contact_no" | "email" | "address" | "created_at" | "created_by" | "updated_at" | "updated_by" | "deleted_at" | "deleted_by" | "is_deleted", ExtArgs["result"]["companyVendorsMaster"]>
 export type CompanyVendorsMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.CompanyVendorsMaster$deletedByArgs<ExtArgs>
@@ -1585,6 +1640,7 @@ export type $CompanyVendorsMasterPayload<ExtArgs extends runtime.Types.Extension
     vendor_code: string
     company_name: string
     point_of_contact: string
+    in_house: boolean
     contact_no: string
     email: string | null
     address: string | null
@@ -2028,6 +2084,7 @@ export interface CompanyVendorsMasterFieldRefs {
   readonly vendor_code: Prisma.FieldRef<"CompanyVendorsMaster", 'String'>
   readonly company_name: Prisma.FieldRef<"CompanyVendorsMaster", 'String'>
   readonly point_of_contact: Prisma.FieldRef<"CompanyVendorsMaster", 'String'>
+  readonly in_house: Prisma.FieldRef<"CompanyVendorsMaster", 'Boolean'>
   readonly contact_no: Prisma.FieldRef<"CompanyVendorsMaster", 'String'>
   readonly email: Prisma.FieldRef<"CompanyVendorsMaster", 'String'>
   readonly address: Prisma.FieldRef<"CompanyVendorsMaster", 'String'>

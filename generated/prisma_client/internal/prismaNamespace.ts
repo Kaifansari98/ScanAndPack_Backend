@@ -5930,6 +5930,7 @@ export const CompanyVendorsMasterScalarFieldEnum = {
   vendor_code: 'vendor_code',
   company_name: 'company_name',
   point_of_contact: 'point_of_contact',
+  in_house: 'in_house',
   contact_no: 'contact_no',
   email: 'email',
   address: 'address',

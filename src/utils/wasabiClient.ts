@@ -276,6 +276,35 @@ export const uploadToWasabiProductionFilesFile = async (
   return sysName;
 };
 
+export const uploadToWasabiOrderLoginPoFile = async (
+  filePath: string,
+  vendorId: number,
+  leadId: number,
+  cardName: string,
+  originalName: string,
+  contentType: string
+) => {
+  const ext = originalName.split(".").pop();
+  const safeCardName = sanitizeFilename(cardName || "card");
+  const sysName = `order_login_po/${vendorId}/${leadId}/${safeCardName}/${uuidv4()}.${ext}`;
+
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
+
+  return sysName;
+};
+
 export const uploadToWasabiProductionFilesQcPhotos = async (
   buffer: Buffer,
   vendorId: number,

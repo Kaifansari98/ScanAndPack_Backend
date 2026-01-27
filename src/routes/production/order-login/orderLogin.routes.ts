@@ -1,7 +1,10 @@
 import { Router } from "express";
 import { OrderLoginController } from "../../../controllers/leadModuleControllers/production/order-login/orderLogin.controller";
 import multer from "multer";
-import { uploadProductionFiles } from "../../../middlewares/uploadWasabi";
+import {
+  uploadOrderLoginPoFiles,
+  uploadProductionFiles,
+} from "../../../middlewares/uploadWasabi";
 
 const upload = multer();
 const orderLoginRoutes = Router();
@@ -31,6 +34,11 @@ orderLoginRoutes.put(
   controller.updateOrderLogin
 );
 
+orderLoginRoutes.delete(
+  "/vendorId/:vendorId/order-login-id/:orderLoginId/delete",
+  controller.deleteOrderLogin
+);
+
 orderLoginRoutes.put(
   "/vendorId/:vendorId/leadId/:leadId/update-multiple",
   upload.none(),
@@ -51,6 +59,17 @@ orderLoginRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-production-files",
   uploadProductionFiles.array("files", 10), // ✅ accept up to 10 files
   controller.uploadProductionFiles
+);
+
+orderLoginRoutes.post(
+  "/vendorId/:vendorId/leadId/:leadId/order-login-id/:orderLoginId/upload-po-files",
+  uploadOrderLoginPoFiles.array("files", 10),
+  controller.uploadOrderLoginPoFiles
+);
+
+orderLoginRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/order-login-id/:orderLoginId/po-files",
+  controller.getOrderLoginPoFiles
 );
 
 orderLoginRoutes.get(

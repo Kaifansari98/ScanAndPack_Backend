@@ -136,7 +136,7 @@ export const uploadFinalMeasurement = multer({
       cb(null, `${Date.now()}-${file.originalname}`);
     },
   }),
-  limits: { fileSize: 200 * 1024 * 1024, files: 20 },
+  limits: { fileSize: 200 * 1024 * 1024, files: 100 },
   fileFilter: (req, file, cb) => {
     const allowedMimeTypes = [
       "image/jpeg",
@@ -270,6 +270,14 @@ export const uploadDesigns = multer({
       ".catpart",
       ".catproduct",
       ".zip",
+      ".jpg",
+      ".jpeg",
+      ".png",
+      ".gif",
+      ".webp",
+      ".bmp",
+      ".tif",
+      ".tiff",
     ];
 
     const ext = path.extname(file.originalname).toLowerCase();
@@ -279,7 +287,7 @@ export const uploadDesigns = multer({
     } else {
       cb(
         new Error(
-          `Only design files are allowed! Supported extensions: ${allowedExtensions.join(
+          `Only design or image files are allowed! Supported extensions: ${allowedExtensions.join(
             ", "
           )}. Received: ${ext}`
         )
@@ -300,12 +308,26 @@ export const uploadProductionFiles = multer({
     },
   }),
   limits: { fileSize: 200 * 1024 * 1024, files: 10 },
+  fileFilter: (_req, _file, cb) => cb(null, true),
+});
+
+export const uploadOrderLoginPoFiles = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/order_login_po_files";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 10 },
   fileFilter: (req, file, cb) => {
-    // ✅ Allowed formats: CAD + PDF
     const allowedExtensions = [
-      ".pdf", // ⬅️ added
+      ".pdf",
       ".pyo",
-      ".pytha", // custom
+      ".pytha",
       ".dwg",
       ".dxf",
       ".stl",
@@ -322,6 +344,14 @@ export const uploadProductionFiles = multer({
       ".catpart",
       ".catproduct",
       ".zip",
+      ".jpg",
+      ".jpeg",
+      ".png",
+      ".gif",
+      ".webp",
+      ".bmp",
+      ".tif",
+      ".tiff",
     ];
 
     const ext = path.extname(file.originalname).toLowerCase();
@@ -331,7 +361,7 @@ export const uploadProductionFiles = multer({
     } else {
       cb(
         new Error(
-          `Only design files are allowed! Supported extensions: ${allowedExtensions.join(
+          `Only design or image files are allowed! Supported extensions: ${allowedExtensions.join(
             ", "
           )}. Received: ${ext}`
         )

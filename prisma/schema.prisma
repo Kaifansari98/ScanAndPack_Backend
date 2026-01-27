@@ -917,6 +917,7 @@ model CompanyVendorsMaster {
   vendor_code      String
   company_name     String
   point_of_contact String
+  in_house          Boolean            @default(false)
   contact_no       String
   email            String?
   address          String?

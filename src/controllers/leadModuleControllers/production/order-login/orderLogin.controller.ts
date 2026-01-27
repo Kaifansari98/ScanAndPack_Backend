@@ -5,6 +5,7 @@ import { NotificationService } from "../../../../services/notification/notificat
 import { NotificationType } from "../../../../prisma/generated";
 import {
   generateSignedUrl,
+  uploadToWasabiOrderLoginPoFile,
   uploadToWasabiProductionFilesFile,
 } from "../../../../utils/wasabiClient";
 import { ApiResponse } from "../../../../utils/apiResponse";
@@ -158,6 +159,37 @@ export class OrderLoginController {
         message:
           error.message ||
           "Internal server error while updating multiple order logins",
+      });
+    }
+  }
+
+  async deleteOrderLogin(req: Request, res: Response) {
+    try {
+      const { vendorId, orderLoginId } = req.params;
+
+      if (!vendorId || !orderLoginId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and orderLoginId are required",
+        });
+      }
+
+      const deleted = await service.deleteOrderLogin(
+        Number(vendorId),
+        Number(orderLoginId)
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Order login deleted successfully",
+        data: deleted,
+      });
+    } catch (error: any) {
+      console.error("Error deleting order login:", error);
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message:
+          error.message || "Internal server error while deleting order login",
       });
     }
   }
@@ -325,6 +357,78 @@ export class OrderLoginController {
     }
   }
 
+  async uploadOrderLoginPoFiles(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId, orderLoginId } = req.params;
+      const { created_by } = req.body;
+      const files = req.files as Express.Multer.File[];
+
+      if (!vendorId || !leadId || !orderLoginId || !created_by) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId, leadId, orderLoginId, and created_by are required",
+        });
+      }
+
+      const orderLogin = await prisma.orderLoginDetails.findFirst({
+        where: {
+          id: Number(orderLoginId),
+          vendor_id: Number(vendorId),
+          lead_id: Number(leadId),
+        },
+      });
+
+      if (!orderLogin) {
+        return res.status(404).json({
+          success: false,
+          message: "Order login record not found.",
+        });
+      }
+
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+      for (const file of files || []) {
+        const sysName = await uploadToWasabiOrderLoginPoFile(
+          file.path,
+          Number(vendorId),
+          Number(leadId),
+          orderLogin.item_type,
+          file.originalname,
+          file.mimetype
+        );
+
+        await fs.unlink(file.path);
+
+        uploadedFiles.push({
+          originalName: file.originalname,
+          sysName,
+        });
+      }
+
+      const uploaded = await service.uploadOrderLoginPoFiles(
+        Number(vendorId),
+        Number(leadId),
+        Number(orderLogin.account_id),
+        Number(created_by),
+        uploadedFiles
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "PO files uploaded successfully",
+        count: uploaded.length,
+        data: uploaded,
+      });
+    } catch (error: any) {
+      console.error("Error uploading PO files:", error);
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message:
+          error.message || "Internal server error while uploading PO files",
+      });
+    }
+  }
+
   async getProductionFiles(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
@@ -399,6 +503,53 @@ export class OrderLoginController {
         message:
           error.message ||
           "Internal server error while fetching production files",
+      });
+    }
+  }
+
+  async getOrderLoginPoFiles(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId, orderLoginId } = req.params;
+
+      const docs = await service.getOrderLoginPoFiles(
+        Number(vendorId),
+        Number(leadId),
+        Number(orderLoginId)
+      );
+
+      if (!docs || docs.length === 0) {
+        return res.status(200).json({
+          success: true,
+          message: "No PO files found for this order login.",
+          count: 0,
+          data: [],
+        });
+      }
+
+      const docsWithUrls = await Promise.all(
+        docs.map(async (doc) => {
+          try {
+            const signedUrl = await generateSignedUrl(doc.doc_sys_name, 3600);
+            return { ...doc, signed_url: signedUrl };
+          } catch (err) {
+            console.error(`Failed to sign URL for doc ${doc.id}:`, err);
+            return { ...doc, signed_url: null };
+          }
+        })
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "PO files fetched successfully",
+        count: docsWithUrls.length,
+        data: docsWithUrls,
+      });
+    } catch (error: any) {
+      console.error("Error fetching PO files:", error);
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message:
+          error.message || "Internal server error while fetching PO files",
       });
     }
   }

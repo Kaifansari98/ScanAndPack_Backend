@@ -57,7 +57,10 @@ export class FinalMeasurementController {
 
       const files = req.files as { [fieldname: string]: Express.Multer.File[] };
       const finalMeasurementDocs = files?.final_measurement_doc || [];
-      const sitePhotos = files?.site_photos || [];
+      const sitePhotos = [
+        ...(files?.site_photos || []),
+        ...(files?.["site_photos[]"] || []),
+      ];
 
       if (!finalMeasurementDocs || finalMeasurementDocs.length === 0) {
         res.status(400).json({
@@ -265,7 +268,10 @@ export class FinalMeasurementController {
       }
 
       const files = req.files as { [fieldname: string]: Express.Multer.File[] };
-      const sitePhotos = files?.site_photos || [];
+      const sitePhotos = [
+        ...(files?.site_photos || []),
+        ...(files?.["site_photos[]"] || []),
+      ];
 
       if (!sitePhotos || sitePhotos.length === 0) {
         res.status(400).json({
@@ -336,7 +342,10 @@ export class FinalMeasurementController {
       }
 
       const files = req.files as { [fieldname: string]: Express.Multer.File[] };
-      const sitePhotos = files?.site_photos || [];
+      const sitePhotos = [
+        ...(files?.site_photos || []),
+        ...(files?.["site_photos[]"] || []),
+      ];
 
       if (!sitePhotos || sitePhotos.length === 0) {
         res.status(400).json({
