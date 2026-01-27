@@ -27,6 +27,29 @@ interface BackendData {
 }
 
 export class OrderLoginService {
+  private readonly REQUIRED_ORDER_LOGIN_TYPES = [
+    "Carcass",
+    "Shutter",
+    "Stock Hardware",
+  ] as const;
+
+  private async getMissingRequiredOrderLoginTypes(
+    vendorId: number,
+    leadId: number
+  ) {
+    const existing = await prisma.orderLoginDetails.findMany({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        is_completed: false,
+      },
+      select: { item_type: true },
+    });
+
+    const presentSet = new Set(existing.map((e) => e.item_type));
+    return this.REQUIRED_ORDER_LOGIN_TYPES.filter((t) => !presentSet.has(t));
+  }
+
   private async getOrderLoginPoDocType(
     vendorId: number,
     createIfMissing: boolean = true
@@ -678,6 +701,60 @@ export class OrderLoginService {
       },
     });
 
+    // ✅ If required order-login items are missing, create a backend task
+    const missingTypes = await this.getMissingRequiredOrderLoginTypes(
+      vendorId,
+      leadId
+    );
+
+    if (missingTypes.length > 0) {
+      const backendMapping = await prisma.leadUserMapping.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          status: "active",
+          user: {
+            user_type: {
+              user_type: { equals: "backend", mode: "insensitive" },
+            },
+          },
+        },
+        select: {
+          user_id: true,
+        },
+      });
+
+      if (backendMapping?.user_id) {
+        const existingTask = await prisma.userLeadTask.findFirst({
+          where: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            user_id: backendMapping.user_id,
+            task_type: "Order Login",
+            status: "open",
+          },
+          select: { id: true },
+        });
+
+        if (!existingTask) {
+          await prisma.userLeadTask.create({
+            data: {
+              lead_id: leadId,
+              account_id: accountId,
+              vendor_id: vendorId,
+              user_id: backendMapping.user_id,
+              task_type: "Order Login",
+              lead_stage: "order-login-stage",
+              due_date: new Date(),
+              remark: `Missing order login items: ${missingTypes.join(", ")}`,
+              status: "open",
+              created_by: userId,
+            },
+          });
+        }
+      }
+    }
+
     // ✅ 3. Assign this lead to the Factory user via LeadUserMapping
     const leadUserMapping = await prisma.leadUserMapping.create({
       data: {
@@ -768,23 +845,13 @@ export class OrderLoginService {
     }
 
     // --- Check required OrderLoginDetails (three items) ---
-    const REQUIRED_TYPES = ["Carcass", "Shutter", "Stock Hardware"] as const;
-
-    // Fetch existing item_types for this lead
-    const existing = await prisma.orderLoginDetails.findMany({
-      where: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        is_completed: false, // optional; remove if you want any record regardless of completion
-      },
-      select: { item_type: true },
-    });
-
-    const presentSet = new Set(existing.map((e) => e.item_type));
-    const carcass = presentSet.has("Carcass");
-    const shutter = presentSet.has("Shutter");
-    const stockHardware = presentSet.has("Stock Hardware");
-    const allThree = carcass && shutter && stockHardware;
+    const missing = await this.getMissingRequiredOrderLoginTypes(
+      vendorId,
+      leadId
+    );
+    const carcass = !missing.includes("Carcass");
+    const shutter = !missing.includes("Shutter");
+    const stockHardware = !missing.includes("Stock Hardware");
 
     // --- Check if at least 1 Production File (Type 14) exists ---
     const docType = await prisma.documentTypeMaster.findFirst({
@@ -813,15 +880,15 @@ export class OrderLoginService {
         carcass,
         shutter,
         stockHardware,
-        allThree,
-        missing: REQUIRED_TYPES.filter((t) => !presentSet.has(t)),
+        allThree: carcass && shutter && stockHardware,
+        missing,
       },
       productionFiles: {
         hasAny: hasAnyProductionFiles,
         count: productionFilesCount,
         docTypeFound: Boolean(docType?.id), // helpful for diagnosing vendor setup
       },
-      readyForProduction: allThree && hasAnyProductionFiles,
+      readyForProduction: hasAnyProductionFiles,
     };
   }
 
