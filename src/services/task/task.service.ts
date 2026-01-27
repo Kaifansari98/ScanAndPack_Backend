@@ -1,5 +1,4 @@
-import { Prisma } from "../../prisma/generated";
-import { prisma } from "../../prisma/client"; // adjust your path
+import { prisma, Prisma } from "../../prisma/client";
 
 export class TaskService {
   private static taskIncludes() {
