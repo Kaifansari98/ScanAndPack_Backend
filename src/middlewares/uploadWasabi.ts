@@ -308,52 +308,7 @@ export const uploadProductionFiles = multer({
     },
   }),
   limits: { fileSize: 200 * 1024 * 1024, files: 10 },
-  fileFilter: (req, file, cb) => {
-    // ✅ Allowed formats: CAD + PDF
-    const allowedExtensions = [
-      ".pdf", // ⬅️ added
-      ".pyo",
-      ".pytha", // custom
-      ".dwg",
-      ".dxf",
-      ".stl",
-      ".step",
-      ".stp",
-      ".iges",
-      ".igs",
-      ".3ds",
-      ".obj",
-      ".skp",
-      ".sldprt",
-      ".sldasm",
-      ".prt",
-      ".catpart",
-      ".catproduct",
-      ".zip",
-      ".jpg",
-      ".jpeg",
-      ".png",
-      ".gif",
-      ".webp",
-      ".bmp",
-      ".tif",
-      ".tiff",
-    ];
-
-    const ext = path.extname(file.originalname).toLowerCase();
-
-    if (allowedExtensions.includes(ext)) {
-      cb(null, true);
-    } else {
-      cb(
-        new Error(
-          `Only design or image files are allowed! Supported extensions: ${allowedExtensions.join(
-            ", "
-          )}. Received: ${ext}`
-        )
-      );
-    }
-  },
+  fileFilter: (_req, _file, cb) => cb(null, true),
 });
 
 export const uploadOrderLoginPoFiles = multer({
