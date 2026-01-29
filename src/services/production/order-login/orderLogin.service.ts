@@ -35,7 +35,7 @@ export class OrderLoginService {
 
   private async getMissingRequiredOrderLoginTypes(
     vendorId: number,
-    leadId: number
+    leadId: number,
   ) {
     const existing = await prisma.orderLoginDetails.findMany({
       where: {
@@ -52,7 +52,7 @@ export class OrderLoginService {
 
   private async getOrderLoginPoDocType(
     vendorId: number,
-    createIfMissing: boolean = true
+    createIfMissing: boolean = true,
   ) {
     let docType = await prisma.documentTypeMaster.findFirst({
       where: { vendor_id: vendorId, tag: "Type 18" },
@@ -92,7 +92,7 @@ export class OrderLoginService {
 
     if (missing.length > 0) {
       const error = new Error(
-        `Missing required field(s): ${missing.join(", ")}`
+        `Missing required field(s): ${missing.join(", ")}`,
       );
       (error as any).statusCode = 400;
       throw error;
@@ -142,7 +142,7 @@ export class OrderLoginService {
     vendorId: number,
     leadId: number,
     accountId: number,
-    breakups: any[]
+    breakups: any[],
   ) {
     if (!vendorId || !leadId)
       throw Object.assign(new Error("vendorId and leadId are required"), {
@@ -168,7 +168,7 @@ export class OrderLoginService {
         if (!created_by) missing.push("created_by");
         if (missing.length)
           throw new Error(
-            `Missing field(s) in record #${index + 1}: ${missing.join(", ")}`
+            `Missing field(s) in record #${index + 1}: ${missing.join(", ")}`,
           );
 
         // duplicate check
@@ -183,7 +183,7 @@ export class OrderLoginService {
 
         if (existing)
           throw new Error(
-            `Item type '${item_type}' already exists for lead ${leadId}`
+            `Item type '${item_type}' already exists for lead ${leadId}`,
           );
 
         // create record
@@ -260,7 +260,7 @@ export class OrderLoginService {
 
     if (missingFields.length > 0) {
       const error = new Error(
-        `Missing required field(s): ${missingFields.join(", ")}`
+        `Missing required field(s): ${missingFields.join(", ")}`,
       );
       (error as any).statusCode = 400;
       throw error;
@@ -292,7 +292,7 @@ export class OrderLoginService {
 
     if (duplicate) {
       const error = new Error(
-        `Item type '${item_type}' already exists for this lead.`
+        `Item type '${item_type}' already exists for this lead.`,
       );
       (error as any).statusCode = 409;
       throw error;
@@ -315,7 +315,7 @@ export class OrderLoginService {
   async updateMultipleOrderLogins(
     vendorId: number,
     leadId: number,
-    updates: any[]
+    updates: any[],
   ) {
     if (!vendorId || !leadId)
       throw Object.assign(new Error("vendorId and leadId are required"), {
@@ -342,7 +342,7 @@ export class OrderLoginService {
         if (!updated_by) missing.push("updated_by");
         if (missing.length)
           throw new Error(
-            `Missing field(s) in record #${index + 1}: ${missing.join(", ")}`
+            `Missing field(s) in record #${index + 1}: ${missing.join(", ")}`,
           );
 
         // Check if record exists
@@ -352,7 +352,7 @@ export class OrderLoginService {
 
         if (!existing)
           throw new Error(
-            `Order login record #${id} not found for vendor ${vendorId}`
+            `Order login record #${id} not found for vendor ${vendorId}`,
           );
 
         // Duplicate check (unique item_type per lead)
@@ -367,7 +367,7 @@ export class OrderLoginService {
 
         if (duplicate)
           throw new Error(
-            `Item type '${item_type}' already exists for this lead. (record #${id})`
+            `Item type '${item_type}' already exists for this lead. (record #${id})`,
           );
 
         // Update
@@ -418,7 +418,7 @@ export class OrderLoginService {
     vendorId: number,
     userId: number,
     limit = 10,
-    page = 1
+    page = 1,
   ) {
     const skip = (page - 1) * limit;
 
@@ -430,7 +430,7 @@ export class OrderLoginService {
 
     if (!orderLoginStatus) {
       throw new Error(
-        `Order Login status (Type 9) not found for vendor ${vendorId}`
+        `Order Login status (Type 9) not found for vendor ${vendorId}`,
       );
     }
 
@@ -527,7 +527,7 @@ export class OrderLoginService {
     leadId: number,
     accountId: number | null,
     userId: number,
-    files: { originalName: string; sysName: string }[]
+    files: { originalName: string; sysName: string }[],
   ) {
     if (!vendorId || !leadId || !userId) {
       const error = new Error("vendorId, leadId, and userId are required");
@@ -574,10 +574,12 @@ export class OrderLoginService {
     leadId: number,
     accountId: number,
     userId: number,
-    files: { originalName: string; sysName: string }[]
+    files: { originalName: string; sysName: string }[],
   ) {
     if (!vendorId || !leadId || !accountId || !userId) {
-      const error = new Error("vendorId, leadId, accountId, and userId are required");
+      const error = new Error(
+        "vendorId, leadId, accountId, and userId are required",
+      );
       (error as any).statusCode = 400;
       throw error;
     }
@@ -615,10 +617,12 @@ export class OrderLoginService {
   async getOrderLoginPoFiles(
     vendorId: number,
     leadId: number,
-    orderLoginId: number
+    orderLoginId: number,
   ) {
     if (!vendorId || !leadId || !orderLoginId) {
-      const error = new Error("vendorId, leadId, and orderLoginId are required");
+      const error = new Error(
+        "vendorId, leadId, and orderLoginId are required",
+      );
       (error as any).statusCode = 400;
       throw error;
     }
@@ -681,7 +685,7 @@ export class OrderLoginService {
 
     if (!statusType) {
       const error = new Error(
-        "Production Stage (Type 10) not configured for this vendor."
+        "Production Stage (Type 10) not configured for this vendor.",
       );
       (error as any).statusCode = 404;
       throw error;
@@ -704,7 +708,7 @@ export class OrderLoginService {
     // ✅ If required order-login items are missing, create a backend task
     const missingTypes = await this.getMissingRequiredOrderLoginTypes(
       vendorId,
-      leadId
+      leadId,
     );
 
     if (missingTypes.length > 0) {
@@ -847,11 +851,8 @@ export class OrderLoginService {
     // --- Check required OrderLoginDetails (three items) ---
     const missing = await this.getMissingRequiredOrderLoginTypes(
       vendorId,
-      leadId
+      leadId,
     );
-    const carcass = !missing.includes("Carcass");
-    const shutter = !missing.includes("Shutter");
-    const stockHardware = !missing.includes("Stock Hardware");
 
     // --- Check if at least 1 Production File (Type 14) exists ---
     const docType = await prisma.documentTypeMaster.findFirst({
@@ -876,13 +877,6 @@ export class OrderLoginService {
 
     // You asked for “true/false” overall; returning detailed + overall flags
     return {
-      orderLogin: {
-        carcass,
-        shutter,
-        stockHardware,
-        allThree: carcass && shutter && stockHardware,
-        missing,
-      },
       productionFiles: {
         hasAny: hasAnyProductionFiles,
         count: productionFilesCount,
@@ -895,7 +889,7 @@ export class OrderLoginService {
   async getFactoryUsersByVendor(vendorId: number): Promise<BackendData[]> {
     try {
       console.log(
-        `[SERVICE] Fetching Factory Users for vendor ID: ${vendorId}`
+        `[SERVICE] Fetching Factory Users for vendor ID: ${vendorId}`,
       );
 
       // 1. Find the user type ID for 'factory'
@@ -914,7 +908,7 @@ export class OrderLoginService {
       }
 
       console.log(
-        `[SERVICE] Found Factory user type ID: ${factoryUserType.id}`
+        `[SERVICE] Found Factory user type ID: ${factoryUserType.id}`,
       );
 
       // 2. Fetch all users with factory role for the specified vendor
