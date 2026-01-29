@@ -1,9 +1,9 @@
 import logger from "../../../../src/utils/logger";
 import { prisma } from "../../../prisma/client";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
-import { sendReadyToDispatchEmail } from "src/services/email/brevoEmail.service";
+import { sendReadyToDispatchEmail } from "../../../../src/services/email/brevoEmail.service";
 import { NotificationType } from "@prisma/client";
-import { NotificationService } from "src/services/notification/notification.service";
+import { NotificationService } from "../../../../src/services/notification/notification.service";
 
 export class PostProductionService {
   async uploadQcPhotos(
