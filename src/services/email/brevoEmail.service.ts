@@ -1,7 +1,7 @@
 "use strict";
 
 import { prisma } from "../../prisma/client";
-import logger from "../../utils/logger";
+import logger from "../../../src/utils/logger";
 
 export type BrevoEmailPayload = {
   toEmail: string;
