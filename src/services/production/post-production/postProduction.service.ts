@@ -1,4 +1,4 @@
-import logger from "src/utils/logger";
+import logger from "../../../../src/utils/logger";
 import { prisma } from "../../../prisma/client";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { sendReadyToDispatchEmail } from "src/services/email/brevoEmail.service";
