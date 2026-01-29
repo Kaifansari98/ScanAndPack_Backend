@@ -139,10 +139,22 @@ export type PaymentAddedEmailPayload = {
   leadUrl?: string;
 };
 
+export interface ReadyToDispatchEmailPayload {
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  markedBy: string;
+  markedAt: string;
+  projectUrl?: string;
+}
+
 const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
 const LEAD_CREATED_TEMPLATE_KEY = "LEAD_CREATED";
 const LEAD_ASSIGNED_TEMPLATE_KEY = "LEAD_ASSIGNED";
-const LEAD_ASSIGNED_SITE_SUPERVISOR_TEMPLATE_KEY = "LEAD_ASSIGNED_SITE_SUPERVISOR";
+const LEAD_ASSIGNED_SITE_SUPERVISOR_TEMPLATE_KEY =
+  "LEAD_ASSIGNED_SITE_SUPERVISOR";
 const TASK_ASSIGNED_TEMPLATE_KEY = "TASK_ASSIGNED";
 const CHAT_MENTION_TEMPLATE_KEY = "CHAT_MENTION";
 const MILESTONE_TEMPLATE_KEY = "MILESTONE_ACHIEVED";
@@ -152,7 +164,7 @@ const LEAD_LOST_APPROVAL_TEMPLATE_KEY = "LEAD_LOST_APPROVAL";
 const LEAD_LOST_APPROVED_TEMPLATE_KEY = "LEAD_LOST_APPROVED";
 const LEAD_LOST_REJECTED_TEMPLATE_KEY = "LEAD_LOST_REJECTED";
 const PAYMENT_ADDED_TEMPLATE_KEY = "PAYMENT_ADDED";
-
+const READY_TO_DISPATCH_TEMPLATE_KEY = "READY_TO_DISPATCH";
 
 const renderTemplate = (template: string, values: Record<string, string>) => {
   return template.replace(/{{\s*([a-zA-Z0-9_]+)\s*}}/g, (match, key) => {
@@ -163,7 +175,7 @@ const renderTemplate = (template: string, values: Record<string, string>) => {
 };
 
 export const sendBrevoEmail = async (
-  payload: BrevoEmailPayload
+  payload: BrevoEmailPayload,
 ): Promise<BrevoEmailResult> => {
   const apiKey = process.env.BREVO_API_KEY;
   const senderEmail = process.env.BREVO_SENDER_EMAIL;
@@ -256,7 +268,7 @@ export const sendBrevoEmail = async (
 };
 
 export const sendLeadCreatedEmail = async (
-  payload: LeadCreatedEmailPayload
+  payload: LeadCreatedEmailPayload,
 ): Promise<BrevoEmailResult> => {
   const defaultSubject = `New Lead Created: ${payload.leadCode} - ${payload.leadName}`;
   const defaultText = [
@@ -366,18 +378,15 @@ export const sendLeadCreatedEmail = async (
     });
   }
 
-  const subject =
-    template?.subject?.trim().length
-      ? renderTemplate(template.subject, templateValues)
-      : defaultSubject;
-  const text =
-    template?.text?.trim().length
-      ? renderTemplate(template.text, templateValues)
-      : defaultText;
-  const html =
-    template?.html?.trim().length
-      ? renderTemplate(template.html, templateValues)
-      : defaultHtml;
+  const subject = template?.subject?.trim().length
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+  const text = template?.text?.trim().length
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+  const html = template?.html?.trim().length
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
 
   return sendBrevoEmail({
     toEmail: payload.toEmail,
@@ -389,7 +398,7 @@ export const sendLeadCreatedEmail = async (
 };
 
 export const sendLeadAssignedEmail = async (
-  payload: LeadCreatedEmailPayload
+  payload: LeadCreatedEmailPayload,
 ): Promise<BrevoEmailResult> => {
   const defaultSubject = `New Lead Assigned: ${payload.leadCode} - ${payload.leadName}`;
   const defaultText = [
@@ -520,7 +529,7 @@ export const sendLeadAssignedEmail = async (
 };
 
 export const sendLeadAssignedToSiteSupervisorEmail = async (
-  payload: LeadCreatedEmailPayload
+  payload: LeadCreatedEmailPayload,
 ): Promise<BrevoEmailResult> => {
   const defaultSubject = `Lead Assigned: ${payload.leadCode} - ${payload.leadName}`;
   const defaultText = [
@@ -651,7 +660,7 @@ export const sendLeadAssignedToSiteSupervisorEmail = async (
 };
 
 export const sendTaskAssignedEmail = async (
-  payload: TaskAssignedEmailPayload
+  payload: TaskAssignedEmailPayload,
 ): Promise<BrevoEmailResult> => {
   const defaultSubject = `Task Assigned: ${payload.taskTitle} for ${payload.leadCode} ${payload.leadName}`;
   const defaultText = [
@@ -781,7 +790,7 @@ export const sendTaskAssignedEmail = async (
 };
 
 export const sendChatMentionEmail = async (
-  payload: ChatMentionEmailPayload
+  payload: ChatMentionEmailPayload,
 ): Promise<BrevoEmailResult> => {
   const defaultSubject = `You Were Mentioned on ${payload.leadCode} - ${payload.leadName}`;
   const defaultText = [
@@ -793,7 +802,9 @@ export const sendChatMentionEmail = async (
     `"${payload.messageText}"`,
     "",
     "Please review the message and respond if required.",
-    payload.conversationUrl ? `View Conversation: ${payload.conversationUrl}` : "",
+    payload.conversationUrl
+      ? `View Conversation: ${payload.conversationUrl}`
+      : "",
   ]
     .filter(Boolean)
     .join("\n");
@@ -884,7 +895,7 @@ export const sendChatMentionEmail = async (
 };
 
 export const sendMajorMilestoneEmail = async (
-  payload: MajorMilestoneEmailPayload
+  payload: MajorMilestoneEmailPayload,
 ): Promise<BrevoEmailResult> => {
   const formatMilestoneDate = (value: string) => {
     const parsed = new Date(value);
@@ -907,7 +918,9 @@ export const sendMajorMilestoneEmail = async (
     `Achieved On: ${completedOn}`,
     "",
     "This marks an important progression in the project lifecycle. Please review the details and proceed with the next required actions.",
-    payload.detailsUrl ? `View Lead / Project Details: ${payload.detailsUrl}` : "",
+    payload.detailsUrl
+      ? `View Lead / Project Details: ${payload.detailsUrl}`
+      : "",
   ]
     .filter(Boolean)
     .join("\n");
@@ -1010,7 +1023,7 @@ export const sendMajorMilestoneEmail = async (
 };
 
 export const sendLeadOnHoldEmail = async (
-  payload: LeadOnHoldEmailPayload
+  payload: LeadOnHoldEmailPayload,
 ): Promise<BrevoEmailResult> => {
   const formatOnHoldDate = (value: string) => {
     const parsed = new Date(value);
@@ -1141,7 +1154,7 @@ export const sendLeadOnHoldEmail = async (
 };
 
 export const sendLeadActiveEmail = async (
-  payload: LeadActiveEmailPayload
+  payload: LeadActiveEmailPayload,
 ): Promise<BrevoEmailResult> => {
   const formatActiveDate = (value: string) => {
     const parsed = new Date(value);
@@ -1272,7 +1285,7 @@ export const sendLeadActiveEmail = async (
 };
 
 export const sendLeadLostApprovalEmail = async (
-  payload: LeadLostApprovalEmailPayload
+  payload: LeadLostApprovalEmailPayload,
 ): Promise<BrevoEmailResult> => {
   const defaultSubject = `Approval Required: Lead Marked as Lost - ${payload.leadCode} - ${payload.leadName}`;
   const defaultText = [
@@ -1395,7 +1408,7 @@ export const sendLeadLostApprovalEmail = async (
 };
 
 export const sendLeadLostApprovedEmail = async (
-  payload: LeadLostApprovedEmailPayload
+  payload: LeadLostApprovedEmailPayload,
 ): Promise<BrevoEmailResult> => {
   const defaultSubject = `Lost Lead Request Approved: ${payload.leadCode} - ${payload.leadName}`;
   const defaultText = [
@@ -1518,7 +1531,7 @@ export const sendLeadLostApprovedEmail = async (
 };
 
 export const sendLeadLostRejectedEmail = async (
-  payload: LeadLostRejectedEmailPayload
+  payload: LeadLostRejectedEmailPayload,
 ): Promise<BrevoEmailResult> => {
   const defaultSubject = `Lost Lead Request Rejected: ${payload.leadCode} - ${payload.leadName}`;
   const defaultText = [
@@ -1641,7 +1654,7 @@ export const sendLeadLostRejectedEmail = async (
 };
 
 export const sendPaymentAddedEmail = async (
-  payload: PaymentAddedEmailPayload
+  payload: PaymentAddedEmailPayload,
 ): Promise<BrevoEmailResult> => {
   const defaultSubject = `Payment Added for ${payload.leadCode} - ${payload.leadName}`;
   const defaultText = [
@@ -1749,6 +1762,126 @@ export const sendPaymentAddedEmail = async (
   const text = template
     ? renderTemplate(template.text, templateValues)
     : defaultText;
+  const html = template
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail({
+    toEmail: payload.toEmail,
+    toName: payload.toName,
+    subject,
+    text,
+    html,
+  });
+};
+
+export const sendReadyToDispatchEmail = async (
+  payload: ReadyToDispatchEmailPayload,
+): Promise<BrevoEmailResult> => {
+  const defaultSubject = `${payload.leadCode} - ${payload.leadName} is Ready to Dispatch`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "The production for the following project has been successfully completed and marked as Ready to Dispatch by the factory.",
+    "",
+    "Project Details:",
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
+    `Marked Ready By: ${payload.markedBy}`,
+    `Marked Ready On: ${payload.markedAt}`,
+    "",
+    payload.projectUrl ? `View Project Details: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+    <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
+      <div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
+        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">
+          Ready to Dispatch
+        </h2>
+
+        <p style="margin: 0 0 12px; color: #111827;">
+          Hello ${payload.toName ?? "there"},
+        </p>
+
+        <p style="margin: 0 0 16px; color: #4b5563;">
+          The production for the following project has been successfully completed and marked as Ready to Dispatch by the factory.
+        </p>
+
+        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;">
+            <tr>
+              <td style="padding: 6px 0; color: #6b7280;">Lead Code</td>
+              <td style="padding: 6px 0; font-weight: 600;">${payload.leadCode}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #6b7280;">Lead Name</td>
+              <td style="padding: 6px 0; font-weight: 600;">${payload.leadName}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #6b7280;">Marked Ready By</td>
+              <td style="padding: 6px 0; font-weight: 600;">${payload.markedBy}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #6b7280;">Marked Ready On</td>
+              <td style="padding: 6px 0; font-weight: 600;">${payload.markedAt}</td>
+            </tr>
+          </table>
+        </div>
+
+        ${
+          payload.projectUrl
+            ? `<p style="margin: 18px 0 0;">
+                <a
+                  href="${payload.projectUrl}"
+                  style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Project Details
+                </a>
+              </p>`
+            : ""
+        }
+
+      </div>
+    </div>
+  `;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    markedBy: payload.markedBy,
+    markedAt: payload.markedAt,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: READY_TO_DISPATCH_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: READY_TO_DISPATCH_TEMPLATE_KEY,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
   const html = template
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
