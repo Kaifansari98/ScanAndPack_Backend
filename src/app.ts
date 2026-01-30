@@ -17,7 +17,8 @@ const allowedOrigins = [
   'https://vloq.furnixcrm.com',
   'https://cadbid.com',
   'http://localhost:3000',
-  'http://localhost:5173', 
+  'http://localhost:5173',
+  'https://vloq-web-v1.vercel.app', 
 ];
 
 app.use(
