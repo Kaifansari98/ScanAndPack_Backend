@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.0.1
- * Query Engine version: f09f2815f091dbba658cdcd2264306d88bb5bda6
+ * Prisma Client JS version: 7.2.0
+ * Query Engine version: 0c8ef2ce45c83248ab3df073180d5eda9e8be7a3
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.0.1",
-  engine: "f09f2815f091dbba658cdcd2264306d88bb5bda6"
+  client: "7.2.0",
+  engine: "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3"
 }
 
 /**
@@ -447,7 +447,8 @@ export const ModelName = {
   EmailNotificationMaster: 'EmailNotificationMaster',
   Notification: 'Notification',
   UserPushToken: 'UserPushToken',
-  NotificationDeliveryLogs: 'NotificationDeliveryLogs'
+  NotificationDeliveryLogs: 'NotificationDeliveryLogs',
+  VloqEmailLogs: 'VloqEmailLogs'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -463,7 +464,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -5203,6 +5204,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    VloqEmailLogs: {
+      payload: Prisma.$VloqEmailLogsPayload<ExtArgs>
+      fields: Prisma.VloqEmailLogsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VloqEmailLogsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VloqEmailLogsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VloqEmailLogsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VloqEmailLogsPayload>
+        }
+        findFirst: {
+          args: Prisma.VloqEmailLogsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VloqEmailLogsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VloqEmailLogsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VloqEmailLogsPayload>
+        }
+        findMany: {
+          args: Prisma.VloqEmailLogsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VloqEmailLogsPayload>[]
+        }
+        create: {
+          args: Prisma.VloqEmailLogsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VloqEmailLogsPayload>
+        }
+        createMany: {
+          args: Prisma.VloqEmailLogsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.VloqEmailLogsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VloqEmailLogsPayload>[]
+        }
+        delete: {
+          args: Prisma.VloqEmailLogsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VloqEmailLogsPayload>
+        }
+        update: {
+          args: Prisma.VloqEmailLogsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VloqEmailLogsPayload>
+        }
+        deleteMany: {
+          args: Prisma.VloqEmailLogsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VloqEmailLogsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.VloqEmailLogsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VloqEmailLogsPayload>[]
+        }
+        upsert: {
+          args: Prisma.VloqEmailLogsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VloqEmailLogsPayload>
+        }
+        aggregate: {
+          args: Prisma.VloqEmailLogsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVloqEmailLogs>
+        }
+        groupBy: {
+          args: Prisma.VloqEmailLogsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VloqEmailLogsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VloqEmailLogsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VloqEmailLogsCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -6205,6 +6280,22 @@ export const NotificationDeliveryLogsScalarFieldEnum = {
 export type NotificationDeliveryLogsScalarFieldEnum = (typeof NotificationDeliveryLogsScalarFieldEnum)[keyof typeof NotificationDeliveryLogsScalarFieldEnum]
 
 
+export const VloqEmailLogsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  subject: 'subject',
+  message: 'message',
+  to_email: 'to_email',
+  status: 'status',
+  error_message: 'error_message',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type VloqEmailLogsScalarFieldEnum = (typeof VloqEmailLogsScalarFieldEnum)[keyof typeof VloqEmailLogsScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -6514,7 +6605,7 @@ export type PrismaClientOptions = ({
    *  { emit: 'stdout', level: 'error' }
    * 
    * ```
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
+   * Read more in our [docs](https://pris.ly/d/logging).
    */
   log?: (LogLevel | LogDefinition)[]
   /**
@@ -6542,6 +6633,22 @@ export type PrismaClientOptions = ({
    * ```
    */
   omit?: GlobalOmitConfig
+  /**
+   * SQL commenter plugins that add metadata to SQL queries as comments.
+   * Comments follow the sqlcommenter format: https://google.github.io/sqlcommenter/
+   * 
+   * @example
+   * ```
+   * const prisma = new PrismaClient({
+   *   adapter,
+   *   comments: [
+   *     traceContext(),
+   *     queryInsights(),
+   *   ],
+   * })
+   * ```
+   */
+  comments?: runtime.SqlCommenterPlugin[]
 }
 export type GlobalOmitConfig = {
   vendorMaster?: Prisma.VendorMasterOmit
@@ -6608,6 +6715,7 @@ export type GlobalOmitConfig = {
   notification?: Prisma.NotificationOmit
   userPushToken?: Prisma.UserPushTokenOmit
   notificationDeliveryLogs?: Prisma.NotificationDeliveryLogsOmit
+  vloqEmailLogs?: Prisma.VloqEmailLogsOmit
 }
 
 /* Types for Logging */

@@ -9,6 +9,9 @@ export type BrevoEmailPayload = {
   subject: string;
   html: string;
   text?: string;
+  replyToEmail?: string;
+  replyToName?: string;
+  senderName?: string;
 };
 
 export type BrevoEmailResult =
@@ -167,8 +170,10 @@ export const sendBrevoEmail = async (
 ): Promise<BrevoEmailResult> => {
   const apiKey = process.env.BREVO_API_KEY;
   const senderEmail = process.env.BREVO_SENDER_EMAIL;
-  const senderName = process.env.BREVO_SENDER_NAME || "Furnix CRM";
-  const replyTo = process.env.BREVO_REPLY_TO_EMAIL;
+  const defaultSenderName = process.env.BREVO_SENDER_NAME || "Furnix CRM";
+  const senderName = payload.senderName || defaultSenderName;
+  const replyTo = payload.replyToEmail || process.env.BREVO_REPLY_TO_EMAIL;
+  const replyToName = payload.replyToName || senderName;
   const brevoEnabled = process.env.BREVO_ENABLED === "true";
 
   if (!brevoEnabled) {
@@ -221,7 +226,7 @@ export const sendBrevoEmail = async (
           ? {
               replyTo: {
                 email: replyTo,
-                name: senderName,
+                name: replyToName,
               },
             }
           : {}),

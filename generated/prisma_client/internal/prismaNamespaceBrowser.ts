@@ -114,7 +114,8 @@ export const ModelName = {
   EmailNotificationMaster: 'EmailNotificationMaster',
   Notification: 'Notification',
   UserPushToken: 'UserPushToken',
-  NotificationDeliveryLogs: 'NotificationDeliveryLogs'
+  NotificationDeliveryLogs: 'NotificationDeliveryLogs',
+  VloqEmailLogs: 'VloqEmailLogs'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1094,6 +1095,22 @@ export const NotificationDeliveryLogsScalarFieldEnum = {
 } as const
 
 export type NotificationDeliveryLogsScalarFieldEnum = (typeof NotificationDeliveryLogsScalarFieldEnum)[keyof typeof NotificationDeliveryLogsScalarFieldEnum]
+
+
+export const VloqEmailLogsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  subject: 'subject',
+  message: 'message',
+  to_email: 'to_email',
+  status: 'status',
+  error_message: 'error_message',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type VloqEmailLogsScalarFieldEnum = (typeof VloqEmailLogsScalarFieldEnum)[keyof typeof VloqEmailLogsScalarFieldEnum]
 
 
 export const SortOrder = {

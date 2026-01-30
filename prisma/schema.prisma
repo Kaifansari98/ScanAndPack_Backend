@@ -1222,6 +1222,19 @@ model NotificationDeliveryLogs {
   pushToken       UserPushToken     @relation(fields: [push_token_id], references: [id])
 }
 
+model VloqEmailLogs {
+  id            Int      @id @default(autoincrement())
+  name          String
+  email         String
+  subject       String
+  message       String   @db.Text
+  to_email      String
+  status        String   @default("pending")
+  error_message String?  @db.Text
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+}
+
 enum NotificationType {
   LEAD_ASSIGNED
   TASK_ASSIGNED
