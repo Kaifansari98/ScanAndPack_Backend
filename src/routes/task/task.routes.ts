@@ -3,21 +3,9 @@ import { TaskController } from "../../controllers/task/task.controller";
 
 const taskRouter = Router();
 
-// GET /api/tasks/vendorId/:vendorId/users/:userId/tasks
-taskRouter.get(
-  "/vendorId/:vendorId/userId/:userId/tasks",
-  TaskController.getTasks,
-);
-
 taskRouter.post(
   "/vendorId/:vendorId/userId/:userId/tasks/filter",
   TaskController.getTasks2,
-);
-
-// GET /api/tasks/vendorId/:vendorId/tasks/all
-taskRouter.get(
-  "/vendorId/:vendorId/tasks/all",
-  TaskController.getTasksByVendor,
 );
 
 taskRouter.post(

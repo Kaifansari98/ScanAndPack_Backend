@@ -122,72 +122,6 @@ export class TaskService {
     };
   }
 
-  /**
-   * Get all tasks for a given vendor and user, including relations
-   */
-  static async getTasksByVendorAndUser(vendorId: number, userId: number) {
-    const tasks = await prisma.userLeadTask.findMany({
-      where: {
-        vendor_id: vendorId,
-        user_id: userId,
-        status: "open",
-      },
-      select: {
-        id: true,
-        status: true,
-        due_date: true,
-        task_type: true,
-        remark: true,
-        closed_by: true,
-        closed_at: true,
-        created_by: true,
-        created_at: true,
-        updated_by: true,
-        updated_at: true,
-
-        // 👤 Who created the task
-        createdBy: {
-          select: {
-            id: true,
-            user_name: true,
-          },
-        },
-        user: {
-          select: {
-            id: true,
-            user_name: true,
-          },
-        },
-
-        // 🔑 Lead details
-        lead: {
-          select: {
-            id: true,
-            account_id: true,
-            vendor_id: true,
-            lead_code: true,
-            firstname: true,
-            lastname: true,
-            contact_no: true,
-            site_map_link: true,
-            statusType: { select: { type: true } },
-            siteType: { select: { type: true } },
-            productMappings: {
-              select: { productType: { select: { type: true } } },
-            },
-            leadProductStructureMapping: {
-              select: { productStructure: { select: { type: true } } },
-            },
-          },
-        },
-      },
-      orderBy: { created_at: "desc" },
-    });
-
-    // ✅ Shape data into your desired format
-    return tasks.map((task) => this.mapTaskWithLead(task));
-  }
-
   static async getTasksByVendorAndUser2(
     vendorId: number,
     userId: number,
@@ -793,65 +727,7 @@ export class TaskService {
     };
   }
 
-  /**
-   * Get all tasks for a given vendor (admin view)
-   */
-  static async getTasksByVendor(vendorId: number) {
-    const tasks = await prisma.userLeadTask.findMany({
-      where: {
-        vendor_id: vendorId,
-        status: { in: ["open", "in_progress"] },
-      },
-      select: {
-        id: true,
-        status: true,
-        due_date: true,
-        task_type: true,
-        remark: true,
-        closed_by: true,
-        closed_at: true,
-        created_by: true,
-        created_at: true,
-        updated_by: true,
-        updated_at: true,
-        createdBy: {
-          select: {
-            id: true,
-            user_name: true,
-          },
-        },
-        user: {
-          select: {
-            id: true,
-            user_name: true,
-          },
-        },
-        lead: {
-          select: {
-            id: true,
-            account_id: true,
-            vendor_id: true,
-            lead_code: true,
-            firstname: true,
-            lastname: true,
-            contact_no: true,
-            site_map_link: true,
-            statusType: { select: { type: true } },
-            siteType: { select: { type: true } },
-            productMappings: {
-              select: { productType: { select: { type: true } } },
-            },
-            leadProductStructureMapping: {
-              select: { productStructure: { select: { type: true } } },
-            },
-          },
-        },
-      },
-      orderBy: { created_at: "desc" },
-    });
 
-    return tasks.map((task) => this.mapTaskWithLead(task));
-  }
 
   static async getTasksFilterByVendor2(
     vendorId: number,
