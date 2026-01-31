@@ -236,13 +236,10 @@ export class OrderLoginService {
       },
     });
 
-    if (orderLogins.length === 0) {
-      const error = new Error("No order login details found for this lead.");
-      (error as any).statusCode = 404;
-      throw error;
-    }
-
-    return orderLogins;
+    return {
+      list: orderLogins,
+      hasData: orderLogins.length > 0,
+    };
   }
 
   async updateOrderLogin(vendorId: number, orderLoginId: number, payload: any) {
