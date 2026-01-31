@@ -33,6 +33,71 @@ const resolveClientBaseUrl = (req: Request): string => {
 const clientApprovalService = new ClientApprovalService();
 
 export class ClientApprovalController {
+  public static async addApprovalDocuments(
+    req: Request,
+    res: Response
+  ): Promise<void> {
+    try {
+      const { lead_id, vendor_id, account_id, created_by } = req.body;
+
+      if (!lead_id || !vendor_id || !account_id || !created_by) {
+        res
+          .status(400)
+          .json({ success: false, message: "Missing required fields" });
+        return;
+      }
+
+      const documents = (req.files as any)?.documents || [];
+
+      if (!documents || documents.length === 0) {
+        res.status(400).json({
+          success: false,
+          message: "At least one screenshot is required",
+        });
+        return;
+      }
+
+      const uploadedDocs: { originalName: string; sysName: string }[] = [];
+
+      for (const doc of documents) {
+        const sysName = await uploadToWasabClientApprovalDocumentationFile(
+          doc.path,
+          Number(vendor_id),
+          Number(lead_id),
+          doc.originalname,
+          doc.mimetype
+        );
+
+        await fs.unlink(doc.path);
+
+        uploadedDocs.push({
+          originalName: doc.originalname,
+          sysName,
+        });
+      }
+
+      const result = await clientApprovalService.addApprovalDocuments({
+        lead_id: Number(lead_id),
+        vendor_id: Number(vendor_id),
+        account_id: Number(account_id),
+        created_by: Number(created_by),
+        documents: uploadedDocs,
+      });
+
+      res.status(201).json({
+        success: true,
+        message: "Client approval screenshots uploaded successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error("[ClientApprovalController] addApprovalDocuments Error:", error);
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  }
+
   public static async submitApproval(
     req: Request,
     res: Response
