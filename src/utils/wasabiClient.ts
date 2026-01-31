@@ -1210,15 +1210,26 @@ export const uploadInitialSiteMeasurement = multer({
     fileSize: 200 * 1024 * 1024, // 200 MB
   },
   fileFilter: (_req, file, cb) => {
-    const allowedMimeTypes = [
-      "application/pdf",
-      "image/jpeg",
-      "image/jpg",
-      "image/png",
-      "image/gif",
+    const isImage = file.mimetype.startsWith("image/");
+    const isPdf = file.mimetype === "application/pdf";
+    const ext = path.extname(file.originalname || "").toLowerCase();
+    const imageExtensions = [
+      ".jpg",
+      ".jpeg",
+      ".png",
+      ".gif",
+      ".webp",
+      ".bmp",
+      ".tif",
+      ".tiff",
+      ".heic",
+      ".heif",
+      ".avif",
+      ".svg",
+      ".jfif",
     ];
 
-    if (allowedMimeTypes.includes(file.mimetype)) {
+    if (isImage || isPdf || imageExtensions.includes(ext)) {
       cb(null, true);
     } else {
       cb(new Error("Invalid file type. Only PDF and image files are allowed."));
