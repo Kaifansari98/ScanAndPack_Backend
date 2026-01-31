@@ -17,6 +17,13 @@ clientApprovalRouter.post(
   ClientApprovalController.submitApproval
 );
 
+// Upload more client approval screenshots
+clientApprovalRouter.post(
+  "/add-documents",
+  uploadClientApproval.fields([{ name: "documents", maxCount: 10 }]),
+  ClientApprovalController.addApprovalDocuments
+);
+
 // GET /api/backend-users/vendorId/:vendorId
 // Fetch all backend users for a specific vendor
 clientApprovalRouter.get(
