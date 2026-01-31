@@ -41,6 +41,7 @@ import DashboardRouter from "./dashboard/dashboard.route";
 import chatRoutes from "./chat/chat.routes";
 import notificationRoutes from "./notification/notification.routes";
 import emailNotificationMasterRoutes from "./notification/emailNotificationMaster.routes";
+import contactUsRoutes from "./generic/contactUs.routes";
 
 const router = Router();
 
@@ -91,5 +92,6 @@ router.use("/leads/installation/final-handover", finalHandoverStageRoutes);
 router.use("/leads/chats", chatRoutes);
 router.use("/notifications", notificationRoutes);
 router.use("/email-notification-master", emailNotificationMasterRoutes);
+router.use("/public", contactUsRoutes);
 
 export { router };

@@ -337,3 +337,8 @@ export type UserPushToken = Prisma.UserPushTokenModel
  * 
  */
 export type NotificationDeliveryLogs = Prisma.NotificationDeliveryLogsModel
+/**
+ * Model VloqEmailLogs
+ * 
+ */
+export type VloqEmailLogs = Prisma.VloqEmailLogsModel

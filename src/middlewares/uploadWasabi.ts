@@ -281,10 +281,21 @@ export const uploadDesigns = multer({
     ];
 
     const ext = path.extname(file.originalname).toLowerCase();
+    console.log("[uploadOrderLoginPoFiles] incoming file:", {
+      name: file.originalname,
+      mimetype: file.mimetype,
+      ext,
+    });
 
     if (allowedExtensions.includes(ext)) {
       cb(null, true);
     } else {
+      console.warn("[uploadOrderLoginPoFiles] rejected file:", {
+        name: file.originalname,
+        mimetype: file.mimetype,
+        ext,
+        allowedExtensions,
+      });
       cb(
         new Error(
           `Only design or image files are allowed! Supported extensions: ${allowedExtensions.join(
@@ -326,6 +337,12 @@ export const uploadOrderLoginPoFiles = multer({
   fileFilter: (req, file, cb) => {
     const allowedExtensions = [
       ".pdf",
+      ".ppt",
+      ".pptx",
+      ".doc",
+      ".docx",
+      ".xls",
+      ".xlsx",
       ".pyo",
       ".pytha",
       ".dwg",
