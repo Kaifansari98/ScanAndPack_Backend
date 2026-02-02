@@ -18,7 +18,7 @@ const allowedOrigins = [
   'https://cadbid.com',
   'http://localhost:3000',
   'http://localhost:5173',
-  'https://vloq-web-v1.vercel.app', 
+  'https://vloq.com/'
 ];
 
 app.use(
