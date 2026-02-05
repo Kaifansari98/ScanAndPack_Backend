@@ -362,3 +362,13 @@ export type NotificationDeliveryLogs = Prisma.NotificationDeliveryLogsModel
  * 
  */
 export type VloqEmailLogs = Prisma.VloqEmailLogsModel
+/**
+ * Model ModulesMaster
+ * 
+ */
+export type ModulesMaster = Prisma.ModulesMasterModel
+/**
+ * Model VendorModulesMapping
+ * 
+ */
+export type VendorModulesMapping = Prisma.VendorModulesMappingModel

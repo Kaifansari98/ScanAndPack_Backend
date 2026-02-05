@@ -73,6 +73,12 @@ model VendorMaster {
   taxInfo                     VendorTaxInfo[]
   tokens                      VendorTokens[]
   productStructureInstances   LeadProductStructureInstance[]
+  vendorModulesMappings       VendorModulesMapping[]
+  machineMaster               MachineMaster[]
+  CutList                     CutList[]
+  cutListMachineMapping       CutListMachineMapping[]
+
+
 
 }
 
@@ -203,6 +209,8 @@ model ProjectMaster {
   createdByUser     UserMaster           @relation("CreatedByUser", fields: [created_by], references: [id], onDelete: Cascade)
   vendor            VendorMaster         @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   scanItems         ScanAndPackItem[]
+  CutList           CutList[]
+  cutListMachineMapping       CutListMachineMapping[]
 }
 
 model ProjectDetails {
@@ -1235,6 +1243,127 @@ model VloqEmailLogs {
   updated_at    DateTime @updatedAt
 }
 
+model ModulesMaster {
+  id          Int          @id @default(autoincrement())
+  module_name String
+  module_code String       @unique
+  active      ActiveStatus @default(Yes)
+  vendorModulesMappings VendorModulesMapping[]
+
+}
+
+model VendorModulesMapping {
+  id          Int      @id @default(autoincrement())
+  vendor_id   Int
+  module_id   Int
+  created_at  DateTime @default(now())
+  created_by  Int
+  updated_by  Int?
+  updated_at  DateTime?
+
+  active     ModulesVendorMappingActiveStatus    @default(Yes)
+
+  // Foreign key relations
+  vendor     VendorMaster @relation(fields: [vendor_id], references: [id])
+  module     ModulesMaster @relation(fields: [module_id], references: [id])
+
+  
+}
+
+model MachineMaster {
+  id           Int           @id @default(autoincrement())
+  machine_name String
+  machine_code String        @unique
+  machine_type String
+  status       MachineStatus @default(ACTIVE)
+  scan_type    ScanType
+  description  String?       @db.Text
+  vendor_id    Int  
+  factory_id   Int?
+  created_by   Int
+  created_at   DateTime      @default(now())
+  updated_by   Int
+  updated_at   DateTime      @default(now())
+  vendor     VendorMaster @relation(fields: [vendor_id], references: [id])
+  cutListMachineMapping       CutListMachineMapping[]
+}
+
+
+model CutList {
+  id               Int      @id @default(autoincrement())
+
+  project_id       Int
+  project           ProjectMaster @relation(fields: [project_id], references: [id])
+
+  vendor_id        Int
+  vendor            VendorMaster  @relation(fields: [vendor_id], references: [id])
+
+  description      String
+  length           Decimal? @db.Decimal(18, 2)
+  width            Decimal? @db.Decimal(18, 2)
+  thickness        Decimal? @db.Decimal(18, 2)
+
+  qty              Int
+
+  material_details String
+  item_name        String
+
+  unique_code      String?
+
+  status           String   @default("active")
+
+  created_by       Int
+  created_at       DateTime @default(now())
+
+  updated_by       Int?
+  updated_at       DateTime @default(now())
+  cutListMachineMapping       CutListMachineMapping[]
+
+}
+
+
+model CutListMachineMapping {
+  id              Int      @id @default(autoincrement())
+
+  cut_list_id     Int
+  cut_list        CutList  @relation(fields: [cut_list_id], references: [id])
+
+  machine_id      Int
+  machine         MachineMaster @relation(fields: [machine_id], references: [id])
+
+  vendor_id       Int
+  vendor          VendorMaster  @relation(fields: [vendor_id], references: [id])
+
+  project_id      Int
+  project         ProjectMaster @relation(fields: [project_id], references: [id])
+
+  sequence_no     Int
+  is_optional     Boolean  @default(false)
+
+  expected_in     Boolean  @default(false)
+  expected_out    Boolean  @default(false)
+
+  status          String
+
+  actual_in_at    DateTime?
+  actual_out_at   DateTime?
+
+  in_operator     Int?
+  out_operator    Int?
+
+  created_by      Int
+  created_at      DateTime @default(now())
+
+  @@index([cut_list_id])
+  @@index([machine_id])
+  @@index([project_id])
+  @@index([vendor_id])
+  @@index([sequence_no])
+
+}
+
+
+
 enum NotificationType {
   LEAD_ASSIGNED
   TASK_ASSIGNED
@@ -1315,4 +1444,28 @@ enum ProductInstanceStatus {
   onHold
   lostApproval
   lost
+}
+
+enum ActiveStatus {
+  Yes
+  No
+}
+
+enum ModulesVendorMappingActiveStatus {
+  Yes
+  No
+}
+
+enum MachineStatus {
+  ACTIVE
+  MAINTENANCE
+  INACTIVE
+  RETIRED
+}
+
+enum ScanType {
+  IN
+  OUT
+  BOTH
+  PASS
 }

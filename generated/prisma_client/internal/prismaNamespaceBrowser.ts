@@ -115,7 +115,9 @@ export const ModelName = {
   Notification: 'Notification',
   UserPushToken: 'UserPushToken',
   NotificationDeliveryLogs: 'NotificationDeliveryLogs',
-  VloqEmailLogs: 'VloqEmailLogs'
+  VloqEmailLogs: 'VloqEmailLogs',
+  ModulesMaster: 'ModulesMaster',
+  VendorModulesMapping: 'VendorModulesMapping'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -124,12 +126,12 @@ export type ModelName = (typeof ModelName)[keyof typeof ModelName]
  * Enums
  */
 
-export const TransactionIsolationLevel = {
+export const TransactionIsolationLevel = runtime.makeStrictEnum({
   ReadUncommitted: 'ReadUncommitted',
   ReadCommitted: 'ReadCommitted',
   RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
-} as const
+} as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
@@ -1111,6 +1113,30 @@ export const VloqEmailLogsScalarFieldEnum = {
 } as const
 
 export type VloqEmailLogsScalarFieldEnum = (typeof VloqEmailLogsScalarFieldEnum)[keyof typeof VloqEmailLogsScalarFieldEnum]
+
+
+export const ModulesMasterScalarFieldEnum = {
+  id: 'id',
+  module_name: 'module_name',
+  module_code: 'module_code',
+  active: 'active'
+} as const
+
+export type ModulesMasterScalarFieldEnum = (typeof ModulesMasterScalarFieldEnum)[keyof typeof ModulesMasterScalarFieldEnum]
+
+
+export const VendorModulesMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  module_id: 'module_id',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at',
+  active: 'active'
+} as const
+
+export type VendorModulesMappingScalarFieldEnum = (typeof VendorModulesMappingScalarFieldEnum)[keyof typeof VendorModulesMappingScalarFieldEnum]
 
 
 export const SortOrder = {

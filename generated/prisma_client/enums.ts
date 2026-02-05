@@ -128,3 +128,11 @@ export const ProductInstanceStatus = {
 } as const
 
 export type ProductInstanceStatus = (typeof ProductInstanceStatus)[keyof typeof ProductInstanceStatus]
+
+
+export const ActiveStatus = {
+  Yes: 'Yes',
+  No: 'No'
+} as const
+
+export type ActiveStatus = (typeof ActiveStatus)[keyof typeof ActiveStatus]

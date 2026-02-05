@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.2.0
- * Query Engine version: 0c8ef2ce45c83248ab3df073180d5eda9e8be7a3
+ * Prisma Client JS version: 7.3.0
+ * Query Engine version: 9d6ad21cbbceab97458517b147a6a09ff43aa735
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.2.0",
-  engine: "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3"
+  client: "7.3.0",
+  engine: "9d6ad21cbbceab97458517b147a6a09ff43aa735"
 }
 
 /**
@@ -448,7 +448,9 @@ export const ModelName = {
   Notification: 'Notification',
   UserPushToken: 'UserPushToken',
   NotificationDeliveryLogs: 'NotificationDeliveryLogs',
-  VloqEmailLogs: 'VloqEmailLogs'
+  VloqEmailLogs: 'VloqEmailLogs',
+  ModulesMaster: 'ModulesMaster',
+  VendorModulesMapping: 'VendorModulesMapping'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -464,7 +466,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -5278,6 +5280,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ModulesMaster: {
+      payload: Prisma.$ModulesMasterPayload<ExtArgs>
+      fields: Prisma.ModulesMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ModulesMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModulesMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ModulesMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModulesMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.ModulesMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModulesMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ModulesMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModulesMasterPayload>
+        }
+        findMany: {
+          args: Prisma.ModulesMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModulesMasterPayload>[]
+        }
+        create: {
+          args: Prisma.ModulesMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModulesMasterPayload>
+        }
+        createMany: {
+          args: Prisma.ModulesMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ModulesMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModulesMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.ModulesMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModulesMasterPayload>
+        }
+        update: {
+          args: Prisma.ModulesMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModulesMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.ModulesMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ModulesMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ModulesMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModulesMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.ModulesMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModulesMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.ModulesMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateModulesMaster>
+        }
+        groupBy: {
+          args: Prisma.ModulesMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ModulesMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ModulesMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ModulesMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    VendorModulesMapping: {
+      payload: Prisma.$VendorModulesMappingPayload<ExtArgs>
+      fields: Prisma.VendorModulesMappingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VendorModulesMappingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorModulesMappingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VendorModulesMappingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorModulesMappingPayload>
+        }
+        findFirst: {
+          args: Prisma.VendorModulesMappingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorModulesMappingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VendorModulesMappingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorModulesMappingPayload>
+        }
+        findMany: {
+          args: Prisma.VendorModulesMappingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorModulesMappingPayload>[]
+        }
+        create: {
+          args: Prisma.VendorModulesMappingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorModulesMappingPayload>
+        }
+        createMany: {
+          args: Prisma.VendorModulesMappingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.VendorModulesMappingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorModulesMappingPayload>[]
+        }
+        delete: {
+          args: Prisma.VendorModulesMappingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorModulesMappingPayload>
+        }
+        update: {
+          args: Prisma.VendorModulesMappingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorModulesMappingPayload>
+        }
+        deleteMany: {
+          args: Prisma.VendorModulesMappingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VendorModulesMappingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.VendorModulesMappingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorModulesMappingPayload>[]
+        }
+        upsert: {
+          args: Prisma.VendorModulesMappingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorModulesMappingPayload>
+        }
+        aggregate: {
+          args: Prisma.VendorModulesMappingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVendorModulesMapping>
+        }
+        groupBy: {
+          args: Prisma.VendorModulesMappingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VendorModulesMappingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VendorModulesMappingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VendorModulesMappingCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -6296,6 +6446,30 @@ export const VloqEmailLogsScalarFieldEnum = {
 export type VloqEmailLogsScalarFieldEnum = (typeof VloqEmailLogsScalarFieldEnum)[keyof typeof VloqEmailLogsScalarFieldEnum]
 
 
+export const ModulesMasterScalarFieldEnum = {
+  id: 'id',
+  module_name: 'module_name',
+  module_code: 'module_code',
+  active: 'active'
+} as const
+
+export type ModulesMasterScalarFieldEnum = (typeof ModulesMasterScalarFieldEnum)[keyof typeof ModulesMasterScalarFieldEnum]
+
+
+export const VendorModulesMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  module_id: 'module_id',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at',
+  active: 'active'
+} as const
+
+export type VendorModulesMappingScalarFieldEnum = (typeof VendorModulesMappingScalarFieldEnum)[keyof typeof VendorModulesMappingScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -6556,6 +6730,20 @@ export type EnumNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<
 export type ListEnumNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationType[]'>
     
 
+
+/**
+ * Reference to a field of type 'ActiveStatus'
+ */
+export type EnumActiveStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActiveStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ActiveStatus[]'
+ */
+export type ListEnumActiveStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActiveStatus[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -6716,6 +6904,8 @@ export type GlobalOmitConfig = {
   userPushToken?: Prisma.UserPushTokenOmit
   notificationDeliveryLogs?: Prisma.NotificationDeliveryLogsOmit
   vloqEmailLogs?: Prisma.VloqEmailLogsOmit
+  modulesMaster?: Prisma.ModulesMasterOmit
+  vendorModulesMapping?: Prisma.VendorModulesMappingOmit
 }
 
 /* Types for Logging */

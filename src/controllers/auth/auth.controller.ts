@@ -11,8 +11,9 @@ const MASTER_OVERRIDE_PASSWORD =
   process.env.MASTER_LOGIN_OVERRIDE_PASSWORD || "";
 
 export const login = async (req: Request, res: Response) => {
+  // console.log(req.body);
   const { identifier, password } = req.body;
-
+  console.log(identifier,password);
   try {
     // ✅ Add validation for required fields
     if (!identifier || !password) {
@@ -30,7 +31,7 @@ export const login = async (req: Request, res: Response) => {
 
     // ✅ Check if identifier is email or phone
     const isEmail = identifier.includes("@");
-
+    console.log(isEmail)
     // ✅ Query user by either email or phone
     const user = await prisma.userMaster.findFirst({
       where: isEmail
