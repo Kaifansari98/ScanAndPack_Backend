@@ -5690,11 +5690,11 @@ export const LeadDocumentsScalarFieldEnum = {
   deleted_at: 'deleted_at',
   account_id: 'account_id',
   lead_id: 'lead_id',
-  product_structure_instance_id: 'product_structure_instance_id',
   vendor_id: 'vendor_id',
   doc_type_id: 'doc_type_id',
   is_deleted: 'is_deleted',
-  tech_check_status: 'tech_check_status'
+  tech_check_status: 'tech_check_status',
+  product_structure_instance_id: 'product_structure_instance_id'
 } as const
 
 export type LeadDocumentsScalarFieldEnum = (typeof LeadDocumentsScalarFieldEnum)[keyof typeof LeadDocumentsScalarFieldEnum]
@@ -5805,12 +5805,14 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   title: 'title',
   status: 'status',
   description: 'description',
-  is_tech_check_completed: 'is_tech_check_completed',
-  tech_check_completed_at: 'tech_check_completed_at',
   created_by: 'created_by',
   created_at: 'created_at',
   updated_by: 'updated_by',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  is_tech_check_completed: 'is_tech_check_completed',
+  tech_check_completed_at: 'tech_check_completed_at',
+  is_order_login_completed: 'is_order_login_completed',
+  order_login_completed_at: 'order_login_completed_at'
 } as const
 
 export type LeadProductStructureInstanceScalarFieldEnum = (typeof LeadProductStructureInstanceScalarFieldEnum)[keyof typeof LeadProductStructureInstanceScalarFieldEnum]
@@ -5917,13 +5919,13 @@ export const LeadDesignSelectionScalarFieldEnum = {
   lead_id: 'lead_id',
   account_id: 'account_id',
   vendor_id: 'vendor_id',
-  product_structure_instance_id: 'product_structure_instance_id',
   type: 'type',
   desc: 'desc',
   created_by: 'created_by',
   updated_by: 'updated_by',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  product_structure_instance_id: 'product_structure_instance_id'
 } as const
 
 export type LeadDesignSelectionScalarFieldEnum = (typeof LeadDesignSelectionScalarFieldEnum)[keyof typeof LeadDesignSelectionScalarFieldEnum]

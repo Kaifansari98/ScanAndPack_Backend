@@ -31,9 +31,9 @@ export type LeadDesignSelectionAvgAggregateOutputType = {
   lead_id: number | null
   account_id: number | null
   vendor_id: number | null
-  product_structure_instance_id: number | null
   created_by: number | null
   updated_by: number | null
+  product_structure_instance_id: number | null
 }
 
 export type LeadDesignSelectionSumAggregateOutputType = {
@@ -41,9 +41,9 @@ export type LeadDesignSelectionSumAggregateOutputType = {
   lead_id: number | null
   account_id: number | null
   vendor_id: number | null
-  product_structure_instance_id: number | null
   created_by: number | null
   updated_by: number | null
+  product_structure_instance_id: number | null
 }
 
 export type LeadDesignSelectionMinAggregateOutputType = {
@@ -51,13 +51,13 @@ export type LeadDesignSelectionMinAggregateOutputType = {
   lead_id: number | null
   account_id: number | null
   vendor_id: number | null
-  product_structure_instance_id: number | null
   type: string | null
   desc: string | null
   created_by: number | null
   updated_by: number | null
   created_at: Date | null
   updated_at: Date | null
+  product_structure_instance_id: number | null
 }
 
 export type LeadDesignSelectionMaxAggregateOutputType = {
@@ -65,13 +65,13 @@ export type LeadDesignSelectionMaxAggregateOutputType = {
   lead_id: number | null
   account_id: number | null
   vendor_id: number | null
-  product_structure_instance_id: number | null
   type: string | null
   desc: string | null
   created_by: number | null
   updated_by: number | null
   created_at: Date | null
   updated_at: Date | null
+  product_structure_instance_id: number | null
 }
 
 export type LeadDesignSelectionCountAggregateOutputType = {
@@ -79,13 +79,13 @@ export type LeadDesignSelectionCountAggregateOutputType = {
   lead_id: number
   account_id: number
   vendor_id: number
-  product_structure_instance_id: number
   type: number
   desc: number
   created_by: number
   updated_by: number
   created_at: number
   updated_at: number
+  product_structure_instance_id: number
   _all: number
 }
 
@@ -95,9 +95,9 @@ export type LeadDesignSelectionAvgAggregateInputType = {
   lead_id?: true
   account_id?: true
   vendor_id?: true
-  product_structure_instance_id?: true
   created_by?: true
   updated_by?: true
+  product_structure_instance_id?: true
 }
 
 export type LeadDesignSelectionSumAggregateInputType = {
@@ -105,9 +105,9 @@ export type LeadDesignSelectionSumAggregateInputType = {
   lead_id?: true
   account_id?: true
   vendor_id?: true
-  product_structure_instance_id?: true
   created_by?: true
   updated_by?: true
+  product_structure_instance_id?: true
 }
 
 export type LeadDesignSelectionMinAggregateInputType = {
@@ -115,13 +115,13 @@ export type LeadDesignSelectionMinAggregateInputType = {
   lead_id?: true
   account_id?: true
   vendor_id?: true
-  product_structure_instance_id?: true
   type?: true
   desc?: true
   created_by?: true
   updated_by?: true
   created_at?: true
   updated_at?: true
+  product_structure_instance_id?: true
 }
 
 export type LeadDesignSelectionMaxAggregateInputType = {
@@ -129,13 +129,13 @@ export type LeadDesignSelectionMaxAggregateInputType = {
   lead_id?: true
   account_id?: true
   vendor_id?: true
-  product_structure_instance_id?: true
   type?: true
   desc?: true
   created_by?: true
   updated_by?: true
   created_at?: true
   updated_at?: true
+  product_structure_instance_id?: true
 }
 
 export type LeadDesignSelectionCountAggregateInputType = {
@@ -143,13 +143,13 @@ export type LeadDesignSelectionCountAggregateInputType = {
   lead_id?: true
   account_id?: true
   vendor_id?: true
-  product_structure_instance_id?: true
   type?: true
   desc?: true
   created_by?: true
   updated_by?: true
   created_at?: true
   updated_at?: true
+  product_structure_instance_id?: true
   _all?: true
 }
 
@@ -244,13 +244,13 @@ export type LeadDesignSelectionGroupByOutputType = {
   lead_id: number
   account_id: number
   vendor_id: number
-  product_structure_instance_id: number | null
   type: string
   desc: string
   created_by: number
   updated_by: number | null
   created_at: Date
   updated_at: Date
+  product_structure_instance_id: number | null
   _count: LeadDesignSelectionCountAggregateOutputType | null
   _avg: LeadDesignSelectionAvgAggregateOutputType | null
   _sum: LeadDesignSelectionSumAggregateOutputType | null
@@ -281,13 +281,13 @@ export type LeadDesignSelectionWhereInput = {
   lead_id?: Prisma.IntFilter<"LeadDesignSelection"> | number
   account_id?: Prisma.IntFilter<"LeadDesignSelection"> | number
   vendor_id?: Prisma.IntFilter<"LeadDesignSelection"> | number
-  product_structure_instance_id?: Prisma.IntNullableFilter<"LeadDesignSelection"> | number | null
   type?: Prisma.StringFilter<"LeadDesignSelection"> | string
   desc?: Prisma.StringFilter<"LeadDesignSelection"> | string
   created_by?: Prisma.IntFilter<"LeadDesignSelection"> | number
   updated_by?: Prisma.IntNullableFilter<"LeadDesignSelection"> | number | null
   created_at?: Prisma.DateTimeFilter<"LeadDesignSelection"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"LeadDesignSelection"> | Date | string
+  product_structure_instance_id?: Prisma.IntNullableFilter<"LeadDesignSelection"> | number | null
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
@@ -301,13 +301,13 @@ export type LeadDesignSelectionOrderByWithRelationInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  product_structure_instance_id?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   desc?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  product_structure_instance_id?: Prisma.SortOrderInput | Prisma.SortOrder
   account?: Prisma.AccountMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   lead?: Prisma.LeadMasterOrderByWithRelationInput
@@ -324,13 +324,13 @@ export type LeadDesignSelectionWhereUniqueInput = Prisma.AtLeast<{
   lead_id?: Prisma.IntFilter<"LeadDesignSelection"> | number
   account_id?: Prisma.IntFilter<"LeadDesignSelection"> | number
   vendor_id?: Prisma.IntFilter<"LeadDesignSelection"> | number
-  product_structure_instance_id?: Prisma.IntNullableFilter<"LeadDesignSelection"> | number | null
   type?: Prisma.StringFilter<"LeadDesignSelection"> | string
   desc?: Prisma.StringFilter<"LeadDesignSelection"> | string
   created_by?: Prisma.IntFilter<"LeadDesignSelection"> | number
   updated_by?: Prisma.IntNullableFilter<"LeadDesignSelection"> | number | null
   created_at?: Prisma.DateTimeFilter<"LeadDesignSelection"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"LeadDesignSelection"> | Date | string
+  product_structure_instance_id?: Prisma.IntNullableFilter<"LeadDesignSelection"> | number | null
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
@@ -344,13 +344,13 @@ export type LeadDesignSelectionOrderByWithAggregationInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  product_structure_instance_id?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   desc?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  product_structure_instance_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.LeadDesignSelectionCountOrderByAggregateInput
   _avg?: Prisma.LeadDesignSelectionAvgOrderByAggregateInput
   _max?: Prisma.LeadDesignSelectionMaxOrderByAggregateInput
@@ -366,13 +366,13 @@ export type LeadDesignSelectionScalarWhereWithAggregatesInput = {
   lead_id?: Prisma.IntWithAggregatesFilter<"LeadDesignSelection"> | number
   account_id?: Prisma.IntWithAggregatesFilter<"LeadDesignSelection"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"LeadDesignSelection"> | number
-  product_structure_instance_id?: Prisma.IntNullableWithAggregatesFilter<"LeadDesignSelection"> | number | null
   type?: Prisma.StringWithAggregatesFilter<"LeadDesignSelection"> | string
   desc?: Prisma.StringWithAggregatesFilter<"LeadDesignSelection"> | string
   created_by?: Prisma.IntWithAggregatesFilter<"LeadDesignSelection"> | number
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"LeadDesignSelection"> | number | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"LeadDesignSelection"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"LeadDesignSelection"> | Date | string
+  product_structure_instance_id?: Prisma.IntNullableWithAggregatesFilter<"LeadDesignSelection"> | number | null
 }
 
 export type LeadDesignSelectionCreateInput = {
@@ -393,13 +393,13 @@ export type LeadDesignSelectionUncheckedCreateInput = {
   lead_id: number
   account_id: number
   vendor_id: number
-  product_structure_instance_id?: number | null
   type: string
   desc: string
   created_by: number
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  product_structure_instance_id?: number | null
 }
 
 export type LeadDesignSelectionUpdateInput = {
@@ -420,13 +420,13 @@ export type LeadDesignSelectionUncheckedUpdateInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDesignSelectionCreateManyInput = {
@@ -434,13 +434,13 @@ export type LeadDesignSelectionCreateManyInput = {
   lead_id: number
   account_id: number
   vendor_id: number
-  product_structure_instance_id?: number | null
   type: string
   desc: string
   created_by: number
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  product_structure_instance_id?: number | null
 }
 
 export type LeadDesignSelectionUpdateManyMutationInput = {
@@ -455,13 +455,13 @@ export type LeadDesignSelectionUncheckedUpdateManyInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDesignSelectionListRelationFilter = {
@@ -479,13 +479,13 @@ export type LeadDesignSelectionCountOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  product_structure_instance_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   desc?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  product_structure_instance_id?: Prisma.SortOrder
 }
 
 export type LeadDesignSelectionAvgOrderByAggregateInput = {
@@ -493,9 +493,9 @@ export type LeadDesignSelectionAvgOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  product_structure_instance_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  product_structure_instance_id?: Prisma.SortOrder
 }
 
 export type LeadDesignSelectionMaxOrderByAggregateInput = {
@@ -503,13 +503,13 @@ export type LeadDesignSelectionMaxOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  product_structure_instance_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   desc?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  product_structure_instance_id?: Prisma.SortOrder
 }
 
 export type LeadDesignSelectionMinOrderByAggregateInput = {
@@ -517,13 +517,13 @@ export type LeadDesignSelectionMinOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  product_structure_instance_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   desc?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  product_structure_instance_id?: Prisma.SortOrder
 }
 
 export type LeadDesignSelectionSumOrderByAggregateInput = {
@@ -531,9 +531,9 @@ export type LeadDesignSelectionSumOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  product_structure_instance_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  product_structure_instance_id?: Prisma.SortOrder
 }
 
 export type LeadDesignSelectionCreateNestedManyWithoutVendorInput = {
@@ -804,13 +804,13 @@ export type LeadDesignSelectionUncheckedCreateWithoutVendorInput = {
   id?: number
   lead_id: number
   account_id: number
-  product_structure_instance_id?: number | null
   type: string
   desc: string
   created_by: number
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  product_structure_instance_id?: number | null
 }
 
 export type LeadDesignSelectionCreateOrConnectWithoutVendorInput = {
@@ -847,13 +847,13 @@ export type LeadDesignSelectionScalarWhereInput = {
   lead_id?: Prisma.IntFilter<"LeadDesignSelection"> | number
   account_id?: Prisma.IntFilter<"LeadDesignSelection"> | number
   vendor_id?: Prisma.IntFilter<"LeadDesignSelection"> | number
-  product_structure_instance_id?: Prisma.IntNullableFilter<"LeadDesignSelection"> | number | null
   type?: Prisma.StringFilter<"LeadDesignSelection"> | string
   desc?: Prisma.StringFilter<"LeadDesignSelection"> | string
   created_by?: Prisma.IntFilter<"LeadDesignSelection"> | number
   updated_by?: Prisma.IntNullableFilter<"LeadDesignSelection"> | number | null
   created_at?: Prisma.DateTimeFilter<"LeadDesignSelection"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"LeadDesignSelection"> | Date | string
+  product_structure_instance_id?: Prisma.IntNullableFilter<"LeadDesignSelection"> | number | null
 }
 
 export type LeadDesignSelectionCreateWithoutCreatedByInput = {
@@ -873,12 +873,12 @@ export type LeadDesignSelectionUncheckedCreateWithoutCreatedByInput = {
   lead_id: number
   account_id: number
   vendor_id: number
-  product_structure_instance_id?: number | null
   type: string
   desc: string
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  product_structure_instance_id?: number | null
 }
 
 export type LeadDesignSelectionCreateOrConnectWithoutCreatedByInput = {
@@ -908,12 +908,12 @@ export type LeadDesignSelectionUncheckedCreateWithoutUpdatedByInput = {
   lead_id: number
   account_id: number
   vendor_id: number
-  product_structure_instance_id?: number | null
   type: string
   desc: string
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
+  product_structure_instance_id?: number | null
 }
 
 export type LeadDesignSelectionCreateOrConnectWithoutUpdatedByInput = {
@@ -974,13 +974,13 @@ export type LeadDesignSelectionUncheckedCreateWithoutLeadInput = {
   id?: number
   account_id: number
   vendor_id: number
-  product_structure_instance_id?: number | null
   type: string
   desc: string
   created_by: number
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  product_structure_instance_id?: number | null
 }
 
 export type LeadDesignSelectionCreateOrConnectWithoutLeadInput = {
@@ -1025,13 +1025,13 @@ export type LeadDesignSelectionUncheckedCreateWithoutAccountInput = {
   id?: number
   lead_id: number
   vendor_id: number
-  product_structure_instance_id?: number | null
   type: string
   desc: string
   created_by: number
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  product_structure_instance_id?: number | null
 }
 
 export type LeadDesignSelectionCreateOrConnectWithoutAccountInput = {
@@ -1115,13 +1115,13 @@ export type LeadDesignSelectionCreateManyVendorInput = {
   id?: number
   lead_id: number
   account_id: number
-  product_structure_instance_id?: number | null
   type: string
   desc: string
   created_by: number
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  product_structure_instance_id?: number | null
 }
 
 export type LeadDesignSelectionUpdateWithoutVendorInput = {
@@ -1140,26 +1140,26 @@ export type LeadDesignSelectionUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDesignSelectionUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDesignSelectionCreateManyCreatedByInput = {
@@ -1167,12 +1167,12 @@ export type LeadDesignSelectionCreateManyCreatedByInput = {
   lead_id: number
   account_id: number
   vendor_id: number
-  product_structure_instance_id?: number | null
   type: string
   desc: string
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  product_structure_instance_id?: number | null
 }
 
 export type LeadDesignSelectionCreateManyUpdatedByInput = {
@@ -1180,12 +1180,12 @@ export type LeadDesignSelectionCreateManyUpdatedByInput = {
   lead_id: number
   account_id: number
   vendor_id: number
-  product_structure_instance_id?: number | null
   type: string
   desc: string
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
+  product_structure_instance_id?: number | null
 }
 
 export type LeadDesignSelectionUpdateWithoutCreatedByInput = {
@@ -1205,12 +1205,12 @@ export type LeadDesignSelectionUncheckedUpdateWithoutCreatedByInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDesignSelectionUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1218,12 +1218,12 @@ export type LeadDesignSelectionUncheckedUpdateManyWithoutCreatedByInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDesignSelectionUpdateWithoutUpdatedByInput = {
@@ -1243,12 +1243,12 @@ export type LeadDesignSelectionUncheckedUpdateWithoutUpdatedByInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDesignSelectionUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -1256,25 +1256,25 @@ export type LeadDesignSelectionUncheckedUpdateManyWithoutUpdatedByInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDesignSelectionCreateManyLeadInput = {
   id?: number
   account_id: number
   vendor_id: number
-  product_structure_instance_id?: number | null
   type: string
   desc: string
   created_by: number
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  product_structure_instance_id?: number | null
 }
 
 export type LeadDesignSelectionUpdateWithoutLeadInput = {
@@ -1293,39 +1293,39 @@ export type LeadDesignSelectionUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDesignSelectionUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDesignSelectionCreateManyAccountInput = {
   id?: number
   lead_id: number
   vendor_id: number
-  product_structure_instance_id?: number | null
   type: string
   desc: string
   created_by: number
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  product_structure_instance_id?: number | null
 }
 
 export type LeadDesignSelectionUpdateWithoutAccountInput = {
@@ -1344,26 +1344,26 @@ export type LeadDesignSelectionUncheckedUpdateWithoutAccountInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDesignSelectionUncheckedUpdateManyWithoutAccountInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDesignSelectionCreateManyProductStructureInstanceInput = {
@@ -1424,13 +1424,13 @@ export type LeadDesignSelectionSelect<ExtArgs extends runtime.Types.Extensions.I
   lead_id?: boolean
   account_id?: boolean
   vendor_id?: boolean
-  product_structure_instance_id?: boolean
   type?: boolean
   desc?: boolean
   created_by?: boolean
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
+  product_structure_instance_id?: boolean
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -1444,13 +1444,13 @@ export type LeadDesignSelectionSelectCreateManyAndReturn<ExtArgs extends runtime
   lead_id?: boolean
   account_id?: boolean
   vendor_id?: boolean
-  product_structure_instance_id?: boolean
   type?: boolean
   desc?: boolean
   created_by?: boolean
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
+  product_structure_instance_id?: boolean
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -1464,13 +1464,13 @@ export type LeadDesignSelectionSelectUpdateManyAndReturn<ExtArgs extends runtime
   lead_id?: boolean
   account_id?: boolean
   vendor_id?: boolean
-  product_structure_instance_id?: boolean
   type?: boolean
   desc?: boolean
   created_by?: boolean
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
+  product_structure_instance_id?: boolean
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -1484,16 +1484,16 @@ export type LeadDesignSelectionSelectScalar = {
   lead_id?: boolean
   account_id?: boolean
   vendor_id?: boolean
-  product_structure_instance_id?: boolean
   type?: boolean
   desc?: boolean
   created_by?: boolean
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
+  product_structure_instance_id?: boolean
 }
 
-export type LeadDesignSelectionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "vendor_id" | "product_structure_instance_id" | "type" | "desc" | "created_by" | "updated_by" | "created_at" | "updated_at", ExtArgs["result"]["leadDesignSelection"]>
+export type LeadDesignSelectionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "vendor_id" | "type" | "desc" | "created_by" | "updated_by" | "created_at" | "updated_at" | "product_structure_instance_id", ExtArgs["result"]["leadDesignSelection"]>
 export type LeadDesignSelectionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -1534,13 +1534,13 @@ export type $LeadDesignSelectionPayload<ExtArgs extends runtime.Types.Extensions
     lead_id: number
     account_id: number
     vendor_id: number
-    product_structure_instance_id: number | null
     type: string
     desc: string
     created_by: number
     updated_by: number | null
     created_at: Date
     updated_at: Date
+    product_structure_instance_id: number | null
   }, ExtArgs["result"]["leadDesignSelection"]>
   composites: {}
 }
@@ -1974,13 +1974,13 @@ export interface LeadDesignSelectionFieldRefs {
   readonly lead_id: Prisma.FieldRef<"LeadDesignSelection", 'Int'>
   readonly account_id: Prisma.FieldRef<"LeadDesignSelection", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"LeadDesignSelection", 'Int'>
-  readonly product_structure_instance_id: Prisma.FieldRef<"LeadDesignSelection", 'Int'>
   readonly type: Prisma.FieldRef<"LeadDesignSelection", 'String'>
   readonly desc: Prisma.FieldRef<"LeadDesignSelection", 'String'>
   readonly created_by: Prisma.FieldRef<"LeadDesignSelection", 'Int'>
   readonly updated_by: Prisma.FieldRef<"LeadDesignSelection", 'Int'>
   readonly created_at: Prisma.FieldRef<"LeadDesignSelection", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"LeadDesignSelection", 'DateTime'>
+  readonly product_structure_instance_id: Prisma.FieldRef<"LeadDesignSelection", 'Int'>
 }
     
 
