@@ -40,8 +40,7 @@ export const ActivityStatus = {
   onGoing: 'onGoing',
   onHold: 'onHold',
   lost: 'lost',
-  lostApproval: 'lostApproval',
-  completed: 'project-completed'
+  lostApproval: 'lostApproval'
 } as const
 
 export type ActivityStatus = (typeof ActivityStatus)[keyof typeof ActivityStatus]
