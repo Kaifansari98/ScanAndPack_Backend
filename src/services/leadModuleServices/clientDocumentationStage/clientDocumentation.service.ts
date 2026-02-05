@@ -9,6 +9,7 @@ export interface CustomMulterFile {
   originalName: string;
   sysName: string;
   docTypeTag: DocTypeTag;
+  productStructureInstanceId?: number;
 }
 
 export interface ClientDocumentationDto {
@@ -16,6 +17,7 @@ export interface ClientDocumentationDto {
   vendor_id: number;
   account_id: number;
   created_by: number;
+  product_structure_instance_id?: number;
   documents: CustomMulterFile[];
 }
 
@@ -25,7 +27,7 @@ export class ClientDocumentationService {
     return await prisma.$transaction(async (tx) => {
       const response: any = {
         documents: [],
-        message: "Client documentation stage completed successfully",
+        message: "Client documentation uploaded successfully",
       };
 
       // Insert lead documents
@@ -49,38 +51,32 @@ export class ClientDocumentationService {
             account_id: data.account_id,
             lead_id: data.lead_id,
             vendor_id: data.vendor_id,
+            product_structure_instance_id:
+              doc.productStructureInstanceId ??
+              data.product_structure_instance_id ??
+              null,
           },
         });
 
         response.documents.push(docEntry);
       }
 
-      // Find Client Approval Status (Type 7)
-      const clientApprovalStatus = await tx.statusTypeMaster.findFirst({
+      // ✅ Update only uploaded-doc count. Stage movement is handled explicitly.
+      const currentDocCount = await tx.leadDocuments.count({
         where: {
+          lead_id: data.lead_id,
           vendor_id: data.vendor_id,
-          tag: "Type 7",
+          is_deleted: false,
+          documentType: { tag: { in: ["Type 11", "Type 12"] } },
         },
-        select: { id: true },
       });
 
-      if (!clientApprovalStatus) {
-        throw new Error(
-          `Client Approval status (Type 7) not found for vendor ${data.vendor_id}`
-        );
-      }
-
-      // ✅ Calculate total number of documents initially submitted
-      const totalSubmittedDocs = data.documents?.length || 0;
-
-      // Update lead status
       await tx.leadMaster.update({
         where: { id: data.lead_id },
         data: {
-          status_id: clientApprovalStatus.id,
           updated_at: new Date(),
           updated_by: data.created_by,
-          no_of_client_documents_initially_submitted: totalSubmittedDocs,
+          no_of_client_documents_initially_submitted: currentDocCount,
         },
       });
 
@@ -115,19 +111,7 @@ export class ClientDocumentationService {
         await tx.leadDocumentLogs.createMany({ data: docLogsData });
       }
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: data.vendor_id,
-          lead_id: data.lead_id,
-          account_id: data.account_id,
-          action: `Lead has been moved to Client Approval stage.`,
-          action_type: "UPDATE",
-          created_by: data.created_by,
-          created_at: new Date(),
-        },
-      });
-
-      logger.info("✅ Client Documentation Stage completed", {
+      logger.info("✅ Client Documentation uploaded", {
         lead_id: data.lead_id,
         vendor_id: data.vendor_id,
         document_count: docCount,
@@ -138,43 +122,204 @@ export class ClientDocumentationService {
     });
   }
 
+  public async moveToClientApproval(data: {
+    lead_id: number;
+    vendor_id: number;
+    updated_by: number;
+  }) {
+    return prisma.$transaction(async (tx) => {
+      const lead = await tx.leadMaster.findFirst({
+        where: { id: data.lead_id, vendor_id: data.vendor_id, is_deleted: false },
+        select: { id: true, account_id: true },
+      });
+      if (!lead) {
+        throw new Error("Lead not found");
+      }
+      if (!lead.account_id) {
+        throw new Error("Lead account is missing");
+      }
+
+      const [clientApprovalStatus, pptType, pythaType, instances, selections] =
+        await Promise.all([
+          tx.statusTypeMaster.findFirst({
+            where: { vendor_id: data.vendor_id, tag: "Type 7" },
+            select: { id: true },
+          }),
+          tx.documentTypeMaster.findFirst({
+            where: { vendor_id: data.vendor_id, tag: "Type 11" },
+            select: { id: true },
+          }),
+          tx.documentTypeMaster.findFirst({
+            where: { vendor_id: data.vendor_id, tag: "Type 12" },
+            select: { id: true },
+          }),
+          tx.leadProductStructureInstance.findMany({
+            where: { lead_id: data.lead_id, vendor_id: data.vendor_id },
+            select: { id: true, title: true },
+            orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+          }),
+          tx.leadDesignSelection.findMany({
+            where: {
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+              type: { in: ["Carcas", "Shutter", "Handles"] },
+            },
+            select: { type: true, desc: true, product_structure_instance_id: true },
+          }),
+        ]);
+
+      if (!clientApprovalStatus) {
+        throw new Error("Client Approval status (Type 7) not found");
+      }
+      if (!pptType || !pythaType) {
+        throw new Error("Client documentation document types not configured");
+      }
+
+      const hasFilledValue = (value?: string | null) => {
+        const normalized = (value || "").trim();
+        return normalized.length > 0 && normalized.toUpperCase() !== "NULL";
+      };
+
+      if (instances.length > 1) {
+        for (const instance of instances) {
+          const rows = selections.filter(
+            (row) => row.product_structure_instance_id === instance.id
+          );
+
+          const hasValueByType = {
+            Carcas: rows.some((row) => row.type === "Carcas" && hasFilledValue(row.desc)),
+            Shutter: rows.some((row) => row.type === "Shutter" && hasFilledValue(row.desc)),
+            Handles: rows.some((row) => row.type === "Handles" && hasFilledValue(row.desc)),
+          };
+
+          if (!hasValueByType.Carcas || !hasValueByType.Shutter || !hasValueByType.Handles) {
+            throw new Error(
+              `Carcas, Shutter and Handles must be filled for ${instance.title}`
+            );
+          }
+        }
+      } else {
+        const hasValueByType = {
+          Carcas: selections.some((row) => row.type === "Carcas" && hasFilledValue(row.desc)),
+          Shutter: selections.some((row) => row.type === "Shutter" && hasFilledValue(row.desc)),
+          Handles: selections.some((row) => row.type === "Handles" && hasFilledValue(row.desc)),
+        };
+        if (!hasValueByType.Carcas || !hasValueByType.Shutter || !hasValueByType.Handles) {
+          throw new Error("Carcas, Shutter and Handles must be filled");
+        }
+      }
+
+      const docs = await tx.leadDocuments.findMany({
+        where: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          is_deleted: false,
+          doc_type_id: { in: [pptType.id, pythaType.id] },
+        },
+        select: {
+          doc_type_id: true,
+          product_structure_instance_id: true,
+        },
+      });
+
+      if (instances.length > 1) {
+        for (const instance of instances) {
+          const pptCount = docs.filter(
+            (d) =>
+              d.product_structure_instance_id === instance.id &&
+              d.doc_type_id === pptType.id
+          ).length;
+          const pythaCount = docs.filter(
+            (d) =>
+              d.product_structure_instance_id === instance.id &&
+              d.doc_type_id === pythaType.id
+          ).length;
+          if (pptCount === 0 || pythaCount === 0) {
+            throw new Error(
+              `Both Project Files and Pytha Design Files are required for ${instance.title}`
+            );
+          }
+        }
+      } else {
+        const pptCount = docs.filter((d) => d.doc_type_id === pptType.id).length;
+        const pythaCount = docs.filter((d) => d.doc_type_id === pythaType.id).length;
+        if (pptCount === 0 || pythaCount === 0) {
+          throw new Error(
+            "Both Project Files and Pytha Design Files are required before moving stage"
+          );
+        }
+      }
+
+      await tx.leadMaster.update({
+        where: { id: data.lead_id },
+        data: {
+          status_id: clientApprovalStatus.id,
+          updated_by: data.updated_by,
+          updated_at: new Date(),
+        },
+      });
+
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: lead.account_id,
+          action: "Lead has been moved to Client Approval stage.",
+          action_type: "UPDATE",
+          created_by: data.updated_by,
+          created_at: new Date(),
+        },
+      });
+
+      return { moved: true, status_id: clientApprovalStatus.id };
+    });
+  }
+
   public async getClientDocumentation(vendorId: number, leadId: number) {
     // 1️⃣ Validate vendor & lead
     if (!vendorId || !leadId) {
       throw new Error("vendorId and leadId are required");
     }
 
-    // 2️⃣ Fetch the lead with all its documents
-    const lead = await prisma.leadMaster.findFirst({
-      where: {
-        id: leadId,
-        vendor_id: vendorId,
-      },
-      include: {
-        documents: {
-          include: {
-            documentType: true, // To easily identify Type 11 / Type 12
+    const [pptDocType, pythaDocType, productStructureInstances, lead] =
+      await Promise.all([
+        prisma.documentTypeMaster.findFirst({
+          where: { vendor_id: vendorId, tag: "Type 11" }, // PPT
+        }),
+        prisma.documentTypeMaster.findFirst({
+          where: { vendor_id: vendorId, tag: "Type 12" }, // PYTHA
+        }),
+        prisma.leadProductStructureInstance.findMany({
+          where: { lead_id: leadId, vendor_id: vendorId },
+          select: {
+            id: true,
+            title: true,
+            quantity_index: true,
+            productStructure: { select: { id: true, type: true } },
           },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+        }),
+        prisma.leadMaster.findFirst({
           where: {
-            is_deleted: false,
-          }
-        },
-      },
-    });
+            id: leadId,
+            vendor_id: vendorId,
+          },
+          include: {
+            documents: {
+              include: {
+                documentType: true, // To easily identify Type 11 / Type 12
+              },
+              where: {
+                is_deleted: false,
+              },
+            },
+          },
+        }),
+      ]);
 
     if (!lead) {
       throw new Error("Lead not found or not in Client Documentation stage");
     }
-
-    // 3️⃣ Get document type entries for both PPT and PYTHA
-    const [pptDocType, pythaDocType] = await Promise.all([
-      prisma.documentTypeMaster.findFirst({
-        where: { vendor_id: vendorId, tag: "Type 11" }, // PPT
-      }),
-      prisma.documentTypeMaster.findFirst({
-        where: { vendor_id: vendorId, tag: "Type 12" }, // PYTHA
-      }),
-    ]);
 
     if (!pptDocType && !pythaDocType) {
       throw new Error(
@@ -206,15 +351,78 @@ export class ClientDocumentationService {
       ),
     ]);
 
+    const documentsByInstance: any[] = productStructureInstances.map((instance) => ({
+      instance_id: instance.id,
+      instance_title: instance.title,
+      quantity_index: instance.quantity_index,
+      product_structure: instance.productStructure,
+      documents: {
+        ppt: pptDocsWithUrls.filter(
+          (doc: any) => doc.product_structure_instance_id === instance.id
+        ),
+        pytha: pythaDocsWithUrls.filter(
+          (doc: any) => doc.product_structure_instance_id === instance.id
+        ),
+      },
+    }));
+
+    const unassignedPpt = pptDocsWithUrls.filter(
+      (doc: any) => !doc.product_structure_instance_id
+    );
+    const unassignedPytha = pythaDocsWithUrls.filter(
+      (doc: any) => !doc.product_structure_instance_id
+    );
+    if (unassignedPpt.length || unassignedPytha.length) {
+      documentsByInstance.push({
+        instance_id: null,
+        instance_title: "General",
+        quantity_index: null,
+        product_structure: null,
+        documents: {
+          ppt: unassignedPpt,
+          pytha: unassignedPytha,
+        },
+      });
+    }
+
+    const sectionCardsByInstance = documentsByInstance.map((group: any) => {
+      const projectCount = group.documents?.ppt?.length || 0;
+      const pythaCount = group.documents?.pytha?.length || 0;
+      return {
+        instance_id: group.instance_id,
+        instance_title: group.instance_title,
+        sections: [
+          {
+            key: "project",
+            title: "Client Documentation - Project Files",
+            total_files: projectCount,
+            can_view: projectCount > 0,
+            status: projectCount > 0 ? "uploaded" : "pending",
+          },
+          {
+            key: "pytha",
+            title: "Client Documentation - Pytha Design Files",
+            total_files: pythaCount,
+            can_view: pythaCount > 0,
+            status: pythaCount > 0 ? "uploaded" : "pending",
+          },
+        ],
+      };
+    });
+
     // 6️⃣ Return structured response
     return {
       id: lead.id,
       vendor_id: lead.vendor_id,
       status_id: lead.status_id,
+      instance_count: productStructureInstances.length,
+      product_structure_instances: productStructureInstances,
       documents: {
         ppt: pptDocsWithUrls,
         pytha: pythaDocsWithUrls,
       },
+      documents_by_instance: documentsByInstance,
+      section_cards_by_instance: sectionCardsByInstance,
     };
   }
 
@@ -248,6 +456,10 @@ export class ClientDocumentationService {
             lead_id: data.lead_id,
             vendor_id: data.vendor_id,
             tech_check_status: "REVISED",
+            product_structure_instance_id:
+              doc.productStructureInstanceId ??
+              data.product_structure_instance_id ??
+              null,
           },
         });
 

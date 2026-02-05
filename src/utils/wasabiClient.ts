@@ -133,10 +133,14 @@ export const uploadToWasabClientDocumentation = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  folder: string = "client_documentations"
+  folder: string = "client_documentations",
+  instanceFolder?: string
 ) => {
   const ext = originalName.split(".").pop();
-  const sysName = `${folder}/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+  const folderPath = instanceFolder
+    ? `${folder}/${vendorId}/${leadId}/${instanceFolder}`
+    : `${folder}/${vendorId}/${leadId}`;
+  const sysName = `${folderPath}/${uuidv4()}.${ext}`;
 
   await wasabi.send(
     new PutObjectCommand({
@@ -156,10 +160,14 @@ export const uploadToWasabClientDocumentationFile = async (
   leadId: number,
   originalName: string,
   contentType: string,
-  folder: string = "client_documentations"
+  folder: string = "client_documentations",
+  instanceFolder?: string
 ) => {
   const ext = originalName.split(".").pop();
-  const sysName = `${folder}/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+  const folderPath = instanceFolder
+    ? `${folder}/${vendorId}/${leadId}/${instanceFolder}`
+    : `${folder}/${vendorId}/${leadId}`;
+  const sysName = `${folderPath}/${uuidv4()}.${ext}`;
 
   const upload = new Upload({
     client: wasabi,

@@ -34,4 +34,9 @@ ClientDocumentationRouter.get(
   ClientDocumentationController.getAllClientDocumentations
 );
 
+ClientDocumentationRouter.post(
+  "/move-to-client-approval",
+  ClientDocumentationController.moveToClientApproval
+);
+
 export default ClientDocumentationRouter;

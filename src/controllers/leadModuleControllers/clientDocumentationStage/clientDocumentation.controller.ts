@@ -5,14 +5,62 @@ import {
   CustomMulterFile,
 } from "../../../services/leadModuleServices/clientDocumentationStage/clientDocumentation.service";
 import { uploadToWasabClientDocumentationFile } from "../../../utils/wasabiClient";
+import { sanitizeFilename } from "../../../utils/sanitizeFilename";
 import fs from "node:fs/promises";
+import { prisma } from "../../../prisma/client";
 
 const clientDocumentationService = new ClientDocumentationService();
 
 export class ClientDocumentationController {
+  private static async resolveProductStructureInstance(
+    leadId: number,
+    vendorId: number,
+    requestedInstanceId?: number
+  ) {
+    const instances = await prisma.leadProductStructureInstance.findMany({
+      where: { lead_id: leadId, vendor_id: vendorId },
+      select: { id: true, title: true },
+      orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+    });
+
+    if (instances.length > 1) {
+      if (!requestedInstanceId) {
+        throw new Error(
+          "product_structure_instance_id is required when lead has multiple product structure instances"
+        );
+      }
+      const selected = instances.find((item) => item.id === requestedInstanceId);
+      if (!selected) {
+        throw new Error("Invalid product_structure_instance_id for this lead");
+      }
+      return selected;
+    }
+
+    if (instances.length === 1) {
+      if (requestedInstanceId && instances[0].id !== requestedInstanceId) {
+        throw new Error("Invalid product_structure_instance_id for this lead");
+      }
+      return instances[0];
+    }
+
+    if (requestedInstanceId) {
+      throw new Error(
+        "product_structure_instance_id provided but no product structure instance exists for this lead"
+      );
+    }
+
+    return null;
+  }
+
   public static async create(req: Request, res: Response): Promise<void> {
     try {
-      const { lead_id, account_id, vendor_id, created_by } = req.body;
+      const {
+        lead_id,
+        account_id,
+        vendor_id,
+        created_by,
+        product_structure_instance_id,
+      } = req.body;
       const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
       if (!lead_id || !account_id || !vendor_id || !created_by) {
@@ -33,6 +81,42 @@ export class ClientDocumentationController {
         return;
       }
 
+      const parsedLeadId = parseInt(lead_id);
+      const parsedVendorId = parseInt(vendor_id);
+      const parsedProductStructureInstanceId = product_structure_instance_id
+        ? Number(product_structure_instance_id)
+        : undefined;
+
+      if (
+        parsedProductStructureInstanceId !== undefined &&
+        Number.isNaN(parsedProductStructureInstanceId)
+      ) {
+        res.status(400).json({
+          success: false,
+          message: "Invalid product_structure_instance_id",
+        });
+        return;
+      }
+
+      let resolvedInstance: { id: number; title: string } | null = null;
+      try {
+        resolvedInstance = await ClientDocumentationController.resolveProductStructureInstance(
+          parsedLeadId,
+          parsedVendorId,
+          parsedProductStructureInstanceId
+        );
+      } catch (instanceError: any) {
+        res.status(400).json({
+          success: false,
+          message: instanceError?.message || "Invalid product structure instance",
+        });
+        return;
+      }
+
+      const instanceFolder = resolvedInstance?.title
+        ? sanitizeFilename(resolvedInstance.title.trim().replace(/\s+/g, "_"))
+        : undefined;
+
       const uploadTaggedFiles = async (
         docs: Express.Multer.File[],
         tag: "Type 11" | "Type 12"
@@ -51,7 +135,8 @@ export class ClientDocumentationController {
             Number(lead_id),
             doc.originalname,
             doc.mimetype,
-            folder
+            folder,
+            instanceFolder
           );
 
           await fs.unlink(doc.path);
@@ -60,6 +145,7 @@ export class ClientDocumentationController {
             originalName: doc.originalname,
             sysName,
             docTypeTag: tag,
+            productStructureInstanceId: resolvedInstance?.id,
           });
         }
 
@@ -72,10 +158,11 @@ export class ClientDocumentationController {
       ];
 
       const dto: ClientDocumentationDto = {
-        lead_id: parseInt(lead_id),
+        lead_id: parsedLeadId,
         account_id: parseInt(account_id),
-        vendor_id: parseInt(vendor_id),
+        vendor_id: parsedVendorId,
         created_by: parseInt(created_by),
+        product_structure_instance_id: resolvedInstance?.id,
         documents,
       };
 
@@ -132,7 +219,13 @@ export class ClientDocumentationController {
     res: Response
   ): Promise<void> {
     try {
-      const { lead_id, account_id, vendor_id, created_by } = req.body;
+      const {
+        lead_id,
+        account_id,
+        vendor_id,
+        created_by,
+        product_structure_instance_id,
+      } = req.body;
       const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
       const pptFiles = files?.client_documentations_ppt || [];
@@ -153,6 +246,42 @@ export class ClientDocumentationController {
         return;
       }
 
+      const parsedLeadId = parseInt(lead_id);
+      const parsedVendorId = parseInt(vendor_id);
+      const parsedProductStructureInstanceId = product_structure_instance_id
+        ? Number(product_structure_instance_id)
+        : undefined;
+
+      if (
+        parsedProductStructureInstanceId !== undefined &&
+        Number.isNaN(parsedProductStructureInstanceId)
+      ) {
+        res.status(400).json({
+          success: false,
+          message: "Invalid product_structure_instance_id",
+        });
+        return;
+      }
+
+      let resolvedInstance: { id: number; title: string } | null = null;
+      try {
+        resolvedInstance = await ClientDocumentationController.resolveProductStructureInstance(
+          parsedLeadId,
+          parsedVendorId,
+          parsedProductStructureInstanceId
+        );
+      } catch (instanceError: any) {
+        res.status(400).json({
+          success: false,
+          message: instanceError?.message || "Invalid product structure instance",
+        });
+        return;
+      }
+
+      const instanceFolder = resolvedInstance?.title
+        ? sanitizeFilename(resolvedInstance.title.trim().replace(/\s+/g, "_"))
+        : undefined;
+
       const uploadTaggedFiles = async (
         docs: Express.Multer.File[],
         tag: "Type 11" | "Type 12"
@@ -171,7 +300,8 @@ export class ClientDocumentationController {
             Number(lead_id),
             doc.originalname,
             doc.mimetype,
-            folder
+            folder,
+            instanceFolder
           );
 
           await fs.unlink(doc.path);
@@ -180,6 +310,7 @@ export class ClientDocumentationController {
             originalName: doc.originalname,
             sysName,
             docTypeTag: tag,
+            productStructureInstanceId: resolvedInstance?.id,
           });
         }
 
@@ -192,10 +323,11 @@ export class ClientDocumentationController {
       ];
 
       const dto: ClientDocumentationDto = {
-        lead_id: parseInt(lead_id),
+        lead_id: parsedLeadId,
         account_id: parseInt(account_id),
-        vendor_id: parseInt(vendor_id),
+        vendor_id: parsedVendorId,
         created_by: parseInt(created_by),
+        product_structure_instance_id: resolvedInstance?.id,
         documents,
       };
 
@@ -253,6 +385,40 @@ export class ClientDocumentationController {
       return res.status(500).json({
         success: false,
         message: error.message || "Something went wrong",
+      });
+    }
+  };
+
+  public static moveToClientApproval = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const { lead_id, vendor_id, updated_by } = req.body;
+      if (!lead_id || !vendor_id || !updated_by) {
+        res.status(400).json({
+          success: false,
+          message: "lead_id, vendor_id and updated_by are required",
+        });
+        return;
+      }
+
+      const result = await clientDocumentationService.moveToClientApproval({
+        lead_id: Number(lead_id),
+        vendor_id: Number(vendor_id),
+        updated_by: Number(updated_by),
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Lead moved to Client Approval",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error("[ClientDocumentationController] moveToClientApproval:", error);
+      res.status(400).json({
+        success: false,
+        message: error?.message || "Failed to move lead to Client Approval",
       });
     }
   };

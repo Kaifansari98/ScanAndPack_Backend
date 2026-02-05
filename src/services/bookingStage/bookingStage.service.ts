@@ -291,7 +291,6 @@ export class BookingStageService {
             data: {
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
-              created_by: data.created_by,
             },
             select: { id: true },
           });
