@@ -622,6 +622,8 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   title: 'title',
   status: 'status',
   description: 'description',
+  is_tech_check_completed: 'is_tech_check_completed',
+  tech_check_completed_at: 'tech_check_completed_at',
   created_by: 'created_by',
   created_at: 'created_at',
   updated_by: 'updated_by',

@@ -37,6 +37,16 @@ export class BookingStageService {
       leadProductStructureMapping: {
         select: { productStructure: { select: { id: true, type: true } } },
       },
+      productStructureInstances: {
+        select: {
+          id: true,
+          title: true,
+          quantity_index: true,
+          product_structure_id: true,
+          productStructure: { select: { id: true, type: true } },
+        },
+        orderBy: [{ product_structure_id: Prisma.SortOrder.asc }, { quantity_index: Prisma.SortOrder.asc }],
+      },
       payments: {
         where: { paymentType: { tag: "Type 2" } },
         select: {

@@ -685,6 +685,8 @@ model LeadProductStructureInstance {
   title                String
   status               ProductInstanceStatus @default(open)
   description          String?               @db.VarChar(2000)
+  is_tech_check_completed Boolean?
+  tech_check_completed_at DateTime?
   created_by           Int
   created_at           DateTime              @default(now())
   updated_by           Int?

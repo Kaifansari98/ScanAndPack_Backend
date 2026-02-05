@@ -61,6 +61,8 @@ export type LeadProductStructureInstanceMinAggregateOutputType = {
   title: string | null
   status: $Enums.ProductInstanceStatus | null
   description: string | null
+  is_tech_check_completed: boolean | null
+  tech_check_completed_at: Date | null
   created_by: number | null
   created_at: Date | null
   updated_by: number | null
@@ -78,6 +80,8 @@ export type LeadProductStructureInstanceMaxAggregateOutputType = {
   title: string | null
   status: $Enums.ProductInstanceStatus | null
   description: string | null
+  is_tech_check_completed: boolean | null
+  tech_check_completed_at: Date | null
   created_by: number | null
   created_at: Date | null
   updated_by: number | null
@@ -95,6 +99,8 @@ export type LeadProductStructureInstanceCountAggregateOutputType = {
   title: number
   status: number
   description: number
+  is_tech_check_completed: number
+  tech_check_completed_at: number
   created_by: number
   created_at: number
   updated_by: number
@@ -138,6 +144,8 @@ export type LeadProductStructureInstanceMinAggregateInputType = {
   title?: true
   status?: true
   description?: true
+  is_tech_check_completed?: true
+  tech_check_completed_at?: true
   created_by?: true
   created_at?: true
   updated_by?: true
@@ -155,6 +163,8 @@ export type LeadProductStructureInstanceMaxAggregateInputType = {
   title?: true
   status?: true
   description?: true
+  is_tech_check_completed?: true
+  tech_check_completed_at?: true
   created_by?: true
   created_at?: true
   updated_by?: true
@@ -172,6 +182,8 @@ export type LeadProductStructureInstanceCountAggregateInputType = {
   title?: true
   status?: true
   description?: true
+  is_tech_check_completed?: true
+  tech_check_completed_at?: true
   created_by?: true
   created_at?: true
   updated_by?: true
@@ -276,6 +288,8 @@ export type LeadProductStructureInstanceGroupByOutputType = {
   title: string
   status: $Enums.ProductInstanceStatus
   description: string | null
+  is_tech_check_completed: boolean | null
+  tech_check_completed_at: Date | null
   created_by: number
   created_at: Date
   updated_by: number | null
@@ -316,6 +330,8 @@ export type LeadProductStructureInstanceWhereInput = {
   title?: Prisma.StringFilter<"LeadProductStructureInstance"> | string
   status?: Prisma.EnumProductInstanceStatusFilter<"LeadProductStructureInstance"> | $Enums.ProductInstanceStatus
   description?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  is_tech_check_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  tech_check_completed_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
   created_by?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   created_at?: Prisma.DateTimeFilter<"LeadProductStructureInstance"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
@@ -341,6 +357,8 @@ export type LeadProductStructureInstanceOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   status?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_tech_check_completed?: Prisma.SortOrderInput | Prisma.SortOrder
+  tech_check_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -370,6 +388,8 @@ export type LeadProductStructureInstanceWhereUniqueInput = Prisma.AtLeast<{
   title?: Prisma.StringFilter<"LeadProductStructureInstance"> | string
   status?: Prisma.EnumProductInstanceStatusFilter<"LeadProductStructureInstance"> | $Enums.ProductInstanceStatus
   description?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  is_tech_check_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  tech_check_completed_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
   created_by?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   created_at?: Prisma.DateTimeFilter<"LeadProductStructureInstance"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
@@ -395,6 +415,8 @@ export type LeadProductStructureInstanceOrderByWithAggregationInput = {
   title?: Prisma.SortOrder
   status?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_tech_check_completed?: Prisma.SortOrderInput | Prisma.SortOrder
+  tech_check_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -420,6 +442,8 @@ export type LeadProductStructureInstanceScalarWhereWithAggregatesInput = {
   title?: Prisma.StringWithAggregatesFilter<"LeadProductStructureInstance"> | string
   status?: Prisma.EnumProductInstanceStatusWithAggregatesFilter<"LeadProductStructureInstance"> | $Enums.ProductInstanceStatus
   description?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
+  is_tech_check_completed?: Prisma.BoolNullableWithAggregatesFilter<"LeadProductStructureInstance"> | boolean | null
+  tech_check_completed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string | null
   created_by?: Prisma.IntWithAggregatesFilter<"LeadProductStructureInstance"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"LeadProductStructureInstance"> | number | null
@@ -431,6 +455,8 @@ export type LeadProductStructureInstanceCreateInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
@@ -455,6 +481,8 @@ export type LeadProductStructureInstanceUncheckedCreateInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -468,6 +496,8 @@ export type LeadProductStructureInstanceUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -492,6 +522,8 @@ export type LeadProductStructureInstanceUncheckedUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -511,6 +543,8 @@ export type LeadProductStructureInstanceCreateManyInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -522,6 +556,8 @@ export type LeadProductStructureInstanceUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -538,6 +574,8 @@ export type LeadProductStructureInstanceUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -577,6 +615,8 @@ export type LeadProductStructureInstanceCountOrderByAggregateInput = {
   title?: Prisma.SortOrder
   status?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  is_tech_check_completed?: Prisma.SortOrder
+  tech_check_completed_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
@@ -606,6 +646,8 @@ export type LeadProductStructureInstanceMaxOrderByAggregateInput = {
   title?: Prisma.SortOrder
   status?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  is_tech_check_completed?: Prisma.SortOrder
+  tech_check_completed_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
@@ -623,6 +665,8 @@ export type LeadProductStructureInstanceMinOrderByAggregateInput = {
   title?: Prisma.SortOrder
   status?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  is_tech_check_completed?: Prisma.SortOrder
+  tech_check_completed_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
@@ -934,6 +978,8 @@ export type LeadProductStructureInstanceCreateWithoutVendorInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
@@ -956,6 +1002,8 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutVendorInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -1004,6 +1052,8 @@ export type LeadProductStructureInstanceScalarWhereInput = {
   title?: Prisma.StringFilter<"LeadProductStructureInstance"> | string
   status?: Prisma.EnumProductInstanceStatusFilter<"LeadProductStructureInstance"> | $Enums.ProductInstanceStatus
   description?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  is_tech_check_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  tech_check_completed_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
   created_by?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   created_at?: Prisma.DateTimeFilter<"LeadProductStructureInstance"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
@@ -1015,6 +1065,8 @@ export type LeadProductStructureInstanceCreateWithoutUpdatedByInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
@@ -1038,6 +1090,8 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutUpdatedByInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
@@ -1076,6 +1130,8 @@ export type LeadProductStructureInstanceCreateWithoutLeadInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
@@ -1098,6 +1154,8 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutLeadInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -1137,6 +1195,8 @@ export type LeadProductStructureInstanceCreateWithoutAccountInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
@@ -1159,6 +1219,8 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutAccountInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -1198,6 +1260,8 @@ export type LeadProductStructureInstanceCreateWithoutProductTypeInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
@@ -1220,6 +1284,8 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductTypeInput =
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -1259,6 +1325,8 @@ export type LeadProductStructureInstanceCreateWithoutDocumentsInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
@@ -1282,6 +1350,8 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutDocumentsInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -1310,6 +1380,8 @@ export type LeadProductStructureInstanceUpdateWithoutDocumentsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1333,6 +1405,8 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutDocumentsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1345,6 +1419,8 @@ export type LeadProductStructureInstanceCreateWithoutProductStructureInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
@@ -1367,6 +1443,8 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductStructureIn
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -1406,6 +1484,8 @@ export type LeadProductStructureInstanceCreateWithoutDesignSelectionsInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
@@ -1429,6 +1509,8 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutDesignSelectionsIn
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -1457,6 +1539,8 @@ export type LeadProductStructureInstanceUpdateWithoutDesignSelectionsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1480,6 +1564,8 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutDesignSelectionsIn
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1497,6 +1583,8 @@ export type LeadProductStructureInstanceCreateManyVendorInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -1508,6 +1596,8 @@ export type LeadProductStructureInstanceUpdateWithoutVendorInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1530,6 +1620,8 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutVendorInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1548,6 +1640,8 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorInput = 
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1565,6 +1659,8 @@ export type LeadProductStructureInstanceCreateManyUpdatedByInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
@@ -1575,6 +1671,8 @@ export type LeadProductStructureInstanceUpdateWithoutUpdatedByInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1598,6 +1696,8 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutUpdatedByInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1616,6 +1716,8 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByInput
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1631,6 +1733,8 @@ export type LeadProductStructureInstanceCreateManyLeadInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -1642,6 +1746,8 @@ export type LeadProductStructureInstanceUpdateWithoutLeadInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1664,6 +1770,8 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutLeadInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1682,6 +1790,8 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1698,6 +1808,8 @@ export type LeadProductStructureInstanceCreateManyAccountInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -1709,6 +1821,8 @@ export type LeadProductStructureInstanceUpdateWithoutAccountInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1731,6 +1845,8 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutAccountInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1749,6 +1865,8 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountInput =
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1765,6 +1883,8 @@ export type LeadProductStructureInstanceCreateManyProductTypeInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -1776,6 +1896,8 @@ export type LeadProductStructureInstanceUpdateWithoutProductTypeInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1798,6 +1920,8 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductTypeInput =
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1816,6 +1940,8 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductTypeInp
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1832,6 +1958,8 @@ export type LeadProductStructureInstanceCreateManyProductStructureInput = {
   title: string
   status?: $Enums.ProductInstanceStatus
   description?: string | null
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -1843,6 +1971,8 @@ export type LeadProductStructureInstanceUpdateWithoutProductStructureInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1865,6 +1995,8 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductStructureIn
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1883,6 +2015,8 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductStructu
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1940,6 +2074,8 @@ export type LeadProductStructureInstanceSelect<ExtArgs extends runtime.Types.Ext
   title?: boolean
   status?: boolean
   description?: boolean
+  is_tech_check_completed?: boolean
+  tech_check_completed_at?: boolean
   created_by?: boolean
   created_at?: boolean
   updated_by?: boolean
@@ -1966,6 +2102,8 @@ export type LeadProductStructureInstanceSelectCreateManyAndReturn<ExtArgs extend
   title?: boolean
   status?: boolean
   description?: boolean
+  is_tech_check_completed?: boolean
+  tech_check_completed_at?: boolean
   created_by?: boolean
   created_at?: boolean
   updated_by?: boolean
@@ -1989,6 +2127,8 @@ export type LeadProductStructureInstanceSelectUpdateManyAndReturn<ExtArgs extend
   title?: boolean
   status?: boolean
   description?: boolean
+  is_tech_check_completed?: boolean
+  tech_check_completed_at?: boolean
   created_by?: boolean
   created_at?: boolean
   updated_by?: boolean
@@ -2012,13 +2152,15 @@ export type LeadProductStructureInstanceSelectScalar = {
   title?: boolean
   status?: boolean
   description?: boolean
+  is_tech_check_completed?: boolean
+  tech_check_completed_at?: boolean
   created_by?: boolean
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
 }
 
-export type LeadProductStructureInstanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "product_type_id" | "product_structure_id" | "quantity_index" | "title" | "status" | "description" | "created_by" | "created_at" | "updated_by" | "updated_at", ExtArgs["result"]["leadProductStructureInstance"]>
+export type LeadProductStructureInstanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "product_type_id" | "product_structure_id" | "quantity_index" | "title" | "status" | "description" | "is_tech_check_completed" | "tech_check_completed_at" | "created_by" | "created_at" | "updated_by" | "updated_at", ExtArgs["result"]["leadProductStructureInstance"]>
 export type LeadProductStructureInstanceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -2070,6 +2212,8 @@ export type $LeadProductStructureInstancePayload<ExtArgs extends runtime.Types.E
     title: string
     status: $Enums.ProductInstanceStatus
     description: string | null
+    is_tech_check_completed: boolean | null
+    tech_check_completed_at: Date | null
     created_by: number
     created_at: Date
     updated_by: number | null
@@ -2515,6 +2659,8 @@ export interface LeadProductStructureInstanceFieldRefs {
   readonly title: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
   readonly status: Prisma.FieldRef<"LeadProductStructureInstance", 'ProductInstanceStatus'>
   readonly description: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
+  readonly is_tech_check_completed: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
+  readonly tech_check_completed_at: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
   readonly created_by: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
   readonly created_at: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
   readonly updated_by: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
