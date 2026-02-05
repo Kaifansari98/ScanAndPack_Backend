@@ -1,7 +1,7 @@
 import cron from "node-cron";
 import { prisma } from "../../../src/prisma/client";
 import { NotificationService } from "../notification/notification.service";
-import { NotificationType } from "@prisma/client";
+import { NotificationType } from "../../prisma/generated";
 import { sendOrderLoginReminderEmail } from "../email/brevoEmail2.service";
 
 export function startOrderLoginReminderJob() {
