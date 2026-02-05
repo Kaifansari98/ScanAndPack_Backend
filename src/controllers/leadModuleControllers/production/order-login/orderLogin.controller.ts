@@ -77,10 +77,12 @@ export class OrderLoginController {
     try {
       const { vendorId } = req.params;
       const { lead_id } = req.query; // ✅ Use query param
+      const { senderUserId } = req.query; // ✅ Use query param
 
       const orderLogins = await service.getOrderLoginByLead(
         Number(vendorId),
         Number(lead_id),
+        Number(senderUserId)
       );
 
       return res.status(200).json({

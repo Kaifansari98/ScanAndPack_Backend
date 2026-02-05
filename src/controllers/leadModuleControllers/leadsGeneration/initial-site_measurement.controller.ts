@@ -9,7 +9,10 @@ import logger from "../../../utils/logger";
 import { assignTaskISMService } from "../../../services/leadModuleServices/leadsGeneration/initial-site_measurement.service";
 import { NotificationService } from "../../../services/notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
-import { sendTaskAssignedEmail } from "../../../services/email/brevoEmail.service";
+import {
+  sendLeadMovedToISMEmail,
+  sendTaskAssignedEmail,
+} from "../../../services/email/brevoEmail.service";
 
 const resolveClientBaseUrl = (req: Request): string => {
   const origin = req.headers.origin;
@@ -38,7 +41,7 @@ export class PaymentUploadController {
 
   public getISMDetailsByLeadId = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const { leadId } = req.params;
@@ -52,7 +55,7 @@ export class PaymentUploadController {
       }
 
       const result = await this.paymentUploadService.getISMDetailsByLeadId(
-        parseInt(leadId)
+        parseInt(leadId),
       );
 
       res.status(200).json({
@@ -71,7 +74,7 @@ export class PaymentUploadController {
 
   public getISMPaymentInfoByLeadId = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const { leadId } = req.params;
@@ -85,7 +88,7 @@ export class PaymentUploadController {
       }
 
       const result = await this.paymentUploadService.getISMPaymentInfoByLeadId(
-        parseInt(leadId)
+        parseInt(leadId),
       );
 
       res.status(200).json({
@@ -111,10 +114,13 @@ export class PaymentUploadController {
         due_date,
         remark,
         user_id, // assignee
-        created_by, // optional: if you carry user id from FE; otherwise derive from auth
+        created_by,
       } = req.body;
 
-      // Minimal validation here (service re-validates too)
+      // ===============================
+      // BASIC VALIDATION
+      // ===============================
+
       if (!leadId || !task_type || !due_date || !user_id) {
         return res.status(400).json({
           success: false,
@@ -134,7 +140,12 @@ export class PaymentUploadController {
         });
       }
 
-      const actorId = created_by ?? (req as any).user?.id; // if you attach auth user to req
+      const actorId = created_by ?? (req as any).user?.id;
+
+      // ===============================
+      // SERVICE EXECUTION
+      // ===============================
+
       const result = await assignTaskISMService({
         lead_id: leadId,
         task_type,
@@ -143,6 +154,10 @@ export class PaymentUploadController {
         assignee_user_id: Number(user_id),
         created_by: Number(actorId),
       });
+
+      // ===============================
+      // EXISTING NOTIFICATION LOGIC (UNCHANGED)
+      // ===============================
 
       try {
         const [assignee, lead, assignedBy] = await Promise.all([
@@ -157,7 +172,12 @@ export class PaymentUploadController {
           }),
           prisma.leadMaster.findUnique({
             where: { id: leadId },
-            select: { firstname: true, lastname: true, lead_code: true },
+            select: {
+              firstname: true,
+              lastname: true,
+              lead_code: true,
+              account_id: true,
+            },
           }),
           actorId
             ? prisma.userMaster.findUnique({
@@ -167,12 +187,20 @@ export class PaymentUploadController {
             : Promise.resolve(null),
         ]);
 
-        const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+        const leadName =
+          `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+
         const leadCode =
           lead?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+
         const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
+
         const isSelfAssigned =
           Boolean(actorId) && Number(actorId) === Number(user_id);
+
+        // ===============================
+        // SALES EXEC TASK NOTIFICATION (UNCHANGED)
+        // ===============================
 
         if (
           !isSelfAssigned &&
@@ -195,6 +223,10 @@ export class PaymentUploadController {
           });
         }
 
+        // ===============================
+        // SALES EXEC EMAIL (UNCHANGED)
+        // ===============================
+
         let assigneeEmail = assignee?.user_email?.trim();
         if (!assigneeEmail && assignee?.id) {
           const fallbackAssignee = await prisma.userMaster.findUnique({
@@ -207,7 +239,9 @@ export class PaymentUploadController {
         if (assigneeEmail && !isSelfAssigned) {
           const clientBaseUrl = resolveClientBaseUrl(req);
           const taskUrl = `${clientBaseUrl}/dashboard/my-tasks`;
+
           const assignedByName = assignedBy?.user_name ?? "Admin";
+
           const dueDate = due_date
             ? new Date(due_date).toLocaleDateString("en-IN", {
                 day: "2-digit",
@@ -228,19 +262,69 @@ export class PaymentUploadController {
             remark,
             taskUrl,
           });
-        } else {
-          logger.warn("Task assignment email skipped: missing assignee email", {
-            lead_id: leadId,
-            assignee_user_id: user_id,
+        }
+
+        // ======================================================
+        // ✅ NEW ADDITION — ADMIN EMAIL ON ISM STAGE MOVE ONLY
+        // ======================================================
+
+        const isISMStageMove = task_type === "Initial Site Measurement";
+
+        if (isISMStageMove) {
+          const admins = await prisma.userMaster.findMany({
+            where: {
+              vendor_id: result.lead.vendor_id,
+              status: "active",
+              user_type: {
+                user_type: { in: ["admin"] },
+              },
+            },
+            select: {
+              id: true,
+              user_name: true,
+              user_email: true,
+            },
           });
+
+          const clientBaseUrl = resolveClientBaseUrl(req);
+          const projectUrl = `${clientBaseUrl}/dashboard/leads/details/${leadId}?accountId=${lead?.account_id}`;
+
+          const updatedAt = new Date().toLocaleString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+
+          for (const admin of admins) {
+            // ❌ Admin self-trigger block
+            if (admin.id === actorId) continue;
+
+            if (!admin.user_email) continue;
+
+            await sendLeadMovedToISMEmail({
+              vendor_id: result.lead.vendor_id,
+              toEmail: admin.user_email,
+              toName: admin.user_name,
+              leadCode,
+              leadName,
+              updatedBy: assignedBy?.user_name ?? "System",
+              updatedAt,
+              projectUrl,
+            });
+          }
         }
       } catch (notificationError: any) {
-        logger.warn("⚠️ Failed to send task assignment notification", {
+        logger.warn("⚠️ Failed to send notification", {
           error: notificationError?.message,
           lead_id: leadId,
-          assignee_user_id: user_id,
         });
       }
+
+      // ===============================
+      // RESPONSE
+      // ===============================
 
       return res.status(201).json({
         success: true,
@@ -249,6 +333,7 @@ export class PaymentUploadController {
       });
     } catch (error: any) {
       logger.error("[ERROR] assignTaskISM:", { err: error });
+
       return res.status(500).json({
         success: false,
         error: "Internal server error",
@@ -260,7 +345,7 @@ export class PaymentUploadController {
 
   public createPaymentUpload = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const { lead_id, account_id, vendor_id, created_by, client_id, user_id } =
@@ -373,9 +458,8 @@ export class PaymentUploadController {
       }
 
       // Call service
-      const result = await this.paymentUploadService.createPaymentUpload(
-        createDto
-      );
+      const result =
+        await this.paymentUploadService.createPaymentUpload(createDto);
 
       res.status(201).json({
         success: true,
@@ -395,7 +479,7 @@ export class PaymentUploadController {
 
   public createBookingDoneIsmUpload = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const { lead_id, account_id, vendor_id, created_by, client_id, user_id } =
@@ -435,9 +519,8 @@ export class PaymentUploadController {
         paymentImageFile: files?.payment_image?.[0],
       };
 
-      const result = await this.paymentUploadService.createBDISMPaymentUpload(
-        dto
-      );
+      const result =
+        await this.paymentUploadService.createBDISMPaymentUpload(dto);
 
       res.status(201).json({
         success: true,
@@ -455,12 +538,12 @@ export class PaymentUploadController {
 
   public getBookingDoneIsmDetails = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const leadId = Number(req.params.leadId);
       const vendorId = Number(req.query.vendor_id);
-  
+
       if (!leadId || !vendorId) {
         res.status(400).json({
           success: false,
@@ -468,13 +551,12 @@ export class PaymentUploadController {
         });
         return;
       }
-  
-      const data =
-        await this.paymentUploadService.getBDISMPaymentUploadDetails(
-          leadId,
-          vendorId
-        );
-  
+
+      const data = await this.paymentUploadService.getBDISMPaymentUploadDetails(
+        leadId,
+        vendorId,
+      );
+
       res.status(200).json({
         success: true,
         data,
@@ -487,12 +569,11 @@ export class PaymentUploadController {
       });
     }
   };
-  
 
   // GET /api/payment-upload/documents/signed-url/:s3Key
   public generateSignedUrl = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const { s3Key } = req.params;
@@ -512,7 +593,7 @@ export class PaymentUploadController {
       const signedUrl = await this.paymentUploadService.generateSignedUrl(
         decodedS3Key,
         parseInt(vendor_id as string),
-        expires_in ? parseInt(expires_in as string) : 3600
+        expires_in ? parseInt(expires_in as string) : 3600,
       );
 
       res.status(200).json({
@@ -526,7 +607,7 @@ export class PaymentUploadController {
     } catch (error: any) {
       console.error(
         "[PaymentUploadController] Error generating signed URL:",
-        error
+        error,
       );
 
       res.status(error.message.includes("not found") ? 404 : 500).json({
@@ -542,7 +623,7 @@ export class PaymentUploadController {
   // POST /api/payment-upload/documents/batch-signed-urls
   public generateBatchSignedUrls = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const { documents, vendor_id, expires_in } = req.body;
@@ -558,7 +639,7 @@ export class PaymentUploadController {
       // Validate documents array structure
       const isValidDocuments = documents.every(
         (doc) =>
-          typeof doc === "string" || (typeof doc === "object" && doc.s3Key)
+          typeof doc === "string" || (typeof doc === "object" && doc.s3Key),
       );
 
       if (!isValidDocuments) {
@@ -591,7 +672,7 @@ export class PaymentUploadController {
     } catch (error: any) {
       console.error(
         "[PaymentUploadController] Error generating batch signed URLs:",
-        error
+        error,
       );
 
       res.status(500).json({
@@ -605,7 +686,7 @@ export class PaymentUploadController {
   // GET /api/leads/vendor/:vendorId/status/2
   public getLeadsByStatus = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const { vendorId } = req.params;
@@ -640,7 +721,7 @@ export class PaymentUploadController {
         user_id,
         statusType.id,
         parseInt(page as string),
-        parseInt(limit as string)
+        parseInt(limit as string),
       );
 
       // ✅ Attach uploads as before
@@ -649,10 +730,10 @@ export class PaymentUploadController {
           const uploads =
             await this.paymentUploadService.getPaymentUploadsByLead(
               lead.id,
-              vendor_id
+              vendor_id,
             );
           return { ...lead, uploads };
-        })
+        }),
       );
 
       res.status(200).json({
@@ -673,7 +754,7 @@ export class PaymentUploadController {
     } catch (error: any) {
       console.error(
         "[PaymentUploadController] Error getting leads by status:",
-        error
+        error,
       );
 
       res.status(500).json({
@@ -687,7 +768,7 @@ export class PaymentUploadController {
   // GET /api/payment-upload/lead/:leadId
   public getPaymentUploadsByLead = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const { leadId } = req.params;
@@ -703,7 +784,7 @@ export class PaymentUploadController {
 
       const result = await this.paymentUploadService.getPaymentUploadsByLead(
         parseInt(leadId),
-        parseInt(vendor_id as string)
+        parseInt(vendor_id as string),
       );
 
       res.status(200).json({
@@ -725,7 +806,7 @@ export class PaymentUploadController {
   // GET /api/payment-upload/account/:accountId
   public getPaymentUploadsByAccount = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const { accountId } = req.params;
@@ -741,7 +822,7 @@ export class PaymentUploadController {
 
       const result = await this.paymentUploadService.getPaymentUploadsByAccount(
         parseInt(accountId),
-        parseInt(vendor_id as string)
+        parseInt(vendor_id as string),
       );
 
       res.status(200).json({
@@ -763,7 +844,7 @@ export class PaymentUploadController {
   // GET /api/payment-upload/vendor/:vendorId
   public getPaymentUploadsByVendor = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const { vendorId } = req.params;
@@ -774,7 +855,7 @@ export class PaymentUploadController {
         parseInt(page as string),
         parseInt(limit as string),
         startDate ? new Date(startDate as string) : undefined,
-        endDate ? new Date(endDate as string) : undefined
+        endDate ? new Date(endDate as string) : undefined,
       );
 
       res.status(200).json({
@@ -805,7 +886,7 @@ export class PaymentUploadController {
   // GET /api/payment-upload/documents/:documentId/download
   public downloadDocument = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const { documentId } = req.params;
@@ -821,7 +902,7 @@ export class PaymentUploadController {
 
       const result = await this.paymentUploadService.getDocumentDownloadUrl(
         parseInt(documentId),
-        parseInt(vendor_id as string)
+        parseInt(vendor_id as string),
       );
 
       if (!result) {
@@ -851,7 +932,7 @@ export class PaymentUploadController {
   // GET /api/payment-upload/analytics/:vendorId
   public getPaymentAnalytics = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const { vendorId } = req.params;
@@ -860,7 +941,7 @@ export class PaymentUploadController {
       const result = await this.paymentUploadService.getPaymentAnalytics(
         parseInt(vendorId),
         startDate ? new Date(startDate as string) : undefined,
-        endDate ? new Date(endDate as string) : undefined
+        endDate ? new Date(endDate as string) : undefined,
       );
 
       res.status(200).json({
@@ -881,7 +962,7 @@ export class PaymentUploadController {
 
   public updatePaymentUpload = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const { paymentId } = req.params;
@@ -1000,7 +1081,7 @@ export class PaymentUploadController {
         const existingPayment =
           await this.paymentUploadService.getPaymentUploadById(
             paymentIdNum,
-            updateDto.vendor_id
+            updateDto.vendor_id,
           );
 
         if (!existingPayment.payment_date) {
@@ -1033,7 +1114,7 @@ export class PaymentUploadController {
       // Call service
       const result = await this.paymentUploadService.updatePaymentUpload(
         paymentIdNum,
-        updateDto
+        updateDto,
       );
 
       res.status(200).json({
@@ -1072,7 +1153,7 @@ export class PaymentUploadController {
   // PUT /api/payment-upload/documents/:documentId/delete
   public softDeleteDocument = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const { documentId } = req.params;
@@ -1129,7 +1210,7 @@ export class PaymentUploadController {
       const result = await this.paymentUploadService.softDeleteDocument(
         documentIdNum,
         userIdNum,
-        vendorIdNum
+        vendorIdNum,
       );
 
       if (!result.success) {
@@ -1161,7 +1242,7 @@ export class PaymentUploadController {
     } catch (error: any) {
       console.error(
         "[PaymentUploadController] Error soft deleting document:",
-        error
+        error,
       );
 
       res.status(500).json({
@@ -1175,7 +1256,7 @@ export class PaymentUploadController {
   // PUT /api/payment-upload/documents/:documentId/replace-pdf
   public replacePdfDocument = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const { documentId } = req.params;
@@ -1254,7 +1335,7 @@ export class PaymentUploadController {
         documentIdNum,
         userIdNum,
         vendorIdNum,
-        pdfFile
+        pdfFile,
       );
 
       res.status(200).json({
@@ -1265,7 +1346,7 @@ export class PaymentUploadController {
     } catch (error: any) {
       console.error(
         "[PaymentUploadController] Error replacing PDF document:",
-        error
+        error,
       );
 
       res.status(error.statusCode || 500).json({
@@ -1278,7 +1359,7 @@ export class PaymentUploadController {
   // PUT /api/payment-upload/documents/:documentId/restore
   public restoreDocument = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const { documentId } = req.params;
@@ -1335,7 +1416,7 @@ export class PaymentUploadController {
       const result = await this.paymentUploadService.restoreDocument(
         documentIdNum,
         userIdNum,
-        vendorIdNum
+        vendorIdNum,
       );
 
       if (!result.success) {
@@ -1367,7 +1448,7 @@ export class PaymentUploadController {
     } catch (error: any) {
       console.error(
         "[PaymentUploadController] Error restoring document:",
-        error
+        error,
       );
 
       res.status(500).json({
@@ -1381,7 +1462,7 @@ export class PaymentUploadController {
   // GET /api/payment-upload/documents/deleted
   public getDeletedDocuments = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const { user_id, vendor_id, page = "1", limit = "10" } = req.query;
@@ -1437,7 +1518,7 @@ export class PaymentUploadController {
         vendorIdNum,
         userIdNum,
         pageNum,
-        limitNum
+        limitNum,
       );
 
       res.status(200).json({
@@ -1455,7 +1536,7 @@ export class PaymentUploadController {
     } catch (error: any) {
       console.error(
         "[PaymentUploadController] Error getting deleted documents:",
-        error
+        error,
       );
 
       let statusCode = 500;
@@ -1480,7 +1561,7 @@ export class PaymentUploadController {
   // GET /api/payment-upload/:paymentId
   public getPaymentUploadById = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> => {
     try {
       const { paymentId } = req.params;
@@ -1506,7 +1587,7 @@ export class PaymentUploadController {
 
       const result = await this.paymentUploadService.getPaymentUploadById(
         paymentIdNum,
-        parseInt(vendor_id as string)
+        parseInt(vendor_id as string),
       );
 
       res.status(200).json({
@@ -1517,7 +1598,7 @@ export class PaymentUploadController {
     } catch (error: any) {
       console.error(
         "[PaymentUploadController] Error getting payment by ID:",
-        error
+        error,
       );
 
       let statusCode = 500;

@@ -3,8 +3,13 @@ import { generateSignedUrl } from "../../../utils/wasabiClient"; // your existin
 import Joi = require("joi");
 import logger from "../../../utils/logger";
 import { AssignTaskFMInput } from "../../../types/leadModule.types";
-import { Prisma } from "../../../prisma/generated";
+import { NotificationType, Prisma } from "../../../prisma/generated";
 import { cache } from "../../../utils/cache";
+import { NotificationService } from "../../../../src/services/notification/notification.service";
+import {
+  sendLeadMovedToClientApprovalEmail,
+  sendLeadMovedToClientDocumentationEmail,
+} from "../../../../src/services/email/brevoEmail.service";
 
 interface FinalMeasurementDto {
   lead_id: number;
@@ -29,7 +34,7 @@ const assignTaskISMSchema = Joi.object({
 
 export class FinalMeasurementService {
   public async createFinalMeasurementStage(data: FinalMeasurementDto) {
-    return await prisma.$transaction(
+    const response = await prisma.$transaction(
       async (tx: any) => {
         const response: any = {
           measurementDocs: [],
@@ -43,7 +48,7 @@ export class FinalMeasurementService {
         });
         if (!measurementDocType) {
           throw new Error(
-            "Document type (Final Measurement) not found for this vendor"
+            "Document type (Final Measurement) not found for this vendor",
           );
         }
 
@@ -69,7 +74,7 @@ export class FinalMeasurementService {
         });
         if (!sitePhotoType) {
           throw new Error(
-            "Document type (Site Photos) not found for this vendor"
+            "Document type (Site Photos) not found for this vendor",
           );
         }
 
@@ -96,7 +101,7 @@ export class FinalMeasurementService {
         });
         if (!clientDocumentationStatus) {
           throw new Error(
-            `Client documentation status (Type 6) not found for vendor ${data.vendor_id}`
+            `Client documentation status (Type 6) not found for vendor ${data.vendor_id}`,
           );
         }
 
@@ -203,13 +208,121 @@ export class FinalMeasurementService {
       },
       {
         timeout: 20000,
-      }
+      },
     );
+
+    // ===============================
+    // CLIENT DOCUMENTATION STAGE → ADMIN NOTIFICATION
+    // ===============================
+
+    try {
+      const actorId = data.created_by;
+
+      const [lead, actor] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: data.lead_id },
+          select: {
+            firstname: true,
+            lastname: true,
+            lead_code: true,
+            vendor_id: true,
+            account_id: true,
+          },
+        }),
+
+        prisma.userMaster.findUnique({
+          where: { id: actorId },
+          select: { user_name: true },
+        }),
+      ]);
+
+      // Safety guard
+      if (!lead) return response;
+
+      const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+
+      const leadCode =
+        lead.lead_code ?? `LEAD-${String(data.lead_id).padStart(4, "0")}`;
+
+      const updatedAt = new Date().toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      const baseUrl =
+        process.env.CLIENT_BASE_URL ||
+        process.env.FRONTEND_URL ||
+        "http://localhost:3000";
+
+      // Account-aware deep link
+      const projectUrl = lead.account_id
+        ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
+        : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;
+
+      // Fetch Active Admin Users
+      const admins = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: lead.vendor_id,
+          status: "active",
+          user_type: {
+            user_type: { in: ["admin"] },
+          },
+        },
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+        },
+      });
+
+      for (const admin of admins) {
+        // ❌ Prevent self notification
+        if (admin.id === actorId) continue;
+
+        // 🔔 In-App Notification
+        await NotificationService.createAndSend({
+          vendor_id: lead.vendor_id,
+          user_id: admin.id,
+          sender_id: actorId,
+          type: NotificationType.LEAD_MILESTONE,
+          title: "Lead Entered Client Documentation Stage",
+          message: `${leadCode} - ${leadName} moved to Client Documentation stage.`,
+          entity_type: "lead",
+          entity_id: data.lead_id,
+          redirect_url: lead.account_id
+            ? `/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
+            : `/dashboard/leads/details/${data.lead_id}`,
+        });
+
+        // 📧 EMAIL Notification (Client Documentation Mail)
+        if (!admin.user_email) continue;
+
+        await sendLeadMovedToClientDocumentationEmail({
+          vendor_id: lead.vendor_id,
+          toEmail: admin.user_email,
+          toName: admin.user_name,
+          leadCode,
+          leadName,
+          updatedBy: actor?.user_name ?? "System",
+          updatedAt,
+          projectUrl,
+        });
+      }
+    } catch (err: any) {
+      logger.warn("⚠️ Client documentation admin notification failed", {
+        lead_id: data.lead_id,
+        error: err?.message,
+      });
+    }
+    return response;
   }
 
   public async getAllFinalMeasurementLeadsByVendorId(
     vendorId: number,
-    userId: number
+    userId: number,
   ) {
     // 1. Resolve status ID dynamically for Type 5
     const finalMeasurementStatus = await prisma.statusTypeMaster.findFirst({
@@ -219,7 +332,7 @@ export class FinalMeasurementService {
 
     if (!finalMeasurementStatus) {
       throw new Error(
-        `Final Measurement status (Type 5) not found for vendor ${vendorId}`
+        `Final Measurement status (Type 5) not found for vendor ${vendorId}`,
       );
     }
 
@@ -380,7 +493,7 @@ export class FinalMeasurementService {
         .map(async (doc: any) => ({
           ...doc,
           signedUrl: await generateSignedUrl(doc.doc_sys_name, 3600, "inline"),
-        }))
+        })),
     );
 
     // Site photos (multiple)
@@ -390,7 +503,7 @@ export class FinalMeasurementService {
         .map(async (doc: any) => ({
           ...doc,
           signedUrl: await generateSignedUrl(doc.doc_sys_name, 3600, "inline"),
-        }))
+        })),
     );
 
     return {
@@ -406,7 +519,7 @@ export class FinalMeasurementService {
   public async updateCriticalDiscussionNotes(
     vendorId: number,
     leadId: number,
-    notes: string
+    notes: string,
   ) {
     // Resolve the vendor's Open status ID dynamically
     const finalMeasurementStatus = await prisma.statusTypeMaster.findFirst({
@@ -462,7 +575,7 @@ export class FinalMeasurementService {
 
         if (!lead?.account_id) {
           throw new Error(
-            "Lead not found or account_id missing for this vendor"
+            "Lead not found or account_id missing for this vendor",
           );
         }
 
@@ -473,7 +586,7 @@ export class FinalMeasurementService {
           });
           if (!sitePhotoType) {
             throw new Error(
-              "Document type (Site Photos) not found for this vendor"
+              "Document type (Site Photos) not found for this vendor",
             );
           }
 
@@ -496,7 +609,7 @@ export class FinalMeasurementService {
 
         return response;
       },
-      { timeout: 15000 }
+      { timeout: 15000 },
     );
   }
 
@@ -523,7 +636,7 @@ export class FinalMeasurementService {
 
         if (!lead?.account_id) {
           throw new Error(
-            "Lead not found or account_id missing for this vendor"
+            "Lead not found or account_id missing for this vendor",
           );
         }
 
@@ -532,7 +645,7 @@ export class FinalMeasurementService {
         });
         if (!sitePhotoType) {
           throw new Error(
-            "Document type (Site Photos) not found for this vendor"
+            "Document type (Site Photos) not found for this vendor",
           );
         }
 
@@ -554,7 +667,7 @@ export class FinalMeasurementService {
 
         return response;
       },
-      { timeout: 15000 }
+      { timeout: 15000 },
     );
   }
 
@@ -581,7 +694,7 @@ export class FinalMeasurementService {
 
         if (!lead?.account_id) {
           throw new Error(
-            "Lead not found or account_id missing for this vendor"
+            "Lead not found or account_id missing for this vendor",
           );
         }
 
@@ -590,7 +703,7 @@ export class FinalMeasurementService {
         });
         if (!measurementDocType) {
           throw new Error(
-            "Document type (Final Measurement) not found for this vendor"
+            "Document type (Final Measurement) not found for this vendor",
           );
         }
 
@@ -612,13 +725,13 @@ export class FinalMeasurementService {
 
         return response;
       },
-      { timeout: 15000 }
+      { timeout: 15000 },
     );
   }
 
   public async getLeadsWithStatusFinalMeasurement(
     vendorId: number,
-    userId: number
+    userId: number,
   ) {
     // ✅ Get user role
     const user = await prisma.userMaster.findUnique({
@@ -707,7 +820,7 @@ export class FinalMeasurementService {
     const { error, value } = assignTaskISMSchema.validate(payload);
     if (error) {
       throw new Error(
-        `Validation failed: ${error.details.map((d) => d.message).join(", ")}`
+        `Validation failed: ${error.details.map((d) => d.message).join(", ")}`,
       );
     }
 
@@ -724,17 +837,22 @@ export class FinalMeasurementService {
       // 1️⃣ Validate lead
       const lead = await tx.leadMaster.findUnique({
         where: { id: lead_id },
-        select: { id: true, vendor_id: true, account_id: true, status_id: true },
+        select: {
+          id: true,
+          vendor_id: true,
+          account_id: true,
+          status_id: true,
+        },
       });
       if (!lead) throw new Error(`Lead ${lead_id} not found`);
 
       const leadStage = lead.status_id
-        ? (
+        ? ((
             await tx.statusTypeMaster.findUnique({
               where: { id: lead.status_id },
               select: { type: true },
             })
-          )?.type ?? null
+          )?.type ?? null)
         : null;
 
       // 2️⃣ Validate assignee
@@ -746,7 +864,7 @@ export class FinalMeasurementService {
         throw new Error(`Assignee user ${assignee_user_id} not found`);
       if (assignee.vendor_id !== lead.vendor_id) {
         throw new Error(
-          `Assignee user ${assignee_user_id} does not belong to vendor ${lead.vendor_id}`
+          `Assignee user ${assignee_user_id} does not belong to vendor ${lead.vendor_id}`,
         );
       }
 
@@ -794,11 +912,14 @@ export class FinalMeasurementService {
       });
 
       if (existingMember) {
-        logger.info("[SERVICE] LeadChatMember already exists, skipping insert", {
-          lead_id: lead.id,
-          chat_room_id: chatRoom.id,
-          user_id: assignee_user_id,
-        });
+        logger.info(
+          "[SERVICE] LeadChatMember already exists, skipping insert",
+          {
+            lead_id: lead.id,
+            chat_room_id: chatRoom.id,
+            user_id: assignee_user_id,
+          },
+        );
       } else {
         await tx.leadChatMember.create({
           data: {
@@ -831,7 +952,7 @@ export class FinalMeasurementService {
         });
         if (!toStatus) {
           throw new Error(
-            `Status 'Type 5' not found for vendor ${lead.vendor_id}`
+            `Status 'Type 5' not found for vendor ${lead.vendor_id}`,
           );
         }
 

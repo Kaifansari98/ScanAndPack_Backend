@@ -1,5 +1,9 @@
 import { prisma } from "../../../prisma/client";
-import { ActivityStatus, NotificationType, Prisma } from "../../../prisma/generated";
+import {
+  ActivityStatus,
+  NotificationType,
+  Prisma,
+} from "../../../prisma/generated";
 import { NotificationService } from "../../notification/notification.service";
 import logger from "../../../utils/logger";
 import { cache } from "../../../utils/cache";
@@ -185,7 +189,10 @@ export class LeadActivityStatusService {
       const lostUrl = `${baseUrl}/dashboard/leads/leadstable?tab=lost`;
 
       // 🔔 Handle onHold and lostApproval notifications
-      if (status === ActivityStatus.onHold || status === ActivityStatus.lostApproval) {
+      if (
+        status === ActivityStatus.onHold ||
+        status === ActivityStatus.lostApproval
+      ) {
         const admins = await prisma.userMaster.findMany({
           where: {
             vendor_id: vendorId,
@@ -198,7 +205,9 @@ export class LeadActivityStatusService {
         });
 
         const isOnHold = status === ActivityStatus.onHold;
-        const redirectUrl = isOnHold ? "/dashboard/leads/leadstable?tab=onHold" : "/dashboard/leads/leadstable?tab=lostApproval";
+        const redirectUrl = isOnHold
+          ? "/dashboard/leads/leadstable?tab=onHold"
+          : "/dashboard/leads/leadstable?tab=lostApproval";
         const leadUrl = isOnHold ? onHoldUrl : lostApprovalUrl;
 
         await Promise.allSettled(
@@ -210,7 +219,9 @@ export class LeadActivityStatusService {
                 user_id: admin.id,
                 sender_id: createdBy,
                 type: NotificationType.LEAD_ACTION,
-                title: isOnHold ? "Lead placed On Hold" : "Lost approval required",
+                title: isOnHold
+                  ? "Lead placed On Hold"
+                  : "Lost approval required",
                 message: isOnHold
                   ? `Lead ${leadCode} - ${leadName} placed On Hold by ${updatedByName}.`
                   : `Lead ${leadCode} - ${leadName} marked Lost and awaiting approval.`,
@@ -247,7 +258,7 @@ export class LeadActivityStatusService {
                   leadUrl,
                 });
               }
-            })
+            }),
         );
 
         // 🔔 If onHold and admin is the actor, notify sales executives too
@@ -261,7 +272,7 @@ export class LeadActivityStatusService {
             select: { user_id: true },
           });
           const mappedUserIds = Array.from(
-            new Set(mappings.map((mapping) => mapping.user_id))
+            new Set(mappings.map((mapping) => mapping.user_id)),
           ).filter((id) => id !== createdBy);
 
           if (mappedUserIds.length > 0) {
@@ -304,7 +315,7 @@ export class LeadActivityStatusService {
                   remark,
                   leadUrl,
                 });
-              })
+              }),
             );
           }
         }
@@ -489,7 +500,8 @@ export class LeadActivityStatusService {
         leadInfo?.lastname ?? ""
       }`.trim();
       const rejectedByName = rejectedByUser?.user_name ?? "Admin";
-      const rejectedByRole = rejectedByUser?.user_type?.user_type?.toLowerCase();
+      const rejectedByRole =
+        rejectedByUser?.user_type?.user_type?.toLowerCase();
       const isAdminActor =
         rejectedByRole === "admin" || rejectedByRole === "super-admin";
       const rejectedByRoleLabel = isAdminActor ? "Admin" : "Sales Executive";
@@ -522,7 +534,7 @@ export class LeadActivityStatusService {
             select: { user_id: true },
           });
           const mappedUserIds = Array.from(
-            new Set(mappings.map((mapping) => mapping.user_id))
+            new Set(mappings.map((mapping) => mapping.user_id)),
           ).filter((id) => id !== createdBy);
 
           if (mappedUserIds.length > 0) {
@@ -565,7 +577,7 @@ export class LeadActivityStatusService {
                   remark,
                   leadUrl: onGoingUrl,
                 });
-              })
+              }),
             );
           }
         } else {
@@ -574,7 +586,10 @@ export class LeadActivityStatusService {
               vendor_id: vendorId,
               status: "active",
               user_type: {
-                user_type: { in: ["admin", "super-admin"], mode: "insensitive" },
+                user_type: {
+                  in: ["admin", "super-admin"],
+                  mode: "insensitive",
+                },
               },
               id: { not: createdBy },
             },
@@ -609,7 +624,7 @@ export class LeadActivityStatusService {
                 remark,
                 leadUrl: onGoingUrl,
               });
-            })
+            }),
           );
         }
       }
@@ -781,7 +796,7 @@ export class LeadActivityStatusService {
               remark,
               leadUrl: onGoingUrl,
             });
-          })
+          }),
         );
       }
     } catch (notifyError: any) {

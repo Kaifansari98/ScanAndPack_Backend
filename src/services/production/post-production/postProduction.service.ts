@@ -1,7 +1,7 @@
 import logger from "../../../../src/utils/logger";
 import { prisma } from "../../../prisma/client";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
-import { sendReadyToDispatchEmail } from "../../../../src/services/email/brevoEmail.service";
+import { sendLeadMovedToReadyToDispatchEmail, sendReadyToDispatchEmail } from "../../../../src/services/email/brevoEmail.service";
 import { NotificationType } from "../../../prisma/generated";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 
@@ -661,6 +661,115 @@ export class PostProductionService {
         leadId,
         vendorId,
         error: notifyError?.message,
+      });
+    }
+
+    // ==========================
+    // READY TO DISPATCH → ADMIN NOTIFICATION
+    // ==========================
+
+    try {
+      const actorId = updatedBy; // factory user who marked dispatch ready
+
+      const [lead, actor] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: leadId },
+          select: {
+            firstname: true,
+            lastname: true,
+            lead_code: true,
+            vendor_id: true,
+            account_id: true,
+          },
+        }),
+
+        prisma.userMaster.findUnique({
+          where: { id: actorId },
+          select: { user_name: true },
+        }),
+      ]);
+
+      // Safety guard
+      if (!lead) return result.updatedLead;
+
+      const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+
+      const leadCode =
+        lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+
+      const markedBy = actor?.user_name ?? "Factory Team";
+
+      const markedAt = new Date().toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      const baseUrl =
+        process.env.CLIENT_BASE_URL ||
+        process.env.FRONTEND_URL ||
+        "http://localhost:3000";
+
+      const redirectPath = lead.account_id
+        ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
+        : `/dashboard/leads/details/${leadId}`;
+
+      const projectUrl = `${baseUrl}${redirectPath}`;
+
+      // Fetch Active Admin Users
+      const admins = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: lead.vendor_id,
+          status: "active",
+          user_type: {
+            user_type: { in: ["admin"] },
+          },
+        },
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+        },
+      });
+
+      for (const admin of admins) {
+        // ❌ Prevent self notification
+        if (admin.id === actorId) continue;
+
+        // 🔔 In-App Notification (ADMIN)
+        await NotificationService.createAndSend({
+          vendor_id: lead.vendor_id,
+          user_id: admin.id,
+          sender_id: actorId,
+          type: NotificationType.LEAD_MILESTONE,
+          title: "Ready To Dispatch",
+          message: `${leadCode} - ${leadName} marked Ready to Dispatch by Factory.`,
+          entity_type: "lead",
+          entity_id: leadId,
+          redirect_url: redirectPath,
+        });
+
+        // 📧 Email Notification (ADMIN)
+        if (!admin.user_email) continue;
+
+        await sendLeadMovedToReadyToDispatchEmail({
+          vendor_id: lead.vendor_id,
+          toEmail: admin.user_email,
+          toName: admin.user_name,
+          leadCode,
+          leadName,
+          markedBy,
+          markedAt,
+          projectUrl,
+        });
+      }
+    } catch (adminNotifyErr: any) {
+      logger.warn("⚠️ Ready To Dispatch admin notification failed", {
+        leadId,
+        vendorId,
+        error: adminNotifyErr?.message,
       });
     }
 

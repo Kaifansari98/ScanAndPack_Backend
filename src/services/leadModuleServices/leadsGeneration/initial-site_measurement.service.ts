@@ -21,10 +21,12 @@ import {
 import { prisma } from "../../../prisma/client";
 import Joi from "joi";
 import logger from "../../../utils/logger";
-import { Prisma } from "../../../prisma/generated";
+import { NotificationType, Prisma } from "../../../prisma/generated";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { cache } from "../../../utils/cache";
 import fs from "node:fs/promises";
+import { sendLeadMovedToDesigningEmail } from "src/services/email/brevoEmail.service";
+import { NotificationService } from "src/services/notification/notification.service";
 
 export interface CreateBDISMPaymentUploadDto {
   lead_id: number;
@@ -60,7 +62,7 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
   const { error, value } = assignTaskISMSchema.validate(payload);
   if (error) {
     throw new Error(
-      `Validation failed: ${error.details.map((d) => d.message).join(", ")}`
+      `Validation failed: ${error.details.map((d) => d.message).join(", ")}`,
     );
   }
 
@@ -76,12 +78,12 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
     if (!lead) throw new Error(`Lead ${lead_id} not found`);
 
     const leadStage = lead.status_id
-      ? (
+      ? ((
           await tx.statusTypeMaster.findUnique({
             where: { id: lead.status_id },
             select: { type: true },
           })
-        )?.type ?? null
+        )?.type ?? null)
       : null;
 
     // 2) Assignee guard (same vendor)
@@ -93,7 +95,7 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
       throw new Error(`Assignee user ${assignee_user_id} not found`);
     if (assignee.vendor_id !== lead.vendor_id) {
       throw new Error(
-        `Assignee user ${assignee_user_id} does not belong to vendor ${lead.vendor_id}`
+        `Assignee user ${assignee_user_id} does not belong to vendor ${lead.vendor_id}`,
       );
     }
 
@@ -171,7 +173,7 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
 
     // 🧹 Invalidate Dashboard Task Cache (Sales Executive Dashboard)
     await cache.del(
-      `performance:snapshot:${lead.vendor_id}:${assignee_user_id}`
+      `performance:snapshot:${lead.vendor_id}:${assignee_user_id}`,
     );
     await cache.del(`performance:snapshot:${lead.vendor_id}:${created_by}`);
 
@@ -190,7 +192,7 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
       });
       if (!toStatus) {
         throw new Error(
-          `Status 'Type 2' not found for vendor ${lead.vendor_id}`
+          `Status 'Type 2' not found for vendor ${lead.vendor_id}`,
         );
       }
 
@@ -346,21 +348,21 @@ export class PaymentUploadService {
             uploadedAt: doc.created_at,
             s3Key: doc.doc_sys_name,
             signedUrl: await generateSignedUrl(doc.doc_sys_name),
-          }))
+          })),
         );
       };
 
       const current_site_photos = await withSignedUrls(
         sitePhotos,
-        "current_site_photo"
+        "current_site_photo",
       );
       const initial_site_measurement_documents = await withSignedUrls(
         pdfDocs,
-        "pdf_upload"
+        "pdf_upload",
       );
       const initial_site_measurement_payment_details = await withSignedUrls(
         paymentDocs,
-        "initial_site_measurement_payment_details"
+        "initial_site_measurement_payment_details",
       );
 
       // Step 5: Fetch payment info
@@ -456,7 +458,7 @@ export class PaymentUploadService {
   }
 
   public async createPaymentUpload(
-    data: CreatePaymentUploadDto
+    data: CreatePaymentUploadDto,
   ): Promise<PaymentUploadResponseDto> {
     try {
       if (!data.pdfFile) {
@@ -479,7 +481,7 @@ export class PaymentUploadService {
             data.lead_id,
             photo.originalname,
             photo.mimetype,
-            "current_site_photos"
+            "current_site_photos",
           );
 
           await fs.unlink(photo.path);
@@ -496,7 +498,7 @@ export class PaymentUploadService {
         data.lead_id,
         data.pdfFile.originalname,
         data.pdfFile.mimetype,
-        "initial_site_measurement_documents"
+        "initial_site_measurement_documents",
       );
       await fs.unlink(data.pdfFile.path);
 
@@ -508,7 +510,7 @@ export class PaymentUploadService {
           data.lead_id,
           data.paymentImageFile.originalname,
           data.paymentImageFile.mimetype,
-          "initial-site-measurement-payment-images"
+          "initial-site-measurement-payment-images",
         );
         await fs.unlink(data.paymentImageFile.path);
       }
@@ -524,7 +526,7 @@ export class PaymentUploadService {
 
             if (!sitePhotoDocType) {
               throw new Error(
-                "Document type (site photos) not found for this vendor"
+                "Document type (site photos) not found for this vendor",
               );
             }
 
@@ -557,7 +559,7 @@ export class PaymentUploadService {
 
           if (!pdfDocType) {
             throw new Error(
-              "Document type (measurement documents) not found for this vendor"
+              "Document type (measurement documents) not found for this vendor",
             );
           }
 
@@ -589,7 +591,7 @@ export class PaymentUploadService {
 
             if (!paymentDocType) {
               throw new Error(
-                "Document type for payment images not found for this vendor"
+                "Document type for payment images not found for this vendor",
               );
             }
 
@@ -623,7 +625,7 @@ export class PaymentUploadService {
 
             if (!paymentType) {
               throw new Error(
-                "Payment type (Initial Site Measurement Payment) not found for this vendor"
+                "Payment type (Initial Site Measurement Payment) not found for this vendor",
               );
             }
 
@@ -753,7 +755,7 @@ export class PaymentUploadService {
           // If payment details exist, include them in sentence format
           if (data.amount && data.payment_date) {
             const formattedDate = new Date(
-              data.payment_date
+              data.payment_date,
             ).toLocaleDateString("en-IN", {
               day: "2-digit",
               month: "short",
@@ -761,7 +763,7 @@ export class PaymentUploadService {
             });
 
             actionMessage = `Initial Site Measurement amount ₹${data.amount.toLocaleString(
-              "en-IN"
+              "en-IN",
             )} received on ${formattedDate}. `;
           }
 
@@ -811,9 +813,110 @@ export class PaymentUploadService {
         },
         {
           timeout: 20000, // 20 seconds
-        }
+        },
       );
 
+      try {
+        const actorId = data.created_by;
+
+        const [lead, actor] = await Promise.all([
+          prisma.leadMaster.findUnique({
+            where: { id: data.lead_id },
+            select: {
+              firstname: true,
+              lastname: true,
+              lead_code: true,
+              vendor_id: true,
+              account_id: true, // ✅ added
+            },
+          }),
+
+          prisma.userMaster.findUnique({
+            where: { id: actorId },
+            select: { user_name: true },
+          }),
+        ]);
+
+        if (!lead) return result;
+
+        const leadName =
+          `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+
+        const leadCode =
+          lead.lead_code ?? `LEAD-${String(data.lead_id).padStart(4, "0")}`;
+
+        const updatedAt = new Date().toLocaleString("en-IN", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
+        const baseUrl =
+          process.env.CLIENT_BASE_URL ||
+          process.env.FRONTEND_URL ||
+          "http://localhost:3000";
+
+        // ✅ Account aware deep-link
+        const projectUrl = lead.account_id
+          ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
+          : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;
+
+        const admins = await prisma.userMaster.findMany({
+          where: {
+            vendor_id: lead.vendor_id,
+            status: "active",
+            user_type: {
+              user_type: { in: ["admin"] },
+            },
+          },
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+          },
+        });
+
+        for (const admin of admins) {
+          // ❌ Self block
+          if (admin.id === actorId) continue;
+
+          // 🔔 In-App
+          await NotificationService.createAndSend({
+            vendor_id: lead.vendor_id,
+            user_id: admin.id,
+            sender_id: actorId,
+            type: NotificationType.LEAD_MILESTONE,
+            title: "Lead Entered Designing Stage",
+            message: `${leadCode} - ${leadName} moved to Designing stage.`,
+            entity_type: "lead",
+            entity_id: data.lead_id,
+            redirect_url: lead.account_id
+              ? `/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
+              : `/dashboard/leads/details/${data.lead_id}`,
+          });
+
+          // 📧 Email
+          if (!admin.user_email) continue;
+
+          await sendLeadMovedToDesigningEmail({
+            vendor_id: lead.vendor_id,
+            toEmail: admin.user_email,
+            toName: admin.user_name,
+            leadCode,
+            leadName,
+            updatedBy: actor?.user_name ?? "System",
+            updatedAt,
+            projectUrl,
+          });
+        }
+      } catch (err: any) {
+        logger.warn("⚠️ Designing stage notification failed", {
+          lead_id: data.lead_id,
+          error: err?.message,
+        });
+      }
       return result;
     } catch (error: any) {
       console.error("[PaymentUploadService] Error:", error);
@@ -822,7 +925,7 @@ export class PaymentUploadService {
   }
 
   public async createBDISMPaymentUpload(
-    data: CreateBDISMPaymentUploadDto
+    data: CreateBDISMPaymentUploadDto,
   ): Promise<PaymentUploadResponseDto> {
     try {
       if (!data.pdfFile) {
@@ -845,7 +948,7 @@ export class PaymentUploadService {
             data.lead_id,
             photo.originalname,
             photo.mimetype,
-            "bd_ism_current_site_photos"
+            "bd_ism_current_site_photos",
           );
 
           await fs.unlink(photo.path);
@@ -862,7 +965,7 @@ export class PaymentUploadService {
         data.lead_id,
         data.pdfFile.originalname,
         data.pdfFile.mimetype,
-        "bd_initial_site_measurement_documents"
+        "bd_initial_site_measurement_documents",
       );
       await fs.unlink(data.pdfFile.path);
 
@@ -874,7 +977,7 @@ export class PaymentUploadService {
           data.lead_id,
           data.paymentImageFile.originalname,
           data.paymentImageFile.mimetype,
-          "bd_initial-site-measurement-payment-images"
+          "bd_initial-site-measurement-payment-images",
         );
         await fs.unlink(data.paymentImageFile.path);
       }
@@ -1085,7 +1188,7 @@ export class PaymentUploadService {
 
           return response;
         },
-        { timeout: 20000 }
+        { timeout: 20000 },
       );
     } catch (error: any) {
       logger.error("[BD-ISM PaymentUploadService]", error);
@@ -1129,7 +1232,7 @@ export class PaymentUploadService {
         signedUrl: await generateSignedUrl(doc.doc_sys_name),
         docTypeTag: docTypeMap.get(doc.doc_type_id),
         createdAt: doc.created_at,
-      }))
+      })),
     );
 
     /* ------------------------------
@@ -1173,13 +1276,13 @@ export class PaymentUploadService {
     ------------------------------ */
     return {
       current_site_photos: docsWithSignedUrl.filter(
-        (d) => d.docTypeTag === "Type 33"
+        (d) => d.docTypeTag === "Type 33",
       ),
       pdf_documents: docsWithSignedUrl.filter(
-        (d) => d.docTypeTag === "Type 34"
+        (d) => d.docTypeTag === "Type 34",
       ),
       payment_images: docsWithSignedUrl.filter(
-        (d) => d.docTypeTag === "Type 35"
+        (d) => d.docTypeTag === "Type 35",
       ),
 
       payment_info: paymentInfo
@@ -1201,7 +1304,7 @@ export class PaymentUploadService {
   public async generateSignedUrl(
     s3Key: string,
     vendorId: number,
-    expiresIn: number = 3600
+    expiresIn: number = 3600,
   ): Promise<string> {
     try {
       // Validate that the file belongs to the vendor (security check)
@@ -1231,7 +1334,7 @@ export class PaymentUploadService {
     } catch (error: any) {
       console.error(
         "[PaymentUploadService] Error generating signed URL:",
-        error
+        error,
       );
       throw new Error(`Failed to generate signed URL: ${error.message}`);
     }
@@ -1239,7 +1342,7 @@ export class PaymentUploadService {
 
   // Batch generate signed URLs for multiple documents
   public async generateBatchSignedUrls(
-    documents: Array<{ s3Key: string; vendorId: number }>
+    documents: Array<{ s3Key: string; vendorId: number }>,
   ): Promise<Record<string, string>> {
     try {
       const signedUrls: Record<string, string> = {};
@@ -1250,7 +1353,7 @@ export class PaymentUploadService {
           try {
             const signedUrl = await this.generateSignedUrl(
               doc.s3Key,
-              doc.vendorId
+              doc.vendorId,
             );
             signedUrls[doc.s3Key] = signedUrl;
           } catch (error) {
@@ -1258,14 +1361,14 @@ export class PaymentUploadService {
             // Don't throw, just skip this document
             signedUrls[doc.s3Key] = "";
           }
-        })
+        }),
       );
 
       return signedUrls;
     } catch (error: any) {
       console.error(
         "[PaymentUploadService] Error generating batch signed URLs:",
-        error
+        error,
       );
       throw new Error(`Failed to generate batch signed URLs: ${error.message}`);
     }
@@ -1277,7 +1380,7 @@ export class PaymentUploadService {
     userId: number,
     statusId: number,
     page: number = 1,
-    limit: number = 10
+    limit: number = 10,
   ): Promise<{ data: LeadDetailDto[]; total: number }> {
     try {
       const skip = (page - 1) * limit;
@@ -1426,7 +1529,7 @@ export class PaymentUploadService {
         lead.documents.map((doc: any) => ({
           s3Key: doc.doc_sys_name,
           vendorId,
-        }))
+        })),
       );
       const signedUrls = await this.generateBatchSignedUrls(allDocuments);
 
@@ -1459,7 +1562,7 @@ export class PaymentUploadService {
     } catch (error: any) {
       console.error(
         "[PaymentUploadService] Error getting leads by status:",
-        error
+        error,
       );
       throw new Error(`Failed to get leads by status: ${error.message}`);
     }
@@ -1468,7 +1571,7 @@ export class PaymentUploadService {
   // Get payment uploads by lead ID (only for leads with status_id == 2)
   public async getPaymentUploadsByLead(
     leadId: number,
-    vendorId: number
+    vendorId: number,
   ): Promise<PaymentUploadDetailDto[]> {
     try {
       // ✅ Find the correct status type for this vendor
@@ -1560,7 +1663,7 @@ export class PaymentUploadService {
         const relatedLedger = ledgerEntries.find(
           (l: any) =>
             l.payment_date.getTime() === payment.payment_date?.getTime() &&
-            l.amount === payment.amount
+            l.amount === payment.amount,
         );
 
         result.push({
@@ -1586,7 +1689,7 @@ export class PaymentUploadService {
           documents: documents
             .filter((doc: any) => {
               const timeDiff = Math.abs(
-                doc.created_at.getTime() - payment.created_at.getTime()
+                doc.created_at.getTime() - payment.created_at.getTime(),
               );
               return timeDiff < 60000;
             })
@@ -1607,7 +1710,7 @@ export class PaymentUploadService {
       const paymentTimes = paymentInfos.map((p: any) => p.created_at.getTime());
       const documentOnlyUploads = documents.filter((doc: any) => {
         return !paymentTimes.some(
-          (time: any) => Math.abs(doc.created_at.getTime() - time) < 60000
+          (time: any) => Math.abs(doc.created_at.getTime() - time) < 60000,
         );
       });
 
@@ -1642,12 +1745,12 @@ export class PaymentUploadService {
 
       // Sort by newest first
       return result.sort(
-        (a, b) => b.created_at.getTime() - a.created_at.getTime()
+        (a, b) => b.created_at.getTime() - a.created_at.getTime(),
       );
     } catch (error: any) {
       console.error(
         "[PaymentUploadGetService] Error getting uploads by lead:",
-        error
+        error,
       );
       throw new Error(`Failed to get payment uploads: ${error.message}`);
     }
@@ -1655,7 +1758,7 @@ export class PaymentUploadService {
 
   public async updatePaymentUpload(
     paymentId: number,
-    data: UpdatePaymentUploadDto
+    data: UpdatePaymentUploadDto,
   ): Promise<PaymentUploadResponseDto> {
     try {
       // Start a transaction to ensure data consistency
@@ -1690,7 +1793,7 @@ export class PaymentUploadService {
 
             if (!sitePhotoDocType) {
               throw new Error(
-                "Document type for site photos not found for this vendor"
+                "Document type for site photos not found for this vendor",
               );
             }
 
@@ -1707,7 +1810,7 @@ export class PaymentUploadService {
                   Key: s3Key,
                   Body: photo.buffer,
                   ContentType: photo.mimetype,
-                })
+                }),
               );
 
               // Save document info to database
@@ -1741,7 +1844,7 @@ export class PaymentUploadService {
 
             if (!paymentDocType) {
               throw new Error(
-                "Document type for payment details not found for this vendor"
+                "Document type for payment details not found for this vendor",
               );
             }
 
@@ -1758,7 +1861,7 @@ export class PaymentUploadService {
                   Key: s3Key,
                   Body: photo.buffer,
                   ContentType: photo.mimetype,
-                })
+                }),
               );
 
               // Save document info to database
@@ -1884,7 +1987,7 @@ export class PaymentUploadService {
                 : "";
             const datePart = data.payment_date
               ? `Payment Date set to ${new Date(
-                  data.payment_date
+                  data.payment_date,
                 ).toLocaleDateString("en-IN", {
                   day: "2-digit",
                   month: "short",
@@ -1904,23 +2007,23 @@ export class PaymentUploadService {
           // If documents were uploaded
           if (response.documentsUploaded.length > 0) {
             const sitePhotoCount = response.documentsUploaded.filter(
-              (d) => d.type === "current_site_photo"
+              (d) => d.type === "current_site_photo",
             ).length;
             const paymentPhotoCount = response.documentsUploaded.filter(
-              (d) => d.type === "payment_detail_photo"
+              (d) => d.type === "payment_detail_photo",
             ).length;
 
             if (sitePhotoCount > 0)
               actionParts.push(
                 `${sitePhotoCount} Current Site Photo${
                   sitePhotoCount > 1 ? "s" : ""
-                } uploaded`
+                } uploaded`,
               );
             if (paymentPhotoCount > 0)
               actionParts.push(
                 `${paymentPhotoCount} Payment Detail Photo${
                   paymentPhotoCount > 1 ? "s" : ""
-                } uploaded`
+                } uploaded`,
               );
           }
 
@@ -1928,7 +2031,7 @@ export class PaymentUploadService {
           const actionMessage =
             actionParts.length > 0
               ? `Payment details updated successfully — ${actionParts.join(
-                  ", "
+                  ", ",
                 )}.`
               : "Payment details updated successfully.";
 
@@ -1970,7 +2073,7 @@ export class PaymentUploadService {
         },
         {
           timeout: 20000, // 20 seconds
-        }
+        },
       );
 
       return result;
@@ -1983,7 +2086,7 @@ export class PaymentUploadService {
   public async softDeleteDocument(
     documentId: number,
     userId: number,
-    vendorId: number
+    vendorId: number,
   ): Promise<{ success: boolean; message: string; document?: any }> {
     try {
       const result = await prisma.$transaction(async (tx: any) => {
@@ -2032,7 +2135,7 @@ export class PaymentUploadService {
 
         if (!document) {
           throw new Error(
-            "Document not found, already deleted, or access denied"
+            "Document not found, already deleted, or access denied",
           );
         }
 
@@ -2096,7 +2199,7 @@ export class PaymentUploadService {
     } catch (error: any) {
       console.error(
         "[PaymentUploadService] Error soft deleting document:",
-        error
+        error,
       );
 
       if (
@@ -2119,7 +2222,7 @@ export class PaymentUploadService {
     documentId: number,
     userId: number,
     vendorId: number,
-    pdfFile: Express.Multer.File
+    pdfFile: Express.Multer.File,
   ) {
     if (!pdfFile) {
       throw Object.assign(new Error("Document file is required"), {
@@ -2139,7 +2242,7 @@ export class PaymentUploadService {
       if (!user) {
         throw Object.assign(
           new Error("User not found or not authorized for this vendor"),
-          { statusCode: 403 }
+          { statusCode: 403 },
         );
       }
 
@@ -2163,16 +2266,16 @@ export class PaymentUploadService {
       if (!existingDoc) {
         throw Object.assign(
           new Error("Document not found or already deleted"),
-          { statusCode: 404 }
+          { statusCode: 404 },
         );
       }
 
       if (existingDoc.documentType?.tag !== "Type 3") {
         throw Object.assign(
           new Error(
-            "Only initial site measurement documents can be replaced via this endpoint"
+            "Only initial site measurement documents can be replaced via this endpoint",
           ),
-          { statusCode: 400 }
+          { statusCode: 400 },
         );
       }
 
@@ -2196,7 +2299,7 @@ export class PaymentUploadService {
           Key: pdfS3Key,
           Body: pdfFile.buffer,
           ContentType: pdfFile.mimetype,
-        })
+        }),
       );
 
       const newDocument = await tx.leadDocuments.create({
@@ -2241,7 +2344,7 @@ export class PaymentUploadService {
   public async restoreDocument(
     documentId: number,
     userId: number,
-    vendorId: number
+    vendorId: number,
   ): Promise<{ success: boolean; message: string; document?: any }> {
     try {
       const result = await prisma.$transaction(async (tx: any) => {
@@ -2343,7 +2446,7 @@ export class PaymentUploadService {
     vendorId: number,
     userId: number,
     page: number = 1,
-    limit: number = 10
+    limit: number = 10,
   ): Promise<{ data: any[]; total: number; success: boolean }> {
     try {
       // Verify user belongs to vendor
@@ -2417,7 +2520,7 @@ export class PaymentUploadService {
     } catch (error: any) {
       console.error(
         "[PaymentUploadService] Error getting deleted documents:",
-        error
+        error,
       );
       throw new Error(`Failed to get deleted documents: ${error.message}`);
     }
@@ -2426,7 +2529,7 @@ export class PaymentUploadService {
   // Get payment upload details by ID
   public async getPaymentUploadById(
     paymentId: number,
-    vendorId: number
+    vendorId: number,
   ): Promise<any> {
     try {
       const payment = await prisma.paymentInfo.findFirst({
@@ -2494,7 +2597,7 @@ export class PaymentUploadService {
         documents.map(async (doc: any) => {
           const signedUrl = await this.generateSignedUrl(
             doc.doc_sys_name,
-            vendorId
+            vendorId,
           );
           return {
             ...doc,
@@ -2506,7 +2609,7 @@ export class PaymentUploadService {
                 ? "current_site_photo"
                 : "payment_detail_photo",
           };
-        })
+        }),
       );
 
       return {
@@ -2516,7 +2619,7 @@ export class PaymentUploadService {
     } catch (error: any) {
       console.error(
         "[PaymentUploadService] Error getting payment by ID:",
-        error
+        error,
       );
       throw new Error(`Failed to get payment upload: ${error.message}`);
     }
@@ -2525,7 +2628,7 @@ export class PaymentUploadService {
   // Get payment uploads by account ID
   public async getPaymentUploadsByAccount(
     accountId: number,
-    vendorId: number
+    vendorId: number,
   ): Promise<PaymentUploadListDto[]> {
     try {
       const paymentInfos = await prisma.paymentInfo.findMany({
@@ -2572,7 +2675,7 @@ export class PaymentUploadService {
     } catch (error: any) {
       console.error(
         "[PaymentUploadGetService] Error getting uploads by account:",
-        error
+        error,
       );
       throw new Error(`Failed to get payment uploads: ${error.message}`);
     }
@@ -2584,7 +2687,7 @@ export class PaymentUploadService {
     page: number = 1,
     limit: number = 10,
     startDate?: Date,
-    endDate?: Date
+    endDate?: Date,
   ): Promise<{ data: PaymentUploadListDto[]; total: number }> {
     try {
       const whereClause: any = {
@@ -2647,7 +2750,7 @@ export class PaymentUploadService {
     } catch (error: any) {
       console.error(
         "[PaymentUploadGetService] Error getting uploads by vendor:",
-        error
+        error,
       );
       throw new Error(`Failed to get payment uploads: ${error.message}`);
     }
@@ -2656,7 +2759,7 @@ export class PaymentUploadService {
   // Generate download URL for document
   public async getDocumentDownloadUrl(
     documentId: number,
-    vendorId: number
+    vendorId: number,
   ): Promise<DocumentDownloadDto | null> {
     try {
       const document = await prisma.leadDocuments.findFirst({
@@ -2690,7 +2793,7 @@ export class PaymentUploadService {
     } catch (error: any) {
       console.error(
         "[PaymentUploadGetService] Error generating download URL:",
-        error
+        error,
       );
       throw new Error(`Failed to generate download URL: ${error.message}`);
     }
@@ -2700,7 +2803,7 @@ export class PaymentUploadService {
   public async getPaymentAnalytics(
     vendorId: number,
     startDate?: Date,
-    endDate?: Date
+    endDate?: Date,
   ): Promise<PaymentAnalyticsDto> {
     try {
       const whereClause: any = {
@@ -2779,7 +2882,7 @@ export class PaymentUploadService {
     } catch (error: any) {
       console.error(
         "[PaymentUploadGetService] Error getting analytics:",
-        error
+        error,
       );
       throw new Error(`Failed to get payment analytics: ${error.message}`);
     }
