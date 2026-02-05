@@ -1,6 +1,6 @@
 import { prisma } from "../../../src/prisma/client";
 import { BrevoEmailResult, sendBrevoEmail } from "./brevoEmail.service";
-import logger from "src/utils/logger";
+import logger from "../../../src/utils/logger";
 
 // Template Keys Constants
 export const ORDER_LOGIN_TEMPLATE_KEYS = {
