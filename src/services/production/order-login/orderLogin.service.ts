@@ -1,7 +1,7 @@
 import { prisma } from "../../../prisma/client";
 import { sanitizeFilename } from "../../../utils/sanitizeFilename";
 import logger from "../../../utils/logger";
-import { NotificationType } from "@prisma/client";
+import { NotificationType } from "../../../prisma/generated";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 import { sendLeadMovedToProductionEmail } from "../../../../src/services/email/brevoEmail.service";
 import {
