@@ -52,7 +52,33 @@ export class TechCheckController {
       const leadId = parseInt(req.params.leadId);
       const userId = parseInt(req.params.userId);
 
-      const { assign_to_user_id, account_id } = req.body;
+      const {
+        assign_to_user_id,
+        account_id,
+        product_structure_instance_id,
+      } = req.body;
+
+      const instanceId = product_structure_instance_id
+        ? Number(product_structure_instance_id)
+        : undefined;
+
+      // Instance-wise completion path
+      if (instanceId) {
+        const result = await techCheckService.approveTechCheck(
+          vendorId,
+          leadId,
+          userId,
+          Number(assign_to_user_id || 0),
+          Number(account_id || 0),
+          instanceId
+        );
+
+        return res.status(200).json({
+          success: true,
+          message: "Tech check marked as completed for instance",
+          data: result,
+        });
+      }
 
       if (
         !vendorId ||
@@ -73,7 +99,8 @@ export class TechCheckController {
         leadId,
         userId,
         Number(assign_to_user_id),
-        Number(account_id)
+        Number(account_id),
+        undefined
       );
 
       try {

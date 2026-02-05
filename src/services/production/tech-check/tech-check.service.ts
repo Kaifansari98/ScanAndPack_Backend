@@ -9,9 +9,56 @@ export class TechCheckService {
     leadId: number,
     userId: number,
     assignToUserId: number,
-    accountId: number
+    accountId: number,
+    productStructureInstanceId?: number
   ) {
     return await prisma.$transaction(async (tx) => {
+      if (productStructureInstanceId) {
+        const instance = await tx.leadProductStructureInstance.findFirst({
+          where: {
+            id: productStructureInstanceId,
+            lead_id: leadId,
+            vendor_id: vendorId,
+            account_id: accountId || undefined,
+          },
+          select: { id: true, title: true, account_id: true },
+        });
+
+        if (!instance) {
+          throw new Error("Product structure instance not found for this lead");
+        }
+
+        const effectiveAccountId = accountId || instance.account_id;
+
+        const updatedInstance = await tx.leadProductStructureInstance.update({
+          where: { id: productStructureInstanceId },
+          data: {
+            is_tech_check_completed: true,
+            tech_check_completed_at: new Date(),
+            updated_by: userId,
+            updated_at: new Date(),
+          },
+        });
+
+        await tx.leadDetailedLogs.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: effectiveAccountId,
+            action: `Tech Check completed for instance ${instance.title}`,
+            action_type: "UPDATE",
+            created_by: userId,
+          },
+        });
+
+        return {
+          mode: "instance",
+          instance_id: updatedInstance.id,
+          is_tech_check_completed: updatedInstance.is_tech_check_completed,
+          tech_check_completed_at: updatedInstance.tech_check_completed_at,
+        };
+      }
+
       // 1️⃣ Get Order Login Status (Type 9)
       const orderLoginStatus = await tx.statusTypeMaster.findFirst({
         where: { vendor_id: vendorId, tag: "Type 9" },
