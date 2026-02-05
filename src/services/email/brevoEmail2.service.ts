@@ -1,4 +1,4 @@
-import { prisma } from "src/prisma/client";
+import { prisma } from "../../../src/prisma/client";
 import { BrevoEmailResult, sendBrevoEmail } from "./brevoEmail.service";
 import logger from "src/utils/logger";
 
