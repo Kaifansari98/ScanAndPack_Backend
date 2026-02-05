@@ -767,6 +767,7 @@ export class BookingStageService {
           originalName: doc.doc_og_name,
           s3Key: doc.doc_sys_name,
           type: doc.documentType?.tag,
+          created_at: doc.created_at,
           signedUrl, // ✅ added signed URL
         };
       }),

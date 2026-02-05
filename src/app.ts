@@ -14,12 +14,12 @@ export const app = express();
 })();
 
 const allowedOrigins = [
-  "https://shambhala.furnixcrm.com",
-  "https://vloq.furnixcrm.com",
-  "https://cadbid.com",
-  "http://localhost:3000",
-  "http://localhost:5173",
-  "https://vloq-web-v1.vercel.app",
+  'https://shambhala.furnixcrm.com',
+  'https://vloq.furnixcrm.com',
+  'https://cadbid.com',
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'https://vloq.com/'
 ];
 
 app.use(

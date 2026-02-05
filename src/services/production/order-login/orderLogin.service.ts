@@ -1116,7 +1116,7 @@ export class OrderLoginService {
               user_id: backendMapping.user_id,
               task_type: "Order Login",
               lead_stage: "order-login-stage",
-              due_date: new Date(),
+              due_date: new Date(Date.now() + 24 * 60 * 60 * 1000),
               remark: `Missing order login items: ${missingTypes.join(", ")}`,
               status: "open",
               created_by: userId,

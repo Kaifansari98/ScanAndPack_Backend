@@ -9,6 +9,41 @@ import { NotificationService } from "../../notification/notification.service";
 import { sendPaymentAddedEmail } from "../../email/brevoEmail.service";
 
 export class ClientApprovalService {
+  public async addApprovalDocuments(data: {
+    lead_id: number;
+    vendor_id: number;
+    account_id: number;
+    created_by: number;
+    documents: { originalName: string; sysName: string }[];
+  }) {
+    if (!data.documents || data.documents.length === 0) {
+      return [];
+    }
+
+    const approvalDocType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id: data.vendor_id, tag: "Type 13" },
+    });
+    if (!approvalDocType) throw new Error("Doc Type (Type 13) not found");
+
+    const createdDocs: any[] = [];
+    for (const doc of data.documents) {
+      const docEntry = await prisma.leadDocuments.create({
+        data: {
+          doc_og_name: doc.originalName,
+          doc_sys_name: doc.sysName,
+          created_by: data.created_by,
+          doc_type_id: approvalDocType.id,
+          account_id: data.account_id,
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+        },
+      });
+      createdDocs.push(docEntry);
+    }
+
+    return createdDocs;
+  }
+
   public async submitClientApproval(data: ClientApprovalDto) {
     const response: any = { screenshots: [], paymentInfo: null, ledger: null };
 

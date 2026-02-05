@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import path from "path";
 import { PaymentUploadService } from "../../../services/leadModuleServices/leadsGeneration/initial-site_measurement.service";
 import {
   CreatePaymentUploadDto,
@@ -397,7 +398,37 @@ export class PaymentUploadController {
         "image/jpg",
         "image/png",
         "image/gif",
+        "image/webp",
+        "image/bmp",
+        "image/tiff",
+        "image/heic",
+        "image/heif",
+        "image/avif",
+        "image/svg+xml",
       ];
+      const validImageExtensions = [
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".gif",
+        ".webp",
+        ".bmp",
+        ".tif",
+        ".tiff",
+        ".heic",
+        ".heif",
+        ".avif",
+        ".svg",
+        ".jfif",
+      ];
+      const isValidImage = (file: Express.Multer.File) => {
+        const ext = path.extname(file.originalname || "").toLowerCase();
+        return (
+          file.mimetype.startsWith("image/") ||
+          validImageTypes.includes(file.mimetype) ||
+          validImageExtensions.includes(ext)
+        );
+      };
       for (const photo of sitePhotos) {
         if (!validImageTypes.includes(photo.mimetype)) {
           res.status(400).json({
@@ -1008,14 +1039,44 @@ export class PaymentUploadController {
         "image/jpg",
         "image/png",
         "image/gif",
+        "image/webp",
+        "image/bmp",
+        "image/tiff",
+        "image/heic",
+        "image/heif",
+        "image/avif",
+        "image/svg+xml",
       ];
+      const validImageExtensions = [
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".gif",
+        ".webp",
+        ".bmp",
+        ".tif",
+        ".tiff",
+        ".heic",
+        ".heif",
+        ".avif",
+        ".svg",
+        ".jfif",
+      ];
+      const isValidImage = (file: Express.Multer.File) => {
+        const ext = path.extname(file.originalname || "").toLowerCase();
+        return (
+          file.mimetype.startsWith("image/") ||
+          validImageTypes.includes(file.mimetype) ||
+          validImageExtensions.includes(ext)
+        );
+      };
 
       for (const photo of currentSitePhotos) {
-        if (!validImageTypes.includes(photo.mimetype)) {
+        if (!isValidImage(photo)) {
           res.status(400).json({
             success: false,
             message:
-              "Current site photos must be valid image files (JPEG, JPG, PNG, GIF)",
+              "Current site photos must be valid image files",
           });
           return;
         }
@@ -1023,11 +1084,11 @@ export class PaymentUploadController {
 
       // Validate payment detail photos
       for (const photo of paymentDetailPhotos) {
-        if (!validImageTypes.includes(photo.mimetype)) {
+        if (!isValidImage(photo)) {
           res.status(400).json({
             success: false,
             message:
-              "Payment detail photos must be valid image files (JPEG, JPG, PNG, GIF)",
+              "Payment detail photos must be valid image files",
           });
           return;
         }
