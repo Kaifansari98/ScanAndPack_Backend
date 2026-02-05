@@ -21,7 +21,7 @@ export class OrderLoginController {
 
       const orderLogin = await service.uploadFileBreakups(
         Number(vendorId),
-        payload
+        payload,
       );
 
       return res.status(201).json({
@@ -50,7 +50,7 @@ export class OrderLoginController {
           Number(vendorId),
           Number(leadId),
           Number(accountId),
-          breakups
+          breakups,
         );
 
       return res.status(201).json({
@@ -77,16 +77,23 @@ export class OrderLoginController {
     try {
       const { vendorId } = req.params;
       const { lead_id } = req.query; // ✅ Use query param
+      const { senderUserId } = req.query; // ✅ Use query param
 
       const orderLogins = await service.getOrderLoginByLead(
         Number(vendorId),
-        Number(lead_id)
+        Number(lead_id),
+        Number(senderUserId)
       );
 
       return res.status(200).json({
         success: true,
-        message: "Order login details fetched successfully",
-        data: orderLogins,
+        message: orderLogins.hasData
+          ? "Order login details fetched successfully"
+          : "No order login created yet for this lead",
+        data: orderLogins.list,
+        meta: {
+          hasOrderLogin: orderLogins.hasData,
+        },
       });
     } catch (error: any) {
       console.error("Error fetching order login details:", error);
@@ -107,7 +114,7 @@ export class OrderLoginController {
       const updated = await service.updateOrderLogin(
         Number(vendorId),
         Number(orderLoginId),
-        payload
+        payload,
       );
 
       return res.status(200).json({
@@ -140,7 +147,7 @@ export class OrderLoginController {
       const { results, errors } = await service.updateMultipleOrderLogins(
         Number(vendorId),
         Number(leadId),
-        updates
+        updates,
       );
 
       return res.status(200).json({
@@ -176,7 +183,7 @@ export class OrderLoginController {
 
       const deleted = await service.deleteOrderLogin(
         Number(vendorId),
-        Number(orderLoginId)
+        Number(orderLoginId),
       );
 
       return res.status(200).json({
@@ -213,7 +220,7 @@ export class OrderLoginController {
         vendorId,
         userId,
         limit,
-        page
+        page,
       );
 
       return res.status(200).json({
@@ -225,7 +232,7 @@ export class OrderLoginController {
     } catch (error: any) {
       console.error(
         "[OrderLoginController] getAllOrderLoginLeads Error:",
-        error
+        error,
       );
       return res.status(500).json({
         success: false,
@@ -287,7 +294,7 @@ export class OrderLoginController {
             console.error(`Failed to sign URL for doc ${doc.id}:`, err);
             return { ...doc, signed_url: null };
           }
-        })
+        }),
       );
 
       return res.status(200).json({
@@ -321,7 +328,7 @@ export class OrderLoginController {
           Number(vendorId),
           Number(leadId),
           file.originalname,
-          file.mimetype
+          file.mimetype,
         );
 
         await fs.unlink(file.path);
@@ -337,7 +344,7 @@ export class OrderLoginController {
         Number(leadId),
         account_id ? Number(account_id) : null,
         Number(created_by),
-        uploadedFiles
+        uploadedFiles,
       );
 
       return res.status(200).json({
@@ -366,7 +373,8 @@ export class OrderLoginController {
       if (!vendorId || !leadId || !orderLoginId || !created_by) {
         return res.status(400).json({
           success: false,
-          message: "vendorId, leadId, orderLoginId, and created_by are required",
+          message:
+            "vendorId, leadId, orderLoginId, and created_by are required",
         });
       }
 
@@ -394,7 +402,7 @@ export class OrderLoginController {
           Number(leadId),
           orderLogin.item_type,
           file.originalname,
-          file.mimetype
+          file.mimetype,
         );
 
         await fs.unlink(file.path);
@@ -410,7 +418,7 @@ export class OrderLoginController {
         Number(leadId),
         Number(orderLogin.account_id),
         Number(created_by),
-        uploadedFiles
+        uploadedFiles,
       );
 
       return res.status(200).json({
@@ -487,7 +495,7 @@ export class OrderLoginController {
             console.error(`Failed to sign URL for doc ${doc.id}:`, err);
             return { ...doc, signed_url: null };
           }
-        })
+        }),
       );
 
       return res.status(200).json({
@@ -514,7 +522,7 @@ export class OrderLoginController {
       const docs = await service.getOrderLoginPoFiles(
         Number(vendorId),
         Number(leadId),
-        Number(orderLoginId)
+        Number(orderLoginId),
       );
 
       if (!docs || docs.length === 0) {
@@ -535,7 +543,7 @@ export class OrderLoginController {
             console.error(`Failed to sign URL for doc ${doc.id}:`, err);
             return { ...doc, signed_url: null };
           }
-        })
+        }),
       );
 
       return res.status(200).json({
@@ -605,7 +613,8 @@ export class OrderLoginController {
             where: { id: Number(leadId) },
             select: { firstname: true, lastname: true },
           });
-          const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+          const leadName =
+            `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
 
           await NotificationService.createAndSend({
             vendor_id: Number(vendorId),
@@ -657,7 +666,7 @@ export class OrderLoginController {
 
       const data = await service.getLeadProductionReadiness(
         Number(vendorId),
-        Number(leadId)
+        Number(leadId),
       );
 
       return res.status(200).json({
@@ -678,7 +687,7 @@ export class OrderLoginController {
 
   async fetchFactoryUsersByVendor(
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<Response> {
     try {
       const vendorId = parseInt(req.params.vendorId);
@@ -690,7 +699,7 @@ export class OrderLoginController {
       }
 
       console.log(
-        `[CONTROLLER] Fetching Factory Users for vendor ID: ${vendorId}`
+        `[CONTROLLER] Fetching Factory Users for vendor ID: ${vendorId}`,
       );
 
       const factoryUsers = await service.getFactoryUsersByVendor(vendorId);
@@ -702,8 +711,8 @@ export class OrderLoginController {
             ApiResponse.success(
               [],
               "No Factory Users found for this vendor",
-              200
-            )
+              200,
+            ),
           );
       }
 
@@ -716,8 +725,8 @@ export class OrderLoginController {
             count: factoryUsers.length,
           },
           "Factory users fetched successfully",
-          200
-        )
+          200,
+        ),
       );
     } catch (error: any) {
       console.error("[CONTROLLER] fetchFactoryUsersByVendor error:", error);
@@ -728,8 +737,8 @@ export class OrderLoginController {
           ApiResponse.error(
             "Failed to fetch Factory Users",
             500,
-            process.env.NODE_ENV === "development" ? error.message : undefined
-          )
+            process.env.NODE_ENV === "development" ? error.message : undefined,
+          ),
         );
     }
   }

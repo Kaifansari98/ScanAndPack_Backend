@@ -35,7 +35,7 @@ export class ClientDocumentationController {
 
       const uploadTaggedFiles = async (
         docs: Express.Multer.File[],
-        tag: "Type 11" | "Type 12"
+        tag: "Type 11" | "Type 12",
       ): Promise<CustomMulterFile[]> => {
         const folder =
           tag === "Type 11"
@@ -51,7 +51,7 @@ export class ClientDocumentationController {
             Number(lead_id),
             doc.originalname,
             doc.mimetype,
-            folder
+            folder,
           );
 
           await fs.unlink(doc.path);
@@ -95,41 +95,44 @@ export class ClientDocumentationController {
     }
   }
 
-  public static async get(req: Request, res: Response): Promise<void> {
+  public static async canMoveToOrderLoginController(
+    req: Request,
+    res: Response,
+  ) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
 
       if (!vendorId || !leadId) {
-        res.status(400).json({
+        return res.status(400).json({
           success: false,
           message: "vendorId and leadId are required",
         });
-        return;
       }
 
-      const data = await clientDocumentationService.getClientDocumentation(
-        vendorId,
-        leadId
-      );
+      const result =
+        await clientDocumentationService.canMoveToOrderLoginButtonEnabled(
+          vendorId,
+          leadId,
+        );
 
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
-        message: "Client documentation fetched successfully",
-        data,
+        data: result,
       });
     } catch (error: any) {
-      console.error("[ClientDocumentationController] Error:", error);
-      res.status(500).json({
+      console.error("Order Login Eligibility Error:", error);
+
+      return res.status(500).json({
         success: false,
-        message: error.message || "Internal server error",
+        message: error.message || "Internal Server Error",
       });
     }
   }
 
   public static async addMoreDocuments(
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> {
     try {
       const { lead_id, account_id, vendor_id, created_by } = req.body;
@@ -155,7 +158,7 @@ export class ClientDocumentationController {
 
       const uploadTaggedFiles = async (
         docs: Express.Multer.File[],
-        tag: "Type 11" | "Type 12"
+        tag: "Type 11" | "Type 12",
       ): Promise<CustomMulterFile[]> => {
         const folder =
           tag === "Type 11"
@@ -171,7 +174,7 @@ export class ClientDocumentationController {
             Number(lead_id),
             doc.originalname,
             doc.mimetype,
-            folder
+            folder,
           );
 
           await fs.unlink(doc.path);
@@ -218,7 +221,7 @@ export class ClientDocumentationController {
 
   public static getAllClientDocumentations = async (
     req: Request,
-    res: Response
+    res: Response,
   ) => {
     try {
       const vendorId = parseInt(req.params.vendorId);
@@ -234,21 +237,19 @@ export class ClientDocumentationController {
       const leads =
         await clientDocumentationService.getLeadsWithStatusClientDocumentation(
           vendorId,
-          userId
+          userId,
         );
-
-      const count = leads.length;
 
       return res.status(200).json({
         success: true,
         message: "Client Documentation leads fetched successfully",
-        count,
+        count: leads.length,
         data: leads,
       });
     } catch (error: any) {
       console.error(
         "[ClientDocumentationController] getAllClientDocumentations Error:",
-        error
+        error,
       );
       return res.status(500).json({
         success: false,
@@ -256,4 +257,38 @@ export class ClientDocumentationController {
       });
     }
   };
+
+  public static async get(req: Request, res: Response): Promise<void> {
+    try {
+      const vendorId = parseInt(req.params.vendorId);
+      const leadId = parseInt(req.params.leadId);
+      const userId = Number(req.query.userId);
+
+      if (!vendorId || !leadId || !userId) {
+        res.status(400).json({
+          success: false,
+          message: "vendorId, leadId and userId are required",
+        });
+        return;
+      }
+
+      const data = await clientDocumentationService.getClientDocumentation(
+        vendorId,
+        leadId,
+        userId,
+      );
+
+      res.status(200).json({
+        success: true,
+        message: "Client documentation fetched successfully",
+        data,
+      });
+    } catch (error: any) {
+      console.error("[ClientDocumentationController:get]", error);
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  }
 }

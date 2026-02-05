@@ -398,22 +398,22 @@ export class ChatService {
         const mentionText =
           trimmedText.length > 0 ? trimmedText : "Attachment shared.";
 
-        await Promise.allSettled(
-          mentionedUsers
-            .filter((user) => user.user_email && user.id !== userId)
-            .map((user) =>
-              sendChatMentionEmail({
-                vendor_id: vendorId,
-                toEmail: user.user_email!,
-                toName: user.user_name ?? undefined,
-                leadCode,
-                senderName,
-                leadName: leadName || "Lead",
-                messageText: mentionText,
-                conversationUrl,
-              })
-            )
-        );
+        // await Promise.allSettled(
+        //   mentionedUsers
+        //     .filter((user) => user.user_email && user.id !== userId)
+        //     .map((user) =>
+        //       sendChatMentionEmail({
+        //         vendor_id: vendorId,
+        //         toEmail: user.user_email!,
+        //         toName: user.user_name ?? undefined,
+        //         leadCode,
+        //         senderName,
+        //         leadName: leadName || "Lead",
+        //         messageText: mentionText,
+        //         conversationUrl,
+        //       })
+        //     )
+        // );
       } catch (error: any) {
         logger.warn("⚠️ Failed to send chat mention notifications", {
           error: error?.message,

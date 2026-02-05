@@ -1,7 +1,12 @@
 import { prisma } from "../../../prisma/client";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
-import { Prisma } from "../../../prisma/generated";
+import { NotificationType, Prisma } from "../../../prisma/generated";
 import logger from "../../../utils/logger";
+import { NotificationService } from "../../../../src/services/notification/notification.service";
+import {
+  sendLeadMovedToClientApprovalEmail,
+  sendOrderLoginEnabledEmail,
+} from "../../../../src/services/email/brevoEmail.service";
 
 export type DocTypeTag = "Type 11" | "Type 12";
 
@@ -22,7 +27,7 @@ export interface ClientDocumentationDto {
 export class ClientDocumentationService {
   public async createClientDocumentationStage(data: ClientDocumentationDto) {
     // ✅ Step 1: Run DB operations inside a short transaction
-    return await prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx) => {
       const response: any = {
         documents: [],
         message: "Client documentation stage completed successfully",
@@ -36,7 +41,7 @@ export class ClientDocumentationService {
 
         if (!docType) {
           throw new Error(
-            `Document type ${doc.docTypeTag} not found for vendor ${data.vendor_id}`
+            `Document type ${doc.docTypeTag} not found for vendor ${data.vendor_id}`,
           );
         }
 
@@ -66,7 +71,7 @@ export class ClientDocumentationService {
 
       if (!clientApprovalStatus) {
         throw new Error(
-          `Client Approval status (Type 7) not found for vendor ${data.vendor_id}`
+          `Client Approval status (Type 7) not found for vendor ${data.vendor_id}`,
         );
       }
 
@@ -136,15 +141,362 @@ export class ClientDocumentationService {
 
       return response;
     });
+
+    // ===============================
+    // CLIENT APPROVAL STAGE → ADMIN NOTIFICATION
+    // ===============================
+
+    try {
+      const actorId = data.created_by;
+
+      const [lead, actor] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: data.lead_id },
+          select: {
+            firstname: true,
+            lastname: true,
+            lead_code: true,
+            vendor_id: true,
+            account_id: true,
+          },
+        }),
+
+        prisma.userMaster.findUnique({
+          where: { id: actorId },
+          select: { user_name: true },
+        }),
+      ]);
+
+      // Safety guard
+      if (!lead) return result;
+
+      const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+
+      const leadCode =
+        lead.lead_code ?? `LEAD-${String(data.lead_id).padStart(4, "0")}`;
+
+      const updatedAt = new Date().toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      const baseUrl =
+        process.env.CLIENT_BASE_URL ||
+        process.env.FRONTEND_URL ||
+        "http://localhost:3000";
+
+      // Account aware deep-link
+      const projectUrl = lead.account_id
+        ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
+        : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;
+
+      // Fetch Active Admin Users
+      const admins = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: lead.vendor_id,
+          status: "active",
+          user_type: {
+            user_type: { in: ["admin"] },
+          },
+        },
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+        },
+      });
+
+      for (const admin of admins) {
+        // ❌ Block self notification
+        if (admin.id === actorId) continue;
+
+        // 🔔 IN-APP Notification
+        await NotificationService.createAndSend({
+          vendor_id: lead.vendor_id,
+          user_id: admin.id,
+          sender_id: actorId,
+          type: NotificationType.LEAD_MILESTONE,
+          title: "Lead Entered Client Approval Stage",
+          message: `${leadCode} - ${leadName} moved to Client Approval stage.`,
+          entity_type: "lead",
+          entity_id: data.lead_id,
+          redirect_url: lead.account_id
+            ? `/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
+            : `/dashboard/leads/details/${data.lead_id}`,
+        });
+
+        // 📧 EMAIL Notification (Client Approval Mail)
+        if (!admin.user_email) continue;
+
+        await sendLeadMovedToClientApprovalEmail({
+          vendor_id: lead.vendor_id,
+          toEmail: admin.user_email,
+          toName: admin.user_name,
+          leadCode,
+          leadName,
+          updatedBy: actor?.user_name ?? "System",
+          updatedAt,
+          projectUrl,
+        });
+      }
+    } catch (err: any) {
+      logger.warn("⚠️ Client approval admin notification failed", {
+        lead_id: data.lead_id,
+        error: err?.message,
+      });
+    }
+    return result;
   }
 
-  public async getClientDocumentation(vendorId: number, leadId: number) {
-    // 1️⃣ Validate vendor & lead
+  public async canMoveToOrderLoginButtonEnabled(
+    vendorId: number,
+    leadId: number,
+  ) {
     if (!vendorId || !leadId) {
       throw new Error("vendorId and leadId are required");
     }
 
-    // 2️⃣ Fetch the lead with all its documents
+    // 1️⃣ Fetch lead with documents
+    const lead = await prisma.leadMaster.findFirst({
+      where: {
+        id: leadId,
+        vendor_id: vendorId,
+        is_deleted: false,
+      },
+      include: {
+        documents: {
+          where: { is_deleted: false },
+          include: {
+            documentType: true, // Type 11 (PPT) / Type 12 (PYTHA)
+          },
+        },
+      },
+    });
+
+    if (!lead) {
+      throw new Error("Lead not found");
+    }
+
+    const docs = lead.documents ?? [];
+    const requiredCount = lead.no_of_client_documents_initially_submitted ?? 0;
+
+    // =====================================================
+    // ✅ STATUS-BASED CLASSIFICATION (IMPORTANT FIX)
+    // =====================================================
+
+    const approvedDocs = docs.filter((d) => d.tech_check_status === "APPROVED");
+
+    // 🔥 FIX: ONLY PENDING / REVISED ARE BLOCKERS
+    // ❌ NULL / UNDEFINED / REJECTED are NOT pending
+    const pendingDocs = docs.filter(
+      (d) =>
+        d.tech_check_status === "PENDING" || d.tech_check_status === "REVISED",
+    );
+
+    const approvedPPT = approvedDocs.filter(
+      (d) => d.documentType?.tag === "Type 11", // PPT
+    ).length;
+
+    const approvedPytha = approvedDocs.filter(
+      (d) => d.documentType?.tag === "Type 12", // PYTHA
+    ).length;
+
+    // =====================================================
+    // ❌ RULE 1 — Initial submission must be fully approved
+    // =====================================================
+    if (requiredCount && approvedDocs.length < requiredCount) {
+      return {
+        allowed: false,
+        reason: `You must approve all initially submitted client documents (${requiredCount}) before moving to Order Login.`,
+      };
+    }
+
+    // =====================================================
+    // ❌ RULE 2 — At least one PPT must be approved
+    // =====================================================
+    if (approvedPPT === 0) {
+      return {
+        allowed: false,
+        reason:
+          "At least one PPT file must be approved before moving to Order Login.",
+      };
+    }
+
+    // =====================================================
+    // ❌ RULE 3 — At least one PYTHA must be approved
+    // =====================================================
+    if (approvedPytha === 0) {
+      return {
+        allowed: false,
+        reason:
+          "At least one Pytha file must be approved before moving to Order Login.",
+      };
+    }
+
+    // =====================================================
+    // ❌ RULE 4 — Any pending / revised doc blocks movement
+    // =====================================================
+    if (pendingDocs.length > 0) {
+      return {
+        allowed: false,
+        reason:
+          "You still have pending documents. Please review all before proceeding.",
+      };
+    }
+
+    // =====================================================
+    // ✅ ALL CONDITIONS SATISFIED
+    // =====================================================
+    return {
+      allowed: true,
+      reason: null,
+    };
+  }
+
+  public async triggerOrderLoginEnabledNotification(
+    vendorId: number,
+    leadId: number,
+    triggeredByUserId: number,
+  ) {
+    // 1️⃣ Eligibility check
+    const eligibility = await this.canMoveToOrderLoginButtonEnabled(
+      vendorId,
+      leadId,
+    );
+
+    if (!eligibility.allowed) return;
+
+    // 2️⃣ Fetch Order Login stage (Type 8)
+    const orderLoginStage = await prisma.statusTypeMaster.findFirst({
+      where: {
+        vendor_id: vendorId,
+        tag: "Type 8",
+      },
+      select: { id: true },
+    });
+
+    if (!orderLoginStage) return;
+
+    // 3️⃣ Fetch lead (WITH status)
+    const lead = await prisma.leadMaster.findFirst({
+      where: { id: leadId, vendor_id: vendorId },
+      select: {
+        lead_code: true,
+        firstname: true,
+        lastname: true,
+        status_id: true,
+      },
+    });
+
+    if (!lead) return;
+
+    // 🔒 HARD GUARD — ONLY TYPE 8
+    if (lead.status_id !== orderLoginStage.id) {
+      return;
+    }
+
+    // 4️⃣ Duplicate protection
+    const alreadySent = await prisma.notification.findFirst({
+      where: {
+        vendor_id: vendorId,
+        entity_type: "lead",
+        entity_id: leadId,
+        type: NotificationType.LEAD_ACTION,
+        title: "Order Login Enabled",
+      },
+    });
+
+    if (alreadySent) return;
+
+    const leadCode =
+      lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+
+    const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+
+    // 5️⃣ Triggered-by user name
+    const triggeredByUser = await prisma.userMaster.findFirst({
+      where: { id: triggeredByUserId },
+      select: { user_name: true },
+    });
+
+    const approvedBy = triggeredByUser?.user_name ?? "System";
+
+    // 6️⃣ Target user (sales-executive)
+    const mapping = await prisma.leadUserMapping.findFirst({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        status: "active",
+        user: {
+          user_type: {
+            user_type: {
+              equals: "sales-executive",
+              mode: "insensitive",
+            },
+          },
+        },
+      },
+      select: {
+        user: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+          },
+        },
+      },
+    });
+
+    if (!mapping?.user) return;
+
+    const targetUser = mapping.user;
+
+    // 7️⃣ In-app notification
+    await NotificationService.createAndSend({
+      vendor_id: vendorId,
+      user_id: targetUser.id,
+      sender_id: triggeredByUserId,
+      type: NotificationType.LEAD_ACTION,
+      title: "Order Login Enabled",
+      message: `${leadCode} - Order Login is now enabled`,
+      entity_type: "lead",
+      entity_id: leadId,
+      redirect_url: `/dashboard/leads/details/${leadId}`,
+    });
+
+    // 8️⃣ Email
+    if (targetUser.user_email) {
+      await sendOrderLoginEnabledEmail({
+        vendor_id: vendorId,
+        toEmail: targetUser.user_email,
+        toName: targetUser.user_name,
+        leadCode,
+        leadName,
+        approvedBy,
+        approvedAt: new Date().toLocaleString("en-IN"),
+        projectUrl: `${process.env.CLIENT_BASE_URL}/dashboard/leads/details/${leadId}`,
+      });
+    }
+
+    logger.info("ORDER LOGIN ENABLED NOTIFICATION SENT", {
+      vendorId,
+      leadId,
+      approvedBy,
+    });
+  }
+
+  public async getClientDocumentation(
+    vendorId: number,
+    leadId: number,
+    userId: number,
+  ) {
+    if (!vendorId || !leadId) {
+      throw new Error("vendorId and leadId are required");
+    }
+
     const lead = await prisma.leadMaster.findFirst({
       where: {
         id: leadId,
@@ -153,60 +505,55 @@ export class ClientDocumentationService {
       include: {
         documents: {
           include: {
-            documentType: true, // To easily identify Type 11 / Type 12
+            documentType: true,
           },
           where: {
             is_deleted: false,
-          }
+          },
         },
       },
     });
 
     if (!lead) {
-      throw new Error("Lead not found or not in Client Documentation stage");
+      throw new Error("Lead not found");
     }
 
-    // 3️⃣ Get document type entries for both PPT and PYTHA
+    // -------- existing PPT / PYTHA logic --------
     const [pptDocType, pythaDocType] = await Promise.all([
       prisma.documentTypeMaster.findFirst({
-        where: { vendor_id: vendorId, tag: "Type 11" }, // PPT
+        where: { vendor_id: vendorId, tag: "Type 11" },
       }),
       prisma.documentTypeMaster.findFirst({
-        where: { vendor_id: vendorId, tag: "Type 12" }, // PYTHA
+        where: { vendor_id: vendorId, tag: "Type 12" },
       }),
     ]);
 
-    if (!pptDocType && !pythaDocType) {
-      throw new Error(
-        "Document types (Client Documentation PPT / PYTHA) not found for this vendor"
-      );
-    }
-
-    // 4️⃣ Separate PPT and PYTHA documents by doc_type_id
     const pptDocs = lead.documents.filter(
-      (d) => d.doc_type_id === pptDocType?.id
-    );
-    const pythaDocs = lead.documents.filter(
-      (d) => d.doc_type_id === pythaDocType?.id
+      (d) => d.doc_type_id === pptDocType?.id,
     );
 
-    // 5️⃣ Generate signed URLs for both sets
+    const pythaDocs = lead.documents.filter(
+      (d) => d.doc_type_id === pythaDocType?.id,
+    );
+
     const [pptDocsWithUrls, pythaDocsWithUrls] = await Promise.all([
       Promise.all(
         pptDocs.map(async (doc: any) => ({
           ...doc,
           signed_url: await generateSignedUrl(doc.doc_sys_name, 3600, "inline"),
-        }))
+        })),
       ),
       Promise.all(
         pythaDocs.map(async (doc: any) => ({
           ...doc,
           signed_url: await generateSignedUrl(doc.doc_sys_name, 3600, "inline"),
-        }))
+        })),
       ),
     ]);
 
-    // 6️⃣ Return structured response
+    // 🔔 SAFE TRIGGER (read-through side effect)
+    await this.triggerOrderLoginEnabledNotification(vendorId, leadId, userId);
+
     return {
       id: lead.id,
       vendor_id: lead.vendor_id,
@@ -295,7 +642,7 @@ export class ClientDocumentationService {
 
   public async getLeadsWithStatusClientDocumentation(
     vendorId: number,
-    userId: number
+    userId: number,
   ) {
     // 1. Resolve status ID dynamically for Type 6
     const clientDocStatus = await prisma.statusTypeMaster.findFirst({
@@ -305,7 +652,7 @@ export class ClientDocumentationService {
 
     if (!clientDocStatus) {
       throw new Error(
-        `Client Documentation status (Type 6) not found for vendor ${vendorId}`
+        `Client Documentation status (Type 6) not found for vendor ${vendorId}`,
       );
     }
 
