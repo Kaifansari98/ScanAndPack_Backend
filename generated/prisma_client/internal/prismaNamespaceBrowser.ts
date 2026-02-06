@@ -629,7 +629,9 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   is_tech_check_completed: 'is_tech_check_completed',
   tech_check_completed_at: 'tech_check_completed_at',
   is_order_login_completed: 'is_order_login_completed',
-  order_login_completed_at: 'order_login_completed_at'
+  order_login_completed_at: 'order_login_completed_at',
+  is_production_completed: 'is_production_completed',
+  production_completed_at: 'production_completed_at'
 } as const
 
 export type LeadProductStructureInstanceScalarFieldEnum = (typeof LeadProductStructureInstanceScalarFieldEnum)[keyof typeof LeadProductStructureInstanceScalarFieldEnum]
@@ -849,6 +851,7 @@ export const OrderLoginDetailsScalarFieldEnum = {
   lead_id: 'lead_id',
   account_id: 'account_id',
   vendor_id: 'vendor_id',
+  instance_id: 'instance_id',
   item_type: 'item_type',
   item_desc: 'item_desc',
   estimated_completion_date: 'estimated_completion_date',

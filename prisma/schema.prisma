@@ -693,6 +693,8 @@ model LeadProductStructureInstance {
   tech_check_completed_at DateTime?
   is_order_login_completed Boolean?
   order_login_completed_at DateTime?
+  is_production_completed Boolean?
+  production_completed_at DateTime?
   designSelections        LeadDesignSelection[]
   documents               LeadDocuments[]
   account                 AccountMaster         @relation(fields: [account_id], references: [id], onDelete: Cascade)
@@ -944,6 +946,7 @@ model OrderLoginDetails {
   lead_id                              Int
   account_id                           Int
   vendor_id                            Int
+  instance_id                          Int?
   item_type                            String
   item_desc                            String
   estimated_completion_date            DateTime?

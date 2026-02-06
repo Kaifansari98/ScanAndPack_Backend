@@ -169,6 +169,7 @@ export class PreProductionController {
     try {
       const vendorId = parseInt(req.params.vendorId);
       const leadId = parseInt(req.params.leadId);
+      const { instance_id } = req.query;
 
       if (!vendorId || !leadId) {
         return res.status(400).json({
@@ -177,7 +178,11 @@ export class PreProductionController {
         });
       }
 
-      const result = await service.checkPostProductionReady(vendorId, leadId);
+      const result = await service.checkPostProductionReady(
+        vendorId,
+        leadId,
+        typeof instance_id !== "undefined" ? Number(instance_id) : undefined
+      );
 
       return res.status(200).json({
         success: true,
