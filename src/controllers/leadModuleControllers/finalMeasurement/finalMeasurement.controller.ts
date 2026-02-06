@@ -648,7 +648,7 @@ export class FinalMeasurementController {
             prisma.userMaster.findMany({
               where: {
                 vendor_id: vendorId,
-                user_type: { user_type: { in: ["admin", "super-admin"] } },
+                user_type: { user_type: { in: ["admin"] } },
               },
               select: { id: true },
             }),
