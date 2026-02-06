@@ -360,10 +360,17 @@ export const uploadToWasabiProductionFilesQcPhotosFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
+  instanceFolder?: string
 ) => {
   const ext = originalName.split(".").pop();
-  const sysName = `production_files_qc_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+  const safeInstanceFolder = instanceFolder
+    ? sanitizeFilename(instanceFolder)
+    : undefined;
+  const folderPath = safeInstanceFolder
+    ? `production_files_qc_photos/${vendorId}/${leadId}/${safeInstanceFolder}`
+    : `production_files_qc_photos/${vendorId}/${leadId}`;
+  const sysName = `${folderPath}/${uuidv4()}.${ext}`;
 
   const upload = new Upload({
     client: wasabi,
@@ -408,10 +415,17 @@ export const uploadToWasabiProductionFilesHardwarePackingDocsFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
+  instanceFolder?: string
 ) => {
   const ext = originalName.split(".").pop();
-  const sysName = `production_files_hardware_packing_details_docs/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+  const safeInstanceFolder = instanceFolder
+    ? sanitizeFilename(instanceFolder)
+    : undefined;
+  const folderPath = safeInstanceFolder
+    ? `production_files_hardware_packing_details_docs/${vendorId}/${leadId}/${safeInstanceFolder}`
+    : `production_files_hardware_packing_details_docs/${vendorId}/${leadId}`;
+  const sysName = `${folderPath}/${uuidv4()}.${ext}`;
 
   const upload = new Upload({
     client: wasabi,
@@ -456,10 +470,17 @@ export const uploadToWasabiProductionFilesWoodworkPackingDocsFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
+  instanceFolder?: string
 ) => {
   const ext = originalName.split(".").pop();
-  const sysName = `production_files_woodwork_packing_details_docs/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+  const safeInstanceFolder = instanceFolder
+    ? sanitizeFilename(instanceFolder)
+    : undefined;
+  const folderPath = safeInstanceFolder
+    ? `production_files_woodwork_packing_details_docs/${vendorId}/${leadId}/${safeInstanceFolder}`
+    : `production_files_woodwork_packing_details_docs/${vendorId}/${leadId}`;
+  const sysName = `${folderPath}/${uuidv4()}.${ext}`;
 
   const upload = new Upload({
     client: wasabi,

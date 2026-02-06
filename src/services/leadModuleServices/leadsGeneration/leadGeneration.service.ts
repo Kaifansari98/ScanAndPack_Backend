@@ -6,7 +6,6 @@ import {
 } from "../../../types/leadModule.types";
 import fs from "fs";
 import { SalesExecutiveData } from "../../../types/leadModule.types";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
 import wasabi, {
   uploadToWasabiLeadSitePhoto,
 } from "../../../utils/wasabiClient";

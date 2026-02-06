@@ -695,6 +695,8 @@ model LeadProductStructureInstance {
   order_login_completed_at DateTime?
   is_production_completed Boolean?
   production_completed_at DateTime?
+  woodwork_packing_details_remark String? @db.VarChar(2000)
+  hardware_packing_details_remark String? @db.VarChar(2000)
   designSelections        LeadDesignSelection[]
   documents               LeadDocuments[]
   account                 AccountMaster         @relation(fields: [account_id], references: [id], onDelete: Cascade)
