@@ -647,11 +647,19 @@ export class PostProductionService {
       });
       hardwareDocsExist = hardwareCount > 0;
 
-      const hardwareRemark = await prisma.leadMaster.findFirst({
-        where: { id: leadId, vendor_id: vendorId },
-        select: { hardware_packing_details_remark: true },
-      });
-      hardwareRemarkExist = !!hardwareRemark?.hardware_packing_details_remark;
+      if (typeof instanceId !== "undefined") {
+        const instance = await prisma.leadProductStructureInstance.findFirst({
+          where: { id: instanceId ?? 0, lead_id: leadId, vendor_id: vendorId },
+          select: { id: true, hardware_packing_details_remark: true },
+        });
+        hardwareRemarkExist = !!instance?.hardware_packing_details_remark;
+      } else {
+        const hardwareRemark = await prisma.leadMaster.findFirst({
+          where: { id: leadId, vendor_id: vendorId },
+          select: { hardware_packing_details_remark: true },
+        });
+        hardwareRemarkExist = !!hardwareRemark?.hardware_packing_details_remark;
+      }
     }
 
     // 🟨 3. Woodwork Packing Details (Type 17)
