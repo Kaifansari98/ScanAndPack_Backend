@@ -5816,7 +5816,8 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   is_production_completed: 'is_production_completed',
   production_completed_at: 'production_completed_at',
   woodwork_packing_details_remark: 'woodwork_packing_details_remark',
-  hardware_packing_details_remark: 'hardware_packing_details_remark'
+  hardware_packing_details_remark: 'hardware_packing_details_remark',
+  no_of_boxes: 'no_of_boxes'
 } as const
 
 export type LeadProductStructureInstanceScalarFieldEnum = (typeof LeadProductStructureInstanceScalarFieldEnum)[keyof typeof LeadProductStructureInstanceScalarFieldEnum]

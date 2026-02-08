@@ -486,13 +486,42 @@ export class PostProductionController {
   async updateNoOfBoxes(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
-      const { account_id, user_id, no_of_boxes } = req.body;
+      const { account_id, user_id, no_of_boxes, instance_id } = req.body;
+      const { instance_id: instanceIdQuery } = req.query;
 
       if (!vendorId || !leadId || !user_id || !no_of_boxes) {
         return res.status(400).json({
           success: false,
           message: "vendorId, leadId, user_id and no_of_boxes are required",
         });
+      }
+
+      const bodyInstanceRaw = Array.isArray(instance_id)
+        ? instance_id[0]
+        : instance_id;
+      const queryInstanceRaw = Array.isArray(instanceIdQuery)
+        ? instanceIdQuery[0]
+        : instanceIdQuery;
+      const parsedInstanceId =
+        typeof bodyInstanceRaw !== "undefined"
+          ? Number(bodyInstanceRaw)
+          : typeof queryInstanceRaw !== "undefined"
+          ? Number(queryInstanceRaw)
+          : undefined;
+      const instanceIdValue = Number.isFinite(parsedInstanceId)
+        ? parsedInstanceId
+        : undefined;
+
+      if (
+        typeof bodyInstanceRaw !== "undefined" ||
+        typeof queryInstanceRaw !== "undefined"
+      ) {
+        if (!instanceIdValue) {
+          return res.status(400).json({
+            success: false,
+            message: "instance_id must be a valid number",
+          });
+        }
       }
 
       const value = parseInt(no_of_boxes);
@@ -508,7 +537,8 @@ export class PostProductionController {
         Number(leadId),
         Number(account_id) || null,
         Number(user_id),
-        value
+        value,
+        instanceIdValue
       );
 
       return res.status(200).json({
@@ -530,6 +560,12 @@ export class PostProductionController {
   async getNoOfBoxes(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
+      const { instance_id } = req.query;
+      const parsedInstanceId =
+        typeof instance_id !== "undefined" ? Number(instance_id) : undefined;
+      const safeInstanceId = Number.isFinite(parsedInstanceId)
+        ? parsedInstanceId
+        : undefined;
 
       if (!vendorId || !leadId) {
         return res.status(400).json({
@@ -538,7 +574,11 @@ export class PostProductionController {
         });
       }
 
-      const data = await service.getNoOfBoxes(Number(vendorId), Number(leadId));
+      const data = await service.getNoOfBoxes(
+        Number(vendorId),
+        Number(leadId),
+        safeInstanceId
+      );
 
       if (!data) {
         return res.status(404).json({
@@ -596,6 +636,63 @@ export class PostProductionController {
         message:
           error.message ||
           "Internal server error while checking post production completeness",
+      });
+    }
+  }
+
+  async markProductionCompleted(req: Request, res: Response) {
+    try {
+      const vendorId = parseInt(req.params.vendorId);
+      const leadId = parseInt(req.params.leadId);
+      const { updated_by, instance_id } = req.body;
+      const { instance_id: instanceIdQuery } = req.query;
+
+      const bodyInstanceRaw = Array.isArray(instance_id)
+        ? instance_id[0]
+        : instance_id;
+      const queryInstanceRaw = Array.isArray(instanceIdQuery)
+        ? instanceIdQuery[0]
+        : instanceIdQuery;
+
+      const parsedInstanceId =
+        typeof bodyInstanceRaw !== "undefined"
+          ? Number(bodyInstanceRaw)
+          : typeof queryInstanceRaw !== "undefined"
+          ? Number(queryInstanceRaw)
+          : undefined;
+
+      const instanceIdValue = Number.isFinite(parsedInstanceId)
+        ? parsedInstanceId
+        : undefined;
+
+      if (!vendorId || !leadId || !updated_by || !instanceIdValue) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "vendorId, leadId, updated_by and instance_id are required",
+        });
+      }
+
+      const result = await service.markProductionCompleted(
+        vendorId,
+        leadId,
+        instanceIdValue,
+        Number(updated_by)
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Production marked completed for the instance",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error(
+        "[PostProductionController] markProductionCompleted error:",
+        error
+      );
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
       });
     }
   }

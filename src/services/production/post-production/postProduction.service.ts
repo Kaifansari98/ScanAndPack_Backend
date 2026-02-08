@@ -457,9 +457,57 @@ export class PostProductionService {
     leadId: number,
     accountId: number | null,
     userId: number,
-    noOfBoxes: number
+    noOfBoxes: number,
+    instanceId?: number | null
   ) {
-    // ✅ Validate Lead Exists
+    if (instanceId) {
+      const instance = await prisma.leadProductStructureInstance.findFirst({
+        where: {
+          id: instanceId,
+          lead_id: leadId,
+          vendor_id: vendorId,
+        },
+        select: { id: true, no_of_boxes: true },
+      });
+
+      if (!instance) {
+        throw Object.assign(
+          new Error("Product structure instance not found for this lead"),
+          {
+            statusCode: 404,
+          }
+        );
+      }
+
+      const updatedInstance = await prisma.leadProductStructureInstance.update({
+        where: { id: instanceId },
+        data: {
+          no_of_boxes: noOfBoxes,
+          updated_by: userId,
+          updated_at: new Date(),
+        },
+        select: {
+          id: true,
+          no_of_boxes: true,
+          updated_at: true,
+        },
+      });
+
+      await prisma.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId ?? 0,
+          action: `Number of Boxes updated to ${noOfBoxes} for instance ${instanceId}`,
+          action_type: "UPDATE",
+          created_by: userId,
+          created_at: new Date(),
+        },
+      });
+
+      return updatedInstance;
+    }
+
     const lead = await prisma.leadMaster.findFirst({
       where: { id: leadId, vendor_id: vendorId, is_deleted: false },
       select: { id: true, no_of_boxes: true },
@@ -471,7 +519,6 @@ export class PostProductionService {
       });
     }
 
-    // ✅ Update the number of boxes
     const updatedLead = await prisma.leadMaster.update({
       where: { id: leadId },
       data: {
@@ -481,7 +528,6 @@ export class PostProductionService {
       },
       select: {
         id: true,
-        lead_code: true,
         no_of_boxes: true,
         updated_at: true,
       },
@@ -504,18 +550,36 @@ export class PostProductionService {
   }
 
   // ✅ Fetch No. of Boxes
-  async getNoOfBoxes(vendorId: number, leadId: number) {
+  async getNoOfBoxes(
+    vendorId: number,
+    leadId: number,
+    instanceId?: number | null
+  ) {
+    if (instanceId) {
+      const instance = await prisma.leadProductStructureInstance.findFirst({
+        where: { id: instanceId, vendor_id: vendorId, lead_id: leadId },
+        select: {
+          id: true,
+          no_of_boxes: true,
+          updated_at: true,
+        },
+      });
+
+      if (instance?.no_of_boxes != null) {
+        return { ...instance, source: "instance" as const };
+      }
+    }
+
     const lead = await prisma.leadMaster.findFirst({
       where: { id: leadId, vendor_id: vendorId, is_deleted: false },
       select: {
         id: true,
-        lead_code: true,
         no_of_boxes: true,
         updated_at: true,
       },
     });
 
-    return lead;
+    return lead ? { ...lead, source: "lead" as const } : null;
   }
 
   // ✅ Check Post-Production Completeness
@@ -524,6 +588,23 @@ export class PostProductionService {
     leadId: number,
     instanceId?: number | null
   ) {
+    const instances = await prisma.leadProductStructureInstance.findMany({
+      where: { lead_id: leadId, vendor_id: vendorId },
+      select: {
+        id: true,
+        title: true,
+        is_production_completed: true,
+        no_of_boxes: true,
+      },
+    });
+
+    const incompleteProduction = instances.filter(
+      (instance) => instance.is_production_completed !== true
+    );
+    const incompleteBoxes = instances.filter(
+      (instance) => !instance.no_of_boxes || instance.no_of_boxes <= 0
+    );
+
     // 🟦 1. QC Photos (Type 15)
     const qcDocType = await prisma.documentTypeMaster.findFirst({
       where: { vendor_id: vendorId, tag: "Type 15" },
@@ -616,11 +697,66 @@ export class PostProductionService {
       hardware_remark: hardwareRemarkExist,
       woodwork_docs: woodworkDocsExist,
       woodwork_remark: woodworkRemarkExist,
+      instances_ready: incompleteProduction.length === 0,
+      boxes_ready: incompleteBoxes.length === 0,
+      missing_production_titles: incompleteProduction.map(
+        (instance) => instance.title
+      ),
+      missing_boxes_titles: incompleteBoxes.map((instance) => instance.title),
       all_exists:
         qcPhotosExist &&
         hardwareDocsExist &&
         woodworkDocsExist
     };
+  }
+
+  async markProductionCompleted(
+    vendorId: number,
+    leadId: number,
+    instanceId: number,
+    updatedBy: number
+  ) {
+    const instance = await prisma.leadProductStructureInstance.findFirst({
+      where: {
+        id: instanceId,
+        lead_id: leadId,
+        vendor_id: vendorId,
+      },
+      select: {
+        id: true,
+        title: true,
+        account_id: true,
+        is_production_completed: true,
+      },
+    });
+
+    if (!instance) {
+      throw new Error("Product structure instance not found for this lead");
+    }
+
+    const updatedInstance = await prisma.leadProductStructureInstance.update({
+      where: { id: instanceId },
+      data: {
+        is_production_completed: true,
+        production_completed_at: new Date(),
+        updated_by: updatedBy,
+        updated_at: new Date(),
+      },
+    });
+
+    await prisma.leadDetailedLogs.create({
+      data: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: instance.account_id ?? 0,
+        action: `Production completed for instance ${instance.title}`,
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        created_at: new Date(),
+      },
+    });
+
+    return updatedInstance;
   }
 
   async moveLeadToReadyToDispatch(
