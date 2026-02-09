@@ -382,14 +382,12 @@ export const createLeadService = async (
           );
         }
 
-        const quantityIndexMap = new Map<number, number>();
+        let nextIndex = 0;
         for (const instance of instanceSource) {
           const structure = structureMap.get(instance.product_structure_id);
           if (!structure) continue;
 
-          const nextIndex =
-            (quantityIndexMap.get(instance.product_structure_id) || 0) + 1;
-          quantityIndexMap.set(instance.product_structure_id, nextIndex);
+          nextIndex += 1;
 
           await tx.leadProductStructureInstance.create({
             data: {
@@ -1660,14 +1658,12 @@ export const updateLeadService = async (
           );
         }
 
-        const quantityIndexMap = new Map<number, number>();
+        let nextIndex = 0;
         for (const instance of instanceSource) {
           const structure = structureMap.get(instance.product_structure_id);
           if (!structure) continue;
 
-          const nextIndex =
-            (quantityIndexMap.get(instance.product_structure_id) || 0) + 1;
-          quantityIndexMap.set(instance.product_structure_id, nextIndex);
+          nextIndex += 1;
 
           await tx.leadProductStructureInstance.create({
             data: {
