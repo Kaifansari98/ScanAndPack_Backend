@@ -47,9 +47,17 @@ export class BookingStageService {
           tech_check_completed_at: true,
           is_order_login_completed: true,
           order_login_completed_at: true,
-          productStructure: { select: { id: true, type: true } },
+          productStructure: {
+            select: {
+              id: true,
+              type: true,
+            },
+          },
         },
-        orderBy: [{ product_structure_id: Prisma.SortOrder.asc }, { quantity_index: Prisma.SortOrder.asc }],
+        orderBy: [
+          { product_structure_id: Prisma.SortOrder.asc },
+          { quantity_index: Prisma.SortOrder.asc },
+        ],
       },
       payments: {
         where: { paymentType: { tag: "Type 2" } },
@@ -2403,7 +2411,7 @@ export class BookingStageService {
             updatedBy: updatedByName,
             leadUrl,
           });
-        })
+        }),
       );
     } catch (notifyError: any) {
       logger.warn("⚠️ Failed to send payment notifications", {
