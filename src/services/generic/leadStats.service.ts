@@ -64,26 +64,27 @@ export class LeadStatsService {
       // userLeadTask counts are no longer included
     }
 
+    const baseLeadScope = {
+      ...whereClause,
+      activity_status: {
+        in: [ActivityStatus.onGoing, ActivityStatus.lostApproval],
+      },
+    };
+
     // Helper: count leads by status type
     const countByStatus = async (statusType: string) =>
       prisma.leadMaster.count({
         where: {
-          ...whereClause,
+          ...baseLeadScope,
           statusType: { vendor_id: vendorId, type: statusType },
-          activity_status: {
-            in: [ActivityStatus.onGoing, ActivityStatus.lostApproval],
-          },
         },
       });
 
     // Aggregate counts
     const totalLeads = await prisma.leadMaster.count({
       where: {
-        ...whereClause,
+        ...baseLeadScope,
         statusType: { vendor_id: vendorId },
-        activity_status: {
-          in: [ActivityStatus.onGoing, ActivityStatus.lostApproval],
-        },
       },
     });
 
@@ -130,9 +131,48 @@ export class LeadStatsService {
     const totalClientApprovalStageLeads = await countByStatus(
       "client-approval-stage"
     );
-    const totalTechCheckStageLeads = await countByStatus("tech-check-stage");
-    const totalOrderLoginStageLeads = await countByStatus("order-login-stage");
-    const totalProductionStageLeads = await countByStatus("production-stage");
+    const instanceStageTags = ["Type 8", "Type 9", "Type 10"];
+
+    const totalTechCheckStageLeads = await prisma.leadProductStructureInstance.count({
+      where: {
+        vendor_id: vendorId,
+        OR: [
+          { is_tech_check_completed: false },
+          { is_tech_check_completed: null },
+        ],
+        lead: {
+          ...baseLeadScope,
+          statusType: { vendor_id: vendorId, tag: { in: instanceStageTags } },
+        },
+      },
+    });
+
+    const totalOrderLoginStageLeads = await prisma.leadProductStructureInstance.count({
+      where: {
+        vendor_id: vendorId,
+        is_tech_check_completed: true,
+        OR: [
+          { is_order_login_completed: false },
+          { is_order_login_completed: null },
+        ],
+        lead: {
+          ...baseLeadScope,
+          statusType: { vendor_id: vendorId, tag: { in: instanceStageTags } },
+        },
+      },
+    });
+
+    const totalProductionStageLeads = await prisma.leadProductStructureInstance.count({
+      where: {
+        vendor_id: vendorId,
+        is_tech_check_completed: true,
+        is_order_login_completed: true,
+        lead: {
+          ...baseLeadScope,
+          statusType: { vendor_id: vendorId, tag: { in: instanceStageTags } },
+        },
+      },
+    });
     const totalReadyToDispatchStageLeads = await countByStatus(
       "ready-to-dispatch-stage"
     );
