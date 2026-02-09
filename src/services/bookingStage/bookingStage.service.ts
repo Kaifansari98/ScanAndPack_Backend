@@ -1392,6 +1392,27 @@ export class BookingStageService {
       ...(excludedLeadIds.length && { id: { notIn: excludedLeadIds } }),
     });
 
+    try {
+      const includeConfig = BookingStageService.leadIncludes();
+      const instanceSelectKeys = Object.keys(
+        includeConfig?.productStructureInstances?.select || {},
+      );
+      logger.info("[BookingStageService] getVendorLeadsByTag2 debug", {
+        vendorId,
+        tag,
+        userId,
+        page,
+        limit,
+        excludedLeadIdsCount: excludedLeadIds.length,
+        instanceSelectKeys,
+      });
+    } catch (err: any) {
+      logger.warn(
+        "[BookingStageService] getVendorLeadsByTag2 debug log failed",
+        { error: err?.message },
+      );
+    }
+
     const [leads, total] = await Promise.all([
       prisma.leadMaster.findMany({
         where: whereClause,
