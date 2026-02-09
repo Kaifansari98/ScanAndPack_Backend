@@ -488,6 +488,9 @@ export const sendOrderLoginReminderEmail = async (payload: {
         font-size: 13px;
         margin-bottom: 4px;
       }
+           .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
     }
   </style>
 </head>
@@ -513,7 +516,7 @@ export const sendOrderLoginReminderEmail = async (payload: {
           <div class="lead-info-label">Lead Code</div>
           <div class="lead-info-value">${payload.leadCode}</div>
         </div>
-        <div class="lead-info-row">
+        <div class="lead-info-row .no-border">
           <div class="lead-info-label">Lead Name</div>
           <div class="lead-info-value">${payload.leadName}</div>
         </div>
@@ -534,7 +537,7 @@ export const sendOrderLoginReminderEmail = async (payload: {
     Schedule tracking
   </li>
 </ul>
->
+
 
       <p style="margin:16px 0 0;color:#4b5563;">
         Please update the Order Login details at the earliest.
@@ -1145,7 +1148,6 @@ export const sendUnderInstallationAssignedEmail = async (payload: {
   });
 };
 
-
 // factory user email
 // 1
 export const sendLeadMovedToDispatchEmail = async (payload: {
@@ -1358,9 +1360,6 @@ export const sendLeadMovedToDispatchEmail = async (payload: {
     html,
   });
 };
-
-
-
 
 // 1
 export const sendFinalMeasurementAssignedEmail = async (payload: {
@@ -1736,6 +1735,3 @@ export const sendSiteReadinessAssignedEmail = async (payload: {
     html,
   });
 };
-
-
-
