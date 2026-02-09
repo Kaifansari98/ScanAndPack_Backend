@@ -464,10 +464,15 @@ export class FinalMeasurementService {
       where: {
         id: leadId,
         vendor_id: vendorId,
-        // status_id: finalMeasurementStatus.id, // ✅ Final Measurement stage
+     
       },
       include: {
-        documents: true, // we'll filter after fetch
+        documents: {
+          where: {
+            is_deleted: false 
+          }
+        },
+         // we'll filter after fetch
       },
     });
 

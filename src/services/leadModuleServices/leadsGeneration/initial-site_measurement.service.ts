@@ -2270,14 +2270,6 @@ export class PaymentUploadService {
         );
       }
 
-      if (existingDoc.documentType?.tag !== "Type 3") {
-        throw Object.assign(
-          new Error(
-            "Only initial site measurement documents can be replaced via this endpoint",
-          ),
-          { statusCode: 400 },
-        );
-      }
 
       await tx.leadDocuments.update({
         where: { id: documentId },

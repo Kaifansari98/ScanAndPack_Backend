@@ -946,15 +946,25 @@ export class UnderInstallationStageService {
   static async getInstallationUpdatesDayWise(vendorId: number, leadId: number) {
     // 1️⃣ Fetch all updates (Day wise)
     const updates = await prisma.installationUpdate.findMany({
-      where: { vendor_id: vendorId, lead_id: leadId },
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+      },
       include: {
         documents: {
+          where: {
+            document: {
+              is_deleted: false,
+            },
+          },
           include: {
-            document: true, // LeadDocuments
+            document: true,
           },
         },
       },
-      orderBy: { update_date: "desc" },
+      orderBy: {
+        update_date: "desc",
+      },
     });
 
     // 2️⃣ Format data
