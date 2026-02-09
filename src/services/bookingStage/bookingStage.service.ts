@@ -47,10 +47,7 @@ export class BookingStageService {
           tech_check_completed_at: true,
           is_order_login_completed: true,
           order_login_completed_at: true,
-          // productStructure: { select: { id: true, type: true } },
-        },
-        include: {
-          productStructure: true,
+          productStructure: { select: { id: true, type: true } },
         },
         orderBy: [{ product_structure_id: Prisma.SortOrder.asc }, { quantity_index: Prisma.SortOrder.asc }],
       },
