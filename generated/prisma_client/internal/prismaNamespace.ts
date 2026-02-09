@@ -5817,6 +5817,7 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   production_completed_at: 'production_completed_at',
   woodwork_packing_details_remark: 'woodwork_packing_details_remark',
   hardware_packing_details_remark: 'hardware_packing_details_remark',
+  no_of_client_documents_initially_submitted: 'no_of_client_documents_initially_submitted',
   no_of_boxes: 'no_of_boxes'
 } as const
 

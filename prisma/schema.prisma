@@ -697,6 +697,7 @@ model LeadProductStructureInstance {
   production_completed_at DateTime?
   woodwork_packing_details_remark String? @db.VarChar(2000)
   hardware_packing_details_remark String? @db.VarChar(2000)
+  no_of_client_documents_initially_submitted Int?
   no_of_boxes Int?
   designSelections        LeadDesignSelection[]
   documents               LeadDocuments[]

@@ -61,24 +61,89 @@ export class ClientDocumentationService {
         response.documents.push(docEntry);
       }
 
-      // ✅ Update only uploaded-doc count. Stage movement is handled explicitly.
-      const currentDocCount = await tx.leadDocuments.count({
-        where: {
-          lead_id: data.lead_id,
-          vendor_id: data.vendor_id,
-          is_deleted: false,
-          documentType: { tag: { in: ["Type 11", "Type 12"] } },
-        },
-      });
+      // ✅ Update uploaded-doc count (instance-wise when available) ONLY for Client Documentation stage
+      const resolvedInstanceId =
+        data.product_structure_instance_id ??
+        data.documents.find((doc) => doc.productStructureInstanceId)?.productStructureInstanceId ??
+        null;
 
-      await tx.leadMaster.update({
-        where: { id: data.lead_id },
-        data: {
-          updated_at: new Date(),
-          updated_by: data.created_by,
-          no_of_client_documents_initially_submitted: currentDocCount,
-        },
-      });
+      const [clientDocStatus, leadSnapshot, instanceSnapshot] =
+        await Promise.all([
+          tx.statusTypeMaster.findFirst({
+            where: { vendor_id: data.vendor_id, tag: "Type 6" },
+            select: { id: true },
+          }),
+          tx.leadMaster.findFirst({
+            where: { id: data.lead_id, vendor_id: data.vendor_id },
+            select: {
+              id: true,
+              status_id: true,
+              no_of_client_documents_initially_submitted: true,
+            },
+          }),
+          resolvedInstanceId
+            ? tx.leadProductStructureInstance.findFirst({
+                where: {
+                  id: resolvedInstanceId,
+                  lead_id: data.lead_id,
+                  vendor_id: data.vendor_id,
+                },
+                select: {
+                  id: true,
+                  no_of_client_documents_initially_submitted: true,
+                },
+              })
+            : Promise.resolve(null),
+        ]);
+
+      const isClientDocStage =
+        !!clientDocStatus && leadSnapshot?.status_id === clientDocStatus.id;
+
+      if (isClientDocStage) {
+        if (!leadSnapshot?.no_of_client_documents_initially_submitted) {
+          const currentDocCount = await tx.leadDocuments.count({
+            where: {
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+              is_deleted: false,
+              documentType: { tag: { in: ["Type 11", "Type 12"] } },
+            },
+          });
+
+          await tx.leadMaster.update({
+            where: { id: data.lead_id },
+            data: {
+              updated_at: new Date(),
+              updated_by: data.created_by,
+              no_of_client_documents_initially_submitted: currentDocCount,
+            },
+          });
+        }
+
+        if (
+          resolvedInstanceId &&
+          !instanceSnapshot?.no_of_client_documents_initially_submitted
+        ) {
+          const instanceDocCount = await tx.leadDocuments.count({
+            where: {
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+              is_deleted: false,
+              documentType: { tag: { in: ["Type 11", "Type 12"] } },
+              product_structure_instance_id: resolvedInstanceId,
+            },
+          });
+
+          await tx.leadProductStructureInstance.update({
+            where: { id: resolvedInstanceId },
+            data: {
+              no_of_client_documents_initially_submitted: instanceDocCount,
+              updated_at: new Date(),
+              updated_by: data.created_by,
+            },
+          });
+        }
+      }
 
       // Add logs
       const docCount = response.documents.length;
@@ -295,6 +360,7 @@ export class ClientDocumentationService {
             id: true,
             title: true,
             quantity_index: true,
+            no_of_client_documents_initially_submitted: true,
             productStructure: { select: { id: true, type: true } },
           },
           orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
@@ -467,6 +533,10 @@ export class ClientDocumentationService {
       }
 
       const docCount = response.documents.length;
+      const resolvedInstanceId =
+        data.product_structure_instance_id ??
+        data.documents.find((doc) => doc.productStructureInstanceId)?.productStructureInstanceId ??
+        null;
       const plural = docCount > 1 ? "documents have" : "document has";
       const actionMessage = `${docCount} additional Client Documentation ${plural} been uploaded successfully.`;
 
