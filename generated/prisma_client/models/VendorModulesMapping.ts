@@ -50,7 +50,7 @@ export type VendorModulesMappingMinAggregateOutputType = {
   created_by: number | null
   updated_by: number | null
   updated_at: Date | null
-  active: $Enums.ActiveStatus | null
+  active: $Enums.ModulesVendorMappingActiveStatus | null
 }
 
 export type VendorModulesMappingMaxAggregateOutputType = {
@@ -61,7 +61,7 @@ export type VendorModulesMappingMaxAggregateOutputType = {
   created_by: number | null
   updated_by: number | null
   updated_at: Date | null
-  active: $Enums.ActiveStatus | null
+  active: $Enums.ModulesVendorMappingActiveStatus | null
 }
 
 export type VendorModulesMappingCountAggregateOutputType = {
@@ -221,7 +221,7 @@ export type VendorModulesMappingGroupByOutputType = {
   created_by: number
   updated_by: number | null
   updated_at: Date | null
-  active: $Enums.ActiveStatus
+  active: $Enums.ModulesVendorMappingActiveStatus
   _count: VendorModulesMappingCountAggregateOutputType | null
   _avg: VendorModulesMappingAvgAggregateOutputType | null
   _sum: VendorModulesMappingSumAggregateOutputType | null
@@ -255,9 +255,9 @@ export type VendorModulesMappingWhereInput = {
   created_by?: Prisma.IntFilter<"VendorModulesMapping"> | number
   updated_by?: Prisma.IntNullableFilter<"VendorModulesMapping"> | number | null
   updated_at?: Prisma.DateTimeNullableFilter<"VendorModulesMapping"> | Date | string | null
-  active?: Prisma.EnumActiveStatusFilter<"VendorModulesMapping"> | $Enums.ActiveStatus
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  active?: Prisma.EnumModulesVendorMappingActiveStatusFilter<"VendorModulesMapping"> | $Enums.ModulesVendorMappingActiveStatus
   module?: Prisma.XOR<Prisma.ModulesMasterScalarRelationFilter, Prisma.ModulesMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type VendorModulesMappingOrderByWithRelationInput = {
@@ -269,8 +269,8 @@ export type VendorModulesMappingOrderByWithRelationInput = {
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   active?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   module?: Prisma.ModulesMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type VendorModulesMappingWhereUniqueInput = Prisma.AtLeast<{
@@ -284,9 +284,9 @@ export type VendorModulesMappingWhereUniqueInput = Prisma.AtLeast<{
   created_by?: Prisma.IntFilter<"VendorModulesMapping"> | number
   updated_by?: Prisma.IntNullableFilter<"VendorModulesMapping"> | number | null
   updated_at?: Prisma.DateTimeNullableFilter<"VendorModulesMapping"> | Date | string | null
-  active?: Prisma.EnumActiveStatusFilter<"VendorModulesMapping"> | $Enums.ActiveStatus
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  active?: Prisma.EnumModulesVendorMappingActiveStatusFilter<"VendorModulesMapping"> | $Enums.ModulesVendorMappingActiveStatus
   module?: Prisma.XOR<Prisma.ModulesMasterScalarRelationFilter, Prisma.ModulesMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type VendorModulesMappingOrderByWithAggregationInput = {
@@ -316,7 +316,7 @@ export type VendorModulesMappingScalarWhereWithAggregatesInput = {
   created_by?: Prisma.IntWithAggregatesFilter<"VendorModulesMapping"> | number
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"VendorModulesMapping"> | number | null
   updated_at?: Prisma.DateTimeNullableWithAggregatesFilter<"VendorModulesMapping"> | Date | string | null
-  active?: Prisma.EnumActiveStatusWithAggregatesFilter<"VendorModulesMapping"> | $Enums.ActiveStatus
+  active?: Prisma.EnumModulesVendorMappingActiveStatusWithAggregatesFilter<"VendorModulesMapping"> | $Enums.ModulesVendorMappingActiveStatus
 }
 
 export type VendorModulesMappingCreateInput = {
@@ -324,9 +324,9 @@ export type VendorModulesMappingCreateInput = {
   created_by: number
   updated_by?: number | null
   updated_at?: Date | string | null
-  active?: $Enums.ActiveStatus
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutVendorModulesMappingsInput
+  active?: $Enums.ModulesVendorMappingActiveStatus
   module: Prisma.ModulesMasterCreateNestedOneWithoutVendorModulesMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutVendorModulesMappingsInput
 }
 
 export type VendorModulesMappingUncheckedCreateInput = {
@@ -337,7 +337,7 @@ export type VendorModulesMappingUncheckedCreateInput = {
   created_by: number
   updated_by?: number | null
   updated_at?: Date | string | null
-  active?: $Enums.ActiveStatus
+  active?: $Enums.ModulesVendorMappingActiveStatus
 }
 
 export type VendorModulesMappingUpdateInput = {
@@ -345,9 +345,9 @@ export type VendorModulesMappingUpdateInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  active?: Prisma.EnumActiveStatusFieldUpdateOperationsInput | $Enums.ActiveStatus
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutVendorModulesMappingsNestedInput
+  active?: Prisma.EnumModulesVendorMappingActiveStatusFieldUpdateOperationsInput | $Enums.ModulesVendorMappingActiveStatus
   module?: Prisma.ModulesMasterUpdateOneRequiredWithoutVendorModulesMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutVendorModulesMappingsNestedInput
 }
 
 export type VendorModulesMappingUncheckedUpdateInput = {
@@ -358,7 +358,7 @@ export type VendorModulesMappingUncheckedUpdateInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  active?: Prisma.EnumActiveStatusFieldUpdateOperationsInput | $Enums.ActiveStatus
+  active?: Prisma.EnumModulesVendorMappingActiveStatusFieldUpdateOperationsInput | $Enums.ModulesVendorMappingActiveStatus
 }
 
 export type VendorModulesMappingCreateManyInput = {
@@ -369,7 +369,7 @@ export type VendorModulesMappingCreateManyInput = {
   created_by: number
   updated_by?: number | null
   updated_at?: Date | string | null
-  active?: $Enums.ActiveStatus
+  active?: $Enums.ModulesVendorMappingActiveStatus
 }
 
 export type VendorModulesMappingUpdateManyMutationInput = {
@@ -377,7 +377,7 @@ export type VendorModulesMappingUpdateManyMutationInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  active?: Prisma.EnumActiveStatusFieldUpdateOperationsInput | $Enums.ActiveStatus
+  active?: Prisma.EnumModulesVendorMappingActiveStatusFieldUpdateOperationsInput | $Enums.ModulesVendorMappingActiveStatus
 }
 
 export type VendorModulesMappingUncheckedUpdateManyInput = {
@@ -388,7 +388,7 @@ export type VendorModulesMappingUncheckedUpdateManyInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  active?: Prisma.EnumActiveStatusFieldUpdateOperationsInput | $Enums.ActiveStatus
+  active?: Prisma.EnumModulesVendorMappingActiveStatusFieldUpdateOperationsInput | $Enums.ModulesVendorMappingActiveStatus
 }
 
 export type VendorModulesMappingListRelationFilter = {
@@ -534,12 +534,16 @@ export type VendorModulesMappingUncheckedUpdateManyWithoutModuleNestedInput = {
   deleteMany?: Prisma.VendorModulesMappingScalarWhereInput | Prisma.VendorModulesMappingScalarWhereInput[]
 }
 
+export type EnumModulesVendorMappingActiveStatusFieldUpdateOperationsInput = {
+  set?: $Enums.ModulesVendorMappingActiveStatus
+}
+
 export type VendorModulesMappingCreateWithoutVendorInput = {
   created_at?: Date | string
   created_by: number
   updated_by?: number | null
   updated_at?: Date | string | null
-  active?: $Enums.ActiveStatus
+  active?: $Enums.ModulesVendorMappingActiveStatus
   module: Prisma.ModulesMasterCreateNestedOneWithoutVendorModulesMappingsInput
 }
 
@@ -550,7 +554,7 @@ export type VendorModulesMappingUncheckedCreateWithoutVendorInput = {
   created_by: number
   updated_by?: number | null
   updated_at?: Date | string | null
-  active?: $Enums.ActiveStatus
+  active?: $Enums.ModulesVendorMappingActiveStatus
 }
 
 export type VendorModulesMappingCreateOrConnectWithoutVendorInput = {
@@ -590,7 +594,7 @@ export type VendorModulesMappingScalarWhereInput = {
   created_by?: Prisma.IntFilter<"VendorModulesMapping"> | number
   updated_by?: Prisma.IntNullableFilter<"VendorModulesMapping"> | number | null
   updated_at?: Prisma.DateTimeNullableFilter<"VendorModulesMapping"> | Date | string | null
-  active?: Prisma.EnumActiveStatusFilter<"VendorModulesMapping"> | $Enums.ActiveStatus
+  active?: Prisma.EnumModulesVendorMappingActiveStatusFilter<"VendorModulesMapping"> | $Enums.ModulesVendorMappingActiveStatus
 }
 
 export type VendorModulesMappingCreateWithoutModuleInput = {
@@ -598,7 +602,7 @@ export type VendorModulesMappingCreateWithoutModuleInput = {
   created_by: number
   updated_by?: number | null
   updated_at?: Date | string | null
-  active?: $Enums.ActiveStatus
+  active?: $Enums.ModulesVendorMappingActiveStatus
   vendor: Prisma.VendorMasterCreateNestedOneWithoutVendorModulesMappingsInput
 }
 
@@ -609,7 +613,7 @@ export type VendorModulesMappingUncheckedCreateWithoutModuleInput = {
   created_by: number
   updated_by?: number | null
   updated_at?: Date | string | null
-  active?: $Enums.ActiveStatus
+  active?: $Enums.ModulesVendorMappingActiveStatus
 }
 
 export type VendorModulesMappingCreateOrConnectWithoutModuleInput = {
@@ -645,7 +649,7 @@ export type VendorModulesMappingCreateManyVendorInput = {
   created_by: number
   updated_by?: number | null
   updated_at?: Date | string | null
-  active?: $Enums.ActiveStatus
+  active?: $Enums.ModulesVendorMappingActiveStatus
 }
 
 export type VendorModulesMappingUpdateWithoutVendorInput = {
@@ -653,7 +657,7 @@ export type VendorModulesMappingUpdateWithoutVendorInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  active?: Prisma.EnumActiveStatusFieldUpdateOperationsInput | $Enums.ActiveStatus
+  active?: Prisma.EnumModulesVendorMappingActiveStatusFieldUpdateOperationsInput | $Enums.ModulesVendorMappingActiveStatus
   module?: Prisma.ModulesMasterUpdateOneRequiredWithoutVendorModulesMappingsNestedInput
 }
 
@@ -664,7 +668,7 @@ export type VendorModulesMappingUncheckedUpdateWithoutVendorInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  active?: Prisma.EnumActiveStatusFieldUpdateOperationsInput | $Enums.ActiveStatus
+  active?: Prisma.EnumModulesVendorMappingActiveStatusFieldUpdateOperationsInput | $Enums.ModulesVendorMappingActiveStatus
 }
 
 export type VendorModulesMappingUncheckedUpdateManyWithoutVendorInput = {
@@ -674,7 +678,7 @@ export type VendorModulesMappingUncheckedUpdateManyWithoutVendorInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  active?: Prisma.EnumActiveStatusFieldUpdateOperationsInput | $Enums.ActiveStatus
+  active?: Prisma.EnumModulesVendorMappingActiveStatusFieldUpdateOperationsInput | $Enums.ModulesVendorMappingActiveStatus
 }
 
 export type VendorModulesMappingCreateManyModuleInput = {
@@ -684,7 +688,7 @@ export type VendorModulesMappingCreateManyModuleInput = {
   created_by: number
   updated_by?: number | null
   updated_at?: Date | string | null
-  active?: $Enums.ActiveStatus
+  active?: $Enums.ModulesVendorMappingActiveStatus
 }
 
 export type VendorModulesMappingUpdateWithoutModuleInput = {
@@ -692,7 +696,7 @@ export type VendorModulesMappingUpdateWithoutModuleInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  active?: Prisma.EnumActiveStatusFieldUpdateOperationsInput | $Enums.ActiveStatus
+  active?: Prisma.EnumModulesVendorMappingActiveStatusFieldUpdateOperationsInput | $Enums.ModulesVendorMappingActiveStatus
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutVendorModulesMappingsNestedInput
 }
 
@@ -703,7 +707,7 @@ export type VendorModulesMappingUncheckedUpdateWithoutModuleInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  active?: Prisma.EnumActiveStatusFieldUpdateOperationsInput | $Enums.ActiveStatus
+  active?: Prisma.EnumModulesVendorMappingActiveStatusFieldUpdateOperationsInput | $Enums.ModulesVendorMappingActiveStatus
 }
 
 export type VendorModulesMappingUncheckedUpdateManyWithoutModuleInput = {
@@ -713,7 +717,7 @@ export type VendorModulesMappingUncheckedUpdateManyWithoutModuleInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  active?: Prisma.EnumActiveStatusFieldUpdateOperationsInput | $Enums.ActiveStatus
+  active?: Prisma.EnumModulesVendorMappingActiveStatusFieldUpdateOperationsInput | $Enums.ModulesVendorMappingActiveStatus
 }
 
 
@@ -727,8 +731,8 @@ export type VendorModulesMappingSelect<ExtArgs extends runtime.Types.Extensions.
   updated_by?: boolean
   updated_at?: boolean
   active?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   module?: boolean | Prisma.ModulesMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["vendorModulesMapping"]>
 
 export type VendorModulesMappingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -740,8 +744,8 @@ export type VendorModulesMappingSelectCreateManyAndReturn<ExtArgs extends runtim
   updated_by?: boolean
   updated_at?: boolean
   active?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   module?: boolean | Prisma.ModulesMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["vendorModulesMapping"]>
 
 export type VendorModulesMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -753,8 +757,8 @@ export type VendorModulesMappingSelectUpdateManyAndReturn<ExtArgs extends runtim
   updated_by?: boolean
   updated_at?: boolean
   active?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   module?: boolean | Prisma.ModulesMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["vendorModulesMapping"]>
 
 export type VendorModulesMappingSelectScalar = {
@@ -770,23 +774,23 @@ export type VendorModulesMappingSelectScalar = {
 
 export type VendorModulesMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "module_id" | "created_at" | "created_by" | "updated_by" | "updated_at" | "active", ExtArgs["result"]["vendorModulesMapping"]>
 export type VendorModulesMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   module?: boolean | Prisma.ModulesMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type VendorModulesMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   module?: boolean | Prisma.ModulesMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type VendorModulesMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   module?: boolean | Prisma.ModulesMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $VendorModulesMappingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "VendorModulesMapping"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     module: Prisma.$ModulesMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -796,7 +800,7 @@ export type $VendorModulesMappingPayload<ExtArgs extends runtime.Types.Extension
     created_by: number
     updated_by: number | null
     updated_at: Date | null
-    active: $Enums.ActiveStatus
+    active: $Enums.ModulesVendorMappingActiveStatus
   }, ExtArgs["result"]["vendorModulesMapping"]>
   composites: {}
 }
@@ -1191,8 +1195,8 @@ readonly fields: VendorModulesMappingFieldRefs;
  */
 export interface Prisma__VendorModulesMappingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   module<T extends Prisma.ModulesMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ModulesMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ModulesMasterClient<runtime.Types.Result.GetResult<Prisma.$ModulesMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1229,7 +1233,7 @@ export interface VendorModulesMappingFieldRefs {
   readonly created_by: Prisma.FieldRef<"VendorModulesMapping", 'Int'>
   readonly updated_by: Prisma.FieldRef<"VendorModulesMapping", 'Int'>
   readonly updated_at: Prisma.FieldRef<"VendorModulesMapping", 'DateTime'>
-  readonly active: Prisma.FieldRef<"VendorModulesMapping", 'ActiveStatus'>
+  readonly active: Prisma.FieldRef<"VendorModulesMapping", 'ModulesVendorMappingActiveStatus'>
 }
     
 

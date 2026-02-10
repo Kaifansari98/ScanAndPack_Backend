@@ -216,8 +216,8 @@ export type LeadChatMentionWhereInput = {
   msg_id?: Prisma.IntFilter<"LeadChatMention"> | number
   mentioned_user_id?: Prisma.IntFilter<"LeadChatMention"> | number
   created_at?: Prisma.DateTimeFilter<"LeadChatMention"> | Date | string
-  message?: Prisma.XOR<Prisma.LeadChatMessageScalarRelationFilter, Prisma.LeadChatMessageWhereInput>
   mentionedUser?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  message?: Prisma.XOR<Prisma.LeadChatMessageScalarRelationFilter, Prisma.LeadChatMessageWhereInput>
 }
 
 export type LeadChatMentionOrderByWithRelationInput = {
@@ -225,8 +225,8 @@ export type LeadChatMentionOrderByWithRelationInput = {
   msg_id?: Prisma.SortOrder
   mentioned_user_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  message?: Prisma.LeadChatMessageOrderByWithRelationInput
   mentionedUser?: Prisma.UserMasterOrderByWithRelationInput
+  message?: Prisma.LeadChatMessageOrderByWithRelationInput
 }
 
 export type LeadChatMentionWhereUniqueInput = Prisma.AtLeast<{
@@ -238,8 +238,8 @@ export type LeadChatMentionWhereUniqueInput = Prisma.AtLeast<{
   msg_id?: Prisma.IntFilter<"LeadChatMention"> | number
   mentioned_user_id?: Prisma.IntFilter<"LeadChatMention"> | number
   created_at?: Prisma.DateTimeFilter<"LeadChatMention"> | Date | string
-  message?: Prisma.XOR<Prisma.LeadChatMessageScalarRelationFilter, Prisma.LeadChatMessageWhereInput>
   mentionedUser?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  message?: Prisma.XOR<Prisma.LeadChatMessageScalarRelationFilter, Prisma.LeadChatMessageWhereInput>
 }, "id" | "msg_id_mentioned_user_id">
 
 export type LeadChatMentionOrderByWithAggregationInput = {
@@ -266,8 +266,8 @@ export type LeadChatMentionScalarWhereWithAggregatesInput = {
 
 export type LeadChatMentionCreateInput = {
   created_at?: Date | string
-  message: Prisma.LeadChatMessageCreateNestedOneWithoutMentionsInput
   mentionedUser: Prisma.UserMasterCreateNestedOneWithoutLeadChatMentionsInput
+  message: Prisma.LeadChatMessageCreateNestedOneWithoutMentionsInput
 }
 
 export type LeadChatMentionUncheckedCreateInput = {
@@ -279,8 +279,8 @@ export type LeadChatMentionUncheckedCreateInput = {
 
 export type LeadChatMentionUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  message?: Prisma.LeadChatMessageUpdateOneRequiredWithoutMentionsNestedInput
   mentionedUser?: Prisma.UserMasterUpdateOneRequiredWithoutLeadChatMentionsNestedInput
+  message?: Prisma.LeadChatMessageUpdateOneRequiredWithoutMentionsNestedInput
 }
 
 export type LeadChatMentionUncheckedUpdateInput = {
@@ -577,8 +577,8 @@ export type LeadChatMentionSelect<ExtArgs extends runtime.Types.Extensions.Inter
   msg_id?: boolean
   mentioned_user_id?: boolean
   created_at?: boolean
-  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
   mentionedUser?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadChatMention"]>
 
 export type LeadChatMentionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -586,8 +586,8 @@ export type LeadChatMentionSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   msg_id?: boolean
   mentioned_user_id?: boolean
   created_at?: boolean
-  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
   mentionedUser?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadChatMention"]>
 
 export type LeadChatMentionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -595,8 +595,8 @@ export type LeadChatMentionSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   msg_id?: boolean
   mentioned_user_id?: boolean
   created_at?: boolean
-  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
   mentionedUser?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadChatMention"]>
 
 export type LeadChatMentionSelectScalar = {
@@ -608,23 +608,23 @@ export type LeadChatMentionSelectScalar = {
 
 export type LeadChatMentionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "msg_id" | "mentioned_user_id" | "created_at", ExtArgs["result"]["leadChatMention"]>
 export type LeadChatMentionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
   mentionedUser?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
 }
 export type LeadChatMentionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
   mentionedUser?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
 }
 export type LeadChatMentionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
   mentionedUser?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
 }
 
 export type $LeadChatMentionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadChatMention"
   objects: {
-    message: Prisma.$LeadChatMessagePayload<ExtArgs>
     mentionedUser: Prisma.$UserMasterPayload<ExtArgs>
+    message: Prisma.$LeadChatMessagePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1025,8 +1025,8 @@ readonly fields: LeadChatMentionFieldRefs;
  */
 export interface Prisma__LeadChatMentionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  message<T extends Prisma.LeadChatMessageDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadChatMessageDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadChatMessageClient<runtime.Types.Result.GetResult<Prisma.$LeadChatMessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   mentionedUser<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  message<T extends Prisma.LeadChatMessageDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadChatMessageDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadChatMessageClient<runtime.Types.Result.GetResult<Prisma.$LeadChatMessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

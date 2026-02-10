@@ -69,6 +69,8 @@ export const getAllProjects = () => {
   });
 };
 
+
+
 export const getAllProjectsTrackTrace = (vendor_id: number) => {
   return prisma.projectMaster.findMany({
     where: {

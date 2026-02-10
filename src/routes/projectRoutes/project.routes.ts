@@ -16,8 +16,7 @@ import {
     getProjectWeight, 
     getProjectAndBoxWeight,
     getCompletedProjects,
-    autoPackGroupedBoxes,
-    getAllProjectsTrackTrace
+    autoPackGroupedBoxes    
 } from '../../controllers/projectControllers/project.controller';
 
 const router = Router();
@@ -31,7 +30,7 @@ router.get('/details', getAllProjectDetails);
 router.get('/items', getAllProjectItems);
 
 
-router.get('/track-trace/:vendor_id', getAllProjectsTrackTrace);
+
 
 router.get("/vendor/:vendorId", getProjectsByVendorId);
 

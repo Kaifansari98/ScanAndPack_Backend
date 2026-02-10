@@ -450,7 +450,11 @@ export const ModelName = {
   NotificationDeliveryLogs: 'NotificationDeliveryLogs',
   VloqEmailLogs: 'VloqEmailLogs',
   ModulesMaster: 'ModulesMaster',
-  VendorModulesMapping: 'VendorModulesMapping'
+  VendorModulesMapping: 'VendorModulesMapping',
+  MachineMaster: 'MachineMaster',
+  CutList: 'CutList',
+  CutListMachineMapping: 'CutListMachineMapping',
+  UserMachineMapping: 'UserMachineMapping'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -466,7 +470,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -5428,6 +5432,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    MachineMaster: {
+      payload: Prisma.$MachineMasterPayload<ExtArgs>
+      fields: Prisma.MachineMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MachineMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MachineMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.MachineMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MachineMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineMasterPayload>
+        }
+        findMany: {
+          args: Prisma.MachineMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineMasterPayload>[]
+        }
+        create: {
+          args: Prisma.MachineMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineMasterPayload>
+        }
+        createMany: {
+          args: Prisma.MachineMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MachineMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.MachineMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineMasterPayload>
+        }
+        update: {
+          args: Prisma.MachineMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.MachineMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MachineMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MachineMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.MachineMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.MachineMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMachineMaster>
+        }
+        groupBy: {
+          args: Prisma.MachineMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MachineMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MachineMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MachineMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    CutList: {
+      payload: Prisma.$CutListPayload<ExtArgs>
+      fields: Prisma.CutListFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CutListFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CutListFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListPayload>
+        }
+        findFirst: {
+          args: Prisma.CutListFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CutListFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListPayload>
+        }
+        findMany: {
+          args: Prisma.CutListFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListPayload>[]
+        }
+        create: {
+          args: Prisma.CutListCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListPayload>
+        }
+        createMany: {
+          args: Prisma.CutListCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CutListCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListPayload>[]
+        }
+        delete: {
+          args: Prisma.CutListDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListPayload>
+        }
+        update: {
+          args: Prisma.CutListUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListPayload>
+        }
+        deleteMany: {
+          args: Prisma.CutListDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CutListUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CutListUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListPayload>[]
+        }
+        upsert: {
+          args: Prisma.CutListUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListPayload>
+        }
+        aggregate: {
+          args: Prisma.CutListAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCutList>
+        }
+        groupBy: {
+          args: Prisma.CutListGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CutListGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CutListCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CutListCountAggregateOutputType> | number
+        }
+      }
+    }
+    CutListMachineMapping: {
+      payload: Prisma.$CutListMachineMappingPayload<ExtArgs>
+      fields: Prisma.CutListMachineMappingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CutListMachineMappingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListMachineMappingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CutListMachineMappingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListMachineMappingPayload>
+        }
+        findFirst: {
+          args: Prisma.CutListMachineMappingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListMachineMappingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CutListMachineMappingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListMachineMappingPayload>
+        }
+        findMany: {
+          args: Prisma.CutListMachineMappingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListMachineMappingPayload>[]
+        }
+        create: {
+          args: Prisma.CutListMachineMappingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListMachineMappingPayload>
+        }
+        createMany: {
+          args: Prisma.CutListMachineMappingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CutListMachineMappingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListMachineMappingPayload>[]
+        }
+        delete: {
+          args: Prisma.CutListMachineMappingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListMachineMappingPayload>
+        }
+        update: {
+          args: Prisma.CutListMachineMappingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListMachineMappingPayload>
+        }
+        deleteMany: {
+          args: Prisma.CutListMachineMappingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CutListMachineMappingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CutListMachineMappingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListMachineMappingPayload>[]
+        }
+        upsert: {
+          args: Prisma.CutListMachineMappingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CutListMachineMappingPayload>
+        }
+        aggregate: {
+          args: Prisma.CutListMachineMappingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCutListMachineMapping>
+        }
+        groupBy: {
+          args: Prisma.CutListMachineMappingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CutListMachineMappingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CutListMachineMappingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CutListMachineMappingCountAggregateOutputType> | number
+        }
+      }
+    }
+    UserMachineMapping: {
+      payload: Prisma.$UserMachineMappingPayload<ExtArgs>
+      fields: Prisma.UserMachineMappingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserMachineMappingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserMachineMappingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserMachineMappingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserMachineMappingPayload>
+        }
+        findFirst: {
+          args: Prisma.UserMachineMappingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserMachineMappingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserMachineMappingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserMachineMappingPayload>
+        }
+        findMany: {
+          args: Prisma.UserMachineMappingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserMachineMappingPayload>[]
+        }
+        create: {
+          args: Prisma.UserMachineMappingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserMachineMappingPayload>
+        }
+        createMany: {
+          args: Prisma.UserMachineMappingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserMachineMappingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserMachineMappingPayload>[]
+        }
+        delete: {
+          args: Prisma.UserMachineMappingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserMachineMappingPayload>
+        }
+        update: {
+          args: Prisma.UserMachineMappingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserMachineMappingPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserMachineMappingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserMachineMappingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserMachineMappingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserMachineMappingPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserMachineMappingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserMachineMappingPayload>
+        }
+        aggregate: {
+          args: Prisma.UserMachineMappingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserMachineMapping>
+        }
+        groupBy: {
+          args: Prisma.UserMachineMappingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserMachineMappingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserMachineMappingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserMachineMappingCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -6106,7 +6406,6 @@ export const UserLeadTaskScalarFieldEnum = {
   vendor_id: 'vendor_id',
   user_id: 'user_id',
   task_type: 'task_type',
-  lead_stage: 'lead_stage',
   due_date: 'due_date',
   remark: 'remark',
   status: 'status',
@@ -6115,7 +6414,8 @@ export const UserLeadTaskScalarFieldEnum = {
   created_by: 'created_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  updated_by: 'updated_by'
+  updated_by: 'updated_by',
+  lead_stage: 'lead_stage'
 } as const
 
 export type UserLeadTaskScalarFieldEnum = (typeof UserLeadTaskScalarFieldEnum)[keyof typeof UserLeadTaskScalarFieldEnum]
@@ -6155,7 +6455,6 @@ export const CompanyVendorsMasterScalarFieldEnum = {
   vendor_code: 'vendor_code',
   company_name: 'company_name',
   point_of_contact: 'point_of_contact',
-  in_house: 'in_house',
   contact_no: 'contact_no',
   email: 'email',
   address: 'address',
@@ -6165,7 +6464,8 @@ export const CompanyVendorsMasterScalarFieldEnum = {
   updated_by: 'updated_by',
   deleted_at: 'deleted_at',
   deleted_by: 'deleted_by',
-  is_deleted: 'is_deleted'
+  is_deleted: 'is_deleted',
+  in_house: 'in_house'
 } as const
 
 export type CompanyVendorsMasterScalarFieldEnum = (typeof CompanyVendorsMasterScalarFieldEnum)[keyof typeof CompanyVendorsMasterScalarFieldEnum]
@@ -6372,12 +6672,12 @@ export type IssueLogResponsibleTeamMappingScalarFieldEnum = (typeof IssueLogResp
 export const EmailNotificationMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
-  template_key: 'template_key',
-  subject: 'subject',
   text: 'text',
-  html: 'html',
   active: 'active',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  html: 'html',
+  subject: 'subject',
+  template_key: 'template_key'
 } as const
 
 export type EmailNotificationMasterScalarFieldEnum = (typeof EmailNotificationMasterScalarFieldEnum)[keyof typeof EmailNotificationMasterScalarFieldEnum]
@@ -6409,10 +6709,10 @@ export const UserPushTokenScalarFieldEnum = {
   token: 'token',
   platform: 'platform',
   browser: 'browser',
-  device_id: 'device_id',
   is_active: 'is_active',
   created_at: 'created_at',
-  last_used_at: 'last_used_at'
+  last_used_at: 'last_used_at',
+  device_id: 'device_id'
 } as const
 
 export type UserPushTokenScalarFieldEnum = (typeof UserPushTokenScalarFieldEnum)[keyof typeof UserPushTokenScalarFieldEnum]
@@ -6468,6 +6768,89 @@ export const VendorModulesMappingScalarFieldEnum = {
 } as const
 
 export type VendorModulesMappingScalarFieldEnum = (typeof VendorModulesMappingScalarFieldEnum)[keyof typeof VendorModulesMappingScalarFieldEnum]
+
+
+export const MachineMasterScalarFieldEnum = {
+  id: 'id',
+  machine_name: 'machine_name',
+  machine_code: 'machine_code',
+  machine_type: 'machine_type',
+  status: 'status',
+  scan_type: 'scan_type',
+  description: 'description',
+  vendor_id: 'vendor_id',
+  factory_id: 'factory_id',
+  sequence_no: 'sequence_no',
+  target_per_hour: 'target_per_hour',
+  image_path: 'image_path',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by'
+} as const
+
+export type MachineMasterScalarFieldEnum = (typeof MachineMasterScalarFieldEnum)[keyof typeof MachineMasterScalarFieldEnum]
+
+
+export const CutListScalarFieldEnum = {
+  id: 'id',
+  project_id: 'project_id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  description: 'description',
+  length: 'length',
+  width: 'width',
+  thickness: 'thickness',
+  qty: 'qty',
+  material_details: 'material_details',
+  item_name: 'item_name',
+  unique_code: 'unique_code',
+  status: 'status',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at'
+} as const
+
+export type CutListScalarFieldEnum = (typeof CutListScalarFieldEnum)[keyof typeof CutListScalarFieldEnum]
+
+
+export const CutListMachineMappingScalarFieldEnum = {
+  id: 'id',
+  cut_list_id: 'cut_list_id',
+  machine_id: 'machine_id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  project_id: 'project_id',
+  sequence_no: 'sequence_no',
+  is_optional: 'is_optional',
+  expected_in: 'expected_in',
+  expected_out: 'expected_out',
+  status: 'status',
+  actual_in_at: 'actual_in_at',
+  actual_out_at: 'actual_out_at',
+  in_operator: 'in_operator',
+  out_operator: 'out_operator',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type CutListMachineMappingScalarFieldEnum = (typeof CutListMachineMappingScalarFieldEnum)[keyof typeof CutListMachineMappingScalarFieldEnum]
+
+
+export const UserMachineMappingScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  machine_id: 'machine_id',
+  vendor_id: 'vendor_id',
+  status: 'status',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at'
+} as const
+
+export type UserMachineMappingScalarFieldEnum = (typeof UserMachineMappingScalarFieldEnum)[keyof typeof UserMachineMappingScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -6744,6 +7127,76 @@ export type EnumActiveStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
 export type ListEnumActiveStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActiveStatus[]'>
     
 
+
+/**
+ * Reference to a field of type 'ModulesVendorMappingActiveStatus'
+ */
+export type EnumModulesVendorMappingActiveStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ModulesVendorMappingActiveStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ModulesVendorMappingActiveStatus[]'
+ */
+export type ListEnumModulesVendorMappingActiveStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ModulesVendorMappingActiveStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'MachineStatus'
+ */
+export type EnumMachineStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MachineStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'MachineStatus[]'
+ */
+export type ListEnumMachineStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MachineStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ScanType'
+ */
+export type EnumScanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScanType'>
+    
+
+
+/**
+ * Reference to a field of type 'ScanType[]'
+ */
+export type ListEnumScanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScanType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal'
+ */
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal[]'
+ */
+export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
+ * Reference to a field of type 'UserMachineStatus'
+ */
+export type EnumUserMachineStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserMachineStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'UserMachineStatus[]'
+ */
+export type ListEnumUserMachineStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserMachineStatus[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -6906,6 +7359,10 @@ export type GlobalOmitConfig = {
   vloqEmailLogs?: Prisma.VloqEmailLogsOmit
   modulesMaster?: Prisma.ModulesMasterOmit
   vendorModulesMapping?: Prisma.VendorModulesMappingOmit
+  machineMaster?: Prisma.MachineMasterOmit
+  cutList?: Prisma.CutListOmit
+  cutListMachineMapping?: Prisma.CutListMachineMappingOmit
+  userMachineMapping?: Prisma.UserMachineMappingOmit
 }
 
 /* Types for Logging */
