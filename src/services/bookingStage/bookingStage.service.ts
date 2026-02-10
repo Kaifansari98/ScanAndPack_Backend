@@ -47,6 +47,7 @@ export class BookingStageService {
           tech_check_completed_at: true,
           is_order_login_completed: true,
           order_login_completed_at: true,
+          is_production_completed: true,
           productStructure: {
             select: {
               id: true,
