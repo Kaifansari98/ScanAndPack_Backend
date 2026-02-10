@@ -6,6 +6,7 @@ import { NotificationService } from "../../../../src/services/notification/notif
 import {
   sendLeadMovedToClientApprovalEmail,
   sendOrderLoginEnabledEmail,
+  sendRevisedDocumentsUploadedEmail,
 } from "../../../../src/services/email/brevoEmail.service";
 
 export type DocTypeTag = "Type 11" | "Type 12";
@@ -565,81 +566,6 @@ export class ClientDocumentationService {
     };
   }
 
-  public async addMoreClientDocumentation(data: ClientDocumentationDto) {
-    // Upload outside transaction
-    const uploadedDocs: {
-      originalname: string;
-      sysName: string;
-      docTypeTag: "Type 11" | "Type 12";
-    }[] = [];
-
-    // DB Transaction
-    return await prisma.$transaction(async (tx) => {
-      const response: any = {
-        documents: [],
-        message: "Additional client documentation uploaded successfully",
-      };
-
-      for (const doc of data.documents) {
-        const docType = await tx.documentTypeMaster.findFirst({
-          where: { vendor_id: data.vendor_id, tag: doc.docTypeTag },
-        });
-
-        const docEntry = await tx.leadDocuments.create({
-          data: {
-            doc_og_name: doc.originalName,
-            doc_sys_name: doc.sysName,
-            created_by: data.created_by,
-            doc_type_id: docType?.id!,
-            account_id: data.account_id,
-            lead_id: data.lead_id,
-            vendor_id: data.vendor_id,
-            tech_check_status: "REVISED",
-          },
-        });
-
-        response.documents.push(docEntry);
-      }
-
-      const docCount = response.documents.length;
-      const plural = docCount > 1 ? "documents have" : "document has";
-      const actionMessage = `${docCount} additional Client Documentation ${plural} been uploaded successfully.`;
-
-      const detailedLog = await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: data.vendor_id,
-          lead_id: data.lead_id,
-          account_id: data.account_id,
-          action: actionMessage,
-          action_type: "CREATE",
-          created_by: data.created_by,
-          created_at: new Date(),
-        },
-      });
-
-      const docLogsData = response.documents.map((doc: any) => ({
-        vendor_id: data.vendor_id,
-        lead_id: data.lead_id,
-        account_id: data.account_id,
-        doc_id: doc.id,
-        lead_logs_id: detailedLog.id,
-        created_by: data.created_by,
-        created_at: new Date(),
-      }));
-
-      await tx.leadDocumentLogs.createMany({ data: docLogsData });
-
-      logger.info("✅ Additional Client Documentation uploaded", {
-        vendor_id: data.vendor_id,
-        lead_id: data.lead_id,
-        docCount,
-        actionMessage,
-      });
-
-      return response;
-    });
-  }
-
   public async getLeadsWithStatusClientDocumentation(
     vendorId: number,
     userId: number,
@@ -753,5 +679,237 @@ export class ClientDocumentationService {
         orderBy: { created_at: Prisma.SortOrder.desc }, // ✅ fixed typing
       },
     };
+  }
+
+  public async addMoreClientDocumentation(data: ClientDocumentationDto) {
+    // ==================================================
+    // 1️⃣ CORE DB TRANSACTION (UPLOAD + LOGS)
+    // ==================================================
+
+    const result = await prisma.$transaction(async (tx) => {
+      const response: any = {
+        documents: [],
+        message: "Additional client documentation uploaded successfully",
+      };
+
+      for (const doc of data.documents) {
+        const docType = await tx.documentTypeMaster.findFirst({
+          where: { vendor_id: data.vendor_id, tag: doc.docTypeTag },
+          select: { id: true },
+        });
+
+        if (!docType) {
+          throw new Error(`Document type ${doc.docTypeTag} not configured`);
+        }
+
+        const docEntry = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: doc.originalName,
+            doc_sys_name: doc.sysName,
+            created_by: data.created_by,
+            doc_type_id: docType.id,
+            account_id: data.account_id,
+            lead_id: data.lead_id,
+            vendor_id: data.vendor_id,
+            tech_check_status: "REVISED",
+          },
+        });
+
+        response.documents.push(docEntry);
+      }
+
+      const docCount = response.documents.length;
+      const actionMessage = `${docCount} additional Client Documentation ${
+        docCount > 1 ? "documents have" : "document has"
+      } been uploaded successfully.`;
+
+      const detailedLog = await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          action: actionMessage,
+          action_type: "UPLOAD",
+          created_by: data.created_by,
+        },
+      });
+
+      await tx.leadDocumentLogs.createMany({
+        data: response.documents.map((doc: any) => ({
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: data.created_by,
+        })),
+      });
+
+      return { ...response, docCount };
+    });
+
+    // ==================================================
+    // 2️⃣ LEAD STAGE CHECK → ONLY TECH CHECK (TYPE 8)
+    // ==================================================
+
+    const lead = await prisma.leadMaster.findUnique({
+      where: { id: data.lead_id },
+      select: {
+        id: true,
+        lead_code: true,
+        firstname: true,
+        lastname: true,
+        account_id: true,
+        status_id: true,
+      },
+    });
+
+    if (!lead) return result;
+
+    const leadStatus = await prisma.statusTypeMaster.findUnique({
+      where: { id: lead.status_id ?? 0 },
+      select: { tag: true },
+    });
+
+    if (leadStatus?.tag !== "Type 8") {
+      logger.info("ℹ️ Lead not in Tech Check stage. Notification skipped.", {
+        lead_id: data.lead_id,
+        stage: leadStatus?.tag,
+      });
+      return result;
+    }
+
+    // ==================================================
+    // 3️⃣ GET USERS MAPPED TO LEAD
+    // ==================================================
+
+    const leadUserMappings = await prisma.leadUserMapping.findMany({
+      where: {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        status: "active",
+      },
+      select: {
+        user: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+            status: true,
+            user_type: {
+              select: {
+                user_type: true, // 👈 FROM UserTypeMaster
+              },
+            },
+          },
+        },
+      },
+    });
+
+    // ==================================================
+    // 4️⃣ FILTER ONLY TECH-CHECK ROLE USERS
+    // ==================================================
+
+    const techCheckUsers = leadUserMappings
+      .map((m) => m.user)
+      .filter(
+        (u) =>
+          u.status === "active" &&
+          u.user_type.user_type.toLowerCase() === "tech-check",
+      );
+
+    if (!techCheckUsers.length) {
+      logger.warn("⚠️ No Tech Check user found for lead", {
+        lead_id: data.lead_id,
+      });
+      return result;
+    }
+
+    // ==================================================
+    // 5️⃣ COMMON DATA FOR NOTIFICATION / EMAIL
+    // ==================================================
+
+    const leadCode =
+      lead.lead_code ?? `LEAD-${String(lead.id).padStart(4, "0")}`;
+
+    const leadName = `${lead.firstname} ${lead.lastname}`.trim();
+
+    const uploadedBy = await prisma.userMaster.findUnique({
+      where: { id: data.created_by },
+      select: { user_name: true },
+    });
+
+    const uploadedAt = new Date().toLocaleString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    const baseUrl =
+      process.env.CLIENT_BASE_URL ||
+      process.env.FRONTEND_URL ||
+      "http://localhost:3000";
+
+    const redirectPath = `/dashboard/leads/tech-check/${lead.id}`;
+
+    const projectUrl = lead.account_id
+      ? `${baseUrl}${redirectPath}?accountId=${lead.account_id}`
+      : `${baseUrl}${redirectPath}`;
+
+    // ==================================================
+    // 6️⃣ SEND 🔔 IN-APP (ONCE) + 📧 EMAIL
+    // ==================================================
+
+    await Promise.allSettled(
+      techCheckUsers.map(async (user) => {
+        // ---------- IN-APP (DUPLICATE SAFE) ----------
+        const alreadyNotified = await prisma.notification.findFirst({
+          where: {
+            vendor_id: data.vendor_id,
+            user_id: user.id,
+            entity_type: "lead",
+            entity_id: lead.id,
+            title: "Revised Documents Uploaded",
+          },
+        });
+
+        if (!alreadyNotified) {
+          await NotificationService.createAndSend({
+            vendor_id: data.vendor_id,
+            user_id: user.id,
+            sender_id: data.created_by,
+            type: NotificationType.LEAD_ACTION,
+            title: "Revised Documents Uploaded",
+            message: `Revised documents have been uploaded for ${leadCode} - ${leadName}. Please review and update your Tech Check decision.`,
+            entity_type: "lead",
+            entity_id: lead.id,
+            redirect_url: redirectPath,
+          });
+        }
+
+        // ---------- EMAIL ----------
+        if (!user.user_email) return;
+
+        await sendRevisedDocumentsUploadedEmail({
+          vendor_id: data.vendor_id,
+          toEmail: user.user_email,
+          toName: user.user_name,
+          leadCode,
+          leadName,
+          uploadedBy: uploadedBy?.user_name ?? "Sales Executive",
+          uploadedAt,
+          projectUrl,
+        });
+      }),
+    );
+
+    logger.info("🔔 Revised documents notification sent to Tech Check users", {
+      lead_id: lead.id,
+      recipients: techCheckUsers.length,
+    });
+
+    return result;
   }
 }

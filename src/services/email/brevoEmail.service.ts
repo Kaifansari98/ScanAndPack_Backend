@@ -4227,15 +4227,11 @@ export const sendTechCheckRejectedEmail = async (payload: {
           <div class="lead-info-value">${payload.rejectedAt}</div>
         </div>
       </div>
-
-      <div style="margin:16px 0 0;border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
-        <p style="margin:0 0 6px;color:#6b7280;font-size:13px;font-weight:500;">
-          Remark
-        </p>
-        <p style="margin:0;color:#111827;font-size:14px;line-height:1.6;white-space:pre-wrap;word-break:break-word;">
-          ${payload.remark ?? "—"}
-        </p>
-      </div>
+      
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Remarks</div>
+          <div class="lead-info-value">${payload.remark ?? "—"}</div>
+        </div>
 
       <p style="margin:16px 0 0;color:#4b5563;">
         Please review the remark and resubmit the documents.
