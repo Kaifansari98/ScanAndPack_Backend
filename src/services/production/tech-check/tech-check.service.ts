@@ -41,7 +41,7 @@ export class TechCheckService {
     assignToUserId: number,
     accountId: number,
     productStructureInstanceId?: number
-  ): Promise<ApproveTechCheckResult> {
+  ) {
     const result = await prisma.$transaction(async (tx) => {
       if (productStructureInstanceId) {
         const instance = await tx.leadProductStructureInstance.findFirst({
