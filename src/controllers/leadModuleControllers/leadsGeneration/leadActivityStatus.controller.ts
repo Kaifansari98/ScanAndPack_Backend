@@ -91,64 +91,7 @@ export class LeadActivityStatusController {
         .json(ApiResponse.error(error.message || "Internal Server Error"));
     }
   }
-
-  static async getOnHoldLeads(req: Request, res: Response) {
-    try {
-      const { vendorId } = req.params;
-
-      const leads = await LeadActivityStatusService.getOnHoldLeads(
-        Number(vendorId),
-      );
-
-      return res
-        .status(200)
-        .json(ApiResponse.success(leads, "OnHold leads fetched successfully"));
-    } catch (error: any) {
-      return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal Server Error"));
-    }
-  }
-
-  static async getLostLeads(req: Request, res: Response) {
-    try {
-      const { vendorId } = req.params;
-
-      const leads = await LeadActivityStatusService.getLostLeads(
-        Number(vendorId),
-      );
-
-      return res
-        .status(200)
-        .json(ApiResponse.success(leads, "Lost leads fetched successfully"));
-    } catch (error: any) {
-      return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal Server Error"));
-    }
-  }
-
-  static async getLostApprovalLeads(req: Request, res: Response) {
-    try {
-      const { vendorId } = req.params;
-
-      const leads = await LeadActivityStatusService.getLostApprovalLeads(
-        Number(vendorId),
-      );
-
-      return res
-        .status(200)
-        .json(
-          ApiResponse.success(leads, "LostApproval leads fetched successfully"),
-        );
-    } catch (error: any) {
-      return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal Server Error"));
-    }
-  }
-
-
+  
   static async getActivityStatusCounts(req: Request, res: Response) {
     try {
       const vendorId = parseInt(req.params.vendorId, 10);
@@ -174,9 +117,6 @@ export class LeadActivityStatusController {
     }
   }
 
-
-
-  
   static async getOnHoldLeadsFilter(req: Request, res: Response) {
     try {
       const vendorId = parseInt(req.params.vendorId);

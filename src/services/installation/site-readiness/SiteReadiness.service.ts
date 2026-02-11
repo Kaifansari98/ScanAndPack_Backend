@@ -1,7 +1,9 @@
-import { Prisma } from "../../../prisma/generated";
+import { NotificationType, Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
+import { sendLeadMovedToDispatchPlanningEmail } from "../../../../src/services/email/brevoEmail.service";
+import { NotificationService } from "../../../../src/services/notification/notification.service";
 
 interface SiteReadinessPayload {
   account_id: number;
@@ -17,7 +19,7 @@ export class SiteReadinessService {
     vendorId: number,
     userId: number,
     limit = 10,
-    page = 1
+    page = 1,
   ) {
     const skip = (page - 1) * limit;
 
@@ -29,7 +31,7 @@ export class SiteReadinessService {
 
     if (!siteReadinessStatus) {
       throw new Error(
-        `Site Readiness status (Type 12) not found for vendor ${vendorId}`
+        `Site Readiness status (Type 12) not found for vendor ${vendorId}`,
       );
     }
 
@@ -143,7 +145,7 @@ export class SiteReadinessService {
   static async createSiteReadiness(
     vendorId: number,
     leadId: number,
-    payload: any
+    payload: any,
   ) {
     const entries = Array.isArray(payload) ? payload : [payload];
 
@@ -174,7 +176,7 @@ export class SiteReadinessService {
   static async getSiteReadinessRecords(
     vendorId: number,
     leadId?: number,
-    accountId?: number
+    accountId?: number,
   ) {
     const where: any = { vendor_id: vendorId };
 
@@ -215,7 +217,7 @@ export class SiteReadinessService {
   static async updateSiteReadiness(
     vendorId: number,
     leadId: number,
-    payload: any
+    payload: any,
   ) {
     const entries = Array.isArray(payload) ? payload : [payload];
     const updatedRecords: any[] = [];
@@ -223,7 +225,7 @@ export class SiteReadinessService {
     for (const item of entries) {
       if (!item.id) {
         throw new Error(
-          "Each SiteReadiness record must include an 'id' field to update."
+          "Each SiteReadiness record must include an 'id' field to update.",
         );
       }
 
@@ -253,12 +255,12 @@ export class SiteReadinessService {
     leadId: number,
     accountId: number | null,
     userId: number,
-    files: { originalName: string; sysName: string }[]
+    files: { originalName: string; sysName: string }[],
   ) {
     if (!vendorId || !leadId || !userId)
       throw Object.assign(
         new Error("vendorId, leadId and userId are required"),
-        { statusCode: 400 }
+        { statusCode: 400 },
       );
 
     // 🔹 Get DocType for Current Site Photos (Type 19)
@@ -269,7 +271,7 @@ export class SiteReadinessService {
     if (!sitePhotoDocType)
       throw Object.assign(
         new Error("Document type (Type 19) not found for this vendor"),
-        { statusCode: 404 }
+        { statusCode: 404 },
       );
 
     const uploadedDocs = [];
@@ -310,7 +312,7 @@ export class SiteReadinessService {
     if (!sitePhotoDocType)
       throw Object.assign(
         new Error("Document type (Type 19) not found for this vendor"),
-        { statusCode: 404 }
+        { statusCode: 404 },
       );
 
     // 🔹 Fetch all uploaded Current Site Photos for this lead
@@ -329,7 +331,7 @@ export class SiteReadinessService {
       documents.map(async (doc) => {
         const signed_url = await generateSignedUrl(doc.doc_sys_name);
         return { ...doc, signed_url };
-      })
+      }),
     );
 
     return docsWithUrls;
@@ -357,7 +359,7 @@ export class SiteReadinessService {
     if (!sitePhotoDocType) {
       throw Object.assign(
         new Error("Document type (Type 19) not found for this vendor"),
-        { statusCode: 404 }
+        { statusCode: 404 },
       );
     }
 
@@ -395,7 +397,7 @@ export class SiteReadinessService {
     const allValuesPresent =
       hasSixRows &&
       readinessRows.every(
-        (item) => item.value !== null && item.value !== undefined
+        (item) => item.value !== null && item.value !== undefined,
       );
 
     // 🔹 Final flag (photo + 6 items + all true)
@@ -417,9 +419,9 @@ export class SiteReadinessService {
   static async moveLeadToDispatchPlanning(
     vendorId: number,
     leadId: number,
-    updatedBy: number
+    updatedBy: number,
   ) {
-    return prisma.$transaction(async (tx) => {
+    const result = prisma.$transaction(async (tx) => {
       // 1️⃣ Validate lead
       const lead = await tx.leadMaster.findUnique({
         where: { id: leadId },
@@ -438,7 +440,7 @@ export class SiteReadinessService {
 
       if (!toStatus)
         throw new Error(
-          `Status 'Type 13' (Dispatch Planning Stage) not found for vendor ${vendorId}`
+          `Status 'Type 13' (Dispatch Planning Stage) not found for vendor ${vendorId}`,
         );
 
       // 3️⃣ Update Lead’s Status
@@ -484,5 +486,120 @@ export class SiteReadinessService {
         new_status: toStatus.type,
       };
     });
+    
+    // ===============================
+    // DISPATCH PLANNING STAGE → ADMIN NOTIFICATION
+    // ===============================
+
+    try {
+      const actorId = updatedBy; // user who moved lead to dispatch planning
+
+      const [lead, actor] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: leadId },
+          select: {
+            firstname: true,
+            lastname: true,
+            lead_code: true,
+            vendor_id: true,
+            account_id: true,
+          },
+        }),
+
+        prisma.userMaster.findUnique({
+          where: { id: actorId },
+          select: { user_name: true },
+        }),
+      ]);
+
+      // Safety guard
+      if (!lead) return;
+
+      const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+
+      const leadCode =
+        lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+
+      const movedBy = actor?.user_name ?? "System";
+
+      const movedAt = new Date().toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      const baseUrl =
+        process.env.CLIENT_BASE_URL ||
+        process.env.FRONTEND_URL ||
+        "http://localhost:3000";
+
+      const redirectPath = lead.account_id
+        ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
+        : `/dashboard/leads/details/${leadId}`;
+
+      const projectUrl = `${baseUrl}${redirectPath}`;
+
+      // Fetch Active Admin Users
+      const admins = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: lead.vendor_id,
+          status: "active",
+          user_type: {
+            user_type: { in: ["admin", "super-admin"] },
+          },
+        },
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+        },
+      });
+
+      for (const admin of admins) {
+        // ❌ Prevent self-notification
+        if (admin.id === actorId) continue;
+
+        // 🔔 In-App Notification
+        await NotificationService.createAndSend({
+          vendor_id: lead.vendor_id,
+          user_id: admin.id,
+          sender_id: actorId,
+          type: NotificationType.LEAD_MILESTONE,
+          title: "Dispatch Planning Started",
+          message: `${leadCode} - ${leadName} moved to Dispatch Planning stage by ${movedBy}.`,
+          entity_type: "lead",
+          entity_id: leadId,
+          redirect_url: redirectPath,
+        });
+
+        // 📧 Email Notification
+        if (!admin.user_email) continue;
+
+        await sendLeadMovedToDispatchPlanningEmail({
+          vendor_id: lead.vendor_id,
+          toEmail: admin.user_email,
+          toName: admin.user_name,
+          leadCode,
+          leadName,
+          movedBy,
+          movedAt,
+          projectUrl,
+        });
+      }
+
+      logger.info("✅ Dispatch Planning admin notifications sent", {
+        vendor_id: lead.vendor_id,
+        lead_id: leadId,
+        admin_count: admins.length,
+      });
+    } catch (dispatchNotifyErr: any) {
+      logger.warn("⚠️ Dispatch Planning admin notification failed", {
+        lead_id: leadId,
+        error: dispatchNotifyErr?.message,
+      });
+    }
+    return result;
   }
 }

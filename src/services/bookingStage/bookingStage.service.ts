@@ -15,7 +15,10 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import logger from "../../utils/logger";
 import { isLeadComplete } from "../../validations/leadValidation";
 import { cache } from "../../utils/cache";
-import { sendPaymentAddedEmail } from "../email/brevoEmail.service";
+import {
+  sendLeadMovedToBookingEmail,
+  sendPaymentAddedEmail,
+} from "../email/brevoEmail.service";
 
 export class BookingStageService {
   // Helper to avoid repeating include structure
@@ -428,44 +431,108 @@ export class BookingStageService {
       },
     );
 
+    // ===============================
+    // BOOKING STAGE → ADMIN NOTIFICATION
+    // ===============================
+
     try {
-      const supervisor = await prisma.userMaster.findUnique({
-        where: { id: data.siteSupervisorId },
+      const actorId = data.created_by;
+
+      const [lead, actor] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: data.lead_id },
+          select: {
+            firstname: true,
+            lastname: true,
+            lead_code: true,
+            vendor_id: true,
+            account_id: true,
+          },
+        }),
+
+        prisma.userMaster.findUnique({
+          where: { id: actorId },
+          select: { user_name: true },
+        }),
+      ]);
+
+      if (!lead) return response;
+
+      const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+
+      const leadCode =
+        lead.lead_code ?? `LEAD-${String(data.lead_id).padStart(4, "0")}`;
+
+      const updatedAt = new Date().toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      const baseUrl =
+        process.env.CLIENT_BASE_URL ||
+        process.env.FRONTEND_URL ||
+        "http://localhost:3000";
+
+      const projectUrl = lead.account_id
+        ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
+        : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;
+
+      // Fetch Active Admins
+      const admins = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: lead.vendor_id,
+          status: "active",
+          user_type: {
+            user_type: { in: ["admin"] },
+          },
+        },
         select: {
+          id: true,
           user_name: true,
-          user_type: { select: { user_type: true } },
+          user_email: true,
         },
       });
-      const supervisorRole = supervisor?.user_type?.user_type?.toLowerCase();
 
-      if (supervisorRole === "site-supervisor") {
-        const lead = await prisma.leadMaster.findUnique({
-          where: { id: data.lead_id },
-          select: { firstname: true, lastname: true },
-        });
-        const leadName =
-          `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+      for (const admin of admins) {
+        // ❌ Prevent self-trigger notification
+        if (admin.id === actorId) continue;
 
+        // 🔔 In-App Notification
         await NotificationService.createAndSend({
-          vendor_id: data.vendor_id,
-          user_id: data.siteSupervisorId,
-          sender_id: data.created_by,
-          type: NotificationType.LEAD_ASSIGNED,
-          title: "Lead assigned",
-          message:
-            leadName.length > 0
-              ? `Lead ${leadName} has been assigned to you.`
-              : "A lead has been assigned to you.",
+          vendor_id: lead.vendor_id,
+          user_id: admin.id,
+          sender_id: actorId,
+          type: NotificationType.LEAD_MILESTONE,
+          title: "Lead Entered Booking Stage",
+          message: `${leadCode} - ${leadName} moved to Booking stage.`,
           entity_type: "lead",
           entity_id: data.lead_id,
-          redirect_url: `/dashboard/leads/details/${data.lead_id}?accountId=${data.account_id}`,
+          redirect_url: lead.account_id
+            ? `/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
+            : `/dashboard/leads/details/${data.lead_id}`,
+        });
+
+        // 📧 Email Notification
+        if (!admin.user_email) continue;
+
+        await sendLeadMovedToBookingEmail({
+          vendor_id: lead.vendor_id,
+          toEmail: admin.user_email,
+          toName: admin.user_name,
+          leadCode,
+          leadName,
+          updatedBy: actor?.user_name ?? "System",
+          updatedAt,
+          projectUrl,
         });
       }
-    } catch (notificationError: any) {
-      logger.warn("⚠️ Failed to send site supervisor assignment notification", {
-        error: notificationError?.message,
+    } catch (err: any) {
+      logger.warn("⚠️ Booking stage admin notification failed", {
         lead_id: data.lead_id,
-        assignee_user_id: data.siteSupervisorId,
+        error: err?.message,
       });
     }
 
@@ -563,6 +630,111 @@ export class BookingStageService {
         actionMessage,
       });
 
+      // ===============================
+      // BOOKING STAGE → ADMIN NOTIFICATION
+      // ===============================
+
+      try {
+        const actorId = data.created_by;
+
+        const [lead, actor] = await Promise.all([
+          prisma.leadMaster.findUnique({
+            where: { id: data.lead_id },
+            select: {
+              firstname: true,
+              lastname: true,
+              lead_code: true,
+              vendor_id: true,
+              account_id: true,
+            },
+          }),
+
+          prisma.userMaster.findUnique({
+            where: { id: actorId },
+            select: { user_name: true },
+          }),
+        ]);
+
+        if (!lead) return response;
+
+        const leadName =
+          `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+
+        const leadCode =
+          lead.lead_code ?? `LEAD-${String(data.lead_id).padStart(4, "0")}`;
+
+        const updatedAt = new Date().toLocaleString("en-IN", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
+        const baseUrl =
+          process.env.CLIENT_BASE_URL ||
+          process.env.FRONTEND_URL ||
+          "http://localhost:3000";
+
+        const projectUrl = lead.account_id
+          ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
+          : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;
+
+        // Fetch Active Admins
+        const admins = await prisma.userMaster.findMany({
+          where: {
+            vendor_id: lead.vendor_id,
+            status: "active",
+            user_type: {
+              user_type: { in: ["admin"] },
+            },
+          },
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+          },
+        });
+
+        for (const admin of admins) {
+          // ❌ Prevent self-trigger notification
+          if (admin.id === actorId) continue;
+
+          // 🔔 In-App Notification
+          await NotificationService.createAndSend({
+            vendor_id: lead.vendor_id,
+            user_id: admin.id,
+            sender_id: actorId,
+            type: NotificationType.LEAD_MILESTONE,
+            title: "Lead Entered Booking Stage",
+            message: `${leadCode} - ${leadName} moved to Booking stage.`,
+            entity_type: "lead",
+            entity_id: data.lead_id,
+            redirect_url: lead.account_id
+              ? `/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
+              : `/dashboard/leads/details/${data.lead_id}`,
+          });
+
+          // 📧 Email Notification
+          if (!admin.user_email) continue;
+
+          await sendLeadMovedToBookingEmail({
+            vendor_id: lead.vendor_id,
+            toEmail: admin.user_email,
+            toName: admin.user_name,
+            leadCode,
+            leadName,
+            updatedBy: actor?.user_name ?? "System",
+            updatedAt,
+            projectUrl,
+          });
+        }
+      } catch (err: any) {
+        logger.warn("⚠️ Booking stage admin notification failed", {
+          lead_id: data.lead_id,
+          error: err?.message,
+        });
+      }
       return response;
     });
   }

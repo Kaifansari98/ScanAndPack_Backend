@@ -1,5 +1,9 @@
+import logger from "../../../../src/utils/logger";
 import { prisma } from "../../../prisma/client";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
+import { sendLeadMovedToReadyToDispatchEmail, sendReadyToDispatchEmail } from "../../../../src/services/email/brevoEmail.service";
+import { NotificationType } from "../../../prisma/generated";
+import { NotificationService } from "../../../../src/services/notification/notification.service";
 
 export class PostProductionService {
   async uploadQcPhotos(
@@ -13,7 +17,7 @@ export class PostProductionService {
     if (!vendorId || !leadId || !userId)
       throw Object.assign(
         new Error("vendorId, leadId and userId are required"),
-        { statusCode: 400 }
+        { statusCode: 400 },
       );
 
     // 🔹 Get DocType for QC Photos (Type 15)
@@ -24,7 +28,7 @@ export class PostProductionService {
     if (!qcDocType)
       throw Object.assign(
         new Error("Document type (Type 15) not found for this vendor"),
-        { statusCode: 404 }
+        { statusCode: 404 },
       );
 
     const uploadedDocs = [];
@@ -71,7 +75,7 @@ export class PostProductionService {
         new Error("Document type (Type 16) not found for this vendor"),
         {
           statusCode: 404,
-        }
+        },
       );
 
     const uploadedDocs = [];
@@ -185,7 +189,7 @@ export class PostProductionService {
         new Error("Document type (Type 17) not found for this vendor"),
         {
           statusCode: 404,
-        }
+        },
       );
 
     const uploadedDocs = [];
@@ -293,7 +297,7 @@ export class PostProductionService {
     if (!docType)
       throw Object.assign(
         new Error("Document type (Type 15) not found for this vendor"),
-        { statusCode: 404 }
+        { statusCode: 404 },
       );
 
     const docs = await prisma.leadDocuments.findMany({
@@ -314,7 +318,7 @@ export class PostProductionService {
       docs.map(async (doc) => ({
         ...doc,
         signed_url: await generateSignedUrl(doc.doc_sys_name, 3600, "inline"),
-      }))
+      })),
     );
 
     return withUrls;
@@ -333,7 +337,7 @@ export class PostProductionService {
     if (!docType)
       throw Object.assign(
         new Error("Document type (Type 16) not found for this vendor"),
-        { statusCode: 404 }
+        { statusCode: 404 },
       );
 
     const docs = await prisma.leadDocuments.findMany({
@@ -353,7 +357,7 @@ export class PostProductionService {
       docs.map(async (doc) => ({
         ...doc,
         signed_url: await generateSignedUrl(doc.doc_sys_name, 3600, "inline"),
-      }))
+      })),
     );
 
     let remark: string | null = null;
@@ -399,7 +403,7 @@ export class PostProductionService {
     if (!docType)
       throw Object.assign(
         new Error("Document type (Type 17) not found for this vendor"),
-        { statusCode: 404 }
+        { statusCode: 404 },
       );
 
     const docs = await prisma.leadDocuments.findMany({
@@ -419,7 +423,7 @@ export class PostProductionService {
       docs.map(async (doc) => ({
         ...doc,
         signed_url: await generateSignedUrl(doc.doc_sys_name, 3600, "inline"),
-      }))
+      })),
     );
 
     let remark: string | null = null;
@@ -711,10 +715,7 @@ export class PostProductionService {
         (instance) => instance.title
       ),
       missing_boxes_titles: incompleteBoxes.map((instance) => instance.title),
-      all_exists:
-        qcPhotosExist &&
-        hardwareDocsExist &&
-        woodworkDocsExist
+      all_exists: qcPhotosExist && hardwareDocsExist && woodworkDocsExist,
     };
   }
 
@@ -770,52 +771,317 @@ export class PostProductionService {
   async moveLeadToReadyToDispatch(
     vendorId: number,
     leadId: number,
-    updatedBy: number
+    updatedBy: number,
   ) {
-    // 1️⃣ Get Ready To Dispatch status
-    const readyToDispatchStatus = await prisma.statusTypeMaster.findFirst({
-      where: { vendor_id: vendorId, tag: "Type 11" },
-      select: { id: true },
+    // ==========================
+    // TRANSACTIONAL CORE
+    // ==========================
+
+    const result = await prisma.$transaction(async (tx) => {
+      // 1️⃣ Fetch Ready To Dispatch status (Type 11)
+      const readyToDispatchStatus = await tx.statusTypeMaster.findFirst({
+        where: { vendor_id: vendorId, tag: "Type 11" },
+        select: { id: true },
+      });
+
+      if (!readyToDispatchStatus) {
+        throw new Error(
+          `Ready To Dispatch status (Type 11) not found for vendor ${vendorId}`,
+        );
+      }
+
+      // 2️⃣ Validate lead exists
+      const currentLead = await tx.leadMaster.findFirst({
+        where: { id: leadId, vendor_id: vendorId, is_deleted: false },
+        select: {
+          id: true,
+          status_id: true,
+          account_id: true,
+          lead_code: true,
+          firstname: true,
+          lastname: true,
+        },
+      });
+
+      if (!currentLead) {
+        throw new Error(`Lead ${leadId} not found for vendor ${vendorId}`);
+      }
+
+      // 3️⃣ Update lead status
+      const updatedLead = await tx.leadMaster.update({
+        where: { id: leadId },
+        data: {
+          status_id: readyToDispatchStatus.id,
+          updated_by: updatedBy,
+        },
+      });
+
+      // 4️⃣ Audit log
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: currentLead.account_id ?? 0,
+          action: "Lead moved to Ready To Dispatch stage",
+          action_type: "STATUS_CHANGE",
+          created_by: updatedBy,
+          created_at: new Date(),
+        },
+      });
+
+      return {
+        updatedLead,
+        leadMeta: currentLead,
+      };
     });
 
-    if (!readyToDispatchStatus) {
-      throw new Error(
-        `Ready To Dispatch status (Type 11) not found for vendor ${vendorId}`
+    // ==========================
+    // COMMUNICATION LAYER
+    // ==========================
+
+    try {
+      const { leadMeta } = result;
+
+      // 5️⃣ Resolve Sales Executive role id
+      const salesExecRole = await prisma.userTypeMaster.findFirst({
+        where: {
+          user_type: { equals: "sales-executive", mode: "insensitive" },
+        },
+        select: { id: true },
+      });
+
+      if (!salesExecRole) {
+        logger.warn("Sales Executive role not configured", { vendorId });
+        return result.updatedLead;
+      }
+
+      // 6️⃣ Fetch mapped Sales Executives
+      const leadMappings = await prisma.leadUserMapping.findMany({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          status: "active",
+        },
+        select: { user_id: true },
+      });
+
+      const salesUserIds = Array.from(
+        new Set(leadMappings.map((m) => m.user_id)),
+      ).filter((id) => id !== updatedBy);
+
+      if (!salesUserIds.length) {
+        logger.info("No Sales Executive mapped for Ready To Dispatch", {
+          leadId,
+        });
+        return result.updatedLead;
+      }
+
+      // 7️⃣ Fetch Sales Executive user profiles
+      const salesExecutives = await prisma.userMaster.findMany({
+        where: {
+          id: { in: salesUserIds },
+          vendor_id: vendorId,
+          status: "active",
+          user_type_id: salesExecRole.id,
+        },
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+        },
+      });
+
+      // 8️⃣ Fetch actor (factory user)
+      const actor = await prisma.userMaster.findUnique({
+        where: { id: updatedBy },
+        select: { user_name: true },
+      });
+
+      const leadCode =
+        leadMeta.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+
+      const leadName = `${leadMeta.firstname ?? ""} ${
+        leadMeta.lastname ?? ""
+      }`.trim();
+
+      const markedBy = actor?.user_name ?? "Factory Team";
+
+      const markedAt = new Date().toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      const redirectPath = leadMeta.account_id
+        ? `/dashboard/leads/details/${leadId}?accountId=${leadMeta.account_id}`
+        : `/dashboard/leads/details/${leadId}`;
+
+      const baseUrl =
+        process.env.CLIENT_BASE_URL ||
+        process.env.FRONTEND_URL ||
+        "http://localhost:3000";
+
+      const projectUrl = `${baseUrl}${redirectPath}`;
+
+      // ==========================
+      // BROADCAST NOTIFICATION + EMAIL
+      // ==========================
+
+      await Promise.allSettled(
+        salesExecutives.map(async (salesExec) => {
+          // 🔔 In-App Notification
+          await NotificationService.createAndSend({
+            vendor_id: vendorId,
+            user_id: salesExec.id,
+            sender_id: updatedBy,
+            type: NotificationType.LEAD_ACTION,
+            title: "Ready to Dispatch",
+            message: `Production for ${leadCode} - ${leadName} is complete and marked Ready to Dispatch by the factory.`,
+            entity_type: "lead",
+            entity_id: leadId,
+            redirect_url: redirectPath,
+          });
+
+          // 📧 Email Notification
+          if (!salesExec.user_email) return;
+
+          await sendReadyToDispatchEmail({
+            vendor_id: vendorId,
+            toEmail: salesExec.user_email,
+            toName: salesExec.user_name ?? undefined,
+            leadCode,
+            leadName,
+            markedBy,
+            markedAt,
+            projectUrl,
+          });
+        }),
       );
+
+      logger.info("Ready To Dispatch notifications dispatched", {
+        vendorId,
+        leadId,
+        receivers: salesExecutives.length,
+      });
+    } catch (notifyError: any) {
+      logger.warn("Ready To Dispatch notification failure", {
+        leadId,
+        vendorId,
+        error: notifyError?.message,
+      });
     }
 
-    // 2️⃣ Validate the lead exists in Production stage (Type 10)
-    const currentLead = await prisma.leadMaster.findFirst({
-      where: { id: leadId, vendor_id: vendorId, is_deleted: false },
-      select: { id: true, status_id: true, account_id: true },
-    });
+    // ==========================
+    // READY TO DISPATCH → ADMIN NOTIFICATION
+    // ==========================
 
-    if (!currentLead) {
-      throw new Error(`Lead ${leadId} not found for vendor ${vendorId}`);
+    try {
+      const actorId = updatedBy; // factory user who marked dispatch ready
+
+      const [lead, actor] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: leadId },
+          select: {
+            firstname: true,
+            lastname: true,
+            lead_code: true,
+            vendor_id: true,
+            account_id: true,
+          },
+        }),
+
+        prisma.userMaster.findUnique({
+          where: { id: actorId },
+          select: { user_name: true },
+        }),
+      ]);
+
+      // Safety guard
+      if (!lead) return result.updatedLead;
+
+      const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+
+      const leadCode =
+        lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+
+      const markedBy = actor?.user_name ?? "Factory Team";
+
+      const markedAt = new Date().toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      const baseUrl =
+        process.env.CLIENT_BASE_URL ||
+        process.env.FRONTEND_URL ||
+        "http://localhost:3000";
+
+      const redirectPath = lead.account_id
+        ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
+        : `/dashboard/leads/details/${leadId}`;
+
+      const projectUrl = `${baseUrl}${redirectPath}`;
+
+      // Fetch Active Admin Users
+      const admins = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: lead.vendor_id,
+          status: "active",
+          user_type: {
+            user_type: { in: ["admin"] },
+          },
+        },
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+        },
+      });
+
+      for (const admin of admins) {
+        // ❌ Prevent self notification
+        if (admin.id === actorId) continue;
+
+        // 🔔 In-App Notification (ADMIN)
+        await NotificationService.createAndSend({
+          vendor_id: lead.vendor_id,
+          user_id: admin.id,
+          sender_id: actorId,
+          type: NotificationType.LEAD_MILESTONE,
+          title: "Ready To Dispatch",
+          message: `${leadCode} - ${leadName} marked Ready to Dispatch by Factory.`,
+          entity_type: "lead",
+          entity_id: leadId,
+          redirect_url: redirectPath,
+        });
+
+        // 📧 Email Notification (ADMIN)
+        if (!admin.user_email) continue;
+
+        await sendLeadMovedToReadyToDispatchEmail({
+          vendor_id: lead.vendor_id,
+          toEmail: admin.user_email,
+          toName: admin.user_name,
+          leadCode,
+          leadName,
+          markedBy,
+          markedAt,
+          projectUrl,
+        });
+      }
+    } catch (adminNotifyErr: any) {
+      logger.warn("⚠️ Ready To Dispatch admin notification failed", {
+        leadId,
+        vendorId,
+        error: adminNotifyErr?.message,
+      });
     }
 
-    // 3️⃣ Update status to Ready To Dispatch
-    const updatedLead = await prisma.leadMaster.update({
-      where: { id: leadId },
-      data: {
-        status_id: readyToDispatchStatus.id,
-        updated_by: updatedBy,
-      },
-    });
-
-    // 4️⃣ Log transition
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        account_id: currentLead.account_id ?? 0,
-        action: "Lead moved to Ready To Dispatch stage",
-        action_type: "STATUS_CHANGE",
-        created_by: updatedBy,
-        created_at: new Date(),
-      },
-    });
-
-    return updatedLead;
+    return result.updatedLead;
   }
 }

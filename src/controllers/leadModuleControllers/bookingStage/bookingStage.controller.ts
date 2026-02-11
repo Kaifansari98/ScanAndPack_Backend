@@ -247,7 +247,7 @@ export class BookingStageController {
             where: {
               vendor_id: dto.vendor_id,
               status: "active",
-              user_type: { user_type: { in: ["admin", "super-admin"] } },
+              user_type: { user_type: { in: ["admin"] } },
             },
             select: { id: true },
           }),

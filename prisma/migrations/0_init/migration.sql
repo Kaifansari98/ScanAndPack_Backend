@@ -5,31 +5,79 @@ CREATE SCHEMA IF NOT EXISTS "public";
 CREATE TYPE "NotificationType" AS ENUM ('LEAD_ASSIGNED', 'TASK_ASSIGNED', 'CHAT_MENTION', 'LEAD_MILESTONE', 'LEAD_ACTION');
 
 -- CreateEnum
-CREATE TYPE "BoxStatus" AS ENUM ('packed', 'unpacked');
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_type WHERE typname = 'BoxStatus'
+  ) THEN
+    CREATE TYPE "BoxStatus" AS ENUM ('packed', 'unpacked');
+  END IF;
+END$$;
 
--- CreateEnum
-CREATE TYPE "ItemStatus" AS ENUM ('packed', 'unpacked');
 
--- CreateEnum
-CREATE TYPE "ActivityStatus" AS ENUM ('onGoing', 'onHold', 'lost', 'lostApproval');
+-- ItemStatus
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'ItemStatus') THEN
+    CREATE TYPE "ItemStatus" AS ENUM ('packed', 'unpacked');
+  END IF;
+END$$;
 
--- CreateEnum
-CREATE TYPE "LeadUserStatus" AS ENUM ('inactive', 'active');
+-- ActivityStatus
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'ActivityStatus') THEN
+    CREATE TYPE "ActivityStatus" AS ENUM ('onGoing', 'onHold', 'lost', 'lostApproval');
+  END IF;
+END$$;
 
--- CreateEnum
-CREATE TYPE "DocumentType" AS ENUM ('site_photo');
+-- LeadUserStatus
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'LeadUserStatus') THEN
+    CREATE TYPE "LeadUserStatus" AS ENUM ('inactive', 'active');
+  END IF;
+END$$;
 
--- CreateEnum
-CREATE TYPE "TechCheckStatus" AS ENUM ('PENDING', 'APPROVED', 'REJECTED', 'REVISED');
+-- DocumentType
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'DocumentType') THEN
+    CREATE TYPE "DocumentType" AS ENUM ('site_photo');
+  END IF;
+END$$;
 
--- CreateEnum
-CREATE TYPE "LedgerType" AS ENUM ('debit', 'credit');
+-- TechCheckStatus
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'TechCheckStatus') THEN
+    CREATE TYPE "TechCheckStatus" AS ENUM ('PENDING', 'APPROVED', 'REJECTED');
+  END IF;
+END$$;
 
--- CreateEnum
-CREATE TYPE "SupervisorStatus" AS ENUM ('active', 'inactive');
+-- LedgerType
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'LedgerType') THEN
+    CREATE TYPE "LedgerType" AS ENUM ('debit', 'credit');
+  END IF;
+END$$;
 
--- CreateEnum
-CREATE TYPE "LeadTaskStatus" AS ENUM ('open', 'closed', 'in_progress', 'completed', 'cancelled');
+-- SupervisorStatus
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'SupervisorStatus') THEN
+    CREATE TYPE "SupervisorStatus" AS ENUM ('active', 'inactive');
+  END IF;
+END$$;
+
+-- LeadTaskStatus
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'LeadTaskStatus') THEN
+    CREATE TYPE "LeadTaskStatus" AS ENUM ('open', 'closed', 'in_progress', 'completed', 'cancelled');
+  END IF;
+END$$;
 
 -- CreateEnum
 CREATE TYPE "ActionType" AS ENUM ('CREATE', 'UPDATE', 'DELETE', 'UPLOAD', 'STATUS_CHANGE', 'OTHER');

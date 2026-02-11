@@ -1,9 +1,9 @@
 import { prisma } from "../../../prisma/client";
-import { Prisma } from "../../../prisma/generated";
-import {
-  generateSignedUrl,
-} from "../../../utils/wasabiClient";
+import { NotificationType, Prisma } from "../../../prisma/generated";
+import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
+import { sendProjectCompletedEmail } from "../../../../src/services/email/brevoEmail.service";
+import { NotificationService } from "../../../../src/services/notification/notification.service";
 
 export class FinalHandoverStageService {
   /**
@@ -13,7 +13,7 @@ export class FinalHandoverStageService {
     vendorId: number,
     userId: number,
     limit = 10,
-    page = 1
+    page = 1,
   ) {
     const skip = (page - 1) * limit;
 
@@ -25,7 +25,7 @@ export class FinalHandoverStageService {
 
     if (!finalHandoverStatus) {
       throw new Error(
-        `Final Handover Stage status (Type 16) not found for vendor ${vendorId}`
+        `Final Handover Stage status (Type 16) not found for vendor ${vendorId}`,
       );
     }
 
@@ -145,7 +145,7 @@ export class FinalHandoverStageService {
       handover_booklet_photo?: { originalName: string; sysName: string }[];
       final_handover_form_photo?: { originalName: string; sysName: string }[];
       qc_document?: { originalName: string; sysName: string }[];
-    }
+    },
   ) {
     const uploadedDocs: any[] = [];
 
@@ -161,7 +161,7 @@ export class FinalHandoverStageService {
       const type = docTypes.find((d) => d.tag === tag);
       if (!type) {
         throw new Error(
-          `Document Type ${tag} not found for vendor ${vendorId}`
+          `Document Type ${tag} not found for vendor ${vendorId}`,
         );
       }
       return type.id;
@@ -292,7 +292,7 @@ export class FinalHandoverStageService {
     if (!docTypes.length)
       throw Object.assign(
         new Error("Final Handover document types not found for vendor"),
-        { statusCode: 404 }
+        { statusCode: 404 },
       );
 
     const docTypeIds = docTypes.map((d) => d.id);
@@ -314,7 +314,7 @@ export class FinalHandoverStageService {
         const signed_url = await generateSignedUrl(
           doc.doc_sys_name,
           3600,
-          "inline"
+          "inline",
         );
 
         return {
@@ -322,7 +322,7 @@ export class FinalHandoverStageService {
           signed_url,
           doc_type_tag: docTypes.find((d) => d.id === doc.doc_type_id)?.tag,
         };
-      })
+      }),
     );
 
     return documentsWithUrls;
@@ -390,7 +390,7 @@ export class FinalHandoverStageService {
     });
 
     const pending_tasks_clear = pendingTasks.every((t) =>
-      ["completed", "cancelled"].includes(t.status)
+      ["completed", "cancelled"].includes(t.status),
     );
 
     return {
@@ -418,16 +418,15 @@ export class FinalHandoverStageService {
 
     const totalProjectAmount = lead.total_project_amount;
     if (totalProjectAmount === null || totalProjectAmount === undefined) {
-      throw Object.assign(
-        new Error("total_project_amount must be provided"),
-        { statusCode: 400 }
-      );
+      throw Object.assign(new Error("total_project_amount must be provided"), {
+        statusCode: 400,
+      });
     }
 
     if (totalProjectAmount <= 0) {
       throw Object.assign(
         new Error("total_project_amount must be a positive number"),
-        { statusCode: 400 }
+        { statusCode: 400 },
       );
     }
 
@@ -450,53 +449,59 @@ export class FinalHandoverStageService {
   static async moveLeadToProjectCompleted(
     vendorId: number,
     leadId: number,
-    updatedBy: number
+    updatedBy: number,
   ) {
-    return prisma.$transaction(async (tx) => {
-      // 1️⃣ Validate Lead
+    // ==================================================
+    // 1️⃣ CORE TRANSACTION LAYER (ONLY DB OPERATIONS)
+    // ==================================================
+
+    const result = await prisma.$transaction(async (tx) => {
+      // 1. Validate Lead
       const lead = await tx.leadMaster.findUnique({
         where: { id: leadId },
-        select: { id: true, vendor_id: true, account_id: true },
+        select: {
+          id: true,
+          vendor_id: true,
+          account_id: true,
+          lead_code: true,
+          firstname: true,
+          lastname: true,
+        },
       });
 
-      if (!lead) throw new Error(`Lead ${leadId} not found`);
-      if (lead.vendor_id !== vendorId)
-        throw new Error(`Lead does not belong to vendor ${vendorId}`);
+      if (!lead) throw new Error("Lead not found");
+      if (lead.vendor_id !== vendorId) throw new Error("Vendor mismatch");
 
-      // 2️⃣ Fetch Status Type (PROJECT COMPLETED - Type 17)
-      const toStatus = await tx.statusTypeMaster.findFirst({
-        where: { vendor_id: vendorId, tag: "Type 17" },
+      // 2. Fetch Project Completed Status (Type 17)
+      const status = await tx.statusTypeMaster.findFirst({
+        where: {
+          vendor_id: vendorId,
+          tag: "Type 17",
+        },
         select: { id: true, type: true },
       });
 
-      if (!toStatus)
-        throw new Error(
-          `Status 'Type 17' (Project Completed) not found for vendor ${vendorId}`
-        );
+      if (!status) {
+        throw new Error("Project Completed status not configured");
+      }
 
-      // 3️⃣ Update Lead’s Status
-      const updatedLead = await tx.leadMaster.update({
-        where: { id: lead.id },
+      // 3. Update Lead Status
+      await tx.leadMaster.update({
+        where: { id: leadId },
         data: {
-          status_id: toStatus.id,
+          status_id: status.id,
           updated_by: updatedBy,
           updated_at: new Date(),
         },
-        select: {
-          id: true,
-          account_id: true,
-          vendor_id: true,
-          status_id: true,
-        },
       });
 
-      // 4️⃣ Create Log Entry
+      // 4. Insert Audit Log
       const actionMessage = `Lead moved to Project Completed Stage.`;
 
       await tx.leadDetailedLogs.create({
         data: {
           vendor_id: vendorId,
-          lead_id: lead.id,
+          lead_id: leadId,
           account_id: lead.account_id!,
           action: actionMessage,
           action_type: "UPDATE",
@@ -505,17 +510,129 @@ export class FinalHandoverStageService {
         },
       });
 
-      logger.info("[SERVICE] Lead moved to Project Completed Stage", {
-        lead_id: lead.id,
+      logger.info("✅ Project Completed DB update done", {
+        lead_id: leadId,
         vendor_id: vendorId,
-        updated_by: updatedBy,
       });
 
       return {
-        lead_id: lead.id,
-        vendor_id: vendorId,
-        new_status: toStatus.type,
+        leadId,
+        accountId: lead.account_id,
+        leadCode: lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`,
+        leadName: `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim(),
       };
     });
+
+    // ==================================================
+    // 2️⃣ NOTIFICATION + EMAIL LAYER (SIDE EFFECTS)
+    // ==================================================
+
+    try {
+      const [leadUsers, admins] = await Promise.all([
+        // SALES EXECUTIVES FROM MAPPING
+        prisma.leadUserMapping.findMany({
+          where: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            status: "active",
+          },
+          select: { user_id: true },
+        }),
+
+        // ADMINS
+        prisma.userMaster.findMany({
+          where: {
+            vendor_id: vendorId,
+            status: "active",
+            user_type: {
+              user_type: { in: ["admin"], mode: "insensitive" },
+            },
+          },
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+          },
+        }),
+      ]);
+
+      const salesUserIds = Array.from(new Set(leadUsers.map((m) => m.user_id)));
+
+      const salesExecutives =
+        salesUserIds.length > 0
+          ? await prisma.userMaster.findMany({
+              where: {
+                id: { in: salesUserIds },
+                status: "active",
+                user_type: {
+                  user_type: {
+                    in: ["sales-executive"],
+                    mode: "insensitive",
+                  },
+                },
+              },
+              select: {
+                id: true,
+                user_name: true,
+                user_email: true,
+              },
+            })
+          : [];
+
+      const recipients = [...admins, ...salesExecutives];
+
+      if (!recipients.length) return result;
+
+      const baseUrl =
+        process.env.CLIENT_BASE_URL ||
+        process.env.FRONTEND_URL ||
+        "http://localhost:3000";
+
+      const redirectPath = `/dashboard/leads/project-summary/${leadId}`;
+
+      const projectUrl = result.accountId
+        ? `${baseUrl}${redirectPath}?accountId=${result.accountId}`
+        : `${baseUrl}${redirectPath}`;
+
+      // ==================================================
+      // 3️⃣ SEND NOTIFICATIONS + EMAILS
+      // ==================================================
+
+      await Promise.allSettled(
+        recipients.map(async (user) => {
+          // 🔔 IN-APP NOTIFICATION
+          await NotificationService.createAndSend({
+            vendor_id: vendorId,
+            user_id: user.id,
+            sender_id: updatedBy,
+            type: NotificationType.LEAD_MILESTONE,
+            title: "Project Completed",
+            message: `Final handover documents have been uploaded and ${result.leadCode} - ${result.leadName} has been marked as Completed.`,
+            entity_type: "lead",
+            entity_id: leadId,
+            redirect_url: redirectPath,
+          });
+
+          // 📧 EMAIL
+          if (!user.user_email) return;
+
+          await sendProjectCompletedEmail({
+            vendor_id: vendorId,
+            toEmail: user.user_email,
+            toName: user.user_name ?? undefined,
+            leadCode: result.leadCode,
+            leadName: result.leadName,
+            projectUrl,
+          });
+        }),
+      );
+    } catch (notifyErr: any) {
+      logger.warn("⚠️ Project Completed notification failed", {
+        lead_id: leadId,
+        error: notifyErr?.message,
+      });
+    }
+
+    return result;
   }
 }

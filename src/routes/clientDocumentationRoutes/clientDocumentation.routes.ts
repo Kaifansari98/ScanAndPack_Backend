@@ -10,13 +10,13 @@ ClientDocumentationRouter.post(
     { name: "client_documentations_ppt", maxCount: 10 },
     { name: "client_documentations_pytha", maxCount: 10 },
   ]),
-  ClientDocumentationController.create
+  ClientDocumentationController.create,
 );
 
 // GET documents with signed URLs
 ClientDocumentationRouter.get(
   "/vendorId/:vendorId/leadId/:leadId",
-  ClientDocumentationController.get
+  ClientDocumentationController.get,
 );
 
 ClientDocumentationRouter.post(
@@ -25,13 +25,13 @@ ClientDocumentationRouter.post(
     { name: "client_documentations_ppt", maxCount: 10 },
     { name: "client_documentations_pytha", maxCount: 10 },
   ]),
-  ClientDocumentationController.addMoreDocuments
+  ClientDocumentationController.addMoreDocuments,
 );
 
 // GET /api/leads/client-documentation/allLeads/vendorId/:vendorId/userId/:userId
 ClientDocumentationRouter.get(
   "/allLeads/vendorId/:vendorId/userId/:userId",
-  ClientDocumentationController.getAllClientDocumentations
+  ClientDocumentationController.getAllClientDocumentations,
 );
 
 ClientDocumentationRouter.post(
@@ -39,4 +39,8 @@ ClientDocumentationRouter.post(
   ClientDocumentationController.moveToClientApproval
 );
 
+ClientDocumentationRouter.get(
+  "/order-login/eligibility/:vendorId/:leadId",
+  ClientDocumentationController.canMoveToOrderLoginController,
+);
 export default ClientDocumentationRouter;
