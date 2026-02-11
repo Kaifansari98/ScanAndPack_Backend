@@ -67,14 +67,15 @@ export class TechCheckController {
 
       // Instance-wise completion path
       if (instanceId) {
-        const result = (await techCheckService.approveTechCheck(
-          vendorId,
-          leadId,
-          userId,
-          Number(assign_to_user_id || 0),
-          Number(account_id || 0),
-          instanceId
-        )) as ApproveTechCheckResult;
+        const result: ApproveTechCheckResult =
+          await techCheckService.approveTechCheck(
+            vendorId,
+            leadId,
+            userId,
+            Number(assign_to_user_id || 0),
+            Number(account_id || 0),
+            instanceId
+          );
 
         const hasMoveInfo =
           "moved_to_order_login" in result &&
