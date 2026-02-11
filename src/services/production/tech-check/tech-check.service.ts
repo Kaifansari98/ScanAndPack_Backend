@@ -9,6 +9,29 @@ import {
   sendTechCheckRejectedEmail,
 } from "../../../../src/services/email/brevoEmail.service";
 
+export type ApproveTechCheckResult =
+  | {
+      mode: "instance";
+      instance_id: number;
+      is_tech_check_completed: boolean | null;
+      tech_check_completed_at: Date | null;
+    }
+  | {
+      mode: "instance_and_lead_moved";
+      instance_id: number;
+      is_tech_check_completed: boolean | null;
+      tech_check_completed_at: Date | null;
+      updatedLead: any;
+      mapping: any;
+      moved_to_order_login: true;
+      assign_to_user_id: number;
+      account_id: number;
+    }
+  | {
+      updatedLead: any;
+      mapping: any;
+    };
+
 export class TechCheckService {
   // ✅ Approve Tech Check
   public async approveTechCheck(
@@ -18,7 +41,7 @@ export class TechCheckService {
     assignToUserId: number,
     accountId: number,
     productStructureInstanceId?: number
-  ) {
+  ): Promise<ApproveTechCheckResult> {
     const result = await prisma.$transaction(async (tx) => {
       if (productStructureInstanceId) {
         const instance = await tx.leadProductStructureInstance.findFirst({

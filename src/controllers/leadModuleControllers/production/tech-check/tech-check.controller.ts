@@ -1,5 +1,8 @@
 import { Request, Response } from "express";
-import { TechCheckService } from "../../../../services/production/tech-check/tech-check.service";
+import {
+  TechCheckService,
+  ApproveTechCheckResult,
+} from "../../../../services/production/tech-check/tech-check.service";
 import { prisma } from "../../../../prisma/client";
 import { NotificationService } from "../../../../services/notification/notification.service";
 import { NotificationType } from "../../../../prisma/generated";
@@ -64,7 +67,8 @@ export class TechCheckController {
 
       // Instance-wise completion path
       if (instanceId) {
-        const result = await techCheckService.approveTechCheck(
+        const result: ApproveTechCheckResult =
+          await techCheckService.approveTechCheck(
           vendorId,
           leadId,
           userId,
@@ -73,7 +77,13 @@ export class TechCheckController {
           instanceId
         );
 
-        if (result?.moved_to_order_login && result?.assign_to_user_id) {
+        const hasMoveInfo =
+          "moved_to_order_login" in result &&
+          result.moved_to_order_login === true &&
+          "assign_to_user_id" in result &&
+          typeof result.assign_to_user_id === "number";
+
+        if (hasMoveInfo) {
           try {
             const assignee = await prisma.userMaster.findUnique({
               where: { id: Number(result.assign_to_user_id) },
@@ -101,21 +111,27 @@ export class TechCheckController {
                     : "A lead has been assigned to you.",
                 entity_type: "lead",
                 entity_id: leadId,
-                redirect_url: `/dashboard/leads/details/${leadId}?accountId=${result.account_id || account_id}`,
+                redirect_url: `/dashboard/leads/details/${leadId}?accountId=${
+                  "account_id" in result && result.account_id
+                    ? result.account_id
+                    : account_id
+                }`,
               });
             }
           } catch (notificationError: any) {
             console.error("⚠️ Failed to send order-login assignment notification", {
               error: notificationError?.message,
               lead_id: leadId,
-              assignee_user_id: result.assign_to_user_id,
+              assignee_user_id:
+                "assign_to_user_id" in result ? result.assign_to_user_id : null,
             });
           }
         }
 
         return res.status(200).json({
           success: true,
-          message: result?.moved_to_order_login
+          message:
+            "moved_to_order_login" in result && result.moved_to_order_login
             ? "All instances completed. Lead moved to Order Login"
             : "Tech check marked as completed for instance",
           data: result,
