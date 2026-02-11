@@ -624,6 +624,7 @@ export class DispatchStageService {
       select: {
         id: true,
         item_type: true,
+        instance_id: true,
       },
     });
 
