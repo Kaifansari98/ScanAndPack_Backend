@@ -43,6 +43,9 @@ import notificationRoutes from "./notification/notification.routes";
 import emailNotificationMasterRoutes from "./notification/emailNotificationMaster.routes";
 import contactUsRoutes from "./generic/contactUs.routes";
 
+import trackTraceRoutes from "./trackTraceRoutes/track-trace.routes";
+
+
 const router = Router();
 
 router.use("/dashboard", DashboardRouter);
@@ -93,5 +96,8 @@ router.use("/leads/chats", chatRoutes);
 router.use("/notifications", notificationRoutes);
 router.use("/email-notification-master", emailNotificationMasterRoutes);
 router.use("/public", contactUsRoutes);
+
+
+router.use("/track-trace", trackTraceRoutes);
 
 export { router };

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import * as projectService from '../../services/projectServices/project.service';
 import { getProjectsByVendorIdService, createOrUpdateFullProject, calculateProjectWeight, calculateProjectAndBoxWeight, getCompletedProjectsByVendorIdService, autoPackGroupedBoxesService } from '../../services/projectServices/project.service';
 import { getProjectItemByFields as getProjectItemByFieldsService } from '../../services/projectServices/project.service';
+import { ApiResponse } from 'src/utils/apiResponse';
 
 export const createProject = async (req: Request, res: Response) => {
   try {
@@ -31,6 +32,7 @@ export const createProjectItem = async (req: Request, res: Response) => {
 };
 
 export const getAllProjects = async (_req: Request, res: Response) => {
+    console.log("Query params:", _req.query); 
   try {
     const projects = await projectService.getAllProjects();
     res.json(projects);
@@ -38,6 +40,8 @@ export const getAllProjects = async (_req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to fetch projects', details: err });
   }
 };
+
+
   
 export const getAllProjectDetails = async (_req: Request, res: Response) => {
   try {

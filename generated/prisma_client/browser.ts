@@ -342,3 +342,33 @@ export type NotificationDeliveryLogs = Prisma.NotificationDeliveryLogsModel
  * 
  */
 export type VloqEmailLogs = Prisma.VloqEmailLogsModel
+/**
+ * Model ModulesMaster
+ * 
+ */
+export type ModulesMaster = Prisma.ModulesMasterModel
+/**
+ * Model VendorModulesMapping
+ * 
+ */
+export type VendorModulesMapping = Prisma.VendorModulesMappingModel
+/**
+ * Model MachineMaster
+ * 
+ */
+export type MachineMaster = Prisma.MachineMasterModel
+/**
+ * Model CutList
+ * 
+ */
+export type CutList = Prisma.CutListModel
+/**
+ * Model CutListMachineMapping
+ * 
+ */
+export type CutListMachineMapping = Prisma.CutListMachineMappingModel
+/**
+ * Model UserMachineMapping
+ * 
+ */
+export type UserMachineMapping = Prisma.UserMachineMappingModel
