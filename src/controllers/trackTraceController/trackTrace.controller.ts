@@ -173,7 +173,7 @@ export const getMachineStatus = async(req: Request, res: Response) => {
         const payload = await getTrackTraceDashboardPayload(req);        
 
         const response = await trackTraceService.getMachineStatus(payload);
-        console.log(response);
+        // console.log(response);
         return res
             .status(200)
             .json(

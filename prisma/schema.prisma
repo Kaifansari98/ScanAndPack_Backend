@@ -201,7 +201,7 @@ model ProjectMaster {
   id                    Int                     @id @default(autoincrement())
   project_name          String
   vendor_id             Int
-  client_id             Int                     @default(1)
+  client_id             Int?
   created_by            Int
   project_status        String                  @default("Initiated")
   created_at            DateTime                @default(now())
@@ -212,7 +212,7 @@ model ProjectMaster {
   cutListMachineMapping CutListMachineMapping[]
   details               ProjectDetails[]
   items                 ProjectItemsMaster[]
-  client                ClientMaster            @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  client                ClientMaster?            @relation(fields: [client_id], references: [id], onDelete: Cascade)
   createdByUser         UserMaster              @relation("CreatedByUser", fields: [created_by], references: [id], onDelete: Cascade)
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   scanItems             ScanAndPackItem[]
@@ -326,7 +326,7 @@ model ClientMaster {
   ledgers     Ledger[]
   details     ProjectDetails[]
   items       ProjectItemsMaster[]
-  projects    ProjectMaster[]
+  projects   ProjectMaster[]
   scanItems   ScanAndPackItem[]
 }
 
