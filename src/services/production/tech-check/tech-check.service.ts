@@ -17,8 +17,175 @@ export class TechCheckService {
     userId: number,
     assignToUserId: number,
     accountId: number,
+    productStructureInstanceId?: number
   ) {
     const result = await prisma.$transaction(async (tx) => {
+      if (productStructureInstanceId) {
+        const instance = await tx.leadProductStructureInstance.findFirst({
+          where: {
+            id: productStructureInstanceId,
+            lead_id: leadId,
+            vendor_id: vendorId,
+            account_id: accountId || undefined,
+          },
+          select: { id: true, title: true, account_id: true },
+        });
+
+        if (!instance) {
+          throw new Error("Product structure instance not found for this lead");
+        }
+
+        const effectiveAccountId = accountId || instance.account_id;
+
+        const updatedInstance = await tx.leadProductStructureInstance.update({
+          where: { id: productStructureInstanceId },
+          data: {
+            is_tech_check_completed: true,
+            tech_check_completed_at: new Date(),
+            updated_by: userId,
+            updated_at: new Date(),
+          },
+        });
+
+        await tx.leadDetailedLogs.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: effectiveAccountId,
+            action: `Tech Check completed for instance ${instance.title}`,
+            action_type: "UPDATE",
+            created_by: userId,
+          },
+        });
+
+        const pendingInstances = await tx.leadProductStructureInstance.count({
+          where: {
+            lead_id: leadId,
+            vendor_id: vendorId,
+            OR: [
+              { is_tech_check_completed: false },
+              { is_tech_check_completed: null },
+            ],
+          },
+        });
+
+        if (pendingInstances === 0) {
+          if (!assignToUserId || !effectiveAccountId) {
+            throw new Error(
+              "assign_to_user_id and account_id are required to move lead to Order Login"
+            );
+          }
+
+          const orderLoginStatus = await tx.statusTypeMaster.findFirst({
+            where: { vendor_id: vendorId, tag: "Type 9" },
+            select: { id: true },
+          });
+
+          if (!orderLoginStatus) {
+            throw new Error(
+              `Order Login (Type 9) not configured for vendor ${vendorId}`
+            );
+          }
+
+          const updatedLead = await tx.leadMaster.update({
+            where: { id: leadId },
+            data: {
+              status_id: orderLoginStatus.id,
+              updated_by: userId,
+              updated_at: new Date(),
+            },
+          });
+
+          const mapping = await tx.leadUserMapping.create({
+            data: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: effectiveAccountId,
+              user_id: assignToUserId,
+              type: "order-login-stage",
+              status: "active",
+              created_by: userId,
+            },
+          });
+
+          let chatRoom = await tx.leadChatRoom.findFirst({
+            where: {
+              lead_id: leadId,
+              vendor_id: vendorId,
+            },
+            select: { id: true },
+          });
+
+          if (!chatRoom) {
+            chatRoom = await tx.leadChatRoom.create({
+              data: {
+                lead_id: leadId,
+                vendor_id: vendorId,
+              },
+              select: { id: true },
+            });
+          }
+
+          const existingMember = await tx.leadChatMember.findFirst({
+            where: {
+              chat_room_id: chatRoom.id,
+              user_id: assignToUserId,
+            },
+            select: { id: true },
+          });
+
+          if (!existingMember) {
+            await tx.leadChatMember.create({
+              data: {
+                chat_room_id: chatRoom.id,
+                user_id: assignToUserId,
+                added_by: userId,
+              },
+            });
+          }
+
+          await tx.leadStatusLogs.create({
+            data: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: effectiveAccountId,
+              status_id: orderLoginStatus.id,
+              created_by: userId,
+            },
+          });
+
+          await tx.leadDetailedLogs.create({
+            data: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: effectiveAccountId,
+              action: `All instances tech check completed. Lead moved to Order Login and assigned to backend user ${assignToUserId}`,
+              action_type: "STATUS_CHANGE",
+              created_by: userId,
+            },
+          });
+
+          return {
+            mode: "instance_and_lead_moved",
+            instance_id: updatedInstance.id,
+            is_tech_check_completed: updatedInstance.is_tech_check_completed,
+            tech_check_completed_at: updatedInstance.tech_check_completed_at,
+            updatedLead,
+            mapping,
+            moved_to_order_login: true,
+            assign_to_user_id: assignToUserId,
+            account_id: effectiveAccountId,
+          };
+        }
+
+        return {
+          mode: "instance",
+          instance_id: updatedInstance.id,
+          is_tech_check_completed: updatedInstance.is_tech_check_completed,
+          tech_check_completed_at: updatedInstance.tech_check_completed_at,
+        };
+      }
+
       // 1️⃣ Get Order Login Status (Type 9)
       const orderLoginStatus = await tx.statusTypeMaster.findFirst({
         where: { vendor_id: vendorId, tag: "Type 9" },

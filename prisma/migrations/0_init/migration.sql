@@ -2,6 +2,9 @@
 CREATE SCHEMA IF NOT EXISTS "public";
 
 -- CreateEnum
+CREATE TYPE "NotificationType" AS ENUM ('LEAD_ASSIGNED', 'TASK_ASSIGNED', 'CHAT_MENTION', 'LEAD_MILESTONE', 'LEAD_ACTION');
+
+-- CreateEnum
 DO $$
 BEGIN
   IF NOT EXISTS (
@@ -76,13 +79,14 @@ BEGIN
   END IF;
 END$$;
 
--- ActionType
-DO $$
-BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'ActionType') THEN
-    CREATE TYPE "ActionType" AS ENUM ('CREATE', 'UPDATE', 'DELETE', 'UPLOAD', 'STATUS_CHANGE', 'OTHER');
-  END IF;
-END$$;
+-- CreateEnum
+CREATE TYPE "ActionType" AS ENUM ('CREATE', 'UPDATE', 'DELETE', 'UPLOAD', 'STATUS_CHANGE', 'OTHER');
+
+-- CreateEnum
+CREATE TYPE "LeadChatMessageType" AS ENUM ('text', 'attachment', 'system', 'textWithAttachment');
+
+-- CreateEnum
+CREATE TYPE "ProductInstanceStatus" AS ENUM ('open', 'onHold', 'lostApproval', 'lost');
 
 -- CreateTable
 CREATE TABLE "VendorMaster" (
@@ -388,6 +392,7 @@ CREATE TABLE "SiteTypeMaster" (
     "id" SERIAL NOT NULL,
     "type" TEXT NOT NULL,
     "vendor_id" INTEGER NOT NULL,
+    "status" TEXT NOT NULL DEFAULT 'active',
 
     CONSTRAINT "SiteTypeMaster_pkey" PRIMARY KEY ("id")
 );
@@ -397,6 +402,7 @@ CREATE TABLE "SourceMaster" (
     "id" SERIAL NOT NULL,
     "type" TEXT NOT NULL,
     "vendor_id" INTEGER NOT NULL,
+    "status" TEXT NOT NULL DEFAULT 'active',
 
     CONSTRAINT "SourceMaster_pkey" PRIMARY KEY ("id")
 );
@@ -440,6 +446,7 @@ CREATE TABLE "ProductTypeMaster" (
     "type" TEXT NOT NULL,
     "vendor_id" INTEGER NOT NULL,
     "tag" TEXT NOT NULL,
+    "status" TEXT NOT NULL DEFAULT 'active',
 
     CONSTRAINT "ProductTypeMaster_pkey" PRIMARY KEY ("id")
 );
@@ -459,8 +466,79 @@ CREATE TABLE "LeadDocuments" (
     "doc_type_id" INTEGER NOT NULL,
     "is_deleted" BOOLEAN NOT NULL DEFAULT false,
     "tech_check_status" "TechCheckStatus",
+    "product_structure_instance_id" INTEGER,
 
     CONSTRAINT "LeadDocuments_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "LeadChatRoom" (
+    "id" SERIAL NOT NULL,
+    "lead_id" INTEGER NOT NULL,
+    "vendor_id" INTEGER NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "LeadChatRoom_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "LeadChatMember" (
+    "id" SERIAL NOT NULL,
+    "chat_room_id" INTEGER NOT NULL,
+    "user_id" INTEGER NOT NULL,
+    "joined_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "added_by" INTEGER,
+
+    CONSTRAINT "LeadChatMember_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "LeadChatMessage" (
+    "id" SERIAL NOT NULL,
+    "chat_room_id" INTEGER NOT NULL,
+    "sender_id" INTEGER NOT NULL,
+    "message_type" "LeadChatMessageType" NOT NULL DEFAULT 'text',
+    "message_text" TEXT,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "LeadChatMessage_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "LeadChatAttachment" (
+    "id" SERIAL NOT NULL,
+    "msg_id" INTEGER NOT NULL,
+    "doc_id" INTEGER NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "LeadChatAttachment_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "LeadChatMention" (
+    "id" SERIAL NOT NULL,
+    "msg_id" INTEGER NOT NULL,
+    "mentioned_user_id" INTEGER NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "LeadChatMention_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "LeadChatDocument" (
+    "id" SERIAL NOT NULL,
+    "doc_og_name" TEXT NOT NULL,
+    "doc_sys_name" TEXT NOT NULL,
+    "created_by" INTEGER NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "deleted_by" INTEGER,
+    "deleted_at" TIMESTAMP(3),
+    "account_id" INTEGER,
+    "lead_id" INTEGER,
+    "vendor_id" INTEGER NOT NULL,
+    "is_deleted" BOOLEAN NOT NULL DEFAULT false,
+
+    CONSTRAINT "LeadChatDocument_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -468,6 +546,8 @@ CREATE TABLE "ProductStructure" (
     "id" SERIAL NOT NULL,
     "type" TEXT NOT NULL,
     "vendor_id" INTEGER NOT NULL,
+    "parent" TEXT,
+    "status" TEXT NOT NULL DEFAULT 'active',
 
     CONSTRAINT "ProductStructure_pkey" PRIMARY KEY ("id")
 );
@@ -483,6 +563,28 @@ CREATE TABLE "LeadProductStructureMapping" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "LeadProductStructureMapping_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "LeadProductStructureInstance" (
+    "id" SERIAL NOT NULL,
+    "vendor_id" INTEGER NOT NULL,
+    "lead_id" INTEGER NOT NULL,
+    "account_id" INTEGER NOT NULL,
+    "product_type_id" INTEGER NOT NULL,
+    "product_structure_id" INTEGER NOT NULL,
+    "quantity_index" INTEGER NOT NULL,
+    "title" TEXT NOT NULL,
+    "status" "ProductInstanceStatus" NOT NULL DEFAULT 'open',
+    "description" VARCHAR(2000),
+    "created_by" INTEGER NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_by" INTEGER,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+    "is_tech_check_completed" BOOLEAN,
+    "tech_check_completed_at" TIMESTAMP(3),
+
+    CONSTRAINT "LeadProductStructureInstance_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -593,6 +695,7 @@ CREATE TABLE "LeadDesignSelection" (
     "updated_by" INTEGER,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
+    "product_structure_instance_id" INTEGER,
 
     CONSTRAINT "LeadDesignSelection_pkey" PRIMARY KEY ("id")
 );
@@ -638,6 +741,7 @@ CREATE TABLE "UserLeadTask" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
     "updated_by" INTEGER,
+    "lead_stage" TEXT,
 
     CONSTRAINT "UserLeadTask_pkey" PRIMARY KEY ("id")
 );
@@ -687,6 +791,7 @@ CREATE TABLE "CompanyVendorsMaster" (
     "deleted_at" TIMESTAMP(3),
     "deleted_by" INTEGER,
     "is_deleted" BOOLEAN NOT NULL DEFAULT false,
+    "in_house" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "CompanyVendorsMaster_pkey" PRIMARY KEY ("id")
 );
@@ -890,6 +995,83 @@ CREATE TABLE "IssueLogResponsibleTeamMapping" (
 );
 
 -- CreateTable
+CREATE TABLE "EmailNotificationMaster" (
+    "id" SERIAL NOT NULL,
+    "vendor_id" INTEGER NOT NULL,
+    "text" TEXT NOT NULL,
+    "active" BOOLEAN NOT NULL DEFAULT true,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "html" TEXT NOT NULL,
+    "subject" TEXT NOT NULL,
+    "template_key" TEXT NOT NULL,
+
+    CONSTRAINT "EmailNotificationMaster_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Notification" (
+    "id" SERIAL NOT NULL,
+    "vendor_id" INTEGER NOT NULL,
+    "user_id" INTEGER NOT NULL,
+    "sender_id" INTEGER,
+    "type" "NotificationType" NOT NULL,
+    "title" TEXT NOT NULL,
+    "message" TEXT NOT NULL,
+    "entity_type" TEXT,
+    "entity_id" INTEGER,
+    "redirect_url" TEXT,
+    "is_read" BOOLEAN NOT NULL DEFAULT false,
+    "read_at" TIMESTAMP(3),
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Notification_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "UserPushToken" (
+    "id" SERIAL NOT NULL,
+    "user_id" INTEGER NOT NULL,
+    "vendor_id" INTEGER NOT NULL,
+    "token" TEXT NOT NULL,
+    "platform" TEXT NOT NULL,
+    "browser" TEXT,
+    "is_active" BOOLEAN NOT NULL DEFAULT true,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "last_used" TIMESTAMP(3),
+    "device_id" TEXT,
+
+    CONSTRAINT "UserPushToken_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "NotificationDeliveryLogs" (
+    "id" SERIAL NOT NULL,
+    "notification_id" INTEGER NOT NULL,
+    "push_token_id" INTEGER NOT NULL,
+    "status" TEXT NOT NULL,
+    "error" TEXT,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "NotificationDeliveryLogs_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "VloqEmailLogs" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "subject" TEXT NOT NULL,
+    "message" TEXT NOT NULL,
+    "to_email" TEXT NOT NULL,
+    "status" TEXT NOT NULL DEFAULT 'pending',
+    "error_message" TEXT,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "VloqEmailLogs_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "_LeadDocumentsToSiteReadiness" (
     "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL,
@@ -907,6 +1089,21 @@ CREATE UNIQUE INDEX "VendorTokens_token_key" ON "VendorTokens"("token");
 CREATE UNIQUE INDEX "LeadMaster_vendor_id_lead_code_key" ON "LeadMaster"("vendor_id", "lead_code");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "LeadChatRoom_lead_id_vendor_id_key" ON "LeadChatRoom"("lead_id", "vendor_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "LeadChatMember_chat_room_id_user_id_key" ON "LeadChatMember"("chat_room_id", "user_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "LeadChatAttachment_msg_id_doc_id_key" ON "LeadChatAttachment"("msg_id", "doc_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "LeadChatMention_msg_id_mentioned_user_id_key" ON "LeadChatMention"("msg_id", "mentioned_user_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "LeadProductStructureInstance_lead_id_vendor_id_product_stru_key" ON "LeadProductStructureInstance"("lead_id", "vendor_id", "product_structure_id", "quantity_index");
+
+-- CreateIndex
 CREATE INDEX "SiteReadiness_lead_id_vendor_id_type_idx" ON "SiteReadiness"("lead_id", "vendor_id", "type");
 
 -- CreateIndex
@@ -917,6 +1114,24 @@ CREATE UNIQUE INDEX "IssueLogTypeMapping_issue_log_id_type_id_key" ON "IssueLogT
 
 -- CreateIndex
 CREATE UNIQUE INDEX "IssueLogResponsibleTeamMapping_issue_log_id_team_id_key" ON "IssueLogResponsibleTeamMapping"("issue_log_id", "team_id");
+
+-- CreateIndex
+CREATE INDEX "EmailNotificationMaster_vendor_id_idx" ON "EmailNotificationMaster"("vendor_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "EmailNotificationMaster_vendor_id_template_key_key" ON "EmailNotificationMaster"("vendor_id", "template_key");
+
+-- CreateIndex
+CREATE INDEX "Notification_user_id_is_read_idx" ON "Notification"("user_id", "is_read");
+
+-- CreateIndex
+CREATE INDEX "Notification_vendor_id_idx" ON "Notification"("vendor_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "UserPushToken_token_key" ON "UserPushToken"("token");
+
+-- CreateIndex
+CREATE INDEX "UserPushToken_user_id_vendor_id_idx" ON "UserPushToken"("user_id", "vendor_id");
 
 -- CreateIndex
 CREATE INDEX "_LeadDocumentsToSiteReadiness_B_index" ON "_LeadDocumentsToSiteReadiness"("B");
@@ -1105,7 +1320,58 @@ ALTER TABLE "LeadDocuments" ADD CONSTRAINT "LeadDocuments_doc_type_id_fkey" FORE
 ALTER TABLE "LeadDocuments" ADD CONSTRAINT "LeadDocuments_lead_id_fkey" FOREIGN KEY ("lead_id") REFERENCES "LeadMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "LeadDocuments" ADD CONSTRAINT "LeadDocuments_product_structure_instance_id_fkey" FOREIGN KEY ("product_structure_instance_id") REFERENCES "LeadProductStructureInstance"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "LeadDocuments" ADD CONSTRAINT "LeadDocuments_vendor_id_fkey" FOREIGN KEY ("vendor_id") REFERENCES "VendorMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadChatRoom" ADD CONSTRAINT "LeadChatRoom_lead_id_fkey" FOREIGN KEY ("lead_id") REFERENCES "LeadMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadChatRoom" ADD CONSTRAINT "LeadChatRoom_vendor_id_fkey" FOREIGN KEY ("vendor_id") REFERENCES "VendorMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadChatMember" ADD CONSTRAINT "LeadChatMember_added_by_fkey" FOREIGN KEY ("added_by") REFERENCES "UserMaster"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadChatMember" ADD CONSTRAINT "LeadChatMember_chat_room_id_fkey" FOREIGN KEY ("chat_room_id") REFERENCES "LeadChatRoom"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadChatMember" ADD CONSTRAINT "LeadChatMember_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "UserMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadChatMessage" ADD CONSTRAINT "LeadChatMessage_chat_room_id_fkey" FOREIGN KEY ("chat_room_id") REFERENCES "LeadChatRoom"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadChatMessage" ADD CONSTRAINT "LeadChatMessage_sender_id_fkey" FOREIGN KEY ("sender_id") REFERENCES "UserMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadChatAttachment" ADD CONSTRAINT "LeadChatAttachment_doc_id_fkey" FOREIGN KEY ("doc_id") REFERENCES "LeadChatDocument"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadChatAttachment" ADD CONSTRAINT "LeadChatAttachment_msg_id_fkey" FOREIGN KEY ("msg_id") REFERENCES "LeadChatMessage"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadChatMention" ADD CONSTRAINT "LeadChatMention_mentioned_user_id_fkey" FOREIGN KEY ("mentioned_user_id") REFERENCES "UserMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadChatMention" ADD CONSTRAINT "LeadChatMention_msg_id_fkey" FOREIGN KEY ("msg_id") REFERENCES "LeadChatMessage"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadChatDocument" ADD CONSTRAINT "LeadChatDocument_account_id_fkey" FOREIGN KEY ("account_id") REFERENCES "AccountMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadChatDocument" ADD CONSTRAINT "LeadChatDocument_created_by_fkey" FOREIGN KEY ("created_by") REFERENCES "UserMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadChatDocument" ADD CONSTRAINT "LeadChatDocument_deleted_by_fkey" FOREIGN KEY ("deleted_by") REFERENCES "UserMaster"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadChatDocument" ADD CONSTRAINT "LeadChatDocument_lead_id_fkey" FOREIGN KEY ("lead_id") REFERENCES "LeadMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadChatDocument" ADD CONSTRAINT "LeadChatDocument_vendor_id_fkey" FOREIGN KEY ("vendor_id") REFERENCES "VendorMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ProductStructure" ADD CONSTRAINT "ProductStructure_vendor_id_fkey" FOREIGN KEY ("vendor_id") REFERENCES "VendorMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -1121,6 +1387,24 @@ ALTER TABLE "LeadProductStructureMapping" ADD CONSTRAINT "LeadProductStructureMa
 
 -- AddForeignKey
 ALTER TABLE "LeadProductStructureMapping" ADD CONSTRAINT "LeadProductStructureMapping_vendor_id_fkey" FOREIGN KEY ("vendor_id") REFERENCES "VendorMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadProductStructureInstance" ADD CONSTRAINT "LeadProductStructureInstance_account_id_fkey" FOREIGN KEY ("account_id") REFERENCES "AccountMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadProductStructureInstance" ADD CONSTRAINT "LeadProductStructureInstance_lead_id_fkey" FOREIGN KEY ("lead_id") REFERENCES "LeadMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadProductStructureInstance" ADD CONSTRAINT "LeadProductStructureInstance_product_structure_id_fkey" FOREIGN KEY ("product_structure_id") REFERENCES "ProductStructure"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadProductStructureInstance" ADD CONSTRAINT "LeadProductStructureInstance_product_type_id_fkey" FOREIGN KEY ("product_type_id") REFERENCES "ProductTypeMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadProductStructureInstance" ADD CONSTRAINT "LeadProductStructureInstance_updated_by_fkey" FOREIGN KEY ("updated_by") REFERENCES "UserMaster"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadProductStructureInstance" ADD CONSTRAINT "LeadProductStructureInstance_vendor_id_fkey" FOREIGN KEY ("vendor_id") REFERENCES "VendorMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PaymentInfo" ADD CONSTRAINT "PaymentInfo_account_id_fkey" FOREIGN KEY ("account_id") REFERENCES "AccountMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -1214,6 +1498,9 @@ ALTER TABLE "LeadDesignSelection" ADD CONSTRAINT "LeadDesignSelection_created_by
 
 -- AddForeignKey
 ALTER TABLE "LeadDesignSelection" ADD CONSTRAINT "LeadDesignSelection_lead_id_fkey" FOREIGN KEY ("lead_id") REFERENCES "LeadMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeadDesignSelection" ADD CONSTRAINT "LeadDesignSelection_product_structure_instance_id_fkey" FOREIGN KEY ("product_structure_instance_id") REFERENCES "LeadProductStructureInstance"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "LeadDesignSelection" ADD CONSTRAINT "LeadDesignSelection_updated_by_fkey" FOREIGN KEY ("updated_by") REFERENCES "UserMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -1442,6 +1729,30 @@ ALTER TABLE "IssueLogResponsibleTeamMapping" ADD CONSTRAINT "IssueLogResponsible
 
 -- AddForeignKey
 ALTER TABLE "IssueLogResponsibleTeamMapping" ADD CONSTRAINT "IssueLogResponsibleTeamMapping_team_id_fkey" FOREIGN KEY ("team_id") REFERENCES "MiscellaneousTeamMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "EmailNotificationMaster" ADD CONSTRAINT "EmailNotificationMaster_vendor_id_fkey" FOREIGN KEY ("vendor_id") REFERENCES "VendorMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Notification" ADD CONSTRAINT "Notification_sender_id_fkey" FOREIGN KEY ("sender_id") REFERENCES "UserMaster"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Notification" ADD CONSTRAINT "Notification_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "UserMaster"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Notification" ADD CONSTRAINT "Notification_vendor_id_fkey" FOREIGN KEY ("vendor_id") REFERENCES "VendorMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "UserPushToken" ADD CONSTRAINT "UserPushToken_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "UserMaster"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "UserPushToken" ADD CONSTRAINT "UserPushToken_vendor_id_fkey" FOREIGN KEY ("vendor_id") REFERENCES "VendorMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "NotificationDeliveryLogs" ADD CONSTRAINT "NotificationDeliveryLogs_notification_id_fkey" FOREIGN KEY ("notification_id") REFERENCES "Notification"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "NotificationDeliveryLogs" ADD CONSTRAINT "NotificationDeliveryLogs_push_token_id_fkey" FOREIGN KEY ("push_token_id") REFERENCES "UserPushToken"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_LeadDocumentsToSiteReadiness" ADD CONSTRAINT "_LeadDocumentsToSiteReadiness_A_fkey" FOREIGN KEY ("A") REFERENCES "LeadDocuments"("id") ON DELETE CASCADE ON UPDATE CASCADE;

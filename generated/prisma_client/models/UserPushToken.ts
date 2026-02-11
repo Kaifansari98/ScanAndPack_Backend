@@ -45,10 +45,10 @@ export type UserPushTokenMinAggregateOutputType = {
   token: string | null
   platform: string | null
   browser: string | null
-  device_id: string | null
   is_active: boolean | null
   created_at: Date | null
   last_used_at: Date | null
+  device_id: string | null
 }
 
 export type UserPushTokenMaxAggregateOutputType = {
@@ -58,10 +58,10 @@ export type UserPushTokenMaxAggregateOutputType = {
   token: string | null
   platform: string | null
   browser: string | null
-  device_id: string | null
   is_active: boolean | null
   created_at: Date | null
   last_used_at: Date | null
+  device_id: string | null
 }
 
 export type UserPushTokenCountAggregateOutputType = {
@@ -71,10 +71,10 @@ export type UserPushTokenCountAggregateOutputType = {
   token: number
   platform: number
   browser: number
-  device_id: number
   is_active: number
   created_at: number
   last_used_at: number
+  device_id: number
   _all: number
 }
 
@@ -98,10 +98,10 @@ export type UserPushTokenMinAggregateInputType = {
   token?: true
   platform?: true
   browser?: true
-  device_id?: true
   is_active?: true
   created_at?: true
   last_used_at?: true
+  device_id?: true
 }
 
 export type UserPushTokenMaxAggregateInputType = {
@@ -111,10 +111,10 @@ export type UserPushTokenMaxAggregateInputType = {
   token?: true
   platform?: true
   browser?: true
-  device_id?: true
   is_active?: true
   created_at?: true
   last_used_at?: true
+  device_id?: true
 }
 
 export type UserPushTokenCountAggregateInputType = {
@@ -124,10 +124,10 @@ export type UserPushTokenCountAggregateInputType = {
   token?: true
   platform?: true
   browser?: true
-  device_id?: true
   is_active?: true
   created_at?: true
   last_used_at?: true
+  device_id?: true
   _all?: true
 }
 
@@ -224,10 +224,10 @@ export type UserPushTokenGroupByOutputType = {
   token: string
   platform: string
   browser: string | null
-  device_id: string | null
   is_active: boolean
   created_at: Date
   last_used_at: Date | null
+  device_id: string | null
   _count: UserPushTokenCountAggregateOutputType | null
   _avg: UserPushTokenAvgAggregateOutputType | null
   _sum: UserPushTokenSumAggregateOutputType | null
@@ -260,13 +260,13 @@ export type UserPushTokenWhereInput = {
   token?: Prisma.StringFilter<"UserPushToken"> | string
   platform?: Prisma.StringFilter<"UserPushToken"> | string
   browser?: Prisma.StringNullableFilter<"UserPushToken"> | string | null
-  device_id?: Prisma.StringNullableFilter<"UserPushToken"> | string | null
   is_active?: Prisma.BoolFilter<"UserPushToken"> | boolean
   created_at?: Prisma.DateTimeFilter<"UserPushToken"> | Date | string
   last_used_at?: Prisma.DateTimeNullableFilter<"UserPushToken"> | Date | string | null
+  device_id?: Prisma.StringNullableFilter<"UserPushToken"> | string | null
+  deliveryLogs?: Prisma.NotificationDeliveryLogsListRelationFilter
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  deliveryLogs?: Prisma.NotificationDeliveryLogsListRelationFilter
 }
 
 export type UserPushTokenOrderByWithRelationInput = {
@@ -276,13 +276,13 @@ export type UserPushTokenOrderByWithRelationInput = {
   token?: Prisma.SortOrder
   platform?: Prisma.SortOrder
   browser?: Prisma.SortOrderInput | Prisma.SortOrder
-  device_id?: Prisma.SortOrderInput | Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   last_used_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  device_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  deliveryLogs?: Prisma.NotificationDeliveryLogsOrderByRelationAggregateInput
   user?: Prisma.UserMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  deliveryLogs?: Prisma.NotificationDeliveryLogsOrderByRelationAggregateInput
 }
 
 export type UserPushTokenWhereUniqueInput = Prisma.AtLeast<{
@@ -295,13 +295,13 @@ export type UserPushTokenWhereUniqueInput = Prisma.AtLeast<{
   vendor_id?: Prisma.IntFilter<"UserPushToken"> | number
   platform?: Prisma.StringFilter<"UserPushToken"> | string
   browser?: Prisma.StringNullableFilter<"UserPushToken"> | string | null
-  device_id?: Prisma.StringNullableFilter<"UserPushToken"> | string | null
   is_active?: Prisma.BoolFilter<"UserPushToken"> | boolean
   created_at?: Prisma.DateTimeFilter<"UserPushToken"> | Date | string
   last_used_at?: Prisma.DateTimeNullableFilter<"UserPushToken"> | Date | string | null
+  device_id?: Prisma.StringNullableFilter<"UserPushToken"> | string | null
+  deliveryLogs?: Prisma.NotificationDeliveryLogsListRelationFilter
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  deliveryLogs?: Prisma.NotificationDeliveryLogsListRelationFilter
 }, "id" | "token">
 
 export type UserPushTokenOrderByWithAggregationInput = {
@@ -311,10 +311,10 @@ export type UserPushTokenOrderByWithAggregationInput = {
   token?: Prisma.SortOrder
   platform?: Prisma.SortOrder
   browser?: Prisma.SortOrderInput | Prisma.SortOrder
-  device_id?: Prisma.SortOrderInput | Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   last_used_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  device_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserPushTokenCountOrderByAggregateInput
   _avg?: Prisma.UserPushTokenAvgOrderByAggregateInput
   _max?: Prisma.UserPushTokenMaxOrderByAggregateInput
@@ -332,23 +332,23 @@ export type UserPushTokenScalarWhereWithAggregatesInput = {
   token?: Prisma.StringWithAggregatesFilter<"UserPushToken"> | string
   platform?: Prisma.StringWithAggregatesFilter<"UserPushToken"> | string
   browser?: Prisma.StringNullableWithAggregatesFilter<"UserPushToken"> | string | null
-  device_id?: Prisma.StringNullableWithAggregatesFilter<"UserPushToken"> | string | null
   is_active?: Prisma.BoolWithAggregatesFilter<"UserPushToken"> | boolean
   created_at?: Prisma.DateTimeWithAggregatesFilter<"UserPushToken"> | Date | string
   last_used_at?: Prisma.DateTimeNullableWithAggregatesFilter<"UserPushToken"> | Date | string | null
+  device_id?: Prisma.StringNullableWithAggregatesFilter<"UserPushToken"> | string | null
 }
 
 export type UserPushTokenCreateInput = {
   token: string
   platform: string
   browser?: string | null
-  device_id?: string | null
   is_active?: boolean
   created_at?: Date | string
   last_used_at?: Date | string | null
+  device_id?: string | null
+  deliveryLogs?: Prisma.NotificationDeliveryLogsCreateNestedManyWithoutPushTokenInput
   user: Prisma.UserMasterCreateNestedOneWithoutPushTokensInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserPushTokensInput
-  deliveryLogs?: Prisma.NotificationDeliveryLogsCreateNestedManyWithoutPushTokenInput
 }
 
 export type UserPushTokenUncheckedCreateInput = {
@@ -358,10 +358,10 @@ export type UserPushTokenUncheckedCreateInput = {
   token: string
   platform: string
   browser?: string | null
-  device_id?: string | null
   is_active?: boolean
   created_at?: Date | string
   last_used_at?: Date | string | null
+  device_id?: string | null
   deliveryLogs?: Prisma.NotificationDeliveryLogsUncheckedCreateNestedManyWithoutPushTokenInput
 }
 
@@ -369,13 +369,13 @@ export type UserPushTokenUpdateInput = {
   token?: Prisma.StringFieldUpdateOperationsInput | string
   platform?: Prisma.StringFieldUpdateOperationsInput | string
   browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   last_used_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryLogs?: Prisma.NotificationDeliveryLogsUpdateManyWithoutPushTokenNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutPushTokensNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserPushTokensNestedInput
-  deliveryLogs?: Prisma.NotificationDeliveryLogsUpdateManyWithoutPushTokenNestedInput
 }
 
 export type UserPushTokenUncheckedUpdateInput = {
@@ -385,10 +385,10 @@ export type UserPushTokenUncheckedUpdateInput = {
   token?: Prisma.StringFieldUpdateOperationsInput | string
   platform?: Prisma.StringFieldUpdateOperationsInput | string
   browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   last_used_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryLogs?: Prisma.NotificationDeliveryLogsUncheckedUpdateManyWithoutPushTokenNestedInput
 }
 
@@ -399,20 +399,20 @@ export type UserPushTokenCreateManyInput = {
   token: string
   platform: string
   browser?: string | null
-  device_id?: string | null
   is_active?: boolean
   created_at?: Date | string
   last_used_at?: Date | string | null
+  device_id?: string | null
 }
 
 export type UserPushTokenUpdateManyMutationInput = {
   token?: Prisma.StringFieldUpdateOperationsInput | string
   platform?: Prisma.StringFieldUpdateOperationsInput | string
   browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   last_used_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserPushTokenUncheckedUpdateManyInput = {
@@ -422,10 +422,10 @@ export type UserPushTokenUncheckedUpdateManyInput = {
   token?: Prisma.StringFieldUpdateOperationsInput | string
   platform?: Prisma.StringFieldUpdateOperationsInput | string
   browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   last_used_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserPushTokenListRelationFilter = {
@@ -445,10 +445,10 @@ export type UserPushTokenCountOrderByAggregateInput = {
   token?: Prisma.SortOrder
   platform?: Prisma.SortOrder
   browser?: Prisma.SortOrder
-  device_id?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   last_used_at?: Prisma.SortOrder
+  device_id?: Prisma.SortOrder
 }
 
 export type UserPushTokenAvgOrderByAggregateInput = {
@@ -464,10 +464,10 @@ export type UserPushTokenMaxOrderByAggregateInput = {
   token?: Prisma.SortOrder
   platform?: Prisma.SortOrder
   browser?: Prisma.SortOrder
-  device_id?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   last_used_at?: Prisma.SortOrder
+  device_id?: Prisma.SortOrder
 }
 
 export type UserPushTokenMinOrderByAggregateInput = {
@@ -477,10 +477,10 @@ export type UserPushTokenMinOrderByAggregateInput = {
   token?: Prisma.SortOrder
   platform?: Prisma.SortOrder
   browser?: Prisma.SortOrder
-  device_id?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   last_used_at?: Prisma.SortOrder
+  device_id?: Prisma.SortOrder
 }
 
 export type UserPushTokenSumOrderByAggregateInput = {
@@ -596,12 +596,12 @@ export type UserPushTokenCreateWithoutVendorInput = {
   token: string
   platform: string
   browser?: string | null
-  device_id?: string | null
   is_active?: boolean
   created_at?: Date | string
   last_used_at?: Date | string | null
-  user: Prisma.UserMasterCreateNestedOneWithoutPushTokensInput
+  device_id?: string | null
   deliveryLogs?: Prisma.NotificationDeliveryLogsCreateNestedManyWithoutPushTokenInput
+  user: Prisma.UserMasterCreateNestedOneWithoutPushTokensInput
 }
 
 export type UserPushTokenUncheckedCreateWithoutVendorInput = {
@@ -610,10 +610,10 @@ export type UserPushTokenUncheckedCreateWithoutVendorInput = {
   token: string
   platform: string
   browser?: string | null
-  device_id?: string | null
   is_active?: boolean
   created_at?: Date | string
   last_used_at?: Date | string | null
+  device_id?: string | null
   deliveryLogs?: Prisma.NotificationDeliveryLogsUncheckedCreateNestedManyWithoutPushTokenInput
 }
 
@@ -653,22 +653,22 @@ export type UserPushTokenScalarWhereInput = {
   token?: Prisma.StringFilter<"UserPushToken"> | string
   platform?: Prisma.StringFilter<"UserPushToken"> | string
   browser?: Prisma.StringNullableFilter<"UserPushToken"> | string | null
-  device_id?: Prisma.StringNullableFilter<"UserPushToken"> | string | null
   is_active?: Prisma.BoolFilter<"UserPushToken"> | boolean
   created_at?: Prisma.DateTimeFilter<"UserPushToken"> | Date | string
   last_used_at?: Prisma.DateTimeNullableFilter<"UserPushToken"> | Date | string | null
+  device_id?: Prisma.StringNullableFilter<"UserPushToken"> | string | null
 }
 
 export type UserPushTokenCreateWithoutUserInput = {
   token: string
   platform: string
   browser?: string | null
-  device_id?: string | null
   is_active?: boolean
   created_at?: Date | string
   last_used_at?: Date | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutUserPushTokensInput
+  device_id?: string | null
   deliveryLogs?: Prisma.NotificationDeliveryLogsCreateNestedManyWithoutPushTokenInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUserPushTokensInput
 }
 
 export type UserPushTokenUncheckedCreateWithoutUserInput = {
@@ -677,10 +677,10 @@ export type UserPushTokenUncheckedCreateWithoutUserInput = {
   token: string
   platform: string
   browser?: string | null
-  device_id?: string | null
   is_active?: boolean
   created_at?: Date | string
   last_used_at?: Date | string | null
+  device_id?: string | null
   deliveryLogs?: Prisma.NotificationDeliveryLogsUncheckedCreateNestedManyWithoutPushTokenInput
 }
 
@@ -714,10 +714,10 @@ export type UserPushTokenCreateWithoutDeliveryLogsInput = {
   token: string
   platform: string
   browser?: string | null
-  device_id?: string | null
   is_active?: boolean
   created_at?: Date | string
   last_used_at?: Date | string | null
+  device_id?: string | null
   user: Prisma.UserMasterCreateNestedOneWithoutPushTokensInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserPushTokensInput
 }
@@ -729,10 +729,10 @@ export type UserPushTokenUncheckedCreateWithoutDeliveryLogsInput = {
   token: string
   platform: string
   browser?: string | null
-  device_id?: string | null
   is_active?: boolean
   created_at?: Date | string
   last_used_at?: Date | string | null
+  device_id?: string | null
 }
 
 export type UserPushTokenCreateOrConnectWithoutDeliveryLogsInput = {
@@ -755,10 +755,10 @@ export type UserPushTokenUpdateWithoutDeliveryLogsInput = {
   token?: Prisma.StringFieldUpdateOperationsInput | string
   platform?: Prisma.StringFieldUpdateOperationsInput | string
   browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   last_used_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserMasterUpdateOneRequiredWithoutPushTokensNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserPushTokensNestedInput
 }
@@ -770,10 +770,10 @@ export type UserPushTokenUncheckedUpdateWithoutDeliveryLogsInput = {
   token?: Prisma.StringFieldUpdateOperationsInput | string
   platform?: Prisma.StringFieldUpdateOperationsInput | string
   browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   last_used_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserPushTokenCreateManyVendorInput = {
@@ -782,22 +782,22 @@ export type UserPushTokenCreateManyVendorInput = {
   token: string
   platform: string
   browser?: string | null
-  device_id?: string | null
   is_active?: boolean
   created_at?: Date | string
   last_used_at?: Date | string | null
+  device_id?: string | null
 }
 
 export type UserPushTokenUpdateWithoutVendorInput = {
   token?: Prisma.StringFieldUpdateOperationsInput | string
   platform?: Prisma.StringFieldUpdateOperationsInput | string
   browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   last_used_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutPushTokensNestedInput
+  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryLogs?: Prisma.NotificationDeliveryLogsUpdateManyWithoutPushTokenNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutPushTokensNestedInput
 }
 
 export type UserPushTokenUncheckedUpdateWithoutVendorInput = {
@@ -806,10 +806,10 @@ export type UserPushTokenUncheckedUpdateWithoutVendorInput = {
   token?: Prisma.StringFieldUpdateOperationsInput | string
   platform?: Prisma.StringFieldUpdateOperationsInput | string
   browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   last_used_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryLogs?: Prisma.NotificationDeliveryLogsUncheckedUpdateManyWithoutPushTokenNestedInput
 }
 
@@ -819,10 +819,10 @@ export type UserPushTokenUncheckedUpdateManyWithoutVendorInput = {
   token?: Prisma.StringFieldUpdateOperationsInput | string
   platform?: Prisma.StringFieldUpdateOperationsInput | string
   browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   last_used_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserPushTokenCreateManyUserInput = {
@@ -831,22 +831,22 @@ export type UserPushTokenCreateManyUserInput = {
   token: string
   platform: string
   browser?: string | null
-  device_id?: string | null
   is_active?: boolean
   created_at?: Date | string
   last_used_at?: Date | string | null
+  device_id?: string | null
 }
 
 export type UserPushTokenUpdateWithoutUserInput = {
   token?: Prisma.StringFieldUpdateOperationsInput | string
   platform?: Prisma.StringFieldUpdateOperationsInput | string
   browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   last_used_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserPushTokensNestedInput
+  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryLogs?: Prisma.NotificationDeliveryLogsUpdateManyWithoutPushTokenNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserPushTokensNestedInput
 }
 
 export type UserPushTokenUncheckedUpdateWithoutUserInput = {
@@ -855,10 +855,10 @@ export type UserPushTokenUncheckedUpdateWithoutUserInput = {
   token?: Prisma.StringFieldUpdateOperationsInput | string
   platform?: Prisma.StringFieldUpdateOperationsInput | string
   browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   last_used_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deliveryLogs?: Prisma.NotificationDeliveryLogsUncheckedUpdateManyWithoutPushTokenNestedInput
 }
 
@@ -868,10 +868,10 @@ export type UserPushTokenUncheckedUpdateManyWithoutUserInput = {
   token?: Prisma.StringFieldUpdateOperationsInput | string
   platform?: Prisma.StringFieldUpdateOperationsInput | string
   browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   last_used_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -912,13 +912,13 @@ export type UserPushTokenSelect<ExtArgs extends runtime.Types.Extensions.Interna
   token?: boolean
   platform?: boolean
   browser?: boolean
-  device_id?: boolean
   is_active?: boolean
   created_at?: boolean
   last_used_at?: boolean
+  device_id?: boolean
+  deliveryLogs?: boolean | Prisma.UserPushToken$deliveryLogsArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  deliveryLogs?: boolean | Prisma.UserPushToken$deliveryLogsArgs<ExtArgs>
   _count?: boolean | Prisma.UserPushTokenCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userPushToken"]>
 
@@ -929,10 +929,10 @@ export type UserPushTokenSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   token?: boolean
   platform?: boolean
   browser?: boolean
-  device_id?: boolean
   is_active?: boolean
   created_at?: boolean
   last_used_at?: boolean
+  device_id?: boolean
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userPushToken"]>
@@ -944,10 +944,10 @@ export type UserPushTokenSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   token?: boolean
   platform?: boolean
   browser?: boolean
-  device_id?: boolean
   is_active?: boolean
   created_at?: boolean
   last_used_at?: boolean
+  device_id?: boolean
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userPushToken"]>
@@ -959,17 +959,17 @@ export type UserPushTokenSelectScalar = {
   token?: boolean
   platform?: boolean
   browser?: boolean
-  device_id?: boolean
   is_active?: boolean
   created_at?: boolean
   last_used_at?: boolean
+  device_id?: boolean
 }
 
-export type UserPushTokenOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "vendor_id" | "token" | "platform" | "browser" | "device_id" | "is_active" | "created_at" | "last_used_at", ExtArgs["result"]["userPushToken"]>
+export type UserPushTokenOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "vendor_id" | "token" | "platform" | "browser" | "is_active" | "created_at" | "last_used_at" | "device_id", ExtArgs["result"]["userPushToken"]>
 export type UserPushTokenInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  deliveryLogs?: boolean | Prisma.UserPushToken$deliveryLogsArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  deliveryLogs?: boolean | Prisma.UserPushToken$deliveryLogsArgs<ExtArgs>
   _count?: boolean | Prisma.UserPushTokenCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserPushTokenIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -984,9 +984,9 @@ export type UserPushTokenIncludeUpdateManyAndReturn<ExtArgs extends runtime.Type
 export type $UserPushTokenPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "UserPushToken"
   objects: {
+    deliveryLogs: Prisma.$NotificationDeliveryLogsPayload<ExtArgs>[]
     user: Prisma.$UserMasterPayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    deliveryLogs: Prisma.$NotificationDeliveryLogsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -995,10 +995,10 @@ export type $UserPushTokenPayload<ExtArgs extends runtime.Types.Extensions.Inter
     token: string
     platform: string
     browser: string | null
-    device_id: string | null
     is_active: boolean
     created_at: Date
     last_used_at: Date | null
+    device_id: string | null
   }, ExtArgs["result"]["userPushToken"]>
   composites: {}
 }
@@ -1393,9 +1393,9 @@ readonly fields: UserPushTokenFieldRefs;
  */
 export interface Prisma__UserPushTokenClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  deliveryLogs<T extends Prisma.UserPushToken$deliveryLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserPushToken$deliveryLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationDeliveryLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  deliveryLogs<T extends Prisma.UserPushToken$deliveryLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserPushToken$deliveryLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationDeliveryLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1431,10 +1431,10 @@ export interface UserPushTokenFieldRefs {
   readonly token: Prisma.FieldRef<"UserPushToken", 'String'>
   readonly platform: Prisma.FieldRef<"UserPushToken", 'String'>
   readonly browser: Prisma.FieldRef<"UserPushToken", 'String'>
-  readonly device_id: Prisma.FieldRef<"UserPushToken", 'String'>
   readonly is_active: Prisma.FieldRef<"UserPushToken", 'Boolean'>
   readonly created_at: Prisma.FieldRef<"UserPushToken", 'DateTime'>
   readonly last_used_at: Prisma.FieldRef<"UserPushToken", 'DateTime'>
+  readonly device_id: Prisma.FieldRef<"UserPushToken", 'String'>
 }
     
 

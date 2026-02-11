@@ -460,7 +460,7 @@ export class SiteReadinessService {
       });
 
       // 4️⃣ Add Detailed Log Entry
-      const actionMessage = `Lead moved to Dispatch Planning stage (Type 13).`;
+      const actionMessage = `Lead moved to Dispatch Planning stage.`;
 
       await tx.leadDetailedLogs.create({
         data: {

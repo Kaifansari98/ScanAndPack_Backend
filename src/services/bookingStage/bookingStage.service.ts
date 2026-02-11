@@ -40,6 +40,29 @@ export class BookingStageService {
       leadProductStructureMapping: {
         select: { productStructure: { select: { id: true, type: true } } },
       },
+      productStructureInstances: {
+        select: {
+          id: true,
+          title: true,
+          quantity_index: true,
+          product_structure_id: true,
+          is_tech_check_completed: true,
+          tech_check_completed_at: true,
+          is_order_login_completed: true,
+          order_login_completed_at: true,
+          is_production_completed: true,
+          productStructure: {
+            select: {
+              id: true,
+              type: true,
+            },
+          },
+        },
+        orderBy: [
+          { product_structure_id: Prisma.SortOrder.asc },
+          { quantity_index: Prisma.SortOrder.asc },
+        ],
+      },
       payments: {
         where: { paymentType: { tag: "Type 2" } },
         select: {
@@ -294,7 +317,6 @@ export class BookingStageService {
             data: {
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
-              created_by: data.created_by,
             },
             select: { id: true },
           });
@@ -1264,14 +1286,24 @@ export class BookingStageService {
     // STATUS RESOLUTION
     // ============================
 
-    const statusType = await prisma.statusTypeMaster.findFirst({
-      where: { vendor_id: vendorId, tag },
-      select: { id: true },
+    const normalizedTag = String(tag || "").trim().toLowerCase();
+    const statusTags =
+      normalizedTag === "type 9"
+        ? ["Type 8", "Type 9"]
+        : normalizedTag === "type 10"
+          ? ["Type 8", "Type 9", "Type 10"]
+          : [tag];
+
+    const statusTypes = await prisma.statusTypeMaster.findMany({
+      where: { vendor_id: vendorId, tag: { in: statusTags } },
+      select: { id: true, tag: true },
     });
 
-    if (!statusType) {
+    if (!statusTypes.length) {
       throw new Error(`Status ${tag} not found for vendor ${vendorId}`);
     }
+
+    const statusIds = statusTypes.map((status) => status.id);
 
     // ============================
     // EXCLUDE USER LINKED LEADS
@@ -1546,10 +1578,31 @@ export class BookingStageService {
     const whereClause = addFilterConditions({
       vendor_id: vendorId,
       is_deleted: false,
-      status_id: statusType.id,
+      status_id: { in: statusIds },
       activity_status: "onGoing",
       ...(excludedLeadIds.length && { id: { notIn: excludedLeadIds } }),
     });
+
+    try {
+      const includeConfig = BookingStageService.leadIncludes();
+      const instanceSelectKeys = Object.keys(
+        includeConfig?.productStructureInstances?.select || {},
+      );
+      logger.info("[BookingStageService] getVendorLeadsByTag2 debug", {
+        vendorId,
+        tag,
+        userId,
+        page,
+        limit,
+        excludedLeadIdsCount: excludedLeadIds.length,
+        instanceSelectKeys,
+      });
+    } catch (err: any) {
+      logger.warn(
+        "[BookingStageService] getVendorLeadsByTag2 debug log failed",
+        { error: err?.message },
+      );
+    }
 
     const [leads, total] = await Promise.all([
       prisma.leadMaster.findMany({
@@ -1669,15 +1722,23 @@ export class BookingStageService {
       });
       statusIds = statuses.map((s) => s.id);
     } else {
-      const statusType = await prisma.statusTypeMaster.findFirst({
-        where: { vendor_id: vendorId, tag },
+      const normalizedTag = String(tag || "").trim().toLowerCase();
+      const statusTags =
+        normalizedTag === "type 9"
+          ? ["Type 8", "Type 9"]
+          : normalizedTag === "type 10"
+            ? ["Type 8", "Type 9", "Type 10"]
+            : [tag];
+
+      const statusTypes = await prisma.statusTypeMaster.findMany({
+        where: { vendor_id: vendorId, tag: { in: statusTags } },
         select: { id: true },
       });
 
-      if (!statusType) {
+      if (!statusTypes.length) {
         throw new Error(`Status ${tag} not found for vendor ${vendorId}`);
       }
-      statusIds = [statusType.id];
+      statusIds = statusTypes.map((status) => status.id);
     }
 
     if (!statusIds.length) {

@@ -133,7 +133,9 @@ export const uploadFinalMeasurement = multer({
       cb(null, dir);
     },
     filename: (_req, file, cb) => {
-      cb(null, `${Date.now()}-${file.originalname}`);
+      const safeName = sanitizeFilename(file.originalname).replace(/\s+/g, "_");
+      const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+      cb(null, `${uniqueSuffix}-${safeName}`);
     },
   }),
   limits: { fileSize: 200 * 1024 * 1024, files: 100 },

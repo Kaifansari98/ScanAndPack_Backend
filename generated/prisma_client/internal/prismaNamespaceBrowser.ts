@@ -510,7 +510,8 @@ export const LeadDocumentsScalarFieldEnum = {
   vendor_id: 'vendor_id',
   doc_type_id: 'doc_type_id',
   is_deleted: 'is_deleted',
-  tech_check_status: 'tech_check_status'
+  tech_check_status: 'tech_check_status',
+  product_structure_instance_id: 'product_structure_instance_id'
 } as const
 
 export type LeadDocumentsScalarFieldEnum = (typeof LeadDocumentsScalarFieldEnum)[keyof typeof LeadDocumentsScalarFieldEnum]
@@ -624,7 +625,17 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   created_by: 'created_by',
   created_at: 'created_at',
   updated_by: 'updated_by',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  is_tech_check_completed: 'is_tech_check_completed',
+  tech_check_completed_at: 'tech_check_completed_at',
+  is_order_login_completed: 'is_order_login_completed',
+  order_login_completed_at: 'order_login_completed_at',
+  is_production_completed: 'is_production_completed',
+  production_completed_at: 'production_completed_at',
+  woodwork_packing_details_remark: 'woodwork_packing_details_remark',
+  hardware_packing_details_remark: 'hardware_packing_details_remark',
+  no_of_client_documents_initially_submitted: 'no_of_client_documents_initially_submitted',
+  no_of_boxes: 'no_of_boxes'
 } as const
 
 export type LeadProductStructureInstanceScalarFieldEnum = (typeof LeadProductStructureInstanceScalarFieldEnum)[keyof typeof LeadProductStructureInstanceScalarFieldEnum]
@@ -736,7 +747,8 @@ export const LeadDesignSelectionScalarFieldEnum = {
   created_by: 'created_by',
   updated_by: 'updated_by',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  product_structure_instance_id: 'product_structure_instance_id'
 } as const
 
 export type LeadDesignSelectionScalarFieldEnum = (typeof LeadDesignSelectionScalarFieldEnum)[keyof typeof LeadDesignSelectionScalarFieldEnum]
@@ -773,7 +785,6 @@ export const UserLeadTaskScalarFieldEnum = {
   vendor_id: 'vendor_id',
   user_id: 'user_id',
   task_type: 'task_type',
-  lead_stage: 'lead_stage',
   due_date: 'due_date',
   remark: 'remark',
   status: 'status',
@@ -782,7 +793,8 @@ export const UserLeadTaskScalarFieldEnum = {
   created_by: 'created_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  updated_by: 'updated_by'
+  updated_by: 'updated_by',
+  lead_stage: 'lead_stage'
 } as const
 
 export type UserLeadTaskScalarFieldEnum = (typeof UserLeadTaskScalarFieldEnum)[keyof typeof UserLeadTaskScalarFieldEnum]
@@ -822,7 +834,6 @@ export const CompanyVendorsMasterScalarFieldEnum = {
   vendor_code: 'vendor_code',
   company_name: 'company_name',
   point_of_contact: 'point_of_contact',
-  in_house: 'in_house',
   contact_no: 'contact_no',
   email: 'email',
   address: 'address',
@@ -832,7 +843,8 @@ export const CompanyVendorsMasterScalarFieldEnum = {
   updated_by: 'updated_by',
   deleted_at: 'deleted_at',
   deleted_by: 'deleted_by',
-  is_deleted: 'is_deleted'
+  is_deleted: 'is_deleted',
+  in_house: 'in_house'
 } as const
 
 export type CompanyVendorsMasterScalarFieldEnum = (typeof CompanyVendorsMasterScalarFieldEnum)[keyof typeof CompanyVendorsMasterScalarFieldEnum]
@@ -843,6 +855,7 @@ export const OrderLoginDetailsScalarFieldEnum = {
   lead_id: 'lead_id',
   account_id: 'account_id',
   vendor_id: 'vendor_id',
+  instance_id: 'instance_id',
   item_type: 'item_type',
   item_desc: 'item_desc',
   estimated_completion_date: 'estimated_completion_date',
@@ -1039,12 +1052,12 @@ export type IssueLogResponsibleTeamMappingScalarFieldEnum = (typeof IssueLogResp
 export const EmailNotificationMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
-  template_key: 'template_key',
-  subject: 'subject',
   text: 'text',
-  html: 'html',
   active: 'active',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  html: 'html',
+  subject: 'subject',
+  template_key: 'template_key'
 } as const
 
 export type EmailNotificationMasterScalarFieldEnum = (typeof EmailNotificationMasterScalarFieldEnum)[keyof typeof EmailNotificationMasterScalarFieldEnum]
@@ -1076,10 +1089,10 @@ export const UserPushTokenScalarFieldEnum = {
   token: 'token',
   platform: 'platform',
   browser: 'browser',
-  device_id: 'device_id',
   is_active: 'is_active',
   created_at: 'created_at',
-  last_used_at: 'last_used_at'
+  last_used_at: 'last_used_at',
+  device_id: 'device_id'
 } as const
 
 export type UserPushTokenScalarFieldEnum = (typeof UserPushTokenScalarFieldEnum)[keyof typeof UserPushTokenScalarFieldEnum]

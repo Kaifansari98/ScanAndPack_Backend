@@ -34,6 +34,11 @@ ClientDocumentationRouter.get(
   ClientDocumentationController.getAllClientDocumentations,
 );
 
+ClientDocumentationRouter.post(
+  "/move-to-client-approval",
+  ClientDocumentationController.moveToClientApproval
+);
+
 ClientDocumentationRouter.get(
   "/order-login/eligibility/:vendorId/:leadId",
   ClientDocumentationController.canMoveToOrderLoginController,
