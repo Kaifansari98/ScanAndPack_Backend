@@ -3,7 +3,7 @@ import multerS3 from "multer-s3";
 import path from "path";
 import { sanitizeFilename } from "../utils/fileUtils";
 import wasabi from "../utils/wasabiClient";
-import fs from 'fs'
+import fs from "fs";
 
 const bucketName = process.env.WASABI_BUCKET_NAME || "vloq-furnix";
 
@@ -70,8 +70,8 @@ export const upload = multer({
     } else {
       cb(
         new Error(
-          `Only image files and PDFs and ZIP archives are allowed! Received: ${file.mimetype}`
-        )
+          `Only image files and PDFs and ZIP archives are allowed! Received: ${file.mimetype}`,
+        ),
       );
     }
   },
@@ -118,8 +118,8 @@ export const uploadDesignMeetingFiles = multer({
     } else {
       cb(
         new Error(
-          `Only image files and PDFs and ZIP archives are allowed! Received: ${file.mimetype}`
-        )
+          `Only image files and PDFs and ZIP archives are allowed! Received: ${file.mimetype}`,
+        ),
       );
     }
   },
@@ -150,8 +150,8 @@ export const uploadFinalMeasurement = multer({
     } else {
       cb(
         new Error(
-          `Only image files and PDFs are allowed! Received: ${file.mimetype}`
-        )
+          `Only image files and PDFs are allowed! Received: ${file.mimetype}`,
+        ),
       );
     }
   },
@@ -229,8 +229,8 @@ export const uploadClientDocumentation = multer({
     } else {
       cb(
         new Error(
-          `Only .ppt, .pptx, .pdf, .jpg, .jpeg, .png, .doc, .docx, .pyo files are allowed! Received: ${file.originalname} (${file.mimetype})`
-        )
+          `Only .ppt, .pptx, .pdf, .jpg, .jpeg, .png, .doc, .docx, .pyo files are allowed! Received: ${file.originalname} (${file.mimetype})`,
+        ),
       );
     }
   },
@@ -299,9 +299,9 @@ export const uploadDesigns = multer({
       cb(
         new Error(
           `Only design or image files are allowed! Supported extensions: ${allowedExtensions.join(
-            ", "
-          )}. Received: ${ext}`
-        )
+            ", ",
+          )}. Received: ${ext}`,
+        ),
       );
     }
   },
@@ -379,9 +379,9 @@ export const uploadOrderLoginPoFiles = multer({
       cb(
         new Error(
           `Only design or image files are allowed! Supported extensions: ${allowedExtensions.join(
-            ", "
-          )}. Received: ${ext}`
-        )
+            ", ",
+          )}. Received: ${ext}`,
+        ),
       );
     }
   },
@@ -535,12 +535,7 @@ export const uploadCSPBookingFiles = multer({
     files: 10,
   },
   fileFilter: (req, file, cb) => {
-    const allowed = [
-      "image/jpeg",
-      "image/jpg",
-      "image/png",
-      "image/gif",
-    ];
+    const allowed = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
     if (allowed.includes(file.mimetype)) cb(null, true);
     else cb(new Error("Only image files are allowed"));
   },
@@ -572,5 +567,28 @@ export const uploadToWasabiUnderInstallationDayWiseDocs = multer({
     const ext = path.extname(file.originalname).toLowerCase();
     if (allowed.includes(ext)) cb(null, true);
     else cb(new Error(`Unsupported file type: ${ext}`));
+  },
+});
+
+export const uploadMachineFiles = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/machine_images";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: {
+    fileSize: 20 * 1024 * 1024,
+    files: 1,
+  },
+  fileFilter: (req, file, cb) => {
+    const allowed = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+    allowed.includes(file.mimetype)
+      ? cb(null, true)
+      : cb(new Error("Only image files are allowed"));
   },
 });
