@@ -70,6 +70,10 @@ export type CutListMinAggregateOutputType = {
   created_at: Date | null
   updated_by: number | null
   updated_at: Date | null
+  elf: string | null
+  elb: string | null
+  esl: string | null
+  esr: string | null
 }
 
 export type CutListMaxAggregateOutputType = {
@@ -90,6 +94,10 @@ export type CutListMaxAggregateOutputType = {
   created_at: Date | null
   updated_by: number | null
   updated_at: Date | null
+  elf: string | null
+  elb: string | null
+  esl: string | null
+  esr: string | null
 }
 
 export type CutListCountAggregateOutputType = {
@@ -110,6 +118,10 @@ export type CutListCountAggregateOutputType = {
   created_at: number
   updated_by: number
   updated_at: number
+  elf: number
+  elb: number
+  esl: number
+  esr: number
   _all: number
 }
 
@@ -158,6 +170,10 @@ export type CutListMinAggregateInputType = {
   created_at?: true
   updated_by?: true
   updated_at?: true
+  elf?: true
+  elb?: true
+  esl?: true
+  esr?: true
 }
 
 export type CutListMaxAggregateInputType = {
@@ -178,6 +194,10 @@ export type CutListMaxAggregateInputType = {
   created_at?: true
   updated_by?: true
   updated_at?: true
+  elf?: true
+  elb?: true
+  esl?: true
+  esr?: true
 }
 
 export type CutListCountAggregateInputType = {
@@ -198,6 +218,10 @@ export type CutListCountAggregateInputType = {
   created_at?: true
   updated_by?: true
   updated_at?: true
+  elf?: true
+  elb?: true
+  esl?: true
+  esr?: true
   _all?: true
 }
 
@@ -305,6 +329,10 @@ export type CutListGroupByOutputType = {
   created_at: Date
   updated_by: number | null
   updated_at: Date
+  elf: string | null
+  elb: string | null
+  esl: string | null
+  esr: string | null
   _count: CutListCountAggregateOutputType | null
   _avg: CutListAvgAggregateOutputType | null
   _sum: CutListSumAggregateOutputType | null
@@ -348,6 +376,10 @@ export type CutListWhereInput = {
   created_at?: Prisma.DateTimeFilter<"CutList"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"CutList"> | number | null
   updated_at?: Prisma.DateTimeFilter<"CutList"> | Date | string
+  elf?: Prisma.StringNullableFilter<"CutList"> | string | null
+  elb?: Prisma.StringNullableFilter<"CutList"> | string | null
+  esl?: Prisma.StringNullableFilter<"CutList"> | string | null
+  esr?: Prisma.StringNullableFilter<"CutList"> | string | null
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
@@ -372,6 +404,10 @@ export type CutListOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  elf?: Prisma.SortOrderInput | Prisma.SortOrder
+  elb?: Prisma.SortOrderInput | Prisma.SortOrder
+  esl?: Prisma.SortOrderInput | Prisma.SortOrder
+  esr?: Prisma.SortOrderInput | Prisma.SortOrder
   project?: Prisma.ProjectMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   lead?: Prisma.LeadMasterOrderByWithRelationInput
@@ -399,6 +435,10 @@ export type CutListWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"CutList"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"CutList"> | number | null
   updated_at?: Prisma.DateTimeFilter<"CutList"> | Date | string
+  elf?: Prisma.StringNullableFilter<"CutList"> | string | null
+  elb?: Prisma.StringNullableFilter<"CutList"> | string | null
+  esl?: Prisma.StringNullableFilter<"CutList"> | string | null
+  esr?: Prisma.StringNullableFilter<"CutList"> | string | null
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
@@ -423,6 +463,10 @@ export type CutListOrderByWithAggregationInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  elf?: Prisma.SortOrderInput | Prisma.SortOrder
+  elb?: Prisma.SortOrderInput | Prisma.SortOrder
+  esl?: Prisma.SortOrderInput | Prisma.SortOrder
+  esr?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.CutListCountOrderByAggregateInput
   _avg?: Prisma.CutListAvgOrderByAggregateInput
   _max?: Prisma.CutListMaxOrderByAggregateInput
@@ -451,6 +495,10 @@ export type CutListScalarWhereWithAggregatesInput = {
   created_at?: Prisma.DateTimeWithAggregatesFilter<"CutList"> | Date | string
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"CutList"> | number | null
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"CutList"> | Date | string
+  elf?: Prisma.StringNullableWithAggregatesFilter<"CutList"> | string | null
+  elb?: Prisma.StringNullableWithAggregatesFilter<"CutList"> | string | null
+  esl?: Prisma.StringNullableWithAggregatesFilter<"CutList"> | string | null
+  esr?: Prisma.StringNullableWithAggregatesFilter<"CutList"> | string | null
 }
 
 export type CutListCreateInput = {
@@ -467,6 +515,10 @@ export type CutListCreateInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  elf?: string | null
+  elb?: string | null
+  esl?: string | null
+  esr?: string | null
   project: Prisma.ProjectMasterCreateNestedOneWithoutCutListInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCutListInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutCutListInput
@@ -491,6 +543,10 @@ export type CutListUncheckedCreateInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  elf?: string | null
+  elb?: string | null
+  esl?: string | null
+  esr?: string | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutCut_listInput
 }
 
@@ -508,6 +564,10 @@ export type CutListUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  elf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutCutListNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCutListNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCutListNestedInput
@@ -532,6 +592,10 @@ export type CutListUncheckedUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  elf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutCut_listNestedInput
 }
 
@@ -553,6 +617,10 @@ export type CutListCreateManyInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  elf?: string | null
+  elb?: string | null
+  esl?: string | null
+  esr?: string | null
 }
 
 export type CutListUpdateManyMutationInput = {
@@ -569,6 +637,10 @@ export type CutListUpdateManyMutationInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  elf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CutListUncheckedUpdateManyInput = {
@@ -589,6 +661,10 @@ export type CutListUncheckedUpdateManyInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  elf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CutListListRelationFilter = {
@@ -619,6 +695,10 @@ export type CutListCountOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  elf?: Prisma.SortOrder
+  elb?: Prisma.SortOrder
+  esl?: Prisma.SortOrder
+  esr?: Prisma.SortOrder
 }
 
 export type CutListAvgOrderByAggregateInput = {
@@ -652,6 +732,10 @@ export type CutListMaxOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  elf?: Prisma.SortOrder
+  elb?: Prisma.SortOrder
+  esl?: Prisma.SortOrder
+  esr?: Prisma.SortOrder
 }
 
 export type CutListMinOrderByAggregateInput = {
@@ -672,6 +756,10 @@ export type CutListMinOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  elf?: Prisma.SortOrder
+  elb?: Prisma.SortOrder
+  esl?: Prisma.SortOrder
+  esr?: Prisma.SortOrder
 }
 
 export type CutListSumOrderByAggregateInput = {
@@ -846,6 +934,10 @@ export type CutListCreateWithoutVendorInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  elf?: string | null
+  elb?: string | null
+  esl?: string | null
+  esr?: string | null
   project: Prisma.ProjectMasterCreateNestedOneWithoutCutListInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutCutListInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutCut_listInput
@@ -868,6 +960,10 @@ export type CutListUncheckedCreateWithoutVendorInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  elf?: string | null
+  elb?: string | null
+  esl?: string | null
+  esr?: string | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutCut_listInput
 }
 
@@ -918,6 +1014,10 @@ export type CutListScalarWhereInput = {
   created_at?: Prisma.DateTimeFilter<"CutList"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"CutList"> | number | null
   updated_at?: Prisma.DateTimeFilter<"CutList"> | Date | string
+  elf?: Prisma.StringNullableFilter<"CutList"> | string | null
+  elb?: Prisma.StringNullableFilter<"CutList"> | string | null
+  esl?: Prisma.StringNullableFilter<"CutList"> | string | null
+  esr?: Prisma.StringNullableFilter<"CutList"> | string | null
 }
 
 export type CutListCreateWithoutProjectInput = {
@@ -934,6 +1034,10 @@ export type CutListCreateWithoutProjectInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  elf?: string | null
+  elb?: string | null
+  esl?: string | null
+  esr?: string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCutListInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutCutListInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutCut_listInput
@@ -956,6 +1060,10 @@ export type CutListUncheckedCreateWithoutProjectInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  elf?: string | null
+  elb?: string | null
+  esl?: string | null
+  esr?: string | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutCut_listInput
 }
 
@@ -999,6 +1107,10 @@ export type CutListCreateWithoutLeadInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  elf?: string | null
+  elb?: string | null
+  esl?: string | null
+  esr?: string | null
   project: Prisma.ProjectMasterCreateNestedOneWithoutCutListInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCutListInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutCut_listInput
@@ -1021,6 +1133,10 @@ export type CutListUncheckedCreateWithoutLeadInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  elf?: string | null
+  elb?: string | null
+  esl?: string | null
+  esr?: string | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutCut_listInput
 }
 
@@ -1064,6 +1180,10 @@ export type CutListCreateWithoutCutListMachineMappingInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  elf?: string | null
+  elb?: string | null
+  esl?: string | null
+  esr?: string | null
   project: Prisma.ProjectMasterCreateNestedOneWithoutCutListInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCutListInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutCutListInput
@@ -1087,6 +1207,10 @@ export type CutListUncheckedCreateWithoutCutListMachineMappingInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  elf?: string | null
+  elb?: string | null
+  esl?: string | null
+  esr?: string | null
 }
 
 export type CutListCreateOrConnectWithoutCutListMachineMappingInput = {
@@ -1119,6 +1243,10 @@ export type CutListUpdateWithoutCutListMachineMappingInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  elf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutCutListNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCutListNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCutListNestedInput
@@ -1142,6 +1270,10 @@ export type CutListUncheckedUpdateWithoutCutListMachineMappingInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  elf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CutListCreateManyVendorInput = {
@@ -1161,6 +1293,10 @@ export type CutListCreateManyVendorInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  elf?: string | null
+  elb?: string | null
+  esl?: string | null
+  esr?: string | null
 }
 
 export type CutListUpdateWithoutVendorInput = {
@@ -1177,6 +1313,10 @@ export type CutListUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  elf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutCutListNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCutListNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutCut_listNestedInput
@@ -1199,6 +1339,10 @@ export type CutListUncheckedUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  elf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutCut_listNestedInput
 }
 
@@ -1219,6 +1363,10 @@ export type CutListUncheckedUpdateManyWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  elf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CutListCreateManyProjectInput = {
@@ -1238,6 +1386,10 @@ export type CutListCreateManyProjectInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  elf?: string | null
+  elb?: string | null
+  esl?: string | null
+  esr?: string | null
 }
 
 export type CutListUpdateWithoutProjectInput = {
@@ -1254,6 +1406,10 @@ export type CutListUpdateWithoutProjectInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  elf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCutListNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCutListNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutCut_listNestedInput
@@ -1276,6 +1432,10 @@ export type CutListUncheckedUpdateWithoutProjectInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  elf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutCut_listNestedInput
 }
 
@@ -1296,6 +1456,10 @@ export type CutListUncheckedUpdateManyWithoutProjectInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  elf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CutListCreateManyLeadInput = {
@@ -1315,6 +1479,10 @@ export type CutListCreateManyLeadInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  elf?: string | null
+  elb?: string | null
+  esl?: string | null
+  esr?: string | null
 }
 
 export type CutListUpdateWithoutLeadInput = {
@@ -1331,6 +1499,10 @@ export type CutListUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  elf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutCutListNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCutListNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutCut_listNestedInput
@@ -1353,6 +1525,10 @@ export type CutListUncheckedUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  elf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutCut_listNestedInput
 }
 
@@ -1373,6 +1549,10 @@ export type CutListUncheckedUpdateManyWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  elf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -1424,6 +1604,10 @@ export type CutListSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
+  elf?: boolean
+  elb?: boolean
+  esl?: boolean
+  esr?: boolean
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -1449,6 +1633,10 @@ export type CutListSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
+  elf?: boolean
+  elb?: boolean
+  esl?: boolean
+  esr?: boolean
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -1472,6 +1660,10 @@ export type CutListSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
+  elf?: boolean
+  elb?: boolean
+  esl?: boolean
+  esr?: boolean
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -1495,9 +1687,13 @@ export type CutListSelectScalar = {
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
+  elf?: boolean
+  elb?: boolean
+  esl?: boolean
+  esr?: boolean
 }
 
-export type CutListOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "lead_id" | "description" | "length" | "width" | "thickness" | "qty" | "material_details" | "item_name" | "unique_code" | "status" | "created_by" | "created_at" | "updated_by" | "updated_at", ExtArgs["result"]["cutList"]>
+export type CutListOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "lead_id" | "description" | "length" | "width" | "thickness" | "qty" | "material_details" | "item_name" | "unique_code" | "status" | "created_by" | "created_at" | "updated_by" | "updated_at" | "elf" | "elb" | "esl" | "esr", ExtArgs["result"]["cutList"]>
 export type CutListInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1542,6 +1738,10 @@ export type $CutListPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     created_at: Date
     updated_by: number | null
     updated_at: Date
+    elf: string | null
+    elb: string | null
+    esl: string | null
+    esr: string | null
   }, ExtArgs["result"]["cutList"]>
   composites: {}
 }
@@ -1986,6 +2186,10 @@ export interface CutListFieldRefs {
   readonly created_at: Prisma.FieldRef<"CutList", 'DateTime'>
   readonly updated_by: Prisma.FieldRef<"CutList", 'Int'>
   readonly updated_at: Prisma.FieldRef<"CutList", 'DateTime'>
+  readonly elf: Prisma.FieldRef<"CutList", 'String'>
+  readonly elb: Prisma.FieldRef<"CutList", 'String'>
+  readonly esl: Prisma.FieldRef<"CutList", 'String'>
+  readonly esr: Prisma.FieldRef<"CutList", 'String'>
 }
     
 

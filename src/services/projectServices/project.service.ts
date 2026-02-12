@@ -884,16 +884,11 @@ export const handelItems = async (
     const itemSchema = z.object({
       articleCode: requiredString("articleCode"),
       groupName: requiredString("groupName"),
-      el1: requiredString("el1"),
-      el2: requiredString("el2"),
       l1: requiredNumber("l1"),
       l2: requiredNumber("l2"),
       l3: requiredNumber("l3"),
       name: requiredString("name"),
       qty: z.coerce.number().int().positive("qty must be greater than 0"),
-      rotation: requiredNumber("rotation"),
-      sl1: requiredString("sl1"),
-      sl2: requiredString("sl2")
     });
 
     const payloadSchema = z.object({
@@ -965,56 +960,101 @@ export const handelItems = async (
         }
       });
 
+      // for (const item of payload.items) {
+
+      //   const firstRow = await tx.cutList.create({
+      //     data: {
+      //       project_id: project.id,
+      //       vendor_id: vendor.id,
+      //       description: item.name,
+      //       length: Number(item.l1),
+      //       width: Number(item.l2),
+      //       thickness: Number(item.l3),
+      //       qty: 1,
+      //       material_details: item.articleCode,
+      //       item_name: item.groupName,
+      //       status: "Active",
+      //       created_by: createdByUserId,
+      //       lead_id: lead_id,
+      //       elf: item.elf,
+      //       elb: item.elb,
+      //       esl: item.esl,
+      //       esr: item.esr,
+      //     }
+      //   });
+
+      //   const uniqueCode = `${firstRow.id}-${project.id}`;
+
+      //   await tx.cutList.update({
+      //     where: { id: firstRow.id },
+      //     data: { unique_code: uniqueCode }
+      //   });
+
+      //   const quantity = Number(item.qty);
+
+      //   if (quantity > 1) {
+      //     const additionalRows = Array.from({ length: quantity - 1 }).map(() => ({
+      //       project_id: project.id,
+      //       vendor_id: vendor.id,
+      //       description: item.name,
+      //       length: Number(item.l1),
+      //       width: Number(item.l2),
+      //       thickness: Number(item.l3),
+      //       qty: 1,
+      //       material_details: item.articleCode,
+      //       item_name: item.groupName,
+      //       status: "Active",
+      //       created_by: createdByUserId,
+      //       lead_id: lead_id,
+      //       unique_code: uniqueCode,
+      //       elf: item.elf,
+      //       elb: item.elb,
+      //       esl: item.esl,
+      //       esr: item.esr,
+      //     }));
+
+      //     await tx.cutList.createMany({
+      //       data: additionalRows
+      //     });
+      //   }
+      // }
+
       for (const item of payload.items) {
-
-        const firstRow = await tx.cutList.create({
-          data: {
-            project_id: project.id,
-            vendor_id: vendor.id,
-            description: item.name,
-            length: Number(item.l1),
-            width: Number(item.l2),
-            thickness: Number(item.l3),
-            qty: 1,
-            material_details: item.articleCode,
-            item_name: item.groupName,
-            status: "Active",
-            created_by: createdByUserId,
-            lead_id: lead_id
-          }
-        });
-
-        const uniqueCode = `${firstRow.id}-${project.id}`;
-
-        await tx.cutList.update({
-          where: { id: firstRow.id },
-          data: { unique_code: uniqueCode }
-        });
 
         const quantity = Number(item.qty);
 
-        if (quantity > 1) {
-          const additionalRows = Array.from({ length: quantity - 1 }).map(() => ({
-            project_id: project.id,
-            vendor_id: vendor.id,
-            description: item.name,
-            length: Number(item.l1),
-            width: Number(item.l2),
-            thickness: Number(item.l3),
-            qty: 1,
-            material_details: item.articleCode,
-            item_name: item.groupName,
-            status: "Active",
-            created_by: createdByUserId,
-            lead_id: lead_id,
-            unique_code: uniqueCode
-          }));
+        for (let i = 0; i < quantity; i++) {
 
-          await tx.cutList.createMany({
-            data: additionalRows
+          const row = await tx.cutList.create({
+            data: {
+              project_id: project.id,
+              vendor_id: vendor.id,
+              description: item.name,
+              length: Number(item.l1),
+              width: Number(item.l2),
+              thickness: Number(item.l3),
+              qty: 1,
+              material_details: item.articleCode,
+              item_name: item.groupName,
+              status: "Active",
+              created_by: createdByUserId,
+              lead_id: lead_id,
+              elf: item.el1,
+              elb: item.el2,
+              esl: item.sl1,
+              esr: item.sl2,
+            }
+          });
+
+          const uniqueCode = `${row.id}-${project.id}`;
+
+          await tx.cutList.update({
+            where: { id: row.id },
+            data: { unique_code: uniqueCode }
           });
         }
       }
+
 
       return project;
     });

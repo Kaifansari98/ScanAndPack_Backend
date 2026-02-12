@@ -1309,6 +1309,10 @@ model CutList {
   created_at            DateTime                @default(now())
   updated_by            Int?
   updated_at            DateTime                @default(now())
+  elf                   String?
+  elb                   String?
+  esl                   String?
+  esr                   String?
   project               ProjectMaster           @relation(fields: [project_id], references: [id])
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])
   
