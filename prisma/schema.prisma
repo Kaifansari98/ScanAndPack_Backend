@@ -836,6 +836,8 @@ model LeadDesignSelection {
   productStructureInstance      LeadProductStructureInstance? @relation(fields: [product_structure_instance_id], references: [id])
   updatedBy                     UserMaster?                   @relation("DesignSelectionUpdatedBy", fields: [updated_by], references: [id], onDelete: Cascade)
   vendor                        VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  @@unique([lead_id, type, product_structure_instance_id], name: "unique_lead_type_instance")
 }
 
 model PaymentTypeMaster {
