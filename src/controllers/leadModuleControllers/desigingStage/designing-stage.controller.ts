@@ -1155,48 +1155,97 @@ export class DesigingStageController {
         logs.push("Product structure instance verified successfully");
       }
 
-      // 5️⃣ Create Design Selection Entry
-      const designSelection = await prisma.leadDesignSelection.create({
-        data: {
+      // 5️⃣ Create or update Design Selection Entry (prevent duplicate per type+instance)
+      const existingSelection = await prisma.leadDesignSelection.findFirst({
+        where: {
           lead_id: Number(lead_id),
-          account_id: Number(account_id),
           vendor_id: Number(vendor_id),
-          product_structure_instance_id: resolvedInstanceId,
+          account_id: Number(account_id),
           type,
-          desc,
-          created_by: Number(created_by),
+          product_structure_instance_id: resolvedInstanceId,
         },
-        include: {
-          createdBy: {
-            select: { id: true, user_name: true, user_email: true },
-          },
-          lead: {
-            select: {
-              id: true,
-              firstname: true,
-              lastname: true,
-              contact_no: true,
-            },
-          },
-          account: { select: { id: true, name: true } },
-          productStructureInstance: {
-            select: { id: true, title: true, quantity_index: true },
-          },
-        },
+        select: { id: true },
       });
 
-      logs.push("Design selection created successfully");
+      const designSelection = existingSelection
+        ? await prisma.leadDesignSelection.update({
+            where: { id: existingSelection.id },
+            data: {
+              desc,
+              updated_by: Number(created_by),
+              updated_at: new Date(),
+            },
+            include: {
+              createdBy: {
+                select: { id: true, user_name: true, user_email: true },
+              },
+              lead: {
+                select: {
+                  id: true,
+                  firstname: true,
+                  lastname: true,
+                  contact_no: true,
+                },
+              },
+              account: { select: { id: true, name: true } },
+              productStructureInstance: {
+                select: { id: true, title: true, quantity_index: true },
+              },
+            },
+          })
+        : await prisma.leadDesignSelection.create({
+            data: {
+              lead_id: Number(lead_id),
+              account_id: Number(account_id),
+              vendor_id: Number(vendor_id),
+              product_structure_instance_id: resolvedInstanceId,
+              type,
+              desc,
+              created_by: Number(created_by),
+            },
+            include: {
+              createdBy: {
+                select: { id: true, user_name: true, user_email: true },
+              },
+              lead: {
+                select: {
+                  id: true,
+                  firstname: true,
+                  lastname: true,
+                  contact_no: true,
+                },
+              },
+              account: { select: { id: true, name: true } },
+              productStructureInstance: {
+                select: { id: true, title: true, quantity_index: true },
+              },
+            },
+          });
+
+      logs.push(
+        existingSelection
+          ? "Design selection updated successfully"
+          : "Design selection created successfully"
+      );
 
       // 6️⃣ Add LeadDetailedLogs entry (with remark from `desc`)
       let actionMessage = "";
       if (type.toLowerCase() === "carcas") {
-        actionMessage = `Carcas has been added successfully.`;
+        actionMessage = existingSelection
+          ? `Carcas has been updated successfully.`
+          : `Carcas has been added successfully.`;
       } else if (type.toLowerCase() === "shutter") {
-        actionMessage = `Shutter has been added successfully.`;
+        actionMessage = existingSelection
+          ? `Shutter has been updated successfully.`
+          : `Shutter has been added successfully.`;
       } else if (type.toLowerCase() === "handles") {
-        actionMessage = `Handles have been added successfully.`;
+        actionMessage = existingSelection
+          ? `Handles has been updated successfully.`
+          : `Handles has been added successfully.`;
       } else {
-        actionMessage = `${type} has been added successfully.`;
+        actionMessage = existingSelection
+          ? `${type} has been updated successfully.`
+          : `${type} has been added successfully.`;
       }
 
       // 👇 append remark from `desc` into the action
