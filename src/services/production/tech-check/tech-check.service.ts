@@ -50,6 +50,10 @@ export class TechCheckService {
         vendor_id: true,
         is_tech_check_completed: true,
         tech_check_completed_at: true,
+        is_order_login_completed: true,
+        order_login_completed_at: true,
+        is_production_completed: true,
+        production_completed_at: true,
       },
     });
   }
