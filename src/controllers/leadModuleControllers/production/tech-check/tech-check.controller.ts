@@ -48,6 +48,53 @@ export class TechCheckController {
     }
   };
 
+  // ✅ Get Tech-Check status by vendor, lead, instance
+  public static getTechCheckInstanceStatus = async (
+    req: Request,
+    res: Response
+  ) => {
+    try {
+      const vendorId = parseInt(req.params.vendorId);
+      const leadId = parseInt(req.params.leadId);
+      const instanceId = parseInt(req.params.instanceId);
+
+      if (!vendorId || !leadId || !instanceId) {
+        return res.status(400).json({
+          success: false,
+          message: "Vendor ID, Lead ID, and Instance ID are required",
+        });
+      }
+
+      const result = await techCheckService.getInstanceTechCheckStatus(
+        vendorId,
+        leadId,
+        instanceId
+      );
+
+      if (!result) {
+        return res.status(404).json({
+          success: false,
+          message: "Instance not found for this lead",
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        message: "Tech check status fetched successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error(
+        "[TechCheckController] getTechCheckInstanceStatus Error:",
+        error
+      );
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
   // ✅ Approve Tech Check
   public static approveTechCheck = async (req: Request, res: Response) => {
     try {

@@ -33,6 +33,27 @@ export type ApproveTechCheckResult =
     };
 
 export class TechCheckService {
+  public async getInstanceTechCheckStatus(
+    vendorId: number,
+    leadId: number,
+    instanceId: number
+  ) {
+    return prisma.leadProductStructureInstance.findFirst({
+      where: {
+        id: instanceId,
+        lead_id: leadId,
+        vendor_id: vendorId,
+      },
+      select: {
+        id: true,
+        lead_id: true,
+        vendor_id: true,
+        is_tech_check_completed: true,
+        tech_check_completed_at: true,
+      },
+    });
+  }
+
   // ✅ Approve Tech Check
   public async approveTechCheck(
     vendorId: number,
