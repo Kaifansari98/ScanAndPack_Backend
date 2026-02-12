@@ -231,7 +231,8 @@ export const ProjectMasterScalarFieldEnum = {
   project_status: 'project_status',
   created_at: 'created_at',
   unique_project_id: 'unique_project_id',
-  is_grouping: 'is_grouping'
+  is_grouping: 'is_grouping',
+  track_trace_status: 'track_trace_status'
 } as const
 
 export type ProjectMasterScalarFieldEnum = (typeof ProjectMasterScalarFieldEnum)[keyof typeof ProjectMasterScalarFieldEnum]

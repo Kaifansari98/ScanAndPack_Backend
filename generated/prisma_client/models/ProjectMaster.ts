@@ -50,6 +50,7 @@ export type ProjectMasterMinAggregateOutputType = {
   created_at: Date | null
   unique_project_id: string | null
   is_grouping: boolean | null
+  track_trace_status: string | null
 }
 
 export type ProjectMasterMaxAggregateOutputType = {
@@ -62,6 +63,7 @@ export type ProjectMasterMaxAggregateOutputType = {
   created_at: Date | null
   unique_project_id: string | null
   is_grouping: boolean | null
+  track_trace_status: string | null
 }
 
 export type ProjectMasterCountAggregateOutputType = {
@@ -74,6 +76,7 @@ export type ProjectMasterCountAggregateOutputType = {
   created_at: number
   unique_project_id: number
   is_grouping: number
+  track_trace_status: number
   _all: number
 }
 
@@ -102,6 +105,7 @@ export type ProjectMasterMinAggregateInputType = {
   created_at?: true
   unique_project_id?: true
   is_grouping?: true
+  track_trace_status?: true
 }
 
 export type ProjectMasterMaxAggregateInputType = {
@@ -114,6 +118,7 @@ export type ProjectMasterMaxAggregateInputType = {
   created_at?: true
   unique_project_id?: true
   is_grouping?: true
+  track_trace_status?: true
 }
 
 export type ProjectMasterCountAggregateInputType = {
@@ -126,6 +131,7 @@ export type ProjectMasterCountAggregateInputType = {
   created_at?: true
   unique_project_id?: true
   is_grouping?: true
+  track_trace_status?: true
   _all?: true
 }
 
@@ -225,6 +231,7 @@ export type ProjectMasterGroupByOutputType = {
   created_at: Date
   unique_project_id: string
   is_grouping: boolean
+  track_trace_status: string
   _count: ProjectMasterCountAggregateOutputType | null
   _avg: ProjectMasterAvgAggregateOutputType | null
   _sum: ProjectMasterSumAggregateOutputType | null
@@ -260,6 +267,7 @@ export type ProjectMasterWhereInput = {
   created_at?: Prisma.DateTimeFilter<"ProjectMaster"> | Date | string
   unique_project_id?: Prisma.StringFilter<"ProjectMaster"> | string
   is_grouping?: Prisma.BoolFilter<"ProjectMaster"> | boolean
+  track_trace_status?: Prisma.StringFilter<"ProjectMaster"> | string
   boxes?: Prisma.BoxMasterListRelationFilter
   CutList?: Prisma.CutListListRelationFilter
   cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
@@ -281,6 +289,7 @@ export type ProjectMasterOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   unique_project_id?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
+  track_trace_status?: Prisma.SortOrder
   boxes?: Prisma.BoxMasterOrderByRelationAggregateInput
   CutList?: Prisma.CutListOrderByRelationAggregateInput
   cutListMachineMapping?: Prisma.CutListMachineMappingOrderByRelationAggregateInput
@@ -305,6 +314,7 @@ export type ProjectMasterWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"ProjectMaster"> | Date | string
   unique_project_id?: Prisma.StringFilter<"ProjectMaster"> | string
   is_grouping?: Prisma.BoolFilter<"ProjectMaster"> | boolean
+  track_trace_status?: Prisma.StringFilter<"ProjectMaster"> | string
   boxes?: Prisma.BoxMasterListRelationFilter
   CutList?: Prisma.CutListListRelationFilter
   cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
@@ -326,6 +336,7 @@ export type ProjectMasterOrderByWithAggregationInput = {
   created_at?: Prisma.SortOrder
   unique_project_id?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
+  track_trace_status?: Prisma.SortOrder
   _count?: Prisma.ProjectMasterCountOrderByAggregateInput
   _avg?: Prisma.ProjectMasterAvgOrderByAggregateInput
   _max?: Prisma.ProjectMasterMaxOrderByAggregateInput
@@ -346,6 +357,7 @@ export type ProjectMasterScalarWhereWithAggregatesInput = {
   created_at?: Prisma.DateTimeWithAggregatesFilter<"ProjectMaster"> | Date | string
   unique_project_id?: Prisma.StringWithAggregatesFilter<"ProjectMaster"> | string
   is_grouping?: Prisma.BoolWithAggregatesFilter<"ProjectMaster"> | boolean
+  track_trace_status?: Prisma.StringWithAggregatesFilter<"ProjectMaster"> | string
 }
 
 export type ProjectMasterCreateInput = {
@@ -354,6 +366,7 @@ export type ProjectMasterCreateInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
@@ -375,6 +388,7 @@ export type ProjectMasterUncheckedCreateInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
@@ -389,6 +403,7 @@ export type ProjectMasterUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
@@ -410,6 +425,7 @@ export type ProjectMasterUncheckedUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
@@ -428,6 +444,7 @@ export type ProjectMasterCreateManyInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
 }
 
 export type ProjectMasterUpdateManyMutationInput = {
@@ -436,6 +453,7 @@ export type ProjectMasterUpdateManyMutationInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProjectMasterUncheckedUpdateManyInput = {
@@ -448,6 +466,7 @@ export type ProjectMasterUncheckedUpdateManyInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProjectMasterListRelationFilter = {
@@ -470,6 +489,7 @@ export type ProjectMasterCountOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   unique_project_id?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
+  track_trace_status?: Prisma.SortOrder
 }
 
 export type ProjectMasterAvgOrderByAggregateInput = {
@@ -489,6 +509,7 @@ export type ProjectMasterMaxOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   unique_project_id?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
+  track_trace_status?: Prisma.SortOrder
 }
 
 export type ProjectMasterMinOrderByAggregateInput = {
@@ -501,6 +522,7 @@ export type ProjectMasterMinOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   unique_project_id?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
+  track_trace_status?: Prisma.SortOrder
 }
 
 export type ProjectMasterSumOrderByAggregateInput = {
@@ -735,6 +757,7 @@ export type ProjectMasterCreateWithoutVendorInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
@@ -754,6 +777,7 @@ export type ProjectMasterUncheckedCreateWithoutVendorInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
@@ -801,6 +825,7 @@ export type ProjectMasterScalarWhereInput = {
   created_at?: Prisma.DateTimeFilter<"ProjectMaster"> | Date | string
   unique_project_id?: Prisma.StringFilter<"ProjectMaster"> | string
   is_grouping?: Prisma.BoolFilter<"ProjectMaster"> | boolean
+  track_trace_status?: Prisma.StringFilter<"ProjectMaster"> | string
 }
 
 export type ProjectMasterCreateWithoutCreatedByUserInput = {
@@ -809,6 +834,7 @@ export type ProjectMasterCreateWithoutCreatedByUserInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
@@ -828,6 +854,7 @@ export type ProjectMasterUncheckedCreateWithoutCreatedByUserInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
@@ -868,6 +895,7 @@ export type ProjectMasterCreateWithoutDetailsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
@@ -888,6 +916,7 @@ export type ProjectMasterUncheckedCreateWithoutDetailsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
@@ -917,6 +946,7 @@ export type ProjectMasterUpdateWithoutDetailsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
@@ -937,6 +967,7 @@ export type ProjectMasterUncheckedUpdateWithoutDetailsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
@@ -950,6 +981,7 @@ export type ProjectMasterCreateWithoutItemsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
@@ -970,6 +1002,7 @@ export type ProjectMasterUncheckedCreateWithoutItemsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
@@ -999,6 +1032,7 @@ export type ProjectMasterUpdateWithoutItemsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
@@ -1019,6 +1053,7 @@ export type ProjectMasterUncheckedUpdateWithoutItemsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
@@ -1032,6 +1067,7 @@ export type ProjectMasterCreateWithoutBoxesInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsCreateNestedManyWithoutProjectInput
@@ -1052,6 +1088,7 @@ export type ProjectMasterUncheckedCreateWithoutBoxesInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutProjectInput
@@ -1081,6 +1118,7 @@ export type ProjectMasterUpdateWithoutBoxesInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
@@ -1101,6 +1139,7 @@ export type ProjectMasterUncheckedUpdateWithoutBoxesInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutProjectNestedInput
@@ -1114,6 +1153,7 @@ export type ProjectMasterCreateWithoutScanItemsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
@@ -1134,6 +1174,7 @@ export type ProjectMasterUncheckedCreateWithoutScanItemsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
@@ -1163,6 +1204,7 @@ export type ProjectMasterUpdateWithoutScanItemsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
@@ -1183,6 +1225,7 @@ export type ProjectMasterUncheckedUpdateWithoutScanItemsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
@@ -1196,6 +1239,7 @@ export type ProjectMasterCreateWithoutClientInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
@@ -1215,6 +1259,7 @@ export type ProjectMasterUncheckedCreateWithoutClientInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
@@ -1255,6 +1300,7 @@ export type ProjectMasterCreateWithoutCutListInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsCreateNestedManyWithoutProjectInput
@@ -1275,6 +1321,7 @@ export type ProjectMasterUncheckedCreateWithoutCutListInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutProjectInput
@@ -1304,6 +1351,7 @@ export type ProjectMasterUpdateWithoutCutListInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
@@ -1324,6 +1372,7 @@ export type ProjectMasterUncheckedUpdateWithoutCutListInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutProjectNestedInput
@@ -1337,6 +1386,7 @@ export type ProjectMasterCreateWithoutCutListMachineMappingInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsCreateNestedManyWithoutProjectInput
@@ -1357,6 +1407,7 @@ export type ProjectMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutProjectInput
@@ -1386,6 +1437,7 @@ export type ProjectMasterUpdateWithoutCutListMachineMappingInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
@@ -1406,6 +1458,7 @@ export type ProjectMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutProjectNestedInput
@@ -1422,6 +1475,7 @@ export type ProjectMasterCreateManyVendorInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
 }
 
 export type ProjectMasterUpdateWithoutVendorInput = {
@@ -1430,6 +1484,7 @@ export type ProjectMasterUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
@@ -1449,6 +1504,7 @@ export type ProjectMasterUncheckedUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
@@ -1466,6 +1522,7 @@ export type ProjectMasterUncheckedUpdateManyWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProjectMasterCreateManyCreatedByUserInput = {
@@ -1477,6 +1534,7 @@ export type ProjectMasterCreateManyCreatedByUserInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
 }
 
 export type ProjectMasterUpdateWithoutCreatedByUserInput = {
@@ -1485,6 +1543,7 @@ export type ProjectMasterUpdateWithoutCreatedByUserInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
@@ -1504,6 +1563,7 @@ export type ProjectMasterUncheckedUpdateWithoutCreatedByUserInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
@@ -1521,6 +1581,7 @@ export type ProjectMasterUncheckedUpdateManyWithoutCreatedByUserInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProjectMasterCreateManyClientInput = {
@@ -1532,6 +1593,7 @@ export type ProjectMasterCreateManyClientInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
 }
 
 export type ProjectMasterUpdateWithoutClientInput = {
@@ -1540,6 +1602,7 @@ export type ProjectMasterUpdateWithoutClientInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
@@ -1559,6 +1622,7 @@ export type ProjectMasterUncheckedUpdateWithoutClientInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
@@ -1576,6 +1640,7 @@ export type ProjectMasterUncheckedUpdateManyWithoutClientInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -1664,6 +1729,7 @@ export type ProjectMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   created_at?: boolean
   unique_project_id?: boolean
   is_grouping?: boolean
+  track_trace_status?: boolean
   boxes?: boolean | Prisma.ProjectMaster$boxesArgs<ExtArgs>
   CutList?: boolean | Prisma.ProjectMaster$CutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.ProjectMaster$cutListMachineMappingArgs<ExtArgs>
@@ -1686,6 +1752,7 @@ export type ProjectMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   created_at?: boolean
   unique_project_id?: boolean
   is_grouping?: boolean
+  track_trace_status?: boolean
   client?: boolean | Prisma.ProjectMaster$clientArgs<ExtArgs>
   createdByUser?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1701,6 +1768,7 @@ export type ProjectMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   created_at?: boolean
   unique_project_id?: boolean
   is_grouping?: boolean
+  track_trace_status?: boolean
   client?: boolean | Prisma.ProjectMaster$clientArgs<ExtArgs>
   createdByUser?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1716,9 +1784,10 @@ export type ProjectMasterSelectScalar = {
   created_at?: boolean
   unique_project_id?: boolean
   is_grouping?: boolean
+  track_trace_status?: boolean
 }
 
-export type ProjectMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_name" | "vendor_id" | "client_id" | "created_by" | "project_status" | "created_at" | "unique_project_id" | "is_grouping", ExtArgs["result"]["projectMaster"]>
+export type ProjectMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_name" | "vendor_id" | "client_id" | "created_by" | "project_status" | "created_at" | "unique_project_id" | "is_grouping" | "track_trace_status", ExtArgs["result"]["projectMaster"]>
 export type ProjectMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   boxes?: boolean | Prisma.ProjectMaster$boxesArgs<ExtArgs>
   CutList?: boolean | Prisma.ProjectMaster$CutListArgs<ExtArgs>
@@ -1765,6 +1834,7 @@ export type $ProjectMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     created_at: Date
     unique_project_id: string
     is_grouping: boolean
+    track_trace_status: string
   }, ExtArgs["result"]["projectMaster"]>
   composites: {}
 }
@@ -2206,6 +2276,7 @@ export interface ProjectMasterFieldRefs {
   readonly created_at: Prisma.FieldRef<"ProjectMaster", 'DateTime'>
   readonly unique_project_id: Prisma.FieldRef<"ProjectMaster", 'String'>
   readonly is_grouping: Prisma.FieldRef<"ProjectMaster", 'Boolean'>
+  readonly track_trace_status: Prisma.FieldRef<"ProjectMaster", 'String'>
 }
     
 

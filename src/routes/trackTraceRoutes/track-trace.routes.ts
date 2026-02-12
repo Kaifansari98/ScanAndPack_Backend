@@ -15,7 +15,9 @@ import {
     getTopPerformer,
     getProjectProgress,
     getBottleNeck    ,
-    get_filter_track_trace
+    get_filter_track_trace,
+    getCutListMachine,
+    assignMachine
 } from '../../controllers/trackTraceController/trackTrace.controller';
 
 
@@ -41,6 +43,11 @@ router.get('/machine-utilization/:vendor_id', getMachineUtilization);
 router.get('/top-performer/:vendor_id', getTopPerformer);
 router.get('/project-progress/:vendor_id', getProjectProgress);
 router.get('/bottle-neck/:vendor_id', getBottleNeck);
+
+
+router.get('/cut-list-machine/:vendor_id/:project_id', getCutListMachine);
+
+router.post('/assign-machine', assignMachine);
 
 
 

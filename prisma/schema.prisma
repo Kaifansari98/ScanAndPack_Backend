@@ -207,6 +207,7 @@ model ProjectMaster {
   created_at            DateTime                @default(now())
   unique_project_id     String
   is_grouping           Boolean                 @default(false)
+  track_trace_status        String                  @default("Not Started")
   boxes                 BoxMaster[]
   CutList               CutList[]
   cutListMachineMapping CutListMachineMapping[]

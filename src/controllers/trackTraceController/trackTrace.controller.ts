@@ -3,6 +3,7 @@ import * as trackTraceService from '../../services/trackTraceServices/trackTrace
 import * as machineService from '../../services/machineService/machineService.service';
 
 import { ApiResponse } from 'src/utils/apiResponse';
+import { CutListSavePayload } from 'src/types/track-trace';
 
 
 export const scan_item = async (req: Request, res: Response) => {
@@ -60,32 +61,32 @@ export const getAllMachines = async (_req: Request, res: Response) => {
 
 
 export const getTrackTraceDashboardPayload = (
-  req: Request
+    req: Request
 ): TrackTraceDashboardPayload => {
 
-  const vendorIdRaw = req.params.vendor_id;
+    const vendorIdRaw = req.params.vendor_id;
 
-  if (!vendorIdRaw || isNaN(Number(vendorIdRaw))) {
-    throw new Error('Invalid or missing vendor_id');
-  }
+    if (!vendorIdRaw || isNaN(Number(vendorIdRaw))) {
+        throw new Error('Invalid or missing vendor_id');
+    }
 
-  return {
-    vendor_id: Number(vendorIdRaw),
-    project_id: req.query.project_id
-      ? String(req.query.project_id)
-      : undefined,
-    machine_id: req.query.machine_id
-      ? String(req.query.machine_id)
-      : undefined,
-    created_by: req.query.created_by
-      ? String(req.query.created_by)
-      : undefined,
-  };
+    return {
+        vendor_id: Number(vendorIdRaw),
+        project_id: req.query.project_id
+            ? String(req.query.project_id)
+            : undefined,
+        machine_id: req.query.machine_id
+            ? String(req.query.machine_id)
+            : undefined,
+        created_by: req.query.created_by
+            ? String(req.query.created_by)
+            : undefined,
+    };
 };
 
 export const getKPIS = async (req: Request, res: Response) => {
     try {
-        
+
         const payload = await getTrackTraceDashboardPayload(req);
         console.log(payload)
         // const payload = {
@@ -109,7 +110,7 @@ export const getKPIS = async (req: Request, res: Response) => {
             );
 
     } catch (error) {
-        
+
         console.error('Error fetching KPIs:', error);
         return res
             .status(200)
@@ -123,10 +124,10 @@ export const getKPIS = async (req: Request, res: Response) => {
 };
 
 
-export const getRealTimeItemTracking = async(req: Request, res: Response) => {
-    
-     try {
-        
+export const getRealTimeItemTracking = async (req: Request, res: Response) => {
+
+    try {
+
         const payload = await getTrackTraceDashboardPayload(req);
         // const payload = {
         //     vendor_id: Number(req.query.vendor_id),
@@ -149,7 +150,7 @@ export const getRealTimeItemTracking = async(req: Request, res: Response) => {
             );
 
     } catch (error) {
-        
+
         console.error('Error fetching KPIs:', error);
         return res
             .status(200)
@@ -166,11 +167,11 @@ export const getRealTimeItemTracking = async(req: Request, res: Response) => {
 };
 
 
-export const getMachineStatus = async(req: Request, res: Response) => {
-    
-     try {
-        
-        const payload = await getTrackTraceDashboardPayload(req);        
+export const getMachineStatus = async (req: Request, res: Response) => {
+
+    try {
+
+        const payload = await getTrackTraceDashboardPayload(req);
 
         const response = await trackTraceService.getMachineStatus(payload);
         // console.log(response);
@@ -185,7 +186,7 @@ export const getMachineStatus = async(req: Request, res: Response) => {
             );
 
     } catch (error) {
-        
+
         console.error('Error fetching KPIs:', error);
         return res
             .status(200)
@@ -201,11 +202,11 @@ export const getMachineStatus = async(req: Request, res: Response) => {
 
 };
 
-export const getHourlyProduction = async(req: Request, res: Response) => {
-     
-     try {
-        
-        const payload = await getTrackTraceDashboardPayload(req);        
+export const getHourlyProduction = async (req: Request, res: Response) => {
+
+    try {
+
+        const payload = await getTrackTraceDashboardPayload(req);
 
         const response = await trackTraceService.getHourlyProduction(payload);
         console.log(response);
@@ -220,7 +221,7 @@ export const getHourlyProduction = async(req: Request, res: Response) => {
             );
 
     } catch (error) {
-        
+
         console.error('Error fetching KPIs:', error);
         return res
             .status(200)
@@ -234,10 +235,10 @@ export const getHourlyProduction = async(req: Request, res: Response) => {
 };
 
 
-export const getMachineUtilization = async(req: Request, res: Response) => {
+export const getMachineUtilization = async (req: Request, res: Response) => {
     try {
-        
-        const payload = await getTrackTraceDashboardPayload(req);        
+
+        const payload = await getTrackTraceDashboardPayload(req);
 
         const response = await trackTraceService.getMachineUtilization(payload);
         console.log(response);
@@ -252,7 +253,7 @@ export const getMachineUtilization = async(req: Request, res: Response) => {
             );
 
     } catch (error) {
-        
+
         console.error('Error fetching KPIs:', error);
         return res
             .status(200)
@@ -264,10 +265,10 @@ export const getMachineUtilization = async(req: Request, res: Response) => {
             );
     }
 };
-export const getTopPerformer = async(req: Request, res: Response) => {
+export const getTopPerformer = async (req: Request, res: Response) => {
     try {
-        
-        const payload = await getTrackTraceDashboardPayload(req);        
+
+        const payload = await getTrackTraceDashboardPayload(req);
 
         const response = await trackTraceService.getTopPerformer(payload);
         console.log(response);
@@ -282,7 +283,7 @@ export const getTopPerformer = async(req: Request, res: Response) => {
             );
 
     } catch (error) {
-        
+
         console.error('Error fetching KPIs:', error);
         return res
             .status(200)
@@ -295,10 +296,10 @@ export const getTopPerformer = async(req: Request, res: Response) => {
     }
 };
 
-export const getProjectProgress = async(req: Request, res: Response) => {
+export const getProjectProgress = async (req: Request, res: Response) => {
     try {
-        
-        const payload = await getTrackTraceDashboardPayload(req);        
+
+        const payload = await getTrackTraceDashboardPayload(req);
 
         const response = await trackTraceService.getProjectProgress(payload);
         console.log(response);
@@ -313,7 +314,7 @@ export const getProjectProgress = async(req: Request, res: Response) => {
             );
 
     } catch (error) {
-        
+
         console.error('Error fetching KPIs:', error);
         return res
             .status(200)
@@ -326,10 +327,10 @@ export const getProjectProgress = async(req: Request, res: Response) => {
     }
 };
 
-export const getBottleNeck = async(req: Request, res: Response) => {
+export const getBottleNeck = async (req: Request, res: Response) => {
     try {
-        
-        const payload = await getTrackTraceDashboardPayload(req);        
+
+        const payload = await getTrackTraceDashboardPayload(req);
 
         const response = await trackTraceService.getBottleNeck(payload);
         console.log(response);
@@ -344,7 +345,7 @@ export const getBottleNeck = async(req: Request, res: Response) => {
             );
 
     } catch (error) {
-        
+
         console.error('Error fetching KPIs:', error);
         return res
             .status(200)
@@ -358,32 +359,121 @@ export const getBottleNeck = async(req: Request, res: Response) => {
 };
 
 export const get_filter_track_trace = async (_req: Request, res: Response) => {
-    console.log("Query params:", _req.query); 
+    console.log("Query params:", _req.query);
     // res.json(_req.params.vendor_id);
-    
-  try {
-    const vendor_id = Number(_req.params.vendor_id);
 
-    const projects = await trackTraceService.getAllProjectsByVendorId(vendor_id);
-    const machines = await trackTraceService.getAllMachinesByVendorId(vendor_id);
-    const users = await trackTraceService.getAllUsersByVendorId(vendor_id);
-    
-    const response ={
-      project:projects,
-      machine:machines,
-      user:users
-    }
+    try {
+        const vendor_id = Number(_req.params.vendor_id);
 
-     return res
-              .status(200)
-              .json(
+        const projects = await trackTraceService.getAllProjectsByVendorId(vendor_id);
+        const machines = await trackTraceService.getAllMachinesByVendorId(vendor_id);
+        const users = await trackTraceService.getAllUsersByVendorId(vendor_id);
+
+        const response = {
+            project: projects,
+            machine: machines,
+            user: users
+        }
+
+        return res
+            .status(200)
+            .json(
                 ApiResponse.success(
-                  response,
-                  "",
-                  200
+                    response,
+                    "",
+                    200
                 )
-              );
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch projects', details: err });
-  }
+            );
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch projects', details: err });
+    }
 };
+
+export const getCutListMachine = async (_req: Request, res: Response) => {
+
+    console.log("Query params:", _req.query);
+    // res.json(_req.params.vendor_id);
+
+    try {
+        const vendor_id = Number(_req.params.vendor_id);
+        const project_id = String(_req.params.project_id);
+
+        const projects = await trackTraceService.getCutListMachine(vendor_id, project_id);
+
+        const response = {
+            cutlist: projects,
+        }
+
+        return res
+            .status(200)
+            .json(
+                ApiResponse.success(
+                    response,
+                    "",
+                    200
+                )
+            );
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch projects', details: err });
+    }
+}
+
+
+export const assignMachine = async (_req: Request, res: Response) => {
+
+    console.log("Query params:", _req.body);
+    // res.json(_req.params.vendor_id);
+
+    try {
+
+        const payload: CutListSavePayload = {
+            project_id: String(_req.body.project_id),
+            vendor_id: Number(_req.body.vendor_id),
+            cutListIds: String(_req.body.cutListIds),
+            machine_id: Number(_req.body.machine_id),
+            machine_name: String(_req.body.machine_name),
+            assigned: Boolean(_req.body.assigned),
+            created_by: Number(_req.body.vendor_id)
+        }
+        // const vendor_id = Number(_req.params.vendor_id);
+        // const project_id = String(_req.params.project_id);
+
+
+        const serviceResponse = await trackTraceService.assignMachine(payload);
+
+        if (serviceResponse.status == 0) {
+            return res
+                .status(200)
+                .json(
+                    ApiResponse.error(
+                        serviceResponse.message,
+                        500
+                    )
+                );
+        } else {
+            return res
+                .status(200)
+                .json(
+                    ApiResponse.success(
+                        serviceResponse.status,
+                        serviceResponse.message,
+                        200
+                    )
+                );
+        }
+    } catch (err) {
+
+        return res
+            .status(200)
+            .json(
+                ApiResponse.error(
+                    "Error",
+                    500
+                )
+            );
+    }
+}
+
+
+
+
