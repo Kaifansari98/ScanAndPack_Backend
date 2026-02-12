@@ -941,7 +941,7 @@ export const handelItems = async (
     if (!adminUser) throw new Error("No admin user found for this vendor");
 
     const createdByUserId = adminUser.id;
-    const lead_id = 37;
+    const lead_id = 1;
 
     const { randomUUID } = require("crypto");
     const unique_project_id = randomUUID();
