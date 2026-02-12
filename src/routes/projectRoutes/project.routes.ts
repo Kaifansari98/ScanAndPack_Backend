@@ -16,7 +16,8 @@ import {
     getProjectWeight, 
     getProjectAndBoxWeight,
     getCompletedProjects,
-    autoPackGroupedBoxes    
+    autoPackGroupedBoxes,
+    handelItems
 } from '../../controllers/projectControllers/project.controller';
 
 const router = Router();
@@ -42,7 +43,9 @@ router.get('/:id', getProjectById);
 router.get('/details/:id', getProjectDetailsById);
 router.get('/items/:id', getProjectItemById);
 
-router.post("/onboard/project", handleFullProjectCreate);
+// router.post("/onboard/project", handleFullProjectCreate);
+
+router.post("/onboard/project", handelItems);
 
 router.get('/:vendor_id/:project_id/weight', getProjectWeight);
 router.get('/:vendor_id/:project_id/boxes/:box_id/weight', getProjectAndBoxWeight);

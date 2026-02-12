@@ -310,3 +310,16 @@ export const autoPackGroupedBoxes = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const handelItems = async (req: Request, res: Response) => {
+  try {
+    const token = req.headers["authorization"]?.replace("Bearer ", "");
+    if (!token) return res.status(401).json({ message: "Token is required" });
+
+    const result = await projectService.handelItems(token, req.body);
+    return res.status(200).json(result);
+  } catch (err: any) {
+    console.error(err);
+    return res.status(400).json({ error: err.message });
+  }
+};

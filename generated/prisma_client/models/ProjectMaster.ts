@@ -219,7 +219,7 @@ export type ProjectMasterGroupByOutputType = {
   id: number
   project_name: string
   vendor_id: number
-  client_id: number
+  client_id: number | null
   created_by: number
   project_status: string
   created_at: Date
@@ -254,7 +254,7 @@ export type ProjectMasterWhereInput = {
   id?: Prisma.IntFilter<"ProjectMaster"> | number
   project_name?: Prisma.StringFilter<"ProjectMaster"> | string
   vendor_id?: Prisma.IntFilter<"ProjectMaster"> | number
-  client_id?: Prisma.IntFilter<"ProjectMaster"> | number
+  client_id?: Prisma.IntNullableFilter<"ProjectMaster"> | number | null
   created_by?: Prisma.IntFilter<"ProjectMaster"> | number
   project_status?: Prisma.StringFilter<"ProjectMaster"> | string
   created_at?: Prisma.DateTimeFilter<"ProjectMaster"> | Date | string
@@ -265,7 +265,7 @@ export type ProjectMasterWhereInput = {
   cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
   details?: Prisma.ProjectDetailsListRelationFilter
   items?: Prisma.ProjectItemsMasterListRelationFilter
-  client?: Prisma.XOR<Prisma.ClientMasterScalarRelationFilter, Prisma.ClientMasterWhereInput>
+  client?: Prisma.XOR<Prisma.ClientMasterNullableScalarRelationFilter, Prisma.ClientMasterWhereInput> | null
   createdByUser?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   scanItems?: Prisma.ScanAndPackItemListRelationFilter
@@ -275,7 +275,7 @@ export type ProjectMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   project_name?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
+  client_id?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   project_status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -299,7 +299,7 @@ export type ProjectMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ProjectMasterWhereInput | Prisma.ProjectMasterWhereInput[]
   project_name?: Prisma.StringFilter<"ProjectMaster"> | string
   vendor_id?: Prisma.IntFilter<"ProjectMaster"> | number
-  client_id?: Prisma.IntFilter<"ProjectMaster"> | number
+  client_id?: Prisma.IntNullableFilter<"ProjectMaster"> | number | null
   created_by?: Prisma.IntFilter<"ProjectMaster"> | number
   project_status?: Prisma.StringFilter<"ProjectMaster"> | string
   created_at?: Prisma.DateTimeFilter<"ProjectMaster"> | Date | string
@@ -310,7 +310,7 @@ export type ProjectMasterWhereUniqueInput = Prisma.AtLeast<{
   cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
   details?: Prisma.ProjectDetailsListRelationFilter
   items?: Prisma.ProjectItemsMasterListRelationFilter
-  client?: Prisma.XOR<Prisma.ClientMasterScalarRelationFilter, Prisma.ClientMasterWhereInput>
+  client?: Prisma.XOR<Prisma.ClientMasterNullableScalarRelationFilter, Prisma.ClientMasterWhereInput> | null
   createdByUser?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   scanItems?: Prisma.ScanAndPackItemListRelationFilter
@@ -320,7 +320,7 @@ export type ProjectMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   project_name?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
+  client_id?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   project_status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -340,7 +340,7 @@ export type ProjectMasterScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"ProjectMaster"> | number
   project_name?: Prisma.StringWithAggregatesFilter<"ProjectMaster"> | string
   vendor_id?: Prisma.IntWithAggregatesFilter<"ProjectMaster"> | number
-  client_id?: Prisma.IntWithAggregatesFilter<"ProjectMaster"> | number
+  client_id?: Prisma.IntNullableWithAggregatesFilter<"ProjectMaster"> | number | null
   created_by?: Prisma.IntWithAggregatesFilter<"ProjectMaster"> | number
   project_status?: Prisma.StringWithAggregatesFilter<"ProjectMaster"> | string
   created_at?: Prisma.DateTimeWithAggregatesFilter<"ProjectMaster"> | Date | string
@@ -369,7 +369,7 @@ export type ProjectMasterUncheckedCreateInput = {
   id?: number
   project_name: string
   vendor_id: number
-  client_id?: number
+  client_id?: number | null
   created_by: number
   project_status?: string
   created_at?: Date | string
@@ -394,7 +394,7 @@ export type ProjectMasterUpdateInput = {
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutProjectsNestedInput
+  client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
   createdByUser?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
@@ -404,7 +404,7 @@ export type ProjectMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   project_status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -422,7 +422,7 @@ export type ProjectMasterCreateManyInput = {
   id?: number
   project_name: string
   vendor_id: number
-  client_id?: number
+  client_id?: number | null
   created_by: number
   project_status?: string
   created_at?: Date | string
@@ -442,7 +442,7 @@ export type ProjectMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   project_status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -748,7 +748,7 @@ export type ProjectMasterCreateWithoutVendorInput = {
 export type ProjectMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   project_name: string
-  client_id?: number
+  client_id?: number | null
   created_by: number
   project_status?: string
   created_at?: Date | string
@@ -795,7 +795,7 @@ export type ProjectMasterScalarWhereInput = {
   id?: Prisma.IntFilter<"ProjectMaster"> | number
   project_name?: Prisma.StringFilter<"ProjectMaster"> | string
   vendor_id?: Prisma.IntFilter<"ProjectMaster"> | number
-  client_id?: Prisma.IntFilter<"ProjectMaster"> | number
+  client_id?: Prisma.IntNullableFilter<"ProjectMaster"> | number | null
   created_by?: Prisma.IntFilter<"ProjectMaster"> | number
   project_status?: Prisma.StringFilter<"ProjectMaster"> | string
   created_at?: Prisma.DateTimeFilter<"ProjectMaster"> | Date | string
@@ -823,7 +823,7 @@ export type ProjectMasterUncheckedCreateWithoutCreatedByUserInput = {
   id?: number
   project_name: string
   vendor_id: number
-  client_id?: number
+  client_id?: number | null
   project_status?: string
   created_at?: Date | string
   unique_project_id: string
@@ -882,7 +882,7 @@ export type ProjectMasterUncheckedCreateWithoutDetailsInput = {
   id?: number
   project_name: string
   vendor_id: number
-  client_id?: number
+  client_id?: number | null
   created_by: number
   project_status?: string
   created_at?: Date | string
@@ -921,7 +921,7 @@ export type ProjectMasterUpdateWithoutDetailsInput = {
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutProjectsNestedInput
+  client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
   createdByUser?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
@@ -931,7 +931,7 @@ export type ProjectMasterUncheckedUpdateWithoutDetailsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   project_status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -964,7 +964,7 @@ export type ProjectMasterUncheckedCreateWithoutItemsInput = {
   id?: number
   project_name: string
   vendor_id: number
-  client_id?: number
+  client_id?: number | null
   created_by: number
   project_status?: string
   created_at?: Date | string
@@ -1003,7 +1003,7 @@ export type ProjectMasterUpdateWithoutItemsInput = {
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutProjectsNestedInput
+  client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
   createdByUser?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
@@ -1013,7 +1013,7 @@ export type ProjectMasterUncheckedUpdateWithoutItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   project_status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1046,7 +1046,7 @@ export type ProjectMasterUncheckedCreateWithoutBoxesInput = {
   id?: number
   project_name: string
   vendor_id: number
-  client_id?: number
+  client_id?: number | null
   created_by: number
   project_status?: string
   created_at?: Date | string
@@ -1085,7 +1085,7 @@ export type ProjectMasterUpdateWithoutBoxesInput = {
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutProjectsNestedInput
+  client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
   createdByUser?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
@@ -1095,7 +1095,7 @@ export type ProjectMasterUncheckedUpdateWithoutBoxesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   project_status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1128,7 +1128,7 @@ export type ProjectMasterUncheckedCreateWithoutScanItemsInput = {
   id?: number
   project_name: string
   vendor_id: number
-  client_id?: number
+  client_id?: number | null
   created_by: number
   project_status?: string
   created_at?: Date | string
@@ -1168,7 +1168,7 @@ export type ProjectMasterUpdateWithoutScanItemsInput = {
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutProjectsNestedInput
+  client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
   createdByUser?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
 }
@@ -1177,7 +1177,7 @@ export type ProjectMasterUncheckedUpdateWithoutScanItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   project_status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1269,7 +1269,7 @@ export type ProjectMasterUncheckedCreateWithoutCutListInput = {
   id?: number
   project_name: string
   vendor_id: number
-  client_id?: number
+  client_id?: number | null
   created_by: number
   project_status?: string
   created_at?: Date | string
@@ -1308,7 +1308,7 @@ export type ProjectMasterUpdateWithoutCutListInput = {
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutProjectsNestedInput
+  client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
   createdByUser?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
@@ -1318,7 +1318,7 @@ export type ProjectMasterUncheckedUpdateWithoutCutListInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   project_status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1351,7 +1351,7 @@ export type ProjectMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   id?: number
   project_name: string
   vendor_id: number
-  client_id?: number
+  client_id?: number | null
   created_by: number
   project_status?: string
   created_at?: Date | string
@@ -1390,7 +1390,7 @@ export type ProjectMasterUpdateWithoutCutListMachineMappingInput = {
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutProjectsNestedInput
+  client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
   createdByUser?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
@@ -1400,7 +1400,7 @@ export type ProjectMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   project_status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1416,7 +1416,7 @@ export type ProjectMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
 export type ProjectMasterCreateManyVendorInput = {
   id?: number
   project_name: string
-  client_id?: number
+  client_id?: number | null
   created_by: number
   project_status?: string
   created_at?: Date | string
@@ -1435,7 +1435,7 @@ export type ProjectMasterUpdateWithoutVendorInput = {
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutProjectsNestedInput
+  client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
   createdByUser?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
 }
@@ -1443,7 +1443,7 @@ export type ProjectMasterUpdateWithoutVendorInput = {
 export type ProjectMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_name?: Prisma.StringFieldUpdateOperationsInput | string
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   project_status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1460,7 +1460,7 @@ export type ProjectMasterUncheckedUpdateWithoutVendorInput = {
 export type ProjectMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_name?: Prisma.StringFieldUpdateOperationsInput | string
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   project_status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1472,7 +1472,7 @@ export type ProjectMasterCreateManyCreatedByUserInput = {
   id?: number
   project_name: string
   vendor_id: number
-  client_id?: number
+  client_id?: number | null
   project_status?: string
   created_at?: Date | string
   unique_project_id: string
@@ -1490,7 +1490,7 @@ export type ProjectMasterUpdateWithoutCreatedByUserInput = {
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutProjectsNestedInput
+  client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
 }
@@ -1499,7 +1499,7 @@ export type ProjectMasterUncheckedUpdateWithoutCreatedByUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project_status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1516,7 +1516,7 @@ export type ProjectMasterUncheckedUpdateManyWithoutCreatedByUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project_status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1669,7 +1669,7 @@ export type ProjectMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   cutListMachineMapping?: boolean | Prisma.ProjectMaster$cutListMachineMappingArgs<ExtArgs>
   details?: boolean | Prisma.ProjectMaster$detailsArgs<ExtArgs>
   items?: boolean | Prisma.ProjectMaster$itemsArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  client?: boolean | Prisma.ProjectMaster$clientArgs<ExtArgs>
   createdByUser?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   scanItems?: boolean | Prisma.ProjectMaster$scanItemsArgs<ExtArgs>
@@ -1686,7 +1686,7 @@ export type ProjectMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   created_at?: boolean
   unique_project_id?: boolean
   is_grouping?: boolean
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  client?: boolean | Prisma.ProjectMaster$clientArgs<ExtArgs>
   createdByUser?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectMaster"]>
@@ -1701,7 +1701,7 @@ export type ProjectMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   created_at?: boolean
   unique_project_id?: boolean
   is_grouping?: boolean
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  client?: boolean | Prisma.ProjectMaster$clientArgs<ExtArgs>
   createdByUser?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectMaster"]>
@@ -1725,19 +1725,19 @@ export type ProjectMasterInclude<ExtArgs extends runtime.Types.Extensions.Intern
   cutListMachineMapping?: boolean | Prisma.ProjectMaster$cutListMachineMappingArgs<ExtArgs>
   details?: boolean | Prisma.ProjectMaster$detailsArgs<ExtArgs>
   items?: boolean | Prisma.ProjectMaster$itemsArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  client?: boolean | Prisma.ProjectMaster$clientArgs<ExtArgs>
   createdByUser?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   scanItems?: boolean | Prisma.ProjectMaster$scanItemsArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  client?: boolean | Prisma.ProjectMaster$clientArgs<ExtArgs>
   createdByUser?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type ProjectMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  client?: boolean | Prisma.ProjectMaster$clientArgs<ExtArgs>
   createdByUser?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
@@ -1750,7 +1750,7 @@ export type $ProjectMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     cutListMachineMapping: Prisma.$CutListMachineMappingPayload<ExtArgs>[]
     details: Prisma.$ProjectDetailsPayload<ExtArgs>[]
     items: Prisma.$ProjectItemsMasterPayload<ExtArgs>[]
-    client: Prisma.$ClientMasterPayload<ExtArgs>
+    client: Prisma.$ClientMasterPayload<ExtArgs> | null
     createdByUser: Prisma.$UserMasterPayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     scanItems: Prisma.$ScanAndPackItemPayload<ExtArgs>[]
@@ -1759,7 +1759,7 @@ export type $ProjectMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     id: number
     project_name: string
     vendor_id: number
-    client_id: number
+    client_id: number | null
     created_by: number
     project_status: string
     created_at: Date
@@ -2164,7 +2164,7 @@ export interface Prisma__ProjectMasterClient<T, Null = never, ExtArgs extends ru
   cutListMachineMapping<T extends Prisma.ProjectMaster$cutListMachineMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$cutListMachineMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListMachineMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   details<T extends Prisma.ProjectMaster$detailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$detailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   items<T extends Prisma.ProjectMaster$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectItemsMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  client<T extends Prisma.ClientMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ClientMasterClient<runtime.Types.Result.GetResult<Prisma.$ClientMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  client<T extends Prisma.ProjectMaster$clientArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$clientArgs<ExtArgs>>): Prisma.Prisma__ClientMasterClient<runtime.Types.Result.GetResult<Prisma.$ClientMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdByUser<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   scanItems<T extends Prisma.ProjectMaster$scanItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$scanItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScanAndPackItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2719,6 +2719,25 @@ export type ProjectMaster$itemsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.ProjectItemsMasterScalarFieldEnum | Prisma.ProjectItemsMasterScalarFieldEnum[]
+}
+
+/**
+ * ProjectMaster.client
+ */
+export type ProjectMaster$clientArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ClientMaster
+   */
+  select?: Prisma.ClientMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ClientMaster
+   */
+  omit?: Prisma.ClientMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClientMasterInclude<ExtArgs> | null
+  where?: Prisma.ClientMasterWhereInput
 }
 
 /**
