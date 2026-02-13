@@ -227,6 +227,7 @@ export const ProjectMasterScalarFieldEnum = {
   project_name: 'project_name',
   vendor_id: 'vendor_id',
   client_id: 'client_id',
+  lead_id: 'lead_id',
   created_by: 'created_by',
   project_status: 'project_status',
   created_at: 'created_at',
