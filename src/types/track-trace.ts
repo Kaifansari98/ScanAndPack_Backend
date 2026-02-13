@@ -14,3 +14,10 @@ export interface CutListSavePayload {
     assigned: boolean;
     created_by: Number
 }
+
+
+export interface QRParam {
+    projectId?: string;
+    vendorId: number;
+    cutListIds?: string;    
+}

@@ -1,7 +1,8 @@
 import { validationResponse } from 'src/utils/validationResponse';
 import { prisma } from '../../prisma/client';
 import { Prisma, CutListMachineMapping } from '../../prisma/generated';
-import { CutListSavePayload } from 'src/types/track-trace';
+import { CutListSavePayload, QRParam } from 'src/types/track-trace';
+
 
 
 
@@ -1528,101 +1529,101 @@ export const getAllUsersByVendorId = (vendor_id: number) => {
 
 
 
-export const getTrackTraceMatrix = async (
-    vendor_id: number,
-    project_id: number
-) => {
-    const mappings = await prisma.cutListMachineMapping.findMany({
-        where: {
-            vendor_id,
-            project_id,
-        },
-        select: {
-            actual_in_at: true,
-            machine: {
-                select: {
-                    machine_name: true,
-                },
-            },
-            cut_list: {
-                select: {
-                    id: true,
-                    description: true,
-                    sqmtr: true,
-                    sqft: true,
-                    length: true,
-                    width: true,
-                    thickness: true,
-                    grains: true,
-                    material_details: true,
-                    item_name: true,
-                    project_name: true,
-                    qty: true,
-                    unique_code: true,
-                },
-            },
-        },
-    });
+// export const getTrackTraceMatrix = async (
+//     vendor_id: number,
+//     project_id: number
+// ) => {
+//     const mappings = await prisma.cutListMachineMapping.findMany({
+//         where: {
+//             vendor_id,
+//             project_id,
+//         },
+//         select: {
+//             actual_in_at: true,
+//             machine: {
+//                 select: {
+//                     machine_name: true,
+//                 },
+//             },
+//             cut_list: {
+//                 select: {
+//                     id: true,
+//                     description: true,
+//                     sqmtr: true,
+//                     sqft: true,
+//                     length: true,
+//                     width: true,
+//                     thickness: true,
+//                     grains: true,
+//                     material_details: true,
+//                     item_name: true,
+//                     project_name: true,
+//                     qty: true,
+//                     unique_code: true,
+//                 },
+//             },
+//         },
+//     });
 
-    const MACHINE_COLUMNS = [
-        "ELF",
-        "ELB",
-        "ESL",
-        "ESR",
-        "Sanding",
-        "Pressing",
-        "Cutting",
-        "Edge Bend",
-        "Cnc Drilling",
-        "CNC router",
-        "solid wood",
-        "Carpentry",
-        "Assembly",
-        "Coating",
-        "Packing",
-        "Dispatch",
-    ];
+//     const MACHINE_COLUMNS = [
+//         "ELF",
+//         "ELB",
+//         "ESL",
+//         "ESR",
+//         "Sanding",
+//         "Pressing",
+//         "Cutting",
+//         "Edge Bend",
+//         "Cnc Drilling",
+//         "CNC router",
+//         "solid wood",
+//         "Carpentry",
+//         "Assembly",
+//         "Coating",
+//         "Packing",
+//         "Dispatch",
+//     ];
 
-    const resultMap = new Map();
+//     const resultMap = new Map();
 
-    mappings.forEach((row) => {
-        const cut = row.cut_list;
-        const machineName = row.machine.machine_name;
+//     mappings.forEach((row) => {
+//         const cut = row.cut_list;
+//         const machineName = row.machine.machine_name;
 
-        if (!resultMap.has(cut.id)) {
-            const baseRow: any = {
-                DESCRIPTION: cut.description,
-                sqmtr: cut.sqmtr,
-                sqft: cut.sqft,
-                LENGTH: cut.length,
-                WIDTH: cut.width,
-                THICKNESS: cut.thickness,
-                GRAINS: cut.grains,
-                MATERIAL_DETAILS: cut.material_details,
-                ITEM_NAME: cut.item_name,
-                PROJECT_NAME: cut.project_name,
-                qty: cut.qty,
-                unique_code: cut.unique_code,
-                cutlistid: cut.id,
-            };
+//         if (!resultMap.has(cut.id)) {
+//             const baseRow: any = {
+//                 DESCRIPTION: cut.description,
+//                 sqmtr: cut.sqmtr,
+//                 sqft: cut.sqft,
+//                 LENGTH: cut.length,
+//                 WIDTH: cut.width,
+//                 THICKNESS: cut.thickness,
+//                 GRAINS: cut.grains,
+//                 MATERIAL_DETAILS: cut.material_details,
+//                 ITEM_NAME: cut.item_name,
+//                 PROJECT_NAME: cut.project_name,
+//                 qty: cut.qty,
+//                 unique_code: cut.unique_code,
+//                 cutlistid: cut.id,
+//             };
 
-            // Initialize all machines as NA
-            MACHINE_COLUMNS.forEach((m) => {
-                baseRow[m] = "NA";
-            });
+//             // Initialize all machines as NA
+//             MACHINE_COLUMNS.forEach((m) => {
+//                 baseRow[m] = "NA";
+//             });
 
-            resultMap.set(cut.id, baseRow);
-        }
+//             resultMap.set(cut.id, baseRow);
+//         }
 
-        // If mapping exists → override NA
-        if (MACHINE_COLUMNS.includes(machineName)) {
-            resultMap.get(cut.id)[machineName] =
-                row.actual_in_at ?? null; // null means exists but not started
-        }
-    });
+//         // If mapping exists → override NA
+//         if (MACHINE_COLUMNS.includes(machineName)) {
+//             resultMap.get(cut.id)[machineName] =
+//                 row.actual_in_at ?? null; // null means exists but not started
+//         }
+//     });
 
-    return Array.from(resultMap.values());
-};
+//     return Array.from(resultMap.values());
+// };
 
 
 
@@ -1734,7 +1735,7 @@ export const getCutListMachine = async (vendorId: number, unique_project_id: str
 export const assignMachine = async (payload: CutListSavePayload) => {
 
     try {
-        console.log("payload.project_id",payload.project_id);
+        console.log("payload.project_id", payload.project_id);
         const projectMaster = await prisma.projectMaster.findFirst({
             where: {
                 unique_project_id: payload.project_id
@@ -1744,7 +1745,7 @@ export const assignMachine = async (payload: CutListSavePayload) => {
             }
         });
 
-        console.log("projectMaster",projectMaster);
+        console.log("projectMaster", projectMaster);
 
         const projectId = projectMaster?.id;
 
@@ -1831,11 +1832,100 @@ export const assignMachine = async (payload: CutListSavePayload) => {
             }
 
             return validationResponse(1, 'Machine mapped successfully');
-            
+
         });
     } catch (error) {
         console.log(error)
         return validationResponse(0, 'Something went wrong');
-        
+
     }
 }
+
+
+export const createQR = async (payload: QRParam) => {
+
+    try {
+
+
+        const projectId = await prisma.projectMaster.findFirst({
+            where: {
+                unique_project_id: payload.projectId
+            },
+            select: {
+                id: true
+            }
+        })
+
+        // console.log(payload.cutListIds)
+        if (projectId) {
+            let cutListIds: number[] | undefined;
+            if (payload.cutListIds) {
+                cutListIds = payload.cutListIds
+                    .split(",")
+                    .map((id) => Number(id.trim()))
+                    .filter((id) => !isNaN(id));
+            }
+
+
+            console.log("cutListIds",cutListIds)
+
+            const cutLists = await prisma.cutListMachineMapping.findMany({
+                where: {
+                    vendor_id: Number(payload.vendorId),
+                    project_id: Number(projectId.id),
+                    ...(cutListIds && cutListIds.length > 0
+                        ? { cut_list_id: { in: cutListIds } }
+                        : {}),
+                },
+                distinct: ['cut_list_id'],
+                select: {
+                    id: true, // clmm.id
+                    cut_list: {
+                        select: {
+                            unique_code: true,
+                            description: true,
+                        },
+                    },
+                },
+            });
+
+            console.log("cutLists",cutLists)
+            if(cutLists.length>0){
+                return cutLists;
+            }else{
+                return null;
+            }
+
+            // const cutLists = await prisma.cutListMachineMapping.findMany({
+            //     where: {
+            //         vendor_id: Number(payload.vendorId),
+            //         project_id: Number(projectId.id),
+            //         ...(cutListIds && cutListIds.length > 0
+            //             ? { id: { in: cutListIds } }
+            //             : {}),
+            //     },
+            //     include: {
+            //         cut_list: true,
+            //     },
+            //     select: {
+            //         id: true,
+            //         unique_code: true,
+            //         description: true,
+            //     },
+            // });
+
+            
+        }
+
+
+
+
+
+
+
+    } catch (error) {
+        console.error('Error generating QR code:', error);
+        throw error;
+    }
+}
+

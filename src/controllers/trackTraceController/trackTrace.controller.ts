@@ -3,8 +3,8 @@ import * as trackTraceService from '../../services/trackTraceServices/trackTrace
 import * as machineService from '../../services/machineService/machineService.service';
 
 import { ApiResponse } from 'src/utils/apiResponse';
-import { CutListSavePayload } from 'src/types/track-trace';
-
+import { CutListSavePayload, QRParam } from 'src/types/track-trace';
+import { generateWarehouseQRPDF } from "../../utils/warehouse-qr-generator";
 
 export const scan_item = async (req: Request, res: Response) => {
     console.log("Query params:", req.body);
@@ -62,7 +62,7 @@ export const getAllMachines = async (_req: Request, res: Response) => {
 
 export const getTrackTraceDashboardPayload = (
     req: Request
-): TrackTraceDashboardPayload => {
+) => {
 
     const vendorIdRaw = req.params.vendor_id;
 
@@ -474,6 +474,79 @@ export const assignMachine = async (_req: Request, res: Response) => {
     }
 }
 
+
+// import { generateQrLabel } from "../../utils/qr-label";
+// import { generateMultiQRLabel } from "../../utils/multi-qr-label";
+
+
+
+
+export const createQR = async (_req: Request, res: Response) => {
+
+    console.log("Query params:", _req.body);
+
+    const payload: QRParam = {
+        vendorId: Number(_req.body.vendorId),
+        projectId: String(_req.body.projectId),
+        cutListIds: String(_req.body.cutListIds)
+    }
+
+
+    console.log(payload)
+
+    try {
+
+        const data = await trackTraceService.createQR(payload);
+
+        if (data) {
+            const filePath = await generateWarehouseQRPDF({
+                itemQRs: data.map((item: any) => ({
+                    value: item.cut_list.unique_code,        // QR encoded value
+                    itemCode: item.cut_list.unique_code,     // Bold label
+                    itemName: item.cut_list.description || "", // Second label,
+                    columns: 3
+                })),
+
+
+            });
+            return res
+                .status(200)
+                .json(
+                    ApiResponse.success(
+                        filePath,
+                        "",
+                        200
+                    )
+                );
+        } else {
+            return res
+                .status(200)
+                .json(
+                    ApiResponse.error(
+                        "No data avialbale",
+                        200
+                    )
+                );
+        }
+
+
+
+
+
+
+
+    } catch (err) {
+
+        return res
+            .status(200)
+            .json(
+                ApiResponse.error(
+                    "",
+                    500
+                )
+            );
+    }
+}
 
 
 
