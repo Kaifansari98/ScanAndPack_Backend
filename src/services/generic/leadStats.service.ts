@@ -189,6 +189,12 @@ export class LeadStatsService {
     const totalFinalhandoverStageLeads = await countByStatus(
       "final-handover-stage"
     );
+    const totalProjectCompletedStageLeads = await prisma.leadMaster.count({
+      where: {
+        ...baseLeadScope,
+        statusType: { vendor_id: vendorId, tag: "Type 17" },
+      },
+    });
 
     // GROUP TOTALS
     const total_leads_group =
@@ -212,7 +218,8 @@ export class LeadStatsService {
       totalDispatchPlanningStageLeads +
       totalDispatchStageLeads +
       totalUnderInstallationStageLeads +
-      totalFinalhandoverStageLeads;
+      totalFinalhandoverStageLeads +
+      totalProjectCompletedStageLeads;
 
     const stats = {
       // =====================
@@ -241,6 +248,7 @@ export class LeadStatsService {
       total_dispatch_stage_leads: totalDispatchStageLeads,
       total_under_installation_stage_leads: totalUnderInstallationStageLeads,
       total_final_handover_stage_leads: totalFinalhandoverStageLeads,
+      total_project_completed_stage_leads: totalProjectCompletedStageLeads,
 
       // =====================
       // GROUP TOTALS (NEW)
