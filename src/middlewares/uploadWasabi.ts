@@ -574,3 +574,27 @@ export const uploadToWasabiUnderInstallationDayWiseDocs = multer({
     else cb(new Error(`Unsupported file type: ${ext}`));
   },
 });
+
+
+export const uploadMachineFiles = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/machine_images";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: {
+    fileSize: 20 * 1024 * 1024,
+    files: 1,
+  },
+  fileFilter: (req, file, cb) => {
+    const allowed = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+    allowed.includes(file.mimetype)
+      ? cb(null, true)
+      : cb(new Error("Only image files are allowed"));
+  },
+});

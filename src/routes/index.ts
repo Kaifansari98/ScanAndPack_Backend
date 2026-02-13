@@ -44,8 +44,8 @@ import emailNotificationMasterRoutes from "./notification/emailNotificationMaste
 import contactUsRoutes from "./generic/contactUs.routes";
 
 import trackTraceRoutes from "./trackTraceRoutes/track-trace.routes";
-
-
+import trackTraceMasterRoutes from "./trackTraceRoutes/trackTraceMaster.routes";
+import configureRoutes from "./trackTraceRoutes/configure.routes";
 const router = Router();
 
 router.use("/dashboard", DashboardRouter);
@@ -99,5 +99,7 @@ router.use("/public", contactUsRoutes);
 
 
 router.use("/track-trace", trackTraceRoutes);
+router.use("/track-trace-master", trackTraceMasterRoutes);
+router.use("/track-trace-configure", configureRoutes);
 
 export { router };

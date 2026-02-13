@@ -202,6 +202,7 @@ model ProjectMaster {
   project_name          String
   vendor_id             Int
   client_id             Int?
+  lead_id               Int?
   created_by            Int
   project_status        String                  @default("Initiated")
   created_at            DateTime                @default(now())
@@ -213,7 +214,8 @@ model ProjectMaster {
   cutListMachineMapping CutListMachineMapping[]
   details               ProjectDetails[]
   items                 ProjectItemsMaster[]
-  client                ClientMaster?            @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  lead                  LeadMaster?             @relation(fields: [lead_id], references: [id])
+  client                ClientMaster?           @relation(fields: [client_id], references: [id], onDelete: Cascade)
   createdByUser         UserMaster              @relation("CreatedByUser", fields: [created_by], references: [id], onDelete: Cascade)
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   scanItems             ScanAndPackItem[]
@@ -405,6 +407,7 @@ model LeadMaster {
   designSelection                             LeadDesignSelection[]
   leadDetailedLogs                            LeadDetailedLogs[]
   leadDocumentLogs                            LeadDocumentLogs[]
+  projects                                     ProjectMaster[]
   documents                                   LeadDocuments[]
   account                                     AccountMaster?                      @relation(fields: [account_id], references: [id], onDelete: Cascade)
   assignedTo                                  UserMaster?                         @relation("LeadAssignedTo", fields: [assign_to], references: [id])
