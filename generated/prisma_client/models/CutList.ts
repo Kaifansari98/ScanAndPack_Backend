@@ -315,7 +315,7 @@ export type CutListGroupByOutputType = {
   id: number
   project_id: number
   vendor_id: number
-  lead_id: number
+  lead_id: number | null
   description: string
   length: runtime.Decimal | null
   width: runtime.Decimal | null
@@ -362,7 +362,7 @@ export type CutListWhereInput = {
   id?: Prisma.IntFilter<"CutList"> | number
   project_id?: Prisma.IntFilter<"CutList"> | number
   vendor_id?: Prisma.IntFilter<"CutList"> | number
-  lead_id?: Prisma.IntFilter<"CutList"> | number
+  lead_id?: Prisma.IntNullableFilter<"CutList"> | number | null
   description?: Prisma.StringFilter<"CutList"> | string
   length?: Prisma.DecimalNullableFilter<"CutList"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   width?: Prisma.DecimalNullableFilter<"CutList"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -382,7 +382,7 @@ export type CutListWhereInput = {
   esr?: Prisma.StringNullableFilter<"CutList"> | string | null
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterNullableScalarRelationFilter, Prisma.LeadMasterWhereInput> | null
   cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
 }
 
@@ -390,7 +390,7 @@ export type CutListOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  lead_id?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrder
   length?: Prisma.SortOrderInput | Prisma.SortOrder
   width?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -421,7 +421,7 @@ export type CutListWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.CutListWhereInput | Prisma.CutListWhereInput[]
   project_id?: Prisma.IntFilter<"CutList"> | number
   vendor_id?: Prisma.IntFilter<"CutList"> | number
-  lead_id?: Prisma.IntFilter<"CutList"> | number
+  lead_id?: Prisma.IntNullableFilter<"CutList"> | number | null
   description?: Prisma.StringFilter<"CutList"> | string
   length?: Prisma.DecimalNullableFilter<"CutList"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   width?: Prisma.DecimalNullableFilter<"CutList"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -441,7 +441,7 @@ export type CutListWhereUniqueInput = Prisma.AtLeast<{
   esr?: Prisma.StringNullableFilter<"CutList"> | string | null
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterNullableScalarRelationFilter, Prisma.LeadMasterWhereInput> | null
   cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
 }, "id">
 
@@ -449,7 +449,7 @@ export type CutListOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  lead_id?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrder
   length?: Prisma.SortOrderInput | Prisma.SortOrder
   width?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -481,7 +481,7 @@ export type CutListScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"CutList"> | number
   project_id?: Prisma.IntWithAggregatesFilter<"CutList"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"CutList"> | number
-  lead_id?: Prisma.IntWithAggregatesFilter<"CutList"> | number
+  lead_id?: Prisma.IntNullableWithAggregatesFilter<"CutList"> | number | null
   description?: Prisma.StringWithAggregatesFilter<"CutList"> | string
   length?: Prisma.DecimalNullableWithAggregatesFilter<"CutList"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   width?: Prisma.DecimalNullableWithAggregatesFilter<"CutList"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -521,7 +521,7 @@ export type CutListCreateInput = {
   esr?: string | null
   project: Prisma.ProjectMasterCreateNestedOneWithoutCutListInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCutListInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutCutListInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutCutListInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutCut_listInput
 }
 
@@ -529,7 +529,7 @@ export type CutListUncheckedCreateInput = {
   id?: number
   project_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   description: string
   length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   width?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -570,7 +570,7 @@ export type CutListUpdateInput = {
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutCutListNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCutListNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCutListNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutCutListNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutCut_listNestedInput
 }
 
@@ -578,7 +578,7 @@ export type CutListUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   width?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -603,7 +603,7 @@ export type CutListCreateManyInput = {
   id?: number
   project_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   description: string
   length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   width?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -647,7 +647,7 @@ export type CutListUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   width?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -939,14 +939,14 @@ export type CutListCreateWithoutVendorInput = {
   esl?: string | null
   esr?: string | null
   project: Prisma.ProjectMasterCreateNestedOneWithoutCutListInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutCutListInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutCutListInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutCut_listInput
 }
 
 export type CutListUncheckedCreateWithoutVendorInput = {
   id?: number
   project_id: number
-  lead_id: number
+  lead_id?: number | null
   description: string
   length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   width?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1000,7 +1000,7 @@ export type CutListScalarWhereInput = {
   id?: Prisma.IntFilter<"CutList"> | number
   project_id?: Prisma.IntFilter<"CutList"> | number
   vendor_id?: Prisma.IntFilter<"CutList"> | number
-  lead_id?: Prisma.IntFilter<"CutList"> | number
+  lead_id?: Prisma.IntNullableFilter<"CutList"> | number | null
   description?: Prisma.StringFilter<"CutList"> | string
   length?: Prisma.DecimalNullableFilter<"CutList"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   width?: Prisma.DecimalNullableFilter<"CutList"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1039,14 +1039,14 @@ export type CutListCreateWithoutProjectInput = {
   esl?: string | null
   esr?: string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCutListInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutCutListInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutCutListInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutCut_listInput
 }
 
 export type CutListUncheckedCreateWithoutProjectInput = {
   id?: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   description: string
   length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   width?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1186,14 +1186,14 @@ export type CutListCreateWithoutCutListMachineMappingInput = {
   esr?: string | null
   project: Prisma.ProjectMasterCreateNestedOneWithoutCutListInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCutListInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutCutListInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutCutListInput
 }
 
 export type CutListUncheckedCreateWithoutCutListMachineMappingInput = {
   id?: number
   project_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   description: string
   length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   width?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1249,14 +1249,14 @@ export type CutListUpdateWithoutCutListMachineMappingInput = {
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutCutListNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCutListNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCutListNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutCutListNestedInput
 }
 
 export type CutListUncheckedUpdateWithoutCutListMachineMappingInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   width?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1279,7 +1279,7 @@ export type CutListUncheckedUpdateWithoutCutListMachineMappingInput = {
 export type CutListCreateManyVendorInput = {
   id?: number
   project_id: number
-  lead_id: number
+  lead_id?: number | null
   description: string
   length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   width?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1318,14 +1318,14 @@ export type CutListUpdateWithoutVendorInput = {
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutCutListNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCutListNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutCutListNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutCut_listNestedInput
 }
 
 export type CutListUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   width?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1349,7 +1349,7 @@ export type CutListUncheckedUpdateWithoutVendorInput = {
 export type CutListUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   width?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1372,7 +1372,7 @@ export type CutListUncheckedUpdateManyWithoutVendorInput = {
 export type CutListCreateManyProjectInput = {
   id?: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   description: string
   length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   width?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1411,14 +1411,14 @@ export type CutListUpdateWithoutProjectInput = {
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCutListNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCutListNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutCutListNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutCut_listNestedInput
 }
 
 export type CutListUncheckedUpdateWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   width?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1442,7 +1442,7 @@ export type CutListUncheckedUpdateWithoutProjectInput = {
 export type CutListUncheckedUpdateManyWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   width?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1610,7 +1610,7 @@ export type CutListSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   esr?: boolean
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.CutList$leadArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.CutList$cutListMachineMappingArgs<ExtArgs>
   _count?: boolean | Prisma.CutListCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["cutList"]>
@@ -1639,7 +1639,7 @@ export type CutListSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   esr?: boolean
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.CutList$leadArgs<ExtArgs>
 }, ExtArgs["result"]["cutList"]>
 
 export type CutListSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1666,7 +1666,7 @@ export type CutListSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   esr?: boolean
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.CutList$leadArgs<ExtArgs>
 }, ExtArgs["result"]["cutList"]>
 
 export type CutListSelectScalar = {
@@ -1697,19 +1697,19 @@ export type CutListOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type CutListInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.CutList$leadArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.CutList$cutListMachineMappingArgs<ExtArgs>
   _count?: boolean | Prisma.CutListCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CutListIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.CutList$leadArgs<ExtArgs>
 }
 export type CutListIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.CutList$leadArgs<ExtArgs>
 }
 
 export type $CutListPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1717,14 +1717,14 @@ export type $CutListPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     project: Prisma.$ProjectMasterPayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    lead: Prisma.$LeadMasterPayload<ExtArgs>
+    lead: Prisma.$LeadMasterPayload<ExtArgs> | null
     cutListMachineMapping: Prisma.$CutListMachineMappingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     project_id: number
     vendor_id: number
-    lead_id: number
+    lead_id: number | null
     description: string
     length: runtime.Decimal | null
     width: runtime.Decimal | null
@@ -2138,7 +2138,7 @@ export interface Prisma__CutListClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   project<T extends Prisma.ProjectMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectMasterClient<runtime.Types.Result.GetResult<Prisma.$ProjectMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.CutList$leadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CutList$leadArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   cutListMachineMapping<T extends Prisma.CutList$cutListMachineMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CutList$cutListMachineMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListMachineMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2583,6 +2583,25 @@ export type CutListDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many CutLists to delete.
    */
   limit?: number
+}
+
+/**
+ * CutList.lead
+ */
+export type CutList$leadArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadMaster
+   */
+  select?: Prisma.LeadMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadMaster
+   */
+  omit?: Prisma.LeadMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadMasterInclude<ExtArgs> | null
+  where?: Prisma.LeadMasterWhereInput
 }
 
 /**

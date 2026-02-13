@@ -598,3 +598,32 @@ export const uploadMachineFiles = multer({
       : cb(new Error("Only image files are allowed"));
   },
 });
+
+export const uploadProjectExcel = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/project_excels";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+
+  limits: {
+    fileSize: 25 * 1024 * 1024, // Excel can be large
+    files: 1,
+  },
+
+  fileFilter: (_req, file, cb) => {
+    const allowed = [
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // .xlsx
+      "application/vnd.ms-excel", // .xls
+    ];
+
+    allowed.includes(file.mimetype)
+      ? cb(null, true)
+      : cb(new Error("Only Excel files are allowed"));
+  },
+});
