@@ -619,7 +619,6 @@ export class PostProductionController {
       const result = await service.checkPostProductionCompleteness(
         Number(vendorId),
         Number(leadId),
-     ,
         typeof instance_id !== "undefined" ? Number(instance_id) : undefined
       );
 
