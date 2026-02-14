@@ -1093,6 +1093,10 @@ export class ClientDocumentationService {
             lead_id: data.lead_id,
             vendor_id: data.vendor_id,
             tech_check_status: "REVISED",
+            product_structure_instance_id:
+              doc.productStructureInstanceId ??
+              data.product_structure_instance_id ??
+              null,
           },
         });
 

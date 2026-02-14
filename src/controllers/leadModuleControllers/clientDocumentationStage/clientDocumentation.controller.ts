@@ -236,6 +236,18 @@ export class ClientDocumentationController {
       const pptFiles = files?.client_documentations_ppt || [];
       const pythaFiles = files?.client_documentations_pytha || [];
 
+      console.info("[ClientDocumentation:addMoreDocuments] Incoming request", {
+        lead_id,
+        account_id,
+        vendor_id,
+        created_by,
+        product_structure_instance_id,
+        pptCount: pptFiles.length,
+        pythaCount: pythaFiles.length,
+        pptNames: pptFiles.map((f) => f.originalname),
+        pythaNames: pythaFiles.map((f) => f.originalname),
+      });
+
       if (!lead_id || !account_id || !vendor_id || !created_by) {
         res
           .status(400)
@@ -327,6 +339,14 @@ export class ClientDocumentationController {
         ...(await uploadTaggedFiles(pythaFiles, "Type 12")),
       ];
 
+      console.info("[ClientDocumentation:addMoreDocuments] Uploaded docs", {
+        lead_id: parsedLeadId,
+        vendor_id: parsedVendorId,
+        resolvedInstanceId: resolvedInstance?.id ?? null,
+        uploadedCount: documents.length,
+        uploadedNames: documents.map((d) => d.originalName),
+      });
+
       const dto: ClientDocumentationDto = {
         lead_id: parsedLeadId,
         account_id: parseInt(account_id),
@@ -416,6 +436,16 @@ export class ClientDocumentationController {
         userId,
         baseUrl,
       );
+
+      console.info("[ClientDocumentation:get] Response summary", {
+        leadId,
+        vendorId,
+        userId,
+        instanceCount: data?.instance_count,
+        instanceGroups: data?.documents_by_instance?.length,
+        pptCount: data?.documents?.ppt?.length,
+        pythaCount: data?.documents?.pytha?.length,
+      });
 
       res.status(200).json({
         success: true,

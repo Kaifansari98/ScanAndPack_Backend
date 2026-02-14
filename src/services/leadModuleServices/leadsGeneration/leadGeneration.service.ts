@@ -1416,9 +1416,6 @@ export const updateLeadService = async (
     archetech_name,
     designer_remark,
     updated_by,
-    product_types = [],
-    product_structures = [],
-    product_structure_instances = [],
     initial_site_measurement_date,
   } = payload;
 
@@ -1510,177 +1507,6 @@ export const updateLeadService = async (
       data: leadUpdateData,
     });
 
-    // 8. Handle product_types updates (only if provided)
-    if (product_types !== undefined) {
-      console.log("[DEBUG] Updating product types for lead ID:", leadId);
-
-      // Delete existing product type mappings
-      await tx.leadProductMapping.deleteMany({
-        where: {
-          lead_id: leadId,
-          vendor_id,
-        },
-      });
-
-      // Create new mappings
-      for (const productTypeId of product_types) {
-        console.log("[DEBUG] Processing product type ID:", productTypeId);
-
-        // Validate that the product type exists and belongs to the vendor
-        const productType = await tx.productTypeMaster.findFirst({
-          where: {
-            id: productTypeId,
-            vendor_id,
-          },
-        });
-
-        if (!productType) {
-          throw new Error(
-            `Product type with ID ${productTypeId} not found for vendor ${vendor_id}`
-          );
-        }
-
-        await tx.leadProductMapping.create({
-          data: {
-            vendor_id,
-            lead_id: leadId,
-            account_id: existingLead.account_id!,
-            product_type_id: productTypeId,
-            created_by: updated_by,
-          },
-        });
-        console.log(
-          "[DEBUG] ✅ Product mapping created for type ID:",
-          productTypeId
-        );
-      }
-    }
-
-    // 9. Handle product_structures updates (only if provided)
-    if (product_structures !== undefined) {
-      console.log("[DEBUG] Updating product structures for lead ID:", leadId);
-
-      // Delete existing product structure mappings
-      await tx.leadProductStructureMapping.deleteMany({
-        where: {
-          lead_id: leadId,
-          vendor_id,
-        },
-      });
-      await tx.leadProductStructureInstance.deleteMany({
-        where: {
-          lead_id: leadId,
-          vendor_id,
-        },
-      });
-
-      const existingProductType = await tx.leadProductMapping.findFirst({
-        where: {
-          lead_id: leadId,
-          vendor_id,
-        },
-        select: { product_type_id: true },
-      });
-      const instanceProductTypeId =
-        product_types[0] ?? existingProductType?.product_type_id;
-      const instanceSource: {
-        product_structure_id: number;
-        title?: string;
-        description?: string;
-      }[] =
-        product_structure_instances.length > 0
-          ? product_structure_instances
-          : product_structures.map((product_structure_id) => ({
-              product_structure_id,
-            }));
-
-      // Create new mappings
-      for (const productStructureId of product_structures) {
-        console.log(
-          "[DEBUG] Processing product structure ID:",
-          productStructureId
-        );
-
-        // Validate that the product structure exists and belongs to the vendor
-        const structure = await tx.productStructure.findFirst({
-          where: {
-            id: productStructureId,
-            vendor_id,
-          },
-        });
-
-        if (!structure) {
-          throw new Error(
-            `Product structure with ID ${productStructureId} not found for vendor ${vendor_id}`
-          );
-        }
-
-        await tx.leadProductStructureMapping.create({
-          data: {
-            vendor_id,
-            lead_id: leadId,
-            account_id: existingLead.account_id!,
-            product_structure_id: productStructureId,
-            created_by: updated_by,
-          },
-        });
-        console.log(
-          "[DEBUG] ✅ Product structure mapping created for structure ID:",
-          productStructureId
-        );
-      }
-
-      if (!instanceProductTypeId) {
-        logger.warn(
-          "⚠️ Skipping structure instances: product_types is empty",
-          { lead_id: leadId }
-        );
-      } else {
-        const structureIds = Array.from(
-          new Set(instanceSource.map((instance) => instance.product_structure_id))
-        );
-        const structures = await tx.productStructure.findMany({
-          where: {
-            id: { in: structureIds },
-            vendor_id,
-          },
-        });
-        const structureMap = new Map(
-          structures.map((structure) => [structure.id, structure])
-        );
-
-        if (structureMap.size !== structureIds.length) {
-          const missingIds = structureIds.filter((id) => !structureMap.has(id));
-          throw new Error(
-            `Product structure with ID(s) ${missingIds.join(
-              ", "
-            )} not found for vendor ${vendor_id}`
-          );
-        }
-
-        let nextIndex = 0;
-        for (const instance of instanceSource) {
-          const structure = structureMap.get(instance.product_structure_id);
-          if (!structure) continue;
-
-          nextIndex += 1;
-
-          await tx.leadProductStructureInstance.create({
-            data: {
-              vendor_id,
-              lead_id: leadId,
-              account_id: existingLead.account_id!,
-              product_type_id: instanceProductTypeId,
-              product_structure_id: instance.product_structure_id,
-              quantity_index: nextIndex,
-              title: instance.title?.trim() || structure.type,
-              description: instance.description?.trim() || null,
-              created_by: updated_by,
-            },
-          });
-        }
-      }
-    }
 
     // ✅ Auto-unmark draft if completed and prepare email payload
     if (existingLead.is_draft) {
@@ -1850,19 +1676,11 @@ export const updateLeadService = async (
     console.log("[INFO] Lead updated successfully:", {
       leadId,
       accountId: updatedAccount.id,
-      productTypesCount: product_types.length,
-      productStructuresCount: product_structures.length,
     });
 
     return {
       lead: updatedLead,
       account: updatedAccount,
-      productTypesUpdated:
-        product_types !== undefined ? product_types.length : "not updated",
-      productStructuresUpdated:
-        product_structures !== undefined
-          ? product_structures.length
-          : "not updated",
     };
   });
 
