@@ -471,10 +471,7 @@ export class BookingStageService {
         minute: "2-digit",
       });
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
+      const baseUrl = data.baseUrl;
 
       const projectUrl = lead.account_id
         ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
@@ -544,6 +541,7 @@ export class BookingStageService {
     account_id: number;
     vendor_id: number;
     created_by: number;
+    baseUrl: string;
     finalDocuments?: { originalName: string; sysName: string }[];
   }) {
     return await prisma.$transaction(async (tx: any) => {
@@ -671,11 +669,7 @@ export class BookingStageService {
           minute: "2-digit",
         });
 
-        const baseUrl =
-          process.env.CLIENT_BASE_URL ||
-          process.env.FRONTEND_URL ||
-          "http://localhost:3000";
-
+        const baseUrl = data.baseUrl;
         const projectUrl = lead.account_id
           ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
           : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;
@@ -1286,7 +1280,9 @@ export class BookingStageService {
     // STATUS RESOLUTION
     // ============================
 
-    const normalizedTag = String(tag || "").trim().toLowerCase();
+    const normalizedTag = String(tag || "")
+      .trim()
+      .toLowerCase();
     const statusTags =
       normalizedTag === "type 9"
         ? ["Type 8", "Type 9"]
@@ -1722,7 +1718,9 @@ export class BookingStageService {
       });
       statusIds = statuses.map((s) => s.id);
     } else {
-      const normalizedTag = String(tag || "").trim().toLowerCase();
+      const normalizedTag = String(tag || "")
+        .trim()
+        .toLowerCase();
       const statusTags =
         normalizedTag === "type 9"
           ? ["Type 8", "Type 9"]
@@ -2565,10 +2563,8 @@ export class BookingStageService {
       const updatedByName = updatedByUser?.user_name ?? "User";
       const amountText = `₹${data.amount.toLocaleString("en-IN")}`;
       const paymentTypeName = result.paymentTypeName || "Payment";
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
+      
+      const baseUrl = data.baseUrl;
       const leadUrl = leadInfo?.account_id
         ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${leadInfo.account_id}`
         : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;

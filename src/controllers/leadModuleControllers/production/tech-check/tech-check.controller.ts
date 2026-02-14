@@ -6,6 +6,7 @@ import {
 import { prisma } from "../../../../prisma/client";
 import { NotificationService } from "../../../../services/notification/notification.service";
 import { NotificationType } from "../../../../prisma/generated";
+import { resolveClientBaseUrl } from "../../../../utils/fileUtils";
 
 const techCheckService = new TechCheckService();
 
@@ -113,6 +114,7 @@ export class TechCheckController {
         : undefined;
 
       // Instance-wise completion path
+      const baseUrl = resolveClientBaseUrl(req);
       if (instanceId) {
         const result: ApproveTechCheckResult =
           await techCheckService.approveTechCheck(
@@ -121,6 +123,7 @@ export class TechCheckController {
             userId,
             Number(assign_to_user_id || 0),
             Number(account_id || 0),
+            baseUrl,
             instanceId
           );
 
@@ -198,13 +201,14 @@ export class TechCheckController {
             "Missing required fields (vendorId, leadId, userId, assign_to_user_id, account_id)",
         });
       }
-
+  
       const result = await techCheckService.approveTechCheck(
         vendorId,
         leadId,
         userId,
         Number(assign_to_user_id),
         Number(account_id),
+        baseUrl,
         undefined
       );
 
@@ -285,11 +289,13 @@ export class TechCheckController {
         });
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       const result = await techCheckService.approveMultipleDocuments(
         vendorId,
         leadId,
         userId,
-        approvedDocs
+        approvedDocs,
+        baseUrl
       );
 
       return res.status(200).json({

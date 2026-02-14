@@ -65,6 +65,7 @@ export class TechCheckService {
     userId: number,
     assignToUserId: number,
     accountId: number,
+    baseUrl: string,
     productStructureInstanceId?: number
   ): Promise<ApproveTechCheckResult> {
     const result: ApproveTechCheckResult = await prisma.$transaction(
@@ -382,10 +383,6 @@ export class TechCheckService {
           minute: "2-digit",
         });
 
-        const baseUrl =
-          process.env.CLIENT_BASE_URL ||
-          process.env.FRONTEND_URL ||
-          "http://localhost:3000";
 
         const projectUrl = lead.account_id
           ? `${baseUrl}/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
@@ -492,10 +489,6 @@ export class TechCheckService {
             minute: "2-digit",
           });
 
-          const baseUrl =
-            process.env.CLIENT_BASE_URL ||
-            process.env.FRONTEND_URL ||
-            "http://localhost:3000";
 
           const projectUrl = lead.account_id
             ? `${baseUrl}/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
@@ -547,6 +540,7 @@ export class TechCheckService {
     leadId: number,
     userId: number,
     rejectedDocs: number[],
+    baseUrl: string,
     remark?: string,
   ) {
     // ===============================
@@ -659,10 +653,7 @@ export class TechCheckService {
         minute: "2-digit",
       });
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
+
 
       const redirectPath = leadInfo.account_id
         ? `/dashboard/leads/details/${leadId}?accountId=${leadInfo.account_id}`
@@ -837,6 +828,7 @@ export class TechCheckService {
     leadId: number,
     userId: number,
     approvedDocs: number[],
+    baseUrl: string,
   ) {
     // ===============================
     // 1️⃣ TRANSACTION LAYER
@@ -943,10 +935,6 @@ export class TechCheckService {
         minute: "2-digit",
       });
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
 
       const redirectPath = leadInfo.account_id
         ? `/dashboard/leads/details/${leadId}?accountId=${leadInfo.account_id}`

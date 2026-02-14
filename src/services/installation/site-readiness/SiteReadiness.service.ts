@@ -420,6 +420,7 @@ export class SiteReadinessService {
     vendorId: number,
     leadId: number,
     updatedBy: number,
+    baseUrl: string,
   ) {
     const result = prisma.$transaction(async (tx) => {
       // 1️⃣ Validate lead
@@ -530,10 +531,6 @@ export class SiteReadinessService {
         minute: "2-digit",
       });
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
 
       const redirectPath = lead.account_id
         ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`

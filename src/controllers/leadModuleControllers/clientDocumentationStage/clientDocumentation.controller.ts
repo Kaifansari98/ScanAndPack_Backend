@@ -8,6 +8,7 @@ import { uploadToWasabClientDocumentationFile } from "../../../utils/wasabiClien
 import { sanitizeFilename } from "../../../utils/sanitizeFilename";
 import fs from "node:fs/promises";
 import { prisma } from "../../../prisma/client";
+import { resolveClientBaseUrl } from "../../../utils/fileUtils";
 
 const clientDocumentationService = new ClientDocumentationService();
 
@@ -164,6 +165,7 @@ export class ClientDocumentationController {
         created_by: parseInt(created_by),
         product_structure_instance_id: resolvedInstance?.id,
         documents,
+        baseUrl: resolveClientBaseUrl(req),
       };
 
       const result =
@@ -332,7 +334,9 @@ export class ClientDocumentationController {
         created_by: parseInt(created_by),
         product_structure_instance_id: resolvedInstance?.id,
         documents,
+        baseUrl: resolveClientBaseUrl(req),
       };
+
 
       const result =
         await clientDocumentationService.addMoreClientDocumentation(dto);
@@ -404,10 +408,13 @@ export class ClientDocumentationController {
         return;
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
+
       const data = await clientDocumentationService.getClientDocumentation(
         vendorId,
         leadId,
         userId,
+        baseUrl,
       );
 
       res.status(200).json({
@@ -438,10 +445,12 @@ export class ClientDocumentationController {
         return;
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       const result = await clientDocumentationService.moveToClientApproval({
         lead_id: Number(lead_id),
         vendor_id: Number(vendor_id),
         updated_by: Number(updated_by),
+        baseUrl,
       });
 
       res.status(200).json({

@@ -450,6 +450,7 @@ export class FinalHandoverStageService {
     vendorId: number,
     leadId: number,
     updatedBy: number,
+    baseUrl: string
   ) {
     // ==================================================
     // 1️⃣ CORE TRANSACTION LAYER (ONLY DB OPERATIONS)
@@ -583,10 +584,6 @@ export class FinalHandoverStageService {
 
       if (!recipients.length) return result;
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
 
       const redirectPath = `/dashboard/leads/project-summary/${leadId}`;
 
