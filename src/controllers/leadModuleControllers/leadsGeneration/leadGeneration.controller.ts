@@ -1159,6 +1159,16 @@ export class LeadController {
         },
       });
 
+      await prisma.leadProductStructureInstance.updateMany({
+        where: {
+          lead_id: leadId,
+          vendor_id: lead.vendor_id,
+        },
+        data: {
+          product_type_id: resolvedProductTypeId,
+        },
+      });
+
       if (mapping.product_type_id !== resolvedProductTypeId) {
         const [oldType, newType] = await Promise.all([
           mapping.product_type_id
