@@ -1,5 +1,8 @@
 import { Request, Response } from "express";
-import { TechCheckService } from "../../../../services/production/tech-check/tech-check.service";
+import {
+  TechCheckService,
+  ApproveTechCheckResult,
+} from "../../../../services/production/tech-check/tech-check.service";
 import { prisma } from "../../../../prisma/client";
 import { NotificationService } from "../../../../services/notification/notification.service";
 import { NotificationType } from "../../../../prisma/generated";
@@ -45,6 +48,53 @@ export class TechCheckController {
     }
   };
 
+  // ✅ Get Tech-Check status by vendor, lead, instance
+  public static getTechCheckInstanceStatus = async (
+    req: Request,
+    res: Response
+  ) => {
+    try {
+      const vendorId = parseInt(req.params.vendorId);
+      const leadId = parseInt(req.params.leadId);
+      const instanceId = parseInt(req.params.instanceId);
+
+      if (!vendorId || !leadId || !instanceId) {
+        return res.status(400).json({
+          success: false,
+          message: "Vendor ID, Lead ID, and Instance ID are required",
+        });
+      }
+
+      const result = await techCheckService.getInstanceTechCheckStatus(
+        vendorId,
+        leadId,
+        instanceId
+      );
+
+      if (!result) {
+        return res.status(404).json({
+          success: false,
+          message: "Instance not found for this lead",
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        message: "Tech check status fetched successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error(
+        "[TechCheckController] getTechCheckInstanceStatus Error:",
+        error
+      );
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
   // ✅ Approve Tech Check
   public static approveTechCheck = async (req: Request, res: Response) => {
     try {
@@ -52,7 +102,88 @@ export class TechCheckController {
       const leadId = parseInt(req.params.leadId);
       const userId = parseInt(req.params.userId);
 
-      const { assign_to_user_id, account_id } = req.body;
+      const {
+        assign_to_user_id,
+        account_id,
+        product_structure_instance_id,
+      } = req.body;
+
+      const instanceId = product_structure_instance_id
+        ? Number(product_structure_instance_id)
+        : undefined;
+
+      // Instance-wise completion path
+      if (instanceId) {
+        const result: ApproveTechCheckResult =
+          await techCheckService.approveTechCheck(
+            vendorId,
+            leadId,
+            userId,
+            Number(assign_to_user_id || 0),
+            Number(account_id || 0),
+            instanceId
+          );
+
+        const hasMoveInfo =
+          "moved_to_order_login" in result &&
+          result.moved_to_order_login === true &&
+          "assign_to_user_id" in result &&
+          typeof result.assign_to_user_id === "number";
+
+        if (hasMoveInfo) {
+          try {
+            const assignee = await prisma.userMaster.findUnique({
+              where: { id: Number(result.assign_to_user_id) },
+              select: {
+                user_type: { select: { user_type: true } },
+              },
+            });
+            const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
+            if (assigneeRole !== "admin" && assigneeRole !== "super-admin") {
+              const lead = await prisma.leadMaster.findUnique({
+                where: { id: leadId },
+                select: { firstname: true, lastname: true },
+              });
+              const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+
+              await NotificationService.createAndSend({
+                vendor_id: vendorId,
+                user_id: Number(result.assign_to_user_id),
+                sender_id: userId,
+                type: NotificationType.LEAD_ASSIGNED,
+                title: "Lead assigned",
+                message:
+                  leadName.length > 0
+                    ? `Lead ${leadName} has been assigned to you.`
+                    : "A lead has been assigned to you.",
+                entity_type: "lead",
+                entity_id: leadId,
+                redirect_url: `/dashboard/leads/details/${leadId}?accountId=${
+                  "account_id" in result && result.account_id
+                    ? result.account_id
+                    : account_id
+                }`,
+              });
+            }
+          } catch (notificationError: any) {
+            console.error("⚠️ Failed to send order-login assignment notification", {
+              error: notificationError?.message,
+              lead_id: leadId,
+              assignee_user_id:
+                "assign_to_user_id" in result ? result.assign_to_user_id : null,
+            });
+          }
+        }
+
+        return res.status(200).json({
+          success: true,
+          message:
+            "moved_to_order_login" in result && result.moved_to_order_login
+            ? "All instances completed. Lead moved to Order Login"
+            : "Tech check marked as completed for instance",
+          data: result,
+        });
+      }
 
       if (
         !vendorId ||
@@ -73,7 +204,8 @@ export class TechCheckController {
         leadId,
         userId,
         Number(assign_to_user_id),
-        Number(account_id)
+        Number(account_id),
+        undefined
       );
 
       try {

@@ -1065,6 +1065,115 @@ export class LeadController {
   }
 
   /**
+   * Update lead product type only
+   */
+  async updateLeadProductType(req: Request, res: Response): Promise<void> {
+    try {
+      const leadId = parseInt(req.params.leadId);
+      const updatedBy = parseInt(req.params.userId);
+      const productTypeId = Number(req.body.product_type_id);
+      const productTypeName = req.body.product_type;
+
+      if (!updatedBy || isNaN(updatedBy)) {
+        res
+          .status(400)
+          .json(ApiResponse.error("Invalid user ID provided", 400));
+        return;
+      }
+
+      if (!leadId || isNaN(leadId)) {
+        res
+          .status(400)
+          .json(ApiResponse.error("Invalid lead ID provided", 400));
+        return;
+      }
+
+      if ((!productTypeId || isNaN(productTypeId)) && !productTypeName) {
+        res
+          .status(400)
+          .json(
+            ApiResponse.error(
+              "product_type_id or product_type is required",
+              400
+            )
+          );
+        return;
+      }
+
+      const lead = await prisma.leadMaster.findFirst({
+        where: { id: leadId, is_deleted: false },
+        select: { id: true, vendor_id: true },
+      });
+
+      if (!lead) {
+        res
+          .status(404)
+          .json(ApiResponse.error("Lead not found", 404));
+        return;
+      }
+
+      let resolvedProductTypeId = productTypeId;
+
+      if (!resolvedProductTypeId || isNaN(resolvedProductTypeId)) {
+        const productType = await prisma.productTypeMaster.findFirst({
+          where: {
+            vendor_id: lead.vendor_id,
+            type: String(productTypeName),
+          },
+          select: { id: true },
+        });
+
+        if (!productType) {
+          res
+            .status(404)
+            .json(ApiResponse.error("Product type not found", 404));
+          return;
+        }
+
+        resolvedProductTypeId = productType.id;
+      }
+
+      const mapping = await prisma.leadProductMapping.findFirst({
+        where: {
+          lead_id: leadId,
+          vendor_id: lead.vendor_id,
+        },
+        select: { id: true },
+      });
+
+      if (!mapping) {
+        res
+          .status(404)
+          .json(ApiResponse.error("Lead product mapping not found", 404));
+        return;
+      }
+
+      await prisma.leadProductMapping.update({
+        where: { id: mapping.id },
+        data: {
+          product_type_id: resolvedProductTypeId,
+        },
+      });
+
+      res.status(200).json(
+        ApiResponse.success(
+          {
+            lead: {
+              id: leadId,
+            },
+            product_type_id: resolvedProductTypeId,
+          },
+          "Product type updated successfully",
+          200,
+        ),
+      );
+    } catch (error: any) {
+      console.error("[ERROR] Failed to update product type:", error.message);
+      res.status(500).json(ApiResponse.error(error.message, 500));
+    }
+  }
+
+  /**
    * Fetch all sales executives for a specific vendor
    */
   async fetchSalesExecutivesByVendor(

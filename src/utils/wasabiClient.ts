@@ -133,10 +133,14 @@ export const uploadToWasabClientDocumentation = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  folder: string = "client_documentations"
+  folder: string = "client_documentations",
+  instanceFolder?: string
 ) => {
   const ext = originalName.split(".").pop();
-  const sysName = `${folder}/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+  const folderPath = instanceFolder
+    ? `${folder}/${vendorId}/${leadId}/${instanceFolder}`
+    : `${folder}/${vendorId}/${leadId}`;
+  const sysName = `${folderPath}/${uuidv4()}.${ext}`;
 
   await wasabi.send(
     new PutObjectCommand({
@@ -156,10 +160,14 @@ export const uploadToWasabClientDocumentationFile = async (
   leadId: number,
   originalName: string,
   contentType: string,
-  folder: string = "client_documentations"
+  folder: string = "client_documentations",
+  instanceFolder?: string
 ) => {
   const ext = originalName.split(".").pop();
-  const sysName = `${folder}/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+  const folderPath = instanceFolder
+    ? `${folder}/${vendorId}/${leadId}/${instanceFolder}`
+    : `${folder}/${vendorId}/${leadId}`;
+  const sysName = `${folderPath}/${uuidv4()}.${ext}`;
 
   const upload = new Upload({
     client: wasabi,
@@ -232,10 +240,17 @@ export const uploadToWasabiProductionFiles = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
+  instanceFolder?: string
 ) => {
   const ext = originalName.split(".").pop();
-  const sysName = `production_files/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+  const safeInstanceFolder = instanceFolder
+    ? sanitizeFilename(instanceFolder)
+    : undefined;
+  const folderPath = safeInstanceFolder
+    ? `production_files/${vendorId}/${leadId}/${safeInstanceFolder}`
+    : `production_files/${vendorId}/${leadId}`;
+  const sysName = `${folderPath}/${uuidv4()}.${ext}`;
 
   await wasabi.send(
     new PutObjectCommand({
@@ -254,10 +269,17 @@ export const uploadToWasabiProductionFilesFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
+  instanceFolder?: string
 ) => {
   const ext = originalName.split(".").pop();
-  const sysName = `production_files/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+  const safeInstanceFolder = instanceFolder
+    ? sanitizeFilename(instanceFolder)
+    : undefined;
+  const folderPath = safeInstanceFolder
+    ? `production_files/${vendorId}/${leadId}/${safeInstanceFolder}`
+    : `production_files/${vendorId}/${leadId}`;
+  const sysName = `${folderPath}/${uuidv4()}.${ext}`;
 
   const upload = new Upload({
     client: wasabi,
@@ -282,11 +304,18 @@ export const uploadToWasabiOrderLoginPoFile = async (
   leadId: number,
   cardName: string,
   originalName: string,
-  contentType: string
+  contentType: string,
+  instanceFolder?: string
 ) => {
   const ext = originalName.split(".").pop();
   const safeCardName = sanitizeFilename(cardName || "card");
-  const sysName = `order_login_po/${vendorId}/${leadId}/${safeCardName}/${uuidv4()}.${ext}`;
+  const safeInstanceFolder = instanceFolder
+    ? sanitizeFilename(instanceFolder)
+    : undefined;
+  const folderPath = safeInstanceFolder
+    ? `order_login_po/${vendorId}/${leadId}/${safeInstanceFolder}/${safeCardName}`
+    : `order_login_po/${vendorId}/${leadId}/${safeCardName}`;
+  const sysName = `${folderPath}/${uuidv4()}.${ext}`;
 
   const upload = new Upload({
     client: wasabi,
@@ -331,10 +360,17 @@ export const uploadToWasabiProductionFilesQcPhotosFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
+  instanceFolder?: string
 ) => {
   const ext = originalName.split(".").pop();
-  const sysName = `production_files_qc_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+  const safeInstanceFolder = instanceFolder
+    ? sanitizeFilename(instanceFolder)
+    : undefined;
+  const folderPath = safeInstanceFolder
+    ? `production_files_qc_photos/${vendorId}/${leadId}/${safeInstanceFolder}`
+    : `production_files_qc_photos/${vendorId}/${leadId}`;
+  const sysName = `${folderPath}/${uuidv4()}.${ext}`;
 
   const upload = new Upload({
     client: wasabi,
@@ -379,10 +415,17 @@ export const uploadToWasabiProductionFilesHardwarePackingDocsFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
+  instanceFolder?: string
 ) => {
   const ext = originalName.split(".").pop();
-  const sysName = `production_files_hardware_packing_details_docs/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+  const safeInstanceFolder = instanceFolder
+    ? sanitizeFilename(instanceFolder)
+    : undefined;
+  const folderPath = safeInstanceFolder
+    ? `production_files_hardware_packing_details_docs/${vendorId}/${leadId}/${safeInstanceFolder}`
+    : `production_files_hardware_packing_details_docs/${vendorId}/${leadId}`;
+  const sysName = `${folderPath}/${uuidv4()}.${ext}`;
 
   const upload = new Upload({
     client: wasabi,
@@ -427,10 +470,17 @@ export const uploadToWasabiProductionFilesWoodworkPackingDocsFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
+  instanceFolder?: string
 ) => {
   const ext = originalName.split(".").pop();
-  const sysName = `production_files_woodwork_packing_details_docs/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+  const safeInstanceFolder = instanceFolder
+    ? sanitizeFilename(instanceFolder)
+    : undefined;
+  const folderPath = safeInstanceFolder
+    ? `production_files_woodwork_packing_details_docs/${vendorId}/${leadId}/${safeInstanceFolder}`
+    : `production_files_woodwork_packing_details_docs/${vendorId}/${leadId}`;
+  const sysName = `${folderPath}/${uuidv4()}.${ext}`;
 
   const upload = new Upload({
     client: wasabi,

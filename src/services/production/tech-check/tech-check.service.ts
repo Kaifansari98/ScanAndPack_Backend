@@ -9,7 +9,55 @@ import {
   sendTechCheckRejectedEmail,
 } from "../../../../src/services/email/brevoEmail.service";
 
+export type ApproveTechCheckResult =
+  | {
+      mode: "instance";
+      instance_id: number;
+      is_tech_check_completed: boolean | null;
+      tech_check_completed_at: Date | null;
+    }
+  | {
+      mode: "instance_and_lead_moved";
+      instance_id: number;
+      is_tech_check_completed: boolean | null;
+      tech_check_completed_at: Date | null;
+      updatedLead: any;
+      mapping: any;
+      moved_to_order_login: true;
+      assign_to_user_id: number;
+      account_id: number;
+    }
+  | {
+      updatedLead: any;
+      mapping: any;
+    };
+
 export class TechCheckService {
+  public async getInstanceTechCheckStatus(
+    vendorId: number,
+    leadId: number,
+    instanceId: number
+  ) {
+    return prisma.leadProductStructureInstance.findFirst({
+      where: {
+        id: instanceId,
+        lead_id: leadId,
+        vendor_id: vendorId,
+      },
+      select: {
+        id: true,
+        lead_id: true,
+        vendor_id: true,
+        is_tech_check_completed: true,
+        tech_check_completed_at: true,
+        is_order_login_completed: true,
+        order_login_completed_at: true,
+        is_production_completed: true,
+        production_completed_at: true,
+      },
+    });
+  }
+
   // ✅ Approve Tech Check
   public async approveTechCheck(
     vendorId: number,
@@ -17,8 +65,176 @@ export class TechCheckService {
     userId: number,
     assignToUserId: number,
     accountId: number,
-  ) {
-    const result = await prisma.$transaction(async (tx) => {
+    productStructureInstanceId?: number
+  ): Promise<ApproveTechCheckResult> {
+    const result: ApproveTechCheckResult = await prisma.$transaction(
+      async (tx) => {
+      if (productStructureInstanceId) {
+        const instance = await tx.leadProductStructureInstance.findFirst({
+          where: {
+            id: productStructureInstanceId,
+            lead_id: leadId,
+            vendor_id: vendorId,
+            account_id: accountId || undefined,
+          },
+          select: { id: true, title: true, account_id: true },
+        });
+
+        if (!instance) {
+          throw new Error("Product structure instance not found for this lead");
+        }
+
+        const effectiveAccountId = accountId || instance.account_id;
+
+        const updatedInstance = await tx.leadProductStructureInstance.update({
+          where: { id: productStructureInstanceId },
+          data: {
+            is_tech_check_completed: true,
+            tech_check_completed_at: new Date(),
+            updated_by: userId,
+            updated_at: new Date(),
+          },
+        });
+
+        await tx.leadDetailedLogs.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: effectiveAccountId,
+            action: `Tech Check completed for instance ${instance.title}`,
+            action_type: "UPDATE",
+            created_by: userId,
+          },
+        });
+
+        const pendingInstances = await tx.leadProductStructureInstance.count({
+          where: {
+            lead_id: leadId,
+            vendor_id: vendorId,
+            OR: [
+              { is_tech_check_completed: false },
+              { is_tech_check_completed: null },
+            ],
+          },
+        });
+
+        if (pendingInstances === 0) {
+          if (!assignToUserId || !effectiveAccountId) {
+            throw new Error(
+              "assign_to_user_id and account_id are required to move lead to Order Login"
+            );
+          }
+
+          const orderLoginStatus = await tx.statusTypeMaster.findFirst({
+            where: { vendor_id: vendorId, tag: "Type 9" },
+            select: { id: true },
+          });
+
+          if (!orderLoginStatus) {
+            throw new Error(
+              `Order Login (Type 9) not configured for vendor ${vendorId}`
+            );
+          }
+
+          const updatedLead = await tx.leadMaster.update({
+            where: { id: leadId },
+            data: {
+              status_id: orderLoginStatus.id,
+              updated_by: userId,
+              updated_at: new Date(),
+            },
+          });
+
+          const mapping = await tx.leadUserMapping.create({
+            data: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: effectiveAccountId,
+              user_id: assignToUserId,
+              type: "order-login-stage",
+              status: "active",
+              created_by: userId,
+            },
+          });
+
+          let chatRoom = await tx.leadChatRoom.findFirst({
+            where: {
+              lead_id: leadId,
+              vendor_id: vendorId,
+            },
+            select: { id: true },
+          });
+
+          if (!chatRoom) {
+            chatRoom = await tx.leadChatRoom.create({
+              data: {
+                lead_id: leadId,
+                vendor_id: vendorId,
+              },
+              select: { id: true },
+            });
+          }
+
+          const existingMember = await tx.leadChatMember.findFirst({
+            where: {
+              chat_room_id: chatRoom.id,
+              user_id: assignToUserId,
+            },
+            select: { id: true },
+          });
+
+          if (!existingMember) {
+            await tx.leadChatMember.create({
+              data: {
+                chat_room_id: chatRoom.id,
+                user_id: assignToUserId,
+                added_by: userId,
+              },
+            });
+          }
+
+          await tx.leadStatusLogs.create({
+            data: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: effectiveAccountId,
+              status_id: orderLoginStatus.id,
+              created_by: userId,
+            },
+          });
+
+          await tx.leadDetailedLogs.create({
+            data: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: effectiveAccountId,
+              action: `All instances tech check completed. Lead moved to Order Login and assigned to backend user ${assignToUserId}`,
+              action_type: "STATUS_CHANGE",
+              created_by: userId,
+            },
+          });
+
+          return {
+            mode: "instance_and_lead_moved",
+            instance_id: updatedInstance.id,
+            is_tech_check_completed: updatedInstance.is_tech_check_completed,
+            tech_check_completed_at: updatedInstance.tech_check_completed_at,
+            updatedLead,
+            mapping,
+            moved_to_order_login: true,
+            assign_to_user_id: assignToUserId,
+            account_id: effectiveAccountId,
+          };
+        }
+
+        return {
+          mode: "instance",
+          instance_id: updatedInstance.id,
+          is_tech_check_completed: updatedInstance.is_tech_check_completed,
+          tech_check_completed_at: updatedInstance.tech_check_completed_at,
+        };
+      }
+
       // 1️⃣ Get Order Login Status (Type 9)
       const orderLoginStatus = await tx.statusTypeMaster.findFirst({
         where: { vendor_id: vendorId, tag: "Type 9" },
@@ -126,122 +342,14 @@ export class TechCheckService {
       return { updatedLead, mapping };
     });
 
-    // ===============================
-    // ORDER LOGIN STAGE → ADMIN NOTIFICATION
-    // ===============================
+    const notify = async () => {
+      // ===============================
+      // ORDER LOGIN STAGE → ADMIN NOTIFICATION
+      // ===============================
+      try {
+        const actorId = userId; // tech check approver
 
-    try {
-      const actorId = userId; // tech check approver
-
-      const [lead, actor] = await Promise.all([
-        prisma.leadMaster.findUnique({
-          where: { id: leadId },
-          select: {
-            firstname: true,
-            lastname: true,
-            lead_code: true,
-            vendor_id: true,
-            account_id: true,
-          },
-        }),
-
-        prisma.userMaster.findUnique({
-          where: { id: actorId },
-          select: { user_name: true },
-        }),
-      ]);
-
-      // Safety guard
-      if (!lead) return result;
-
-      const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
-
-      const leadCode =
-        lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
-
-      const updatedAt = new Date().toLocaleString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
-
-      // Account aware deep link
-      const projectUrl = lead.account_id
-        ? `${baseUrl}/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
-        : `${baseUrl}/dashboard/leads/details/${leadId}`;
-
-      // Fetch Active Admin Users
-      const admins = await prisma.userMaster.findMany({
-        where: {
-          vendor_id: lead.vendor_id,
-          status: "active",
-          user_type: {
-            user_type: { in: ["admin"] },
-          },
-        },
-        select: {
-          id: true,
-          user_name: true,
-          user_email: true,
-        },
-      });
-
-      for (const admin of admins) {
-        if (admin.id === actorId) continue;
-
-        // 🔔 IN-APP Notification
-        await NotificationService.createAndSend({
-          vendor_id: lead.vendor_id,
-          user_id: admin.id,
-          sender_id: actorId,
-          type: NotificationType.LEAD_MILESTONE,
-          title: "Lead Entered Order Login Stage",
-          message: `${leadCode} - ${leadName} moved to Order Login stage.`,
-          entity_type: "lead",
-          entity_id: leadId,
-          redirect_url: lead.account_id
-            ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
-            : `/dashboard/leads/details/${leadId}`,
-        });
-
-        // 📧 EMAIL Notification
-        if (!admin.user_email) continue;
-
-        await sendLeadMovedToOrderLoginEmail({
-          vendor_id: lead.vendor_id,
-          toEmail: admin.user_email,
-          toName: admin.user_name,
-          leadCode,
-          leadName,
-          updatedBy: actor?.user_name ?? "System",
-          updatedAt,
-          projectUrl,
-        });
-      }
-    } catch (err: any) {
-      logger.warn("⚠️ Order login admin notification failed", {
-        lead_id: leadId,
-        error: err?.message,
-      });
-    }
-
-    // ===============================
-    // ORDER LOGIN ASSIGNMENT → BACKEND USER NOTIFICATION
-    // ===============================
-
-    try {
-      const assignedUserId = assignToUserId;
-
-      // ❌ Prevent self assignment notification
-      if (assignedUserId !== userId) {
-        const [lead, assigner, assignee] = await Promise.all([
+        const [lead, actor] = await Promise.all([
           prisma.leadMaster.findUnique({
             where: { id: leadId },
             select: {
@@ -254,28 +362,19 @@ export class TechCheckService {
           }),
 
           prisma.userMaster.findUnique({
-            where: { id: userId },
+            where: { id: actorId },
             select: { user_name: true },
-          }),
-
-          prisma.userMaster.findUnique({
-            where: { id: assignedUserId },
-            select: {
-              user_name: true,
-              user_email: true,
-            },
           }),
         ]);
 
-        if (!lead || !assignee) return result;
+        if (!lead) return;
 
-        const leadName =
-          `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+        const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
 
         const leadCode =
           lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
 
-        const assignedAt = new Date().toLocaleString("en-IN", {
+        const updatedAt = new Date().toLocaleString("en-IN", {
           day: "2-digit",
           month: "short",
           year: "numeric",
@@ -292,42 +391,153 @@ export class TechCheckService {
           ? `${baseUrl}/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
           : `${baseUrl}/dashboard/leads/details/${leadId}`;
 
-        // 🔔 IN-APP Notification (Backend User)
-        await NotificationService.createAndSend({
-          vendor_id: lead.vendor_id,
-          user_id: assignedUserId,
-          sender_id: userId,
-          type: NotificationType.TASK_ASSIGNED,
-          title: "Order Login Task Assigned",
-          message: `${leadCode} - ${leadName} has been assigned to you for Order Login.`,
-          entity_type: "lead",
-          entity_id: leadId,
-          redirect_url: lead.account_id
-            ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
-            : `/dashboard/leads/details/${leadId}`,
+        const admins = await prisma.userMaster.findMany({
+          where: {
+            vendor_id: lead.vendor_id,
+            status: "active",
+            user_type: {
+              user_type: { in: ["admin"] },
+            },
+          },
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+          },
         });
 
-        // 📧 EMAIL Notification (Backend User)
-        if (assignee.user_email) {
-          await sendOrderLoginAssignedEmail({
+        for (const admin of admins) {
+          if (admin.id === actorId) continue;
+
+          await NotificationService.createAndSend({
             vendor_id: lead.vendor_id,
-            toEmail: assignee.user_email,
-            toName: assignee.user_name,
+            user_id: admin.id,
+            sender_id: actorId,
+            type: NotificationType.LEAD_MILESTONE,
+            title: "Lead Entered Order Login Stage",
+            message: `${leadCode} - ${leadName} moved to Order Login stage.`,
+            entity_type: "lead",
+            entity_id: leadId,
+            redirect_url: lead.account_id
+              ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
+              : `/dashboard/leads/details/${leadId}`,
+          });
+
+          if (!admin.user_email) continue;
+
+          await sendLeadMovedToOrderLoginEmail({
+            vendor_id: lead.vendor_id,
+            toEmail: admin.user_email,
+            toName: admin.user_name,
             leadCode,
             leadName,
-            assignedBy: assigner?.user_name ?? "System",
-            assignedAt,
+            updatedBy: actor?.user_name ?? "System",
+            updatedAt,
             projectUrl,
           });
         }
+      } catch (err: any) {
+        logger.warn("⚠️ Order login admin notification failed", {
+          lead_id: leadId,
+          error: err?.message,
+        });
       }
-    } catch (err: any) {
-      logger.warn("⚠️ Order login assignment notification failed", {
-        lead_id: leadId,
-        assigned_user_id: assignToUserId,
-        error: err?.message,
-      });
-    }
+
+      // ===============================
+      // ORDER LOGIN ASSIGNMENT → BACKEND USER NOTIFICATION
+      // ===============================
+      try {
+        const assignedUserId = assignToUserId;
+
+        if (assignedUserId !== userId) {
+          const [lead, assigner, assignee] = await Promise.all([
+            prisma.leadMaster.findUnique({
+              where: { id: leadId },
+              select: {
+                firstname: true,
+                lastname: true,
+                lead_code: true,
+                vendor_id: true,
+                account_id: true,
+              },
+            }),
+
+            prisma.userMaster.findUnique({
+              where: { id: userId },
+              select: { user_name: true },
+            }),
+
+            prisma.userMaster.findUnique({
+              where: { id: assignedUserId },
+              select: {
+                user_name: true,
+                user_email: true,
+              },
+            }),
+          ]);
+
+          if (!lead || !assignee) return;
+
+          const leadName =
+            `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+
+          const leadCode =
+            lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+
+          const assignedAt = new Date().toLocaleString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+
+          const baseUrl =
+            process.env.CLIENT_BASE_URL ||
+            process.env.FRONTEND_URL ||
+            "http://localhost:3000";
+
+          const projectUrl = lead.account_id
+            ? `${baseUrl}/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
+            : `${baseUrl}/dashboard/leads/details/${leadId}`;
+
+          await NotificationService.createAndSend({
+            vendor_id: lead.vendor_id,
+            user_id: assignedUserId,
+            sender_id: userId,
+            type: NotificationType.TASK_ASSIGNED,
+            title: "Order Login Task Assigned",
+            message: `${leadCode} - ${leadName} has been assigned to you for Order Login.`,
+            entity_type: "lead",
+            entity_id: leadId,
+            redirect_url: lead.account_id
+              ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
+              : `/dashboard/leads/details/${leadId}`,
+          });
+
+          if (assignee.user_email) {
+            await sendOrderLoginAssignedEmail({
+              vendor_id: lead.vendor_id,
+              toEmail: assignee.user_email,
+              toName: assignee.user_name,
+              leadCode,
+              leadName,
+              assignedBy: assigner?.user_name ?? "System",
+              assignedAt,
+              projectUrl,
+            });
+          }
+        }
+      } catch (err: any) {
+        logger.warn("⚠️ Order login assignment notification failed", {
+          lead_id: leadId,
+          assigned_user_id: assignToUserId,
+          error: err?.message,
+        });
+      }
+    };
+
+    void notify();
     return result;
   }
 

@@ -59,6 +59,11 @@ postProductionRoutes.get(
   controller.checkPostProductionCompleteness
 );
 
+postProductionRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/mark-production-completed",
+  controller.markProductionCompleted
+);
+
 // PUT → Move lead from Production (Type 10) → Ready To Dispatch (Type 11)
 postProductionRoutes.put(
   "/vendorId/:vendorId/leadId/:leadId/move-to-ready-to-dispatch",

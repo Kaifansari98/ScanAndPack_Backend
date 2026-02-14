@@ -475,7 +475,7 @@ export class TaskService {
     };
 
     // ============================
-    // ADMIN FLOW
+    // ADMIN FLOW                  
     // ============================
 
     if (isAdmin) {
@@ -632,7 +632,7 @@ export class TaskService {
     const ownedTasks = await prisma.userLeadTask.findMany({
       where: {
         vendor_id: vendorId,
-        OR: [{ created_by: userId }, { user_id: userId }],
+        user_id: userId,
       },
       select: { id: true },
     });

@@ -696,6 +696,7 @@ export class DesigingStage {
     lead_id: number;
     account_id: number;
     vendor_id: number;
+    product_structure_instance_id?: number;
     type: string;
     desc: string;
     created_by: number;
@@ -743,12 +744,32 @@ export class DesigingStage {
     }
     logs.push("Account verified successfully");
 
+    // 4️⃣ Validate product structure instance (optional)
+    let resolvedInstanceId: number | null = null;
+    if (data.product_structure_instance_id) {
+      const instance = await prisma.leadProductStructureInstance.findFirst({
+        where: {
+          id: data.product_structure_instance_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          vendor_id: data.vendor_id,
+        },
+        select: { id: true },
+      });
+
+      if (!instance) {
+        throw new Error("Product structure instance not found for this lead");
+      }
+      resolvedInstanceId = instance.id;
+    }
+
     // 4️⃣ Create design selection
     const designSelection = await prisma.leadDesignSelection.create({
       data: {
         lead_id: data.lead_id,
         account_id: data.account_id,
         vendor_id: data.vendor_id,
+        product_structure_instance_id: resolvedInstanceId,
         type: data.type,
         desc: data.desc,
         created_by: data.created_by,
@@ -790,7 +811,8 @@ export class DesigingStage {
     vendorId: number,
     leadId: number,
     page: number,
-    limit: number
+    limit: number,
+    productStructureInstanceId?: number
   ) {
     const logs: any[] = [];
     const skip = (page - 1) * limit;
@@ -814,6 +836,9 @@ export class DesigingStage {
       where: {
         lead_id: leadId,
         vendor_id: vendorId,
+        ...(productStructureInstanceId
+          ? { product_structure_instance_id: productStructureInstanceId }
+          : {}),
       },
       skip,
       take: limit,
@@ -858,6 +883,9 @@ export class DesigingStage {
       where: {
         lead_id: leadId,
         vendor_id: vendorId,
+        ...(productStructureInstanceId
+          ? { product_structure_instance_id: productStructureInstanceId }
+          : {}),
       },
     });
 

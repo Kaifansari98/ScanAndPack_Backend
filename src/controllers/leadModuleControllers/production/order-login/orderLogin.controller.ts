@@ -76,13 +76,14 @@ export class OrderLoginController {
   async getOrderLoginByLead(req: Request, res: Response) {
     try {
       const { vendorId } = req.params;
-      const { lead_id } = req.query; // ✅ Use query param
+      const { lead_id, instance_id } = req.query; // ✅ Use query params
       const { senderUserId } = req.query; // ✅ Use query param
 
       const orderLogins = await service.getOrderLoginByLead(
         Number(vendorId),
         Number(lead_id),
-        Number(senderUserId)
+        Number(senderUserId),
+        typeof instance_id !== "undefined" ? Number(instance_id) : undefined
       );
 
       return res.status(200).json({
@@ -274,6 +275,7 @@ export class OrderLoginController {
           created_by: true,
           created_at: true,
           tech_check_status: true,
+          product_structure_instance_id: true,
         },
       });
 
@@ -317,10 +319,33 @@ export class OrderLoginController {
   async uploadProductionFiles(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
-      const { account_id, created_by } = req.body;
+      const { account_id, created_by, instance_id } = req.body;
       const files = req.files as Express.Multer.File[];
 
       const uploadedFiles: { originalName: string; sysName: string }[] = [];
+      let instanceFolder: string | undefined;
+      let instanceIdValue: number | null = null;
+
+      if (instance_id) {
+        const instance = await prisma.leadProductStructureInstance.findFirst({
+          where: {
+            id: Number(instance_id),
+            vendor_id: Number(vendorId),
+            lead_id: Number(leadId),
+          },
+          select: { title: true },
+        });
+
+        if (!instance) {
+          return res.status(404).json({
+            success: false,
+            message: "Product structure instance not found for this lead.",
+          });
+        }
+
+        instanceIdValue = Number(instance_id);
+        instanceFolder = instance.title?.trim() || `instance-${instance_id}`;
+      }
 
       for (const file of files) {
         const sysName = await uploadToWasabiProductionFilesFile(
@@ -329,6 +354,7 @@ export class OrderLoginController {
           Number(leadId),
           file.originalname,
           file.mimetype,
+          instanceFolder
         );
 
         await fs.unlink(file.path);
@@ -345,6 +371,7 @@ export class OrderLoginController {
         account_id ? Number(account_id) : null,
         Number(created_by),
         uploadedFiles,
+        instanceIdValue
       );
 
       return res.status(200).json({
@@ -393,6 +420,26 @@ export class OrderLoginController {
         });
       }
 
+      let instanceFolder: string | undefined;
+      let instanceIdValue: number | null = null;
+
+      if (orderLogin.instance_id) {
+        const instance = await prisma.leadProductStructureInstance.findFirst({
+          where: {
+            id: Number(orderLogin.instance_id),
+            vendor_id: Number(vendorId),
+            lead_id: Number(leadId),
+          },
+          select: { title: true },
+        });
+
+        if (instance) {
+          instanceIdValue = Number(orderLogin.instance_id);
+          instanceFolder =
+            instance.title?.trim() || `instance-${orderLogin.instance_id}`;
+        }
+      }
+
       const uploadedFiles: { originalName: string; sysName: string }[] = [];
 
       for (const file of files || []) {
@@ -403,6 +450,7 @@ export class OrderLoginController {
           orderLogin.item_type,
           file.originalname,
           file.mimetype,
+          instanceFolder
         );
 
         await fs.unlink(file.path);
@@ -419,6 +467,7 @@ export class OrderLoginController {
         Number(orderLogin.account_id),
         Number(created_by),
         uploadedFiles,
+        instanceIdValue
       );
 
       return res.status(200).json({
@@ -440,6 +489,7 @@ export class OrderLoginController {
   async getProductionFiles(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
+      const { instance_id } = req.query;
 
       if (!vendorId || !leadId) {
         return res.status(400).json({
@@ -467,6 +517,9 @@ export class OrderLoginController {
           lead_id: Number(leadId),
           doc_type_id: ProductionDocType.id,
           is_deleted: false,
+          ...(typeof instance_id !== "undefined"
+            ? { product_structure_instance_id: Number(instance_id) }
+            : {}),
         },
         orderBy: { created_at: "asc" },
         select: {
@@ -570,6 +623,7 @@ export class OrderLoginController {
         user_id,
         assign_to_user_id,
         client_required_order_login_complition_date,
+        instance_id,
       } = req.body;
 
       const missingFields = [];
@@ -598,6 +652,7 @@ export class OrderLoginController {
         userId: Number(user_id),
         assignToUserId: Number(assign_to_user_id),
         requiredDate: new Date(client_required_order_login_complition_date),
+        instanceId: instance_id ? Number(instance_id) : undefined,
       });
 
       try {
@@ -639,9 +694,18 @@ export class OrderLoginController {
         });
       }
 
+      const movedToProduction = Boolean(
+        (updatedLead as any)?.moved_to_production
+      );
+
       return res.status(200).json({
         success: true,
-        message: "Lead successfully moved to Production Stage",
+        message:
+          movedToProduction
+            ? "Lead successfully moved to Production Stage"
+            : instance_id
+            ? "Order login marked complete for instance"
+            : "Lead successfully moved to Production Stage",
         data: updatedLead,
       });
     } catch (error: any) {
@@ -656,6 +720,7 @@ export class OrderLoginController {
   async getLeadProductionReadiness(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
+      const { instance_id } = req.query;
 
       if (!vendorId || !leadId) {
         return res.status(400).json({
@@ -667,6 +732,7 @@ export class OrderLoginController {
       const data = await service.getLeadProductionReadiness(
         Number(vendorId),
         Number(leadId),
+        typeof instance_id !== "undefined" ? Number(instance_id) : undefined
       );
 
       return res.status(200).json({

@@ -9,6 +9,12 @@ techCheckRouter.get(
   TechCheckController.getAllTechCheckLeads
 );
 
+// ✅ Get Tech-Check status for a specific instance
+techCheckRouter.get(
+  "/vendorId/:vendorId/leadId/:leadId/instanceId/:instanceId/status",
+  TechCheckController.getTechCheckInstanceStatus
+);
+
 // ✅ Approve Tech Check
 techCheckRouter.post(
   "/leadId/:leadId/vendorId/:vendorId/userId/:userId/approve",
