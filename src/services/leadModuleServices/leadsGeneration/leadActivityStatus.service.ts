@@ -26,6 +26,7 @@ export class LeadActivityStatusService {
     status: ActivityStatus,
     remark: string,
     createdBy: number,
+    baseUrl: string,
     dueDate?: string, // 👈 optional param, required only for onHold
   ) {
     if (!remark) {
@@ -178,13 +179,10 @@ export class LeadActivityStatusService {
         minute: "2-digit",
       });
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
-      const leadDetailsUrl = leadInfo?.account_id
-        ? `${baseUrl}/dashboard/leads/details/${leadId}?accountId=${leadInfo.account_id}`
-        : `${baseUrl}/dashboard/leads/details/${leadId}`;
+      // const leadDetailsUrl = leadInfo?.account_id
+      //   ? `${baseUrl}/dashboard/leads/details/${leadId}?accountId=${leadInfo.account_id}`
+      //   : `${baseUrl}/dashboard/leads/details/${leadId}`;
+
       const onHoldUrl = `${baseUrl}/dashboard/leads/leadstable?tab=onHold`;
       const lostApprovalUrl = `${baseUrl}/dashboard/leads/leadstable?tab=lostApproval`;
       const lostUrl = `${baseUrl}/dashboard/leads/leadstable?tab=lost`;
