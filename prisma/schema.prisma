@@ -1277,6 +1277,10 @@ model MachineMaster {
   machine_name          String
   machine_code          String                  @unique
   machine_type          String
+  machine_type_id       Int?
+  machineType           MachineTypeMaster? @relation(fields: [machine_type_id], references: [id])
+
+
   status                MachineStatus           @default(ACTIVE)
   scan_type             ScanType
   description           String?
@@ -1293,6 +1297,7 @@ model MachineMaster {
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])  
   userMachineMappings UserMachineMapping[]
 
+
 }
 
 model CutList {
@@ -1308,6 +1313,7 @@ model CutList {
   material_details      String
   item_name             String
   unique_code           String?
+  unique_code_2         String?
   status                String                  @default("active")
   created_by            Int
   created_at            DateTime                @default(now())
@@ -1381,6 +1387,23 @@ model UserMachineMapping {
   vendor      VendorMaster      @relation(fields: [vendor_id], references: [id])
 
 
+}
+
+model MachineTypeMaster {
+  id           Int            @id @default(autoincrement())
+  machine_type String
+  active       MachineTypeMasterStatus @default(YES)
+
+  created_at   DateTime       @default(now())
+  updated_at   DateTime       @updatedAt
+
+  machineMaster     MachineMaster[]
+  
+}
+
+enum MachineTypeMasterStatus {
+  YES
+  NO
 }
 
 

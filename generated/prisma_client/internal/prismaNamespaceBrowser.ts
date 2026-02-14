@@ -121,7 +121,8 @@ export const ModelName = {
   MachineMaster: 'MachineMaster',
   CutList: 'CutList',
   CutListMachineMapping: 'CutListMachineMapping',
-  UserMachineMapping: 'UserMachineMapping'
+  UserMachineMapping: 'UserMachineMapping',
+  MachineTypeMaster: 'MachineTypeMaster'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1150,6 +1151,7 @@ export const MachineMasterScalarFieldEnum = {
   machine_name: 'machine_name',
   machine_code: 'machine_code',
   machine_type: 'machine_type',
+  machine_type_id: 'machine_type_id',
   status: 'status',
   scan_type: 'scan_type',
   description: 'description',
@@ -1180,6 +1182,7 @@ export const CutListScalarFieldEnum = {
   material_details: 'material_details',
   item_name: 'item_name',
   unique_code: 'unique_code',
+  unique_code_2: 'unique_code_2',
   status: 'status',
   created_by: 'created_by',
   created_at: 'created_at',
@@ -1230,6 +1233,17 @@ export const UserMachineMappingScalarFieldEnum = {
 } as const
 
 export type UserMachineMappingScalarFieldEnum = (typeof UserMachineMappingScalarFieldEnum)[keyof typeof UserMachineMappingScalarFieldEnum]
+
+
+export const MachineTypeMasterScalarFieldEnum = {
+  id: 'id',
+  machine_type: 'machine_type',
+  active: 'active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type MachineTypeMasterScalarFieldEnum = (typeof MachineTypeMasterScalarFieldEnum)[keyof typeof MachineTypeMasterScalarFieldEnum]
 
 
 export const SortOrder = {

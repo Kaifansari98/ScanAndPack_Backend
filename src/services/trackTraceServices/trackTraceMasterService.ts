@@ -91,7 +91,7 @@ export class TrackTraceMasterService {
       logger.info("Fetching machines for vendor", { vendor_id });
       const machines = await prisma.machineMaster.findMany({
         where: { vendor_id },
-        orderBy: { created_at: "desc" },
+        orderBy: { sequence_no: "asc" },
       });
 
       return machines;

@@ -65,6 +65,7 @@ export type CutListMinAggregateOutputType = {
   material_details: string | null
   item_name: string | null
   unique_code: string | null
+  unique_code_2: string | null
   status: string | null
   created_by: number | null
   created_at: Date | null
@@ -89,6 +90,7 @@ export type CutListMaxAggregateOutputType = {
   material_details: string | null
   item_name: string | null
   unique_code: string | null
+  unique_code_2: string | null
   status: string | null
   created_by: number | null
   created_at: Date | null
@@ -113,6 +115,7 @@ export type CutListCountAggregateOutputType = {
   material_details: number
   item_name: number
   unique_code: number
+  unique_code_2: number
   status: number
   created_by: number
   created_at: number
@@ -165,6 +168,7 @@ export type CutListMinAggregateInputType = {
   material_details?: true
   item_name?: true
   unique_code?: true
+  unique_code_2?: true
   status?: true
   created_by?: true
   created_at?: true
@@ -189,6 +193,7 @@ export type CutListMaxAggregateInputType = {
   material_details?: true
   item_name?: true
   unique_code?: true
+  unique_code_2?: true
   status?: true
   created_by?: true
   created_at?: true
@@ -213,6 +218,7 @@ export type CutListCountAggregateInputType = {
   material_details?: true
   item_name?: true
   unique_code?: true
+  unique_code_2?: true
   status?: true
   created_by?: true
   created_at?: true
@@ -324,6 +330,7 @@ export type CutListGroupByOutputType = {
   material_details: string
   item_name: string
   unique_code: string | null
+  unique_code_2: string | null
   status: string
   created_by: number
   created_at: Date
@@ -371,6 +378,7 @@ export type CutListWhereInput = {
   material_details?: Prisma.StringFilter<"CutList"> | string
   item_name?: Prisma.StringFilter<"CutList"> | string
   unique_code?: Prisma.StringNullableFilter<"CutList"> | string | null
+  unique_code_2?: Prisma.StringNullableFilter<"CutList"> | string | null
   status?: Prisma.StringFilter<"CutList"> | string
   created_by?: Prisma.IntFilter<"CutList"> | number
   created_at?: Prisma.DateTimeFilter<"CutList"> | Date | string
@@ -399,6 +407,7 @@ export type CutListOrderByWithRelationInput = {
   material_details?: Prisma.SortOrder
   item_name?: Prisma.SortOrder
   unique_code?: Prisma.SortOrderInput | Prisma.SortOrder
+  unique_code_2?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -430,6 +439,7 @@ export type CutListWhereUniqueInput = Prisma.AtLeast<{
   material_details?: Prisma.StringFilter<"CutList"> | string
   item_name?: Prisma.StringFilter<"CutList"> | string
   unique_code?: Prisma.StringNullableFilter<"CutList"> | string | null
+  unique_code_2?: Prisma.StringNullableFilter<"CutList"> | string | null
   status?: Prisma.StringFilter<"CutList"> | string
   created_by?: Prisma.IntFilter<"CutList"> | number
   created_at?: Prisma.DateTimeFilter<"CutList"> | Date | string
@@ -458,6 +468,7 @@ export type CutListOrderByWithAggregationInput = {
   material_details?: Prisma.SortOrder
   item_name?: Prisma.SortOrder
   unique_code?: Prisma.SortOrderInput | Prisma.SortOrder
+  unique_code_2?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -490,6 +501,7 @@ export type CutListScalarWhereWithAggregatesInput = {
   material_details?: Prisma.StringWithAggregatesFilter<"CutList"> | string
   item_name?: Prisma.StringWithAggregatesFilter<"CutList"> | string
   unique_code?: Prisma.StringNullableWithAggregatesFilter<"CutList"> | string | null
+  unique_code_2?: Prisma.StringNullableWithAggregatesFilter<"CutList"> | string | null
   status?: Prisma.StringWithAggregatesFilter<"CutList"> | string
   created_by?: Prisma.IntWithAggregatesFilter<"CutList"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"CutList"> | Date | string
@@ -510,6 +522,7 @@ export type CutListCreateInput = {
   material_details: string
   item_name: string
   unique_code?: string | null
+  unique_code_2?: string | null
   status?: string
   created_by: number
   created_at?: Date | string
@@ -538,6 +551,7 @@ export type CutListUncheckedCreateInput = {
   material_details: string
   item_name: string
   unique_code?: string | null
+  unique_code_2?: string | null
   status?: string
   created_by: number
   created_at?: Date | string
@@ -559,6 +573,7 @@ export type CutListUpdateInput = {
   material_details?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
   unique_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unique_code_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -587,6 +602,7 @@ export type CutListUncheckedUpdateInput = {
   material_details?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
   unique_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unique_code_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -612,6 +628,7 @@ export type CutListCreateManyInput = {
   material_details: string
   item_name: string
   unique_code?: string | null
+  unique_code_2?: string | null
   status?: string
   created_by: number
   created_at?: Date | string
@@ -632,6 +649,7 @@ export type CutListUpdateManyMutationInput = {
   material_details?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
   unique_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unique_code_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -656,6 +674,7 @@ export type CutListUncheckedUpdateManyInput = {
   material_details?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
   unique_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unique_code_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -690,6 +709,7 @@ export type CutListCountOrderByAggregateInput = {
   material_details?: Prisma.SortOrder
   item_name?: Prisma.SortOrder
   unique_code?: Prisma.SortOrder
+  unique_code_2?: Prisma.SortOrder
   status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -727,6 +747,7 @@ export type CutListMaxOrderByAggregateInput = {
   material_details?: Prisma.SortOrder
   item_name?: Prisma.SortOrder
   unique_code?: Prisma.SortOrder
+  unique_code_2?: Prisma.SortOrder
   status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -751,6 +772,7 @@ export type CutListMinOrderByAggregateInput = {
   material_details?: Prisma.SortOrder
   item_name?: Prisma.SortOrder
   unique_code?: Prisma.SortOrder
+  unique_code_2?: Prisma.SortOrder
   status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -929,6 +951,7 @@ export type CutListCreateWithoutVendorInput = {
   material_details: string
   item_name: string
   unique_code?: string | null
+  unique_code_2?: string | null
   status?: string
   created_by: number
   created_at?: Date | string
@@ -955,6 +978,7 @@ export type CutListUncheckedCreateWithoutVendorInput = {
   material_details: string
   item_name: string
   unique_code?: string | null
+  unique_code_2?: string | null
   status?: string
   created_by: number
   created_at?: Date | string
@@ -1009,6 +1033,7 @@ export type CutListScalarWhereInput = {
   material_details?: Prisma.StringFilter<"CutList"> | string
   item_name?: Prisma.StringFilter<"CutList"> | string
   unique_code?: Prisma.StringNullableFilter<"CutList"> | string | null
+  unique_code_2?: Prisma.StringNullableFilter<"CutList"> | string | null
   status?: Prisma.StringFilter<"CutList"> | string
   created_by?: Prisma.IntFilter<"CutList"> | number
   created_at?: Prisma.DateTimeFilter<"CutList"> | Date | string
@@ -1029,6 +1054,7 @@ export type CutListCreateWithoutProjectInput = {
   material_details: string
   item_name: string
   unique_code?: string | null
+  unique_code_2?: string | null
   status?: string
   created_by: number
   created_at?: Date | string
@@ -1055,6 +1081,7 @@ export type CutListUncheckedCreateWithoutProjectInput = {
   material_details: string
   item_name: string
   unique_code?: string | null
+  unique_code_2?: string | null
   status?: string
   created_by: number
   created_at?: Date | string
@@ -1102,6 +1129,7 @@ export type CutListCreateWithoutLeadInput = {
   material_details: string
   item_name: string
   unique_code?: string | null
+  unique_code_2?: string | null
   status?: string
   created_by: number
   created_at?: Date | string
@@ -1128,6 +1156,7 @@ export type CutListUncheckedCreateWithoutLeadInput = {
   material_details: string
   item_name: string
   unique_code?: string | null
+  unique_code_2?: string | null
   status?: string
   created_by: number
   created_at?: Date | string
@@ -1175,6 +1204,7 @@ export type CutListCreateWithoutCutListMachineMappingInput = {
   material_details: string
   item_name: string
   unique_code?: string | null
+  unique_code_2?: string | null
   status?: string
   created_by: number
   created_at?: Date | string
@@ -1202,6 +1232,7 @@ export type CutListUncheckedCreateWithoutCutListMachineMappingInput = {
   material_details: string
   item_name: string
   unique_code?: string | null
+  unique_code_2?: string | null
   status?: string
   created_by: number
   created_at?: Date | string
@@ -1238,6 +1269,7 @@ export type CutListUpdateWithoutCutListMachineMappingInput = {
   material_details?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
   unique_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unique_code_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1265,6 +1297,7 @@ export type CutListUncheckedUpdateWithoutCutListMachineMappingInput = {
   material_details?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
   unique_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unique_code_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1288,6 +1321,7 @@ export type CutListCreateManyVendorInput = {
   material_details: string
   item_name: string
   unique_code?: string | null
+  unique_code_2?: string | null
   status?: string
   created_by: number
   created_at?: Date | string
@@ -1308,6 +1342,7 @@ export type CutListUpdateWithoutVendorInput = {
   material_details?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
   unique_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unique_code_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1334,6 +1369,7 @@ export type CutListUncheckedUpdateWithoutVendorInput = {
   material_details?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
   unique_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unique_code_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1358,6 +1394,7 @@ export type CutListUncheckedUpdateManyWithoutVendorInput = {
   material_details?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
   unique_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unique_code_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1381,6 +1418,7 @@ export type CutListCreateManyProjectInput = {
   material_details: string
   item_name: string
   unique_code?: string | null
+  unique_code_2?: string | null
   status?: string
   created_by: number
   created_at?: Date | string
@@ -1401,6 +1439,7 @@ export type CutListUpdateWithoutProjectInput = {
   material_details?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
   unique_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unique_code_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1427,6 +1466,7 @@ export type CutListUncheckedUpdateWithoutProjectInput = {
   material_details?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
   unique_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unique_code_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1451,6 +1491,7 @@ export type CutListUncheckedUpdateManyWithoutProjectInput = {
   material_details?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
   unique_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unique_code_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1474,6 +1515,7 @@ export type CutListCreateManyLeadInput = {
   material_details: string
   item_name: string
   unique_code?: string | null
+  unique_code_2?: string | null
   status?: string
   created_by: number
   created_at?: Date | string
@@ -1494,6 +1536,7 @@ export type CutListUpdateWithoutLeadInput = {
   material_details?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
   unique_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unique_code_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1520,6 +1563,7 @@ export type CutListUncheckedUpdateWithoutLeadInput = {
   material_details?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
   unique_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unique_code_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1544,6 +1588,7 @@ export type CutListUncheckedUpdateManyWithoutLeadInput = {
   material_details?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
   unique_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unique_code_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1599,6 +1644,7 @@ export type CutListSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   material_details?: boolean
   item_name?: boolean
   unique_code?: boolean
+  unique_code_2?: boolean
   status?: boolean
   created_by?: boolean
   created_at?: boolean
@@ -1628,6 +1674,7 @@ export type CutListSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   material_details?: boolean
   item_name?: boolean
   unique_code?: boolean
+  unique_code_2?: boolean
   status?: boolean
   created_by?: boolean
   created_at?: boolean
@@ -1655,6 +1702,7 @@ export type CutListSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   material_details?: boolean
   item_name?: boolean
   unique_code?: boolean
+  unique_code_2?: boolean
   status?: boolean
   created_by?: boolean
   created_at?: boolean
@@ -1682,6 +1730,7 @@ export type CutListSelectScalar = {
   material_details?: boolean
   item_name?: boolean
   unique_code?: boolean
+  unique_code_2?: boolean
   status?: boolean
   created_by?: boolean
   created_at?: boolean
@@ -1693,7 +1742,7 @@ export type CutListSelectScalar = {
   esr?: boolean
 }
 
-export type CutListOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "lead_id" | "description" | "length" | "width" | "thickness" | "qty" | "material_details" | "item_name" | "unique_code" | "status" | "created_by" | "created_at" | "updated_by" | "updated_at" | "elf" | "elb" | "esl" | "esr", ExtArgs["result"]["cutList"]>
+export type CutListOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "lead_id" | "description" | "length" | "width" | "thickness" | "qty" | "material_details" | "item_name" | "unique_code" | "unique_code_2" | "status" | "created_by" | "created_at" | "updated_by" | "updated_at" | "elf" | "elb" | "esl" | "esr", ExtArgs["result"]["cutList"]>
 export type CutListInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1733,6 +1782,7 @@ export type $CutListPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     material_details: string
     item_name: string
     unique_code: string | null
+    unique_code_2: string | null
     status: string
     created_by: number
     created_at: Date
@@ -2181,6 +2231,7 @@ export interface CutListFieldRefs {
   readonly material_details: Prisma.FieldRef<"CutList", 'String'>
   readonly item_name: Prisma.FieldRef<"CutList", 'String'>
   readonly unique_code: Prisma.FieldRef<"CutList", 'String'>
+  readonly unique_code_2: Prisma.FieldRef<"CutList", 'String'>
   readonly status: Prisma.FieldRef<"CutList", 'String'>
   readonly created_by: Prisma.FieldRef<"CutList", 'Int'>
   readonly created_at: Prisma.FieldRef<"CutList", 'DateTime'>

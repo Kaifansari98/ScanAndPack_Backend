@@ -9,6 +9,14 @@
 * 🟢 You can import this file directly.
 */
 
+export const MachineTypeMasterStatus = {
+  YES: 'YES',
+  NO: 'NO'
+} as const
+
+export type MachineTypeMasterStatus = (typeof MachineTypeMasterStatus)[keyof typeof MachineTypeMasterStatus]
+
+
 export const NotificationType = {
   LEAD_ASSIGNED: 'LEAD_ASSIGNED',
   TASK_ASSIGNED: 'TASK_ASSIGNED',

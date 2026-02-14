@@ -585,6 +585,23 @@ export type EnumUserMachineStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumUserMachineStatusFilter<$PrismaModel>
 }
 
+export type EnumMachineTypeMasterStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.MachineTypeMasterStatus | Prisma.EnumMachineTypeMasterStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MachineTypeMasterStatus[] | Prisma.ListEnumMachineTypeMasterStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MachineTypeMasterStatus[] | Prisma.ListEnumMachineTypeMasterStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMachineTypeMasterStatusFilter<$PrismaModel> | $Enums.MachineTypeMasterStatus
+}
+
+export type EnumMachineTypeMasterStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MachineTypeMasterStatus | Prisma.EnumMachineTypeMasterStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MachineTypeMasterStatus[] | Prisma.ListEnumMachineTypeMasterStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MachineTypeMasterStatus[] | Prisma.ListEnumMachineTypeMasterStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMachineTypeMasterStatusWithAggregatesFilter<$PrismaModel> | $Enums.MachineTypeMasterStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMachineTypeMasterStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMachineTypeMasterStatusFilter<$PrismaModel>
+}
+
 export type NestedIntFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel>
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
@@ -1145,6 +1162,23 @@ export type NestedEnumUserMachineStatusWithAggregatesFilter<$PrismaModel = never
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumUserMachineStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumUserMachineStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumMachineTypeMasterStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.MachineTypeMasterStatus | Prisma.EnumMachineTypeMasterStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MachineTypeMasterStatus[] | Prisma.ListEnumMachineTypeMasterStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MachineTypeMasterStatus[] | Prisma.ListEnumMachineTypeMasterStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMachineTypeMasterStatusFilter<$PrismaModel> | $Enums.MachineTypeMasterStatus
+}
+
+export type NestedEnumMachineTypeMasterStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MachineTypeMasterStatus | Prisma.EnumMachineTypeMasterStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MachineTypeMasterStatus[] | Prisma.ListEnumMachineTypeMasterStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MachineTypeMasterStatus[] | Prisma.ListEnumMachineTypeMasterStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMachineTypeMasterStatusWithAggregatesFilter<$PrismaModel> | $Enums.MachineTypeMasterStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMachineTypeMasterStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMachineTypeMasterStatusFilter<$PrismaModel>
 }
 
 

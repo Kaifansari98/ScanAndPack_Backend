@@ -550,3 +550,43 @@ export const createQR = async (_req: Request, res: Response) => {
 
 
 
+export const downloadCutListExcel = async (_req: Request, res: Response) => {
+    try {
+        const searchParams = _req.body.searchParams;
+        const vendorId = _req.body.vendorId;
+        console.log("vendorId",vendorId);
+        const unique_project_id =_req.body.unique_project_id;// searchParams.get('unique_project_id');
+
+        if (!unique_project_id) {
+            return res
+                .status(200)
+                .json(
+                    ApiResponse.error(
+                        "Project Id is required",
+                        200
+                    )
+                );
+        }
+
+        // Generate Excel
+        const filePath = await trackTraceService.downloadCutListExcel(vendorId, unique_project_id);
+
+
+        // Return Excel file
+
+
+        return res
+            .status(200)
+            .json(
+                ApiResponse.success(
+                    filePath,
+                    "",
+                    200
+                )
+            );
+    } catch (error: any) {
+        console.error('Error downloading Excel:', error);
+
+    }
+
+}
