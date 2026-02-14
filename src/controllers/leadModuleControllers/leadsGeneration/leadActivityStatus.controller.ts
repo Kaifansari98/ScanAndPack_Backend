@@ -75,6 +75,8 @@ export class LeadActivityStatusController {
           .json(ApiResponse.validationError("Remark is required."));
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
+
       const lead = await LeadActivityStatusService.revertToOnGoing(
         Number(leadId),
         vendorId,
@@ -82,6 +84,7 @@ export class LeadActivityStatusController {
         userId,
         remark,
         createdBy,
+        baseUrl,
       );
 
       return res

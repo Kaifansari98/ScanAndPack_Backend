@@ -463,6 +463,7 @@ export class PostProductionService {
     vendorId: number,
     leadId: number,
     updatedBy: number,
+    baseUrl: string,
   ) {
     // ==========================
     // TRANSACTIONAL CORE
@@ -608,11 +609,6 @@ export class PostProductionService {
       const redirectPath = leadMeta.account_id
         ? `/dashboard/leads/details/${leadId}?accountId=${leadMeta.account_id}`
         : `/dashboard/leads/details/${leadId}`;
-
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
 
       const projectUrl = `${baseUrl}${redirectPath}`;
 
