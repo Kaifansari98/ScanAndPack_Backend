@@ -959,8 +959,14 @@ export class LeadController {
         return;
       }
 
+      // Remove product-related fields from edit payload
+      const sanitizedBody = { ...req.body };
+      // delete sanitizedBody.product_types;
+      // delete sanitizedBody.product_structures;
+      // delete sanitizedBody.product_structure_instances;
+
       // Merge updated_by into request body before validation
-      const payloadWithUpdatedBy = { ...req.body, updated_by: updatedBy };
+      const payloadWithUpdatedBy = { ...sanitizedBody, updated_by: updatedBy };
 
       // Validate request body
       const validationResult = validateUpdateLeadInput(payloadWithUpdatedBy);
@@ -985,13 +991,13 @@ export class LeadController {
         "[DEBUG] Controller received update request for lead ID:",
         leadId,
       );
-      console.log("[DEBUG] Update payload:", req.body);
+      console.log("[DEBUG] Update payload:", sanitizedBody);
 
       // Call service to update lead
       const result = await updateLeadService(
         leadId,
         {
-          ...req.body,
+          ...sanitizedBody,
           updated_by: updatedBy,
         },
         resolveClientBaseUrl(req),
@@ -1024,8 +1030,6 @@ export class LeadController {
               email: result.account.email,
               updated_at: result.account.updated_at,
             },
-            productTypesUpdated: result.productTypesUpdated,
-            productStructuresUpdated: result.productStructuresUpdated,
           },
           "Lead updated successfully",
           200,
@@ -1102,7 +1106,7 @@ export class LeadController {
 
       const lead = await prisma.leadMaster.findFirst({
         where: { id: leadId, is_deleted: false },
-        select: { id: true, vendor_id: true },
+        select: { id: true, vendor_id: true, account_id: true },
       });
 
       if (!lead) {
@@ -1138,7 +1142,7 @@ export class LeadController {
           lead_id: leadId,
           vendor_id: lead.vendor_id,
         },
-        select: { id: true },
+        select: { id: true, product_type_id: true },
       });
 
       if (!mapping) {
@@ -1154,6 +1158,43 @@ export class LeadController {
           product_type_id: resolvedProductTypeId,
         },
       });
+
+      if (mapping.product_type_id !== resolvedProductTypeId) {
+        const [oldType, newType] = await Promise.all([
+          mapping.product_type_id
+            ? prisma.productTypeMaster.findFirst({
+                where: {
+                  id: mapping.product_type_id,
+                  vendor_id: lead.vendor_id,
+                },
+                select: { type: true },
+              })
+            : Promise.resolve(null),
+          prisma.productTypeMaster.findFirst({
+            where: {
+              id: resolvedProductTypeId,
+              vendor_id: lead.vendor_id,
+            },
+            select: { type: true },
+          }),
+        ]);
+
+        const oldLabel = oldType?.type || "Unknown";
+        const newLabel = newType?.type || "Unknown";
+        const actionMessage = `Product Type has been updated from "${oldLabel}" to "${newLabel}".`;
+
+        await prisma.leadDetailedLogs.create({
+          data: {
+            vendor_id: lead.vendor_id,
+            lead_id: leadId,
+            account_id: lead.account_id!,
+            action: actionMessage,
+            action_type: "UPDATE",
+            created_by: updatedBy,
+            created_at: new Date(),
+          },
+        });
+      }
 
       res.status(200).json(
         ApiResponse.success(
