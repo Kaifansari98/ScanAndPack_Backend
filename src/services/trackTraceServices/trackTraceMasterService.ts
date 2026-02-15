@@ -5,7 +5,7 @@ import logger from "../../../src/utils/logger";
 export interface MachineData {
   machine_name: string;
   machine_code: string;
-  machine_type: string;
+  machine_type_id: number;
   scan_type: ScanType;
   description?: string;
   vendor_id: number;
@@ -19,7 +19,7 @@ export interface MachineData {
 
 export interface UpdateMachineData {
   machine_name?: string;
-  machine_type?: string;
+  machine_type_id: number;
   scan_type?: ScanType;
   status?: MachineStatus;
   description?: string;
@@ -41,6 +41,7 @@ export const validateCreateMachine = (data: any) => {
 
   if (!data.machine_name) throw new Error("machine_name required");
   if (!data.machine_code) throw new Error("machine_code required");
+  if (!data.machine_type_id) throw new Error("machine_type_id required");
   if (!data.vendor_id) throw new Error("vendor_id required");
   if (!data.created_by) throw new Error("created_by required");
   if (!data.updated_by) throw new Error("updated_by required");
@@ -54,19 +55,19 @@ export class TrackTraceMasterService {
       validateCreateMachine(data);
 
       // sequence uniqueness check
-      if (data.sequence_no !== undefined) {
-        const exists = await prisma.machineMaster.findFirst({
-          where: {
-            sequence_no: data.sequence_no,
-            vendor_id: data.vendor_id,
-          },
-          select: { id: true },
-        });
+      // if (data.sequence_no !== undefined) {
+      //   const exists = await prisma.machineMaster.findFirst({
+      //     where: {
+      //       sequence_no: data.sequence_no,
+      //       vendor_id: data.vendor_id,
+      //     },
+      //     select: { id: true },
+      //   });
 
-        if (exists) {
-          throw new Error("Sequence number already exists for this vendor");
-        }
-      }
+      //   if (exists) {
+      //     throw new Error("Sequence number already exists for this vendor");
+      //   }
+      // }
 
       const machine = await prisma.machineMaster.create({
         data: {
@@ -89,10 +90,28 @@ export class TrackTraceMasterService {
   static async getMachinesByVendor(vendor_id: number) {
     try {
       logger.info("Fetching machines for vendor", { vendor_id });
-      const machines = await prisma.machineMaster.findMany({
-        where: { vendor_id },
-        orderBy: { sequence_no: "asc" },
-      });
+      // const machines = await prisma.machineMaster.findMany({
+      //   where: { vendor_id },
+      //   orderBy: { sequence_no: "asc" },
+      // });
+
+      const machines = (
+  await prisma.machineMaster.findMany({
+    where: {
+      vendor_id,
+      machineType: { isNot: null } // ensures INNER JOIN behavior
+    },
+    orderBy: { sequence_no: "asc" },
+    include: {
+      machineType: {
+        select: { machine_type: true }
+      }
+    }
+  })
+).map(({ machineType, ...machine }) => ({
+  ...machine,
+  machine_type: machineType?.machine_type ?? null
+}));
 
       return machines;
     } catch (error) {
@@ -119,20 +138,20 @@ export class TrackTraceMasterService {
       }
 
       // sequence uniqueness check
-      if (data.sequence_no !== undefined) {
-        const duplicate = await prisma.machineMaster.findFirst({
-          where: {
-            vendor_id,
-            sequence_no: data.sequence_no,
-            NOT: { id },
-          },
-          select: { id: true },
-        });
+      // if (data.sequence_no !== undefined) {
+      //   const duplicate = await prisma.machineMaster.findFirst({
+      //     where: {
+      //       vendor_id,
+      //       sequence_no: data.sequence_no,
+      //       NOT: { id },
+      //     },
+      //     select: { id: true },
+      //   });
 
-        if (duplicate) {
-          throw new Error("Sequence number already exists");
-        }
-      }
+      //   if (duplicate) {
+      //     throw new Error("Sequence number already exists");
+      //   }
+      // }
 
       const updated = await prisma.machineMaster.update({
         where: { id },
@@ -146,5 +165,19 @@ export class TrackTraceMasterService {
       logger.error("Error updating machine", error);
       throw error;
     }
+  }
+}
+
+
+export const getMachineType = async () => {
+  try {
+    return await prisma.machineTypeMaster.findMany({
+      orderBy: {
+        machine_type: "asc"
+      }
+
+    });
+  } catch (error) {
+    return null;
   }
 }

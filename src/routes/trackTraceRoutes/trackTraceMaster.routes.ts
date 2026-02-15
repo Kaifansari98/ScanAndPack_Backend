@@ -1,7 +1,10 @@
 import { Router } from "express";
 import { TrackTraceMasterController } from "src/controllers/trackTraceController/trackTraceMasterController";
 import { uploadMachineFiles } from "src/middlewares/uploadWasabi";
+import { 
 
+  getMachineType
+} from '../../controllers/trackTraceController/trackTraceMasterController';
 const router = Router();
 
 
@@ -19,4 +22,6 @@ router.put(
   uploadMachineFiles.single("machine_image"),
   TrackTraceMasterController.updateMachine
 );
+
+router.get("/machine-type",getMachineType);
 export default router;

@@ -283,7 +283,7 @@ export type MachineMasterGroupByOutputType = {
   id: number
   machine_name: string
   machine_code: string
-  machine_type: string
+  machine_type: string | null
   machine_type_id: number | null
   status: $Enums.MachineStatus
   scan_type: $Enums.ScanType
@@ -326,7 +326,7 @@ export type MachineMasterWhereInput = {
   id?: Prisma.IntFilter<"MachineMaster"> | number
   machine_name?: Prisma.StringFilter<"MachineMaster"> | string
   machine_code?: Prisma.StringFilter<"MachineMaster"> | string
-  machine_type?: Prisma.StringFilter<"MachineMaster"> | string
+  machine_type?: Prisma.StringNullableFilter<"MachineMaster"> | string | null
   machine_type_id?: Prisma.IntNullableFilter<"MachineMaster"> | number | null
   status?: Prisma.EnumMachineStatusFilter<"MachineMaster"> | $Enums.MachineStatus
   scan_type?: Prisma.EnumScanTypeFilter<"MachineMaster"> | $Enums.ScanType
@@ -350,7 +350,7 @@ export type MachineMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   machine_name?: Prisma.SortOrder
   machine_code?: Prisma.SortOrder
-  machine_type?: Prisma.SortOrder
+  machine_type?: Prisma.SortOrderInput | Prisma.SortOrder
   machine_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   scan_type?: Prisma.SortOrder
@@ -377,7 +377,7 @@ export type MachineMasterWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.MachineMasterWhereInput[]
   NOT?: Prisma.MachineMasterWhereInput | Prisma.MachineMasterWhereInput[]
   machine_name?: Prisma.StringFilter<"MachineMaster"> | string
-  machine_type?: Prisma.StringFilter<"MachineMaster"> | string
+  machine_type?: Prisma.StringNullableFilter<"MachineMaster"> | string | null
   machine_type_id?: Prisma.IntNullableFilter<"MachineMaster"> | number | null
   status?: Prisma.EnumMachineStatusFilter<"MachineMaster"> | $Enums.MachineStatus
   scan_type?: Prisma.EnumScanTypeFilter<"MachineMaster"> | $Enums.ScanType
@@ -401,7 +401,7 @@ export type MachineMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   machine_name?: Prisma.SortOrder
   machine_code?: Prisma.SortOrder
-  machine_type?: Prisma.SortOrder
+  machine_type?: Prisma.SortOrderInput | Prisma.SortOrder
   machine_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   scan_type?: Prisma.SortOrder
@@ -429,7 +429,7 @@ export type MachineMasterScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"MachineMaster"> | number
   machine_name?: Prisma.StringWithAggregatesFilter<"MachineMaster"> | string
   machine_code?: Prisma.StringWithAggregatesFilter<"MachineMaster"> | string
-  machine_type?: Prisma.StringWithAggregatesFilter<"MachineMaster"> | string
+  machine_type?: Prisma.StringNullableWithAggregatesFilter<"MachineMaster"> | string | null
   machine_type_id?: Prisma.IntNullableWithAggregatesFilter<"MachineMaster"> | number | null
   status?: Prisma.EnumMachineStatusWithAggregatesFilter<"MachineMaster"> | $Enums.MachineStatus
   scan_type?: Prisma.EnumScanTypeWithAggregatesFilter<"MachineMaster"> | $Enums.ScanType
@@ -448,7 +448,7 @@ export type MachineMasterScalarWhereWithAggregatesInput = {
 export type MachineMasterCreateInput = {
   machine_name: string
   machine_code: string
-  machine_type: string
+  machine_type?: string | null
   status?: $Enums.MachineStatus
   scan_type: $Enums.ScanType
   description?: string | null
@@ -470,7 +470,7 @@ export type MachineMasterUncheckedCreateInput = {
   id?: number
   machine_name: string
   machine_code: string
-  machine_type: string
+  machine_type?: string | null
   machine_type_id?: number | null
   status?: $Enums.MachineStatus
   scan_type: $Enums.ScanType
@@ -491,7 +491,7 @@ export type MachineMasterUncheckedCreateInput = {
 export type MachineMasterUpdateInput = {
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
-  machine_type?: Prisma.StringFieldUpdateOperationsInput | string
+  machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMachineStatusFieldUpdateOperationsInput | $Enums.MachineStatus
   scan_type?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -513,7 +513,7 @@ export type MachineMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
-  machine_type?: Prisma.StringFieldUpdateOperationsInput | string
+  machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   machine_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumMachineStatusFieldUpdateOperationsInput | $Enums.MachineStatus
   scan_type?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
@@ -535,7 +535,7 @@ export type MachineMasterCreateManyInput = {
   id?: number
   machine_name: string
   machine_code: string
-  machine_type: string
+  machine_type?: string | null
   machine_type_id?: number | null
   status?: $Enums.MachineStatus
   scan_type: $Enums.ScanType
@@ -554,7 +554,7 @@ export type MachineMasterCreateManyInput = {
 export type MachineMasterUpdateManyMutationInput = {
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
-  machine_type?: Prisma.StringFieldUpdateOperationsInput | string
+  machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMachineStatusFieldUpdateOperationsInput | $Enums.MachineStatus
   scan_type?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -572,7 +572,7 @@ export type MachineMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
-  machine_type?: Prisma.StringFieldUpdateOperationsInput | string
+  machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   machine_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumMachineStatusFieldUpdateOperationsInput | $Enums.MachineStatus
   scan_type?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
@@ -816,7 +816,7 @@ export type MachineMasterUncheckedUpdateManyWithoutMachineTypeNestedInput = {
 export type MachineMasterCreateWithoutVendorInput = {
   machine_name: string
   machine_code: string
-  machine_type: string
+  machine_type?: string | null
   status?: $Enums.MachineStatus
   scan_type: $Enums.ScanType
   description?: string | null
@@ -837,7 +837,7 @@ export type MachineMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   machine_name: string
   machine_code: string
-  machine_type: string
+  machine_type?: string | null
   machine_type_id?: number | null
   status?: $Enums.MachineStatus
   scan_type: $Enums.ScanType
@@ -887,7 +887,7 @@ export type MachineMasterScalarWhereInput = {
   id?: Prisma.IntFilter<"MachineMaster"> | number
   machine_name?: Prisma.StringFilter<"MachineMaster"> | string
   machine_code?: Prisma.StringFilter<"MachineMaster"> | string
-  machine_type?: Prisma.StringFilter<"MachineMaster"> | string
+  machine_type?: Prisma.StringNullableFilter<"MachineMaster"> | string | null
   machine_type_id?: Prisma.IntNullableFilter<"MachineMaster"> | number | null
   status?: Prisma.EnumMachineStatusFilter<"MachineMaster"> | $Enums.MachineStatus
   scan_type?: Prisma.EnumScanTypeFilter<"MachineMaster"> | $Enums.ScanType
@@ -906,7 +906,7 @@ export type MachineMasterScalarWhereInput = {
 export type MachineMasterCreateWithoutCutListMachineMappingInput = {
   machine_name: string
   machine_code: string
-  machine_type: string
+  machine_type?: string | null
   status?: $Enums.MachineStatus
   scan_type: $Enums.ScanType
   description?: string | null
@@ -927,7 +927,7 @@ export type MachineMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   id?: number
   machine_name: string
   machine_code: string
-  machine_type: string
+  machine_type?: string | null
   machine_type_id?: number | null
   status?: $Enums.MachineStatus
   scan_type: $Enums.ScanType
@@ -963,7 +963,7 @@ export type MachineMasterUpdateToOneWithWhereWithoutCutListMachineMappingInput =
 export type MachineMasterUpdateWithoutCutListMachineMappingInput = {
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
-  machine_type?: Prisma.StringFieldUpdateOperationsInput | string
+  machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMachineStatusFieldUpdateOperationsInput | $Enums.MachineStatus
   scan_type?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -984,7 +984,7 @@ export type MachineMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
-  machine_type?: Prisma.StringFieldUpdateOperationsInput | string
+  machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   machine_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumMachineStatusFieldUpdateOperationsInput | $Enums.MachineStatus
   scan_type?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
@@ -1004,7 +1004,7 @@ export type MachineMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
 export type MachineMasterCreateWithoutUserMachineMappingsInput = {
   machine_name: string
   machine_code: string
-  machine_type: string
+  machine_type?: string | null
   status?: $Enums.MachineStatus
   scan_type: $Enums.ScanType
   description?: string | null
@@ -1025,7 +1025,7 @@ export type MachineMasterUncheckedCreateWithoutUserMachineMappingsInput = {
   id?: number
   machine_name: string
   machine_code: string
-  machine_type: string
+  machine_type?: string | null
   machine_type_id?: number | null
   status?: $Enums.MachineStatus
   scan_type: $Enums.ScanType
@@ -1061,7 +1061,7 @@ export type MachineMasterUpdateToOneWithWhereWithoutUserMachineMappingsInput = {
 export type MachineMasterUpdateWithoutUserMachineMappingsInput = {
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
-  machine_type?: Prisma.StringFieldUpdateOperationsInput | string
+  machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMachineStatusFieldUpdateOperationsInput | $Enums.MachineStatus
   scan_type?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1082,7 +1082,7 @@ export type MachineMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
-  machine_type?: Prisma.StringFieldUpdateOperationsInput | string
+  machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   machine_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumMachineStatusFieldUpdateOperationsInput | $Enums.MachineStatus
   scan_type?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
@@ -1102,7 +1102,7 @@ export type MachineMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
 export type MachineMasterCreateWithoutMachineTypeInput = {
   machine_name: string
   machine_code: string
-  machine_type: string
+  machine_type?: string | null
   status?: $Enums.MachineStatus
   scan_type: $Enums.ScanType
   description?: string | null
@@ -1123,7 +1123,7 @@ export type MachineMasterUncheckedCreateWithoutMachineTypeInput = {
   id?: number
   machine_name: string
   machine_code: string
-  machine_type: string
+  machine_type?: string | null
   status?: $Enums.MachineStatus
   scan_type: $Enums.ScanType
   description?: string | null
@@ -1170,7 +1170,7 @@ export type MachineMasterCreateManyVendorInput = {
   id?: number
   machine_name: string
   machine_code: string
-  machine_type: string
+  machine_type?: string | null
   machine_type_id?: number | null
   status?: $Enums.MachineStatus
   scan_type: $Enums.ScanType
@@ -1188,7 +1188,7 @@ export type MachineMasterCreateManyVendorInput = {
 export type MachineMasterUpdateWithoutVendorInput = {
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
-  machine_type?: Prisma.StringFieldUpdateOperationsInput | string
+  machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMachineStatusFieldUpdateOperationsInput | $Enums.MachineStatus
   scan_type?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1209,7 +1209,7 @@ export type MachineMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
-  machine_type?: Prisma.StringFieldUpdateOperationsInput | string
+  machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   machine_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumMachineStatusFieldUpdateOperationsInput | $Enums.MachineStatus
   scan_type?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
@@ -1230,7 +1230,7 @@ export type MachineMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
-  machine_type?: Prisma.StringFieldUpdateOperationsInput | string
+  machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   machine_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumMachineStatusFieldUpdateOperationsInput | $Enums.MachineStatus
   scan_type?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
@@ -1249,7 +1249,7 @@ export type MachineMasterCreateManyMachineTypeInput = {
   id?: number
   machine_name: string
   machine_code: string
-  machine_type: string
+  machine_type?: string | null
   status?: $Enums.MachineStatus
   scan_type: $Enums.ScanType
   description?: string | null
@@ -1267,7 +1267,7 @@ export type MachineMasterCreateManyMachineTypeInput = {
 export type MachineMasterUpdateWithoutMachineTypeInput = {
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
-  machine_type?: Prisma.StringFieldUpdateOperationsInput | string
+  machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMachineStatusFieldUpdateOperationsInput | $Enums.MachineStatus
   scan_type?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1288,7 +1288,7 @@ export type MachineMasterUncheckedUpdateWithoutMachineTypeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
-  machine_type?: Prisma.StringFieldUpdateOperationsInput | string
+  machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMachineStatusFieldUpdateOperationsInput | $Enums.MachineStatus
   scan_type?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1309,7 +1309,7 @@ export type MachineMasterUncheckedUpdateManyWithoutMachineTypeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
-  machine_type?: Prisma.StringFieldUpdateOperationsInput | string
+  machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMachineStatusFieldUpdateOperationsInput | $Enums.MachineStatus
   scan_type?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1482,7 +1482,7 @@ export type $MachineMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     id: number
     machine_name: string
     machine_code: string
-    machine_type: string
+    machine_type: string | null
     machine_type_id: number | null
     status: $Enums.MachineStatus
     scan_type: $Enums.ScanType

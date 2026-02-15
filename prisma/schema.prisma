@@ -1276,7 +1276,7 @@ model MachineMaster {
   id                    Int                     @id @default(autoincrement())
   machine_name          String
   machine_code          String                  @unique
-  machine_type          String
+  machine_type          String?
   machine_type_id       Int?
   machineType           MachineTypeMaster? @relation(fields: [machine_type_id], references: [id])
 
