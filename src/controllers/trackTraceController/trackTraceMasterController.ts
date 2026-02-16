@@ -4,6 +4,7 @@ import { TrackTraceMasterService } from "../../../src/services/trackTraceService
 import logger from "src/utils/logger";
 import { uploadToWasabiMachineImage } from "src/utils/wasabiClient";
 import * as trackTraceService from '../../services/trackTraceServices/trackTraceMasterService';
+import path from "path";
 
 export class TrackTraceMasterController {
   static async createMachine(req: Request, res: Response) {
@@ -17,16 +18,24 @@ export class TrackTraceMasterController {
 
       const file = req.file;
 
-      // Upload image
-      const imagePath = await uploadToWasabiMachineImage(
+
+      const imagePath = await uploadToLocalMachineStore(
         file.path,
-        Number(req.body.vendor_id),
+       Number(req.body.vendor_id),
         file.originalname,
-        file.mimetype,
       );
 
-      // Delete temp file safely
-      await fs.unlink(file.path);
+
+      /* // Upload image
+       const imagePath = await uploadToWasabiMachineImage(
+         file.path,
+         Number(req.body.vendor_id),
+         file.originalname,
+         file.mimetype,
+       );
+ 
+       // Delete temp file safely
+       await fs.unlink(file.path);*/
 
       const machine = await TrackTraceMasterService.createMachine({
         ...req.body,
@@ -56,6 +65,8 @@ export class TrackTraceMasterController {
       });
     }
   }
+
+
 
   static async getMachineByVendor(req: Request, res: Response) {
     try {
@@ -88,14 +99,14 @@ export class TrackTraceMasterController {
       if (req.file) {
         const file = req.file;
 
-        imagePath = await uploadToWasabiMachineImage(
+        imagePath = await uploadToLocalMachineStore(
           file.path,
-          vendor_id,
+          Number(vendor_id),
           file.originalname,
-          file.mimetype,
         );
 
-        await fs.unlink(file.path);
+
+        // await fs.unlink(file.path);
       }
 
       const updated = await TrackTraceMasterService.updateMachine(
@@ -135,22 +146,48 @@ export class TrackTraceMasterController {
   }
 }
 
- export const getMachineType = async (req: Request, res: Response) => {
-    try {
-      const vendor_id = Number(req.params.vendor_id);
 
-      const machines_type = await trackTraceService.getMachineType();
 
-      return res.status(200).json({
-        success: true,
-        data: machines_type,
-      });
-    } catch (error: any) {
-      logger.error("Controller Error - Get Machines", error);
+export const uploadToLocalMachineStore = async (
+  filePath: string,
+  vendorId: number,
+  originalName: string,
+): Promise<string> => {
 
-      return res.status(500).json({
-        success: false,
-        message: error.message || "Internal Server Error",
-      });
-    }
+  const sanitized = originalName.replace(/\s+/g, "-");
+  const fileName = `${Date.now()}-${sanitized}`;
+
+  const destDir = path.join(
+    process.cwd(),
+    "assets/machines"   
+  );
+
+  await fs.mkdir(destDir, { recursive: true });
+
+  const destPath = path.join(destDir, fileName);
+
+  await fs.rename(filePath, destPath);
+
+  // return relative path for DB storage
+  return `assets/machines/${fileName}`;
+};
+
+export const getMachineType = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+
+    const machines_type = await trackTraceService.getMachineType();
+
+    return res.status(200).json({
+      success: true,
+      data: machines_type,
+    });
+  } catch (error: any) {
+    logger.error("Controller Error - Get Machines", error);
+
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Internal Server Error",
+    });
   }
+}

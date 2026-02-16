@@ -144,163 +144,185 @@ interface TrackTracePayload {
 
 
 export const updateScannedItem = async (payload: TrackTracePayload) => {
-    const { project_id, vendor_id, machine_id, unique_code, created_by } = payload;
 
-    //check if item is mapped to any machine
-    const currentMapping =
-        await prisma.cutListMachineMapping.findFirst({
-            where: {
-                machine_id: machine_id,
-                vendor_id: vendor_id,
-
-                cut_list: {
-                    unique_code: unique_code,
-                },
-            },
-            select: {
-                id: true,
-                sequence_no: true,
-                cut_list_id: true
-            },
-        });
-
-    if (!currentMapping) {
-        return validationResponse(0, 'Machine mapping not found');
-    }
-
-
-    const nextMapping =
-        await prisma.cutListMachineMapping.findFirst({
-            where: {
-                machine_id: machine_id,
-                vendor_id: vendor_id,
-
-                cut_list: {
-                    unique_code: unique_code,
-                },
-                actual_in_at: null
-            },
-            select: {
-                id: true,
-                sequence_no: true,
-                cut_list_id: true
-            },
-        });
-
-
-    if (!nextMapping) {
-        return validationResponse(0, 'Already Scanned');
-    }
-
-    const { id, sequence_no, cut_list_id } = nextMapping;
-    // return currentMapping;
-    // return id;
-
-    // 679 1 364
-
-    console.log(id, sequence_no, cut_list_id)
-
-    //check if already scanned in machine
-
-    const scanned_count = await prisma.cutListMachineMapping.count({
-        where: {
-            cut_list_id: cut_list_id,
-            vendor_id: vendor_id,
-            sequence_no: sequence_no,
-            expected_in: true,
-            actual_in_at: null,
-            machine_id: machine_id
-
-        }
-    });
-
-    console.log("scanned_count", scanned_count);
-
-    //return scanned_count;
-
-
-    // this item is already scanned in provided machine
-    if (scanned_count == 0) {
-        return validationResponse(0, 'Already Scanned');
-    }
+    try {
 
 
 
-    // ✅ Check if any machine is left in sequence (excluding 'pass' type machines)
-    const count = await prisma.cutListMachineMapping.count({
-        where: {
-            cut_list_id: cut_list_id,
-            vendor_id: vendor_id,
-            sequence_no: { lt: sequence_no },
-            actual_in_at: null,
-            machine: {
-                scan_type: {
-                    not: 'PASS'  // Only count machines that require scanning
-                }
-            }
-        }
-    });
+        const { project_id, vendor_id, machine_id, unique_code, created_by } = payload;
 
-    // console.log("pending_scans_count", count);
-
-
-    const passMachines = await prisma.cutListMachineMapping.findMany({
-        where: {
-            cut_list_id: cut_list_id,
-            vendor_id: vendor_id,
-            sequence_no: { lt: sequence_no },
-            actual_in_at: null,
-            machine: {
-                scan_type: 'PASS'
-            }
-        },
-        select: {
-            id: true,
-            machine: {
-                select: {
-                    machine_name: true
-                }
-            }
-        }
-    });
-
-    console.log("pass_machines_to_update", passMachines.length);
-
-    if (count == 0) {
-
-        // ✅ Update all 'pass' type machines as scanned
-        if (passMachines.length > 0) {
-            await prisma.cutListMachineMapping.updateMany({
+        //check if item is mapped to any machine
+        const currentMapping =
+            await prisma.cutListMachineMapping.findFirst({
                 where: {
-                    id: {
-                        in: passMachines.map(m => m.id)
+                    machine_id: machine_id,
+                    vendor_id: vendor_id,
+                    cut_list: {
+                        unique_code: unique_code,
                     }
                 },
-                data: {
-                    actual_in_at: new Date(),
-                    in_operator: created_by,
-                }
+                select: {
+                    id: true,
+                    sequence_no: true,
+                    cut_list_id: true,
+                    project_id: true,
+                    project: {
+                        select: {
+                            track_trace_status: true,
+                        }
+                    }
+                },
             });
 
-            console.log(`Auto-passed ${passMachines.length} machines with scan_type='pass'`);
+            //console.log("currentMapping",currentMapping)
+        if (!currentMapping) {
+            return validationResponse(0, 'Machine mapping not found');
         }
 
-        // ✅ Update current machine as scanned
-        const updated = await prisma.cutListMachineMapping.update({
+       //return currentMapping;
+
+
+        const nextMapping =
+            await prisma.cutListMachineMapping.findFirst({
+                where: {
+                    machine_id: machine_id,
+                    vendor_id: vendor_id,
+                    cut_list: {
+                        unique_code: unique_code,
+                    },
+                    actual_in_at: null
+                },
+                select: {
+                    id: true,
+                    sequence_no: true,
+                    cut_list_id: true
+                },
+            });
+
+
+        if (!nextMapping) {
+            return validationResponse(0, 'Already Scanned');
+        }
+
+        const { id, sequence_no, cut_list_id } = nextMapping;
+        // return currentMapping;
+        // return id;
+
+        // 679 1 364
+
+        console.log(id, sequence_no, cut_list_id)
+
+        //check if already scanned in machine
+
+        const scanned_count = await prisma.cutListMachineMapping.count({
             where: {
-                id: id,
-            },
-            data: {
-                actual_in_at: new Date(),
-                in_operator: created_by,
-            },
+                cut_list_id: cut_list_id,
+                vendor_id: vendor_id,
+                sequence_no: sequence_no,
+                expected_in: true,
+                actual_in_at: null,
+                machine_id: machine_id
+
+            }
         });
 
-        return validationResponse(1, 'Scan done');
+        console.log("scanned_count", scanned_count);
 
-    } else {
-        // ✅ There are still machines that need to be scanned before this one
-        return validationResponse(0, 'Scan on other machine first');
+        //return scanned_count;
+
+
+        // this item is already scanned in provided machine
+        if (scanned_count == 0) {
+            return validationResponse(0, 'Already Scanned');
+        }
+
+
+
+        // ✅ Check if any machine is left in sequence (excluding 'pass' type machines)
+        const count = await prisma.cutListMachineMapping.count({
+            where: {
+                cut_list_id: cut_list_id,
+                vendor_id: vendor_id,
+                sequence_no: { lt: sequence_no },
+                actual_in_at: null,
+                machine: {
+                    scan_type: {
+                        not: 'PASS'  // Only count machines that require scanning
+                    }
+                }
+            }
+        });
+
+        // console.log("pending_scans_count", count);
+
+
+        const passMachines = await prisma.cutListMachineMapping.findMany({
+            where: {
+                cut_list_id: cut_list_id,
+                vendor_id: vendor_id,
+                sequence_no: { lt: sequence_no },
+                actual_in_at: null,
+                machine: {
+                    scan_type: 'PASS'
+                }
+            },
+            select: {
+                id: true,
+                machine: {
+                    select: {
+                        machine_name: true
+                    }
+                }
+            }
+        });
+
+        console.log("pass_machines_to_update", passMachines.length);
+
+        if (count == 0) {
+
+            // ✅ Update all 'pass' type machines as scanned
+            // if (passMachines.length > 0) {
+            //     await prisma.cutListMachineMapping.updateMany({
+            //         where: {
+            //             id: {
+            //                 in: passMachines.map(m => m.id)
+            //             }
+            //         },
+            //         data: {
+            //             actual_in_at: new Date(),
+            //             in_operator: created_by,
+            //         }
+            //     });
+
+            //     console.log(`Auto-passed ${passMachines.length} machines with scan_type='pass'`);
+            // }
+
+            // ✅ Update current machine as scanned
+            // const updated = await prisma.cutListMachineMapping.update({
+            //     where: {
+            //         id: id,
+            //     },
+            //     data: {
+            //         actual_in_at: new Date(),
+            //         in_operator: created_by,
+            //     },
+            // });
+
+            console.log("currentMapping.project.track_trace_status",currentMapping.project.track_trace_status);
+            if (currentMapping.project.track_trace_status == "Not Started") {
+                await updateProjectStatus(currentMapping.project_id);
+            }
+
+
+            return validationResponse(1, 'Scan done');
+
+        } else {
+            // ✅ There are still machines that need to be scanned before this one
+            return validationResponse(0, 'Scan on other machine first');
+        }
+
+    } catch (error) {
+        console.log("Error in api",)
     }
 
 
@@ -308,8 +330,27 @@ export const updateScannedItem = async (payload: TrackTracePayload) => {
 
 
 
+};
+
+export const updateProjectStatus = async (project_id: Number) => {
 
 
+    try {
+    const updatedProject = await prisma.projectMaster.update({
+        where: {
+            id: Number(project_id),
+        },
+        data: {
+            track_trace_status: "Started"
+        },
+    });
+    
+    console.log("Updated project:", updatedProject);
+    return updatedProject;
+} catch (error) {
+    console.error("Error updating project:", error);
+    throw error;
+}
 };
 
 

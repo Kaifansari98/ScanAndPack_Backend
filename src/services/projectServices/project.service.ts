@@ -82,6 +82,7 @@ export const getAllProjectsTrackTrace = (vendor_id: number) => {
       details: true,
       items: true,
     },
+    orderBy: { id: "desc" }
   });
 };
 

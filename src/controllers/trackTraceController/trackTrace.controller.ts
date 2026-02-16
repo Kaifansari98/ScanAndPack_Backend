@@ -9,8 +9,7 @@ import { generateWarehouseQRPDF } from "../../utils/warehouse-qr-generator";
 export const scan_item = async (req: Request, res: Response) => {
     console.log("Query params:", req.body);
 
-    let serviceResponse = await trackTraceService.updateScannedItem(req.body);
-    console.log("serviceResponse.status" + serviceResponse.status);
+    let serviceResponse = await trackTraceService.updateScannedItem(req.body);    
     if (serviceResponse.status == 0) {
         return res
             .status(200)

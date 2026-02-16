@@ -95,23 +95,29 @@ export class TrackTraceMasterService {
       //   orderBy: { sequence_no: "asc" },
       // });
 
+      const BASE_URL = process.env.APP_URL;
       const machines = (
-  await prisma.machineMaster.findMany({
-    where: {
-      vendor_id,
-      machineType: { isNot: null } // ensures INNER JOIN behavior
-    },
-    orderBy: { sequence_no: "asc" },
-    include: {
-      machineType: {
-        select: { machine_type: true }
-      }
-    }
-  })
-).map(({ machineType, ...machine }) => ({
-  ...machine,
-  machine_type: machineType?.machine_type ?? null
-}));
+        await prisma.machineMaster.findMany({
+          where: {
+            vendor_id,
+            machineType: { isNot: null } // ensures INNER JOIN behavior
+          },
+          orderBy: { sequence_no: "asc" },
+          include: {
+            machineType: {
+              select: { machine_type: true }
+            }
+          }
+        })
+      ).map(({ machineType, ...machine }) => ({
+        ...machine,
+        image_path: machine.image_path
+          ? `${BASE_URL}/${machine.image_path}`
+          : null,
+        machine_type: machineType?.machine_type ?? null
+      }));
+
+
 
       return machines;
     } catch (error) {

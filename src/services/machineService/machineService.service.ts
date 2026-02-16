@@ -34,10 +34,11 @@ export const getAllMachines = async (
 
   const BASE_URL = process.env.APP_URL;
 
+  
   return machines.map(machine => ({
     ...machine,
     image_path: machine.image_path
-      ? `${BASE_URL}/assets/track-trace/${machine.image_path}`
+      ? `${BASE_URL}/${machine.image_path}`
       : null,
   }));
 };
