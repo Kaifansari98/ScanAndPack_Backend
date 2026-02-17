@@ -1584,3 +1584,90 @@ export const uploadToWasabiLeadSitePhoto = async (
 
   return sysName;
 };
+
+export const uploadToWasabiMachineImage = async (
+  filePath: string,
+  vendorId: number,
+  originalName: string,
+  contentType: string,
+): Promise<string> => {
+  const sanitizedName = sanitizeFilename(originalName);
+
+  const key = `machine-images/${vendorId}/${Date.now()}-${sanitizedName}`;
+
+  // 1️⃣ Upload file
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: key,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
+
+  // 2️⃣ Generate signed URL
+  const command = new GetObjectCommand({
+    Bucket: process.env.WASABI_BUCKET_NAME!,
+    Key: key,
+    ResponseContentDisposition: "inline",
+  });
+
+  const signedUrl = await getSignedUrl(wasabi, command, {
+    expiresIn: 60 * 60, // 1 hour
+  });
+
+  // 3️⃣ return signed URL
+  return signedUrl;
+};
+
+export const uploadToWasabiProjectExcel = async (
+  filePath: string,
+  vendorId: number,
+  originalName: string,
+  contentType: string,
+): Promise<{ key: string; url: string }> => {
+  try {
+    const ext = path.extname(originalName);
+    const baseName = path
+      .basename(originalName, ext)
+      .replace(/[^a-zA-Z0-9-_]/g, "_");
+
+    const safeName = `${baseName}${ext}`;
+    const key = `project-excels/${vendorId}/${Date.now()}-${safeName}`;
+    const upload = new Upload({
+      client: wasabi,
+      params: {
+        Bucket: process.env.WASABI_BUCKET_NAME!,
+        Key: key,
+        Body: fs.createReadStream(filePath),
+        ContentType: contentType,
+      },
+      partSize: 10 * 1024 * 1024,
+      queueSize: 4,
+    });
+
+    await upload.done();
+
+    const command = new GetObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: key,
+      ResponseContentDisposition: `attachment; filename="${safeName}"`,
+    });
+
+    const signedUrl = await getSignedUrl(wasabi, command, {
+      expiresIn: 60 * 60 * 24, // 24 hours
+    });
+
+    return {
+      key,
+      url: signedUrl,
+    };
+  } catch (error: any) {
+    throw error;
+  }
+};

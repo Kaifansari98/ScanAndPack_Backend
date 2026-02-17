@@ -603,7 +603,6 @@ export const getCompletedProjectsByVendorIdService = async (vendorId: number) =>
         where: {
           project_id: project.id,
           vendor_id: project.vendor_id,
-          client_id: project.client_id,
           is_deleted: false,
           box_status: 'unpacked'
         }
@@ -619,7 +618,6 @@ export const getCompletedProjectsByVendorIdService = async (vendorId: number) =>
           where: {
             project_id: project.id,
             vendor_id: project.vendor_id,
-            client_id: project.client_id,
             is_deleted: false, // Only update non-deleted boxes
             box_status: 'unpacked' // Only update boxes that are currently unpacked
           },
@@ -636,7 +634,6 @@ export const getCompletedProjectsByVendorIdService = async (vendorId: number) =>
         where: {
           project_id: project.id,
           vendor_id: project.vendor_id,
-          client_id: project.client_id,
           is_deleted: false
         }
       });
@@ -646,7 +643,6 @@ export const getCompletedProjectsByVendorIdService = async (vendorId: number) =>
         where: {
           project_id: project.id,
           vendor_id: project.vendor_id,
-          client_id: project.client_id,
           is_deleted: false,
           box_status: 'packed'
         }
@@ -1001,14 +997,6 @@ export const handelItems = async (
 
     // 🔥 MAIN TRANSACTION
     const result = await prisma.$transaction(async (tx) => {
-
-
-
-
-
-
-
-
 
       const project = await tx.projectMaster.create({
         data: {
