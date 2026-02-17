@@ -163,8 +163,8 @@ export class UnderInstallationStageService {
 
 
       const redirectPath = lead.account_id
-        ? `/dashboard/installation/details/${leadId}?accountId=${lead.account_id}`
-        : `/dashboard/installation/details/${leadId}`;
+        ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
+        : `/dashboard/leads/details/${leadId}`;
 
       const projectUrl = `${baseUrl}${redirectPath}`;
 
@@ -2078,8 +2078,8 @@ export class UnderInstallationStageService {
 
       const redirectPath =
         leadMeta?.account_id && leadMeta.account_id > 0
-          ? `/dashboard/installation/details/${leadId}?accountId=${leadMeta.account_id}`
-          : `/dashboard/installation/details/${leadId}`;
+          ? `/dashboard/leads/details/${leadId}?accountId=${leadMeta.account_id}`
+          : `/dashboard/leads/details/${leadId}`;
 
       const projectUrl = `${baseUrl}${redirectPath}`;
 

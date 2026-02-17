@@ -585,7 +585,7 @@ export class FinalHandoverStageService {
       if (!recipients.length) return result;
 
 
-      const redirectPath = `/dashboard/installation/details/${leadId}?accountId=${result.accountId}`;
+      const redirectPath = `/dashboard/leads/details/${leadId}?accountId=${result.accountId}`;
 
       const projectUrl = result.accountId
         ? `${baseUrl}${redirectPath}`

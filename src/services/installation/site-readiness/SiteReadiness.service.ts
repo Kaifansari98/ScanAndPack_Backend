@@ -533,8 +533,8 @@ export class SiteReadinessService {
 
 
       const redirectPath = lead.account_id
-        ? `/dashboard/production/details/${leadId}?accountId=${lead.account_id}`
-        : `/dashboard/production/details/${leadId}`;
+        ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
+        : `/dashboard/leads/details/${leadId}`;
 
       const projectUrl = `${baseUrl}${redirectPath}`;
 

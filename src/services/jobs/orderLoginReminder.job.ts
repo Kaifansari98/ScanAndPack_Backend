@@ -90,7 +90,7 @@ export function startOrderLoginReminderJob() {
             message: `${leadCode} - Order Login is still pending`,
             entity_type: "lead",
             entity_id: task.lead_id,
-            redirect_url: `/dashboard/production/details/${task.lead_id}`,
+            redirect_url: `/dashboard/leads/details/${task.lead_id}`,
           });
 
           console.log("✅ In-app reminder sent:", leadCode);

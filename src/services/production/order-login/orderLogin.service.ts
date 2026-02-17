@@ -247,7 +247,7 @@ export async function triggerOrderLoginCompletionNotification(
   const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
 
   // ✅ Correct routes
-  const redirectUrl = `/dashboard/production/details/${leadId}?accountId=${lead.account_id}`;
+  const redirectUrl = `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`;
   const projectUrl = `${baseUrl}${redirectUrl}`;
 
   // 5️⃣ In-App
@@ -1554,12 +1554,12 @@ export class OrderLoginService {
       leadMeta.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
 
     const projectUrl = leadMeta.account_id
-      ? `${baseUrl}/dashboard/production/details/${leadId}?accountId=${leadMeta.account_id}`
-      : `${baseUrl}/dashboard/production/details/${leadId}`;
+      ? `${baseUrl}/dashboard/leads/details/${leadId}?accountId=${leadMeta.account_id}`
+      : `${baseUrl}/dashboard/leads/details/${leadId}`;
 
     const redirectUrl = leadMeta.account_id
-      ? `/dashboard/production/details/${leadId}?accountId=${leadMeta.account_id}`
-      : `/dashboard/production/details/${leadId}`;
+      ? `/dashboard/leads/details/${leadId}?accountId=${leadMeta.account_id}`
+      : `/dashboard/leads/details/${leadId}`;
 
     // ===============================
     // PRODUCTION STAGE → ADMIN NOTIFICATION

@@ -365,7 +365,7 @@ export class TechCheckService {
           queryParams.set("instance_id", String(productStructureInstanceId));
         }
         const queryString = queryParams.toString();
-        return `/dashboard/production/details/${leadId}${queryString ? `?${queryString}` : ""}`;
+        return `/dashboard/leads/details/${leadId}${queryString ? `?${queryString}` : ""}`;
       };
 
       // ===============================
@@ -992,7 +992,7 @@ export class TechCheckService {
         queryParams.set("instance_id", String(instanceId));
       }
       const queryString = queryParams.toString();
-      const redirectPath = `/dashboard/production/tech-check/details/${leadId}${queryString ? `?${queryString}` : ""}`;
+      const redirectPath = `/dashboard/leads/details/${leadId}${queryString ? `?${queryString}` : ""}`;
 
       const projectUrl = `${baseUrl}${redirectPath}`;
 

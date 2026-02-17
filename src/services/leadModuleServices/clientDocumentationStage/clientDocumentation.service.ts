@@ -421,7 +421,7 @@ export class ClientDocumentationService {
       });
 
       // ✅ Correct route
-      const redirectPath = `/dashboard/project/deails/${data.lead_id}?accountId=${leadInfo.account_id}`;
+      const redirectPath = `/dashboard/leads/deails/${data.lead_id}?accountId=${leadInfo.account_id}`;
       const projectUrl = `${data.baseUrl}${redirectPath}`;
 
       // Fetch active admins
@@ -1237,7 +1237,7 @@ export class ClientDocumentationService {
       );
     }
 
-    const redirectPath = `/dashboard/production/tech-check/details/${lead.id}${
+    const redirectPath = `/dashboard/leads/details/${lead.id}${
       queryParams.toString() ? `?${queryParams.toString()}` : ""
     }`;
 

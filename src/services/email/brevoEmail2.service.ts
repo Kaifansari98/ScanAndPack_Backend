@@ -15,6 +15,7 @@ export const ORDER_LOGIN_TEMPLATE_KEYS = {
   LEAD_MOVED_TO_DISPATCH_TEMPLATE_KEY: "MOVE_TO_DISPATCH",
   TECHCHECK_REJECTED_DOCUMENT_KEY: "TECH_CHECK_FILES_REJECTED_SA",
   TECHCHECK_APPROVED_DOCUMENT_KEY: "TECH_CHECK_APPROVED_SA",
+  TECH_CHECK_ASSIGNED_TEMPLATE_KEY: "TECH_CHECK_ASSIGNED",
 };
 
 const renderTemplate = (template: string, values: Record<string, string>) => {
@@ -1363,5 +1364,203 @@ export const sendLeadMovedToDispatchEmail = async (payload: {
   });
 };
 
+// types
+export type TechCheckAssignedEmailPayload = {
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  assignedBy: string;
+  assignedDate: string;
+  leadUrl?: string;
+};
 
+// function
+export const sendTechCheckAssignedEmail = async (
+  payload: TechCheckAssignedEmailPayload,
+): Promise<BrevoEmailResult> => {
+  const defaultSubject = `Tech Check Review Required for ${payload.leadCode} - ${payload.leadName}`;
 
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "A lead has been assigned to you for Tech Check Review.",
+    "",
+    "Lead Details",
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
+    `Assigned By: ${payload.assignedBy}`,
+    `Assigned Date: ${payload.assignedDate}`,
+    "",
+    "Please review the uploaded documents and either approve or reject them with remarks.",
+    payload.leadUrl ? `View Lead Details: ${payload.leadUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <style>
+        .lead-info-row {
+          display: table;
+          width: 100%;
+          padding: 4px 0;
+        }
+        .lead-info-label {
+          display: table-cell;
+          color: #6b7280;
+          font-size: 14px;
+          width: 40%;
+          vertical-align: top;
+        }
+        .lead-info-value {
+          display: table-cell;
+          color: #111827;
+          font-weight: 600;
+          font-size: 14px;
+          width: 60%;
+        }
+
+        @media only screen and (max-width: 600px) {
+          .lead-info-row {
+            display: block !important;
+            margin-bottom: 4px !important;
+            padding-bottom: 4px !important;
+            border-bottom: 1px solid #e5e7eb !important;
+          }
+          .lead-info-row:last-child {
+            border-bottom: none !important;
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
+          }
+          .lead-info-label {
+            display: block !important;
+            width: 100% !important;
+            margin-bottom: 4px !important;
+            font-size: 13px !important;
+          }
+          .lead-info-value {
+            display: block !important;
+            width: 100% !important;
+          }
+          .lead-info-row.no-border {
+            border-bottom: none !important;
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
+          }
+        }
+      </style>
+    </head>
+    <body style="margin: 0; padding: 0; font-family: Arial, sans-serif;">
+      <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 10px;">
+        <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
+
+          <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Tech Check Review Required</h2>
+
+          <p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p>
+
+          <p style="margin: 0 0 16px; color: #4b5563;">
+            A lead has been assigned to you for Tech Check Review.
+          </p>
+
+          <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
+            <p style="margin: 0 0 4px; font-weight: 600; color: #111827;">Lead Details</p>
+
+            <div class="lead-info-row">
+              <div class="lead-info-label">Lead Code</div>
+              <div class="lead-info-value">${payload.leadCode}</div>
+            </div>
+
+            <div class="lead-info-row">
+              <div class="lead-info-label">Lead Name</div>
+              <div class="lead-info-value">${payload.leadName}</div>
+            </div>
+
+            <div class="lead-info-row">
+              <div class="lead-info-label">Assigned By</div>
+              <div class="lead-info-value">${payload.assignedBy}</div>
+            </div>
+
+            <div class="lead-info-row no-border">
+              <div class="lead-info-label">Assigned Date</div>
+              <div class="lead-info-value">${payload.assignedDate}</div>
+            </div>
+          </div>
+
+          <p style="margin: 16px 0 0; color: #4b5563;">
+            Please review the uploaded documents and either approve or reject them with remarks.
+          </p>
+
+      ${
+        payload.leadUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.leadUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead Details
+              </a>
+            </div>`
+          : ""
+      }
+
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    assignedBy: payload.assignedBy,
+    assignedDate: payload.assignedDate,
+    leadUrl: payload.leadUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: ORDER_LOGIN_TEMPLATE_KEYS.TECH_CHECK_ASSIGNED_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  if (template) {
+    logger.info("Brevo email template source: db", {
+      template_key: ORDER_LOGIN_TEMPLATE_KEYS.TECH_CHECK_ASSIGNED_TEMPLATE_KEY,
+      vendor_id: payload.vendor_id,
+    });
+  } else {
+    logger.info("Brevo email template source: default", {
+      template_key: ORDER_LOGIN_TEMPLATE_KEYS.TECH_CHECK_ASSIGNED_TEMPLATE_KEY,
+      vendor_id: payload.vendor_id,
+    });
+  }
+
+  const subject = template
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+  const text = template
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+  const html = template
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail({
+    toEmail: payload.toEmail,
+    toName: payload.toName,
+    subject,
+    text,
+    html,
+  });
+};

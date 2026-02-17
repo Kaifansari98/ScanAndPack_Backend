@@ -522,7 +522,7 @@ export class LeadActivityStatusService {
       });
 
       // ✅ UPDATED: Correct route with leadId and accountId
-      const leadDetailsPath = `/dashboard/leads/leadstable/pendingleaddetails/${leadId}?accountId=${accountId}`;
+      const leadDetailsPath = `/dashboard/leads/details/${leadId}?accountId=${accountId}`;
       const leadDetailsUrl = `${baseUrl}${leadDetailsPath}`;
 
       // 🔔 Handle onHold → onGoing revert notifications

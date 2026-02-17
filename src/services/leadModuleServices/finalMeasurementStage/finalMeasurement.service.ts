@@ -291,8 +291,8 @@ export class FinalMeasurementService {
           entity_type: "lead",
           entity_id: data.lead_id,
           redirect_url: lead.account_id
-            ? `/dashboard/project/details/${data.lead_id}?accountId=${lead.account_id}`
-            : `/dashboard/project/details/${data.lead_id}`,
+            ? `/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
+            : `/dashboard/leads/details/${data.lead_id}`,
         });
 
         // 📧 EMAIL Notification (Client Documentation Mail)
