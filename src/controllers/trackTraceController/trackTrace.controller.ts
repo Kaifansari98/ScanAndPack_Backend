@@ -32,8 +32,6 @@ export const scan_item = async (req: Request, res: Response) => {
     }
 };
 
-
-
 export const getAllMachines = async (_req: Request, res: Response) => {
     console.log("Query params:", _req.query);
     // res.json(_req.params.vendor_id);

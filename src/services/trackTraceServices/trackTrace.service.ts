@@ -1,7 +1,7 @@
 import { validationResponse } from 'src/utils/validationResponse';
 import { prisma } from '../../prisma/client';
 import { Prisma, CutListMachineMapping } from '../../prisma/generated';
-import { CutListSavePayload, QRParam } from 'src/types/track-trace';
+import { CutListSavePayload, QRParam, TrackTraceDashboardPayload } from 'src/types/track-trace';
 import * as XLSX from "xlsx";
 import * as fs from "fs";
 import * as path from "path";
@@ -322,7 +322,8 @@ export const updateScannedItem = async (payload: TrackTracePayload) => {
         }
 
     } catch (error) {
-        console.log("Error in api",)
+        console.log("Error in api", error);
+        return validationResponse(0, 'Something went wrong');
     }
 
 
@@ -365,7 +366,6 @@ export const getKPIS = async (payload: TrackTraceDashboardPayload) => {
 
     const yesterdayStart = new Date(todayStart.getTime() - 24 * 60 * 60 * 1000);
 
-
     const baseWhere: any = {
         vendor_id: payload.vendor_id,
         actual_in_at: {
@@ -387,14 +387,9 @@ export const getKPIS = async (payload: TrackTraceDashboardPayload) => {
         baseWhere.operator = Number(payload.created_by);
     }
 
-
-
-
     const itemsToday = await prisma.cutListMachineMapping.count({
         where: baseWhere,
     });
-
-
 
     // where: {
     //             vendor_id: payload.vendor_id,
@@ -563,7 +558,6 @@ export const getRealTimeItemTracking = async (payload: TrackTraceDashboardPayloa
     const machine = payload.machine_id;
     const operator = payload.created_by;
     const vendor_id = payload.vendor_id;
-
 
     const baseWhere: any = {
         vendor_id: vendor_id,
@@ -1068,7 +1062,6 @@ export const getMachineUtilization = async (
         const WORKING_SECONDS = 8 * 60 * 60;
         const EXPECTED_SQFT_PER_MACHINE = 500; // tune per factory
 
-
         const baseWhere: any = {
             vendor_id: payload.vendor_id,
         };
@@ -1085,7 +1078,6 @@ export const getMachineUtilization = async (
         //     baseWhere.operator = Number(payload.created_by);
         // }
 
-
         const machines = await prisma.machineMaster.findMany({
             where: baseWhere,
             select: {
@@ -1094,7 +1086,7 @@ export const getMachineUtilization = async (
                 status: true,
             },
         });
-
+        
         console.log("=============");
         console.log(machines)
 
@@ -2020,6 +2012,9 @@ export const assignMachine = async (payload: CutListSavePayload) => {
 
 
             const sequence = machine?.sequence_no;
+            if (sequence == null) {
+                return validationResponse(0, 'Machine sequence not set');
+            }
 
             if (newIds.length > 0) {
 
@@ -2046,7 +2041,7 @@ export const assignMachine = async (payload: CutListSavePayload) => {
                         lead_id: lead_id, // don't hardcode 1
                         sequence_no: sequence,
                         status: "Pending",
-                        created_by: payload.created_by,
+                        created_by: Number(payload.created_by),
                         expected_in: true
                     }))
                 });

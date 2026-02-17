@@ -1,4 +1,4 @@
-interface TrackTraceDashboardPayload {
+export interface TrackTraceDashboardPayload {
     project_id?: string;
     vendor_id: number;
     machine_id?: string;

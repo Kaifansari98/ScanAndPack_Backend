@@ -158,7 +158,10 @@ export const deleteBoxAndItsScanItems = async (req: Request, res: Response) => {
 
 export const getGroupedItemInfo = async (req: Request, res: Response) => {
   try {
-    const boxId = parseInt(req.params.boxId);
+    const boxIdParam = Array.isArray(req.params.boxId)
+      ? req.params.boxId[0]
+      : req.params.boxId;
+    const boxId = Number(boxIdParam);
     if (isNaN(boxId)) {
       return res.status(400).json({ error: 'Invalid box ID' });
     }
