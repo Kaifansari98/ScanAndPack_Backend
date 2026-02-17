@@ -7,6 +7,7 @@ import {
   uploadToWasabiPaymentProffDispatchPlanningFile,
 } from "../../../utils/wasabiClient";
 import fs from "node:fs/promises";
+import { resolveClientBaseUrl } from "../../../utils/fileUtils";
 
 const service = new DispatchPlanningService();
 
@@ -340,11 +341,13 @@ export class DispatchPlanningController {
             )
           );
       }
+      const baseUrl = resolveClientBaseUrl(req);
 
       const result = await DispatchPlanningService.moveLeadToDispatch(
         vendorId,
         leadId,
-        updated_by
+        updated_by,
+        baseUrl
       );
 
       return res

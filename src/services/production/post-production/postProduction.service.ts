@@ -772,6 +772,7 @@ export class PostProductionService {
     vendorId: number,
     leadId: number,
     updatedBy: number,
+    baseUrl: string,
   ) {
     // ==========================
     // TRANSACTIONAL CORE
@@ -918,11 +919,6 @@ export class PostProductionService {
         ? `/dashboard/leads/details/${leadId}?accountId=${leadMeta.account_id}`
         : `/dashboard/leads/details/${leadId}`;
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
-
       const projectUrl = `${baseUrl}${redirectPath}`;
 
       // ==========================
@@ -1016,14 +1012,10 @@ export class PostProductionService {
         minute: "2-digit",
       });
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
 
       const redirectPath = lead.account_id
-        ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
-        : `/dashboard/leads/details/${leadId}`;
+        ? `/dashboard/production/details/${leadId}?accountId=${lead.account_id}`
+        : `/dashboard/production/details/${leadId}`;
 
       const projectUrl = `${baseUrl}${redirectPath}`;
 

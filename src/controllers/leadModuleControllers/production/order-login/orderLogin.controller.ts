@@ -10,6 +10,7 @@ import {
 } from "../../../../utils/wasabiClient";
 import { ApiResponse } from "../../../../utils/apiResponse";
 import fs from "node:fs/promises";
+import { resolveClientBaseUrl } from "../../../../utils/fileUtils";
 
 const service = new OrderLoginService();
 
@@ -79,10 +80,12 @@ export class OrderLoginController {
       const { lead_id, instance_id } = req.query; // ✅ Use query params
       const { senderUserId } = req.query; // ✅ Use query param
 
+      const baseUrl = resolveClientBaseUrl(req);
       const orderLogins = await service.getOrderLoginByLead(
         Number(vendorId),
         Number(lead_id),
         Number(senderUserId),
+        baseUrl,
         typeof instance_id !== "undefined" ? Number(instance_id) : undefined
       );
 
@@ -645,10 +648,12 @@ export class OrderLoginController {
         });
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       const updatedLead = await service.updateLeadToProductionStage({
         vendorId: Number(vendorId),
         leadId: Number(leadId),
         accountId: Number(account_id),
+        baseUrl,
         userId: Number(user_id),
         assignToUserId: Number(assign_to_user_id),
         requiredDate: new Date(client_required_order_login_complition_date),

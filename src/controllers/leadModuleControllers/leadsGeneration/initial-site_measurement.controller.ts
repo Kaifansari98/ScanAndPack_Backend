@@ -462,6 +462,7 @@ export class PaymentUploadController {
         client_id: parseInt(client_id),
         user_id: parseInt(user_id),
         amount: req.body.amount ? parseFloat(req.body.amount) : undefined,
+        baseUrl: resolveClientBaseUrl(req),
         payment_date: req.body.payment_date
           ? new Date(req.body.payment_date)
           : undefined,
@@ -541,6 +542,7 @@ export class PaymentUploadController {
         client_id: +client_id,
         user_id: +user_id,
         amount: req.body.amount ? +req.body.amount : undefined,
+        baseUrl: resolveClientBaseUrl(req),
         payment_date: req.body.payment_date
           ? new Date(req.body.payment_date)
           : undefined,

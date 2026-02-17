@@ -150,6 +150,7 @@ export class FinalMeasurementController {
         account_id: parseInt(account_id),
         vendor_id: parseInt(vendor_id),
         created_by: parseInt(created_by),
+        baseUrl: resolveClientBaseUrl(req),
         critical_discussion_notes: critical_discussion_notes || null,
         finalMeasurementDocs: uploadedFinalMeasurementDocs,
         sitePhotos: uploadedSitePhotos,

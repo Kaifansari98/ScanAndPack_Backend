@@ -7,6 +7,7 @@ import {
   uploadToWasabiProductionFilesWoodworkPackingDocsFile,
 } from "../../../../utils/wasabiClient";
 import fs from "node:fs/promises";
+import { resolveClientBaseUrl } from "../../../../utils/fileUtils";
 
 const service = new PostProductionService();
 
@@ -710,10 +711,13 @@ export class PostProductionController {
         });
       }
 
+
+            const baseUrl = resolveClientBaseUrl(req);
       const result = await service.moveLeadToReadyToDispatch(
         vendorId,
         leadId,
-        updated_by
+        updated_by,
+        baseUrl
       );
 
       return res.status(200).json({

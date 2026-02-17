@@ -290,10 +290,12 @@ export class FinalHandoverStageController {
           );
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       const result = await FinalHandoverStageService.moveLeadToProjectCompleted(
         vendorId,
         leadId,
-        updated_by
+        updated_by,
+        baseUrl
       );
 
       try {

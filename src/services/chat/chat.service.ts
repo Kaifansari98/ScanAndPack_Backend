@@ -1,7 +1,6 @@
 import { prisma } from "../../prisma/client";
 import { NotificationType } from "../../prisma/generated";
 import { NotificationService } from "../notification/notification.service";
-import { sendChatMentionEmail } from "../email/brevoEmail.service";
 import logger from "../../utils/logger";
 import {
   generateSignedUrl,

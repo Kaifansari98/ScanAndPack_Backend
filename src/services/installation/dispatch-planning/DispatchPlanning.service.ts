@@ -460,6 +460,7 @@ export class DispatchPlanningService {
     vendorId: number,
     leadId: number,
     updatedBy: number,
+    baseUrl: string,
   ) {
     // ==========================
     // CORE TRANSACTION LAYER
@@ -550,14 +551,10 @@ export class DispatchPlanningService {
         minute: "2-digit",
       });
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
 
       const redirectPath = lead.account_id
-        ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
-        : `/dashboard/leads/details/${leadId}`;
+        ? `/dashboard/production/details/${leadId}?accountId=${lead.account_id}`
+        : `/dashboard/production/details/${leadId}`;
 
       const projectUrl = `${baseUrl}${redirectPath}`;
 

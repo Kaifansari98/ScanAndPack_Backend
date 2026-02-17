@@ -29,6 +29,7 @@ interface MiscPayload {
   created_by: number;
   teams: number[];
   files: { originalName: string; sysName: string }[];
+  baseUrl: string;
 }
 
 interface UpdateERDInput {
@@ -36,6 +37,7 @@ interface UpdateERDInput {
   misc_id: number;
   expected_ready_date: string;
   updated_by: number;
+  baseUrl: string;
 }
 
 interface InstallIssueLogPayload {
@@ -66,6 +68,7 @@ export class UnderInstallationStageService {
     vendorId: number,
     leadId: number,
     updatedBy: number,
+    baseUrl: string,
   ) {
     // ==========================
     // CORE TRANSACTION LAYER
@@ -158,14 +161,10 @@ export class UnderInstallationStageService {
         minute: "2-digit",
       });
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
 
       const redirectPath = lead.account_id
-        ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
-        : `/dashboard/leads/details/${leadId}`;
+        ? `/dashboard/installation/details/${leadId}?accountId=${lead.account_id}`
+        : `/dashboard/installation/details/${leadId}`;
 
       const projectUrl = `${baseUrl}${redirectPath}`;
 
@@ -1019,6 +1018,7 @@ export class UnderInstallationStageService {
       created_by,
       teams,
       files,
+      baseUrl
     } = payload;
 
     // ====================================
@@ -1244,11 +1244,7 @@ export class UnderInstallationStageService {
       // Build Deep-Link Redirect URL
       // -----------------------------
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
-
+    
       const redirectPath =
         leadMeta?.account_id && leadMeta.account_id > 0
           ? `/dashboard/leads/details/${lead_id}?accountId=${leadMeta.account_id}&tab=misc&taskId=${misc.taskId}`
@@ -1412,6 +1408,7 @@ export class UnderInstallationStageService {
     misc_id,
     expected_ready_date,
     updated_by,
+    baseUrl
   }: UpdateERDInput) {
     // ===============================
     // 1️⃣ TRANSACTION LAYER
@@ -1563,11 +1560,7 @@ export class UnderInstallationStageService {
       // Deep Link Builder
       // -------------------------
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
-
+     
       const redirectPath =
         leadMeta?.account_id && leadMeta.account_id > 0
           ? `/dashboard/leads/details/${result.lead_id}?accountId=${leadMeta.account_id}&tab=misc&taskId=${result.taskId}`
@@ -1966,6 +1959,7 @@ export class UnderInstallationStageService {
     vendorId: number,
     leadId: number,
     updatedBy: number,
+    baseUrl: string
   ) {
     // ===============================
     // 1️⃣ TRANSACTION LAYER
@@ -2080,16 +2074,12 @@ export class UnderInstallationStageService {
       const leadName =
         `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
 
-      // Deep Link (Final Handover Tab)
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
+
 
       const redirectPath =
         leadMeta?.account_id && leadMeta.account_id > 0
-          ? `/dashboard/leads/details/${leadId}?accountId=${leadMeta.account_id}`
-          : `/dashboard/leads/details/${leadId}`;
+          ? `/dashboard/installation/details/${leadId}?accountId=${leadMeta.account_id}`
+          : `/dashboard/installation/details/${leadId}`;
 
       const projectUrl = `${baseUrl}${redirectPath}`;
 
@@ -2340,8 +2330,9 @@ export class UnderInstallationStageService {
     lead_id: number;
     misc_id: number;
     resolved_by: number;
+    baseUrl: string;
   }) {
-    const { vendor_id, lead_id, misc_id, resolved_by } = payload;
+    const { vendor_id, lead_id, misc_id, resolved_by, baseUrl } = payload;
 
     // ===============================
     // 1️⃣ TRANSACTION LAYER
@@ -2462,11 +2453,6 @@ export class UnderInstallationStageService {
         minute: "2-digit",
       });
 
-      // Deep Link
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
 
       const redirectPath =
         leadMeta?.account_id && leadMeta.account_id > 0
@@ -2521,8 +2507,9 @@ export class UnderInstallationStageService {
     lead_id: number;
     misc_id: number;
     ready_by: number;
+    baseUrl: string;
   }) {
-    const { vendor_id, lead_id, misc_id, ready_by } = payload;
+    const { vendor_id, lead_id, misc_id, ready_by, baseUrl } = payload;
 
     // ===============================
     // 1️⃣ TRANSACTION LAYER
@@ -2650,10 +2637,7 @@ export class UnderInstallationStageService {
       });
 
       // Build Deep Link
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
+
 
       const redirectPath =
         leadMeta?.account_id && leadMeta.account_id > 0
