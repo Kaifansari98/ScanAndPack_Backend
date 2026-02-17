@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import { Request, Response } from "express";
 import { TrackTraceMasterService } from "../../../src/services/trackTraceServices/trackTraceMasterService";
-import logger from "src/utils/logger";
+import logger from "../../../src/utils/logger";
 import * as trackTraceService from '../../services/trackTraceServices/trackTraceMasterService';
 import path from "path";
 

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { ConfigureService } from "src/services/trackTraceServices/configure.service";
-import logger from "src/utils/logger";
+import { ConfigureService } from "../../../src/services/trackTraceServices/configure.service";
+import logger from "../../../src/utils/logger";
 
 const configureService = new ConfigureService();
 

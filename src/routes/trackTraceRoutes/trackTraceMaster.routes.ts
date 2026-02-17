@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { TrackTraceMasterController } from "src/controllers/trackTraceController/trackTraceMasterController";
-import { uploadMachineFiles } from "src/middlewares/uploadWasabi";
+import { TrackTraceMasterController } from "../../../src/controllers/trackTraceController/trackTraceMasterController";
+import { uploadMachineFiles } from "../../../src/middlewares/uploadWasabi";
 import { 
 
   getMachineType

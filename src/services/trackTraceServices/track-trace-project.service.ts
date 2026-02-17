@@ -3,7 +3,7 @@ import fs from "fs";
 import * as XLSX from "xlsx";
 import { Prisma, prisma } from "../../../src/prisma/client";
 import { randomUUID } from "crypto";
-import logger from "src/utils/logger";
+import logger from "../../../src/utils/logger";
 import { uploadToWasabiProjectExcel } from "../../../src/utils/wasabiClient";
 
 /* ------------------ TYPES ------------------ */
