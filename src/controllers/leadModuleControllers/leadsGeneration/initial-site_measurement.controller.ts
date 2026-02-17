@@ -15,6 +15,12 @@ import {
   sendTaskAssignedEmail,
 } from "../../../services/email/brevoEmail.service";
 
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
+const getNumberParam = (param: string | string[] | undefined): number =>
+  Number(getParam(param));
+
 const resolveClientBaseUrl = (req: Request): string => {
   const origin = req.headers.origin;
   if (typeof origin === "string" && origin.trim().length > 0) {
@@ -45,7 +51,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { leadId } = req.params;
+      const leadId = getNumberParam(req.params.leadId);
 
       if (!leadId) {
         res.status(400).json({
@@ -56,7 +62,7 @@ export class PaymentUploadController {
       }
 
       const result = await this.paymentUploadService.getISMDetailsByLeadId(
-        parseInt(leadId),
+        Number(leadId),
       );
 
       res.status(200).json({
@@ -78,7 +84,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { leadId } = req.params;
+      const leadId = getNumberParam(req.params.leadId);
 
       if (!leadId) {
         res.status(400).json({
@@ -89,7 +95,7 @@ export class PaymentUploadController {
       }
 
       const result = await this.paymentUploadService.getISMPaymentInfoByLeadId(
-        parseInt(leadId),
+        Number(leadId),
       );
 
       res.status(200).json({
@@ -109,7 +115,7 @@ export class PaymentUploadController {
   public async assignTaskISM(req: Request, res: Response): Promise<Response> {
     logger.info("[CONTROLLER] assignTaskISM called");
     try {
-      const leadId = Number(req.params.leadId);
+      const leadId = getNumberParam(req.params.leadId);
       const {
         task_type,
         due_date,
@@ -574,7 +580,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const leadId = Number(req.params.leadId);
+      const leadId = getNumberParam(req.params.leadId);
       const vendorId = Number(req.query.vendor_id);
 
       if (!leadId || !vendorId) {
@@ -609,7 +615,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { s3Key } = req.params;
+      const s3Key = getParam(req.params.s3Key);
       const { vendor_id, expires_in } = req.query;
 
       if (!s3Key || !vendor_id) {
@@ -722,7 +728,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { vendorId } = req.params;
+      const vendorId = getNumberParam(req.params.vendorId);
       const { page = "1", limit = "10", userId } = req.query;
 
       if (!vendorId || !userId) {
@@ -733,7 +739,7 @@ export class PaymentUploadController {
         return;
       }
 
-      const vendor_id = parseInt(vendorId);
+      const vendor_id = Number(vendorId);
       const user_id = Number(userId);
 
       // ✅ Find the correct status type for this vendor
@@ -804,7 +810,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { leadId } = req.params;
+      const leadId = getNumberParam(req.params.leadId);
       const { vendor_id } = req.query;
 
       if (!leadId || !vendor_id) {
@@ -816,7 +822,7 @@ export class PaymentUploadController {
       }
 
       const result = await this.paymentUploadService.getPaymentUploadsByLead(
-        parseInt(leadId),
+        Number(leadId),
         parseInt(vendor_id as string),
       );
 
@@ -842,7 +848,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { accountId } = req.params;
+      const accountId = getNumberParam(req.params.accountId);
       const { vendor_id } = req.query;
 
       if (!accountId || !vendor_id) {
@@ -854,7 +860,7 @@ export class PaymentUploadController {
       }
 
       const result = await this.paymentUploadService.getPaymentUploadsByAccount(
-        parseInt(accountId),
+        Number(accountId),
         parseInt(vendor_id as string),
       );
 
@@ -880,11 +886,11 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { vendorId } = req.params;
+      const vendorId = getNumberParam(req.params.vendorId);
       const { page = "1", limit = "10", startDate, endDate } = req.query;
 
       const result = await this.paymentUploadService.getPaymentUploadsByVendor(
-        parseInt(vendorId),
+        Number(vendorId),
         parseInt(page as string),
         parseInt(limit as string),
         startDate ? new Date(startDate as string) : undefined,
@@ -922,7 +928,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { documentId } = req.params;
+      const documentId = getNumberParam(req.params.documentId);
       const { vendor_id } = req.query;
 
       if (!documentId || !vendor_id) {
@@ -934,7 +940,7 @@ export class PaymentUploadController {
       }
 
       const result = await this.paymentUploadService.getDocumentDownloadUrl(
-        parseInt(documentId),
+        Number(documentId),
         parseInt(vendor_id as string),
       );
 
@@ -968,11 +974,11 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { vendorId } = req.params;
+      const vendorId = getNumberParam(req.params.vendorId);
       const { startDate, endDate } = req.query;
 
       const result = await this.paymentUploadService.getPaymentAnalytics(
-        parseInt(vendorId),
+        Number(vendorId),
         startDate ? new Date(startDate as string) : undefined,
         endDate ? new Date(endDate as string) : undefined,
       );
@@ -998,7 +1004,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { paymentId } = req.params;
+      const paymentId = getNumberParam(req.params.paymentId);
       const {
         lead_id,
         account_id,
@@ -1020,7 +1026,7 @@ export class PaymentUploadController {
       }
 
       // Validate paymentId is a valid number
-      const paymentIdNum = parseInt(paymentId);
+      const paymentIdNum = Number(paymentId);
       if (isNaN(paymentIdNum)) {
         res.status(400).json({
           success: false,
@@ -1219,7 +1225,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { documentId } = req.params;
+      const documentId = getNumberParam(req.params.documentId);
       const { user_id, vendor_id } = req.body;
 
       // Validate required parameters
@@ -1240,7 +1246,7 @@ export class PaymentUploadController {
       }
 
       // Validate documentId is a valid number
-      const documentIdNum = parseInt(documentId);
+      const documentIdNum = Number(documentId);
       if (isNaN(documentIdNum) || documentIdNum <= 0) {
         res.status(400).json({
           success: false,
@@ -1322,7 +1328,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { documentId } = req.params;
+      const documentId = getNumberParam(req.params.documentId);
       const { user_id, vendor_id } = req.body;
       const files = req.files as { [fieldname: string]: Express.Multer.File[] };
       const pdfFile = files?.upload_pdf?.[0];
@@ -1366,7 +1372,7 @@ export class PaymentUploadController {
         return;
       }
 
-      const documentIdNum = parseInt(documentId);
+      const documentIdNum = Number(documentId);
       const userIdNum = parseInt(user_id);
       const vendorIdNum = parseInt(vendor_id);
 
@@ -1425,7 +1431,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { documentId } = req.params;
+      const documentId = getNumberParam(req.params.documentId);
       const { user_id, vendor_id } = req.body;
 
       // Validate required parameters
@@ -1446,7 +1452,7 @@ export class PaymentUploadController {
       }
 
       // Validate documentId is a valid number
-      const documentIdNum = parseInt(documentId);
+      const documentIdNum = Number(documentId);
       if (isNaN(documentIdNum) || documentIdNum <= 0) {
         res.status(400).json({
           success: false,
@@ -1627,7 +1633,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { paymentId } = req.params;
+      const paymentId = getNumberParam(req.params.paymentId);
       const { vendor_id } = req.query;
 
       if (!paymentId || !vendor_id) {
@@ -1639,7 +1645,7 @@ export class PaymentUploadController {
       }
 
       // Validate paymentId is a valid number
-      const paymentIdNum = parseInt(paymentId);
+      const paymentIdNum = Number(paymentId);
       if (isNaN(paymentIdNum)) {
         res.status(400).json({
           success: false,

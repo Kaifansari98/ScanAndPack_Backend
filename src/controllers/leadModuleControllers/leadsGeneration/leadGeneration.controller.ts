@@ -57,6 +57,9 @@ const resolveClientBaseUrl = (req: Request): string => {
   return "http://localhost:3000";
 };
 
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
 export class LeadController {
   /**
    * Helper method to explain access levels
@@ -438,7 +441,7 @@ export class LeadController {
    */
   async fetchLeadsByVendor(req: Request, res: Response): Promise<Response> {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
       if (isNaN(vendorId)) {
         return res.status(400).json({ error: "Invalid vendorId" });
       }
@@ -462,8 +465,8 @@ export class LeadController {
     res: Response,
   ): Promise<Response> => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const userId = Number(getParam(req.params.userId));
 
       // Validate parameters
       if (isNaN(vendorId) || vendorId <= 0) {
@@ -541,9 +544,9 @@ export class LeadController {
   // Controller method to fetch a single lead by ID
   fetchLeadById = async (req: Request, res: Response): Promise<Response> => {
     try {
-      const leadId = parseInt(req.params.leadId);
-      const userId = parseInt(req.params.userId);
-      const vendorId = parseInt(req.params.vendorId);
+      const leadId = Number(getParam(req.params.leadId));
+      const userId = Number(getParam(req.params.userId));
+      const vendorId = Number(getParam(req.params.vendorId));
 
       // Validate parameters
       if (isNaN(leadId) || leadId <= 0) {
@@ -941,8 +944,8 @@ export class LeadController {
    */
   async updateLead(req: Request, res: Response): Promise<void> {
     try {
-      const leadId = parseInt(req.params.leadId);
-      const updatedBy = parseInt(req.params.userId);
+      const leadId = Number(getParam(req.params.leadId));
+      const updatedBy = Number(getParam(req.params.userId));
 
       if (!updatedBy || isNaN(updatedBy)) {
         res
@@ -1073,8 +1076,8 @@ export class LeadController {
    */
   async updateLeadProductType(req: Request, res: Response): Promise<void> {
     try {
-      const leadId = parseInt(req.params.leadId);
-      const updatedBy = parseInt(req.params.userId);
+      const leadId = Number(getParam(req.params.leadId));
+      const updatedBy = Number(getParam(req.params.userId));
       const productTypeId = Number(req.body.product_type_id);
       const productTypeName = req.body.product_type;
 
@@ -1232,7 +1235,7 @@ export class LeadController {
     res: Response,
   ): Promise<Response> {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
 
       // Validate vendorId
       if (isNaN(vendorId) || vendorId <= 0) {
@@ -1297,7 +1300,7 @@ export class LeadController {
     res: Response,
   ): Promise<Response> {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
 
       // Validate vendorId
       if (isNaN(vendorId) || vendorId <= 0) {
@@ -1362,8 +1365,8 @@ export class LeadController {
     res: Response,
   ): Promise<Response> {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const userId = Number(getParam(req.params.userId));
 
       // Validate parameters
       if (isNaN(vendorId) || vendorId <= 0) {
@@ -1429,8 +1432,8 @@ export class LeadController {
    */
   async assignLead(req: Request, res: Response): Promise<void> {
     try {
-      const leadId = parseInt(req.params.leadId);
-      const vendorId = parseInt(req.params.vendorId);
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
 
       // Validate leadId
       if (isNaN(leadId) || leadId <= 0) {
@@ -1612,8 +1615,8 @@ export class LeadController {
     res: Response,
   ): Promise<Response> {
     try {
-      const leadId = parseInt(req.params.leadId);
-      const vendorId = parseInt(req.params.vendorId);
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
 
       // Validate parameters
       if (isNaN(leadId) || leadId <= 0) {
