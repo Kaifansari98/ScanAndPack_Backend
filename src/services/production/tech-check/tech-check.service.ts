@@ -1,188 +1,568 @@
-import { Prisma } from "../../../prisma/generated";
+import { NotificationType, Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import logger from "../../../utils/logger";
+import { NotificationService } from "../../../../src/services/notification/notification.service";
+import {
+  sendLeadMovedToOrderLoginEmail, // approved techcheck
+  sendOrderLoginAssignedEmail, // approved tehccheck
+  sendTechCheckApprovedEmail,
+  sendTechCheckRejectedEmail,
+} from "../../../../src/services/email/brevoEmail.service";
+
+export type ApproveTechCheckResult =
+  | {
+      mode: "instance";
+      instance_id: number;
+      is_tech_check_completed: boolean | null;
+      tech_check_completed_at: Date | null;
+    }
+  | {
+      mode: "instance_and_lead_moved";
+      instance_id: number;
+      is_tech_check_completed: boolean | null;
+      tech_check_completed_at: Date | null;
+      updatedLead: any;
+      mapping: any;
+      moved_to_order_login: true;
+      assign_to_user_id: number;
+      account_id: number;
+    }
+  | {
+      updatedLead: any;
+      mapping: any;
+    };
 
 export class TechCheckService {
+  public async getInstanceTechCheckStatus(
+    vendorId: number,
+    leadId: number,
+    instanceId: number,
+  ) {
+    return prisma.leadProductStructureInstance.findFirst({
+      where: {
+        id: instanceId,
+        lead_id: leadId,
+        vendor_id: vendorId,
+      },
+      select: {
+        id: true,
+        lead_id: true,
+        vendor_id: true,
+        is_tech_check_completed: true,
+        tech_check_completed_at: true,
+        is_order_login_completed: true,
+        order_login_completed_at: true,
+        is_production_completed: true,
+        production_completed_at: true,
+      },
+    });
+  }
+
   // ✅ Approve Tech Check
   public async approveTechCheck(
     vendorId: number,
     leadId: number,
     userId: number,
     assignToUserId: number,
-    accountId: number
-  ) {
-    return await prisma.$transaction(async (tx) => {
-      // 1️⃣ Get Order Login Status (Type 9)
-      const orderLoginStatus = await tx.statusTypeMaster.findFirst({
-        where: { vendor_id: vendorId, tag: "Type 9" },
-        select: { id: true },
-      });
+    accountId: number,
+    baseUrl: string,
+    productStructureInstanceId?: number,
+  ): Promise<ApproveTechCheckResult> {
+    const result: ApproveTechCheckResult = await prisma.$transaction(
+      async (tx) => {
+        if (productStructureInstanceId) {
+          const instance = await tx.leadProductStructureInstance.findFirst({
+            where: {
+              id: productStructureInstanceId,
+              lead_id: leadId,
+              vendor_id: vendorId,
+              account_id: accountId || undefined,
+            },
+            select: { id: true, title: true, account_id: true },
+          });
 
-      if (!orderLoginStatus) {
-        throw new Error(
-          `Order Login (Type 9) not configured for vendor ${vendorId}`
-        );
-      }
+          if (!instance) {
+            throw new Error(
+              "Product structure instance not found for this lead",
+            );
+          }
 
-      // 2️⃣ Update Lead status
-      const updatedLead = await tx.leadMaster.update({
-        where: { id: leadId },
-        data: {
-          status_id: orderLoginStatus.id,
-          updated_by: userId,
-          updated_at: new Date(),
-        },
-      });
+          const effectiveAccountId = accountId || instance.account_id;
 
-      // 3️⃣ Assign to Backend User
-      const mapping = await tx.leadUserMapping.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          user_id: assignToUserId,
-          type: "order-login-stage", // 👈 IMPORTANT
-          status: "active",
-          created_by: userId,
-        },
-      });
+          const updatedInstance = await tx.leadProductStructureInstance.update({
+            where: { id: productStructureInstanceId },
+            data: {
+              is_tech_check_completed: true,
+              tech_check_completed_at: new Date(),
+              updated_by: userId,
+              updated_at: new Date(),
+            },
+          });
 
-      // ✅ Ensure assigned backend user is in lead chat members
-      let chatRoom = await tx.leadChatRoom.findFirst({
-        where: {
-          lead_id: leadId,
-          vendor_id: vendorId,
-        },
-        select: { id: true },
-      });
+          await tx.leadDetailedLogs.create({
+            data: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: effectiveAccountId,
+              action: `Tech Check completed for instance ${instance.title}`,
+              action_type: "UPDATE",
+              created_by: userId,
+            },
+          });
 
-      if (!chatRoom) {
-        chatRoom = await tx.leadChatRoom.create({
+          const pendingInstances = await tx.leadProductStructureInstance.count({
+            where: {
+              lead_id: leadId,
+              vendor_id: vendorId,
+              OR: [
+                { is_tech_check_completed: false },
+                { is_tech_check_completed: null },
+              ],
+            },
+          });
+
+          if (pendingInstances === 0) {
+            if (!assignToUserId || !effectiveAccountId) {
+              throw new Error(
+                "assign_to_user_id and account_id are required to move lead to Order Login",
+              );
+            }
+
+            const orderLoginStatus = await tx.statusTypeMaster.findFirst({
+              where: { vendor_id: vendorId, tag: "Type 9" },
+              select: { id: true },
+            });
+
+            if (!orderLoginStatus) {
+              throw new Error(
+                `Order Login (Type 9) not configured for vendor ${vendorId}`,
+              );
+            }
+
+            const updatedLead = await tx.leadMaster.update({
+              where: { id: leadId },
+              data: {
+                status_id: orderLoginStatus.id,
+                updated_by: userId,
+                updated_at: new Date(),
+              },
+            });
+
+            const mapping = await tx.leadUserMapping.create({
+              data: {
+                vendor_id: vendorId,
+                lead_id: leadId,
+                account_id: effectiveAccountId,
+                user_id: assignToUserId,
+                type: "order-login-stage",
+                status: "active",
+                created_by: userId,
+              },
+            });
+
+            let chatRoom = await tx.leadChatRoom.findFirst({
+              where: {
+                lead_id: leadId,
+                vendor_id: vendorId,
+              },
+              select: { id: true },
+            });
+
+            if (!chatRoom) {
+              chatRoom = await tx.leadChatRoom.create({
+                data: {
+                  lead_id: leadId,
+                  vendor_id: vendorId,
+                },
+                select: { id: true },
+              });
+            }
+
+            const existingMember = await tx.leadChatMember.findFirst({
+              where: {
+                chat_room_id: chatRoom.id,
+                user_id: assignToUserId,
+              },
+              select: { id: true },
+            });
+
+            if (!existingMember) {
+              await tx.leadChatMember.create({
+                data: {
+                  chat_room_id: chatRoom.id,
+                  user_id: assignToUserId,
+                  added_by: userId,
+                },
+              });
+            }
+
+            await tx.leadStatusLogs.create({
+              data: {
+                vendor_id: vendorId,
+                lead_id: leadId,
+                account_id: effectiveAccountId,
+                status_id: orderLoginStatus.id,
+                created_by: userId,
+              },
+            });
+
+            await tx.leadDetailedLogs.create({
+              data: {
+                vendor_id: vendorId,
+                lead_id: leadId,
+                account_id: effectiveAccountId,
+                action: `All instances tech check completed. Lead moved to Order Login and assigned to backend user ${assignToUserId}`,
+                action_type: "STATUS_CHANGE",
+                created_by: userId,
+              },
+            });
+
+            return {
+              mode: "instance_and_lead_moved",
+              instance_id: updatedInstance.id,
+              is_tech_check_completed: updatedInstance.is_tech_check_completed,
+              tech_check_completed_at: updatedInstance.tech_check_completed_at,
+              updatedLead,
+              mapping,
+              moved_to_order_login: true,
+              assign_to_user_id: assignToUserId,
+              account_id: effectiveAccountId,
+            };
+          }
+
+          return {
+            mode: "instance",
+            instance_id: updatedInstance.id,
+            is_tech_check_completed: updatedInstance.is_tech_check_completed,
+            tech_check_completed_at: updatedInstance.tech_check_completed_at,
+          };
+        }
+
+        // 1️⃣ Get Order Login Status (Type 9)
+        const orderLoginStatus = await tx.statusTypeMaster.findFirst({
+          where: { vendor_id: vendorId, tag: "Type 9" },
+          select: { id: true },
+        });
+
+        if (!orderLoginStatus) {
+          throw new Error(
+            `Order Login (Type 9) not configured for vendor ${vendorId}`,
+          );
+        }
+
+        // 2️⃣ Update Lead status
+        const updatedLead = await tx.leadMaster.update({
+          where: { id: leadId },
           data: {
+            status_id: orderLoginStatus.id,
+            updated_by: userId,
+            updated_at: new Date(),
+          },
+        });
+
+        // 3️⃣ Assign to Backend User
+        const mapping = await tx.leadUserMapping.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: accountId,
+            user_id: assignToUserId,
+            type: "order-login-stage",
+            status: "active",
+            created_by: userId,
+          },
+        });
+
+        // ✅ Ensure assigned backend user is in lead chat members
+        let chatRoom = await tx.leadChatRoom.findFirst({
+          where: {
             lead_id: leadId,
             vendor_id: vendorId,
           },
           select: { id: true },
         });
-      }
 
-      const existingMember = await tx.leadChatMember.findFirst({
-        where: {
-          chat_room_id: chatRoom.id,
-          user_id: assignToUserId,
-        },
-        select: { id: true },
-      });
+        if (!chatRoom) {
+          chatRoom = await tx.leadChatRoom.create({
+            data: {
+              lead_id: leadId,
+              vendor_id: vendorId,
+            },
+            select: { id: true },
+          });
+        }
 
-      if (existingMember) {
-        logger.info("[SERVICE] LeadChatMember already exists, skipping insert", {
-          lead_id: leadId,
-          chat_room_id: chatRoom.id,
-          user_id: assignToUserId,
-        });
-      } else {
-        await tx.leadChatMember.create({
-          data: {
+        const existingMember = await tx.leadChatMember.findFirst({
+          where: {
             chat_room_id: chatRoom.id,
             user_id: assignToUserId,
-            added_by: userId,
           },
+          select: { id: true },
+        });
+
+        if (existingMember) {
+          logger.info(
+            "[SERVICE] LeadChatMember already exists, skipping insert",
+            {
+              lead_id: leadId,
+              chat_room_id: chatRoom.id,
+              user_id: assignToUserId,
+            },
+          );
+        } else {
+          await tx.leadChatMember.create({
+            data: {
+              chat_room_id: chatRoom.id,
+              user_id: assignToUserId,
+              added_by: userId,
+            },
+          });
+        }
+
+        // 4️⃣ Log status change
+        await tx.leadStatusLogs.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: accountId,
+            status_id: orderLoginStatus.id,
+            created_by: userId,
+          },
+        });
+
+        // 5️⃣ Detailed Logs
+        await tx.leadDetailedLogs.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: accountId,
+            action: `Tech Check approved and assigned to backend user ${assignToUserId}`,
+            action_type: "STATUS_CHANGE",
+            created_by: userId,
+          },
+        });
+
+        return { updatedLead, mapping };
+      },
+    );
+
+    const notify = async () => {
+      // ✅ instance_id ke basis pe quantity_index fetch karo — dono blocks use karenge
+      const instanceInfo = productStructureInstanceId
+        ? await prisma.leadProductStructureInstance.findUnique({
+            where: { id: productStructureInstanceId },
+            select: { quantity_index: true },
+          })
+        : null;
+
+      // ✅ redirectPath builder — accountId + instance_id (optional) dono include
+      const buildRedirectPath = (leadAccountId: number | null) => {
+        const queryParams = new URLSearchParams();
+        if (leadAccountId) {
+          queryParams.set("accountId", String(leadAccountId));
+        }
+        if (productStructureInstanceId) {
+          queryParams.set("instance_id", String(productStructureInstanceId));
+        }
+        const queryString = queryParams.toString();
+        return `/dashboard/production/details/${leadId}${queryString ? `?${queryString}` : ""}`;
+      };
+
+      // ===============================
+      // ORDER LOGIN STAGE → ADMIN NOTIFICATION
+      // ===============================
+      try {
+        const actorId = userId;
+
+        const [lead, actor] = await Promise.all([
+          prisma.leadMaster.findUnique({
+            where: { id: leadId },
+            select: {
+              firstname: true,
+              lastname: true,
+              lead_code: true,
+              vendor_id: true,
+              account_id: true,
+            },
+          }),
+
+          prisma.userMaster.findUnique({
+            where: { id: actorId },
+            select: { user_name: true },
+          }),
+        ]);
+
+        if (!lead) return;
+
+        const leadName =
+          `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+
+        const baseLeadCode =
+          lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+
+        // ✅ instance hai → vloq-46.1 | nahi hai → vloq-46
+        const leadCode =
+          instanceInfo?.quantity_index != null
+            ? `${baseLeadCode}.${instanceInfo.quantity_index}`
+            : baseLeadCode;
+
+        const updatedAt = new Date().toLocaleString("en-IN", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
+        // ✅ redirectPath with instance_id
+        const redirectPath = buildRedirectPath(lead.account_id);
+        const projectUrl = `${baseUrl}${redirectPath}`;
+
+        const admins = await prisma.userMaster.findMany({
+          where: {
+            vendor_id: lead.vendor_id,
+            status: "active",
+            user_type: {
+              user_type: { in: ["admin"] },
+            },
+          },
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+          },
+        });
+
+        for (const admin of admins) {
+          if (admin.id === actorId) continue;
+
+          await NotificationService.createAndSend({
+            vendor_id: lead.vendor_id,
+            user_id: admin.id,
+            sender_id: actorId,
+            type: NotificationType.LEAD_MILESTONE,
+            title: "Lead Entered Order Login Stage",
+            message: `${leadCode} - ${leadName} moved to Order Login stage.`,
+            entity_type: "lead",
+            entity_id: leadId,
+            redirect_url: redirectPath, // ✅ instance_id included
+          });
+
+          if (!admin.user_email) continue;
+
+          await sendLeadMovedToOrderLoginEmail({
+            vendor_id: lead.vendor_id,
+            toEmail: admin.user_email,
+            toName: admin.user_name,
+            leadCode, // ✅ vloq-46.1 ya vloq-46
+            leadName,
+            updatedBy: actor?.user_name ?? "System",
+            updatedAt,
+            projectUrl, // ✅ instance_id included
+          });
+        }
+      } catch (err: any) {
+        logger.warn("⚠️ Order login admin notification failed", {
+          lead_id: leadId,
+          error: err?.message,
         });
       }
 
-      // 4️⃣ Log status change
-      await tx.leadStatusLogs.create({
-        data: {
-          vendor_id: vendorId,
+      // ===============================
+      // ORDER LOGIN ASSIGNMENT → BACKEND USER NOTIFICATION
+      // ===============================
+      try {
+        const assignedUserId = assignToUserId;
+
+        if (assignedUserId !== userId) {
+          const [lead, assigner, assignee] = await Promise.all([
+            prisma.leadMaster.findUnique({
+              where: { id: leadId },
+              select: {
+                firstname: true,
+                lastname: true,
+                lead_code: true,
+                vendor_id: true,
+                account_id: true,
+              },
+            }),
+
+            prisma.userMaster.findUnique({
+              where: { id: userId },
+              select: { user_name: true },
+            }),
+
+            prisma.userMaster.findUnique({
+              where: { id: assignedUserId },
+              select: {
+                user_name: true,
+                user_email: true,
+              },
+            }),
+          ]);
+
+          if (!lead || !assignee) return;
+
+          const leadName =
+            `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+
+          const baseLeadCode =
+            lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+
+          // ✅ instance hai → vloq-46.1 | nahi hai → vloq-46
+          const leadCode =
+            instanceInfo?.quantity_index != null
+              ? `${baseLeadCode}.${instanceInfo.quantity_index}`
+              : baseLeadCode;
+
+          const assignedAt = new Date().toLocaleString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+
+          // ✅ redirectPath with instance_id
+          const redirectPath = buildRedirectPath(lead.account_id);
+          const projectUrl = `${baseUrl}${redirectPath}`;
+
+          await NotificationService.createAndSend({
+            vendor_id: lead.vendor_id,
+            user_id: assignedUserId,
+            sender_id: userId,
+            type: NotificationType.TASK_ASSIGNED,
+            title: "Order Login Task Assigned",
+            message: `${leadCode} - ${leadName} has been assigned to you for Order Login.`,
+            entity_type: "lead",
+            entity_id: leadId,
+            redirect_url: redirectPath, // ✅ instance_id included
+          });
+
+          if (assignee.user_email) {
+            await sendOrderLoginAssignedEmail({
+              vendor_id: lead.vendor_id,
+              toEmail: assignee.user_email,
+              toName: assignee.user_name,
+              leadCode, // ✅ vloq-46.1 ya vloq-46
+              leadName,
+              assignedBy: assigner?.user_name ?? "System",
+              assignedAt,
+              projectUrl, // ✅ instance_id included
+            });
+          }
+        }
+      } catch (err: any) {
+        logger.warn("⚠️ Order login assignment notification failed", {
           lead_id: leadId,
-          account_id: accountId,
-          status_id: orderLoginStatus.id,
-          created_by: userId,
-        },
-      });
-
-      // 5️⃣ Detailed Logs
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          action: `Tech Check approved and assigned to backend user ${assignToUserId}`,
-          action_type: "STATUS_CHANGE",
-          created_by: userId,
-        },
-      });
-
-      return { updatedLead, mapping };
-    });
-  }
-
-  // ✅ Reject Tech Check
-  public async rejectTechCheck(
-    vendorId: number,
-    leadId: number,
-    userId: number,
-    rejectedDocs: number[],
-    remark?: string
-  ) {
-    return await prisma.$transaction(async (tx) => {
-      // Resolve account_id once
-      const accountId = (
-        await tx.leadMaster.findUnique({
-          where: { id: leadId },
-          select: { account_id: true },
-        })
-      )?.account_id!;
-
-      // 1️⃣ Create a single leadDetailedLogs entry (with remark baked into action)
-      const actionText = remark
-        ? `Tech check rejected ${rejectedDocs.length} documents — Remark: ${remark}`
-        : `Tech check rejected ${rejectedDocs.length} documents`;
-
-      const detailedLog = await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          action: actionText,
-          action_type: "UPDATE",
-          created_by: userId,
-        },
-      });
-
-      // 2️⃣ Update only the selected client-documentation docs to REJECTED
-      const updateRes = await tx.leadDocuments.updateMany({
-        where: {
-          id: { in: rejectedDocs },
-          vendor_id: vendorId,
-          documentType: {
-            // ✅ use the correct tags with spaces
-            tag: { in: ["Type 11", "Type 12"] },
-          },
-        },
-        data: { tech_check_status: "REJECTED" },
-      });
-
-      // 3️⃣ Insert LeadDocumentLogs mappings referencing the detailed log
-      if (rejectedDocs.length > 0) {
-        const docLogsData = rejectedDocs.map((docId) => ({
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          doc_id: docId, // ✅ schema field name
-          lead_logs_id: detailedLog.id, // ✅ link to the detailed log
-          created_by: userId,
-        }));
-
-        await tx.leadDocumentLogs.createMany({ data: docLogsData });
+          assigned_user_id: assignToUserId,
+          error: err?.message,
+        });
       }
+    };
 
-      return {
-        rejectedDocsRequested: rejectedDocs.length,
-        rejectedDocsUpdated: updateRes.count,
-        detailedLogId: detailedLog.id,
-      };
-    });
+    void notify();
+    return result;
   }
 
   // ✅ Keep your existing method
@@ -190,7 +570,7 @@ export class TechCheckService {
     vendorId: number,
     userId: number,
     limit = 10,
-    page = 1
+    page = 1,
   ) {
     const skip = (page - 1) * limit;
 
@@ -201,7 +581,7 @@ export class TechCheckService {
 
     if (!techCheckStatus) {
       throw new Error(
-        `Tech Check status (Type 8) not found for vendor ${vendorId}`
+        `Tech Check status (Type 8) not found for vendor ${vendorId}`,
       );
     }
 
@@ -277,18 +657,26 @@ export class TechCheckService {
     vendorId: number,
     leadId: number,
     userId: number,
-    approvedDocs: number[]
+    approvedDocs: number[],
+    baseUrl: string,
+    instanceId?: number,
   ) {
-    return await prisma.$transaction(async (tx) => {
-      // 1️⃣ Validate & Resolve account_id
+    // ===============================
+    // 1️⃣ TRANSACTION LAYER
+    // ===============================
+
+    const result = await prisma.$transaction(async (tx) => {
       const accountId = (
         await tx.leadMaster.findUnique({
           where: { id: leadId },
           select: { account_id: true },
         })
-      )?.account_id!;
+      )?.account_id;
 
-      // 2️⃣ Update the provided documents’ tech_check_status to APPROVED
+      if (!accountId) {
+        throw new Error("Lead account not found");
+      }
+
       const updateRes = await tx.leadDocuments.updateMany({
         where: {
           id: { in: approvedDocs },
@@ -297,10 +685,11 @@ export class TechCheckService {
             tag: { in: ["Type 11", "Type 12"] },
           },
         },
-        data: { tech_check_status: "APPROVED" },
+        data: {
+          tech_check_status: "APPROVED",
+        },
       });
 
-      // 3️⃣ Create a main detailed log entry
       const detailedLog = await tx.leadDetailedLogs.create({
         data: {
           vendor_id: vendorId,
@@ -312,8 +701,7 @@ export class TechCheckService {
         },
       });
 
-      // 4️⃣ Create corresponding document logs linked to this detailed log
-      if (approvedDocs.length > 0) {
+      if (approvedDocs.length) {
         const docLogsData = approvedDocs.map((docId) => ({
           vendor_id: vendorId,
           lead_id: leadId,
@@ -323,15 +711,356 @@ export class TechCheckService {
           created_by: userId,
         }));
 
-        await tx.leadDocumentLogs.createMany({ data: docLogsData });
+        await tx.leadDocumentLogs.createMany({
+          data: docLogsData,
+        });
       }
 
       return {
-        approvedDocsRequested: approvedDocs.length,
-        approvedDocsUpdated: updateRes.count,
-        detailedLogId: detailedLog.id,
+        accountId,
+        updatedCount: updateRes.count,
       };
     });
+
+    // ===============================
+    // 2️⃣ NOTIFICATION + EMAIL LAYER
+    // ===============================
+
+    try {
+      const [leadInfo, approvedByUser, instanceInfo] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: leadId, vendor_id: vendorId },
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            account_id: true,
+          },
+        }),
+
+        prisma.userMaster.findUnique({
+          where: { id: userId },
+          select: { user_name: true },
+        }),
+
+        // ✅ quantity_index fetch — same as rejectTechCheck
+        instanceId
+          ? prisma.leadProductStructureInstance.findUnique({
+              where: { id: instanceId },
+              select: { quantity_index: true },
+            })
+          : Promise.resolve(null),
+      ]);
+
+      if (!leadInfo) return result;
+
+      const baseLeadCode =
+        leadInfo.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+
+      // ✅ instance hai → vloq-46.1 | nahi hai → vloq-46
+      const leadCode =
+        instanceInfo?.quantity_index != null
+          ? `${baseLeadCode}.${instanceInfo.quantity_index}`
+          : baseLeadCode;
+
+      const leadName =
+        `${leadInfo.firstname ?? ""} ${leadInfo.lastname ?? ""}`.trim();
+
+      const approvedByName = approvedByUser?.user_name ?? "Tech Check Team";
+
+      const approvedAt = new Date().toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      // ✅ redirectPath — accountId + instance_id (optional) dono include
+      const queryParams = new URLSearchParams();
+      if (leadInfo.account_id) {
+        queryParams.set("accountId", String(leadInfo.account_id));
+      }
+      if (instanceId) {
+        queryParams.set("instance_id", String(instanceId));
+      }
+      const queryString = queryParams.toString();
+      const redirectPath = `/dashboard/leads/details/${leadId}${queryString ? `?${queryString}` : ""}`;
+
+      const projectUrl = `${baseUrl}${redirectPath}`;
+
+      const mappings = await prisma.leadUserMapping.findMany({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          status: "active",
+        },
+        select: { user_id: true },
+      });
+
+      const salesUserIds = [...new Set(mappings.map((m) => m.user_id))];
+
+      if (!salesUserIds.length) return result;
+
+      const salesExecutives = await prisma.userMaster.findMany({
+        where: {
+          id: { in: salesUserIds },
+          status: "active",
+          user_type: {
+            user_type: { equals: "sales-executive", mode: "insensitive" },
+          },
+        },
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+        },
+      });
+
+      await Promise.allSettled(
+        salesExecutives.map(async (salesExec) => {
+          // 🔔 In-App Notification
+          await NotificationService.createAndSend({
+            vendor_id: vendorId,
+            user_id: salesExec.id,
+            sender_id: userId,
+            type: NotificationType.LEAD_ACTION,
+            title: "Tech Check Document Approved",
+            message: `The documents for ${leadCode} - ${leadName} have been approved by Tech Check.`,
+            entity_type: "lead",
+            entity_id: leadId,
+            redirect_url: redirectPath,
+          });
+
+          if (!salesExec.user_email) return;
+
+          await sendTechCheckApprovedEmail({
+            vendor_id: vendorId,
+            toEmail: salesExec.user_email,
+            toName: salesExec.user_name ?? undefined,
+            leadCode, // ✅ vloq-46.1 ya vloq-46
+            leadName,
+            approvedBy: approvedByName,
+            approvedAt,
+            projectUrl,
+          });
+        }),
+      );
+    } catch (err: any) {
+      logger.warn("⚠️ Tech Check approval notification failed", {
+        lead_id: leadId,
+        error: err?.message,
+      });
+    }
+
+    return result;
+  }
+
+  public async rejectTechCheck(
+    vendorId: number,
+    leadId: number,
+    userId: number,
+    rejectedDocs: number[],
+    baseUrl: string,
+    instanceId?: number,
+    remark?: string,
+  ) {
+    // ===============================
+    // 1️⃣ TRANSACTION LAYER
+    // ===============================
+
+    console.log("instance id from reject techcheck: ", instanceId);
+
+    const result = await prisma.$transaction(async (tx) => {
+      const accountId = (
+        await tx.leadMaster.findUnique({
+          where: { id: leadId },
+          select: { account_id: true },
+        })
+      )?.account_id;
+
+      if (!accountId) {
+        throw new Error("Lead account not found");
+      }
+
+      const actionText = remark
+        ? `Tech check rejected ${rejectedDocs.length} documents — Remark: ${remark}`
+        : `Tech check rejected ${rejectedDocs.length} documents`;
+
+      const detailedLog = await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          action: actionText,
+          action_type: "UPDATE",
+          created_by: userId,
+        },
+      });
+
+      const updateRes = await tx.leadDocuments.updateMany({
+        where: {
+          id: { in: rejectedDocs },
+          vendor_id: vendorId,
+          documentType: {
+            tag: { in: ["Type 11", "Type 12"] },
+          },
+        },
+        data: {
+          tech_check_status: "REJECTED",
+        },
+      });
+
+      if (rejectedDocs.length) {
+        const docLogsData = rejectedDocs.map((docId) => ({
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          doc_id: docId,
+          lead_logs_id: detailedLog.id,
+          created_by: userId,
+        }));
+
+        await tx.leadDocumentLogs.createMany({
+          data: docLogsData,
+        });
+      }
+
+      return {
+        accountId,
+        rejectedUpdated: updateRes.count,
+      };
+    });
+
+    // ===============================
+    // 2️⃣ NOTIFICATION + EMAIL LAYER
+    // ===============================
+
+    try {
+      const [leadInfo, rejectedByUser, instanceInfo] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: leadId, vendor_id: vendorId },
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            account_id: true,
+          },
+        }),
+
+        prisma.userMaster.findUnique({
+          where: { id: userId },
+          select: { user_name: true },
+        }),
+
+        instanceId
+          ? prisma.leadProductStructureInstance.findUnique({
+              where: { id: instanceId },
+              select: { quantity_index: true },
+            })
+          : Promise.resolve(null),
+      ]);
+
+      if (!leadInfo) return result;
+
+      const baseLeadCode = leadInfo.lead_code;
+
+      const leadCode =
+        instanceInfo?.quantity_index != null
+          ? `${baseLeadCode}.${instanceInfo.quantity_index}`
+          : baseLeadCode;
+
+      const leadName =
+        `${leadInfo.firstname ?? ""} ${leadInfo.lastname ?? ""}`.trim();
+
+      const rejectedByName = rejectedByUser?.user_name ?? "Tech Check Team";
+
+      const rejectedAt = new Date().toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      // ✅ redirectPath — accountId + instance_id (optional) dono include
+      const queryParams = new URLSearchParams();
+      if (leadInfo.account_id) {
+        queryParams.set("accountId", String(leadInfo.account_id));
+      }
+      if (instanceId) {
+        queryParams.set("instance_id", String(instanceId));
+      }
+      const queryString = queryParams.toString();
+      const redirectPath = `/dashboard/production/tech-check/details/${leadId}${queryString ? `?${queryString}` : ""}`;
+
+      const projectUrl = `${baseUrl}${redirectPath}`;
+
+      const mappings = await prisma.leadUserMapping.findMany({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          status: "active",
+        },
+        select: { user_id: true },
+      });
+
+      const salesUserIds = [...new Set(mappings.map((m) => m.user_id))];
+
+      if (!salesUserIds.length) return result;
+
+      const salesExecutives = await prisma.userMaster.findMany({
+        where: {
+          id: { in: salesUserIds },
+          status: "active",
+          user_type: {
+            user_type: { equals: "sales-executive", mode: "insensitive" },
+          },
+        },
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+        },
+      });
+
+      await Promise.allSettled(
+        salesExecutives.map(async (salesExec) => {
+          await NotificationService.createAndSend({
+            vendor_id: vendorId,
+            user_id: salesExec.id,
+            sender_id: userId,
+            type: NotificationType.LEAD_ACTION,
+            title: "Tech Check Document Rejected",
+            message: `Documents for ${leadCode} - ${leadName} have been rejected by Tech Check.`,
+            entity_type: "lead",
+            entity_id: leadId,
+            redirect_url: redirectPath,
+          });
+
+          if (!salesExec.user_email) return;
+
+          await sendTechCheckRejectedEmail({
+            vendor_id: vendorId,
+            toEmail: salesExec.user_email,
+            toName: salesExec.user_name ?? undefined,
+            leadCode,
+            leadName,
+            rejectedBy: rejectedByName,
+            rejectedAt,
+            remark,
+            projectUrl,
+          });
+        }),
+      );
+    } catch (err: any) {
+      logger.warn("⚠️ Tech Check rejection notification failed", {
+        lead_id: leadId,
+        error: err?.message,
+      });
+    }
+
+    return result;
   }
 
   private defaultIncludes() {

@@ -3,11 +3,14 @@ import { PreProductionService } from "../../../../services/production/pre-produc
 
 const service = new PreProductionService();
 
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
 export class PreProductionController {
   async getAllPreProductionLeads(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const userId = Number(getParam(req.params.userId));
 
       if (!vendorId || !userId) {
         return res.status(400).json({
@@ -127,8 +130,8 @@ export class PreProductionController {
 
   static async updateExpectedOrderLoginReadyDate(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
       const { expected_order_login_ready_date, updated_by } = req.body;
 
       if (
@@ -167,8 +170,9 @@ export class PreProductionController {
 
   static async checkPostProductionReady(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
+      const { instance_id } = req.query;
 
       if (!vendorId || !leadId) {
         return res.status(400).json({
@@ -177,7 +181,11 @@ export class PreProductionController {
         });
       }
 
-      const result = await service.checkPostProductionReady(vendorId, leadId);
+      const result = await service.checkPostProductionReady(
+        vendorId,
+        leadId,
+        typeof instance_id !== "undefined" ? Number(instance_id) : undefined
+      );
 
       return res.status(200).json({
         success: true,

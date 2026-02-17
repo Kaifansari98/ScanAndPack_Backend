@@ -3,14 +3,13 @@ import * as trackTraceService from '../../services/trackTraceServices/trackTrace
 import * as machineService from '../../services/machineService/machineService.service';
 
 import { ApiResponse } from 'src/utils/apiResponse';
-import { CutListSavePayload } from 'src/types/track-trace';
-
+import { CutListSavePayload, QRParam } from 'src/types/track-trace';
+import { generateWarehouseQRPDF } from "../../utils/warehouse-qr-generator";
 
 export const scan_item = async (req: Request, res: Response) => {
     console.log("Query params:", req.body);
 
-    let serviceResponse = await trackTraceService.updateScannedItem(req.body);
-    console.log("serviceResponse.status" + serviceResponse.status);
+    let serviceResponse = await trackTraceService.updateScannedItem(req.body);    
     if (serviceResponse.status == 0) {
         return res
             .status(200)
@@ -32,8 +31,6 @@ export const scan_item = async (req: Request, res: Response) => {
             );
     }
 };
-
-
 
 export const getAllMachines = async (_req: Request, res: Response) => {
     console.log("Query params:", _req.query);
@@ -62,7 +59,7 @@ export const getAllMachines = async (_req: Request, res: Response) => {
 
 export const getTrackTraceDashboardPayload = (
     req: Request
-): TrackTraceDashboardPayload => {
+) => {
 
     const vendorIdRaw = req.params.vendor_id;
 
@@ -475,5 +472,118 @@ export const assignMachine = async (_req: Request, res: Response) => {
 }
 
 
+// import { generateQrLabel } from "../../utils/qr-label";
+// import { generateMultiQRLabel } from "../../utils/multi-qr-label";
 
 
+
+
+export const createQR = async (_req: Request, res: Response) => {
+
+    console.log("Query params:", _req.body);
+
+    const payload: QRParam = {
+        vendorId: Number(_req.body.vendorId),
+        projectId: String(_req.body.projectId),
+        cutListIds: String(_req.body.cutListIds)
+    }
+
+
+    console.log(payload)
+
+    try {
+
+        const data = await trackTraceService.createQR(payload);
+
+        if (data) {
+            const filePath = await generateWarehouseQRPDF({
+                itemQRs: data.map((item: any) => ({
+                    value: item.cut_list.unique_code,        // QR encoded value
+                    itemCode: item.cut_list.unique_code,     // Bold label
+                    itemName: item.cut_list.description || "", // Second label,
+                    columns: 3
+                })),
+
+
+            });
+            return res
+                .status(200)
+                .json(
+                    ApiResponse.success(
+                        filePath,
+                        "",
+                        200
+                    )
+                );
+        } else {
+            return res
+                .status(200)
+                .json(
+                    ApiResponse.error(
+                        "No data avialbale",
+                        200
+                    )
+                );
+        }
+
+
+
+
+
+
+
+    } catch (err) {
+
+        return res
+            .status(200)
+            .json(
+                ApiResponse.error(
+                    "",
+                    500
+                )
+            );
+    }
+}
+
+
+
+export const downloadCutListExcel = async (_req: Request, res: Response) => {
+    try {
+        const searchParams = _req.body.searchParams;
+        const vendorId = _req.body.vendorId;
+        console.log("vendorId",vendorId);
+        const unique_project_id =_req.body.unique_project_id;// searchParams.get('unique_project_id');
+
+        if (!unique_project_id) {
+            return res
+                .status(200)
+                .json(
+                    ApiResponse.error(
+                        "Project Id is required",
+                        200
+                    )
+                );
+        }
+
+        // Generate Excel
+        const filePath = await trackTraceService.downloadCutListExcel(vendorId, unique_project_id);
+
+
+        // Return Excel file
+
+
+        return res
+            .status(200)
+            .json(
+                ApiResponse.success(
+                    filePath,
+                    "",
+                    200
+                )
+            );
+    } catch (error: any) {
+        console.error('Error downloading Excel:', error);
+
+    }
+
+}

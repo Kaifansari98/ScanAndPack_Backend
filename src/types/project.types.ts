@@ -76,6 +76,8 @@ export interface CadbidItems {
   rotation: Number;
   sl1: string;
   sl2: string;
+  barcode1: string;
+  barcode2: string;
 }
 
 

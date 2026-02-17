@@ -82,6 +82,7 @@ export const getAllProjectsTrackTrace = (vendor_id: number) => {
       details: true,
       items: true,
     },
+    orderBy: { id: "desc" }
   });
 };
 
@@ -889,6 +890,12 @@ export const handelItems = async (
       l3: requiredNumber("l3"),
       name: requiredString("name"),
       qty: z.coerce.number().int().positive("qty must be greater than 0"),
+      barcode1: z.string().optional(),
+      barcode2: z.string().optional(),
+      el1: z.string().optional(),
+      el2: z.string().optional(),
+      sl1: z.string().optional(),
+      sl2: z.string().optional(),
     });
 
     const payloadSchema = z.object({
@@ -915,9 +922,55 @@ export const handelItems = async (
       };
     }
 
+    // ✅ Step 1: Collect all unique_codes (barcode1) that will be inserted
+    const uniqueCodesToInsert: string[] = [];
 
+    for (const item of payload.items) {
+      if (item.barcode1) {
+        const quantity = Number(item.qty);
+        for (let i = 0; i < quantity; i++) {
+          uniqueCodesToInsert.push(item.barcode1);
+        }
+      }
+    }
 
-    // ✅ Step 1: Resolve vendor
+    // ✅ Step 2: Check for duplicates within the payload itself
+    const duplicatesInPayload = uniqueCodesToInsert.filter(
+      (code, index) => uniqueCodesToInsert.indexOf(code) !== index
+    );
+
+    if (duplicatesInPayload.length > 0) {
+      return {
+        success: false,
+        message: "Duplicate barcodes found in payload",
+        duplicates: [...new Set(duplicatesInPayload)]
+      };
+    }
+
+    // ✅ Step 3: Check if any barcode1 already exists in database
+    if (uniqueCodesToInsert.length > 0) {
+      const existingCodes = await prisma.cutList.findMany({
+        where: {
+          unique_code: {
+            in: uniqueCodesToInsert
+          }
+        },
+        select: {
+          unique_code: true
+        }
+      });
+
+      if (existingCodes.length > 0) {
+        const duplicateCodes = existingCodes.map(c => c.unique_code);
+        return {
+          success: false,
+          message: "Duplicate barcodes found in database",
+          duplicates: duplicateCodes
+        };
+      }
+    }
+
+    // ✅ Step 4: Resolve vendor
     const vendorTokenEntry = await prisma.vendorTokens.findUnique({
       where: { token: vendorToken },
       include: { vendor: true }
@@ -929,7 +982,7 @@ export const handelItems = async (
 
     const vendor = vendorTokenEntry.vendor;
 
-    // ✅ Step 2: Resolve admin user
+    // ✅ Step 5: Resolve admin user
     const adminUser = await prisma.userMaster.findFirst({
       where: {
         vendor_id: vendor.id,
@@ -949,6 +1002,14 @@ export const handelItems = async (
     // 🔥 MAIN TRANSACTION
     const result = await prisma.$transaction(async (tx) => {
 
+
+
+
+
+
+
+
+
       const project = await tx.projectMaster.create({
         data: {
           project_name: payload.projectName,
@@ -959,65 +1020,6 @@ export const handelItems = async (
           is_grouping: false
         }
       });
-
-      // for (const item of payload.items) {
-
-      //   const firstRow = await tx.cutList.create({
-      //     data: {
-      //       project_id: project.id,
-      //       vendor_id: vendor.id,
-      //       description: item.name,
-      //       length: Number(item.l1),
-      //       width: Number(item.l2),
-      //       thickness: Number(item.l3),
-      //       qty: 1,
-      //       material_details: item.articleCode,
-      //       item_name: item.groupName,
-      //       status: "Active",
-      //       created_by: createdByUserId,
-      //       lead_id: lead_id,
-      //       elf: item.elf,
-      //       elb: item.elb,
-      //       esl: item.esl,
-      //       esr: item.esr,
-      //     }
-      //   });
-
-      //   const uniqueCode = `${firstRow.id}-${project.id}`;
-
-      //   await tx.cutList.update({
-      //     where: { id: firstRow.id },
-      //     data: { unique_code: uniqueCode }
-      //   });
-
-      //   const quantity = Number(item.qty);
-
-      //   if (quantity > 1) {
-      //     const additionalRows = Array.from({ length: quantity - 1 }).map(() => ({
-      //       project_id: project.id,
-      //       vendor_id: vendor.id,
-      //       description: item.name,
-      //       length: Number(item.l1),
-      //       width: Number(item.l2),
-      //       thickness: Number(item.l3),
-      //       qty: 1,
-      //       material_details: item.articleCode,
-      //       item_name: item.groupName,
-      //       status: "Active",
-      //       created_by: createdByUserId,
-      //       lead_id: lead_id,
-      //       unique_code: uniqueCode,
-      //       elf: item.elf,
-      //       elb: item.elb,
-      //       esl: item.esl,
-      //       esr: item.esr,
-      //     }));
-
-      //     await tx.cutList.createMany({
-      //       data: additionalRows
-      //     });
-      //   }
-      // }
 
       for (const item of payload.items) {
 
@@ -1039,22 +1041,70 @@ export const handelItems = async (
               status: "Active",
               created_by: createdByUserId,
               lead_id: lead_id,
-              elf: item.el1,
-              elb: item.el2,
-              esl: item.sl1,
-              esr: item.sl2,
+              elf: item.el1 || '',
+              elb: item.el2 || '',
+              esl: item.sl1 || '',
+              esr: item.sl2 || '',
+              unique_code: "",
+              unique_code_2: item.barcode2 || null,
             }
           });
 
-          const uniqueCode = `${row.id}-${project.id}`;
+          const uniqueCode = item.barcode1 || `${row.id}-${project.id}`;
 
           await tx.cutList.update({
             where: { id: row.id },
             data: { unique_code: uniqueCode }
           });
-        }
-      }
 
+          let machine_type_id = 0;
+          let sequence_no = 0;
+          const hasEdgeBanding = item.el1 || item.el2 || item.sl1 || item.sl2;
+
+          if (hasEdgeBanding) {
+
+            if (machine_type_id == 0) {
+              const machine_type = await tx.machineMaster.findFirst({
+                where: {
+                  vendor_id: Number(vendor.id),
+                  machine_type_id: 11
+                },
+                select: {
+                  id: true,
+                  sequence_no: true
+                }
+              });
+              if (machine_type) {
+                machine_type_id = machine_type.id ?? 0;
+                sequence_no = machine_type.sequence_no ?? 0;
+              }
+            }
+
+            if (machine_type_id == 0) {
+              return {
+                success: false,
+                message: "Edgebanding machine is not configured",
+              };
+            } else {
+              await tx.cutListMachineMapping.create({
+                data: {
+                  cut_list_id: row.id,
+                  machine_id: machine_type_id,
+                  project_id: project.id,
+                  vendor_id: vendor.id,
+                  lead_id: lead_id,
+                  sequence_no: sequence_no,
+                  status: "Pending",
+                  created_by: createdByUserId,
+                  expected_in: true
+                }
+              });
+            }
+          }
+        }
+
+
+      }
 
       return project;
     });
@@ -1062,7 +1112,8 @@ export const handelItems = async (
     return {
       success: true,
       message: "Items processed successfully",
-      project_id: result.id
+      project_id: result.id,
+      unique_project_id: unique_project_id
     };
 
   } catch (error: any) {

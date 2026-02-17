@@ -1072,7 +1072,15 @@ export class DesigingStageController {
         });
       }
 
-      const { lead_id, account_id, vendor_id, type, desc, created_by } =
+      const {
+        lead_id,
+        account_id,
+        vendor_id,
+        type,
+        desc,
+        created_by,
+        product_structure_instance_id,
+      } =
         req.body;
       const logs: any[] = [];
 
@@ -1123,44 +1131,121 @@ export class DesigingStageController {
       }
       logs.push("Account verified successfully");
 
-      // 4️⃣ Create Design Selection Entry
-      const designSelection = await prisma.leadDesignSelection.create({
-        data: {
+      // 4️⃣ Validate product structure instance (optional)
+      let resolvedInstanceId: number | null = null;
+      if (product_structure_instance_id) {
+        const instance = await prisma.leadProductStructureInstance.findFirst({
+          where: {
+            id: Number(product_structure_instance_id),
+            lead_id: Number(lead_id),
+            account_id: Number(account_id),
+            vendor_id: Number(vendor_id),
+          },
+          select: { id: true },
+        });
+
+        if (!instance) {
+          return res.status(404).json({
+            success: false,
+            message: "Product structure instance not found for this lead",
+            logs: ["Product structure instance verification failed"],
+          });
+        }
+        resolvedInstanceId = instance.id;
+        logs.push("Product structure instance verified successfully");
+      }
+
+      // 5️⃣ Create or update Design Selection Entry (prevent duplicate per type+instance)
+      const existingSelection = await prisma.leadDesignSelection.findFirst({
+        where: {
           lead_id: Number(lead_id),
-          account_id: Number(account_id),
           vendor_id: Number(vendor_id),
+          account_id: Number(account_id),
           type,
-          desc,
-          created_by: Number(created_by),
+          product_structure_instance_id: resolvedInstanceId,
         },
-        include: {
-          createdBy: {
-            select: { id: true, user_name: true, user_email: true },
-          },
-          lead: {
-            select: {
-              id: true,
-              firstname: true,
-              lastname: true,
-              contact_no: true,
-            },
-          },
-          account: { select: { id: true, name: true } },
-        },
+        select: { id: true },
       });
 
-      logs.push("Design selection created successfully");
+      const designSelection = existingSelection
+        ? await prisma.leadDesignSelection.update({
+            where: { id: existingSelection.id },
+            data: {
+              desc,
+              updated_by: Number(created_by),
+              updated_at: new Date(),
+            },
+            include: {
+              createdBy: {
+                select: { id: true, user_name: true, user_email: true },
+              },
+              lead: {
+                select: {
+                  id: true,
+                  firstname: true,
+                  lastname: true,
+                  contact_no: true,
+                },
+              },
+              account: { select: { id: true, name: true } },
+              productStructureInstance: {
+                select: { id: true, title: true, quantity_index: true },
+              },
+            },
+          })
+        : await prisma.leadDesignSelection.create({
+            data: {
+              lead_id: Number(lead_id),
+              account_id: Number(account_id),
+              vendor_id: Number(vendor_id),
+              product_structure_instance_id: resolvedInstanceId,
+              type,
+              desc,
+              created_by: Number(created_by),
+            },
+            include: {
+              createdBy: {
+                select: { id: true, user_name: true, user_email: true },
+              },
+              lead: {
+                select: {
+                  id: true,
+                  firstname: true,
+                  lastname: true,
+                  contact_no: true,
+                },
+              },
+              account: { select: { id: true, name: true } },
+              productStructureInstance: {
+                select: { id: true, title: true, quantity_index: true },
+              },
+            },
+          });
 
-      // 5️⃣ Add LeadDetailedLogs entry (with remark from `desc`)
+      logs.push(
+        existingSelection
+          ? "Design selection updated successfully"
+          : "Design selection created successfully"
+      );
+
+      // 6️⃣ Add LeadDetailedLogs entry (with remark from `desc`)
       let actionMessage = "";
       if (type.toLowerCase() === "carcas") {
-        actionMessage = `Carcas has been added successfully.`;
+        actionMessage = existingSelection
+          ? `Carcas has been updated successfully.`
+          : `Carcas has been added successfully.`;
       } else if (type.toLowerCase() === "shutter") {
-        actionMessage = `Shutter has been added successfully.`;
+        actionMessage = existingSelection
+          ? `Shutter has been updated successfully.`
+          : `Shutter has been added successfully.`;
       } else if (type.toLowerCase() === "handles") {
-        actionMessage = `Handles have been added successfully.`;
+        actionMessage = existingSelection
+          ? `Handles has been updated successfully.`
+          : `Handles has been added successfully.`;
       } else {
-        actionMessage = `${type} has been added successfully.`;
+        actionMessage = existingSelection
+          ? `${type} has been updated successfully.`
+          : `${type} has been added successfully.`;
       }
 
       // 👇 append remark from `desc` into the action
@@ -1205,7 +1290,11 @@ export class DesigingStageController {
   public static async getDesignSelections(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
-      const { page = "1", limit = "10" } = req.query;
+      const {
+        page = "1",
+        limit = "10",
+        product_structure_instance_id,
+      } = req.query;
 
       if (!vendorId || !leadId) {
         return res.status(400).json({
@@ -1236,11 +1325,45 @@ export class DesigingStageController {
       }
       logs.push("Lead verified successfully");
 
+      let instanceFilter: number | undefined;
+      if (product_structure_instance_id) {
+        const instanceId = Number(product_structure_instance_id);
+        if (Number.isNaN(instanceId)) {
+          return res.status(400).json({
+            success: false,
+            message: "product_structure_instance_id must be numeric",
+            logs: ["Invalid product_structure_instance_id"],
+          });
+        }
+
+        const instance = await prisma.leadProductStructureInstance.findFirst({
+          where: {
+            id: instanceId,
+            lead_id: Number(leadId),
+            vendor_id: Number(vendorId),
+          },
+          select: { id: true },
+        });
+
+        if (!instance) {
+          return res.status(404).json({
+            success: false,
+            message: "Product structure instance not found for this lead",
+            logs: ["Product structure instance verification failed"],
+          });
+        }
+        instanceFilter = instance.id;
+        logs.push("Product structure instance verified successfully");
+      }
+
       // 2️⃣ Fetch design selections with pagination
       const designSelections = await prisma.leadDesignSelection.findMany({
         where: {
           lead_id: Number(leadId),
           vendor_id: Number(vendorId),
+          ...(instanceFilter
+            ? { product_structure_instance_id: instanceFilter }
+            : {}),
         },
         skip,
         take: Number(limit),
@@ -1277,6 +1400,9 @@ export class DesigingStageController {
               email: true,
             },
           },
+          productStructureInstance: {
+            select: { id: true, title: true, quantity_index: true },
+          },
         },
       });
 
@@ -1285,6 +1411,9 @@ export class DesigingStageController {
         where: {
           lead_id: Number(leadId),
           vendor_id: Number(vendorId),
+          ...(instanceFilter
+            ? { product_structure_instance_id: instanceFilter }
+            : {}),
         },
       });
 
@@ -1329,7 +1458,7 @@ export class DesigingStageController {
       }
 
       const { id } = req.params;
-      const { type, desc, updated_by } = req.body;
+      const { type, desc, updated_by, product_structure_instance_id } = req.body;
 
       const logs: any[] = [];
 
@@ -1369,6 +1498,33 @@ export class DesigingStageController {
       }
       logs.push("User verified successfully");
 
+      let resolvedInstanceId: number | null | undefined = undefined;
+      if (typeof product_structure_instance_id !== "undefined") {
+        if (product_structure_instance_id) {
+          const instance = await prisma.leadProductStructureInstance.findFirst({
+            where: {
+              id: Number(product_structure_instance_id),
+              lead_id: existingDesignSelection.lead_id,
+              account_id: existingDesignSelection.account_id,
+              vendor_id: existingDesignSelection.vendor_id,
+            },
+            select: { id: true },
+          });
+
+          if (!instance) {
+            return res.status(404).json({
+              success: false,
+              message: "Product structure instance not found for this lead",
+              logs: ["Product structure instance verification failed"],
+            });
+          }
+          resolvedInstanceId = instance.id;
+          logs.push("Product structure instance verified successfully");
+        } else {
+          resolvedInstanceId = null;
+        }
+      }
+
       // 3️⃣ Update design selection
       const updatedDesignSelection = await prisma.leadDesignSelection.update({
         where: { id: Number(id) },
@@ -1376,6 +1532,9 @@ export class DesigingStageController {
           type,
           desc,
           updated_by: Number(updated_by),
+          ...(typeof resolvedInstanceId !== "undefined"
+            ? { product_structure_instance_id: resolvedInstanceId }
+            : {}),
           updated_at: new Date(),
         },
         include: {
@@ -1395,6 +1554,9 @@ export class DesigingStageController {
           },
           account: {
             select: { id: true, name: true },
+          },
+          productStructureInstance: {
+            select: { id: true, title: true, quantity_index: true },
           },
         },
       });

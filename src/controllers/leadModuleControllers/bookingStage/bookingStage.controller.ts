@@ -37,6 +37,9 @@ const resolveClientBaseUrl = (req: Request): string => {
   return "http://localhost:3000";
 };
 
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
 export class BookingStageController {
   private bookingStageService = new BookingStageService();
 
@@ -132,6 +135,8 @@ export class BookingStageController {
         };
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
+
       const dto: CreateBookingStageDto = {
         lead_id: parseInt(lead_id),
         account_id: parseInt(account_id),
@@ -143,6 +148,7 @@ export class BookingStageController {
         bookingAmountPaymentDetailsText,
         finalBookingAmount: parseFloat(finalBookingAmount),
         siteSupervisorId: parseInt(siteSupervisorId),
+        baseUrl,
         finalDocuments: uploadedFinalDocuments,
         bookingAmountPaymentDetailsFile: uploadedPaymentFile,
       };
@@ -247,7 +253,7 @@ export class BookingStageController {
             where: {
               vendor_id: dto.vendor_id,
               status: "active",
-              user_type: { user_type: { in: ["admin", "super-admin"] } },
+              user_type: { user_type: { in: ["admin"] } },
             },
             select: { id: true },
           }),
@@ -377,6 +383,7 @@ export class BookingStageController {
         account_id: parseInt(account_id),
         vendor_id: parseInt(vendor_id),
         created_by: parseInt(created_by),
+        baseUrl: resolveClientBaseUrl(req),
         finalDocuments: uploadedFinalDocuments,
       };
 
@@ -400,8 +407,8 @@ export class BookingStageController {
     res: Response,
   ): Promise<void> => {
     try {
-      const leadId = parseInt(req.params.leadId);
-      const vendorId = parseInt(req.params.vendorId);
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
 
       if (!leadId) {
         res.status(400).json({ success: false, message: "leadId is required" });
@@ -429,7 +436,7 @@ export class BookingStageController {
 
   public getBookingLeads = async (req: Request, res: Response) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
       const userId = Number(req.query.userId);
 
       if (!vendorId || !userId) {
@@ -468,7 +475,7 @@ export class BookingStageController {
    */
   public getVendorLeadsByTag = async (req: Request, res: Response) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
       const userId = req.query.userId ? Number(req.query.userId) : null;
       const tag = req.query.tag as string;
       const page = parseInt((req.query.page as string) || "1");
@@ -526,7 +533,7 @@ export class BookingStageController {
   // CONTROLLER 1: getVendorLeadsByTag2
   public getVendorLeadsByTag2 = async (req: Request, res: Response) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
       const userId = req.body.userId ? Number(req.body.userId) : null;
       const tag = req.body.tag as string;
 
@@ -655,7 +662,7 @@ export class BookingStageController {
   // CONTROLLER 2: getUniversalTableData2
   public getUniversalTableData2 = async (req: Request, res: Response) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
       const userId = Number(req.body.userId);
       const tag = req.body.tag as string;
       const page = parseInt((req.body.page as string) || "1");
@@ -773,7 +780,7 @@ export class BookingStageController {
 
   public getOpenLeads = async (req: Request, res: Response) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
       const userId = Number(req.query.userId || req.body.userId);
 
       if (!vendorId || !userId) {
@@ -816,7 +823,7 @@ export class BookingStageController {
 
   public getUniversalTableData = async (req: Request, res: Response) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
       const userId = Number(req.query.userId);
       const tag = req.query.tag as string;
       const page = parseInt((req.query.page as string) || "1");
@@ -960,6 +967,8 @@ export class BookingStageController {
         };
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
+
       const dto: AddPaymentDto = {
         lead_id: parseInt(lead_id),
         account_id: parseInt(account_id),
@@ -969,6 +978,7 @@ export class BookingStageController {
         amount: parseFloat(amount),
         payment_text,
         payment_date,
+        baseUrl,
         payment_file: uploadedPaymentFile,
       };
 
@@ -986,8 +996,8 @@ export class BookingStageController {
     res: Response,
   ): Promise<void> => {
     try {
-      const leadId = parseInt(req.params.leadId);
-      const vendorId = parseInt(req.params.vendorId);
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
       const siteSupervisorId = parseInt(req.body.siteSupervisorId);
       const createdBy = parseInt(req.body.created_by);
 
@@ -1026,8 +1036,8 @@ export class BookingStageController {
     res: Response,
   ): Promise<void> => {
     try {
-      const leadId = parseInt(req.params.leadId);
-      const vendorId = parseInt(req.params.vendorId);
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
       const mrpValue = Number(req.body.mrp_value);
       const updatedBy = parseInt(req.body.updated_by);
 
@@ -1065,8 +1075,8 @@ export class BookingStageController {
     res: Response,
   ): Promise<void> => {
     try {
-      const leadId = parseInt(req.params.leadId);
-      const vendorId = parseInt(req.params.vendorId);
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
       const totalProjectAmount = Number(req.body.total_project_amount);
       const updatedBy = parseInt(req.body.updated_by);
 
@@ -1113,8 +1123,8 @@ export class BookingStageController {
     res: Response,
   ): Promise<void> => {
     try {
-      const leadId = parseInt(req.params.leadId);
-      const vendorId = parseInt(req.params.vendorId);
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
       const bookingAmount = Number(req.body.booking_amount);
       const updatedBy = parseInt(req.body.updated_by);
 
@@ -1154,7 +1164,7 @@ export class BookingStageController {
   public getPayments = async (req: Request, res: Response) => {
     // 👈 arrow fn preserves `this`
     try {
-      const leadId = parseInt(req.params.leadId);
+      const leadId = Number(getParam(req.params.leadId));
       const vendorId = parseInt(req.query.vendorId as string);
 
       if (!leadId || !vendorId) {

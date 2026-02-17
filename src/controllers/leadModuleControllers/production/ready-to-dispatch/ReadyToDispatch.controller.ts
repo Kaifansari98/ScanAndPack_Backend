@@ -31,11 +31,14 @@ import fs from "node:fs/promises";
 
 const service = new ReadyToDispatchService();
 
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
 export class ReadyToDispatchController {
   async getAllReadyToDispatchLeads(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const userId = Number(getParam(req.params.userId));
 
       if (!vendorId || !userId) {
         return res.status(400).json({
@@ -444,6 +447,9 @@ export class ReadyToDispatchController {
           lead_id: leadId,
         });
       }
+
+      
+      
 
       return res.status(201).json({
         success: true,

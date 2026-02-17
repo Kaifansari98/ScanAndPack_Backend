@@ -121,7 +121,8 @@ export const ModelName = {
   MachineMaster: 'MachineMaster',
   CutList: 'CutList',
   CutListMachineMapping: 'CutListMachineMapping',
-  UserMachineMapping: 'UserMachineMapping'
+  UserMachineMapping: 'UserMachineMapping',
+  MachineTypeMaster: 'MachineTypeMaster'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -130,12 +131,12 @@ export type ModelName = (typeof ModelName)[keyof typeof ModelName]
  * Enums
  */
 
-export const TransactionIsolationLevel = {
+export const TransactionIsolationLevel = runtime.makeStrictEnum({
   ReadUncommitted: 'ReadUncommitted',
   ReadCommitted: 'ReadCommitted',
   RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
-} as const
+} as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
@@ -518,7 +519,8 @@ export const LeadDocumentsScalarFieldEnum = {
   vendor_id: 'vendor_id',
   doc_type_id: 'doc_type_id',
   is_deleted: 'is_deleted',
-  tech_check_status: 'tech_check_status'
+  tech_check_status: 'tech_check_status',
+  product_structure_instance_id: 'product_structure_instance_id'
 } as const
 
 export type LeadDocumentsScalarFieldEnum = (typeof LeadDocumentsScalarFieldEnum)[keyof typeof LeadDocumentsScalarFieldEnum]
@@ -632,7 +634,17 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   created_by: 'created_by',
   created_at: 'created_at',
   updated_by: 'updated_by',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  is_order_login_completed: 'is_order_login_completed',
+  order_login_completed_at: 'order_login_completed_at',
+  is_production_completed: 'is_production_completed',
+  production_completed_at: 'production_completed_at',
+  woodwork_packing_details_remark: 'woodwork_packing_details_remark',
+  hardware_packing_details_remark: 'hardware_packing_details_remark',
+  no_of_boxes: 'no_of_boxes',
+  is_tech_check_completed: 'is_tech_check_completed',
+  tech_check_completed_at: 'tech_check_completed_at',
+  no_of_client_documents_initially_submitted: 'no_of_client_documents_initially_submitted'
 } as const
 
 export type LeadProductStructureInstanceScalarFieldEnum = (typeof LeadProductStructureInstanceScalarFieldEnum)[keyof typeof LeadProductStructureInstanceScalarFieldEnum]
@@ -744,7 +756,8 @@ export const LeadDesignSelectionScalarFieldEnum = {
   created_by: 'created_by',
   updated_by: 'updated_by',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  product_structure_instance_id: 'product_structure_instance_id'
 } as const
 
 export type LeadDesignSelectionScalarFieldEnum = (typeof LeadDesignSelectionScalarFieldEnum)[keyof typeof LeadDesignSelectionScalarFieldEnum]
@@ -861,7 +874,8 @@ export const OrderLoginDetailsScalarFieldEnum = {
   company_vendor_id: 'company_vendor_id',
   updated_at: 'updated_at',
   updated_by: 'updated_by',
-  factory_user_vendor_selection_remark: 'factory_user_vendor_selection_remark'
+  factory_user_vendor_selection_remark: 'factory_user_vendor_selection_remark',
+  instance_id: 'instance_id'
 } as const
 
 export type OrderLoginDetailsScalarFieldEnum = (typeof OrderLoginDetailsScalarFieldEnum)[keyof typeof OrderLoginDetailsScalarFieldEnum]
@@ -1150,6 +1164,7 @@ export const MachineMasterScalarFieldEnum = {
   machine_name: 'machine_name',
   machine_code: 'machine_code',
   machine_type: 'machine_type',
+  machine_type_id: 'machine_type_id',
   status: 'status',
   scan_type: 'scan_type',
   description: 'description',
@@ -1180,6 +1195,7 @@ export const CutListScalarFieldEnum = {
   material_details: 'material_details',
   item_name: 'item_name',
   unique_code: 'unique_code',
+  unique_code_2: 'unique_code_2',
   status: 'status',
   created_by: 'created_by',
   created_at: 'created_at',
@@ -1230,6 +1246,17 @@ export const UserMachineMappingScalarFieldEnum = {
 } as const
 
 export type UserMachineMappingScalarFieldEnum = (typeof UserMachineMappingScalarFieldEnum)[keyof typeof UserMachineMappingScalarFieldEnum]
+
+
+export const MachineTypeMasterScalarFieldEnum = {
+  id: 'id',
+  machine_type: 'machine_type',
+  active: 'active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type MachineTypeMasterScalarFieldEnum = (typeof MachineTypeMasterScalarFieldEnum)[keyof typeof MachineTypeMasterScalarFieldEnum]
 
 
 export const SortOrder = {

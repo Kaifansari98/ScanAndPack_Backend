@@ -1,20 +1,42 @@
 import { Request, Response } from "express";
 import { PostProductionService } from "../../../../services/production/post-production/postProduction.service";
+import { prisma } from "../../../../prisma/client";
 import {
   uploadToWasabiProductionFilesHardwarePackingDocsFile,
   uploadToWasabiProductionFilesQcPhotosFile,
   uploadToWasabiProductionFilesWoodworkPackingDocsFile,
 } from "../../../../utils/wasabiClient";
 import fs from "node:fs/promises";
+import { resolveClientBaseUrl } from "../../../../utils/fileUtils";
 
 const service = new PostProductionService();
+
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
 
 export class PostProductionController {
   async uploadQcPhotos(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
-      const { account_id, created_by } = req.body;
+      const { account_id, created_by, instance_id } = req.body;
+      const { instance_id: instanceIdQuery } = req.query;
       const files = req.files as Express.Multer.File[];
+      const bodyInstanceRaw = Array.isArray(instance_id)
+        ? instance_id[0]
+        : instance_id;
+      const queryInstanceRaw = Array.isArray(instanceIdQuery)
+        ? instanceIdQuery[0]
+        : instanceIdQuery;
+      const parsedInstanceId =
+        typeof bodyInstanceRaw !== "undefined"
+          ? Number(bodyInstanceRaw)
+          : typeof queryInstanceRaw !== "undefined"
+          ? Number(queryInstanceRaw)
+          : undefined;
+      const instanceIdValue = Number.isFinite(parsedInstanceId)
+        ? parsedInstanceId
+        : undefined;
+      let instanceFolder: string | undefined;
 
       if (!vendorId || !leadId || !created_by) {
         return res.status(400).json({
@@ -22,6 +44,31 @@ export class PostProductionController {
           message: "vendorId, leadId and created_by are required",
         });
       }
+
+      if (!instanceIdValue) {
+        return res.status(400).json({
+          success: false,
+          message: "instance_id is required for QC photos",
+        });
+      }
+
+      const instance = await prisma.leadProductStructureInstance.findFirst({
+        where: {
+          id: instanceIdValue,
+          lead_id: Number(leadId),
+          vendor_id: Number(vendorId),
+        },
+        select: { title: true },
+      });
+
+      if (!instance) {
+        return res.status(404).json({
+          success: false,
+          message: "Product structure instance not found for this lead.",
+        });
+      }
+
+      instanceFolder = instance.title?.trim() || `instance-${instanceIdValue}`;
 
       if (!files || files.length === 0) {
         return res.status(400).json({
@@ -38,7 +85,8 @@ export class PostProductionController {
           Number(vendorId),
           Number(leadId),
           file.originalname,
-          file.mimetype
+          file.mimetype,
+          instanceFolder
         );
 
         await fs.unlink(file.path);
@@ -54,7 +102,8 @@ export class PostProductionController {
         Number(leadId),
         account_id ? Number(account_id) : null,
         Number(created_by),
-        uploadedFiles
+        uploadedFiles,
+        instanceIdValue
       );
 
       return res.status(200).json({
@@ -76,8 +125,52 @@ export class PostProductionController {
   async uploadHardwarePackingDetails(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
-      const { account_id, created_by, remark } = req.body;
+      const { account_id, created_by, remark, instance_id } = req.body;
+      const { instance_id: instanceIdQuery } = req.query;
       const files = req.files as Express.Multer.File[];
+      const bodyInstanceRaw = Array.isArray(instance_id)
+        ? instance_id[0]
+        : instance_id;
+      const queryInstanceRaw = Array.isArray(instanceIdQuery)
+        ? instanceIdQuery[0]
+        : instanceIdQuery;
+      const parsedInstanceId =
+        typeof bodyInstanceRaw !== "undefined"
+          ? Number(bodyInstanceRaw)
+          : typeof queryInstanceRaw !== "undefined"
+          ? Number(queryInstanceRaw)
+          : undefined;
+      const instanceIdValue = Number.isFinite(parsedInstanceId)
+        ? parsedInstanceId
+        : undefined;
+      let instanceFolder: string | undefined;
+
+      if (!instanceIdValue) {
+        return res.status(400).json({
+          success: false,
+          message: "instance_id is required for hardware packing details",
+        });
+      }
+
+      if (instanceIdValue) {
+        const instance = await prisma.leadProductStructureInstance.findFirst({
+          where: {
+            id: instanceIdValue,
+            lead_id: Number(leadId),
+            vendor_id: Number(vendorId),
+          },
+          select: { title: true },
+        });
+
+        if (!instance) {
+          return res.status(404).json({
+            success: false,
+            message: "Product structure instance not found for this lead.",
+          });
+        }
+
+        instanceFolder = instance.title?.trim() || `instance-${instanceIdValue}`;
+      }
 
       if (!vendorId || !leadId || !created_by) {
         return res.status(400).json({
@@ -104,7 +197,8 @@ export class PostProductionController {
               Number(vendorId),
               Number(leadId),
               file.originalname,
-              file.mimetype
+              file.mimetype,
+              instanceFolder
             );
 
           await fs.unlink(file.path);
@@ -122,7 +216,8 @@ export class PostProductionController {
         account_id ? Number(account_id) : null,
         Number(created_by),
         remark,
-        uploadedFiles
+        uploadedFiles,
+        instanceIdValue
       );
 
       return res.status(200).json({
@@ -147,8 +242,54 @@ export class PostProductionController {
   async uploadWoodworkPackingDetails(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
-      const { account_id, created_by, remark } = req.body;
+      const { account_id, created_by, remark, instance_id } = req.body;
+      const { instance_id: instanceIdQuery } = req.query;
       const files = req.files as Express.Multer.File[];
+      console.log("[woodwork] body:", req.body);
+      console.log("[woodwork] query:", req.query);
+      const bodyInstanceRaw = Array.isArray(instance_id)
+        ? instance_id[0]
+        : instance_id;
+      const queryInstanceRaw = Array.isArray(instanceIdQuery)
+        ? instanceIdQuery[0]
+        : instanceIdQuery;
+      const parsedInstanceId =
+        typeof bodyInstanceRaw !== "undefined"
+          ? Number(bodyInstanceRaw)
+          : typeof queryInstanceRaw !== "undefined"
+          ? Number(queryInstanceRaw)
+          : undefined;
+      const instanceIdValue = Number.isFinite(parsedInstanceId)
+        ? parsedInstanceId
+        : undefined;
+      let instanceFolder: string | undefined;
+
+      if (!instanceIdValue) {
+        return res.status(400).json({
+          success: false,
+          message: "instance_id is required for woodwork packing details",
+        });
+      }
+
+      if (instanceIdValue) {
+        const instance = await prisma.leadProductStructureInstance.findFirst({
+          where: {
+            id: instanceIdValue,
+            lead_id: Number(leadId),
+            vendor_id: Number(vendorId),
+          },
+          select: { title: true },
+        });
+
+        if (!instance) {
+          return res.status(404).json({
+            success: false,
+            message: "Product structure instance not found for this lead.",
+          });
+        }
+
+        instanceFolder = instance.title?.trim() || `instance-${instanceIdValue}`;
+      }
 
       if (!vendorId || !leadId || !created_by) {
         return res.status(400).json({
@@ -174,7 +315,8 @@ export class PostProductionController {
               Number(vendorId),
               Number(leadId),
               file.originalname,
-              file.mimetype
+              file.mimetype,
+              instanceFolder
             );
 
           await fs.unlink(file.path);
@@ -192,7 +334,8 @@ export class PostProductionController {
         account_id ? Number(account_id) : null,
         Number(created_by),
         remark,
-        uploadedFiles
+        uploadedFiles,
+        instanceIdValue
       );
 
       return res.status(200).json({
@@ -218,6 +361,12 @@ export class PostProductionController {
   async getQcPhotos(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
+      const { instance_id } = req.query;
+      const parsedInstanceId =
+        typeof instance_id !== "undefined" ? Number(instance_id) : undefined;
+      const safeInstanceId = Number.isFinite(parsedInstanceId)
+        ? parsedInstanceId
+        : undefined;
 
       if (!vendorId || !leadId) {
         return res.status(400).json({
@@ -226,7 +375,11 @@ export class PostProductionController {
         });
       }
 
-      const data = await service.getQcPhotos(Number(vendorId), Number(leadId));
+      const data = await service.getQcPhotos(
+        Number(vendorId),
+        Number(leadId),
+        safeInstanceId
+      );
 
       return res.status(200).json({
         success: true,
@@ -248,6 +401,12 @@ export class PostProductionController {
   async getHardwarePackingDetails(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
+      const { instance_id } = req.query;
+      const parsedInstanceId =
+        typeof instance_id !== "undefined" ? Number(instance_id) : undefined;
+      const safeInstanceId = Number.isFinite(parsedInstanceId)
+        ? parsedInstanceId
+        : undefined;
 
       if (!vendorId || !leadId) {
         return res.status(400).json({
@@ -258,7 +417,8 @@ export class PostProductionController {
 
       const data = await service.getHardwarePackingDetails(
         Number(vendorId),
-        Number(leadId)
+        Number(leadId),
+        safeInstanceId
       );
 
       return res.status(200).json({
@@ -286,6 +446,12 @@ export class PostProductionController {
   async getWoodworkPackingDetails(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
+      const { instance_id } = req.query;
+      const parsedInstanceId =
+        typeof instance_id !== "undefined" ? Number(instance_id) : undefined;
+      const safeInstanceId = Number.isFinite(parsedInstanceId)
+        ? parsedInstanceId
+        : undefined;
 
       if (!vendorId || !leadId) {
         return res.status(400).json({
@@ -296,7 +462,8 @@ export class PostProductionController {
 
       const data = await service.getWoodworkPackingDetails(
         Number(vendorId),
-        Number(leadId)
+        Number(leadId),
+        safeInstanceId
       );
 
       return res.status(200).json({
@@ -323,13 +490,42 @@ export class PostProductionController {
   async updateNoOfBoxes(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
-      const { account_id, user_id, no_of_boxes } = req.body;
+      const { account_id, user_id, no_of_boxes, instance_id } = req.body;
+      const { instance_id: instanceIdQuery } = req.query;
 
       if (!vendorId || !leadId || !user_id || !no_of_boxes) {
         return res.status(400).json({
           success: false,
           message: "vendorId, leadId, user_id and no_of_boxes are required",
         });
+      }
+
+      const bodyInstanceRaw = Array.isArray(instance_id)
+        ? instance_id[0]
+        : instance_id;
+      const queryInstanceRaw = Array.isArray(instanceIdQuery)
+        ? instanceIdQuery[0]
+        : instanceIdQuery;
+      const parsedInstanceId =
+        typeof bodyInstanceRaw !== "undefined"
+          ? Number(bodyInstanceRaw)
+          : typeof queryInstanceRaw !== "undefined"
+          ? Number(queryInstanceRaw)
+          : undefined;
+      const instanceIdValue = Number.isFinite(parsedInstanceId)
+        ? parsedInstanceId
+        : undefined;
+
+      if (
+        typeof bodyInstanceRaw !== "undefined" ||
+        typeof queryInstanceRaw !== "undefined"
+      ) {
+        if (!instanceIdValue) {
+          return res.status(400).json({
+            success: false,
+            message: "instance_id must be a valid number",
+          });
+        }
       }
 
       const value = parseInt(no_of_boxes);
@@ -345,7 +541,8 @@ export class PostProductionController {
         Number(leadId),
         Number(account_id) || null,
         Number(user_id),
-        value
+        value,
+        instanceIdValue
       );
 
       return res.status(200).json({
@@ -367,6 +564,12 @@ export class PostProductionController {
   async getNoOfBoxes(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
+      const { instance_id } = req.query;
+      const parsedInstanceId =
+        typeof instance_id !== "undefined" ? Number(instance_id) : undefined;
+      const safeInstanceId = Number.isFinite(parsedInstanceId)
+        ? parsedInstanceId
+        : undefined;
 
       if (!vendorId || !leadId) {
         return res.status(400).json({
@@ -375,7 +578,11 @@ export class PostProductionController {
         });
       }
 
-      const data = await service.getNoOfBoxes(Number(vendorId), Number(leadId));
+      const data = await service.getNoOfBoxes(
+        Number(vendorId),
+        Number(leadId),
+        safeInstanceId
+      );
 
       if (!data) {
         return res.status(404).json({
@@ -403,6 +610,7 @@ export class PostProductionController {
   async checkPostProductionCompleteness(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
+      const { instance_id } = req.query;
 
       if (!vendorId || !leadId) {
         return res.status(400).json({
@@ -413,7 +621,8 @@ export class PostProductionController {
 
       const result = await service.checkPostProductionCompleteness(
         Number(vendorId),
-        Number(leadId)
+        Number(leadId),
+        typeof instance_id !== "undefined" ? Number(instance_id) : undefined
       );
 
       return res.status(200).json({
@@ -435,10 +644,67 @@ export class PostProductionController {
     }
   }
 
+  async markProductionCompleted(req: Request, res: Response) {
+    try {
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
+      const { updated_by, instance_id } = req.body;
+      const { instance_id: instanceIdQuery } = req.query;
+
+      const bodyInstanceRaw = Array.isArray(instance_id)
+        ? instance_id[0]
+        : instance_id;
+      const queryInstanceRaw = Array.isArray(instanceIdQuery)
+        ? instanceIdQuery[0]
+        : instanceIdQuery;
+
+      const parsedInstanceId =
+        typeof bodyInstanceRaw !== "undefined"
+          ? Number(bodyInstanceRaw)
+          : typeof queryInstanceRaw !== "undefined"
+          ? Number(queryInstanceRaw)
+          : undefined;
+
+      const instanceIdValue = Number.isFinite(parsedInstanceId)
+        ? parsedInstanceId
+        : undefined;
+
+      if (!vendorId || !leadId || !updated_by || !instanceIdValue) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "vendorId, leadId, updated_by and instance_id are required",
+        });
+      }
+
+      const result = await service.markProductionCompleted(
+        vendorId,
+        leadId,
+        instanceIdValue,
+        Number(updated_by)
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Production marked completed for the instance",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error(
+        "[PostProductionController] markProductionCompleted error:",
+        error
+      );
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  }
+
   async moveLeadToReadyToDispatch(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
       const { updated_by } = req.body;
 
       if (!vendorId || !leadId || !updated_by) {
@@ -448,10 +714,13 @@ export class PostProductionController {
         });
       }
 
+
+            const baseUrl = resolveClientBaseUrl(req);
       const result = await service.moveLeadToReadyToDispatch(
         vendorId,
         leadId,
-        updated_by
+        updated_by,
+        baseUrl
       );
 
       return res.status(200).json({

@@ -354,7 +354,8 @@ export class PreProductionService {
 
   async checkPostProductionReady(
     vendorId: number,
-    leadId: number
+    leadId: number,
+    instanceId?: number | null
   ): Promise<{
     readyForPostProduction: boolean;
     all_order_login_dates_added: boolean;
@@ -369,11 +370,19 @@ export class PreProductionService {
     if (!lead)
       throw new Error(`Lead ${leadId} not found for vendor ${vendorId}`);
 
-    const hasExpectedDate = !!lead.expected_order_login_ready_date;
+    const hasExpectedDate = instanceId
+      ? true
+      : !!lead.expected_order_login_ready_date;
 
     // 2️⃣ Fetch all order login records
     const orderLogins = await prisma.orderLoginDetails.findMany({
-      where: { vendor_id: vendorId, lead_id: leadId },
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        ...(typeof instanceId !== "undefined"
+          ? { instance_id: instanceId ?? null }
+          : {}),
+      },
       select: {
         id: true,
         is_completed: true,

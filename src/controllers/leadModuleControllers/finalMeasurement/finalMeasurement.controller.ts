@@ -26,6 +26,9 @@ const resolveClientBaseUrl = (req: Request): string => {
 
   return "http://localhost:3000";
 };
+
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
 import {
   uploadToWasabiFinalMeasurementDocFile,
   uploadToWasabiFinalMeasurementSitePhotoFile,
@@ -33,6 +36,28 @@ import {
 import fs from "node:fs/promises";
 
 const finalMeasurementService = new FinalMeasurementService();
+
+const ensureTempFileExists = async (file: Express.Multer.File) => {
+  if (!file?.path) {
+    throw new Error(`Uploaded file path missing for ${file?.originalname || "file"}`);
+  }
+  try {
+    await fs.access(file.path);
+  } catch {
+    throw new Error(
+      `Temporary upload file missing for ${file.originalname}. Please re-upload and try again.`
+    );
+  }
+};
+
+const safeUnlink = async (filePath?: string) => {
+  if (!filePath) return;
+  try {
+    await fs.unlink(filePath);
+  } catch {
+    // ignore temp cleanup failures
+  }
+};
 
 export class FinalMeasurementController {
   public createFinalMeasurementStage = async (
@@ -83,6 +108,7 @@ export class FinalMeasurementController {
       }[] = [];
 
       for (const doc of finalMeasurementDocs) {
+        await ensureTempFileExists(doc);
         const sysName = await uploadToWasabiFinalMeasurementDocFile(
           doc.path,
           Number(vendor_id),
@@ -91,7 +117,7 @@ export class FinalMeasurementController {
           doc.mimetype
         );
 
-        await fs.unlink(doc.path);
+        await safeUnlink(doc.path);
 
         uploadedFinalMeasurementDocs.push({
           originalName: doc.originalname,
@@ -105,6 +131,7 @@ export class FinalMeasurementController {
       }[] = [];
 
       for (const photo of sitePhotos) {
+        await ensureTempFileExists(photo);
         const sysName = await uploadToWasabiFinalMeasurementSitePhotoFile(
           photo.path,
           Number(vendor_id),
@@ -113,7 +140,7 @@ export class FinalMeasurementController {
           photo.mimetype
         );
 
-        await fs.unlink(photo.path);
+        await safeUnlink(photo.path);
 
         uploadedSitePhotos.push({
           originalName: photo.originalname,
@@ -126,6 +153,7 @@ export class FinalMeasurementController {
         account_id: parseInt(account_id),
         vendor_id: parseInt(vendor_id),
         created_by: parseInt(created_by),
+        baseUrl: resolveClientBaseUrl(req),
         critical_discussion_notes: critical_discussion_notes || null,
         finalMeasurementDocs: uploadedFinalMeasurementDocs,
         sitePhotos: uploadedSitePhotos,
@@ -141,6 +169,16 @@ export class FinalMeasurementController {
       });
     } catch (error: any) {
       console.error("[FinalMeasurementController] Error:", error);
+      if (
+        typeof error?.message === "string" &&
+        error.message.toLowerCase().includes("temporary upload file missing")
+      ) {
+        res.status(400).json({
+          success: false,
+          message: error.message,
+        });
+        return;
+      }
       res.status(500).json({
         success: false,
         message: error.message || "Internal server error",
@@ -153,7 +191,7 @@ export class FinalMeasurementController {
     res: Response
   ): Promise<void> => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
       const userId = Number(req.query.userId);
 
       if (!vendorId || !userId) {
@@ -192,8 +230,8 @@ export class FinalMeasurementController {
     res: Response
   ): Promise<void> => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
 
       if (!vendorId || !leadId) {
         res.status(400).json({
@@ -227,8 +265,8 @@ export class FinalMeasurementController {
     res: Response
   ): Promise<void> => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
       const { notes } = req.body;
 
       if (!notes) {
@@ -288,6 +326,7 @@ export class FinalMeasurementController {
       }[] = [];
 
       for (const photo of sitePhotos) {
+        await ensureTempFileExists(photo);
         const sysName = await uploadToWasabiFinalMeasurementSitePhotoFile(
           photo.path,
           Number(vendor_id),
@@ -296,7 +335,7 @@ export class FinalMeasurementController {
           photo.mimetype
         );
 
-        await fs.unlink(photo.path);
+        await safeUnlink(photo.path);
 
         uploadedSitePhotos.push({
           originalName: photo.originalname,
@@ -361,6 +400,7 @@ export class FinalMeasurementController {
       }[] = [];
 
       for (const photo of sitePhotos) {
+        await ensureTempFileExists(photo);
         const sysName = await uploadToWasabiFinalMeasurementSitePhotoFile(
           photo.path,
           Number(vendor_id),
@@ -369,7 +409,7 @@ export class FinalMeasurementController {
           photo.mimetype
         );
 
-        await fs.unlink(photo.path);
+        await safeUnlink(photo.path);
 
         uploadedSitePhotos.push({
           originalName: photo.originalname,
@@ -430,6 +470,7 @@ export class FinalMeasurementController {
       }[] = [];
 
       for (const doc of finalMeasurementDocs) {
+        await ensureTempFileExists(doc);
         const sysName = await uploadToWasabiFinalMeasurementDocFile(
           doc.path,
           Number(vendor_id),
@@ -438,7 +479,7 @@ export class FinalMeasurementController {
           doc.mimetype
         );
 
-        await fs.unlink(doc.path);
+        await safeUnlink(doc.path);
 
         uploadedFinalMeasurementDocs.push({
           originalName: doc.originalname,
@@ -470,8 +511,8 @@ export class FinalMeasurementController {
 
   public getFinalMeasurementLeads = async (req: Request, res: Response) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId); // ✅ take userId also
+      const vendorId = Number(getParam(req.params.vendorId));
+      const userId = Number(getParam(req.params.userId)); // ✅ take userId also
 
       if (!vendorId || !userId) {
         return res.status(400).json({
@@ -648,7 +689,7 @@ export class FinalMeasurementController {
             prisma.userMaster.findMany({
               where: {
                 vendor_id: vendorId,
-                user_type: { user_type: { in: ["admin", "super-admin"] } },
+                user_type: { user_type: { in: ["admin"] } },
               },
               select: { id: true },
             }),

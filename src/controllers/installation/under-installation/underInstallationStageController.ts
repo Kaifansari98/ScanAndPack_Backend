@@ -10,6 +10,7 @@ import {
 import logger from "../../../utils/logger";
 import fs from "node:fs/promises";
 import { BookingStageService } from "../../../services/bookingStage/bookingStage.service";
+import { resolveClientBaseUrl } from "../../../utils/fileUtils";
 
 const service = new UnderInstallationStageService();
 
@@ -35,11 +36,13 @@ export class UnderInstallationStageController {
           );
       }
 
+      const baseUrl =  resolveClientBaseUrl(req);
       const result =
         await UnderInstallationStageService.moveLeadToUnderInstallation(
           vendorId,
           leadId,
           updated_by,
+          baseUrl,
         );
 
       return res
@@ -64,8 +67,14 @@ export class UnderInstallationStageController {
   /** ✅ Get all leads under Post-Dispatch Stage (Type 15) */
   async getAllUnderInstallationStageLeads(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId);
+      const vendorIdParam = Array.isArray(req.params.vendorId)
+        ? req.params.vendorId[0]
+        : req.params.vendorId;
+      const userIdParam = Array.isArray(req.params.userId)
+        ? req.params.userId[0]
+        : req.params.userId;
+      const vendorId = Number(vendorIdParam);
+      const userId = Number(userIdParam);
 
       if (!vendorId || !userId) {
         return res
@@ -111,7 +120,10 @@ export class UnderInstallationStageController {
     res: Response,
   ) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorIdParam = Array.isArray(req.params.vendorId)
+        ? req.params.vendorId[0]
+        : req.params.vendorId;
+      const vendorId = Number(vendorIdParam);
       const userId = Number(req.body.userId);
       const page = parseInt((req.body.page as string) || "1");
       const limit = parseInt((req.body.limit as string) || "10");
@@ -819,6 +831,7 @@ export class UnderInstallationStageController {
         }
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       const payload = {
         vendor_id: vendorId,
         lead_id: leadId,
@@ -836,6 +849,7 @@ export class UnderInstallationStageController {
         created_by: Number(created_by),
         teams: parsedTeams,
         files: uploadedFiles,
+        baseUrl
       };
 
       const result =
@@ -899,11 +913,14 @@ export class UnderInstallationStageController {
         });
       }
 
+
+      const baseUrl = resolveClientBaseUrl(req);
       const data = await UnderInstallationStageService.updateERDService({
         vendor_id: vendorId,
         misc_id: miscId,
         expected_ready_date,
         updated_by,
+        baseUrl
       });
 
       return res.status(200).json({ success: true, data });
@@ -963,8 +980,14 @@ export class UnderInstallationStageController {
 
   async getInstallationIssueLogs(req: Request, res: Response) {
     try {
-      const vendor_id = parseInt(req.params.vendor_id);
-      const lead_id = parseInt(req.params.lead_id);
+      const vendorIdParam = Array.isArray(req.params.vendor_id)
+        ? req.params.vendor_id[0]
+        : req.params.vendor_id;
+      const leadIdParam = Array.isArray(req.params.lead_id)
+        ? req.params.lead_id[0]
+        : req.params.lead_id;
+      const vendor_id = Number(vendorIdParam);
+      const lead_id = Number(leadIdParam);
 
       if (!vendor_id || !lead_id) {
         return res.status(400).json({
@@ -987,7 +1010,10 @@ export class UnderInstallationStageController {
 
   async getInstallationIssueLogById(req: Request, res: Response) {
     try {
-      const id = parseInt(req.params.id);
+      const idParam = Array.isArray(req.params.id)
+        ? req.params.id[0]
+        : req.params.id;
+      const id = Number(idParam);
 
       if (!id) {
         return res.status(400).json({
@@ -1015,7 +1041,10 @@ export class UnderInstallationStageController {
 
   async updateInstallationIssueLog(req: Request, res: Response) {
     try {
-      const id = parseInt(req.params.id);
+      const idParam = Array.isArray(req.params.id)
+        ? req.params.id[0]
+        : req.params.id;
+      const id = Number(idParam);
 
       if (!id)
         return res.status(400).json({
@@ -1207,11 +1236,13 @@ export class UnderInstallationStageController {
           );
       }
 
+      const baseUrl = resolveClientBaseUrl(req);  
       const result =
         await UnderInstallationStageService.moveLeadToFinalHandover(
           vendorId,
           leadId,
           updated_by,
+          baseUrl
         );
 
       return res
@@ -1322,12 +1353,14 @@ export class UnderInstallationStageController {
         });
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       const result =
         await UnderInstallationStageService.resolveMiscellaneousService({
           vendor_id: vendorId,
           lead_id: leadId,
           misc_id: miscId,
           resolved_by: Number(resolved_by),
+          baseUrl
         });
 
       return res.status(200).json({
@@ -1359,11 +1392,13 @@ export class UnderInstallationStageController {
         });
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       await UnderInstallationStageService.markMiscTaskReady({
         vendor_id: vendorId,
         lead_id: leadId,
         misc_id: miscId,
         ready_by: Number(ready_by),
+        baseUrl
       });
 
       return res.status(200).json({

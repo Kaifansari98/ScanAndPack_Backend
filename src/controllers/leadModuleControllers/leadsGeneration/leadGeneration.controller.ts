@@ -57,6 +57,9 @@ const resolveClientBaseUrl = (req: Request): string => {
   return "http://localhost:3000";
 };
 
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
 export class LeadController {
   /**
    * Helper method to explain access levels
@@ -107,7 +110,7 @@ export class LeadController {
 
       if (!openStatus) {
         throw new Error(
-          `Open status (Type 1) not found for vendor ${vendor_id}`
+          `Open status (Type 1) not found for vendor ${vendor_id}`,
         );
       }
 
@@ -171,12 +174,13 @@ export class LeadController {
       // Pass raw files to the service (supports Multer S3 files)
       const result = await createLeadService(
         { ...value, is_draft: draftMode },
-        files
+        files,
       );
 
       if (!result.draft) {
         try {
-          const leadName = `${result.lead.firstname} ${result.lead.lastname}`.trim();
+          const leadName =
+            `${result.lead.firstname} ${result.lead.lastname}`.trim();
           const senderId = value.assigned_by ?? value.created_by;
 
           const [assignedUser, createdByUser] = await Promise.all([
@@ -195,13 +199,13 @@ export class LeadController {
             }),
           ]);
 
-          const creatorRole = createdByUser?.user_type?.user_type?.toLowerCase();
+          const creatorRole =
+            createdByUser?.user_type?.user_type?.toLowerCase();
           const isAdminCreator =
             creatorRole === "admin" || creatorRole === "super-admin";
           const isSalesExecutiveCreator = creatorRole === "sales-executive";
           const isCreatorAssignee =
-            Boolean(value.assign_to) &&
-            value.assign_to === value.created_by;
+            Boolean(value.assign_to) && value.assign_to === value.created_by;
 
           const clientBaseUrl = resolveClientBaseUrl(req);
           const leadUrl = `${clientBaseUrl}/dashboard/leads/details/${result.lead.id}?accountId=${result.lead.account_id}`;
@@ -299,7 +303,7 @@ export class LeadController {
                 {
                   lead_id: result.lead.id,
                   assign_to: value.assign_to,
-                }
+                },
               );
             }
           } else {
@@ -318,7 +322,7 @@ export class LeadController {
             });
 
             const recipients = adminUsers.filter(
-              (user) => user.id !== value.created_by && user.user_email
+              (user) => user.id !== value.created_by && user.user_email,
             );
 
             if (recipients.length === 0) {
@@ -333,8 +337,8 @@ export class LeadController {
                     ...emailPayload,
                     toEmail: recipient.user_email!,
                     toName: recipient.user_name ?? undefined,
-                  })
-                )
+                  }),
+                ),
               );
             }
           }
@@ -409,7 +413,7 @@ export class LeadController {
           lead_id: Number(lead_id),
           created_by: Number(created_by),
         },
-        files
+        files,
       );
 
       return res.status(200).json({
@@ -437,7 +441,7 @@ export class LeadController {
    */
   async fetchLeadsByVendor(req: Request, res: Response): Promise<Response> {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
       if (isNaN(vendorId)) {
         return res.status(400).json({ error: "Invalid vendorId" });
       }
@@ -458,11 +462,11 @@ export class LeadController {
    */
   fetchLeadsByVendorAndUser = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<Response> => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const userId = Number(getParam(req.params.userId));
 
       // Validate parameters
       if (isNaN(vendorId) || vendorId <= 0) {
@@ -480,7 +484,7 @@ export class LeadController {
       }
 
       console.log(
-        `[CONTROLLER] Fetching leads for vendor ${vendorId} and user ${userId}`
+        `[CONTROLLER] Fetching leads for vendor ${vendorId} and user ${userId}`,
       );
 
       const result = await getLeadsByVendorAndUser(vendorId, userId);
@@ -506,7 +510,7 @@ export class LeadController {
       };
 
       console.log(
-        `[CONTROLLER] Successfully fetched ${result.leads.length} leads for ${result.userInfo.role}`
+        `[CONTROLLER] Successfully fetched ${result.leads.length} leads for ${result.userInfo.role}`,
       );
 
       return res.status(200).json(response);
@@ -540,9 +544,9 @@ export class LeadController {
   // Controller method to fetch a single lead by ID
   fetchLeadById = async (req: Request, res: Response): Promise<Response> => {
     try {
-      const leadId = parseInt(req.params.leadId);
-      const userId = parseInt(req.params.userId);
-      const vendorId = parseInt(req.params.vendorId);
+      const leadId = Number(getParam(req.params.leadId));
+      const userId = Number(getParam(req.params.userId));
+      const vendorId = Number(getParam(req.params.vendorId));
 
       // Validate parameters
       if (isNaN(leadId) || leadId <= 0) {
@@ -567,7 +571,7 @@ export class LeadController {
       }
 
       console.log(
-        `[CONTROLLER] Fetching lead ${leadId} for user ${userId} in vendor ${vendorId}`
+        `[CONTROLLER] Fetching lead ${leadId} for user ${userId} in vendor ${vendorId}`,
       );
 
       const result = await getLeadById(leadId, userId, vendorId);
@@ -592,7 +596,7 @@ export class LeadController {
       };
 
       console.log(
-        `[CONTROLLER] Successfully fetched lead ${leadId} for ${result.userInfo.role}`
+        `[CONTROLLER] Successfully fetched lead ${leadId} for ${result.userInfo.role}`,
       );
 
       return res.status(200).json(response);
@@ -633,7 +637,7 @@ export class LeadController {
 
   fetchLeadProductStructureInstances = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<Response> => {
     try {
       const leadId = Number(req.params.leadId);
@@ -653,32 +657,34 @@ export class LeadController {
 
       const instances = await getLeadProductStructureInstances(
         leadId,
-        vendorId
+        vendorId,
       );
 
-      return res.status(200).json(
-        ApiResponse.success(
-          instances,
-          "Lead product structure instances fetched successfully",
-          200
-        )
-      );
+      return res
+        .status(200)
+        .json(
+          ApiResponse.success(
+            instances,
+            "Lead product structure instances fetched successfully",
+            200,
+          ),
+        );
     } catch (error: any) {
       console.error(
         "[CONTROLLER] fetchLeadProductStructureInstances error:",
-        error
+        error,
       );
       return res
         .status(500)
         .json(
-          ApiResponse.error("Failed to fetch product structure instances", 500)
+          ApiResponse.error("Failed to fetch product structure instances", 500),
         );
     }
   };
 
   deleteLeadProductStructureInstance = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<Response> => {
     try {
       const leadId = Number(req.params.leadId);
@@ -710,16 +716,18 @@ export class LeadController {
         leadId,
         vendorId,
         instanceId,
-        deletedBy
+        deletedBy,
       );
 
-      return res.status(200).json(
-        ApiResponse.success(
-          null,
-          "Lead product structure instance deleted successfully",
-          200
-        )
-      );
+      return res
+        .status(200)
+        .json(
+          ApiResponse.success(
+            null,
+            "Lead product structure instance deleted successfully",
+            200,
+          ),
+        );
     } catch (error: any) {
       const message = error?.message || "Failed to delete instance";
       if (message === "Instance not found") {
@@ -727,7 +735,7 @@ export class LeadController {
       }
       console.error(
         "[CONTROLLER] deleteLeadProductStructureInstance error:",
-        error
+        error,
       );
       return res
         .status(500)
@@ -737,7 +745,7 @@ export class LeadController {
 
   updateLeadProductStructureInstance = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<Response> => {
     try {
       const leadId = Number(req.params.leadId);
@@ -772,7 +780,9 @@ export class LeadController {
       if (!productStructureId || Number.isNaN(productStructureId)) {
         return res
           .status(400)
-          .json(ApiResponse.error("Invalid product structure ID provided", 400));
+          .json(
+            ApiResponse.error("Invalid product structure ID provided", 400),
+          );
       }
 
       if (!title) {
@@ -791,13 +801,15 @@ export class LeadController {
         updated_by: updatedBy,
       });
 
-      return res.status(200).json(
-        ApiResponse.success(
-          updated,
-          "Lead product structure instance updated successfully",
-          200
-        )
-      );
+      return res
+        .status(200)
+        .json(
+          ApiResponse.success(
+            updated,
+            "Lead product structure instance updated successfully",
+            200,
+          ),
+        );
     } catch (error: any) {
       const message = error?.message || "Failed to update instance";
       if (message.includes("Instance not found")) {
@@ -810,7 +822,7 @@ export class LeadController {
       }
       console.error(
         "[CONTROLLER] updateLeadProductStructureInstance error:",
-        error
+        error,
       );
       return res
         .status(500)
@@ -820,7 +832,7 @@ export class LeadController {
 
   createLeadProductStructureInstance = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<Response> => {
     try {
       const leadId = Number(req.params.leadId);
@@ -846,7 +858,9 @@ export class LeadController {
       if (!productStructureId || Number.isNaN(productStructureId)) {
         return res
           .status(400)
-          .json(ApiResponse.error("Invalid product structure ID provided", 400));
+          .json(
+            ApiResponse.error("Invalid product structure ID provided", 400),
+          );
       }
 
       if (!title) {
@@ -870,13 +884,15 @@ export class LeadController {
         created_by: createdBy,
       });
 
-      return res.status(201).json(
-        ApiResponse.success(
-          created,
-          "Lead product structure instance created successfully",
-          201
-        )
-      );
+      return res
+        .status(201)
+        .json(
+          ApiResponse.success(
+            created,
+            "Lead product structure instance created successfully",
+            201,
+          ),
+        );
     } catch (error: any) {
       const message = error?.message || "Failed to create instance";
       if (message.includes("Lead not found")) {
@@ -894,7 +910,7 @@ export class LeadController {
       }
       console.error(
         "[CONTROLLER] createLeadProductStructureInstance error:",
-        error
+        error,
       );
       return res
         .status(500)
@@ -928,8 +944,8 @@ export class LeadController {
    */
   async updateLead(req: Request, res: Response): Promise<void> {
     try {
-      const leadId = parseInt(req.params.leadId);
-      const updatedBy = parseInt(req.params.userId);
+      const leadId = Number(getParam(req.params.leadId));
+      const updatedBy = Number(getParam(req.params.userId));
 
       if (!updatedBy || isNaN(updatedBy)) {
         res
@@ -946,8 +962,14 @@ export class LeadController {
         return;
       }
 
+      // Remove product-related fields from edit payload
+      const sanitizedBody = { ...req.body };
+      // delete sanitizedBody.product_types;
+      // delete sanitizedBody.product_structures;
+      // delete sanitizedBody.product_structure_instances;
+
       // Merge updated_by into request body before validation
-      const payloadWithUpdatedBy = { ...req.body, updated_by: updatedBy };
+      const payloadWithUpdatedBy = { ...sanitizedBody, updated_by: updatedBy };
 
       // Validate request body
       const validationResult = validateUpdateLeadInput(payloadWithUpdatedBy);
@@ -960,28 +982,28 @@ export class LeadController {
               400,
               validationResult.errors
                 ? validationResult.errors.map(
-                    (e: any) => `${e.field}: ${e.message}`
+                    (e: any) => `${e.field}: ${e.message}`,
                   )
-                : undefined
-            )
+                : undefined,
+            ),
           );
         return;
       }
 
       console.log(
         "[DEBUG] Controller received update request for lead ID:",
-        leadId
+        leadId,
       );
-      console.log("[DEBUG] Update payload:", req.body);
+      console.log("[DEBUG] Update payload:", sanitizedBody);
 
       // Call service to update lead
       const result = await updateLeadService(
         leadId,
         {
-          ...req.body,
+          ...sanitizedBody,
           updated_by: updatedBy,
         },
-        resolveClientBaseUrl(req)
+        resolveClientBaseUrl(req),
       );
 
       console.log("[INFO] Lead updated successfully:", {
@@ -1011,12 +1033,10 @@ export class LeadController {
               email: result.account.email,
               updated_at: result.account.updated_at,
             },
-            productTypesUpdated: result.productTypesUpdated,
-            productStructuresUpdated: result.productStructuresUpdated,
           },
           "Lead updated successfully",
-          200
-        )
+          200,
+        ),
       );
     } catch (error: any) {
       console.error("[ERROR] Failed to update lead:", error.message);
@@ -1045,9 +1065,165 @@ export class LeadController {
         .json(
           ApiResponse.error(
             "An unexpected error occurred while updating the lead",
-            500
-          )
+            500,
+          ),
         );
+    }
+  }
+
+  /**
+   * Update lead product type only
+   */
+  async updateLeadProductType(req: Request, res: Response): Promise<void> {
+    try {
+      const leadId = Number(getParam(req.params.leadId));
+      const updatedBy = Number(getParam(req.params.userId));
+      const productTypeId = Number(req.body.product_type_id);
+      const productTypeName = req.body.product_type;
+
+      if (!updatedBy || isNaN(updatedBy)) {
+        res
+          .status(400)
+          .json(ApiResponse.error("Invalid user ID provided", 400));
+        return;
+      }
+
+      if (!leadId || isNaN(leadId)) {
+        res
+          .status(400)
+          .json(ApiResponse.error("Invalid lead ID provided", 400));
+        return;
+      }
+
+      if ((!productTypeId || isNaN(productTypeId)) && !productTypeName) {
+        res
+          .status(400)
+          .json(
+            ApiResponse.error(
+              "product_type_id or product_type is required",
+              400
+            )
+          );
+        return;
+      }
+
+      const lead = await prisma.leadMaster.findFirst({
+        where: { id: leadId, is_deleted: false },
+        select: { id: true, vendor_id: true, account_id: true },
+      });
+
+      if (!lead) {
+        res
+          .status(404)
+          .json(ApiResponse.error("Lead not found", 404));
+        return;
+      }
+
+      let resolvedProductTypeId = productTypeId;
+
+      if (!resolvedProductTypeId || isNaN(resolvedProductTypeId)) {
+        const productType = await prisma.productTypeMaster.findFirst({
+          where: {
+            vendor_id: lead.vendor_id,
+            type: String(productTypeName),
+          },
+          select: { id: true },
+        });
+
+        if (!productType) {
+          res
+            .status(404)
+            .json(ApiResponse.error("Product type not found", 404));
+          return;
+        }
+
+        resolvedProductTypeId = productType.id;
+      }
+
+      const mapping = await prisma.leadProductMapping.findFirst({
+        where: {
+          lead_id: leadId,
+          vendor_id: lead.vendor_id,
+        },
+        select: { id: true, product_type_id: true },
+      });
+
+      if (!mapping) {
+        res
+          .status(404)
+          .json(ApiResponse.error("Lead product mapping not found", 404));
+        return;
+      }
+
+      await prisma.leadProductMapping.update({
+        where: { id: mapping.id },
+        data: {
+          product_type_id: resolvedProductTypeId,
+        },
+      });
+
+      await prisma.leadProductStructureInstance.updateMany({
+        where: {
+          lead_id: leadId,
+          vendor_id: lead.vendor_id,
+        },
+        data: {
+          product_type_id: resolvedProductTypeId,
+        },
+      });
+
+      if (mapping.product_type_id !== resolvedProductTypeId) {
+        const [oldType, newType] = await Promise.all([
+          mapping.product_type_id
+            ? prisma.productTypeMaster.findFirst({
+                where: {
+                  id: mapping.product_type_id,
+                  vendor_id: lead.vendor_id,
+                },
+                select: { type: true },
+              })
+            : Promise.resolve(null),
+          prisma.productTypeMaster.findFirst({
+            where: {
+              id: resolvedProductTypeId,
+              vendor_id: lead.vendor_id,
+            },
+            select: { type: true },
+          }),
+        ]);
+
+        const oldLabel = oldType?.type || "Unknown";
+        const newLabel = newType?.type || "Unknown";
+        const actionMessage = `Product Type has been updated from "${oldLabel}" to "${newLabel}".`;
+
+        await prisma.leadDetailedLogs.create({
+          data: {
+            vendor_id: lead.vendor_id,
+            lead_id: leadId,
+            account_id: lead.account_id!,
+            action: actionMessage,
+            action_type: "UPDATE",
+            created_by: updatedBy,
+            created_at: new Date(),
+          },
+        });
+      }
+
+      res.status(200).json(
+        ApiResponse.success(
+          {
+            lead: {
+              id: leadId,
+            },
+            product_type_id: resolvedProductTypeId,
+          },
+          "Product type updated successfully",
+          200,
+        ),
+      );
+    } catch (error: any) {
+      console.error("[ERROR] Failed to update product type:", error.message);
+      res.status(500).json(ApiResponse.error(error.message, 500));
     }
   }
 
@@ -1056,10 +1232,10 @@ export class LeadController {
    */
   async fetchSalesExecutivesByVendor(
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<Response> {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
 
       // Validate vendorId
       if (isNaN(vendorId) || vendorId <= 0) {
@@ -1069,7 +1245,7 @@ export class LeadController {
       }
 
       console.log(
-        `[CONTROLLER] Fetching sales executives for vendor ID: ${vendorId}`
+        `[CONTROLLER] Fetching sales executives for vendor ID: ${vendorId}`,
       );
 
       const salesExecutives = await getSalesExecutivesByVendor(vendorId);
@@ -1082,13 +1258,13 @@ export class LeadController {
             ApiResponse.success(
               [],
               "No sales executives found for this vendor",
-              200
-            )
+              200,
+            ),
           );
       }
 
       console.log(
-        `[CONTROLLER] Found ${salesExecutives.length} sales executives`
+        `[CONTROLLER] Found ${salesExecutives.length} sales executives`,
       );
 
       return res.status(200).json(
@@ -1098,8 +1274,8 @@ export class LeadController {
             count: salesExecutives.length,
           },
           "Sales executives fetched successfully",
-          200
-        )
+          200,
+        ),
       );
     } catch (error: any) {
       console.error("[CONTROLLER] fetchSalesExecutivesByVendor error:", error);
@@ -1110,8 +1286,8 @@ export class LeadController {
           ApiResponse.error(
             "Failed to fetch sales executives",
             500,
-            process.env.NODE_ENV === "development" ? error.message : undefined
-          )
+            process.env.NODE_ENV === "development" ? error.message : undefined,
+          ),
         );
     }
   }
@@ -1121,10 +1297,10 @@ export class LeadController {
    */
   async fetchSiteSupervisorsByVendor(
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<Response> {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
 
       // Validate vendorId
       if (isNaN(vendorId) || vendorId <= 0) {
@@ -1134,7 +1310,7 @@ export class LeadController {
       }
 
       console.log(
-        `[CONTROLLER] Fetching Site Supervisors for vendor ID: ${vendorId}`
+        `[CONTROLLER] Fetching Site Supervisors for vendor ID: ${vendorId}`,
       );
 
       const siteSupervisors = await getSiteSupervisorByVendor(vendorId);
@@ -1147,13 +1323,13 @@ export class LeadController {
             ApiResponse.success(
               [],
               "No site supervisors found for this vendor",
-              200
-            )
+              200,
+            ),
           );
       }
 
       console.log(
-        `[CONTROLLER] Found ${siteSupervisors.length} Site Supervisors`
+        `[CONTROLLER] Found ${siteSupervisors.length} Site Supervisors`,
       );
 
       return res.status(200).json(
@@ -1163,8 +1339,8 @@ export class LeadController {
             count: siteSupervisors.length,
           },
           "site supervisors fetched successfully",
-          200
-        )
+          200,
+        ),
       );
     } catch (error: any) {
       console.error("[CONTROLLER] fetchSiteSupervisorsByVendor error:", error);
@@ -1175,8 +1351,8 @@ export class LeadController {
           ApiResponse.error(
             "Failed to fetch Site Supervisors",
             500,
-            process.env.NODE_ENV === "development" ? error.message : undefined
-          )
+            process.env.NODE_ENV === "development" ? error.message : undefined,
+          ),
         );
     }
   }
@@ -1186,11 +1362,11 @@ export class LeadController {
    */
   async fetchSalesExecutiveById(
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<Response> {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const userId = Number(getParam(req.params.userId));
 
       // Validate parameters
       if (isNaN(vendorId) || vendorId <= 0) {
@@ -1206,7 +1382,7 @@ export class LeadController {
       }
 
       console.log(
-        `[CONTROLLER] Fetching sales executive ID: ${userId} for vendor: ${vendorId}`
+        `[CONTROLLER] Fetching sales executive ID: ${userId} for vendor: ${vendorId}`,
       );
 
       const salesExecutive = await getSalesExecutiveById(vendorId, userId);
@@ -1217,13 +1393,13 @@ export class LeadController {
           .json(
             ApiResponse.error(
               "Sales executive not found or not authorized for this vendor",
-              404
-            )
+              404,
+            ),
           );
       }
 
       console.log(
-        `[CONTROLLER] Sales executive found: ${salesExecutive.user_name}`
+        `[CONTROLLER] Sales executive found: ${salesExecutive.user_name}`,
       );
 
       return res
@@ -1232,8 +1408,8 @@ export class LeadController {
           ApiResponse.success(
             salesExecutive,
             "Sales executive fetched successfully",
-            200
-          )
+            200,
+          ),
         );
     } catch (error: any) {
       console.error("[CONTROLLER] fetchSalesExecutiveById error:", error);
@@ -1244,8 +1420,8 @@ export class LeadController {
           ApiResponse.error(
             "Failed to fetch sales executive",
             500,
-            process.env.NODE_ENV === "development" ? error.message : undefined
-          )
+            process.env.NODE_ENV === "development" ? error.message : undefined,
+          ),
         );
     }
   }
@@ -1256,8 +1432,8 @@ export class LeadController {
    */
   async assignLead(req: Request, res: Response): Promise<void> {
     try {
-      const leadId = parseInt(req.params.leadId);
-      const vendorId = parseInt(req.params.vendorId);
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
 
       // Validate leadId
       if (isNaN(leadId) || leadId <= 0) {
@@ -1290,10 +1466,10 @@ export class LeadController {
               400,
               validationResult.errors
                 ? validationResult.errors.map(
-                    (e: any) => `${e.field}: ${e.message}`
+                    (e: any) => `${e.field}: ${e.message}`,
                   )
-                : undefined
-            )
+                : undefined,
+            ),
           );
         return;
       }
@@ -1307,15 +1483,15 @@ export class LeadController {
           .json(
             ApiResponse.error(
               "assign_to and assign_by cannot be the same user",
-              400
-            )
+              400,
+            ),
           );
         return;
       }
 
       console.log(`[CONTROLLER] Payload validation successful`);
       console.log(
-        `[CONTROLLER] Assigning lead to user ${assignmentPayload.assign_to} by user ${assignmentPayload.assign_by}`
+        `[CONTROLLER] Assigning lead to user ${assignmentPayload.assign_to} by user ${assignmentPayload.assign_by}`,
       );
 
       // Call service to assign lead
@@ -1323,12 +1499,12 @@ export class LeadController {
         leadId,
         vendorId,
         assignmentPayload,
-        resolveClientBaseUrl(req)
+        resolveClientBaseUrl(req),
       );
 
       console.log(`[CONTROLLER] Lead assignment successful`);
       console.log(
-        `[CONTROLLER] Lead ${result.lead.id} assigned to ${result.assignedTo.user_name}`
+        `[CONTROLLER] Lead ${result.lead.id} assigned to ${result.assignedTo.user_name}`,
       );
 
       res.status(200).json(
@@ -1359,8 +1535,8 @@ export class LeadController {
             message: `Lead successfully assigned to ${result.assignedTo.user_name}`,
           },
           "Lead assigned successfully",
-          200
-        )
+          200,
+        ),
       );
     } catch (error: any) {
       console.error("[CONTROLLER] Failed to assign lead:", error.message);
@@ -1376,8 +1552,8 @@ export class LeadController {
           .json(
             ApiResponse.error(
               "Access denied. Only admin and super-admin users can assign leads",
-              403
-            )
+              403,
+            ),
           );
         return;
       }
@@ -1391,8 +1567,8 @@ export class LeadController {
           .json(
             ApiResponse.error(
               "Invalid assignment target. User must be an active sales executive",
-              400
-            )
+              400,
+            ),
           );
         return;
       }
@@ -1406,8 +1582,8 @@ export class LeadController {
           .json(
             ApiResponse.error(
               "Lead not found or doesn't belong to this vendor",
-              404
-            )
+              404,
+            ),
           );
         return;
       }
@@ -1424,8 +1600,8 @@ export class LeadController {
           ApiResponse.error(
             "An unexpected error occurred while assigning the lead",
             500,
-            process.env.NODE_ENV === "development" ? error.message : undefined
-          )
+            process.env.NODE_ENV === "development" ? error.message : undefined,
+          ),
         );
     }
   }
@@ -1436,11 +1612,11 @@ export class LeadController {
    */
   async getLeadAssignmentHistory(
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<Response> {
     try {
-      const leadId = parseInt(req.params.leadId);
-      const vendorId = parseInt(req.params.vendorId);
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
 
       // Validate parameters
       if (isNaN(leadId) || leadId <= 0) {
@@ -1456,7 +1632,7 @@ export class LeadController {
       }
 
       console.log(
-        `[CONTROLLER] Fetching assignment history for lead ${leadId}`
+        `[CONTROLLER] Fetching assignment history for lead ${leadId}`,
       );
 
       // This would require a separate table to track assignment history
@@ -1521,8 +1697,8 @@ export class LeadController {
           ApiResponse.success(
             assignmentInfo,
             "Lead assignment information retrieved successfully",
-            200
-          )
+            200,
+          ),
         );
     } catch (error: any) {
       console.error("[CONTROLLER] getLeadAssignmentHistory error:", error);
@@ -1533,8 +1709,8 @@ export class LeadController {
           ApiResponse.error(
             "Failed to fetch lead assignment history",
             500,
-            process.env.NODE_ENV === "development" ? error.message : undefined
-          )
+            process.env.NODE_ENV === "development" ? error.message : undefined,
+          ),
         );
     }
   }
@@ -1603,7 +1779,13 @@ export class LeadController {
   }
 
   verifyUserTokenController = async (req: Request, res: Response) => {
-    const { token } = req.params;
+    const token = getParam(req.params.token);
+    if (!token) {
+      return res.status(400).json({
+        success: false,
+        error: "token is required",
+      });
+    }
     try {
       const vendor = await verifyUserTokenService(token);
       return res.json({
@@ -1701,29 +1883,29 @@ export class LeadController {
         },
       });
 
-      // 🪵 Step 1: Create LeadDetailedLogs entry
-      const detailedLog = await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: Number(vendorId),
-          lead_id: existingDoc.lead_id!,
-          account_id: existingDoc.account_id!,
-          action: `Document "${existingDoc.doc_og_name}" was deleted.`,
-          action_type: "DELETE",
-          created_by: Number(deleted_by),
-        },
-      });
+      if (existingDoc.account_id) {
+        const detailedLog = await prisma.leadDetailedLogs.create({
+          data: {
+            vendor_id: Number(vendorId),
+            lead_id: existingDoc.lead_id!,
+            account_id: existingDoc.account_id,
+            action: `Document "${existingDoc.doc_og_name}" was deleted.`,
+            action_type: "DELETE",
+            created_by: Number(deleted_by),
+          },
+        });
 
-      // 🪵 Step 2: Create LeadDocumentLogs entry (linked to detailedLog)
-      await prisma.leadDocumentLogs.create({
-        data: {
-          vendor_id: Number(vendorId),
-          lead_id: existingDoc.lead_id!,
-          account_id: existingDoc.account_id!,
-          doc_id: Number(documentId),
-          lead_logs_id: detailedLog.id,
-          created_by: Number(deleted_by),
-        },
-      });
+        await prisma.leadDocumentLogs.create({
+          data: {
+            vendor_id: Number(vendorId),
+            lead_id: existingDoc.lead_id!,
+            account_id: existingDoc.account_id,
+            doc_id: Number(documentId),
+            lead_logs_id: detailedLog.id,
+            created_by: Number(deleted_by),
+          },
+        });
+      }
 
       return res.status(200).json({
         success: true,
@@ -1742,7 +1924,7 @@ export class LeadController {
 
   async getClientRequiredCompletionDate(
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> {
     try {
       const { vendorId, leadId } = req.params;
@@ -1757,7 +1939,7 @@ export class LeadController {
 
       const date = await getClientRequiredCompletionDate(
         Number(vendorId),
-        Number(leadId)
+        Number(leadId),
       );
 
       if (!date) {
@@ -1780,7 +1962,7 @@ export class LeadController {
     } catch (error: any) {
       console.error(
         "[ClientApprovalController] getClientRequiredCompletionDate error:",
-        error
+        error,
       );
       res.status(500).json({
         success: false,

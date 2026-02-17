@@ -10,6 +10,7 @@ import {
 } from "../../../../utils/wasabiClient";
 import { ApiResponse } from "../../../../utils/apiResponse";
 import fs from "node:fs/promises";
+import { resolveClientBaseUrl } from "../../../../utils/fileUtils";
 
 const service = new OrderLoginService();
 
@@ -21,7 +22,7 @@ export class OrderLoginController {
 
       const orderLogin = await service.uploadFileBreakups(
         Number(vendorId),
-        payload
+        payload,
       );
 
       return res.status(201).json({
@@ -50,7 +51,7 @@ export class OrderLoginController {
           Number(vendorId),
           Number(leadId),
           Number(accountId),
-          breakups
+          breakups,
         );
 
       return res.status(201).json({
@@ -76,17 +77,27 @@ export class OrderLoginController {
   async getOrderLoginByLead(req: Request, res: Response) {
     try {
       const { vendorId } = req.params;
-      const { lead_id } = req.query; // ✅ Use query param
+      const { lead_id, instance_id } = req.query; // ✅ Use query params
+      const { senderUserId } = req.query; // ✅ Use query param
 
+      const baseUrl = resolveClientBaseUrl(req);
       const orderLogins = await service.getOrderLoginByLead(
         Number(vendorId),
-        Number(lead_id)
+        Number(lead_id),
+        Number(senderUserId),
+        baseUrl,
+        typeof instance_id !== "undefined" ? Number(instance_id) : undefined
       );
 
       return res.status(200).json({
         success: true,
-        message: "Order login details fetched successfully",
-        data: orderLogins,
+        message: orderLogins.hasData
+          ? "Order login details fetched successfully"
+          : "No order login created yet for this lead",
+        data: orderLogins.list,
+        meta: {
+          hasOrderLogin: orderLogins.hasData,
+        },
       });
     } catch (error: any) {
       console.error("Error fetching order login details:", error);
@@ -107,7 +118,7 @@ export class OrderLoginController {
       const updated = await service.updateOrderLogin(
         Number(vendorId),
         Number(orderLoginId),
-        payload
+        payload,
       );
 
       return res.status(200).json({
@@ -140,7 +151,7 @@ export class OrderLoginController {
       const { results, errors } = await service.updateMultipleOrderLogins(
         Number(vendorId),
         Number(leadId),
-        updates
+        updates,
       );
 
       return res.status(200).json({
@@ -176,7 +187,7 @@ export class OrderLoginController {
 
       const deleted = await service.deleteOrderLogin(
         Number(vendorId),
-        Number(orderLoginId)
+        Number(orderLoginId),
       );
 
       return res.status(200).json({
@@ -196,8 +207,14 @@ export class OrderLoginController {
 
   async getAllOrderLoginLeads(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId);
+      const vendorIdParam = Array.isArray(req.params.vendorId)
+        ? req.params.vendorId[0]
+        : req.params.vendorId;
+      const userIdParam = Array.isArray(req.params.userId)
+        ? req.params.userId[0]
+        : req.params.userId;
+      const vendorId = Number(vendorIdParam);
+      const userId = Number(userIdParam);
 
       if (!vendorId || !userId) {
         return res.status(400).json({
@@ -213,7 +230,7 @@ export class OrderLoginController {
         vendorId,
         userId,
         limit,
-        page
+        page,
       );
 
       return res.status(200).json({
@@ -225,7 +242,7 @@ export class OrderLoginController {
     } catch (error: any) {
       console.error(
         "[OrderLoginController] getAllOrderLoginLeads Error:",
-        error
+        error,
       );
       return res.status(500).json({
         success: false,
@@ -267,6 +284,7 @@ export class OrderLoginController {
           created_by: true,
           created_at: true,
           tech_check_status: true,
+          product_structure_instance_id: true,
         },
       });
 
@@ -287,7 +305,7 @@ export class OrderLoginController {
             console.error(`Failed to sign URL for doc ${doc.id}:`, err);
             return { ...doc, signed_url: null };
           }
-        })
+        }),
       );
 
       return res.status(200).json({
@@ -310,10 +328,33 @@ export class OrderLoginController {
   async uploadProductionFiles(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
-      const { account_id, created_by } = req.body;
+      const { account_id, created_by, instance_id } = req.body;
       const files = req.files as Express.Multer.File[];
 
       const uploadedFiles: { originalName: string; sysName: string }[] = [];
+      let instanceFolder: string | undefined;
+      let instanceIdValue: number | null = null;
+
+      if (instance_id) {
+        const instance = await prisma.leadProductStructureInstance.findFirst({
+          where: {
+            id: Number(instance_id),
+            vendor_id: Number(vendorId),
+            lead_id: Number(leadId),
+          },
+          select: { title: true },
+        });
+
+        if (!instance) {
+          return res.status(404).json({
+            success: false,
+            message: "Product structure instance not found for this lead.",
+          });
+        }
+
+        instanceIdValue = Number(instance_id);
+        instanceFolder = instance.title?.trim() || `instance-${instance_id}`;
+      }
 
       for (const file of files) {
         const sysName = await uploadToWasabiProductionFilesFile(
@@ -321,7 +362,8 @@ export class OrderLoginController {
           Number(vendorId),
           Number(leadId),
           file.originalname,
-          file.mimetype
+          file.mimetype,
+          instanceFolder
         );
 
         await fs.unlink(file.path);
@@ -337,7 +379,8 @@ export class OrderLoginController {
         Number(leadId),
         account_id ? Number(account_id) : null,
         Number(created_by),
-        uploadedFiles
+        uploadedFiles,
+        instanceIdValue
       );
 
       return res.status(200).json({
@@ -366,7 +409,8 @@ export class OrderLoginController {
       if (!vendorId || !leadId || !orderLoginId || !created_by) {
         return res.status(400).json({
           success: false,
-          message: "vendorId, leadId, orderLoginId, and created_by are required",
+          message:
+            "vendorId, leadId, orderLoginId, and created_by are required",
         });
       }
 
@@ -385,6 +429,26 @@ export class OrderLoginController {
         });
       }
 
+      let instanceFolder: string | undefined;
+      let instanceIdValue: number | null = null;
+
+      if (orderLogin.instance_id) {
+        const instance = await prisma.leadProductStructureInstance.findFirst({
+          where: {
+            id: Number(orderLogin.instance_id),
+            vendor_id: Number(vendorId),
+            lead_id: Number(leadId),
+          },
+          select: { title: true },
+        });
+
+        if (instance) {
+          instanceIdValue = Number(orderLogin.instance_id);
+          instanceFolder =
+            instance.title?.trim() || `instance-${orderLogin.instance_id}`;
+        }
+      }
+
       const uploadedFiles: { originalName: string; sysName: string }[] = [];
 
       for (const file of files || []) {
@@ -394,7 +458,8 @@ export class OrderLoginController {
           Number(leadId),
           orderLogin.item_type,
           file.originalname,
-          file.mimetype
+          file.mimetype,
+          instanceFolder
         );
 
         await fs.unlink(file.path);
@@ -410,7 +475,8 @@ export class OrderLoginController {
         Number(leadId),
         Number(orderLogin.account_id),
         Number(created_by),
-        uploadedFiles
+        uploadedFiles,
+        instanceIdValue
       );
 
       return res.status(200).json({
@@ -432,6 +498,7 @@ export class OrderLoginController {
   async getProductionFiles(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
+      const { instance_id } = req.query;
 
       if (!vendorId || !leadId) {
         return res.status(400).json({
@@ -459,6 +526,9 @@ export class OrderLoginController {
           lead_id: Number(leadId),
           doc_type_id: ProductionDocType.id,
           is_deleted: false,
+          ...(typeof instance_id !== "undefined"
+            ? { product_structure_instance_id: Number(instance_id) }
+            : {}),
         },
         orderBy: { created_at: "asc" },
         select: {
@@ -487,7 +557,7 @@ export class OrderLoginController {
             console.error(`Failed to sign URL for doc ${doc.id}:`, err);
             return { ...doc, signed_url: null };
           }
-        })
+        }),
       );
 
       return res.status(200).json({
@@ -514,7 +584,7 @@ export class OrderLoginController {
       const docs = await service.getOrderLoginPoFiles(
         Number(vendorId),
         Number(leadId),
-        Number(orderLoginId)
+        Number(orderLoginId),
       );
 
       if (!docs || docs.length === 0) {
@@ -535,7 +605,7 @@ export class OrderLoginController {
             console.error(`Failed to sign URL for doc ${doc.id}:`, err);
             return { ...doc, signed_url: null };
           }
-        })
+        }),
       );
 
       return res.status(200).json({
@@ -562,6 +632,7 @@ export class OrderLoginController {
         user_id,
         assign_to_user_id,
         client_required_order_login_complition_date,
+        instance_id,
       } = req.body;
 
       const missingFields = [];
@@ -583,13 +654,16 @@ export class OrderLoginController {
         });
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       const updatedLead = await service.updateLeadToProductionStage({
         vendorId: Number(vendorId),
         leadId: Number(leadId),
         accountId: Number(account_id),
+        baseUrl,
         userId: Number(user_id),
         assignToUserId: Number(assign_to_user_id),
         requiredDate: new Date(client_required_order_login_complition_date),
+        instanceId: instance_id ? Number(instance_id) : undefined,
       });
 
       try {
@@ -605,7 +679,8 @@ export class OrderLoginController {
             where: { id: Number(leadId) },
             select: { firstname: true, lastname: true },
           });
-          const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+          const leadName =
+            `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
 
           await NotificationService.createAndSend({
             vendor_id: Number(vendorId),
@@ -630,9 +705,18 @@ export class OrderLoginController {
         });
       }
 
+      const movedToProduction = Boolean(
+        (updatedLead as any)?.moved_to_production
+      );
+
       return res.status(200).json({
         success: true,
-        message: "Lead successfully moved to Production Stage",
+        message:
+          movedToProduction
+            ? "Lead successfully moved to Production Stage"
+            : instance_id
+            ? "Order login marked complete for instance"
+            : "Lead successfully moved to Production Stage",
         data: updatedLead,
       });
     } catch (error: any) {
@@ -647,6 +731,7 @@ export class OrderLoginController {
   async getLeadProductionReadiness(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
+      const { instance_id } = req.query;
 
       if (!vendorId || !leadId) {
         return res.status(400).json({
@@ -657,7 +742,8 @@ export class OrderLoginController {
 
       const data = await service.getLeadProductionReadiness(
         Number(vendorId),
-        Number(leadId)
+        Number(leadId),
+        typeof instance_id !== "undefined" ? Number(instance_id) : undefined
       );
 
       return res.status(200).json({
@@ -678,10 +764,13 @@ export class OrderLoginController {
 
   async fetchFactoryUsersByVendor(
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<Response> {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorIdParam = Array.isArray(req.params.vendorId)
+        ? req.params.vendorId[0]
+        : req.params.vendorId;
+      const vendorId = Number(vendorIdParam);
 
       if (isNaN(vendorId) || vendorId <= 0) {
         return res
@@ -690,7 +779,7 @@ export class OrderLoginController {
       }
 
       console.log(
-        `[CONTROLLER] Fetching Factory Users for vendor ID: ${vendorId}`
+        `[CONTROLLER] Fetching Factory Users for vendor ID: ${vendorId}`,
       );
 
       const factoryUsers = await service.getFactoryUsersByVendor(vendorId);
@@ -702,8 +791,8 @@ export class OrderLoginController {
             ApiResponse.success(
               [],
               "No Factory Users found for this vendor",
-              200
-            )
+              200,
+            ),
           );
       }
 
@@ -716,8 +805,8 @@ export class OrderLoginController {
             count: factoryUsers.length,
           },
           "Factory users fetched successfully",
-          200
-        )
+          200,
+        ),
       );
     } catch (error: any) {
       console.error("[CONTROLLER] fetchFactoryUsersByVendor error:", error);
@@ -728,8 +817,8 @@ export class OrderLoginController {
           ApiResponse.error(
             "Failed to fetch Factory Users",
             500,
-            process.env.NODE_ENV === "development" ? error.message : undefined
-          )
+            process.env.NODE_ENV === "development" ? error.message : undefined,
+          ),
         );
     }
   }

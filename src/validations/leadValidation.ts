@@ -170,8 +170,6 @@ interface UpdateLeadInput {
   archetech_name?: string;
   designer_remark?: string;
   updated_by?: number;
-  product_types?: number[];
-  product_structures?: number[];
 }
 
 export const validateUpdateLeadInput = (
@@ -279,31 +277,6 @@ export const validateUpdateLeadInput = (
     typeof input.designer_remark !== "string"
   ) {
     errors.push("designer_remark must be a string if provided");
-  }
-
-  // Validate arrays
-  if (input.product_types !== undefined) {
-    if (!Array.isArray(input.product_types)) {
-      errors.push("product_types must be an array if provided");
-    } else {
-      for (let i = 0; i < input.product_types.length; i++) {
-        if (typeof input.product_types[i] !== "number") {
-          errors.push(`product_types[${i}] must be a number`);
-        }
-      }
-    }
-  }
-
-  if (input.product_structures !== undefined) {
-    if (!Array.isArray(input.product_structures)) {
-      errors.push("product_structures must be an array if provided");
-    } else {
-      for (let i = 0; i < input.product_structures.length; i++) {
-        if (typeof input.product_structures[i] !== "number") {
-          errors.push(`product_structures[${i}] must be a number`);
-        }
-      }
-    }
   }
 
   // Contact number validation (basic)

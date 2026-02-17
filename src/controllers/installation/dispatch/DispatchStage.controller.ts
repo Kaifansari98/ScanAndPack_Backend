@@ -32,12 +32,15 @@ import fs from "node:fs/promises";
 
 const service = new DispatchStageService();
 
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
 export class DispatchStageController {
   /** ✅ Get all leads under Dispatch Stage (Type 14) */
   async getAllDispatchStageLeads(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const userId = Number(getParam(req.params.userId));
 
       if (!vendorId || !userId) {
         return res
@@ -77,8 +80,8 @@ export class DispatchStageController {
   /** ✅ Get required_date_for_dispatch by Lead ID & Vendor ID */
   async getRequiredDateForDispatch(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
 
       if (!vendorId || !leadId) {
         return res
@@ -110,8 +113,8 @@ export class DispatchStageController {
   /** ✅ POST → Add Dispatch Details */
   async addDispatchDetails(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
       const {
         dispatch_date,
         driver_name,
@@ -155,8 +158,8 @@ export class DispatchStageController {
   /** ✅ GET → Fetch Dispatch details */
   async getDispatchDetails(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
 
       if (!vendorId || !leadId) {
         return res

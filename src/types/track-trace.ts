@@ -1,4 +1,4 @@
-interface TrackTraceDashboardPayload {
+export interface TrackTraceDashboardPayload {
     project_id?: string;
     vendor_id: number;
     machine_id?: string;
@@ -13,4 +13,11 @@ export interface CutListSavePayload {
     machine_name: string;
     assigned: boolean;
     created_by: Number
+}
+
+
+export interface QRParam {
+    projectId?: string;
+    vendorId: number;
+    cutListIds?: string;    
 }

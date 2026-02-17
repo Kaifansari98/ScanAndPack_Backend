@@ -142,6 +142,9 @@ export class DispatchStageService {
         vendor_id: true,
         required_date_for_dispatch: true,
         no_of_boxes: true,
+        onsite_contact_person_name: true,
+        onsite_contact_person_number: true,
+        material_lift_availability: true,
       },
     });
 
@@ -363,7 +366,28 @@ export class DispatchStageService {
 
     if (!lead.dispatch_date) missing.push("Dispatch Date");
     if (!lead.vehicle_no) missing.push("Vehicle Number");
-    if (!lead.no_of_boxes || lead.no_of_boxes <= 0) missing.push("Box Count");
+
+    const hasLeadBoxCount = !!lead.no_of_boxes && lead.no_of_boxes > 0;
+    if (!hasLeadBoxCount) {
+      const instanceBoxes = await prisma.leadProductStructureInstance.findMany({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+        },
+        select: { id: true, no_of_boxes: true },
+      });
+
+      const hasAllInstanceBoxes =
+        instanceBoxes.length > 0 &&
+        instanceBoxes.every(
+          (instance) => !!instance.no_of_boxes && instance.no_of_boxes > 0
+        );
+
+      if (!hasAllInstanceBoxes) {
+        missing.push("Box Count");
+      }
+    }
+
     if (dispatchDocs.length === 0) missing.push("Dispatch Documents");
 
     const readyForPostDispatch = missing.length === 0;
@@ -624,6 +648,7 @@ export class DispatchStageService {
       select: {
         id: true,
         item_type: true,
+        instance_id: true,
       },
     });
 

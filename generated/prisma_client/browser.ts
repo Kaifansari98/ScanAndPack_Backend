@@ -372,3 +372,8 @@ export type CutListMachineMapping = Prisma.CutListMachineMappingModel
  * 
  */
 export type UserMachineMapping = Prisma.UserMachineMappingModel
+/**
+ * Model MachineTypeMaster
+ * 
+ */
+export type MachineTypeMaster = Prisma.MachineTypeMasterModel

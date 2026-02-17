@@ -5,7 +5,7 @@ import logger from "../../../src/utils/logger";
 export interface MachineData {
   machine_name: string;
   machine_code: string;
-  machine_type: string;
+  machine_type_id: number;
   scan_type: ScanType;
   description: string;
   vendor_id: number;
@@ -19,7 +19,7 @@ export interface MachineData {
 
 export interface UpdateMachineData {
   machine_name?: string;
-  machine_type?: string;
+  machine_type_id: number;
   scan_type?: ScanType;
   machine_code: string;
   status?: MachineStatus;
@@ -42,6 +42,7 @@ export const validateCreateMachine = (data: any) => {
 
   if (!data.machine_name) throw new Error("machine_name required");
   if (!data.machine_code) throw new Error("machine_code required");
+  if (!data.machine_type_id) throw new Error("machine_type_id required");
   if (!data.vendor_id) throw new Error("vendor_id required");
   if (!data.created_by) throw new Error("created_by required");
   if (!data.updated_by) throw new Error("updated_by required");
@@ -93,10 +94,34 @@ export class TrackTraceMasterService {
   static async getMachinesByVendor(vendor_id: number) {
     try {
       logger.info("Fetching machines for vendor", { vendor_id });
-      const machines = await prisma.machineMaster.findMany({
-        where: { vendor_id },
-        orderBy: { created_at: "desc" },
-      });
+      // const machines = await prisma.machineMaster.findMany({
+      //   where: { vendor_id },
+      //   orderBy: { sequence_no: "asc" },
+      // });
+
+      const BASE_URL = process.env.APP_URL;
+      const machines = (
+        await prisma.machineMaster.findMany({
+          where: {
+            vendor_id,
+            machineType: { isNot: null } // ensures INNER JOIN behavior
+          },
+          orderBy: { sequence_no: "asc" },
+          include: {
+            machineType: {
+              select: { machine_type: true }
+            }
+          }
+        })
+      ).map(({ machineType, ...machine }) => ({
+        ...machine,
+        image_path: machine.image_path
+          ? `${BASE_URL}/${machine.image_path}`
+          : null,
+        machine_type: machineType?.machine_type ?? null
+      }));
+
+
 
       return machines;
     } catch (error) {
@@ -164,4 +189,18 @@ static async updateMachine(
   }
 }
 
+}
+
+
+export const getMachineType = async () => {
+  try {
+    return await prisma.machineTypeMaster.findMany({
+      orderBy: {
+        machine_type: "asc"
+      }
+
+    });
+  } catch (error) {
+    return null;
+  }
 }

@@ -109,6 +109,10 @@ leadsRouter.delete(
 );
 
 leadsRouter.put("/update/:leadId/userId/:userId", leadController.updateLead);
+leadsRouter.put(
+  "/update-product-type/:leadId/userId/:userId",
+  leadController.updateLeadProductType
+);
 
 // GET /api/sales-executives/vendor/:vendorId
 // Fetch all sales executives for a specific vendor

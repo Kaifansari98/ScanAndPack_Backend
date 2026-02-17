@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.2.0
- * Query Engine version: 0c8ef2ce45c83248ab3df073180d5eda9e8be7a3
+ * Prisma Client JS version: 7.4.0
+ * Query Engine version: ab56fe763f921d033a6c195e7ddeb3e255bdbb57
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.2.0",
-  engine: "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3"
+  client: "7.4.0",
+  engine: "ab56fe763f921d033a6c195e7ddeb3e255bdbb57"
 }
 
 /**
@@ -454,7 +454,8 @@ export const ModelName = {
   MachineMaster: 'MachineMaster',
   CutList: 'CutList',
   CutListMachineMapping: 'CutListMachineMapping',
-  UserMachineMapping: 'UserMachineMapping'
+  UserMachineMapping: 'UserMachineMapping',
+  MachineTypeMaster: 'MachineTypeMaster'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -470,7 +471,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "machineTypeMaster"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -5728,6 +5729,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    MachineTypeMaster: {
+      payload: Prisma.$MachineTypeMasterPayload<ExtArgs>
+      fields: Prisma.MachineTypeMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MachineTypeMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineTypeMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MachineTypeMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineTypeMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.MachineTypeMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineTypeMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MachineTypeMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineTypeMasterPayload>
+        }
+        findMany: {
+          args: Prisma.MachineTypeMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineTypeMasterPayload>[]
+        }
+        create: {
+          args: Prisma.MachineTypeMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineTypeMasterPayload>
+        }
+        createMany: {
+          args: Prisma.MachineTypeMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MachineTypeMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineTypeMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.MachineTypeMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineTypeMasterPayload>
+        }
+        update: {
+          args: Prisma.MachineTypeMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineTypeMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.MachineTypeMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MachineTypeMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MachineTypeMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineTypeMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.MachineTypeMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MachineTypeMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.MachineTypeMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMachineTypeMaster>
+        }
+        groupBy: {
+          args: Prisma.MachineTypeMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MachineTypeMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MachineTypeMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MachineTypeMasterCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -6145,7 +6220,8 @@ export const LeadDocumentsScalarFieldEnum = {
   vendor_id: 'vendor_id',
   doc_type_id: 'doc_type_id',
   is_deleted: 'is_deleted',
-  tech_check_status: 'tech_check_status'
+  tech_check_status: 'tech_check_status',
+  product_structure_instance_id: 'product_structure_instance_id'
 } as const
 
 export type LeadDocumentsScalarFieldEnum = (typeof LeadDocumentsScalarFieldEnum)[keyof typeof LeadDocumentsScalarFieldEnum]
@@ -6259,7 +6335,17 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   created_by: 'created_by',
   created_at: 'created_at',
   updated_by: 'updated_by',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  is_order_login_completed: 'is_order_login_completed',
+  order_login_completed_at: 'order_login_completed_at',
+  is_production_completed: 'is_production_completed',
+  production_completed_at: 'production_completed_at',
+  woodwork_packing_details_remark: 'woodwork_packing_details_remark',
+  hardware_packing_details_remark: 'hardware_packing_details_remark',
+  no_of_boxes: 'no_of_boxes',
+  is_tech_check_completed: 'is_tech_check_completed',
+  tech_check_completed_at: 'tech_check_completed_at',
+  no_of_client_documents_initially_submitted: 'no_of_client_documents_initially_submitted'
 } as const
 
 export type LeadProductStructureInstanceScalarFieldEnum = (typeof LeadProductStructureInstanceScalarFieldEnum)[keyof typeof LeadProductStructureInstanceScalarFieldEnum]
@@ -6371,7 +6457,8 @@ export const LeadDesignSelectionScalarFieldEnum = {
   created_by: 'created_by',
   updated_by: 'updated_by',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  product_structure_instance_id: 'product_structure_instance_id'
 } as const
 
 export type LeadDesignSelectionScalarFieldEnum = (typeof LeadDesignSelectionScalarFieldEnum)[keyof typeof LeadDesignSelectionScalarFieldEnum]
@@ -6488,7 +6575,8 @@ export const OrderLoginDetailsScalarFieldEnum = {
   company_vendor_id: 'company_vendor_id',
   updated_at: 'updated_at',
   updated_by: 'updated_by',
-  factory_user_vendor_selection_remark: 'factory_user_vendor_selection_remark'
+  factory_user_vendor_selection_remark: 'factory_user_vendor_selection_remark',
+  instance_id: 'instance_id'
 } as const
 
 export type OrderLoginDetailsScalarFieldEnum = (typeof OrderLoginDetailsScalarFieldEnum)[keyof typeof OrderLoginDetailsScalarFieldEnum]
@@ -6777,6 +6865,7 @@ export const MachineMasterScalarFieldEnum = {
   machine_name: 'machine_name',
   machine_code: 'machine_code',
   machine_type: 'machine_type',
+  machine_type_id: 'machine_type_id',
   status: 'status',
   scan_type: 'scan_type',
   description: 'description',
@@ -6807,6 +6896,7 @@ export const CutListScalarFieldEnum = {
   material_details: 'material_details',
   item_name: 'item_name',
   unique_code: 'unique_code',
+  unique_code_2: 'unique_code_2',
   status: 'status',
   created_by: 'created_by',
   created_at: 'created_at',
@@ -6857,6 +6947,17 @@ export const UserMachineMappingScalarFieldEnum = {
 } as const
 
 export type UserMachineMappingScalarFieldEnum = (typeof UserMachineMappingScalarFieldEnum)[keyof typeof UserMachineMappingScalarFieldEnum]
+
+
+export const MachineTypeMasterScalarFieldEnum = {
+  id: 'id',
+  machine_type: 'machine_type',
+  active: 'active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type MachineTypeMasterScalarFieldEnum = (typeof MachineTypeMasterScalarFieldEnum)[keyof typeof MachineTypeMasterScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -7203,6 +7304,20 @@ export type EnumUserMachineStatusFieldRefInput<$PrismaModel> = FieldRefInputType
 export type ListEnumUserMachineStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserMachineStatus[]'>
     
 
+
+/**
+ * Reference to a field of type 'MachineTypeMasterStatus'
+ */
+export type EnumMachineTypeMasterStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MachineTypeMasterStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'MachineTypeMasterStatus[]'
+ */
+export type ListEnumMachineTypeMasterStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MachineTypeMasterStatus[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -7369,6 +7484,7 @@ export type GlobalOmitConfig = {
   cutList?: Prisma.CutListOmit
   cutListMachineMapping?: Prisma.CutListMachineMappingOmit
   userMachineMapping?: Prisma.UserMachineMappingOmit
+  machineTypeMaster?: Prisma.MachineTypeMasterOmit
 }
 
 /* Types for Logging */

@@ -562,30 +562,32 @@ model ProductTypeMaster {
 }
 
 model LeadDocuments {
-  id                     Int                           @id @default(autoincrement())
-  doc_og_name            String
-  doc_sys_name           String
-  created_by             Int
-  created_at             DateTime                      @default(now())
-  deleted_by             Int?
-  deleted_at             DateTime?
-  account_id             Int?
-  lead_id                Int?
-  vendor_id              Int
-  doc_type_id            Int
-  is_deleted             Boolean                       @default(false)
-  tech_check_status      TechCheckStatus?
-  installationUpdateDocs InstallationUpdateDocuments[] @relation("InstallationUpdateDocumentLink")
-  leadDocumentLogs       LeadDocumentLogs[]
-  account                AccountMaster?                @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  createdBy              UserMaster                    @relation("DocumentCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
-  deletedBy              UserMaster?                   @relation("DocumentDeletedBy", fields: [deleted_by], references: [id])
-  documentType           DocumentTypeMaster            @relation(fields: [doc_type_id], references: [id], onDelete: Cascade)
-  lead                   LeadMaster?                   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  vendor                 VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  miscellaneousDocument  MiscellaneousDocument[]
-  paymentInfo            PaymentInfo[]
-  site_readiness_photos  SiteReadiness[]               @relation("LeadDocumentsToSiteReadiness")
+  id                            Int                           @id @default(autoincrement())
+  doc_og_name                   String
+  doc_sys_name                  String
+  created_by                    Int
+  created_at                    DateTime                      @default(now())
+  deleted_by                    Int?
+  deleted_at                    DateTime?
+  account_id                    Int?
+  lead_id                       Int?
+  vendor_id                     Int
+  doc_type_id                   Int
+  is_deleted                    Boolean                       @default(false)
+  tech_check_status             TechCheckStatus?
+  product_structure_instance_id Int?
+  installationUpdateDocs        InstallationUpdateDocuments[] @relation("InstallationUpdateDocumentLink")
+  leadDocumentLogs              LeadDocumentLogs[]
+  account                       AccountMaster?                @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  createdBy                     UserMaster                    @relation("DocumentCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  deletedBy                     UserMaster?                   @relation("DocumentDeletedBy", fields: [deleted_by], references: [id])
+  documentType                  DocumentTypeMaster            @relation(fields: [doc_type_id], references: [id], onDelete: Cascade)
+  lead                          LeadMaster?                   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  productStructureInstance      LeadProductStructureInstance? @relation(fields: [product_structure_instance_id], references: [id])
+  vendor                        VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  miscellaneousDocument         MiscellaneousDocument[]
+  paymentInfo                   PaymentInfo[]
+  site_readiness_photos         SiteReadiness[]               @relation("LeadDocumentsToSiteReadiness")
 }
 
 model LeadChatRoom {
@@ -695,26 +697,38 @@ model LeadProductStructureMapping {
 }
 
 model LeadProductStructureInstance {
-  id                   Int                   @id @default(autoincrement())
-  vendor_id            Int
-  lead_id              Int
-  account_id           Int
-  product_type_id      Int
-  product_structure_id Int
-  quantity_index       Int
-  title                String
-  status               ProductInstanceStatus @default(open)
-  description          String?               @db.VarChar(2000)
-  created_by           Int
-  created_at           DateTime              @default(now())
-  updated_by           Int?
-  updated_at           DateTime              @updatedAt
-  account              AccountMaster         @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  lead                 LeadMaster            @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  productStructure     ProductStructure      @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
-  productType          ProductTypeMaster     @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
-  updatedBy            UserMaster?           @relation(fields: [updated_by], references: [id])
-  vendor               VendorMaster          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  id                                         Int                   @id @default(autoincrement())
+  vendor_id                                  Int
+  lead_id                                    Int
+  account_id                                 Int
+  product_type_id                            Int
+  product_structure_id                       Int
+  quantity_index                             Int
+  title                                      String
+  status                                     ProductInstanceStatus @default(open)
+  description                                String?               @db.VarChar(2000)
+  created_by                                 Int
+  created_at                                 DateTime              @default(now())
+  updated_by                                 Int?
+  updated_at                                 DateTime              @updatedAt
+  is_order_login_completed                   Boolean?
+  order_login_completed_at                   DateTime?
+  is_production_completed                    Boolean?
+  production_completed_at                    DateTime?
+  woodwork_packing_details_remark            String?               @db.VarChar(2000)
+  hardware_packing_details_remark            String?               @db.VarChar(2000)
+  no_of_boxes                                Int?
+  is_tech_check_completed                    Boolean?
+  tech_check_completed_at                    DateTime?
+  no_of_client_documents_initially_submitted Int?
+  designSelections                           LeadDesignSelection[]
+  documents                                  LeadDocuments[]
+  account                                    AccountMaster         @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  lead                                       LeadMaster            @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  productStructure                           ProductStructure      @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
+  productType                                ProductTypeMaster     @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
+  updatedBy                                  UserMaster?           @relation(fields: [updated_by], references: [id])
+  vendor                                     VendorMaster          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
   @@unique([lead_id, vendor_id, product_structure_id, quantity_index], name: "uniq_structure_instance")
 }
@@ -827,21 +841,23 @@ model LeadDesignMeetingDocumentsMapping {
 }
 
 model LeadDesignSelection {
-  id         Int           @id @default(autoincrement())
-  lead_id    Int
-  account_id Int
-  vendor_id  Int
-  type       String        @db.VarChar(1000)
-  desc       String        @db.VarChar(2000)
-  created_by Int
-  updated_by Int?
-  created_at DateTime      @default(now())
-  updated_at DateTime      @updatedAt
-  account    AccountMaster @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  createdBy  UserMaster    @relation("DesignSelectionCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
-  lead       LeadMaster    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  updatedBy  UserMaster?   @relation("DesignSelectionUpdatedBy", fields: [updated_by], references: [id], onDelete: Cascade)
-  vendor     VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  id                            Int                           @id @default(autoincrement())
+  lead_id                       Int
+  account_id                    Int
+  vendor_id                     Int
+  type                          String                        @db.VarChar(1000)
+  desc                          String                        @db.VarChar(2000)
+  created_by                    Int
+  updated_by                    Int?
+  created_at                    DateTime                      @default(now())
+  updated_at                    DateTime                      @updatedAt
+  product_structure_instance_id Int?
+  account                       AccountMaster                 @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  createdBy                     UserMaster                    @relation("DesignSelectionCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  lead                          LeadMaster                    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  productStructureInstance      LeadProductStructureInstance? @relation(fields: [product_structure_instance_id], references: [id])
+  updatedBy                     UserMaster?                   @relation("DesignSelectionUpdatedBy", fields: [updated_by], references: [id], onDelete: Cascade)
+  vendor                        VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
 model PaymentTypeMaster {
@@ -967,6 +983,7 @@ model OrderLoginDetails {
   updated_at                           DateTime              @updatedAt
   updated_by                           Int?
   factory_user_vendor_selection_remark String?
+  instance_id                          Int?
   account                              AccountMaster         @relation(fields: [account_id], references: [id], onDelete: Cascade)
   companyVendor                        CompanyVendorsMaster? @relation(fields: [company_vendor_id], references: [id])
   createdBy                            UserMaster            @relation(fields: [created_by], references: [id], onDelete: Cascade)
@@ -1276,7 +1293,11 @@ model MachineMaster {
   id                    Int                     @id @default(autoincrement())
   machine_name          String
   machine_code          String                  @unique
-  machine_type          String
+  machine_type          String?
+  machine_type_id       Int?
+  machineType           MachineTypeMaster? @relation(fields: [machine_type_id], references: [id])
+
+
   status                MachineStatus           @default(ACTIVE)
   scan_type             ScanType
   description           String?
@@ -1293,6 +1314,7 @@ model MachineMaster {
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])  
   userMachineMappings UserMachineMapping[]
 
+
 }
 
 model CutList {
@@ -1308,6 +1330,7 @@ model CutList {
   material_details      String
   item_name             String
   unique_code           String?
+  unique_code_2         String?
   status                String                  @default("active")
   created_by            Int
   created_at            DateTime                @default(now())
@@ -1381,6 +1404,23 @@ model UserMachineMapping {
   vendor      VendorMaster      @relation(fields: [vendor_id], references: [id])
 
 
+}
+
+model MachineTypeMaster {
+  id           Int            @id @default(autoincrement())
+  machine_type String
+  active       MachineTypeMasterStatus @default(YES)
+
+  created_at   DateTime       @default(now())
+  updated_at   DateTime       @updatedAt
+
+  machineMaster     MachineMaster[]
+  
+}
+
+enum MachineTypeMasterStatus {
+  YES
+  NO
 }
 
 
