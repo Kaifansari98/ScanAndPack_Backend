@@ -318,6 +318,7 @@ export type LeadDesignSelectionOrderByWithRelationInput = {
 
 export type LeadDesignSelectionWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  unique_lead_type_instance?: Prisma.LeadDesignSelectionUnique_lead_type_instanceCompoundUniqueInput
   AND?: Prisma.LeadDesignSelectionWhereInput | Prisma.LeadDesignSelectionWhereInput[]
   OR?: Prisma.LeadDesignSelectionWhereInput[]
   NOT?: Prisma.LeadDesignSelectionWhereInput | Prisma.LeadDesignSelectionWhereInput[]
@@ -337,7 +338,7 @@ export type LeadDesignSelectionWhereUniqueInput = Prisma.AtLeast<{
   productStructureInstance?: Prisma.XOR<Prisma.LeadProductStructureInstanceNullableScalarRelationFilter, Prisma.LeadProductStructureInstanceWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-}, "id">
+}, "id" | "unique_lead_type_instance">
 
 export type LeadDesignSelectionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -472,6 +473,12 @@ export type LeadDesignSelectionListRelationFilter = {
 
 export type LeadDesignSelectionOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type LeadDesignSelectionUnique_lead_type_instanceCompoundUniqueInput = {
+  lead_id: number
+  type: string
+  product_structure_instance_id: number
 }
 
 export type LeadDesignSelectionCountOrderByAggregateInput = {
