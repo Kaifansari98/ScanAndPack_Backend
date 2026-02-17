@@ -6660,7 +6660,7 @@ export const sendLeadMovedToUnderInstallationEmail = async (payload: {
 };
 
 // ================================================================================
-// 12. LEAD MOVED TO FINAL HANDOVER STAGE
+// 12. LEAD MOVED TO FINAL HANDOVER STAGE repeat final handover sitesuparvisor 7
 // ================================================================================
 export const sendLeadMovedToFinalHandoverEmail = async (payload: {
   vendor_id: number;

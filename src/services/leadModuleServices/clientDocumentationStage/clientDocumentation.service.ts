@@ -25,6 +25,7 @@ export interface ClientDocumentationDto {
   created_by: number;
   product_structure_instance_id?: number;
   documents: CustomMulterFile[];
+  baseUrl: string;
 }
 
 export class ClientDocumentationService {
@@ -70,7 +71,8 @@ export class ClientDocumentationService {
       // ✅ Update uploaded-doc count (instance-wise when available) ONLY for Client Documentation stage
       const resolvedInstanceId =
         data.product_structure_instance_id ??
-        data.documents.find((doc) => doc.productStructureInstanceId)?.productStructureInstanceId ??
+        data.documents.find((doc) => doc.productStructureInstanceId)
+          ?.productStructureInstanceId ??
         null;
 
       const [clientDocStatus, leadSnapshot, instanceSnapshot] =
@@ -197,10 +199,16 @@ export class ClientDocumentationService {
     lead_id: number;
     vendor_id: number;
     updated_by: number;
+    baseUrl: string;
   }) {
-    return prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx) => {
       const lead = await tx.leadMaster.findFirst({
-        where: { id: data.lead_id, vendor_id: data.vendor_id, is_deleted: false },
+        where: {
+          id: data.lead_id,
+
+          vendor_id: data.vendor_id,
+          is_deleted: false,
+        },
         select: { id: true, account_id: true },
       });
       if (!lead) {
@@ -227,7 +235,10 @@ export class ClientDocumentationService {
           tx.leadProductStructureInstance.findMany({
             where: { lead_id: data.lead_id, vendor_id: data.vendor_id },
             select: { id: true, title: true },
-            orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+            orderBy: [
+              { product_structure_id: "asc" },
+              { quantity_index: "asc" },
+            ],
           }),
           tx.leadDesignSelection.findMany({
             where: {
@@ -235,7 +246,11 @@ export class ClientDocumentationService {
               vendor_id: data.vendor_id,
               type: { in: ["Carcas", "Shutter", "Handles"] },
             },
-            select: { type: true, desc: true, product_structure_instance_id: true },
+            select: {
+              type: true,
+              desc: true,
+              product_structure_instance_id: true,
+            },
           }),
         ]);
 
@@ -254,28 +269,48 @@ export class ClientDocumentationService {
       if (instances.length > 1) {
         for (const instance of instances) {
           const rows = selections.filter(
-            (row) => row.product_structure_instance_id === instance.id
+            (row) => row.product_structure_instance_id === instance.id,
           );
 
           const hasValueByType = {
-            Carcas: rows.some((row) => row.type === "Carcas" && hasFilledValue(row.desc)),
-            Shutter: rows.some((row) => row.type === "Shutter" && hasFilledValue(row.desc)),
-            Handles: rows.some((row) => row.type === "Handles" && hasFilledValue(row.desc)),
+            Carcas: rows.some(
+              (row) => row.type === "Carcas" && hasFilledValue(row.desc),
+            ),
+            Shutter: rows.some(
+              (row) => row.type === "Shutter" && hasFilledValue(row.desc),
+            ),
+            Handles: rows.some(
+              (row) => row.type === "Handles" && hasFilledValue(row.desc),
+            ),
           };
 
-          if (!hasValueByType.Carcas || !hasValueByType.Shutter || !hasValueByType.Handles) {
+          if (
+            !hasValueByType.Carcas ||
+            !hasValueByType.Shutter ||
+            !hasValueByType.Handles
+          ) {
             throw new Error(
-              `Carcas, Shutter and Handles must be filled for ${instance.title}`
+              `Carcas, Shutter and Handles must be filled for ${instance.title}`,
             );
           }
         }
       } else {
         const hasValueByType = {
-          Carcas: selections.some((row) => row.type === "Carcas" && hasFilledValue(row.desc)),
-          Shutter: selections.some((row) => row.type === "Shutter" && hasFilledValue(row.desc)),
-          Handles: selections.some((row) => row.type === "Handles" && hasFilledValue(row.desc)),
+          Carcas: selections.some(
+            (row) => row.type === "Carcas" && hasFilledValue(row.desc),
+          ),
+          Shutter: selections.some(
+            (row) => row.type === "Shutter" && hasFilledValue(row.desc),
+          ),
+          Handles: selections.some(
+            (row) => row.type === "Handles" && hasFilledValue(row.desc),
+          ),
         };
-        if (!hasValueByType.Carcas || !hasValueByType.Shutter || !hasValueByType.Handles) {
+        if (
+          !hasValueByType.Carcas ||
+          !hasValueByType.Shutter ||
+          !hasValueByType.Handles
+        ) {
           throw new Error("Carcas, Shutter and Handles must be filled");
         }
       }
@@ -298,25 +333,29 @@ export class ClientDocumentationService {
           const pptCount = docs.filter(
             (d) =>
               d.product_structure_instance_id === instance.id &&
-              d.doc_type_id === pptType.id
+              d.doc_type_id === pptType.id,
           ).length;
           const pythaCount = docs.filter(
             (d) =>
               d.product_structure_instance_id === instance.id &&
-              d.doc_type_id === pythaType.id
+              d.doc_type_id === pythaType.id,
           ).length;
           if (pptCount === 0 || pythaCount === 0) {
             throw new Error(
-              `Both Project Files and Pytha Design Files are required for ${instance.title}`
+              `Both Project Files and Pytha Design Files are required for ${instance.title}`,
             );
           }
         }
       } else {
-        const pptCount = docs.filter((d) => d.doc_type_id === pptType.id).length;
-        const pythaCount = docs.filter((d) => d.doc_type_id === pythaType.id).length;
+        const pptCount = docs.filter(
+          (d) => d.doc_type_id === pptType.id,
+        ).length;
+        const pythaCount = docs.filter(
+          (d) => d.doc_type_id === pythaType.id,
+        ).length;
         if (pptCount === 0 || pythaCount === 0) {
           throw new Error(
-            "Both Project Files and Pytha Design Files are required before moving stage"
+            "Both Project Files and Pytha Design Files are required before moving stage",
           );
         }
       }
@@ -335,7 +374,7 @@ export class ClientDocumentationService {
           vendor_id: data.vendor_id,
           lead_id: data.lead_id,
           account_id: lead.account_id,
-          action: "Lead has been moved to Client Approval stage.",
+          action: `Lead has been moved to Client Approval stage.`,
           action_type: "UPDATE",
           created_by: data.updated_by,
           created_at: new Date(),
@@ -344,6 +383,104 @@ export class ClientDocumentationService {
 
       return { moved: true, status_id: clientApprovalStatus.id };
     });
+
+    // ===============================
+    // CLIENT APPROVAL STAGE → ADMIN NOTIFICATION ✅
+    // ===============================
+    try {
+      const [leadInfo, actor] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: data.lead_id },
+          select: {
+            firstname: true,
+            lastname: true,
+            lead_code: true,
+            vendor_id: true,
+            account_id: true,
+          },
+        }),
+        prisma.userMaster.findUnique({
+          where: { id: data.updated_by },
+          select: { user_name: true },
+        }),
+      ]);
+
+      if (!leadInfo) return result;
+
+      const leadName =
+        `${leadInfo.firstname ?? ""} ${leadInfo.lastname ?? ""}`.trim();
+      const leadCode =
+        leadInfo.lead_code ?? `LEAD-${String(data.lead_id).padStart(4, "0")}`;
+      const movedBy = actor?.user_name ?? "System";
+      const movedAt = new Date().toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      // ✅ Correct route
+      const redirectPath = `/dashboard/leads/leadstable/pendingleaddetails/${data.lead_id}?accountId=${leadInfo.account_id}`;
+      const projectUrl = `${data.baseUrl}${redirectPath}`;
+
+      // Fetch active admins
+      const admins = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: leadInfo.vendor_id,
+          status: "active",
+          user_type: {
+            user_type: { in: ["admin", "super-admin"], mode: "insensitive" },
+          },
+        },
+        select: { id: true, user_name: true, user_email: true },
+      });
+
+      for (const admin of admins) {
+        // ❌ Prevent self-notification
+        if (admin.id === data.updated_by) continue;
+
+        // 🔔 In-App Notification
+        await NotificationService.createAndSend({
+          vendor_id: leadInfo.vendor_id,
+          user_id: admin.id,
+          sender_id: data.updated_by,
+          type: NotificationType.LEAD_MILESTONE,
+          title: "Lead Moved to Client Approval",
+          message: `${leadCode} - ${leadName} moved to Client Approval stage by ${movedBy}.`,
+          entity_type: "lead",
+          entity_id: data.lead_id,
+          redirect_url: redirectPath,
+        });
+
+        // 📧 Email Notification
+        if (!admin.user_email) continue;
+
+        await sendLeadMovedToClientApprovalEmail({
+          vendor_id: leadInfo.vendor_id,
+          toEmail: admin.user_email,
+          toName: admin.user_name ?? undefined,
+          leadCode,
+          leadName,
+          updatedBy: movedBy,
+          updatedAt: movedAt,
+          projectUrl,
+        });
+      }
+
+      logger.info("✅ Client Approval admin notifications sent", {
+        vendor_id: leadInfo.vendor_id,
+        lead_id: data.lead_id,
+        admin_count: admins.length,
+      });
+    } catch (notifyErr: any) {
+      logger.warn("⚠️ Client Approval admin notification failed", {
+        lead_id: data.lead_id,
+        error: notifyErr?.message,
+      });
+    }
+
+    return result;
   }
 
   public async canMoveToOrderLoginButtonEnabled(
@@ -455,6 +592,8 @@ export class ClientDocumentationService {
     vendorId: number,
     leadId: number,
     triggeredByUserId: number,
+    baseUrl: string,
+    instanceId?: number, // ✅ optional — instance ke basis pe leadCode aur redirectPath banenge
   ) {
     // 1️⃣ Eligibility check
     const eligibility = await this.canMoveToOrderLoginButtonEnabled(
@@ -483,6 +622,7 @@ export class ClientDocumentationService {
         firstname: true,
         lastname: true,
         status_id: true,
+        account_id: true,
       },
     });
 
@@ -506,8 +646,22 @@ export class ClientDocumentationService {
 
     if (alreadySent) return;
 
+    // ✅ instanceId hai → quantity_index fetch karo
+    const instanceInfo = instanceId
+      ? await prisma.leadProductStructureInstance.findUnique({
+          where: { id: instanceId },
+          select: { quantity_index: true },
+        })
+      : null;
+
+    const baseLeadCode =
+      lead.lead_code;
+
+    // ✅ instance hai → vloq-46.1 | nahi hai → vloq-46
     const leadCode =
-      lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+      instanceInfo?.quantity_index != null
+        ? `${baseLeadCode}.${instanceInfo.quantity_index}`
+        : baseLeadCode;
 
     const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
 
@@ -549,6 +703,19 @@ export class ClientDocumentationService {
 
     const targetUser = mapping.user;
 
+    // ✅ redirectPath — accountId + instance_id (optional) dono include
+    const queryParams = new URLSearchParams();
+    if (lead.account_id && lead.account_id > 0) {
+      queryParams.set("accountId", String(lead.account_id));
+    }
+    if (instanceId) {
+      queryParams.set("instance_id", String(instanceId));
+    }
+    const queryString = queryParams.toString();
+    const redirectPath = `/dashboard/leads/details/${leadId}${queryString ? `?${queryString}` : ""}`;
+
+    const projectUrl = `${baseUrl}${redirectPath}`;
+
     // 7️⃣ In-app notification
     await NotificationService.createAndSend({
       vendor_id: vendorId,
@@ -559,7 +726,7 @@ export class ClientDocumentationService {
       message: `${leadCode} - Order Login is now enabled`,
       entity_type: "lead",
       entity_id: leadId,
-      redirect_url: `/dashboard/leads/details/${leadId}`,
+      redirect_url: redirectPath,
     });
 
     // 8️⃣ Email
@@ -568,11 +735,11 @@ export class ClientDocumentationService {
         vendor_id: vendorId,
         toEmail: targetUser.user_email,
         toName: targetUser.user_name,
-        leadCode,
+        leadCode, // ✅ vloq-46.1 ya vloq-46
         leadName,
         approvedBy,
         approvedAt: new Date().toLocaleString("en-IN"),
-        projectUrl: `${process.env.CLIENT_BASE_URL}/dashboard/leads/details/${leadId}`,
+        projectUrl, // ✅ instance_id included
       });
     }
 
@@ -587,6 +754,8 @@ export class ClientDocumentationService {
     vendorId: number,
     leadId: number,
     userId: number,
+    baseUrl: string,
+    instanceId?: number,
   ) {
     if (!vendorId || !leadId) {
       throw new Error("vendorId and leadId are required");
@@ -656,26 +825,28 @@ export class ClientDocumentationService {
       ),
     ]);
 
-    const documentsByInstance: any[] = productStructureInstances.map((instance) => ({
-      instance_id: instance.id,
-      instance_title: instance.title,
-      quantity_index: instance.quantity_index,
-      product_structure: instance.productStructure,
-      documents: {
-        ppt: pptDocsWithUrls.filter(
-          (doc: any) => doc.product_structure_instance_id === instance.id
-        ),
-        pytha: pythaDocsWithUrls.filter(
-          (doc: any) => doc.product_structure_instance_id === instance.id
-        ),
-      },
-    }));
+    const documentsByInstance: any[] = productStructureInstances.map(
+      (instance) => ({
+        instance_id: instance.id,
+        instance_title: instance.title,
+        quantity_index: instance.quantity_index,
+        product_structure: instance.productStructure,
+        documents: {
+          ppt: pptDocsWithUrls.filter(
+            (doc: any) => doc.product_structure_instance_id === instance.id,
+          ),
+          pytha: pythaDocsWithUrls.filter(
+            (doc: any) => doc.product_structure_instance_id === instance.id,
+          ),
+        },
+      }),
+    );
 
     const unassignedPpt = pptDocsWithUrls.filter(
-      (doc: any) => !doc.product_structure_instance_id
+      (doc: any) => !doc.product_structure_instance_id,
     );
     const unassignedPytha = pythaDocsWithUrls.filter(
-      (doc: any) => !doc.product_structure_instance_id
+      (doc: any) => !doc.product_structure_instance_id,
     );
     if (unassignedPpt.length || unassignedPytha.length) {
       documentsByInstance.push({
@@ -775,7 +946,13 @@ export class ClientDocumentationService {
     });
 
     // 🔔 SAFE TRIGGER (read-through side effect)
-    await this.triggerOrderLoginEnabledNotification(vendorId, leadId, userId);
+    await this.triggerOrderLoginEnabledNotification(
+      vendorId,
+      leadId,
+      userId,
+      baseUrl,
+      instanceId,
+    );
 
     return {
       id: lead.id,
@@ -791,7 +968,6 @@ export class ClientDocumentationService {
       section_cards_by_instance: sectionCardsByInstance,
     };
   }
-
 
   public async getLeadsWithStatusClientDocumentation(
     vendorId: number,
@@ -1078,16 +1254,11 @@ export class ClientDocumentationService {
       minute: "2-digit",
     });
 
-    const baseUrl =
-      process.env.CLIENT_BASE_URL ||
-      process.env.FRONTEND_URL ||
-      "http://localhost:3000";
-
     const redirectPath = `/dashboard/leads/tech-check/${lead.id}`;
 
     const projectUrl = lead.account_id
-      ? `${baseUrl}${redirectPath}?accountId=${lead.account_id}`
-      : `${baseUrl}${redirectPath}`;
+      ? `${data.baseUrl}${redirectPath}?accountId=${lead.account_id}`
+      : `${data.baseUrl}${redirectPath}`;
 
     // ==================================================
     // 6️⃣ SEND 🔔 IN-APP (ONCE) + 📧 EMAIL

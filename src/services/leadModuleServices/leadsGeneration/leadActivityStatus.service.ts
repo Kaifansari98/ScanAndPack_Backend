@@ -16,6 +16,20 @@ import {
   sendLeadMarkedActiveEmail,
 } from "../../email/brevoEmail.service";
 
+export const buildLeadDetailsPath = (leadId: number, accountId?: number) => {
+  return accountId
+    ? `/dashboard/leads/details/${leadId}?accountId=${accountId}`
+    : `/dashboard/leads/details/${leadId}`;
+};
+
+export const buildLeadDetailsUrl = (
+  baseUrl: string,
+  leadId: number,
+  accountId?: number,
+) => {
+  return `${baseUrl}${buildLeadDetailsPath(leadId, accountId)}`;
+};
+
 export class LeadActivityStatusService {
   // Change status (onHold / lostApproval / lost )
   static async updateStatus(
@@ -26,7 +40,8 @@ export class LeadActivityStatusService {
     status: ActivityStatus,
     remark: string,
     createdBy: number,
-    dueDate?: string, // 👈 optional param, required only for onHold
+    baseUrl: string,
+    dueDate?: string,
   ) {
     if (!remark) {
       throw new Error("Remark is required when changing activity status.");
@@ -81,7 +96,7 @@ export class LeadActivityStatusService {
             lead_stage: leadStage,
             due_date: new Date(dueDate),
             remark: remark,
-            status: "open", // default anyway
+            status: "open",
             created_by: createdBy,
           },
         });
@@ -90,7 +105,7 @@ export class LeadActivityStatusService {
       // 🧹 Invalidate Sales-Executive Dashboard Cache
       await cache.del(`dashboard:tasks:${vendorId}:${userId}`);
 
-      // 4️⃣ Insert into LeadDetailedLogs (Audit Trail)
+      // 4. Insert into LeadDetailedLogs (Audit Trail)
       let actionMessage = "";
 
       if (status === ActivityStatus.onHold) {
@@ -106,7 +121,6 @@ export class LeadActivityStatusService {
         actionMessage = `Lead has been marked as Lost.`;
       }
 
-      // 👇 Append remark (if provided)
       if (remark && remark.trim() !== "") {
         actionMessage += ` — Remark: ${remark.trim()}`;
       }
@@ -125,11 +139,7 @@ export class LeadActivityStatusService {
 
       logger.info(
         "✅ LeadDetailedLogs entry created for activity status change",
-        {
-          leadId,
-          status,
-          actionMessage,
-        },
+        { leadId, status, actionMessage },
       );
 
       logger.info("Lead activity status updated", { leadId, vendorId, status });
@@ -178,16 +188,14 @@ export class LeadActivityStatusService {
         minute: "2-digit",
       });
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
-      const leadDetailsUrl = leadInfo?.account_id
-        ? `${baseUrl}/dashboard/leads/details/${leadId}?accountId=${leadInfo.account_id}`
-        : `${baseUrl}/dashboard/leads/details/${leadId}`;
-      const onHoldUrl = `${baseUrl}/dashboard/leads/leadstable?tab=onHold`;
-      const lostApprovalUrl = `${baseUrl}/dashboard/leads/leadstable?tab=lostApproval`;
-      const lostUrl = `${baseUrl}/dashboard/leads/leadstable?tab=lost`;
+      // ✅ UPDATED: Correct routes with leadId and accountId
+      const onHoldPath = `/dashboard/leads/leadstable/pendingleaddetails/${leadId}?accountId=${accountId}&tab=onHold`;
+      const lostApprovalPath = `/dashboard/leads/leadstable/pendingleaddetails/${leadId}?accountId=${accountId}&tab=lostApproval`;
+      const lostPath = `/dashboard/leads/leadstable/pendingleaddetails/${leadId}?accountId=${accountId}&tab=lost`;
+
+      const onHoldUrl = `${baseUrl}${onHoldPath}`;
+      const lostApprovalUrl = `${baseUrl}${lostApprovalPath}`;
+      const lostUrl = `${baseUrl}${lostPath}`;
 
       // 🔔 Handle onHold and lostApproval notifications
       if (
@@ -206,9 +214,7 @@ export class LeadActivityStatusService {
         });
 
         const isOnHold = status === ActivityStatus.onHold;
-        const redirectUrl = isOnHold
-          ? "/dashboard/leads/leadstable?tab=onHold"
-          : "/dashboard/leads/leadstable?tab=lostApproval";
+        const redirectUrl = isOnHold ? onHoldPath : lostApprovalPath; // ✅ UPDATED
         const leadUrl = isOnHold ? onHoldUrl : lostApprovalUrl;
 
         await Promise.allSettled(
@@ -228,7 +234,7 @@ export class LeadActivityStatusService {
                   : `Lead ${leadCode} - ${leadName} marked Lost and awaiting approval.`,
                 entity_type: "lead",
                 entity_id: leadId,
-                redirect_url: redirectUrl,
+                redirect_url: redirectUrl, // ✅ UPDATED
               });
 
               if (!admin.user_email) return;
@@ -299,7 +305,7 @@ export class LeadActivityStatusService {
                   message: `Lead ${leadCode} - ${leadName} placed On Hold by ${updatedByName}.`,
                   entity_type: "lead",
                   entity_id: leadId,
-                  redirect_url: redirectUrl,
+                  redirect_url: onHoldPath, // ✅ UPDATED
                 });
 
                 if (!salesExec.user_email) return;
@@ -314,7 +320,7 @@ export class LeadActivityStatusService {
                   updatedByRole: updatedByRoleLabel,
                   updatedAt,
                   remark,
-                  leadUrl,
+                  leadUrl: onHoldUrl, // ✅ UPDATED
                 });
               }),
             );
@@ -362,7 +368,7 @@ export class LeadActivityStatusService {
             message: `Lead ${leadCode} - ${leadName} marked Lost approved by ${updatedByName}.`,
             entity_type: "lead",
             entity_id: leadId,
-            redirect_url: "/dashboard/leads/leadstable?tab=lost",
+            redirect_url: lostPath, // ✅ UPDATED
           });
 
           if (salesExec.user_email) {
@@ -375,7 +381,7 @@ export class LeadActivityStatusService {
               approvedBy: updatedByName,
               approvedAt: updatedAt,
               remark: lostApprovalLog?.activity_status_remark ?? remark,
-              leadUrl: lostUrl,
+              leadUrl: lostUrl, // ✅ UPDATED
             });
           }
         } else {
@@ -404,6 +410,7 @@ export class LeadActivityStatusService {
     userId: number,
     remark: string,
     createdBy: number,
+    baseUrl: string,
   ) {
     if (!remark) {
       throw new Error("Remark is required when reverting to onGoing.");
@@ -514,18 +521,12 @@ export class LeadActivityStatusService {
         minute: "2-digit",
       });
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
-      const leadDetailsUrl = leadInfo?.account_id
-        ? `${baseUrl}/dashboard/leads/details/${leadId}?accountId=${leadInfo.account_id}`
-        : `${baseUrl}/dashboard/leads/details/${leadId}`;
-      const onGoingUrl = `${baseUrl}/dashboard/leads/leadstable?tab=onGoing`;
+      // ✅ UPDATED: Correct route with leadId and accountId
+      const leadDetailsPath = `/dashboard/leads/leadstable/pendingleaddetails/${leadId}?accountId=${accountId}`;
+      const leadDetailsUrl = `${baseUrl}${leadDetailsPath}`;
 
       // 🔔 Handle onHold → onGoing revert notifications
       if (previousStatus === ActivityStatus.onHold) {
-        // Admin reverted onHold → notify all admins with sendLeadMarkedActiveEmail
         const admins = await prisma.userMaster.findMany({
           where: {
             vendor_id: vendorId,
@@ -551,7 +552,7 @@ export class LeadActivityStatusService {
               message: `${leadCode} - ${leadName} has been marked Active"`,
               entity_type: "lead",
               entity_id: leadId,
-              redirect_url: `/dashboard/leads/details/${leadId}`,
+              redirect_url: leadDetailsPath, // ✅ UPDATED
             });
 
             if (!admin.user_email) return;
@@ -611,9 +612,7 @@ export class LeadActivityStatusService {
             message: `Lost request for lead ${leadCode} - ${leadName} rejected by ${rejectedByName}.`,
             entity_type: "lead",
             entity_id: leadId,
-            redirect_url: `/dashboard/leads/details/${leadId}${
-              leadInfo?.account_id ? `?accountId=${leadInfo.account_id}` : ""
-            }`,
+            redirect_url: leadDetailsPath, // ✅ UPDATED
           });
 
           if (salesExec.user_email) {
@@ -634,7 +633,6 @@ export class LeadActivityStatusService {
 
       // 🔔 Handle lost → onGoing revert notifications
       if (previousStatus === ActivityStatus.lost) {
-        // Find who originally requested the lost status
         const lostApprovalLog = await prisma.leadActivityStatusLog.findFirst({
           where: {
             lead_id: leadId,
@@ -664,7 +662,6 @@ export class LeadActivityStatusService {
             })
           : null;
 
-        // Notify sales executive with sendLeadActiveEmail
         if (salesExec?.id) {
           await NotificationService.createAndSend({
             vendor_id: vendorId,
@@ -675,7 +672,7 @@ export class LeadActivityStatusService {
             message: `${leadCode} - ${leadName} has been marked Active Remark: "${remark}" ${rejectedByName}`,
             entity_type: "lead",
             entity_id: leadId,
-            redirect_url: `/dashboard/leads/details/${leadId}`,
+            redirect_url: leadDetailsPath, // ✅ UPDATED
           });
 
           if (salesExec.user_email) {

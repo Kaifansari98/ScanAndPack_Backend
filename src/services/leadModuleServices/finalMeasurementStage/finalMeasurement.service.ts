@@ -7,7 +7,6 @@ import { NotificationType, Prisma } from "../../../prisma/generated";
 import { cache } from "../../../utils/cache";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 import {
-  sendLeadMovedToClientApprovalEmail,
   sendLeadMovedToClientDocumentationEmail,
 } from "../../../../src/services/email/brevoEmail.service";
 
@@ -16,6 +15,7 @@ interface FinalMeasurementDto {
   account_id: number;
   vendor_id: number;
   created_by: number;
+  baseUrl: string;
   critical_discussion_notes?: string | null;
   finalMeasurementDocs: { originalName: string; sysName: string }[];
   sitePhotos: { originalName: string; sysName: string }[];
@@ -252,11 +252,9 @@ export class FinalMeasurementService {
         minute: "2-digit",
       });
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
+      
 
+      const baseUrl = data.baseUrl;
       // Account-aware deep link
       const projectUrl = lead.account_id
         ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`

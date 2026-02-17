@@ -4,6 +4,7 @@ import { uploadToWasabiCurrentSitePhotosSiteReadinessFile } from "../../../utils
 import logger from "../../../utils/logger";
 import { ApiResponse } from "../../../utils/apiResponse";
 import fs from "node:fs/promises";
+import { resolveClientBaseUrl } from "../../../utils/fileUtils";
 
 const service = new SiteReadinessService();
 
@@ -382,10 +383,12 @@ export class SiteReadinessController {
           );
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       const result = await SiteReadinessService.moveLeadToDispatchPlanning(
         vendorId,
         leadId,
-        updated_by
+        updated_by,
+        baseUrl,
       );
 
       return res

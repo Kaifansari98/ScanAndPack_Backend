@@ -132,6 +132,8 @@ export class BookingStageController {
         };
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
+
       const dto: CreateBookingStageDto = {
         lead_id: parseInt(lead_id),
         account_id: parseInt(account_id),
@@ -143,6 +145,7 @@ export class BookingStageController {
         bookingAmountPaymentDetailsText,
         finalBookingAmount: parseFloat(finalBookingAmount),
         siteSupervisorId: parseInt(siteSupervisorId),
+        baseUrl,
         finalDocuments: uploadedFinalDocuments,
         bookingAmountPaymentDetailsFile: uploadedPaymentFile,
       };
@@ -377,6 +380,7 @@ export class BookingStageController {
         account_id: parseInt(account_id),
         vendor_id: parseInt(vendor_id),
         created_by: parseInt(created_by),
+        baseUrl: resolveClientBaseUrl(req),
         finalDocuments: uploadedFinalDocuments,
       };
 
@@ -960,6 +964,8 @@ export class BookingStageController {
         };
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
+
       const dto: AddPaymentDto = {
         lead_id: parseInt(lead_id),
         account_id: parseInt(account_id),
@@ -969,6 +975,7 @@ export class BookingStageController {
         amount: parseFloat(amount),
         payment_text,
         payment_date,
+        baseUrl,
         payment_file: uploadedPaymentFile,
       };
 

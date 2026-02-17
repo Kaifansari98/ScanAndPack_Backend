@@ -3,6 +3,7 @@ import { LeadActivityStatusService } from "../../../services/leadModuleServices/
 import { ApiResponse } from "../../../utils/apiResponse";
 import { ActivityStatus } from "../../../prisma/generated";
 import logger from "../../../utils/logger";
+import { resolveClientBaseUrl } from "../../../../src/utils/fileUtils";
 
 export class LeadActivityStatusController {
   static async updateStatus(req: Request, res: Response) {
@@ -40,7 +41,7 @@ export class LeadActivityStatusController {
           .status(400)
           .json(ApiResponse.validationError("Remark is required."));
       }
-
+      const clientBaseUrl = resolveClientBaseUrl(req);
       const lead = await LeadActivityStatusService.updateStatus(
         Number(leadId),
         vendorId,
@@ -49,6 +50,7 @@ export class LeadActivityStatusController {
         status,
         remark,
         createdBy,
+        clientBaseUrl,
         dueDate, // 👈 pass dueDate
       );
 
@@ -73,6 +75,8 @@ export class LeadActivityStatusController {
           .json(ApiResponse.validationError("Remark is required."));
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
+
       const lead = await LeadActivityStatusService.revertToOnGoing(
         Number(leadId),
         vendorId,
@@ -80,6 +84,7 @@ export class LeadActivityStatusController {
         userId,
         remark,
         createdBy,
+        baseUrl,
       );
 
       return res
@@ -91,7 +96,7 @@ export class LeadActivityStatusController {
         .json(ApiResponse.error(error.message || "Internal Server Error"));
     }
   }
-  
+
   static async getActivityStatusCounts(req: Request, res: Response) {
     try {
       const vendorId = parseInt(req.params.vendorId, 10);
@@ -193,12 +198,15 @@ export class LeadActivityStatusController {
         });
       }
 
-      logger.info("[LeadActivityStatusController] getOnHoldLeadsFilter called", {
-        vendorId,
-        page,
-        limit,
-        dateRange,
-      });
+      logger.info(
+        "[LeadActivityStatusController] getOnHoldLeadsFilter called",
+        {
+          vendorId,
+          page,
+          limit,
+          dateRange,
+        },
+      );
 
       const { leads, count } =
         await LeadActivityStatusService.getOnHoldLeadsFilter(
@@ -428,12 +436,15 @@ export class LeadActivityStatusController {
         });
       }
 
-      logger.info("[LeadActivityStatusController] getLostApprovalLeadsFilter called", {
-        vendorId,
-        page,
-        limit,
-        dateRange,
-      });
+      logger.info(
+        "[LeadActivityStatusController] getLostApprovalLeadsFilter called",
+        {
+          vendorId,
+          page,
+          limit,
+          dateRange,
+        },
+      );
 
       const { leads, count } =
         await LeadActivityStatusService.getLostApprovalLeadsFilter(

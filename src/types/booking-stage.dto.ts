@@ -11,7 +11,7 @@ export interface CreateBookingStageDto {
   finalBookingAmount: number;
   siteSupervisorId: number;
   mrpValue: number;
-
+  baseUrl: string;
   // Files
   finalDocuments: UploadedFileRef[];
   bookingAmountPaymentDetailsFile?: UploadedFileRef;
@@ -31,5 +31,6 @@ export interface AddPaymentDto {
   amount: number;
   payment_text: string;       // ✅ mandatory
   payment_date: string;       // ✅ mandatory
+  baseUrl : string;
   payment_file?: UploadedFileRef; // optional
 }

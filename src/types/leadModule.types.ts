@@ -261,6 +261,7 @@ export interface CreatePaymentUploadDto {
     created_by: number;
     client_id: number;
     user_id: number;
+    baseUrl: string;
     amount?: number;
     payment_date?: Date;
     payment_text?: string;

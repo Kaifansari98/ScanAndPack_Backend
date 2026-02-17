@@ -147,7 +147,8 @@ async function closeOrderLoginTask(
 export async function triggerOrderLoginCompletionNotification(
   vendorId: number,
   leadId: number,
-  accountId: number,
+  userId: number,
+  baseUrl: string,
 ) {
   // 1️⃣ Check order login completed AFTER SAVE
   const completed = await isOrderLoginComplete2(vendorId, leadId);
@@ -161,7 +162,7 @@ export async function triggerOrderLoginCompletionNotification(
   const productionStage = await prisma.statusTypeMaster.findFirst({
     where: {
       vendor_id: vendorId,
-      tag: "Type 10", // verify in DB
+      tag: "Type 10",
     },
     select: { id: true },
   });
@@ -175,6 +176,7 @@ export async function triggerOrderLoginCompletionNotification(
       firstname: true,
       lastname: true,
       lead_code: true,
+      account_id: true,
     },
   });
 
@@ -185,8 +187,8 @@ export async function triggerOrderLoginCompletionNotification(
     return;
   }
 
-  // ✅ Auto close Order Login Task
-  await closeOrderLoginTask(vendorId, leadId, accountId);
+  // ✅ Auto close Order Login Task — ✅ lead.account_id use karo
+  await closeOrderLoginTask(vendorId, leadId, userId);
 
   // 3️⃣ Duplicate protection
   const alreadySent = await prisma.notification.findFirst({
@@ -234,21 +236,31 @@ export async function triggerOrderLoginCompletionNotification(
 
   const factoryUser = mapping.user;
 
-  const leadCode = lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+  // ✅ Fetch actor name from userMaster
+  const actorUser = await prisma.userMaster.findUnique({
+    where: { id: userId },
+    select: { user_name: true },
+  });
+  const updatedBy = actorUser?.user_name ?? "System"; // ✅ FIXED
 
+  const leadCode = lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
   const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+
+  // ✅ Correct routes
+  const redirectUrl = `/dashboard/leads/leadstable/pendingleaddetails/${leadId}?accountId=${lead.account_id}`;
+  const projectUrl = `${baseUrl}${redirectUrl}`;
 
   // 5️⃣ In-App
   await NotificationService.createAndSend({
     vendor_id: vendorId,
     user_id: factoryUser.id,
-    sender_id: accountId,
+    sender_id: userId,
     type: NotificationType.LEAD_ACTION,
     title: "Order Login Completed",
     message: `${leadCode} - ${leadName} Order Login completed`,
     entity_type: "lead",
     entity_id: leadId,
-    redirect_url: `/dashboard/leads/details/${leadId}`,
+    redirect_url: redirectUrl,
   });
 
   // 6️⃣ Email
@@ -259,9 +271,9 @@ export async function triggerOrderLoginCompletionNotification(
       toName: factoryUser.user_name,
       leadCode,
       leadName,
-      updatedBy: "System",
+      updatedBy: updatedBy, // ✅ FIXED
       updatedAt: new Date().toLocaleString("en-IN"),
-      projectUrl: `${process.env.CLIENT_BASE_URL}/dashboard/leads/details/${leadId}`,
+      projectUrl: projectUrl,
     });
   }
 
@@ -461,9 +473,6 @@ export class OrderLoginService {
       }
     }
 
-    // ❌ Notification trigger REMOVED
-    // await triggerOrderLoginCompletionNotification(vendorId, leadId, accountId);
-
     return { results, errors };
   }
 
@@ -471,6 +480,7 @@ export class OrderLoginService {
     vendorId: number,
     leadId: number,
     senderUserId: number,
+    baseUrl: string,
     instanceId?: number | null,
   ) {
     if (!vendorId || !leadId) {
@@ -507,6 +517,7 @@ export class OrderLoginService {
       vendorId,
       leadId,
       senderUserId,
+      baseUrl
     );
 
     return {
@@ -1108,6 +1119,7 @@ export class OrderLoginService {
     vendorId,
     leadId,
     accountId,
+    baseUrl,
     userId,
     assignToUserId,
     requiredDate,
@@ -1116,6 +1128,7 @@ export class OrderLoginService {
     vendorId: number;
     leadId: number;
     accountId: number;
+    baseUrl: string;
     userId: number;
     assignToUserId: number;
     requiredDate: Date;
@@ -1539,11 +1552,6 @@ export class OrderLoginService {
 
     const leadCode =
       leadMeta.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
-
-    const baseUrl =
-      process.env.CLIENT_BASE_URL ||
-      process.env.FRONTEND_URL ||
-      "http://localhost:3000";
 
     const projectUrl = leadMeta.account_id
       ? `${baseUrl}/dashboard/leads/details/${leadId}?accountId=${leadMeta.account_id}`

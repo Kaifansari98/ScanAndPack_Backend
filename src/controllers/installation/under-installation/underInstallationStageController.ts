@@ -10,6 +10,7 @@ import {
 import logger from "../../../utils/logger";
 import fs from "node:fs/promises";
 import { BookingStageService } from "../../../services/bookingStage/bookingStage.service";
+import { resolveClientBaseUrl } from "../../../utils/fileUtils";
 
 const service = new UnderInstallationStageService();
 
@@ -35,11 +36,13 @@ export class UnderInstallationStageController {
           );
       }
 
+      const baseUrl =  resolveClientBaseUrl(req);
       const result =
         await UnderInstallationStageService.moveLeadToUnderInstallation(
           vendorId,
           leadId,
           updated_by,
+          baseUrl,
         );
 
       return res
@@ -819,6 +822,7 @@ export class UnderInstallationStageController {
         }
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       const payload = {
         vendor_id: vendorId,
         lead_id: leadId,
@@ -836,6 +840,7 @@ export class UnderInstallationStageController {
         created_by: Number(created_by),
         teams: parsedTeams,
         files: uploadedFiles,
+        baseUrl
       };
 
       const result =
@@ -899,11 +904,14 @@ export class UnderInstallationStageController {
         });
       }
 
+
+      const baseUrl = resolveClientBaseUrl(req);
       const data = await UnderInstallationStageService.updateERDService({
         vendor_id: vendorId,
         misc_id: miscId,
         expected_ready_date,
         updated_by,
+        baseUrl
       });
 
       return res.status(200).json({ success: true, data });
@@ -1207,11 +1215,13 @@ export class UnderInstallationStageController {
           );
       }
 
+      const baseUrl = resolveClientBaseUrl(req);  
       const result =
         await UnderInstallationStageService.moveLeadToFinalHandover(
           vendorId,
           leadId,
           updated_by,
+          baseUrl
         );
 
       return res
@@ -1322,12 +1332,14 @@ export class UnderInstallationStageController {
         });
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       const result =
         await UnderInstallationStageService.resolveMiscellaneousService({
           vendor_id: vendorId,
           lead_id: leadId,
           misc_id: miscId,
           resolved_by: Number(resolved_by),
+          baseUrl
         });
 
       return res.status(200).json({
@@ -1359,11 +1371,13 @@ export class UnderInstallationStageController {
         });
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       await UnderInstallationStageService.markMiscTaskReady({
         vendor_id: vendorId,
         lead_id: leadId,
         misc_id: miscId,
         ready_by: Number(ready_by),
+        baseUrl
       });
 
       return res.status(200).json({
