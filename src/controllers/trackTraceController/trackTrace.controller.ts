@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 import * as trackTraceService from '../../services/trackTraceServices/trackTrace.service';
 import * as machineService from '../../services/machineService/machineService.service';
 
-import { ApiResponse } from 'src/utils/apiResponse';
-import { CutListSavePayload, QRParam } from 'src/types/track-trace';
+import { ApiResponse } from '../../../src/utils/apiResponse';
+import { CutListSavePayload, QRParam } from '../../../src/types/track-trace';
 import { generateWarehouseQRPDF } from "../../utils/warehouse-qr-generator";
 
 export const scan_item = async (req: Request, res: Response) => {
