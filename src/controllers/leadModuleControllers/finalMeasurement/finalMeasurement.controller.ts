@@ -26,6 +26,9 @@ const resolveClientBaseUrl = (req: Request): string => {
 
   return "http://localhost:3000";
 };
+
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
 import {
   uploadToWasabiFinalMeasurementDocFile,
   uploadToWasabiFinalMeasurementSitePhotoFile,
@@ -188,7 +191,7 @@ export class FinalMeasurementController {
     res: Response
   ): Promise<void> => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
       const userId = Number(req.query.userId);
 
       if (!vendorId || !userId) {
@@ -227,8 +230,8 @@ export class FinalMeasurementController {
     res: Response
   ): Promise<void> => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
 
       if (!vendorId || !leadId) {
         res.status(400).json({
@@ -262,8 +265,8 @@ export class FinalMeasurementController {
     res: Response
   ): Promise<void> => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
       const { notes } = req.body;
 
       if (!notes) {
@@ -508,8 +511,8 @@ export class FinalMeasurementController {
 
   public getFinalMeasurementLeads = async (req: Request, res: Response) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId); // ✅ take userId also
+      const vendorId = Number(getParam(req.params.vendorId));
+      const userId = Number(getParam(req.params.userId)); // ✅ take userId also
 
       if (!vendorId || !userId) {
         return res.status(400).json({

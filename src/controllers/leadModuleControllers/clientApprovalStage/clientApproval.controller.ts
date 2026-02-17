@@ -30,6 +30,9 @@ const resolveClientBaseUrl = (req: Request): string => {
   return "http://localhost:3000";
 };
 
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
 const clientApprovalService = new ClientApprovalService();
 
 export class ClientApprovalController {
@@ -178,8 +181,8 @@ export class ClientApprovalController {
       }
 
       const dto = {
-        lead_id: parseInt(leadId),
-        vendor_id: parseInt(vendorId),
+        lead_id: Number(leadId),
+        vendor_id: Number(vendorId),
         account_id: parseInt(account_id),
         client_id: parseInt(client_id),
         created_by: parseInt(created_by),
@@ -214,7 +217,7 @@ export class ClientApprovalController {
     res: Response
   ): Promise<Response> {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
 
       // Validate vendorId
       if (isNaN(vendorId) || vendorId <= 0) {
@@ -273,8 +276,8 @@ export class ClientApprovalController {
 
   public static getAllClientApprovals = async (req: Request, res: Response) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const userId = Number(getParam(req.params.userId));
 
       if (!vendorId || !userId) {
         return res.status(400).json({
@@ -325,8 +328,8 @@ export class ClientApprovalController {
       }
 
       const details = await clientApprovalService.getClientApprovalDetails(
-        parseInt(vendorId),
-        parseInt(leadId)
+        Number(vendorId),
+        Number(leadId)
       );
 
       res.status(200).json({
@@ -373,8 +376,8 @@ export class ClientApprovalController {
       }
   
       const dto = {
-        lead_id: parseInt(leadId),
-        vendor_id: parseInt(vendorId),
+        lead_id: Number(leadId),
+        vendor_id: Number(vendorId),
         account_id: parseInt(account_id),
         assign_to_user_id: parseInt(assign_to_user_id),
         created_by: parseInt(created_by),
@@ -624,7 +627,7 @@ export class ClientApprovalController {
     res: Response
   ): Promise<Response> {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
 
       if (isNaN(vendorId) || vendorId <= 0) {
         return res
