@@ -421,7 +421,7 @@ export class ClientDocumentationService {
       });
 
       // ✅ Correct route
-      const redirectPath = `/dashboard/leads/leadstable/pendingleaddetails/${data.lead_id}?accountId=${leadInfo.account_id}`;
+      const redirectPath = `/dashboard/project/deails/${data.lead_id}?accountId=${leadInfo.account_id}`;
       const projectUrl = `${data.baseUrl}${redirectPath}`;
 
       // Fetch active admins
@@ -654,8 +654,7 @@ export class ClientDocumentationService {
         })
       : null;
 
-    const baseLeadCode =
-      lead.lead_code;
+    const baseLeadCode = lead.lead_code;
 
     // ✅ instance hai → vloq-46.1 | nahi hai → vloq-46
     const leadCode =
@@ -1126,16 +1125,13 @@ export class ClientDocumentationService {
       }
 
       const docCount = response.documents.length;
-      const actionMessage = `${docCount} additional Client Documentation ${
-        docCount > 1 ? "documents have" : "document has"
-      } been uploaded successfully.`;
 
       const detailedLog = await tx.leadDetailedLogs.create({
         data: {
           vendor_id: data.vendor_id,
           lead_id: data.lead_id,
           account_id: data.account_id,
-          action: actionMessage,
+          action: `${docCount} additional Client Documentation uploaded.`,
           action_type: "UPLOAD",
           created_by: data.created_by,
         },
@@ -1179,65 +1175,35 @@ export class ClientDocumentationService {
     });
 
     if (leadStatus?.tag !== "Type 8") {
-      logger.info("ℹ️ Lead not in Tech Check stage. Notification skipped.", {
-        lead_id: data.lead_id,
-        stage: leadStatus?.tag,
-      });
       return result;
     }
 
     // ==================================================
-    // 3️⃣ GET USERS MAPPED TO LEAD
+    // 3️⃣ INSTANCE FETCH (OPTIONAL)
     // ==================================================
 
-    const leadUserMappings = await prisma.leadUserMapping.findMany({
-      where: {
-        vendor_id: data.vendor_id,
-        lead_id: data.lead_id,
-        status: "active",
-      },
-      select: {
-        user: {
-          select: {
-            id: true,
-            user_name: true,
-            user_email: true,
-            status: true,
-            user_type: {
-              select: {
-                user_type: true, // 👈 FROM UserTypeMaster
-              },
-            },
-          },
-        },
-      },
-    });
+    let quantityIndex: number | null = null;
 
-    // ==================================================
-    // 4️⃣ FILTER ONLY TECH-CHECK ROLE USERS
-    // ==================================================
-
-    const techCheckUsers = leadUserMappings
-      .map((m) => m.user)
-      .filter(
-        (u) =>
-          u.status === "active" &&
-          u.user_type.user_type.toLowerCase() === "tech-check",
-      );
-
-    if (!techCheckUsers.length) {
-      logger.warn("⚠️ No Tech Check user found for lead", {
-        lead_id: data.lead_id,
+    if (data.product_structure_instance_id) {
+      const instance = await prisma.leadProductStructureInstance.findUnique({
+        where: { id: data.product_structure_instance_id },
+        select: { quantity_index: true },
       });
-      return result;
+
+      quantityIndex = instance?.quantity_index ?? null;
     }
 
     // ==================================================
-    // 5️⃣ COMMON DATA FOR NOTIFICATION / EMAIL
+    // 4️⃣ BUILD INSTANCE-WISE LEAD CODE
     // ==================================================
+
+    const baseLeadCode =
+      lead.lead_code ?? `LEAD-${String(lead.id).padStart(4, "0")}`;
 
     const leadCode =
-      lead.lead_code ?? `LEAD-${String(lead.id).padStart(4, "0")}`;
+      quantityIndex !== null
+        ? `${baseLeadCode}.${quantityIndex}`
+        : baseLeadCode;
 
     const leadName = `${lead.firstname} ${lead.lastname}`.trim();
 
@@ -1254,44 +1220,82 @@ export class ClientDocumentationService {
       minute: "2-digit",
     });
 
-    const redirectPath = `/dashboard/leads/tech-check/${lead.id}`;
+    // ==================================================
+    // 5️⃣ INSTANCE-AWARE REDIRECT URL
+    // ==================================================
 
-    const projectUrl = lead.account_id
-      ? `${data.baseUrl}${redirectPath}?accountId=${lead.account_id}`
-      : `${data.baseUrl}${redirectPath}`;
+    const queryParams = new URLSearchParams();
+
+    if (lead.account_id) {
+      queryParams.set("accountId", String(lead.account_id));
+    }
+
+    if (data.product_structure_instance_id) {
+      queryParams.set(
+        "instance_id",
+        String(data.product_structure_instance_id),
+      );
+    }
+
+    const redirectPath = `/dashboard/production/tech-check/details/${lead.id}${
+      queryParams.toString() ? `?${queryParams.toString()}` : ""
+    }`;
+
+    const projectUrl = `${data.baseUrl}${redirectPath}`;
 
     // ==================================================
-    // 6️⃣ SEND 🔔 IN-APP (ONCE) + 📧 EMAIL
+    // 6️⃣ GET TECH CHECK USERS
+    // ==================================================
+
+    const leadUserMappings = await prisma.leadUserMapping.findMany({
+      where: {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        status: "active",
+      },
+      select: {
+        user: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+            status: true,
+            user_type: {
+              select: { user_type: true },
+            },
+          },
+        },
+      },
+    });
+
+    const techCheckUsers = leadUserMappings
+      .map((m) => m.user)
+      .filter(
+        (u) =>
+          u.status === "active" &&
+          u.user_type.user_type.toLowerCase() === "tech-check",
+      );
+
+    if (!techCheckUsers.length) return result;
+
+    // ==================================================
+    // 7️⃣ ALWAYS SEND NOTIFICATION (NO DUPLICATE BLOCK)
     // ==================================================
 
     await Promise.allSettled(
       techCheckUsers.map(async (user) => {
-        // ---------- IN-APP (DUPLICATE SAFE) ----------
-        const alreadyNotified = await prisma.notification.findFirst({
-          where: {
-            vendor_id: data.vendor_id,
-            user_id: user.id,
-            entity_type: "lead",
-            entity_id: lead.id,
-            title: "Revised Documents Uploaded",
-          },
+        await NotificationService.createAndSend({
+          vendor_id: data.vendor_id,
+          user_id: user.id,
+          sender_id: data.created_by,
+          type: NotificationType.LEAD_ACTION,
+          title: "Revised Documents Uploaded",
+          message: `Revised documents uploaded for ${leadCode} - ${leadName}.`,
+          entity_type: "lead",
+          entity_id: lead.id,
+          redirect_url: redirectPath,
         });
 
-        if (!alreadyNotified) {
-          await NotificationService.createAndSend({
-            vendor_id: data.vendor_id,
-            user_id: user.id,
-            sender_id: data.created_by,
-            type: NotificationType.LEAD_ACTION,
-            title: "Revised Documents Uploaded",
-            message: `Revised documents have been uploaded for ${leadCode} - ${leadName}. Please review and update your Tech Check decision.`,
-            entity_type: "lead",
-            entity_id: lead.id,
-            redirect_url: redirectPath,
-          });
-        }
-
-        // ---------- EMAIL ----------
         if (!user.user_email) return;
 
         await sendRevisedDocumentsUploadedEmail({
@@ -1306,11 +1310,6 @@ export class ClientDocumentationService {
         });
       }),
     );
-
-    logger.info("🔔 Revised documents notification sent to Tech Check users", {
-      lead_id: lead.id,
-      recipients: techCheckUsers.length,
-    });
 
     return result;
   }

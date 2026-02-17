@@ -1559,7 +1559,7 @@ export const updateLeadService = async (
                 year: "numeric",
               });
           const createdByName = hydratedLead.createdBy?.user_name ?? "System";
-          const baseUrl = clientBaseUrl || "http://localhost:3000";
+          const baseUrl = clientBaseUrl;
           const leadUrl = `${baseUrl}/dashboard/leads/details/${hydratedLead.id}?accountId=${hydratedLead.account_id}`;
 
           leadCreatedEmailPayload = {

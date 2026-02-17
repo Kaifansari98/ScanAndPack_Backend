@@ -1014,8 +1014,8 @@ export class PostProductionService {
 
 
       const redirectPath = lead.account_id
-        ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
-        : `/dashboard/leads/details/${leadId}`;
+        ? `/dashboard/production/details/${leadId}?accountId=${lead.account_id}`
+        : `/dashboard/production/details/${leadId}`;
 
       const projectUrl = `${baseUrl}${redirectPath}`;
 
