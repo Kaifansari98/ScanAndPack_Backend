@@ -1,4 +1,4 @@
-import { MachineStatus, ScanType } from "@prisma/client";
+import { MachineStatus, ScanType } from "../../../generated/prisma_client/client";
 import { prisma } from "../../../src/prisma/client";
 import logger from "../../../src/utils/logger";
 
