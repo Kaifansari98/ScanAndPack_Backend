@@ -1,9 +1,4 @@
-import { validationResponse } from 'src/utils/validationResponse';
 import { prisma } from '../../prisma/client';
-import { Prisma, CutListMachineMapping } from '../../prisma/generated';
-
-
-
 
 export const getAllMachines = async (
   vendor_id: number,
