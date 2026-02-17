@@ -1069,10 +1069,7 @@ export const handelItems = async (
             }
 
             if (machine_type_id == 0) {
-              return {
-                success: false,
-                message: "Edgebanding machine is not configured",
-              };
+              throw new Error("Edgebanding machine is not configured");
             } else {
               await tx.cutListMachineMapping.create({
                 data: {
@@ -1114,5 +1111,4 @@ export const handelItems = async (
     };
   }
 };
-
 
