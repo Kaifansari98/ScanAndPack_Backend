@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as projectService from '../../services/projectServices/project.service';
-import { ApiResponse } from 'src/utils/apiResponse';
+import { ApiResponse } from '../../../src/utils/apiResponse';
 
 export const getAllProjectsTrackTrace = async (_req: Request, res: Response) => {
     console.log("Query params:", _req.query); 
