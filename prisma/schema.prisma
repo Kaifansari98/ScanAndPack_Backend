@@ -24,6 +24,8 @@ model VendorMaster {
   accounts                    AccountMaster[]
   boxes                       BoxMaster[]
   CompanyVendorsMaster        CompanyVendorsMaster[]
+  CutList                     CutList[]
+  cutListMachineMapping       CutListMachineMapping[]
   documentTypes               DocumentTypeMaster[]
   notificationMasters         EmailNotificationMaster[]
   installationIssueLogMaster  InstallationIssueLogMaster[]
@@ -49,6 +51,7 @@ model VendorMaster {
   leadStatusLogs              LeadStatusLogs[]
   leadUserMappings            LeadUserMapping[]
   ledgers                     Ledger[]
+  machineMaster               MachineMaster[]
   miscellaneousDocument       MiscellaneousDocument[]
   miscellaneousMaster         MiscellaneousMaster[]
   miscellaneousTeamMaster     MiscellaneousTeamMaster[]
@@ -71,8 +74,11 @@ model VendorMaster {
   users                       UserMaster[]
   userPushTokens              UserPushToken[]
   addresses                   VendorAddress[]
+  vendorModulesMappings       VendorModulesMapping[]
   taxInfo                     VendorTaxInfo[]
   tokens                      VendorTokens[]
+  userMachineMapping          UserMachineMapping[]
+  
 }
 
 model VendorAddress {
@@ -173,6 +179,13 @@ model UserMaster {
   user_type                            UserTypeMaster                      @relation(fields: [user_type_id], references: [id])
   vendor                               VendorMaster                        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   pushTokens                           UserPushToken[]
+  operator                             CutListMachineMapping[]
+
+  userMachineMappings        UserMachineMapping[] @relation("UserMachine_user")
+  createdUserMachineMappings UserMachineMapping[] @relation("UserMachine_createdBy")
+  updatedUserMachineMappings UserMachineMapping[] @relation("UserMachine_updatedBy")
+
+
 }
 
 model UserDocument {
@@ -185,22 +198,27 @@ model UserDocument {
 }
 
 model ProjectMaster {
-  id                Int                  @id @default(autoincrement())
-  project_name      String
-  vendor_id         Int
-  client_id         Int                  @default(1)
-  created_by        Int
-  project_status    String               @default("Initiated")
-  created_at        DateTime             @default(now())
-  unique_project_id String
-  is_grouping       Boolean              @default(false)
-  boxes             BoxMaster[]
-  details           ProjectDetails[]
-  items             ProjectItemsMaster[]
-  client            ClientMaster         @relation(fields: [client_id], references: [id], onDelete: Cascade)
-  createdByUser     UserMaster           @relation("CreatedByUser", fields: [created_by], references: [id], onDelete: Cascade)
-  vendor            VendorMaster         @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  scanItems         ScanAndPackItem[]
+  id                    Int                     @id @default(autoincrement())
+  project_name          String
+  vendor_id             Int
+  client_id             Int?
+  lead_id               Int?
+  created_by            Int
+  project_status        String                  @default("Initiated")
+  created_at            DateTime                @default(now())
+  unique_project_id     String
+  is_grouping           Boolean                 @default(false)
+  track_trace_status        String                  @default("Not Started")
+  boxes                 BoxMaster[]
+  CutList               CutList[]
+  cutListMachineMapping CutListMachineMapping[]
+  details               ProjectDetails[]
+  items                 ProjectItemsMaster[]
+  lead                  LeadMaster?             @relation(fields: [lead_id], references: [id])
+  client                ClientMaster?           @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  createdByUser         UserMaster              @relation("CreatedByUser", fields: [created_by], references: [id], onDelete: Cascade)
+  vendor                VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  scanItems             ScanAndPackItem[]
 }
 
 model ProjectDetails {
@@ -311,7 +329,7 @@ model ClientMaster {
   ledgers     Ledger[]
   details     ProjectDetails[]
   items       ProjectItemsMaster[]
-  projects    ProjectMaster[]
+  projects   ProjectMaster[]
   scanItems   ScanAndPackItem[]
 }
 
@@ -389,6 +407,7 @@ model LeadMaster {
   designSelection                             LeadDesignSelection[]
   leadDetailedLogs                            LeadDetailedLogs[]
   leadDocumentLogs                            LeadDocumentLogs[]
+  projects                                     ProjectMaster[]
   documents                                   LeadDocuments[]
   account                                     AccountMaster?                      @relation(fields: [account_id], references: [id], onDelete: Cascade)
   assignedTo                                  UserMaster?                         @relation("LeadAssignedTo", fields: [assign_to], references: [id])
@@ -411,6 +430,9 @@ model LeadMaster {
   payments                                    PaymentInfo[]
   siteReadiness                               SiteReadiness[]
   tasks                                       UserLeadTask[]
+  cutList                                     CutList[]
+  cutListMachineMapping                       CutListMachineMapping[]
+  
 
   @@unique([vendor_id, lead_code], name: "uniq_vendor_lead_code")
 }
@@ -1248,6 +1270,162 @@ model VloqEmailLogs {
   updated_at    DateTime @updatedAt
 }
 
+model ModulesMaster {
+  id                    Int                    @id @default(autoincrement())
+  module_name           String
+  module_code           String                 @unique
+  active                ActiveStatus           @default(Yes)
+  vendorModulesMappings VendorModulesMapping[]
+}
+
+model VendorModulesMapping {
+  id         Int                              @id @default(autoincrement())
+  vendor_id  Int
+  module_id  Int
+  created_at DateTime                         @default(now())
+  created_by Int
+  updated_by Int?
+  updated_at DateTime?
+  active     ModulesVendorMappingActiveStatus @default(Yes)
+  module     ModulesMaster                    @relation(fields: [module_id], references: [id])
+  vendor     VendorMaster                     @relation(fields: [vendor_id], references: [id])
+}
+
+model MachineMaster {
+  id                    Int                     @id @default(autoincrement())
+  machine_name          String
+  machine_code          String                  @unique
+  machine_type          String?
+  machine_type_id       Int?
+  machineType           MachineTypeMaster? @relation(fields: [machine_type_id], references: [id])
+
+
+  status                MachineStatus           @default(ACTIVE)
+  scan_type             ScanType
+  description           String?
+  vendor_id             Int
+  factory_id            Int?
+  sequence_no           Int?
+  target_per_hour       Decimal?
+  image_path            String?
+  created_by            Int
+  created_at            DateTime                @default(now())
+  updated_at            DateTime                @default(now())
+  updated_by            Int
+  cutListMachineMapping CutListMachineMapping[]
+  vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])  
+  userMachineMappings UserMachineMapping[]
+
+
+}
+
+model CutList {
+  id                    Int                     @id @default(autoincrement())
+  project_id            Int
+  vendor_id             Int
+  lead_id               Int?                     
+  description           String
+  length                Decimal?                @db.Decimal(18, 2)
+  width                 Decimal?                @db.Decimal(18, 2)
+  thickness             Decimal?                @db.Decimal(18, 2)
+  qty                   Int
+  material_details      String
+  item_name             String
+  unique_code           String?
+  unique_code_2         String?
+  status                String                  @default("active")
+  created_by            Int
+  created_at            DateTime                @default(now())
+  updated_by            Int?
+  updated_at            DateTime                @default(now())
+  elf                   String?
+  elb                   String?
+  esl                   String?
+  esr                   String?
+  project               ProjectMaster           @relation(fields: [project_id], references: [id])
+  vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])
+  
+  lead                  LeadMaster?              @relation(fields: [lead_id], references: [id])
+  cutListMachineMapping CutListMachineMapping[]
+}
+
+model CutListMachineMapping {
+  id            Int           @id @default(autoincrement())
+  cut_list_id   Int
+  machine_id    Int
+  vendor_id     Int
+  lead_id       Int           
+  project_id    Int
+  sequence_no   Int
+  is_optional   Boolean       @default(false)
+  expected_in   Boolean       @default(false)
+  expected_out  Boolean       @default(false)
+  status        String
+  actual_in_at  DateTime?
+  actual_out_at DateTime?
+  in_operator   Int?
+  out_operator  Int?
+  created_by    Int
+  created_at    DateTime      @default(now())
+  cut_list      CutList       @relation(fields: [cut_list_id], references: [id])
+  machine       MachineMaster @relation(fields: [machine_id], references: [id])
+  project       ProjectMaster @relation(fields: [project_id], references: [id])
+  vendor        VendorMaster  @relation(fields: [vendor_id], references: [id])  
+  lead          LeadMaster    @relation(fields: [lead_id], references: [id])
+  operator      UserMaster?    @relation(fields: [in_operator], references: [id])
+
+  @@index([cut_list_id])
+  @@index([machine_id])
+  @@index([project_id])
+  @@index([vendor_id])
+  @@index([sequence_no])
+}
+
+
+model UserMachineMapping {
+  id          Int               @id @default(autoincrement())
+
+  user_id     Int
+  machine_id  Int
+  vendor_id   Int
+
+  status      UserMachineStatus @default(ACTIVE)
+
+  created_by  Int
+  created_at  DateTime          @default(now())
+
+  updated_by  Int
+  updated_at  DateTime          @default(now())
+
+  // Relations
+  user        UserMaster        @relation("UserMachine_user", fields: [user_id], references: [id])
+  machine     MachineMaster     @relation(fields: [machine_id], references: [id])
+
+  createdBy   UserMaster        @relation("UserMachine_createdBy", fields: [created_by], references: [id])
+  updatedBy   UserMaster        @relation("UserMachine_updatedBy", fields: [updated_by], references: [id])
+  vendor      VendorMaster      @relation(fields: [vendor_id], references: [id])
+
+
+}
+
+model MachineTypeMaster {
+  id           Int            @id @default(autoincrement())
+  machine_type String
+  active       MachineTypeMasterStatus @default(YES)
+
+  created_at   DateTime       @default(now())
+  updated_at   DateTime       @updatedAt
+
+  machineMaster     MachineMaster[]
+  
+}
+
+enum MachineTypeMasterStatus {
+  YES
+  NO
+}
+
+
 enum NotificationType {
   LEAD_ASSIGNED
   TASK_ASSIGNED
@@ -1328,4 +1506,33 @@ enum ProductInstanceStatus {
   onHold
   lostApproval
   lost
+}
+
+enum ActiveStatus {
+  Yes
+  No
+}
+
+enum ModulesVendorMappingActiveStatus {
+  Yes
+  No
+}
+
+enum MachineStatus {
+  ACTIVE
+  MAINTENANCE
+  INACTIVE
+  RETIRED
+}
+
+enum ScanType {
+  IN
+  OUT
+  BOTH
+  PASS
+}
+
+enum UserMachineStatus {
+  ACTIVE
+  INACTIVE
 }

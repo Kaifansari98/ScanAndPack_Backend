@@ -9,6 +9,14 @@
 * 🟢 You can import this file directly.
 */
 
+export const MachineTypeMasterStatus = {
+  YES: 'YES',
+  NO: 'NO'
+} as const
+
+export type MachineTypeMasterStatus = (typeof MachineTypeMasterStatus)[keyof typeof MachineTypeMasterStatus]
+
+
 export const NotificationType = {
   LEAD_ASSIGNED: 'LEAD_ASSIGNED',
   TASK_ASSIGNED: 'TASK_ASSIGNED',
@@ -128,3 +136,47 @@ export const ProductInstanceStatus = {
 } as const
 
 export type ProductInstanceStatus = (typeof ProductInstanceStatus)[keyof typeof ProductInstanceStatus]
+
+
+export const ActiveStatus = {
+  Yes: 'Yes',
+  No: 'No'
+} as const
+
+export type ActiveStatus = (typeof ActiveStatus)[keyof typeof ActiveStatus]
+
+
+export const ModulesVendorMappingActiveStatus = {
+  Yes: 'Yes',
+  No: 'No'
+} as const
+
+export type ModulesVendorMappingActiveStatus = (typeof ModulesVendorMappingActiveStatus)[keyof typeof ModulesVendorMappingActiveStatus]
+
+
+export const MachineStatus = {
+  ACTIVE: 'ACTIVE',
+  MAINTENANCE: 'MAINTENANCE',
+  INACTIVE: 'INACTIVE',
+  RETIRED: 'RETIRED'
+} as const
+
+export type MachineStatus = (typeof MachineStatus)[keyof typeof MachineStatus]
+
+
+export const ScanType = {
+  IN: 'IN',
+  OUT: 'OUT',
+  BOTH: 'BOTH',
+  PASS: 'PASS'
+} as const
+
+export type ScanType = (typeof ScanType)[keyof typeof ScanType]
+
+
+export const UserMachineStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+} as const
+
+export type UserMachineStatus = (typeof UserMachineStatus)[keyof typeof UserMachineStatus]
