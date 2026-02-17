@@ -675,38 +675,38 @@ model LeadProductStructureMapping {
 }
 
 model LeadProductStructureInstance {
-  id                      Int                   @id @default(autoincrement())
-  vendor_id               Int
-  lead_id                 Int
-  account_id              Int
-  product_type_id         Int
-  product_structure_id    Int
-  quantity_index          Int
-  title                   String
-  status                  ProductInstanceStatus @default(open)
-  description             String?               @db.VarChar(2000)
-  created_by              Int
-  created_at              DateTime              @default(now())
-  updated_by              Int?
-  updated_at              DateTime              @updatedAt
-  is_tech_check_completed Boolean?
-  tech_check_completed_at DateTime?
-  is_order_login_completed Boolean?
-  order_login_completed_at DateTime?
-  is_production_completed Boolean?
-  production_completed_at DateTime?
-  woodwork_packing_details_remark String? @db.VarChar(2000)
-  hardware_packing_details_remark String? @db.VarChar(2000)
+  id                                         Int                   @id @default(autoincrement())
+  vendor_id                                  Int
+  lead_id                                    Int
+  account_id                                 Int
+  product_type_id                            Int
+  product_structure_id                       Int
+  quantity_index                             Int
+  title                                      String
+  status                                     ProductInstanceStatus @default(open)
+  description                                String?               @db.VarChar(2000)
+  created_by                                 Int
+  created_at                                 DateTime              @default(now())
+  updated_by                                 Int?
+  updated_at                                 DateTime              @updatedAt
+  is_order_login_completed                   Boolean?
+  order_login_completed_at                   DateTime?
+  is_production_completed                    Boolean?
+  production_completed_at                    DateTime?
+  woodwork_packing_details_remark            String?               @db.VarChar(2000)
+  hardware_packing_details_remark            String?               @db.VarChar(2000)
+  no_of_boxes                                Int?
+  is_tech_check_completed                    Boolean?
+  tech_check_completed_at                    DateTime?
   no_of_client_documents_initially_submitted Int?
-  no_of_boxes Int?
-  designSelections        LeadDesignSelection[]
-  documents               LeadDocuments[]
-  account                 AccountMaster         @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  lead                    LeadMaster            @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  productStructure        ProductStructure      @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
-  productType             ProductTypeMaster     @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
-  updatedBy               UserMaster?           @relation(fields: [updated_by], references: [id])
-  vendor                  VendorMaster          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  designSelections                           LeadDesignSelection[]
+  documents                                  LeadDocuments[]
+  account                                    AccountMaster         @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  lead                                       LeadMaster            @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  productStructure                           ProductStructure      @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
+  productType                                ProductTypeMaster     @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
+  updatedBy                                  UserMaster?           @relation(fields: [updated_by], references: [id])
+  vendor                                     VendorMaster          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
   @@unique([lead_id, vendor_id, product_structure_id, quantity_index], name: "uniq_structure_instance")
 }
@@ -836,8 +836,6 @@ model LeadDesignSelection {
   productStructureInstance      LeadProductStructureInstance? @relation(fields: [product_structure_instance_id], references: [id])
   updatedBy                     UserMaster?                   @relation("DesignSelectionUpdatedBy", fields: [updated_by], references: [id], onDelete: Cascade)
   vendor                        VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-
-  @@unique([lead_id, type, product_structure_instance_id], name: "unique_lead_type_instance")
 }
 
 model PaymentTypeMaster {
@@ -952,7 +950,6 @@ model OrderLoginDetails {
   lead_id                              Int
   account_id                           Int
   vendor_id                            Int
-  instance_id                          Int?
   item_type                            String
   item_desc                            String
   estimated_completion_date            DateTime?
@@ -964,6 +961,7 @@ model OrderLoginDetails {
   updated_at                           DateTime              @updatedAt
   updated_by                           Int?
   factory_user_vendor_selection_remark String?
+  instance_id                          Int?
   account                              AccountMaster         @relation(fields: [account_id], references: [id], onDelete: Cascade)
   companyVendor                        CompanyVendorsMaster? @relation(fields: [company_vendor_id], references: [id])
   createdBy                            UserMaster            @relation(fields: [created_by], references: [id], onDelete: Cascade)

@@ -142,6 +142,9 @@ export class DispatchStageService {
         vendor_id: true,
         required_date_for_dispatch: true,
         no_of_boxes: true,
+        onsite_contact_person_name: true,
+        onsite_contact_person_number: true,
+        material_lift_availability: true,
       },
     });
 

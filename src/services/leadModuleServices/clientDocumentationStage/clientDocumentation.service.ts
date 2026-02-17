@@ -199,16 +199,15 @@ export class ClientDocumentationService {
     lead_id: number;
     vendor_id: number;
     updated_by: number;
-    baseUrl: string; 
+    baseUrl: string;
   }) {
     const result = await prisma.$transaction(async (tx) => {
       const lead = await tx.leadMaster.findFirst({
         where: {
           id: data.lead_id,
-        
+
           vendor_id: data.vendor_id,
           is_deleted: false,
-          
         },
         select: { id: true, account_id: true },
       });
@@ -594,6 +593,7 @@ export class ClientDocumentationService {
     leadId: number,
     triggeredByUserId: number,
     baseUrl: string,
+    instanceId?: number, // ✅ optional — instance ke basis pe leadCode aur redirectPath banenge
   ) {
     // 1️⃣ Eligibility check
     const eligibility = await this.canMoveToOrderLoginButtonEnabled(
@@ -646,8 +646,22 @@ export class ClientDocumentationService {
 
     if (alreadySent) return;
 
+    // ✅ instanceId hai → quantity_index fetch karo
+    const instanceInfo = instanceId
+      ? await prisma.leadProductStructureInstance.findUnique({
+          where: { id: instanceId },
+          select: { quantity_index: true },
+        })
+      : null;
+
+    const baseLeadCode =
+      lead.lead_code;
+
+    // ✅ instance hai → vloq-46.1 | nahi hai → vloq-46
     const leadCode =
-      lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+      instanceInfo?.quantity_index != null
+        ? `${baseLeadCode}.${instanceInfo.quantity_index}`
+        : baseLeadCode;
 
     const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
 
@@ -689,10 +703,16 @@ export class ClientDocumentationService {
 
     const targetUser = mapping.user;
 
-    const redirectPath =
-      lead?.account_id && lead.account_id > 0
-        ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
-        : `/dashboard/leads/details/${leadId}`;
+    // ✅ redirectPath — accountId + instance_id (optional) dono include
+    const queryParams = new URLSearchParams();
+    if (lead.account_id && lead.account_id > 0) {
+      queryParams.set("accountId", String(lead.account_id));
+    }
+    if (instanceId) {
+      queryParams.set("instance_id", String(instanceId));
+    }
+    const queryString = queryParams.toString();
+    const redirectPath = `/dashboard/leads/details/${leadId}${queryString ? `?${queryString}` : ""}`;
 
     const projectUrl = `${baseUrl}${redirectPath}`;
 
@@ -715,11 +735,11 @@ export class ClientDocumentationService {
         vendor_id: vendorId,
         toEmail: targetUser.user_email,
         toName: targetUser.user_name,
-        leadCode,
+        leadCode, // ✅ vloq-46.1 ya vloq-46
         leadName,
         approvedBy,
         approvedAt: new Date().toLocaleString("en-IN"),
-        projectUrl: projectUrl,
+        projectUrl, // ✅ instance_id included
       });
     }
 
@@ -735,6 +755,7 @@ export class ClientDocumentationService {
     leadId: number,
     userId: number,
     baseUrl: string,
+    instanceId?: number,
   ) {
     if (!vendorId || !leadId) {
       throw new Error("vendorId and leadId are required");
@@ -930,6 +951,7 @@ export class ClientDocumentationService {
       leadId,
       userId,
       baseUrl,
+      instanceId,
     );
 
     return {

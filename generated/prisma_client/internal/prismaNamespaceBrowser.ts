@@ -626,16 +626,16 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   created_at: 'created_at',
   updated_by: 'updated_by',
   updated_at: 'updated_at',
-  is_tech_check_completed: 'is_tech_check_completed',
-  tech_check_completed_at: 'tech_check_completed_at',
   is_order_login_completed: 'is_order_login_completed',
   order_login_completed_at: 'order_login_completed_at',
   is_production_completed: 'is_production_completed',
   production_completed_at: 'production_completed_at',
   woodwork_packing_details_remark: 'woodwork_packing_details_remark',
   hardware_packing_details_remark: 'hardware_packing_details_remark',
-  no_of_client_documents_initially_submitted: 'no_of_client_documents_initially_submitted',
-  no_of_boxes: 'no_of_boxes'
+  no_of_boxes: 'no_of_boxes',
+  is_tech_check_completed: 'is_tech_check_completed',
+  tech_check_completed_at: 'tech_check_completed_at',
+  no_of_client_documents_initially_submitted: 'no_of_client_documents_initially_submitted'
 } as const
 
 export type LeadProductStructureInstanceScalarFieldEnum = (typeof LeadProductStructureInstanceScalarFieldEnum)[keyof typeof LeadProductStructureInstanceScalarFieldEnum]
@@ -855,7 +855,6 @@ export const OrderLoginDetailsScalarFieldEnum = {
   lead_id: 'lead_id',
   account_id: 'account_id',
   vendor_id: 'vendor_id',
-  instance_id: 'instance_id',
   item_type: 'item_type',
   item_desc: 'item_desc',
   estimated_completion_date: 'estimated_completion_date',
@@ -866,7 +865,8 @@ export const OrderLoginDetailsScalarFieldEnum = {
   company_vendor_id: 'company_vendor_id',
   updated_at: 'updated_at',
   updated_by: 'updated_by',
-  factory_user_vendor_selection_remark: 'factory_user_vendor_selection_remark'
+  factory_user_vendor_selection_remark: 'factory_user_vendor_selection_remark',
+  instance_id: 'instance_id'
 } as const
 
 export type OrderLoginDetailsScalarFieldEnum = (typeof OrderLoginDetailsScalarFieldEnum)[keyof typeof OrderLoginDetailsScalarFieldEnum]

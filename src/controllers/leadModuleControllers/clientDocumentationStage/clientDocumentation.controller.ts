@@ -419,6 +419,8 @@ export class ClientDocumentationController {
       const vendorId = parseInt(req.params.vendorId);
       const leadId = parseInt(req.params.leadId);
       const userId = Number(req.query.userId);
+      const instanceId = req.query.instanceId ? parseInt(req.query.instanceId as string) : undefined
+
 
       if (!vendorId || !leadId || !userId) {
         res.status(400).json({
@@ -435,6 +437,7 @@ export class ClientDocumentationController {
         leadId,
         userId,
         baseUrl,
+        instanceId,
       );
 
       console.info("[ClientDocumentation:get] Response summary", {

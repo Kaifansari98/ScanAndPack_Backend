@@ -273,6 +273,7 @@ export class TechCheckController {
       const vendorId = parseInt(req.params.vendorId);
       const leadId = parseInt(req.params.leadId);
       const userId = parseInt(req.params.userId);
+      const instanceId = parseInt(req.params.instanceId);
       const { approvedDocs } = req.body;
 
       if (!vendorId || !leadId || !userId) {
@@ -295,7 +296,8 @@ export class TechCheckController {
         leadId,
         userId,
         approvedDocs,
-        baseUrl
+        baseUrl,
+        instanceId
       );
 
       return res.status(200).json({
@@ -321,6 +323,7 @@ export class TechCheckController {
       const vendorId = parseInt(req.params.vendorId);
       const leadId = parseInt(req.params.leadId);
       const userId = parseInt(req.params.userId);
+      const instanceId = parseInt(req.params.instanceId);
       const { rejectedDocs, remark } = req.body;
 
       if (!vendorId || !leadId || !userId) {
@@ -337,11 +340,14 @@ export class TechCheckController {
         });
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       const result = await techCheckService.rejectTechCheck(
         vendorId,
         leadId,
         userId,
         rejectedDocs,
+        baseUrl,
+        instanceId,
         remark
       );
 
