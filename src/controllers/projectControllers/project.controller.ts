@@ -63,7 +63,7 @@ export const getAllProjectItems = async (_req: Request, res: Response) => {
   
 export const getProjectById = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id);
+    const id = Number(req.params.id);
     const project = await projectService.getProjectById(id);
 
     if (!project) {
@@ -98,7 +98,7 @@ export const getProjectById = async (req: Request, res: Response) => {
   
 export const getProjectDetailsById = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id);
+    const id = Number(req.params.id);
     const details = await projectService.getProjectDetailsById(id);
     res.json(details);
   } catch (err) {
@@ -108,7 +108,7 @@ export const getProjectDetailsById = async (req: Request, res: Response) => {
   
 export const getProjectItemById = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id);
+    const id = Number(req.params.id);
     const item = await projectService.getProjectItemById(id);
     res.json(item);
   } catch (err) {
@@ -216,8 +216,8 @@ export const handleFullProjectCreate = async (req: Request, res: Response) => {
 
 export const getProjectWeight = async (req: Request, res: Response) => {
   try {
-    const vendorId = parseInt(req.params.vendor_id);
-    const projectId = parseInt(req.params.project_id);
+    const vendorId = Number(req.params.vendor_id);
+    const projectId = Number(req.params.project_id);
 
     const weight = await calculateProjectWeight(vendorId, projectId);
 
@@ -230,9 +230,9 @@ export const getProjectWeight = async (req: Request, res: Response) => {
 
 export const getProjectAndBoxWeight = async (req: Request, res: Response) => {
   try {
-    const vendorId = parseInt(req.params.vendor_id);
-    const projectId = parseInt(req.params.project_id);
-    const boxId = parseInt(req.params.box_id);
+    const vendorId = Number(req.params.vendor_id);
+    const projectId = Number(req.params.project_id);
+    const boxId = Number(req.params.box_id);
 
     const result = await calculateProjectAndBoxWeight(vendorId, projectId, boxId);
 
@@ -254,7 +254,7 @@ export const getProjectAndBoxWeight = async (req: Request, res: Response) => {
 
 export const getCompletedProjects = async (req: Request, res: Response) => {
   try {
-    const vendorId = parseInt(req.params.vendorId);
+    const vendorId = Number(req.params.vendorId);
     
     // Validate vendorId
     if (!vendorId || isNaN(vendorId)) {
@@ -284,7 +284,7 @@ export const getCompletedProjects = async (req: Request, res: Response) => {
 
 export const autoPackGroupedBoxes = async (req: Request, res: Response) => {
   try {
-    const vendorId = parseInt(req.params.vendorId);
+    const vendorId = Number(req.params.vendorId);
 
     // Validate vendorId
     if (!vendorId || isNaN(vendorId)) {

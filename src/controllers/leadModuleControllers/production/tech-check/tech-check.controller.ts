@@ -10,12 +10,15 @@ import { resolveClientBaseUrl } from "../../../../utils/fileUtils";
 
 const techCheckService = new TechCheckService();
 
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
 export class TechCheckController {
   // ✅ Get All Tech-Check Leads
   public static getAllTechCheckLeads = async (req: Request, res: Response) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const userId = Number(getParam(req.params.userId));
 
       if (!vendorId || !userId) {
         return res.status(400).json({
@@ -55,9 +58,9 @@ export class TechCheckController {
     res: Response
   ) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
-      const instanceId = parseInt(req.params.instanceId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
+      const instanceId = Number(getParam(req.params.instanceId));
 
       if (!vendorId || !leadId || !instanceId) {
         return res.status(400).json({
@@ -99,9 +102,9 @@ export class TechCheckController {
   // ✅ Approve Tech Check
   public static approveTechCheck = async (req: Request, res: Response) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
-      const userId = parseInt(req.params.userId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
+      const userId = Number(getParam(req.params.userId));
 
       const {
         assign_to_user_id,
@@ -270,10 +273,10 @@ export class TechCheckController {
     res: Response
   ) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
-      const userId = parseInt(req.params.userId);
-      const instanceId = parseInt(req.params.instanceId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
+      const userId = Number(getParam(req.params.userId));
+      const instanceId = Number(getParam(req.params.instanceId));
       const { approvedDocs } = req.body;
 
       if (!vendorId || !leadId || !userId) {
@@ -320,10 +323,10 @@ export class TechCheckController {
   // ✅ Reject Tech Check
   public static rejectTechCheck = async (req: Request, res: Response) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
-      const userId = parseInt(req.params.userId);
-      const instanceId = parseInt(req.params.instanceId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
+      const userId = Number(getParam(req.params.userId));
+      const instanceId = Number(getParam(req.params.instanceId));
       const { rejectedDocs, remark } = req.body;
 
       if (!vendorId || !leadId || !userId) {

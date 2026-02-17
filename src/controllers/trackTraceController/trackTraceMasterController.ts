@@ -2,7 +2,6 @@ import fs from "node:fs/promises";
 import { Request, Response } from "express";
 import { TrackTraceMasterService } from "../../../src/services/trackTraceServices/trackTraceMasterService";
 import logger from "src/utils/logger";
-import { uploadToWasabiMachineImage } from "src/utils/wasabiClient";
 import * as trackTraceService from '../../services/trackTraceServices/trackTraceMasterService';
 import path from "path";
 
@@ -24,18 +23,6 @@ export class TrackTraceMasterController {
        Number(req.body.vendor_id),
         file.originalname,
       );
-
-
-      /* // Upload image
-       const imagePath = await uploadToWasabiMachineImage(
-         file.path,
-         Number(req.body.vendor_id),
-         file.originalname,
-         file.mimetype,
-       );
- 
-       // Delete temp file safely
-       await fs.unlink(file.path);*/
 
       const machine = await TrackTraceMasterService.createMachine({
         ...req.body,

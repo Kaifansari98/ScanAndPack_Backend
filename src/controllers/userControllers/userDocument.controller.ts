@@ -25,7 +25,7 @@ export const getUserDocumentsByUserIdController = async (req: Request, res: Resp
   try {
     const { userId } = req.params;
 
-    const result = await getUserDocumentsByUserIdService(parseInt(userId));
+    const result = await getUserDocumentsByUserIdService(Number(userId));
     res.status(200).json({ message: "Documents fetched", data: result });
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch documents", error });
@@ -36,7 +36,7 @@ export const deleteUserDocumentController = async (req: Request, res: Response) 
   try {
     const { id } = req.params;
 
-    const result = await deleteUserDocumentService(parseInt(id));
+    const result = await deleteUserDocumentService(Number(id));
     res.status(200).json({ message: "Document deleted", data: result });
   } catch (error) {
     res.status(500).json({ message: "Failed to delete document", error });

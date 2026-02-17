@@ -1779,7 +1779,13 @@ export class LeadController {
   }
 
   verifyUserTokenController = async (req: Request, res: Response) => {
-    const { token } = req.params;
+    const token = getParam(req.params.token);
+    if (!token) {
+      return res.status(400).json({
+        success: false,
+        error: "token is required",
+      });
+    }
     try {
       const vendor = await verifyUserTokenService(token);
       return res.json({

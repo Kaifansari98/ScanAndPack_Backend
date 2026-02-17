@@ -6,8 +6,8 @@ import { date } from "joi";
 export class TaskController {
   static async getTasks(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId, 10);
-      const userId = parseInt(req.params.userId, 10);
+      const vendorId = Number(req.params.vendorId);
+      const userId = Number(req.params.userId);
 
       if (isNaN(vendorId) || isNaN(userId)) {
         return res.status(400).json({
@@ -35,8 +35,8 @@ export class TaskController {
 
   static async getTasks2(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId, 10);
-      const userId = parseInt(req.params.userId, 10);
+      const vendorId = Number(req.params.vendorId);
+      const userId = Number(req.params.userId);
 
       const page = parseInt((req.body.page as string) || "1");
       const limit = parseInt((req.body.limit as string) || "10");
@@ -202,8 +202,8 @@ export class TaskController {
 
   static async getInitialSiteMeasurementTasks(req: Request, res: Response) {
     try {
-      const userId = parseInt(req.params.userId, 10);
-      const leadId = parseInt(req.params.leadId, 10);
+      const userId = Number(req.params.userId);
+      const leadId = Number(req.params.leadId);
 
       if (isNaN(userId) || isNaN(leadId)) {
         return res
@@ -233,8 +233,8 @@ export class TaskController {
 
   static async getFollowUpTasks(req: Request, res: Response) {
     try {
-      const userId = parseInt(req.params.userId, 10);
-      const leadId = parseInt(req.params.leadId, 10);
+      const userId = Number(req.params.userId);
+      const leadId = Number(req.params.leadId);
 
       if (isNaN(userId) || isNaN(leadId)) {
         return res
@@ -258,8 +258,8 @@ export class TaskController {
 
   static async getFinalMeasurementTasks(req: Request, res: Response) {
     try {
-      const userId = parseInt(req.params.userId, 10);
-      const leadId = parseInt(req.params.leadId, 10);
+      const userId = Number(req.params.userId);
+      const leadId = Number(req.params.leadId);
 
       if (isNaN(userId) || isNaN(leadId)) {
         return res
@@ -284,7 +284,7 @@ export class TaskController {
   // Vendor overall tasks
   static async getTasksByVendor(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId, 10);
+      const vendorId = Number(req.params.vendorId);
 
       if (isNaN(vendorId)) {
         return res.status(400).json({
@@ -312,7 +312,7 @@ export class TaskController {
 
   static async getTasksFilterByVendorAll(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId, 10);
+      const vendorId = Number(req.params.vendorId);
 
       const page = parseInt((req.body.page as string) || "1");
       const limit = parseInt((req.body.limit as string) || "10");
@@ -472,8 +472,8 @@ export class TaskController {
   
   static async getActiveTasksByVendorAndLead(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId, 10);
-      const leadId = parseInt(req.params.leadId, 10);
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
 
       if (isNaN(vendorId) || isNaN(leadId)) {
         return res

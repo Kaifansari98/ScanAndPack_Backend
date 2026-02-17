@@ -4,12 +4,16 @@ import logger from "src/utils/logger";
 
 const configureService = new ConfigureService();
 
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
 export const getVendorLeadsController = async (
   req: Request,
   res: Response
 ) => {
   try {
-    const { token, projectId } = req.params;
+    const token = getParam(req.params.token);
+    const projectId = getParam(req.params.projectId);
 
     if (!token || !projectId) {
       logger.warn("Missing required params", { params: req.params });
@@ -22,10 +26,7 @@ export const getVendorLeadsController = async (
 
     logger.info("Incoming request for vendor leads", { token, projectId });
 
-    const data = await configureService.getLeadsVendorById(
-      token,
-      projectId
-    );
+    const data = await configureService.getLeadsVendorById(token, projectId);
 
     return res.status(200).json({
       success: true,
@@ -49,7 +50,8 @@ export const getVendorLeadsControllerPost = async (
   res: Response
 ) => {
   try {
-    const { token, projectId } = req.params;
+    const token = getParam(req.params.token);
+    const projectId = getParam(req.params.projectId);
 
     if (!token || !projectId) {
       return res.status(400).json({

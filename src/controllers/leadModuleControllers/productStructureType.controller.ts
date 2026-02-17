@@ -34,7 +34,7 @@ export const fetchAllProductStructureTypes = async (req: Request, res: Response)
     console.log("[CONTROLLER] fetchAllProductStructureTypes called", { query: req.query });
 
     try {
-    const vendor_id = parseInt(req.params.vendor_id);
+    const vendor_id = Number(req.params.vendor_id);
     if (!vendor_id) {
       console.warn("[CONTROLLER] Missing vendor_id");
       return res.status(400).json({ error: "vendor_id is required" });
@@ -53,7 +53,7 @@ export const removeProductStructureType = async (req: Request, res: Response) =>
     console.log("[CONTROLLER] removeProductStructureType called", { params: req.params });
   
     try {
-      const id = parseInt(req.params.id);
+      const id = Number(req.params.id);
       if (!id) {
         console.warn("[CONTROLLER] Missing ProductStructure type id");
         return res.status(400).json({ error: "id is required" });
@@ -74,7 +74,7 @@ export const editProductStructureParent = async (req: Request, res: Response) =>
     });
 
     try {
-        const id = parseInt(req.params.id);
+        const id = Number(req.params.id);
         const { parent } = req.body as { parent?: string };
 
         if (!id) {
