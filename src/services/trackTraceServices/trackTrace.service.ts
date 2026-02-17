@@ -1,7 +1,7 @@
 import { validationResponse } from 'src/utils/validationResponse';
 import { prisma } from '../../prisma/client';
 import { Prisma, CutListMachineMapping } from '../../prisma/generated';
-import { CutListSavePayload, QRParam } from 'src/types/track-trace';
+import { CutListSavePayload, QRParam, TrackTraceDashboardPayload } from 'src/types/track-trace';
 import * as XLSX from "xlsx";
 import * as fs from "fs";
 import * as path from "path";
