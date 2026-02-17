@@ -585,10 +585,10 @@ export class FinalHandoverStageService {
       if (!recipients.length) return result;
 
 
-      const redirectPath = `/dashboard/leads/project-summary/${leadId}`;
+      const redirectPath = `/dashboard/installation/details/${leadId}?accountId=${result.accountId}`;
 
       const projectUrl = result.accountId
-        ? `${baseUrl}${redirectPath}?accountId=${result.accountId}`
+        ? `${baseUrl}${redirectPath}`
         : `${baseUrl}${redirectPath}`;
 
       // ==================================================

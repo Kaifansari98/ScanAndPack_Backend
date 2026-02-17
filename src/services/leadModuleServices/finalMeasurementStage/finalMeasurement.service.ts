@@ -257,8 +257,8 @@ export class FinalMeasurementService {
       const baseUrl = data.baseUrl;
       // Account-aware deep link
       const projectUrl = lead.account_id
-        ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
-        : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;
+        ? `${baseUrl}/dashboard/project/details/${data.lead_id}?accountId=${lead.account_id}`
+        : `${baseUrl}/dashboard/project/details/${data.lead_id}`;
 
       // Fetch Active Admin Users
       const admins = await prisma.userMaster.findMany({
@@ -291,8 +291,8 @@ export class FinalMeasurementService {
           entity_type: "lead",
           entity_id: data.lead_id,
           redirect_url: lead.account_id
-            ? `/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
-            : `/dashboard/leads/details/${data.lead_id}`,
+            ? `/dashboard/project/details/${data.lead_id}?accountId=${lead.account_id}`
+            : `/dashboard/project/details/${data.lead_id}`,
         });
 
         // 📧 EMAIL Notification (Client Documentation Mail)
