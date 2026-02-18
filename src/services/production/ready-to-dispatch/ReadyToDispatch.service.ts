@@ -209,13 +209,16 @@ export class ReadyToDispatchService {
         { statusCode: 404 }
       );
 
+    const prefix = `ready_to_dispatch/current_site_photos/${vendorId}/${leadId}/`;
+
     // 🔹 Fetch all uploaded Current Site Photos for this lead
     const documents = await prisma.leadDocuments.findMany({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
         doc_type_id: sitePhotoDocType.id,
-        is_deleted: false
+        is_deleted: false,
+        doc_sys_name: { startsWith: prefix }
       },
       orderBy: { created_at: "desc" },
     });
@@ -251,12 +254,15 @@ export class ReadyToDispatchService {
         { statusCode: 404 }
       );
 
+    const prefix = `ready_to_dispatch/current_site_photos/${vendorId}/${leadId}/`;
+
     // 🔹 Count all uploaded Current Site Photos for this lead
     const count = await prisma.leadDocuments.count({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
         doc_type_id: sitePhotoDocType.id,
+        doc_sys_name: { startsWith: prefix },
       },
     });
 

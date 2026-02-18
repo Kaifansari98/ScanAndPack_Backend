@@ -470,6 +470,11 @@ export type ClientMasterUncheckedUpdateManyInput = {
   clientCode?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
+export type ClientMasterNullableScalarRelationFilter = {
+  is?: Prisma.ClientMasterWhereInput | null
+  isNot?: Prisma.ClientMasterWhereInput | null
+}
+
 export type ClientMasterScalarRelationFilter = {
   is?: Prisma.ClientMasterWhereInput
   isNot?: Prisma.ClientMasterWhereInput
@@ -525,21 +530,18 @@ export type ClientMasterSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
-export type ClientMasterNullableScalarRelationFilter = {
-  is?: Prisma.ClientMasterWhereInput | null
-  isNot?: Prisma.ClientMasterWhereInput | null
-}
-
 export type ClientMasterCreateNestedOneWithoutProjectsInput = {
   create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutProjectsInput, Prisma.ClientMasterUncheckedCreateWithoutProjectsInput>
   connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutProjectsInput
   connect?: Prisma.ClientMasterWhereUniqueInput
 }
 
-export type ClientMasterUpdateOneRequiredWithoutProjectsNestedInput = {
+export type ClientMasterUpdateOneWithoutProjectsNestedInput = {
   create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutProjectsInput, Prisma.ClientMasterUncheckedCreateWithoutProjectsInput>
   connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutProjectsInput
   upsert?: Prisma.ClientMasterUpsertWithoutProjectsInput
+  disconnect?: Prisma.ClientMasterWhereInput | boolean
+  delete?: Prisma.ClientMasterWhereInput | boolean
   connect?: Prisma.ClientMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClientMasterUpdateToOneWithWhereWithoutProjectsInput, Prisma.ClientMasterUpdateWithoutProjectsInput>, Prisma.ClientMasterUncheckedUpdateWithoutProjectsInput>
 }

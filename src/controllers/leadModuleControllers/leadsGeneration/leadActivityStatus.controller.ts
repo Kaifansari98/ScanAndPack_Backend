@@ -5,6 +5,9 @@ import { ActivityStatus } from "../../../prisma/generated";
 import logger from "../../../utils/logger";
 import { resolveClientBaseUrl } from "../../../../src/utils/fileUtils";
 
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
 export class LeadActivityStatusController {
   static async updateStatus(req: Request, res: Response) {
     try {
@@ -99,7 +102,7 @@ export class LeadActivityStatusController {
 
   static async getActivityStatusCounts(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId, 10);
+      const vendorId = Number(getParam(req.params.vendorId));
       if (!vendorId) {
         return res
           .status(400)
@@ -124,7 +127,7 @@ export class LeadActivityStatusController {
 
   static async getOnHoldLeadsFilter(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
       const page = parseInt((req.body.page as string) || "1");
       const limit = parseInt((req.body.limit as string) || "10");
 
@@ -246,7 +249,7 @@ export class LeadActivityStatusController {
 
   static async getLostLeadsFilter(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
       const page = parseInt((req.body.page as string) || "1");
       const limit = parseInt((req.body.limit as string) || "10");
 
@@ -362,7 +365,7 @@ export class LeadActivityStatusController {
 
   static async getLostApprovalLeadsFilter(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
       const page = parseInt((req.body.page as string) || "1");
       const limit = parseInt((req.body.limit as string) || "10");
 

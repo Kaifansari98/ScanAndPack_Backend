@@ -31,6 +31,7 @@ export const createProjectItem = async (req: Request, res: Response) => {
 };
 
 export const getAllProjects = async (_req: Request, res: Response) => {
+    console.log("Query params:", _req.query); 
   try {
     const projects = await projectService.getAllProjects();
     res.json(projects);
@@ -38,6 +39,8 @@ export const getAllProjects = async (_req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to fetch projects', details: err });
   }
 };
+
+
   
 export const getAllProjectDetails = async (_req: Request, res: Response) => {
   try {
@@ -59,7 +62,7 @@ export const getAllProjectItems = async (_req: Request, res: Response) => {
   
 export const getProjectById = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id);
+    const id = Number(req.params.id);
     const project = await projectService.getProjectById(id);
 
     if (!project) {
@@ -94,7 +97,7 @@ export const getProjectById = async (req: Request, res: Response) => {
   
 export const getProjectDetailsById = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id);
+    const id = Number(req.params.id);
     const details = await projectService.getProjectDetailsById(id);
     res.json(details);
   } catch (err) {
@@ -104,7 +107,7 @@ export const getProjectDetailsById = async (req: Request, res: Response) => {
   
 export const getProjectItemById = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id);
+    const id = Number(req.params.id);
     const item = await projectService.getProjectItemById(id);
     res.json(item);
   } catch (err) {
@@ -212,8 +215,8 @@ export const handleFullProjectCreate = async (req: Request, res: Response) => {
 
 export const getProjectWeight = async (req: Request, res: Response) => {
   try {
-    const vendorId = parseInt(req.params.vendor_id);
-    const projectId = parseInt(req.params.project_id);
+    const vendorId = Number(req.params.vendor_id);
+    const projectId = Number(req.params.project_id);
 
     const weight = await calculateProjectWeight(vendorId, projectId);
 
@@ -226,9 +229,9 @@ export const getProjectWeight = async (req: Request, res: Response) => {
 
 export const getProjectAndBoxWeight = async (req: Request, res: Response) => {
   try {
-    const vendorId = parseInt(req.params.vendor_id);
-    const projectId = parseInt(req.params.project_id);
-    const boxId = parseInt(req.params.box_id);
+    const vendorId = Number(req.params.vendor_id);
+    const projectId = Number(req.params.project_id);
+    const boxId = Number(req.params.box_id);
 
     const result = await calculateProjectAndBoxWeight(vendorId, projectId, boxId);
 
@@ -250,7 +253,7 @@ export const getProjectAndBoxWeight = async (req: Request, res: Response) => {
 
 export const getCompletedProjects = async (req: Request, res: Response) => {
   try {
-    const vendorId = parseInt(req.params.vendorId);
+    const vendorId = Number(req.params.vendorId);
     
     // Validate vendorId
     if (!vendorId || isNaN(vendorId)) {
@@ -280,7 +283,7 @@ export const getCompletedProjects = async (req: Request, res: Response) => {
 
 export const autoPackGroupedBoxes = async (req: Request, res: Response) => {
   try {
-    const vendorId = parseInt(req.params.vendorId);
+    const vendorId = Number(req.params.vendorId);
 
     // Validate vendorId
     if (!vendorId || isNaN(vendorId)) {
@@ -304,5 +307,18 @@ export const autoPackGroupedBoxes = async (req: Request, res: Response) => {
       success: false,
       message: error.message || 'Internal server error',
     });
+  }
+};
+
+export const handelItems = async (req: Request, res: Response) => {
+  try {
+    const token = req.headers["authorization"]?.replace("Bearer ", "");
+    if (!token) return res.status(401).json({ message: "Token is required" });
+
+    const result = await projectService.handelItems(token, req.body);
+    return res.status(200).json(result);
+  } catch (err: any) {
+    console.error(err);
+    return res.status(400).json({ error: err.message });
   }
 };

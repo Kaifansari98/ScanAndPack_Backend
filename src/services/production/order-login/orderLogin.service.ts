@@ -1,5 +1,6 @@
 import { prisma } from "../../../prisma/client";
 import { sanitizeFilename } from "../../../utils/sanitizeFilename";
+import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
 import { NotificationType } from "../../../prisma/generated";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
@@ -391,15 +392,15 @@ export class OrderLoginService {
     createIfMissing: boolean = true,
   ) {
     let docType = await prisma.documentTypeMaster.findFirst({
-      where: { vendor_id: vendorId, tag: "Type 18" },
+      where: { vendor_id: vendorId, tag: "Type 36" },
     });
 
     if (!docType && createIfMissing) {
       docType = await prisma.documentTypeMaster.create({
         data: {
           vendor_id: vendorId,
-          tag: "Type 18",
-          type: "Order Login PO Files",
+          tag: "Type 36",
+          type: "PO-files",
         },
       });
     }
@@ -957,7 +958,7 @@ export class OrderLoginService {
     }
 
     const docType = await this.getOrderLoginPoDocType(vendorId);
-    if (!docType) throw new Error("Doc Type (Type 18) not found");
+    if (!docType) throw new Error("Doc Type (Type 36) not found");
 
     const uploadedDocs = [];
 
@@ -1036,15 +1037,19 @@ export class OrderLoginService {
         )}/${safeCardName}/`
       : `order_login_po/${vendorId}/${leadId}/${safeCardName}/`;
 
-    return prisma.leadDocuments.findMany({
+    const baseWhere = {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      doc_type_id: docType.id,
+      is_deleted: false,
+      ...(instanceIdValue
+        ? { product_structure_instance_id: instanceIdValue }
+        : {}),
+    };
+
+    let documents = await prisma.leadDocuments.findMany({
       where: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        doc_type_id: docType.id,
-        is_deleted: false,
-        ...(instanceIdValue
-          ? { product_structure_instance_id: instanceIdValue }
-          : {}),
+        ...baseWhere,
         doc_sys_name: { startsWith: prefix },
       },
       orderBy: { created_at: "asc" },
@@ -1055,6 +1060,27 @@ export class OrderLoginService {
         created_at: true,
       },
     });
+
+    // Fallback for renamed item_type/instance titles
+    if (documents.length === 0) {
+      documents = await prisma.leadDocuments.findMany({
+        where: baseWhere,
+        orderBy: { created_at: "asc" },
+        select: {
+          id: true,
+          doc_og_name: true,
+          doc_sys_name: true,
+          created_at: true,
+        },
+      });
+    }
+
+    return Promise.all(
+      documents.map(async (doc) => ({
+        ...doc,
+        signed_url: await generateSignedUrl(doc.doc_sys_name),
+      })),
+    );
   }
 
   async getLeadProductionReadiness(
