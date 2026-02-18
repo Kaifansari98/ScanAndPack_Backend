@@ -1366,7 +1366,7 @@ model CutListMachineMapping {
   created_by    Int
   created_at    DateTime      @default(now())
   cut_list      CutList       @relation(fields: [cut_list_id], references: [id])
-  machine       MachineMaster @relation(fields: [machine_id], references: [id])
+  machine       MachineMaster @relation(fielders: [machine_id], references: [id])
   project       ProjectMaster @relation(fields: [project_id], references: [id])
   vendor        VendorMaster  @relation(fields: [vendor_id], references: [id])  
   lead          LeadMaster    @relation(fields: [lead_id], references: [id])
