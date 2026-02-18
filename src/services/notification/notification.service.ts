@@ -71,8 +71,11 @@ export const NotificationService = {
   },
 
   async createAndSend(
-    input: CreateNotificationInput
-  ): Promise<{ notification: Notification; delivery: PushDeliverySummary | null }> {
+    input: CreateNotificationInput,
+  ): Promise<{
+    notification: Notification;
+    delivery: PushDeliverySummary | null;
+  }> {
     const notification = await this.create(input);
     let delivery: PushDeliverySummary | null = null;
 
@@ -91,7 +94,7 @@ export const NotificationService = {
 
   async sendPushToUser(
     notificationId: number,
-    input: CreateNotificationInput
+    input: CreateNotificationInput,
   ): Promise<PushDeliverySummary> {
     const tokens = await prisma.userPushToken.findMany({
       where: {
@@ -149,7 +152,9 @@ export const NotificationService = {
         notification_id: notificationId,
         push_token_id: token.id,
         status: result.success ? "SENT" : "FAILED",
-        error: result.success ? null : result.error?.message ?? "Unknown error",
+        error: result.success
+          ? null
+          : (result.error?.message ?? "Unknown error"),
       };
     });
 
@@ -168,9 +173,10 @@ export const NotificationService = {
         tokenId: tokens[index].id,
       }))
       .filter(({ result }) =>
-        ["messaging/registration-token-not-registered", "messaging/invalid-registration-token"].includes(
-          result.error?.code ?? ""
-        )
+        [
+          "messaging/registration-token-not-registered",
+          "messaging/invalid-registration-token",
+        ].includes(result.error?.code ?? ""),
       )
       .map(({ tokenId }) => tokenId);
 
@@ -181,7 +187,9 @@ export const NotificationService = {
       });
     }
 
-    const successCount = response.responses.filter((result) => result.success).length;
+    const successCount = response.responses.filter(
+      (result) => result.success,
+    ).length;
     const failureCount = response.responses.length - successCount;
 
     return {
@@ -195,7 +203,7 @@ export const NotificationService = {
   async listForUser(
     vendorId: number,
     userId: number,
-    options: ListNotificationsOptions = {}
+    options: ListNotificationsOptions = {},
   ): Promise<ListNotificationsResult> {
     const { is_read, take = 20, skip = 0 } = options;
     const notifications = await prisma.notification.findMany({
@@ -246,15 +254,14 @@ export const NotificationService = {
       deliveryLookup.set(row.notification_id, current);
     }
 
-    const notificationsWithDelivery: NotificationWithDelivery[] = notifications.map(
-      (notification) => ({
+    const notificationsWithDelivery: NotificationWithDelivery[] =
+      notifications.map((notification) => ({
         ...notification,
         delivery_summary: deliveryLookup.get(notification.id) ?? {
           sent: 0,
           failed: 0,
         },
-      })
-    );
+      }));
 
     return { notifications: notificationsWithDelivery, unread_count };
   },
@@ -296,4 +303,38 @@ export const NotificationService = {
       },
     });
   },
+
+async deactivatePushToken(data: {
+  user_id: number;
+  vendor_id: number;
+  device_id?: string;
+  token?: string;
+}) {
+  const { user_id, vendor_id, device_id, token } = data;
+
+  logger.info("Deactivating push token", {
+    user_id,
+    vendor_id,
+    device_id,
+    token,
+  });
+
+  const result = await prisma.userPushToken.updateMany({
+    where: {
+      user_id,
+      vendor_id,
+      ...(device_id ? { device_id } : {}),
+      ...(token ? { token } : {}),
+    },
+    data: {
+      is_active: false,
+      last_used_at: new Date(),
+    },
+  });
+
+  logger.info("Push token deactivated", { affectedRows: result.count });
+
+  return { success: true, affected: result.count };
+}
+
 };

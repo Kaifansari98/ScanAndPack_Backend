@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { NotificationService } from "../../services/notification/notification.service";
 import { NotificationType } from "../../prisma/generated";
+import logger from "../../../src/utils/logger";
 
 export class NotificationController {
   static async send(req: Request, res: Response) {
@@ -13,11 +14,15 @@ export class NotificationController {
       const title = String(req.body.title || "").trim();
       const message = String(req.body.message || "").trim();
       const entityType =
-        req.body.entity_type !== undefined ? String(req.body.entity_type) : null;
+        req.body.entity_type !== undefined
+          ? String(req.body.entity_type)
+          : null;
       const entityId =
         req.body.entity_id !== undefined ? Number(req.body.entity_id) : null;
       const redirectUrl =
-        req.body.redirect_url !== undefined ? String(req.body.redirect_url) : null;
+        req.body.redirect_url !== undefined
+          ? String(req.body.redirect_url)
+          : null;
 
       if (!vendorId || !userId || !type || !title || !message) {
         return res.status(400).json({
@@ -33,17 +38,18 @@ export class NotificationController {
         });
       }
 
-      const { notification, delivery } = await NotificationService.createAndSend({
-        vendor_id: vendorId,
-        user_id: userId,
-        sender_id: senderId,
-        type,
-        title,
-        message,
-        entity_type: entityType,
-        entity_id: entityId,
-        redirect_url: redirectUrl,
-      });
+      const { notification, delivery } =
+        await NotificationService.createAndSend({
+          vendor_id: vendorId,
+          user_id: userId,
+          sender_id: senderId,
+          type,
+          title,
+          message,
+          entity_type: entityType,
+          entity_id: entityId,
+          redirect_url: redirectUrl,
+        });
 
       return res.status(201).json({
         success: true,
@@ -66,9 +72,7 @@ export class NotificationController {
       const userId = Number(req.params.userId);
       const isReadParam = req.query.is_read;
       const isRead =
-        typeof isReadParam === "string"
-          ? isReadParam === "true"
-          : undefined;
+        typeof isReadParam === "string" ? isReadParam === "true" : undefined;
       const take = req.query.take ? Number(req.query.take) : undefined;
       const skip = req.query.skip ? Number(req.query.skip) : undefined;
 
@@ -79,11 +83,12 @@ export class NotificationController {
         });
       }
 
-      const { notifications, unread_count } = await NotificationService.listForUser(
-        vendorId,
-        userId,
-        { is_read: isRead, take, skip }
-      );
+      const { notifications, unread_count } =
+        await NotificationService.listForUser(vendorId, userId, {
+          is_read: isRead,
+          take,
+          skip,
+        });
 
       return res.status(200).json({
         success: true,
@@ -171,6 +176,53 @@ export class NotificationController {
         success: false,
         message: "Failed to register push token",
         error: error.message,
+      });
+    }
+  }
+
+  static async deactivatePushToken(req: Request, res: Response) {
+    try {
+      const { user_id, vendor_id, device_id, token } = req.body;
+
+      if (!user_id || !vendor_id) {
+        return res.status(400).json({
+          message: "user_id and vendor_id are required",
+        });
+      }
+
+      if (!device_id && !token) {
+        return res.status(400).json({
+          message: "device_id or token must be provided",
+        });
+      }
+
+      logger.info("Deactivate push token request", {
+        user_id,
+        vendor_id,
+        device_id,
+        token,
+      });
+
+      const result = await NotificationService.deactivatePushToken({
+        user_id,
+        vendor_id,
+        device_id,
+        token,
+      });
+
+      logger.info("Push token deactivated", {
+        user_id,
+        vendor_id,
+      });
+
+      return res.json(result);
+    } catch (error: any) {
+      logger.error("Failed to deactivate push token", {
+        error: error?.message,
+      });
+
+      return res.status(500).json({
+        message: "Failed to deactivate token",
       });
     }
   }

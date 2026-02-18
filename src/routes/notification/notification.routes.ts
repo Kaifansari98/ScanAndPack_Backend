@@ -6,9 +6,16 @@ const notificationRoutes = Router();
 notificationRoutes.post("/send", NotificationController.send);
 notificationRoutes.get(
   "/vendor/:vendorId/user/:userId",
-  NotificationController.listForUser
+  NotificationController.listForUser,
 );
 notificationRoutes.patch("/:id/read", NotificationController.markRead);
-notificationRoutes.post("/push-token", NotificationController.registerPushToken);
+notificationRoutes.post(
+  "/push-token",
+  NotificationController.registerPushToken,
+);
+notificationRoutes.put(
+  "/deactivate-token",
+  NotificationController.deactivatePushToken,
+);
 
 export default notificationRoutes;
