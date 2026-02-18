@@ -517,6 +517,7 @@ export class OrderLoginService {
           );
 
         // duplicate check
+        let record;
         const existing = await prisma.orderLoginDetails.findFirst({
           where: {
             vendor_id: vendorId,
@@ -528,23 +529,35 @@ export class OrderLoginService {
         });
 
         if (existing) {
-          throw new Error(`Item ${item_type} already exists`);
+          record = await prisma.orderLoginDetails.update({
+            where: { id: existing.id },
+            data: {
+              item_desc,
+              company_vendor_id: company_vendor_id
+                ? Number(company_vendor_id)
+                : null,
+              updated_by: Number(created_by),
+              updated_at: new Date(),
+              is_completed: true, // mark completed when updated
+              completion_date: new Date(),
+            },
+          });
+        } else {
+          record = await prisma.orderLoginDetails.create({
+            data: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: accountId,
+              instance_id: instance_id ? Number(instance_id) : null,
+              item_type,
+              item_desc,
+              company_vendor_id: company_vendor_id
+                ? Number(company_vendor_id)
+                : null,
+              created_by: Number(created_by),
+            },
+          });
         }
-
-        const record = await prisma.orderLoginDetails.create({
-          data: {
-            vendor_id: vendorId,
-            lead_id: leadId,
-            account_id: accountId,
-            instance_id: instance_id ? Number(instance_id) : null,
-            item_type,
-            item_desc,
-            company_vendor_id: company_vendor_id
-              ? Number(company_vendor_id)
-              : null,
-            created_by: Number(created_by),
-          },
-        });
 
         results.push(record);
       } catch (err: any) {
@@ -607,8 +620,14 @@ export class OrderLoginService {
   }
 
   async updateOrderLogin(vendorId: number, orderLoginId: number, payload: any) {
-    const { lead_id, item_type, item_desc, company_vendor_id, updated_by } =
-      payload;
+    const {
+      lead_id,
+      item_type,
+      item_desc,
+      company_vendor_id,
+      updated_by,
+      instance_id,
+    } = payload;
 
     // 🧾 Validation
     const missingFields: string[] = [];
@@ -627,7 +646,7 @@ export class OrderLoginService {
       throw error;
     }
 
-    // ✅ Check if record exists
+    // ✅ Ensure record exists
     const existing = await prisma.orderLoginDetails.findFirst({
       where: {
         id: orderLoginId,
@@ -641,25 +660,37 @@ export class OrderLoginService {
       throw error;
     }
 
-    // 🚫 Duplicate validation: item_type unique per lead_id
+    // ------------------------------------------------------------
+    // 🚫 Instance-Aware Duplicate Check (Corrected Logic)
+    // ------------------------------------------------------------
     const duplicate = await prisma.orderLoginDetails.findFirst({
       where: {
         vendor_id: vendorId,
         lead_id: Number(lead_id),
-        item_type: item_type,
-        NOT: { id: orderLoginId },
+
+        // 👇 critical fix — scope to same instance only
+        instance_id: instance_id ?? existing.instance_id ?? null,
+
+        item_type,
+
+        // exclude self
+        NOT: {
+          id: orderLoginId,
+        },
       },
     });
 
     if (duplicate) {
       const error = new Error(
-        `Item type '${item_type}' already exists for this lead.`,
+        `Item type '${item_type}' already exists for this instance.`,
       );
       (error as any).statusCode = 409;
       throw error;
     }
 
-    // ✅ Update record
+    // ------------------------------------------------------------
+    // ✅ Update Record
+    // ------------------------------------------------------------
     const updated = await prisma.orderLoginDetails.update({
       where: { id: orderLoginId },
       data: {
