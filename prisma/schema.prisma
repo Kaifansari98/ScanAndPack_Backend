@@ -78,7 +78,6 @@ model VendorMaster {
   taxInfo                     VendorTaxInfo[]
   tokens                      VendorTokens[]
   userMachineMapping          UserMachineMapping[]
-  
 }
 
 model VendorAddress {
@@ -184,8 +183,6 @@ model UserMaster {
   userMachineMappings        UserMachineMapping[] @relation("UserMachine_user")
   createdUserMachineMappings UserMachineMapping[] @relation("UserMachine_createdBy")
   updatedUserMachineMappings UserMachineMapping[] @relation("UserMachine_updatedBy")
-
-
 }
 
 model UserDocument {
@@ -208,7 +205,7 @@ model ProjectMaster {
   created_at            DateTime                @default(now())
   unique_project_id     String
   is_grouping           Boolean                 @default(false)
-  track_trace_status        String                  @default("Not Started")
+  track_trace_status    String                  @default("Not Started")
   boxes                 BoxMaster[]
   CutList               CutList[]
   cutListMachineMapping CutListMachineMapping[]
@@ -1366,9 +1363,9 @@ model CutListMachineMapping {
   created_by    Int
   created_at    DateTime      @default(now())
   cut_list      CutList       @relation(fields: [cut_list_id], references: [id])
-  machine       MachineMaster @relation(fielders: [machine_id], references: [id])
+  machine       MachineMaster @relation(fields: [machine_id], references: [id])
   project       ProjectMaster @relation(fields: [project_id], references: [id])
-  vendor        VendorMaster  @relation(fields: [vendor_id], references: [id])  
+  vendor        VendorMaster  @relation(fields: [vendor_id], references: [id])
   lead          LeadMaster    @relation(fields: [lead_id], references: [id])
   operator      UserMaster?    @relation(fields: [in_operator], references: [id])
 
