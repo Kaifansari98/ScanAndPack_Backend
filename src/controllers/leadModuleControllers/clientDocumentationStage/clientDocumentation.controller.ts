@@ -139,7 +139,6 @@ export class ClientDocumentationController {
             Number(lead_id),
             doc.originalname,
             doc.mimetype,
-            folder,
             instanceFolder
           );
 
@@ -320,7 +319,6 @@ export class ClientDocumentationController {
             Number(lead_id),
             doc.originalname,
             doc.mimetype,
-            folder,
             instanceFolder
           );
 

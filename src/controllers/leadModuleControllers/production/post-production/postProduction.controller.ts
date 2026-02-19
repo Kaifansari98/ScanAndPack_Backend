@@ -86,7 +86,6 @@ export class PostProductionController {
           Number(leadId),
           file.originalname,
           file.mimetype,
-          instanceFolder
         );
 
         await fs.unlink(file.path);
@@ -198,7 +197,6 @@ export class PostProductionController {
               Number(leadId),
               file.originalname,
               file.mimetype,
-              instanceFolder
             );
 
           await fs.unlink(file.path);
@@ -316,7 +314,6 @@ export class PostProductionController {
               Number(leadId),
               file.originalname,
               file.mimetype,
-              instanceFolder
             );
 
           await fs.unlink(file.path);

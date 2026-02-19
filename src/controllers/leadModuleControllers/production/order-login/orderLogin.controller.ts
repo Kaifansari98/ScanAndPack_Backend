@@ -363,7 +363,6 @@ export class OrderLoginController {
           Number(leadId),
           file.originalname,
           file.mimetype,
-          instanceFolder
         );
 
         await fs.unlink(file.path);
@@ -459,7 +458,6 @@ export class OrderLoginController {
           orderLogin.item_type,
           file.originalname,
           file.mimetype,
-          instanceFolder
         );
 
         await fs.unlink(file.path);
