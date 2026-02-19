@@ -5,6 +5,9 @@ import {
   deleteInstallerUser,
 } from "../../services/leadModuleServices/installerUser.service";
 
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
 export const createInstallerUser = async (req: Request, res: Response) => {
   console.log("[CONTROLLER] createInstallerUser called", { body: req.body });
 
@@ -50,7 +53,7 @@ export const fetchAllInstallerUsers = async (req: Request, res: Response) => {
   });
 
   try {
-    const vendor_id = parseInt(req.params.vendor_id);
+    const vendor_id = Number(getParam(req.params.vendor_id));
     if (!vendor_id) {
       console.warn("[CONTROLLER] Missing vendor_id");
       return res.status(400).json({ error: "vendor_id is required" });
@@ -72,7 +75,7 @@ export const removeInstallerUser = async (req: Request, res: Response) => {
   });
 
   try {
-    const id = parseInt(req.params.id);
+    const id = Number(getParam(req.params.id));
     if (!id) {
       console.warn("[CONTROLLER] Missing installer user id");
       return res.status(400).json({ error: "id is required" });

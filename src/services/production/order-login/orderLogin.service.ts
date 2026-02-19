@@ -1,5 +1,6 @@
 import { prisma } from "../../../prisma/client";
 import { sanitizeFilename } from "../../../utils/sanitizeFilename";
+import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
 import { NotificationType } from "../../../prisma/generated";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
@@ -515,15 +516,15 @@ export class OrderLoginService {
     createIfMissing: boolean = true,
   ) {
     let docType = await prisma.documentTypeMaster.findFirst({
-      where: { vendor_id: vendorId, tag: "Type 18" },
+      where: { vendor_id: vendorId, tag: "Type 36" },
     });
 
     if (!docType && createIfMissing) {
       docType = await prisma.documentTypeMaster.create({
         data: {
           vendor_id: vendorId,
-          tag: "Type 18",
-          type: "Order Login PO Files",
+          tag: "Type 36",
+          type: "PO-files",
         },
       });
     }
@@ -640,6 +641,7 @@ export class OrderLoginService {
           );
 
         // duplicate check
+        let record;
         const existing = await prisma.orderLoginDetails.findFirst({
           where: {
             vendor_id: vendorId,
@@ -651,23 +653,35 @@ export class OrderLoginService {
         });
 
         if (existing) {
-          throw new Error(`Item ${item_type} already exists`);
+          record = await prisma.orderLoginDetails.update({
+            where: { id: existing.id },
+            data: {
+              item_desc,
+              company_vendor_id: company_vendor_id
+                ? Number(company_vendor_id)
+                : null,
+              updated_by: Number(created_by),
+              updated_at: new Date(),
+              is_completed: true, // mark completed when updated
+              completion_date: new Date(),
+            },
+          });
+        } else {
+          record = await prisma.orderLoginDetails.create({
+            data: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: accountId,
+              instance_id: instance_id ? Number(instance_id) : null,
+              item_type,
+              item_desc,
+              company_vendor_id: company_vendor_id
+                ? Number(company_vendor_id)
+                : null,
+              created_by: Number(created_by),
+            },
+          });
         }
-
-        const record = await prisma.orderLoginDetails.create({
-          data: {
-            vendor_id: vendorId,
-            lead_id: leadId,
-            account_id: accountId,
-            instance_id: instance_id ? Number(instance_id) : null,
-            item_type,
-            item_desc,
-            company_vendor_id: company_vendor_id
-              ? Number(company_vendor_id)
-              : null,
-            created_by: Number(created_by),
-          },
-        });
 
         results.push(record);
       } catch (err: any) {
@@ -730,8 +744,14 @@ export class OrderLoginService {
   }
 
   async updateOrderLogin(vendorId: number, orderLoginId: number, payload: any) {
-    const { lead_id, item_type, item_desc, company_vendor_id, updated_by } =
-      payload;
+    const {
+      lead_id,
+      item_type,
+      item_desc,
+      company_vendor_id,
+      updated_by,
+      instance_id,
+    } = payload;
 
     // 🧾 Validation
     const missingFields: string[] = [];
@@ -750,7 +770,7 @@ export class OrderLoginService {
       throw error;
     }
 
-    // ✅ Check if record exists
+    // ✅ Ensure record exists
     const existing = await prisma.orderLoginDetails.findFirst({
       where: {
         id: orderLoginId,
@@ -764,25 +784,37 @@ export class OrderLoginService {
       throw error;
     }
 
-    // 🚫 Duplicate validation: item_type unique per lead_id
+    // ------------------------------------------------------------
+    // 🚫 Instance-Aware Duplicate Check (Corrected Logic)
+    // ------------------------------------------------------------
     const duplicate = await prisma.orderLoginDetails.findFirst({
       where: {
         vendor_id: vendorId,
         lead_id: Number(lead_id),
-        item_type: item_type,
-        NOT: { id: orderLoginId },
+
+        // 👇 critical fix — scope to same instance only
+        instance_id: instance_id ?? existing.instance_id ?? null,
+
+        item_type,
+
+        // exclude self
+        NOT: {
+          id: orderLoginId,
+        },
       },
     });
 
     if (duplicate) {
       const error = new Error(
-        `Item type '${item_type}' already exists for this lead.`,
+        `Item type '${item_type}' already exists for this instance.`,
       );
       (error as any).statusCode = 409;
       throw error;
     }
 
-    // ✅ Update record
+    // ------------------------------------------------------------
+    // ✅ Update Record
+    // ------------------------------------------------------------
     const updated = await prisma.orderLoginDetails.update({
       where: { id: orderLoginId },
       data: {
@@ -1081,7 +1113,7 @@ export class OrderLoginService {
     }
 
     const docType = await this.getOrderLoginPoDocType(vendorId);
-    if (!docType) throw new Error("Doc Type (Type 18) not found");
+    if (!docType) throw new Error("Doc Type (Type 36) not found");
 
     const uploadedDocs = [];
 
@@ -1160,15 +1192,19 @@ export class OrderLoginService {
         )}/${safeCardName}/`
       : `order_login_po/${vendorId}/${leadId}/${safeCardName}/`;
 
-    return prisma.leadDocuments.findMany({
+    const baseWhere = {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      doc_type_id: docType.id,
+      is_deleted: false,
+      ...(instanceIdValue
+        ? { product_structure_instance_id: instanceIdValue }
+        : {}),
+    };
+
+    let documents = await prisma.leadDocuments.findMany({
       where: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        doc_type_id: docType.id,
-        is_deleted: false,
-        ...(instanceIdValue
-          ? { product_structure_instance_id: instanceIdValue }
-          : {}),
+        ...baseWhere,
         doc_sys_name: { startsWith: prefix },
       },
       orderBy: { created_at: "asc" },
@@ -1179,6 +1215,27 @@ export class OrderLoginService {
         created_at: true,
       },
     });
+
+    // Fallback for renamed item_type/instance titles
+    if (documents.length === 0) {
+      documents = await prisma.leadDocuments.findMany({
+        where: baseWhere,
+        orderBy: { created_at: "asc" },
+        select: {
+          id: true,
+          doc_og_name: true,
+          doc_sys_name: true,
+          created_at: true,
+        },
+      });
+    }
+
+    return Promise.all(
+      documents.map(async (doc) => ({
+        ...doc,
+        signed_url: await generateSignedUrl(doc.doc_sys_name),
+      })),
+    );
   }
 
   async getLeadProductionReadiness(

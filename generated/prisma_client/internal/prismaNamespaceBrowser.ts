@@ -115,7 +115,14 @@ export const ModelName = {
   Notification: 'Notification',
   UserPushToken: 'UserPushToken',
   NotificationDeliveryLogs: 'NotificationDeliveryLogs',
-  VloqEmailLogs: 'VloqEmailLogs'
+  VloqEmailLogs: 'VloqEmailLogs',
+  ModulesMaster: 'ModulesMaster',
+  VendorModulesMapping: 'VendorModulesMapping',
+  MachineMaster: 'MachineMaster',
+  CutList: 'CutList',
+  CutListMachineMapping: 'CutListMachineMapping',
+  UserMachineMapping: 'UserMachineMapping',
+  MachineTypeMaster: 'MachineTypeMaster'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -124,12 +131,12 @@ export type ModelName = (typeof ModelName)[keyof typeof ModelName]
  * Enums
  */
 
-export const TransactionIsolationLevel = {
+export const TransactionIsolationLevel = runtime.makeStrictEnum({
   ReadUncommitted: 'ReadUncommitted',
   ReadCommitted: 'ReadCommitted',
   RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
-} as const
+} as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
@@ -221,11 +228,13 @@ export const ProjectMasterScalarFieldEnum = {
   project_name: 'project_name',
   vendor_id: 'vendor_id',
   client_id: 'client_id',
+  lead_id: 'lead_id',
   created_by: 'created_by',
   project_status: 'project_status',
   created_at: 'created_at',
   unique_project_id: 'unique_project_id',
-  is_grouping: 'is_grouping'
+  is_grouping: 'is_grouping',
+  track_trace_status: 'track_trace_status'
 } as const
 
 export type ProjectMasterScalarFieldEnum = (typeof ProjectMasterScalarFieldEnum)[keyof typeof ProjectMasterScalarFieldEnum]
@@ -1124,6 +1133,130 @@ export const VloqEmailLogsScalarFieldEnum = {
 } as const
 
 export type VloqEmailLogsScalarFieldEnum = (typeof VloqEmailLogsScalarFieldEnum)[keyof typeof VloqEmailLogsScalarFieldEnum]
+
+
+export const ModulesMasterScalarFieldEnum = {
+  id: 'id',
+  module_name: 'module_name',
+  module_code: 'module_code',
+  active: 'active'
+} as const
+
+export type ModulesMasterScalarFieldEnum = (typeof ModulesMasterScalarFieldEnum)[keyof typeof ModulesMasterScalarFieldEnum]
+
+
+export const VendorModulesMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  module_id: 'module_id',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at',
+  active: 'active'
+} as const
+
+export type VendorModulesMappingScalarFieldEnum = (typeof VendorModulesMappingScalarFieldEnum)[keyof typeof VendorModulesMappingScalarFieldEnum]
+
+
+export const MachineMasterScalarFieldEnum = {
+  id: 'id',
+  machine_name: 'machine_name',
+  machine_code: 'machine_code',
+  machine_type: 'machine_type',
+  machine_type_id: 'machine_type_id',
+  status: 'status',
+  scan_type: 'scan_type',
+  description: 'description',
+  vendor_id: 'vendor_id',
+  factory_id: 'factory_id',
+  sequence_no: 'sequence_no',
+  target_per_hour: 'target_per_hour',
+  image_path: 'image_path',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by'
+} as const
+
+export type MachineMasterScalarFieldEnum = (typeof MachineMasterScalarFieldEnum)[keyof typeof MachineMasterScalarFieldEnum]
+
+
+export const CutListScalarFieldEnum = {
+  id: 'id',
+  project_id: 'project_id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  description: 'description',
+  length: 'length',
+  width: 'width',
+  thickness: 'thickness',
+  qty: 'qty',
+  material_details: 'material_details',
+  item_name: 'item_name',
+  unique_code: 'unique_code',
+  unique_code_2: 'unique_code_2',
+  status: 'status',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at',
+  elf: 'elf',
+  elb: 'elb',
+  esl: 'esl',
+  esr: 'esr'
+} as const
+
+export type CutListScalarFieldEnum = (typeof CutListScalarFieldEnum)[keyof typeof CutListScalarFieldEnum]
+
+
+export const CutListMachineMappingScalarFieldEnum = {
+  id: 'id',
+  cut_list_id: 'cut_list_id',
+  machine_id: 'machine_id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  project_id: 'project_id',
+  sequence_no: 'sequence_no',
+  is_optional: 'is_optional',
+  expected_in: 'expected_in',
+  expected_out: 'expected_out',
+  status: 'status',
+  actual_in_at: 'actual_in_at',
+  actual_out_at: 'actual_out_at',
+  in_operator: 'in_operator',
+  out_operator: 'out_operator',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type CutListMachineMappingScalarFieldEnum = (typeof CutListMachineMappingScalarFieldEnum)[keyof typeof CutListMachineMappingScalarFieldEnum]
+
+
+export const UserMachineMappingScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  machine_id: 'machine_id',
+  vendor_id: 'vendor_id',
+  status: 'status',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at'
+} as const
+
+export type UserMachineMappingScalarFieldEnum = (typeof UserMachineMappingScalarFieldEnum)[keyof typeof UserMachineMappingScalarFieldEnum]
+
+
+export const MachineTypeMasterScalarFieldEnum = {
+  id: 'id',
+  machine_type: 'machine_type',
+  active: 'active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type MachineTypeMasterScalarFieldEnum = (typeof MachineTypeMasterScalarFieldEnum)[keyof typeof MachineTypeMasterScalarFieldEnum]
 
 
 export const SortOrder = {

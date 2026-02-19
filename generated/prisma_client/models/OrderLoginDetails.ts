@@ -31,10 +31,10 @@ export type OrderLoginDetailsAvgAggregateOutputType = {
   lead_id: number | null
   account_id: number | null
   vendor_id: number | null
-  instance_id: number | null
   created_by: number | null
   company_vendor_id: number | null
   updated_by: number | null
+  instance_id: number | null
 }
 
 export type OrderLoginDetailsSumAggregateOutputType = {
@@ -42,10 +42,10 @@ export type OrderLoginDetailsSumAggregateOutputType = {
   lead_id: number | null
   account_id: number | null
   vendor_id: number | null
-  instance_id: number | null
   created_by: number | null
   company_vendor_id: number | null
   updated_by: number | null
+  instance_id: number | null
 }
 
 export type OrderLoginDetailsMinAggregateOutputType = {
@@ -53,7 +53,6 @@ export type OrderLoginDetailsMinAggregateOutputType = {
   lead_id: number | null
   account_id: number | null
   vendor_id: number | null
-  instance_id: number | null
   item_type: string | null
   item_desc: string | null
   estimated_completion_date: Date | null
@@ -65,6 +64,7 @@ export type OrderLoginDetailsMinAggregateOutputType = {
   updated_at: Date | null
   updated_by: number | null
   factory_user_vendor_selection_remark: string | null
+  instance_id: number | null
 }
 
 export type OrderLoginDetailsMaxAggregateOutputType = {
@@ -72,7 +72,6 @@ export type OrderLoginDetailsMaxAggregateOutputType = {
   lead_id: number | null
   account_id: number | null
   vendor_id: number | null
-  instance_id: number | null
   item_type: string | null
   item_desc: string | null
   estimated_completion_date: Date | null
@@ -84,6 +83,7 @@ export type OrderLoginDetailsMaxAggregateOutputType = {
   updated_at: Date | null
   updated_by: number | null
   factory_user_vendor_selection_remark: string | null
+  instance_id: number | null
 }
 
 export type OrderLoginDetailsCountAggregateOutputType = {
@@ -91,7 +91,6 @@ export type OrderLoginDetailsCountAggregateOutputType = {
   lead_id: number
   account_id: number
   vendor_id: number
-  instance_id: number
   item_type: number
   item_desc: number
   estimated_completion_date: number
@@ -103,6 +102,7 @@ export type OrderLoginDetailsCountAggregateOutputType = {
   updated_at: number
   updated_by: number
   factory_user_vendor_selection_remark: number
+  instance_id: number
   _all: number
 }
 
@@ -112,10 +112,10 @@ export type OrderLoginDetailsAvgAggregateInputType = {
   lead_id?: true
   account_id?: true
   vendor_id?: true
-  instance_id?: true
   created_by?: true
   company_vendor_id?: true
   updated_by?: true
+  instance_id?: true
 }
 
 export type OrderLoginDetailsSumAggregateInputType = {
@@ -123,10 +123,10 @@ export type OrderLoginDetailsSumAggregateInputType = {
   lead_id?: true
   account_id?: true
   vendor_id?: true
-  instance_id?: true
   created_by?: true
   company_vendor_id?: true
   updated_by?: true
+  instance_id?: true
 }
 
 export type OrderLoginDetailsMinAggregateInputType = {
@@ -134,7 +134,6 @@ export type OrderLoginDetailsMinAggregateInputType = {
   lead_id?: true
   account_id?: true
   vendor_id?: true
-  instance_id?: true
   item_type?: true
   item_desc?: true
   estimated_completion_date?: true
@@ -146,6 +145,7 @@ export type OrderLoginDetailsMinAggregateInputType = {
   updated_at?: true
   updated_by?: true
   factory_user_vendor_selection_remark?: true
+  instance_id?: true
 }
 
 export type OrderLoginDetailsMaxAggregateInputType = {
@@ -153,7 +153,6 @@ export type OrderLoginDetailsMaxAggregateInputType = {
   lead_id?: true
   account_id?: true
   vendor_id?: true
-  instance_id?: true
   item_type?: true
   item_desc?: true
   estimated_completion_date?: true
@@ -165,6 +164,7 @@ export type OrderLoginDetailsMaxAggregateInputType = {
   updated_at?: true
   updated_by?: true
   factory_user_vendor_selection_remark?: true
+  instance_id?: true
 }
 
 export type OrderLoginDetailsCountAggregateInputType = {
@@ -172,7 +172,6 @@ export type OrderLoginDetailsCountAggregateInputType = {
   lead_id?: true
   account_id?: true
   vendor_id?: true
-  instance_id?: true
   item_type?: true
   item_desc?: true
   estimated_completion_date?: true
@@ -184,6 +183,7 @@ export type OrderLoginDetailsCountAggregateInputType = {
   updated_at?: true
   updated_by?: true
   factory_user_vendor_selection_remark?: true
+  instance_id?: true
   _all?: true
 }
 
@@ -278,7 +278,6 @@ export type OrderLoginDetailsGroupByOutputType = {
   lead_id: number
   account_id: number
   vendor_id: number
-  instance_id: number | null
   item_type: string
   item_desc: string
   estimated_completion_date: Date | null
@@ -290,6 +289,7 @@ export type OrderLoginDetailsGroupByOutputType = {
   updated_at: Date
   updated_by: number | null
   factory_user_vendor_selection_remark: string | null
+  instance_id: number | null
   _count: OrderLoginDetailsCountAggregateOutputType | null
   _avg: OrderLoginDetailsAvgAggregateOutputType | null
   _sum: OrderLoginDetailsSumAggregateOutputType | null
@@ -320,7 +320,6 @@ export type OrderLoginDetailsWhereInput = {
   lead_id?: Prisma.IntFilter<"OrderLoginDetails"> | number
   account_id?: Prisma.IntFilter<"OrderLoginDetails"> | number
   vendor_id?: Prisma.IntFilter<"OrderLoginDetails"> | number
-  instance_id?: Prisma.IntNullableFilter<"OrderLoginDetails"> | number | null
   item_type?: Prisma.StringFilter<"OrderLoginDetails"> | string
   item_desc?: Prisma.StringFilter<"OrderLoginDetails"> | string
   estimated_completion_date?: Prisma.DateTimeNullableFilter<"OrderLoginDetails"> | Date | string | null
@@ -332,6 +331,7 @@ export type OrderLoginDetailsWhereInput = {
   updated_at?: Prisma.DateTimeFilter<"OrderLoginDetails"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"OrderLoginDetails"> | number | null
   factory_user_vendor_selection_remark?: Prisma.StringNullableFilter<"OrderLoginDetails"> | string | null
+  instance_id?: Prisma.IntNullableFilter<"OrderLoginDetails"> | number | null
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterNullableScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
@@ -345,7 +345,6 @@ export type OrderLoginDetailsOrderByWithRelationInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  instance_id?: Prisma.SortOrderInput | Prisma.SortOrder
   item_type?: Prisma.SortOrder
   item_desc?: Prisma.SortOrder
   estimated_completion_date?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -357,6 +356,7 @@ export type OrderLoginDetailsOrderByWithRelationInput = {
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   factory_user_vendor_selection_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  instance_id?: Prisma.SortOrderInput | Prisma.SortOrder
   account?: Prisma.AccountMasterOrderByWithRelationInput
   companyVendor?: Prisma.CompanyVendorsMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
@@ -373,7 +373,6 @@ export type OrderLoginDetailsWhereUniqueInput = Prisma.AtLeast<{
   lead_id?: Prisma.IntFilter<"OrderLoginDetails"> | number
   account_id?: Prisma.IntFilter<"OrderLoginDetails"> | number
   vendor_id?: Prisma.IntFilter<"OrderLoginDetails"> | number
-  instance_id?: Prisma.IntNullableFilter<"OrderLoginDetails"> | number | null
   item_type?: Prisma.StringFilter<"OrderLoginDetails"> | string
   item_desc?: Prisma.StringFilter<"OrderLoginDetails"> | string
   estimated_completion_date?: Prisma.DateTimeNullableFilter<"OrderLoginDetails"> | Date | string | null
@@ -385,6 +384,7 @@ export type OrderLoginDetailsWhereUniqueInput = Prisma.AtLeast<{
   updated_at?: Prisma.DateTimeFilter<"OrderLoginDetails"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"OrderLoginDetails"> | number | null
   factory_user_vendor_selection_remark?: Prisma.StringNullableFilter<"OrderLoginDetails"> | string | null
+  instance_id?: Prisma.IntNullableFilter<"OrderLoginDetails"> | number | null
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterNullableScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
@@ -398,7 +398,6 @@ export type OrderLoginDetailsOrderByWithAggregationInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  instance_id?: Prisma.SortOrderInput | Prisma.SortOrder
   item_type?: Prisma.SortOrder
   item_desc?: Prisma.SortOrder
   estimated_completion_date?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -410,6 +409,7 @@ export type OrderLoginDetailsOrderByWithAggregationInput = {
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   factory_user_vendor_selection_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  instance_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.OrderLoginDetailsCountOrderByAggregateInput
   _avg?: Prisma.OrderLoginDetailsAvgOrderByAggregateInput
   _max?: Prisma.OrderLoginDetailsMaxOrderByAggregateInput
@@ -425,7 +425,6 @@ export type OrderLoginDetailsScalarWhereWithAggregatesInput = {
   lead_id?: Prisma.IntWithAggregatesFilter<"OrderLoginDetails"> | number
   account_id?: Prisma.IntWithAggregatesFilter<"OrderLoginDetails"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"OrderLoginDetails"> | number
-  instance_id?: Prisma.IntNullableWithAggregatesFilter<"OrderLoginDetails"> | number | null
   item_type?: Prisma.StringWithAggregatesFilter<"OrderLoginDetails"> | string
   item_desc?: Prisma.StringWithAggregatesFilter<"OrderLoginDetails"> | string
   estimated_completion_date?: Prisma.DateTimeNullableWithAggregatesFilter<"OrderLoginDetails"> | Date | string | null
@@ -437,10 +436,10 @@ export type OrderLoginDetailsScalarWhereWithAggregatesInput = {
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"OrderLoginDetails"> | Date | string
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"OrderLoginDetails"> | number | null
   factory_user_vendor_selection_remark?: Prisma.StringNullableWithAggregatesFilter<"OrderLoginDetails"> | string | null
+  instance_id?: Prisma.IntNullableWithAggregatesFilter<"OrderLoginDetails"> | number | null
 }
 
 export type OrderLoginDetailsCreateInput = {
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -449,6 +448,7 @@ export type OrderLoginDetailsCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
   account: Prisma.AccountMasterCreateNestedOneWithoutOrderLoginDetailsInput
   companyVendor?: Prisma.CompanyVendorsMasterCreateNestedOneWithoutOrderLoginLinksInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutOrderLoginDetailsInput
@@ -462,7 +462,6 @@ export type OrderLoginDetailsUncheckedCreateInput = {
   lead_id: number
   account_id: number
   vendor_id: number
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -474,10 +473,10 @@ export type OrderLoginDetailsUncheckedCreateInput = {
   updated_at?: Date | string
   updated_by?: number | null
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
 }
 
 export type OrderLoginDetailsUpdateInput = {
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -486,6 +485,7 @@ export type OrderLoginDetailsUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneWithoutOrderLoginLinksNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
@@ -499,7 +499,6 @@ export type OrderLoginDetailsUncheckedUpdateInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -511,6 +510,7 @@ export type OrderLoginDetailsUncheckedUpdateInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type OrderLoginDetailsCreateManyInput = {
@@ -518,7 +518,6 @@ export type OrderLoginDetailsCreateManyInput = {
   lead_id: number
   account_id: number
   vendor_id: number
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -530,10 +529,10 @@ export type OrderLoginDetailsCreateManyInput = {
   updated_at?: Date | string
   updated_by?: number | null
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
 }
 
 export type OrderLoginDetailsUpdateManyMutationInput = {
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -542,6 +541,7 @@ export type OrderLoginDetailsUpdateManyMutationInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type OrderLoginDetailsUncheckedUpdateManyInput = {
@@ -549,7 +549,6 @@ export type OrderLoginDetailsUncheckedUpdateManyInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -561,6 +560,7 @@ export type OrderLoginDetailsUncheckedUpdateManyInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type OrderLoginDetailsListRelationFilter = {
@@ -578,7 +578,6 @@ export type OrderLoginDetailsCountOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  instance_id?: Prisma.SortOrder
   item_type?: Prisma.SortOrder
   item_desc?: Prisma.SortOrder
   estimated_completion_date?: Prisma.SortOrder
@@ -590,6 +589,7 @@ export type OrderLoginDetailsCountOrderByAggregateInput = {
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   factory_user_vendor_selection_remark?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
 }
 
 export type OrderLoginDetailsAvgOrderByAggregateInput = {
@@ -597,10 +597,10 @@ export type OrderLoginDetailsAvgOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  instance_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   company_vendor_id?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
 }
 
 export type OrderLoginDetailsMaxOrderByAggregateInput = {
@@ -608,7 +608,6 @@ export type OrderLoginDetailsMaxOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  instance_id?: Prisma.SortOrder
   item_type?: Prisma.SortOrder
   item_desc?: Prisma.SortOrder
   estimated_completion_date?: Prisma.SortOrder
@@ -620,6 +619,7 @@ export type OrderLoginDetailsMaxOrderByAggregateInput = {
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   factory_user_vendor_selection_remark?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
 }
 
 export type OrderLoginDetailsMinOrderByAggregateInput = {
@@ -627,7 +627,6 @@ export type OrderLoginDetailsMinOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  instance_id?: Prisma.SortOrder
   item_type?: Prisma.SortOrder
   item_desc?: Prisma.SortOrder
   estimated_completion_date?: Prisma.SortOrder
@@ -639,6 +638,7 @@ export type OrderLoginDetailsMinOrderByAggregateInput = {
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   factory_user_vendor_selection_remark?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
 }
 
 export type OrderLoginDetailsSumOrderByAggregateInput = {
@@ -646,10 +646,10 @@ export type OrderLoginDetailsSumOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  instance_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   company_vendor_id?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
 }
 
 export type OrderLoginDetailsCreateNestedManyWithoutVendorInput = {
@@ -905,7 +905,6 @@ export type OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput 
 }
 
 export type OrderLoginDetailsCreateWithoutVendorInput = {
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -914,6 +913,7 @@ export type OrderLoginDetailsCreateWithoutVendorInput = {
   created_at?: Date | string
   updated_at?: Date | string
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
   account: Prisma.AccountMasterCreateNestedOneWithoutOrderLoginDetailsInput
   companyVendor?: Prisma.CompanyVendorsMasterCreateNestedOneWithoutOrderLoginLinksInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutOrderLoginDetailsInput
@@ -925,7 +925,6 @@ export type OrderLoginDetailsUncheckedCreateWithoutVendorInput = {
   id?: number
   lead_id: number
   account_id: number
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -937,6 +936,7 @@ export type OrderLoginDetailsUncheckedCreateWithoutVendorInput = {
   updated_at?: Date | string
   updated_by?: number | null
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
 }
 
 export type OrderLoginDetailsCreateOrConnectWithoutVendorInput = {
@@ -973,7 +973,6 @@ export type OrderLoginDetailsScalarWhereInput = {
   lead_id?: Prisma.IntFilter<"OrderLoginDetails"> | number
   account_id?: Prisma.IntFilter<"OrderLoginDetails"> | number
   vendor_id?: Prisma.IntFilter<"OrderLoginDetails"> | number
-  instance_id?: Prisma.IntNullableFilter<"OrderLoginDetails"> | number | null
   item_type?: Prisma.StringFilter<"OrderLoginDetails"> | string
   item_desc?: Prisma.StringFilter<"OrderLoginDetails"> | string
   estimated_completion_date?: Prisma.DateTimeNullableFilter<"OrderLoginDetails"> | Date | string | null
@@ -985,10 +984,10 @@ export type OrderLoginDetailsScalarWhereInput = {
   updated_at?: Prisma.DateTimeFilter<"OrderLoginDetails"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"OrderLoginDetails"> | number | null
   factory_user_vendor_selection_remark?: Prisma.StringNullableFilter<"OrderLoginDetails"> | string | null
+  instance_id?: Prisma.IntNullableFilter<"OrderLoginDetails"> | number | null
 }
 
 export type OrderLoginDetailsCreateWithoutCreatedByInput = {
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -997,6 +996,7 @@ export type OrderLoginDetailsCreateWithoutCreatedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
   account: Prisma.AccountMasterCreateNestedOneWithoutOrderLoginDetailsInput
   companyVendor?: Prisma.CompanyVendorsMasterCreateNestedOneWithoutOrderLoginLinksInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutOrderLoginDetailsInput
@@ -1009,7 +1009,6 @@ export type OrderLoginDetailsUncheckedCreateWithoutCreatedByInput = {
   lead_id: number
   account_id: number
   vendor_id: number
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -1020,6 +1019,7 @@ export type OrderLoginDetailsUncheckedCreateWithoutCreatedByInput = {
   updated_at?: Date | string
   updated_by?: number | null
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
 }
 
 export type OrderLoginDetailsCreateOrConnectWithoutCreatedByInput = {
@@ -1033,7 +1033,6 @@ export type OrderLoginDetailsCreateManyCreatedByInputEnvelope = {
 }
 
 export type OrderLoginDetailsCreateWithoutUpdatedByInput = {
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -1042,6 +1041,7 @@ export type OrderLoginDetailsCreateWithoutUpdatedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
   account: Prisma.AccountMasterCreateNestedOneWithoutOrderLoginDetailsInput
   companyVendor?: Prisma.CompanyVendorsMasterCreateNestedOneWithoutOrderLoginLinksInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutOrderLoginDetailsInput
@@ -1054,7 +1054,6 @@ export type OrderLoginDetailsUncheckedCreateWithoutUpdatedByInput = {
   lead_id: number
   account_id: number
   vendor_id: number
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -1065,6 +1064,7 @@ export type OrderLoginDetailsUncheckedCreateWithoutUpdatedByInput = {
   company_vendor_id?: number | null
   updated_at?: Date | string
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
 }
 
 export type OrderLoginDetailsCreateOrConnectWithoutUpdatedByInput = {
@@ -1110,7 +1110,6 @@ export type OrderLoginDetailsUpdateManyWithWhereWithoutUpdatedByInput = {
 }
 
 export type OrderLoginDetailsCreateWithoutLeadInput = {
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -1119,6 +1118,7 @@ export type OrderLoginDetailsCreateWithoutLeadInput = {
   created_at?: Date | string
   updated_at?: Date | string
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
   account: Prisma.AccountMasterCreateNestedOneWithoutOrderLoginDetailsInput
   companyVendor?: Prisma.CompanyVendorsMasterCreateNestedOneWithoutOrderLoginLinksInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutOrderLoginDetailsInput
@@ -1130,7 +1130,6 @@ export type OrderLoginDetailsUncheckedCreateWithoutLeadInput = {
   id?: number
   account_id: number
   vendor_id: number
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -1142,6 +1141,7 @@ export type OrderLoginDetailsUncheckedCreateWithoutLeadInput = {
   updated_at?: Date | string
   updated_by?: number | null
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
 }
 
 export type OrderLoginDetailsCreateOrConnectWithoutLeadInput = {
@@ -1171,7 +1171,6 @@ export type OrderLoginDetailsUpdateManyWithWhereWithoutLeadInput = {
 }
 
 export type OrderLoginDetailsCreateWithoutAccountInput = {
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -1180,6 +1179,7 @@ export type OrderLoginDetailsCreateWithoutAccountInput = {
   created_at?: Date | string
   updated_at?: Date | string
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
   companyVendor?: Prisma.CompanyVendorsMasterCreateNestedOneWithoutOrderLoginLinksInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutOrderLoginDetailsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutOrderLoginDetailsInput
@@ -1191,7 +1191,6 @@ export type OrderLoginDetailsUncheckedCreateWithoutAccountInput = {
   id?: number
   lead_id: number
   vendor_id: number
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -1203,6 +1202,7 @@ export type OrderLoginDetailsUncheckedCreateWithoutAccountInput = {
   updated_at?: Date | string
   updated_by?: number | null
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
 }
 
 export type OrderLoginDetailsCreateOrConnectWithoutAccountInput = {
@@ -1232,7 +1232,6 @@ export type OrderLoginDetailsUpdateManyWithWhereWithoutAccountInput = {
 }
 
 export type OrderLoginDetailsCreateWithoutCompanyVendorInput = {
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -1241,6 +1240,7 @@ export type OrderLoginDetailsCreateWithoutCompanyVendorInput = {
   created_at?: Date | string
   updated_at?: Date | string
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
   account: Prisma.AccountMasterCreateNestedOneWithoutOrderLoginDetailsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutOrderLoginDetailsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutOrderLoginDetailsInput
@@ -1253,7 +1253,6 @@ export type OrderLoginDetailsUncheckedCreateWithoutCompanyVendorInput = {
   lead_id: number
   account_id: number
   vendor_id: number
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -1264,6 +1263,7 @@ export type OrderLoginDetailsUncheckedCreateWithoutCompanyVendorInput = {
   updated_at?: Date | string
   updated_by?: number | null
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
 }
 
 export type OrderLoginDetailsCreateOrConnectWithoutCompanyVendorInput = {
@@ -1296,7 +1296,6 @@ export type OrderLoginDetailsCreateManyVendorInput = {
   id?: number
   lead_id: number
   account_id: number
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -1308,10 +1307,10 @@ export type OrderLoginDetailsCreateManyVendorInput = {
   updated_at?: Date | string
   updated_by?: number | null
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
 }
 
 export type OrderLoginDetailsUpdateWithoutVendorInput = {
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1320,6 +1319,7 @@ export type OrderLoginDetailsUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneWithoutOrderLoginLinksNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
@@ -1331,7 +1331,6 @@ export type OrderLoginDetailsUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1343,13 +1342,13 @@ export type OrderLoginDetailsUncheckedUpdateWithoutVendorInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type OrderLoginDetailsUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1361,6 +1360,7 @@ export type OrderLoginDetailsUncheckedUpdateManyWithoutVendorInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type OrderLoginDetailsCreateManyCreatedByInput = {
@@ -1368,7 +1368,6 @@ export type OrderLoginDetailsCreateManyCreatedByInput = {
   lead_id: number
   account_id: number
   vendor_id: number
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -1379,6 +1378,7 @@ export type OrderLoginDetailsCreateManyCreatedByInput = {
   updated_at?: Date | string
   updated_by?: number | null
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
 }
 
 export type OrderLoginDetailsCreateManyUpdatedByInput = {
@@ -1386,7 +1386,6 @@ export type OrderLoginDetailsCreateManyUpdatedByInput = {
   lead_id: number
   account_id: number
   vendor_id: number
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -1397,10 +1396,10 @@ export type OrderLoginDetailsCreateManyUpdatedByInput = {
   company_vendor_id?: number | null
   updated_at?: Date | string
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
 }
 
 export type OrderLoginDetailsUpdateWithoutCreatedByInput = {
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1409,6 +1408,7 @@ export type OrderLoginDetailsUpdateWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneWithoutOrderLoginLinksNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
@@ -1421,7 +1421,6 @@ export type OrderLoginDetailsUncheckedUpdateWithoutCreatedByInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1432,6 +1431,7 @@ export type OrderLoginDetailsUncheckedUpdateWithoutCreatedByInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type OrderLoginDetailsUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1439,7 +1439,6 @@ export type OrderLoginDetailsUncheckedUpdateManyWithoutCreatedByInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1450,10 +1449,10 @@ export type OrderLoginDetailsUncheckedUpdateManyWithoutCreatedByInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type OrderLoginDetailsUpdateWithoutUpdatedByInput = {
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1462,6 +1461,7 @@ export type OrderLoginDetailsUpdateWithoutUpdatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneWithoutOrderLoginLinksNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
@@ -1474,7 +1474,6 @@ export type OrderLoginDetailsUncheckedUpdateWithoutUpdatedByInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1485,6 +1484,7 @@ export type OrderLoginDetailsUncheckedUpdateWithoutUpdatedByInput = {
   company_vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type OrderLoginDetailsUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -1492,7 +1492,6 @@ export type OrderLoginDetailsUncheckedUpdateManyWithoutUpdatedByInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1503,13 +1502,13 @@ export type OrderLoginDetailsUncheckedUpdateManyWithoutUpdatedByInput = {
   company_vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type OrderLoginDetailsCreateManyLeadInput = {
   id?: number
   account_id: number
   vendor_id: number
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -1521,10 +1520,10 @@ export type OrderLoginDetailsCreateManyLeadInput = {
   updated_at?: Date | string
   updated_by?: number | null
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
 }
 
 export type OrderLoginDetailsUpdateWithoutLeadInput = {
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1533,6 +1532,7 @@ export type OrderLoginDetailsUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneWithoutOrderLoginLinksNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
@@ -1544,7 +1544,6 @@ export type OrderLoginDetailsUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1556,13 +1555,13 @@ export type OrderLoginDetailsUncheckedUpdateWithoutLeadInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type OrderLoginDetailsUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1574,13 +1573,13 @@ export type OrderLoginDetailsUncheckedUpdateManyWithoutLeadInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type OrderLoginDetailsCreateManyAccountInput = {
   id?: number
   lead_id: number
   vendor_id: number
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -1592,10 +1591,10 @@ export type OrderLoginDetailsCreateManyAccountInput = {
   updated_at?: Date | string
   updated_by?: number | null
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
 }
 
 export type OrderLoginDetailsUpdateWithoutAccountInput = {
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1604,6 +1603,7 @@ export type OrderLoginDetailsUpdateWithoutAccountInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneWithoutOrderLoginLinksNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
@@ -1615,7 +1615,6 @@ export type OrderLoginDetailsUncheckedUpdateWithoutAccountInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1627,13 +1626,13 @@ export type OrderLoginDetailsUncheckedUpdateWithoutAccountInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type OrderLoginDetailsUncheckedUpdateManyWithoutAccountInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1645,6 +1644,7 @@ export type OrderLoginDetailsUncheckedUpdateManyWithoutAccountInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type OrderLoginDetailsCreateManyCompanyVendorInput = {
@@ -1652,7 +1652,6 @@ export type OrderLoginDetailsCreateManyCompanyVendorInput = {
   lead_id: number
   account_id: number
   vendor_id: number
-  instance_id?: number | null
   item_type: string
   item_desc: string
   estimated_completion_date?: Date | string | null
@@ -1663,10 +1662,10 @@ export type OrderLoginDetailsCreateManyCompanyVendorInput = {
   updated_at?: Date | string
   updated_by?: number | null
   factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
 }
 
 export type OrderLoginDetailsUpdateWithoutCompanyVendorInput = {
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1675,6 +1674,7 @@ export type OrderLoginDetailsUpdateWithoutCompanyVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
@@ -1687,7 +1687,6 @@ export type OrderLoginDetailsUncheckedUpdateWithoutCompanyVendorInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1698,6 +1697,7 @@ export type OrderLoginDetailsUncheckedUpdateWithoutCompanyVendorInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorInput = {
@@ -1705,7 +1705,6 @@ export type OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   item_type?: Prisma.StringFieldUpdateOperationsInput | string
   item_desc?: Prisma.StringFieldUpdateOperationsInput | string
   estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1716,6 +1715,7 @@ export type OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -1725,7 +1725,6 @@ export type OrderLoginDetailsSelect<ExtArgs extends runtime.Types.Extensions.Int
   lead_id?: boolean
   account_id?: boolean
   vendor_id?: boolean
-  instance_id?: boolean
   item_type?: boolean
   item_desc?: boolean
   estimated_completion_date?: boolean
@@ -1737,6 +1736,7 @@ export type OrderLoginDetailsSelect<ExtArgs extends runtime.Types.Extensions.Int
   updated_at?: boolean
   updated_by?: boolean
   factory_user_vendor_selection_remark?: boolean
+  instance_id?: boolean
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.OrderLoginDetails$companyVendorArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -1750,7 +1750,6 @@ export type OrderLoginDetailsSelectCreateManyAndReturn<ExtArgs extends runtime.T
   lead_id?: boolean
   account_id?: boolean
   vendor_id?: boolean
-  instance_id?: boolean
   item_type?: boolean
   item_desc?: boolean
   estimated_completion_date?: boolean
@@ -1762,6 +1761,7 @@ export type OrderLoginDetailsSelectCreateManyAndReturn<ExtArgs extends runtime.T
   updated_at?: boolean
   updated_by?: boolean
   factory_user_vendor_selection_remark?: boolean
+  instance_id?: boolean
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.OrderLoginDetails$companyVendorArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -1775,7 +1775,6 @@ export type OrderLoginDetailsSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   lead_id?: boolean
   account_id?: boolean
   vendor_id?: boolean
-  instance_id?: boolean
   item_type?: boolean
   item_desc?: boolean
   estimated_completion_date?: boolean
@@ -1787,6 +1786,7 @@ export type OrderLoginDetailsSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   updated_at?: boolean
   updated_by?: boolean
   factory_user_vendor_selection_remark?: boolean
+  instance_id?: boolean
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.OrderLoginDetails$companyVendorArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -1800,7 +1800,6 @@ export type OrderLoginDetailsSelectScalar = {
   lead_id?: boolean
   account_id?: boolean
   vendor_id?: boolean
-  instance_id?: boolean
   item_type?: boolean
   item_desc?: boolean
   estimated_completion_date?: boolean
@@ -1812,9 +1811,10 @@ export type OrderLoginDetailsSelectScalar = {
   updated_at?: boolean
   updated_by?: boolean
   factory_user_vendor_selection_remark?: boolean
+  instance_id?: boolean
 }
 
-export type OrderLoginDetailsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "vendor_id" | "instance_id" | "item_type" | "item_desc" | "estimated_completion_date" | "completion_date" | "is_completed" | "created_at" | "created_by" | "company_vendor_id" | "updated_at" | "updated_by" | "factory_user_vendor_selection_remark", ExtArgs["result"]["orderLoginDetails"]>
+export type OrderLoginDetailsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "vendor_id" | "item_type" | "item_desc" | "estimated_completion_date" | "completion_date" | "is_completed" | "created_at" | "created_by" | "company_vendor_id" | "updated_at" | "updated_by" | "factory_user_vendor_selection_remark" | "instance_id", ExtArgs["result"]["orderLoginDetails"]>
 export type OrderLoginDetailsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.OrderLoginDetails$companyVendorArgs<ExtArgs>
@@ -1855,7 +1855,6 @@ export type $OrderLoginDetailsPayload<ExtArgs extends runtime.Types.Extensions.I
     lead_id: number
     account_id: number
     vendor_id: number
-    instance_id: number | null
     item_type: string
     item_desc: string
     estimated_completion_date: Date | null
@@ -1867,6 +1866,7 @@ export type $OrderLoginDetailsPayload<ExtArgs extends runtime.Types.Extensions.I
     updated_at: Date
     updated_by: number | null
     factory_user_vendor_selection_remark: string | null
+    instance_id: number | null
   }, ExtArgs["result"]["orderLoginDetails"]>
   composites: {}
 }
@@ -2300,7 +2300,6 @@ export interface OrderLoginDetailsFieldRefs {
   readonly lead_id: Prisma.FieldRef<"OrderLoginDetails", 'Int'>
   readonly account_id: Prisma.FieldRef<"OrderLoginDetails", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"OrderLoginDetails", 'Int'>
-  readonly instance_id: Prisma.FieldRef<"OrderLoginDetails", 'Int'>
   readonly item_type: Prisma.FieldRef<"OrderLoginDetails", 'String'>
   readonly item_desc: Prisma.FieldRef<"OrderLoginDetails", 'String'>
   readonly estimated_completion_date: Prisma.FieldRef<"OrderLoginDetails", 'DateTime'>
@@ -2312,6 +2311,7 @@ export interface OrderLoginDetailsFieldRefs {
   readonly updated_at: Prisma.FieldRef<"OrderLoginDetails", 'DateTime'>
   readonly updated_by: Prisma.FieldRef<"OrderLoginDetails", 'Int'>
   readonly factory_user_vendor_selection_remark: Prisma.FieldRef<"OrderLoginDetails", 'String'>
+  readonly instance_id: Prisma.FieldRef<"OrderLoginDetails", 'Int'>
 }
     
 

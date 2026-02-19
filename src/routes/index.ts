@@ -43,6 +43,10 @@ import notificationRoutes from "./notification/notification.routes";
 import emailNotificationMasterRoutes from "./notification/emailNotificationMaster.routes";
 import contactUsRoutes from "./generic/contactUs.routes";
 
+import trackTraceRoutes from "./trackTraceRoutes/track-trace.routes";
+import trackTraceMasterRoutes from "./trackTraceRoutes/trackTraceMaster.routes";
+import configureRoutes from "./trackTraceRoutes/configure.routes";
+import tracktraceProjectRoutes from "./trackTraceRoutes/track-trace-project.routes";
 const router = Router();
 
 router.use("/dashboard", DashboardRouter);
@@ -82,7 +86,10 @@ router.use("/leads/production/ready-to-dispatch", readyToDispatchRoutes);
 router.use("/leads/installation/site-readiness", siteReadinessRoutes);
 router.use("/leads/installation/dispatch-planning", dispatchPlanningRoutes);
 router.use("/leads/installation/dispatch", dispatchStageRoutes);
-router.use("/leads/installation/under-installation", underInstallationStageRoutes);
+router.use(
+  "/leads/installation/under-installation",
+  underInstallationStageRoutes,
+);
 
 router.use("/installer-users", installerUserRoutes);
 router.use("/miscellaneous-master", miscRoutes);
@@ -93,5 +100,10 @@ router.use("/leads/chats", chatRoutes);
 router.use("/notifications", notificationRoutes);
 router.use("/email-notification-master", emailNotificationMasterRoutes);
 router.use("/public", contactUsRoutes);
+
+router.use("/track-trace", trackTraceRoutes);
+router.use("/track-trace-master", trackTraceMasterRoutes);
+router.use("/track-trace-configure", configureRoutes);
+router.use("/track-trace-project", tracktraceProjectRoutes);
 
 export { router };

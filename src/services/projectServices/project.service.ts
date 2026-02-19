@@ -1,6 +1,6 @@
 import { prisma } from '../../prisma/client';
 import { Prisma, ProjectMaster, ProjectDetails, ProjectItemsMaster } from '../../prisma/generated';
-import { FullProjectCreateInput } from '../../types/project.types';
+import { CadbidPayload, FullProjectCreateInput } from '../../types/project.types';
 
 export const createProject = async (data: Omit<ProjectMaster, 'id' | 'created_at'>) => {
   return prisma.projectMaster.create({
@@ -66,6 +66,23 @@ export const getAllProjects = () => {
       details: true,
       items: true,
     },
+  });
+};
+
+
+
+export const getAllProjectsTrackTrace = (vendor_id: number) => {
+  return prisma.projectMaster.findMany({
+    where: {
+      vendor_id: vendor_id,
+    },
+    include: {
+      vendor: true,
+      createdByUser: true,
+      details: true,
+      items: true,
+    },
+    orderBy: { id: "desc" }
   });
 };
 
@@ -285,7 +302,7 @@ export const createOrUpdateFullProject = async (
     include: { vendor: true }
   });
 
-  if (!vendorTokenEntry || new Date() > vendorTokenEntry.expiry_date){
+  if (!vendorTokenEntry || new Date() > vendorTokenEntry.expiry_date) {
     throw new Error("Invalid or expired vendor token");
   }
 
@@ -577,8 +594,8 @@ export const getCompletedProjectsByVendorIdService = async (vendorId: number) =>
     );
 
     // Check if project is completed (100% packed)
-    const isCompleted = aggregatedTotals.total_items > 0 && 
-                       aggregatedTotals.total_packed === aggregatedTotals.total_items;
+    const isCompleted = aggregatedTotals.total_items > 0 &&
+      aggregatedTotals.total_packed === aggregatedTotals.total_items;
 
     if (isCompleted) {
       // First, check how many boxes are currently unpacked
@@ -586,7 +603,6 @@ export const getCompletedProjectsByVendorIdService = async (vendorId: number) =>
         where: {
           project_id: project.id,
           vendor_id: project.vendor_id,
-          client_id: project.client_id,
           is_deleted: false,
           box_status: 'unpacked'
         }
@@ -597,12 +613,11 @@ export const getCompletedProjectsByVendorIdService = async (vendorId: number) =>
       // Only update if there are unpacked boxes
       if (unpackedBoxesCount > 0) {
         console.log(`📦 Found ${unpackedBoxesCount} unpacked boxes for project "${project.project_name}", updating to packed...`);
-        
+
         boxUpdateResult = await prisma.boxMaster.updateMany({
           where: {
             project_id: project.id,
             vendor_id: project.vendor_id,
-            client_id: project.client_id,
             is_deleted: false, // Only update non-deleted boxes
             box_status: 'unpacked' // Only update boxes that are currently unpacked
           },
@@ -619,7 +634,6 @@ export const getCompletedProjectsByVendorIdService = async (vendorId: number) =>
         where: {
           project_id: project.id,
           vendor_id: project.vendor_id,
-          client_id: project.client_id,
           is_deleted: false
         }
       });
@@ -629,7 +643,6 @@ export const getCompletedProjectsByVendorIdService = async (vendorId: number) =>
         where: {
           project_id: project.id,
           vendor_id: project.vendor_id,
-          client_id: project.client_id,
           is_deleted: false,
           box_status: 'packed'
         }
@@ -741,7 +754,7 @@ export const autoPackGroupedBoxesService = async (vendorId: number) => {
 
         // Get the first item to determine the group
         const firstItemUniqueId = itemsInBox[0].unique_id;
-        
+
         const firstItemDetails = await prisma.projectItemsMaster.findFirst({
           where: {
             project_id: project.id,
@@ -841,3 +854,261 @@ export const autoPackGroupedBoxesService = async (vendorId: number) => {
     },
   };
 };
+
+import { z } from "zod";
+
+
+export const handelItems = async (
+  vendorToken: string,
+  payload: CadbidPayload
+) => {
+  try {
+
+    console.log("payload", payload);
+
+
+    const requiredString = (field: string) =>
+      z.string().min(1, `${field} blank`);
+
+    const requiredNumber = (field: string) =>
+      z.coerce.number({
+        error: `${field} missing`
+      });
+
+
+
+
+    const itemSchema = z.object({
+      articleCode: requiredString("articleCode"),
+      groupName: requiredString("groupName"),
+      l1: requiredNumber("l1"),
+      l2: requiredNumber("l2"),
+      l3: requiredNumber("l3"),
+      name: requiredString("name"),
+      qty: z.coerce.number().int().positive("qty must be greater than 0"),
+      barcode1: z.string().optional(),
+      barcode2: z.string().optional(),
+      el1: z.string().optional(),
+      el2: z.string().optional(),
+      sl1: z.string().optional(),
+      sl2: z.string().optional(),
+    });
+
+    const payloadSchema = z.object({
+      projectName: requiredString("projectName"),
+      items: z.array(itemSchema).min(1, "items missing")
+    });
+
+    const validation = payloadSchema.safeParse(payload);
+
+    if (!validation.success) {
+      const errors = validation.error.issues.map(issue => ({
+        field_name: issue.path.join("."),
+        message:
+          issue.code === "invalid_type"
+            ? "missing"
+            : issue.message.includes("blank")
+              ? "blank"
+              : issue.message
+      }));
+
+      return {
+        success: false,
+        errors
+      };
+    }
+
+    // ✅ Step 1: Collect all unique_codes (barcode1) that will be inserted
+    const uniqueCodesToInsert: string[] = [];
+
+    for (const item of payload.items) {
+      if (item.barcode1) {
+        const quantity = Number(item.qty);
+        for (let i = 0; i < quantity; i++) {
+          uniqueCodesToInsert.push(item.barcode1);
+        }
+      }
+    }
+
+    // ✅ Step 2: Check for duplicates within the payload itself
+    const duplicatesInPayload = uniqueCodesToInsert.filter(
+      (code, index) => uniqueCodesToInsert.indexOf(code) !== index
+    );
+
+    if (duplicatesInPayload.length > 0) {
+      return {
+        success: false,
+        message: "Duplicate barcodes found in payload",
+        duplicates: [...new Set(duplicatesInPayload)]
+      };
+    }
+
+    // ✅ Step 3: Check if any barcode1 already exists in database
+    if (uniqueCodesToInsert.length > 0) {
+      const existingCodes = await prisma.cutList.findMany({
+        where: {
+          unique_code: {
+            in: uniqueCodesToInsert
+          }
+        },
+        select: {
+          unique_code: true
+        }
+      });
+
+      if (existingCodes.length > 0) {
+        const duplicateCodes = existingCodes.map(c => c.unique_code);
+        return {
+          success: false,
+          message: "Duplicate barcodes found in database",
+          duplicates: duplicateCodes
+        };
+      }
+    }
+
+    // ✅ Step 4: Resolve vendor
+    const vendorTokenEntry = await prisma.vendorTokens.findUnique({
+      where: { token: vendorToken },
+      include: { vendor: true }
+    });
+
+    if (!vendorTokenEntry || new Date() > vendorTokenEntry.expiry_date) {
+      throw new Error("Invalid or expired vendor token");
+    }
+
+    const vendor = vendorTokenEntry.vendor;
+
+    // ✅ Step 5: Resolve admin user
+    const adminUser = await prisma.userMaster.findFirst({
+      where: {
+        vendor_id: vendor.id,
+        user_type_id: 2
+      },
+      orderBy: { created_at: "asc" }
+    });
+
+    if (!adminUser) throw new Error("No admin user found for this vendor");
+
+    const createdByUserId = adminUser.id;
+    const lead_id = 37;
+
+    const { randomUUID } = require("crypto");
+    const unique_project_id = randomUUID();
+
+    // 🔥 MAIN TRANSACTION
+    const result = await prisma.$transaction(async (tx) => {
+
+      const project = await tx.projectMaster.create({
+        data: {
+          project_name: payload.projectName,
+          unique_project_id,
+          vendor_id: vendor.id,
+          created_by: createdByUserId,
+          project_status: "Initiated",
+          is_grouping: false
+        }
+      });
+
+      for (const item of payload.items) {
+
+        const quantity = Number(item.qty);
+
+        for (let i = 0; i < quantity; i++) {
+
+          const row = await tx.cutList.create({
+            data: {
+              project_id: project.id,
+              vendor_id: vendor.id,
+              description: item.name,
+              length: Number(item.l1),
+              width: Number(item.l2),
+              thickness: Number(item.l3),
+              qty: 1,
+              material_details: item.articleCode,
+              item_name: item.groupName,
+              status: "Active",
+              created_by: createdByUserId,
+              lead_id: lead_id,
+              elf: item.el1 || '',
+              elb: item.el2 || '',
+              esl: item.sl1 || '',
+              esr: item.sl2 || '',
+              unique_code: "",
+              unique_code_2: item.barcode2 || null,
+            }
+          });
+
+          const uniqueCode = item.barcode1 || `${row.id}-${project.id}`;
+
+          await tx.cutList.update({
+            where: { id: row.id },
+            data: { unique_code: uniqueCode }
+          });
+
+          let machine_type_id = 0;
+          let sequence_no = 0;
+          const hasEdgeBanding = item.el1 || item.el2 || item.sl1 || item.sl2;
+
+          if (hasEdgeBanding) {
+
+            if (machine_type_id == 0) {
+              const machine_type = await tx.machineMaster.findFirst({
+                where: {
+                  vendor_id: Number(vendor.id),
+                  machine_type_id: 11
+                },
+                select: {
+                  id: true,
+                  sequence_no: true
+                }
+              });
+              if (machine_type) {
+                machine_type_id = machine_type.id ?? 0;
+                sequence_no = machine_type.sequence_no ?? 0;
+              }
+            }
+
+            if (machine_type_id == 0) {
+              throw new Error("Edgebanding machine is not configured");
+            } else {
+              await tx.cutListMachineMapping.create({
+                data: {
+                  cut_list_id: row.id,
+                  machine_id: machine_type_id,
+                  project_id: project.id,
+                  vendor_id: vendor.id,
+                  lead_id: lead_id,
+                  sequence_no: sequence_no,
+                  status: "Pending",
+                  created_by: createdByUserId,
+                  expected_in: true
+                }
+              });
+            }
+          }
+        }
+
+
+      }
+
+      return project;
+    });
+
+    return {
+      success: true,
+      message: "Items processed successfully",
+      project_id: result.id,
+      unique_project_id: unique_project_id
+    };
+
+  } catch (error: any) {
+
+    console.error("Transaction failed:", error);
+
+    return {
+      success: false,
+      message: error.message || "Something went wrong. Transaction rolled back."
+    };
+  }
+};
+

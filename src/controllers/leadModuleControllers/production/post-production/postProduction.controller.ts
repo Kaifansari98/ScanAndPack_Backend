@@ -11,6 +11,9 @@ import { resolveClientBaseUrl } from "../../../../utils/fileUtils";
 
 const service = new PostProductionService();
 
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
 export class PostProductionController {
   async uploadQcPhotos(req: Request, res: Response) {
     try {
@@ -83,7 +86,6 @@ export class PostProductionController {
           Number(leadId),
           file.originalname,
           file.mimetype,
-          instanceFolder
         );
 
         await fs.unlink(file.path);
@@ -195,7 +197,6 @@ export class PostProductionController {
               Number(leadId),
               file.originalname,
               file.mimetype,
-              instanceFolder
             );
 
           await fs.unlink(file.path);
@@ -313,7 +314,6 @@ export class PostProductionController {
               Number(leadId),
               file.originalname,
               file.mimetype,
-              instanceFolder
             );
 
           await fs.unlink(file.path);
@@ -643,8 +643,8 @@ export class PostProductionController {
 
   async markProductionCompleted(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
       const { updated_by, instance_id } = req.body;
       const { instance_id: instanceIdQuery } = req.query;
 
@@ -700,8 +700,8 @@ export class PostProductionController {
 
   async moveLeadToReadyToDispatch(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
       const { updated_by } = req.body;
 
       if (!vendorId || !leadId || !updated_by) {

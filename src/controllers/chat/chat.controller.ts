@@ -21,7 +21,10 @@ export class ChatController {
   }
   static async checkLeadChatRoom(req: Request, res: Response) {
     try {
-      const leadId = parseInt(req.params.leadId, 10);
+      const leadIdParam = Array.isArray(req.params.leadId)
+        ? req.params.leadId[0]
+        : req.params.leadId;
+      const leadId = Number(leadIdParam);
 
       if (isNaN(leadId)) {
         return res.status(400).json({
@@ -48,7 +51,10 @@ export class ChatController {
 
   static async createLeadChatRoom(req: Request, res: Response) {
     try {
-      const leadId = parseInt(req.params.leadId, 10);
+      const leadIdParam = Array.isArray(req.params.leadId)
+        ? req.params.leadId[0]
+        : req.params.leadId;
+      const leadId = Number(leadIdParam);
       const userId = parseInt(req.body.user_id, 10);
 
       if (isNaN(leadId) || isNaN(userId)) {

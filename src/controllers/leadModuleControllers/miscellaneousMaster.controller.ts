@@ -8,6 +8,9 @@ import {
   removeMiscType,
 } from "../../services/leadModuleServices/miscellaneousMaster.service";
 
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
 /* ------------------------ Miscellaneous Type Master ------------------------ */
 
 // CREATE Type
@@ -42,7 +45,7 @@ export const getMiscTypes = async (req: Request, res: Response) => {
   console.log("[CONTROLLER] getMiscTypes called", { params: req.params });
 
   try {
-    const vendor_id = parseInt(req.params.vendor_id);
+    const vendor_id = Number(getParam(req.params.vendor_id));
     if (!vendor_id) {
       return res.status(400).json({ error: "vendor_id is required" });
     }
@@ -60,7 +63,7 @@ export const deleteMiscType = async (req: Request, res: Response) => {
   console.log("[CONTROLLER] deleteMiscType called", { params: req.params });
 
   try {
-    const id = parseInt(req.params.id);
+    const id = Number(getParam(req.params.id));
     if (!id) return res.status(400).json({ error: "id is required" });
 
     await removeMiscType(id);
@@ -102,7 +105,7 @@ export const getMiscTeams = async (req: Request, res: Response) => {
   console.log("[CONTROLLER] getMiscTeams called", { params: req.params });
 
   try {
-    const vendor_id = parseInt(req.params.vendor_id);
+    const vendor_id = Number(getParam(req.params.vendor_id));
     if (!vendor_id)
       return res.status(400).json({ error: "vendor_id is required" });
 
@@ -119,7 +122,7 @@ export const deleteMiscTeam = async (req: Request, res: Response) => {
   console.log("[CONTROLLER] deleteMiscTeam called", { params: req.params });
 
   try {
-    const id = parseInt(req.params.id);
+    const id = Number(getParam(req.params.id));
     if (!id) return res.status(400).json({ error: "id is required" });
 
     await removeMiscTeam(id);

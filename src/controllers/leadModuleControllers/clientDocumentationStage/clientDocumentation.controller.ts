@@ -12,6 +12,9 @@ import { resolveClientBaseUrl } from "../../../utils/fileUtils";
 
 const clientDocumentationService = new ClientDocumentationService();
 
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
 export class ClientDocumentationController {
   private static async resolveProductStructureInstance(
     leadId: number,
@@ -136,7 +139,6 @@ export class ClientDocumentationController {
             Number(lead_id),
             doc.originalname,
             doc.mimetype,
-            folder,
             instanceFolder
           );
 
@@ -317,7 +319,6 @@ export class ClientDocumentationController {
             Number(lead_id),
             doc.originalname,
             doc.mimetype,
-            folder,
             instanceFolder
           );
 
@@ -380,8 +381,8 @@ export class ClientDocumentationController {
     res: Response,
   ) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const userId = Number(getParam(req.params.userId));
 
       if (!vendorId || !userId) {
         return res.status(400).json({
@@ -416,8 +417,8 @@ export class ClientDocumentationController {
 
   public static async get(req: Request, res: Response): Promise<void> {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
       const userId = Number(req.query.userId);
       const instanceId = req.query.instanceId ? parseInt(req.query.instanceId as string) : undefined
 
