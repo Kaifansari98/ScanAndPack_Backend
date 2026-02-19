@@ -11,7 +11,7 @@ import {
   sendMajorMilestoneEmail,
 } from "../../../services/email/brevoEmail.service";
 import logger from "../../../utils/logger";
-import { sendTechCheckAssignedEmail } from "src/services/email/brevoEmail2.service";
+import { sendTechCheckAssignedEmail } from "../../../../src/services/email/brevoEmail2.service";
 
 const resolveClientBaseUrl = (req: Request): string => {
   const origin = req.headers.origin;
