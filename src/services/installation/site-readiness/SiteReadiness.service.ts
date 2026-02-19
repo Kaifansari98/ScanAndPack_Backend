@@ -1,3 +1,4 @@
+import { UserLeadTask } from "./../../../../generated/prisma_client/browser";
 import { NotificationType, Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
@@ -444,21 +445,33 @@ export class SiteReadinessService {
           `Status 'Type 13' (Dispatch Planning Stage) not found for vendor ${vendorId}`,
         );
 
-      // 3️⃣ Update Lead’s Status
-      const updatedLead = await tx.leadMaster.update({
-        where: { id: lead.id },
-        data: {
-          status_id: toStatus.id,
-          updated_by: updatedBy,
-          updated_at: new Date(),
+      // 3️⃣ Complete "Site Readiness" Task (if exists)
+      const siteReadinessTask = await tx.userLeadTask.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          task_type: "Site Readiness",
+          status: { not: "completed" }, // avoid re-updating
         },
-        select: {
-          id: true,
-          account_id: true,
-          vendor_id: true,
-          status_id: true,
-        },
+        select: { id: true },
       });
+
+      if (siteReadinessTask) {
+        await tx.userLeadTask.update({
+          where: { id: siteReadinessTask.id },
+          data: {
+            status: "completed",
+            closed_by: updatedBy,
+            closed_at: new Date(),
+            updated_by: updatedBy,
+          },
+        });
+
+        logger.info("[SERVICE] Site Readiness task marked completed", {
+          task_id: siteReadinessTask.id,
+          lead_id: leadId,
+        });
+      }
 
       // 4️⃣ Add Detailed Log Entry
       const actionMessage = `Lead moved to Dispatch Planning stage.`;
@@ -475,6 +488,16 @@ export class SiteReadinessService {
         },
       });
 
+      // 4️⃣ Actually move lead to Dispatch Planning (UPDATE STATUS)
+      await tx.leadMaster.update({
+        where: { id: leadId },
+        data: {
+          status_id: toStatus.id, // 🔥 THIS IS THE REAL STAGE CHANGE
+          updated_by: updatedBy,
+          updated_at: new Date(),
+        },
+      });
+
       logger.info("[SERVICE] Lead moved to Dispatch Planning", {
         lead_id: lead.id,
         vendor_id: vendorId,
@@ -487,7 +510,7 @@ export class SiteReadinessService {
         new_status: toStatus.type,
       };
     });
-    
+
     // ===============================
     // DISPATCH PLANNING STAGE → ADMIN NOTIFICATION
     // ===============================
@@ -530,7 +553,6 @@ export class SiteReadinessService {
         hour: "2-digit",
         minute: "2-digit",
       });
-
 
       const redirectPath = lead.account_id
         ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`

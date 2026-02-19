@@ -538,8 +538,8 @@ export class ClientApprovalController {
 
         if (recipientIds.size > 0) {
           const redirectUrl = dto.account_id
-            ? `/dashboard/production/tech-check/details/${dto.lead_id}?accountId=${dto.account_id}`
-            : `/dashboard/production/tech-check/details/${dto.lead_id}`;
+            ? `/dashboard/production/details/${dto.lead_id}?accountId=${dto.account_id}`
+            : `/dashboard/production/details/${dto.lead_id}`;
 
           await Promise.all(
             Array.from(recipientIds).map((recipientId) =>
