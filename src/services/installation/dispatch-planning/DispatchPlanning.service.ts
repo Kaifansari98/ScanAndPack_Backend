@@ -223,54 +223,6 @@ export class DispatchPlanningService {
       /**
        * STEP 3 — Ensure Factory Task Exists
        */
-      const leadData = await tx.leadMaster.findUnique({
-        where: { id: lead_id },
-        select: { account_id: true },
-      });
-
-      if (!leadData?.account_id) {
-        throw new Error("Lead Account not found.");
-      }
-
-      const factoryUser = await tx.userMaster.findFirst({
-        where: {
-          vendor_id,
-          user_type: { user_type: "factory" },
-          status: "active",
-        },
-        select: { id: true },
-      });
-
-      if (!factoryUser) {
-        throw new Error("Factory user not configured.");
-      }
-
-      const existingTask = await tx.userLeadTask.findFirst({
-        where: {
-          lead_id,
-          vendor_id,
-          task_type: "Dispatch",
-          lead_stage: "dispatch-planning-stage",
-        },
-      });
-
-      if (!existingTask) {
-        await tx.userLeadTask.create({
-          data: {
-            vendor_id,
-            lead_id,
-            account_id: leadData.account_id,
-            user_id: factoryUser.id,
-            task_type: "Dispatch",
-            due_date: dispatchDate,
-            remark: dispatch_planning_remark || "Prepare material for dispatch",
-            status: "open",
-            created_by,
-            lead_stage: "dispatch-planning-stage",
-          },
-        });
-      }
-
       return { lead_id, vendor_id, updated: true };
     });
   }
@@ -607,6 +559,73 @@ export class DispatchPlanningService {
           created_by: updatedBy,
         },
       });
+
+      const leadPlanningData = await tx.leadMaster.findUnique({
+        where: { id: leadId },
+        select: {
+          account_id: true,
+          required_date_for_dispatch: true,
+          dispatch_planning_remark: true,
+        },
+      });
+
+      if (!leadPlanningData?.account_id) {
+        throw new Error("Lead Account not found.");
+      }
+
+      if (!leadPlanningData.required_date_for_dispatch) {
+        throw new Error("Required date for dispatch is missing.");
+      }
+
+      const factoryUser = await tx.userMaster.findFirst({
+        where: {
+          vendor_id: vendorId,
+          user_type: { user_type: "factory" },
+          status: "active",
+        },
+        select: { id: true },
+      });
+
+      if (!factoryUser) {
+        throw new Error("Factory user not configured.");
+      }
+
+      const existingTask = await tx.userLeadTask.findFirst({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+          task_type: "Dispatch",
+          lead_stage: "dispatch-planning-stage",
+        },
+      });
+
+      if (existingTask) {
+        await tx.userLeadTask.update({
+          where: { id: existingTask.id },
+          data: {
+            due_date: leadPlanningData.required_date_for_dispatch,
+            updated_by: updatedBy,
+            updated_at: new Date(),
+          },
+        });
+      } else {
+        await tx.userLeadTask.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: leadPlanningData.account_id,
+            user_id: factoryUser.id,
+            task_type: "Dispatch",
+            due_date: leadPlanningData.required_date_for_dispatch,
+            remark:
+              leadPlanningData.dispatch_planning_remark ||
+              "Prepare material for dispatch",
+            status: "open",
+            created_by: updatedBy,
+            lead_stage: "dispatch-planning-stage",
+          },
+        });
+      }
 
       return updatedLead;
     });
