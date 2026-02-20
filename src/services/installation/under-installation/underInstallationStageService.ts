@@ -1437,6 +1437,23 @@ export class UnderInstallationStageService {
       },
     });
 
+    if (misc_approved === false) {
+      const miscTaskKey = `[misc:${misc_id}]`;
+      await prisma.userLeadTask.updateMany({
+        where: {
+          vendor_id,
+          task_type: "Miscellaneous",
+          remark: { contains: miscTaskKey },
+          status: { in: ["open", "completed"] },
+        },
+        data: {
+          status: "cancelled",
+          updated_by,
+          updated_at: new Date(),
+        },
+      });
+    }
+
     return updated;
   }
 
