@@ -119,6 +119,15 @@ underInstallationStageRoutes.put(
   controller.updateMiscRequiredDeliveryDate
 );
 
+/**
+ * ✅ PUT → Update Required Delivery Date (by taskId)
+ * @route PUT /miscellaneous/vendorId/:vendorId/taskId/:taskId/update-required-delivery-date
+ */
+underInstallationStageRoutes.put(
+  "/vendorId/:vendorId/taskId/:taskId/update-required-delivery-date",
+  controller.updateMiscRequiredDeliveryDateByTaskId
+);
+
 underInstallationStageRoutes.post(
   "/issue-log/create",
   controller.createInstallationIssueLog

@@ -1011,6 +1011,46 @@ export class UnderInstallationStageController {
     }
   }
 
+  async updateMiscRequiredDeliveryDateByTaskId(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const taskId = Number(req.params.taskId);
+      const { required_delivery_date, updated_by } = req.body;
+
+      if (!vendorId || !taskId) {
+        return res.status(400).json({
+          success: false,
+          error: "vendorId and taskId are required",
+        });
+      }
+
+      if (!required_delivery_date || !updated_by) {
+        return res.status(400).json({
+          success: false,
+          error: "required_delivery_date and updated_by are required",
+        });
+      }
+
+      const data =
+        await UnderInstallationStageService.updateMiscRequiredDeliveryDateByTaskIdService(
+          {
+            vendor_id: vendorId,
+            task_id: taskId,
+            required_delivery_date,
+            updated_by,
+          },
+        );
+
+      return res.status(200).json({ success: true, data });
+    } catch (error: any) {
+      console.error(
+        "Error updating required delivery date by task:",
+        error.message,
+      );
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  }
+
   async createInstallationIssueLog(req: Request, res: Response) {
     try {
       const {
