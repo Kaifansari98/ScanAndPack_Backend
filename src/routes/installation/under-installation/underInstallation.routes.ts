@@ -101,6 +101,24 @@ underInstallationStageRoutes.put(
   controller.updateMiscExpectedReadyDate
 );
 
+/**
+ * ✅ PUT → Approve/Reject Miscellaneous
+ * @route PUT /miscellaneous/vendorId/:vendorId/miscId/:miscId/update-approval
+ */
+underInstallationStageRoutes.put(
+  "/vendorId/:vendorId/miscId/:miscId/update-approval",
+  controller.updateMiscApproval
+);
+
+/**
+ * ✅ PUT → Update Required Delivery Date
+ * @route PUT /miscellaneous/vendorId/:vendorId/miscId/:miscId/update-required-delivery-date
+ */
+underInstallationStageRoutes.put(
+  "/vendorId/:vendorId/miscId/:miscId/update-required-delivery-date",
+  controller.updateMiscRequiredDeliveryDate
+);
+
 underInstallationStageRoutes.post(
   "/issue-log/create",
   controller.createInstallationIssueLog

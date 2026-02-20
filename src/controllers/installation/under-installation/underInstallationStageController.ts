@@ -930,6 +930,87 @@ export class UnderInstallationStageController {
     }
   }
 
+  async updateMiscApproval(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const miscId = Number(req.params.miscId);
+      const { misc_approved, exp_of_rejection, updated_by } = req.body;
+
+      if (!vendorId || !miscId) {
+        return res.status(400).json({
+          success: false,
+          error: "vendorId and miscId are required",
+        });
+      }
+
+      if (typeof misc_approved !== "boolean" || !updated_by) {
+        return res.status(400).json({
+          success: false,
+          error: "misc_approved and updated_by are required",
+        });
+      }
+
+      if (misc_approved === false && !exp_of_rejection) {
+        return res.status(400).json({
+          success: false,
+          error: "exp_of_rejection is required when rejecting",
+        });
+      }
+
+      const data = await UnderInstallationStageService.updateMiscApprovalService(
+        {
+          vendor_id: vendorId,
+          misc_id: miscId,
+          misc_approved,
+          exp_of_rejection,
+          updated_by,
+        },
+      );
+
+      return res.status(200).json({ success: true, data });
+    } catch (error: any) {
+      console.error("Error updating misc approval:", error.message);
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  }
+
+  async updateMiscRequiredDeliveryDate(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const miscId = Number(req.params.miscId);
+      const { required_delivery_date, updated_by } = req.body;
+
+      if (!vendorId || !miscId) {
+        return res.status(400).json({
+          success: false,
+          error: "vendorId and miscId are required",
+        });
+      }
+
+      if (!required_delivery_date || !updated_by) {
+        return res.status(400).json({
+          success: false,
+          error: "required_delivery_date and updated_by are required",
+        });
+      }
+
+      const data =
+        await UnderInstallationStageService.updateMiscRequiredDeliveryDateService(
+          {
+            vendor_id: vendorId,
+            misc_id: miscId,
+            required_delivery_date,
+            updated_by,
+          },
+        );
+
+      return res.status(200).json({ success: true, data });
+    } catch (error: any) {
+      console.error("Error updating required delivery date:", error.message);
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  }
+
   async createInstallationIssueLog(req: Request, res: Response) {
     try {
       const {

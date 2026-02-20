@@ -1369,6 +1369,8 @@ export class UnderInstallationStageService {
           vendor_id: m.vendor_id,
           lead_id: m.lead_id,
           account_id: m.account_id,
+          misc_approved: m.misc_approved,
+          exp_of_rejection: m.exp_of_rejection,
           type: {
             id: m.type.id,
             name: m.type.name,
@@ -1379,6 +1381,7 @@ export class UnderInstallationStageService {
           cost: m.cost,
           supervisor_remark: m.supervisor_remark,
           expected_ready_date: m.expected_ready_date,
+          required_delivery_date: m.required_delivery_date,
           is_resolved: m.is_resolved,
           resolved_at: m.resolved_at,
           created_by: m.created_by,
@@ -1403,6 +1406,178 @@ export class UnderInstallationStageService {
     return finalResult;
   }
 
+  static async updateMiscApprovalService({
+    vendor_id,
+    misc_id,
+    misc_approved,
+    exp_of_rejection,
+    updated_by,
+  }: {
+    vendor_id: number;
+    misc_id: number;
+    misc_approved: boolean;
+    exp_of_rejection?: string | null;
+    updated_by: number;
+  }) {
+    const existing = await prisma.miscellaneousMaster.findFirst({
+      where: { id: misc_id, vendor_id },
+      select: { id: true },
+    });
+
+    if (!existing) {
+      throw new Error("Miscellaneous record not found");
+    }
+
+    const updated = await prisma.miscellaneousMaster.update({
+      where: { id: misc_id },
+      data: {
+        misc_approved,
+        exp_of_rejection: misc_approved ? null : exp_of_rejection || null,
+        updated_by,
+      },
+    });
+
+    return updated;
+  }
+
+  static async updateMiscRequiredDeliveryDateService({
+    vendor_id,
+    misc_id,
+    required_delivery_date,
+    updated_by,
+  }: {
+    vendor_id: number;
+    misc_id: number;
+    required_delivery_date: string;
+    updated_by: number;
+  }) {
+    const result = await prisma.$transaction(async (tx) => {
+      const existing = await tx.miscellaneousMaster.findFirst({
+        where: { id: misc_id, vendor_id },
+        select: {
+          id: true,
+          lead_id: true,
+          account_id: true,
+          reorder_material_details: true,
+          problem_description: true,
+          misc_approved: true,
+        },
+      });
+
+      if (!existing) {
+        throw new Error("Miscellaneous record not found");
+      }
+
+      if (existing.misc_approved !== true) {
+        throw new Error("Miscellaneous entry is not approved");
+      }
+
+      const miscTaskKey = `[misc:${existing.id}]`;
+      const readyTask = await tx.userLeadTask.findFirst({
+        where: {
+          vendor_id,
+          lead_id: existing.lead_id,
+          task_type: "Miscellaneous",
+          remark: { contains: miscTaskKey },
+          status: "completed",
+        },
+        select: { id: true },
+      });
+
+      if (!readyTask) {
+        throw new Error("Miscellaneous entry is not marked as ready");
+      }
+
+      const updated = await tx.miscellaneousMaster.update({
+        where: { id: misc_id },
+        data: {
+          required_delivery_date: new Date(required_delivery_date),
+          updated_by,
+        },
+      });
+
+      // Resolve Factory Role
+      const factoryType = await tx.userTypeMaster.findFirst({
+        where: {
+          user_type: { equals: "factory", mode: "insensitive" },
+        },
+        select: { id: true },
+      });
+
+      let factoryAssigneeId: number | null = null;
+      if (factoryType) {
+        const factoryMapping = await tx.leadUserMapping.findFirst({
+          where: {
+            vendor_id,
+            lead_id: existing.lead_id,
+            status: "active",
+            user: { user_type_id: factoryType.id },
+          },
+          select: { user_id: true },
+        });
+
+        factoryAssigneeId = factoryMapping?.user_id ?? null;
+      }
+
+      const leadStageRecord = await tx.leadMaster.findUnique({
+        where: { id: existing.lead_id },
+        select: { status_id: true },
+      });
+
+      const leadStage = leadStageRecord?.status_id
+        ? ((
+            await tx.statusTypeMaster.findUnique({
+              where: { id: leadStageRecord.status_id },
+              select: { type: true },
+            })
+          )?.type ?? null)
+        : null;
+
+      const deliveryRemark = `Required delivery date set for **${existing.reorder_material_details}** - ${existing.problem_description}`;
+
+      const existingDeliveryTask = await tx.userLeadTask.findFirst({
+        where: {
+          vendor_id,
+          lead_id: existing.lead_id,
+          task_type: "Miscellaneous",
+          remark: deliveryRemark,
+        },
+        orderBy: { id: "desc" },
+        select: { id: true },
+      });
+
+      if (existingDeliveryTask) {
+        await tx.userLeadTask.update({
+          where: { id: existingDeliveryTask.id },
+          data: {
+            due_date: new Date(required_delivery_date),
+            updated_by,
+            updated_at: new Date(),
+          },
+        });
+      } else {
+        await tx.userLeadTask.create({
+          data: {
+            vendor_id,
+            lead_id: existing.lead_id,
+            account_id: existing.account_id,
+            user_id: factoryAssigneeId ?? updated_by,
+            task_type: "Miscellaneous",
+            lead_stage: leadStage,
+            due_date: new Date(required_delivery_date),
+            remark: deliveryRemark,
+            status: "open",
+            created_by: updated_by,
+          },
+        });
+      }
+
+      return updated;
+    });
+
+    return result;
+  }
+
   static async updateERDService({
     vendor_id,
     misc_id,
@@ -1423,11 +1598,15 @@ export class UnderInstallationStageService {
           account_id: true,
           reorder_material_details: true,
           problem_description: true,
+          misc_approved: true,
         },
       });
 
       if (!existing) {
         throw new Error("Miscellaneous record not found");
+      }
+      if (existing.misc_approved !== true) {
+        throw new Error("Miscellaneous entry is not approved");
       }
 
       const updated = await tx.miscellaneousMaster.update({

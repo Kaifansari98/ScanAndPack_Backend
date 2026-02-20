@@ -1,4 +1,4 @@
-import { prisma } from "src/prisma/client";
+import { prisma } from "../../src/prisma/client";
 
 export async function resolveEmailIdentity(vendorId: number) {
   const vendor = await prisma.vendorMaster.findUnique({

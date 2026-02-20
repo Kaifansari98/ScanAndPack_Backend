@@ -2,7 +2,7 @@
 
 import { prisma } from "../../prisma/client";
 import logger from "../../../src/utils/logger";
-import { resolveEmailIdentity } from "src/validations/emailIdentity.resolver";
+import { resolveEmailIdentity } from "../../../src/validations/emailIdentity.resolver";
 
 export type BrevoEmailPayload = {
   toEmail: string;

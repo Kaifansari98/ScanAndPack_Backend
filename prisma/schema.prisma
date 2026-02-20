@@ -1078,6 +1078,9 @@ model MiscellaneousMaster {
   cost                     Float?
   supervisor_remark        String?
   expected_ready_date      DateTime?
+  required_delivery_date   DateTime?
+  misc_approved            Boolean?
+  exp_of_rejection         String?
   is_resolved              Boolean                    @default(false)
   resolved_at              DateTime?
   created_by               Int
