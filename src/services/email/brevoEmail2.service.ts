@@ -1,6 +1,7 @@
 import { prisma } from "../../../src/prisma/client";
 import { BrevoEmailResult, sendBrevoEmail } from "./brevoEmail.service";
 import logger from "../../../src/utils/logger";
+import { resolveEmailIdentity } from "src/validations/emailIdentity.resolver";
 
 // Template Keys Constants
 export const ORDER_LOGIN_TEMPLATE_KEYS = {
@@ -36,6 +37,7 @@ export const sendMovedToProductionOrderLoginPendingEmail = async (payload: {
   leadName: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Moved to Production with Partial Details for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -217,13 +219,16 @@ export const sendMovedToProductionOrderLoginPendingEmail = async (payload: {
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
 };
 // 3
 export const sendMovedToProductionWithoutOrderLoginEmail = async (payload: {
@@ -234,6 +239,7 @@ export const sendMovedToProductionWithoutOrderLoginEmail = async (payload: {
   leadName: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Action Required: Complete Order Login Details for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -406,13 +412,16 @@ export const sendMovedToProductionWithoutOrderLoginEmail = async (payload: {
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
 };
 // 4
 export const sendOrderLoginReminderEmail = async (payload: {
@@ -423,6 +432,7 @@ export const sendOrderLoginReminderEmail = async (payload: {
   leadName: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Reminder: Order Login Pending for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -600,13 +610,16 @@ export const sendOrderLoginReminderEmail = async (payload: {
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
 };
 // 5
 export const sendOrderLoginCompletedEmail = async (payload: {
@@ -619,6 +632,7 @@ export const sendOrderLoginCompletedEmail = async (payload: {
   updatedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Order Login Completed – Production Ready for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -783,13 +797,16 @@ export const sendOrderLoginCompletedEmail = async (payload: {
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
 };
 //6
 export const sendMovedToProductionWithOrderLoginEmail = async (payload: {
@@ -802,6 +819,7 @@ export const sendMovedToProductionWithOrderLoginEmail = async (payload: {
   updatedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved to Production`;
 
   const defaultText = [
@@ -962,13 +980,16 @@ export const sendMovedToProductionWithOrderLoginEmail = async (payload: {
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
 };
 
 // 9
@@ -982,6 +1003,7 @@ export const sendUnderInstallationAssignedEmail = async (payload: {
   dispatchedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved to Under Installation`;
 
   const defaultText = [
@@ -1142,13 +1164,16 @@ export const sendUnderInstallationAssignedEmail = async (payload: {
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
 };
 
 // factory user email
@@ -1170,6 +1195,7 @@ export const sendLeadMovedToDispatchEmail = async (payload: {
   movedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved to Dispatch Stage`;
 
   const defaultText = [
@@ -1355,13 +1381,16 @@ export const sendLeadMovedToDispatchEmail = async (payload: {
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
 };
 
 // types
@@ -1380,6 +1409,7 @@ export type TechCheckAssignedEmailPayload = {
 export const sendTechCheckAssignedEmail = async (
   payload: TechCheckAssignedEmailPayload,
 ): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Tech Check Review Required for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -1556,11 +1586,14 @@ export const sendTechCheckAssignedEmail = async (
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
 };
