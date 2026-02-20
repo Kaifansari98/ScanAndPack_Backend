@@ -341,7 +341,7 @@ export const createLeadService = async (
         });
       }
 
-      // 5. Create product structure instances (quantity_index always 1)
+      // 5. Create product structure instances
       const instanceProductTypeId = product_types[0];
       const instanceSource: {
         product_structure_id: number;

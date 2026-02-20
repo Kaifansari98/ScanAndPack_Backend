@@ -423,6 +423,11 @@ export class SiteReadinessService {
     updatedBy: number,
     baseUrl: string,
   ) {
+    console.log("[SiteReadiness] moveLeadToDispatchPlanning:start", {
+      vendorId,
+      leadId,
+      updatedBy,
+    });
     const result = prisma.$transaction(async (tx) => {
       // 1️⃣ Validate lead
       const lead = await tx.leadMaster.findUnique({
@@ -433,6 +438,10 @@ export class SiteReadinessService {
       if (!lead) throw new Error(`Lead ${leadId} not found`);
       if (lead.vendor_id !== vendorId)
         throw new Error(`Lead does not belong to vendor ${vendorId}`);
+      console.log("[SiteReadiness] lead validated", {
+        lead_id: lead.id,
+        vendor_id: lead.vendor_id,
+      });
 
       // 2️⃣ Fetch Dispatch Planning StatusType (Type 13)
       const toStatus = await tx.statusTypeMaster.findFirst({
@@ -444,6 +453,10 @@ export class SiteReadinessService {
         throw new Error(
           `Status 'Type 13' (Dispatch Planning Stage) not found for vendor ${vendorId}`,
         );
+      console.log("[SiteReadiness] dispatch planning status fetched", {
+        status_id: toStatus.id,
+        status_type: toStatus.type,
+      });
 
       // 3️⃣ Complete "Site Readiness" Task (if exists)
       const siteReadinessTask = await tx.userLeadTask.findFirst({
@@ -469,6 +482,14 @@ export class SiteReadinessService {
 
         logger.info("[SERVICE] Site Readiness task marked completed", {
           task_id: siteReadinessTask.id,
+          lead_id: leadId,
+        });
+        console.log("[SiteReadiness] site readiness task completed", {
+          task_id: siteReadinessTask.id,
+          lead_id: leadId,
+        });
+      } else {
+        console.log("[SiteReadiness] no site readiness task to complete", {
           lead_id: leadId,
         });
       }
@@ -503,6 +524,11 @@ export class SiteReadinessService {
         vendor_id: vendorId,
         updated_by: updatedBy,
       });
+      console.log("[SiteReadiness] lead status updated to dispatch planning", {
+        lead_id: lead.id,
+        vendor_id: vendorId,
+        status_id: toStatus.id,
+      });
 
       return {
         lead_id: lead.id,
@@ -516,6 +542,11 @@ export class SiteReadinessService {
     // ===============================
 
     try {
+      console.log("[SiteReadiness] dispatch planning notifications:start", {
+        vendorId,
+        leadId,
+        updatedBy,
+      });
       const actorId = updatedBy; // user who moved lead to dispatch planning
 
       const [lead, actor] = await Promise.all([
@@ -575,6 +606,10 @@ export class SiteReadinessService {
           user_email: true,
         },
       });
+      console.log("[SiteReadiness] admins fetched for notification", {
+        admin_count: admins.length,
+        lead_id: leadId,
+      });
 
       for (const admin of admins) {
         // ❌ Prevent self-notification
@@ -613,12 +648,26 @@ export class SiteReadinessService {
         lead_id: leadId,
         admin_count: admins.length,
       });
+      console.log("[SiteReadiness] dispatch planning notifications:done", {
+        vendor_id: lead.vendor_id,
+        lead_id: leadId,
+        admin_count: admins.length,
+      });
     } catch (dispatchNotifyErr: any) {
       logger.warn("⚠️ Dispatch Planning admin notification failed", {
         lead_id: leadId,
         error: dispatchNotifyErr?.message,
       });
+      console.log("[SiteReadiness] dispatch planning notifications:error", {
+        lead_id: leadId,
+        error: dispatchNotifyErr?.message,
+      });
     }
+    console.log("[SiteReadiness] moveLeadToDispatchPlanning:end", {
+      vendorId,
+      leadId,
+      updatedBy,
+    });
     return result;
   }
 }
