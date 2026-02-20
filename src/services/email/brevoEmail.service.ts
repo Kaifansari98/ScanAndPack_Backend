@@ -237,16 +237,16 @@ export type EmailIdentity = {
 
 export const sendBrevoEmail = async (
   payload: BrevoEmailPayload,
-  identity: EmailIdentity, // ← NEW PARAMETER
+  identity?: EmailIdentity, // ← NEW PARAMETER
 ): Promise<BrevoEmailResult> => {
   const apiKey = process.env.BREVO_API_KEY;
   const brevoEnabled = process.env.BREVO_ENABLED === "true";
 
-  const senderEmail = identity.senderEmail;
-  const senderName = identity.senderName;
+  const senderEmail = identity?.senderEmail;
+  const senderName = identity?.senderName;
 
-  const replyTo = identity.senderEmail;
-  const replyToName = identity.senderName;
+  const replyTo = identity?.senderEmail;
+  const replyToName = identity?.senderName;
 
   if (!brevoEnabled) {
     logger.info("Brevo email skipped: disabled", {
