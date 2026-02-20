@@ -9,7 +9,8 @@ export type ContactUsPayload = {
   message: string;
 };
 
-const CONTACT_TO_EMAIL = process.env.VLOQ_CONTACT_TO_EMAIL || "vloq.info@gmail.com";
+const CONTACT_TO_EMAIL =
+  process.env.VLOQ_CONTACT_TO_EMAIL || "vloq.info@gmail.com";
 
 const escapeHtml = (value: string) =>
   value
@@ -52,16 +53,21 @@ export const sendContactUsEmail = async (payload: ContactUsPayload) => {
     .filter(Boolean)
     .join("\n");
 
-  const result = await sendBrevoEmail({
-    toEmail: CONTACT_TO_EMAIL,
-    toName: "VLOQ Support",
-    subject: `[Contact Us] ${subject}`,
-    html,
-    text,
-    replyToEmail: email,
-    replyToName: name,
-    senderName: `${name} via VLOQ`,
-  });
+  const result = await sendBrevoEmail(
+    {
+      toEmail: CONTACT_TO_EMAIL,
+      toName: "VLOQ Support",
+      subject: `[Contact Us] ${subject}`,
+      html,
+      text,
+      replyToEmail: email, // user who filled the form
+      replyToName: name,
+    },
+    {
+      senderName: "VLOQ Support", // ← Company Name
+      senderEmail: "vloqinfo@gmail.com", // ← Your verified Brevo email
+    },
+  );
 
   const status = result.success
     ? "sent"

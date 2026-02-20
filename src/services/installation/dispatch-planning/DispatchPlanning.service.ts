@@ -608,6 +608,45 @@ export class DispatchPlanningService {
         },
       });
 
+      const dispatchTask = await tx.userLeadTask.findFirst({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+          task_type: "Dispatch",
+          lead_stage: "dispatch-planning-stage",
+          status: "open",
+        },
+      });
+
+      /**
+       * ✅ If dispatch task exists → mark it completed
+       */
+      if (dispatchTask) {
+        await tx.userLeadTask.update({
+          where: { id: dispatchTask.id },
+          data: {
+            status: "completed",
+            closed_at: new Date(),
+            closed_by: updatedBy,
+            updated_by: updatedBy,
+            updated_at: new Date(),
+            remark:
+              (dispatchTask.remark ?? "") +
+              " | Auto-closed after lead moved to Dispatch stage.",
+          },
+        });
+
+        await tx.leadDetailedLogs.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: lead.account_id!,
+            action: "Dispatch preparation task marked as Completed.",
+            action_type: "UPDATE",
+            created_by: updatedBy,
+          },
+        });
+      }
       return updatedLead;
     });
 
