@@ -130,6 +130,46 @@ export class DispatchPlanningService {
     };
   }
 
+  private async syncDispatchCommitmentDate(
+    tx: any,
+    params: {
+      vendor_id: number;
+      lead_id: number;
+      dispatchDate: Date;
+      updated_by: number;
+    },
+  ) {
+    const { vendor_id, lead_id, dispatchDate, updated_by } = params;
+
+    /**
+     * Update LeadMaster Dispatch Date
+     */
+    await tx.leadMaster.update({
+      where: { id: lead_id },
+      data: {
+        required_date_for_dispatch: dispatchDate,
+        updated_by,
+      },
+    });
+
+    /**
+     * Update Task Due Date (if already exists)
+     */
+    await tx.userLeadTask.updateMany({
+      where: {
+        lead_id,
+        vendor_id,
+        task_type: "Dispatch",
+        lead_stage: "dispatch-planning-stage",
+        status: "open",
+      },
+      data: {
+        due_date: dispatchDate,
+        updated_by,
+      },
+    });
+  }
+
   /** ✅ 1️⃣ Save Dispatch Planning Information */
   async saveDispatchPlanningInfoService(payload: any) {
     const {
@@ -145,29 +185,94 @@ export class DispatchPlanningService {
       created_by,
     } = payload;
 
-    // 🧹 Removed backend date validation
-    // The frontend already ensures this is >= 2 days ahead
-
     const dispatchDate = required_date_for_dispatch
       ? new Date(required_date_for_dispatch)
       : null;
 
-    // ✅ Update LeadMaster directly
-    const leadUpdate = await prisma.leadMaster.update({
-      where: { id: lead_id },
-      data: {
-        required_date_for_dispatch: dispatchDate,
-        onsite_contact_person_name,
-        onsite_contact_person_number,
-        alt_onsite_contact_person_name,
-        alt_onsite_contact_person_number,
-        material_lift_availability,
-        dispatch_planning_remark,
-        updated_by: created_by,
-      },
-    });
+    if (!dispatchDate) {
+      throw new Error("Dispatch date is required.");
+    }
 
-    return { lead_id, vendor_id, updated: true, leadUpdate };
+    return await prisma.$transaction(async (tx) => {
+      /**
+       * STEP 1 — Update Remaining Dispatch Fields
+       */
+      await tx.leadMaster.update({
+        where: { id: lead_id },
+        data: {
+          onsite_contact_person_name,
+          onsite_contact_person_number,
+          alt_onsite_contact_person_name,
+          alt_onsite_contact_person_number,
+          material_lift_availability,
+          dispatch_planning_remark,
+          updated_by: created_by,
+        },
+      });
+
+      /**
+       * STEP 2 — Sync Dispatch Date ↔ Task Due Date
+       */
+      await this.syncDispatchCommitmentDate(tx, {
+        vendor_id,
+        lead_id,
+        dispatchDate,
+        updated_by: created_by,
+      });
+
+      /**
+       * STEP 3 — Ensure Factory Task Exists
+       */
+      const leadData = await tx.leadMaster.findUnique({
+        where: { id: lead_id },
+        select: { account_id: true },
+      });
+
+      if (!leadData?.account_id) {
+        throw new Error("Lead Account not found.");
+      }
+
+      const factoryUser = await tx.userMaster.findFirst({
+        where: {
+          vendor_id,
+          user_type: { user_type: "factory" },
+          status: "active",
+        },
+        select: { id: true },
+      });
+
+      if (!factoryUser) {
+        throw new Error("Factory user not configured.");
+      }
+
+      const existingTask = await tx.userLeadTask.findFirst({
+        where: {
+          lead_id,
+          vendor_id,
+          task_type: "Dispatch",
+          lead_stage: "dispatch-planning-stage",
+        },
+      });
+
+      if (!existingTask) {
+        await tx.userLeadTask.create({
+          data: {
+            vendor_id,
+            lead_id,
+            account_id: leadData.account_id,
+            user_id: factoryUser.id,
+            task_type: "Dispatch",
+            due_date: dispatchDate,
+            remark: dispatch_planning_remark || "Prepare material for dispatch",
+            status: "open",
+            created_by,
+            lead_stage: "dispatch-planning-stage",
+          },
+        });
+      }
+
+      return { lead_id, vendor_id, updated: true };
+    });
   }
 
   /** ✅ 2️⃣ Save Dispatch Planning Payment Info */
@@ -550,7 +655,6 @@ export class DispatchPlanningService {
         hour: "2-digit",
         minute: "2-digit",
       });
-
 
       const redirectPath = lead.account_id
         ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
