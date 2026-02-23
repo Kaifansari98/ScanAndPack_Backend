@@ -1376,7 +1376,13 @@ export class UnderInstallationStageService {
         lead_id,
         task_type: "Miscellaneous",
       },
-      select: { id: true, task_type: true, remark: true, status: true },
+      select: {
+        id: true,
+        task_type: true,
+        remark: true,
+        status: true,
+        due_date: true,
+      },
     });
 
     // ➜ Attach signed URLs for documents
