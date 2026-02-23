@@ -6105,6 +6105,7 @@ export const LeadMasterScalarFieldEnum = {
   is_shutter_installation_completed: 'is_shutter_installation_completed',
   shutter_installation_completion_date: 'shutter_installation_completion_date',
   usable_handover_pending_work_details: 'usable_handover_pending_work_details',
+  usable_handover_completed: 'usable_handover_completed',
   mrp_value: 'mrp_value'
 } as const
 
@@ -6662,6 +6663,9 @@ export const MiscellaneousMasterScalarFieldEnum = {
   cost: 'cost',
   supervisor_remark: 'supervisor_remark',
   expected_ready_date: 'expected_ready_date',
+  required_delivery_date: 'required_delivery_date',
+  misc_approved: 'misc_approved',
+  exp_of_rejection: 'exp_of_rejection',
   is_resolved: 'is_resolved',
   resolved_at: 'resolved_at',
   created_by: 'created_by',

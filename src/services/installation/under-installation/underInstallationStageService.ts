@@ -116,6 +116,44 @@ export class UnderInstallationStageService {
         },
       });
 
+      // 5️⃣ Close Dispatch Planning Task (if any)
+      const dispatchTask = await tx.userLeadTask.findFirst({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+          task_type: "Dispatch",
+          lead_stage: "dispatch-planning-stage",
+          status: "open",
+        },
+      });
+
+      if (dispatchTask) {
+        await tx.userLeadTask.update({
+          where: { id: dispatchTask.id },
+          data: {
+            status: "completed",
+            closed_at: new Date(),
+            closed_by: updatedBy,
+            updated_by: updatedBy,
+            updated_at: new Date(),
+            remark:
+              (dispatchTask.remark ?? "") +
+              " | Auto-closed after lead moved to Dispatch stage.",
+          },
+        });
+
+        await tx.leadDetailedLogs.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: lead.account_id!,
+            action: "Dispatch preparation task marked as Completed.",
+            action_type: "UPDATE",
+            created_by: updatedBy,
+          },
+        });
+      }
+
       return updatedLead;
     });
 
@@ -1092,7 +1130,7 @@ export class UnderInstallationStageService {
       // Task Creation
       // -----------------------------
 
-      const miscRemark = `[misc:${misc.id}] **${reorder_material_details}** - ${problem_description}`;
+      const miscRemark = `${reorder_material_details} - ${problem_description}`;
 
       const task = await tx.userLeadTask.create({
         data: {
@@ -1317,7 +1355,11 @@ export class UnderInstallationStageService {
         },
         documents: {
           include: {
-            document: true,
+            document: {
+              include: {
+                documentType: true,
+              },
+            },
           },
           where: {
             document: {
@@ -1334,7 +1376,13 @@ export class UnderInstallationStageService {
         lead_id,
         task_type: "Miscellaneous",
       },
-      select: { id: true, task_type: true, remark: true, status: true },
+      select: {
+        id: true,
+        task_type: true,
+        remark: true,
+        status: true,
+        due_date: true,
+      },
     });
 
     // ➜ Attach signed URLs for documents
@@ -1350,13 +1398,14 @@ export class UnderInstallationStageService {
               document_id: docLink.document.id,
               original_name: docLink.document.doc_og_name,
               file_key: docLink.document.doc_sys_name,
+              doc_type_tag: docLink.document.documentType?.tag ?? null,
               signed_url,
               uploaded_at: docLink.document.created_at,
             };
           }),
         );
 
-        const remarkKey = `**${m.reorder_material_details}** - ${m.problem_description}`;
+        const remarkKey = `${m.reorder_material_details} - ${m.problem_description}`;
         const miscTaskKey = `[misc:${m.id}]`;
         const taskForMisc = miscTasks.find(
           (t) =>
@@ -1364,11 +1413,21 @@ export class UnderInstallationStageService {
             t.remark === remarkKey,
         );
 
+        const deliveryTaskForMisc = miscTasks.find(
+          (t) =>
+            typeof t.remark === "string" &&
+            t.remark.includes("Required delivery date set for") &&
+            t.remark.includes(m.reorder_material_details) &&
+            t.remark.includes(m.problem_description),
+        );
+
         return {
           id: m.id,
           vendor_id: m.vendor_id,
           lead_id: m.lead_id,
           account_id: m.account_id,
+          misc_approved: m.misc_approved,
+          exp_of_rejection: m.exp_of_rejection,
           type: {
             id: m.type.id,
             name: m.type.name,
@@ -1379,6 +1438,7 @@ export class UnderInstallationStageService {
           cost: m.cost,
           supervisor_remark: m.supervisor_remark,
           expected_ready_date: m.expected_ready_date,
+          required_delivery_date: m.required_delivery_date,
           is_resolved: m.is_resolved,
           resolved_at: m.resolved_at,
           created_by: m.created_by,
@@ -1396,11 +1456,402 @@ export class UnderInstallationStageService {
                 status: taskForMisc.status,
               }
             : null,
+          delivery_task: deliveryTaskForMisc
+            ? {
+                id: deliveryTaskForMisc.id,
+                task_type: deliveryTaskForMisc.task_type,
+                status: deliveryTaskForMisc.status,
+                remark: deliveryTaskForMisc.remark ?? null,
+                due_date: deliveryTaskForMisc.due_date ?? null,
+              }
+            : null,
         };
       }),
     );
 
     return finalResult;
+  }
+
+  static async updateMiscApprovalService({
+    vendor_id,
+    misc_id,
+    misc_approved,
+    exp_of_rejection,
+    updated_by,
+  }: {
+    vendor_id: number;
+    misc_id: number;
+    misc_approved: boolean;
+    exp_of_rejection?: string | null;
+    updated_by: number;
+  }) {
+    const existing = await prisma.miscellaneousMaster.findFirst({
+      where: { id: misc_id, vendor_id },
+      select: { id: true },
+    });
+
+    if (!existing) {
+      throw new Error("Miscellaneous record not found");
+    }
+
+    const updated = await prisma.miscellaneousMaster.update({
+      where: { id: misc_id },
+      data: {
+        misc_approved,
+        exp_of_rejection: misc_approved ? null : exp_of_rejection || null,
+        updated_by,
+      },
+    });
+
+    if (misc_approved === false) {
+      const miscTaskKey = `[misc:${misc_id}]`;
+      const miscRecord = await prisma.miscellaneousMaster.findFirst({
+        where: { id: misc_id, vendor_id },
+        select: { reorder_material_details: true, problem_description: true },
+      });
+      const remarkKey = miscRecord
+        ? `${miscRecord.reorder_material_details} - ${miscRecord.problem_description}`
+        : undefined;
+
+      await prisma.userLeadTask.updateMany({
+        where: {
+          vendor_id,
+          task_type: "Miscellaneous",
+          status: { in: ["open", "completed"] },
+          OR: [
+            { remark: { contains: miscTaskKey } },
+            ...(remarkKey ? [{ remark: remarkKey }] : []),
+          ],
+        },
+        data: {
+          status: "cancelled",
+          updated_by,
+          updated_at: new Date(),
+        },
+      });
+    }
+
+    return updated;
+  }
+
+  static async updateMiscRequiredDeliveryDateService({
+    vendor_id,
+    misc_id,
+    required_delivery_date,
+    updated_by,
+  }: {
+    vendor_id: number;
+    misc_id: number;
+    required_delivery_date: string;
+    updated_by: number;
+  }) {
+    const result = await prisma.$transaction(async (tx) => {
+      const existing = await tx.miscellaneousMaster.findFirst({
+        where: { id: misc_id, vendor_id },
+        select: {
+          id: true,
+          lead_id: true,
+          account_id: true,
+          reorder_material_details: true,
+          problem_description: true,
+          misc_approved: true,
+        },
+      });
+
+      if (!existing) {
+        throw new Error("Miscellaneous record not found");
+      }
+
+      if (existing.misc_approved !== true) {
+        throw new Error("Miscellaneous entry is not approved");
+      }
+
+      const miscTaskKey = `[misc:${existing.id}]`;
+      const remarkKey = `${existing.reorder_material_details} - ${existing.problem_description}`;
+      const readyTask = await tx.userLeadTask.findFirst({
+        where: {
+          vendor_id,
+          lead_id: existing.lead_id,
+          task_type: "Miscellaneous",
+          OR: [
+            { remark: { contains: miscTaskKey } },
+            { remark: remarkKey },
+          ],
+          status: "completed",
+        },
+        select: { id: true },
+      });
+
+      if (!readyTask) {
+        throw new Error("Miscellaneous entry is not marked as ready");
+      }
+
+      const updated = await tx.miscellaneousMaster.update({
+        where: { id: misc_id },
+        data: {
+          required_delivery_date: new Date(required_delivery_date),
+          updated_by,
+        },
+      });
+
+      // Resolve Factory Role
+      const factoryType = await tx.userTypeMaster.findFirst({
+        where: {
+          user_type: { equals: "factory", mode: "insensitive" },
+        },
+        select: { id: true },
+      });
+
+      let factoryAssigneeId: number | null = null;
+      if (factoryType) {
+        const factoryMapping = await tx.leadUserMapping.findFirst({
+          where: {
+            vendor_id,
+            lead_id: existing.lead_id,
+            status: "active",
+            user: { user_type_id: factoryType.id },
+          },
+          select: { user_id: true },
+        });
+
+        factoryAssigneeId = factoryMapping?.user_id ?? null;
+      }
+
+      const leadStageRecord = await tx.leadMaster.findUnique({
+        where: { id: existing.lead_id },
+        select: { status_id: true },
+      });
+
+      const leadStage = leadStageRecord?.status_id
+        ? ((
+            await tx.statusTypeMaster.findUnique({
+              where: { id: leadStageRecord.status_id },
+              select: { type: true },
+            })
+          )?.type ?? null)
+        : null;
+
+      const deliveryRemark = `Required delivery date set for **${existing.reorder_material_details}** - ${existing.problem_description}`;
+
+      const existingDeliveryTask = await tx.userLeadTask.findFirst({
+        where: {
+          vendor_id,
+          lead_id: existing.lead_id,
+          task_type: "Miscellaneous",
+          remark: deliveryRemark,
+        },
+        orderBy: { id: "desc" },
+        select: { id: true },
+      });
+
+      if (existingDeliveryTask) {
+        await tx.userLeadTask.update({
+          where: { id: existingDeliveryTask.id },
+          data: {
+            due_date: new Date(required_delivery_date),
+            updated_by,
+            updated_at: new Date(),
+          },
+        });
+      } else {
+        await tx.userLeadTask.create({
+          data: {
+            vendor_id,
+            lead_id: existing.lead_id,
+            account_id: existing.account_id,
+            user_id: factoryAssigneeId ?? updated_by,
+            task_type: "Miscellaneous",
+            lead_stage: leadStage,
+            due_date: new Date(required_delivery_date),
+            remark: deliveryRemark,
+            status: "open",
+            created_by: updated_by,
+          },
+        });
+      }
+
+      return updated;
+    });
+
+    return result;
+  }
+
+  static async updateMiscRequiredDeliveryDateByTaskIdService({
+    vendor_id,
+    task_id,
+    required_delivery_date,
+    updated_by,
+  }: {
+    vendor_id: number;
+    task_id: number;
+    required_delivery_date: string;
+    updated_by: number;
+  }) {
+    const result = await prisma.$transaction(async (tx) => {
+      const task = await tx.userLeadTask.findFirst({
+        where: {
+          id: task_id,
+          vendor_id,
+          task_type: "Miscellaneous",
+        },
+        select: {
+          id: true,
+          lead_id: true,
+          remark: true,
+        },
+      });
+
+      if (!task) {
+        throw new Error("Miscellaneous task not found");
+      }
+
+      const remark = task.remark || "";
+      const match =
+        remark.match(/\*\*(.+?)\*\*\s*-\s*(.+)$/) ||
+        remark.match(/^(.+?)\s*-\s*(.+)$/);
+
+      if (!match) {
+        throw new Error("Unable to parse miscellaneous details from remark");
+      }
+
+      const reorder_material_details = match[1];
+      const problem_description = match[2];
+
+      const misc = await tx.miscellaneousMaster.findFirst({
+        where: {
+          vendor_id,
+          lead_id: task.lead_id,
+          reorder_material_details,
+          problem_description,
+        },
+        select: {
+          id: true,
+          misc_approved: true,
+          is_resolved: true,
+        },
+      });
+
+      if (!misc) {
+        throw new Error("Miscellaneous entry not found for this task");
+      }
+
+      if (misc.misc_approved !== true) {
+        throw new Error("Miscellaneous entry is not approved");
+      }
+
+      if (misc.is_resolved) {
+        throw new Error("Miscellaneous entry is already resolved");
+      }
+
+      const updated = await tx.miscellaneousMaster.update({
+        where: { id: misc.id },
+        data: {
+          required_delivery_date: new Date(required_delivery_date),
+          updated_by,
+        },
+      });
+
+      return updated;
+    });
+
+    return result;
+  }
+
+  static async uploadMiscCompletionDocumentsByTaskIdService({
+    vendor_id,
+    task_id,
+    created_by,
+    files,
+  }: {
+    vendor_id: number;
+    task_id: number;
+    created_by: number;
+    files: { originalName: string; sysName: string }[];
+  }) {
+    const result = await prisma.$transaction(async (tx) => {
+      const task = await tx.userLeadTask.findFirst({
+        where: {
+          id: task_id,
+          vendor_id,
+          task_type: "Miscellaneous",
+        },
+        select: {
+          id: true,
+          lead_id: true,
+          remark: true,
+        },
+      });
+
+      if (!task) {
+        throw new Error("Miscellaneous task not found");
+      }
+
+      const remark = task.remark || "";
+      const match =
+        remark.match(/\*\*(.+?)\*\*\s*-\s*(.+)$/) ||
+        remark.match(/^(.+?)\s*-\s*(.+)$/);
+
+      if (!match) {
+        throw new Error("Unable to parse miscellaneous details from remark");
+      }
+
+      const reorder_material_details = match[1];
+      const problem_description = match[2];
+
+      const misc = await tx.miscellaneousMaster.findFirst({
+        where: {
+          vendor_id,
+          lead_id: task.lead_id,
+          reorder_material_details,
+          problem_description,
+        },
+        select: { id: true },
+      });
+
+      if (!misc) {
+        throw new Error("Miscellaneous entry not found for this task");
+      }
+
+      let docType = await tx.documentTypeMaster.findFirst({
+        where: { vendor_id, tag: "Type 37" },
+      });
+
+      if (!docType) {
+        docType = await tx.documentTypeMaster.create({
+          data: {
+            vendor_id,
+            tag: "Type 37",
+            type: "Miscellaneous Completion Documents",
+          },
+        });
+      }
+
+      for (const doc of files) {
+        const leadDoc = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: doc.originalName,
+            doc_sys_name: doc.sysName,
+            vendor_id,
+            lead_id: task.lead_id,
+            created_by,
+            doc_type_id: docType.id,
+          },
+        });
+
+        await tx.miscellaneousDocument.create({
+          data: {
+            vendor_id,
+            miscellaneous_id: misc.id,
+            document_id: leadDoc.id,
+            created_by,
+          },
+        });
+      }
+
+      return { misc_id: misc.id, uploaded: files.length };
+    });
+
+    return result;
   }
 
   static async updateERDService({
@@ -1423,11 +1874,15 @@ export class UnderInstallationStageService {
           account_id: true,
           reorder_material_details: true,
           problem_description: true,
+          misc_approved: true,
         },
       });
 
       if (!existing) {
         throw new Error("Miscellaneous record not found");
+      }
+      if (existing.misc_approved !== true) {
+        throw new Error("Miscellaneous entry is not approved");
       }
 
       const updated = await tx.miscellaneousMaster.update({
@@ -1439,13 +1894,17 @@ export class UnderInstallationStageService {
       });
 
       const miscTaskKey = `[misc:${existing.id}]`;
+      const remarkKey = `${existing.reorder_material_details} - ${existing.problem_description}`;
 
       const existingTask = await tx.userLeadTask.findFirst({
         where: {
           vendor_id,
           lead_id: existing.lead_id,
           task_type: "Miscellaneous",
-          remark: { contains: miscTaskKey },
+          OR: [
+            { remark: { contains: miscTaskKey } },
+            { remark: remarkKey },
+          ],
         },
         select: { id: true },
       });
@@ -1457,7 +1916,6 @@ export class UnderInstallationStageService {
           where: { id: existingTask.id },
           data: {
             due_date: new Date(expected_ready_date),
-            remark: `${miscTaskKey} ERD date updated.`,
             updated_by,
           },
         });
@@ -1472,7 +1930,7 @@ export class UnderInstallationStageService {
             task_type: "Miscellaneous",
             user_id: updated_by,
             due_date: new Date(expected_ready_date),
-            remark: miscTaskKey,
+            remark: remarkKey,
             status: "open",
             created_by: updated_by,
           },
@@ -1871,7 +2329,10 @@ export class UnderInstallationStageService {
     // 1️⃣ Fetch pending work details from LeadMaster
     const lead = await prisma.leadMaster.findUnique({
       where: { id: lead_id },
-      select: { usable_handover_pending_work_details: true },
+      select: {
+        usable_handover_pending_work_details: true,
+        usable_handover_completed: true,
+      },
     });
 
     if (!lead) throw new Error("Lead not found");
@@ -1929,9 +2390,39 @@ export class UnderInstallationStageService {
 
     return {
       pending_work_details: lead.usable_handover_pending_work_details,
+      usable_handover_completed: lead.usable_handover_completed ?? false,
       final_site_photos: finalSitePhotosWithUrl,
       handover_documents: handoverDocumentsWithUrl,
     };
+  }
+
+  static async markUsableHandoverCompleted(
+    vendor_id: number,
+    lead_id: number,
+    updated_by: number,
+  ) {
+    const updatedLead = await prisma.leadMaster.update({
+      where: { id: lead_id, vendor_id },
+      data: {
+        usable_handover_completed: true,
+        updated_by,
+        updated_at: new Date(),
+      },
+    });
+
+    await prisma.leadDetailedLogs.create({
+      data: {
+        vendor_id,
+        lead_id,
+        account_id: updatedLead.account_id!,
+        action: "Usable handover marked as completed.",
+        action_type: "UPDATE",
+        created_by: updated_by,
+        created_at: new Date(),
+      },
+    });
+
+    return updatedLead;
   }
 
   // ----------------------------------------
@@ -2537,6 +3028,7 @@ export class UnderInstallationStageService {
       }
 
       const miscTaskKey = `[misc:${existing.id}]`;
+      const remarkKey = `${existing.reorder_material_details} - ${existing.problem_description}`;
 
       // Close misc task
       const updatedTasks = await tx.userLeadTask.updateMany({
@@ -2545,7 +3037,10 @@ export class UnderInstallationStageService {
           lead_id,
           account_id: existing.account_id,
           task_type: "Miscellaneous",
-          remark: { contains: miscTaskKey },
+          OR: [
+            { remark: { contains: miscTaskKey } },
+            { remark: remarkKey },
+          ],
           status: "open",
         },
         data: {
@@ -2563,7 +3058,10 @@ export class UnderInstallationStageService {
           vendor_id,
           lead_id,
           task_type: "Miscellaneous",
-          remark: { contains: miscTaskKey },
+          OR: [
+            { remark: { contains: miscTaskKey } },
+            { remark: remarkKey },
+          ],
         },
         orderBy: { id: "desc" },
         select: { id: true },

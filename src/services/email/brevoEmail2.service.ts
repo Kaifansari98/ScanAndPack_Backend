@@ -1,7 +1,7 @@
 import { prisma } from "../../../src/prisma/client";
 import { BrevoEmailResult, sendBrevoEmail } from "./brevoEmail.service";
 import logger from "../../../src/utils/logger";
-import { resolveEmailIdentity } from "src/validations/emailIdentity.resolver";
+import { resolveEmailIdentity } from "../../../src/validations/emailIdentity.resolver";
 
 // Template Keys Constants
 export const ORDER_LOGIN_TEMPLATE_KEYS = {

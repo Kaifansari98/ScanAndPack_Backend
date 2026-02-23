@@ -62,6 +62,9 @@ export type MiscellaneousMasterMinAggregateOutputType = {
   cost: number | null
   supervisor_remark: string | null
   expected_ready_date: Date | null
+  required_delivery_date: Date | null
+  misc_approved: boolean | null
+  exp_of_rejection: string | null
   is_resolved: boolean | null
   resolved_at: Date | null
   created_by: number | null
@@ -82,6 +85,9 @@ export type MiscellaneousMasterMaxAggregateOutputType = {
   cost: number | null
   supervisor_remark: string | null
   expected_ready_date: Date | null
+  required_delivery_date: Date | null
+  misc_approved: boolean | null
+  exp_of_rejection: string | null
   is_resolved: boolean | null
   resolved_at: Date | null
   created_by: number | null
@@ -102,6 +108,9 @@ export type MiscellaneousMasterCountAggregateOutputType = {
   cost: number
   supervisor_remark: number
   expected_ready_date: number
+  required_delivery_date: number
+  misc_approved: number
+  exp_of_rejection: number
   is_resolved: number
   resolved_at: number
   created_by: number
@@ -148,6 +157,9 @@ export type MiscellaneousMasterMinAggregateInputType = {
   cost?: true
   supervisor_remark?: true
   expected_ready_date?: true
+  required_delivery_date?: true
+  misc_approved?: true
+  exp_of_rejection?: true
   is_resolved?: true
   resolved_at?: true
   created_by?: true
@@ -168,6 +180,9 @@ export type MiscellaneousMasterMaxAggregateInputType = {
   cost?: true
   supervisor_remark?: true
   expected_ready_date?: true
+  required_delivery_date?: true
+  misc_approved?: true
+  exp_of_rejection?: true
   is_resolved?: true
   resolved_at?: true
   created_by?: true
@@ -188,6 +203,9 @@ export type MiscellaneousMasterCountAggregateInputType = {
   cost?: true
   supervisor_remark?: true
   expected_ready_date?: true
+  required_delivery_date?: true
+  misc_approved?: true
+  exp_of_rejection?: true
   is_resolved?: true
   resolved_at?: true
   created_by?: true
@@ -295,6 +313,9 @@ export type MiscellaneousMasterGroupByOutputType = {
   cost: number | null
   supervisor_remark: string | null
   expected_ready_date: Date | null
+  required_delivery_date: Date | null
+  misc_approved: boolean | null
+  exp_of_rejection: string | null
   is_resolved: boolean
   resolved_at: Date | null
   created_by: number
@@ -338,6 +359,9 @@ export type MiscellaneousMasterWhereInput = {
   cost?: Prisma.FloatNullableFilter<"MiscellaneousMaster"> | number | null
   supervisor_remark?: Prisma.StringNullableFilter<"MiscellaneousMaster"> | string | null
   expected_ready_date?: Prisma.DateTimeNullableFilter<"MiscellaneousMaster"> | Date | string | null
+  required_delivery_date?: Prisma.DateTimeNullableFilter<"MiscellaneousMaster"> | Date | string | null
+  misc_approved?: Prisma.BoolNullableFilter<"MiscellaneousMaster"> | boolean | null
+  exp_of_rejection?: Prisma.StringNullableFilter<"MiscellaneousMaster"> | string | null
   is_resolved?: Prisma.BoolFilter<"MiscellaneousMaster"> | boolean
   resolved_at?: Prisma.DateTimeNullableFilter<"MiscellaneousMaster"> | Date | string | null
   created_by?: Prisma.IntFilter<"MiscellaneousMaster"> | number
@@ -366,6 +390,9 @@ export type MiscellaneousMasterOrderByWithRelationInput = {
   cost?: Prisma.SortOrderInput | Prisma.SortOrder
   supervisor_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   expected_ready_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  required_delivery_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  misc_approved?: Prisma.SortOrderInput | Prisma.SortOrder
+  exp_of_rejection?: Prisma.SortOrderInput | Prisma.SortOrder
   is_resolved?: Prisma.SortOrder
   resolved_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
@@ -397,6 +424,9 @@ export type MiscellaneousMasterWhereUniqueInput = Prisma.AtLeast<{
   cost?: Prisma.FloatNullableFilter<"MiscellaneousMaster"> | number | null
   supervisor_remark?: Prisma.StringNullableFilter<"MiscellaneousMaster"> | string | null
   expected_ready_date?: Prisma.DateTimeNullableFilter<"MiscellaneousMaster"> | Date | string | null
+  required_delivery_date?: Prisma.DateTimeNullableFilter<"MiscellaneousMaster"> | Date | string | null
+  misc_approved?: Prisma.BoolNullableFilter<"MiscellaneousMaster"> | boolean | null
+  exp_of_rejection?: Prisma.StringNullableFilter<"MiscellaneousMaster"> | string | null
   is_resolved?: Prisma.BoolFilter<"MiscellaneousMaster"> | boolean
   resolved_at?: Prisma.DateTimeNullableFilter<"MiscellaneousMaster"> | Date | string | null
   created_by?: Prisma.IntFilter<"MiscellaneousMaster"> | number
@@ -425,6 +455,9 @@ export type MiscellaneousMasterOrderByWithAggregationInput = {
   cost?: Prisma.SortOrderInput | Prisma.SortOrder
   supervisor_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   expected_ready_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  required_delivery_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  misc_approved?: Prisma.SortOrderInput | Prisma.SortOrder
+  exp_of_rejection?: Prisma.SortOrderInput | Prisma.SortOrder
   is_resolved?: Prisma.SortOrder
   resolved_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
@@ -453,6 +486,9 @@ export type MiscellaneousMasterScalarWhereWithAggregatesInput = {
   cost?: Prisma.FloatNullableWithAggregatesFilter<"MiscellaneousMaster"> | number | null
   supervisor_remark?: Prisma.StringNullableWithAggregatesFilter<"MiscellaneousMaster"> | string | null
   expected_ready_date?: Prisma.DateTimeNullableWithAggregatesFilter<"MiscellaneousMaster"> | Date | string | null
+  required_delivery_date?: Prisma.DateTimeNullableWithAggregatesFilter<"MiscellaneousMaster"> | Date | string | null
+  misc_approved?: Prisma.BoolNullableWithAggregatesFilter<"MiscellaneousMaster"> | boolean | null
+  exp_of_rejection?: Prisma.StringNullableWithAggregatesFilter<"MiscellaneousMaster"> | string | null
   is_resolved?: Prisma.BoolWithAggregatesFilter<"MiscellaneousMaster"> | boolean
   resolved_at?: Prisma.DateTimeNullableWithAggregatesFilter<"MiscellaneousMaster"> | Date | string | null
   created_by?: Prisma.IntWithAggregatesFilter<"MiscellaneousMaster"> | number
@@ -468,6 +504,9 @@ export type MiscellaneousMasterCreateInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_at?: Date | string
@@ -494,6 +533,9 @@ export type MiscellaneousMasterUncheckedCreateInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_by: number
@@ -511,6 +553,9 @@ export type MiscellaneousMasterUpdateInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -537,6 +582,9 @@ export type MiscellaneousMasterUncheckedUpdateInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -559,6 +607,9 @@ export type MiscellaneousMasterCreateManyInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_by: number
@@ -574,6 +625,9 @@ export type MiscellaneousMasterUpdateManyMutationInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -592,6 +646,9 @@ export type MiscellaneousMasterUncheckedUpdateManyInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -622,6 +679,9 @@ export type MiscellaneousMasterCountOrderByAggregateInput = {
   cost?: Prisma.SortOrder
   supervisor_remark?: Prisma.SortOrder
   expected_ready_date?: Prisma.SortOrder
+  required_delivery_date?: Prisma.SortOrder
+  misc_approved?: Prisma.SortOrder
+  exp_of_rejection?: Prisma.SortOrder
   is_resolved?: Prisma.SortOrder
   resolved_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
@@ -654,6 +714,9 @@ export type MiscellaneousMasterMaxOrderByAggregateInput = {
   cost?: Prisma.SortOrder
   supervisor_remark?: Prisma.SortOrder
   expected_ready_date?: Prisma.SortOrder
+  required_delivery_date?: Prisma.SortOrder
+  misc_approved?: Prisma.SortOrder
+  exp_of_rejection?: Prisma.SortOrder
   is_resolved?: Prisma.SortOrder
   resolved_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
@@ -674,6 +737,9 @@ export type MiscellaneousMasterMinOrderByAggregateInput = {
   cost?: Prisma.SortOrder
   supervisor_remark?: Prisma.SortOrder
   expected_ready_date?: Prisma.SortOrder
+  required_delivery_date?: Prisma.SortOrder
+  misc_approved?: Prisma.SortOrder
+  exp_of_rejection?: Prisma.SortOrder
   is_resolved?: Prisma.SortOrder
   resolved_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
@@ -986,6 +1052,9 @@ export type MiscellaneousMasterCreateWithoutVendorInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_at?: Date | string
@@ -1010,6 +1079,9 @@ export type MiscellaneousMasterUncheckedCreateWithoutVendorInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_by: number
@@ -1061,6 +1133,9 @@ export type MiscellaneousMasterScalarWhereInput = {
   cost?: Prisma.FloatNullableFilter<"MiscellaneousMaster"> | number | null
   supervisor_remark?: Prisma.StringNullableFilter<"MiscellaneousMaster"> | string | null
   expected_ready_date?: Prisma.DateTimeNullableFilter<"MiscellaneousMaster"> | Date | string | null
+  required_delivery_date?: Prisma.DateTimeNullableFilter<"MiscellaneousMaster"> | Date | string | null
+  misc_approved?: Prisma.BoolNullableFilter<"MiscellaneousMaster"> | boolean | null
+  exp_of_rejection?: Prisma.StringNullableFilter<"MiscellaneousMaster"> | string | null
   is_resolved?: Prisma.BoolFilter<"MiscellaneousMaster"> | boolean
   resolved_at?: Prisma.DateTimeNullableFilter<"MiscellaneousMaster"> | Date | string | null
   created_by?: Prisma.IntFilter<"MiscellaneousMaster"> | number
@@ -1076,6 +1151,9 @@ export type MiscellaneousMasterCreateWithoutCreatedByInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_at?: Date | string
@@ -1101,6 +1179,9 @@ export type MiscellaneousMasterUncheckedCreateWithoutCreatedByInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   updated_by?: number | null
@@ -1127,6 +1208,9 @@ export type MiscellaneousMasterCreateWithoutUpdatedByInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_at?: Date | string
@@ -1152,6 +1236,9 @@ export type MiscellaneousMasterUncheckedCreateWithoutUpdatedByInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_by: number
@@ -1210,6 +1297,9 @@ export type MiscellaneousMasterCreateWithoutLeadInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_at?: Date | string
@@ -1234,6 +1324,9 @@ export type MiscellaneousMasterUncheckedCreateWithoutLeadInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_by: number
@@ -1277,6 +1370,9 @@ export type MiscellaneousMasterCreateWithoutAccountInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_at?: Date | string
@@ -1301,6 +1397,9 @@ export type MiscellaneousMasterUncheckedCreateWithoutAccountInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_by: number
@@ -1344,6 +1443,9 @@ export type MiscellaneousMasterCreateWithoutTypeInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_at?: Date | string
@@ -1368,6 +1470,9 @@ export type MiscellaneousMasterUncheckedCreateWithoutTypeInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_by: number
@@ -1411,6 +1516,9 @@ export type MiscellaneousMasterCreateWithoutTeamsInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_at?: Date | string
@@ -1436,6 +1544,9 @@ export type MiscellaneousMasterUncheckedCreateWithoutTeamsInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_by: number
@@ -1468,6 +1579,9 @@ export type MiscellaneousMasterUpdateWithoutTeamsInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1493,6 +1607,9 @@ export type MiscellaneousMasterUncheckedUpdateWithoutTeamsInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1509,6 +1626,9 @@ export type MiscellaneousMasterCreateWithoutDocumentsInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_at?: Date | string
@@ -1534,6 +1654,9 @@ export type MiscellaneousMasterUncheckedCreateWithoutDocumentsInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_by: number
@@ -1566,6 +1689,9 @@ export type MiscellaneousMasterUpdateWithoutDocumentsInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1591,6 +1717,9 @@ export type MiscellaneousMasterUncheckedUpdateWithoutDocumentsInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1611,6 +1740,9 @@ export type MiscellaneousMasterCreateManyVendorInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_by: number
@@ -1626,6 +1758,9 @@ export type MiscellaneousMasterUpdateWithoutVendorInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1650,6 +1785,9 @@ export type MiscellaneousMasterUncheckedUpdateWithoutVendorInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1671,6 +1809,9 @@ export type MiscellaneousMasterUncheckedUpdateManyWithoutVendorInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1691,6 +1832,9 @@ export type MiscellaneousMasterCreateManyCreatedByInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   updated_by?: number | null
@@ -1710,6 +1854,9 @@ export type MiscellaneousMasterCreateManyUpdatedByInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_by: number
@@ -1724,6 +1871,9 @@ export type MiscellaneousMasterUpdateWithoutCreatedByInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1749,6 +1899,9 @@ export type MiscellaneousMasterUncheckedUpdateWithoutCreatedByInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1770,6 +1923,9 @@ export type MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1784,6 +1940,9 @@ export type MiscellaneousMasterUpdateWithoutUpdatedByInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1809,6 +1968,9 @@ export type MiscellaneousMasterUncheckedUpdateWithoutUpdatedByInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1830,6 +1992,9 @@ export type MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1848,6 +2013,9 @@ export type MiscellaneousMasterCreateManyLeadInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_by: number
@@ -1863,6 +2031,9 @@ export type MiscellaneousMasterUpdateWithoutLeadInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1887,6 +2058,9 @@ export type MiscellaneousMasterUncheckedUpdateWithoutLeadInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1908,6 +2082,9 @@ export type MiscellaneousMasterUncheckedUpdateManyWithoutLeadInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1927,6 +2104,9 @@ export type MiscellaneousMasterCreateManyAccountInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_by: number
@@ -1942,6 +2122,9 @@ export type MiscellaneousMasterUpdateWithoutAccountInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1966,6 +2149,9 @@ export type MiscellaneousMasterUncheckedUpdateWithoutAccountInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1987,6 +2173,9 @@ export type MiscellaneousMasterUncheckedUpdateManyWithoutAccountInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2006,6 +2195,9 @@ export type MiscellaneousMasterCreateManyTypeInput = {
   cost?: number | null
   supervisor_remark?: string | null
   expected_ready_date?: Date | string | null
+  required_delivery_date?: Date | string | null
+  misc_approved?: boolean | null
+  exp_of_rejection?: string | null
   is_resolved?: boolean
   resolved_at?: Date | string | null
   created_by: number
@@ -2021,6 +2213,9 @@ export type MiscellaneousMasterUpdateWithoutTypeInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2045,6 +2240,9 @@ export type MiscellaneousMasterUncheckedUpdateWithoutTypeInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2066,6 +2264,9 @@ export type MiscellaneousMasterUncheckedUpdateManyWithoutTypeInput = {
   cost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   supervisor_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resolved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2126,6 +2327,9 @@ export type MiscellaneousMasterSelect<ExtArgs extends runtime.Types.Extensions.I
   cost?: boolean
   supervisor_remark?: boolean
   expected_ready_date?: boolean
+  required_delivery_date?: boolean
+  misc_approved?: boolean
+  exp_of_rejection?: boolean
   is_resolved?: boolean
   resolved_at?: boolean
   created_by?: boolean
@@ -2155,6 +2359,9 @@ export type MiscellaneousMasterSelectCreateManyAndReturn<ExtArgs extends runtime
   cost?: boolean
   supervisor_remark?: boolean
   expected_ready_date?: boolean
+  required_delivery_date?: boolean
+  misc_approved?: boolean
+  exp_of_rejection?: boolean
   is_resolved?: boolean
   resolved_at?: boolean
   created_by?: boolean
@@ -2181,6 +2388,9 @@ export type MiscellaneousMasterSelectUpdateManyAndReturn<ExtArgs extends runtime
   cost?: boolean
   supervisor_remark?: boolean
   expected_ready_date?: boolean
+  required_delivery_date?: boolean
+  misc_approved?: boolean
+  exp_of_rejection?: boolean
   is_resolved?: boolean
   resolved_at?: boolean
   created_by?: boolean
@@ -2207,6 +2417,9 @@ export type MiscellaneousMasterSelectScalar = {
   cost?: boolean
   supervisor_remark?: boolean
   expected_ready_date?: boolean
+  required_delivery_date?: boolean
+  misc_approved?: boolean
+  exp_of_rejection?: boolean
   is_resolved?: boolean
   resolved_at?: boolean
   created_by?: boolean
@@ -2215,7 +2428,7 @@ export type MiscellaneousMasterSelectScalar = {
   updated_at?: boolean
 }
 
-export type MiscellaneousMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "misc_type_id" | "problem_description" | "reorder_material_details" | "quantity" | "cost" | "supervisor_remark" | "expected_ready_date" | "is_resolved" | "resolved_at" | "created_by" | "updated_by" | "created_at" | "updated_at", ExtArgs["result"]["miscellaneousMaster"]>
+export type MiscellaneousMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "misc_type_id" | "problem_description" | "reorder_material_details" | "quantity" | "cost" | "supervisor_remark" | "expected_ready_date" | "required_delivery_date" | "misc_approved" | "exp_of_rejection" | "is_resolved" | "resolved_at" | "created_by" | "updated_by" | "created_at" | "updated_at", ExtArgs["result"]["miscellaneousMaster"]>
 export type MiscellaneousMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   documents?: boolean | Prisma.MiscellaneousMaster$documentsArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
@@ -2268,6 +2481,9 @@ export type $MiscellaneousMasterPayload<ExtArgs extends runtime.Types.Extensions
     cost: number | null
     supervisor_remark: string | null
     expected_ready_date: Date | null
+    required_delivery_date: Date | null
+    misc_approved: boolean | null
+    exp_of_rejection: string | null
     is_resolved: boolean
     resolved_at: Date | null
     created_by: number
@@ -2716,6 +2932,9 @@ export interface MiscellaneousMasterFieldRefs {
   readonly cost: Prisma.FieldRef<"MiscellaneousMaster", 'Float'>
   readonly supervisor_remark: Prisma.FieldRef<"MiscellaneousMaster", 'String'>
   readonly expected_ready_date: Prisma.FieldRef<"MiscellaneousMaster", 'DateTime'>
+  readonly required_delivery_date: Prisma.FieldRef<"MiscellaneousMaster", 'DateTime'>
+  readonly misc_approved: Prisma.FieldRef<"MiscellaneousMaster", 'Boolean'>
+  readonly exp_of_rejection: Prisma.FieldRef<"MiscellaneousMaster", 'String'>
   readonly is_resolved: Prisma.FieldRef<"MiscellaneousMaster", 'Boolean'>
   readonly resolved_at: Prisma.FieldRef<"MiscellaneousMaster", 'DateTime'>
   readonly created_by: Prisma.FieldRef<"MiscellaneousMaster", 'Int'>

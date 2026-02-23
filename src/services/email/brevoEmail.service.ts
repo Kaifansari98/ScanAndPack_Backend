@@ -2,7 +2,7 @@
 
 import { prisma } from "../../prisma/client";
 import logger from "../../../src/utils/logger";
-import { resolveEmailIdentity } from "src/validations/emailIdentity.resolver";
+import { resolveEmailIdentity } from "../../../src/validations/emailIdentity.resolver";
 
 export type BrevoEmailPayload = {
   toEmail: string;
@@ -237,16 +237,16 @@ export type EmailIdentity = {
 
 export const sendBrevoEmail = async (
   payload: BrevoEmailPayload,
-  identity: EmailIdentity, // ← NEW PARAMETER
+  identity?: EmailIdentity, // ← NEW PARAMETER
 ): Promise<BrevoEmailResult> => {
   const apiKey = process.env.BREVO_API_KEY;
   const brevoEnabled = process.env.BREVO_ENABLED === "true";
 
-  const senderEmail = identity.senderEmail;
-  const senderName = identity.senderName;
+  const senderEmail = identity?.senderEmail;
+  const senderName = identity?.senderName;
 
-  const replyTo = identity.senderEmail;
-  const replyToName = identity.senderName;
+  const replyTo = identity?.senderEmail;
+  const replyToName = identity?.senderName;
 
   if (!brevoEnabled) {
     logger.info("Brevo email skipped: disabled", {
