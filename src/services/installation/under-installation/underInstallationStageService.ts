@@ -1407,6 +1407,14 @@ export class UnderInstallationStageService {
             t.remark === remarkKey,
         );
 
+        const deliveryTaskForMisc = miscTasks.find(
+          (t) =>
+            typeof t.remark === "string" &&
+            t.remark.includes("Required delivery date set for") &&
+            t.remark.includes(m.reorder_material_details) &&
+            t.remark.includes(m.problem_description),
+        );
+
         return {
           id: m.id,
           vendor_id: m.vendor_id,
@@ -1440,6 +1448,15 @@ export class UnderInstallationStageService {
                 id: taskForMisc.id,
                 task_type: taskForMisc.task_type,
                 status: taskForMisc.status,
+              }
+            : null,
+          delivery_task: deliveryTaskForMisc
+            ? {
+                id: deliveryTaskForMisc.id,
+                task_type: deliveryTaskForMisc.task_type,
+                status: deliveryTaskForMisc.status,
+                remark: deliveryTaskForMisc.remark ?? null,
+                due_date: deliveryTaskForMisc.due_date ?? null,
               }
             : null,
         };
