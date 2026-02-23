@@ -21,7 +21,7 @@ export class DesigingStageController {
         return res
           .status(400)
           .json(
-            ApiResponse.validationError(errors.array().map((err) => err.msg))
+            ApiResponse.validationError(errors.array().map((err) => err.msg)),
           );
       }
 
@@ -30,7 +30,7 @@ export class DesigingStageController {
       const result = await DesigingStage.addToDesigingStage(
         Number(lead_id),
         Number(user_id),
-        Number(vendor_id)
+        Number(vendor_id),
       );
 
       return res
@@ -38,8 +38,8 @@ export class DesigingStageController {
         .json(
           ApiResponse.success(
             result,
-            "Lead status updated to 3 and log created"
-          )
+            "Lead status updated to 3 and log created",
+          ),
         );
     } catch (error: any) {
       if (error.message.includes("Unauthorized")) {
@@ -61,7 +61,7 @@ export class DesigingStageController {
         return res
           .status(400)
           .json(
-            ApiResponse.validationError("vendorId and userId are required")
+            ApiResponse.validationError("vendorId and userId are required"),
           );
       }
 
@@ -69,7 +69,7 @@ export class DesigingStageController {
         Number(vendorId),
         Number(userId),
         Number(page),
-        Number(limit)
+        Number(limit),
       );
 
       return res
@@ -210,11 +210,11 @@ export class DesigingStageController {
             ...doc,
             signedUrl,
           };
-        })
+        }),
       );
 
       logs.push(
-        `Found ${documents.length} design quotation documents for lead ${leadId}`
+        `Found ${documents.length} design quotation documents for lead ${leadId}`,
       );
 
       return res.status(200).json({
@@ -335,11 +335,11 @@ export class DesigingStageController {
             ...doc,
             signedUrl,
           };
-        })
+        }),
       );
 
       logs.push(
-        `Found ${documents.length} design quotation documents for lead ${leadId}`
+        `Found ${documents.length} design quotation documents for lead ${leadId}`,
       );
 
       return res.status(200).json({
@@ -415,7 +415,7 @@ export class DesigingStageController {
           Number(vendorId),
           Number(leadId),
           file.originalname,
-          file.mimetype
+          file.mimetype,
         );
 
         await fs.unlink(file.path);
@@ -449,7 +449,7 @@ export class DesigingStageController {
 
             if (!meetingDocType) {
               throw new Error(
-                "Document type for meeting documents (Type 7) not found for this vendor"
+                "Document type for meeting documents (Type 7) not found for this vendor",
               );
             }
 
@@ -531,7 +531,7 @@ export class DesigingStageController {
             documents: newDocuments,
             mapping: newMapping,
           };
-        }
+        },
       );
 
       return res.status(201).json({
@@ -570,7 +570,7 @@ export class DesigingStageController {
           Number(vendorId),
           Number(leadId),
           file.originalname,
-          file.mimetype
+          file.mimetype,
         );
 
         await fs.unlink(file.path);
@@ -608,7 +608,7 @@ export class DesigingStageController {
 
         if (!meetingDocType) {
           throw new Error(
-            "Document type for meeting documents (Type 7) not found for this vendor"
+            "Document type for meeting documents (Type 7) not found for this vendor",
           );
         }
 
@@ -682,7 +682,7 @@ export class DesigingStageController {
     }
   }
 
-  // This API will IGNORE deleted docs -- it will not include them. 
+  // This API will IGNORE deleted docs -- it will not include them.
   // As per the code below, only non-deleted docs are picked by being explicit in the doc lookup.
   public static async getDesignMeetings(req: Request, res: Response) {
     try {
@@ -722,12 +722,16 @@ export class DesigingStageController {
               if (!document) {
                 return null; // filter out mapping if doc is deleted
               }
-              const signedUrl = await generateSignedUrl(document.doc_sys_name, 3600, "inline");
+              const signedUrl = await generateSignedUrl(
+                document.doc_sys_name,
+                3600,
+                "inline",
+              );
               return {
                 ...map,
                 document: { ...document, signedUrl },
               };
-            })
+            }),
           );
 
           // Filter out mappings for deleted/non-existing documents
@@ -735,7 +739,7 @@ export class DesigingStageController {
             ...meeting,
             designMeetingDocsMapping: docsWithUrls.filter(Boolean),
           };
-        })
+        }),
       );
 
       return res.status(200).json({
@@ -771,7 +775,7 @@ export class DesigingStageController {
           Number(vendorId),
           Number(leadId),
           file.originalname,
-          file.mimetype
+          file.mimetype,
         );
 
         await fs.unlink(file.path);
@@ -866,7 +870,7 @@ export class DesigingStageController {
           });
 
           return { uploadedDocs: newDocs, actionMessage: message };
-        }
+        },
       );
 
       return res.status(201).json({
@@ -978,7 +982,7 @@ export class DesigingStageController {
             file.buffer,
             Number(vendorId),
             existingMeeting.lead_id,
-            file.originalname
+            file.originalname,
           );
           logs.push({ fileUploaded: file.originalname, sysName });
 
@@ -1009,7 +1013,7 @@ export class DesigingStageController {
                 created_at: new Date(),
                 created_by: Number(userId),
               },
-            }
+            },
           );
           newMappings.push(mapping);
           logs.push({ mappingCreated: mapping });
@@ -1040,13 +1044,13 @@ export class DesigingStageController {
         return res
           .status(400)
           .json(
-            ApiResponse.validationError("vendorId and leadId are required")
+            ApiResponse.validationError("vendorId and leadId are required"),
           );
       }
 
       const lead = await DesigingStage.getLeadById(
         Number(vendorId),
-        Number(leadId)
+        Number(leadId),
       );
 
       if (!lead) {
@@ -1080,8 +1084,7 @@ export class DesigingStageController {
         desc,
         created_by,
         product_structure_instance_id,
-      } =
-        req.body;
+      } = req.body;
       const logs: any[] = [];
 
       // 1️⃣ Validate user belongs to vendor
@@ -1225,7 +1228,7 @@ export class DesigingStageController {
       logs.push(
         existingSelection
           ? "Design selection updated successfully"
-          : "Design selection created successfully"
+          : "Design selection created successfully",
       );
 
       // 6️⃣ Add LeadDetailedLogs entry (with remark from `desc`)
@@ -1418,7 +1421,7 @@ export class DesigingStageController {
       });
 
       logs.push(
-        `Fetched ${designSelections.length} design selections for lead ${leadId}`
+        `Fetched ${designSelections.length} design selections for lead ${leadId}`,
       );
 
       const pagination = {
@@ -1458,7 +1461,8 @@ export class DesigingStageController {
       }
 
       const { id } = req.params;
-      const { type, desc, updated_by, product_structure_instance_id } = req.body;
+      const { type, desc, updated_by, product_structure_instance_id } =
+        req.body;
 
       const logs: any[] = [];
 
@@ -1753,6 +1757,36 @@ export class DesigingStageController {
       return res.status(500).json({
         message: "Internal server error",
         error: error.message,
+      });
+    }
+  }
+
+  public static async getInstanceStageController(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+      const instanceId = Number(req.params.instanceId);
+
+      if (!vendorId || !leadId || !instanceId) {
+        return res.status(400).json({
+          message: "vendorId, leadId and instanceId are required",
+        });
+      }
+
+      const result = await DesigingStage.getInstanceStageByContext({
+        vendorId,
+        leadId,
+        instanceId,
+      });
+
+      return res.status(200).json({
+        success: true,
+        data: result,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Failed to derive instance stage",
       });
     }
   }

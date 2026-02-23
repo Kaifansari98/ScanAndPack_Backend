@@ -1689,6 +1689,15 @@ export class BookingStageService {
 
     const isAllStages = tag.toUpperCase() === "ALL";
 
+    const normalizedTag = String(tag);
+
+    const isTechCheckStage = normalizedTag === "Type 8";
+    const isOrderLoginStage = normalizedTag === "Type 9";
+    const isProductionStage = normalizedTag === "Type 10";
+
+    const isInstanceDrivenStage =
+      isTechCheckStage || isOrderLoginStage || isProductionStage;
+
     let statusIds: number[] = [];
 
     if (isAllStages) {
@@ -2093,6 +2102,68 @@ export class BookingStageService {
         addAnd({ miscellaneousMaster: { some: {} } });
       }
 
+      // ================= INSTANCE DRIVEN STAGE FILTER =================
+
+      // ================= INSTANCE WORKFLOW STAGE FILTER =================
+
+      if (isInstanceDrivenStage) {
+        // -------- TYPE 8 : TECH CHECK STAGE --------
+        // Tech check not done yet
+        if (isTechCheckStage) {
+          addAnd({
+            productStructureInstances: {
+              some: {
+                OR: [
+                  { is_tech_check_completed: false },
+                  { is_tech_check_completed: null },
+                ],
+              },
+            },
+          });
+        }
+
+        // -------- TYPE 9 : ORDER LOGIN STAGE --------
+        // Tech check completed → now waiting for order login
+        if (isOrderLoginStage) {
+          addAnd({
+            productStructureInstances: {
+              some: {
+                AND: [
+                  { is_tech_check_completed: true },
+                  {
+                    OR: [
+                      { is_order_login_completed: false },
+                      { is_order_login_completed: null },
+                    ],
+                  },
+                ],
+              },
+            },
+          });
+        }
+
+        // -------- TYPE 10 : PRODUCTION STAGE --------
+        // Order login completed → now waiting for production
+        if (isProductionStage) {
+          addAnd({
+            productStructureInstances: {
+              some: {
+                AND: [
+                  { is_tech_check_completed: true },
+                  { is_order_login_completed: true },
+                  {
+                    OR: [
+                      { is_production_completed: false },
+                      { is_production_completed: null },
+                    ],
+                  },
+                ],
+              },
+            },
+          });
+        }
+      }
+
       return whereClause;
     };
 
@@ -2185,7 +2256,7 @@ export class BookingStageService {
       id: { in: leadIds },
       is_deleted: false,
       vendor_id: vendorId,
-      status_id: { in: statusIds },
+      ...(isInstanceDrivenStage ? {} : { status_id: { in: statusIds } }),
       statusType: { vendor_id: vendorId },
       activity_status: isAllStages
         ? "onGoing"
@@ -2563,7 +2634,7 @@ export class BookingStageService {
       const updatedByName = updatedByUser?.user_name ?? "User";
       const amountText = `₹${data.amount.toLocaleString("en-IN")}`;
       const paymentTypeName = result.paymentTypeName || "Payment";
-      
+
       const baseUrl = data.baseUrl;
       const leadUrl = leadInfo?.account_id
         ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${leadInfo.account_id}`
