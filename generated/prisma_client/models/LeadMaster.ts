@@ -128,6 +128,7 @@ export type LeadMasterMinAggregateOutputType = {
   is_shutter_installation_completed: boolean | null
   shutter_installation_completion_date: Date | null
   usable_handover_pending_work_details: string | null
+  usable_handover_completed: boolean | null
   mrp_value: number | null
 }
 
@@ -193,6 +194,7 @@ export type LeadMasterMaxAggregateOutputType = {
   is_shutter_installation_completed: boolean | null
   shutter_installation_completion_date: Date | null
   usable_handover_pending_work_details: string | null
+  usable_handover_completed: boolean | null
   mrp_value: number | null
 }
 
@@ -258,6 +260,7 @@ export type LeadMasterCountAggregateOutputType = {
   is_shutter_installation_completed: number
   shutter_installation_completion_date: number
   usable_handover_pending_work_details: number
+  usable_handover_completed: number
   mrp_value: number
   _all: number
 }
@@ -365,6 +368,7 @@ export type LeadMasterMinAggregateInputType = {
   is_shutter_installation_completed?: true
   shutter_installation_completion_date?: true
   usable_handover_pending_work_details?: true
+  usable_handover_completed?: true
   mrp_value?: true
 }
 
@@ -430,6 +434,7 @@ export type LeadMasterMaxAggregateInputType = {
   is_shutter_installation_completed?: true
   shutter_installation_completion_date?: true
   usable_handover_pending_work_details?: true
+  usable_handover_completed?: true
   mrp_value?: true
 }
 
@@ -495,6 +500,7 @@ export type LeadMasterCountAggregateInputType = {
   is_shutter_installation_completed?: true
   shutter_installation_completion_date?: true
   usable_handover_pending_work_details?: true
+  usable_handover_completed?: true
   mrp_value?: true
   _all?: true
 }
@@ -647,6 +653,7 @@ export type LeadMasterGroupByOutputType = {
   is_shutter_installation_completed: boolean | null
   shutter_installation_completion_date: Date | null
   usable_handover_pending_work_details: string | null
+  usable_handover_completed: boolean | null
   mrp_value: number | null
   _count: LeadMasterCountAggregateOutputType | null
   _avg: LeadMasterAvgAggregateOutputType | null
@@ -735,6 +742,7 @@ export type LeadMasterWhereInput = {
   is_shutter_installation_completed?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
   shutter_installation_completion_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   usable_handover_pending_work_details?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
+  usable_handover_completed?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
   mrp_value?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterListRelationFilter
   installationUpdates?: Prisma.InstallationUpdateListRelationFilter
@@ -836,6 +844,7 @@ export type LeadMasterOrderByWithRelationInput = {
   is_shutter_installation_completed?: Prisma.SortOrderInput | Prisma.SortOrder
   shutter_installation_completion_date?: Prisma.SortOrderInput | Prisma.SortOrder
   usable_handover_pending_work_details?: Prisma.SortOrderInput | Prisma.SortOrder
+  usable_handover_completed?: Prisma.SortOrderInput | Prisma.SortOrder
   mrp_value?: Prisma.SortOrderInput | Prisma.SortOrder
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterOrderByRelationAggregateInput
   installationUpdates?: Prisma.InstallationUpdateOrderByRelationAggregateInput
@@ -941,6 +950,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   is_shutter_installation_completed?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
   shutter_installation_completion_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   usable_handover_pending_work_details?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
+  usable_handover_completed?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
   mrp_value?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterListRelationFilter
   installationUpdates?: Prisma.InstallationUpdateListRelationFilter
@@ -1042,6 +1052,7 @@ export type LeadMasterOrderByWithAggregationInput = {
   is_shutter_installation_completed?: Prisma.SortOrderInput | Prisma.SortOrder
   shutter_installation_completion_date?: Prisma.SortOrderInput | Prisma.SortOrder
   usable_handover_pending_work_details?: Prisma.SortOrderInput | Prisma.SortOrder
+  usable_handover_completed?: Prisma.SortOrderInput | Prisma.SortOrder
   mrp_value?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.LeadMasterCountOrderByAggregateInput
   _avg?: Prisma.LeadMasterAvgOrderByAggregateInput
@@ -1115,6 +1126,7 @@ export type LeadMasterScalarWhereWithAggregatesInput = {
   is_shutter_installation_completed?: Prisma.BoolNullableWithAggregatesFilter<"LeadMaster"> | boolean | null
   shutter_installation_completion_date?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadMaster"> | Date | string | null
   usable_handover_pending_work_details?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
+  usable_handover_completed?: Prisma.BoolNullableWithAggregatesFilter<"LeadMaster"> | boolean | null
   mrp_value?: Prisma.FloatNullableWithAggregatesFilter<"LeadMaster"> | number | null
 }
 
@@ -1170,6 +1182,7 @@ export type LeadMasterCreateInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -1271,6 +1284,7 @@ export type LeadMasterUncheckedCreateInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -1353,6 +1367,7 @@ export type LeadMasterUpdateInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -1454,6 +1469,7 @@ export type LeadMasterUncheckedUpdateInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -1546,6 +1562,7 @@ export type LeadMasterCreateManyInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
 }
 
@@ -1601,6 +1618,7 @@ export type LeadMasterUpdateManyMutationInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
@@ -1666,6 +1684,7 @@ export type LeadMasterUncheckedUpdateManyInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
@@ -1751,6 +1770,7 @@ export type LeadMasterCountOrderByAggregateInput = {
   is_shutter_installation_completed?: Prisma.SortOrder
   shutter_installation_completion_date?: Prisma.SortOrder
   usable_handover_pending_work_details?: Prisma.SortOrder
+  usable_handover_completed?: Prisma.SortOrder
   mrp_value?: Prisma.SortOrder
 }
 
@@ -1836,6 +1856,7 @@ export type LeadMasterMaxOrderByAggregateInput = {
   is_shutter_installation_completed?: Prisma.SortOrder
   shutter_installation_completion_date?: Prisma.SortOrder
   usable_handover_pending_work_details?: Prisma.SortOrder
+  usable_handover_completed?: Prisma.SortOrder
   mrp_value?: Prisma.SortOrder
 }
 
@@ -1901,6 +1922,7 @@ export type LeadMasterMinOrderByAggregateInput = {
   is_shutter_installation_completed?: Prisma.SortOrder
   shutter_installation_completion_date?: Prisma.SortOrder
   usable_handover_pending_work_details?: Prisma.SortOrder
+  usable_handover_completed?: Prisma.SortOrder
   mrp_value?: Prisma.SortOrder
 }
 
@@ -2761,6 +2783,7 @@ export type LeadMasterCreateWithoutVendorInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -2860,6 +2883,7 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -2981,6 +3005,7 @@ export type LeadMasterScalarWhereInput = {
   is_shutter_installation_completed?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
   shutter_installation_completion_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   usable_handover_pending_work_details?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
+  usable_handover_completed?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
   mrp_value?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
 }
 
@@ -3036,6 +3061,7 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -3135,6 +3161,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -3227,6 +3254,7 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -3326,6 +3354,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -3418,6 +3447,7 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -3517,6 +3547,7 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -3609,6 +3640,7 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -3708,6 +3740,7 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -3864,6 +3897,7 @@ export type LeadMasterCreateWithoutProjectsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -3964,6 +3998,7 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -4061,6 +4096,7 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -4161,6 +4197,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -4242,6 +4279,7 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -4342,6 +4380,7 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -4439,6 +4478,7 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -4539,6 +4579,7 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -4620,6 +4661,7 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -4720,6 +4762,7 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -4817,6 +4860,7 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -4917,6 +4961,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -4998,6 +5043,7 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -5097,6 +5143,7 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -5205,6 +5252,7 @@ export type LeadMasterCreateWithoutSourceInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -5304,6 +5352,7 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -5412,6 +5461,7 @@ export type LeadMasterCreateWithoutAccountInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -5511,6 +5561,7 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -5619,6 +5670,7 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -5719,6 +5771,7 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -5816,6 +5869,7 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -5916,6 +5970,7 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -5997,6 +6052,7 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -6097,6 +6153,7 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -6194,6 +6251,7 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -6294,6 +6352,7 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -6375,6 +6434,7 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -6475,6 +6535,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -6572,6 +6633,7 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -6672,6 +6734,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -6753,6 +6816,7 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -6853,6 +6917,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -6950,6 +7015,7 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -7050,6 +7116,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -7131,6 +7198,7 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -7231,6 +7299,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -7328,6 +7397,7 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -7428,6 +7498,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -7509,6 +7580,7 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -7609,6 +7681,7 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -7706,6 +7779,7 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -7806,6 +7880,7 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -7887,6 +7962,7 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -7987,6 +8063,7 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -8084,6 +8161,7 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -8184,6 +8262,7 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -8265,6 +8344,7 @@ export type LeadMasterCreateWithoutLedgersInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -8365,6 +8445,7 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -8462,6 +8543,7 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -8562,6 +8644,7 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -8643,6 +8726,7 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -8742,6 +8826,7 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -8850,6 +8935,7 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -8950,6 +9036,7 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -9047,6 +9134,7 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -9147,6 +9235,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -9228,6 +9317,7 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -9328,6 +9418,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -9425,6 +9516,7 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -9525,6 +9617,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -9606,6 +9699,7 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -9706,6 +9800,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -9803,6 +9898,7 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -9903,6 +9999,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -9984,6 +10081,7 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -10084,6 +10182,7 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -10181,6 +10280,7 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -10281,6 +10381,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -10362,6 +10463,7 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -10462,6 +10564,7 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -10559,6 +10662,7 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -10659,6 +10763,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -10740,6 +10845,7 @@ export type LeadMasterCreateWithoutTasksInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -10840,6 +10946,7 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -10937,6 +11044,7 @@ export type LeadMasterUpdateWithoutTasksInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -11037,6 +11145,7 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -11118,6 +11227,7 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -11218,6 +11328,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -11315,6 +11426,7 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -11415,6 +11527,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -11496,6 +11609,7 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -11596,6 +11710,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -11693,6 +11808,7 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -11793,6 +11909,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -11874,6 +11991,7 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -11974,6 +12092,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -12071,6 +12190,7 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -12171,6 +12291,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -12252,6 +12373,7 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -12352,6 +12474,7 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -12449,6 +12572,7 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -12549,6 +12673,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -12630,6 +12755,7 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -12730,6 +12856,7 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -12827,6 +12954,7 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -12927,6 +13055,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -13008,6 +13137,7 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutLeadInput
@@ -13108,6 +13238,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -13205,6 +13336,7 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutLeadNestedInput
@@ -13305,6 +13437,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -13386,6 +13519,7 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -13486,6 +13620,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -13583,6 +13718,7 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -13683,6 +13819,7 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -13764,6 +13901,7 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutLeadInput
@@ -13864,6 +14002,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -13961,6 +14100,7 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutLeadNestedInput
@@ -14061,6 +14201,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -14142,6 +14283,7 @@ export type LeadMasterCreateWithoutCutListInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -14242,6 +14384,7 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -14339,6 +14482,7 @@ export type LeadMasterUpdateWithoutCutListInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -14439,6 +14583,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -14520,6 +14665,7 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
@@ -14620,6 +14766,7 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
@@ -14717,6 +14864,7 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -14817,6 +14965,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -14907,6 +15056,7 @@ export type LeadMasterCreateManyVendorInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
 }
 
@@ -14962,6 +15112,7 @@ export type LeadMasterUpdateWithoutVendorInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -15061,6 +15212,7 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -15152,6 +15304,7 @@ export type LeadMasterUncheckedUpdateManyWithoutVendorInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
@@ -15216,6 +15369,7 @@ export type LeadMasterCreateManyAssignedToInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
 }
 
@@ -15280,6 +15434,7 @@ export type LeadMasterCreateManyAssignedByInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
 }
 
@@ -15344,6 +15499,7 @@ export type LeadMasterCreateManyCreatedByInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
 }
 
@@ -15408,6 +15564,7 @@ export type LeadMasterCreateManyUpdatedByInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
 }
 
@@ -15463,6 +15620,7 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -15562,6 +15720,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -15653,6 +15812,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedToInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
@@ -15708,6 +15868,7 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -15807,6 +15968,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -15898,6 +16060,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedByInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
@@ -15953,6 +16116,7 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -16052,6 +16216,7 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -16143,6 +16308,7 @@ export type LeadMasterUncheckedUpdateManyWithoutCreatedByInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
@@ -16198,6 +16364,7 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -16297,6 +16464,7 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -16388,6 +16556,7 @@ export type LeadMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
@@ -16452,6 +16621,7 @@ export type LeadMasterCreateManySiteTypeInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
 }
 
@@ -16507,6 +16677,7 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -16606,6 +16777,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -16697,6 +16869,7 @@ export type LeadMasterUncheckedUpdateManyWithoutSiteTypeInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
@@ -16761,6 +16934,7 @@ export type LeadMasterCreateManySourceInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
 }
 
@@ -16816,6 +16990,7 @@ export type LeadMasterUpdateWithoutSourceInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -16915,6 +17090,7 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -17006,6 +17182,7 @@ export type LeadMasterUncheckedUpdateManyWithoutSourceInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
@@ -17070,6 +17247,7 @@ export type LeadMasterCreateManyAccountInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
 }
 
@@ -17125,6 +17303,7 @@ export type LeadMasterUpdateWithoutAccountInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -17224,6 +17403,7 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -17315,6 +17495,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAccountInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
@@ -17379,6 +17560,7 @@ export type LeadMasterCreateManyStatusTypeInput = {
   is_shutter_installation_completed?: boolean | null
   shutter_installation_completion_date?: Date | string | null
   usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
   mrp_value?: number | null
 }
 
@@ -17434,6 +17616,7 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
@@ -17533,6 +17716,7 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
@@ -17624,6 +17808,7 @@ export type LeadMasterUncheckedUpdateManyWithoutStatusTypeInput = {
   is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
@@ -17954,6 +18139,7 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   is_shutter_installation_completed?: boolean
   shutter_installation_completion_date?: boolean
   usable_handover_pending_work_details?: boolean
+  usable_handover_completed?: boolean
   mrp_value?: boolean
   installationIssueLogMaster?: boolean | Prisma.LeadMaster$installationIssueLogMasterArgs<ExtArgs>
   installationUpdates?: boolean | Prisma.LeadMaster$installationUpdatesArgs<ExtArgs>
@@ -18056,6 +18242,7 @@ export type LeadMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   is_shutter_installation_completed?: boolean
   shutter_installation_completion_date?: boolean
   usable_handover_pending_work_details?: boolean
+  usable_handover_completed?: boolean
   mrp_value?: boolean
   account?: boolean | Prisma.LeadMaster$accountArgs<ExtArgs>
   assignedTo?: boolean | Prisma.LeadMaster$assignedToArgs<ExtArgs>
@@ -18130,6 +18317,7 @@ export type LeadMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   is_shutter_installation_completed?: boolean
   shutter_installation_completion_date?: boolean
   usable_handover_pending_work_details?: boolean
+  usable_handover_completed?: boolean
   mrp_value?: boolean
   account?: boolean | Prisma.LeadMaster$accountArgs<ExtArgs>
   assignedTo?: boolean | Prisma.LeadMaster$assignedToArgs<ExtArgs>
@@ -18204,10 +18392,11 @@ export type LeadMasterSelectScalar = {
   is_shutter_installation_completed?: boolean
   shutter_installation_completion_date?: boolean
   usable_handover_pending_work_details?: boolean
+  usable_handover_completed?: boolean
   mrp_value?: boolean
 }
 
-export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "actual_installation_start_date" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value", ExtArgs["result"]["leadMaster"]>
+export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "actual_installation_start_date" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "usable_handover_completed" | "mrp_value", ExtArgs["result"]["leadMaster"]>
 export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   installationIssueLogMaster?: boolean | Prisma.LeadMaster$installationIssueLogMasterArgs<ExtArgs>
   installationUpdates?: boolean | Prisma.LeadMaster$installationUpdatesArgs<ExtArgs>
@@ -18372,6 +18561,7 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     is_shutter_installation_completed: boolean | null
     shutter_installation_completion_date: Date | null
     usable_handover_pending_work_details: string | null
+    usable_handover_completed: boolean | null
     mrp_value: number | null
   }, ExtArgs["result"]["leadMaster"]>
   composites: {}
@@ -18893,6 +19083,7 @@ export interface LeadMasterFieldRefs {
   readonly is_shutter_installation_completed: Prisma.FieldRef<"LeadMaster", 'Boolean'>
   readonly shutter_installation_completion_date: Prisma.FieldRef<"LeadMaster", 'DateTime'>
   readonly usable_handover_pending_work_details: Prisma.FieldRef<"LeadMaster", 'String'>
+  readonly usable_handover_completed: Prisma.FieldRef<"LeadMaster", 'Boolean'>
   readonly mrp_value: Prisma.FieldRef<"LeadMaster", 'Float'>
 }
     

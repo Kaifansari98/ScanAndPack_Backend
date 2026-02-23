@@ -1355,7 +1355,11 @@ export class UnderInstallationStageService {
         },
         documents: {
           include: {
-            document: true,
+            document: {
+              include: {
+                documentType: true,
+              },
+            },
           },
           where: {
             document: {
@@ -1388,13 +1392,14 @@ export class UnderInstallationStageService {
               document_id: docLink.document.id,
               original_name: docLink.document.doc_og_name,
               file_key: docLink.document.doc_sys_name,
+              doc_type_tag: docLink.document.documentType?.tag ?? null,
               signed_url,
               uploaded_at: docLink.document.created_at,
             };
           }),
         );
 
-        const remarkKey = `**${m.reorder_material_details}** - ${m.problem_description}`;
+        const remarkKey = `${m.reorder_material_details} - ${m.problem_description}`;
         const miscTaskKey = `[misc:${m.id}]`;
         const taskForMisc = miscTasks.find(
           (t) =>
@@ -1482,7 +1487,7 @@ export class UnderInstallationStageService {
         select: { reorder_material_details: true, problem_description: true },
       });
       const remarkKey = miscRecord
-        ? `**${miscRecord.reorder_material_details}** - ${miscRecord.problem_description}`
+        ? `${miscRecord.reorder_material_details} - ${miscRecord.problem_description}`
         : undefined;
 
       await prisma.userLeadTask.updateMany({
@@ -1678,7 +1683,9 @@ export class UnderInstallationStageService {
       }
 
       const remark = task.remark || "";
-      const match = remark.match(/\*\*(.+?)\*\*\s*-\s*(.+)$/);
+      const match =
+        remark.match(/\*\*(.+?)\*\*\s*-\s*(.+)$/) ||
+        remark.match(/^(.+?)\s*-\s*(.+)$/);
 
       if (!match) {
         throw new Error("Unable to parse miscellaneous details from remark");
@@ -1722,6 +1729,103 @@ export class UnderInstallationStageService {
       });
 
       return updated;
+    });
+
+    return result;
+  }
+
+  static async uploadMiscCompletionDocumentsByTaskIdService({
+    vendor_id,
+    task_id,
+    created_by,
+    files,
+  }: {
+    vendor_id: number;
+    task_id: number;
+    created_by: number;
+    files: { originalName: string; sysName: string }[];
+  }) {
+    const result = await prisma.$transaction(async (tx) => {
+      const task = await tx.userLeadTask.findFirst({
+        where: {
+          id: task_id,
+          vendor_id,
+          task_type: "Miscellaneous",
+        },
+        select: {
+          id: true,
+          lead_id: true,
+          remark: true,
+        },
+      });
+
+      if (!task) {
+        throw new Error("Miscellaneous task not found");
+      }
+
+      const remark = task.remark || "";
+      const match =
+        remark.match(/\*\*(.+?)\*\*\s*-\s*(.+)$/) ||
+        remark.match(/^(.+?)\s*-\s*(.+)$/);
+
+      if (!match) {
+        throw new Error("Unable to parse miscellaneous details from remark");
+      }
+
+      const reorder_material_details = match[1];
+      const problem_description = match[2];
+
+      const misc = await tx.miscellaneousMaster.findFirst({
+        where: {
+          vendor_id,
+          lead_id: task.lead_id,
+          reorder_material_details,
+          problem_description,
+        },
+        select: { id: true },
+      });
+
+      if (!misc) {
+        throw new Error("Miscellaneous entry not found for this task");
+      }
+
+      let docType = await tx.documentTypeMaster.findFirst({
+        where: { vendor_id, tag: "Type 37" },
+      });
+
+      if (!docType) {
+        docType = await tx.documentTypeMaster.create({
+          data: {
+            vendor_id,
+            tag: "Type 37",
+            type: "Miscellaneous Completion Documents",
+          },
+        });
+      }
+
+      for (const doc of files) {
+        const leadDoc = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: doc.originalName,
+            doc_sys_name: doc.sysName,
+            vendor_id,
+            lead_id: task.lead_id,
+            created_by,
+            doc_type_id: docType.id,
+          },
+        });
+
+        await tx.miscellaneousDocument.create({
+          data: {
+            vendor_id,
+            miscellaneous_id: misc.id,
+            document_id: leadDoc.id,
+            created_by,
+          },
+        });
+      }
+
+      return { misc_id: misc.id, uploaded: files.length };
     });
 
     return result;
@@ -2202,7 +2306,10 @@ export class UnderInstallationStageService {
     // 1️⃣ Fetch pending work details from LeadMaster
     const lead = await prisma.leadMaster.findUnique({
       where: { id: lead_id },
-      select: { usable_handover_pending_work_details: true },
+      select: {
+        usable_handover_pending_work_details: true,
+        usable_handover_completed: true,
+      },
     });
 
     if (!lead) throw new Error("Lead not found");
@@ -2260,9 +2367,39 @@ export class UnderInstallationStageService {
 
     return {
       pending_work_details: lead.usable_handover_pending_work_details,
+      usable_handover_completed: lead.usable_handover_completed ?? false,
       final_site_photos: finalSitePhotosWithUrl,
       handover_documents: handoverDocumentsWithUrl,
     };
+  }
+
+  static async markUsableHandoverCompleted(
+    vendor_id: number,
+    lead_id: number,
+    updated_by: number,
+  ) {
+    const updatedLead = await prisma.leadMaster.update({
+      where: { id: lead_id, vendor_id },
+      data: {
+        usable_handover_completed: true,
+        updated_by,
+        updated_at: new Date(),
+      },
+    });
+
+    await prisma.leadDetailedLogs.create({
+      data: {
+        vendor_id,
+        lead_id,
+        account_id: updatedLead.account_id!,
+        action: "Usable handover marked as completed.",
+        action_type: "UPDATE",
+        created_by: updated_by,
+        created_at: new Date(),
+      },
+    });
+
+    return updatedLead;
   }
 
   // ----------------------------------------

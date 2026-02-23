@@ -128,6 +128,16 @@ underInstallationStageRoutes.put(
   controller.updateMiscRequiredDeliveryDateByTaskId
 );
 
+/**
+ * ✅ POST → Upload Misc Completion Documents (by taskId)
+ * @route POST /miscellaneous/vendorId/:vendorId/taskId/:taskId/upload-completion-docs
+ */
+underInstallationStageRoutes.post(
+  "/vendorId/:vendorId/taskId/:taskId/upload-completion-docs",
+  uploadUnderInstallationFiles.array("files", 10),
+  controller.uploadMiscCompletionDocumentsByTaskId
+);
+
 underInstallationStageRoutes.post(
   "/issue-log/create",
   controller.createInstallationIssueLog
@@ -162,6 +172,12 @@ underInstallationStageRoutes.get(
 
 // PUT update remarks
 underInstallationStageRoutes.put("/update-remarks", controller.updateRemarks);
+
+/** ✅ PUT → Mark Usable Handover as Completed */
+underInstallationStageRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/mark-usable-handover-completed",
+  controller.markUsableHandoverCompleted
+);
 
 /** ✅ PUT → Move Lead to Final Handover Stage (Type 16) */
 underInstallationStageRoutes.put(

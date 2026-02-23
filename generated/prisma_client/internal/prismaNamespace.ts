@@ -6105,6 +6105,7 @@ export const LeadMasterScalarFieldEnum = {
   is_shutter_installation_completed: 'is_shutter_installation_completed',
   shutter_installation_completion_date: 'shutter_installation_completion_date',
   usable_handover_pending_work_details: 'usable_handover_pending_work_details',
+  usable_handover_completed: 'usable_handover_completed',
   mrp_value: 'mrp_value'
 } as const
 
