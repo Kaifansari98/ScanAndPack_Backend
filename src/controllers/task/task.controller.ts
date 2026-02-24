@@ -16,11 +16,17 @@ export class TaskController {
         });
       }
 
-      const tasks = await TaskService.getTasksByVendorAndUser(vendorId, userId);
+      const { tasks, count } = await TaskService.getTasksByVendorAndUser2(
+        vendorId,
+        userId,
+        1,
+        1000,
+        {},
+      );
 
       return res.status(200).json({
         success: true,
-        count: tasks.length,
+        count,
         data: tasks,
       });
     } catch (error: any) {
@@ -293,11 +299,16 @@ export class TaskController {
         });
       }
 
-      const tasks = await TaskService.getTasksByVendor(vendorId);
+      const { tasks, count } = await TaskService.getTasksFilterByVendor2(
+        vendorId,
+        1,
+        1000,
+        {},
+      );
 
       return res.status(200).json({
         success: true,
-        count: tasks.length,
+        count,
         data: tasks,
       });
     } catch (error: any) {
