@@ -9,7 +9,7 @@ import { generateWarehouseQRPDF } from "../../utils/warehouse-qr-generator";
 export const scan_item = async (req: Request, res: Response) => {
     console.log("Query params:", req.body);
 
-    let serviceResponse = await trackTraceService.updateScannedItem(req.body);    
+    let serviceResponse = await trackTraceService.updateScannedItem(req.body);
     if (serviceResponse.status == 0) {
         return res
             .status(200)
@@ -551,8 +551,8 @@ export const downloadCutListExcel = async (_req: Request, res: Response) => {
     try {
         const searchParams = _req.body.searchParams;
         const vendorId = _req.body.vendorId;
-        console.log("vendorId",vendorId);
-        const unique_project_id =_req.body.unique_project_id;// searchParams.get('unique_project_id');
+        console.log("vendorId", vendorId);
+        const unique_project_id = _req.body.unique_project_id;// searchParams.get('unique_project_id');
 
         if (!unique_project_id) {
             return res
@@ -587,3 +587,71 @@ export const downloadCutListExcel = async (_req: Request, res: Response) => {
     }
 
 }
+
+
+export const getVendorLead = async (_req: Request, res: Response) => {
+
+    console.log("Query params:", _req.query);
+    // res.json(_req.params.vendor_id);
+
+    try {
+        const vendor_id = Number(_req.params.vendor_id);
+        const search = String(_req.params.search);
+
+        const leads = await trackTraceService.getVendorLead(vendor_id, search);
+
+        const response = {
+            leads: leads,
+        }
+
+        return res
+            .status(200)
+            .json(
+                ApiResponse.success(
+                    response,
+                    "",
+                    200
+                )
+            );
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch projects', details: err });
+    }
+}
+
+
+
+export const linkLeadToProject = async (_req: Request, res: Response) => {
+
+    console.log("Query params:", _req.body.lead_id);
+    // res.json(_req.params.vendor_id);
+
+    try {
+
+        
+        const project_id = Number(_req.params.project_id);
+
+        const vendor_id = Number(_req.body.vendor_id);
+        const lead_id = Number(_req.body.lead_id);
+        
+
+        const leads = await trackTraceService.linkLeadToProject(vendor_id, lead_id, project_id);
+
+        const response = {
+            leads: leads,
+        }
+
+        return res
+            .status(200)
+            .json(
+                ApiResponse.success(
+                    response,
+                    "",
+                    200
+                )
+            );
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch projects', details: err });
+    }
+}
+
+

@@ -19,7 +19,9 @@ import {
     getCutListMachine,
     assignMachine,
     createQR,
-    downloadCutListExcel
+    downloadCutListExcel,
+    getVendorLead,
+    linkLeadToProject
 } from '../../controllers/trackTraceController/trackTrace.controller';
 
 
@@ -54,6 +56,12 @@ router.post('/assign-machine', assignMachine);
 router.post('/create-qr-code', createQR);
 
 router.post('/download-cut-list-excel', downloadCutListExcel);
+
+router.get('/leads/search/:vendor_id/:search', getVendorLead);
+
+router.post('/link-lead/:project_id/lead', linkLeadToProject);
+
+
 
 
 

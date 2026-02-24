@@ -174,12 +174,12 @@ export const updateScannedItem = async (payload: TrackTracePayload) => {
                 },
             });
 
-            //console.log("currentMapping",currentMapping)
+        //console.log("currentMapping",currentMapping)
         if (!currentMapping) {
             return validationResponse(0, 'Machine mapping not found');
         }
 
-       //return currentMapping;
+        //return currentMapping;
 
 
         const nextMapping =
@@ -308,7 +308,7 @@ export const updateScannedItem = async (payload: TrackTracePayload) => {
             //     },
             // });
 
-            console.log("currentMapping.project.track_trace_status",currentMapping.project.track_trace_status);
+            console.log("currentMapping.project.track_trace_status", currentMapping.project.track_trace_status);
             if (currentMapping.project.track_trace_status == "Not Started") {
                 await updateProjectStatus(currentMapping.project_id);
             }
@@ -337,21 +337,21 @@ export const updateProjectStatus = async (project_id: Number) => {
 
 
     try {
-    const updatedProject = await prisma.projectMaster.update({
-        where: {
-            id: Number(project_id),
-        },
-        data: {
-            track_trace_status: "Started"
-        },
-    });
-    
-    console.log("Updated project:", updatedProject);
-    return updatedProject;
-} catch (error) {
-    console.error("Error updating project:", error);
-    throw error;
-}
+        const updatedProject = await prisma.projectMaster.update({
+            where: {
+                id: Number(project_id),
+            },
+            data: {
+                track_trace_status: "Started"
+            },
+        });
+
+        console.log("Updated project:", updatedProject);
+        return updatedProject;
+    } catch (error) {
+        console.error("Error updating project:", error);
+        throw error;
+    }
 };
 
 
@@ -1086,7 +1086,7 @@ export const getMachineUtilization = async (
                 status: true,
             },
         });
-        
+
         console.log("=============");
         console.log(machines)
 
@@ -2243,3 +2243,66 @@ export const downloadCutListExcel = async (vendorId: number, unique_project_id: 
 
     return relativePath;
 };
+
+
+
+
+export const getVendorLead = async (vendorId: number, search?: string) => {
+    const leads = await prisma.leadMaster.findMany({
+        where: {
+            vendor_id: vendorId,
+            ...(search?.trim()
+                ? {
+                    OR: [
+                        { lead_code: { contains: search, mode: "insensitive" } },
+                        { firstname: { contains: search, mode: "insensitive" } },
+                        { lastname: { contains: search, mode: "insensitive" } },
+                    ],
+                }
+                : {}),
+        },
+        select: {
+            id: true,
+            lead_code: true,
+            firstname: true,
+            lastname: true
+        },
+        orderBy: {
+            lead_code: "asc",
+        },
+        take: 20, // limit results for search dropdown
+    });
+
+    return leads;
+};
+
+
+export const linkLeadToProject = async (vendorId: number, leadId: number, projectId: number) => {
+    return await prisma.$transaction(async (tx) => {
+        // 1. Update lead_id on ProjectMaster
+        await tx.projectMaster.update({
+            where: { id: projectId },
+            data: { lead_id: leadId },
+        });
+
+        // 2. Update lead_id on all CutList rows for this project
+        await tx.cutList.updateMany({
+            where: { project_id: projectId },
+            data: { lead_id: leadId },
+        });
+
+        // 3. Update lead_id on all CutListMachineMapping rows for this project
+        await tx.cutListMachineMapping.updateMany({
+            where: { project_id: projectId },
+            data: { lead_id: leadId },
+        });
+
+        return validationResponse(1, 'Lead Updated Successfully');
+    });
+
+
+};
+
+
+
+

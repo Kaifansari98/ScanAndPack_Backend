@@ -292,7 +292,7 @@ export type CutListMachineMappingGroupByOutputType = {
   cut_list_id: number
   machine_id: number
   vendor_id: number
-  lead_id: number
+  lead_id: number | null
   project_id: number
   sequence_no: number
   is_optional: boolean
@@ -335,7 +335,7 @@ export type CutListMachineMappingWhereInput = {
   cut_list_id?: Prisma.IntFilter<"CutListMachineMapping"> | number
   machine_id?: Prisma.IntFilter<"CutListMachineMapping"> | number
   vendor_id?: Prisma.IntFilter<"CutListMachineMapping"> | number
-  lead_id?: Prisma.IntFilter<"CutListMachineMapping"> | number
+  lead_id?: Prisma.IntNullableFilter<"CutListMachineMapping"> | number | null
   project_id?: Prisma.IntFilter<"CutListMachineMapping"> | number
   sequence_no?: Prisma.IntFilter<"CutListMachineMapping"> | number
   is_optional?: Prisma.BoolFilter<"CutListMachineMapping"> | boolean
@@ -352,7 +352,7 @@ export type CutListMachineMappingWhereInput = {
   machine?: Prisma.XOR<Prisma.MachineMasterScalarRelationFilter, Prisma.MachineMasterWhereInput>
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterNullableScalarRelationFilter, Prisma.LeadMasterWhereInput> | null
   operator?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
 }
 
@@ -361,7 +361,7 @@ export type CutListMachineMappingOrderByWithRelationInput = {
   cut_list_id?: Prisma.SortOrder
   machine_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  lead_id?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
   project_id?: Prisma.SortOrder
   sequence_no?: Prisma.SortOrder
   is_optional?: Prisma.SortOrder
@@ -390,7 +390,7 @@ export type CutListMachineMappingWhereUniqueInput = Prisma.AtLeast<{
   cut_list_id?: Prisma.IntFilter<"CutListMachineMapping"> | number
   machine_id?: Prisma.IntFilter<"CutListMachineMapping"> | number
   vendor_id?: Prisma.IntFilter<"CutListMachineMapping"> | number
-  lead_id?: Prisma.IntFilter<"CutListMachineMapping"> | number
+  lead_id?: Prisma.IntNullableFilter<"CutListMachineMapping"> | number | null
   project_id?: Prisma.IntFilter<"CutListMachineMapping"> | number
   sequence_no?: Prisma.IntFilter<"CutListMachineMapping"> | number
   is_optional?: Prisma.BoolFilter<"CutListMachineMapping"> | boolean
@@ -407,7 +407,7 @@ export type CutListMachineMappingWhereUniqueInput = Prisma.AtLeast<{
   machine?: Prisma.XOR<Prisma.MachineMasterScalarRelationFilter, Prisma.MachineMasterWhereInput>
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterNullableScalarRelationFilter, Prisma.LeadMasterWhereInput> | null
   operator?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
 }, "id">
 
@@ -416,7 +416,7 @@ export type CutListMachineMappingOrderByWithAggregationInput = {
   cut_list_id?: Prisma.SortOrder
   machine_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  lead_id?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
   project_id?: Prisma.SortOrder
   sequence_no?: Prisma.SortOrder
   is_optional?: Prisma.SortOrder
@@ -444,7 +444,7 @@ export type CutListMachineMappingScalarWhereWithAggregatesInput = {
   cut_list_id?: Prisma.IntWithAggregatesFilter<"CutListMachineMapping"> | number
   machine_id?: Prisma.IntWithAggregatesFilter<"CutListMachineMapping"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"CutListMachineMapping"> | number
-  lead_id?: Prisma.IntWithAggregatesFilter<"CutListMachineMapping"> | number
+  lead_id?: Prisma.IntNullableWithAggregatesFilter<"CutListMachineMapping"> | number | null
   project_id?: Prisma.IntWithAggregatesFilter<"CutListMachineMapping"> | number
   sequence_no?: Prisma.IntWithAggregatesFilter<"CutListMachineMapping"> | number
   is_optional?: Prisma.BoolWithAggregatesFilter<"CutListMachineMapping"> | boolean
@@ -474,7 +474,7 @@ export type CutListMachineMappingCreateInput = {
   machine: Prisma.MachineMasterCreateNestedOneWithoutCutListMachineMappingInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutCutListMachineMappingInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCutListMachineMappingInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutCutListMachineMappingInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutCutListMachineMappingInput
   operator?: Prisma.UserMasterCreateNestedOneWithoutOperatorInput
 }
 
@@ -483,7 +483,7 @@ export type CutListMachineMappingUncheckedCreateInput = {
   cut_list_id: number
   machine_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   project_id: number
   sequence_no: number
   is_optional?: boolean
@@ -513,7 +513,7 @@ export type CutListMachineMappingUpdateInput = {
   machine?: Prisma.MachineMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutCutListMachineMappingNestedInput
   operator?: Prisma.UserMasterUpdateOneWithoutOperatorNestedInput
 }
 
@@ -522,7 +522,7 @@ export type CutListMachineMappingUncheckedUpdateInput = {
   cut_list_id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   sequence_no?: Prisma.IntFieldUpdateOperationsInput | number
   is_optional?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -542,7 +542,7 @@ export type CutListMachineMappingCreateManyInput = {
   cut_list_id: number
   machine_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   project_id: number
   sequence_no: number
   is_optional?: boolean
@@ -575,7 +575,7 @@ export type CutListMachineMappingUncheckedUpdateManyInput = {
   cut_list_id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   sequence_no?: Prisma.IntFieldUpdateOperationsInput | number
   is_optional?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -952,7 +952,7 @@ export type CutListMachineMappingCreateWithoutVendorInput = {
   cut_list: Prisma.CutListCreateNestedOneWithoutCutListMachineMappingInput
   machine: Prisma.MachineMasterCreateNestedOneWithoutCutListMachineMappingInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutCutListMachineMappingInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutCutListMachineMappingInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutCutListMachineMappingInput
   operator?: Prisma.UserMasterCreateNestedOneWithoutOperatorInput
 }
 
@@ -960,7 +960,7 @@ export type CutListMachineMappingUncheckedCreateWithoutVendorInput = {
   id?: number
   cut_list_id: number
   machine_id: number
-  lead_id: number
+  lead_id?: number | null
   project_id: number
   sequence_no: number
   is_optional?: boolean
@@ -1009,7 +1009,7 @@ export type CutListMachineMappingScalarWhereInput = {
   cut_list_id?: Prisma.IntFilter<"CutListMachineMapping"> | number
   machine_id?: Prisma.IntFilter<"CutListMachineMapping"> | number
   vendor_id?: Prisma.IntFilter<"CutListMachineMapping"> | number
-  lead_id?: Prisma.IntFilter<"CutListMachineMapping"> | number
+  lead_id?: Prisma.IntNullableFilter<"CutListMachineMapping"> | number | null
   project_id?: Prisma.IntFilter<"CutListMachineMapping"> | number
   sequence_no?: Prisma.IntFilter<"CutListMachineMapping"> | number
   is_optional?: Prisma.BoolFilter<"CutListMachineMapping"> | boolean
@@ -1039,7 +1039,7 @@ export type CutListMachineMappingCreateWithoutOperatorInput = {
   machine: Prisma.MachineMasterCreateNestedOneWithoutCutListMachineMappingInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutCutListMachineMappingInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCutListMachineMappingInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutCutListMachineMappingInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutCutListMachineMappingInput
 }
 
 export type CutListMachineMappingUncheckedCreateWithoutOperatorInput = {
@@ -1047,7 +1047,7 @@ export type CutListMachineMappingUncheckedCreateWithoutOperatorInput = {
   cut_list_id: number
   machine_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   project_id: number
   sequence_no: number
   is_optional?: boolean
@@ -1101,7 +1101,7 @@ export type CutListMachineMappingCreateWithoutProjectInput = {
   cut_list: Prisma.CutListCreateNestedOneWithoutCutListMachineMappingInput
   machine: Prisma.MachineMasterCreateNestedOneWithoutCutListMachineMappingInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCutListMachineMappingInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutCutListMachineMappingInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutCutListMachineMappingInput
   operator?: Prisma.UserMasterCreateNestedOneWithoutOperatorInput
 }
 
@@ -1110,7 +1110,7 @@ export type CutListMachineMappingUncheckedCreateWithoutProjectInput = {
   cut_list_id: number
   machine_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   sequence_no: number
   is_optional?: boolean
   expected_in?: boolean
@@ -1227,7 +1227,7 @@ export type CutListMachineMappingCreateWithoutMachineInput = {
   cut_list: Prisma.CutListCreateNestedOneWithoutCutListMachineMappingInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutCutListMachineMappingInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCutListMachineMappingInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutCutListMachineMappingInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutCutListMachineMappingInput
   operator?: Prisma.UserMasterCreateNestedOneWithoutOperatorInput
 }
 
@@ -1235,7 +1235,7 @@ export type CutListMachineMappingUncheckedCreateWithoutMachineInput = {
   id?: number
   cut_list_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   project_id: number
   sequence_no: number
   is_optional?: boolean
@@ -1290,7 +1290,7 @@ export type CutListMachineMappingCreateWithoutCut_listInput = {
   machine: Prisma.MachineMasterCreateNestedOneWithoutCutListMachineMappingInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutCutListMachineMappingInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCutListMachineMappingInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutCutListMachineMappingInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutCutListMachineMappingInput
   operator?: Prisma.UserMasterCreateNestedOneWithoutOperatorInput
 }
 
@@ -1298,7 +1298,7 @@ export type CutListMachineMappingUncheckedCreateWithoutCut_listInput = {
   id?: number
   machine_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   project_id: number
   sequence_no: number
   is_optional?: boolean
@@ -1343,7 +1343,7 @@ export type CutListMachineMappingCreateManyVendorInput = {
   id?: number
   cut_list_id: number
   machine_id: number
-  lead_id: number
+  lead_id?: number | null
   project_id: number
   sequence_no: number
   is_optional?: boolean
@@ -1372,7 +1372,7 @@ export type CutListMachineMappingUpdateWithoutVendorInput = {
   cut_list?: Prisma.CutListUpdateOneRequiredWithoutCutListMachineMappingNestedInput
   machine?: Prisma.MachineMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutCutListMachineMappingNestedInput
   operator?: Prisma.UserMasterUpdateOneWithoutOperatorNestedInput
 }
 
@@ -1380,7 +1380,7 @@ export type CutListMachineMappingUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   cut_list_id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   sequence_no?: Prisma.IntFieldUpdateOperationsInput | number
   is_optional?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1399,7 +1399,7 @@ export type CutListMachineMappingUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   cut_list_id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   sequence_no?: Prisma.IntFieldUpdateOperationsInput | number
   is_optional?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1419,7 +1419,7 @@ export type CutListMachineMappingCreateManyOperatorInput = {
   cut_list_id: number
   machine_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   project_id: number
   sequence_no: number
   is_optional?: boolean
@@ -1448,7 +1448,7 @@ export type CutListMachineMappingUpdateWithoutOperatorInput = {
   machine?: Prisma.MachineMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutCutListMachineMappingNestedInput
 }
 
 export type CutListMachineMappingUncheckedUpdateWithoutOperatorInput = {
@@ -1456,7 +1456,7 @@ export type CutListMachineMappingUncheckedUpdateWithoutOperatorInput = {
   cut_list_id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   sequence_no?: Prisma.IntFieldUpdateOperationsInput | number
   is_optional?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1475,7 +1475,7 @@ export type CutListMachineMappingUncheckedUpdateManyWithoutOperatorInput = {
   cut_list_id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   sequence_no?: Prisma.IntFieldUpdateOperationsInput | number
   is_optional?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1494,7 +1494,7 @@ export type CutListMachineMappingCreateManyProjectInput = {
   cut_list_id: number
   machine_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   sequence_no: number
   is_optional?: boolean
   expected_in?: boolean
@@ -1522,7 +1522,7 @@ export type CutListMachineMappingUpdateWithoutProjectInput = {
   cut_list?: Prisma.CutListUpdateOneRequiredWithoutCutListMachineMappingNestedInput
   machine?: Prisma.MachineMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutCutListMachineMappingNestedInput
   operator?: Prisma.UserMasterUpdateOneWithoutOperatorNestedInput
 }
 
@@ -1531,7 +1531,7 @@ export type CutListMachineMappingUncheckedUpdateWithoutProjectInput = {
   cut_list_id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.IntFieldUpdateOperationsInput | number
   is_optional?: Prisma.BoolFieldUpdateOperationsInput | boolean
   expected_in?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1550,7 +1550,7 @@ export type CutListMachineMappingUncheckedUpdateManyWithoutProjectInput = {
   cut_list_id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.IntFieldUpdateOperationsInput | number
   is_optional?: Prisma.BoolFieldUpdateOperationsInput | boolean
   expected_in?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1643,7 +1643,7 @@ export type CutListMachineMappingCreateManyMachineInput = {
   id?: number
   cut_list_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   project_id: number
   sequence_no: number
   is_optional?: boolean
@@ -1672,7 +1672,7 @@ export type CutListMachineMappingUpdateWithoutMachineInput = {
   cut_list?: Prisma.CutListUpdateOneRequiredWithoutCutListMachineMappingNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutCutListMachineMappingNestedInput
   operator?: Prisma.UserMasterUpdateOneWithoutOperatorNestedInput
 }
 
@@ -1680,7 +1680,7 @@ export type CutListMachineMappingUncheckedUpdateWithoutMachineInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   cut_list_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   sequence_no?: Prisma.IntFieldUpdateOperationsInput | number
   is_optional?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1699,7 +1699,7 @@ export type CutListMachineMappingUncheckedUpdateManyWithoutMachineInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   cut_list_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   sequence_no?: Prisma.IntFieldUpdateOperationsInput | number
   is_optional?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1718,7 +1718,7 @@ export type CutListMachineMappingCreateManyCut_listInput = {
   id?: number
   machine_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   project_id: number
   sequence_no: number
   is_optional?: boolean
@@ -1747,7 +1747,7 @@ export type CutListMachineMappingUpdateWithoutCut_listInput = {
   machine?: Prisma.MachineMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutCutListMachineMappingNestedInput
   operator?: Prisma.UserMasterUpdateOneWithoutOperatorNestedInput
 }
 
@@ -1755,7 +1755,7 @@ export type CutListMachineMappingUncheckedUpdateWithoutCut_listInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   sequence_no?: Prisma.IntFieldUpdateOperationsInput | number
   is_optional?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1774,7 +1774,7 @@ export type CutListMachineMappingUncheckedUpdateManyWithoutCut_listInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   sequence_no?: Prisma.IntFieldUpdateOperationsInput | number
   is_optional?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1813,7 +1813,7 @@ export type CutListMachineMappingSelect<ExtArgs extends runtime.Types.Extensions
   machine?: boolean | Prisma.MachineMasterDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.CutListMachineMapping$leadArgs<ExtArgs>
   operator?: boolean | Prisma.CutListMachineMapping$operatorArgs<ExtArgs>
 }, ExtArgs["result"]["cutListMachineMapping"]>
 
@@ -1839,7 +1839,7 @@ export type CutListMachineMappingSelectCreateManyAndReturn<ExtArgs extends runti
   machine?: boolean | Prisma.MachineMasterDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.CutListMachineMapping$leadArgs<ExtArgs>
   operator?: boolean | Prisma.CutListMachineMapping$operatorArgs<ExtArgs>
 }, ExtArgs["result"]["cutListMachineMapping"]>
 
@@ -1865,7 +1865,7 @@ export type CutListMachineMappingSelectUpdateManyAndReturn<ExtArgs extends runti
   machine?: boolean | Prisma.MachineMasterDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.CutListMachineMapping$leadArgs<ExtArgs>
   operator?: boolean | Prisma.CutListMachineMapping$operatorArgs<ExtArgs>
 }, ExtArgs["result"]["cutListMachineMapping"]>
 
@@ -1895,7 +1895,7 @@ export type CutListMachineMappingInclude<ExtArgs extends runtime.Types.Extension
   machine?: boolean | Prisma.MachineMasterDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.CutListMachineMapping$leadArgs<ExtArgs>
   operator?: boolean | Prisma.CutListMachineMapping$operatorArgs<ExtArgs>
 }
 export type CutListMachineMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1903,7 +1903,7 @@ export type CutListMachineMappingIncludeCreateManyAndReturn<ExtArgs extends runt
   machine?: boolean | Prisma.MachineMasterDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.CutListMachineMapping$leadArgs<ExtArgs>
   operator?: boolean | Prisma.CutListMachineMapping$operatorArgs<ExtArgs>
 }
 export type CutListMachineMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1911,7 +1911,7 @@ export type CutListMachineMappingIncludeUpdateManyAndReturn<ExtArgs extends runt
   machine?: boolean | Prisma.MachineMasterDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.CutListMachineMapping$leadArgs<ExtArgs>
   operator?: boolean | Prisma.CutListMachineMapping$operatorArgs<ExtArgs>
 }
 
@@ -1922,7 +1922,7 @@ export type $CutListMachineMappingPayload<ExtArgs extends runtime.Types.Extensio
     machine: Prisma.$MachineMasterPayload<ExtArgs>
     project: Prisma.$ProjectMasterPayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    lead: Prisma.$LeadMasterPayload<ExtArgs>
+    lead: Prisma.$LeadMasterPayload<ExtArgs> | null
     operator: Prisma.$UserMasterPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1930,7 +1930,7 @@ export type $CutListMachineMappingPayload<ExtArgs extends runtime.Types.Extensio
     cut_list_id: number
     machine_id: number
     vendor_id: number
-    lead_id: number
+    lead_id: number | null
     project_id: number
     sequence_no: number
     is_optional: boolean
@@ -2341,7 +2341,7 @@ export interface Prisma__CutListMachineMappingClient<T, Null = never, ExtArgs ex
   machine<T extends Prisma.MachineMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MachineMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__MachineMasterClient<runtime.Types.Result.GetResult<Prisma.$MachineMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   project<T extends Prisma.ProjectMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectMasterClient<runtime.Types.Result.GetResult<Prisma.$ProjectMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.CutListMachineMapping$leadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CutListMachineMapping$leadArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   operator<T extends Prisma.CutListMachineMapping$operatorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CutListMachineMapping$operatorArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2782,6 +2782,25 @@ export type CutListMachineMappingDeleteManyArgs<ExtArgs extends runtime.Types.Ex
    * Limit how many CutListMachineMappings to delete.
    */
   limit?: number
+}
+
+/**
+ * CutListMachineMapping.lead
+ */
+export type CutListMachineMapping$leadArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadMaster
+   */
+  select?: Prisma.LeadMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadMaster
+   */
+  omit?: Prisma.LeadMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadMasterInclude<ExtArgs> | null
+  where?: Prisma.LeadMasterWhereInput
 }
 
 /**
