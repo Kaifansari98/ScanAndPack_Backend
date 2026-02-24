@@ -210,6 +210,7 @@ export class PreProductionController {
     try {
       const { vendorId } = req.params;
       const { lead_id } = req.query;
+      const { instance_id } = req.query;
 
       if (!vendorId || !lead_id) {
         return res.status(400).json({
@@ -220,7 +221,8 @@ export class PreProductionController {
 
       const result = await service.getLatestOrderLoginByLead(
         Number(vendorId),
-        Number(lead_id)
+        Number(lead_id),
+        Number(instance_id)
       );
 
       return res.status(200).json({
