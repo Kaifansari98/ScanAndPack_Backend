@@ -1284,11 +1284,13 @@ export class BookingStageService {
       .trim()
       .toLowerCase();
     const statusTags =
-      normalizedTag === "type 9"
+      normalizedTag === "type 8"
         ? ["Type 8", "Type 9"]
-        : normalizedTag === "type 10"
-          ? ["Type 8", "Type 9", "Type 10"]
-          : [tag];
+        : normalizedTag === "type 9"
+          ? ["Type 8", "Type 9"]
+          : normalizedTag === "type 10"
+            ? ["Type 8", "Type 9", "Type 10"]
+            : [tag];
 
     const statusTypes = await prisma.statusTypeMaster.findMany({
       where: { vendor_id: vendorId, tag: { in: statusTags } },
@@ -1731,11 +1733,13 @@ export class BookingStageService {
         .trim()
         .toLowerCase();
       const statusTags =
-        normalizedTag === "type 9"
+        normalizedTag === "type 8"
           ? ["Type 8", "Type 9"]
-          : normalizedTag === "type 10"
-            ? ["Type 8", "Type 9", "Type 10"]
-            : [tag];
+          : normalizedTag === "type 9"
+            ? ["Type 8", "Type 9"]
+            : normalizedTag === "type 10"
+              ? ["Type 8", "Type 9", "Type 10"]
+              : [tag];
 
       const statusTypes = await prisma.statusTypeMaster.findMany({
         where: { vendor_id: vendorId, tag: { in: statusTags } },
@@ -2252,11 +2256,12 @@ export class BookingStageService {
       return { leads: [], count: 0 };
     }
 
+    const shouldFilterByStatus = !isInstanceDrivenStage || isTechCheckStage;
     const whereClause = addFilterConditions({
       id: { in: leadIds },
       is_deleted: false,
       vendor_id: vendorId,
-      ...(isInstanceDrivenStage ? {} : { status_id: { in: statusIds } }),
+      ...(shouldFilterByStatus ? { status_id: { in: statusIds } } : {}),
       statusType: { vendor_id: vendorId },
       activity_status: isAllStages
         ? "onGoing"
