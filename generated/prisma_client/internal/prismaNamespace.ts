@@ -455,6 +455,7 @@ export const ModelName = {
   CutList: 'CutList',
   CutListMachineMapping: 'CutListMachineMapping',
   UserMachineMapping: 'UserMachineMapping',
+  OrderLoginPoFileMapping: 'OrderLoginPoFileMapping',
   MachineTypeMaster: 'MachineTypeMaster'
 } as const
 
@@ -471,7 +472,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "machineTypeMaster"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -5729,6 +5730,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    OrderLoginPoFileMapping: {
+      payload: Prisma.$OrderLoginPoFileMappingPayload<ExtArgs>
+      fields: Prisma.OrderLoginPoFileMappingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OrderLoginPoFileMappingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderLoginPoFileMappingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OrderLoginPoFileMappingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderLoginPoFileMappingPayload>
+        }
+        findFirst: {
+          args: Prisma.OrderLoginPoFileMappingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderLoginPoFileMappingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OrderLoginPoFileMappingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderLoginPoFileMappingPayload>
+        }
+        findMany: {
+          args: Prisma.OrderLoginPoFileMappingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderLoginPoFileMappingPayload>[]
+        }
+        create: {
+          args: Prisma.OrderLoginPoFileMappingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderLoginPoFileMappingPayload>
+        }
+        createMany: {
+          args: Prisma.OrderLoginPoFileMappingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OrderLoginPoFileMappingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderLoginPoFileMappingPayload>[]
+        }
+        delete: {
+          args: Prisma.OrderLoginPoFileMappingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderLoginPoFileMappingPayload>
+        }
+        update: {
+          args: Prisma.OrderLoginPoFileMappingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderLoginPoFileMappingPayload>
+        }
+        deleteMany: {
+          args: Prisma.OrderLoginPoFileMappingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OrderLoginPoFileMappingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OrderLoginPoFileMappingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderLoginPoFileMappingPayload>[]
+        }
+        upsert: {
+          args: Prisma.OrderLoginPoFileMappingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderLoginPoFileMappingPayload>
+        }
+        aggregate: {
+          args: Prisma.OrderLoginPoFileMappingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrderLoginPoFileMapping>
+        }
+        groupBy: {
+          args: Prisma.OrderLoginPoFileMappingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrderLoginPoFileMappingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OrderLoginPoFileMappingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrderLoginPoFileMappingCountAggregateOutputType> | number
+        }
+      }
+    }
     MachineTypeMaster: {
       payload: Prisma.$MachineTypeMasterPayload<ExtArgs>
       fields: Prisma.MachineTypeMasterFieldRefs
@@ -6953,6 +7028,21 @@ export const UserMachineMappingScalarFieldEnum = {
 export type UserMachineMappingScalarFieldEnum = (typeof UserMachineMappingScalarFieldEnum)[keyof typeof UserMachineMappingScalarFieldEnum]
 
 
+export const OrderLoginPoFileMappingScalarFieldEnum = {
+  id: 'id',
+  orderlogin_id: 'orderlogin_id',
+  lead_id: 'lead_id',
+  document_id: 'document_id',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted'
+} as const
+
+export type OrderLoginPoFileMappingScalarFieldEnum = (typeof OrderLoginPoFileMappingScalarFieldEnum)[keyof typeof OrderLoginPoFileMappingScalarFieldEnum]
+
+
 export const MachineTypeMasterScalarFieldEnum = {
   id: 'id',
   machine_type: 'machine_type',
@@ -7488,6 +7578,7 @@ export type GlobalOmitConfig = {
   cutList?: Prisma.CutListOmit
   cutListMachineMapping?: Prisma.CutListMachineMappingOmit
   userMachineMapping?: Prisma.UserMachineMappingOmit
+  orderLoginPoFileMapping?: Prisma.OrderLoginPoFileMappingOmit
   machineTypeMaster?: Prisma.MachineTypeMasterOmit
 }
 

@@ -393,6 +393,11 @@ export type CutListMachineMapping = Prisma.CutListMachineMappingModel
  */
 export type UserMachineMapping = Prisma.UserMachineMappingModel
 /**
+ * Model OrderLoginPoFileMapping
+ * 
+ */
+export type OrderLoginPoFileMapping = Prisma.OrderLoginPoFileMappingModel
+/**
  * Model MachineTypeMaster
  * 
  */

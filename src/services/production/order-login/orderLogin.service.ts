@@ -35,6 +35,17 @@ interface BackendData {
     filename: string | null;
   }[];
 }
+export interface UploadOrderLoginPoFileInput {
+  vendorId: number;
+  leadId: number;
+  orderLoginId: number;
+  userId: number;
+  files: {
+    originalName: string;
+    sysName: string;
+  }[];
+  instanceId?: number | null;
+}
 
 export async function isOrderLoginComplete(vendorId: number, leadId: number) {
   const REQUIRED_ORDER_LOGIN_TYPES = [
@@ -1087,154 +1098,6 @@ export class OrderLoginService {
     }
 
     return uploadedDocs;
-  }
-
-  async uploadOrderLoginPoFiles(
-    vendorId: number,
-    leadId: number,
-    accountId: number,
-    userId: number,
-    files: { originalName: string; sysName: string }[],
-    instanceId?: number | null,
-  ) {
-    if (!vendorId || !leadId || !accountId || !userId) {
-      const error = new Error(
-        "vendorId, leadId, accountId, and userId are required",
-      );
-      (error as any).statusCode = 400;
-      throw error;
-    }
-
-    if (!files || files.length === 0) {
-      const error = new Error("No files provided for upload");
-      (error as any).statusCode = 400;
-      throw error;
-    }
-
-    const docType = await this.getOrderLoginPoDocType(vendorId);
-    if (!docType) throw new Error("Doc Type (Type 36) not found");
-
-    const uploadedDocs = [];
-
-    for (const file of files) {
-      const savedDoc = await prisma.leadDocuments.create({
-        data: {
-          doc_og_name: file.originalName,
-          doc_sys_name: file.sysName,
-          created_by: userId,
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          doc_type_id: docType.id,
-          product_structure_instance_id:
-            typeof instanceId !== "undefined" ? instanceId : null,
-        },
-      });
-
-      uploadedDocs.push(savedDoc);
-    }
-
-    return uploadedDocs;
-  }
-
-  async getOrderLoginPoFiles(
-    vendorId: number,
-    leadId: number,
-    orderLoginId: number,
-  ) {
-    if (!vendorId || !leadId || !orderLoginId) {
-      const error = new Error(
-        "vendorId, leadId, and orderLoginId are required",
-      );
-      (error as any).statusCode = 400;
-      throw error;
-    }
-
-    const orderLogin = await prisma.orderLoginDetails.findFirst({
-      where: { id: orderLoginId, vendor_id: vendorId, lead_id: leadId },
-    });
-
-    if (!orderLogin) {
-      const error = new Error("Order login record not found.");
-      (error as any).statusCode = 404;
-      throw error;
-    }
-
-    const docType = await this.getOrderLoginPoDocType(vendorId, false);
-    if (!docType) {
-      return [];
-    }
-
-    const safeCardName = sanitizeFilename(orderLogin.item_type || "card");
-    const instanceIdValue = orderLogin.instance_id ?? null;
-    let instanceFolder: string | undefined;
-
-    if (instanceIdValue) {
-      const instance = await prisma.leadProductStructureInstance.findFirst({
-        where: {
-          id: Number(instanceIdValue),
-          vendor_id: vendorId,
-          lead_id: leadId,
-        },
-        select: { title: true },
-      });
-
-      if (instance) {
-        instanceFolder =
-          instance.title?.trim() || `instance-${instanceIdValue}`;
-      }
-    }
-
-    const prefix = instanceFolder
-      ? `order_login_po/${vendorId}/${leadId}/${sanitizeFilename(
-          instanceFolder,
-        )}/${safeCardName}/`
-      : `order_login_po/${vendorId}/${leadId}/${safeCardName}/`;
-
-    const baseWhere = {
-      vendor_id: vendorId,
-      lead_id: leadId,
-      doc_type_id: docType.id,
-      is_deleted: false,
-      ...(instanceIdValue
-        ? { product_structure_instance_id: instanceIdValue }
-        : {}),
-    };
-
-    let documents = await prisma.leadDocuments.findMany({
-      where: {
-        ...baseWhere,
-        doc_sys_name: { startsWith: prefix },
-      },
-      orderBy: { created_at: "asc" },
-      select: {
-        id: true,
-        doc_og_name: true,
-        doc_sys_name: true,
-        created_at: true,
-      },
-    });
-
-    // Fallback for renamed item_type/instance titles
-    if (documents.length === 0) {
-      documents = await prisma.leadDocuments.findMany({
-        where: baseWhere,
-        orderBy: { created_at: "asc" },
-        select: {
-          id: true,
-          doc_og_name: true,
-          doc_sys_name: true,
-          created_at: true,
-        },
-      });
-    }
-
-    return Promise.all(
-      documents.map(async (doc) => ({
-        ...doc,
-        signed_url: await generateSignedUrl(doc.doc_sys_name),
-      })),
-    );
   }
 
   async getLeadProductionReadiness(
@@ -2309,5 +2172,178 @@ export class OrderLoginService {
     }
 
     return { lead: updatedLead, leadUserMapping };
+  }
+
+  async uploadOrderLoginPoFile({
+    vendorId,
+    leadId,
+    userId,
+    orderLoginId,
+    files,
+    instanceId,
+  }: UploadOrderLoginPoFileInput) {
+    if (!vendorId || !leadId || !userId || !orderLoginId) {
+      const error = new Error(
+        "vendorId, leadId, orderLoginId, and userId are required",
+      );
+      (error as any).statusCode = 400;
+      throw error;
+    }
+
+    if (!files || files.length === 0) {
+      const error = new Error("No files provided for upload");
+      (error as any).statusCode = 400;
+      throw error;
+    }
+
+    const docType = await this.getOrderLoginPoDocType(vendorId);
+    if (!docType) throw new Error("Doc Type (Type 36) not found");
+
+    const uploadedDocs = [];
+
+    await prisma.$transaction(async (tx) => {
+      for (const file of files) {
+        const savedDoc = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: file.originalName,
+            doc_sys_name: file.sysName,
+            created_by: userId,
+            vendor_id: vendorId,
+            lead_id: leadId,
+            doc_type_id: docType.id,
+            product_structure_instance_id:
+              typeof instanceId !== "undefined" ? instanceId : null,
+          },
+        });
+
+        const mapping = await tx.orderLoginPoFileMapping.create({
+          data: {
+            orderlogin_id: orderLoginId,
+            lead_id: leadId,
+            document_id: savedDoc.id,
+            created_by: userId,
+          },
+        });
+
+        uploadedDocs.push({
+          mapping_id: mapping.id,
+          document_id: savedDoc.id,
+          file_name: savedDoc.doc_og_name,
+          file_path: savedDoc.doc_sys_name,
+        });
+      }
+    });
+  }
+
+  async getOrderLoginPoFile(
+    vendorId: number,
+    leadId: number,
+    orderLoginId: number,
+  ) {
+    if (!vendorId || !leadId || !orderLoginId) {
+      const error = new Error("vendorId, leadId and orderLoginId are required");
+      (error as any).statusCode = 400;
+      throw error;
+    }
+
+    const records = await prisma.orderLoginPoFileMapping.findMany({
+      where: {
+        orderlogin_id: orderLoginId,
+        lead_id: leadId,
+        is_deleted: false,
+        lead: {
+          vendor_id: vendorId,
+        },
+      },
+      include: {
+        document: true,
+        createdBy: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+
+    return records.map((r) => ({
+      id: r.document.id,
+      doc_og_name: r.document.doc_og_name,
+      created_at: r.document.created_at,
+
+      // this will be used to generate signed URL later
+      file_path: r.document.doc_sys_name,
+
+      // if you already generate signed url, attach here
+      signed_url: r.document.doc_sys_name,
+    }));
+  }
+
+  async deleteOrderLoginPoFile({
+    vendorId,
+    leadId,
+    orderLoginId,
+    mappingId,
+    userId,
+  }: {
+    vendorId: number;
+    leadId: number;
+    orderLoginId: number;
+    mappingId: number;
+    userId: number;
+  }) {
+    if (!vendorId || !leadId || !orderLoginId || !mappingId || !userId) {
+      const error = new Error("Required parameters missing");
+      (error as any).statusCode = 400;
+      throw error;
+    }
+
+    return await prisma.$transaction(async (tx) => {
+      /**
+       * Validate Mapping Exists & Belongs To Tenant
+       */
+      const mapping = await tx.orderLoginPoFileMapping.findUnique({
+        where: { id: mappingId },
+        include: {
+          lead: { select: { vendor_id: true } },
+          document: true,
+        },
+      });
+
+      if (!mapping) {
+        const error = new Error("PO file not found");
+        (error as any).statusCode = 404;
+        throw error;
+      }
+
+      /**
+       * Soft Delete Mapping
+       */
+      await tx.orderLoginPoFileMapping.update({
+        where: { id: mappingId },
+        data: {
+          is_deleted: true,
+          deleted_at: new Date(),
+          deleted_by: userId,
+        },
+      });
+
+      /**
+       * Soft Delete Document (important)
+       */
+      await tx.leadDocuments.update({
+        where: { id: mapping.document_id },
+        data: {
+          is_deleted: true,
+          deleted_at: new Date(),
+          deleted_by: userId,
+        },
+      });
+
+      return { success: true };
+    });
   }
 }
