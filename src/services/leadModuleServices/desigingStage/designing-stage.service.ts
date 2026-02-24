@@ -7,6 +7,10 @@ import {
 import { z } from "zod";
 import { Prisma } from "../../../prisma/generated";
 import fs from "node:fs/promises";
+export type StageType =
+  | "tech-check-stage"
+  | "order-login-stage"
+  | "production-stage";
 
 const editDesignMeetingSchema = z.object({
   meetingId: z.number().int().positive(),
@@ -21,7 +25,7 @@ export class DesigingStage {
   public static async addToDesigingStage(
     lead_id: number,
     user_id: number,
-    vendor_id: number
+    vendor_id: number,
   ) {
     // 1. Check if user belongs to the same vendor
     const user = await prisma.userMaster.findFirst({
@@ -91,7 +95,7 @@ export class DesigingStage {
     vendorId: number,
     userId: number,
     page: number = 1,
-    limit: number = 10
+    limit: number = 10,
   ) {
     const skip = (page - 1) * limit;
 
@@ -246,10 +250,10 @@ export class DesigingStage {
           (lead.documents || []).map(async (doc: any) => ({
             ...doc,
             signedUrl: await generateSignedUrl(doc.doc_sys_name),
-          }))
+          })),
         );
         return { ...lead, documents: docsWithUrls };
-      })
+      }),
     );
 
     return {
@@ -363,7 +367,7 @@ export class DesigingStage {
           ...doc,
           signedUrl: await generateSignedUrl(doc.doc_sys_name),
         };
-      })
+      }),
     );
 
     return {
@@ -386,7 +390,7 @@ export class DesigingStage {
         data.vendorId,
         data.leadId,
         file.originalname,
-        file.mimetype
+        file.mimetype,
       );
 
       await fs.unlink(file.path);
@@ -430,7 +434,7 @@ export class DesigingStage {
 
       if (!quotationDocType) {
         throw new Error(
-          "Quotation document type (Type 5) is not configured for this vendor"
+          "Quotation document type (Type 5) is not configured for this vendor",
         );
       }
 
@@ -490,7 +494,7 @@ export class DesigingStage {
 
   public static async getDesignQuotationDocuments(
     vendorId: number,
-    leadId: number
+    leadId: number,
   ) {
     const logs: any[] = [];
 
@@ -518,7 +522,7 @@ export class DesigingStage {
 
     if (!designQuotationDocType) {
       throw new Error(
-        "Design quotation document type not found for this vendor"
+        "Design quotation document type not found for this vendor",
       );
     }
     logs.push("Design quotation document type found");
@@ -566,11 +570,11 @@ export class DesigingStage {
           ...doc,
           signedUrl,
         };
-      })
+      }),
     );
 
     logs.push(
-      `Found ${documents.length} design quotation documents for lead ${leadId}`
+      `Found ${documents.length} design quotation documents for lead ${leadId}`,
     );
 
     return {
@@ -648,7 +652,7 @@ export class DesigingStage {
           file.buffer,
           input.vendorId,
           existingMeeting.lead_id,
-          file.originalname
+          file.originalname,
         );
         logs.push({ fileUploaded: file.originalname, sysName });
 
@@ -812,7 +816,7 @@ export class DesigingStage {
     leadId: number,
     page: number,
     limit: number,
-    productStructureInstanceId?: number
+    productStructureInstanceId?: number,
   ) {
     const logs: any[] = [];
     const skip = (page - 1) * limit;
@@ -890,7 +894,7 @@ export class DesigingStage {
     });
 
     logs.push(
-      `Fetched ${designSelections.length} design selections for lead ${leadId}`
+      `Fetched ${designSelections.length} design selections for lead ${leadId}`,
     );
 
     const pagination = {
@@ -906,6 +910,54 @@ export class DesigingStage {
       logs,
       designSelections,
       pagination,
+    };
+  }
+
+  public static async getInstanceStageByContext(params: {
+    vendorId: number;
+    leadId: number;
+    instanceId: number;
+  }) {
+    const { vendorId, leadId, instanceId } = params;
+
+    // 🔐 Fetch instance only if it belongs to vendor + lead
+    const instance = await prisma.leadProductStructureInstance.findFirst({
+      where: {
+        id: instanceId,
+        vendor_id: vendorId,
+        lead_id: leadId,
+      },
+      select: {
+        id: true,
+        lead_id: true,
+        vendor_id: true,
+        is_tech_check_completed: true,
+        is_order_login_completed: true,
+      },
+    });
+
+    if (!instance) {
+      throw new Error("Instance not found for given vendor/lead context");
+    }
+
+    // =============================
+    // Workflow Stage Derivation
+    // =============================
+    let stage: StageType;
+
+    if (instance.is_tech_check_completed !== true) {
+      stage = "tech-check-stage";
+    } else if (instance.is_order_login_completed !== true) {
+      stage = "order-login-stage";
+    } else {
+      stage = "production-stage";
+    }
+
+    return {
+      vendor_id: vendorId,
+      lead_id: instance.lead_id,
+      instance_id: instance.id,
+      derived_stage: stage,
     };
   }
 }

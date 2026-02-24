@@ -99,6 +99,23 @@ export class TechCheckService {
             },
           });
 
+          // ✅ Create mapping for this instance transition
+          let instanceMapping: any = null;
+
+          if (assignToUserId && effectiveAccountId) {
+            instanceMapping = await tx.leadUserMapping.create({
+              data: {
+                vendor_id: vendorId,
+                lead_id: leadId,
+                account_id: effectiveAccountId,
+                user_id: assignToUserId,
+                type: "order-login-stage",
+                status: "active",
+                created_by: userId,
+              },
+            });
+          }
+
           await tx.leadDetailedLogs.create({
             data: {
               vendor_id: vendorId,
@@ -145,18 +162,6 @@ export class TechCheckService {
                 status_id: orderLoginStatus.id,
                 updated_by: userId,
                 updated_at: new Date(),
-              },
-            });
-
-            const mapping = await tx.leadUserMapping.create({
-              data: {
-                vendor_id: vendorId,
-                lead_id: leadId,
-                account_id: effectiveAccountId,
-                user_id: assignToUserId,
-                type: "order-login-stage",
-                status: "active",
-                created_by: userId,
               },
             });
 
@@ -223,13 +228,12 @@ export class TechCheckService {
               is_tech_check_completed: updatedInstance.is_tech_check_completed,
               tech_check_completed_at: updatedInstance.tech_check_completed_at,
               updatedLead,
-              mapping,
+              mapping: instanceMapping,
               moved_to_order_login: true,
               assign_to_user_id: assignToUserId,
               account_id: effectiveAccountId,
             };
           }
-
           return {
             mode: "instance",
             instance_id: updatedInstance.id,

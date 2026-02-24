@@ -199,7 +199,6 @@ export class UnderInstallationStageService {
         minute: "2-digit",
       });
 
-
       const redirectPath = lead.account_id
         ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
         : `/dashboard/leads/details/${leadId}`;
@@ -1056,7 +1055,7 @@ export class UnderInstallationStageService {
       created_by,
       teams,
       files,
-      baseUrl
+      baseUrl,
     } = payload;
 
     // ====================================
@@ -1282,7 +1281,6 @@ export class UnderInstallationStageService {
       // Build Deep-Link Redirect URL
       // -----------------------------
 
-    
       const redirectPath =
         leadMeta?.account_id && leadMeta.account_id > 0
           ? `/dashboard/leads/details/${lead_id}?accountId=${leadMeta.account_id}&tab=misc&taskId=${misc.taskId}`
@@ -1573,10 +1571,7 @@ export class UnderInstallationStageService {
           vendor_id,
           lead_id: existing.lead_id,
           task_type: "Miscellaneous",
-          OR: [
-            { remark: { contains: miscTaskKey } },
-            { remark: remarkKey },
-          ],
+          OR: [{ remark: { contains: miscTaskKey } }, { remark: remarkKey }],
           status: "completed",
         },
         select: { id: true },
@@ -1859,7 +1854,7 @@ export class UnderInstallationStageService {
     misc_id,
     expected_ready_date,
     updated_by,
-    baseUrl
+    baseUrl,
   }: UpdateERDInput) {
     // ===============================
     // 1️⃣ TRANSACTION LAYER
@@ -1901,10 +1896,7 @@ export class UnderInstallationStageService {
           vendor_id,
           lead_id: existing.lead_id,
           task_type: "Miscellaneous",
-          OR: [
-            { remark: { contains: miscTaskKey } },
-            { remark: remarkKey },
-          ],
+          OR: [{ remark: { contains: miscTaskKey } }, { remark: remarkKey }],
         },
         select: { id: true },
       });
@@ -2018,7 +2010,6 @@ export class UnderInstallationStageService {
       // Deep Link Builder
       // -------------------------
 
-     
       const redirectPath =
         leadMeta?.account_id && leadMeta.account_id > 0
           ? `/dashboard/leads/details/${result.lead_id}?accountId=${leadMeta.account_id}&tab=misc&taskId=${result.taskId}`
@@ -2450,7 +2441,7 @@ export class UnderInstallationStageService {
     vendorId: number,
     leadId: number,
     updatedBy: number,
-    baseUrl: string
+    baseUrl: string,
   ) {
     // ===============================
     // 1️⃣ TRANSACTION LAYER
@@ -2564,8 +2555,6 @@ export class UnderInstallationStageService {
       const leadCode = leadMeta?.lead_code ?? `LEAD-${leadId}`;
       const leadName =
         `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
-
-
 
       const redirectPath =
         leadMeta?.account_id && leadMeta.account_id > 0
@@ -2944,7 +2933,6 @@ export class UnderInstallationStageService {
         minute: "2-digit",
       });
 
-
       const redirectPath =
         leadMeta?.account_id && leadMeta.account_id > 0
           ? `/dashboard/leads/details/${lead_id}?accountId=${leadMeta.account_id}&tab=misc&taskId=${result.taskId}`
@@ -3037,10 +3025,7 @@ export class UnderInstallationStageService {
           lead_id,
           account_id: existing.account_id,
           task_type: "Miscellaneous",
-          OR: [
-            { remark: { contains: miscTaskKey } },
-            { remark: remarkKey },
-          ],
+          OR: [{ remark: { contains: miscTaskKey } }, { remark: remarkKey }],
           status: "open",
         },
         data: {
@@ -3058,10 +3043,7 @@ export class UnderInstallationStageService {
           vendor_id,
           lead_id,
           task_type: "Miscellaneous",
-          OR: [
-            { remark: { contains: miscTaskKey } },
-            { remark: remarkKey },
-          ],
+          OR: [{ remark: { contains: miscTaskKey } }, { remark: remarkKey }],
         },
         orderBy: { id: "desc" },
         select: { id: true },
@@ -3136,7 +3118,6 @@ export class UnderInstallationStageService {
 
       // Build Deep Link
 
-
       const redirectPath =
         leadMeta?.account_id && leadMeta.account_id > 0
           ? `/dashboard/leads/details/${lead_id}?accountId=${leadMeta.account_id}&tab=misc&taskId=${result.taskId}`
@@ -3182,5 +3163,22 @@ export class UnderInstallationStageService {
     }
 
     return { ok: true };
+  }
+
+  static async checkMiscellaneousResolved(vendorId: number, leadId: number) {
+    // Count unresolved records
+    const unresolvedCount = await prisma.miscellaneousMaster.count({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        OR: [{ is_resolved: false }],
+      },
+    });
+
+    return {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      all_resolved: unresolvedCount === 0,
+    };
   }
 }

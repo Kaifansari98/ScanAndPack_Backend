@@ -414,18 +414,20 @@ export class PreProductionService {
     };
   }
 
-  async getLatestOrderLoginByLead(vendorId: number, leadId: number) {
-    if (!vendorId || !leadId) {
-      const error = new Error("vendor_id and lead_id are required");
-      (error as any).statusCode = 400;
-      throw error;
-    }
-
+  async getLatestOrderLoginByLead(vendorId: number, leadId: number,  instanceId: number) {
+   if (!vendorId || !leadId || !instanceId) {
+    const error = new Error(
+      "vendor_id, lead_id and instance_id are required"
+    );
+    (error as any).statusCode = 400;
+    throw error;
+  }
     // Fetch the latest order login sorted by estimated_completion_date DESC
     const latestOrder = await prisma.orderLoginDetails.findFirst({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
+        instance_id: instanceId,
         estimated_completion_date: {
           not: null,
         },
@@ -438,6 +440,7 @@ export class PreProductionService {
         item_type: true,
         estimated_completion_date: true,
         is_completed: true,
+        instance_id: true
       },
     });
 
