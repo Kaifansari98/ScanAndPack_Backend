@@ -81,12 +81,16 @@ export class OrderLoginController {
       const { senderUserId } = req.query; // ✅ Use query param
 
       const baseUrl = resolveClientBaseUrl(req);
+      const instanceId =
+        typeof instance_id === "string" && instance_id.trim().length > 0
+          ? Number(instance_id)
+          : undefined;
       const orderLogins = await service.getOrderLoginByLead(
         Number(vendorId),
         Number(lead_id),
         Number(senderUserId),
         baseUrl,
-        typeof instance_id !== "undefined" ? Number(instance_id) : undefined
+        instanceId
       );
 
       return res.status(200).json({
