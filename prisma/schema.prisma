@@ -183,6 +183,8 @@ model UserMaster {
   userMachineMappings        UserMachineMapping[] @relation("UserMachine_user")
   createdUserMachineMappings UserMachineMapping[] @relation("UserMachine_createdBy")
   updatedUserMachineMappings UserMachineMapping[] @relation("UserMachine_updatedBy")
+  orderLoginPoFilesCreated   OrderLoginPoFileMapping[] @relation("OrderLoginPoFileCreatedBy")
+  orderLoginPoFilesDeleted   OrderLoginPoFileMapping[] @relation("OrderLoginPoFileDeletedBy")
 }
 
 model UserDocument {
@@ -430,7 +432,7 @@ model LeadMaster {
   tasks                                       UserLeadTask[]
   cutList                                     CutList[]
   cutListMachineMapping                       CutListMachineMapping[]
-  
+  orderLoginPoFiles                           OrderLoginPoFileMapping[]
 
   @@unique([vendor_id, lead_code], name: "uniq_vendor_lead_code")
 }
@@ -586,6 +588,7 @@ model LeadDocuments {
   miscellaneousDocument         MiscellaneousDocument[]
   paymentInfo                   PaymentInfo[]
   site_readiness_photos         SiteReadiness[]               @relation("LeadDocumentsToSiteReadiness")
+  orderLoginPoFiles             OrderLoginPoFileMapping[]
 }
 
 model LeadChatRoom {
@@ -988,6 +991,7 @@ model OrderLoginDetails {
   lead                                 LeadMaster            @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   updatedBy                            UserMaster?           @relation("OrderLoginUpdatedBy", fields: [updated_by], references: [id])
   vendor                               VendorMaster          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  poFiles                              OrderLoginPoFileMapping[]
 }
 
 model SiteReadiness {
@@ -1405,6 +1409,34 @@ model UserMachineMapping {
   vendor      VendorMaster      @relation(fields: [vendor_id], references: [id])
 
 
+}
+
+
+model OrderLoginPoFileMapping {
+  id             Int            @id @default(autoincrement())
+
+  orderlogin_id  Int
+  lead_id        Int
+  document_id    Int
+
+  created_by     Int
+  created_at     DateTime       @default(now())
+
+  deleted_at     DateTime?
+  deleted_by     Int?
+  is_deleted     Boolean        @default(false)
+
+  // ================= RELATIONS =================
+
+  orderLogin     OrderLoginDetails @relation(fields: [orderlogin_id], references: [id], onDelete: Cascade)
+  lead           LeadMaster        @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  document       LeadDocuments     @relation(fields: [document_id], references: [id], onDelete: Cascade)
+  createdBy      UserMaster        @relation("OrderLoginPoFileCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  deletedBy      UserMaster?       @relation("OrderLoginPoFileDeletedBy", fields: [deleted_by], references: [id])
+
+  @@index([orderlogin_id])
+  @@index([lead_id])
+  @@index([document_id])
 }
 
 model MachineTypeMaster {

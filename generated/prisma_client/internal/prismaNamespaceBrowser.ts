@@ -122,6 +122,7 @@ export const ModelName = {
   CutList: 'CutList',
   CutListMachineMapping: 'CutListMachineMapping',
   UserMachineMapping: 'UserMachineMapping',
+  OrderLoginPoFileMapping: 'OrderLoginPoFileMapping',
   MachineTypeMaster: 'MachineTypeMaster'
 } as const
 
@@ -1250,6 +1251,21 @@ export const UserMachineMappingScalarFieldEnum = {
 } as const
 
 export type UserMachineMappingScalarFieldEnum = (typeof UserMachineMappingScalarFieldEnum)[keyof typeof UserMachineMappingScalarFieldEnum]
+
+
+export const OrderLoginPoFileMappingScalarFieldEnum = {
+  id: 'id',
+  orderlogin_id: 'orderlogin_id',
+  lead_id: 'lead_id',
+  document_id: 'document_id',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted'
+} as const
+
+export type OrderLoginPoFileMappingScalarFieldEnum = (typeof OrderLoginPoFileMappingScalarFieldEnum)[keyof typeof OrderLoginPoFileMappingScalarFieldEnum]
 
 
 export const MachineTypeMasterScalarFieldEnum = {

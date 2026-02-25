@@ -780,6 +780,7 @@ export type LeadMasterWhereInput = {
   tasks?: Prisma.UserLeadTaskListRelationFilter
   cutList?: Prisma.CutListListRelationFilter
   cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingListRelationFilter
 }
 
 export type LeadMasterOrderByWithRelationInput = {
@@ -882,6 +883,7 @@ export type LeadMasterOrderByWithRelationInput = {
   tasks?: Prisma.UserLeadTaskOrderByRelationAggregateInput
   cutList?: Prisma.CutListOrderByRelationAggregateInput
   cutListMachineMapping?: Prisma.CutListMachineMappingOrderByRelationAggregateInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingOrderByRelationAggregateInput
 }
 
 export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -988,6 +990,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   tasks?: Prisma.UserLeadTaskListRelationFilter
   cutList?: Prisma.CutListListRelationFilter
   cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingListRelationFilter
 }, "id" | "uniq_vendor_lead_code">
 
 export type LeadMasterOrderByWithAggregationInput = {
@@ -1220,6 +1223,7 @@ export type LeadMasterCreateInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateInput = {
@@ -1313,6 +1317,7 @@ export type LeadMasterUncheckedCreateInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUpdateInput = {
@@ -1405,6 +1410,7 @@ export type LeadMasterUpdateInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateInput = {
@@ -1498,6 +1504,7 @@ export type LeadMasterUncheckedUpdateInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateManyInput = {
@@ -2733,6 +2740,20 @@ export type LeadMasterUpdateOneWithoutCutListMachineMappingNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutCutListMachineMappingInput, Prisma.LeadMasterUpdateWithoutCutListMachineMappingInput>, Prisma.LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput>
 }
 
+export type LeadMasterCreateNestedOneWithoutOrderLoginPoFilesInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutOrderLoginPoFilesInput, Prisma.LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutOrderLoginPoFilesInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+}
+
+export type LeadMasterUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutOrderLoginPoFilesInput, Prisma.LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutOrderLoginPoFilesInput
+  upsert?: Prisma.LeadMasterUpsertWithoutOrderLoginPoFilesInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutOrderLoginPoFilesInput, Prisma.LeadMasterUpdateWithoutOrderLoginPoFilesInput>, Prisma.LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput>
+}
+
 export type LeadMasterCreateWithoutVendorInput = {
   firstname: string
   lastname: string
@@ -2822,6 +2843,7 @@ export type LeadMasterCreateWithoutVendorInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutVendorInput = {
@@ -2914,6 +2936,7 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutVendorInput = {
@@ -3100,6 +3123,7 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
@@ -3192,6 +3216,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutAssignedToInput = {
@@ -3293,6 +3318,7 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
@@ -3385,6 +3411,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutAssignedByInput = {
@@ -3486,6 +3513,7 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
@@ -3578,6 +3606,7 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutCreatedByInput = {
@@ -3679,6 +3708,7 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
@@ -3771,6 +3801,7 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutUpdatedByInput = {
@@ -3936,6 +3967,7 @@ export type LeadMasterCreateWithoutProjectsInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutProjectsInput = {
@@ -4028,6 +4060,7 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutProjectsInput = {
@@ -4135,6 +4168,7 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
@@ -4227,6 +4261,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutUserMappingsInput = {
@@ -4318,6 +4353,7 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
@@ -4410,6 +4446,7 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutUserMappingsInput = {
@@ -4517,6 +4554,7 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
@@ -4609,6 +4647,7 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
@@ -4700,6 +4739,7 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
@@ -4792,6 +4832,7 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadActivityStatusLogInput = {
@@ -4899,6 +4940,7 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
@@ -4991,6 +5033,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutSiteTypeInput = {
@@ -5082,6 +5125,7 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
@@ -5174,6 +5218,7 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutSiteTypeInput = {
@@ -5291,6 +5336,7 @@ export type LeadMasterCreateWithoutSourceInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutSourceInput = {
@@ -5383,6 +5429,7 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutSourceInput = {
@@ -5500,6 +5547,7 @@ export type LeadMasterCreateWithoutAccountInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutAccountInput = {
@@ -5592,6 +5640,7 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutAccountInput = {
@@ -5709,6 +5758,7 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
@@ -5801,6 +5851,7 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutProductMappingsInput = {
@@ -5908,6 +5959,7 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
@@ -6000,6 +6052,7 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutDocumentsInput = {
@@ -6091,6 +6144,7 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
@@ -6183,6 +6237,7 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutDocumentsInput = {
@@ -6290,6 +6345,7 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
@@ -6382,6 +6438,7 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadChatRoomsInput = {
@@ -6473,6 +6530,7 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
@@ -6565,6 +6623,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadChatRoomsInput = {
@@ -6672,6 +6731,7 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
@@ -6764,6 +6824,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
@@ -6855,6 +6916,7 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
@@ -6947,6 +7009,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadChatDocumentsInput = {
@@ -7054,6 +7117,7 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
@@ -7146,6 +7210,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
@@ -7237,6 +7302,7 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
@@ -7329,6 +7395,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadProductStructureMappingInput = {
@@ -7436,6 +7503,7 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
@@ -7528,6 +7596,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutProductStructureInstancesInput = {
@@ -7619,6 +7688,7 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
@@ -7711,6 +7781,7 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutProductStructureInstancesInput = {
@@ -7818,6 +7889,7 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
@@ -7910,6 +7982,7 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutPaymentsInput = {
@@ -8001,6 +8074,7 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
@@ -8093,6 +8167,7 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutPaymentsInput = {
@@ -8200,6 +8275,7 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
@@ -8292,6 +8368,7 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLedgersInput = {
@@ -8383,6 +8460,7 @@ export type LeadMasterCreateWithoutLedgersInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLedgersInput = {
@@ -8475,6 +8553,7 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLedgersInput = {
@@ -8582,6 +8661,7 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
@@ -8674,6 +8754,7 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutStatusTypeInput = {
@@ -8765,6 +8846,7 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
@@ -8857,6 +8939,7 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutStatusTypeInput = {
@@ -8974,6 +9057,7 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
@@ -9066,6 +9150,7 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadStatusLogsInput = {
@@ -9173,6 +9258,7 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
@@ -9265,6 +9351,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutDesignMeetingInput = {
@@ -9356,6 +9443,7 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
@@ -9448,6 +9536,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutDesignMeetingInput = {
@@ -9555,6 +9644,7 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
@@ -9647,6 +9737,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
@@ -9738,6 +9829,7 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
@@ -9830,6 +9922,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutDesignMeetingDocsMappingInput = {
@@ -9937,6 +10030,7 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
@@ -10029,6 +10123,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutDesignSelectionInput = {
@@ -10120,6 +10215,7 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
@@ -10212,6 +10308,7 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutDesignSelectionInput = {
@@ -10319,6 +10416,7 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
@@ -10411,6 +10509,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutSiteSupervisorsInput = {
@@ -10502,6 +10601,7 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
@@ -10594,6 +10694,7 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutSiteSupervisorsInput = {
@@ -10701,6 +10802,7 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
@@ -10793,6 +10895,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutTasksInput = {
@@ -10884,6 +10987,7 @@ export type LeadMasterCreateWithoutTasksInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutTasksInput = {
@@ -10976,6 +11080,7 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutTasksInput = {
@@ -11083,6 +11188,7 @@ export type LeadMasterUpdateWithoutTasksInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutTasksInput = {
@@ -11175,6 +11281,7 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
@@ -11266,6 +11373,7 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
@@ -11358,6 +11466,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadDetailedLogsInput = {
@@ -11465,6 +11574,7 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
@@ -11557,6 +11667,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
@@ -11648,6 +11759,7 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
@@ -11740,6 +11852,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadDocumentLogsInput = {
@@ -11847,6 +11960,7 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
@@ -11939,6 +12053,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
@@ -12030,6 +12145,7 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
@@ -12122,6 +12238,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutOrderLoginDetailsInput = {
@@ -12229,6 +12346,7 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
@@ -12321,6 +12439,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutSiteReadinessInput = {
@@ -12412,6 +12531,7 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
@@ -12504,6 +12624,7 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutSiteReadinessInput = {
@@ -12611,6 +12732,7 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
@@ -12703,6 +12825,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutInstallerMappingsInput = {
@@ -12794,6 +12917,7 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
@@ -12886,6 +13010,7 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutInstallerMappingsInput = {
@@ -12993,6 +13118,7 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
@@ -13085,6 +13211,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutInstallationUpdatesInput = {
@@ -13176,6 +13303,7 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
@@ -13268,6 +13396,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutInstallationUpdatesInput = {
@@ -13375,6 +13504,7 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
@@ -13467,6 +13597,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
@@ -13558,6 +13689,7 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
@@ -13650,6 +13782,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutMiscellaneousMasterInput = {
@@ -13757,6 +13890,7 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
@@ -13849,6 +13983,7 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
@@ -13940,6 +14075,7 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
@@ -14032,6 +14168,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutInstallationIssueLogMasterInput = {
@@ -14139,6 +14276,7 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
@@ -14231,6 +14369,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutCutListInput = {
@@ -14322,6 +14461,7 @@ export type LeadMasterCreateWithoutCutListInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutLeadInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutCutListInput = {
@@ -14414,6 +14554,7 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutLeadInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutCutListInput = {
@@ -14521,6 +14662,7 @@ export type LeadMasterUpdateWithoutCutListInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutLeadNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutCutListInput = {
@@ -14613,6 +14755,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutLeadNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutCutListMachineMappingInput = {
@@ -14704,6 +14847,7 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutLeadInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
@@ -14796,6 +14940,7 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutLeadInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutCutListMachineMappingInput = {
@@ -14903,6 +15048,7 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutLeadNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
@@ -14995,6 +15141,393 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutLeadNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  archetech_name?: string | null
+  designer_remark?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  lead_code: string
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  actual_installation_start_date?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
+  mrp_value?: number | null
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
+  account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
+  assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
+  assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadsCreatedInput
+  siteType?: Prisma.SiteTypeMasterCreateNestedOneWithoutLeadsInput
+  source?: Prisma.SourceMasterCreateNestedOneWithoutLeadsInput
+  statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
+  cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+}
+
+export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
+  id?: number
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  archetech_name?: string | null
+  designer_remark?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  vendor_id: number
+  assign_to?: number | null
+  assigned_by?: number | null
+  account_id?: number | null
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  status_id?: number | null
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  lead_code: string
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  actual_installation_start_date?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  usable_handover_completed?: boolean | null
+  mrp_value?: number | null
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
+  productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
+  cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadMasterCreateOrConnectWithoutOrderLoginPoFilesInput = {
+  where: Prisma.LeadMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutOrderLoginPoFilesInput, Prisma.LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput>
+}
+
+export type LeadMasterUpsertWithoutOrderLoginPoFilesInput = {
+  update: Prisma.XOR<Prisma.LeadMasterUpdateWithoutOrderLoginPoFilesInput, Prisma.LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput>
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutOrderLoginPoFilesInput, Prisma.LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput>
+  where?: Prisma.LeadMasterWhereInput
+}
+
+export type LeadMasterUpdateToOneWithWhereWithoutOrderLoginPoFilesInput = {
+  where?: Prisma.LeadMasterWhereInput
+  data: Prisma.XOR<Prisma.LeadMasterUpdateWithoutOrderLoginPoFilesInput, Prisma.LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput>
+}
+
+export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
+  account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
+  assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
+  assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadsCreatedNestedInput
+  siteType?: Prisma.SiteTypeMasterUpdateOneWithoutLeadsNestedInput
+  source?: Prisma.SourceMasterUpdateOneWithoutLeadsNestedInput
+  statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
+  cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  assign_to?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assigned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
+  productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
+  cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateManyVendorInput = {
@@ -15151,6 +15684,7 @@ export type LeadMasterUpdateWithoutVendorInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutVendorInput = {
@@ -15243,6 +15777,7 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -15659,6 +16194,7 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
@@ -15751,6 +16287,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutAssignedToInput = {
@@ -15907,6 +16444,7 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
@@ -15999,6 +16537,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutAssignedByInput = {
@@ -16155,6 +16694,7 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
@@ -16247,6 +16787,7 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutCreatedByInput = {
@@ -16403,6 +16944,7 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
@@ -16495,6 +17037,7 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -16716,6 +17259,7 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
@@ -16808,6 +17352,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutSiteTypeInput = {
@@ -17029,6 +17574,7 @@ export type LeadMasterUpdateWithoutSourceInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutSourceInput = {
@@ -17121,6 +17667,7 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutSourceInput = {
@@ -17342,6 +17889,7 @@ export type LeadMasterUpdateWithoutAccountInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutAccountInput = {
@@ -17434,6 +17982,7 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutAccountInput = {
@@ -17655,6 +18204,7 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
@@ -17747,6 +18297,7 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutStatusTypeInput = {
@@ -17847,6 +18398,7 @@ export type LeadMasterCountOutputType = {
   tasks: number
   cutList: number
   cutListMachineMapping: number
+  orderLoginPoFiles: number
 }
 
 export type LeadMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -17877,6 +18429,7 @@ export type LeadMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   tasks?: boolean | LeadMasterCountOutputTypeCountTasksArgs
   cutList?: boolean | LeadMasterCountOutputTypeCountCutListArgs
   cutListMachineMapping?: boolean | LeadMasterCountOutputTypeCountCutListMachineMappingArgs
+  orderLoginPoFiles?: boolean | LeadMasterCountOutputTypeCountOrderLoginPoFilesArgs
 }
 
 /**
@@ -18078,6 +18631,13 @@ export type LeadMasterCountOutputTypeCountCutListMachineMappingArgs<ExtArgs exte
   where?: Prisma.CutListMachineMappingWhereInput
 }
 
+/**
+ * LeadMasterCountOutputType without action
+ */
+export type LeadMasterCountOutputTypeCountOrderLoginPoFilesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrderLoginPoFileMappingWhereInput
+}
+
 
 export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -18179,6 +18739,7 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   tasks?: boolean | Prisma.LeadMaster$tasksArgs<ExtArgs>
   cutList?: boolean | Prisma.LeadMaster$cutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.LeadMaster$cutListMachineMappingArgs<ExtArgs>
+  orderLoginPoFiles?: boolean | Prisma.LeadMaster$orderLoginPoFilesArgs<ExtArgs>
   _count?: boolean | Prisma.LeadMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadMaster"]>
 
@@ -18436,6 +18997,7 @@ export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   tasks?: boolean | Prisma.LeadMaster$tasksArgs<ExtArgs>
   cutList?: boolean | Prisma.LeadMaster$cutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.LeadMaster$cutListMachineMappingArgs<ExtArgs>
+  orderLoginPoFiles?: boolean | Prisma.LeadMaster$orderLoginPoFilesArgs<ExtArgs>
   _count?: boolean | Prisma.LeadMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LeadMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -18500,6 +19062,7 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     tasks: Prisma.$UserLeadTaskPayload<ExtArgs>[]
     cutList: Prisma.$CutListPayload<ExtArgs>[]
     cutListMachineMapping: Prisma.$CutListMachineMappingPayload<ExtArgs>[]
+    orderLoginPoFiles: Prisma.$OrderLoginPoFileMappingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -18995,6 +19558,7 @@ export interface Prisma__LeadMasterClient<T, Null = never, ExtArgs extends runti
   tasks<T extends Prisma.LeadMaster$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserLeadTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cutList<T extends Prisma.LeadMaster$cutListArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$cutListArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cutListMachineMapping<T extends Prisma.LeadMaster$cutListMachineMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$cutListMachineMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListMachineMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  orderLoginPoFiles<T extends Prisma.LeadMaster$orderLoginPoFilesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$orderLoginPoFilesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderLoginPoFileMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -20261,6 +20825,30 @@ export type LeadMaster$cutListMachineMappingArgs<ExtArgs extends runtime.Types.E
   take?: number
   skip?: number
   distinct?: Prisma.CutListMachineMappingScalarFieldEnum | Prisma.CutListMachineMappingScalarFieldEnum[]
+}
+
+/**
+ * LeadMaster.orderLoginPoFiles
+ */
+export type LeadMaster$orderLoginPoFilesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrderLoginPoFileMapping
+   */
+  select?: Prisma.OrderLoginPoFileMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrderLoginPoFileMapping
+   */
+  omit?: Prisma.OrderLoginPoFileMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderLoginPoFileMappingInclude<ExtArgs> | null
+  where?: Prisma.OrderLoginPoFileMappingWhereInput
+  orderBy?: Prisma.OrderLoginPoFileMappingOrderByWithRelationInput | Prisma.OrderLoginPoFileMappingOrderByWithRelationInput[]
+  cursor?: Prisma.OrderLoginPoFileMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrderLoginPoFileMappingScalarFieldEnum | Prisma.OrderLoginPoFileMappingScalarFieldEnum[]
 }
 
 /**
