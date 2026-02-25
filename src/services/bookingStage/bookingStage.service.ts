@@ -1646,7 +1646,6 @@ export class BookingStageService {
   }
 
   // post filter service
-
   // ✅ Helpers (you already have these in your other service)
   private static getFileType(filename: string): string {
     const ext = filename.split(".").pop()?.toLowerCase();
@@ -2593,9 +2592,8 @@ export class BookingStageService {
     });
   }
 
-
-
-    public static async getUniversalTableData(
+  // post api for lead fetching stage with user id
+  public static async getUniversalTableData(
     vendorId: number,
     userId: number,
     tag?: string,
@@ -2645,9 +2643,12 @@ export class BookingStageService {
     const isTechCheckStage = normalizedTag === "Type 8";
     const isOrderLoginStage = normalizedTag === "Type 9";
     const isProductionStage = normalizedTag === "Type 10";
-
+    const isInstallationStage = normalizedTag === "Type 18";
     const isInstanceDrivenStage =
-      isTechCheckStage || isOrderLoginStage || isProductionStage;
+      isTechCheckStage ||
+      isOrderLoginStage ||
+      isProductionStage ||
+      isInstallationStage;
 
     let statusIds: number[] = [];
 
@@ -3109,6 +3110,15 @@ export class BookingStageService {
         }
       }
 
+      if (isInstallationStage) {
+        addAnd({
+          OR: [
+            { usable_handover_completed: false },
+            { usable_handover_completed: null },
+          ],
+        });
+      }
+
       return whereClause;
     };
 
@@ -3172,7 +3182,7 @@ export class BookingStageService {
       },
       select: { lead_id: true },
     });
-    
+
     const taskLeads = await prisma.userLeadTask.findMany({
       where: {
         vendor_id: vendorId,
@@ -3201,7 +3211,7 @@ export class BookingStageService {
       id: { in: leadIds },
       is_deleted: false,
       vendor_id: vendorId,
-      status_id: { in: statusIds } ,
+      status_id: { in: statusIds },
       statusType: { vendor_id: vendorId },
       activity_status: isAllStages
         ? "onGoing"
@@ -3246,5 +3256,4 @@ export class BookingStageService {
 
     return { leads: processed, count: total };
   }
-
 }
