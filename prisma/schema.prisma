@@ -1357,7 +1357,7 @@ model CutListMachineMapping {
   cut_list_id   Int
   machine_id    Int
   vendor_id     Int
-  lead_id       Int           
+  lead_id       Int?
   project_id    Int
   sequence_no   Int
   is_optional   Boolean       @default(false)
@@ -1373,8 +1373,8 @@ model CutListMachineMapping {
   cut_list      CutList       @relation(fields: [cut_list_id], references: [id])
   machine       MachineMaster @relation(fields: [machine_id], references: [id])
   project       ProjectMaster @relation(fields: [project_id], references: [id])
-  vendor        VendorMaster  @relation(fields: [vendor_id], references: [id])
-  lead          LeadMaster    @relation(fields: [lead_id], references: [id])
+  vendor        VendorMaster  @relation(fields: [vendor_id], references: [id])  
+  lead          LeadMaster?    @relation(fields: [lead_id], references: [id])
   operator      UserMaster?    @relation(fields: [in_operator], references: [id])
 
   @@index([cut_list_id])

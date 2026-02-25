@@ -2730,10 +2730,12 @@ export type LeadMasterCreateNestedOneWithoutCutListMachineMappingInput = {
   connect?: Prisma.LeadMasterWhereUniqueInput
 }
 
-export type LeadMasterUpdateOneRequiredWithoutCutListMachineMappingNestedInput = {
+export type LeadMasterUpdateOneWithoutCutListMachineMappingNestedInput = {
   create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutCutListMachineMappingInput, Prisma.LeadMasterUncheckedCreateWithoutCutListMachineMappingInput>
   connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutCutListMachineMappingInput
   upsert?: Prisma.LeadMasterUpsertWithoutCutListMachineMappingInput
+  disconnect?: Prisma.LeadMasterWhereInput | boolean
+  delete?: Prisma.LeadMasterWhereInput | boolean
   connect?: Prisma.LeadMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutCutListMachineMappingInput, Prisma.LeadMasterUpdateWithoutCutListMachineMappingInput>, Prisma.LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput>
 }

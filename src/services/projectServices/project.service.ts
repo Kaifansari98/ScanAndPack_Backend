@@ -81,7 +81,16 @@ export const getAllProjectsTrackTrace = (vendor_id: number) => {
       createdByUser: true,
       details: true,
       items: true,
+      lead: {
+        select: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          lead_code:true
+        }
+      }
     },
+
     orderBy: { id: "desc" }
   });
 };
@@ -994,7 +1003,7 @@ export const handelItems = async (
     if (!adminUser) throw new Error("No admin user found for this vendor");
 
     const createdByUserId = adminUser.id;
-    const lead_id = 37;
+    const lead_id = null;
 
     const { randomUUID } = require("crypto");
     const unique_project_id = randomUUID();
