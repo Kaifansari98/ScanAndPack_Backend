@@ -241,8 +241,9 @@ export const sendBrevoEmail = async (
 ): Promise<BrevoEmailResult> => {
   const apiKey = process.env.BREVO_API_KEY;
   const brevoEnabled = process.env.BREVO_ENABLED === "true";
+  const forcedSenderEmail = process.env.BREVO_SENDER_EMAIL;
 
-  const senderEmail = identity?.senderEmail;
+  const senderEmail = forcedSenderEmail || identity?.senderEmail;
   const senderName = identity?.senderName;
 
   const replyTo = identity?.senderEmail;
