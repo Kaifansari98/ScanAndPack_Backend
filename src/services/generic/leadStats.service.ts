@@ -183,9 +183,29 @@ export class LeadStatsService {
       "dispatch-planning-stage"
     );
     const totalDispatchStageLeads = await countByStatus("dispatch-stage");
-    const totalUnderInstallationStageLeads = await countByStatus(
-      "under-installation-stage"
-    );
+ const totalUnderInstallationStageLeads = await prisma.leadMaster.count({
+  where: {
+    ...baseLeadScope,
+
+    // Stage Filter (Type 15)
+    statusType: {
+      vendor_id: vendorId,
+      type: "under-installation-stage",
+    },
+
+    // Hide ONLY when usable completed + misc still pending
+    NOT: {
+      AND: [
+        { usable_handover_completed: true },
+        {
+          miscellaneousMaster: {
+            some: { is_resolved: false },
+          },
+        },
+      ],
+    },
+  },
+});
     const totalFinalhandoverStageLeads = await countByStatus(
       "final-handover-stage"
     );

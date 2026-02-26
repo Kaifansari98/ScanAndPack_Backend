@@ -2643,7 +2643,7 @@ export class BookingStageService {
     const isTechCheckStage = normalizedTag === "Type 8";
     const isOrderLoginStage = normalizedTag === "Type 9";
     const isProductionStage = normalizedTag === "Type 10";
-    const isInstallationStage = normalizedTag === "Type 18";
+    const isInstallationStage = normalizedTag === "Type 15";
     const isInstanceDrivenStage =
       isTechCheckStage ||
       isOrderLoginStage ||
@@ -2679,9 +2679,6 @@ export class BookingStageService {
       });
       statusIds = statuses.map((s) => s.id);
     } else {
-      const normalizedTag = String(tag || "")
-        .trim()
-        .toLowerCase();
       const statusTags =
         normalizedTag === "type 8"
           ? ["Type 8", "Type 9"]
@@ -2689,8 +2686,9 @@ export class BookingStageService {
             ? ["Type 8", "Type 9"]
             : normalizedTag === "type 10"
               ? ["Type 8", "Type 9", "Type 10"]
-              : [tag];
-
+              : normalizedTag === "type 15" // ✅ ADD THIS
+                ? ["Type 15"] // ✅ Sirf Type 18 hi chahiye
+                : [tag];
       const statusTypes = await prisma.statusTypeMaster.findMany({
         where: { vendor_id: vendorId, tag: { in: statusTags } },
         select: { id: true },
@@ -3108,15 +3106,21 @@ export class BookingStageService {
             },
           });
         }
+      }
 
-        if (isInstallationStage) {
-          addAnd({
-            OR: [
-              { usable_handover_completed: false },
-              { usable_handover_completed: null },
+      if (isInstallationStage) {
+        addAnd({
+          NOT: {
+            AND: [
+              { usable_handover_completed: true },
+              {
+                miscellaneousMaster: {
+                  some: { is_resolved: false }, // pending misc exists
+                },
+              },
             ],
-          });
-        }
+          },
+        });
       }
 
       return whereClause;
