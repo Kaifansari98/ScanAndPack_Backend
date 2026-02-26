@@ -6,6 +6,8 @@ import {
   createMiscTeam,
   getMiscTeams,
   deleteMiscTeam,
+  getPendingMiscellaneousLeads,
+  getPendingMiscellaneousLeadCount,
 } from "../controllers/leadModuleControllers/miscellaneousMaster.controller";
 
 const miscRoutes = Router();
@@ -38,4 +40,13 @@ miscRoutes.get("/team/vendor/:vendor_id", getMiscTeams);
 // @route DELETE /miscellaneous-master/team/:id
 miscRoutes.delete("/team/:id", deleteMiscTeam);
 
+miscRoutes.post(
+  "/vendor/:vendorId/pending-miscellaneous",
+  getPendingMiscellaneousLeads,
+);
+
+miscRoutes.get(
+  "/vendor/:vendorId/pending-miscellaneous/count",
+  getPendingMiscellaneousLeadCount,
+);
 export default miscRoutes;
