@@ -3108,15 +3108,15 @@ export class BookingStageService {
             },
           });
         }
-      }
 
-      if (isInstallationStage) {
-        addAnd({
-          OR: [
-            { usable_handover_completed: false },
-            { usable_handover_completed: null },
-          ],
-        });
+        if (isInstallationStage) {
+          addAnd({
+            OR: [
+              { usable_handover_completed: false },
+              { usable_handover_completed: null },
+            ],
+          });
+        }
       }
 
       return whereClause;
