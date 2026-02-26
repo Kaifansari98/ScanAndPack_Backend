@@ -1492,21 +1492,38 @@ export class UnderInstallationStageService {
       throw new Error("Miscellaneous record not found");
     }
 
+    // ✅ VALIDATION: Reject must have reason
+    if (misc_approved === false && !exp_of_rejection?.trim()) {
+      throw new Error(
+        "Rejection reason is required when rejecting miscellaneous",
+      );
+    }
+
+    const shouldResolve = misc_approved === false && !!exp_of_rejection?.trim();
+
     const updated = await prisma.miscellaneousMaster.update({
       where: { id: misc_id },
       data: {
         misc_approved,
-        exp_of_rejection: misc_approved ? null : exp_of_rejection || null,
+        exp_of_rejection: misc_approved ? null : exp_of_rejection,
+
+        // ✅ ONLY reject-with-reason will resolve
+        is_resolved: shouldResolve,
+        resolved_at: shouldResolve ? new Date() : null,
+
         updated_by,
       },
     });
 
-    if (misc_approved === false) {
+    // ✅ If rejected → cancel related misc task
+    if (shouldResolve) {
       const miscTaskKey = `[misc:${misc_id}]`;
+
       const miscRecord = await prisma.miscellaneousMaster.findFirst({
         where: { id: misc_id, vendor_id },
         select: { reorder_material_details: true, problem_description: true },
       });
+
       const remarkKey = miscRecord
         ? `${miscRecord.reorder_material_details} - ${miscRecord.problem_description}`
         : undefined;
@@ -1742,6 +1759,7 @@ export class UnderInstallationStageService {
         where: { id: misc.id },
         data: {
           required_delivery_date: new Date(required_delivery_date),
+
           updated_by,
         },
       });
