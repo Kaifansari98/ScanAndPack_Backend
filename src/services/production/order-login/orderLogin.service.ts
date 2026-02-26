@@ -2269,17 +2269,30 @@ export class OrderLoginService {
       },
     });
 
-    return records.map((r) => ({
-      id: r.document.id,
-      doc_og_name: r.document.doc_og_name,
-      created_at: r.document.created_at,
+    return await Promise.all(
+      records.map(async (r) => {
+        const fileName = r.document.doc_og_name ?? "";
+        const ext = fileName.split(".").pop()?.toLowerCase() ?? "";
+        const inlineExts = new Set(["jpg", "jpeg", "png", "webp", "gif"]);
+        const disposition = inlineExts.has(ext) ? "inline" : "attachment";
 
-      // this will be used to generate signed URL later
-      file_path: r.document.doc_sys_name,
+        return {
+        id: r.document.id,
+        doc_og_name: r.document.doc_og_name,
+        created_at: r.document.created_at,
 
-      // if you already generate signed url, attach here
-      signed_url: r.document.doc_sys_name,
-    }));
+        // this will be used to generate signed URL later
+        file_path: r.document.doc_sys_name,
+
+        // signed url for immediate preview
+        signed_url: await generateSignedUrl(
+          r.document.doc_sys_name,
+          3600,
+          disposition,
+        ),
+        };
+      }),
+    );
   }
 
   async deleteOrderLoginPoFile({
