@@ -5,7 +5,6 @@ import cors from "cors";
 import logger from "./utils/logger";
 import { requestLogger, errorLogger } from "./middlewares/requestLogger";
 import { connectRedis } from "./config/redis";
-import { startOrderLoginReminderJob } from "./services/jobs/orderLoginReminder.job";
 
 export const app = express();
 
@@ -49,7 +48,6 @@ app.use(express.json({ limit: "200mb" }));
 app.use(express.urlencoded({ extended: true, limit: "200mb" }));
 
 app.use(requestLogger);
-startOrderLoginReminderJob();
 // ✅ Serve static assets (e.g., PDFs, images, etc.) from /assets
 app.use("/assets", express.static(path.join(__dirname, "..", "assets")));
 // Now: http://yourdomain.com/assets/filename.pdf

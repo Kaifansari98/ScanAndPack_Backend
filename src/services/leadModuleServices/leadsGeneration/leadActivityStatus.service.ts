@@ -184,8 +184,6 @@ export class LeadActivityStatusService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
       // ✅ UPDATED: Correct routes with leadId and accountId
@@ -517,8 +515,6 @@ export class LeadActivityStatusService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
       // ✅ UPDATED: Correct route with leadId and accountId

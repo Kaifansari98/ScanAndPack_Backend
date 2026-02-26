@@ -467,8 +467,6 @@ export class BookingStageService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
       const baseUrl = data.baseUrl;
@@ -665,8 +663,6 @@ export class BookingStageService {
           day: "2-digit",
           month: "short",
           year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
         });
 
         const baseUrl = data.baseUrl;
@@ -2679,16 +2675,16 @@ export class BookingStageService {
       });
       statusIds = statuses.map((s) => s.id);
     } else {
-      const statusTags =
-        normalizedTag === "type 8"
-          ? ["Type 8", "Type 9"]
-          : normalizedTag === "type 9"
-            ? ["Type 8", "Type 9"]
-            : normalizedTag === "type 10"
-              ? ["Type 8", "Type 9", "Type 10"]
-              : normalizedTag === "type 15" // ✅ ADD THIS
-                ? ["Type 15"] // ✅ Sirf Type 18 hi chahiye
-                : [tag];
+const statusTags =
+  normalizedTag === "Type 8"
+    ? ["Type 8", "Type 9"]
+    : normalizedTag === "Type 9"
+      ? ["Type 8", "Type 9"]
+      : normalizedTag === "Type 10"
+        ? ["Type 8", "Type 9", "Type 10"]
+        : normalizedTag === "Type 15"
+          ? ["Type 15"]
+          : [tag];
       const statusTypes = await prisma.statusTypeMaster.findMany({
         where: { vendor_id: vendorId, tag: { in: statusTags } },
         select: { id: true },
@@ -3101,6 +3097,7 @@ export class BookingStageService {
                 AND: [
                   { is_tech_check_completed: true },
                   { is_order_login_completed: true },
+                  
                 ],
               },
             },

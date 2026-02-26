@@ -11,6 +11,7 @@ import {
   sendMovedToProductionWithoutOrderLoginEmail,
   sendOrderLoginCompletedEmail,
 } from "../../../../src/services/email/brevoEmail2.service";
+import { resolveLeadCode } from "../../../../src/utils/fileUtils";
 
 // 🧩 Define this at the top of your service file
 
@@ -235,7 +236,11 @@ export async function triggerOrderLoginCompletionNotification(
     account_id: number | null;
   } | null = null;
 
-  let instanceCode: string;
+  const instanceCode = await resolveLeadCode(
+    vendorId,
+    leadId,
+    instanceId ?? undefined,
+  );
 
   if (instanceId) {
     // ── Instance path ──
@@ -286,13 +291,6 @@ export async function triggerOrderLoginCompletionNotification(
     logger.info("✅ [OL-NOTIF] Instance is in production stage", debugCtx);
 
     leadRecord = instance.lead;
-
-    const rawLeadCode =
-      instance.lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
-
-    instanceCode = instance.quantity_index
-      ? `${rawLeadCode}.${instance.quantity_index}`
-      : rawLeadCode;
   } else {
     // ── Non-instance path → lead level check (Type 10) ──
     const productionStage = await prisma.statusTypeMaster.findFirst({
@@ -338,7 +336,6 @@ export async function triggerOrderLoginCompletionNotification(
     }
 
     leadRecord = lead;
-    instanceCode = lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
   }
 
   logger.info(`✅ [OL-NOTIF] instanceCode = ${instanceCode}`, debugCtx);
@@ -1237,19 +1234,6 @@ export class OrderLoginService {
     }
   }
 
-  // ============================================================
-  // REFACTORED: updateLeadToProductionStage
-  //
-  // FIX: Prisma P2028 Transaction Timeout
-  //
-  // ROOT CAUSE: Business logic (notifications, validations, loops)
-  //             was running INSIDE prisma.$transaction → 5s timeout
-  //
-  // SOLUTION: 2-Phase Execution Model
-  //   Phase 1 → Transaction: ONLY fast DB writes/reads (~40ms)
-  //   Phase 2 → Outside:     All business logic, notifications, validations
-  // ============================================================
-
   async updateLeadToProductionStage({
     vendorId,
     leadId,
@@ -1499,11 +1483,11 @@ export class OrderLoginService {
         leadMoved,
         updatedLead,
         effectiveAccountId,
-        instanceCode,
       } = txResult;
 
       const leadName =
         `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
+      const instanceCode = await resolveLeadCode(vendorId, leadId, instanceId);
 
       // Build URLs
       const queryParams = new URLSearchParams();
@@ -1519,8 +1503,6 @@ export class OrderLoginService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
       // Fetch users for notifications (safe — outside transaction)
@@ -2004,8 +1986,6 @@ export class OrderLoginService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
       const admins = await prisma.userMaster.findMany({
@@ -2154,8 +2134,6 @@ export class OrderLoginService {
           day: "2-digit",
           month: "short",
           year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
         });
 
         await sendMovedToProductionWithOrderLoginEmail({
