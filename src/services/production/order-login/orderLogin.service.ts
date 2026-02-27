@@ -2324,4 +2324,52 @@ export class OrderLoginService {
       return { success: true };
     });
   }
+
+  async markOrderLoginFilled(
+    vendorId: number,
+    leadId: number,
+    instanceId: number,
+    updatedBy: number,
+  ) {
+    logger.info("[OrderLoginInstanceService] markOrderLoginFilled called", {
+      vendorId,
+      leadId,
+      instanceId,
+    });
+
+    // ✅ Validate instance belongs to vendor + lead
+    const instance = await prisma.leadProductStructureInstance.findFirst({
+      where: {
+        id: instanceId,
+        vendor_id: vendorId,
+        lead_id: leadId,
+      },
+      select: { id: true, is_order_login_filled: true },
+    });
+
+    if (!instance) {
+      throw new Error("Instance not found for this vendor/lead");
+    }
+
+    // ✅ Prevent unnecessary writes
+    if (instance.is_order_login_filled === true) {
+      return { message: "Already marked as filled" };
+    }
+
+    // ✅ Update flag
+    const updated = await prisma.leadProductStructureInstance.update({
+      where: { id: instanceId },
+      data: {
+        is_order_login_filled: true,
+        updated_by: updatedBy,
+        updated_at: new Date(),
+      },
+    });
+
+    logger.info("[OrderLoginInstanceService] Updated successfully", {
+      instanceId,
+    });
+
+    return updated;
+  }
 }

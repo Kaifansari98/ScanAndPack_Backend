@@ -98,4 +98,9 @@ orderLoginRoutes.delete(
   controller.deleteOrderLoginPoFile,
 );
 
+orderLoginRoutes.patch(
+  "/:vendorId/:leadId/:instanceId/mark-filled",
+  controller.markFilled
+);
+
 export default orderLoginRoutes;
