@@ -82,9 +82,7 @@ export class OrderLoginController {
     try {
       const { vendorId } = req.params;
       const { lead_id, instance_id } = req.query; // ✅ Use query params
-      const { senderUserId } = req.query; // ✅ Use query param
 
-      const baseUrl = resolveClientBaseUrl(req);
       const instanceId =
         typeof instance_id === "string" && instance_id.trim().length > 0
           ? Number(instance_id)
@@ -92,8 +90,7 @@ export class OrderLoginController {
       const orderLogins = await service.getOrderLoginByLead(
         Number(vendorId),
         Number(lead_id),
-        Number(senderUserId),
-        baseUrl,
+
         instanceId,
       );
 
@@ -842,11 +839,14 @@ export class OrderLoginController {
         return res.status(400).json({ message: "Invalid parameters" });
       }
 
+
+         const baseUrl = resolveClientBaseUrl(req);
       const result = await service.markOrderLoginFilled(
         vendorId,
         leadId,
         instanceId,
         updatedBy,
+        baseUrl,
       );
 
       return res.status(200).json({
