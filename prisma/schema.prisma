@@ -376,7 +376,7 @@ model LeadMaster {
   woodwork_packing_details_remark             String?                             @db.VarChar(2000)
   no_of_boxes                                 Int?
   dispatch_planning_remark                    String?                             @db.VarChar(2000)
-  material_lift_availability                  Boolean?                            @default(false)
+  material_lift_availability                  Boolean?                           
   onsite_contact_person_name                  String?
   onsite_contact_person_number                String?
   required_date_for_dispatch                  DateTime?
