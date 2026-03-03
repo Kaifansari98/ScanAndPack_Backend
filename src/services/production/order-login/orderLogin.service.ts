@@ -1723,8 +1723,6 @@ export class OrderLoginService {
       }
 
       if (missingTypes.length > 0) {
-    
-
         if (missingTypes.length > 0 && instanceId) {
           const backendTaskMapping = await prisma.leadUserMapping.findFirst({
             where: {
@@ -1961,8 +1959,7 @@ export class OrderLoginService {
 
     const leadName =
       `${leadMeta.firstname ?? ""} ${leadMeta.lastname ?? ""}`.trim();
-    const leadCode =
-      leadMeta.lead_code;
+    const leadCode = leadMeta.lead_code;
     const projectUrl = leadMeta.account_id
       ? `${baseUrl}/dashboard/leads/details/${leadId}?accountId=${leadMeta.account_id}`
       : `${baseUrl}/dashboard/leads/details/${leadId}`;
@@ -2242,32 +2239,24 @@ export class OrderLoginService {
     });
 
     return records.map((r) => ({
-      id: r.document.id,
+      id: r.id, // ✅ OrderLoginPoFileMapping.id
       doc_og_name: r.document.doc_og_name,
       created_at: r.document.created_at,
-
-      // this will be used to generate signed URL later
       file_path: r.document.doc_sys_name,
-
-      // if you already generate signed url, attach here
       signed_url: r.document.doc_sys_name,
     }));
   }
 
   async deleteOrderLoginPoFile({
     vendorId,
-    leadId,
-    orderLoginId,
-    mappingId,
+    documentId,
     userId,
   }: {
     vendorId: number;
-    leadId: number;
-    orderLoginId: number;
-    mappingId: number;
+    documentId: number;
     userId: number;
   }) {
-    if (!vendorId || !leadId || !orderLoginId || !mappingId || !userId) {
+    if (!vendorId || !documentId || !userId) {
       const error = new Error("Required parameters missing");
       (error as any).statusCode = 400;
       throw error;
@@ -2278,7 +2267,7 @@ export class OrderLoginService {
        * Validate Mapping Exists & Belongs To Tenant
        */
       const mapping = await tx.orderLoginPoFileMapping.findUnique({
-        where: { id: mappingId },
+        where: { id: documentId },
         include: {
           lead: { select: { vendor_id: true } },
           document: true,
@@ -2295,7 +2284,7 @@ export class OrderLoginService {
        * Soft Delete Mapping
        */
       await tx.orderLoginPoFileMapping.update({
-        where: { id: mappingId },
+        where: { id: documentId },
         data: {
           is_deleted: true,
           deleted_at: new Date(),
@@ -2303,9 +2292,6 @@ export class OrderLoginService {
         },
       });
 
-      /**
-       * Soft Delete Document (important)
-       */
       await tx.leadDocuments.update({
         where: { id: mapping.document_id },
         data: {

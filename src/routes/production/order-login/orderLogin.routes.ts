@@ -94,7 +94,7 @@ orderLoginRoutes.get(
 );
 
 orderLoginRoutes.delete(
-  "/vendorId/:vendorId/leadId/:leadId/order-login-id/:orderLoginId/po-files/:mappingId",
+  "/vendorId/:vendorId/po-files-delete",
   controller.deleteOrderLoginPoFile,
 );
 
