@@ -148,10 +148,11 @@ export class TechCheckController {
             if (assigneeRole !== "admin" && assigneeRole !== "super-admin") {
               const lead = await prisma.leadMaster.findUnique({
                 where: { id: leadId },
-                select: { firstname: true, lastname: true },
+                select: { firstname: true, lastname: true, franchise_id: true },
               });
               const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
-
+              const franchiseId = lead?.franchise_id ?? null;
+              
               await NotificationService.createAndSend({
                 vendor_id: vendorId,
                 user_id: Number(result.assign_to_user_id),
@@ -226,10 +227,11 @@ export class TechCheckController {
         if (assigneeRole !== "admin" && assigneeRole !== "super-admin") {
           const lead = await prisma.leadMaster.findUnique({
             where: { id: leadId },
-            select: { firstname: true, lastname: true },
+            select: { firstname: true, lastname: true, franchise_id: true },
           });
           const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
-
+          const franchiseId = lead?.franchise_id ?? null;
+          
           await NotificationService.createAndSend({
             vendor_id: vendorId,
             user_id: Number(assign_to_user_id),

@@ -78,6 +78,7 @@ export const login = async (req: Request, res: Response) => {
       {
         id: user.id,
         vendor_id: user.vendor_id,
+        franchise_id: user.franchise_id,
         user_type: user.user_type.user_type,
       },
       JWT_SECRET,
@@ -87,6 +88,7 @@ export const login = async (req: Request, res: Response) => {
     return res.status(200).json({
       message: "Login successful",
       token,
+      franchise_id: user.franchise_id,
       user,
     });
   } catch (err) {

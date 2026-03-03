@@ -108,6 +108,7 @@ export const createLeadService = async (
     archetech_name,
     designer_remark,
     vendor_id,
+    franchise_id,
     created_by,
     assign_to,
     assigned_by,
@@ -123,11 +124,25 @@ export const createLeadService = async (
         // 🔍 optional input snapshot
         logger.debug("[SERVICE] createLead input", {
           vendor_id,
+          franchise_id,
           created_by,
           product_types,
           product_structures,
           fileCount: files.length,
         });
+
+        // Validate franchise belongs to vendor
+        const franchise = await tx.franchiseMaster.findFirst({
+          where: {
+            id: franchise_id,
+            vendor_id,
+          },
+          select: { id: true },
+        });
+
+        if (!franchise) {
+          throw new Error("Invalid franchise_id for the given vendor_id.");
+        }
         // 1. AccountMaster (reuse if same phone/email exists for this vendor)
         const matchConditions: Array<Record<string, string>> = [];
         const normalizedEmail = email?.trim();
@@ -165,12 +180,13 @@ export const createLeadService = async (
               alt_contact_no,
               email: normalizedEmail,
               vendor_id,
+              franchise_id,
               created_by,
             },
           }));
 
-      // 2) ⬅️ NEW: generate lead_code for this vendor
-      const lead_code = await generateLeadCode(tx, vendor_id);
+      // 2) ⬅️ NEW: generate lead_code for this franchise
+      const lead_code = await generateLeadCode(tx, franchise_id);
 
       // 3) Create Lead with the generated code
       const lead = await tx.leadMaster.create({
@@ -190,6 +206,7 @@ export const createLeadService = async (
           archetech_name,
           designer_remark,
           vendor_id,
+          franchise_id,
           created_by,
           account_id: account.id, // Add account_id reference
           assign_to,

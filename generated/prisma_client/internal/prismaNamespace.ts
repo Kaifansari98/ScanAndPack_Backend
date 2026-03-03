@@ -7173,6 +7173,7 @@ export const UserLeadTaskScalarFieldEnum = {
   lead_id: 'lead_id',
   account_id: 'account_id',
   vendor_id: 'vendor_id',
+  franchise_id: 'franchise_id',
   user_id: 'user_id',
   instance_id: 'instance_id',
   task_type: 'task_type',

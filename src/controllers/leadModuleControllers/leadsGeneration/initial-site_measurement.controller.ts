@@ -184,6 +184,7 @@ export class PaymentUploadController {
               lastname: true,
               lead_code: true,
               account_id: true,
+              franchise_id: true,
             },
           }),
           actorId
@@ -204,6 +205,8 @@ export class PaymentUploadController {
 
         const isSelfAssigned =
           Boolean(actorId) && Number(actorId) === Number(user_id);
+
+        const franchiseId = lead?.franchise_id ?? null;
 
         // ===============================
         // SALES EXEC TASK NOTIFICATION (UNCHANGED)

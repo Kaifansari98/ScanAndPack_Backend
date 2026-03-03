@@ -599,7 +599,7 @@ export class FinalMeasurementController {
           }),
           prisma.leadMaster.findUnique({
             where: { id: leadId },
-            select: { firstname: true, lastname: true, lead_code: true },
+            select: { firstname: true, lastname: true, lead_code: true, franchise_id: true },
           }),
           actorId
             ? prisma.userMaster.findUnique({
@@ -615,6 +615,7 @@ export class FinalMeasurementController {
         const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
         const isSelfAssigned =
           Boolean(actorId) && Number(actorId) === Number(user_id);
+        const franchiseId = lead?.franchise_id ?? null;
 
         if (
           !isSelfAssigned &&
@@ -703,7 +704,7 @@ export class FinalMeasurementController {
             }),
             prisma.leadMaster.findUnique({
               where: { id: leadId },
-              select: { firstname: true, lastname: true, lead_code: true },
+              select: { firstname: true, lastname: true, lead_code: true, franchise_id: true },
             }),
           ]);
 
@@ -713,6 +714,7 @@ export class FinalMeasurementController {
           const recipientIds = new Set<number>();
           admins.forEach((admin) => recipientIds.add(admin.id));
           mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
+          const franchiseId = lead?.franchise_id ?? null;
 
           if (recipientIds.size > 0) {
             const redirectUrl = accountId

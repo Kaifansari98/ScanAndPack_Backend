@@ -294,7 +294,13 @@ export class ReadyToDispatchService {
       // 1️⃣ Validate lead
       const lead = await tx.leadMaster.findUnique({
         where: { id: lead_id },
-        select: { id: true, vendor_id: true, account_id: true, status_id: true },
+        select: {
+          id: true,
+          vendor_id: true,
+          account_id: true,
+          status_id: true,
+          franchise_id: true,
+        },
       });
       if (!lead) throw new Error(`Lead ${lead_id} not found`);
 
@@ -326,6 +332,7 @@ export class ReadyToDispatchService {
           lead_id: lead.id,
           account_id: lead.account_id!,
           vendor_id: lead.vendor_id,
+          franchise_id: lead.franchise_id ?? null,
           user_id: assignee_user_id,
           task_type,
           lead_stage: leadStage,

@@ -664,6 +664,7 @@ export class BookingStageController {
     try {
       const vendorId = Number(getParam(req.params.vendorId));
       const userId = Number(req.body.userId);
+      const franchiseId = Number(req.body.franchise_id);
       const tag = req.body.tag as string;
       const page = parseInt((req.body.page as string) || "1");
       const limit = parseInt((req.body.limit as string) || "10");
@@ -729,17 +730,23 @@ export class BookingStageController {
         date_range: dateRange, // Normalized date range
       };
 
-      if (!vendorId || !userId) {
-        logger.warn("Missing vendorId or userId", { vendorId, userId, tag });
+      if (!vendorId || !userId || !franchiseId) {
+        logger.warn("Missing vendorId or userId or franchiseId", {
+          vendorId,
+          userId,
+          franchiseId,
+          tag,
+        });
         return res.status(400).json({
           success: false,
-          message: "Vendor ID and User ID are required",
+          message: "Vendor ID, User ID, and Franchise ID are required",
         });
       }
 
       logger.info("[BookingStageController] getUniversalTableData2 called", {
         vendorId,
         userId,
+        franchiseId,
         tag,
         dateRange,
       });
@@ -747,6 +754,7 @@ export class BookingStageController {
       const { leads, count } = await BookingStageService.getUniversalTableData(
         vendorId,
         userId,
+        franchiseId,
         tag,
         page,
         limit,
@@ -825,21 +833,28 @@ export class BookingStageController {
     try {
       const vendorId = Number(getParam(req.params.vendorId));
       const userId = Number(req.query.userId);
+      const franchiseId = Number(req.query.franchise_id);
       const tag = req.query.tag as string;
       const page = parseInt((req.query.page as string) || "1");
       const limit = parseInt((req.query.limit as string) || "10");
 
-      if (!vendorId || !userId) {
-        logger.warn("Missing vendorId or userId", { vendorId, userId, tag });
+      if (!vendorId || !userId || !franchiseId) {
+        logger.warn("Missing vendorId or userId or franchiseId", {
+          vendorId,
+          userId,
+          franchiseId,
+          tag,
+        });
         return res.status(400).json({
           success: false,
-          message: "Vendor ID and User ID are required",
+          message: "Vendor ID, User ID, and Franchise ID are required",
         });
       }
 
       const { leads, count } = await BookingStageService.getUniversalTableData(
         vendorId,
         userId,
+        franchiseId,
         tag,
         page,
         limit,

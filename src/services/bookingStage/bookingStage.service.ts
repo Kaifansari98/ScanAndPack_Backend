@@ -447,6 +447,7 @@ export class BookingStageService {
             lead_code: true,
             vendor_id: true,
             account_id: true,
+            franchise_id: true,
           },
         }),
 
@@ -468,6 +469,8 @@ export class BookingStageService {
         month: "short",
         year: "numeric",
       });
+
+      const franchiseId = lead?.franchise_id ?? null;
 
       const baseUrl = data.baseUrl;
 
@@ -642,6 +645,7 @@ export class BookingStageService {
               lead_code: true,
               vendor_id: true,
               account_id: true,
+              franchise_id: true,
             },
           }),
 
@@ -664,6 +668,8 @@ export class BookingStageService {
           month: "short",
           year: "numeric",
         });
+
+        const franchiseId = lead?.franchise_id ?? null;
 
         const baseUrl = data.baseUrl;
         const projectUrl = lead.account_id
@@ -1948,6 +1954,7 @@ export class BookingStageService {
             firstname: true,
             lastname: true,
             account_id: true,
+            franchise_id: true,
           },
         }),
         prisma.userMaster.findUnique({
@@ -1979,6 +1986,8 @@ export class BookingStageService {
       const leadUrl = leadInfo?.account_id
         ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${leadInfo.account_id}`
         : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;
+
+      const franchiseId = leadInfo?.franchise_id ?? null;
 
       await Promise.allSettled(
         admins.map(async (admin) => {
@@ -2592,6 +2601,7 @@ export class BookingStageService {
   public static async getUniversalTableData(
     vendorId: number,
     userId: number,
+    franchiseId: number,
     tag?: string,
     page: number = 1,
     limit: number = 10,
@@ -2623,6 +2633,7 @@ export class BookingStageService {
     logger.info("[BookingStageService] getUniversalTableData called", {
       vendorId,
       userId,
+      franchiseId,
       tag,
       page,
       limit,
@@ -3127,6 +3138,7 @@ const statusTags =
     if (isAdmin) {
       const whereClause = addFilterConditions({
         vendor_id: vendorId,
+        franchise_id: franchiseId,
         is_deleted: false,
         status_id: { in: statusIds },
         statusType: { vendor_id: vendorId },
@@ -3212,6 +3224,7 @@ const statusTags =
       id: { in: leadIds },
       is_deleted: false,
       vendor_id: vendorId,
+      franchise_id: franchiseId,
       status_id: { in: statusIds },
       statusType: { vendor_id: vendorId },
       activity_status: isAllStages

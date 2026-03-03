@@ -122,6 +122,7 @@ export class LeadController {
         status_id: openStatus.id, // <-- use openStatus' id here
         source_id: Number(req.body.source_id) || undefined,
         vendor_id: Number(req.body.vendor_id),
+        franchise_id: Number(req.body.franchise_id),
         created_by: Number(req.body.created_by),
         assign_to: req.body.assign_to ? Number(req.body.assign_to) : undefined,
         assigned_by: req.body.assigned_by
@@ -365,9 +366,9 @@ export class LeadController {
         stack: error.stack,
       });
       console.error("[ERROR] createLead:", error);
-      return res.status(500).json({
+      return res.status(error.statusCode || 500).json({
         success: false,
-        error: "Internal server error",
+        error: error.message || "Internal server error",
         details:
           process.env.NODE_ENV === "development" ? error.message : undefined,
       });
@@ -967,6 +968,8 @@ export class LeadController {
       // delete sanitizedBody.product_types;
       // delete sanitizedBody.product_structures;
       // delete sanitizedBody.product_structure_instances;
+      // Never allow franchise changes via update
+      delete sanitizedBody.franchise_id;
 
       // Merge updated_by into request body before validation
       const payloadWithUpdatedBy = { ...sanitizedBody, updated_by: updatedBy };

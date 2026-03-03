@@ -50,6 +50,7 @@ export const createLeadSchema = Joi.object({
   designer_remark: Joi.string().trim().max(1000).optional().allow("", null),
 
   vendor_id: numberLike.required(),
+  franchise_id: numberLike.required(),
   created_by: numberLike.required(),
   assign_to: numberLike.optional().allow(null),
   assigned_by: numberLike.optional().allow(null),
@@ -104,6 +105,7 @@ export const createLeadDraftSchema = Joi.object({
   designer_remark: Joi.string().trim().max(1000).optional().allow("", null),
 
   vendor_id: numberLike.required(),
+  franchise_id: numberLike.required(),
   created_by: numberLike.required(),
   assign_to: numberLike.optional().allow(null),
   assigned_by: numberLike.optional().allow(null),

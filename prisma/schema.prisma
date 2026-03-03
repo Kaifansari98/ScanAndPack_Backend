@@ -901,6 +901,7 @@ model UserLeadTask {
   lead_id     Int
   account_id  Int
   vendor_id   Int
+  franchise_id Int?
   user_id     Int
 
   // ✅ NEW COLUMN
@@ -1422,8 +1423,6 @@ model UserMachineMapping {
   createdBy   UserMaster        @relation("UserMachine_createdBy", fields: [created_by], references: [id])
   updatedBy   UserMaster        @relation("UserMachine_updatedBy", fields: [updated_by], references: [id])
   vendor      VendorMaster      @relation(fields: [vendor_id], references: [id])
-
-
 }
 
 

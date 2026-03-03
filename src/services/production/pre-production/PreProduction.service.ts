@@ -507,11 +507,16 @@ export class PreProductionService {
             taskId: existingTask.id,
           });
         } else {
+          const leadFranchise = await prisma.leadMaster.findUnique({
+            where: { id: leadId },
+            select: { franchise_id: true },
+          });
           const created = await prisma.userLeadTask.create({
             data: {
               vendor_id: vendorId,
               lead_id: leadId,
               account_id: existing.account_id,
+              franchise_id: leadFranchise?.franchise_id ?? null,
               instance_id: instance_id,
               user_id: userId,
               task_type: "Production Ready",

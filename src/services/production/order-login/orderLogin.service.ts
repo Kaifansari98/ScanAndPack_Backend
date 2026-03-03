@@ -1723,6 +1723,10 @@ export class OrderLoginService {
 
       // ── Task creation for missing order login types (outside transaction) ──
       if (missingTypes.length > 0) {
+        const leadFranchise = await prisma.leadMaster.findUnique({
+          where: { id: leadId },
+          select: { franchise_id: true },
+        });
         const backendTaskMapping = await prisma.leadUserMapping.findFirst({
           where: {
             vendor_id: vendorId,
@@ -1755,6 +1759,7 @@ export class OrderLoginService {
                 lead_id: leadId,
                 account_id: effectiveAccountId,
                 vendor_id: vendorId,
+                franchise_id: leadFranchise?.franchise_id ?? null,
                 user_id: backendTaskMapping.user_id,
                 task_type: "Order Login",
                 lead_stage: "order-login-stage",
@@ -1826,6 +1831,10 @@ export class OrderLoginService {
     );
 
     if (missingTypes.length > 0) {
+      const leadFranchise = await prisma.leadMaster.findUnique({
+        where: { id: leadId },
+        select: { franchise_id: true },
+      });
       const backendMapping = await prisma.leadUserMapping.findFirst({
         where: {
           vendor_id: vendorId,
@@ -1858,6 +1867,7 @@ export class OrderLoginService {
               lead_id: leadId,
               account_id: accountId,
               vendor_id: vendorId,
+              franchise_id: leadFranchise?.franchise_id ?? null,
               user_id: backendMapping.user_id,
               task_type: "Order Login",
               lead_stage: "order-login-stage",

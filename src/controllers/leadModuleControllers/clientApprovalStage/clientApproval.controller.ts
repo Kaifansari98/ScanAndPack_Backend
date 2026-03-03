@@ -406,12 +406,13 @@ export class ClientApprovalController {
         if (assigneeRole !== "admin" && assigneeRole !== "super-admin") {
           const lead = await prisma.leadMaster.findUnique({
             where: { id: dto.lead_id },
-            select: { firstname: true, lastname: true, lead_code: true },
+            select: { firstname: true, lastname: true, lead_code: true, franchise_id: true },
           });
           const leadName =
             `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
           const leadCode =
             lead?.lead_code ?? `LEAD-${String(dto.lead_id).padStart(4, "0")}`;
+          const franchiseId = lead?.franchise_id ?? null;
 
           // ✅ Spec: "You have been assigned {{Lead Code - Lead Name}} for Tech Check Review.
           //          Please review the documents uploaded by the Sales Executive."
@@ -524,7 +525,7 @@ export class ClientApprovalController {
           }),
           prisma.leadMaster.findUnique({
             where: { id: dto.lead_id },
-            select: { firstname: true, lastname: true, lead_code: true },
+            select: { firstname: true, lastname: true, lead_code: true, franchise_id: true },
           }),
         ]);
 
@@ -535,6 +536,7 @@ export class ClientApprovalController {
         const recipientIds = new Set<number>();
         admins.forEach((admin) => recipientIds.add(admin.id));
         mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
+        const franchiseId = lead?.franchise_id ?? null;
 
         if (recipientIds.size > 0) {
           const redirectUrl = dto.account_id

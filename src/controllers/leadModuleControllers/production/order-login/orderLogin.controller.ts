@@ -539,10 +539,11 @@ export class OrderLoginController {
         if (assigneeRole !== "admin" && assigneeRole !== "super-admin") {
           const lead = await prisma.leadMaster.findUnique({
             where: { id: Number(leadId) },
-            select: { firstname: true, lastname: true },
+            select: { firstname: true, lastname: true, franchise_id: true },
           });
           const leadName =
             `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+          const franchiseId = lead?.franchise_id ?? null;
 
           await NotificationService.createAndSend({
             vendor_id: Number(vendorId),
