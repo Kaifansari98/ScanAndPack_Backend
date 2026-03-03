@@ -1533,13 +1533,24 @@ export class OrderLoginService {
         ]);
 
       // Validate order login status (safe — outside transaction)
-      const instanceOrderLoginComplete = await isOrderLoginCompleteForInstance(
-        vendorId,
-        leadId,
-        instanceId,
-      );
+      // 🔑 Direct DB truth source
+      const instanceRecord =
+        await prisma.leadProductStructureInstance.findFirst({
+          where: {
+            id: instanceId,
+            vendor_id: vendorId,
+            lead_id: leadId,
+          },
+          select: {
+            is_order_login_filled: true,
+          },
+        });
+
+      const instanceOrderLoginComplete =
+        instanceRecord?.is_order_login_filled === true;
 
       let missingTypes: string[] = [];
+
       if (!instanceOrderLoginComplete) {
         missingTypes = await this.getMissingRequiredOrderLoginTypes(
           vendorId,
@@ -1548,17 +1559,8 @@ export class OrderLoginService {
         );
       }
 
-      console.log(
-        "📋 isOrderLoginCompleteForInstance:",
-        instanceOrderLoginComplete,
-      );
-      console.log("📋 missingTypes:", missingTypes);
-
       // ── NOTIFICATION MATRIX ──
       if (instanceOrderLoginComplete) {
-        // ✅ OL COMPLETE → Admin + Factory only
-        console.log("✅ Instance OL Complete - Sending 2 emails");
-
         for (const admin of admins) {
           try {
             await NotificationService.createAndSend({
@@ -1585,7 +1587,6 @@ export class OrderLoginService {
                 projectUrl,
               });
             }
-            console.log(`✅ Admin ${admin.id} notified`);
           } catch (err: any) {
             console.error(`❌ Admin ${admin.id} failed:`, err.message);
           }
@@ -1721,49 +1722,55 @@ export class OrderLoginService {
         }
       }
 
-      // ── Task creation for missing order login types (outside transaction) ──
       if (missingTypes.length > 0) {
-        const backendTaskMapping = await prisma.leadUserMapping.findFirst({
-          where: {
-            vendor_id: vendorId,
-            lead_id: leadId,
-            status: "active",
-            user: {
-              user_type: {
-                user_type: { equals: "backend", mode: "insensitive" },
-              },
-            },
-          },
-          select: { user_id: true },
-        });
+    
 
-        if (backendTaskMapping?.user_id) {
-          const existingTask = await prisma.userLeadTask.findFirst({
+        if (missingTypes.length > 0 && instanceId) {
+          const backendTaskMapping = await prisma.leadUserMapping.findFirst({
             where: {
               vendor_id: vendorId,
               lead_id: leadId,
-              user_id: backendTaskMapping.user_id,
-              task_type: "Order Login",
-              status: "open",
+              status: "active",
+              user: {
+                user_type: {
+                  user_type: { equals: "backend", mode: "insensitive" },
+                },
+              },
             },
-            select: { id: true },
+            select: { user_id: true },
           });
 
-          if (!existingTask) {
-            await prisma.userLeadTask.create({
-              data: {
-                lead_id: leadId,
-                account_id: effectiveAccountId,
+          if (backendTaskMapping?.user_id) {
+            // 🔑 Check existing task for THIS INSTANCE
+            const existingTask = await prisma.userLeadTask.findFirst({
+              where: {
                 vendor_id: vendorId,
+                lead_id: leadId,
+                instance_id: instanceId, // ✅ Instance specific
                 user_id: backendTaskMapping.user_id,
                 task_type: "Order Login",
-                lead_stage: "order-login-stage",
-                due_date: new Date(Date.now() + 24 * 60 * 60 * 1000),
-                remark: `Missing order login items for ${instanceCode}: ${missingTypes.join(", ")}`,
                 status: "open",
-                created_by: userId,
               },
+              select: { id: true },
             });
+
+            if (!existingTask) {
+              await prisma.userLeadTask.create({
+                data: {
+                  lead_id: leadId,
+                  account_id: effectiveAccountId,
+                  vendor_id: vendorId,
+                  user_id: backendTaskMapping.user_id,
+                  instance_id: instanceId, // ✅ Bind to instance
+                  task_type: "Order Login",
+                  lead_stage: "order-login-stage",
+                  due_date: new Date(Date.now() + 24 * 60 * 60 * 1000),
+                  remark: `Missing order login items for ${instanceCode}: ${missingTypes.join(", ")}`,
+                  status: "open",
+                  created_by: userId,
+                },
+              });
+            }
           }
         }
       }
@@ -1955,7 +1962,7 @@ export class OrderLoginService {
     const leadName =
       `${leadMeta.firstname ?? ""} ${leadMeta.lastname ?? ""}`.trim();
     const leadCode =
-      leadMeta.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+      leadMeta.lead_code;
     const projectUrl = leadMeta.account_id
       ? `${baseUrl}/dashboard/leads/details/${leadId}?accountId=${leadMeta.account_id}`
       : `${baseUrl}/dashboard/leads/details/${leadId}`;

@@ -1790,4 +1790,138 @@ export class DesigingStageController {
       });
     }
   }
+
+
+
+   public static async getLeadStatusForNotification(req: Request, res: Response) {
+    try {
+      const { lead_id, vendor_id } = req.params;
+      const { instance_id } = req.query;
+
+      if (!lead_id || !vendor_id) {
+        return res
+          .status(400)
+          .json({ message: "lead_id and vendor_id are required" });
+      }
+
+      const leadId = Number(lead_id);
+      const vendorId = Number(vendor_id);
+      const instanceId = instance_id ? Number(instance_id) : null;
+
+      // ======================================================
+      // 1️⃣ FETCH LEAD MASTER STATUS (Always)
+      // ======================================================
+      const lead = await prisma.leadMaster.findFirst({
+        where: {
+          id: leadId,
+          vendor_id: vendorId,
+          is_deleted: false,
+        },
+        select: {
+          id: true,
+          status_id: true,
+          statusType: {
+            select: {
+              id: true,
+              type: true,
+              tag: true,
+            },
+          },
+        },
+      });
+
+      if (!lead) {
+        return res.status(404).json({ message: "Lead not found" });
+      }
+
+      if (instanceId) {
+        const instance = await prisma.leadProductStructureInstance.findFirst({
+          where: {
+            id: instanceId,
+            lead_id: leadId,
+            vendor_id: vendorId,
+          },
+          select: {
+            id: true,
+            is_tech_check_completed: true,
+            is_order_login_completed: true,
+          },
+        });
+
+        if (!instance) {
+          return res.status(404).json({ message: "Instance not found" });
+        }
+
+        let stage = "tech-check-stage";
+
+        if (instance.is_tech_check_completed) {
+          stage = "order-login-stage";
+        }
+
+        if (
+          instance.is_tech_check_completed &&
+          instance.is_order_login_completed
+        ) {
+          stage = "production-stage";
+        }
+
+        return res.status(200).json({
+          message: "Lead + Instance status fetched successfully",
+          data: {
+            lead_id: lead.id,
+            lead_status_type_id: lead.status_id,
+            lead_status: lead.statusType?.type,
+            lead_status_tag: lead.statusType?.tag,
+
+            instance_id: instance.id,
+            workflow_stage: stage,
+          },
+        });
+      }
+
+      const instances = await prisma.leadProductStructureInstance.findMany({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+        },
+        select: {
+          is_tech_check_completed: true,
+          is_order_login_completed: true,
+        },
+      });
+
+      let workflowStage = "production-stage";
+
+      if (instances.length > 0) {
+        for (const inst of instances) {
+          if (!inst.is_tech_check_completed) {
+            workflowStage = "tech-check-stage";
+            break;
+          }
+
+          if (inst.is_tech_check_completed && !inst.is_order_login_completed) {
+            workflowStage = "order-login-stage";
+          }
+        }
+      }
+
+      return res.status(200).json({
+        message: "Lead status fetched successfully",
+        data: {
+          lead_id: lead.id,
+          lead_status_type_id: lead.status_id,
+          lead_status: lead.statusType?.type,
+          lead_status_tag: lead.statusType?.tag,
+
+          workflow_stage: workflowStage,
+        },
+      });
+    } catch (error: any) {
+      console.error("Error fetching lead status:", error);
+      return res.status(500).json({
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  }
 }
