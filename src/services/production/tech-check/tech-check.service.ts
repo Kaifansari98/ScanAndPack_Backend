@@ -8,6 +8,7 @@ import {
   sendTechCheckApprovedEmail,
   sendTechCheckRejectedEmail,
 } from "../../../../src/services/email/brevoEmail.service";
+import { resolveLeadCode } from "../../../../src/utils/fileUtils";
 
 export type ApproveTechCheckResult =
   | {
@@ -352,12 +353,11 @@ export class TechCheckService {
 
     const notify = async () => {
       // ✅ instance_id ke basis pe quantity_index fetch karo — dono blocks use karenge
-      const instanceInfo = productStructureInstanceId
-        ? await prisma.leadProductStructureInstance.findUnique({
-            where: { id: productStructureInstanceId },
-            select: { quantity_index: true },
-          })
-        : null;
+      const leadCode = await resolveLeadCode(
+        vendorId,
+        leadId,
+        productStructureInstanceId ?? undefined,
+      );
 
       // ✅ redirectPath builder — accountId + instance_id (optional) dono include
       const buildRedirectPath = (leadAccountId: number | null) => {
@@ -401,21 +401,10 @@ export class TechCheckService {
         const leadName =
           `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
 
-        const baseLeadCode =
-          lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
-
-        // ✅ instance hai → vloq-46.1 | nahi hai → vloq-46
-        const leadCode =
-          instanceInfo?.quantity_index != null
-            ? `${baseLeadCode}.${instanceInfo.quantity_index}`
-            : baseLeadCode;
-
         const updatedAt = new Date().toLocaleString("en-IN", {
           day: "2-digit",
           month: "short",
           year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
         });
 
         // ✅ redirectPath with instance_id
@@ -510,21 +499,10 @@ export class TechCheckService {
           const leadName =
             `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
 
-          const baseLeadCode =
-            lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
-
-          // ✅ instance hai → vloq-46.1 | nahi hai → vloq-46
-          const leadCode =
-            instanceInfo?.quantity_index != null
-              ? `${baseLeadCode}.${instanceInfo.quantity_index}`
-              : baseLeadCode;
-
           const assignedAt = new Date().toLocaleString("en-IN", {
             day: "2-digit",
             month: "short",
             year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
           });
 
           // ✅ redirectPath with instance_id
@@ -731,7 +709,7 @@ export class TechCheckService {
     // ===============================
 
     try {
-      const [leadInfo, approvedByUser, instanceInfo] = await Promise.all([
+      const [leadInfo, approvedByUser, leadCode] = await Promise.all([
         prisma.leadMaster.findUnique({
           where: { id: leadId, vendor_id: vendorId },
           select: {
@@ -747,25 +725,10 @@ export class TechCheckService {
           select: { user_name: true },
         }),
 
-        // ✅ quantity_index fetch — same as rejectTechCheck
-        instanceId
-          ? prisma.leadProductStructureInstance.findUnique({
-              where: { id: instanceId },
-              select: { quantity_index: true },
-            })
-          : Promise.resolve(null),
+        resolveLeadCode(vendorId, leadId, instanceId), // ✅ helper call
       ]);
 
       if (!leadInfo) return result;
-
-      const baseLeadCode =
-        leadInfo.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
-
-      // ✅ instance hai → vloq-46.1 | nahi hai → vloq-46
-      const leadCode =
-        instanceInfo?.quantity_index != null
-          ? `${baseLeadCode}.${instanceInfo.quantity_index}`
-          : baseLeadCode;
 
       const leadName =
         `${leadInfo.firstname ?? ""} ${leadInfo.lastname ?? ""}`.trim();
@@ -776,8 +739,6 @@ export class TechCheckService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
       // ✅ redirectPath — accountId + instance_id (optional) dono include
@@ -941,7 +902,7 @@ export class TechCheckService {
     // ===============================
 
     try {
-      const [leadInfo, rejectedByUser, instanceInfo] = await Promise.all([
+      const [leadInfo, rejectedByUser, leadCode] = await Promise.all([
         prisma.leadMaster.findUnique({
           where: { id: leadId, vendor_id: vendorId },
           select: {
@@ -957,22 +918,10 @@ export class TechCheckService {
           select: { user_name: true },
         }),
 
-        instanceId
-          ? prisma.leadProductStructureInstance.findUnique({
-              where: { id: instanceId },
-              select: { quantity_index: true },
-            })
-          : Promise.resolve(null),
+        resolveLeadCode(vendorId, leadId, instanceId), // ✅ helper call
       ]);
 
       if (!leadInfo) return result;
-
-      const baseLeadCode = leadInfo.lead_code;
-
-      const leadCode =
-        instanceInfo?.quantity_index != null
-          ? `${baseLeadCode}.${instanceInfo.quantity_index}`
-          : baseLeadCode;
 
       const leadName =
         `${leadInfo.firstname ?? ""} ${leadInfo.lastname ?? ""}`.trim();
@@ -983,8 +932,6 @@ export class TechCheckService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
       // ✅ redirectPath — accountId + instance_id (optional) dono include

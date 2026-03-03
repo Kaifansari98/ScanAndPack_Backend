@@ -195,8 +195,6 @@ export class UnderInstallationStageService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
       const redirectPath = lead.account_id
@@ -1273,8 +1271,6 @@ export class UnderInstallationStageService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
       // -----------------------------
@@ -2947,8 +2943,6 @@ export class UnderInstallationStageService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
       const redirectPath =
@@ -3130,8 +3124,6 @@ export class UnderInstallationStageService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
       // Build Deep Link

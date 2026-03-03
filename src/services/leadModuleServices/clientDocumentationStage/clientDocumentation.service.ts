@@ -8,6 +8,7 @@ import {
   sendOrderLoginEnabledEmail,
   sendRevisedDocumentsUploadedEmail,
 } from "../../../../src/services/email/brevoEmail.service";
+import { resolveLeadCode } from "../../../../src/utils/fileUtils";
 
 export type DocTypeTag = "Type 11" | "Type 12";
 
@@ -416,8 +417,6 @@ export class ClientDocumentationService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
       // ✅ Correct route
@@ -646,21 +645,7 @@ export class ClientDocumentationService {
 
     if (alreadySent) return;
 
-    // ✅ instanceId hai → quantity_index fetch karo
-    const instanceInfo = instanceId
-      ? await prisma.leadProductStructureInstance.findUnique({
-          where: { id: instanceId },
-          select: { quantity_index: true },
-        })
-      : null;
-
-    const baseLeadCode = lead.lead_code;
-
-    // ✅ instance hai → vloq-46.1 | nahi hai → vloq-46
-    const leadCode =
-      instanceInfo?.quantity_index != null
-        ? `${baseLeadCode}.${instanceInfo.quantity_index}`
-        : baseLeadCode;
+    const leadCode = await resolveLeadCode(vendorId, leadId, instanceId);
 
     const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
 
@@ -1178,32 +1163,11 @@ export class ClientDocumentationService {
       return result;
     }
 
-    // ==================================================
-    // 3️⃣ INSTANCE FETCH (OPTIONAL)
-    // ==================================================
-
-    let quantityIndex: number | null = null;
-
-    if (data.product_structure_instance_id) {
-      const instance = await prisma.leadProductStructureInstance.findUnique({
-        where: { id: data.product_structure_instance_id },
-        select: { quantity_index: true },
-      });
-
-      quantityIndex = instance?.quantity_index ?? null;
-    }
-
-    // ==================================================
-    // 4️⃣ BUILD INSTANCE-WISE LEAD CODE
-    // ==================================================
-
-    const baseLeadCode =
-      lead.lead_code ?? `LEAD-${String(lead.id).padStart(4, "0")}`;
-
-    const leadCode =
-      quantityIndex !== null
-        ? `${baseLeadCode}.${quantityIndex}`
-        : baseLeadCode;
+    const leadCode = await resolveLeadCode(
+      data.vendor_id,
+      data.lead_id,
+      data.product_structure_instance_id ?? undefined,
+    );
 
     const leadName = `${lead.firstname} ${lead.lastname}`.trim();
 
@@ -1216,8 +1180,6 @@ export class ClientDocumentationService {
       day: "2-digit",
       month: "short",
       year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
     });
 
     // ==================================================

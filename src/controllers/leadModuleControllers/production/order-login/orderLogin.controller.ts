@@ -82,9 +82,7 @@ export class OrderLoginController {
     try {
       const { vendorId } = req.params;
       const { lead_id, instance_id } = req.query; // ✅ Use query params
-      const { senderUserId } = req.query; // ✅ Use query param
 
-      const baseUrl = resolveClientBaseUrl(req);
       const instanceId =
         typeof instance_id === "string" && instance_id.trim().length > 0
           ? Number(instance_id)
@@ -92,9 +90,8 @@ export class OrderLoginController {
       const orderLogins = await service.getOrderLoginByLead(
         Number(vendorId),
         Number(lead_id),
-        Number(senderUserId),
-        baseUrl,
-        instanceId
+
+        instanceId,
       );
 
       return res.status(200).json({
@@ -407,8 +404,6 @@ export class OrderLoginController {
     }
   }
 
-
-
   async getProductionFiles(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
@@ -490,8 +485,6 @@ export class OrderLoginController {
       });
     }
   }
-
-
 
   async updateLeadToProductionStage(req: Request, res: Response) {
     try {
@@ -810,30 +803,62 @@ export class OrderLoginController {
     }
   }
 
-
   async deleteOrderLoginPoFile(req: Request, res: Response) {
-  try {
-    const { vendorId, leadId, orderLoginId, mappingId } = req.params;
-    const { deleted_by } = req.body;
+    try {
+      const { vendorId, leadId, orderLoginId, mappingId } = req.params;
+      const { deleted_by } = req.body;
 
-    const result = await service.deleteOrderLoginPoFile({
-      vendorId: Number(vendorId),
-      leadId: Number(leadId),
-      orderLoginId: Number(orderLoginId),
-      mappingId: Number(mappingId),
-      userId: Number(deleted_by),
-    });
+      const result = await service.deleteOrderLoginPoFile({
+        vendorId: Number(vendorId),
+        leadId: Number(leadId),
+        orderLoginId: Number(orderLoginId),
+        mappingId: Number(mappingId),
+        userId: Number(deleted_by),
+      });
 
-    return res.status(200).json({
-      success: true,
-      message: "PO file deleted successfully",
-      data: result,
-    });
-  } catch (error: any) {
-    return res.status(error.statusCode || 500).json({
-      success: false,
-      message: error.message || "Internal Server Error",
-    });
+      return res.status(200).json({
+        success: true,
+        message: "PO file deleted successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message: error.message || "Internal Server Error",
+      });
+    }
   }
-}
+
+  async markFilled(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+      const instanceId = Number(req.params.instanceId);
+      const updatedBy = Number(req.body.updated_by);
+      if (!vendorId || !leadId || !instanceId || !updatedBy) {
+        return res.status(400).json({ message: "Invalid parameters" });
+      }
+
+
+         const baseUrl = resolveClientBaseUrl(req);
+      const result = await service.markOrderLoginFilled(
+        vendorId,
+        leadId,
+        instanceId,
+        updatedBy,
+        baseUrl,
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Order login marked as filled",
+        data: result,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  }
 }

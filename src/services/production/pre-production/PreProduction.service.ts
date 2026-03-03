@@ -1,12 +1,13 @@
 import { LeadTaskStatus, Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
+import logger from "../../../../src/utils/logger";
 
 export class PreProductionService {
   async getLeadsWithStatusPreProduction(
     vendorId: number,
     userId: number,
     limit = 10,
-    page = 1
+    page = 1,
   ) {
     const skip = (page - 1) * limit;
 
@@ -18,7 +19,7 @@ export class PreProductionService {
 
     if (!preProdStatus) {
       throw new Error(
-        `Pre-Production status (Type 10) not found for vendor ${vendorId}`
+        `Pre-Production status (Type 10) not found for vendor ${vendorId}`,
       );
     }
 
@@ -126,150 +127,10 @@ export class PreProductionService {
     };
   }
 
-  async handleOrderLoginCompletion(
-    vendorId: number,
-    leadId: number,
-    updates: any[]
-  ) {
-    const leadStageRecord = await prisma.leadMaster.findFirst({
-      where: { id: leadId, vendor_id: vendorId },
-      select: { status_id: true },
-    });
-    const leadStage = leadStageRecord?.status_id
-      ? (
-          await prisma.statusTypeMaster.findUnique({
-            where: { id: leadStageRecord.status_id },
-            select: { type: true },
-          })
-        )?.type ?? null
-      : null;
-
-    const results = [];
-    const errors = [];
-
-    for (const [index, u] of updates.entries()) {
-      try {
-        const { id, estimated_completion_date, is_completed, updated_by } = u;
-
-        if (!id || !updated_by)
-          throw new Error(`Missing id or updated_by in record #${index + 1}`);
-
-        const existing = await prisma.orderLoginDetails.findFirst({
-          where: { id, vendor_id: vendorId, lead_id: leadId },
-        });
-
-        if (!existing)
-          throw new Error(
-            `Order login record #${id} not found for vendor ${vendorId}`
-          );
-
-        const normalizeCompletionFlag = (val: any) => {
-          if (typeof val === "string") {
-            const v = val.trim().toLowerCase();
-            return v === "true" || v === "1" || v === "yes";
-          }
-          return val === true || val === 1;
-        };
-
-        const completionFlag = normalizeCompletionFlag(is_completed);
-
-        const updateData: any = {
-          estimated_completion_date: estimated_completion_date
-            ? new Date(estimated_completion_date)
-            : existing.estimated_completion_date,
-          updated_by: Number(updated_by),
-        };
-
-        // If user marks completed
-        if (completionFlag) {
-          updateData.is_completed = true;
-          updateData.completion_date = new Date();
-        }
-
-        const updated = await prisma.orderLoginDetails.update({
-          where: { id },
-          data: updateData,
-        });
-
-        const shouldCreateTask =
-          typeof estimated_completion_date !== "undefined" || completionFlag;
-
-        if (shouldCreateTask) {
-          const dueDate =
-            updateData.estimated_completion_date ||
-            updated.estimated_completion_date ||
-            new Date();
-
-          const status: LeadTaskStatus = completionFlag
-            ? "completed"
-            : "open";
-          const userId = Number(updated_by);
-
-          const remark = `${existing.item_type} - still needs to be marked as ready.`;
-
-          const existingTask = await prisma.userLeadTask.findFirst({
-            where: {
-              vendor_id: vendorId,
-              lead_id: leadId,
-              account_id: existing.account_id,
-              task_type: "Production Ready",
-              remark,
-            },
-            orderBy: { created_at: "desc" },
-          });
-
-          if (existingTask) {
-            const updateTaskData: any = {
-              due_date: new Date(dueDate),
-              remark,
-              status: completionFlag ? "completed" : existingTask.status,
-              updated_by: userId,
-              updated_at: new Date(),
-            };
-
-            if (completionFlag) {
-              updateTaskData.closed_by = userId;
-              updateTaskData.closed_at = new Date();
-            }
-
-            await prisma.userLeadTask.update({
-              where: { id: existingTask.id },
-              data: updateTaskData,
-            });
-          } else {
-            await prisma.userLeadTask.create({
-              data: {
-                vendor_id: vendorId,
-                lead_id: leadId,
-                account_id: existing.account_id,
-                user_id: userId,
-                task_type: "Production Ready",
-                lead_stage: leadStage,
-                due_date: new Date(dueDate),
-                remark,
-                status,
-                created_by: userId,
-                ...(completionFlag
-                  ? { closed_by: userId, closed_at: new Date() }
-                  : {}),
-              },
-            });
-          }
-        }
-
-        results.push(updated);
-      } catch (err: any) {
-        errors.push({ index, message: err.message });
-      }
-    }
-
-    return { results, errors };
-  }
-
   async handleFactoryVendorSelection(
     vendorId: number,
     leadId: number,
-    updates: any[]
+    updates: any[],
   ) {
     const results = [];
     const errors = [];
@@ -287,7 +148,7 @@ export class PreProductionService {
 
         if (!existing)
           throw new Error(
-            `Order login record #${id} not found for vendor ${vendorId}`
+            `Order login record #${id} not found for vendor ${vendorId}`,
           );
 
         const updated = await prisma.orderLoginDetails.update({
@@ -314,7 +175,7 @@ export class PreProductionService {
     vendorId: number,
     leadId: number,
     date: string,
-    updatedBy: number
+    updatedBy: number,
   ) {
     // Verify lead belongs to vendor
     const lead = await prisma.leadMaster.findFirst({
@@ -341,7 +202,7 @@ export class PreProductionService {
         lead_id: leadId,
         account_id: lead.account_id ?? 0,
         action: `Expected Order Login Ready Date updated to ${new Date(
-          date
+          date,
         ).toLocaleString()}`,
         action_type: "UPDATE",
         created_by: updatedBy,
@@ -355,7 +216,7 @@ export class PreProductionService {
   async checkPostProductionReady(
     vendorId: number,
     leadId: number,
-    instanceId?: number | null
+    instanceId?: number | null,
   ): Promise<{
     readyForPostProduction: boolean;
     all_order_login_dates_added: boolean;
@@ -414,14 +275,18 @@ export class PreProductionService {
     };
   }
 
-  async getLatestOrderLoginByLead(vendorId: number, leadId: number,  instanceId: number) {
-   if (!vendorId || !leadId || !instanceId) {
-    const error = new Error(
-      "vendor_id, lead_id and instance_id are required"
-    );
-    (error as any).statusCode = 400;
-    throw error;
-  }
+  async getLatestOrderLoginByLead(
+    vendorId: number,
+    leadId: number,
+    instanceId: number,
+  ) {
+    if (!vendorId || !leadId || !instanceId) {
+      const error = new Error(
+        "vendor_id, lead_id and instance_id are required",
+      );
+      (error as any).statusCode = 400;
+      throw error;
+    }
     // Fetch the latest order login sorted by estimated_completion_date DESC
     const latestOrder = await prisma.orderLoginDetails.findFirst({
       where: {
@@ -440,7 +305,7 @@ export class PreProductionService {
         item_type: true,
         estimated_completion_date: true,
         is_completed: true,
-        instance_id: true
+        instance_id: true,
       },
     });
 
@@ -456,5 +321,235 @@ export class PreProductionService {
       message: "Latest order login fetched successfully.",
       data: latestOrder,
     };
+  }
+
+  async handleOrderLoginCompletion(
+    vendorId: number,
+    leadId: number,
+    updates: any[],
+  ) {
+    logger.info("[OrderLoginCompletion] START", {
+      vendorId,
+      leadId,
+      totalUpdates: updates.length,
+    });
+
+    // ─── Lead Stage Fetch ─────────────────────────────────────
+    const leadStageRecord = await prisma.leadMaster.findFirst({
+      where: { id: leadId, vendor_id: vendorId },
+      select: { status_id: true },
+    });
+    logger.debug("[OrderLoginCompletion] leadStageRecord", { leadStageRecord });
+
+    const leadStage = leadStageRecord?.status_id
+      ? ((
+          await prisma.statusTypeMaster.findUnique({
+            where: { id: leadStageRecord.status_id },
+            select: { type: true },
+          })
+        )?.type ?? null)
+      : null;
+
+    logger.debug("[OrderLoginCompletion] resolved leadStage", { leadStage });
+
+    const results = [];
+    const errors = [];
+
+    for (const [index, u] of updates.entries()) {
+      logger.debug(`[OrderLoginCompletion] Processing update [${index}]`, {
+        update: u,
+      });
+
+      try {
+        const {
+          id,
+          instance_id,
+          estimated_completion_date,
+          is_completed,
+          updated_by,
+        } = u;
+
+        // ─── Validation ───────────────────────────────────────────
+        if (!id || !updated_by || !instance_id) {
+          const missing = [
+            !id && "id",
+            !updated_by && "updated_by",
+            !instance_id && "instance_id",
+          ].filter(Boolean);
+          logger.warn(`[OrderLoginCompletion] Validation failed [${index}]`, {
+            missing,
+          });
+          throw new Error(
+            `Missing id / updated_by / instance_id in record #${index + 1}`,
+          );
+        }
+
+        // ─── Existing Order Login Check ───────────────────────────
+        const existing = await prisma.orderLoginDetails.findFirst({
+          where: { id, vendor_id: vendorId, lead_id: leadId },
+        });
+        logger.debug(`[OrderLoginCompletion] existing orderLogin [${index}]`, {
+          existing,
+        });
+
+        if (!existing) {
+          logger.warn(`[OrderLoginCompletion] Record not found [${index}]`, {
+            id,
+            vendorId,
+            leadId,
+          });
+          throw new Error(
+            `Order login record #${id} not found for vendor ${vendorId}`,
+          );
+        }
+
+        // ─── Completion Flag Normalize ─────────────────────────────
+        const normalizeCompletionFlag = (val: any): boolean => {
+          if (typeof val === "string") {
+            const v = val.trim().toLowerCase();
+            return v === "true" || v === "1" || v === "yes";
+          }
+          return val === true || val === 1;
+        };
+
+        const completionFlag = normalizeCompletionFlag(is_completed);
+        logger.debug(`[OrderLoginCompletion] completionFlag [${index}]`, {
+          raw: is_completed,
+          completionFlag,
+        });
+
+        // ─── Build Update Payload ──────────────────────────────────
+        const updateData: any = {
+          estimated_completion_date: estimated_completion_date
+            ? new Date(estimated_completion_date)
+            : existing.estimated_completion_date,
+          updated_by: Number(updated_by),
+        };
+
+        if (completionFlag) {
+          updateData.is_completed = true;
+          updateData.completion_date = new Date();
+        }
+        logger.debug(`[OrderLoginCompletion] updateData [${index}]`, {
+          updateData,
+        });
+
+        // ─── Update Order Login ────────────────────────────────────
+        const updated = await prisma.orderLoginDetails.update({
+          where: { id },
+          data: updateData,
+        });
+        logger.info(`[OrderLoginCompletion] orderLogin updated [${index}]`, {
+          updatedId: updated.id,
+        });
+
+        // ─── Fetch Instance Title for Remark ──────────────────────
+        const instance = await prisma.leadProductStructureInstance.findUnique({
+          where: { id: instance_id },
+          select: { title: true },
+        });
+        logger.debug(`[OrderLoginCompletion] instance [${index}]`, {
+          instance_id,
+          instance,
+        });
+
+        const dueDate =
+          updateData.estimated_completion_date ||
+          updated.estimated_completion_date ||
+          new Date();
+
+        const userId = Number(updated_by);
+        const status: LeadTaskStatus = completionFlag ? "completed" : "open";
+
+        // ✅ remark mein ||OL:id|| embed karo — orderlogin item wise unique identification
+        const remark = `${instance?.title ?? "Unknown"} (${existing.item_type}) - still needs to be marked as ready. ||OL:${id}||`;
+
+        logger.debug(`[OrderLoginCompletion] task meta [${index}]`, {
+          dueDate,
+          status,
+          userId,
+          remark,
+        });
+
+        // ─── Find Existing Task (INSTANCE + ORDERLOGIN via remark) ─
+        const existingTask = await prisma.userLeadTask.findFirst({
+          where: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: existing.account_id,
+            instance_id: instance_id,
+            task_type: "Production Ready",
+            remark: { contains: `||OL:${id}||` }, // ✅ orderlogin id se exact task dhundho
+          },
+        });
+        logger.debug(`[OrderLoginCompletion] existingTask [${index}]`, {
+          found: !!existingTask,
+          taskId: existingTask?.id ?? null,
+        });
+
+        // ─── Task UPDATE or CREATE ─────────────────────────────────
+        if (existingTask) {
+          await prisma.userLeadTask.update({
+            where: { id: existingTask.id },
+            data: {
+              due_date: new Date(dueDate),
+              remark,
+              status: completionFlag ? "completed" : existingTask.status,
+              updated_by: userId,
+              updated_at: new Date(),
+              ...(completionFlag && {
+                closed_by: userId,
+                closed_at: new Date(),
+              }),
+            },
+          });
+          logger.info(`[OrderLoginCompletion] task UPDATED [${index}]`, {
+            taskId: existingTask.id,
+          });
+        } else {
+          const created = await prisma.userLeadTask.create({
+            data: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: existing.account_id,
+              instance_id: instance_id,
+              user_id: userId,
+              task_type: "Production Ready",
+              lead_stage: leadStage,
+              due_date: new Date(dueDate),
+              remark,
+              status,
+              created_by: userId,
+              ...(completionFlag && {
+                closed_by: userId,
+                closed_at: new Date(),
+              }),
+            },
+          });
+          logger.info(`[OrderLoginCompletion] task CREATED [${index}]`, {
+            newTaskId: created.id,
+          });
+        }
+
+        results.push(updated);
+        logger.debug(`[OrderLoginCompletion] update [${index}] SUCCESS`);
+      } catch (err: any) {
+        logger.error(`[OrderLoginCompletion] update [${index}] FAILED`, {
+          message: err.message,
+          stack: err.stack,
+          input: u,
+        });
+        errors.push({ index, message: err.message });
+      }
+    }
+
+    logger.info("[OrderLoginCompletion] DONE", {
+      total: updates.length,
+      success: results.length,
+      failed: errors.length,
+      errors,
+    });
+
+    return { results, errors };
   }
 }
