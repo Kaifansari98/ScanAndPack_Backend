@@ -25,3 +25,6 @@ const shutdown = (signal: string) => {
 
 process.on("SIGINT", () => shutdown("SIGINT"));
 process.on("SIGTERM", () => shutdown("SIGTERM"));
+
+// TODO : The PO files management needs to be checked.
+// TODO : The Auth needs to be done with franchise id as well.

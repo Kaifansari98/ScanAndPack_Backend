@@ -402,3 +402,43 @@ export type OrderLoginPoFileMapping = Prisma.OrderLoginPoFileMappingModel
  * 
  */
 export type MachineTypeMaster = Prisma.MachineTypeMasterModel
+/**
+ * Model FranchiseMaster
+ * 
+ */
+export type FranchiseMaster = Prisma.FranchiseMasterModel
+/**
+ * Model CountryMaster
+ * 
+ */
+export type CountryMaster = Prisma.CountryMasterModel
+/**
+ * Model RegionMaster
+ * 
+ */
+export type RegionMaster = Prisma.RegionMasterModel
+/**
+ * Model StateMaster
+ * 
+ */
+export type StateMaster = Prisma.StateMasterModel
+/**
+ * Model CityMaster
+ * 
+ */
+export type CityMaster = Prisma.CityMasterModel
+/**
+ * Model AreaMaster
+ * 
+ */
+export type AreaMaster = Prisma.AreaMasterModel
+/**
+ * Model GeographicalMapping
+ * 
+ */
+export type GeographicalMapping = Prisma.GeographicalMappingModel
+/**
+ * Model UserGeographicalMapping
+ * 
+ */
+export type UserGeographicalMapping = Prisma.UserGeographicalMappingModel

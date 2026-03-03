@@ -42,6 +42,8 @@ import chatRoutes from "./chat/chat.routes";
 import notificationRoutes from "./notification/notification.routes";
 import emailNotificationMasterRoutes from "./notification/emailNotificationMaster.routes";
 import contactUsRoutes from "./generic/contactUs.routes";
+import franchiseRoutes from "./franchise/franchise.routes";
+import geographyMasterRoutes from "./generic/geographyMaster.routes";
 
 import trackTraceRoutes from "./trackTraceRoutes/track-trace.routes";
 import trackTraceMasterRoutes from "./trackTraceRoutes/trackTraceMaster.routes";
@@ -100,6 +102,8 @@ router.use("/leads/chats", chatRoutes);
 router.use("/notifications", notificationRoutes);
 router.use("/email-notification-master", emailNotificationMasterRoutes);
 router.use("/public", contactUsRoutes);
+router.use("/franchises", franchiseRoutes);
+router.use("/geography-masters", geographyMasterRoutes);
 
 router.use("/track-trace", trackTraceRoutes);
 router.use("/track-trace-master", trackTraceMasterRoutes);

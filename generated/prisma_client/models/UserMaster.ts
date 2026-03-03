@@ -29,18 +29,21 @@ export type AggregateUserMaster = {
 export type UserMasterAvgAggregateOutputType = {
   id: number | null
   vendor_id: number | null
+  franchise_id: number | null
   user_type_id: number | null
 }
 
 export type UserMasterSumAggregateOutputType = {
   id: number | null
   vendor_id: number | null
+  franchise_id: number | null
   user_type_id: number | null
 }
 
 export type UserMasterMinAggregateOutputType = {
   id: number | null
   vendor_id: number | null
+  franchise_id: number | null
   user_name: string | null
   user_contact: string | null
   user_email: string | null
@@ -55,6 +58,7 @@ export type UserMasterMinAggregateOutputType = {
 export type UserMasterMaxAggregateOutputType = {
   id: number | null
   vendor_id: number | null
+  franchise_id: number | null
   user_name: string | null
   user_contact: string | null
   user_email: string | null
@@ -69,6 +73,7 @@ export type UserMasterMaxAggregateOutputType = {
 export type UserMasterCountAggregateOutputType = {
   id: number
   vendor_id: number
+  franchise_id: number
   user_name: number
   user_contact: number
   user_email: number
@@ -85,18 +90,21 @@ export type UserMasterCountAggregateOutputType = {
 export type UserMasterAvgAggregateInputType = {
   id?: true
   vendor_id?: true
+  franchise_id?: true
   user_type_id?: true
 }
 
 export type UserMasterSumAggregateInputType = {
   id?: true
   vendor_id?: true
+  franchise_id?: true
   user_type_id?: true
 }
 
 export type UserMasterMinAggregateInputType = {
   id?: true
   vendor_id?: true
+  franchise_id?: true
   user_name?: true
   user_contact?: true
   user_email?: true
@@ -111,6 +119,7 @@ export type UserMasterMinAggregateInputType = {
 export type UserMasterMaxAggregateInputType = {
   id?: true
   vendor_id?: true
+  franchise_id?: true
   user_name?: true
   user_contact?: true
   user_email?: true
@@ -125,6 +134,7 @@ export type UserMasterMaxAggregateInputType = {
 export type UserMasterCountAggregateInputType = {
   id?: true
   vendor_id?: true
+  franchise_id?: true
   user_name?: true
   user_contact?: true
   user_email?: true
@@ -226,6 +236,7 @@ export type UserMasterGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 export type UserMasterGroupByOutputType = {
   id: number
   vendor_id: number
+  franchise_id: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -263,6 +274,7 @@ export type UserMasterWhereInput = {
   NOT?: Prisma.UserMasterWhereInput | Prisma.UserMasterWhereInput[]
   id?: Prisma.IntFilter<"UserMaster"> | number
   vendor_id?: Prisma.IntFilter<"UserMaster"> | number
+  franchise_id?: Prisma.IntNullableFilter<"UserMaster"> | number | null
   user_name?: Prisma.StringFilter<"UserMaster"> | string
   user_contact?: Prisma.StringFilter<"UserMaster"> | string
   user_email?: Prisma.StringFilter<"UserMaster"> | string
@@ -335,11 +347,14 @@ export type UserMasterWhereInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingListRelationFilter
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingListRelationFilter
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingListRelationFilter
+  userGeographicalMappings?: Prisma.UserGeographicalMappingListRelationFilter
+  franchise?: Prisma.XOR<Prisma.FranchiseMasterNullableScalarRelationFilter, Prisma.FranchiseMasterWhereInput> | null
 }
 
 export type UserMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  franchise_id?: Prisma.SortOrderInput | Prisma.SortOrder
   user_name?: Prisma.SortOrder
   user_contact?: Prisma.SortOrder
   user_email?: Prisma.SortOrder
@@ -412,6 +427,8 @@ export type UserMasterOrderByWithRelationInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingOrderByRelationAggregateInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingOrderByRelationAggregateInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingOrderByRelationAggregateInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingOrderByRelationAggregateInput
+  franchise?: Prisma.FranchiseMasterOrderByWithRelationInput
 }
 
 export type UserMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -421,6 +438,7 @@ export type UserMasterWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UserMasterWhereInput[]
   NOT?: Prisma.UserMasterWhereInput | Prisma.UserMasterWhereInput[]
   vendor_id?: Prisma.IntFilter<"UserMaster"> | number
+  franchise_id?: Prisma.IntNullableFilter<"UserMaster"> | number | null
   user_name?: Prisma.StringFilter<"UserMaster"> | string
   user_email?: Prisma.StringFilter<"UserMaster"> | string
   user_timezone?: Prisma.StringFilter<"UserMaster"> | string
@@ -492,11 +510,14 @@ export type UserMasterWhereUniqueInput = Prisma.AtLeast<{
   updatedUserMachineMappings?: Prisma.UserMachineMappingListRelationFilter
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingListRelationFilter
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingListRelationFilter
+  userGeographicalMappings?: Prisma.UserGeographicalMappingListRelationFilter
+  franchise?: Prisma.XOR<Prisma.FranchiseMasterNullableScalarRelationFilter, Prisma.FranchiseMasterWhereInput> | null
 }, "id" | "user_contact">
 
 export type UserMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  franchise_id?: Prisma.SortOrderInput | Prisma.SortOrder
   user_name?: Prisma.SortOrder
   user_contact?: Prisma.SortOrder
   user_email?: Prisma.SortOrder
@@ -519,6 +540,7 @@ export type UserMasterScalarWhereWithAggregatesInput = {
   NOT?: Prisma.UserMasterScalarWhereWithAggregatesInput | Prisma.UserMasterScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"UserMaster"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"UserMaster"> | number
+  franchise_id?: Prisma.IntNullableWithAggregatesFilter<"UserMaster"> | number | null
   user_name?: Prisma.StringWithAggregatesFilter<"UserMaster"> | string
   user_contact?: Prisma.StringWithAggregatesFilter<"UserMaster"> | string
   user_email?: Prisma.StringWithAggregatesFilter<"UserMaster"> | string
@@ -602,11 +624,14 @@ export type UserMasterCreateInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -677,6 +702,7 @@ export type UserMasterUncheckedCreateInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterUpdateInput = {
@@ -751,11 +777,14 @@ export type UserMasterUpdateInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -826,11 +855,13 @@ export type UserMasterUncheckedUpdateInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateManyInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -856,6 +887,7 @@ export type UserMasterUpdateManyMutationInput = {
 export type UserMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -880,6 +912,7 @@ export type UserMasterOrderByRelationAggregateInput = {
 export type UserMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  franchise_id?: Prisma.SortOrder
   user_name?: Prisma.SortOrder
   user_contact?: Prisma.SortOrder
   user_email?: Prisma.SortOrder
@@ -894,12 +927,14 @@ export type UserMasterCountOrderByAggregateInput = {
 export type UserMasterAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  franchise_id?: Prisma.SortOrder
   user_type_id?: Prisma.SortOrder
 }
 
 export type UserMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  franchise_id?: Prisma.SortOrder
   user_name?: Prisma.SortOrder
   user_contact?: Prisma.SortOrder
   user_email?: Prisma.SortOrder
@@ -914,6 +949,7 @@ export type UserMasterMaxOrderByAggregateInput = {
 export type UserMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  franchise_id?: Prisma.SortOrder
   user_name?: Prisma.SortOrder
   user_contact?: Prisma.SortOrder
   user_email?: Prisma.SortOrder
@@ -928,6 +964,7 @@ export type UserMasterMinOrderByAggregateInput = {
 export type UserMasterSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  franchise_id?: Prisma.SortOrder
   user_type_id?: Prisma.SortOrder
 }
 
@@ -1917,6 +1954,62 @@ export type UserMasterUpdateOneWithoutOrderLoginPoFilesDeletedNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutOrderLoginPoFilesDeletedInput, Prisma.UserMasterUpdateWithoutOrderLoginPoFilesDeletedInput>, Prisma.UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput>
 }
 
+export type UserMasterCreateNestedManyWithoutFranchiseInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutFranchiseInput, Prisma.UserMasterUncheckedCreateWithoutFranchiseInput> | Prisma.UserMasterCreateWithoutFranchiseInput[] | Prisma.UserMasterUncheckedCreateWithoutFranchiseInput[]
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutFranchiseInput | Prisma.UserMasterCreateOrConnectWithoutFranchiseInput[]
+  createMany?: Prisma.UserMasterCreateManyFranchiseInputEnvelope
+  connect?: Prisma.UserMasterWhereUniqueInput | Prisma.UserMasterWhereUniqueInput[]
+}
+
+export type UserMasterUncheckedCreateNestedManyWithoutFranchiseInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutFranchiseInput, Prisma.UserMasterUncheckedCreateWithoutFranchiseInput> | Prisma.UserMasterCreateWithoutFranchiseInput[] | Prisma.UserMasterUncheckedCreateWithoutFranchiseInput[]
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutFranchiseInput | Prisma.UserMasterCreateOrConnectWithoutFranchiseInput[]
+  createMany?: Prisma.UserMasterCreateManyFranchiseInputEnvelope
+  connect?: Prisma.UserMasterWhereUniqueInput | Prisma.UserMasterWhereUniqueInput[]
+}
+
+export type UserMasterUpdateManyWithoutFranchiseNestedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutFranchiseInput, Prisma.UserMasterUncheckedCreateWithoutFranchiseInput> | Prisma.UserMasterCreateWithoutFranchiseInput[] | Prisma.UserMasterUncheckedCreateWithoutFranchiseInput[]
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutFranchiseInput | Prisma.UserMasterCreateOrConnectWithoutFranchiseInput[]
+  upsert?: Prisma.UserMasterUpsertWithWhereUniqueWithoutFranchiseInput | Prisma.UserMasterUpsertWithWhereUniqueWithoutFranchiseInput[]
+  createMany?: Prisma.UserMasterCreateManyFranchiseInputEnvelope
+  set?: Prisma.UserMasterWhereUniqueInput | Prisma.UserMasterWhereUniqueInput[]
+  disconnect?: Prisma.UserMasterWhereUniqueInput | Prisma.UserMasterWhereUniqueInput[]
+  delete?: Prisma.UserMasterWhereUniqueInput | Prisma.UserMasterWhereUniqueInput[]
+  connect?: Prisma.UserMasterWhereUniqueInput | Prisma.UserMasterWhereUniqueInput[]
+  update?: Prisma.UserMasterUpdateWithWhereUniqueWithoutFranchiseInput | Prisma.UserMasterUpdateWithWhereUniqueWithoutFranchiseInput[]
+  updateMany?: Prisma.UserMasterUpdateManyWithWhereWithoutFranchiseInput | Prisma.UserMasterUpdateManyWithWhereWithoutFranchiseInput[]
+  deleteMany?: Prisma.UserMasterScalarWhereInput | Prisma.UserMasterScalarWhereInput[]
+}
+
+export type UserMasterUncheckedUpdateManyWithoutFranchiseNestedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutFranchiseInput, Prisma.UserMasterUncheckedCreateWithoutFranchiseInput> | Prisma.UserMasterCreateWithoutFranchiseInput[] | Prisma.UserMasterUncheckedCreateWithoutFranchiseInput[]
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutFranchiseInput | Prisma.UserMasterCreateOrConnectWithoutFranchiseInput[]
+  upsert?: Prisma.UserMasterUpsertWithWhereUniqueWithoutFranchiseInput | Prisma.UserMasterUpsertWithWhereUniqueWithoutFranchiseInput[]
+  createMany?: Prisma.UserMasterCreateManyFranchiseInputEnvelope
+  set?: Prisma.UserMasterWhereUniqueInput | Prisma.UserMasterWhereUniqueInput[]
+  disconnect?: Prisma.UserMasterWhereUniqueInput | Prisma.UserMasterWhereUniqueInput[]
+  delete?: Prisma.UserMasterWhereUniqueInput | Prisma.UserMasterWhereUniqueInput[]
+  connect?: Prisma.UserMasterWhereUniqueInput | Prisma.UserMasterWhereUniqueInput[]
+  update?: Prisma.UserMasterUpdateWithWhereUniqueWithoutFranchiseInput | Prisma.UserMasterUpdateWithWhereUniqueWithoutFranchiseInput[]
+  updateMany?: Prisma.UserMasterUpdateManyWithWhereWithoutFranchiseInput | Prisma.UserMasterUpdateManyWithWhereWithoutFranchiseInput[]
+  deleteMany?: Prisma.UserMasterScalarWhereInput | Prisma.UserMasterScalarWhereInput[]
+}
+
+export type UserMasterCreateNestedOneWithoutUserGeographicalMappingsInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutUserGeographicalMappingsInput, Prisma.UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutUserGeographicalMappingsInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+}
+
+export type UserMasterUpdateOneRequiredWithoutUserGeographicalMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutUserGeographicalMappingsInput, Prisma.UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutUserGeographicalMappingsInput
+  upsert?: Prisma.UserMasterUpsertWithoutUserGeographicalMappingsInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutUserGeographicalMappingsInput, Prisma.UserMasterUpdateWithoutUserGeographicalMappingsInput>, Prisma.UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput>
+}
+
 export type UserMasterCreateWithoutVendorInput = {
   user_name: string
   user_contact: string
@@ -1988,10 +2081,13 @@ export type UserMasterCreateWithoutVendorInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutVendorInput = {
   id?: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -2062,6 +2158,7 @@ export type UserMasterUncheckedCreateWithoutVendorInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutVendorInput = {
@@ -2096,6 +2193,7 @@ export type UserMasterScalarWhereInput = {
   NOT?: Prisma.UserMasterScalarWhereInput | Prisma.UserMasterScalarWhereInput[]
   id?: Prisma.IntFilter<"UserMaster"> | number
   vendor_id?: Prisma.IntFilter<"UserMaster"> | number
+  franchise_id?: Prisma.IntNullableFilter<"UserMaster"> | number | null
   user_name?: Prisma.StringFilter<"UserMaster"> | string
   user_contact?: Prisma.StringFilter<"UserMaster"> | string
   user_email?: Prisma.StringFilter<"UserMaster"> | string
@@ -2178,11 +2276,14 @@ export type UserMasterCreateWithoutUser_typeInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutUser_typeInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -2252,6 +2353,7 @@ export type UserMasterUncheckedCreateWithoutUser_typeInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutUser_typeInput = {
@@ -2351,11 +2453,14 @@ export type UserMasterCreateWithoutDocumentsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutDocumentsInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -2425,6 +2530,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDocumentsInput = {
@@ -2514,11 +2620,14 @@ export type UserMasterUpdateWithoutDocumentsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDocumentsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2588,6 +2697,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutCreatedProjectsInput = {
@@ -2661,11 +2771,14 @@ export type UserMasterCreateWithoutCreatedProjectsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutCreatedProjectsInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -2735,6 +2848,7 @@ export type UserMasterUncheckedCreateWithoutCreatedProjectsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutCreatedProjectsInput = {
@@ -2824,11 +2938,14 @@ export type UserMasterUpdateWithoutCreatedProjectsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCreatedProjectsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2898,6 +3015,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedProjectsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutScanItemsCreatedInput = {
@@ -2971,11 +3089,14 @@ export type UserMasterCreateWithoutScanItemsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutScanItemsCreatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -3045,6 +3166,7 @@ export type UserMasterUncheckedCreateWithoutScanItemsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutScanItemsCreatedInput = {
@@ -3134,11 +3256,14 @@ export type UserMasterUpdateWithoutScanItemsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutScanItemsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3208,6 +3333,7 @@ export type UserMasterUncheckedUpdateWithoutScanItemsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadsAssignedInput = {
@@ -3281,11 +3407,14 @@ export type UserMasterCreateWithoutLeadsAssignedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadsAssignedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -3355,6 +3484,7 @@ export type UserMasterUncheckedCreateWithoutLeadsAssignedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadsAssignedInput = {
@@ -3433,11 +3563,14 @@ export type UserMasterCreateWithoutLeadsDelegatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadsDelegatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -3507,6 +3640,7 @@ export type UserMasterUncheckedCreateWithoutLeadsDelegatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadsDelegatedInput = {
@@ -3585,11 +3719,14 @@ export type UserMasterCreateWithoutLeadsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadsCreatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -3659,6 +3796,7 @@ export type UserMasterUncheckedCreateWithoutLeadsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadsCreatedInput = {
@@ -3737,11 +3875,14 @@ export type UserMasterCreateWithoutLeadsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadsUpdatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -3811,6 +3952,7 @@ export type UserMasterUncheckedCreateWithoutLeadsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadsUpdatedInput = {
@@ -3900,11 +4042,14 @@ export type UserMasterUpdateWithoutLeadsAssignedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadsAssignedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3974,6 +4119,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsAssignedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadsDelegatedInput = {
@@ -4058,11 +4204,14 @@ export type UserMasterUpdateWithoutLeadsDelegatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadsDelegatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4132,6 +4281,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsDelegatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadsCreatedInput = {
@@ -4216,11 +4366,14 @@ export type UserMasterUpdateWithoutLeadsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4290,6 +4443,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadsUpdatedInput = {
@@ -4374,11 +4528,14 @@ export type UserMasterUpdateWithoutLeadsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4448,6 +4605,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadUserCreatedInput = {
@@ -4521,11 +4679,14 @@ export type UserMasterCreateWithoutLeadUserCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadUserCreatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -4595,6 +4756,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadUserCreatedInput = {
@@ -4673,11 +4835,14 @@ export type UserMasterCreateWithoutLeadUserUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadUserUpdatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -4747,6 +4912,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadUserUpdatedInput = {
@@ -4825,11 +4991,14 @@ export type UserMasterCreateWithoutLeadUserAsUserInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadUserAsUserInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -4899,6 +5068,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserAsUserInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadUserAsUserInput = {
@@ -4988,11 +5158,14 @@ export type UserMasterUpdateWithoutLeadUserCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadUserCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5062,6 +5235,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadUserUpdatedInput = {
@@ -5146,11 +5320,14 @@ export type UserMasterUpdateWithoutLeadUserUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadUserUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5220,6 +5397,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadUserAsUserInput = {
@@ -5304,11 +5482,14 @@ export type UserMasterUpdateWithoutLeadUserAsUserInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadUserAsUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5378,6 +5559,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserAsUserInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadActivityStatusLogInput = {
@@ -5451,11 +5633,14 @@ export type UserMasterCreateWithoutLeadActivityStatusLogInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -5525,6 +5710,7 @@ export type UserMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadActivityStatusLogInput = {
@@ -5614,11 +5800,14 @@ export type UserMasterUpdateWithoutLeadActivityStatusLogInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5688,6 +5877,7 @@ export type UserMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutAccountsCreatedInput = {
@@ -5761,11 +5951,14 @@ export type UserMasterCreateWithoutAccountsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutAccountsCreatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -5835,6 +6028,7 @@ export type UserMasterUncheckedCreateWithoutAccountsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutAccountsCreatedInput = {
@@ -5913,11 +6107,14 @@ export type UserMasterCreateWithoutAccountsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutAccountsUpdatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -5987,6 +6184,7 @@ export type UserMasterUncheckedCreateWithoutAccountsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutAccountsUpdatedInput = {
@@ -6076,11 +6274,14 @@ export type UserMasterUpdateWithoutAccountsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutAccountsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -6150,6 +6351,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutAccountsUpdatedInput = {
@@ -6234,11 +6436,14 @@ export type UserMasterUpdateWithoutAccountsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutAccountsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -6308,6 +6513,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadProductsCreatedInput = {
@@ -6381,11 +6587,14 @@ export type UserMasterCreateWithoutLeadProductsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadProductsCreatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -6455,6 +6664,7 @@ export type UserMasterUncheckedCreateWithoutLeadProductsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadProductsCreatedInput = {
@@ -6544,11 +6754,14 @@ export type UserMasterUpdateWithoutLeadProductsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadProductsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -6618,6 +6831,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProductsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutDocumentsCreatedInput = {
@@ -6691,11 +6905,14 @@ export type UserMasterCreateWithoutDocumentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutDocumentsCreatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -6765,6 +6982,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDocumentsCreatedInput = {
@@ -6843,11 +7061,14 @@ export type UserMasterCreateWithoutDocumentsDeletedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutDocumentsDeletedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -6917,6 +7138,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsDeletedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDocumentsDeletedInput = {
@@ -7006,11 +7228,14 @@ export type UserMasterUpdateWithoutDocumentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDocumentsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -7080,6 +7305,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutDocumentsDeletedInput = {
@@ -7164,11 +7390,14 @@ export type UserMasterUpdateWithoutDocumentsDeletedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDocumentsDeletedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -7238,6 +7467,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsDeletedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadChatMembersAddedInput = {
@@ -7311,11 +7541,14 @@ export type UserMasterCreateWithoutLeadChatMembersAddedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatMembersAddedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -7385,6 +7618,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersAddedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatMembersAddedInput = {
@@ -7463,11 +7697,14 @@ export type UserMasterCreateWithoutLeadChatMembersInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatMembersInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -7537,6 +7774,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatMembersInput = {
@@ -7626,11 +7864,14 @@ export type UserMasterUpdateWithoutLeadChatMembersAddedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatMembersAddedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -7700,6 +7941,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersAddedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadChatMembersInput = {
@@ -7784,11 +8026,14 @@ export type UserMasterUpdateWithoutLeadChatMembersInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatMembersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -7858,6 +8103,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadChatMessagesSentInput = {
@@ -7931,11 +8177,14 @@ export type UserMasterCreateWithoutLeadChatMessagesSentInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatMessagesSentInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -8005,6 +8254,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMessagesSentInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatMessagesSentInput = {
@@ -8094,11 +8344,14 @@ export type UserMasterUpdateWithoutLeadChatMessagesSentInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatMessagesSentInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -8168,6 +8421,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMessagesSentInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadChatMentionsInput = {
@@ -8241,11 +8495,14 @@ export type UserMasterCreateWithoutLeadChatMentionsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatMentionsInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -8315,6 +8572,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMentionsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatMentionsInput = {
@@ -8404,11 +8662,14 @@ export type UserMasterUpdateWithoutLeadChatMentionsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatMentionsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -8478,6 +8739,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMentionsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadChatDocumentsCreatedInput = {
@@ -8551,11 +8813,14 @@ export type UserMasterCreateWithoutLeadChatDocumentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatDocumentsCreatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -8625,6 +8890,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatDocumentsCreatedInput = {
@@ -8703,11 +8969,14 @@ export type UserMasterCreateWithoutLeadChatDocumentsDeletedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatDocumentsDeletedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -8777,6 +9046,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsDeletedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatDocumentsDeletedInput = {
@@ -8866,11 +9136,14 @@ export type UserMasterUpdateWithoutLeadChatDocumentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -8940,6 +9213,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadChatDocumentsDeletedInput = {
@@ -9024,11 +9298,14 @@ export type UserMasterUpdateWithoutLeadChatDocumentsDeletedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsDeletedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -9098,6 +9375,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsDeletedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutProductStructureInstancesInput = {
@@ -9171,11 +9449,14 @@ export type UserMasterCreateWithoutProductStructureInstancesInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -9245,6 +9526,7 @@ export type UserMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutProductStructureInstancesInput = {
@@ -9334,11 +9616,14 @@ export type UserMasterUpdateWithoutProductStructureInstancesInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -9408,6 +9693,7 @@ export type UserMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutPaymentsCreatedInput = {
@@ -9481,11 +9767,14 @@ export type UserMasterCreateWithoutPaymentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutPaymentsCreatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -9555,6 +9844,7 @@ export type UserMasterUncheckedCreateWithoutPaymentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutPaymentsCreatedInput = {
@@ -9644,11 +9934,14 @@ export type UserMasterUpdateWithoutPaymentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPaymentsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -9718,6 +10011,7 @@ export type UserMasterUncheckedUpdateWithoutPaymentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutLedgersCreatedInput = {
@@ -9791,11 +10085,14 @@ export type UserMasterCreateWithoutLedgersCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLedgersCreatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -9865,6 +10162,7 @@ export type UserMasterUncheckedCreateWithoutLedgersCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLedgersCreatedInput = {
@@ -9954,11 +10252,14 @@ export type UserMasterUpdateWithoutLedgersCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLedgersCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -10028,6 +10329,7 @@ export type UserMasterUncheckedUpdateWithoutLedgersCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadStatusLogsInput = {
@@ -10101,11 +10403,14 @@ export type UserMasterCreateWithoutLeadStatusLogsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -10175,6 +10480,7 @@ export type UserMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadStatusLogsInput = {
@@ -10264,11 +10570,14 @@ export type UserMasterUpdateWithoutLeadStatusLogsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -10338,6 +10647,7 @@ export type UserMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutDesignMeetingsCreatedInput = {
@@ -10411,11 +10721,14 @@ export type UserMasterCreateWithoutDesignMeetingsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignMeetingsCreatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -10485,6 +10798,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignMeetingsCreatedInput = {
@@ -10563,11 +10877,14 @@ export type UserMasterCreateWithoutDesignMeetingsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignMeetingsUpdatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -10637,6 +10954,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignMeetingsUpdatedInput = {
@@ -10726,11 +11044,14 @@ export type UserMasterUpdateWithoutDesignMeetingsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignMeetingsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -10800,6 +11121,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutDesignMeetingsUpdatedInput = {
@@ -10884,11 +11206,14 @@ export type UserMasterUpdateWithoutDesignMeetingsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignMeetingsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -10958,6 +11283,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
@@ -11031,11 +11357,14 @@ export type UserMasterCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -11105,6 +11434,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingDocsMappingForCreatedBY
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignMeetingDocsMappingForCreatedBYInput = {
@@ -11194,11 +11524,14 @@ export type UserMasterUpdateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -11268,6 +11601,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingDocsMappingForCreatedBY
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutDesignSelectionsCreatedInput = {
@@ -11341,11 +11675,14 @@ export type UserMasterCreateWithoutDesignSelectionsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignSelectionsCreatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -11415,6 +11752,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignSelectionsCreatedInput = {
@@ -11493,11 +11831,14 @@ export type UserMasterCreateWithoutDesignSelectionsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignSelectionsUpdatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -11567,6 +11908,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignSelectionsUpdatedInput = {
@@ -11656,11 +11998,14 @@ export type UserMasterUpdateWithoutDesignSelectionsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignSelectionsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -11730,6 +12075,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutDesignSelectionsUpdatedInput = {
@@ -11814,11 +12160,14 @@ export type UserMasterUpdateWithoutDesignSelectionsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignSelectionsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -11888,6 +12237,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutSupervisorMappingsCreatedInput = {
@@ -11961,11 +12311,14 @@ export type UserMasterCreateWithoutSupervisorMappingsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutSupervisorMappingsCreatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -12035,6 +12388,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutSupervisorMappingsCreatedInput = {
@@ -12113,11 +12467,14 @@ export type UserMasterCreateWithoutSupervisorMappingsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutSupervisorMappingsInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -12187,6 +12544,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutSupervisorMappingsInput = {
@@ -12276,11 +12634,14 @@ export type UserMasterUpdateWithoutSupervisorMappingsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSupervisorMappingsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -12350,6 +12711,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutSupervisorMappingsInput = {
@@ -12434,11 +12796,14 @@ export type UserMasterUpdateWithoutSupervisorMappingsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSupervisorMappingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -12508,6 +12873,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadTasksClosedInput = {
@@ -12581,11 +12947,14 @@ export type UserMasterCreateWithoutLeadTasksClosedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadTasksClosedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -12655,6 +13024,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksClosedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadTasksClosedInput = {
@@ -12733,11 +13103,14 @@ export type UserMasterCreateWithoutLeadTasksCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadTasksCreatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -12807,6 +13180,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadTasksCreatedInput = {
@@ -12885,11 +13259,14 @@ export type UserMasterCreateWithoutLeadTasksAssignedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadTasksAssignedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -12959,6 +13336,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksAssignedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadTasksAssignedInput = {
@@ -13048,11 +13426,14 @@ export type UserMasterUpdateWithoutLeadTasksClosedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadTasksClosedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -13122,6 +13503,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksClosedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadTasksCreatedInput = {
@@ -13206,11 +13588,14 @@ export type UserMasterUpdateWithoutLeadTasksCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadTasksCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -13280,6 +13665,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadTasksAssignedInput = {
@@ -13364,11 +13750,14 @@ export type UserMasterUpdateWithoutLeadTasksAssignedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadTasksAssignedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -13438,6 +13827,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksAssignedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadDetailedLogsInput = {
@@ -13511,11 +13901,14 @@ export type UserMasterCreateWithoutLeadDetailedLogsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -13585,6 +13978,7 @@ export type UserMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadDetailedLogsInput = {
@@ -13674,11 +14068,14 @@ export type UserMasterUpdateWithoutLeadDetailedLogsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -13748,6 +14145,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadDocumentLogsInput = {
@@ -13821,11 +14219,14 @@ export type UserMasterCreateWithoutLeadDocumentLogsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -13895,6 +14296,7 @@ export type UserMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadDocumentLogsInput = {
@@ -13984,11 +14386,14 @@ export type UserMasterUpdateWithoutLeadDocumentLogsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -14058,6 +14463,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutCompanyVendorsCreatedInput = {
@@ -14131,11 +14537,14 @@ export type UserMasterCreateWithoutCompanyVendorsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutCompanyVendorsCreatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -14205,6 +14614,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutCompanyVendorsCreatedInput = {
@@ -14283,11 +14693,14 @@ export type UserMasterCreateWithoutCompanyVendorsDeletedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutCompanyVendorsDeletedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -14357,6 +14770,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsDeletedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutCompanyVendorsDeletedInput = {
@@ -14435,11 +14849,14 @@ export type UserMasterCreateWithoutCompanyVendorsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutCompanyVendorsUpdatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -14509,6 +14926,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutCompanyVendorsUpdatedInput = {
@@ -14598,11 +15016,14 @@ export type UserMasterUpdateWithoutCompanyVendorsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCompanyVendorsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -14672,6 +15093,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutCompanyVendorsDeletedInput = {
@@ -14756,11 +15178,14 @@ export type UserMasterUpdateWithoutCompanyVendorsDeletedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCompanyVendorsDeletedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -14830,6 +15255,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsDeletedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutCompanyVendorsUpdatedInput = {
@@ -14914,11 +15340,14 @@ export type UserMasterUpdateWithoutCompanyVendorsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCompanyVendorsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -14988,6 +15417,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutOrderLoginDetailsInput = {
@@ -15061,11 +15491,14 @@ export type UserMasterCreateWithoutOrderLoginDetailsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -15135,6 +15568,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutOrderLoginDetailsInput = {
@@ -15213,11 +15647,14 @@ export type UserMasterCreateWithoutOrderLoginsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutOrderLoginsUpdatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -15287,6 +15724,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutOrderLoginsUpdatedInput = {
@@ -15376,11 +15814,14 @@ export type UserMasterUpdateWithoutOrderLoginDetailsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -15450,6 +15891,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutOrderLoginsUpdatedInput = {
@@ -15534,11 +15976,14 @@ export type UserMasterUpdateWithoutOrderLoginsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOrderLoginsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -15608,6 +16053,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutSiteReadinessCreatedInput = {
@@ -15681,11 +16127,14 @@ export type UserMasterCreateWithoutSiteReadinessCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutSiteReadinessCreatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -15755,6 +16204,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutSiteReadinessCreatedInput = {
@@ -15833,11 +16283,14 @@ export type UserMasterCreateWithoutSiteReadinessUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutSiteReadinessUpdatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -15907,6 +16360,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutSiteReadinessUpdatedInput = {
@@ -15996,11 +16450,14 @@ export type UserMasterUpdateWithoutSiteReadinessCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSiteReadinessCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -16070,6 +16527,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutSiteReadinessUpdatedInput = {
@@ -16154,11 +16612,14 @@ export type UserMasterUpdateWithoutSiteReadinessUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSiteReadinessUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -16228,6 +16689,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutInstallersCreatedInput = {
@@ -16301,11 +16763,14 @@ export type UserMasterCreateWithoutInstallersCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutInstallersCreatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -16375,6 +16840,7 @@ export type UserMasterUncheckedCreateWithoutInstallersCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutInstallersCreatedInput = {
@@ -16464,11 +16930,14 @@ export type UserMasterUpdateWithoutInstallersCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutInstallersCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -16538,6 +17007,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutInstallersAssignedInput = {
@@ -16611,11 +17081,14 @@ export type UserMasterCreateWithoutInstallersAssignedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutInstallersAssignedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -16685,6 +17158,7 @@ export type UserMasterUncheckedCreateWithoutInstallersAssignedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutInstallersAssignedInput = {
@@ -16774,11 +17248,14 @@ export type UserMasterUpdateWithoutInstallersAssignedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutInstallersAssignedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -16848,6 +17325,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersAssignedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutInstallationUpdatesCreatedInput = {
@@ -16921,11 +17399,14 @@ export type UserMasterCreateWithoutInstallationUpdatesCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutInstallationUpdatesCreatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -16995,6 +17476,7 @@ export type UserMasterUncheckedCreateWithoutInstallationUpdatesCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutInstallationUpdatesCreatedInput = {
@@ -17084,11 +17566,14 @@ export type UserMasterUpdateWithoutInstallationUpdatesCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutInstallationUpdatesCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -17158,6 +17643,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationUpdatesCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutMiscCreatedInput = {
@@ -17231,11 +17717,14 @@ export type UserMasterCreateWithoutMiscCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutMiscCreatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -17305,6 +17794,7 @@ export type UserMasterUncheckedCreateWithoutMiscCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutMiscCreatedInput = {
@@ -17383,11 +17873,14 @@ export type UserMasterCreateWithoutMiscUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutMiscUpdatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -17457,6 +17950,7 @@ export type UserMasterUncheckedCreateWithoutMiscUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutMiscUpdatedInput = {
@@ -17546,11 +18040,14 @@ export type UserMasterUpdateWithoutMiscCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMiscCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -17620,6 +18117,7 @@ export type UserMasterUncheckedUpdateWithoutMiscCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutMiscUpdatedInput = {
@@ -17704,11 +18202,14 @@ export type UserMasterUpdateWithoutMiscUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMiscUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -17778,6 +18279,7 @@ export type UserMasterUncheckedUpdateWithoutMiscUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutMiscDocumentsCreatedInput = {
@@ -17851,11 +18353,14 @@ export type UserMasterCreateWithoutMiscDocumentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutMiscDocumentsCreatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -17925,6 +18430,7 @@ export type UserMasterUncheckedCreateWithoutMiscDocumentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutMiscDocumentsCreatedInput = {
@@ -18014,11 +18520,14 @@ export type UserMasterUpdateWithoutMiscDocumentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMiscDocumentsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -18088,6 +18597,7 @@ export type UserMasterUncheckedUpdateWithoutMiscDocumentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutInstallationIssueLogMasterInput = {
@@ -18161,11 +18671,14 @@ export type UserMasterCreateWithoutInstallationIssueLogMasterInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -18235,6 +18748,7 @@ export type UserMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutInstallationIssueLogMasterInput = {
@@ -18324,11 +18838,14 @@ export type UserMasterUpdateWithoutInstallationIssueLogMasterInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -18398,6 +18915,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutNotificationsSentInput = {
@@ -18471,11 +18989,14 @@ export type UserMasterCreateWithoutNotificationsSentInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutNotificationsSentInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -18545,6 +19066,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsSentInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutNotificationsSentInput = {
@@ -18623,11 +19145,14 @@ export type UserMasterCreateWithoutNotificationsReceivedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutNotificationsReceivedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -18697,6 +19222,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsReceivedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutNotificationsReceivedInput = {
@@ -18786,11 +19312,14 @@ export type UserMasterUpdateWithoutNotificationsSentInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutNotificationsSentInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -18860,6 +19389,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsSentInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutNotificationsReceivedInput = {
@@ -18944,11 +19474,14 @@ export type UserMasterUpdateWithoutNotificationsReceivedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutNotificationsReceivedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -19018,6 +19551,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsReceivedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutPushTokensInput = {
@@ -19091,11 +19625,14 @@ export type UserMasterCreateWithoutPushTokensInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutPushTokensInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -19165,6 +19702,7 @@ export type UserMasterUncheckedCreateWithoutPushTokensInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutPushTokensInput = {
@@ -19254,11 +19792,14 @@ export type UserMasterUpdateWithoutPushTokensInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -19328,6 +19869,7 @@ export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutOperatorInput = {
@@ -19401,11 +19943,14 @@ export type UserMasterCreateWithoutOperatorInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutOperatorInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -19475,6 +20020,7 @@ export type UserMasterUncheckedCreateWithoutOperatorInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutOperatorInput = {
@@ -19564,11 +20110,14 @@ export type UserMasterUpdateWithoutOperatorInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOperatorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -19638,6 +20187,7 @@ export type UserMasterUncheckedUpdateWithoutOperatorInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutUserMachineMappingsInput = {
@@ -19711,11 +20261,14 @@ export type UserMasterCreateWithoutUserMachineMappingsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutUserMachineMappingsInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -19785,6 +20338,7 @@ export type UserMasterUncheckedCreateWithoutUserMachineMappingsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutUserMachineMappingsInput = {
@@ -19863,11 +20417,14 @@ export type UserMasterCreateWithoutCreatedUserMachineMappingsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutCreatedUserMachineMappingsInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -19937,6 +20494,7 @@ export type UserMasterUncheckedCreateWithoutCreatedUserMachineMappingsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutCreatedUserMachineMappingsInput = {
@@ -20015,11 +20573,14 @@ export type UserMasterCreateWithoutUpdatedUserMachineMappingsInput = {
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutUpdatedUserMachineMappingsInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -20089,6 +20650,7 @@ export type UserMasterUncheckedCreateWithoutUpdatedUserMachineMappingsInput = {
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutUpdatedUserMachineMappingsInput = {
@@ -20178,11 +20740,14 @@ export type UserMasterUpdateWithoutUserMachineMappingsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -20252,6 +20817,7 @@ export type UserMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutCreatedUserMachineMappingsInput = {
@@ -20336,11 +20902,14 @@ export type UserMasterUpdateWithoutCreatedUserMachineMappingsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCreatedUserMachineMappingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -20410,6 +20979,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedUserMachineMappingsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutUpdatedUserMachineMappingsInput = {
@@ -20494,11 +21064,14 @@ export type UserMasterUpdateWithoutUpdatedUserMachineMappingsInput = {
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -20568,6 +21141,7 @@ export type UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput = {
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterCreateWithoutOrderLoginPoFilesCreatedInput = {
@@ -20641,11 +21215,14 @@ export type UserMasterCreateWithoutOrderLoginPoFilesCreatedInput = {
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -20715,6 +21292,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput = {
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutOrderLoginPoFilesCreatedInput = {
@@ -20793,11 +21371,14 @@ export type UserMasterCreateWithoutOrderLoginPoFilesDeletedInput = {
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
 }
 
 export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -20867,6 +21448,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput = {
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutOrderLoginPoFilesDeletedInput = {
@@ -20956,11 +21538,14 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesCreatedInput = {
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -21030,6 +21615,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesCreatedInput = {
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUpsertWithoutOrderLoginPoFilesDeletedInput = {
@@ -21114,11 +21700,14 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesDeletedInput = {
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -21188,10 +21777,507 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput = {
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserMasterCreateWithoutFranchiseInput = {
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageCreateNestedManyWithoutSenderInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsCreateNestedManyWithoutDeletedByInput
+  leadsAssigned?: Prisma.LeadMasterCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutUpdatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutSupervisorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsCreateNestedManyWithoutUpdatedByInput
+  paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
+  createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
+  scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
+  documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskCreateNestedManyWithoutUserInput
+  user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
+  pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+}
+
+export type UserMasterUncheckedCreateWithoutFranchiseInput = {
+  id?: number
+  vendor_id: number
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  user_type_id: number
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutSenderInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDeletedByInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutUpdatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerUncheckedCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutUpdatedByInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
+  createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
+  documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
+  pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserMasterCreateOrConnectWithoutFranchiseInput = {
+  where: Prisma.UserMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutFranchiseInput, Prisma.UserMasterUncheckedCreateWithoutFranchiseInput>
+}
+
+export type UserMasterCreateManyFranchiseInputEnvelope = {
+  data: Prisma.UserMasterCreateManyFranchiseInput | Prisma.UserMasterCreateManyFranchiseInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserMasterUpsertWithWhereUniqueWithoutFranchiseInput = {
+  where: Prisma.UserMasterWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserMasterUpdateWithoutFranchiseInput, Prisma.UserMasterUncheckedUpdateWithoutFranchiseInput>
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutFranchiseInput, Prisma.UserMasterUncheckedCreateWithoutFranchiseInput>
+}
+
+export type UserMasterUpdateWithWhereUniqueWithoutFranchiseInput = {
+  where: Prisma.UserMasterWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserMasterUpdateWithoutFranchiseInput, Prisma.UserMasterUncheckedUpdateWithoutFranchiseInput>
+}
+
+export type UserMasterUpdateManyWithWhereWithoutFranchiseInput = {
+  where: Prisma.UserMasterScalarWhereInput
+  data: Prisma.XOR<Prisma.UserMasterUpdateManyMutationInput, Prisma.UserMasterUncheckedUpdateManyWithoutFranchiseInput>
+}
+
+export type UserMasterCreateWithoutUserGeographicalMappingsInput = {
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageCreateNestedManyWithoutSenderInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsCreateNestedManyWithoutDeletedByInput
+  leadsAssigned?: Prisma.LeadMasterCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutUpdatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutSupervisorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsCreateNestedManyWithoutUpdatedByInput
+  paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
+  createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
+  scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
+  documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskCreateNestedManyWithoutUserInput
+  user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
+  pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
+}
+
+export type UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput = {
+  id?: number
+  vendor_id: number
+  franchise_id?: number | null
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  user_type_id: number
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutSenderInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDeletedByInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutUpdatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerUncheckedCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutUpdatedByInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
+  createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
+  documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
+  pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserMasterCreateOrConnectWithoutUserGeographicalMappingsInput = {
+  where: Prisma.UserMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutUserGeographicalMappingsInput, Prisma.UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput>
+}
+
+export type UserMasterUpsertWithoutUserGeographicalMappingsInput = {
+  update: Prisma.XOR<Prisma.UserMasterUpdateWithoutUserGeographicalMappingsInput, Prisma.UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput>
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutUserGeographicalMappingsInput, Prisma.UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput>
+  where?: Prisma.UserMasterWhereInput
+}
+
+export type UserMasterUpdateToOneWithWhereWithoutUserGeographicalMappingsInput = {
+  where?: Prisma.UserMasterWhereInput
+  data: Prisma.XOR<Prisma.UserMasterUpdateWithoutUserGeographicalMappingsInput, Prisma.UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput>
+}
+
+export type UserMasterUpdateWithoutUserGeographicalMappingsInput = {
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUpdateManyWithoutSenderNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUpdateManyWithoutDeletedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutUpdatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutSupervisorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUpdateManyWithoutUpdatedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
+  documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUpdateManyWithoutUserNestedInput
+  user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
+  pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
+}
+
+export type UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutUpdatedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
+  documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
+  pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserMasterCreateManyVendorInput = {
   id?: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -21274,10 +22360,13 @@ export type UserMasterUpdateWithoutVendorInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -21348,10 +22437,12 @@ export type UserMasterUncheckedUpdateWithoutVendorInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -21366,6 +22457,7 @@ export type UserMasterUncheckedUpdateManyWithoutVendorInput = {
 export type UserMasterCreateManyUser_typeInput = {
   id?: number
   vendor_id: number
+  franchise_id?: number | null
   user_name: string
   user_contact: string
   user_email: string
@@ -21447,11 +22539,14 @@ export type UserMasterUpdateWithoutUser_typeInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUser_typeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -21521,9 +22616,113 @@ export type UserMasterUncheckedUpdateWithoutUser_typeInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateManyWithoutUser_typeInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserMasterCreateManyFranchiseInput = {
+  id?: number
+  vendor_id: number
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  user_type_id: number
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type UserMasterUpdateWithoutFranchiseInput = {
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUpdateManyWithoutSenderNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUpdateManyWithoutDeletedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutUpdatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutSupervisorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUpdateManyWithoutUpdatedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
+  documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUpdateManyWithoutUserNestedInput
+  user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
+  pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+}
+
+export type UserMasterUncheckedUpdateWithoutFranchiseInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -21531,6 +22730,83 @@ export type UserMasterUncheckedUpdateManyWithoutUser_typeInput = {
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutUpdatedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
+  documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
+  pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserMasterUncheckedUpdateManyWithoutFranchiseInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -21603,6 +22879,7 @@ export type UserMasterCountOutputType = {
   updatedUserMachineMappings: number
   orderLoginPoFilesCreated: number
   orderLoginPoFilesDeleted: number
+  userGeographicalMappings: number
 }
 
 export type UserMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -21667,6 +22944,7 @@ export type UserMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   updatedUserMachineMappings?: boolean | UserMasterCountOutputTypeCountUpdatedUserMachineMappingsArgs
   orderLoginPoFilesCreated?: boolean | UserMasterCountOutputTypeCountOrderLoginPoFilesCreatedArgs
   orderLoginPoFilesDeleted?: boolean | UserMasterCountOutputTypeCountOrderLoginPoFilesDeletedArgs
+  userGeographicalMappings?: boolean | UserMasterCountOutputTypeCountUserGeographicalMappingsArgs
 }
 
 /**
@@ -22106,10 +23384,18 @@ export type UserMasterCountOutputTypeCountOrderLoginPoFilesDeletedArgs<ExtArgs e
   where?: Prisma.OrderLoginPoFileMappingWhereInput
 }
 
+/**
+ * UserMasterCountOutputType without action
+ */
+export type UserMasterCountOutputTypeCountUserGeographicalMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserGeographicalMappingWhereInput
+}
+
 
 export type UserMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   vendor_id?: boolean
+  franchise_id?: boolean
   user_name?: boolean
   user_contact?: boolean
   user_email?: boolean
@@ -22182,12 +23468,15 @@ export type UserMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   updatedUserMachineMappings?: boolean | Prisma.UserMaster$updatedUserMachineMappingsArgs<ExtArgs>
   orderLoginPoFilesCreated?: boolean | Prisma.UserMaster$orderLoginPoFilesCreatedArgs<ExtArgs>
   orderLoginPoFilesDeleted?: boolean | Prisma.UserMaster$orderLoginPoFilesDeletedArgs<ExtArgs>
+  userGeographicalMappings?: boolean | Prisma.UserMaster$userGeographicalMappingsArgs<ExtArgs>
+  franchise?: boolean | Prisma.UserMaster$franchiseArgs<ExtArgs>
   _count?: boolean | Prisma.UserMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userMaster"]>
 
 export type UserMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   vendor_id?: boolean
+  franchise_id?: boolean
   user_name?: boolean
   user_contact?: boolean
   user_email?: boolean
@@ -22199,11 +23488,13 @@ export type UserMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   updated_at?: boolean
   user_type?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  franchise?: boolean | Prisma.UserMaster$franchiseArgs<ExtArgs>
 }, ExtArgs["result"]["userMaster"]>
 
 export type UserMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   vendor_id?: boolean
+  franchise_id?: boolean
   user_name?: boolean
   user_contact?: boolean
   user_email?: boolean
@@ -22215,11 +23506,13 @@ export type UserMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   updated_at?: boolean
   user_type?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  franchise?: boolean | Prisma.UserMaster$franchiseArgs<ExtArgs>
 }, ExtArgs["result"]["userMaster"]>
 
 export type UserMasterSelectScalar = {
   id?: boolean
   vendor_id?: boolean
+  franchise_id?: boolean
   user_name?: boolean
   user_contact?: boolean
   user_email?: boolean
@@ -22231,7 +23524,7 @@ export type UserMasterSelectScalar = {
   updated_at?: boolean
 }
 
-export type UserMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "user_name" | "user_contact" | "user_email" | "user_timezone" | "password" | "user_type_id" | "status" | "created_at" | "updated_at", ExtArgs["result"]["userMaster"]>
+export type UserMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "franchise_id" | "user_name" | "user_contact" | "user_email" | "user_timezone" | "password" | "user_type_id" | "status" | "created_at" | "updated_at", ExtArgs["result"]["userMaster"]>
 export type UserMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accountsCreated?: boolean | Prisma.UserMaster$accountsCreatedArgs<ExtArgs>
   accountsUpdated?: boolean | Prisma.UserMaster$accountsUpdatedArgs<ExtArgs>
@@ -22296,15 +23589,19 @@ export type UserMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   updatedUserMachineMappings?: boolean | Prisma.UserMaster$updatedUserMachineMappingsArgs<ExtArgs>
   orderLoginPoFilesCreated?: boolean | Prisma.UserMaster$orderLoginPoFilesCreatedArgs<ExtArgs>
   orderLoginPoFilesDeleted?: boolean | Prisma.UserMaster$orderLoginPoFilesDeletedArgs<ExtArgs>
+  userGeographicalMappings?: boolean | Prisma.UserMaster$userGeographicalMappingsArgs<ExtArgs>
+  franchise?: boolean | Prisma.UserMaster$franchiseArgs<ExtArgs>
   _count?: boolean | Prisma.UserMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user_type?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  franchise?: boolean | Prisma.UserMaster$franchiseArgs<ExtArgs>
 }
 export type UserMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user_type?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  franchise?: boolean | Prisma.UserMaster$franchiseArgs<ExtArgs>
 }
 
 export type $UserMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -22373,10 +23670,13 @@ export type $UserMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     updatedUserMachineMappings: Prisma.$UserMachineMappingPayload<ExtArgs>[]
     orderLoginPoFilesCreated: Prisma.$OrderLoginPoFileMappingPayload<ExtArgs>[]
     orderLoginPoFilesDeleted: Prisma.$OrderLoginPoFileMappingPayload<ExtArgs>[]
+    userGeographicalMappings: Prisma.$UserGeographicalMappingPayload<ExtArgs>[]
+    franchise: Prisma.$FranchiseMasterPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     vendor_id: number
+    franchise_id: number | null
     user_name: string
     user_contact: string
     user_email: string
@@ -22843,6 +24143,8 @@ export interface Prisma__UserMasterClient<T, Null = never, ExtArgs extends runti
   updatedUserMachineMappings<T extends Prisma.UserMaster$updatedUserMachineMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$updatedUserMachineMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserMachineMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orderLoginPoFilesCreated<T extends Prisma.UserMaster$orderLoginPoFilesCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$orderLoginPoFilesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderLoginPoFileMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orderLoginPoFilesDeleted<T extends Prisma.UserMaster$orderLoginPoFilesDeletedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$orderLoginPoFilesDeletedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderLoginPoFileMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  userGeographicalMappings<T extends Prisma.UserMaster$userGeographicalMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$userGeographicalMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserGeographicalMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  franchise<T extends Prisma.UserMaster$franchiseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$franchiseArgs<ExtArgs>>): Prisma.Prisma__FranchiseMasterClient<runtime.Types.Result.GetResult<Prisma.$FranchiseMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -22874,6 +24176,7 @@ export interface Prisma__UserMasterClient<T, Null = never, ExtArgs extends runti
 export interface UserMasterFieldRefs {
   readonly id: Prisma.FieldRef<"UserMaster", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"UserMaster", 'Int'>
+  readonly franchise_id: Prisma.FieldRef<"UserMaster", 'Int'>
   readonly user_name: Prisma.FieldRef<"UserMaster", 'String'>
   readonly user_contact: Prisma.FieldRef<"UserMaster", 'String'>
   readonly user_email: Prisma.FieldRef<"UserMaster", 'String'>
@@ -24740,6 +26043,49 @@ export type UserMaster$orderLoginPoFilesDeletedArgs<ExtArgs extends runtime.Type
   take?: number
   skip?: number
   distinct?: Prisma.OrderLoginPoFileMappingScalarFieldEnum | Prisma.OrderLoginPoFileMappingScalarFieldEnum[]
+}
+
+/**
+ * UserMaster.userGeographicalMappings
+ */
+export type UserMaster$userGeographicalMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserGeographicalMapping
+   */
+  select?: Prisma.UserGeographicalMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserGeographicalMapping
+   */
+  omit?: Prisma.UserGeographicalMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserGeographicalMappingInclude<ExtArgs> | null
+  where?: Prisma.UserGeographicalMappingWhereInput
+  orderBy?: Prisma.UserGeographicalMappingOrderByWithRelationInput | Prisma.UserGeographicalMappingOrderByWithRelationInput[]
+  cursor?: Prisma.UserGeographicalMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserGeographicalMappingScalarFieldEnum | Prisma.UserGeographicalMappingScalarFieldEnum[]
+}
+
+/**
+ * UserMaster.franchise
+ */
+export type UserMaster$franchiseArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FranchiseMaster
+   */
+  select?: Prisma.FranchiseMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FranchiseMaster
+   */
+  omit?: Prisma.FranchiseMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FranchiseMasterInclude<ExtArgs> | null
+  where?: Prisma.FranchiseMasterWhereInput
 }
 
 /**
