@@ -548,24 +548,6 @@ export const uploadCSPBookingFiles = multer({
   },
 });
 
-const CHAT_MAX_FILE_SIZE = 50 * 1024 * 1024; // 50 MB per file
-
-const uploadChatAttachments = multer({
-  storage: multer.diskStorage({
-    destination: (_req, _file, cb) => {
-      const dir = "/tmp/chat_uploads";
-      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-      cb(null, dir);
-    },
-    filename: (_req, file, cb) => {
-      cb(null, `${Date.now()}-${file.originalname}`);
-    },
-  }),
-  limits: {
-    fileSize: 200 * 1024 * 1024, // 200 MB
-  },
-});
-
 export const uploadToWasabiUnderInstallationDayWiseDocs = multer({
   storage: multer.memoryStorage(),
   limits: { files: 10 },
