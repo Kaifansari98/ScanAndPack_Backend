@@ -16,7 +16,8 @@ export interface WarehouseQRPayload {
   columns?: number;
   pageSize?: "A4" | "LETTER";
   outputDir?: string;          // Save location
-  fileName?: string;           // File name
+  fileName?: string;    
+  baseUrl: string;  
 }
 
 export const generateWarehouseQRPDF = async (
@@ -30,6 +31,7 @@ export const generateWarehouseQRPDF = async (
     pageSize = "A4",
     outputDir = "assets/track-trace/qr",
     fileName = `warehouse-${Date.now()}.pdf`,
+    baseUrl
   } = payload;
 
   // Ensure directory exists
@@ -39,7 +41,7 @@ export const generateWarehouseQRPDF = async (
   }
 
   const fullPath = path.join(absoluteDir, fileName);
-  const relativePath = process.env.APP_URL+'/'+ path.join(outputDir, fileName);
+  const relativePath = baseUrl +'/'+ path.join(outputDir, fileName);
 
 
   const doc = new PDFDocument({
