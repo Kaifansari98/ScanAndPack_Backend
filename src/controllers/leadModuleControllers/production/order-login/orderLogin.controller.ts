@@ -804,32 +804,6 @@ export class OrderLoginController {
     }
   }
 
-  async deleteOrderLoginPoFile(req: Request, res: Response) {
-    try {
-      const { vendorId, leadId, orderLoginId, mappingId } = req.params;
-      const { deleted_by } = req.body;
-
-      const result = await service.deleteOrderLoginPoFile({
-        vendorId: Number(vendorId),
-        leadId: Number(leadId),
-        orderLoginId: Number(orderLoginId),
-        mappingId: Number(mappingId),
-        userId: Number(deleted_by),
-      });
-
-      return res.status(200).json({
-        success: true,
-        message: "PO file deleted successfully",
-        data: result,
-      });
-    } catch (error: any) {
-      return res.status(error.statusCode || 500).json({
-        success: false,
-        message: error.message || "Internal Server Error",
-      });
-    }
-  }
-
   async markFilled(req: Request, res: Response) {
     try {
       const vendorId = Number(req.params.vendorId);
@@ -840,8 +814,7 @@ export class OrderLoginController {
         return res.status(400).json({ message: "Invalid parameters" });
       }
 
-
-         const baseUrl = resolveClientBaseUrl(req);
+      const baseUrl = resolveClientBaseUrl(req);
       const result = await service.markOrderLoginFilled(
         vendorId,
         leadId,
@@ -859,6 +832,31 @@ export class OrderLoginController {
       return res.status(500).json({
         success: false,
         message: error.message,
+      });
+    }
+  }
+
+  async deleteOrderLoginPoFile(req: Request, res: Response) {
+    try {
+      const { vendorId } = req.params;
+      const { deleted_by } = req.body;
+      const { documentId } = req.body;
+
+      const result = await service.deleteOrderLoginPoFile({
+        vendorId: Number(vendorId),
+        documentId: Number(documentId),
+        userId: Number(deleted_by),
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "PO file deleted successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message: error.message || "Internal Server Error",
       });
     }
   }

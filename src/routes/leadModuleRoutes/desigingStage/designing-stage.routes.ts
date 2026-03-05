@@ -127,6 +127,12 @@ DesigningStageRouter.get(
   DesigingStageController.getLeadStatus,
 );
 
+
+DesigningStageRouter.get(
+  "/statusfornotification/leadId/:lead_id/vendorId/:vendor_id",
+  DesigingStageController.getLeadStatusForNotification
+);
+
 DesigningStageRouter.get(
   "/vendor/:vendorId/lead/:leadId/instance/:instanceId/stage",
   DesigingStageController.getInstanceStageController,

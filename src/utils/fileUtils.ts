@@ -43,50 +43,56 @@ export const resolveClientBaseUrl = (req: Request): string => {
   return "http://localhost:3000";
 };
 
-/**
- * Lead code with instance suffix generate karta hai
- * - Single instance → "vloq-46"
- * - Multiple instances → "vloq-46.2" (quantity_index se)
- */
 export async function resolveLeadCode(
   vendorId: number,
   leadId: number,
   instanceId?: number,
 ): Promise<string> {
-  console.log("🔍 resolveLeadCode called →", { vendorId, leadId, instanceId });
-
-  const lead = await prisma.leadMaster.findUnique({
-    where: { id: leadId, vendor_id: vendorId },
+  const lead = await prisma.leadMaster.findFirst({
+    where: {
+      id: leadId,
+      vendor_id: vendorId,
+    },
     select: { lead_code: true },
   });
 
-  console.log("📋 lead found →", lead);
   if (!lead) throw new Error("Lead not found");
 
   const baseLeadCode = lead.lead_code;
 
+  // If no instanceId → always return base
   if (!instanceId) {
-    console.log("⚠️ No instanceId → returning base:", baseLeadCode);
     return baseLeadCode;
   }
 
-  const instanceInfo = await prisma.leadProductStructureInstance.findUnique({
-    where: { id: instanceId },
-    select: {
-      quantity_index: true,
-      product_structure_id: true,
+  // Count how many instances exist for this lead
+  const totalInstances = await prisma.leadProductStructureInstance.count({
+    where: {
+      lead_id: leadId,
+      vendor_id: vendorId,
     },
   });
 
-  console.log("🏗️ instanceInfo →", instanceInfo);
-
-  if (!instanceInfo) {
-    console.log("⚠️ instanceInfo not found → returning base:", baseLeadCode);
+  // 🔑 If only one instance exists → do NOT append quantity_index
+  if (totalInstances <= 1) {
     return baseLeadCode;
   }
 
+  // Fetch instance info
+  const instanceInfo = await prisma.leadProductStructureInstance.findFirst({
+    where: {
+      id: instanceId,
+      lead_id: leadId,
+      vendor_id: vendorId,
+    },
+    select: {
+      quantity_index: true,
+    },
+  });
 
-  const finalCode = `${baseLeadCode}.${instanceInfo.quantity_index}`;
-  console.log("✅ Final leadCode →", finalCode);
-  return finalCode;
+  if (!instanceInfo) {
+    return baseLeadCode;
+  }
+
+  return `${baseLeadCode}.${instanceInfo.quantity_index}`;
 }

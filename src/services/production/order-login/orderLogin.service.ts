@@ -1533,13 +1533,24 @@ export class OrderLoginService {
         ]);
 
       // Validate order login status (safe — outside transaction)
-      const instanceOrderLoginComplete = await isOrderLoginCompleteForInstance(
-        vendorId,
-        leadId,
-        instanceId,
-      );
+      // 🔑 Direct DB truth source
+      const instanceRecord =
+        await prisma.leadProductStructureInstance.findFirst({
+          where: {
+            id: instanceId,
+            vendor_id: vendorId,
+            lead_id: leadId,
+          },
+          select: {
+            is_order_login_filled: true,
+          },
+        });
+
+      const instanceOrderLoginComplete =
+        instanceRecord?.is_order_login_filled === true;
 
       let missingTypes: string[] = [];
+
       if (!instanceOrderLoginComplete) {
         missingTypes = await this.getMissingRequiredOrderLoginTypes(
           vendorId,
@@ -1548,17 +1559,8 @@ export class OrderLoginService {
         );
       }
 
-      console.log(
-        "📋 isOrderLoginCompleteForInstance:",
-        instanceOrderLoginComplete,
-      );
-      console.log("📋 missingTypes:", missingTypes);
-
       // ── NOTIFICATION MATRIX ──
       if (instanceOrderLoginComplete) {
-        // ✅ OL COMPLETE → Admin + Factory only
-        console.log("✅ Instance OL Complete - Sending 2 emails");
-
         for (const admin of admins) {
           try {
             await NotificationService.createAndSend({
@@ -1585,7 +1587,6 @@ export class OrderLoginService {
                 projectUrl,
               });
             }
-            console.log(`✅ Admin ${admin.id} notified`);
           } catch (err: any) {
             console.error(`❌ Admin ${admin.id} failed:`, err.message);
           }
@@ -1721,8 +1722,7 @@ export class OrderLoginService {
         }
       }
 
-      // ── Task creation for missing order login types (outside transaction) ──
-      if (missingTypes.length > 0) {
+      if (missingTypes.length > 0 && instanceId) {
         const leadFranchise = await prisma.leadMaster.findUnique({
           where: { id: leadId },
           select: { franchise_id: true },
@@ -1742,10 +1742,12 @@ export class OrderLoginService {
         });
 
         if (backendTaskMapping?.user_id) {
+          // 🔑 Check existing task for THIS INSTANCE
           const existingTask = await prisma.userLeadTask.findFirst({
             where: {
               vendor_id: vendorId,
               lead_id: leadId,
+              instance_id: instanceId, // ✅ Instance specific
               user_id: backendTaskMapping.user_id,
               task_type: "Order Login",
               status: "open",
@@ -1761,6 +1763,7 @@ export class OrderLoginService {
                 vendor_id: vendorId,
                 franchise_id: leadFranchise?.franchise_id ?? null,
                 user_id: backendTaskMapping.user_id,
+                instance_id: instanceId, // ✅ Bind to instance
                 task_type: "Order Login",
                 lead_stage: "order-login-stage",
                 due_date: new Date(Date.now() + 24 * 60 * 60 * 1000),
@@ -1964,8 +1967,7 @@ export class OrderLoginService {
 
     const leadName =
       `${leadMeta.firstname ?? ""} ${leadMeta.lastname ?? ""}`.trim();
-    const leadCode =
-      leadMeta.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+    const leadCode = leadMeta.lead_code;
     const projectUrl = leadMeta.account_id
       ? `${baseUrl}/dashboard/leads/details/${leadId}?accountId=${leadMeta.account_id}`
       : `${baseUrl}/dashboard/leads/details/${leadId}`;
@@ -2252,19 +2254,15 @@ export class OrderLoginService {
         const disposition = inlineExts.has(ext) ? "inline" : "attachment";
 
         return {
-        id: r.document.id,
-        doc_og_name: r.document.doc_og_name,
-        created_at: r.document.created_at,
-
-        // this will be used to generate signed URL later
-        file_path: r.document.doc_sys_name,
-
-        // signed url for immediate preview
-        signed_url: await generateSignedUrl(
-          r.document.doc_sys_name,
-          3600,
-          disposition,
-        ),
+          id: r.document.id,
+          doc_og_name: r.document.doc_og_name,
+          created_at: r.document.created_at,
+          file_path: r.document.doc_sys_name,
+          signed_url: await generateSignedUrl(
+            r.document.doc_sys_name,
+            3600,
+            disposition,
+          ),
         };
       }),
     );
@@ -2272,18 +2270,14 @@ export class OrderLoginService {
 
   async deleteOrderLoginPoFile({
     vendorId,
-    leadId,
-    orderLoginId,
-    mappingId,
+    documentId,
     userId,
   }: {
     vendorId: number;
-    leadId: number;
-    orderLoginId: number;
-    mappingId: number;
+    documentId: number;
     userId: number;
   }) {
-    if (!vendorId || !leadId || !orderLoginId || !mappingId || !userId) {
+    if (!vendorId || !documentId || !userId) {
       const error = new Error("Required parameters missing");
       (error as any).statusCode = 400;
       throw error;
@@ -2294,7 +2288,7 @@ export class OrderLoginService {
        * Validate Mapping Exists & Belongs To Tenant
        */
       const mapping = await tx.orderLoginPoFileMapping.findUnique({
-        where: { id: mappingId },
+        where: { id: documentId },
         include: {
           lead: { select: { vendor_id: true } },
           document: true,
@@ -2311,7 +2305,7 @@ export class OrderLoginService {
        * Soft Delete Mapping
        */
       await tx.orderLoginPoFileMapping.update({
-        where: { id: mappingId },
+        where: { id: documentId },
         data: {
           is_deleted: true,
           deleted_at: new Date(),
@@ -2319,9 +2313,6 @@ export class OrderLoginService {
         },
       });
 
-      /**
-       * Soft Delete Document (important)
-       */
       await tx.leadDocuments.update({
         where: { id: mapping.document_id },
         data: {
