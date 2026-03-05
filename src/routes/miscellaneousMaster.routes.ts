@@ -49,4 +49,5 @@ miscRoutes.get(
   "/vendor/:vendorId/pending-miscellaneous/count",
   getPendingMiscellaneousLeadCount,
 );
+
 export default miscRoutes;

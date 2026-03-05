@@ -10,6 +10,7 @@ import {
   updateLeadProductStructureInstance,
   createLeadProductStructureInstance,
   getSiteSupervisorByVendor,
+  getHeadSiteSupervisorByVendor,
   softDeleteLead,
   updateLeadService,
   verifyUserTokenService,
@@ -1239,6 +1240,9 @@ export class LeadController {
   ): Promise<Response> {
     try {
       const vendorId = Number(getParam(req.params.vendorId));
+      const franchiseId = req.query.franchise_id
+        ? Number(req.query.franchise_id)
+        : undefined;
 
       // Validate vendorId
       if (isNaN(vendorId) || vendorId <= 0) {
@@ -1246,12 +1250,20 @@ export class LeadController {
           .status(400)
           .json(ApiResponse.error("Invalid vendor ID provided", 400));
       }
+      if (franchiseId !== undefined && (isNaN(franchiseId) || franchiseId <= 0)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid franchise ID provided", 400));
+      }
 
       console.log(
         `[CONTROLLER] Fetching sales executives for vendor ID: ${vendorId}`,
       );
 
-      const salesExecutives = await getSalesExecutivesByVendor(vendorId);
+      const salesExecutives = await getSalesExecutivesByVendor(
+        vendorId,
+        franchiseId,
+      );
 
       // Check if any sales executives were found
       if (salesExecutives.length === 0) {
@@ -1353,6 +1365,73 @@ export class LeadController {
         .json(
           ApiResponse.error(
             "Failed to fetch Site Supervisors",
+            500,
+            process.env.NODE_ENV === "development" ? error.message : undefined,
+          ),
+        );
+    }
+  }
+
+  /**
+   * Fetch all Head Site Supervisors for a specific vendor
+   */
+  async fetchHeadSiteSupervisorsByVendor(
+    req: Request,
+    res: Response,
+  ): Promise<Response> {
+    try {
+      const vendorId = Number(getParam(req.params.vendorId));
+
+      // Validate vendorId
+      if (isNaN(vendorId) || vendorId <= 0) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid vendor ID provided", 400));
+      }
+
+      console.log(
+        `[CONTROLLER] Fetching Head Site Supervisors for vendor ID: ${vendorId}`,
+      );
+
+      const headSiteSupervisors = await getHeadSiteSupervisorByVendor(vendorId);
+
+      if (headSiteSupervisors.length === 0) {
+        return res
+          .status(200)
+          .json(
+            ApiResponse.success(
+              [],
+              "No head site supervisors found for this vendor",
+              200,
+            ),
+          );
+      }
+
+      console.log(
+        `[CONTROLLER] Found ${headSiteSupervisors.length} Head Site Supervisors`,
+      );
+
+      return res.status(200).json(
+        ApiResponse.success(
+          {
+            head_site_supervisors: headSiteSupervisors,
+            count: headSiteSupervisors.length,
+          },
+          "Head site supervisors fetched successfully",
+          200,
+        ),
+      );
+    } catch (error: any) {
+      console.error(
+        "[CONTROLLER] fetchHeadSiteSupervisorsByVendor error:",
+        error,
+      );
+
+      return res
+        .status(500)
+        .json(
+          ApiResponse.error(
+            "Failed to fetch Head Site Supervisors",
             500,
             process.env.NODE_ENV === "development" ? error.message : undefined,
           ),

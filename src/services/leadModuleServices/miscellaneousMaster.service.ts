@@ -102,6 +102,7 @@ export const removeMiscTeam = async (id: number) => {
 
 export const getPendingMiscellaneousLeads = async (
   vendorId: number,
+  franchiseId: number,
   page: number = 1,
   limit: number = 10,
   filters: {
@@ -130,6 +131,9 @@ export const getPendingMiscellaneousLeads = async (
     where: {
       vendor_id: vendorId,
       is_resolved: false,
+      lead: {
+        franchise_id: franchiseId,
+      },
     },
     select: { lead_id: true },
     distinct: ["lead_id"],
@@ -146,6 +150,7 @@ export const getPendingMiscellaneousLeads = async (
   const where: Prisma.LeadMasterWhereInput = {
     id: { in: leadIds },
     vendor_id: vendorId,
+    franchise_id: franchiseId,
     is_deleted: false,
   };
 
@@ -331,6 +336,7 @@ export const getPendingMiscellaneousLeads = async (
 
 export const getPendingMiscellaneousLeadCountService = async (
   vendorId: number,
+  franchiseId: number,
 ): Promise<number> => {
 
   // Step 1 → Find unique lead_ids having unresolved misc
@@ -338,6 +344,9 @@ export const getPendingMiscellaneousLeadCountService = async (
     where: {
       vendor_id: vendorId,
       is_resolved: false,
+      lead: {
+        franchise_id: franchiseId,
+      },
     },
     select: {
       lead_id: true,

@@ -1765,7 +1765,8 @@ export const isContactOrEmailExists = async (
 };
 
 export const getSalesExecutivesByVendor = async (
-  vendorId: number
+  vendorId: number,
+  franchiseId?: number,
 ): Promise<SalesExecutiveData[]> => {
   try {
     console.log(
@@ -1798,6 +1799,7 @@ export const getSalesExecutivesByVendor = async (
         user_type_id: salesExecutiveType.id,
         // Optionally filter only active users
         status: "active",
+        ...(franchiseId ? { franchise_id: franchiseId } : {}),
       },
       include: {
         user_type: true,
@@ -1917,6 +1919,85 @@ export const getSiteSupervisorByVendor = async (
   } catch (error: any) {
     console.error("[SERVICE] Error fetching Site Supervisors:", error);
     throw new Error(`Failed to fetch Site Supervisors: ${error.message}`);
+  }
+};
+
+export const getHeadSiteSupervisorByVendor = async (
+  vendorId: number
+): Promise<SiteSupervisorData[]> => {
+  try {
+    console.log(
+      `[SERVICE] Fetching Head Site Supervisor for vendor ID: ${vendorId}`
+    );
+
+    // First, find the user type ID for 'head-site-supervisor'
+    const headSiteSupervisorType = await prisma.userTypeMaster.findFirst({
+      where: {
+        user_type: {
+          equals: "head-site-supervisor",
+          mode: "insensitive", // Case insensitive search
+        },
+      },
+    });
+
+    if (!headSiteSupervisorType) {
+      console.log("[SERVICE] Head Site Supervisor user type not found");
+      return [];
+    }
+
+    console.log(
+      `[SERVICE] Found Head Site Supervisor type ID: ${headSiteSupervisorType.id}`
+    );
+
+    const headSiteSupervisors = await prisma.userMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        user_type_id: headSiteSupervisorType.id,
+        status: "active",
+      },
+      include: {
+        user_type: true,
+        documents: true,
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+
+    console.log(
+      `[SERVICE] Found ${headSiteSupervisors.length} Head Site Supervisors`
+    );
+
+    const transformedData: SiteSupervisorData[] = headSiteSupervisors.map(
+      (supervisor) => ({
+        id: supervisor.id,
+        vendor_id: supervisor.vendor_id,
+        user_name: supervisor.user_name,
+        user_contact: supervisor.user_contact,
+        user_email: supervisor.user_email,
+        user_timezone: supervisor.user_timezone,
+        status: supervisor.status,
+        created_at: supervisor.created_at,
+        updated_at: supervisor.updated_at,
+        user_type: {
+          id: supervisor.user_type.id,
+          user_type: supervisor.user_type.user_type,
+        },
+        documents: supervisor.documents.map((doc) => ({
+          id: doc.id,
+          document_name: doc.document_name,
+          document_number: doc.document_number,
+          filename: doc.filename,
+        })),
+      })
+    );
+
+    return transformedData;
+  } catch (error: any) {
+    console.error("[SERVICE] Error fetching Head Site Supervisors:", error);
+    throw new Error(
+      `Failed to fetch Head Site Supervisors: ${error.message}`
+    );
   }
 };
 

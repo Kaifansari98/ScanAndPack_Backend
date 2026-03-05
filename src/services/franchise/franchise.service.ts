@@ -90,3 +90,28 @@ export const createFranchise = async (payload: CreateFranchisePayload) => {
     },
   });
 };
+
+export const getFranchisesByVendorId = async (vendorId: number) => {
+  if (!vendorId || Number.isNaN(vendorId)) {
+    const error = new Error("Valid vendor_id is required.");
+    (error as any).statusCode = 400;
+    throw error;
+  }
+
+  return await prisma.franchiseMaster.findMany({
+    where: {
+      vendor_id: Number(vendorId),
+    },
+    orderBy: {
+      franchise_name: "asc",
+    },
+    select: {
+      id: true,
+      vendor_id: true,
+      franchise_name: true,
+      franchise_code: true,
+      is_head_office: true,
+      status: true,
+    },
+  });
+};

@@ -1,5 +1,4 @@
 import { prisma } from "../../../prisma/client";
-import { sanitizeFilename } from "../../../utils/sanitizeFilename";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
 import { NotificationType } from "../../../prisma/generated";
@@ -36,6 +35,7 @@ interface BackendData {
     filename: string | null;
   }[];
 }
+
 export interface UploadOrderLoginPoFileInput {
   vendorId: number;
   leadId: number;
