@@ -125,6 +125,7 @@ export const ModelName = {
   OrderLoginPoFileMapping: 'OrderLoginPoFileMapping',
   MachineTypeMaster: 'MachineTypeMaster',
   FranchiseMaster: 'FranchiseMaster',
+  HeadSiteSupervisorFranchiseMapping: 'HeadSiteSupervisorFranchiseMapping',
   CountryMaster: 'CountryMaster',
   RegionMaster: 'RegionMaster',
   StateMaster: 'StateMaster',
@@ -1316,6 +1317,19 @@ export const FranchiseMasterScalarFieldEnum = {
 } as const
 
 export type FranchiseMasterScalarFieldEnum = (typeof FranchiseMasterScalarFieldEnum)[keyof typeof FranchiseMasterScalarFieldEnum]
+
+
+export const HeadSiteSupervisorFranchiseMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  user_id: 'user_id',
+  franchise_id: 'franchise_id',
+  status: 'status',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type HeadSiteSupervisorFranchiseMappingScalarFieldEnum = (typeof HeadSiteSupervisorFranchiseMappingScalarFieldEnum)[keyof typeof HeadSiteSupervisorFranchiseMappingScalarFieldEnum]
 
 
 export const CountryMasterScalarFieldEnum = {

@@ -1972,6 +1972,7 @@ export const getHeadSiteSupervisorByVendor = async (
       (supervisor) => ({
         id: supervisor.id,
         vendor_id: supervisor.vendor_id,
+        franchise_id: supervisor.franchise_id,
         user_name: supervisor.user_name,
         user_contact: supervisor.user_contact,
         user_email: supervisor.user_email,

@@ -458,6 +458,7 @@ export const ModelName = {
   OrderLoginPoFileMapping: 'OrderLoginPoFileMapping',
   MachineTypeMaster: 'MachineTypeMaster',
   FranchiseMaster: 'FranchiseMaster',
+  HeadSiteSupervisorFranchiseMapping: 'HeadSiteSupervisorFranchiseMapping',
   CountryMaster: 'CountryMaster',
   RegionMaster: 'RegionMaster',
   StateMaster: 'StateMaster',
@@ -480,7 +481,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "franchiseMaster" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -5960,6 +5961,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    HeadSiteSupervisorFranchiseMapping: {
+      payload: Prisma.$HeadSiteSupervisorFranchiseMappingPayload<ExtArgs>
+      fields: Prisma.HeadSiteSupervisorFranchiseMappingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.HeadSiteSupervisorFranchiseMappingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HeadSiteSupervisorFranchiseMappingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.HeadSiteSupervisorFranchiseMappingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HeadSiteSupervisorFranchiseMappingPayload>
+        }
+        findFirst: {
+          args: Prisma.HeadSiteSupervisorFranchiseMappingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HeadSiteSupervisorFranchiseMappingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.HeadSiteSupervisorFranchiseMappingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HeadSiteSupervisorFranchiseMappingPayload>
+        }
+        findMany: {
+          args: Prisma.HeadSiteSupervisorFranchiseMappingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HeadSiteSupervisorFranchiseMappingPayload>[]
+        }
+        create: {
+          args: Prisma.HeadSiteSupervisorFranchiseMappingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HeadSiteSupervisorFranchiseMappingPayload>
+        }
+        createMany: {
+          args: Prisma.HeadSiteSupervisorFranchiseMappingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.HeadSiteSupervisorFranchiseMappingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HeadSiteSupervisorFranchiseMappingPayload>[]
+        }
+        delete: {
+          args: Prisma.HeadSiteSupervisorFranchiseMappingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HeadSiteSupervisorFranchiseMappingPayload>
+        }
+        update: {
+          args: Prisma.HeadSiteSupervisorFranchiseMappingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HeadSiteSupervisorFranchiseMappingPayload>
+        }
+        deleteMany: {
+          args: Prisma.HeadSiteSupervisorFranchiseMappingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HeadSiteSupervisorFranchiseMappingPayload>[]
+        }
+        upsert: {
+          args: Prisma.HeadSiteSupervisorFranchiseMappingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HeadSiteSupervisorFranchiseMappingPayload>
+        }
+        aggregate: {
+          args: Prisma.HeadSiteSupervisorFranchiseMappingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateHeadSiteSupervisorFranchiseMapping>
+        }
+        groupBy: {
+          args: Prisma.HeadSiteSupervisorFranchiseMappingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HeadSiteSupervisorFranchiseMappingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.HeadSiteSupervisorFranchiseMappingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HeadSiteSupervisorFranchiseMappingCountAggregateOutputType> | number
+        }
+      }
+    }
     CountryMaster: {
       payload: Prisma.$CountryMasterPayload<ExtArgs>
       fields: Prisma.CountryMasterFieldRefs
@@ -7685,6 +7760,19 @@ export const FranchiseMasterScalarFieldEnum = {
 export type FranchiseMasterScalarFieldEnum = (typeof FranchiseMasterScalarFieldEnum)[keyof typeof FranchiseMasterScalarFieldEnum]
 
 
+export const HeadSiteSupervisorFranchiseMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  user_id: 'user_id',
+  franchise_id: 'franchise_id',
+  status: 'status',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type HeadSiteSupervisorFranchiseMappingScalarFieldEnum = (typeof HeadSiteSupervisorFranchiseMappingScalarFieldEnum)[keyof typeof HeadSiteSupervisorFranchiseMappingScalarFieldEnum]
+
+
 export const CountryMasterScalarFieldEnum = {
   id: 'id',
   name: 'name'
@@ -8281,6 +8369,7 @@ export type GlobalOmitConfig = {
   orderLoginPoFileMapping?: Prisma.OrderLoginPoFileMappingOmit
   machineTypeMaster?: Prisma.MachineTypeMasterOmit
   franchiseMaster?: Prisma.FranchiseMasterOmit
+  headSiteSupervisorFranchiseMapping?: Prisma.HeadSiteSupervisorFranchiseMappingOmit
   countryMaster?: Prisma.CountryMasterOmit
   regionMaster?: Prisma.RegionMasterOmit
   stateMaster?: Prisma.StateMasterOmit

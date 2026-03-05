@@ -79,6 +79,7 @@ model VendorMaster {
   tokens                      VendorTokens[]
   userMachineMapping          UserMachineMapping[]
   franchises                  FranchiseMaster[]
+  headSiteSupervisorFranchiseMappings HeadSiteSupervisorFranchiseMapping[]
 }
 
 model VendorAddress {
@@ -189,6 +190,8 @@ model UserMaster {
   orderLoginPoFilesDeleted   OrderLoginPoFileMapping[] @relation("OrderLoginPoFileDeletedBy")
   userGeographicalMappings   UserGeographicalMapping[]
   franchise                            FranchiseMaster?                    @relation(fields: [franchise_id], references: [id])
+  headSiteSupervisorFranchiseMappings HeadSiteSupervisorFranchiseMapping[] @relation("HeadSiteSupervisorFranchiseMappingUser")
+  headSiteSupervisorFranchiseMappingsCreated HeadSiteSupervisorFranchiseMapping[] @relation("HeadSiteSupervisorFranchiseMappingCreatedBy")
 }
 
 model UserDocument {
@@ -1595,8 +1598,30 @@ model FranchiseMaster {
   users           UserMaster[]
   leads           LeadMaster[]
   accounts        AccountMaster[]
+  headSiteSupervisorFranchiseMappings HeadSiteSupervisorFranchiseMapping[]
 
   @@unique([vendor_id, franchise_code])
+}
+
+model HeadSiteSupervisorFranchiseMapping {
+  id           Int          @id @default(autoincrement())
+  vendor_id    Int
+  user_id      Int
+  franchise_id Int
+  status       Boolean      @default(true)
+  created_by   Int
+  created_at   DateTime     @default(now())
+
+  vendor     VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  user       UserMaster     @relation("HeadSiteSupervisorFranchiseMappingUser", fields: [user_id], references: [id], onDelete: Cascade)
+  franchise  FranchiseMaster @relation(fields: [franchise_id], references: [id], onDelete: Cascade)
+  createdBy  UserMaster     @relation("HeadSiteSupervisorFranchiseMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id])
+  @@index([user_id])
+  @@index([franchise_id])
+  @@unique([vendor_id, user_id, franchise_id])
+  @@unique([vendor_id, franchise_id])
 }
 
 

@@ -388,6 +388,11 @@ export type MachineTypeMaster = Prisma.MachineTypeMasterModel
  */
 export type FranchiseMaster = Prisma.FranchiseMasterModel
 /**
+ * Model HeadSiteSupervisorFranchiseMapping
+ * 
+ */
+export type HeadSiteSupervisorFranchiseMapping = Prisma.HeadSiteSupervisorFranchiseMappingModel
+/**
  * Model CountryMaster
  * 
  */

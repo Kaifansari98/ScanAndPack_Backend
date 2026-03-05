@@ -360,6 +360,7 @@ export type FranchiseMasterWhereInput = {
   users?: Prisma.UserMasterListRelationFilter
   leads?: Prisma.LeadMasterListRelationFilter
   accounts?: Prisma.AccountMasterListRelationFilter
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingListRelationFilter
 }
 
 export type FranchiseMasterOrderByWithRelationInput = {
@@ -386,6 +387,7 @@ export type FranchiseMasterOrderByWithRelationInput = {
   users?: Prisma.UserMasterOrderByRelationAggregateInput
   leads?: Prisma.LeadMasterOrderByRelationAggregateInput
   accounts?: Prisma.AccountMasterOrderByRelationAggregateInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingOrderByRelationAggregateInput
 }
 
 export type FranchiseMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -416,6 +418,7 @@ export type FranchiseMasterWhereUniqueInput = Prisma.AtLeast<{
   users?: Prisma.UserMasterListRelationFilter
   leads?: Prisma.LeadMasterListRelationFilter
   accounts?: Prisma.AccountMasterListRelationFilter
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingListRelationFilter
 }, "id" | "vendor_id_franchise_code">
 
 export type FranchiseMasterOrderByWithAggregationInput = {
@@ -492,6 +495,7 @@ export type FranchiseMasterCreateInput = {
   users?: Prisma.UserMasterCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutFranchiseInput
 }
 
 export type FranchiseMasterUncheckedCreateInput = {
@@ -517,6 +521,7 @@ export type FranchiseMasterUncheckedCreateInput = {
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
 }
 
 export type FranchiseMasterUpdateInput = {
@@ -541,6 +546,7 @@ export type FranchiseMasterUpdateInput = {
   users?: Prisma.UserMasterUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutFranchiseNestedInput
 }
 
 export type FranchiseMasterUncheckedUpdateInput = {
@@ -566,6 +572,7 @@ export type FranchiseMasterUncheckedUpdateInput = {
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
 }
 
 export type FranchiseMasterCreateManyInput = {
@@ -740,6 +747,11 @@ export type FranchiseMasterSumOrderByAggregateInput = {
   area_id?: Prisma.SortOrder
 }
 
+export type FranchiseMasterScalarRelationFilter = {
+  is?: Prisma.FranchiseMasterWhereInput
+  isNot?: Prisma.FranchiseMasterWhereInput
+}
+
 export type FranchiseMasterCreateNestedManyWithoutVendorInput = {
   create?: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutVendorInput, Prisma.FranchiseMasterUncheckedCreateWithoutVendorInput> | Prisma.FranchiseMasterCreateWithoutVendorInput[] | Prisma.FranchiseMasterUncheckedCreateWithoutVendorInput[]
   connectOrCreate?: Prisma.FranchiseMasterCreateOrConnectWithoutVendorInput | Prisma.FranchiseMasterCreateOrConnectWithoutVendorInput[]
@@ -830,6 +842,20 @@ export type FranchiseMasterUpdateOneWithoutAccountsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.FranchiseMasterUpdateToOneWithWhereWithoutAccountsInput, Prisma.FranchiseMasterUpdateWithoutAccountsInput>, Prisma.FranchiseMasterUncheckedUpdateWithoutAccountsInput>
 }
 
+export type FranchiseMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput = {
+  create?: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput, Prisma.FranchiseMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsInput>
+  connectOrCreate?: Prisma.FranchiseMasterCreateOrConnectWithoutHeadSiteSupervisorFranchiseMappingsInput
+  connect?: Prisma.FranchiseMasterWhereUniqueInput
+}
+
+export type FranchiseMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput, Prisma.FranchiseMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsInput>
+  connectOrCreate?: Prisma.FranchiseMasterCreateOrConnectWithoutHeadSiteSupervisorFranchiseMappingsInput
+  upsert?: Prisma.FranchiseMasterUpsertWithoutHeadSiteSupervisorFranchiseMappingsInput
+  connect?: Prisma.FranchiseMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FranchiseMasterUpdateToOneWithWhereWithoutHeadSiteSupervisorFranchiseMappingsInput, Prisma.FranchiseMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput>, Prisma.FranchiseMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput>
+}
+
 export type FranchiseMasterCreateWithoutVendorInput = {
   franchise_name: string
   franchise_code?: string | null
@@ -851,6 +877,7 @@ export type FranchiseMasterCreateWithoutVendorInput = {
   users?: Prisma.UserMasterCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutFranchiseInput
 }
 
 export type FranchiseMasterUncheckedCreateWithoutVendorInput = {
@@ -875,6 +902,7 @@ export type FranchiseMasterUncheckedCreateWithoutVendorInput = {
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
 }
 
 export type FranchiseMasterCreateOrConnectWithoutVendorInput = {
@@ -949,6 +977,7 @@ export type FranchiseMasterCreateWithoutUsersInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutFranchisesInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutFranchiseInput
 }
 
 export type FranchiseMasterUncheckedCreateWithoutUsersInput = {
@@ -973,6 +1002,7 @@ export type FranchiseMasterUncheckedCreateWithoutUsersInput = {
   updatedAt?: Date | string
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
 }
 
 export type FranchiseMasterCreateOrConnectWithoutUsersInput = {
@@ -1012,6 +1042,7 @@ export type FranchiseMasterUpdateWithoutUsersInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFranchisesNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutFranchiseNestedInput
 }
 
 export type FranchiseMasterUncheckedUpdateWithoutUsersInput = {
@@ -1036,6 +1067,7 @@ export type FranchiseMasterUncheckedUpdateWithoutUsersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
 }
 
 export type FranchiseMasterCreateWithoutLeadsInput = {
@@ -1059,6 +1091,7 @@ export type FranchiseMasterCreateWithoutLeadsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutFranchisesInput
   users?: Prisma.UserMasterCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutFranchiseInput
 }
 
 export type FranchiseMasterUncheckedCreateWithoutLeadsInput = {
@@ -1083,6 +1116,7 @@ export type FranchiseMasterUncheckedCreateWithoutLeadsInput = {
   updatedAt?: Date | string
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
 }
 
 export type FranchiseMasterCreateOrConnectWithoutLeadsInput = {
@@ -1122,6 +1156,7 @@ export type FranchiseMasterUpdateWithoutLeadsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFranchisesNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutFranchiseNestedInput
 }
 
 export type FranchiseMasterUncheckedUpdateWithoutLeadsInput = {
@@ -1146,6 +1181,7 @@ export type FranchiseMasterUncheckedUpdateWithoutLeadsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
 }
 
 export type FranchiseMasterCreateWithoutAccountsInput = {
@@ -1169,6 +1205,7 @@ export type FranchiseMasterCreateWithoutAccountsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutFranchisesInput
   users?: Prisma.UserMasterCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutFranchiseInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutFranchiseInput
 }
 
 export type FranchiseMasterUncheckedCreateWithoutAccountsInput = {
@@ -1193,6 +1230,7 @@ export type FranchiseMasterUncheckedCreateWithoutAccountsInput = {
   updatedAt?: Date | string
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutFranchiseInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
 }
 
 export type FranchiseMasterCreateOrConnectWithoutAccountsInput = {
@@ -1232,6 +1270,7 @@ export type FranchiseMasterUpdateWithoutAccountsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFranchisesNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutFranchiseNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutFranchiseNestedInput
 }
 
 export type FranchiseMasterUncheckedUpdateWithoutAccountsInput = {
@@ -1256,6 +1295,121 @@ export type FranchiseMasterUncheckedUpdateWithoutAccountsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
+}
+
+export type FranchiseMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
+  franchise_name: string
+  franchise_code?: string | null
+  contact_number?: string | null
+  contact_email?: string | null
+  contact_person?: string | null
+  is_head_office?: boolean
+  zone_id?: number | null
+  country_id?: number | null
+  region_id?: number | null
+  state_id?: number | null
+  city_id?: number | null
+  area_id?: number | null
+  address?: string | null
+  pincode?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFranchisesInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutFranchiseInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutFranchiseInput
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
+}
+
+export type FranchiseMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
+  id?: number
+  vendor_id: number
+  franchise_name: string
+  franchise_code?: string | null
+  contact_number?: string | null
+  contact_email?: string | null
+  contact_person?: string | null
+  is_head_office?: boolean
+  zone_id?: number | null
+  country_id?: number | null
+  region_id?: number | null
+  state_id?: number | null
+  city_id?: number | null
+  area_id?: number | null
+  address?: string | null
+  pincode?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutFranchiseInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutFranchiseInput
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
+}
+
+export type FranchiseMasterCreateOrConnectWithoutHeadSiteSupervisorFranchiseMappingsInput = {
+  where: Prisma.FranchiseMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput, Prisma.FranchiseMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsInput>
+}
+
+export type FranchiseMasterUpsertWithoutHeadSiteSupervisorFranchiseMappingsInput = {
+  update: Prisma.XOR<Prisma.FranchiseMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput, Prisma.FranchiseMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput>
+  create: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput, Prisma.FranchiseMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsInput>
+  where?: Prisma.FranchiseMasterWhereInput
+}
+
+export type FranchiseMasterUpdateToOneWithWhereWithoutHeadSiteSupervisorFranchiseMappingsInput = {
+  where?: Prisma.FranchiseMasterWhereInput
+  data: Prisma.XOR<Prisma.FranchiseMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput, Prisma.FranchiseMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput>
+}
+
+export type FranchiseMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
+  franchise_name?: Prisma.StringFieldUpdateOperationsInput | string
+  franchise_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_person?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_head_office?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  zone_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  country_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  region_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  city_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  area_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFranchisesNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutFranchiseNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutFranchiseNestedInput
+  accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
+}
+
+export type FranchiseMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_name?: Prisma.StringFieldUpdateOperationsInput | string
+  franchise_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_person?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_head_office?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  zone_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  country_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  region_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  city_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  area_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
 }
 
 export type FranchiseMasterCreateManyVendorInput = {
@@ -1300,6 +1454,7 @@ export type FranchiseMasterUpdateWithoutVendorInput = {
   users?: Prisma.UserMasterUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutFranchiseNestedInput
 }
 
 export type FranchiseMasterUncheckedUpdateWithoutVendorInput = {
@@ -1324,6 +1479,7 @@ export type FranchiseMasterUncheckedUpdateWithoutVendorInput = {
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
 }
 
 export type FranchiseMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -1356,12 +1512,14 @@ export type FranchiseMasterCountOutputType = {
   users: number
   leads: number
   accounts: number
+  headSiteSupervisorFranchiseMappings: number
 }
 
 export type FranchiseMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | FranchiseMasterCountOutputTypeCountUsersArgs
   leads?: boolean | FranchiseMasterCountOutputTypeCountLeadsArgs
   accounts?: boolean | FranchiseMasterCountOutputTypeCountAccountsArgs
+  headSiteSupervisorFranchiseMappings?: boolean | FranchiseMasterCountOutputTypeCountHeadSiteSupervisorFranchiseMappingsArgs
 }
 
 /**
@@ -1395,6 +1553,13 @@ export type FranchiseMasterCountOutputTypeCountAccountsArgs<ExtArgs extends runt
   where?: Prisma.AccountMasterWhereInput
 }
 
+/**
+ * FranchiseMasterCountOutputType without action
+ */
+export type FranchiseMasterCountOutputTypeCountHeadSiteSupervisorFranchiseMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HeadSiteSupervisorFranchiseMappingWhereInput
+}
+
 
 export type FranchiseMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1420,6 +1585,7 @@ export type FranchiseMasterSelect<ExtArgs extends runtime.Types.Extensions.Inter
   users?: boolean | Prisma.FranchiseMaster$usersArgs<ExtArgs>
   leads?: boolean | Prisma.FranchiseMaster$leadsArgs<ExtArgs>
   accounts?: boolean | Prisma.FranchiseMaster$accountsArgs<ExtArgs>
+  headSiteSupervisorFranchiseMappings?: boolean | Prisma.FranchiseMaster$headSiteSupervisorFranchiseMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.FranchiseMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["franchiseMaster"]>
 
@@ -1497,6 +1663,7 @@ export type FranchiseMasterInclude<ExtArgs extends runtime.Types.Extensions.Inte
   users?: boolean | Prisma.FranchiseMaster$usersArgs<ExtArgs>
   leads?: boolean | Prisma.FranchiseMaster$leadsArgs<ExtArgs>
   accounts?: boolean | Prisma.FranchiseMaster$accountsArgs<ExtArgs>
+  headSiteSupervisorFranchiseMappings?: boolean | Prisma.FranchiseMaster$headSiteSupervisorFranchiseMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.FranchiseMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FranchiseMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1513,6 +1680,7 @@ export type $FranchiseMasterPayload<ExtArgs extends runtime.Types.Extensions.Int
     users: Prisma.$UserMasterPayload<ExtArgs>[]
     leads: Prisma.$LeadMasterPayload<ExtArgs>[]
     accounts: Prisma.$AccountMasterPayload<ExtArgs>[]
+    headSiteSupervisorFranchiseMappings: Prisma.$HeadSiteSupervisorFranchiseMappingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1932,6 +2100,7 @@ export interface Prisma__FranchiseMasterClient<T, Null = never, ExtArgs extends 
   users<T extends Prisma.FranchiseMaster$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FranchiseMaster$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leads<T extends Prisma.FranchiseMaster$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FranchiseMaster$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   accounts<T extends Prisma.FranchiseMaster$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FranchiseMaster$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  headSiteSupervisorFranchiseMappings<T extends Prisma.FranchiseMaster$headSiteSupervisorFranchiseMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FranchiseMaster$headSiteSupervisorFranchiseMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HeadSiteSupervisorFranchiseMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2445,6 +2614,30 @@ export type FranchiseMaster$accountsArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.AccountMasterScalarFieldEnum | Prisma.AccountMasterScalarFieldEnum[]
+}
+
+/**
+ * FranchiseMaster.headSiteSupervisorFranchiseMappings
+ */
+export type FranchiseMaster$headSiteSupervisorFranchiseMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HeadSiteSupervisorFranchiseMapping
+   */
+  select?: Prisma.HeadSiteSupervisorFranchiseMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the HeadSiteSupervisorFranchiseMapping
+   */
+  omit?: Prisma.HeadSiteSupervisorFranchiseMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HeadSiteSupervisorFranchiseMappingInclude<ExtArgs> | null
+  where?: Prisma.HeadSiteSupervisorFranchiseMappingWhereInput
+  orderBy?: Prisma.HeadSiteSupervisorFranchiseMappingOrderByWithRelationInput | Prisma.HeadSiteSupervisorFranchiseMappingOrderByWithRelationInput[]
+  cursor?: Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.HeadSiteSupervisorFranchiseMappingScalarFieldEnum | Prisma.HeadSiteSupervisorFranchiseMappingScalarFieldEnum[]
 }
 
 /**
