@@ -2677,6 +2677,8 @@ export class BookingStageService {
       isOrderLoginStage ||
       isProductionStage ||
       isInstallationStage;
+    const ignoreFranchiseForStage =
+      isTechCheckStage || isOrderLoginStage || isProductionStage;
 
     let statusIds: number[] = [];
 
@@ -3171,7 +3173,7 @@ const statusTags =
           ? "onGoing"
           : { in: ["onGoing", "lostApproval"] },
       };
-      if (shouldIncludeFranchise && franchiseId) {
+      if (shouldIncludeFranchise && franchiseId && !ignoreFranchiseForStage) {
         baseWhere.franchise_id = franchiseId;
       }
 
@@ -3260,7 +3262,7 @@ const statusTags =
         ? "onGoing"
         : { in: ["onGoing", "lostApproval"] },
     };
-    if (shouldIncludeFranchise && franchiseId) {
+    if (shouldIncludeFranchise && franchiseId && !ignoreFranchiseForStage) {
       baseWhere.franchise_id = franchiseId;
     }
 
