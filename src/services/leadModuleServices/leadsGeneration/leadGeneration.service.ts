@@ -943,6 +943,30 @@ export const getLeadById = async (
           }
         : null;
 
+    const oldestSiteSupervisorMapping =
+      await prisma.leadUserMapping.findFirst({
+        where: {
+          lead_id: lead.id,
+          vendor_id: vendorId,
+          status: "active",
+          user: {
+            user_type: {
+              user_type: {
+                equals: "site-supervisor",
+                mode: "insensitive",
+              },
+            },
+          },
+        },
+        orderBy: { created_at: "asc" },
+        select: {
+          id: true,
+          user_id: true,
+          created_at: true,
+          user: { select: { id: true, user_name: true } },
+        },
+      });
+
     // 5️⃣ Add signed URLs
     const documentsWithUrls = await Promise.all(
       lead.documents.map(async (doc) => {
@@ -958,6 +982,13 @@ export const getLeadById = async (
         ...lead,
         documents: documentsWithUrls,
         latest_activity_status: activityStatusPayload,
+        assigned_site_supervisor_from_mapping: oldestSiteSupervisorMapping
+          ? {
+              user_id: oldestSiteSupervisorMapping.user_id,
+              user_name: oldestSiteSupervisorMapping.user?.user_name ?? null,
+              created_at: oldestSiteSupervisorMapping.created_at,
+            }
+          : null,
       },
       userInfo: {
         role: userType,
