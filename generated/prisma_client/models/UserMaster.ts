@@ -330,6 +330,7 @@ export type UserMasterWhereInput = {
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   pushTokens?: Prisma.UserPushTokenListRelationFilter
   operator?: Prisma.CutListMachineMappingListRelationFilter
+  createdDefects?: Prisma.DefectedItemListRelationFilter
   userMachineMappings?: Prisma.UserMachineMappingListRelationFilter
   createdUserMachineMappings?: Prisma.UserMachineMappingListRelationFilter
   updatedUserMachineMappings?: Prisma.UserMachineMappingListRelationFilter
@@ -405,6 +406,7 @@ export type UserMasterOrderByWithRelationInput = {
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   pushTokens?: Prisma.UserPushTokenOrderByRelationAggregateInput
   operator?: Prisma.CutListMachineMappingOrderByRelationAggregateInput
+  createdDefects?: Prisma.DefectedItemOrderByRelationAggregateInput
   userMachineMappings?: Prisma.UserMachineMappingOrderByRelationAggregateInput
   createdUserMachineMappings?: Prisma.UserMachineMappingOrderByRelationAggregateInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingOrderByRelationAggregateInput
@@ -483,6 +485,7 @@ export type UserMasterWhereUniqueInput = Prisma.AtLeast<{
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   pushTokens?: Prisma.UserPushTokenListRelationFilter
   operator?: Prisma.CutListMachineMappingListRelationFilter
+  createdDefects?: Prisma.DefectedItemListRelationFilter
   userMachineMappings?: Prisma.UserMachineMappingListRelationFilter
   createdUserMachineMappings?: Prisma.UserMachineMappingListRelationFilter
   updatedUserMachineMappings?: Prisma.UserMachineMappingListRelationFilter
@@ -591,6 +594,7 @@ export type UserMasterCreateInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -664,6 +668,7 @@ export type UserMasterUncheckedCreateInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -736,6 +741,7 @@ export type UserMasterUpdateInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -809,6 +815,7 @@ export type UserMasterUncheckedUpdateInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -1873,6 +1880,20 @@ export type UserMasterUpdateOneRequiredWithoutUpdatedUserMachineMappingsNestedIn
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutUpdatedUserMachineMappingsInput, Prisma.UserMasterUpdateWithoutUpdatedUserMachineMappingsInput>, Prisma.UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput>
 }
 
+export type UserMasterCreateNestedOneWithoutCreatedDefectsInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutCreatedDefectsInput, Prisma.UserMasterUncheckedCreateWithoutCreatedDefectsInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutCreatedDefectsInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+}
+
+export type UserMasterUpdateOneRequiredWithoutCreatedDefectsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutCreatedDefectsInput, Prisma.UserMasterUncheckedCreateWithoutCreatedDefectsInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutCreatedDefectsInput
+  upsert?: Prisma.UserMasterUpsertWithoutCreatedDefectsInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutCreatedDefectsInput, Prisma.UserMasterUpdateWithoutCreatedDefectsInput>, Prisma.UserMasterUncheckedUpdateWithoutCreatedDefectsInput>
+}
+
 export type UserMasterCreateWithoutVendorInput = {
   user_name: string
   user_contact: string
@@ -1939,6 +1960,7 @@ export type UserMasterCreateWithoutVendorInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -2011,6 +2033,7 @@ export type UserMasterUncheckedCreateWithoutVendorInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -2125,6 +2148,7 @@ export type UserMasterCreateWithoutUser_typeInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -2197,6 +2221,7 @@ export type UserMasterUncheckedCreateWithoutUser_typeInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -2294,6 +2319,7 @@ export type UserMasterCreateWithoutDocumentsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -2366,6 +2392,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -2453,6 +2480,7 @@ export type UserMasterUpdateWithoutDocumentsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -2525,6 +2553,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -2596,6 +2625,7 @@ export type UserMasterCreateWithoutCreatedProjectsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -2668,6 +2698,7 @@ export type UserMasterUncheckedCreateWithoutCreatedProjectsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -2755,6 +2786,7 @@ export type UserMasterUpdateWithoutCreatedProjectsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -2827,6 +2859,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedProjectsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -2898,6 +2931,7 @@ export type UserMasterCreateWithoutScanItemsCreatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -2970,6 +3004,7 @@ export type UserMasterUncheckedCreateWithoutScanItemsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -3057,6 +3092,7 @@ export type UserMasterUpdateWithoutScanItemsCreatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -3129,6 +3165,7 @@ export type UserMasterUncheckedUpdateWithoutScanItemsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -3200,6 +3237,7 @@ export type UserMasterCreateWithoutLeadsAssignedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -3272,6 +3310,7 @@ export type UserMasterUncheckedCreateWithoutLeadsAssignedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -3348,6 +3387,7 @@ export type UserMasterCreateWithoutLeadsDelegatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -3420,6 +3460,7 @@ export type UserMasterUncheckedCreateWithoutLeadsDelegatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -3496,6 +3537,7 @@ export type UserMasterCreateWithoutLeadsCreatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -3568,6 +3610,7 @@ export type UserMasterUncheckedCreateWithoutLeadsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -3644,6 +3687,7 @@ export type UserMasterCreateWithoutLeadsUpdatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -3716,6 +3760,7 @@ export type UserMasterUncheckedCreateWithoutLeadsUpdatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -3803,6 +3848,7 @@ export type UserMasterUpdateWithoutLeadsAssignedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -3875,6 +3921,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsAssignedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -3957,6 +4004,7 @@ export type UserMasterUpdateWithoutLeadsDelegatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -4029,6 +4077,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsDelegatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -4111,6 +4160,7 @@ export type UserMasterUpdateWithoutLeadsCreatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -4183,6 +4233,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -4265,6 +4316,7 @@ export type UserMasterUpdateWithoutLeadsUpdatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -4337,6 +4389,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -4408,6 +4461,7 @@ export type UserMasterCreateWithoutLeadUserCreatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -4480,6 +4534,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -4556,6 +4611,7 @@ export type UserMasterCreateWithoutLeadUserUpdatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -4628,6 +4684,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserUpdatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -4704,6 +4761,7 @@ export type UserMasterCreateWithoutLeadUserAsUserInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -4776,6 +4834,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserAsUserInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -4863,6 +4922,7 @@ export type UserMasterUpdateWithoutLeadUserCreatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -4935,6 +4995,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -5017,6 +5078,7 @@ export type UserMasterUpdateWithoutLeadUserUpdatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -5089,6 +5151,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserUpdatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -5171,6 +5234,7 @@ export type UserMasterUpdateWithoutLeadUserAsUserInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -5243,6 +5307,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserAsUserInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -5314,6 +5379,7 @@ export type UserMasterCreateWithoutLeadActivityStatusLogInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -5386,6 +5452,7 @@ export type UserMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -5473,6 +5540,7 @@ export type UserMasterUpdateWithoutLeadActivityStatusLogInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -5545,6 +5613,7 @@ export type UserMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -5616,6 +5685,7 @@ export type UserMasterCreateWithoutAccountsCreatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -5688,6 +5758,7 @@ export type UserMasterUncheckedCreateWithoutAccountsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -5764,6 +5835,7 @@ export type UserMasterCreateWithoutAccountsUpdatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -5836,6 +5908,7 @@ export type UserMasterUncheckedCreateWithoutAccountsUpdatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -5923,6 +5996,7 @@ export type UserMasterUpdateWithoutAccountsCreatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -5995,6 +6069,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -6077,6 +6152,7 @@ export type UserMasterUpdateWithoutAccountsUpdatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -6149,6 +6225,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsUpdatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -6220,6 +6297,7 @@ export type UserMasterCreateWithoutLeadProductsCreatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -6292,6 +6370,7 @@ export type UserMasterUncheckedCreateWithoutLeadProductsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -6379,6 +6458,7 @@ export type UserMasterUpdateWithoutLeadProductsCreatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -6451,6 +6531,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProductsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -6522,6 +6603,7 @@ export type UserMasterCreateWithoutDocumentsCreatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -6594,6 +6676,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -6670,6 +6753,7 @@ export type UserMasterCreateWithoutDocumentsDeletedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -6742,6 +6826,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsDeletedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -6829,6 +6914,7 @@ export type UserMasterUpdateWithoutDocumentsCreatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -6901,6 +6987,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -6983,6 +7070,7 @@ export type UserMasterUpdateWithoutDocumentsDeletedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -7055,6 +7143,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsDeletedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -7126,6 +7215,7 @@ export type UserMasterCreateWithoutLeadChatMembersAddedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -7198,6 +7288,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersAddedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -7274,6 +7365,7 @@ export type UserMasterCreateWithoutLeadChatMembersInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -7346,6 +7438,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -7433,6 +7526,7 @@ export type UserMasterUpdateWithoutLeadChatMembersAddedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -7505,6 +7599,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersAddedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -7587,6 +7682,7 @@ export type UserMasterUpdateWithoutLeadChatMembersInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -7659,6 +7755,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -7730,6 +7827,7 @@ export type UserMasterCreateWithoutLeadChatMessagesSentInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -7802,6 +7900,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMessagesSentInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -7889,6 +7988,7 @@ export type UserMasterUpdateWithoutLeadChatMessagesSentInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -7961,6 +8061,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMessagesSentInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -8032,6 +8133,7 @@ export type UserMasterCreateWithoutLeadChatMentionsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -8104,6 +8206,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMentionsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -8191,6 +8294,7 @@ export type UserMasterUpdateWithoutLeadChatMentionsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -8263,6 +8367,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMentionsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -8334,6 +8439,7 @@ export type UserMasterCreateWithoutLeadChatDocumentsCreatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -8406,6 +8512,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -8482,6 +8589,7 @@ export type UserMasterCreateWithoutLeadChatDocumentsDeletedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -8554,6 +8662,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsDeletedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -8641,6 +8750,7 @@ export type UserMasterUpdateWithoutLeadChatDocumentsCreatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -8713,6 +8823,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -8795,6 +8906,7 @@ export type UserMasterUpdateWithoutLeadChatDocumentsDeletedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -8867,6 +8979,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsDeletedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -8938,6 +9051,7 @@ export type UserMasterCreateWithoutProductStructureInstancesInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -9010,6 +9124,7 @@ export type UserMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -9097,6 +9212,7 @@ export type UserMasterUpdateWithoutProductStructureInstancesInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -9169,6 +9285,7 @@ export type UserMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -9240,6 +9357,7 @@ export type UserMasterCreateWithoutPaymentsCreatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -9312,6 +9430,7 @@ export type UserMasterUncheckedCreateWithoutPaymentsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -9399,6 +9518,7 @@ export type UserMasterUpdateWithoutPaymentsCreatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -9471,6 +9591,7 @@ export type UserMasterUncheckedUpdateWithoutPaymentsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -9542,6 +9663,7 @@ export type UserMasterCreateWithoutLedgersCreatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -9614,6 +9736,7 @@ export type UserMasterUncheckedCreateWithoutLedgersCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -9701,6 +9824,7 @@ export type UserMasterUpdateWithoutLedgersCreatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -9773,6 +9897,7 @@ export type UserMasterUncheckedUpdateWithoutLedgersCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -9844,6 +9969,7 @@ export type UserMasterCreateWithoutLeadStatusLogsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -9916,6 +10042,7 @@ export type UserMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -10003,6 +10130,7 @@ export type UserMasterUpdateWithoutLeadStatusLogsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -10075,6 +10203,7 @@ export type UserMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -10146,6 +10275,7 @@ export type UserMasterCreateWithoutDesignMeetingsCreatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -10218,6 +10348,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -10294,6 +10425,7 @@ export type UserMasterCreateWithoutDesignMeetingsUpdatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -10366,6 +10498,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsUpdatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -10453,6 +10586,7 @@ export type UserMasterUpdateWithoutDesignMeetingsCreatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -10525,6 +10659,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -10607,6 +10742,7 @@ export type UserMasterUpdateWithoutDesignMeetingsUpdatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -10679,6 +10815,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsUpdatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -10750,6 +10887,7 @@ export type UserMasterCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -10822,6 +10960,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingDocsMappingForCreatedBY
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -10909,6 +11048,7 @@ export type UserMasterUpdateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -10981,6 +11121,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingDocsMappingForCreatedBY
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -11052,6 +11193,7 @@ export type UserMasterCreateWithoutDesignSelectionsCreatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -11124,6 +11266,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -11200,6 +11343,7 @@ export type UserMasterCreateWithoutDesignSelectionsUpdatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -11272,6 +11416,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsUpdatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -11359,6 +11504,7 @@ export type UserMasterUpdateWithoutDesignSelectionsCreatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -11431,6 +11577,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -11513,6 +11660,7 @@ export type UserMasterUpdateWithoutDesignSelectionsUpdatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -11585,6 +11733,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsUpdatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -11656,6 +11805,7 @@ export type UserMasterCreateWithoutSupervisorMappingsCreatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -11728,6 +11878,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -11804,6 +11955,7 @@ export type UserMasterCreateWithoutSupervisorMappingsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -11876,6 +12028,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -11963,6 +12116,7 @@ export type UserMasterUpdateWithoutSupervisorMappingsCreatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -12035,6 +12189,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -12117,6 +12272,7 @@ export type UserMasterUpdateWithoutSupervisorMappingsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -12189,6 +12345,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -12260,6 +12417,7 @@ export type UserMasterCreateWithoutLeadTasksClosedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -12332,6 +12490,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksClosedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -12408,6 +12567,7 @@ export type UserMasterCreateWithoutLeadTasksCreatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -12480,6 +12640,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -12556,6 +12717,7 @@ export type UserMasterCreateWithoutLeadTasksAssignedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -12628,6 +12790,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksAssignedInput = {
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -12715,6 +12878,7 @@ export type UserMasterUpdateWithoutLeadTasksClosedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -12787,6 +12951,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksClosedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -12869,6 +13034,7 @@ export type UserMasterUpdateWithoutLeadTasksCreatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -12941,6 +13107,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -13023,6 +13190,7 @@ export type UserMasterUpdateWithoutLeadTasksAssignedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -13095,6 +13263,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksAssignedInput = {
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -13166,6 +13335,7 @@ export type UserMasterCreateWithoutLeadDetailedLogsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -13238,6 +13408,7 @@ export type UserMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -13325,6 +13496,7 @@ export type UserMasterUpdateWithoutLeadDetailedLogsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -13397,6 +13569,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -13468,6 +13641,7 @@ export type UserMasterCreateWithoutLeadDocumentLogsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -13540,6 +13714,7 @@ export type UserMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -13627,6 +13802,7 @@ export type UserMasterUpdateWithoutLeadDocumentLogsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -13699,6 +13875,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -13770,6 +13947,7 @@ export type UserMasterCreateWithoutCompanyVendorsCreatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -13842,6 +14020,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -13918,6 +14097,7 @@ export type UserMasterCreateWithoutCompanyVendorsDeletedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -13990,6 +14170,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsDeletedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -14066,6 +14247,7 @@ export type UserMasterCreateWithoutCompanyVendorsUpdatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -14138,6 +14320,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsUpdatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -14225,6 +14408,7 @@ export type UserMasterUpdateWithoutCompanyVendorsCreatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -14297,6 +14481,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -14379,6 +14564,7 @@ export type UserMasterUpdateWithoutCompanyVendorsDeletedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -14451,6 +14637,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsDeletedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -14533,6 +14720,7 @@ export type UserMasterUpdateWithoutCompanyVendorsUpdatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -14605,6 +14793,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsUpdatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -14676,6 +14865,7 @@ export type UserMasterCreateWithoutOrderLoginDetailsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -14748,6 +14938,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -14824,6 +15015,7 @@ export type UserMasterCreateWithoutOrderLoginsUpdatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -14896,6 +15088,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginsUpdatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -14983,6 +15176,7 @@ export type UserMasterUpdateWithoutOrderLoginDetailsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -15055,6 +15249,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -15137,6 +15332,7 @@ export type UserMasterUpdateWithoutOrderLoginsUpdatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -15209,6 +15405,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginsUpdatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -15280,6 +15477,7 @@ export type UserMasterCreateWithoutSiteReadinessCreatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -15352,6 +15550,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -15428,6 +15627,7 @@ export type UserMasterCreateWithoutSiteReadinessUpdatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -15500,6 +15700,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessUpdatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -15587,6 +15788,7 @@ export type UserMasterUpdateWithoutSiteReadinessCreatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -15659,6 +15861,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -15741,6 +15944,7 @@ export type UserMasterUpdateWithoutSiteReadinessUpdatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -15813,6 +16017,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessUpdatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -15884,6 +16089,7 @@ export type UserMasterCreateWithoutInstallersCreatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -15956,6 +16162,7 @@ export type UserMasterUncheckedCreateWithoutInstallersCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -16043,6 +16250,7 @@ export type UserMasterUpdateWithoutInstallersCreatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -16115,6 +16323,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -16186,6 +16395,7 @@ export type UserMasterCreateWithoutInstallersAssignedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -16258,6 +16468,7 @@ export type UserMasterUncheckedCreateWithoutInstallersAssignedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -16345,6 +16556,7 @@ export type UserMasterUpdateWithoutInstallersAssignedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -16417,6 +16629,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersAssignedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -16488,6 +16701,7 @@ export type UserMasterCreateWithoutInstallationUpdatesCreatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -16560,6 +16774,7 @@ export type UserMasterUncheckedCreateWithoutInstallationUpdatesCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -16647,6 +16862,7 @@ export type UserMasterUpdateWithoutInstallationUpdatesCreatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -16719,6 +16935,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationUpdatesCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -16790,6 +17007,7 @@ export type UserMasterCreateWithoutMiscCreatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -16862,6 +17080,7 @@ export type UserMasterUncheckedCreateWithoutMiscCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -16938,6 +17157,7 @@ export type UserMasterCreateWithoutMiscUpdatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -17010,6 +17230,7 @@ export type UserMasterUncheckedCreateWithoutMiscUpdatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -17097,6 +17318,7 @@ export type UserMasterUpdateWithoutMiscCreatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -17169,6 +17391,7 @@ export type UserMasterUncheckedUpdateWithoutMiscCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -17251,6 +17474,7 @@ export type UserMasterUpdateWithoutMiscUpdatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -17323,6 +17547,7 @@ export type UserMasterUncheckedUpdateWithoutMiscUpdatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -17394,6 +17619,7 @@ export type UserMasterCreateWithoutMiscDocumentsCreatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -17466,6 +17692,7 @@ export type UserMasterUncheckedCreateWithoutMiscDocumentsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -17553,6 +17780,7 @@ export type UserMasterUpdateWithoutMiscDocumentsCreatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -17625,6 +17853,7 @@ export type UserMasterUncheckedUpdateWithoutMiscDocumentsCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -17696,6 +17925,7 @@ export type UserMasterCreateWithoutInstallationIssueLogMasterInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -17768,6 +17998,7 @@ export type UserMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -17855,6 +18086,7 @@ export type UserMasterUpdateWithoutInstallationIssueLogMasterInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -17927,6 +18159,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -17998,6 +18231,7 @@ export type UserMasterCreateWithoutNotificationsSentInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -18070,6 +18304,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsSentInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -18146,6 +18381,7 @@ export type UserMasterCreateWithoutNotificationsReceivedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -18218,6 +18454,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsReceivedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -18305,6 +18542,7 @@ export type UserMasterUpdateWithoutNotificationsSentInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -18377,6 +18615,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsSentInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -18459,6 +18698,7 @@ export type UserMasterUpdateWithoutNotificationsReceivedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -18531,6 +18771,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsReceivedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -18602,6 +18843,7 @@ export type UserMasterCreateWithoutPushTokensInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -18674,6 +18916,7 @@ export type UserMasterUncheckedCreateWithoutPushTokensInput = {
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -18761,6 +19004,7 @@ export type UserMasterUpdateWithoutPushTokensInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -18833,6 +19077,7 @@ export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -18904,6 +19149,7 @@ export type UserMasterCreateWithoutOperatorInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -18976,6 +19222,7 @@ export type UserMasterUncheckedCreateWithoutOperatorInput = {
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -19063,6 +19310,7 @@ export type UserMasterUpdateWithoutOperatorInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -19135,6 +19383,7 @@ export type UserMasterUncheckedUpdateWithoutOperatorInput = {
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -19207,6 +19456,7 @@ export type UserMasterCreateWithoutUserMachineMappingsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
 }
@@ -19279,6 +19529,7 @@ export type UserMasterUncheckedCreateWithoutUserMachineMappingsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -19355,6 +19606,7 @@ export type UserMasterCreateWithoutCreatedUserMachineMappingsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
 }
@@ -19427,6 +19679,7 @@ export type UserMasterUncheckedCreateWithoutCreatedUserMachineMappingsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -19503,6 +19756,7 @@ export type UserMasterCreateWithoutUpdatedUserMachineMappingsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
 }
@@ -19575,6 +19829,7 @@ export type UserMasterUncheckedCreateWithoutUpdatedUserMachineMappingsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
 }
@@ -19662,6 +19917,7 @@ export type UserMasterUpdateWithoutUserMachineMappingsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
 }
@@ -19734,6 +19990,7 @@ export type UserMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -19816,6 +20073,7 @@ export type UserMasterUpdateWithoutCreatedUserMachineMappingsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
 }
@@ -19888,6 +20146,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedUserMachineMappingsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -19970,6 +20229,7 @@ export type UserMasterUpdateWithoutUpdatedUserMachineMappingsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
 }
@@ -20042,8 +20302,315 @@ export type UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserMasterCreateWithoutCreatedDefectsInput = {
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageCreateNestedManyWithoutSenderInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsCreateNestedManyWithoutDeletedByInput
+  leadsAssigned?: Prisma.LeadMasterCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutUpdatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutSupervisorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsCreateNestedManyWithoutUpdatedByInput
+  paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
+  createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
+  scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
+  documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskCreateNestedManyWithoutUserInput
+  user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
+  pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserMasterUncheckedCreateWithoutCreatedDefectsInput = {
+  id?: number
+  vendor_id: number
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  user_type_id: number
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutSenderInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDeletedByInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutUpdatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerUncheckedCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutUpdatedByInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
+  createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
+  documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
+  pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserMasterCreateOrConnectWithoutCreatedDefectsInput = {
+  where: Prisma.UserMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutCreatedDefectsInput, Prisma.UserMasterUncheckedCreateWithoutCreatedDefectsInput>
+}
+
+export type UserMasterUpsertWithoutCreatedDefectsInput = {
+  update: Prisma.XOR<Prisma.UserMasterUpdateWithoutCreatedDefectsInput, Prisma.UserMasterUncheckedUpdateWithoutCreatedDefectsInput>
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutCreatedDefectsInput, Prisma.UserMasterUncheckedCreateWithoutCreatedDefectsInput>
+  where?: Prisma.UserMasterWhereInput
+}
+
+export type UserMasterUpdateToOneWithWhereWithoutCreatedDefectsInput = {
+  where?: Prisma.UserMasterWhereInput
+  data: Prisma.XOR<Prisma.UserMasterUpdateWithoutCreatedDefectsInput, Prisma.UserMasterUncheckedUpdateWithoutCreatedDefectsInput>
+}
+
+export type UserMasterUpdateWithoutCreatedDefectsInput = {
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUpdateManyWithoutSenderNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUpdateManyWithoutDeletedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutUpdatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutSupervisorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUpdateManyWithoutUpdatedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
+  documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUpdateManyWithoutUserNestedInput
+  user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
+  pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutUpdatedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
+  documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
+  pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateManyVendorInput = {
@@ -20125,6 +20692,7 @@ export type UserMasterUpdateWithoutVendorInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -20197,6 +20765,7 @@ export type UserMasterUncheckedUpdateWithoutVendorInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -20294,6 +20863,7 @@ export type UserMasterUpdateWithoutUser_typeInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -20366,6 +20936,7 @@ export type UserMasterUncheckedUpdateWithoutUser_typeInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -20446,6 +21017,7 @@ export type UserMasterCountOutputType = {
   leadTasksAssigned: number
   pushTokens: number
   operator: number
+  createdDefects: number
   userMachineMappings: number
   createdUserMachineMappings: number
   updatedUserMachineMappings: number
@@ -20508,6 +21080,7 @@ export type UserMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   leadTasksAssigned?: boolean | UserMasterCountOutputTypeCountLeadTasksAssignedArgs
   pushTokens?: boolean | UserMasterCountOutputTypeCountPushTokensArgs
   operator?: boolean | UserMasterCountOutputTypeCountOperatorArgs
+  createdDefects?: boolean | UserMasterCountOutputTypeCountCreatedDefectsArgs
   userMachineMappings?: boolean | UserMasterCountOutputTypeCountUserMachineMappingsArgs
   createdUserMachineMappings?: boolean | UserMasterCountOutputTypeCountCreatedUserMachineMappingsArgs
   updatedUserMachineMappings?: boolean | UserMasterCountOutputTypeCountUpdatedUserMachineMappingsArgs
@@ -20918,6 +21491,13 @@ export type UserMasterCountOutputTypeCountOperatorArgs<ExtArgs extends runtime.T
 /**
  * UserMasterCountOutputType without action
  */
+export type UserMasterCountOutputTypeCountCreatedDefectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DefectedItemWhereInput
+}
+
+/**
+ * UserMasterCountOutputType without action
+ */
 export type UserMasterCountOutputTypeCountUserMachineMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.UserMachineMappingWhereInput
 }
@@ -21007,6 +21587,7 @@ export type UserMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   pushTokens?: boolean | Prisma.UserMaster$pushTokensArgs<ExtArgs>
   operator?: boolean | Prisma.UserMaster$operatorArgs<ExtArgs>
+  createdDefects?: boolean | Prisma.UserMaster$createdDefectsArgs<ExtArgs>
   userMachineMappings?: boolean | Prisma.UserMaster$userMachineMappingsArgs<ExtArgs>
   createdUserMachineMappings?: boolean | Prisma.UserMaster$createdUserMachineMappingsArgs<ExtArgs>
   updatedUserMachineMappings?: boolean | Prisma.UserMaster$updatedUserMachineMappingsArgs<ExtArgs>
@@ -21119,6 +21700,7 @@ export type UserMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   pushTokens?: boolean | Prisma.UserMaster$pushTokensArgs<ExtArgs>
   operator?: boolean | Prisma.UserMaster$operatorArgs<ExtArgs>
+  createdDefects?: boolean | Prisma.UserMaster$createdDefectsArgs<ExtArgs>
   userMachineMappings?: boolean | Prisma.UserMaster$userMachineMappingsArgs<ExtArgs>
   createdUserMachineMappings?: boolean | Prisma.UserMaster$createdUserMachineMappingsArgs<ExtArgs>
   updatedUserMachineMappings?: boolean | Prisma.UserMaster$updatedUserMachineMappingsArgs<ExtArgs>
@@ -21194,6 +21776,7 @@ export type $UserMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     pushTokens: Prisma.$UserPushTokenPayload<ExtArgs>[]
     operator: Prisma.$CutListMachineMappingPayload<ExtArgs>[]
+    createdDefects: Prisma.$DefectedItemPayload<ExtArgs>[]
     userMachineMappings: Prisma.$UserMachineMappingPayload<ExtArgs>[]
     createdUserMachineMappings: Prisma.$UserMachineMappingPayload<ExtArgs>[]
     updatedUserMachineMappings: Prisma.$UserMachineMappingPayload<ExtArgs>[]
@@ -21662,6 +22245,7 @@ export interface Prisma__UserMasterClient<T, Null = never, ExtArgs extends runti
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   pushTokens<T extends Prisma.UserMaster$pushTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$pushTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPushTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   operator<T extends Prisma.UserMaster$operatorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$operatorArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListMachineMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdDefects<T extends Prisma.UserMaster$createdDefectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$createdDefectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DefectedItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userMachineMappings<T extends Prisma.UserMaster$userMachineMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$userMachineMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserMachineMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdUserMachineMappings<T extends Prisma.UserMaster$createdUserMachineMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$createdUserMachineMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserMachineMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   updatedUserMachineMappings<T extends Prisma.UserMaster$updatedUserMachineMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$updatedUserMachineMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserMachineMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -23442,6 +24026,30 @@ export type UserMaster$operatorArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.CutListMachineMappingScalarFieldEnum | Prisma.CutListMachineMappingScalarFieldEnum[]
+}
+
+/**
+ * UserMaster.createdDefects
+ */
+export type UserMaster$createdDefectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DefectedItem
+   */
+  select?: Prisma.DefectedItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DefectedItem
+   */
+  omit?: Prisma.DefectedItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DefectedItemInclude<ExtArgs> | null
+  where?: Prisma.DefectedItemWhereInput
+  orderBy?: Prisma.DefectedItemOrderByWithRelationInput | Prisma.DefectedItemOrderByWithRelationInput[]
+  cursor?: Prisma.DefectedItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DefectedItemScalarFieldEnum | Prisma.DefectedItemScalarFieldEnum[]
 }
 
 /**

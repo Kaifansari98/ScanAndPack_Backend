@@ -377,3 +377,23 @@ export type UserMachineMapping = Prisma.UserMachineMappingModel
  * 
  */
 export type MachineTypeMaster = Prisma.MachineTypeMasterModel
+/**
+ * Model VendorSettingKey
+ * 
+ */
+export type VendorSettingKey = Prisma.VendorSettingKeyModel
+/**
+ * Model VendorSetting
+ * 
+ */
+export type VendorSetting = Prisma.VendorSettingModel
+/**
+ * Model DefectMaster
+ * 
+ */
+export type DefectMaster = Prisma.DefectMasterModel
+/**
+ * Model DefectedItem
+ * 
+ */
+export type DefectedItem = Prisma.DefectedItemModel

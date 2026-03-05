@@ -122,7 +122,11 @@ export const ModelName = {
   CutList: 'CutList',
   CutListMachineMapping: 'CutListMachineMapping',
   UserMachineMapping: 'UserMachineMapping',
-  MachineTypeMaster: 'MachineTypeMaster'
+  MachineTypeMaster: 'MachineTypeMaster',
+  VendorSettingKey: 'VendorSettingKey',
+  VendorSetting: 'VendorSetting',
+  DefectMaster: 'DefectMaster',
+  DefectedItem: 'DefectedItem'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1261,6 +1265,61 @@ export const MachineTypeMasterScalarFieldEnum = {
 } as const
 
 export type MachineTypeMasterScalarFieldEnum = (typeof MachineTypeMasterScalarFieldEnum)[keyof typeof MachineTypeMasterScalarFieldEnum]
+
+
+export const VendorSettingKeyScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  display_name: 'display_name',
+  default_value: 'default_value',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type VendorSettingKeyScalarFieldEnum = (typeof VendorSettingKeyScalarFieldEnum)[keyof typeof VendorSettingKeyScalarFieldEnum]
+
+
+export const VendorSettingScalarFieldEnum = {
+  id: 'id',
+  setting_id: 'setting_id',
+  vendor_id: 'vendor_id',
+  value: 'value',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type VendorSettingScalarFieldEnum = (typeof VendorSettingScalarFieldEnum)[keyof typeof VendorSettingScalarFieldEnum]
+
+
+export const DefectMasterScalarFieldEnum = {
+  id: 'id',
+  defect_name: 'defect_name',
+  vendor_id: 'vendor_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type DefectMasterScalarFieldEnum = (typeof DefectMasterScalarFieldEnum)[keyof typeof DefectMasterScalarFieldEnum]
+
+
+export const DefectedItemScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  project_id: 'project_id',
+  cut_list_machine_mapping_id: 'cut_list_machine_mapping_id',
+  cut_list_id: 'cut_list_id',
+  machine_id: 'machine_id',
+  defect_id: 'defect_id',
+  previous_scanned_by: 'previous_scanned_by',
+  previous_scanned_at: 'previous_scanned_at',
+  previous_scanned_machine_id: 'previous_scanned_machine_id',
+  remark: 'remark',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type DefectedItemScalarFieldEnum = (typeof DefectedItemScalarFieldEnum)[keyof typeof DefectedItemScalarFieldEnum]
 
 
 export const SortOrder = {

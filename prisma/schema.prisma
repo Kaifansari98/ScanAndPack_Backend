@@ -78,6 +78,10 @@ model VendorMaster {
   taxInfo                     VendorTaxInfo[]
   tokens                      VendorTokens[]
   userMachineMapping          UserMachineMapping[]
+  vendorSetting               VendorSetting[]
+  defectMaster                DefectMaster[]
+  defectedItems DefectedItem[]
+
 }
 
 model VendorAddress {
@@ -179,6 +183,8 @@ model UserMaster {
   vendor                               VendorMaster                        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   pushTokens                           UserPushToken[]
   operator                             CutListMachineMapping[]
+  createdDefects DefectedItem[]
+
 
   userMachineMappings        UserMachineMapping[] @relation("UserMachine_user")
   createdUserMachineMappings UserMachineMapping[] @relation("UserMachine_createdBy")
@@ -216,6 +222,7 @@ model ProjectMaster {
   createdByUser         UserMaster              @relation("CreatedByUser", fields: [created_by], references: [id], onDelete: Cascade)
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   scanItems             ScanAndPackItem[]
+  defectedItems DefectedItem[]
 }
 
 model ProjectDetails {
@@ -1314,9 +1321,11 @@ model MachineMaster {
   cutListMachineMapping CutListMachineMapping[]
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])  
   userMachineMappings UserMachineMapping[]
+  defectedItems DefectedItem[]
 
 
 }
+
 
 model CutList {
   id                    Int                     @id @default(autoincrement())
@@ -1346,6 +1355,8 @@ model CutList {
   
   lead                  LeadMaster?              @relation(fields: [lead_id], references: [id])
   cutListMachineMapping CutListMachineMapping[]
+  defectedItems DefectedItem[]
+  
 }
 
 model CutListMachineMapping {
@@ -1372,6 +1383,7 @@ model CutListMachineMapping {
   vendor        VendorMaster  @relation(fields: [vendor_id], references: [id])  
   lead          LeadMaster?    @relation(fields: [lead_id], references: [id])
   operator      UserMaster?    @relation(fields: [in_operator], references: [id])
+  defectedItems DefectedItem[]
 
   @@index([cut_list_id])
   @@index([machine_id])
@@ -1417,6 +1429,90 @@ model MachineTypeMaster {
 
   machineMaster     MachineMaster[]
   
+}
+
+
+model VendorSettingKey {
+  id            Int      @id @default(autoincrement())
+  key           String   @unique
+  display_name  String
+  default_value String?
+
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  vendorSettings VendorSetting[]
+}
+
+model VendorSetting {
+  id          Int      @id @default(autoincrement())
+
+  setting_id  Int
+  vendor_id   Int
+  value       String?
+
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+
+  vendorSettingKey     VendorSettingKey @relation(fields: [setting_id], references: [id])
+  vendor      VendorMaster     @relation(fields: [vendor_id], references: [id])
+
+  @@unique([setting_id, vendor_id])
+}
+
+model DefectMaster {
+  id          Int     @id @default(autoincrement())
+  defect_name String
+
+  vendor_id   Int?    
+
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  // ================= RELATIONS =================
+  vendorMaster      VendorMaster? @relation(fields: [vendor_id], references: [id])
+  defectedItems DefectedItem[]
+
+  @@index([vendor_id])
+}
+
+
+model DefectedItem {
+  id          Int      @id @default(autoincrement())
+
+  vendor_id   Int
+  project_id  Int
+  cut_list_machine_mapping_id Int
+  cut_list_id Int?
+  machine_id  Int
+  defect_id   Int?
+
+  previous_scanned_by Int?
+  previous_scanned_at DateTime?
+  previous_scanned_machine_id Int?
+
+  remark      String?
+
+  created_by  Int
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now()) @updatedAt
+
+  // ================= RELATIONS =================
+
+  vendor      VendorMaster   @relation(fields: [vendor_id], references: [id])
+  project     ProjectMaster  @relation(fields: [project_id], references: [id])
+  cutListMachineMapping CutListMachineMapping @relation(fields: [cut_list_machine_mapping_id], references: [id])
+  cutList     CutList?       @relation(fields: [cut_list_id], references: [id])
+  machine     MachineMaster  @relation(fields: [machine_id], references: [id])
+  defect      DefectMaster?   @relation(fields: [defect_id], references: [id])
+  createdBy   UserMaster     @relation(fields: [created_by], references: [id])
+
+  @@index([vendor_id])
+  @@index([project_id])
+  @@index([machine_id])
+  @@index([cut_list_machine_mapping_id])
+  @@index([cut_list_id])
 }
 
 enum MachineTypeMasterStatus {

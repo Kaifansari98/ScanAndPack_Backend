@@ -86,7 +86,7 @@ export const getAllProjectsTrackTrace = (vendor_id: number) => {
           id: true,
           firstname: true,
           lastname: true,
-          lead_code:true
+          lead_code: true
         }
       }
     },
@@ -923,7 +923,7 @@ export const handelItems = async (
 
       return {
         success: false,
-        errors
+        message: errors
       };
     }
 
@@ -982,7 +982,10 @@ export const handelItems = async (
     });
 
     if (!vendorTokenEntry || new Date() > vendorTokenEntry.expiry_date) {
-      throw new Error("Invalid or expired vendor token");
+      return {
+        success: false,
+        message: "Invalid or expired vendor token"
+      };
     }
 
     const vendor = vendorTokenEntry.vendor;
@@ -996,7 +999,12 @@ export const handelItems = async (
       orderBy: { created_at: "asc" }
     });
 
-    if (!adminUser) throw new Error("No admin user found for this vendor");
+    if (!adminUser) {
+      return {
+        success: false,
+        message: "No admin user found for this vendor"
+      };
+    }
 
     const createdByUserId = adminUser.id;
     const lead_id = null;
@@ -1078,7 +1086,12 @@ export const handelItems = async (
             }
 
             if (machine_type_id == 0) {
-              throw new Error("Edgebanding machine is not configured");
+              return {
+                success: false,
+                message: "Edgebanding machine is not configured"
+              };
+
+              //throw new Error("Edgebanding machine is not configured");
             } else {
               await tx.cutListMachineMapping.create({
                 data: {
