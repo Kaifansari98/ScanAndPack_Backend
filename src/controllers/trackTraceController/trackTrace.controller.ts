@@ -129,6 +129,8 @@ export const getAllMachines = async (_req: Request, res: Response) => {
 
         const projects = await machineService.getAllMachines(vendor_id, user_id);
 
+        console.log("machines", projects);
+
         return res.status(200).json(ApiResponse.success(projects, "", 200));
     } catch (err) {
         res.status(500).json({ error: "Failed to fetch machines", details: err });
@@ -597,3 +599,34 @@ export const mark_Defect = async (_req: Request, res: Response) => {
             );
     }
 }
+
+
+export const getScanStatsDashboard = async (req: Request, res: Response) => {
+    const vendor_id = Number(req.params.vendor_id);
+    const user_id = Number(req.params.user_id);
+
+    let serviceResponse = await trackTraceService.getScanStatsDashboard(vendor_id, user_id);
+    if (serviceResponse?.status == 0) {
+        return res
+            .status(200)
+            .json(
+                ApiResponse.error(
+                    serviceResponse?.message,
+                    500
+                )
+            );
+    } else {
+
+        let scanItem = serviceResponse?.data;
+
+        return res
+            .status(200)
+            .json(
+                ApiResponse.success(
+                    { scanItem },
+                    serviceResponse?.message,
+                    200
+                )
+            );
+    }
+};

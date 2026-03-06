@@ -26,7 +26,8 @@ import {
     check_item,
     get_defect,
     mark_Defect,
-    check_defect
+    check_defect,
+    getScanStatsDashboard
 } from '../../controllers/trackTraceController/trackTrace.controller';
 
 import { uploadMachineExcel } from "../../../src/controllers/trackTraceController/upload-cutlist.controller";
@@ -70,7 +71,7 @@ const storage = multer.memoryStorage();
 router.get('/defect-master/:vendor_id',get_defect);
 router.post('/mark-defect',mark_Defect);
 router.post('/scan/check-defect', check_defect);
-
+router.get('/get-scan-status-dashboard/:vendor_id/:user_id',getScanStatsDashboard);
 
 
 

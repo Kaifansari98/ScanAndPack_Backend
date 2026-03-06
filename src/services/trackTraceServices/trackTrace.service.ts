@@ -153,27 +153,29 @@ export const updateScannedItem = async (payload: TrackTracePayload, is_check: bo
 
 
         //check if item is mapped to any machine
-        const currentMapping =
-            await prisma.cutListMachineMapping.findFirst({
-                where: {
-                    machine_id: machine_id,
-                    vendor_id: vendor_id,
-                    cut_list: {
-                        unique_code: unique_code,
-                    }
+        const currentMapping = await prisma.cutListMachineMapping.findFirst({
+            where: {
+                machine_id: machine_id,
+                vendor_id: vendor_id,
+                cut_list: {
+                    unique_code: {
+                        equals: unique_code,
+                        mode: "insensitive",
+                    },
                 },
-                select: {
-                    id: true,
-                    sequence_no: true,
-                    cut_list_id: true,
-                    project_id: true,
-                    project: {
-                        select: {
-                            track_trace_status: true
-                        }
-                    }
+            },
+            select: {
+                id: true,
+                sequence_no: true,
+                cut_list_id: true,
+                project_id: true,
+                project: {
+                    select: {
+                        track_trace_status: true,
+                    },
                 },
-            });
+            },
+        });
 
         //console.log("currentMapping",currentMapping)
         if (!currentMapping) {
@@ -183,22 +185,24 @@ export const updateScannedItem = async (payload: TrackTracePayload, is_check: bo
         //return currentMapping;
 
 
-        const nextMapping =
-            await prisma.cutListMachineMapping.findFirst({
-                where: {
-                    machine_id: machine_id,
-                    vendor_id: vendor_id,
-                    cut_list: {
-                        unique_code: unique_code,
+        const nextMapping = await prisma.cutListMachineMapping.findFirst({
+            where: {
+                machine_id: machine_id,
+                vendor_id: vendor_id,
+                cut_list: {
+                    unique_code: {
+                        equals: unique_code,
+                        mode: "insensitive",
                     },
-                    actual_in_at: null
                 },
-                select: {
-                    id: true,
-                    sequence_no: true,
-                    cut_list_id: true
-                },
-            });
+                actual_in_at: null,
+            },
+            select: {
+                id: true,
+                sequence_no: true,
+                cut_list_id: true,
+            },
+        });
 
 
         if (!nextMapping) {
@@ -293,10 +297,12 @@ export const updateScannedItem = async (payload: TrackTracePayload, is_check: bo
                             machine_id: machine_id,
                             vendor_id: vendor_id,
                             cut_list: {
-                                unique_code: unique_code,
+                                unique_code: {
+                                    equals: unique_code,
+                                    mode: "insensitive",
+                                },
                             },
                         },
-
                         select: {
                             id: true,
                             sequence_no: true,
@@ -317,11 +323,10 @@ export const updateScannedItem = async (payload: TrackTracePayload, is_check: bo
                                     item_name: true,
                                 },
                             },
-
                             project: {
                                 select: {
                                     track_trace_status: true,
-                                    project_name: true
+                                    project_name: true,
                                 },
                             },
                         },
@@ -2530,4 +2535,49 @@ export const mark_Defect = async (payload: MarkDefectPayload) => {
 
         return validationResponse(1, "Defect Marked Successfully");
     });
+};
+
+
+
+export const getScanStatsDashboard = async (vendor_id: number, user_id: number) => {
+    try {
+
+        const startOfToday = new Date();
+        startOfToday.setHours(0, 0, 0, 0);
+
+        const total_items_scanned_today =
+            await prisma.cutListMachineMapping.count({
+                where: {
+                    vendor_id,
+                    in_operator: user_id,
+                    actual_in_at: {
+                        gte: startOfToday,
+                    },
+                },
+            });
+
+        const total_items_pending_to_scan =
+            await prisma.cutListMachineMapping.count({
+                where: {
+                    vendor_id,
+                    actual_in_at: null,
+                    machine: {
+                        userMachineMappings: {
+                            some: {
+                                user_id,
+                            },
+                        },
+                    },
+                },
+            });
+
+        return validationResponse(1, "Scan stats fetched", {
+            total_items_scanned_today,
+            total_items_pending_to_scan,
+        });
+
+    } catch (error) {
+        console.error(error);
+        return validationResponse(0, "Failed to fetch stats");
+    }
 };

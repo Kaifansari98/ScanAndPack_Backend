@@ -1380,6 +1380,7 @@ model CutList {
   lead                  LeadMaster?              @relation(fields: [lead_id], references: [id])
   cutListMachineMapping CutListMachineMapping[]
   defectedItems DefectedItem[]
+  @@index([unique_code])
   
 }
 
