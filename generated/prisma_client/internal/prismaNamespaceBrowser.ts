@@ -122,6 +122,7 @@ export const ModelName = {
   CutList: 'CutList',
   CutListMachineMapping: 'CutListMachineMapping',
   UserMachineMapping: 'UserMachineMapping',
+  OrderLoginPoFileMapping: 'OrderLoginPoFileMapping',
   MachineTypeMaster: 'MachineTypeMaster',
   VendorSettingKey: 'VendorSettingKey',
   VendorSetting: 'VendorSetting',

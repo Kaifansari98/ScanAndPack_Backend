@@ -1894,6 +1894,36 @@ export type UserMasterUpdateOneRequiredWithoutUpdatedUserMachineMappingsNestedIn
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutUpdatedUserMachineMappingsInput, Prisma.UserMasterUpdateWithoutUpdatedUserMachineMappingsInput>, Prisma.UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput>
 }
 
+export type UserMasterCreateNestedOneWithoutOrderLoginPoFilesCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutOrderLoginPoFilesCreatedInput, Prisma.UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutOrderLoginPoFilesCreatedInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+}
+
+export type UserMasterCreateNestedOneWithoutOrderLoginPoFilesDeletedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutOrderLoginPoFilesDeletedInput, Prisma.UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutOrderLoginPoFilesDeletedInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+}
+
+export type UserMasterUpdateOneRequiredWithoutOrderLoginPoFilesCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutOrderLoginPoFilesCreatedInput, Prisma.UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutOrderLoginPoFilesCreatedInput
+  upsert?: Prisma.UserMasterUpsertWithoutOrderLoginPoFilesCreatedInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutOrderLoginPoFilesCreatedInput, Prisma.UserMasterUpdateWithoutOrderLoginPoFilesCreatedInput>, Prisma.UserMasterUncheckedUpdateWithoutOrderLoginPoFilesCreatedInput>
+}
+
+export type UserMasterUpdateOneWithoutOrderLoginPoFilesDeletedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutOrderLoginPoFilesDeletedInput, Prisma.UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutOrderLoginPoFilesDeletedInput
+  upsert?: Prisma.UserMasterUpsertWithoutOrderLoginPoFilesDeletedInput
+  disconnect?: Prisma.UserMasterWhereInput | boolean
+  delete?: Prisma.UserMasterWhereInput | boolean
+  connect?: Prisma.UserMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutOrderLoginPoFilesDeletedInput, Prisma.UserMasterUpdateWithoutOrderLoginPoFilesDeletedInput>, Prisma.UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput>
+}
+
 export type UserMasterCreateNestedOneWithoutCreatedDefectsInput = {
   create?: Prisma.XOR<Prisma.UserMasterCreateWithoutCreatedDefectsInput, Prisma.UserMasterUncheckedCreateWithoutCreatedDefectsInput>
   connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutCreatedDefectsInput
@@ -20868,6 +20898,7 @@ export type UserMasterCreateWithoutOrderLoginPoFilesCreatedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -20942,6 +20973,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -21020,6 +21052,7 @@ export type UserMasterCreateWithoutOrderLoginPoFilesDeletedInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
@@ -21094,6 +21127,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -21183,6 +21217,7 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesCreatedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -21257,6 +21292,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesCreatedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -21341,6 +21377,7 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesDeletedInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
@@ -21415,6 +21452,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput = {
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -21491,6 +21529,8 @@ export type UserMasterCreateWithoutCreatedDefectsInput = {
   userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutCreatedDefectsInput = {
@@ -21564,6 +21604,8 @@ export type UserMasterUncheckedCreateWithoutCreatedDefectsInput = {
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutCreatedDefectsInput = {
@@ -21652,6 +21694,8 @@ export type UserMasterUpdateWithoutCreatedDefectsInput = {
   userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
@@ -21725,6 +21769,8 @@ export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserMasterCreateManyVendorInput = {
