@@ -1111,7 +1111,7 @@ export class UnderInstallationStageService {
 
       const leadStageRecord = await tx.leadMaster.findUnique({
         where: { id: lead_id },
-        select: { status_id: true },
+        select: { status_id: true, franchise_id: true },
       });
 
       const leadStage = leadStageRecord?.status_id
@@ -1134,6 +1134,7 @@ export class UnderInstallationStageService {
           vendor_id,
           lead_id,
           account_id,
+          franchise_id: leadStageRecord?.franchise_id ?? null,
           user_id: factoryAssigneeId ?? created_by,
           task_type: "Miscellaneous",
           lead_stage: leadStage,
@@ -1662,11 +1663,16 @@ export class UnderInstallationStageService {
           },
         });
       } else {
+        const leadFranchise = await tx.leadMaster.findUnique({
+          where: { id: existing.lead_id },
+          select: { franchise_id: true },
+        });
         await tx.userLeadTask.create({
           data: {
             vendor_id,
             lead_id: existing.lead_id,
             account_id: existing.account_id,
+            franchise_id: leadFranchise?.franchise_id ?? null,
             user_id: factoryAssigneeId ?? updated_by,
             task_type: "Miscellaneous",
             lead_stage: leadStage,
@@ -1928,11 +1934,16 @@ export class UnderInstallationStageService {
 
         taskId = existingTask.id;
       } else {
+        const leadFranchise = await tx.leadMaster.findUnique({
+          where: { id: existing.lead_id },
+          select: { franchise_id: true },
+        });
         const newTask = await tx.userLeadTask.create({
           data: {
             vendor_id,
             lead_id: existing.lead_id,
             account_id: existing.account_id,
+            franchise_id: leadFranchise?.franchise_id ?? null,
             task_type: "Miscellaneous",
             user_id: updated_by,
             due_date: new Date(expected_ready_date),

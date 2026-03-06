@@ -447,6 +447,7 @@ export class BookingStageService {
             lead_code: true,
             vendor_id: true,
             account_id: true,
+            franchise_id: true,
           },
         }),
 
@@ -468,6 +469,8 @@ export class BookingStageService {
         month: "short",
         year: "numeric",
       });
+
+      const franchiseId = lead?.franchise_id ?? null;
 
       const baseUrl = data.baseUrl;
 
@@ -642,6 +645,7 @@ export class BookingStageService {
               lead_code: true,
               vendor_id: true,
               account_id: true,
+              franchise_id: true,
             },
           }),
 
@@ -664,6 +668,8 @@ export class BookingStageService {
           month: "short",
           year: "numeric",
         });
+
+        const franchiseId = lead?.franchise_id ?? null;
 
         const baseUrl = data.baseUrl;
         const projectUrl = lead.account_id
@@ -1230,6 +1236,7 @@ export class BookingStageService {
   // post filter service
   public static async getVendorLeadsByTag2(
     vendorId: number,
+    franchiseId: number,
     tag: string,
     userId: number | null,
     page: number = 1,
@@ -1257,6 +1264,15 @@ export class BookingStageService {
   ): Promise<{ leads: any[]; count: number }> {
     logger.info("[BookingStageService] getVendorLeadsByTag2 called", {
       vendorId,
+      franchiseId,
+      tag,
+      userId,
+      page,
+      limit,
+    });
+    console.log("[Service] getVendorLeadsByTag2 ids", {
+      vendorId,
+      franchiseId,
       tag,
       userId,
       page,
@@ -1318,6 +1334,7 @@ export class BookingStageService {
       const taskLeads = await prisma.userLeadTask.findMany({
         where: {
           vendor_id: vendorId,
+          franchise_id: franchiseId,
           OR: [{ created_by: userId }, { user_id: userId }],
         },
         select: { lead_id: true },
@@ -1571,6 +1588,7 @@ export class BookingStageService {
 
     const whereClause = addFilterConditions({
       vendor_id: vendorId,
+      franchise_id: franchiseId,
       is_deleted: false,
       status_id: { in: statusIds },
       activity_status: "onGoing",
@@ -1584,6 +1602,7 @@ export class BookingStageService {
       );
       logger.info("[BookingStageService] getVendorLeadsByTag2 debug", {
         vendorId,
+        franchiseId,
         tag,
         userId,
         page,
@@ -1948,6 +1967,7 @@ export class BookingStageService {
             firstname: true,
             lastname: true,
             account_id: true,
+            franchise_id: true,
           },
         }),
         prisma.userMaster.findUnique({
@@ -1979,6 +1999,8 @@ export class BookingStageService {
       const leadUrl = leadInfo?.account_id
         ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${leadInfo.account_id}`
         : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;
+
+      const franchiseId = leadInfo?.franchise_id ?? null;
 
       await Promise.allSettled(
         admins.map(async (admin) => {
@@ -2592,6 +2614,7 @@ export class BookingStageService {
   public static async getUniversalTableData(
     vendorId: number,
     userId: number,
+    franchiseId: number | undefined,
     tag?: string,
     page: number = 1,
     limit: number = 10,
@@ -2623,6 +2646,15 @@ export class BookingStageService {
     logger.info("[BookingStageService] getUniversalTableData called", {
       vendorId,
       userId,
+      franchiseId,
+      tag,
+      page,
+      limit,
+    });
+    console.log("[Service] getUniversalTableData ids", {
+      vendorId,
+      userId,
+      franchiseId,
       tag,
       page,
       limit,
@@ -2645,6 +2677,8 @@ export class BookingStageService {
       isOrderLoginStage ||
       isProductionStage ||
       isInstallationStage;
+    const ignoreFranchiseForStage =
+      isTechCheckStage || isOrderLoginStage || isProductionStage;
 
     let statusIds: number[] = [];
 
@@ -2705,7 +2739,12 @@ const statusTags =
       include: { user_type: true },
     });
 
-    const isAdmin = creator?.user_type?.user_type?.toLowerCase() === "admin";
+    const normalizedUserType = creator?.user_type?.user_type?.toLowerCase();
+    const isAdmin = normalizedUserType === "admin";
+    const shouldIncludeFranchise =
+      normalizedUserType === "admin" ||
+      normalizedUserType === "super-admin" ||
+      normalizedUserType === "sales-executive";
     const skip = (page - 1) * limit;
     const orderBy = {
       created_at:
@@ -3125,7 +3164,7 @@ const statusTags =
 
     // ============= Admin Flow =============
     if (isAdmin) {
-      const whereClause = addFilterConditions({
+      const baseWhere: Prisma.LeadMasterWhereInput = {
         vendor_id: vendorId,
         is_deleted: false,
         status_id: { in: statusIds },
@@ -3133,7 +3172,12 @@ const statusTags =
         activity_status: isAllStages
           ? "onGoing"
           : { in: ["onGoing", "lostApproval"] },
-      });
+      };
+      if (shouldIncludeFranchise && franchiseId && !ignoreFranchiseForStage) {
+        baseWhere.franchise_id = franchiseId;
+      }
+
+      const whereClause = addFilterConditions(baseWhere);
 
       const [leads, total] = await Promise.all([
         prisma.leadMaster.findMany({
@@ -3208,7 +3252,7 @@ const statusTags =
       return { leads: [], count: 0 };
     }
 
-    const whereClause = addFilterConditions({
+    const baseWhere: Prisma.LeadMasterWhereInput = {
       id: { in: leadIds },
       is_deleted: false,
       vendor_id: vendorId,
@@ -3217,7 +3261,12 @@ const statusTags =
       activity_status: isAllStages
         ? "onGoing"
         : { in: ["onGoing", "lostApproval"] },
-    });
+    };
+    if (shouldIncludeFranchise && franchiseId && !ignoreFranchiseForStage) {
+      baseWhere.franchise_id = franchiseId;
+    }
+
+    const whereClause = addFilterConditions(baseWhere);
 
     const [leads, total] = await Promise.all([
       prisma.leadMaster.findMany({

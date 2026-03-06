@@ -248,6 +248,7 @@ private static mapTaskWithLead(task: any) {
   static async getTasksByVendorAndUser2(
     vendorId: number,
     userId: number,
+    franchiseId: number,
     page: number = 1,
     limit: number = 10,
     filters: {
@@ -539,6 +540,7 @@ private static mapTaskWithLead(task: any) {
       // ✅ UNFILTERED BASE (for inactive tabs)
       const unfilteredBaseWhereClause: any = {
         vendor_id: vendorId,
+        franchise_id: franchiseId,
         user_id: userId,
         status: "open",
       };
@@ -546,6 +548,7 @@ private static mapTaskWithLead(task: any) {
       // ✅ FILTERED BASE (for active tab)
       const filteredBaseWhereClause = addFilterConditions({
         vendor_id: vendorId,
+        franchise_id: franchiseId,
         user_id: userId,
         status: "open",
       });
@@ -689,6 +692,7 @@ private static mapTaskWithLead(task: any) {
     const ownedTasks = await prisma.userLeadTask.findMany({
       where: {
         vendor_id: vendorId,
+        franchise_id: franchiseId,
         user_id: userId,
       },
       select: { id: true },
@@ -708,6 +712,7 @@ private static mapTaskWithLead(task: any) {
     const unfilteredBaseWhereClause: any = {
       id: { in: taskIds },
       vendor_id: vendorId,
+      franchise_id: franchiseId,
       status: "open",
     };
 
@@ -715,6 +720,7 @@ private static mapTaskWithLead(task: any) {
     const filteredBaseWhereClause = addFilterConditions({
       id: { in: taskIds },
       vendor_id: vendorId,
+      franchise_id: franchiseId,
       status: "open",
     });
 
@@ -912,6 +918,7 @@ private static mapTaskWithLead(task: any) {
 
   static async getTasksFilterByVendor2(
     vendorId: number,
+    franchiseId: number,
     page: number = 1,
     limit: number = 10,
     filters: {
@@ -1195,6 +1202,7 @@ private static mapTaskWithLead(task: any) {
 
     const unfilteredBaseWhereClause: any = {
       vendor_id: vendorId,
+      franchise_id: franchiseId,
       status: { in: ["open", "in_progress"] },
     };
 
@@ -1204,6 +1212,7 @@ private static mapTaskWithLead(task: any) {
 
     const filteredBaseWhereClause: any = addFilterConditions({
       vendor_id: vendorId,
+      franchise_id: franchiseId,
       status: { in: ["open", "in_progress"] },
     });
 
@@ -1415,11 +1424,16 @@ private static mapTaskWithLead(task: any) {
     return this.getTasksByUserAndLead(userId, leadId, "Final Measurements");
   }
 
-  static async getActiveTasksByVendorAndLead(vendorId: number, leadId: number) {
+  static async getActiveTasksByVendorAndLead(
+    vendorId: number,
+    leadId: number,
+    franchiseId: number,
+  ) {
     return prisma.userLeadTask.findMany({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
+        franchise_id: franchiseId,
         status: { in: ["open", "in_progress"] },
       },
       select: {

@@ -128,6 +128,13 @@ leadsRouter.get(
   leadController.fetchSiteSupervisorsByVendor
 );
 
+// GET /api/head-site-supervisor/vendor/:vendorId
+// Fetch all head site supervisors for a specific vendor
+leadsRouter.get(
+  "/head-site-supervisor/vendor/:vendorId",
+  leadController.fetchHeadSiteSupervisorsByVendor
+);
+
 /**
  * Lead Assignment Routes
  * Base path: /api/leads/assignment

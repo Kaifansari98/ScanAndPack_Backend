@@ -499,7 +499,7 @@ export class DispatchStageService {
   ) {
     const leadStageRecord = await prisma.leadMaster.findUnique({
       where: { id: leadId },
-      select: { status_id: true },
+      select: { status_id: true, franchise_id: true },
     });
     const leadStage = leadStageRecord?.status_id
       ? (
@@ -515,6 +515,7 @@ export class DispatchStageService {
         vendor_id: vendorId,
         lead_id: leadId,
         account_id: accountId,
+        franchise_id: leadStageRecord?.franchise_id ?? null,
         user_id: assigneeUserId,
         task_type: "Pending Materials",
         lead_stage: leadStage,
@@ -543,7 +544,7 @@ export class DispatchStageService {
   ) {
     const leadStageRecord = await prisma.leadMaster.findUnique({
       where: { id: leadId },
-      select: { status_id: true },
+      select: { status_id: true, franchise_id: true },
     });
     const leadStage = leadStageRecord?.status_id
       ? (
@@ -559,6 +560,7 @@ export class DispatchStageService {
         vendor_id: vendorId,
         lead_id: leadId,
         account_id: accountId,
+        franchise_id: leadStageRecord?.franchise_id ?? null,
         user_id: assigneeUserId,
         task_type: "Pending Work",
         lead_stage: leadStage,

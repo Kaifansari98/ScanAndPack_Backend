@@ -127,7 +127,16 @@ export const ModelName = {
   VendorSettingKey: 'VendorSettingKey',
   VendorSetting: 'VendorSetting',
   DefectMaster: 'DefectMaster',
-  DefectedItem: 'DefectedItem'
+  DefectedItem: 'DefectedItem',
+  FranchiseMaster: 'FranchiseMaster',
+  HeadSiteSupervisorFranchiseMapping: 'HeadSiteSupervisorFranchiseMapping',
+  CountryMaster: 'CountryMaster',
+  RegionMaster: 'RegionMaster',
+  StateMaster: 'StateMaster',
+  CityMaster: 'CityMaster',
+  AreaMaster: 'AreaMaster',
+  GeographicalMapping: 'GeographicalMapping',
+  UserGeographicalMapping: 'UserGeographicalMapping'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -203,6 +212,7 @@ export type UserTypeMasterScalarFieldEnum = (typeof UserTypeMasterScalarFieldEnu
 export const UserMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
+  franchise_id: 'franchise_id',
   user_name: 'user_name',
   user_contact: 'user_contact',
   user_email: 'user_email',
@@ -358,6 +368,7 @@ export const LeadMasterScalarFieldEnum = {
   site_address: 'site_address',
   site_type_id: 'site_type_id',
   source_id: 'source_id',
+  franchise_id: 'franchise_id',
   archetech_name: 'archetech_name',
   designer_remark: 'designer_remark',
   created_by: 'created_by',
@@ -476,6 +487,7 @@ export const AccountMasterScalarFieldEnum = {
   alt_contact_no: 'alt_contact_no',
   email: 'email',
   vendor_id: 'vendor_id',
+  franchise_id: 'franchise_id',
   created_by: 'created_by',
   created_at: 'created_at',
   updated_by: 'updated_by',
@@ -799,6 +811,7 @@ export const UserLeadTaskScalarFieldEnum = {
   lead_id: 'lead_id',
   account_id: 'account_id',
   vendor_id: 'vendor_id',
+  franchise_id: 'franchise_id',
   user_id: 'user_id',
   instance_id: 'instance_id',
   task_type: 'task_type',
@@ -1338,6 +1351,113 @@ export const DefectedItemScalarFieldEnum = {
 } as const
 
 export type DefectedItemScalarFieldEnum = (typeof DefectedItemScalarFieldEnum)[keyof typeof DefectedItemScalarFieldEnum]
+
+
+export const FranchiseMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  franchise_name: 'franchise_name',
+  franchise_code: 'franchise_code',
+  contact_number: 'contact_number',
+  contact_email: 'contact_email',
+  contact_person: 'contact_person',
+  is_head_office: 'is_head_office',
+  zone_id: 'zone_id',
+  country_id: 'country_id',
+  region_id: 'region_id',
+  state_id: 'state_id',
+  city_id: 'city_id',
+  area_id: 'area_id',
+  address: 'address',
+  pincode: 'pincode',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FranchiseMasterScalarFieldEnum = (typeof FranchiseMasterScalarFieldEnum)[keyof typeof FranchiseMasterScalarFieldEnum]
+
+
+export const HeadSiteSupervisorFranchiseMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  user_id: 'user_id',
+  franchise_id: 'franchise_id',
+  status: 'status',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type HeadSiteSupervisorFranchiseMappingScalarFieldEnum = (typeof HeadSiteSupervisorFranchiseMappingScalarFieldEnum)[keyof typeof HeadSiteSupervisorFranchiseMappingScalarFieldEnum]
+
+
+export const CountryMasterScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+} as const
+
+export type CountryMasterScalarFieldEnum = (typeof CountryMasterScalarFieldEnum)[keyof typeof CountryMasterScalarFieldEnum]
+
+
+export const RegionMasterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  country_id: 'country_id'
+} as const
+
+export type RegionMasterScalarFieldEnum = (typeof RegionMasterScalarFieldEnum)[keyof typeof RegionMasterScalarFieldEnum]
+
+
+export const StateMasterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  region_id: 'region_id'
+} as const
+
+export type StateMasterScalarFieldEnum = (typeof StateMasterScalarFieldEnum)[keyof typeof StateMasterScalarFieldEnum]
+
+
+export const CityMasterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  state_id: 'state_id'
+} as const
+
+export type CityMasterScalarFieldEnum = (typeof CityMasterScalarFieldEnum)[keyof typeof CityMasterScalarFieldEnum]
+
+
+export const AreaMasterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  city_id: 'city_id'
+} as const
+
+export type AreaMasterScalarFieldEnum = (typeof AreaMasterScalarFieldEnum)[keyof typeof AreaMasterScalarFieldEnum]
+
+
+export const GeographicalMappingScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  country_id: 'country_id',
+  region_id: 'region_id',
+  state_id: 'state_id',
+  city_id: 'city_id',
+  area_id: 'area_id',
+  is_active: 'is_active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GeographicalMappingScalarFieldEnum = (typeof GeographicalMappingScalarFieldEnum)[keyof typeof GeographicalMappingScalarFieldEnum]
+
+
+export const UserGeographicalMappingScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  geographical_id: 'geographical_id'
+} as const
+
+export type UserGeographicalMappingScalarFieldEnum = (typeof UserGeographicalMappingScalarFieldEnum)[keyof typeof UserGeographicalMappingScalarFieldEnum]
 
 
 export const SortOrder = {

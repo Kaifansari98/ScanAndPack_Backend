@@ -91,6 +91,7 @@ export class LeadActivityStatusService {
             lead_id: leadId,
             account_id: accountId,
             vendor_id: vendorId,
+            franchise_id: updatedLead.franchise_id ?? null,
             user_id: userId,
             task_type: "Follow Up",
             lead_stage: leadStage,

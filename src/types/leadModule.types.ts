@@ -102,6 +102,7 @@ export interface CreateLeadDTO {
     archetech_name?: string;
     designer_remark?: string;
     vendor_id: number;
+    franchise_id: number;
     created_by: number;
     status_id: number;
     assign_to?: number;

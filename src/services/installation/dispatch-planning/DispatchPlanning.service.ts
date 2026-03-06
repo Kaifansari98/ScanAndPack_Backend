@@ -564,6 +564,7 @@ export class DispatchPlanningService {
         where: { id: leadId },
         select: {
           account_id: true,
+          franchise_id: true,
           required_date_for_dispatch: true,
           dispatch_planning_remark: true,
         },
@@ -614,6 +615,7 @@ export class DispatchPlanningService {
             vendor_id: vendorId,
             lead_id: leadId,
             account_id: leadPlanningData.account_id,
+            franchise_id: leadPlanningData.franchise_id ?? null,
             user_id: factoryUser.id,
             task_type: "Dispatch",
             due_date: leadPlanningData.required_date_for_dispatch,
@@ -645,7 +647,7 @@ export class DispatchPlanningService {
           lead_code: true,
           vendor_id: true,
           account_id: true,
-
+          franchise_id: true,
           onsite_contact_person_name: true,
           onsite_contact_person_number: true,
           required_date_for_dispatch: true,
@@ -711,6 +713,8 @@ export class DispatchPlanningService {
       if (!factoryMapping?.user) return result;
 
       const factoryUser = factoryMapping.user;
+
+      const franchiseId = lead?.franchise_id ?? null;
 
       // ===============================
       // 🔔 FACTORY IN-APP

@@ -3,14 +3,20 @@ import { prisma } from "../../prisma/client";
 import logger from "../../utils/logger";
 
 export class LeadStatsService {
-  static async getVendorLeadStats(vendorId: number, userId?: number) {
+  static async getVendorLeadStats(
+    vendorId: number,
+    franchiseId: number,
+    userId?: number
+  ) {
     logger.info("[LeadStatsService] getVendorLeadStats called", {
       vendorId,
+      franchiseId,
       userId,
     });
 
     let whereClause: any = {
       vendor_id: vendorId,
+      franchise_id: franchiseId,
       is_deleted: false,
     };
 
@@ -39,6 +45,7 @@ export class LeadStatsService {
       totalMyTasks = await prisma.userLeadTask.count({
         where: {
           vendor_id: vendorId,
+          franchise_id: franchiseId,
           user_id: userId,
           status: { in: ["open", "in_progress"] },
         },

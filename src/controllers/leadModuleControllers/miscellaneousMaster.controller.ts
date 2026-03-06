@@ -144,6 +144,7 @@ export const deleteMiscTeam = async (req: Request, res: Response) => {
 export const  getPendingMiscellaneousLeads = async (req: Request, res: Response) => {
   try {
     const vendorId = Number(req.params.vendorId);
+    const franchiseId = Number(req.body.franchise_id);
     const page = parseInt((req.body.page as string) || "1");
     const limit = parseInt((req.body.limit as string) || "10");
 
@@ -206,10 +207,10 @@ export const  getPendingMiscellaneousLeads = async (req: Request, res: Response)
       date_range: dateRange,
     };
 
-    if (!vendorId) {
+    if (!vendorId || !franchiseId) {
       return res.status(400).json({
         success: false,
-        message: "Vendor ID is required",
+        message: "Vendor ID and Franchise ID are required",
       });
     }
 
@@ -225,6 +226,7 @@ export const  getPendingMiscellaneousLeads = async (req: Request, res: Response)
 
     const { leads, count } = await getPendingMiscellaneousLeadsService(
       vendorId,
+      franchiseId,
       page,
       limit,
       filters
@@ -262,15 +264,21 @@ export const  getPendingMiscellaneousLeads = async (req: Request, res: Response)
 export const  getPendingMiscellaneousLeadCount = async (req: Request, res: Response) => {
   try {
     const vendorId = Number(req.params.vendorId);
+    const franchiseId = req.query.franchise_id
+      ? Number(req.query.franchise_id)
+      : undefined;
 
-    if (!vendorId) {
+    if (!vendorId || !franchiseId) {
       return res.status(400).json({
         success: false,
-        message: "Vendor ID is required",
+        message: "Vendor ID and Franchise ID are required",
       });
     }
 
-    const count = await getPendingMiscellaneousLeadCountService(vendorId);
+    const count = await getPendingMiscellaneousLeadCountService(
+      vendorId,
+      franchiseId
+    );
 
     return res.status(200).json({
       success: true,
