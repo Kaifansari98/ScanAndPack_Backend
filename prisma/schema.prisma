@@ -1417,8 +1417,7 @@ model UserMachineMapping {
   createdBy   UserMaster        @relation("UserMachine_createdBy", fields: [created_by], references: [id])
   updatedBy   UserMaster        @relation("UserMachine_updatedBy", fields: [updated_by], references: [id])
   vendor      VendorMaster      @relation(fields: [vendor_id], references: [id])
-
-
+  @@unique([machine_id, user_id])
 }
 
 

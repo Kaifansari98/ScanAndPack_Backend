@@ -149,6 +149,53 @@ export class TrackTraceMasterController {
       });
     }
   }
+
+  static async assignUsersToMachineController(req: Request, res: Response) {
+    try {
+      const { machine_id, vendor_id, user_ids, created_by } = req.body;
+
+      if (!machine_id || !vendor_id || !user_ids || !Array.isArray(user_ids)) {
+        return res.status(400).json({
+          success: false,
+          message: "machine_id, vendor_id and user_ids are required",
+        });
+      }
+
+      const result = await TrackTraceMasterService.assignUsersToMachineService({
+        machine_id,
+        vendor_id,
+        user_ids,
+        created_by,
+      });
+
+      return res.status(200).json(result);
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Failed to assign users to machine",
+      });
+    }
+  }
+
+  static async getAssignedUsersController(req: Request, res: Response) {
+  try {
+
+    const machine_id = Number(req.params.machine_id);
+
+    const users = await TrackTraceMasterService.getAssignedUsersService(machine_id);
+
+    return res.status(200).json({
+      success: true,
+      data: users
+    });
+
+  } catch (error: any) {
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+}
 }
 
 export const getMachineType = async (req: Request, res: Response) => {

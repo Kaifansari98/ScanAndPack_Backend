@@ -59,6 +59,7 @@ export const getVendorUsers = async (vendorId: number) => {
     select: {
       id: true,
       user_name: true,
+      user_email: true,
     },
   });
 
