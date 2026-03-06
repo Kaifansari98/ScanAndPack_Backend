@@ -226,10 +226,10 @@ function validateUniqueCodes(normalizedRows: NormalizedRow[]): void {
   }
 
   // Rule 2 — invalid characters (more specific than "bad format")
-  for (const row of normalizedRows) {
-    const val = String(row["Unique Code"]).trim();
-    if (!UNIQUE_CODE_CHARS_REGEX.test(val)) throwError(ERR.UNIQUE_CODE_INVALID_CHARS);
-  }
+  // for (const row of normalizedRows) {
+  //   const val = String(row["Unique Code"]).trim();
+  //   if (!UNIQUE_CODE_CHARS_REGEX.test(val)) throwError(ERR.UNIQUE_CODE_INVALID_CHARS);
+  // }
 
   // Rule 3 — invalid format
   for (const row of normalizedRows) {
