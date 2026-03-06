@@ -232,10 +232,10 @@ function validateUniqueCodes(normalizedRows: NormalizedRow[]): void {
   // }
 
   // Rule 3 — invalid format
-  for (const row of normalizedRows) {
-    const val = String(row["Unique Code"]).trim();
-    if (!UNIQUE_CODE_REGEX.test(val)) throwError(ERR.UNIQUE_CODE_FORMAT);
-  }
+  // for (const row of normalizedRows) {
+  //   const val = String(row["Unique Code"]).trim();
+  //   if (!UNIQUE_CODE_REGEX.test(val)) throwError(ERR.UNIQUE_CODE_FORMAT);
+  // }
 
   // Rule 4 — duplicate values
   const seen = new Set<string>();
