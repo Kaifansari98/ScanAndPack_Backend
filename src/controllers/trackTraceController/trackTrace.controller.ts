@@ -1,5 +1,7 @@
 
 import { Request, Response } from 'express';
+import path from "path";
+import fs from "fs";
 import * as trackTraceService from '../../services/trackTraceServices/trackTrace.service';
 import * as machineService from '../../services/machineService/machineService.service';
 
@@ -480,18 +482,52 @@ export const downloadCutListExcel = async (_req: Request, res: Response) => {
         }
 
         // Generate Excel
-        const filePath = await trackTraceService.downloadCutListExcel(
+        const filename = await trackTraceService.downloadCutListExcel(
             vendorId,
             unique_project_id,
             baseUrl,
         );
-        console.log("[downloadCutListExcel] filePath", filePath);
+        const fileUrl = `${baseUrl}/api/track-trace/cutlist-excel/${filename}`;
+        console.log("[downloadCutListExcel] fileUrl", fileUrl);
 
         // Return Excel file
 
-        return res.status(200).json(ApiResponse.success(filePath, "", 200));
+        return res.status(200).json(ApiResponse.success(fileUrl, "", 200));
     } catch (error: any) {
         console.error("Error downloading Excel:", error);
+    }
+};
+
+export const downloadCutListExcelFile = async (req: Request, res: Response) => {
+    try {
+        const filename = String(req.params.filename || "").trim();
+        if (!filename) {
+            return res
+                .status(400)
+                .json(ApiResponse.error("Filename is required", 400));
+        }
+
+        const filePath = path.join(
+            process.cwd(),
+            "public",
+            "assets",
+            "track-trace",
+            "excel",
+            filename
+        );
+
+        if (!fs.existsSync(filePath)) {
+            return res
+                .status(404)
+                .json(ApiResponse.error("File not found", 404));
+        }
+
+        return res.sendFile(filePath);
+    } catch (error: any) {
+        console.error("Error serving Excel file:", error);
+        return res
+            .status(500)
+            .json(ApiResponse.error("Failed to serve file", 500));
     }
 };
 

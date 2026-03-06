@@ -2367,10 +2367,8 @@ export const downloadCutListExcel = async (
     // ✅ Write the Excel file to disk
     XLSX.writeFile(workbook, filePath);
 
-    // ✅ Return the relative path (accessible via URL)
-    const relativePath = baseUrl + `/assets/track-trace/excel/${filename}`;
-
-    return relativePath;
+    // ✅ Return filename; API will build a served URL
+    return filename;
 };
 
 
