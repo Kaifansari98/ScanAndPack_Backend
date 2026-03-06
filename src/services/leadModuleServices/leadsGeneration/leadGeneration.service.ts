@@ -862,6 +862,7 @@ export const getLeadById = async (
     if (
       userType === "sales-executive" ||
       userType === "site-supervisor" ||
+      userType === "head-site-supervisor" ||
       userType === "tech-check" ||
       userType === "backend" ||
       userType === "factory"
