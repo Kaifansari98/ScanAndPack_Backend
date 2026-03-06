@@ -895,6 +895,16 @@ export interface PrismaClient<
   get userMachineMapping(): Prisma.UserMachineMappingDelegate<ExtArgs, { omit: OmitOpts }>;
 
   /**
+   * `prisma.orderLoginPoFileMapping`: Exposes CRUD operations for the **OrderLoginPoFileMapping** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OrderLoginPoFileMappings
+    * const orderLoginPoFileMappings = await prisma.orderLoginPoFileMapping.findMany()
+    * ```
+    */
+  get orderLoginPoFileMapping(): Prisma.OrderLoginPoFileMappingDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
    * `prisma.machineTypeMaster`: Exposes CRUD operations for the **MachineTypeMaster** model.
     * Example usage:
     * ```ts

@@ -328,6 +328,7 @@ export type LeadDocumentsWhereInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentListRelationFilter
   paymentInfo?: Prisma.PaymentInfoListRelationFilter
   site_readiness_photos?: Prisma.SiteReadinessListRelationFilter
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingListRelationFilter
 }
 
 export type LeadDocumentsOrderByWithRelationInput = {
@@ -357,6 +358,7 @@ export type LeadDocumentsOrderByWithRelationInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentOrderByRelationAggregateInput
   paymentInfo?: Prisma.PaymentInfoOrderByRelationAggregateInput
   site_readiness_photos?: Prisma.SiteReadinessOrderByRelationAggregateInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingOrderByRelationAggregateInput
 }
 
 export type LeadDocumentsWhereUniqueInput = Prisma.AtLeast<{
@@ -389,6 +391,7 @@ export type LeadDocumentsWhereUniqueInput = Prisma.AtLeast<{
   miscellaneousDocument?: Prisma.MiscellaneousDocumentListRelationFilter
   paymentInfo?: Prisma.PaymentInfoListRelationFilter
   site_readiness_photos?: Prisma.SiteReadinessListRelationFilter
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingListRelationFilter
 }, "id">
 
 export type LeadDocumentsOrderByWithAggregationInput = {
@@ -452,6 +455,7 @@ export type LeadDocumentsCreateInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsUncheckedCreateInput = {
@@ -474,6 +478,7 @@ export type LeadDocumentsUncheckedCreateInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsUpdateInput = {
@@ -495,6 +500,7 @@ export type LeadDocumentsUpdateInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateInput = {
@@ -517,6 +523,7 @@ export type LeadDocumentsUncheckedUpdateInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsCreateManyInput = {
@@ -1049,6 +1056,20 @@ export type LeadDocumentsUpdateOneRequiredWithoutMiscellaneousDocumentNestedInpu
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadDocumentsUpdateToOneWithWhereWithoutMiscellaneousDocumentInput, Prisma.LeadDocumentsUpdateWithoutMiscellaneousDocumentInput>, Prisma.LeadDocumentsUncheckedUpdateWithoutMiscellaneousDocumentInput>
 }
 
+export type LeadDocumentsCreateNestedOneWithoutOrderLoginPoFilesInput = {
+  create?: Prisma.XOR<Prisma.LeadDocumentsCreateWithoutOrderLoginPoFilesInput, Prisma.LeadDocumentsUncheckedCreateWithoutOrderLoginPoFilesInput>
+  connectOrCreate?: Prisma.LeadDocumentsCreateOrConnectWithoutOrderLoginPoFilesInput
+  connect?: Prisma.LeadDocumentsWhereUniqueInput
+}
+
+export type LeadDocumentsUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadDocumentsCreateWithoutOrderLoginPoFilesInput, Prisma.LeadDocumentsUncheckedCreateWithoutOrderLoginPoFilesInput>
+  connectOrCreate?: Prisma.LeadDocumentsCreateOrConnectWithoutOrderLoginPoFilesInput
+  upsert?: Prisma.LeadDocumentsUpsertWithoutOrderLoginPoFilesInput
+  connect?: Prisma.LeadDocumentsWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadDocumentsUpdateToOneWithWhereWithoutOrderLoginPoFilesInput, Prisma.LeadDocumentsUpdateWithoutOrderLoginPoFilesInput>, Prisma.LeadDocumentsUncheckedUpdateWithoutOrderLoginPoFilesInput>
+}
+
 export type LeadDocumentsCreateWithoutVendorInput = {
   doc_og_name: string
   doc_sys_name: string
@@ -1067,6 +1088,7 @@ export type LeadDocumentsCreateWithoutVendorInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutVendorInput = {
@@ -1088,6 +1110,7 @@ export type LeadDocumentsUncheckedCreateWithoutVendorInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutVendorInput = {
@@ -1154,6 +1177,7 @@ export type LeadDocumentsCreateWithoutCreatedByInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutCreatedByInput = {
@@ -1175,6 +1199,7 @@ export type LeadDocumentsUncheckedCreateWithoutCreatedByInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutCreatedByInput = {
@@ -1205,6 +1230,7 @@ export type LeadDocumentsCreateWithoutDeletedByInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutDeletedByInput = {
@@ -1226,6 +1252,7 @@ export type LeadDocumentsUncheckedCreateWithoutDeletedByInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutDeletedByInput = {
@@ -1288,6 +1315,7 @@ export type LeadDocumentsCreateWithoutLeadInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutLeadInput = {
@@ -1309,6 +1337,7 @@ export type LeadDocumentsUncheckedCreateWithoutLeadInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutLeadInput = {
@@ -1355,6 +1384,7 @@ export type LeadDocumentsCreateWithoutAccountInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutAccountInput = {
@@ -1376,6 +1406,7 @@ export type LeadDocumentsUncheckedCreateWithoutAccountInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutAccountInput = {
@@ -1422,6 +1453,7 @@ export type LeadDocumentsCreateWithoutProductStructureInstanceInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutProductStructureInstanceInput = {
@@ -1443,6 +1475,7 @@ export type LeadDocumentsUncheckedCreateWithoutProductStructureInstanceInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutProductStructureInstanceInput = {
@@ -1489,6 +1522,7 @@ export type LeadDocumentsCreateWithoutPaymentInfoInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutPaymentInfoInput = {
@@ -1510,6 +1544,7 @@ export type LeadDocumentsUncheckedCreateWithoutPaymentInfoInput = {
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutPaymentInfoInput = {
@@ -1546,6 +1581,7 @@ export type LeadDocumentsUpdateWithoutPaymentInfoInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutPaymentInfoInput = {
@@ -1567,6 +1603,7 @@ export type LeadDocumentsUncheckedUpdateWithoutPaymentInfoInput = {
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsCreateWithoutDocumentTypeInput = {
@@ -1587,6 +1624,7 @@ export type LeadDocumentsCreateWithoutDocumentTypeInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutDocumentTypeInput = {
@@ -1608,6 +1646,7 @@ export type LeadDocumentsUncheckedCreateWithoutDocumentTypeInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutDocumentTypeInput = {
@@ -1654,6 +1693,7 @@ export type LeadDocumentsCreateWithoutLeadDocumentLogsInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutLeadDocumentLogsInput = {
@@ -1675,6 +1715,7 @@ export type LeadDocumentsUncheckedCreateWithoutLeadDocumentLogsInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutLeadDocumentLogsInput = {
@@ -1711,6 +1752,7 @@ export type LeadDocumentsUpdateWithoutLeadDocumentLogsInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutLeadDocumentLogsInput = {
@@ -1732,6 +1774,7 @@ export type LeadDocumentsUncheckedUpdateWithoutLeadDocumentLogsInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsCreateWithoutSite_readiness_photosInput = {
@@ -1752,6 +1795,7 @@ export type LeadDocumentsCreateWithoutSite_readiness_photosInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutSite_readiness_photosInput = {
@@ -1773,6 +1817,7 @@ export type LeadDocumentsUncheckedCreateWithoutSite_readiness_photosInput = {
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutSite_readiness_photosInput = {
@@ -1814,6 +1859,7 @@ export type LeadDocumentsCreateWithoutInstallationUpdateDocsInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutInstallationUpdateDocsInput = {
@@ -1835,6 +1881,7 @@ export type LeadDocumentsUncheckedCreateWithoutInstallationUpdateDocsInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutInstallationUpdateDocsInput = {
@@ -1871,6 +1918,7 @@ export type LeadDocumentsUpdateWithoutInstallationUpdateDocsInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutInstallationUpdateDocsInput = {
@@ -1892,6 +1940,7 @@ export type LeadDocumentsUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsCreateWithoutMiscellaneousDocumentInput = {
@@ -1912,6 +1961,7 @@ export type LeadDocumentsCreateWithoutMiscellaneousDocumentInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsUncheckedCreateWithoutMiscellaneousDocumentInput = {
@@ -1933,6 +1983,7 @@ export type LeadDocumentsUncheckedCreateWithoutMiscellaneousDocumentInput = {
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type LeadDocumentsCreateOrConnectWithoutMiscellaneousDocumentInput = {
@@ -1969,6 +2020,7 @@ export type LeadDocumentsUpdateWithoutMiscellaneousDocumentInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutMiscellaneousDocumentInput = {
@@ -1988,6 +2040,109 @@ export type LeadDocumentsUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
+}
+
+export type LeadDocumentsCreateWithoutOrderLoginPoFilesInput = {
+  doc_og_name: string
+  doc_sys_name: string
+  created_at?: Date | string
+  deleted_at?: Date | string | null
+  is_deleted?: boolean
+  tech_check_status?: $Enums.TechCheckStatus | null
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
+  account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
+  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
+  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
+  productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
+}
+
+export type LeadDocumentsUncheckedCreateWithoutOrderLoginPoFilesInput = {
+  id?: number
+  doc_og_name: string
+  doc_sys_name: string
+  created_by: number
+  created_at?: Date | string
+  deleted_by?: number | null
+  deleted_at?: Date | string | null
+  account_id?: number | null
+  lead_id?: number | null
+  vendor_id: number
+  doc_type_id: number
+  is_deleted?: boolean
+  tech_check_status?: $Enums.TechCheckStatus | null
+  product_structure_instance_id?: number | null
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
+}
+
+export type LeadDocumentsCreateOrConnectWithoutOrderLoginPoFilesInput = {
+  where: Prisma.LeadDocumentsWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadDocumentsCreateWithoutOrderLoginPoFilesInput, Prisma.LeadDocumentsUncheckedCreateWithoutOrderLoginPoFilesInput>
+}
+
+export type LeadDocumentsUpsertWithoutOrderLoginPoFilesInput = {
+  update: Prisma.XOR<Prisma.LeadDocumentsUpdateWithoutOrderLoginPoFilesInput, Prisma.LeadDocumentsUncheckedUpdateWithoutOrderLoginPoFilesInput>
+  create: Prisma.XOR<Prisma.LeadDocumentsCreateWithoutOrderLoginPoFilesInput, Prisma.LeadDocumentsUncheckedCreateWithoutOrderLoginPoFilesInput>
+  where?: Prisma.LeadDocumentsWhereInput
+}
+
+export type LeadDocumentsUpdateToOneWithWhereWithoutOrderLoginPoFilesInput = {
+  where?: Prisma.LeadDocumentsWhereInput
+  data: Prisma.XOR<Prisma.LeadDocumentsUpdateWithoutOrderLoginPoFilesInput, Prisma.LeadDocumentsUncheckedUpdateWithoutOrderLoginPoFilesInput>
+}
+
+export type LeadDocumentsUpdateWithoutOrderLoginPoFilesInput = {
+  doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
+  account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
+  deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
+  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
+  productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
+}
+
+export type LeadDocumentsUncheckedUpdateWithoutOrderLoginPoFilesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
 }
@@ -2026,6 +2181,7 @@ export type LeadDocumentsUpdateWithoutVendorInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutVendorInput = {
@@ -2047,6 +2203,7 @@ export type LeadDocumentsUncheckedUpdateWithoutVendorInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateManyWithoutVendorInput = {
@@ -2115,6 +2272,7 @@ export type LeadDocumentsUpdateWithoutCreatedByInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutCreatedByInput = {
@@ -2136,6 +2294,7 @@ export type LeadDocumentsUncheckedUpdateWithoutCreatedByInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateManyWithoutCreatedByInput = {
@@ -2172,6 +2331,7 @@ export type LeadDocumentsUpdateWithoutDeletedByInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutDeletedByInput = {
@@ -2193,6 +2353,7 @@ export type LeadDocumentsUncheckedUpdateWithoutDeletedByInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateManyWithoutDeletedByInput = {
@@ -2245,6 +2406,7 @@ export type LeadDocumentsUpdateWithoutLeadInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutLeadInput = {
@@ -2266,6 +2428,7 @@ export type LeadDocumentsUncheckedUpdateWithoutLeadInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateManyWithoutLeadInput = {
@@ -2318,6 +2481,7 @@ export type LeadDocumentsUpdateWithoutAccountInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutAccountInput = {
@@ -2339,6 +2503,7 @@ export type LeadDocumentsUncheckedUpdateWithoutAccountInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateManyWithoutAccountInput = {
@@ -2391,6 +2556,7 @@ export type LeadDocumentsUpdateWithoutProductStructureInstanceInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutProductStructureInstanceInput = {
@@ -2412,6 +2578,7 @@ export type LeadDocumentsUncheckedUpdateWithoutProductStructureInstanceInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceInput = {
@@ -2464,6 +2631,7 @@ export type LeadDocumentsUpdateWithoutDocumentTypeInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutDocumentTypeInput = {
@@ -2485,6 +2653,7 @@ export type LeadDocumentsUncheckedUpdateWithoutDocumentTypeInput = {
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateManyWithoutDocumentTypeInput = {
@@ -2521,6 +2690,7 @@ export type LeadDocumentsUpdateWithoutSite_readiness_photosInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateWithoutSite_readiness_photosInput = {
@@ -2542,6 +2712,7 @@ export type LeadDocumentsUncheckedUpdateWithoutSite_readiness_photosInput = {
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type LeadDocumentsUncheckedUpdateManyWithoutSite_readiness_photosInput = {
@@ -2572,6 +2743,7 @@ export type LeadDocumentsCountOutputType = {
   miscellaneousDocument: number
   paymentInfo: number
   site_readiness_photos: number
+  orderLoginPoFiles: number
 }
 
 export type LeadDocumentsCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2580,6 +2752,7 @@ export type LeadDocumentsCountOutputTypeSelect<ExtArgs extends runtime.Types.Ext
   miscellaneousDocument?: boolean | LeadDocumentsCountOutputTypeCountMiscellaneousDocumentArgs
   paymentInfo?: boolean | LeadDocumentsCountOutputTypeCountPaymentInfoArgs
   site_readiness_photos?: boolean | LeadDocumentsCountOutputTypeCountSite_readiness_photosArgs
+  orderLoginPoFiles?: boolean | LeadDocumentsCountOutputTypeCountOrderLoginPoFilesArgs
 }
 
 /**
@@ -2627,6 +2800,13 @@ export type LeadDocumentsCountOutputTypeCountSite_readiness_photosArgs<ExtArgs e
   where?: Prisma.SiteReadinessWhereInput
 }
 
+/**
+ * LeadDocumentsCountOutputType without action
+ */
+export type LeadDocumentsCountOutputTypeCountOrderLoginPoFilesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrderLoginPoFileMappingWhereInput
+}
+
 
 export type LeadDocumentsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2655,6 +2835,7 @@ export type LeadDocumentsSelect<ExtArgs extends runtime.Types.Extensions.Interna
   miscellaneousDocument?: boolean | Prisma.LeadDocuments$miscellaneousDocumentArgs<ExtArgs>
   paymentInfo?: boolean | Prisma.LeadDocuments$paymentInfoArgs<ExtArgs>
   site_readiness_photos?: boolean | Prisma.LeadDocuments$site_readiness_photosArgs<ExtArgs>
+  orderLoginPoFiles?: boolean | Prisma.LeadDocuments$orderLoginPoFilesArgs<ExtArgs>
   _count?: boolean | Prisma.LeadDocumentsCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadDocuments"]>
 
@@ -2737,6 +2918,7 @@ export type LeadDocumentsInclude<ExtArgs extends runtime.Types.Extensions.Intern
   miscellaneousDocument?: boolean | Prisma.LeadDocuments$miscellaneousDocumentArgs<ExtArgs>
   paymentInfo?: boolean | Prisma.LeadDocuments$paymentInfoArgs<ExtArgs>
   site_readiness_photos?: boolean | Prisma.LeadDocuments$site_readiness_photosArgs<ExtArgs>
+  orderLoginPoFiles?: boolean | Prisma.LeadDocuments$orderLoginPoFilesArgs<ExtArgs>
   _count?: boolean | Prisma.LeadDocumentsCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LeadDocumentsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2773,6 +2955,7 @@ export type $LeadDocumentsPayload<ExtArgs extends runtime.Types.Extensions.Inter
     miscellaneousDocument: Prisma.$MiscellaneousDocumentPayload<ExtArgs>[]
     paymentInfo: Prisma.$PaymentInfoPayload<ExtArgs>[]
     site_readiness_photos: Prisma.$SiteReadinessPayload<ExtArgs>[]
+    orderLoginPoFiles: Prisma.$OrderLoginPoFileMappingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -3195,6 +3378,7 @@ export interface Prisma__LeadDocumentsClient<T, Null = never, ExtArgs extends ru
   miscellaneousDocument<T extends Prisma.LeadDocuments$miscellaneousDocumentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$miscellaneousDocumentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MiscellaneousDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   paymentInfo<T extends Prisma.LeadDocuments$paymentInfoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$paymentInfoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentInfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   site_readiness_photos<T extends Prisma.LeadDocuments$site_readiness_photosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$site_readiness_photosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SiteReadinessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  orderLoginPoFiles<T extends Prisma.LeadDocuments$orderLoginPoFilesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$orderLoginPoFilesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderLoginPoFileMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3827,6 +4011,30 @@ export type LeadDocuments$site_readiness_photosArgs<ExtArgs extends runtime.Type
   take?: number
   skip?: number
   distinct?: Prisma.SiteReadinessScalarFieldEnum | Prisma.SiteReadinessScalarFieldEnum[]
+}
+
+/**
+ * LeadDocuments.orderLoginPoFiles
+ */
+export type LeadDocuments$orderLoginPoFilesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrderLoginPoFileMapping
+   */
+  select?: Prisma.OrderLoginPoFileMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrderLoginPoFileMapping
+   */
+  omit?: Prisma.OrderLoginPoFileMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderLoginPoFileMappingInclude<ExtArgs> | null
+  where?: Prisma.OrderLoginPoFileMappingWhereInput
+  orderBy?: Prisma.OrderLoginPoFileMappingOrderByWithRelationInput | Prisma.OrderLoginPoFileMappingOrderByWithRelationInput[]
+  cursor?: Prisma.OrderLoginPoFileMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrderLoginPoFileMappingScalarFieldEnum | Prisma.OrderLoginPoFileMappingScalarFieldEnum[]
 }
 
 /**

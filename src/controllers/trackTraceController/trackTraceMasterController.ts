@@ -1,9 +1,10 @@
-import fs from "node:fs/promises";
+import fs from "fs";
 import { Request, Response } from "express";
 import { TrackTraceMasterService } from "../../../src/services/trackTraceServices/trackTraceMasterService";
 import logger from "../../../src/utils/logger";
-import * as trackTraceService from '../../services/trackTraceServices/trackTraceMasterService';
+import * as trackTraceService from "../../services/trackTraceServices/trackTraceMasterService";
 import path from "path";
+import { uploadToWasabiMachineImage } from "../../../src/utils/wasabiClient";
 
 export class TrackTraceMasterController {
   static async createMachine(req: Request, res: Response) {
@@ -17,12 +18,18 @@ export class TrackTraceMasterController {
 
       const file = req.file;
 
-
-      const imagePath = await uploadToLocalMachineStore(
+      // ✅ Wasabi pe upload
+      const imagePath = await uploadToWasabiMachineImage(
         file.path,
-       Number(req.body.vendor_id),
+        Number(req.body.vendor_id),
         file.originalname,
+        file.mimetype,
       );
+
+      // ✅ Temp file cleanup
+      if (fs.existsSync(file.path)) {
+        fs.unlinkSync(file.path);
+      }
 
       const machine = await TrackTraceMasterService.createMachine({
         ...req.body,
@@ -36,7 +43,7 @@ export class TrackTraceMasterController {
           ? Number(req.body.target_per_hour)
           : undefined,
         created_by: Number(req.body.created_by),
-        updated_by: Number(req.body.created_by), // important
+        updated_by: Number(req.body.created_by),
         image_path: imagePath,
       });
 
@@ -46,14 +53,16 @@ export class TrackTraceMasterController {
         data: machine,
       });
     } catch (error: any) {
+      // ✅ Error pe bhi cleanup
+      if (req.file?.path && fs.existsSync(req.file.path)) {
+        fs.unlinkSync(req.file.path);
+      }
       return res.status(400).json({
         success: false,
         message: error.message || "Failed to create machine",
       });
     }
   }
-
-
 
   static async getMachineByVendor(req: Request, res: Response) {
     try {
@@ -86,14 +95,18 @@ export class TrackTraceMasterController {
       if (req.file) {
         const file = req.file;
 
-        imagePath = await uploadToLocalMachineStore(
+        // ✅ Wasabi pe upload
+        imagePath = await uploadToWasabiMachineImage(
           file.path,
           Number(vendor_id),
           file.originalname,
+          file.mimetype,
         );
 
-
-        // await fs.unlink(file.path);
+        // ✅ Temp file cleanup
+        if (fs.existsSync(file.path)) {
+          fs.unlinkSync(file.path);
+        }
       }
 
       const updated = await TrackTraceMasterService.updateMachine(
@@ -123,6 +136,11 @@ export class TrackTraceMasterController {
         data: updated,
       });
     } catch (error: any) {
+      // ✅ Error pe bhi cleanup
+      if (req.file?.path && fs.existsSync(req.file.path)) {
+        fs.unlinkSync(req.file.path);
+      }
+
       logger.error("Controller Error - Update Machine", error);
 
       return res.status(400).json({
@@ -132,32 +150,6 @@ export class TrackTraceMasterController {
     }
   }
 }
-
-
-
-export const uploadToLocalMachineStore = async (
-  filePath: string,
-  vendorId: number,
-  originalName: string,
-): Promise<string> => {
-
-  const sanitized = originalName.replace(/\s+/g, "-");
-  const fileName = `${Date.now()}-${sanitized}`;
-
-  const destDir = path.join(
-    process.cwd(),
-    "assets/machines"   
-  );
-
-  await fs.mkdir(destDir, { recursive: true });
-
-  const destPath = path.join(destDir, fileName);
-
-  await fs.rename(filePath, destPath);
-
-  // return relative path for DB storage
-  return `assets/machines/${fileName}`;
-};
 
 export const getMachineType = async (req: Request, res: Response) => {
   try {
@@ -177,4 +169,4 @@ export const getMachineType = async (req: Request, res: Response) => {
       message: error.message || "Internal Server Error",
     });
   }
-}
+};

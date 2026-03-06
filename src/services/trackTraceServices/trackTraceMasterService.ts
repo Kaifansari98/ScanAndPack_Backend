@@ -1,4 +1,7 @@
-import { MachineStatus, ScanType } from "../../../generated/prisma_client/client";
+import {
+  MachineStatus,
+  ScanType,
+} from "../../../generated/prisma_client/client";
 import { prisma } from "../../../src/prisma/client";
 import logger from "../../../src/utils/logger";
 
@@ -94,34 +97,25 @@ export class TrackTraceMasterService {
   static async getMachinesByVendor(vendor_id: number) {
     try {
       logger.info("Fetching machines for vendor", { vendor_id });
-      // const machines = await prisma.machineMaster.findMany({
-      //   where: { vendor_id },
-      //   orderBy: { sequence_no: "asc" },
-      // });
 
-      const BASE_URL = process.env.APP_URL;
       const machines = (
         await prisma.machineMaster.findMany({
           where: {
             vendor_id,
-            machineType: { isNot: null } // ensures INNER JOIN behavior
+            machineType: { isNot: null }, 
           },
           orderBy: { sequence_no: "asc" },
           include: {
             machineType: {
-              select: { machine_type: true }
-            }
-          }
+              select: { machine_type: true },
+            },
+          },
         })
       ).map(({ machineType, ...machine }) => ({
         ...machine,
-        image_path: machine.image_path
-          ? `${BASE_URL}/${machine.image_path}`
-          : null,
-        machine_type: machineType?.machine_type ?? null
+        image_path: machine.image_path,
+        machine_type: machineType?.machine_type ?? null,
       }));
-
-
 
       return machines;
     } catch (error) {
@@ -130,77 +124,73 @@ export class TrackTraceMasterService {
     }
   }
 
-static async updateMachine(
-  id: number,
-  vendor_id: number,
-  data: UpdateMachineData,
-) {
-  try {
-    logger.info("Updating machine", { id, vendor_id });
+  static async updateMachine(
+    id: number,
+    vendor_id: number,
+    data: UpdateMachineData,
+  ) {
+    try {
+      logger.info("Updating machine", { id, vendor_id });
 
-    /* -------- Check Machine Exists -------- */
+      /* -------- Check Machine Exists -------- */
 
-    const existing = await prisma.machineMaster.findFirst({
-      where: { id, vendor_id },
-      select: { id: true },
-    });
-
-    if (!existing) {
-      throw new Error("Machine not found for this vendor");
-    }
-
-    /* -------- UNIQUE MACHINE CODE VALIDATION -------- */
-    // Only run if machine_code is being updated
-
-    if (data.machine_code) {
-      const duplicate = await prisma.machineMaster.findFirst({
-        where: {
-          machine_code: data.machine_code,
-          NOT: { id: id }, // 👈 Ignore current machine
-        },
+      const existing = await prisma.machineMaster.findFirst({
+        where: { id, vendor_id },
         select: { id: true },
       });
 
-      if (duplicate) {
-        throw new Error(`Machine code '${data.machine_code}' already exists`);
+      if (!existing) {
+        throw new Error("Machine not found for this vendor");
       }
+
+      /* -------- UNIQUE MACHINE CODE VALIDATION -------- */
+      // Only run if machine_code is being updated
+
+      if (data.machine_code) {
+        const duplicate = await prisma.machineMaster.findFirst({
+          where: {
+            machine_code: data.machine_code,
+            NOT: { id: id }, // 👈 Ignore current machine
+          },
+          select: { id: true },
+        });
+
+        if (duplicate) {
+          throw new Error(`Machine code '${data.machine_code}' already exists`);
+        }
+      }
+
+      /* -------- UPDATE MACHINE -------- */
+
+      const updated = await prisma.machineMaster.update({
+        where: { id },
+        data,
+      });
+
+      logger.info("Machine updated successfully", { id });
+
+      return updated;
+    } catch (error: any) {
+      /* -------- HANDLE DB UNIQUE ERROR (Race Condition Safe) -------- */
+
+      if (error.code === "P2002") {
+        throw new Error("Machine code already exists");
+      }
+
+      logger.error("Error updating machine", error);
+      throw error;
     }
-
-    /* -------- UPDATE MACHINE -------- */
-
-    const updated = await prisma.machineMaster.update({
-      where: { id },
-      data,
-    });
-
-    logger.info("Machine updated successfully", { id });
-
-    return updated;
-  } catch (error: any) {
-
-    /* -------- HANDLE DB UNIQUE ERROR (Race Condition Safe) -------- */
-
-    if (error.code === "P2002") {
-      throw new Error("Machine code already exists");
-    }
-
-    logger.error("Error updating machine", error);
-    throw error;
   }
 }
-
-}
-
 
 export const getMachineType = async () => {
   try {
     return await prisma.machineTypeMaster.findMany({
       orderBy: {
-        machine_type: "asc"
-      }
-
+        machine_type: "asc",
+      },
     });
   } catch (error) {
     return null;
   }
-}
+};

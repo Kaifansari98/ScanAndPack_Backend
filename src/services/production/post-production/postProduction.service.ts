@@ -911,8 +911,6 @@ export class PostProductionService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
       const redirectPath = leadMeta.account_id
@@ -1008,8 +1006,6 @@ export class PostProductionService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
 

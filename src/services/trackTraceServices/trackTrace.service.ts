@@ -1958,44 +1958,43 @@ export const getAllUsersByVendorId = (vendor_id: number) => {
 
 
 
-export const getCutListMachine = async (vendorId: number, unique_project_id: string) => {
-
-
+export const getCutListMachine = async (
+    vendorId: number,
+    unique_project_id: string,
+) => {
     const projectMaster = await prisma.projectMaster.findFirst({
         where: {
-            unique_project_id: unique_project_id
+            unique_project_id: unique_project_id,
         },
         select: {
-            id: true
-        }
-    })
-
+            id: true,
+        },
+    });
 
     const projectId = projectMaster?.id;
-
 
     // Step 1: Get all machines for this vendor (regardless of cutlist assignments)
     const allMachines = await prisma.machineMaster.findMany({
         where: {
-            vendor_id: vendorId  // Assuming MachineMaster has vendor_id
+            vendor_id: vendorId, // Assuming MachineMaster has vendor_id
         },
         select: {
             id: true,
-            machine_name: true,
-            machine_type_id: true
+            machine_code: true,
+            machine_type_id: true,
         },
         orderBy: {
-            sequence_no: 'asc'
-        }
+            sequence_no: "asc",
+        },
     });
 
-    const machineColumns = allMachines.map(m => m.machine_name);
+    const machineColumns = allMachines.map((m) => m.machine_code);
 
     // Step 2: Fetch all cutlists with relations
     const cutLists = await prisma.cutList.findMany({
         where: {
             vendor_id: vendorId,
-            project_id: projectId
+            project_id: projectId,
         },
         include: {
             cutListMachineMapping: {
@@ -2003,12 +2002,12 @@ export const getCutListMachine = async (vendorId: number, unique_project_id: str
                     machine: {
                         select: {
                             id: true,
-                            machine_name: true
-                        }
-                    }
-                }
-            }
-        }
+                            machine_code: true,
+                        },
+                    },
+                },
+            },
+        },
     });
 
     // Step 3: Transform to flat structure
@@ -2029,37 +2028,35 @@ export const getCutListMachine = async (vendorId: number, unique_project_id: str
     //     return row;
     //   });
 
-    const result = cutLists.map(cutList => {
+    const result = cutLists.map((cutList) => {
         const row: any = { ...cutList };
         delete row.cutListMachineMapping;
 
         // Initialize using real machine IDs
-        allMachines.forEach(machine => {
-            row[machine.machine_name] = {
+        allMachines.forEach((machine) => {
+            row[machine.machine_code] = {
                 assigned: false,
                 machineId: machine.id,
-                machine_type_id: machine.machine_type_id
+                machine_type_id: machine.machine_type_id,
             };
         });
 
         // Mark assigned machines
-        cutList.cutListMachineMapping.forEach(mapping => {
-            row[mapping.machine.machine_name] = {
+        cutList.cutListMachineMapping.forEach((mapping) => {
+            row[mapping.machine.machine_code] = {
                 assigned: true,
-                machineId: mapping.machine.id
+                machineId: mapping.machine.id,
             };
         });
 
         return row;
     });
 
-
     return {
         data: result,
-        machineColumns: machineColumns
+        machineColumns: machineColumns,
     };
 };
-
 
 
 
@@ -2271,34 +2268,40 @@ export const createQR = async (payload: QRParam) => {
 
 
 
-export const downloadCutListExcel = async (vendorId: number, unique_project_id: string) => {
+export const downloadCutListExcel = async (
+    vendorId: number,
+    unique_project_id: string,
+    baseUrl: string,
+) => {
     // Get the data using the existing function
-    const { data, machineColumns } = await getCutListMachine(vendorId, unique_project_id);
+
+    const { data, machineColumns } = await getCutListMachine(
+        vendorId,
+        unique_project_id,
+    );
 
     //   return data;
 
     // Transform data for Excel
     const excelData = data.map((row) => {
-
         const excelRow: any = {
-            'Description': row.description,
-            'Length': row.length ? Number(row.length) : 0,           // ✅ Convert to number
-            'Width': row.width ? Number(row.width) : 0,              // ✅ Convert to number
-            'Thickness': row.thickness ? Number(row.thickness) : 0,
-            'Qty': row.qty,
-            'Material Details': row.material_details,
-            'Item Name': row.item_name,
-            'Unique Code': row.unique_code,
-            'Unique Code 2': row.unique_code_2,
-            'ELF': row.elf || '',
-            'ELB': row.elb || '',
-            'ESL': row.esl || '',
-            'ESR': row.esr || '',
-
+            Description: row.description,
+            Length: row.length ? Number(row.length) : 0, // ✅ Convert to number
+            Width: row.width ? Number(row.width) : 0, // ✅ Convert to number
+            Thickness: row.thickness ? Number(row.thickness) : 0,
+            Qty: row.qty,
+            "Material Details": row.material_details,
+            "Item Name": row.item_name,
+            "Unique Code": row.unique_code,
+            "Unique Code 2": row.unique_code_2,
+            ELF: row.elf || "",
+            ELB: row.elb || "",
+            ESL: row.esl || "",
+            ESR: row.esr || "",
         };
 
         // Add machine columns (1 or 0)
-        machineColumns.forEach(machineName => {
+        machineColumns.forEach((machineName) => {
             const machineData = row[machineName];
             excelRow[machineName] = machineData?.assigned ? 1 : 0;
         });
@@ -2314,19 +2317,19 @@ export const downloadCutListExcel = async (vendorId: number, unique_project_id: 
 
     // Set column widths
     const columnWidths = [
-        { wch: 30 },  // Description
-        { wch: 12 },  // Length
-        { wch: 12 },  // Width
-        { wch: 12 },  // Thickness
-        { wch: 8 },   // Qty
-        { wch: 35 },  // Material Details
-        { wch: 30 },  // Item Name
-        { wch: 20 },  // Unique Code
-        { wch: 20 },  // Unique Code 2   
-        { wch: 15 },  // ELF
-        { wch: 15 },  // ELB
-        { wch: 15 },  // ESL
-        { wch: 15 },  // ESR
+        { wch: 30 }, // Description
+        { wch: 12 }, // Length
+        { wch: 12 }, // Width
+        { wch: 12 }, // Thickness
+        { wch: 8 }, // Qty
+        { wch: 35 }, // Material Details
+        { wch: 30 }, // Item Name
+        { wch: 20 }, // Unique Code
+        { wch: 20 }, // Unique Code 2
+        { wch: 15 }, // ELF
+        { wch: 15 }, // ELB
+        { wch: 15 }, // ESL
+        { wch: 15 }, // ESR
     ];
 
     // Add widths for machine columns
@@ -2334,15 +2337,15 @@ export const downloadCutListExcel = async (vendorId: number, unique_project_id: 
         columnWidths.push({ wch: 15 });
     });
 
-    worksheet['!cols'] = columnWidths;
+    worksheet["!cols"] = columnWidths;
 
     // Create workbook
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Cut List');
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Cut List");
 
     // ✅ Define the directory path
     const publicDir = process.cwd();
-    const excelDir = path.join(publicDir, 'assets', 'track-trace', 'excel');
+    const excelDir = path.join(publicDir, "assets", "track-trace", "excel");
 
     // ✅ Create directory if it doesn't exist
     if (!fs.existsSync(excelDir)) {
@@ -2357,9 +2360,8 @@ export const downloadCutListExcel = async (vendorId: number, unique_project_id: 
     // ✅ Write the Excel file to disk
     XLSX.writeFile(workbook, filePath);
 
-    const BASE_URL = process.env.APP_URL;
     // ✅ Return the relative path (accessible via URL)
-    const relativePath = BASE_URL + `/assets/track-trace/excel/${filename}`;
+    const relativePath = baseUrl + `/assets/track-trace/excel/${filename}`;
 
     return relativePath;
 };
@@ -2491,11 +2493,11 @@ export const mark_Defect = async (payload: MarkDefectPayload) => {
                 project_id: payload.project_id,
                 cut_list_machine_mapping_id: payload.cut_list_machine_mapping_id,
                 machine_id: payload.machine_id,
-                defect_id: payload.defect_id > 0 ? payload.defect_id :null,
+                defect_id: payload.defect_id > 0 ? payload.defect_id : null,
                 remark: payload.defect_name,
                 created_by: payload.created_by,
                 cut_list_id: payload.cut_list_id,
-                             
+
             },
         });
 
@@ -2515,14 +2517,14 @@ export const mark_Defect = async (payload: MarkDefectPayload) => {
         // }
 
         await tx.cutListMachineMapping.updateMany({
-                where: {
-                    cut_list_id: payload.cut_list_id,                    
-                },
-                data: {
-                    actual_in_at: null,
-                    in_operator: null,
-                },
-            });
+            where: {
+                cut_list_id: payload.cut_list_id,
+            },
+            data: {
+                actual_in_at: null,
+                in_operator: null,
+            },
+        });
 
 
 

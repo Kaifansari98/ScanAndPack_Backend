@@ -11,6 +11,7 @@ import {
   sendMovedToProductionWithoutOrderLoginEmail,
   sendOrderLoginCompletedEmail,
 } from "../../../../src/services/email/brevoEmail2.service";
+import { resolveLeadCode } from "../../../../src/utils/fileUtils";
 
 // 🧩 Define this at the top of your service file
 
@@ -34,6 +35,17 @@ interface BackendData {
     document_number: string | null;
     filename: string | null;
   }[];
+}
+export interface UploadOrderLoginPoFileInput {
+  vendorId: number;
+  leadId: number;
+  orderLoginId: number;
+  userId: number;
+  files: {
+    originalName: string;
+    sysName: string;
+  }[];
+  instanceId?: number | null;
 }
 
 export async function isOrderLoginComplete(vendorId: number, leadId: number) {
@@ -188,35 +200,13 @@ export async function triggerOrderLoginCompletionNotification(
   const debugCtx = { vendorId, leadId, userId, instanceId };
 
   logger.info(
-    "🔔 [OL-NOTIF] triggerOrderLoginCompletionNotification called",
+    "🔔 [PROD-NOTIF] triggerProductionStageNotification called",
     debugCtx,
   );
 
   // ─────────────────────────────────────────────────────────────
-  // 1️⃣ Order Login Completion Check (instance-aware)
+  // 1️⃣ Production Stage Check (instance-aware)
   // ─────────────────────────────────────────────────────────────
-  let completed: boolean;
-
-  if (instanceId) {
-    completed = await isOrderLoginCompleteForInstance(
-      vendorId,
-      leadId,
-      instanceId,
-    );
-    logger.info(
-      `🔍 [OL-NOTIF] isOrderLoginCompleteForInstance = ${completed}`,
-      debugCtx,
-    );
-  } else {
-    completed = await isOrderLoginComplete2(vendorId, leadId);
-    logger.info(`🔍 [OL-NOTIF] isOrderLoginComplete2 = ${completed}`, debugCtx);
-  }
-
-  if (!completed) {
-    logger.info("⛔ [OL-NOTIF] OL not complete yet — exiting", debugCtx);
-    return;
-  }
-
   let leadRecord: {
     firstname: string | null;
     lastname: string | null;
@@ -224,16 +214,16 @@ export async function triggerOrderLoginCompletionNotification(
     account_id: number | null;
   } | null = null;
 
-  let instanceCode: string;
+  const instanceCode = await resolveLeadCode(
+    vendorId,
+    leadId,
+    instanceId ?? undefined,
+  );
 
   if (instanceId) {
     // ── Instance path ──
     const instance = await prisma.leadProductStructureInstance.findFirst({
-      where: {
-        id: instanceId,
-        vendor_id: vendorId,
-        lead_id: leadId,
-      },
+      where: { id: instanceId, vendor_id: vendorId, lead_id: leadId },
       select: {
         quantity_index: true,
         is_order_login_completed: true,
@@ -250,38 +240,30 @@ export async function triggerOrderLoginCompletionNotification(
     });
 
     if (!instance) {
-      logger.warn("⛔ [OL-NOTIF] Instance not found in DB", debugCtx);
+      logger.warn("⛔ [PROD-NOTIF] Instance not found in DB", debugCtx);
       return;
     }
 
     logger.info(
-      `🔍 [OL-NOTIF] Instance flags — is_order_login_completed: ${instance.is_order_login_completed}, is_tech_check_completed: ${instance.is_tech_check_completed}`,
+      `🔍 [PROD-NOTIF] Instance flags — is_order_login_completed: ${instance.is_order_login_completed}, is_tech_check_completed: ${instance.is_tech_check_completed}`,
       debugCtx,
     );
 
-    // ✅ PRODUCTION STAGE = dono true hone chahiye
+    // ✅ Dono flags true hone chahiye tabhi production stage
     const isInProductionStage =
       instance.is_order_login_completed === true &&
       instance.is_tech_check_completed === true;
 
     if (!isInProductionStage) {
       logger.info(
-        "⛔ [OL-NOTIF] Instance NOT in production stage yet (both flags must be true) — exiting",
+        "⛔ [PROD-NOTIF] Instance NOT in production stage yet (both flags must be true) — exiting",
         debugCtx,
       );
       return;
     }
 
-    logger.info("✅ [OL-NOTIF] Instance is in production stage", debugCtx);
-
+    logger.info("✅ [PROD-NOTIF] Instance is in production stage", debugCtx);
     leadRecord = instance.lead;
-
-    const rawLeadCode =
-      instance.lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
-
-    instanceCode = instance.quantity_index
-      ? `${rawLeadCode}.${instance.quantity_index}`
-      : rawLeadCode;
   } else {
     // ── Non-instance path → lead level check (Type 10) ──
     const productionStage = await prisma.statusTypeMaster.findFirst({
@@ -291,7 +273,7 @@ export async function triggerOrderLoginCompletionNotification(
 
     if (!productionStage) {
       logger.warn(
-        "⛔ [OL-NOTIF] Production stage (Type 10) not found",
+        "⛔ [PROD-NOTIF] Production stage (Type 10) not found",
         debugCtx,
       );
       return;
@@ -309,37 +291,36 @@ export async function triggerOrderLoginCompletionNotification(
     });
 
     if (!lead) {
-      logger.warn("⛔ [OL-NOTIF] Lead not found", debugCtx);
+      logger.warn("⛔ [PROD-NOTIF] Lead not found", debugCtx);
       return;
     }
 
     logger.info(
-      `🔍 [OL-NOTIF] Lead status_id = ${lead.status_id}, expected = ${productionStage.id}`,
+      `🔍 [PROD-NOTIF] Lead status_id = ${lead.status_id}, expected = ${productionStage.id}`,
       debugCtx,
     );
 
     if (lead.status_id !== productionStage.id) {
       logger.info(
-        `⛔ [OL-NOTIF] Lead NOT in production stage — exiting`,
+        "⛔ [PROD-NOTIF] Lead NOT in production stage — exiting",
         debugCtx,
       );
       return;
     }
 
     leadRecord = lead;
-    instanceCode = lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
   }
 
-  logger.info(`✅ [OL-NOTIF] instanceCode = ${instanceCode}`, debugCtx);
+  logger.info(`✅ [PROD-NOTIF] instanceCode = ${instanceCode}`, debugCtx);
 
   // ─────────────────────────────────────────────────────────────
-  // 3️⃣ Auto-close OL Task
+  // 2️⃣ Auto-close OL Task
   // ─────────────────────────────────────────────────────────────
   await closeOrderLoginTask(vendorId, leadId, userId);
-  logger.info("✅ [OL-NOTIF] closeOrderLoginTask done", debugCtx);
+  logger.info("✅ [PROD-NOTIF] closeOrderLoginTask done", debugCtx);
 
   // ─────────────────────────────────────────────────────────────
-  // 4️⃣ Duplicate Protection
+  // 3️⃣ Duplicate Protection
   // ─────────────────────────────────────────────────────────────
   const alreadySent = await prisma.notification.findFirst({
     where: {
@@ -348,11 +329,14 @@ export async function triggerOrderLoginCompletionNotification(
       entity_id: leadId,
       type: NotificationType.LEAD_ACTION,
       title: "Order Login Completed",
+      ...(instanceId
+        ? { metadata: { path: ["instance_id"], equals: instanceId } }
+        : {}),
     },
   });
 
   if (alreadySent) {
-    logger.info("⛔ [OL-NOTIF] Duplicate — notification already sent", {
+    logger.info("⛔ [PROD-NOTIF] Duplicate — notification already sent", {
       ...debugCtx,
       notif_id: alreadySent.id,
     });
@@ -360,7 +344,7 @@ export async function triggerOrderLoginCompletionNotification(
   }
 
   // ─────────────────────────────────────────────────────────────
-  // 5️⃣ Factory User
+  // 4️⃣ Factory User
   // ─────────────────────────────────────────────────────────────
   const mapping = await prisma.leadUserMapping.findFirst({
     where: {
@@ -378,15 +362,14 @@ export async function triggerOrderLoginCompletionNotification(
     },
   });
 
-  
   logger.info(
-    `🔍 [OL-NOTIF] factory mapping found = ${!!mapping?.user}`,
+    `🔍 [PROD-NOTIF] factory mapping found = ${!!mapping?.user}`,
     debugCtx,
   );
 
   if (!mapping?.user) {
     logger.warn(
-      "⛔ [OL-NOTIF] No active factory user mapping — exiting",
+      "⛔ [PROD-NOTIF] No active factory user mapping — exiting",
       debugCtx,
     );
     return;
@@ -395,7 +378,7 @@ export async function triggerOrderLoginCompletionNotification(
   const factoryUser = mapping.user;
 
   // ─────────────────────────────────────────────────────────────
-  // 6️⃣ Actor + Lead Info
+  // 5️⃣ Actor + Lead Info
   // ─────────────────────────────────────────────────────────────
   const actorUser = await prisma.userMaster.findUnique({
     where: { id: userId },
@@ -407,7 +390,7 @@ export async function triggerOrderLoginCompletionNotification(
     `${leadRecord!.firstname ?? ""} ${leadRecord!.lastname ?? ""}`.trim();
 
   // ─────────────────────────────────────────────────────────────
-  // 7️⃣ URLs
+  // 6️⃣ URLs
   // ─────────────────────────────────────────────────────────────
   const queryParams = new URLSearchParams();
   if (leadRecord!.account_id)
@@ -418,10 +401,10 @@ export async function triggerOrderLoginCompletionNotification(
   const redirectUrl = `/dashboard/leads/details/${leadId}${qs ? `?${qs}` : ""}`;
   const projectUrl = `${baseUrl}${redirectUrl}`;
 
-  logger.info(`🔗 [OL-NOTIF] projectUrl = ${projectUrl}`, debugCtx);
+  logger.info(`🔗 [PROD-NOTIF] projectUrl = ${projectUrl}`, debugCtx);
 
   // ─────────────────────────────────────────────────────────────
-  // 8️⃣ In-App Notification
+  // 7️⃣ In-App Notification
   // ─────────────────────────────────────────────────────────────
   try {
     await NotificationService.createAndSend({
@@ -436,19 +419,19 @@ export async function triggerOrderLoginCompletionNotification(
       redirect_url: redirectUrl,
     });
 
-    logger.info("✅ [OL-NOTIF] In-app notification sent", {
+    logger.info("✅ [PROD-NOTIF] In-app notification sent", {
       ...debugCtx,
       factory_user_id: factoryUser.id,
     });
   } catch (err: any) {
-    logger.error("❌ [OL-NOTIF] In-app notification failed", {
+    logger.error("❌ [PROD-NOTIF] In-app notification failed", {
       ...debugCtx,
       error: err?.message,
     });
   }
 
   // ─────────────────────────────────────────────────────────────
-  // 9️⃣ Email
+  // 8️⃣ Email
   // ─────────────────────────────────────────────────────────────
   if (factoryUser.user_email) {
     try {
@@ -463,24 +446,24 @@ export async function triggerOrderLoginCompletionNotification(
         projectUrl,
       });
 
-      logger.info("✅ [OL-NOTIF] Email sent", {
+      logger.info("✅ [PROD-NOTIF] Email sent", {
         ...debugCtx,
         toEmail: factoryUser.user_email,
       });
     } catch (err: any) {
-      logger.error("❌ [OL-NOTIF] Email send failed", {
+      logger.error("❌ [PROD-NOTIF] Email send failed", {
         ...debugCtx,
         error: err?.message,
       });
     }
   } else {
-    logger.warn("⚠️ [OL-NOTIF] Factory user has no email — skipping", {
+    logger.warn("⚠️ [PROD-NOTIF] Factory user has no email — skipping", {
       ...debugCtx,
       factory_user_id: factoryUser.id,
     });
   }
 
-  logger.info("🎉 [OL-NOTIF] Done", { ...debugCtx, instanceCode });
+  logger.info("🎉 [PROD-NOTIF] Done", { ...debugCtx, instanceCode });
 }
 
 export class OrderLoginService {
@@ -695,8 +678,6 @@ export class OrderLoginService {
   async getOrderLoginByLead(
     vendorId: number,
     leadId: number,
-    senderUserId: number,
-    baseUrl: string,
     instanceId?: number | null,
   ) {
     if (!vendorId || !leadId) {
@@ -728,18 +709,31 @@ export class OrderLoginService {
       },
     });
 
-    // 2️⃣ Trigger notification SAFELY
-    await triggerOrderLoginCompletionNotification(
-      vendorId,
-      leadId,
-      senderUserId,
-      baseUrl,
-      instanceId,
-    );
+    // 2️⃣ Fetch instance-level flag (only if instanceId provided)
+    let isOrderLoginFilled: boolean | null = null;
 
+    if (instanceId) {
+      const instance = await prisma.leadProductStructureInstance.findFirst({
+        where: {
+          id: instanceId,
+          vendor_id: vendorId,
+          lead_id: leadId,
+        },
+        select: {
+          is_order_login_filled: true,
+        },
+      });
+
+      isOrderLoginFilled = instance?.is_order_login_filled ?? false;
+    }
+
+    // 3️⃣ Return combined response
     return {
       list: orderLogins,
       hasData: orderLogins.length > 0,
+
+      // ✅ EXTRA FIELD YOU NEEDED
+      is_order_login_filled: isOrderLoginFilled,
     };
   }
 
@@ -1090,154 +1084,6 @@ export class OrderLoginService {
     return uploadedDocs;
   }
 
-  async uploadOrderLoginPoFiles(
-    vendorId: number,
-    leadId: number,
-    accountId: number,
-    userId: number,
-    files: { originalName: string; sysName: string }[],
-    instanceId?: number | null,
-  ) {
-    if (!vendorId || !leadId || !accountId || !userId) {
-      const error = new Error(
-        "vendorId, leadId, accountId, and userId are required",
-      );
-      (error as any).statusCode = 400;
-      throw error;
-    }
-
-    if (!files || files.length === 0) {
-      const error = new Error("No files provided for upload");
-      (error as any).statusCode = 400;
-      throw error;
-    }
-
-    const docType = await this.getOrderLoginPoDocType(vendorId);
-    if (!docType) throw new Error("Doc Type (Type 36) not found");
-
-    const uploadedDocs = [];
-
-    for (const file of files) {
-      const savedDoc = await prisma.leadDocuments.create({
-        data: {
-          doc_og_name: file.originalName,
-          doc_sys_name: file.sysName,
-          created_by: userId,
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          doc_type_id: docType.id,
-          product_structure_instance_id:
-            typeof instanceId !== "undefined" ? instanceId : null,
-        },
-      });
-
-      uploadedDocs.push(savedDoc);
-    }
-
-    return uploadedDocs;
-  }
-
-  async getOrderLoginPoFiles(
-    vendorId: number,
-    leadId: number,
-    orderLoginId: number,
-  ) {
-    if (!vendorId || !leadId || !orderLoginId) {
-      const error = new Error(
-        "vendorId, leadId, and orderLoginId are required",
-      );
-      (error as any).statusCode = 400;
-      throw error;
-    }
-
-    const orderLogin = await prisma.orderLoginDetails.findFirst({
-      where: { id: orderLoginId, vendor_id: vendorId, lead_id: leadId },
-    });
-
-    if (!orderLogin) {
-      const error = new Error("Order login record not found.");
-      (error as any).statusCode = 404;
-      throw error;
-    }
-
-    const docType = await this.getOrderLoginPoDocType(vendorId, false);
-    if (!docType) {
-      return [];
-    }
-
-    const safeCardName = sanitizeFilename(orderLogin.item_type || "card");
-    const instanceIdValue = orderLogin.instance_id ?? null;
-    let instanceFolder: string | undefined;
-
-    if (instanceIdValue) {
-      const instance = await prisma.leadProductStructureInstance.findFirst({
-        where: {
-          id: Number(instanceIdValue),
-          vendor_id: vendorId,
-          lead_id: leadId,
-        },
-        select: { title: true },
-      });
-
-      if (instance) {
-        instanceFolder =
-          instance.title?.trim() || `instance-${instanceIdValue}`;
-      }
-    }
-
-    const prefix = instanceFolder
-      ? `order_login_po/${vendorId}/${leadId}/${sanitizeFilename(
-          instanceFolder,
-        )}/${safeCardName}/`
-      : `order_login_po/${vendorId}/${leadId}/${safeCardName}/`;
-
-    const baseWhere = {
-      vendor_id: vendorId,
-      lead_id: leadId,
-      doc_type_id: docType.id,
-      is_deleted: false,
-      ...(instanceIdValue
-        ? { product_structure_instance_id: instanceIdValue }
-        : {}),
-    };
-
-    let documents = await prisma.leadDocuments.findMany({
-      where: {
-        ...baseWhere,
-        doc_sys_name: { startsWith: prefix },
-      },
-      orderBy: { created_at: "asc" },
-      select: {
-        id: true,
-        doc_og_name: true,
-        doc_sys_name: true,
-        created_at: true,
-      },
-    });
-
-    // Fallback for renamed item_type/instance titles
-    if (documents.length === 0) {
-      documents = await prisma.leadDocuments.findMany({
-        where: baseWhere,
-        orderBy: { created_at: "asc" },
-        select: {
-          id: true,
-          doc_og_name: true,
-          doc_sys_name: true,
-          created_at: true,
-        },
-      });
-    }
-
-    return Promise.all(
-      documents.map(async (doc) => ({
-        ...doc,
-        signed_url: await generateSignedUrl(doc.doc_sys_name),
-      })),
-    );
-  }
-
   async getLeadProductionReadiness(
     vendorId: number,
     leadId: number,
@@ -1398,8 +1244,11 @@ export class OrderLoginService {
     // BRANCH A — INSTANCE-LEVEL PATH
     // ============================================================
     if (instanceId) {
-      return await prisma.$transaction(async (tx) => {
-        // ── 1. Fetch instance + lead meta ──
+      // ──────────────────────────────────────────────────────────
+      // ✅ PHASE 1: TRANSACTION — Only DB state changes (~40ms)
+      // ──────────────────────────────────────────────────────────
+      const txResult = await prisma.$transaction(async (tx) => {
+        // 1. Fetch instance
         const instance = await tx.leadProductStructureInstance.findFirst({
           where: {
             id: instanceId,
@@ -1421,6 +1270,7 @@ export class OrderLoginService {
 
         const effectiveAccountId = accountId || instance.account_id;
 
+        // 2. Fetch lead meta (minimal, needed for code generation)
         const leadMeta = await tx.leadMaster.findUnique({
           where: { id: leadId },
           select: {
@@ -1432,28 +1282,7 @@ export class OrderLoginService {
           },
         });
 
-        const rawLeadCode =
-          leadMeta?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
-
-        // Instance code: "VLOQ-56.2" (with quantity_index)
-        const instanceCode = instance.quantity_index
-          ? `${rawLeadCode}.${instance.quantity_index}`
-          : rawLeadCode;
-
-        const leadName =
-          `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
-
-        const queryParams = new URLSearchParams();
-        if (leadMeta?.account_id) {
-          queryParams.set("accountId", String(leadMeta.account_id));
-        }
-        queryParams.set("instance_id", String(instanceId));
-        const queryString = queryParams.toString();
-
-        const redirectUrl = `/dashboard/leads/details/${leadId}?${queryString}`;
-        const projectUrl = `${baseUrl}${redirectUrl}`;
-
-        // ── 2. Mark instance as order login completed ──
+        // 3. Mark instance as order login completed
         const updatedInstance = await tx.leadProductStructureInstance.update({
           where: { id: instanceId },
           data: {
@@ -1463,6 +1292,43 @@ export class OrderLoginService {
             updated_at: new Date(),
           },
         });
+
+        // 4. Create Production assignment mapping (if not exists)
+        let productionMapping: any = null;
+        if (assignToUserId && effectiveAccountId) {
+          const existingMapping = await tx.leadUserMapping.findFirst({
+            where: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: effectiveAccountId,
+              user_id: assignToUserId,
+              type: "production-stage",
+              status: "active",
+            },
+            select: { id: true },
+          });
+
+          if (!existingMapping) {
+            productionMapping = await tx.leadUserMapping.create({
+              data: {
+                account_id: effectiveAccountId,
+                lead_id: leadId,
+                vendor_id: vendorId,
+                user_id: assignToUserId,
+                type: "production-stage",
+                status: "active",
+                created_by: userId,
+              },
+            });
+          }
+        }
+
+        // 5. Log instance action
+        const rawLeadCode =
+          leadMeta?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+        const instanceCode = instance.quantity_index
+          ? `${rawLeadCode}.${instance.quantity_index}`
+          : rawLeadCode;
 
         await tx.leadDetailedLogs.create({
           data: {
@@ -1475,335 +1341,7 @@ export class OrderLoginService {
           },
         });
 
-        const instanceOrderLoginComplete =
-          await isOrderLoginCompleteForInstance(vendorId, leadId, instanceId);
-
-        let missingTypes: string[] = [];
-
-        if (!instanceOrderLoginComplete) {
-          missingTypes = await this.getMissingRequiredOrderLoginTypes(
-            vendorId,
-            leadId,
-            instanceId,
-          );
-        }
-
-        console.log(
-          "📋 isOrderLoginCompleteForInstance:",
-          instanceOrderLoginComplete,
-        );
-
-        // ── 4. Fetch users for notifications ──
-        const actor = await tx.userMaster.findUnique({
-          where: { id: userId },
-          select: { user_name: true },
-        });
-
-        const updatedAt = new Date().toLocaleString("en-IN", {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-        });
-
-        const factoryUser = await tx.userMaster.findUnique({
-          where: { id: assignToUserId },
-          select: { id: true, user_name: true, user_email: true },
-        });
-
-        const backendMapping = await tx.leadUserMapping.findFirst({
-          where: {
-            vendor_id: vendorId,
-            lead_id: leadId,
-            status: "active",
-            user: {
-              user_type: {
-                user_type: { equals: "backend", mode: "insensitive" },
-              },
-            },
-          },
-          select: {
-            user: {
-              select: { id: true, user_name: true, user_email: true },
-            },
-          },
-        });
-
-        const admins = await tx.userMaster.findMany({
-          where: {
-            vendor_id: vendorId,
-            status: "active",
-            user_type: {
-              user_type: { equals: "admin", mode: "insensitive" },
-            },
-          },
-          select: { id: true, user_name: true, user_email: true },
-        });
-
-        // ================================================================
-        // NOTIFICATION MATRIX
-        //
-        // instanceOrderLoginComplete = TRUE  → 2 emails (Admin + Factory)
-        // instanceOrderLoginComplete = FALSE → 3 emails (Admin + Factory + Backend)
-        // ================================================================
-
-        if (instanceOrderLoginComplete) {
-          // ✅ OL COMPLETE → Admin + Factory only
-
-          console.log("✅ Instance OL Complete - Sending 2 emails");
-
-          // ────────────────────────────────────────────────────────────
-          // 1. ADMIN NOTIFICATIONS
-          // ────────────────────────────────────────────────────────────
-          for (const admin of admins) {
-            // NOTE: Khud ko bhi notify karo (removed userId skip check)
-            try {
-              // 🔔 In-App
-              await NotificationService.createAndSend({
-                vendor_id: vendorId,
-                user_id: admin.id,
-                sender_id: userId,
-                type: NotificationType.LEAD_MILESTONE,
-                title: "Production Started",
-                message: `${instanceCode} - ${leadName} is now in Production.`,
-                entity_type: "lead",
-                entity_id: leadId,
-                redirect_url: redirectUrl,
-              });
-
-              console.log(`✅ Admin ${admin.id} in-app sent`);
-
-              // 📧 Email
-              if (admin.user_email) {
-                await sendLeadMovedToProductionEmail({
-                  vendor_id: vendorId,
-                  toEmail: admin.user_email,
-                  toName: admin.user_name,
-                  leadCode: instanceCode, // ← instance code with .2
-                  leadName,
-                  updatedBy: actor?.user_name ?? "System",
-                  updatedAt,
-                  projectUrl,
-                });
-
-                console.log(`✅ Admin ${admin.id} email sent`);
-              }
-            } catch (err: any) {
-              console.error(`❌ Admin ${admin.id} failed:`, err.message);
-            }
-          }
-
-          // ────────────────────────────────────────────────────────────
-          // 2. FACTORY USER NOTIFICATIONS (OL Complete)
-          // ────────────────────────────────────────────────────────────
-          if (factoryUser?.id) {
-            try {
-              // 🔔 In-App
-              await NotificationService.createAndSend({
-                vendor_id: vendorId,
-                user_id: factoryUser.id,
-                sender_id: userId,
-                type: NotificationType.LEAD_ASSIGNED,
-                title: "Moved to Production",
-                message: `${instanceCode} - ${leadName} has entered Production.`,
-                entity_type: "lead",
-                entity_id: leadId,
-                redirect_url: redirectUrl,
-              });
-
-              console.log("✅ Factory in-app sent");
-
-              // 📧 Email
-              if (factoryUser.user_email) {
-                await sendMovedToProductionWithOrderLoginEmail({
-                  vendor_id: vendorId,
-                  toEmail: factoryUser.user_email,
-                  toName: factoryUser.user_name,
-                  leadCode: instanceCode, // ← instance code
-                  leadName,
-                  updatedBy: actor?.user_name ?? "System",
-                  updatedAt,
-                  projectUrl,
-                });
-
-                console.log("✅ Factory email sent");
-              }
-            } catch (err: any) {
-              console.error("❌ Factory notification failed:", err.message);
-            }
-          }
-        } else {
-          // ❌ OL INCOMPLETE → Admin + Factory + Backend (3 emails)
-
-          console.log("❌ Instance OL Incomplete - Sending 3 emails");
-
-          // ────────────────────────────────────────────────────────────
-          // 1. ADMIN NOTIFICATIONS
-          // ────────────────────────────────────────────────────────────
-          for (const admin of admins) {
-            try {
-              // 🔔 In-App
-              await NotificationService.createAndSend({
-                vendor_id: vendorId,
-                user_id: admin.id,
-                sender_id: userId,
-                type: NotificationType.LEAD_MILESTONE,
-                title: "Production Started",
-                message: `${instanceCode} - ${leadName} is now in Production.`,
-                entity_type: "lead",
-                entity_id: leadId,
-                redirect_url: redirectUrl,
-              });
-
-              console.log(`✅ Admin ${admin.id} in-app sent`);
-
-              // 📧 Email
-              if (admin.user_email) {
-                await sendLeadMovedToProductionEmail({
-                  vendor_id: vendorId,
-                  toEmail: admin.user_email,
-                  toName: admin.user_name,
-                  leadCode: instanceCode,
-                  leadName,
-                  updatedBy: actor?.user_name ?? "System",
-                  updatedAt,
-                  projectUrl,
-                });
-
-                console.log(`✅ Admin ${admin.id} email sent`);
-              }
-            } catch (err: any) {
-              console.error(`❌ Admin ${admin.id} failed:`, err.message);
-            }
-          }
-
-          // ────────────────────────────────────────────────────────────
-          // 2. FACTORY USER NOTIFICATIONS (OL Pending)
-          // ────────────────────────────────────────────────────────────
-          if (factoryUser?.id) {
-            try {
-              // 🔔 In-App
-              await NotificationService.createAndSend({
-                vendor_id: vendorId,
-                user_id: factoryUser.id,
-                sender_id: userId,
-                type: NotificationType.LEAD_ACTION,
-                title: "Project Assigned – Order Login Pending",
-                message: `You've been assigned ${instanceCode} - ${leadName} for Order Login. Upload production files and order login details.`,
-                entity_type: "lead",
-                entity_id: leadId,
-                redirect_url: redirectUrl,
-              });
-
-              console.log("✅ Factory in-app sent");
-
-              // 📧 Email
-              if (factoryUser.user_email) {
-                await sendMovedToProductionOrderLoginPendingEmail({
-                  vendor_id: vendorId,
-                  toEmail: factoryUser.user_email,
-                  toName: factoryUser.user_name,
-                  leadCode: instanceCode,
-                  leadName,
-                  projectUrl,
-                });
-
-                console.log("✅ Factory email sent");
-              }
-            } catch (err: any) {
-              console.error("❌ Factory notification failed:", err.message);
-            }
-          }
-
-          // ────────────────────────────────────────────────────────────
-          // 3. BACKEND USER NOTIFICATIONS (Action Required)
-          // ────────────────────────────────────────────────────────────
-          if (backendMapping?.user?.id) {
-            try {
-              // 🔔 In-App
-              await NotificationService.createAndSend({
-                vendor_id: vendorId,
-                user_id: backendMapping.user.id,
-                sender_id: userId,
-                type: NotificationType.LEAD_ACTION,
-                title: "Moved to Production (Order Login Pending)",
-                message: `${instanceCode} - ${leadName} has entered Production. Production files are available, but Order Login details are pending.`,
-                entity_type: "lead",
-                entity_id: leadId,
-                redirect_url: redirectUrl,
-              });
-
-              console.log("✅ Backend in-app sent");
-
-              // 📧 Email
-              if (backendMapping.user.user_email) {
-                await sendMovedToProductionWithoutOrderLoginEmail({
-                  vendor_id: vendorId,
-                  toEmail: backendMapping.user.user_email,
-                  toName: backendMapping.user.user_name,
-                  leadCode: instanceCode,
-                  leadName,
-                  projectUrl,
-                });
-
-                console.log("✅ Backend email sent");
-              }
-            } catch (err: any) {
-              console.error("❌ Backend notification failed:", err.message);
-            }
-          } else {
-            console.log("ℹ️ No backend user found for this lead");
-          }
-        }
-
-        if (missingTypes.length > 0) {
-          const backendMapping = await tx.leadUserMapping.findFirst({
-            where: {
-              vendor_id: vendorId,
-              lead_id: leadId,
-              status: "active",
-              user: {
-                user_type: {
-                  user_type: { equals: "backend", mode: "insensitive" },
-                },
-              },
-            },
-            select: { user_id: true },
-          });
-
-          if (backendMapping?.user_id) {
-            const existingTask = await tx.userLeadTask.findFirst({
-              where: {
-                vendor_id: vendorId,
-                lead_id: leadId,
-                user_id: backendMapping.user_id,
-                task_type: "Order Login",
-                status: "open",
-              },
-              select: { id: true },
-            });
-
-            if (!existingTask) {
-              await tx.userLeadTask.create({
-                data: {
-                  lead_id: leadId,
-                  account_id: effectiveAccountId,
-                  vendor_id: vendorId,
-                  user_id: backendMapping.user_id,
-                  task_type: "Order Login",
-                  lead_stage: "order-login-stage",
-                  due_date: new Date(Date.now() + 24 * 60 * 60 * 1000),
-                  remark: `Missing order login items for ${instanceCode}: ${missingTypes.join(", ")}`,
-                  status: "open",
-                  created_by: userId,
-                },
-              });
-            }
-          }
-        }
-
-        // ── 6. Check if other instances are still pending ──
+        // 6. Check pending instances
         const pendingInstances = await tx.leadProductStructureInstance.count({
           where: {
             lead_id: leadId,
@@ -1815,9 +1353,11 @@ export class OrderLoginService {
           },
         });
 
-        console.log("⏳ Pending Instances:", pendingInstances);
+        // 7. If all instances done → move lead to Production
+        let leadMoved = false;
+        let updatedLead: any = null;
+        let statusTypeId: number | null = null;
 
-        // ── 7. All instances complete → move lead to Production ──
         if (pendingInstances === 0) {
           if (!assignToUserId || !effectiveAccountId) {
             throw new Error(
@@ -1837,7 +1377,9 @@ export class OrderLoginService {
             throw error;
           }
 
-          const updatedLead = await tx.leadMaster.update({
+          statusTypeId = statusType.id;
+
+          updatedLead = await tx.leadMaster.update({
             where: { id: leadId },
             data: {
               status_id: statusType.id,
@@ -1848,18 +1390,7 @@ export class OrderLoginService {
             include: { statusType: true },
           });
 
-          const leadUserMapping = await tx.leadUserMapping.create({
-            data: {
-              account_id: effectiveAccountId,
-              lead_id: leadId,
-              vendor_id: vendorId,
-              user_id: assignToUserId,
-              type: "production-stage",
-              status: "active",
-              created_by: userId,
-            },
-          });
-
+          // Chat room setup
           let chatRoom = await tx.leadChatRoom.findFirst({
             where: { lead_id: leadId, vendor_id: vendorId },
             select: { id: true },
@@ -1877,16 +1408,7 @@ export class OrderLoginService {
             select: { id: true },
           });
 
-          if (existingMember) {
-            logger.info(
-              "[SERVICE] LeadChatMember already exists, skipping insert",
-              {
-                lead_id: leadId,
-                chat_room_id: chatRoom.id,
-                user_id: assignToUserId,
-              },
-            );
-          } else {
+          if (!existingMember) {
             await tx.leadChatMember.create({
               data: {
                 chat_room_id: chatRoom.id,
@@ -1917,33 +1439,367 @@ export class OrderLoginService {
             },
           });
 
-          return {
-            mode: "instance_and_lead_moved",
-            instance_id: updatedInstance.id,
-            instance_code: instanceCode,
-            is_order_login_completed: updatedInstance.is_order_login_completed,
-            order_login_completed_at: updatedInstance.order_login_completed_at,
-            moved_to_production: true,
-            lead: updatedLead,
-            leadUserMapping,
-          };
+          leadMoved = true;
         }
 
-        // Still waiting for other instances
+        // Return all data needed for Phase 2
         return {
-          mode: "instance",
+          instance,
+          updatedInstance,
+          productionMapping,
+          leadMeta,
+          leadMoved,
+          updatedLead,
+          effectiveAccountId,
+          instanceCode,
+          rawLeadCode,
+          pendingInstances,
+        };
+      });
+      // ── Transaction ends here — DB lock released ──
+
+      // ──────────────────────────────────────────────────────────
+      // ✅ PHASE 2: BUSINESS LOGIC — Outside transaction (no timeout risk)
+      // ──────────────────────────────────────────────────────────
+
+      const {
+        instance,
+        updatedInstance,
+        productionMapping,
+        leadMeta,
+        leadMoved,
+        updatedLead,
+        effectiveAccountId,
+      } = txResult;
+
+      const leadName =
+        `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
+      const instanceCode = await resolveLeadCode(vendorId, leadId, instanceId);
+
+      // Build URLs
+      const queryParams = new URLSearchParams();
+      if (leadMeta?.account_id) {
+        queryParams.set("accountId", String(leadMeta.account_id));
+      }
+      queryParams.set("instance_id", String(instanceId));
+      const queryString = queryParams.toString();
+      const redirectUrl = `/dashboard/leads/details/${leadId}?${queryString}`;
+      const projectUrl = `${baseUrl}${redirectUrl}`;
+
+      const updatedAt = new Date().toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
+
+      // Fetch users for notifications (safe — outside transaction)
+      const [actor, factoryUser, admins, backendMappingData] =
+        await Promise.all([
+          prisma.userMaster.findUnique({
+            where: { id: userId },
+            select: { user_name: true },
+          }),
+          prisma.userMaster.findUnique({
+            where: { id: assignToUserId },
+            select: { id: true, user_name: true, user_email: true },
+          }),
+          prisma.userMaster.findMany({
+            where: {
+              vendor_id: vendorId,
+              status: "active",
+              user_type: {
+                user_type: { equals: "admin", mode: "insensitive" },
+              },
+            },
+            select: { id: true, user_name: true, user_email: true },
+          }),
+          prisma.leadUserMapping.findFirst({
+            where: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              status: "active",
+              user: {
+                user_type: {
+                  user_type: { equals: "backend", mode: "insensitive" },
+                },
+              },
+            },
+            select: {
+              user: {
+                select: { id: true, user_name: true, user_email: true },
+              },
+            },
+          }),
+        ]);
+
+      // Validate order login status (safe — outside transaction)
+      // 🔑 Direct DB truth source
+      const instanceRecord =
+        await prisma.leadProductStructureInstance.findFirst({
+          where: {
+            id: instanceId,
+            vendor_id: vendorId,
+            lead_id: leadId,
+          },
+          select: {
+            is_order_login_filled: true,
+          },
+        });
+
+      const instanceOrderLoginComplete =
+        instanceRecord?.is_order_login_filled === true;
+
+      let missingTypes: string[] = [];
+
+      if (!instanceOrderLoginComplete) {
+        missingTypes = await this.getMissingRequiredOrderLoginTypes(
+          vendorId,
+          leadId,
+          instanceId,
+        );
+      }
+
+      // ── NOTIFICATION MATRIX ──
+      if (instanceOrderLoginComplete) {
+        for (const admin of admins) {
+          try {
+            await NotificationService.createAndSend({
+              vendor_id: vendorId,
+              user_id: admin.id,
+              sender_id: userId,
+              type: NotificationType.LEAD_MILESTONE,
+              title: "Production Started",
+              message: `${instanceCode} - ${leadName} is now in Production.`,
+              entity_type: "lead",
+              entity_id: leadId,
+              redirect_url: redirectUrl,
+            });
+
+            if (admin.user_email) {
+              await sendLeadMovedToProductionEmail({
+                vendor_id: vendorId,
+                toEmail: admin.user_email,
+                toName: admin.user_name,
+                leadCode: instanceCode,
+                leadName,
+                updatedBy: actor?.user_name ?? "System",
+                updatedAt,
+                projectUrl,
+              });
+            }
+          } catch (err: any) {
+            console.error(`❌ Admin ${admin.id} failed:`, err.message);
+          }
+        }
+
+        if (factoryUser?.id) {
+          try {
+            await NotificationService.createAndSend({
+              vendor_id: vendorId,
+              user_id: factoryUser.id,
+              sender_id: userId,
+              type: NotificationType.LEAD_ASSIGNED,
+              title: "Moved to Production",
+              message: `${instanceCode} - ${leadName} has entered Production.`,
+              entity_type: "lead",
+              entity_id: leadId,
+              redirect_url: redirectUrl,
+            });
+
+            if (factoryUser.user_email) {
+              await sendMovedToProductionWithOrderLoginEmail({
+                vendor_id: vendorId,
+                toEmail: factoryUser.user_email,
+                toName: factoryUser.user_name,
+                leadCode: instanceCode,
+                leadName,
+                updatedBy: actor?.user_name ?? "System",
+                updatedAt,
+                projectUrl,
+              });
+            }
+            console.log("✅ Factory notified");
+          } catch (err: any) {
+            console.error("❌ Factory notification failed:", err.message);
+          }
+        }
+      } else {
+        // ❌ OL INCOMPLETE → Admin + Factory + Backend
+        console.log("❌ Instance OL Incomplete - Sending 3 emails");
+
+        for (const admin of admins) {
+          try {
+            await NotificationService.createAndSend({
+              vendor_id: vendorId,
+              user_id: admin.id,
+              sender_id: userId,
+              type: NotificationType.LEAD_MILESTONE,
+              title: "Production Started",
+              message: `${instanceCode} - ${leadName} is now in Production.`,
+              entity_type: "lead",
+              entity_id: leadId,
+              redirect_url: redirectUrl,
+            });
+
+            if (admin.user_email) {
+              await sendLeadMovedToProductionEmail({
+                vendor_id: vendorId,
+                toEmail: admin.user_email,
+                toName: admin.user_name,
+                leadCode: instanceCode,
+                leadName,
+                updatedBy: actor?.user_name ?? "System",
+                updatedAt,
+                projectUrl,
+              });
+            }
+            console.log(`✅ Admin ${admin.id} notified`);
+          } catch (err: any) {
+            console.error(`❌ Admin ${admin.id} failed:`, err.message);
+          }
+        }
+
+        if (factoryUser?.id) {
+          try {
+            await NotificationService.createAndSend({
+              vendor_id: vendorId,
+              user_id: factoryUser.id,
+              sender_id: userId,
+              type: NotificationType.LEAD_ACTION,
+              title: "Project Assigned – Order Login Pending",
+              message: `You've been assigned ${instanceCode} - ${leadName} for Order Login. Upload production files and order login details.`,
+              entity_type: "lead",
+              entity_id: leadId,
+              redirect_url: redirectUrl,
+            });
+
+            if (factoryUser.user_email) {
+              await sendMovedToProductionOrderLoginPendingEmail({
+                vendor_id: vendorId,
+                toEmail: factoryUser.user_email,
+                toName: factoryUser.user_name,
+                leadCode: instanceCode,
+                leadName,
+                projectUrl,
+              });
+            }
+            console.log("✅ Factory notified");
+          } catch (err: any) {
+            console.error("❌ Factory notification failed:", err.message);
+          }
+        }
+
+        if (backendMappingData?.user?.id) {
+          try {
+            await NotificationService.createAndSend({
+              vendor_id: vendorId,
+              user_id: backendMappingData.user.id,
+              sender_id: userId,
+              type: NotificationType.LEAD_ACTION,
+              title: "Moved to Production (Order Login Pending)",
+              message: `${instanceCode} - ${leadName} has entered Production. Production files are available, but Order Login details are pending.`,
+              entity_type: "lead",
+              entity_id: leadId,
+              redirect_url: redirectUrl,
+            });
+
+            if (backendMappingData.user.user_email) {
+              await sendMovedToProductionWithoutOrderLoginEmail({
+                vendor_id: vendorId,
+                toEmail: backendMappingData.user.user_email,
+                toName: backendMappingData.user.user_name,
+                leadCode: instanceCode,
+                leadName,
+                projectUrl,
+              });
+            }
+            console.log("✅ Backend notified");
+          } catch (err: any) {
+            console.error("❌ Backend notification failed:", err.message);
+          }
+        } else {
+          console.log("ℹ️ No backend user found for this lead");
+        }
+      }
+
+      if (missingTypes.length > 0) {
+        if (missingTypes.length > 0 && instanceId) {
+          const backendTaskMapping = await prisma.leadUserMapping.findFirst({
+            where: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              status: "active",
+              user: {
+                user_type: {
+                  user_type: { equals: "backend", mode: "insensitive" },
+                },
+              },
+            },
+            select: { user_id: true },
+          });
+
+          if (backendTaskMapping?.user_id) {
+            // 🔑 Check existing task for THIS INSTANCE
+            const existingTask = await prisma.userLeadTask.findFirst({
+              where: {
+                vendor_id: vendorId,
+                lead_id: leadId,
+                instance_id: instanceId, // ✅ Instance specific
+                user_id: backendTaskMapping.user_id,
+                task_type: "Order Login",
+                status: "open",
+              },
+              select: { id: true },
+            });
+
+            if (!existingTask) {
+              await prisma.userLeadTask.create({
+                data: {
+                  lead_id: leadId,
+                  account_id: effectiveAccountId,
+                  vendor_id: vendorId,
+                  user_id: backendTaskMapping.user_id,
+                  instance_id: instanceId, // ✅ Bind to instance
+                  task_type: "Order Login",
+                  lead_stage: "order-login-stage",
+                  due_date: new Date(Date.now() + 24 * 60 * 60 * 1000),
+                  remark: `Missing order login items for ${instanceCode}: ${missingTypes.join(", ")}`,
+                  status: "open",
+                  created_by: userId,
+                },
+              });
+            }
+          }
+        }
+      }
+
+      // ── Return result ──
+      if (leadMoved) {
+        return {
+          mode: "instance_and_lead_moved",
           instance_id: updatedInstance.id,
           instance_code: instanceCode,
           is_order_login_completed: updatedInstance.is_order_login_completed,
           order_login_completed_at: updatedInstance.order_login_completed_at,
-          moved_to_production: false,
+          moved_to_production: true,
+          lead: updatedLead,
+          leadUserMapping: txResult.productionMapping,
         };
-      });
+      }
+
+      return {
+        mode: "instance",
+        instance_id: updatedInstance.id,
+        instance_code: instanceCode,
+        is_order_login_completed: updatedInstance.is_order_login_completed,
+        order_login_completed_at: updatedInstance.order_login_completed_at,
+        moved_to_production: false,
+      };
     }
 
     // ============================================================
     // BRANCH B — NO INSTANCE (LEAD-LEVEL PATH)
-    // [UNCHANGED - Exact copy from document 7]
+    // No transaction needed here — already sequential, no atomicity risk
     // ============================================================
 
     const statusType = await prisma.statusTypeMaster.findFirst({
@@ -2103,8 +1959,7 @@ export class OrderLoginService {
 
     const leadName =
       `${leadMeta.firstname ?? ""} ${leadMeta.lastname ?? ""}`.trim();
-    const leadCode =
-      leadMeta.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+    const leadCode = leadMeta.lead_code;
     const projectUrl = leadMeta.account_id
       ? `${baseUrl}/dashboard/leads/details/${leadId}?accountId=${leadMeta.account_id}`
       : `${baseUrl}/dashboard/leads/details/${leadId}`;
@@ -2122,8 +1977,6 @@ export class OrderLoginService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
       const admins = await prisma.userMaster.findMany({
@@ -2272,8 +2125,6 @@ export class OrderLoginService {
           day: "2-digit",
           month: "short",
           year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
         });
 
         await sendMovedToProductionWithOrderLoginEmail({
@@ -2290,5 +2141,223 @@ export class OrderLoginService {
     }
 
     return { lead: updatedLead, leadUserMapping };
+  }
+
+  async uploadOrderLoginPoFile({
+    vendorId,
+    leadId,
+    userId,
+    orderLoginId,
+    files,
+    instanceId,
+  }: UploadOrderLoginPoFileInput) {
+    if (!vendorId || !leadId || !userId || !orderLoginId) {
+      const error = new Error(
+        "vendorId, leadId, orderLoginId, and userId are required",
+      );
+      (error as any).statusCode = 400;
+      throw error;
+    }
+
+    if (!files || files.length === 0) {
+      const error = new Error("No files provided for upload");
+      (error as any).statusCode = 400;
+      throw error;
+    }
+
+    const docType = await this.getOrderLoginPoDocType(vendorId);
+    if (!docType) throw new Error("Doc Type (Type 36) not found");
+
+    const uploadedDocs = [];
+
+    await prisma.$transaction(async (tx) => {
+      for (const file of files) {
+        const savedDoc = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: file.originalName,
+            doc_sys_name: file.sysName,
+            created_by: userId,
+            vendor_id: vendorId,
+            lead_id: leadId,
+            doc_type_id: docType.id,
+            product_structure_instance_id:
+              typeof instanceId !== "undefined" ? instanceId : null,
+          },
+        });
+
+        const mapping = await tx.orderLoginPoFileMapping.create({
+          data: {
+            orderlogin_id: orderLoginId,
+            lead_id: leadId,
+            document_id: savedDoc.id,
+            created_by: userId,
+          },
+        });
+
+        uploadedDocs.push({
+          mapping_id: mapping.id,
+          document_id: savedDoc.id,
+          file_name: savedDoc.doc_og_name,
+          file_path: savedDoc.doc_sys_name,
+        });
+      }
+    });
+  }
+
+  async getOrderLoginPoFile(
+    vendorId: number,
+    leadId: number,
+    orderLoginId: number,
+  ) {
+    if (!vendorId || !leadId || !orderLoginId) {
+      const error = new Error("vendorId, leadId and orderLoginId are required");
+      (error as any).statusCode = 400;
+      throw error;
+    }
+
+    const records = await prisma.orderLoginPoFileMapping.findMany({
+      where: {
+        orderlogin_id: orderLoginId,
+        lead_id: leadId,
+        is_deleted: false,
+        lead: {
+          vendor_id: vendorId,
+        },
+      },
+      include: {
+        document: true,
+        createdBy: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+
+    return records.map((r) => ({
+      id: r.id, // ✅ OrderLoginPoFileMapping.id
+      doc_og_name: r.document.doc_og_name,
+      created_at: r.document.created_at,
+      file_path: r.document.doc_sys_name,
+      signed_url: r.document.doc_sys_name,
+    }));
+  }
+
+  async deleteOrderLoginPoFile({
+    vendorId,
+    documentId,
+    userId,
+  }: {
+    vendorId: number;
+    documentId: number;
+    userId: number;
+  }) {
+    if (!vendorId || !documentId || !userId) {
+      const error = new Error("Required parameters missing");
+      (error as any).statusCode = 400;
+      throw error;
+    }
+
+    return await prisma.$transaction(async (tx) => {
+      /**
+       * Validate Mapping Exists & Belongs To Tenant
+       */
+      const mapping = await tx.orderLoginPoFileMapping.findUnique({
+        where: { id: documentId },
+        include: {
+          lead: { select: { vendor_id: true } },
+          document: true,
+        },
+      });
+
+      if (!mapping) {
+        const error = new Error("PO file not found");
+        (error as any).statusCode = 404;
+        throw error;
+      }
+
+      /**
+       * Soft Delete Mapping
+       */
+      await tx.orderLoginPoFileMapping.update({
+        where: { id: documentId },
+        data: {
+          is_deleted: true,
+          deleted_at: new Date(),
+          deleted_by: userId,
+        },
+      });
+
+      await tx.leadDocuments.update({
+        where: { id: mapping.document_id },
+        data: {
+          is_deleted: true,
+          deleted_at: new Date(),
+          deleted_by: userId,
+        },
+      });
+
+      return { success: true };
+    });
+  }
+
+  async markOrderLoginFilled(
+    vendorId: number,
+    leadId: number,
+    instanceId: number,
+    updatedBy: number,
+    baseUrl: string,
+  ) {
+    logger.info("[OrderLoginInstanceService] markOrderLoginFilled called", {
+      vendorId,
+      leadId,
+      instanceId,
+    });
+
+    // ✅ Validate instance belongs to vendor + lead
+    const instance = await prisma.leadProductStructureInstance.findFirst({
+      where: {
+        id: instanceId,
+        vendor_id: vendorId,
+        lead_id: leadId,
+      },
+      select: { id: true, is_order_login_filled: true },
+    });
+
+    if (!instance) {
+      throw new Error("Instance not found for this vendor/lead");
+    }
+
+    // ✅ Prevent unnecessary writes
+    if (instance.is_order_login_filled === true) {
+      return { message: "Already marked as filled" };
+    }
+
+    // ✅ Update flag
+    const updated = await prisma.leadProductStructureInstance.update({
+      where: { id: instanceId },
+      data: {
+        is_order_login_filled: true,
+        updated_by: updatedBy,
+        updated_at: new Date(),
+      },
+    });
+
+    await triggerOrderLoginCompletionNotification(
+      vendorId,
+      leadId,
+      updatedBy,
+      baseUrl,
+      instanceId,
+    );
+    logger.info("[OrderLoginInstanceService] Updated successfully", {
+      instanceId,
+    });
+
+    return updated;
   }
 }

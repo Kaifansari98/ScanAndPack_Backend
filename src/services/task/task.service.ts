@@ -1,126 +1,183 @@
 import { prisma, Prisma } from "../../prisma/client";
 
 export class TaskService {
-  private static taskIncludes() {
-    return {
-      select: {
-        // ----------------
-        // TASK TABLE FIELDS
-        // ----------------
-        id: true,
-        status: true,
-        due_date: true,
-        task_type: true,
-        remark: true,
-        closed_by: true,
-        closed_at: true,
-        created_by: true,
-        created_at: true,
-        updated_by: true,
-        updated_at: true,
+private static taskIncludes() {
+  return {
+    select: {
+      // ----------------
+      // TASK TABLE FIELDS
+      // ----------------
+      id: true,
+      status: true,
+      due_date: true,
+      task_type: true,
+      remark: true,
+      closed_by: true,
+      closed_at: true,
+      created_by: true,
+      created_at: true,
+      updated_by: true,
+      updated_at: true,
+      instance_id: true, // ✅ NEW
 
-        // ----------------
-        // RELATIONS
-        // ----------------
+      // ----------------
+      // RELATIONS
+      // ----------------
 
-        createdBy: {
-          select: {
-            id: true,
-            user_name: true,
+      createdBy: {
+        select: {
+          id: true,
+          user_name: true,
+        },
+      },
+
+      user: {
+        select: {
+          id: true,
+          user_name: true,
+        },
+      },
+
+      // ✅ NEW: instance relation
+      instance: {
+        select: {
+          id: true,
+          quantity_index: true,
+          product_structure_id: true,
+          product_type_id: true,
+          productStructure: {
+            select: {
+              type: true,
+            },
+          },
+          productType: {
+            select: {
+              type: true,
+            },
           },
         },
+      },
 
-        user: {
-          select: {
-            id: true,
-            user_name: true,
+      lead: {
+        select: {
+          id: true,
+          
+          account_id: true,
+          vendor_id: true,
+          lead_code: true,
+          firstname: true,
+          lastname: true,
+          contact_no: true,
+          site_map_link: true,
+
+          statusType: {
+            select: {
+              type: true,
+            },
           },
-        },
 
-        lead: {
-          select: {
-            id: true,
-            account_id: true,
-            vendor_id: true,
-            lead_code: true,
-            firstname: true,
-            lastname: true,
-            contact_no: true,
-            site_map_link: true,
-
-            statusType: {
-              select: {
-                type: true,
-              },
+          siteType: {
+            select: {
+              type: true,
             },
+          },
 
-            siteType: {
-              select: {
-                type: true,
-              },
-            },
-
-            productMappings: {
-              select: {
-                productType: {
-                  select: {
-                    type: true,
-                  },
+          productMappings: {
+            select: {
+              productType: {
+                select: {
+                  type: true,
                 },
               },
             },
+          },
 
-            leadProductStructureMapping: {
-              select: {
-                productStructure: {
-                  select: {
-                    type: true,
-                  },
+          leadProductStructureMapping: {
+            select: {
+              productStructure: {
+                select: {
+                  type: true,
                 },
               },
             },
           },
         },
       },
-    };
-  }
+    },
+  };
+}
 
-  private static mapTaskWithLead(task: any) {
-    return {
-      userLeadTask: {
-        id: task.id,
-        status: task.status,
-        due_date: task.due_date,
-        task_type: task.task_type,
-        remark: task.remark,
-        closed_by: task.closed_by,
-        closed_at: task.closed_at,
-        created_by: task.created_by,
-        created_by_name: task.createdBy?.user_name || null,
-        assigned_to_name: task.user?.user_name || null,
-        created_at: task.created_at,
-        updated_by: task.updated_by,
-        updated_at: task.updated_at,
-      },
-      leadMaster: {
-        id: task.lead?.id,
-        account_id: task.lead?.account_id,
-        vendor_id: task?.lead?.vendor_id,
-        lead_code: task.lead?.lead_code,
-        site_map_link: task.lead?.site_map_link,
-        name: `${task.lead?.firstname} ${task.lead?.lastname}`,
-        phone_number: task.lead?.contact_no,
-        site_type: task.lead?.siteType?.type,
-        lead_status: task.lead?.statusType?.type,
-        product_type: task.lead?.productMappings.map(
-          (pm: any) => pm.productType.type,
-        ),
-        product_structure: task.lead?.leadProductStructureMapping.map(
-          (ps: any) => ps.productStructure.type,
-        ),
-      },
-    };
-  }
+private static mapTaskWithLead(task: any) {
+  const rawLeadCode = task.lead?.lead_code ?? null;
+  const quantityIndex = task.instance?.quantity_index ?? null;
+
+  const displayLeadCode =
+    rawLeadCode && quantityIndex !== null && quantityIndex !== undefined
+      ? `${rawLeadCode}.${quantityIndex}`
+      : rawLeadCode;
+
+  // ✅ Agar instance hai → sirf uska product_structure dikhao
+  // ✅ Agar instance nahi → saare lead ke product_structures dikhao
+  const productStructure = task.instance
+    ? task.instance.productStructure?.type
+      ? [task.instance.productStructure.type]
+      : []
+    : (task.lead?.leadProductStructureMapping ?? []).map(
+        (ps: any) => ps.productStructure.type,
+      );
+
+  // ✅ Same for product_type
+  const productType = task.instance
+    ? task.instance.productType?.type
+      ? [task.instance.productType.type]
+      : []
+    : (task.lead?.productMappings ?? []).map(
+        (pm: any) => pm.productType.type,
+      );
+
+  return {
+    userLeadTask: {
+      id: task.id,
+      status: task.status,
+      due_date: task.due_date,
+      task_type: task.task_type,
+      remark: task.remark,
+      closed_by: task.closed_by,
+      closed_at: task.closed_at,
+      created_by: task.created_by,
+      created_by_name: task.createdBy?.user_name || null,
+      assigned_to_name: task.user?.user_name || null,
+      created_at: task.created_at,
+      updated_by: task.updated_by,
+      updated_at: task.updated_at,
+      instance_id: task.instance_id ?? null,
+    },
+    leadMaster: {
+      id: task.lead?.id,
+      account_id: task.lead?.account_id,
+      vendor_id: task?.lead?.vendor_id,
+      lead_code: displayLeadCode,
+      site_map_link: task.lead?.site_map_link,
+      name: `${task.lead?.firstname} ${task.lead?.lastname}`,
+      phone_number: task.lead?.contact_no,
+      site_type: task.lead?.siteType?.type,
+      lead_status: task.lead?.statusType?.type,
+      product_type: productType,       // ✅ instance-aware
+      product_structure: productStructure, // ✅ instance-aware
+      instance_id: task.instance_id ?? null, 
+    },
+    instanceDetails: task.instance
+      ? {
+          id: task.instance.id,
+          quantity_index: task.instance.quantity_index,
+          product_structure_id: task.instance.product_structure_id,
+          product_structure_type: task.instance.productStructure?.type ?? null,
+          product_type_id: task.instance.product_type_id,
+          product_type: task.instance.productType?.type ?? null,
+        }
+      : null,
+  };
+}
 
   /**
    * Get all tasks for a given vendor and user, including relations

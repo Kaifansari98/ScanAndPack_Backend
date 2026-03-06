@@ -641,6 +641,7 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   updated_by: 'updated_by',
   updated_at: 'updated_at',
   is_order_login_completed: 'is_order_login_completed',
+  is_order_login_filled: 'is_order_login_filled',
   order_login_completed_at: 'order_login_completed_at',
   is_production_completed: 'is_production_completed',
   production_completed_at: 'production_completed_at',
@@ -798,6 +799,7 @@ export const UserLeadTaskScalarFieldEnum = {
   account_id: 'account_id',
   vendor_id: 'vendor_id',
   user_id: 'user_id',
+  instance_id: 'instance_id',
   task_type: 'task_type',
   due_date: 'due_date',
   remark: 'remark',
@@ -1254,6 +1256,21 @@ export const UserMachineMappingScalarFieldEnum = {
 } as const
 
 export type UserMachineMappingScalarFieldEnum = (typeof UserMachineMappingScalarFieldEnum)[keyof typeof UserMachineMappingScalarFieldEnum]
+
+
+export const OrderLoginPoFileMappingScalarFieldEnum = {
+  id: 'id',
+  orderlogin_id: 'orderlogin_id',
+  lead_id: 'lead_id',
+  document_id: 'document_id',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted'
+} as const
+
+export type OrderLoginPoFileMappingScalarFieldEnum = (typeof OrderLoginPoFileMappingScalarFieldEnum)[keyof typeof OrderLoginPoFileMappingScalarFieldEnum]
 
 
 export const MachineTypeMasterScalarFieldEnum = {

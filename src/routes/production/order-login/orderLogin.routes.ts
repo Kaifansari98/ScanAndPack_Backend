@@ -14,83 +14,93 @@ const controller = new OrderLoginController();
 orderLoginRoutes.post(
   "/vendorId/:vendorId/upload-file-breakups",
   upload.none(),
-  controller.uploadFileBreakups
+  controller.uploadFileBreakups,
 );
 
 orderLoginRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/accountId/:accountId/upload-multiple-file-breakups",
   upload.none(),
-  controller.uploadMultipleFileBreakupsByLead
+  controller.uploadMultipleFileBreakupsByLead,
 );
 
 orderLoginRoutes.get(
   "/vendorId/:vendorId/get-order-login-details",
-  controller.getOrderLoginByLead
+  controller.getOrderLoginByLead,
 );
 
 orderLoginRoutes.put(
   "/vendorId/:vendorId/order-login-id/:orderLoginId/update",
   upload.none(),
-  controller.updateOrderLogin
+  controller.updateOrderLogin,
 );
 
 orderLoginRoutes.delete(
   "/vendorId/:vendorId/order-login-id/:orderLoginId/delete",
-  controller.deleteOrderLogin
+  controller.deleteOrderLogin,
 );
 
 orderLoginRoutes.put(
   "/vendorId/:vendorId/leadId/:leadId/update-multiple",
   upload.none(),
-  controller.updateMultipleOrderLogins
+  controller.updateMultipleOrderLogins,
 );
 
 orderLoginRoutes.get(
   "/vendorId/:vendorId/userId/:userId",
-  controller.getAllOrderLoginLeads
+  controller.getAllOrderLoginLeads,
 );
 
 orderLoginRoutes.get(
   "/vendorId/:vendorId/leadId/:leadId/tech-check-approved",
-  controller.getApprovedTechCheckDocuments
+  controller.getApprovedTechCheckDocuments,
 );
 
 orderLoginRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-production-files",
   uploadProductionFiles.array("files", 10), // ✅ accept up to 10 files
-  controller.uploadProductionFiles
-);
-
-orderLoginRoutes.post(
-  "/vendorId/:vendorId/leadId/:leadId/order-login-id/:orderLoginId/upload-po-files",
-  uploadOrderLoginPoFiles.array("files", 10),
-  controller.uploadOrderLoginPoFiles
-);
-
-orderLoginRoutes.get(
-  "/vendorId/:vendorId/leadId/:leadId/order-login-id/:orderLoginId/po-files",
-  controller.getOrderLoginPoFiles
+  controller.uploadProductionFiles,
 );
 
 orderLoginRoutes.get(
   "/vendorId/:vendorId/leadId/:leadId/production-files",
-  controller.getProductionFiles
+  controller.getProductionFiles,
 );
 
 orderLoginRoutes.put(
   "/vendorId/:vendorId/leadId/:leadId/move-to-production-stage",
   upload.none(),
-  controller.updateLeadToProductionStage
+  controller.updateLeadToProductionStage,
 );
 
 orderLoginRoutes.get(
   "/vendorId/:vendorId/leadId/:leadId/move-to-production-readiness-check",
-  controller.getLeadProductionReadiness
+  controller.getLeadProductionReadiness,
 );
 
 orderLoginRoutes.get(
   "/factory-users/vendorId/:vendorId",
-  controller.fetchFactoryUsersByVendor
+  controller.fetchFactoryUsersByVendor,
+);
+
+orderLoginRoutes.post(
+  "/vendorId/:vendorId/leadId/:leadId/order-login-id/:orderLoginId/upload-po-files",
+  uploadOrderLoginPoFiles.array("files", 10),
+  controller.uploadOrderLoginPoFile,
+);
+
+orderLoginRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/order-login-id/:orderLoginId/po-files",
+  controller.getOrderLoginPoFile,
+);
+
+orderLoginRoutes.delete(
+  "/vendorId/:vendorId/po-files-delete",
+  controller.deleteOrderLoginPoFile,
+);
+
+orderLoginRoutes.patch(
+  "/:vendorId/:leadId/:instanceId/mark-filled",
+  controller.markFilled
 );
 
 export default orderLoginRoutes;

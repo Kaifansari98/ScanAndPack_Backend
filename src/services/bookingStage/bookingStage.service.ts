@@ -467,8 +467,6 @@ export class BookingStageService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
       const baseUrl = data.baseUrl;
@@ -665,8 +663,6 @@ export class BookingStageService {
           day: "2-digit",
           month: "short",
           year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
         });
 
         const baseUrl = data.baseUrl;
@@ -1284,11 +1280,13 @@ export class BookingStageService {
       .trim()
       .toLowerCase();
     const statusTags =
-      normalizedTag === "type 9"
+      normalizedTag === "type 8"
         ? ["Type 8", "Type 9"]
-        : normalizedTag === "type 10"
-          ? ["Type 8", "Type 9", "Type 10"]
-          : [tag];
+        : normalizedTag === "type 9"
+          ? ["Type 8", "Type 9"]
+          : normalizedTag === "type 10"
+            ? ["Type 8", "Type 9", "Type 10"]
+            : [tag];
 
     const statusTypes = await prisma.statusTypeMaster.findMany({
       where: { vendor_id: vendorId, tag: { in: statusTags } },
@@ -1644,593 +1642,6 @@ export class BookingStageService {
   }
 
   // post filter service
-  public static async getUniversalTableData(
-    vendorId: number,
-    userId: number,
-    tag?: string,
-    page: number = 1,
-    limit: number = 10,
-    filters: {
-      global_search?: string;
-      filter_lead_code?: string;
-      filter_name?: string;
-      contact?: string;
-      stagetag?: string[];
-      furniture_type?: Array<number | string>;
-      furniture_structure?: Array<number | string>;
-      site_map_link?: boolean;
-      site_type?: Array<number | string>;
-      assign_to?: Array<number | string>;
-      site_address?: string;
-      archetech_name?: string;
-      source?: Array<number | string>;
-      created_at?: "asc" | "desc";
-      alt_contact_no?: string;
-      email?: string;
-      designer_remark?: string;
-      date_range?: { from: string; to: string };
-    } = {},
-    options: {
-      requireMiscellaneous?: boolean;
-      requirePendingMiscellaneous?: boolean;
-    } = {},
-  ): Promise<{ leads: any[]; count: number }> {
-    logger.info("[BookingStageService] getUniversalTableData called", {
-      vendorId,
-      userId,
-      tag,
-      page,
-      limit,
-    });
-
-    if (!tag) {
-      throw new Error("Status tag is required to fetch universal table data");
-    }
-
-    const isAllStages = tag.toUpperCase() === "ALL";
-
-    let statusIds: number[] = [];
-
-    if (isAllStages) {
-      const targetTags = [
-        "Type 1",
-        "Type 2",
-        "Type 3",
-        "Type 4",
-        "Type 5",
-        "Type 6",
-        "Type 7",
-        "Type 8",
-        "Type 9",
-        "Type 10",
-        "Type 11",
-        "Type 12",
-        "Type 13",
-        "Type 14",
-        "Type 15",
-        "Type 16",
-        "Type 17",
-      ];
-
-      const statuses = await prisma.statusTypeMaster.findMany({
-        where: { vendor_id: vendorId, tag: { in: targetTags } },
-        select: { id: true },
-      });
-      statusIds = statuses.map((s) => s.id);
-    } else {
-      const normalizedTag = String(tag || "")
-        .trim()
-        .toLowerCase();
-      const statusTags =
-        normalizedTag === "type 9"
-          ? ["Type 8", "Type 9"]
-          : normalizedTag === "type 10"
-            ? ["Type 8", "Type 9", "Type 10"]
-            : [tag];
-
-      const statusTypes = await prisma.statusTypeMaster.findMany({
-        where: { vendor_id: vendorId, tag: { in: statusTags } },
-        select: { id: true },
-      });
-
-      if (!statusTypes.length) {
-        throw new Error(`Status ${tag} not found for vendor ${vendorId}`);
-      }
-      statusIds = statusTypes.map((status) => status.id);
-    }
-
-    if (!statusIds.length) {
-      return { leads: [], count: 0 };
-    }
-
-    const creator = await prisma.userMaster.findUnique({
-      where: { id: userId },
-      include: { user_type: true },
-    });
-
-    const isAdmin = creator?.user_type?.user_type?.toLowerCase() === "admin";
-    const skip = (page - 1) * limit;
-    const orderBy = {
-      created_at:
-        filters.created_at === "asc"
-          ? Prisma.SortOrder.asc
-          : Prisma.SortOrder.desc,
-    };
-
-    const addFilterConditions = (
-      whereClause: Prisma.LeadMasterWhereInput,
-    ): Prisma.LeadMasterWhereInput => {
-      const addAnd = (condition: Prisma.LeadMasterWhereInput) => {
-        if (!whereClause.AND) whereClause.AND = [];
-        if (Array.isArray(whereClause.AND)) {
-          whereClause.AND.push(condition);
-        } else {
-          whereClause.AND = [whereClause.AND, condition];
-        }
-      };
-
-      const toString = (value: unknown) =>
-        typeof value === "string" ? value.trim() : "";
-
-      const toArray = (value: unknown): Array<number | string> => {
-        if (Array.isArray(value)) return value;
-        if (value === undefined || value === null) return [];
-        return [value as number | string];
-      };
-
-      const parseNumberList = (value: unknown) => {
-        const raw = toArray(value);
-        const numbers = raw
-          .map((item) => Number(item))
-          .filter((item) => !Number.isNaN(item));
-        const strings = raw
-          .filter((item) => Number.isNaN(Number(item)))
-          .map((item) => String(item));
-        return { numbers, strings };
-      };
-
-      const leadCode = toString(filters.filter_lead_code);
-      if (leadCode) {
-        addAnd({ lead_code: { contains: leadCode, mode: "insensitive" } });
-      }
-
-      const nameFilter = toString(filters.filter_name);
-      if (nameFilter) {
-        const nameParts = nameFilter.split(/\s+/).filter(Boolean);
-        if (nameParts.length >= 2) {
-          addAnd({
-            AND: [
-              {
-                firstname: {
-                  contains: nameParts[0],
-                  mode: "insensitive",
-                },
-              },
-              {
-                lastname: {
-                  contains: nameParts.slice(1).join(" "),
-                  mode: "insensitive",
-                },
-              },
-            ],
-          });
-        } else {
-          addAnd({
-            OR: [
-              { firstname: { contains: nameFilter, mode: "insensitive" } },
-              { lastname: { contains: nameFilter, mode: "insensitive" } },
-            ],
-          });
-        }
-      }
-
-      const globalSearch = toString(filters.global_search);
-
-      if (globalSearch) {
-        const nameParts = globalSearch.split(/\s+/).filter(Boolean);
-
-        // Full name search (Firstname + Lastname)
-        if (nameParts.length >= 2) {
-          addAnd({
-            OR: [
-              {
-                AND: [
-                  {
-                    firstname: {
-                      contains: nameParts[0],
-                      mode: "insensitive",
-                    },
-                  },
-                  {
-                    lastname: {
-                      contains: nameParts.slice(1).join(" "),
-                      mode: "insensitive",
-                    },
-                  },
-                ],
-              },
-              {
-                lead_code: {
-                  contains: globalSearch,
-                  mode: "insensitive",
-                },
-              },
-              {
-                contact_no: {
-                  contains: globalSearch,
-                  mode: "insensitive",
-                },
-              },
-            ],
-          });
-        }
-        // Single word search
-        else {
-          addAnd({
-            OR: [
-              {
-                firstname: {
-                  contains: globalSearch,
-                  mode: "insensitive",
-                },
-              },
-              {
-                lastname: {
-                  contains: globalSearch,
-                  mode: "insensitive",
-                },
-              },
-              {
-                lead_code: {
-                  contains: globalSearch,
-                  mode: "insensitive",
-                },
-              },
-              {
-                contact_no: {
-                  contains: globalSearch,
-                  mode: "insensitive",
-                },
-              },
-            ],
-          });
-        }
-      }
-
-      const contactFilter = toString(filters.contact);
-      if (contactFilter) {
-        addAnd({
-          contact_no: { contains: contactFilter, mode: "insensitive" },
-        });
-      }
-
-      const altContactFilter = toString(filters.alt_contact_no);
-      if (altContactFilter) {
-        addAnd({
-          alt_contact_no: { contains: altContactFilter, mode: "insensitive" },
-        });
-      }
-
-      const emailFilter = toString(filters.email);
-      if (emailFilter) {
-        addAnd({ email: { contains: emailFilter, mode: "insensitive" } });
-      }
-
-      const siteAddressFilter = toString(filters.site_address);
-      if (siteAddressFilter) {
-        addAnd({
-          site_address: { contains: siteAddressFilter, mode: "insensitive" },
-        });
-      }
-
-      const archetechFilter = toString(filters.archetech_name);
-      if (archetechFilter) {
-        addAnd({
-          archetech_name: { contains: archetechFilter, mode: "insensitive" },
-        });
-      }
-
-      const designerRemarkFilter = toString(filters.designer_remark);
-      if (designerRemarkFilter) {
-        addAnd({
-          designer_remark: {
-            contains: designerRemarkFilter,
-            mode: "insensitive",
-          },
-        });
-      }
-
-      // ========== DATE RANGE FILTER ==========
-
-      const dateRange = filters.date_range;
-
-      if (dateRange && (dateRange.from || dateRange.to)) {
-        let fromDate: Date | null = null;
-        let toDate: Date | null = null;
-
-        // Parse 'from' date - START of day (00:00:00.000)
-        if (dateRange.from) {
-          fromDate = new Date(dateRange.from);
-          fromDate.setHours(0, 0, 0, 0);
-        }
-
-        // Parse 'to' date - END of day (23:59:59.999)
-        if (dateRange.to) {
-          toDate = new Date(dateRange.to);
-          toDate.setHours(23, 59, 59, 999);
-        }
-
-        // ✅ Main case: Both dates exist (includes single date scenario)
-        // Controller already normalizes single date to: { from: "2024-01-15", to: "2024-01-15" }
-        if (fromDate && toDate) {
-          addAnd({
-            created_at: {
-              gte: fromDate, // Start: 2024-01-15 00:00:00.000
-              lte: toDate, // End:   2024-01-15 23:59:59.999
-            },
-          });
-        }
-
-        // ✅ Edge case: Only 'from' provided (shouldn't happen after controller normalization)
-        else if (fromDate) {
-          const endOfDay = new Date(fromDate);
-          endOfDay.setHours(23, 59, 59, 999);
-
-          addAnd({
-            created_at: {
-              gte: fromDate,
-              lte: endOfDay,
-            },
-          });
-        }
-
-        // ✅ Edge case: Only 'to' provided
-        else if (toDate) {
-          addAnd({
-            created_at: {
-              lte: toDate,
-            },
-          });
-        }
-      }
-
-      if (Array.isArray(filters.assign_to) && filters.assign_to.length > 0) {
-        const assignIds = filters.assign_to
-          .map(Number)
-          .filter((id) => !Number.isNaN(id));
-
-        if (assignIds.length > 0) {
-          addAnd({
-            assign_to: {
-              in: assignIds,
-            },
-          });
-        }
-      }
-
-      const siteTypeList = parseNumberList(filters.site_type);
-      if (siteTypeList.numbers.length > 0) {
-        addAnd({ site_type_id: { in: siteTypeList.numbers } });
-      } else if (siteTypeList.strings.length > 0) {
-        addAnd({ siteType: { type: { in: siteTypeList.strings } } });
-      }
-
-      const sourceList = parseNumberList(filters.source);
-      if (sourceList.numbers.length > 0) {
-        addAnd({ source_id: { in: sourceList.numbers } });
-      } else if (sourceList.strings.length > 0) {
-        addAnd({ source: { type: { in: sourceList.strings } } });
-      }
-
-      const furnitureTypes = parseNumberList(filters.furniture_type);
-      if (furnitureTypes.numbers.length > 0) {
-        addAnd({
-          productMappings: {
-            some: { product_type_id: { in: furnitureTypes.numbers } },
-          },
-        });
-      } else if (furnitureTypes.strings.length > 0) {
-        addAnd({
-          productMappings: {
-            some: { productType: { type: { in: furnitureTypes.strings } } },
-          },
-        });
-      }
-
-      if (Array.isArray(filters.stagetag) && filters.stagetag.length > 0) {
-        const normalizedTags = filters.stagetag
-          .map((tag) => String(tag).trim())
-          .filter(Boolean);
-
-        if (normalizedTags.length > 0) {
-          addAnd({
-            statusType: {
-              type: {
-                in: normalizedTags,
-              },
-            },
-          });
-        }
-      }
-
-      const furnitureStructures = parseNumberList(filters.furniture_structure);
-      if (furnitureStructures.numbers.length > 0) {
-        addAnd({
-          leadProductStructureMapping: {
-            some: {
-              product_structure_id: { in: furnitureStructures.numbers },
-            },
-          },
-        });
-      } else if (furnitureStructures.strings.length > 0) {
-        addAnd({
-          leadProductStructureMapping: {
-            some: {
-              productStructure: { type: { in: furnitureStructures.strings } },
-            },
-          },
-        });
-      }
-
-      if (typeof filters.site_map_link === "boolean") {
-        if (filters.site_map_link) {
-          addAnd({
-            AND: [
-              { site_map_link: { not: null } },
-              { site_map_link: { not: "" } },
-            ],
-          });
-        } else {
-          addAnd({
-            OR: [{ site_map_link: null }, { site_map_link: "" }],
-          });
-        }
-      }
-
-      if (options.requirePendingMiscellaneous) {
-        addAnd({ miscellaneousMaster: { some: { is_resolved: false } } });
-      } else if (options.requireMiscellaneous) {
-        addAnd({ miscellaneousMaster: { some: {} } });
-      }
-
-      return whereClause;
-    };
-
-    // ============= Admin Flow =============
-    if (isAdmin) {
-      const whereClause = addFilterConditions({
-        vendor_id: vendorId,
-        is_deleted: false,
-        status_id: { in: statusIds },
-        statusType: { vendor_id: vendorId },
-        activity_status: isAllStages
-          ? "onGoing"
-          : { in: ["onGoing", "lostApproval"] },
-      });
-
-      const [leads, total] = await Promise.all([
-        prisma.leadMaster.findMany({
-          where: whereClause,
-          include: BookingStageService.leadIncludes(),
-          orderBy,
-          skip,
-          take: limit,
-        }),
-        prisma.leadMaster.count({ where: whereClause }),
-      ]);
-
-      const processed = await Promise.all(
-        leads.map(async (lead: any) => {
-          if (lead.is_draft && isLeadComplete(lead)) {
-            await prisma.leadMaster.update({
-              where: { id: lead.id },
-              data: { is_draft: false },
-            });
-            lead.is_draft = false;
-          }
-
-          const docsWithUrls = await Promise.all(
-            lead.documents.map(async (doc: any) => {
-              const signed_url = await generateSignedUrl(doc.doc_sys_name);
-              return {
-                ...doc,
-                signed_url,
-                file_type: BookingStageService.getFileType(doc.doc_og_name),
-                is_image: BookingStageService.isImageFile(doc.doc_og_name),
-              };
-            }),
-          );
-          return { ...lead, documents: docsWithUrls };
-        }),
-      );
-      return { leads: processed, count: total };
-    }
-
-    // ============= Non-Admin Flow =============
-
-    const mappedLeads = await prisma.leadUserMapping.findMany({
-      where: {
-        vendor_id: vendorId,
-        user_id: userId,
-        status: "active",
-      },
-      select: { lead_id: true },
-    });
-
-    const taskLeads = await prisma.userLeadTask.findMany({
-      where: {
-        vendor_id: vendorId,
-        OR: [{ created_by: userId }, { user_id: userId }],
-      },
-      select: { lead_id: true },
-    });
-
-    const leadIds = [
-      ...new Set([
-        ...mappedLeads.map((m) => m.lead_id),
-        ...taskLeads.map((t) => t.lead_id),
-      ]),
-    ];
-
-    if (!leadIds.length) {
-      logger.info("No leads found for user (union empty)", {
-        userId,
-        vendorId,
-        tag,
-      });
-      return { leads: [], count: 0 };
-    }
-
-    const whereClause = addFilterConditions({
-      id: { in: leadIds },
-      is_deleted: false,
-      vendor_id: vendorId,
-      status_id: { in: statusIds },
-      statusType: { vendor_id: vendorId },
-      activity_status: isAllStages
-        ? "onGoing"
-        : { in: ["onGoing", "lostApproval"] },
-    });
-
-    const [leads, total] = await Promise.all([
-      prisma.leadMaster.findMany({
-        where: whereClause,
-        include: BookingStageService.leadIncludes(),
-        orderBy,
-        skip,
-        take: limit,
-      }),
-      prisma.leadMaster.count({ where: whereClause }),
-    ]);
-
-    const processed = await Promise.all(
-      leads.map(async (lead: any) => {
-        if (lead.is_draft && isLeadComplete(lead)) {
-          await prisma.leadMaster.update({
-            where: { id: lead.id },
-            data: { is_draft: false },
-          });
-          lead.is_draft = false;
-        }
-
-        const docsWithUrls = await Promise.all(
-          lead.documents.map(async (doc: any) => {
-            const signed_url = await generateSignedUrl(doc.doc_sys_name);
-            return {
-              ...doc,
-              signed_url,
-              file_type: BookingStageService.getFileType(doc.doc_og_name),
-              is_image: BookingStageService.isImageFile(doc.doc_og_name),
-            };
-          }),
-        );
-        return { ...lead, documents: docsWithUrls };
-      }),
-    );
-
-    return { leads: processed, count: total };
-  }
-
   // ✅ Helpers (you already have these in your other service)
   private static getFileType(filename: string): string {
     const ext = filename.split(".").pop()?.toLowerCase();
@@ -2563,7 +1974,7 @@ export class BookingStageService {
       const updatedByName = updatedByUser?.user_name ?? "User";
       const amountText = `₹${data.amount.toLocaleString("en-IN")}`;
       const paymentTypeName = result.paymentTypeName || "Payment";
-      
+
       const baseUrl = data.baseUrl;
       const leadUrl = leadInfo?.account_id
         ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${leadInfo.account_id}`
@@ -3175,5 +2586,675 @@ export class BookingStageService {
         updated_at: true,
       },
     });
+  }
+
+  // post api for lead fetching stage with user id
+  public static async getUniversalTableData(
+    vendorId: number,
+    userId: number,
+    tag?: string,
+    page: number = 1,
+    limit: number = 10,
+    filters: {
+      global_search?: string;
+      filter_lead_code?: string;
+      filter_name?: string;
+      contact?: string;
+      stagetag?: string[];
+      furniture_type?: Array<number | string>;
+      furniture_structure?: Array<number | string>;
+      site_map_link?: boolean;
+      site_type?: Array<number | string>;
+      assign_to?: Array<number | string>;
+      site_address?: string;
+      archetech_name?: string;
+      source?: Array<number | string>;
+      created_at?: "asc" | "desc";
+      alt_contact_no?: string;
+      email?: string;
+      designer_remark?: string;
+      date_range?: { from: string; to: string };
+    } = {},
+    options: {
+      requireMiscellaneous?: boolean;
+      requirePendingMiscellaneous?: boolean;
+    } = {},
+  ): Promise<{ leads: any[]; count: number }> {
+    logger.info("[BookingStageService] getUniversalTableData called", {
+      vendorId,
+      userId,
+      tag,
+      page,
+      limit,
+    });
+
+    if (!tag) {
+      throw new Error("Status tag is required to fetch universal table data");
+    }
+
+    const isAllStages = tag.toUpperCase() === "ALL";
+
+    const normalizedTag = String(tag);
+
+    const isTechCheckStage = normalizedTag === "Type 8";
+    const isOrderLoginStage = normalizedTag === "Type 9";
+    const isProductionStage = normalizedTag === "Type 10";
+    const isInstallationStage = normalizedTag === "Type 15";
+    const isInstanceDrivenStage =
+      isTechCheckStage ||
+      isOrderLoginStage ||
+      isProductionStage ||
+      isInstallationStage;
+
+    let statusIds: number[] = [];
+
+    if (isAllStages) {
+      const targetTags = [
+        "Type 1",
+        "Type 2",
+        "Type 3",
+        "Type 4",
+        "Type 5",
+        "Type 6",
+        "Type 7",
+        "Type 8",
+        "Type 9",
+        "Type 10",
+        "Type 11",
+        "Type 12",
+        "Type 13",
+        "Type 14",
+        "Type 15",
+        "Type 16",
+        "Type 17",
+      ];
+
+      const statuses = await prisma.statusTypeMaster.findMany({
+        where: { vendor_id: vendorId, tag: { in: targetTags } },
+        select: { id: true },
+      });
+      statusIds = statuses.map((s) => s.id);
+    } else {
+const statusTags =
+  normalizedTag === "Type 8"
+    ? ["Type 8", "Type 9"]
+    : normalizedTag === "Type 9"
+      ? ["Type 8", "Type 9"]
+      : normalizedTag === "Type 10"
+        ? ["Type 8", "Type 9", "Type 10"]
+        : normalizedTag === "Type 15"
+          ? ["Type 15"]
+          : [tag];
+      const statusTypes = await prisma.statusTypeMaster.findMany({
+        where: { vendor_id: vendorId, tag: { in: statusTags } },
+        select: { id: true },
+      });
+
+      if (!statusTypes.length) {
+        throw new Error(`Status ${tag} not found for vendor ${vendorId}`);
+      }
+      statusIds = statusTypes.map((status) => status.id);
+    }
+
+    if (!statusIds.length) {
+      return { leads: [], count: 0 };
+    }
+
+    const creator = await prisma.userMaster.findUnique({
+      where: { id: userId },
+      include: { user_type: true },
+    });
+
+    const isAdmin = creator?.user_type?.user_type?.toLowerCase() === "admin";
+    const skip = (page - 1) * limit;
+    const orderBy = {
+      created_at:
+        filters.created_at === "asc"
+          ? Prisma.SortOrder.asc
+          : Prisma.SortOrder.desc,
+    };
+
+    const addFilterConditions = (
+      whereClause: Prisma.LeadMasterWhereInput,
+    ): Prisma.LeadMasterWhereInput => {
+      const addAnd = (condition: Prisma.LeadMasterWhereInput) => {
+        if (!whereClause.AND) whereClause.AND = [];
+        if (Array.isArray(whereClause.AND)) {
+          whereClause.AND.push(condition);
+        } else {
+          whereClause.AND = [whereClause.AND, condition];
+        }
+      };
+
+      const toString = (value: unknown) =>
+        typeof value === "string" ? value.trim() : "";
+
+      const toArray = (value: unknown): Array<number | string> => {
+        if (Array.isArray(value)) return value;
+        if (value === undefined || value === null) return [];
+        return [value as number | string];
+      };
+
+      const parseNumberList = (value: unknown) => {
+        const raw = toArray(value);
+        const numbers = raw
+          .map((item) => Number(item))
+          .filter((item) => !Number.isNaN(item));
+        const strings = raw
+          .filter((item) => Number.isNaN(Number(item)))
+          .map((item) => String(item));
+        return { numbers, strings };
+      };
+
+      const leadCode = toString(filters.filter_lead_code);
+      if (leadCode) {
+        addAnd({ lead_code: { contains: leadCode, mode: "insensitive" } });
+      }
+
+      const nameFilter = toString(filters.filter_name);
+      if (nameFilter) {
+        const nameParts = nameFilter.split(/\s+/).filter(Boolean);
+        if (nameParts.length >= 2) {
+          addAnd({
+            AND: [
+              {
+                firstname: {
+                  contains: nameParts[0],
+                  mode: "insensitive",
+                },
+              },
+              {
+                lastname: {
+                  contains: nameParts.slice(1).join(" "),
+                  mode: "insensitive",
+                },
+              },
+            ],
+          });
+        } else {
+          addAnd({
+            OR: [
+              { firstname: { contains: nameFilter, mode: "insensitive" } },
+              { lastname: { contains: nameFilter, mode: "insensitive" } },
+            ],
+          });
+        }
+      }
+
+      const globalSearch = toString(filters.global_search);
+
+      if (globalSearch) {
+        const nameParts = globalSearch.split(/\s+/).filter(Boolean);
+
+        // Full name search (Firstname + Lastname)
+        if (nameParts.length >= 2) {
+          addAnd({
+            OR: [
+              {
+                AND: [
+                  {
+                    firstname: {
+                      contains: nameParts[0],
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    lastname: {
+                      contains: nameParts.slice(1).join(" "),
+                      mode: "insensitive",
+                    },
+                  },
+                ],
+              },
+              {
+                lead_code: {
+                  contains: globalSearch,
+                  mode: "insensitive",
+                },
+              },
+              {
+                contact_no: {
+                  contains: globalSearch,
+                  mode: "insensitive",
+                },
+              },
+            ],
+          });
+        }
+        // Single word search
+        else {
+          addAnd({
+            OR: [
+              {
+                firstname: {
+                  contains: globalSearch,
+                  mode: "insensitive",
+                },
+              },
+              {
+                lastname: {
+                  contains: globalSearch,
+                  mode: "insensitive",
+                },
+              },
+              {
+                lead_code: {
+                  contains: globalSearch,
+                  mode: "insensitive",
+                },
+              },
+              {
+                contact_no: {
+                  contains: globalSearch,
+                  mode: "insensitive",
+                },
+              },
+            ],
+          });
+        }
+      }
+
+      const contactFilter = toString(filters.contact);
+      if (contactFilter) {
+        addAnd({
+          contact_no: { contains: contactFilter, mode: "insensitive" },
+        });
+      }
+
+      const altContactFilter = toString(filters.alt_contact_no);
+      if (altContactFilter) {
+        addAnd({
+          alt_contact_no: { contains: altContactFilter, mode: "insensitive" },
+        });
+      }
+
+      const emailFilter = toString(filters.email);
+      if (emailFilter) {
+        addAnd({ email: { contains: emailFilter, mode: "insensitive" } });
+      }
+
+      const siteAddressFilter = toString(filters.site_address);
+      if (siteAddressFilter) {
+        addAnd({
+          site_address: { contains: siteAddressFilter, mode: "insensitive" },
+        });
+      }
+
+      const archetechFilter = toString(filters.archetech_name);
+      if (archetechFilter) {
+        addAnd({
+          archetech_name: { contains: archetechFilter, mode: "insensitive" },
+        });
+      }
+
+      const designerRemarkFilter = toString(filters.designer_remark);
+      if (designerRemarkFilter) {
+        addAnd({
+          designer_remark: {
+            contains: designerRemarkFilter,
+            mode: "insensitive",
+          },
+        });
+      }
+
+      // ========== DATE RANGE FILTER ==========
+
+      const dateRange = filters.date_range;
+
+      if (dateRange && (dateRange.from || dateRange.to)) {
+        let fromDate: Date | null = null;
+        let toDate: Date | null = null;
+
+        // Parse 'from' date - START of day (00:00:00.000)
+        if (dateRange.from) {
+          fromDate = new Date(dateRange.from);
+          fromDate.setHours(0, 0, 0, 0);
+        }
+
+        // Parse 'to' date - END of day (23:59:59.999)
+        if (dateRange.to) {
+          toDate = new Date(dateRange.to);
+          toDate.setHours(23, 59, 59, 999);
+        }
+
+        // ✅ Main case: Both dates exist (includes single date scenario)
+        // Controller already normalizes single date to: { from: "2024-01-15", to: "2024-01-15" }
+        if (fromDate && toDate) {
+          addAnd({
+            created_at: {
+              gte: fromDate, // Start: 2024-01-15 00:00:00.000
+              lte: toDate, // End:   2024-01-15 23:59:59.999
+            },
+          });
+        }
+
+        // ✅ Edge case: Only 'from' provided (shouldn't happen after controller normalization)
+        else if (fromDate) {
+          const endOfDay = new Date(fromDate);
+          endOfDay.setHours(23, 59, 59, 999);
+
+          addAnd({
+            created_at: {
+              gte: fromDate,
+              lte: endOfDay,
+            },
+          });
+        }
+
+        // ✅ Edge case: Only 'to' provided
+        else if (toDate) {
+          addAnd({
+            created_at: {
+              lte: toDate,
+            },
+          });
+        }
+      }
+
+      if (Array.isArray(filters.assign_to) && filters.assign_to.length > 0) {
+        const assignIds = filters.assign_to
+          .map(Number)
+          .filter((id) => !Number.isNaN(id));
+
+        if (assignIds.length > 0) {
+          addAnd({
+            assign_to: {
+              in: assignIds,
+            },
+          });
+        }
+      }
+
+      const siteTypeList = parseNumberList(filters.site_type);
+      if (siteTypeList.numbers.length > 0) {
+        addAnd({ site_type_id: { in: siteTypeList.numbers } });
+      } else if (siteTypeList.strings.length > 0) {
+        addAnd({ siteType: { type: { in: siteTypeList.strings } } });
+      }
+
+      const sourceList = parseNumberList(filters.source);
+      if (sourceList.numbers.length > 0) {
+        addAnd({ source_id: { in: sourceList.numbers } });
+      } else if (sourceList.strings.length > 0) {
+        addAnd({ source: { type: { in: sourceList.strings } } });
+      }
+
+      const furnitureTypes = parseNumberList(filters.furniture_type);
+      if (furnitureTypes.numbers.length > 0) {
+        addAnd({
+          productMappings: {
+            some: { product_type_id: { in: furnitureTypes.numbers } },
+          },
+        });
+      } else if (furnitureTypes.strings.length > 0) {
+        addAnd({
+          productMappings: {
+            some: { productType: { type: { in: furnitureTypes.strings } } },
+          },
+        });
+      }
+
+      if (Array.isArray(filters.stagetag) && filters.stagetag.length > 0) {
+        const normalizedTags = filters.stagetag
+          .map((tag) => String(tag).trim())
+          .filter(Boolean);
+
+        if (normalizedTags.length > 0) {
+          addAnd({
+            statusType: {
+              type: {
+                in: normalizedTags,
+              },
+            },
+          });
+        }
+      }
+
+      const furnitureStructures = parseNumberList(filters.furniture_structure);
+      if (furnitureStructures.numbers.length > 0) {
+        addAnd({
+          leadProductStructureMapping: {
+            some: {
+              product_structure_id: { in: furnitureStructures.numbers },
+            },
+          },
+        });
+      } else if (furnitureStructures.strings.length > 0) {
+        addAnd({
+          leadProductStructureMapping: {
+            some: {
+              productStructure: { type: { in: furnitureStructures.strings } },
+            },
+          },
+        });
+      }
+
+      if (typeof filters.site_map_link === "boolean") {
+        if (filters.site_map_link) {
+          addAnd({
+            AND: [
+              { site_map_link: { not: null } },
+              { site_map_link: { not: "" } },
+            ],
+          });
+        } else {
+          addAnd({
+            OR: [{ site_map_link: null }, { site_map_link: "" }],
+          });
+        }
+      }
+
+      if (options.requirePendingMiscellaneous) {
+        addAnd({ miscellaneousMaster: { some: { is_resolved: false } } });
+      } else if (options.requireMiscellaneous) {
+        addAnd({ miscellaneousMaster: { some: {} } });
+      }
+
+      // ================= INSTANCE DRIVEN STAGE FILTER =================
+
+      if (isInstanceDrivenStage) {
+        // -------- TYPE 8 : TECH CHECK STAGE --------
+        // Tech check not done yet
+        if (isTechCheckStage) {
+          addAnd({
+            productStructureInstances: {
+              some: {
+                OR: [
+                  { is_tech_check_completed: false },
+                  { is_tech_check_completed: null },
+                ],
+              },
+            },
+          });
+        }
+
+        // -------- TYPE 9 : ORDER LOGIN STAGE --------
+        // Tech check completed → now waiting for order login
+        if (isOrderLoginStage) {
+          addAnd({
+            productStructureInstances: {
+              some: {
+                AND: [
+                  { is_tech_check_completed: true },
+                  {
+                    OR: [
+                      { is_order_login_completed: false },
+                      { is_order_login_completed: null },
+                    ],
+                  },
+                ],
+              },
+            },
+          });
+        }
+
+        // -------- TYPE 10 : PRODUCTION STAGE --------
+        // Order login completed → now waiting for production
+        if (isProductionStage) {
+          addAnd({
+            productStructureInstances: {
+              some: {
+                AND: [
+                  { is_tech_check_completed: true },
+                  { is_order_login_completed: true },
+                  
+                ],
+              },
+            },
+          });
+        }
+      }
+
+      if (isInstallationStage) {
+        addAnd({
+          NOT: {
+            AND: [
+              { usable_handover_completed: true },
+              {
+                miscellaneousMaster: {
+                  some: { is_resolved: false }, // pending misc exists
+                },
+              },
+            ],
+          },
+        });
+      }
+
+      return whereClause;
+    };
+
+    // ============= Admin Flow =============
+    if (isAdmin) {
+      const whereClause = addFilterConditions({
+        vendor_id: vendorId,
+        is_deleted: false,
+        status_id: { in: statusIds },
+        statusType: { vendor_id: vendorId },
+        activity_status: isAllStages
+          ? "onGoing"
+          : { in: ["onGoing", "lostApproval"] },
+      });
+
+      const [leads, total] = await Promise.all([
+        prisma.leadMaster.findMany({
+          where: whereClause,
+          include: BookingStageService.leadIncludes(),
+          orderBy,
+          skip,
+          take: limit,
+        }),
+        prisma.leadMaster.count({ where: whereClause }),
+      ]);
+
+      const processed = await Promise.all(
+        leads.map(async (lead: any) => {
+          if (lead.is_draft && isLeadComplete(lead)) {
+            await prisma.leadMaster.update({
+              where: { id: lead.id },
+              data: { is_draft: false },
+            });
+            lead.is_draft = false;
+          }
+
+          const docsWithUrls = await Promise.all(
+            lead.documents.map(async (doc: any) => {
+              const signed_url = await generateSignedUrl(doc.doc_sys_name);
+              return {
+                ...doc,
+                signed_url,
+                file_type: BookingStageService.getFileType(doc.doc_og_name),
+                is_image: BookingStageService.isImageFile(doc.doc_og_name),
+              };
+            }),
+          );
+          return { ...lead, documents: docsWithUrls };
+        }),
+      );
+      return { leads: processed, count: total };
+    }
+
+    // ============= Non-Admin Flow =============
+
+    const mappedLeads = await prisma.leadUserMapping.findMany({
+      where: {
+        vendor_id: vendorId,
+        user_id: userId,
+        status: "active",
+      },
+      select: { lead_id: true },
+    });
+
+    const taskLeads = await prisma.userLeadTask.findMany({
+      where: {
+        vendor_id: vendorId,
+        OR: [{ created_by: userId }, { user_id: userId }],
+      },
+      select: { lead_id: true },
+    });
+
+    const leadIds = [
+      ...new Set([
+        ...mappedLeads.map((m) => m.lead_id),
+        ...taskLeads.map((t) => t.lead_id),
+      ]),
+    ];
+
+    if (!leadIds.length) {
+      logger.info("No leads found for user (union empty)", {
+        userId,
+        vendorId,
+        tag,
+      });
+      return { leads: [], count: 0 };
+    }
+
+    const whereClause = addFilterConditions({
+      id: { in: leadIds },
+      is_deleted: false,
+      vendor_id: vendorId,
+      status_id: { in: statusIds },
+      statusType: { vendor_id: vendorId },
+      activity_status: isAllStages
+        ? "onGoing"
+        : { in: ["onGoing", "lostApproval"] },
+    });
+
+    const [leads, total] = await Promise.all([
+      prisma.leadMaster.findMany({
+        where: whereClause,
+        include: BookingStageService.leadIncludes(),
+        orderBy,
+        skip,
+        take: limit,
+      }),
+      prisma.leadMaster.count({ where: whereClause }),
+    ]);
+
+    const processed = await Promise.all(
+      leads.map(async (lead: any) => {
+        if (lead.is_draft && isLeadComplete(lead)) {
+          await prisma.leadMaster.update({
+            where: { id: lead.id },
+            data: { is_draft: false },
+          });
+          lead.is_draft = false;
+        }
+
+        const docsWithUrls = await Promise.all(
+          lead.documents.map(async (doc: any) => {
+            const signed_url = await generateSignedUrl(doc.doc_sys_name);
+            return {
+              ...doc,
+              signed_url,
+              file_type: BookingStageService.getFileType(doc.doc_og_name),
+              is_image: BookingStageService.isImageFile(doc.doc_og_name),
+            };
+          }),
+        );
+        return { ...lead, documents: docsWithUrls };
+      }),
+    );
+
+    return { leads: processed, count: total };
   }
 }

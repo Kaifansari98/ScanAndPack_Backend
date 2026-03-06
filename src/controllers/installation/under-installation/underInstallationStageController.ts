@@ -37,7 +37,7 @@ export class UnderInstallationStageController {
           );
       }
 
-      const baseUrl =  resolveClientBaseUrl(req);
+      const baseUrl = resolveClientBaseUrl(req);
       const result =
         await UnderInstallationStageService.moveLeadToUnderInstallation(
           vendorId,
@@ -850,7 +850,7 @@ export class UnderInstallationStageController {
         created_by: Number(created_by),
         teams: parsedTeams,
         files: uploadedFiles,
-        baseUrl
+        baseUrl,
       };
 
       const result =
@@ -914,14 +914,13 @@ export class UnderInstallationStageController {
         });
       }
 
-
       const baseUrl = resolveClientBaseUrl(req);
       const data = await UnderInstallationStageService.updateERDService({
         vendor_id: vendorId,
         misc_id: miscId,
         expected_ready_date,
         updated_by,
-        baseUrl
+        baseUrl,
       });
 
       return res.status(200).json({ success: true, data });
@@ -958,15 +957,14 @@ export class UnderInstallationStageController {
         });
       }
 
-      const data = await UnderInstallationStageService.updateMiscApprovalService(
-        {
+      const data =
+        await UnderInstallationStageService.updateMiscApprovalService({
           vendor_id: vendorId,
           misc_id: miscId,
           misc_approved,
           exp_of_rejection,
           updated_by,
-        },
-      );
+        });
 
       return res.status(200).json({ success: true, data });
     } catch (error: any) {
@@ -1430,11 +1428,12 @@ export class UnderInstallationStageController {
         });
       }
 
-      const data = await UnderInstallationStageService.markUsableHandoverCompleted(
-        vendorId,
-        leadId,
-        Number(updated_by),
-      );
+      const data =
+        await UnderInstallationStageService.markUsableHandoverCompleted(
+          vendorId,
+          leadId,
+          Number(updated_by),
+        );
 
       return res.status(200).json({ success: true, data });
     } catch (error: any) {
@@ -1464,13 +1463,13 @@ export class UnderInstallationStageController {
           );
       }
 
-      const baseUrl = resolveClientBaseUrl(req);  
+      const baseUrl = resolveClientBaseUrl(req);
       const result =
         await UnderInstallationStageService.moveLeadToFinalHandover(
           vendorId,
           leadId,
           updated_by,
-          baseUrl
+          baseUrl,
         );
 
       return res
@@ -1588,7 +1587,7 @@ export class UnderInstallationStageController {
           lead_id: leadId,
           misc_id: miscId,
           resolved_by: Number(resolved_by),
-          baseUrl
+          baseUrl,
         });
 
       return res.status(200).json({
@@ -1626,7 +1625,7 @@ export class UnderInstallationStageController {
         lead_id: leadId,
         misc_id: miscId,
         ready_by: Number(ready_by),
-        baseUrl
+        baseUrl,
       });
 
       return res.status(200).json({
@@ -1638,6 +1637,37 @@ export class UnderInstallationStageController {
       return res.status(500).json({
         success: false,
         error: err.message || "Something went wrong",
+      });
+    }
+  }
+
+  async getMiscellaneousResolutionStatus(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+
+      if (!vendorId || !leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid vendorId or leadId",
+        });
+      }
+
+      const result =
+        await UnderInstallationStageService.checkMiscellaneousResolved(
+          vendorId,
+          leadId,
+        );
+
+      return res.status(200).json({
+        success: true,
+        data: result,
+      });
+    } catch (error: any) {
+      console.error("Misc status error:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Failed to evaluate miscellaneous status",
       });
     }
   }

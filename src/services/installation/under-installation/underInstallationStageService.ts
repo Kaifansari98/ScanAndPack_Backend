@@ -195,10 +195,7 @@ export class UnderInstallationStageService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
-
 
       const redirectPath = lead.account_id
         ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
@@ -1056,7 +1053,7 @@ export class UnderInstallationStageService {
       created_by,
       teams,
       files,
-      baseUrl
+      baseUrl,
     } = payload;
 
     // ====================================
@@ -1274,15 +1271,12 @@ export class UnderInstallationStageService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
       // -----------------------------
       // Build Deep-Link Redirect URL
       // -----------------------------
 
-    
       const redirectPath =
         leadMeta?.account_id && leadMeta.account_id > 0
           ? `/dashboard/leads/details/${lead_id}?accountId=${leadMeta.account_id}&tab=misc&taskId=${misc.taskId}`
@@ -1376,7 +1370,13 @@ export class UnderInstallationStageService {
         lead_id,
         task_type: "Miscellaneous",
       },
-      select: { id: true, task_type: true, remark: true, status: true },
+      select: {
+        id: true,
+        task_type: true,
+        remark: true,
+        status: true,
+        due_date: true,
+      },
     });
 
     // ➜ Attach signed URLs for documents
@@ -1405,6 +1405,14 @@ export class UnderInstallationStageService {
           (t) =>
             (t.remark && t.remark.includes(miscTaskKey)) ||
             t.remark === remarkKey,
+        );
+
+        const deliveryTaskForMisc = miscTasks.find(
+          (t) =>
+            typeof t.remark === "string" &&
+            t.remark.includes("Required delivery date set for") &&
+            t.remark.includes(m.reorder_material_details) &&
+            t.remark.includes(m.problem_description),
         );
 
         return {
@@ -1442,6 +1450,15 @@ export class UnderInstallationStageService {
                 status: taskForMisc.status,
               }
             : null,
+          delivery_task: deliveryTaskForMisc
+            ? {
+                id: deliveryTaskForMisc.id,
+                task_type: deliveryTaskForMisc.task_type,
+                status: deliveryTaskForMisc.status,
+                remark: deliveryTaskForMisc.remark ?? null,
+                due_date: deliveryTaskForMisc.due_date ?? null,
+              }
+            : null,
         };
       }),
     );
@@ -1471,21 +1488,38 @@ export class UnderInstallationStageService {
       throw new Error("Miscellaneous record not found");
     }
 
+    // ✅ VALIDATION: Reject must have reason
+    if (misc_approved === false && !exp_of_rejection?.trim()) {
+      throw new Error(
+        "Rejection reason is required when rejecting miscellaneous",
+      );
+    }
+
+    const shouldResolve = misc_approved === false && !!exp_of_rejection?.trim();
+
     const updated = await prisma.miscellaneousMaster.update({
       where: { id: misc_id },
       data: {
         misc_approved,
-        exp_of_rejection: misc_approved ? null : exp_of_rejection || null,
+        exp_of_rejection: misc_approved ? null : exp_of_rejection,
+
+        // ✅ ONLY reject-with-reason will resolve
+        is_resolved: shouldResolve,
+        resolved_at: shouldResolve ? new Date() : null,
+
         updated_by,
       },
     });
 
-    if (misc_approved === false) {
+    // ✅ If rejected → cancel related misc task
+    if (shouldResolve) {
       const miscTaskKey = `[misc:${misc_id}]`;
+
       const miscRecord = await prisma.miscellaneousMaster.findFirst({
         where: { id: misc_id, vendor_id },
         select: { reorder_material_details: true, problem_description: true },
       });
+
       const remarkKey = miscRecord
         ? `${miscRecord.reorder_material_details} - ${miscRecord.problem_description}`
         : undefined;
@@ -1550,10 +1584,7 @@ export class UnderInstallationStageService {
           vendor_id,
           lead_id: existing.lead_id,
           task_type: "Miscellaneous",
-          OR: [
-            { remark: { contains: miscTaskKey } },
-            { remark: remarkKey },
-          ],
+          OR: [{ remark: { contains: miscTaskKey } }, { remark: remarkKey }],
           status: "completed",
         },
         select: { id: true },
@@ -1724,6 +1755,7 @@ export class UnderInstallationStageService {
         where: { id: misc.id },
         data: {
           required_delivery_date: new Date(required_delivery_date),
+
           updated_by,
         },
       });
@@ -1836,7 +1868,7 @@ export class UnderInstallationStageService {
     misc_id,
     expected_ready_date,
     updated_by,
-    baseUrl
+    baseUrl,
   }: UpdateERDInput) {
     // ===============================
     // 1️⃣ TRANSACTION LAYER
@@ -1878,10 +1910,7 @@ export class UnderInstallationStageService {
           vendor_id,
           lead_id: existing.lead_id,
           task_type: "Miscellaneous",
-          OR: [
-            { remark: { contains: miscTaskKey } },
-            { remark: remarkKey },
-          ],
+          OR: [{ remark: { contains: miscTaskKey } }, { remark: remarkKey }],
         },
         select: { id: true },
       });
@@ -1995,7 +2024,6 @@ export class UnderInstallationStageService {
       // Deep Link Builder
       // -------------------------
 
-     
       const redirectPath =
         leadMeta?.account_id && leadMeta.account_id > 0
           ? `/dashboard/leads/details/${result.lead_id}?accountId=${leadMeta.account_id}&tab=misc&taskId=${result.taskId}`
@@ -2427,7 +2455,7 @@ export class UnderInstallationStageService {
     vendorId: number,
     leadId: number,
     updatedBy: number,
-    baseUrl: string
+    baseUrl: string,
   ) {
     // ===============================
     // 1️⃣ TRANSACTION LAYER
@@ -2541,8 +2569,6 @@ export class UnderInstallationStageService {
       const leadCode = leadMeta?.lead_code ?? `LEAD-${leadId}`;
       const leadName =
         `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
-
-
 
       const redirectPath =
         leadMeta?.account_id && leadMeta.account_id > 0
@@ -2917,10 +2943,7 @@ export class UnderInstallationStageService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
-
 
       const redirectPath =
         leadMeta?.account_id && leadMeta.account_id > 0
@@ -3014,10 +3037,7 @@ export class UnderInstallationStageService {
           lead_id,
           account_id: existing.account_id,
           task_type: "Miscellaneous",
-          OR: [
-            { remark: { contains: miscTaskKey } },
-            { remark: remarkKey },
-          ],
+          OR: [{ remark: { contains: miscTaskKey } }, { remark: remarkKey }],
           status: "open",
         },
         data: {
@@ -3035,10 +3055,7 @@ export class UnderInstallationStageService {
           vendor_id,
           lead_id,
           task_type: "Miscellaneous",
-          OR: [
-            { remark: { contains: miscTaskKey } },
-            { remark: remarkKey },
-          ],
+          OR: [{ remark: { contains: miscTaskKey } }, { remark: remarkKey }],
         },
         orderBy: { id: "desc" },
         select: { id: true },
@@ -3107,12 +3124,9 @@ export class UnderInstallationStageService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
       // Build Deep Link
-
 
       const redirectPath =
         leadMeta?.account_id && leadMeta.account_id > 0
@@ -3159,5 +3173,22 @@ export class UnderInstallationStageService {
     }
 
     return { ok: true };
+  }
+
+  static async checkMiscellaneousResolved(vendorId: number, leadId: number) {
+    // Count unresolved records
+    const unresolvedCount = await prisma.miscellaneousMaster.count({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        OR: [{ is_resolved: false }],
+      },
+    });
+
+    return {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      all_resolved: unresolvedCount === 0,
+    };
   }
 }

@@ -118,76 +118,99 @@ export class LeadStatsService {
 
     const totalOpenLeads = await countByStatus("open");
     const totalInitialSiteMeasurementLeads = await countByStatus(
-      "initial-site-measurement"
+      "initial-site-measurement",
     );
     const totalDesigningStageLeads = await countByStatus("designing-stage");
     const totalBookingStageLeads = await countByStatus("booking-stage");
     const totalFinalMeasurementStageLeads = await countByStatus(
-      "final-site-measurement-stage"
+      "final-site-measurement-stage",
     );
     const totalClientDocumentationStageLeads = await countByStatus(
-      "client-documentation-stage"
+      "client-documentation-stage",
     );
     const totalClientApprovalStageLeads = await countByStatus(
-      "client-approval-stage"
+      "client-approval-stage",
     );
     const instanceStageTags = ["Type 8", "Type 9", "Type 10"];
 
-    const totalTechCheckStageLeads = await prisma.leadProductStructureInstance.count({
-      where: {
-        vendor_id: vendorId,
-        OR: [
-          { is_tech_check_completed: false },
-          { is_tech_check_completed: null },
-        ],
-        lead: {
-          ...baseLeadScope,
-          statusType: { vendor_id: vendorId, tag: { in: instanceStageTags } },
+    const totalTechCheckStageLeads =
+      await prisma.leadProductStructureInstance.count({
+        where: {
+          vendor_id: vendorId,
+          OR: [
+            { is_tech_check_completed: false },
+            { is_tech_check_completed: null },
+          ],
+          lead: {
+            ...baseLeadScope,
+            statusType: { vendor_id: vendorId, tag: { in: instanceStageTags } },
+          },
         },
-      },
-    });
+      });
 
-    const totalOrderLoginStageLeads = await prisma.leadProductStructureInstance.count({
-      where: {
-        vendor_id: vendorId,
-        is_tech_check_completed: true,
-        OR: [
-          { is_order_login_completed: false },
-          { is_order_login_completed: null },
-        ],
-        lead: {
-          ...baseLeadScope,
-          statusType: { vendor_id: vendorId, tag: { in: instanceStageTags } },
+    const totalOrderLoginStageLeads =
+      await prisma.leadProductStructureInstance.count({
+        where: {
+          vendor_id: vendorId,
+          is_tech_check_completed: true,
+          OR: [
+            { is_order_login_completed: false },
+            { is_order_login_completed: null },
+          ],
+          lead: {
+            ...baseLeadScope,
+            statusType: { vendor_id: vendorId, tag: { in: instanceStageTags } },
+          },
         },
-      },
-    });
+      });
 
-    const totalProductionStageLeads = await prisma.leadProductStructureInstance.count({
-      where: {
-        vendor_id: vendorId,
-        is_tech_check_completed: true,
-        is_order_login_completed: true,
-        lead: {
-          ...baseLeadScope,
-          statusType: { vendor_id: vendorId, tag: { in: instanceStageTags } },
+    const totalProductionStageLeads =
+      await prisma.leadProductStructureInstance.count({
+        where: {
+          vendor_id: vendorId,
+          is_tech_check_completed: true,
+          is_order_login_completed: true,
+          lead: {
+            ...baseLeadScope,
+            statusType: { vendor_id: vendorId, tag: { in: instanceStageTags } },
+          },
         },
-      },
-    });
+      });
     const totalReadyToDispatchStageLeads = await countByStatus(
-      "ready-to-dispatch-stage"
+      "ready-to-dispatch-stage",
     );
     const totalSiteReadinessStageLeads = await countByStatus(
-      "site-readiness-stage"
+      "site-readiness-stage",
     );
     const totalDispatchPlanningStageLeads = await countByStatus(
-      "dispatch-planning-stage"
+      "dispatch-planning-stage",
     );
     const totalDispatchStageLeads = await countByStatus("dispatch-stage");
-    const totalUnderInstallationStageLeads = await countByStatus(
-      "under-installation-stage"
-    );
+    const totalUnderInstallationStageLeads = await prisma.leadMaster.count({
+      where: {
+        ...baseLeadScope,
+
+        // Stage Filter (Type 15)
+        statusType: {
+          vendor_id: vendorId,
+          type: "under-installation-stage",
+        },
+
+        // Hide ONLY when usable completed + misc still pending
+        NOT: {
+          AND: [
+            { usable_handover_completed: true },
+            {
+              miscellaneousMaster: {
+                some: { is_resolved: false },
+              },
+            },
+          ],
+        },
+      },
+    });
     const totalFinalhandoverStageLeads = await countByStatus(
-      "final-handover-stage"
+      "final-handover-stage",
     );
     const totalProjectCompletedStageLeads = await prisma.leadMaster.count({
       where: {
@@ -237,12 +260,12 @@ export class LeadStatsService {
       total_final_measurement_leads: totalFinalMeasurementStageLeads,
       total_client_documentation_leads: totalClientDocumentationStageLeads,
       total_client_approval_leads: totalClientApprovalStageLeads,
-      
+
       total_tech_check_leads: totalTechCheckStageLeads,
       total_order_login_leads: totalOrderLoginStageLeads,
       total_production_stage_leads: totalProductionStageLeads,
       total_ready_to_dispatch_leads: totalReadyToDispatchStageLeads,
-      
+
       total_site_readiness_stage_leads: totalSiteReadinessStageLeads,
       total_dispatch_planning_stage_leads: totalDispatchPlanningStageLeads,
       total_dispatch_stage_leads: totalDispatchStageLeads,

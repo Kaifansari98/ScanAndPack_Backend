@@ -5,7 +5,12 @@ import {
   updateLeadStatusValidation,
   updateDesignSelectionValidation,
 } from "../../../validations/designing-stage.validation";
-import { upload, uploadDesignMeetingFiles, uploadDesigns, uploadMeetingDocs } from "../../../middlewares/uploadWasabi";
+import {
+  upload,
+  uploadDesignMeetingFiles,
+  uploadDesigns,
+  uploadMeetingDocs,
+} from "../../../middlewares/uploadWasabi";
 import { uploadDesignQuotationFiles } from "../../../utils/wasabiClient";
 
 const DesigningStageRouter = Router();
@@ -15,19 +20,19 @@ const DesigningStageRouter = Router();
 DesigningStageRouter.post(
   "/update-status",
   updateLeadStatusValidation,
-  DesigingStageController.addToDesigingStage
+  DesigingStageController.addToDesigingStage,
 );
 
 // GET /api/leads/designing-stage/get-all-leads/vendor/:vendorId/page=1&limit=10
 DesigningStageRouter.get(
   "/get-all-leads/vendor/:vendorId",
-  DesigingStageController.getLeadsByStatus
+  DesigingStageController.getLeadsByStatus,
 );
 
 DesigningStageRouter.post(
   "/upload-quotation",
   uploadDesignQuotationFiles.array("files", 10), // file field in form-data
-  (req, res) => DesigingStageController.upload(req, res)
+  (req, res) => DesigingStageController.upload(req, res),
 );
 
 // POST /api/leads/design-meeting
@@ -35,20 +40,20 @@ DesigningStageRouter.post(
 DesigningStageRouter.post(
   "/design-meeting",
   uploadDesignMeetingFiles.array("files"), // multiple files
-  DesigingStageController.addDesignMeeting
+  DesigingStageController.addDesignMeeting,
 );
 
 // POST /api/leads/designing-stage/add-meeting-docs
 DesigningStageRouter.post(
   "/add-meeting-docs",
   uploadMeetingDocs.array("files", 10), // same multer setup
-  (req, res) => DesigingStageController.addMeetingDocs(req, res)
+  (req, res) => DesigingStageController.addMeetingDocs(req, res),
 );
 
 // GET /api/leads/:vendorId/:leadId/design-meetings
 DesigningStageRouter.get(
   "/:vendorId/:leadId/design-meetings",
-  DesigingStageController.getDesignMeetings
+  DesigingStageController.getDesignMeetings,
 );
 
 // POST /api/leads/designing-stage/upload-designs
@@ -56,7 +61,7 @@ DesigningStageRouter.get(
 DesigningStageRouter.post(
   "/upload-designs",
   uploadDesigns.array("files", 10), // multiple files
-  (req, res) => DesigingStageController.uploadDesigns(req, res)
+  (req, res) => DesigingStageController.uploadDesigns(req, res),
 );
 
 // PUT /api/leads/design-meeting/:meetingId
@@ -64,13 +69,13 @@ DesigningStageRouter.post(
 DesigningStageRouter.put(
   "/design-meeting/:meetingId",
   upload.array("files"), // optional multiple files
-  DesigingStageController.editDesignMeeting
+  DesigingStageController.editDesignMeeting,
 );
 
 // GET /api/leads/designing-stage/vendor/:vendorId/lead/:leadId
 DesigningStageRouter.get(
   "/vendor/:vendorId/lead/:leadId",
-  DesigingStageController.getLeadById
+  DesigingStageController.getLeadById,
 );
 
 // ✅ NEW: Design Selection Routes
@@ -80,27 +85,27 @@ DesigningStageRouter.post(
   "/design-selection",
   upload.none(), // Handle form-data without files
   createDesignSelectionValidation,
-  DesigingStageController.createDesignSelection
+  DesigingStageController.createDesignSelection,
 );
 
 // GET /api/leads/designing-stage/:vendorId/:leadId/design-selections?page=1&limit=10
 DesigningStageRouter.get(
   "/:vendorId/:leadId/design-selections",
-  DesigingStageController.getDesignSelections
+  DesigingStageController.getDesignSelections,
 );
 
 // ✅ NEW: Get Design Quotation Documents
 // GET /api/leads/designing-stage/:vendorId/:leadId/design-quotation-documents
 DesigningStageRouter.get(
   "/:vendorId/:leadId/design-quotation-documents",
-  DesigingStageController.getDesignQuotationDocuments
+  DesigingStageController.getDesignQuotationDocuments,
 );
 
 // ✅ NEW: Get Design Documents
 // GET /api/leads/designing-stage/:vendorId/:leadId/design-stage1-documents
 DesigningStageRouter.get(
   "/:vendorId/:leadId/design-stage1-documents",
-  DesigingStageController.getDesignStageDocuments
+  DesigingStageController.getDesignStageDocuments,
 );
 
 // PUT /api/leads/designing-stage/design-selection/:id
@@ -109,14 +114,27 @@ DesigningStageRouter.put(
   "/design-selection/:id",
   upload.none(), // Handle form-data without files
   updateDesignSelectionValidation,
-  DesigingStageController.updateDesignSelection
+  DesigingStageController.updateDesignSelection,
 );
 
 DesigningStageRouter.get(
   "/:vendorId/:leadId/design-stage-counts",
-  DesigingStageController.getDesignStageCounts
+  DesigingStageController.getDesignStageCounts,
 );
 
-DesigningStageRouter.get("/status/leadId/:lead_id/vendorId/:vendor_id", DesigingStageController.getLeadStatus);
+DesigningStageRouter.get(
+  "/status/leadId/:lead_id/vendorId/:vendor_id",
+  DesigingStageController.getLeadStatus,
+);
 
+
+DesigningStageRouter.get(
+  "/statusfornotification/leadId/:lead_id/vendorId/:vendor_id",
+  DesigingStageController.getLeadStatusForNotification
+);
+
+DesigningStageRouter.get(
+  "/vendor/:vendorId/lead/:leadId/instance/:instanceId/stage",
+  DesigingStageController.getInstanceStageController,
+);
 export default DesigningStageRouter;
