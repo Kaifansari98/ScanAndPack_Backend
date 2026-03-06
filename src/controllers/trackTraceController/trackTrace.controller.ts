@@ -443,6 +443,7 @@ export const createQR = async (_req: Request, res: Response) => {
         const data = await trackTraceService.createQR(payload);
         const baseUrl =
           process.env.PUBLIC_BASE_URL || `${_req.protocol}://${_req.get("host")}`;
+        console.log("[downloadCutListExcel] baseUrl", baseUrl);
 
         if (data) {
             const filePath = await generateWarehouseQRPDF({
@@ -484,6 +485,7 @@ export const downloadCutListExcel = async (_req: Request, res: Response) => {
             unique_project_id,
             baseUrl,
         );
+        console.log("[downloadCutListExcel] filePath", filePath);
 
         // Return Excel file
 
