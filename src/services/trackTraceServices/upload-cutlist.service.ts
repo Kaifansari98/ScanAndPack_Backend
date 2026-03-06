@@ -21,12 +21,14 @@ const ERR = {
   MACHINE_COL_DUPLICATE:     "Duplicate machine column found in the Excel sheet. Please download the latest Excel sheet.",
   INVALID_COL_NAME:          "Invalid column name detected in the Excel sheet. Please download the latest Excel sheet.",
 
-
   // Unique Code values
   UNIQUE_CODE_EMPTY:         "Unique Code value is empty in the Excel sheet. Please download the latest Excel sheet.",
   UNIQUE_CODE_FORMAT:        "Unique Code format is invalid in the Excel sheet. Please download the latest Excel sheet.",
   UNIQUE_CODE_DUPLICATE_VAL: "Duplicate Unique Code values found in the Excel sheet. Please download the latest Excel sheet.",
   UNIQUE_CODE_INVALID_CHARS: "Unique Code contains invalid characters. Please download the latest Excel sheet.",
+
+  // Unique Code DB
+  UNIQUE_CODE_NOT_IN_DB:     "Some Unique Codes do not exist in the system for this project. Please download the latest Excel sheet.",
 
   // Machine values
   MACHINE_VAL_EMPTY:         "Machine value is empty in the Excel sheet. Machine value must be 0 or 1. Please download the latest Excel sheet.",
@@ -41,6 +43,7 @@ const ERR = {
   // System
   PROJECT_NOT_FOUND:         "Project not found for this vendor.",
   MACHINES_NOT_CONFIGURED:   "No machines are configured for this vendor.",
+
 } as const;
 
 // ─────────────────────────────────────────────
@@ -63,20 +66,13 @@ const UploadInputSchema = z.object({
   createdBy:    z.number().int().positive(),
 });
 
-// Valid Unique Code:  <digits>-<uuid>
-// e.g.  8-550e8400-e29b-41d4-a716-446655440000
+
 const UNIQUE_CODE_REGEX =
   /^\d+-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
-// Characters allowed in a Unique Code (digits, hyphens, hex letters only)
+
 const UNIQUE_CODE_CHARS_REGEX = /^[0-9a-fA-F-]+$/;
 
-// Valid machine code column name: alphanumeric + optional _ or -
-const MACHINE_CODE_NAME_REGEX = /^[A-Za-z0-9_-]+$/;
-
-// ─────────────────────────────────────────────
-// Types
-// ─────────────────────────────────────────────
 
 type RawRow = Record<string, unknown>;
 
@@ -88,21 +84,13 @@ interface NormalizedRow {
 export interface UploadResult {
   message: string;
   stats: {
-    totalRows:   number;
-    skippedRows: number;
-    created:     number;
-    deleted:     number;
+    totalRows: number;
+    created:   number;
+    deleted:   number;
   };
 }
 
-// ─────────────────────────────────────────────
-// Header helpers
-// ─────────────────────────────────────────────
 
-/**
- * Collect every header key that appears in any row.
- * Union across all rows handles XLSX sparse-fill on irregular sheets.
- */
 function extractHeaders(rawRows: RawRow[]): string[] {
   const allKeys = new Set<string>();
   for (const row of rawRows) {
@@ -111,36 +99,19 @@ function extractHeaders(rawRows: RawRow[]): string[] {
   return [...allKeys];
 }
 
-/**
- * XLSX sheet_to_json silently renames duplicate headers to avoid key collisions:
- *
- *   Excel has:       "Unique Code"   "Unique Code"   "CNC1"   "CNC1"
- *   XLSX gives you:  "Unique Code"   "Unique Code_1" "CNC1"   "CNC1_1"
- *
- * We detect the pattern  FOO_N  where N is digits AND  FOO  also exists
- * in the header list — which is the exact fingerprint XLSX leaves.
- *
- * Returns the original (un-suffixed) column name of the first duplicate
- * found, or null if no duplicates exist.
- */
 function detectXlsxRenamedDuplicate(trimmedHeaders: string[]): string | null {
-  const headerSet    = new Set(trimmedHeaders);
-  const suffixRegex  = /^(.+)_(\d+)$/;          // matches "Unique Code_1", "CNC1_2", etc.
+  const headerSet   = new Set(trimmedHeaders);
+  const suffixRegex = /^(.+)_(\d+)$/; // matches "Unique Code_1", "CNC1_2", etc.
 
   for (const h of trimmedHeaders) {
     const match = h.match(suffixRegex);
     if (match) {
-      const base = match[1];                     // "Unique Code" or "CNC1"
-      if (headerSet.has(base)) return base;      // original column exists → it was duplicated
+      const base = match[1]; 
+      if (headerSet.has(base)) return base; 
     }
   }
   return null;
 }
-
-// ─────────────────────────────────────────────
-// A — Column-level validation + normalization
-//     Throws on the FIRST structural problem found.
-// ─────────────────────────────────────────────
 
 function validateColumnsAndNormalize(
   rawRows:    RawRow[],
@@ -150,48 +121,37 @@ function validateColumnsAndNormalize(
   const rawHeaders     = extractHeaders(rawRows);
   const trimmedHeaders = rawHeaders.map((h) => h.trim());
 
-  // ── Check 0: XLSX-renamed duplicates ──────────────────────────────────────
-  // Must run FIRST because XLSX has already de-duplicated the keys by the time
-  // the rows reach this function.  If we skip this, ucCount is always 1 and
-  // the duplicate-column error never fires.
   const xlsxDuplicate = detectXlsxRenamedDuplicate(trimmedHeaders);
   if (xlsxDuplicate !== null) {
     if (xlsxDuplicate === "Unique Code") throwError(ERR.UNIQUE_CODE_DUPLICATE_COL);
     throwError(ERR.MACHINE_COL_DUPLICATE);
   }
 
-  // ── Check 1: Blank / whitespace-only column name ──────────────────────────
+  // ── Check 1: Blank / whitespace-only column name 
   if (trimmedHeaders.some((h) => h === "")) throwError(ERR.INVALID_COL_NAME);
 
   const machineCodeSet = new Set(machineCodes);
   const nonUcHeaders   = trimmedHeaders.filter((h) => h !== "Unique Code");
 
-  // ── Check 2: Duplicate "Unique Code" column (native, belt-and-suspenders) ─
+  // ── Check 2: Duplicate "Unique Code" column (native, belt-and-suspenders)
   const ucCount = trimmedHeaders.filter((h) => h === "Unique Code").length;
   if (ucCount > 1) throwError(ERR.UNIQUE_CODE_DUPLICATE_COL);
 
-  // ── Check 3: "Unique Code" column missing ────────────────────────────────
+  // ── Check 3: "Unique Code" column missing
   if (ucCount === 0) throwError(ERR.UNIQUE_CODE_MISSING);
 
-
- 
-
-  // ── Check 6: Duplicate machine column (native) ───────────────────────────
+  // ── Check 6: Duplicate machine column (native) 
   const seenHeaders = new Set<string>();
   for (const h of nonUcHeaders) {
     if (seenHeaders.has(h)) throwError(ERR.MACHINE_COL_DUPLICATE);
     seenHeaders.add(h);
   }
 
-  // ── Check 7: Missing machine columns (in DB but absent from Excel) ────────
+  // ── Check 7: Missing machine columns (in DB but absent from Excel)
   const headerSet  = new Set(trimmedHeaders);
   const hasMissing = machineCodes.some((mc) => !headerSet.has(mc));
   if (hasMissing) throwError(ERR.MACHINE_COL_MISSING);
 
-  // ── Normalize rows ────────────────────────────────────────────────────────
-  // Keep ONLY "Unique Code" + known machine columns.
-  // Pre-fill every expected key with undefined so blank cells (which XLSX
-  // drops entirely) are visible to downstream validators.
   const allowedKeys = new Set(["Unique Code", ...machineCodes]);
 
   return rawRows.map((row) => {
@@ -214,9 +174,6 @@ function validateColumnsAndNormalize(
   });
 }
 
-// ─────────────────────────────────────────────
-// B — Unique Code row validation  (fail-fast per rule)
-// ─────────────────────────────────────────────
 
 function validateUniqueCodes(normalizedRows: NormalizedRow[]): void {
   // Rule 1 — empty value
@@ -294,11 +251,11 @@ export const uploadCutListMachineExcel = async (
   createdBy:    number,
 ): Promise<UploadResult> => {
 
-  // ── STEP 1: Validate inputs ──────────────────────────────
+  // ── STEP 1: Validate inputs ───────────────────────────────
   const inputParse = UploadInputSchema.safeParse({ vendorId, projectToken, createdBy });
   if (!inputParse.success) throwError(ERR.FILE_INVALID_FORMAT);
 
-  // ── STEP 2: Fetch project ────────────────────────────────
+  // ── STEP 2: Fetch project ─────────────────────────────────
   const project = await prisma.projectMaster.findFirst({
     where:  { unique_project_id: projectToken, vendor_id: vendorId },
     select: { id: true },
@@ -307,7 +264,7 @@ export const uploadCutListMachineExcel = async (
 
   const projectId = project!.id;
 
-  // ── STEP 3: Fetch machines ───────────────────────────────
+  // ── STEP 3: Fetch machines ────────────────────────────────
   const machines = await prisma.machineMaster.findMany({
     where:  { vendor_id: vendorId },
     select: { id: true, machine_code: true },
@@ -317,21 +274,21 @@ export const uploadCutListMachineExcel = async (
   const machineMap   = new Map<string, number>(machines.map((m) => [m.machine_code, m.id]));
   const machineCodes = [...machineMap.keys()];
 
-  // ── STEP 4: Non-empty rows check ────────────────────────
+  // ── STEP 4: Non-empty rows check ──────────────────────────
   if (!Array.isArray(rawRows) || rawRows.length === 0) {
     throwError(ERR.SHEET_NO_DATA);
   }
 
-  // ── STEP 5: Column structure validation + normalization ──
+  // ── STEP 5: Column structure validation + normalization ───
   const normalizedRows = validateColumnsAndNormalize(rawRows, machineMap);
 
-  // ── STEP 6: Unique Code validation ──────────────────────
+  // ── STEP 6: Unique Code validation ────────────────────────
   validateUniqueCodes(normalizedRows);
 
-  // ── STEP 7: Machine value validation ────────────────────
+  // ── STEP 7: Machine value validation ──────────────────────
   validateMachineValues(normalizedRows, machineCodes);
 
-  // ── STEP 8: Batch-fetch cutLists ─────────────────────────
+  // ── STEP 8: Batch-fetch cutLists ──────────────────────────
   const uniqueCodes = normalizedRows.map((r) => String(r["Unique Code"]).trim());
 
   const cutLists = await prisma.cutList.findMany({
@@ -349,7 +306,11 @@ export const uploadCutListMachineExcel = async (
       .map((c)    => [c.unique_code as string, c.id]),
   );
 
-  // ── STEP 9: Batch-fetch existing mappings ────────────────
+  // ── STEP 8.5: Validate every Unique Code exists in DB ─────
+  const missingCode = uniqueCodes.find((code) => !cutListMap.has(code));
+  if (missingCode !== undefined) throwError(ERR.UNIQUE_CODE_NOT_IN_DB);
+
+  // ── STEP 9: Batch-fetch existing mappings ─────────────────
   const cutListIds = [...cutListMap.values()];
 
   const existingMappings = await prisma.cutListMachineMapping.findMany({
@@ -367,19 +328,13 @@ export const uploadCutListMachineExcel = async (
     existingMappingMap.set(`${m.cut_list_id}:${m.machine_id}`, m.id);
   }
 
-  // ── STEP 10: Build create / delete lists ─────────────────
+  // ── STEP 10: Build create / delete lists ──────────────────
   const toCreate: Prisma.CutListMachineMappingCreateManyInput[] = [];
   const toDeleteIds: number[] = [];
-  let skippedRows = 0;
 
   for (const row of normalizedRows) {
     const uniqueCode = String(row["Unique Code"]).trim();
-    const cutListId  = cutListMap.get(uniqueCode);
-
-    if (!cutListId) {
-      skippedRows++;
-      continue;
-    }
+    const cutListId  = cutListMap.get(uniqueCode)!; // guaranteed by Step 8.5
 
     for (const [machineCode, machineId] of machineMap.entries()) {
       const excelValue = Number(row[machineCode]) as 0 | 1;
@@ -402,7 +357,7 @@ export const uploadCutListMachineExcel = async (
     }
   }
 
-  // ── STEP 11: Transaction (unchanged) ────────────────────
+  // ── STEP 11: Transaction ──────────────────────────────────
   const [createResult, deleteResult] = await prisma.$transaction([
     prisma.cutListMachineMapping.createMany({
       data:           toCreate,
@@ -416,10 +371,9 @@ export const uploadCutListMachineExcel = async (
   return {
     message: "Excel processed successfully.",
     stats: {
-      totalRows:   normalizedRows.length,
-      skippedRows,
-      created:     createResult.count,
-      deleted:     deleteResult.count,
+      totalRows: normalizedRows.length,
+      created:   createResult.count,
+      deleted:   deleteResult.count,
     },
   };
 };
