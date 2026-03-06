@@ -49,7 +49,8 @@ app.use(express.urlencoded({ extended: true, limit: "200mb" }));
 
 app.use(requestLogger);
 // ✅ Serve static assets (e.g., PDFs, images, etc.) from /assets
-app.use("/assets", express.static(path.join(__dirname, "..", "assets")));
+// app.use("/assets", express.static(path.join(__dirname, "..", "assets")));
+app.use("/assets", express.static(path.join(__dirname, "..", "public", "assets")));
 // Now: http://yourdomain.com/assets/filename.pdf
 
 // ✅ Root test route
