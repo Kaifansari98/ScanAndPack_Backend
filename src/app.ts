@@ -51,6 +51,7 @@ app.use(requestLogger);
 // ✅ Serve static assets (e.g., PDFs, images, etc.) from /assets
 // app.use("/assets", express.static(path.join(__dirname, "..", "assets")));
 app.use("/assets", express.static(path.join(__dirname, "..", "public", "assets")));
+app.use(express.static(path.join(__dirname, "..", "public")));
 // Now: http://yourdomain.com/assets/filename.pdf
 
 // ✅ Root test route
