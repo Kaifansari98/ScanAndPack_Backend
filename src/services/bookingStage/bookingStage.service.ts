@@ -2667,6 +2667,10 @@ export class BookingStageService {
     const isAllStages = tag.toUpperCase() === "ALL";
 
     const normalizedTag = String(tag);
+    const tagNumber = Number(normalizedTag.replace(/type/i, "").trim());
+    const isType4To16 = Number.isFinite(tagNumber)
+      ? tagNumber >= 4 && tagNumber <= 16
+      : false;
 
     const isTechCheckStage = normalizedTag === "Type 8";
     const isOrderLoginStage = normalizedTag === "Type 9";
@@ -2741,6 +2745,26 @@ const statusTags =
 
     const normalizedUserType = creator?.user_type?.user_type?.toLowerCase();
     const isAdmin = normalizedUserType === "admin";
+    const isSuperAdmin = normalizedUserType === "super-admin";
+    const isAdminLikeForRange = isType4To16 && (isAdmin || isSuperAdmin);
+    const shouldUseMappingForRange =
+      isType4To16 &&
+      [
+        "sales-executive",
+        "site-supervisor",
+        "backend",
+        "tech-check",
+        "factory",
+        "head-site-supervisor",
+      ].includes(normalizedUserType || "");
+    const shouldIncludeFranchiseByRole =
+      isType4To16 &&
+      [
+        "sales-executive",
+        "site-supervisor",
+        "admin",
+        "super-admin",
+      ].includes(normalizedUserType || "");
     const shouldIncludeFranchise =
       normalizedUserType === "admin" ||
       normalizedUserType === "super-admin" ||
@@ -3163,7 +3187,7 @@ const statusTags =
     };
 
     // ============= Admin Flow =============
-    if (isAdmin) {
+    if (isAdminLikeForRange || (!isType4To16 && isAdmin)) {
       const baseWhere: Prisma.LeadMasterWhereInput = {
         vendor_id: vendorId,
         is_deleted: false,
@@ -3173,7 +3197,11 @@ const statusTags =
           ? "onGoing"
           : { in: ["onGoing", "lostApproval"] },
       };
-      if (shouldIncludeFranchise && franchiseId && !ignoreFranchiseForStage) {
+      const includeFranchise =
+        (isType4To16 ? shouldIncludeFranchiseByRole : shouldIncludeFranchise) &&
+        franchiseId &&
+        !ignoreFranchiseForStage;
+      if (includeFranchise) {
         baseWhere.franchise_id = franchiseId;
       }
 
@@ -3263,6 +3291,14 @@ const statusTags =
         : { in: ["onGoing", "lostApproval"] },
     };
     if (shouldIncludeFranchise && franchiseId && !ignoreFranchiseForStage) {
+      baseWhere.franchise_id = franchiseId;
+    }
+
+    const includeFranchise =
+      (isType4To16 ? shouldIncludeFranchiseByRole : shouldIncludeFranchise) &&
+      franchiseId &&
+      !ignoreFranchiseForStage;
+    if (includeFranchise) {
       baseWhere.franchise_id = franchiseId;
     }
 
