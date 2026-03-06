@@ -2349,7 +2349,9 @@ export const downloadCutListExcel = async (
     XLSX.utils.book_append_sheet(workbook, worksheet, "Cut List");
 
     // ✅ Define the directory path
-    const publicDir = process.cwd();
+    // const publicDir = process.cwd();
+    const publicDir = path.join(process.cwd(), "public");
+
     const excelDir = path.join(publicDir, "assets", "track-trace", "excel");
 
     // ✅ Create directory if it doesn't exist
