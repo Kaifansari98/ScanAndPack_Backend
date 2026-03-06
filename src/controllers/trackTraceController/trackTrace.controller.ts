@@ -441,7 +441,8 @@ export const createQR = async (_req: Request, res: Response) => {
 
     try {
         const data = await trackTraceService.createQR(payload);
-        const baseUrl = `${_req.protocol}://${_req.get("host")}`;
+        const baseUrl =
+          process.env.PUBLIC_BASE_URL || `${_req.protocol}://${_req.get("host")}`;
 
         if (data) {
             const filePath = await generateWarehouseQRPDF({
@@ -466,7 +467,8 @@ export const downloadCutListExcel = async (_req: Request, res: Response) => {
     try {
         const searchParams = _req.body.searchParams;
         const vendorId = _req.body.vendorId;
-        const baseUrl = `${_req.protocol}://${_req.get("host")}`;
+        const baseUrl =
+          process.env.PUBLIC_BASE_URL || `${_req.protocol}://${_req.get("host")}`;
         console.log("vendorId", vendorId);
         const unique_project_id = _req.body.unique_project_id; // searchParams.get('unique_project_id');
 
