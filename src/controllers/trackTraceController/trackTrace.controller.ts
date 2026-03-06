@@ -522,7 +522,7 @@ export const downloadCutListExcelFile = async (req: Request, res: Response) => {
                 .json(ApiResponse.error("File not found", 404));
         }
 
-        return res.sendFile(filePath);
+        return res.download(filePath, filename);
     } catch (error: any) {
         console.error("Error serving Excel file:", error);
         return res
