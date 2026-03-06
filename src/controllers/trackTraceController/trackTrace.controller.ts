@@ -457,12 +457,46 @@ export const createQR = async (_req: Request, res: Response) => {
                 })),
                 baseUrl,
             });
-            return res.status(200).json(ApiResponse.success(filePath, "", 200));
+            const filename = path.basename(filePath);
+            const fileUrl = `${baseUrl}/api/track-trace/qr-labels/${filename}`;
+            return res.status(200).json(ApiResponse.success(fileUrl, "", 200));
         } else {
             return res.status(200).json(ApiResponse.error("No data avialbale", 200));
         }
     } catch (err) {
         return res.status(200).json(ApiResponse.error("", 500));
+    }
+};
+
+export const downloadQrLabelsFile = async (req: Request, res: Response) => {
+    try {
+        const filename = String(req.params.filename || "").trim();
+        if (!filename) {
+            return res
+                .status(400)
+                .json(ApiResponse.error("Filename is required", 400));
+        }
+
+        const filePath = path.join(
+            process.cwd(),
+            "assets",
+            "track-trace",
+            "qr",
+            filename
+        );
+
+        if (!fs.existsSync(filePath)) {
+            return res
+                .status(404)
+                .json(ApiResponse.error("File not found", 404));
+        }
+
+        return res.download(filePath, filename);
+    } catch (error: any) {
+        console.error("Error serving QR labels:", error);
+        return res
+            .status(500)
+            .json(ApiResponse.error("Failed to serve file", 500));
     }
 };
 
