@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { PostProductionController } from "../../../controllers/leadModuleControllers/production/post-production/postProduction.controller";
-import { uploadPostProductionFiles } from "../../../middlewares/uploadWasabi";
+import { uploadPostProductionFiles, uploadPreProductionFiles } from "../../../middlewares/uploadWasabi";
 
 const postProductionRoutes = Router();
 const controller = new PostProductionController();
@@ -68,6 +68,23 @@ postProductionRoutes.put(
 postProductionRoutes.put(
   "/vendorId/:vendorId/leadId/:leadId/move-to-ready-to-dispatch",
   controller.moveLeadToReadyToDispatch
+);
+
+// ✅ Pre-Production Files (Type 37)
+postProductionRoutes.post(
+  "/vendorId/:vendorId/leadId/:leadId/upload-pre-production-files",
+  uploadPreProductionFiles.array("files", 10),
+  controller.uploadPreProductionFiles
+);
+
+postProductionRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/get-pre-production-files",
+  controller.getPreProductionFiles
+);
+
+postProductionRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/check-pre-production-files-ready",
+  controller.checkPreProductionFilesReady
 );
 
 export default postProductionRoutes;

@@ -719,6 +719,106 @@ export class PostProductionService {
     };
   }
 
+  async uploadPreProductionFiles(
+    vendorId: number,
+    leadId: number,
+    accountId: number | null,
+    userId: number,
+    files: { originalName: string; sysName: string }[],
+    instanceId?: number | null
+  ) {
+    const docType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id: vendorId, tag: "Type 38" },
+    });
+
+    if (!docType)
+      throw Object.assign(
+        new Error("Document type (Type 38) not found for this vendor"),
+        { statusCode: 404 },
+      );
+
+    const uploadedDocs = [];
+
+    for (const file of files) {
+      const doc = await prisma.leadDocuments.create({
+        data: {
+          doc_og_name: file.originalName,
+          doc_sys_name: file.sysName,
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          created_by: userId,
+          doc_type_id: docType.id,
+          product_structure_instance_id:
+            typeof instanceId !== "undefined" ? instanceId : null,
+        },
+      });
+      uploadedDocs.push(doc);
+    }
+
+    return uploadedDocs;
+  }
+
+  async getPreProductionFiles(
+    vendorId: number,
+    leadId: number,
+    instanceId?: number | null
+  ) {
+    const docType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id: vendorId, tag: "Type 38" },
+    });
+
+    if (!docType) return [];
+
+    const docs = await prisma.leadDocuments.findMany({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        doc_type_id: docType.id,
+        is_deleted: false,
+        ...(typeof instanceId !== "undefined"
+          ? { product_structure_instance_id: instanceId ?? null }
+          : {}),
+      },
+      orderBy: { created_at: "asc" },
+    });
+
+    const withUrls = await Promise.all(
+      docs.map(async (doc) => ({
+        ...doc,
+        signed_url: await generateSignedUrl(doc.doc_sys_name, 3600, "inline"),
+      })),
+    );
+
+    return withUrls;
+  }
+
+  async checkPreProductionFilesReady(
+    vendorId: number,
+    leadId: number,
+    instanceId?: number | null
+  ) {
+    const docType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id: vendorId, tag: "Type 38" },
+    });
+
+    if (!docType) return { readyForUnderProduction: false };
+
+    const count = await prisma.leadDocuments.count({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        doc_type_id: docType.id,
+        is_deleted: false,
+        ...(typeof instanceId !== "undefined"
+          ? { product_structure_instance_id: instanceId ?? null }
+          : {}),
+      },
+    });
+
+    return { readyForUnderProduction: count > 0 };
+  }
+
   async markProductionCompleted(
     vendorId: number,
     leadId: number,

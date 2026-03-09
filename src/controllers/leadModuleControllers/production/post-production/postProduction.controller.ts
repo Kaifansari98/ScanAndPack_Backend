@@ -5,6 +5,7 @@ import {
   uploadToWasabiProductionFilesHardwarePackingDocsFile,
   uploadToWasabiProductionFilesQcPhotosFile,
   uploadToWasabiProductionFilesWoodworkPackingDocsFile,
+  uploadToWasabiPreProductionFilesFile,
 } from "../../../../utils/wasabiClient";
 import fs from "node:fs/promises";
 import { resolveClientBaseUrl } from "../../../../utils/fileUtils";
@@ -690,6 +691,165 @@ export class PostProductionController {
       console.error(
         "[PostProductionController] markProductionCompleted error:",
         error
+      );
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  }
+
+  async uploadPreProductionFiles(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+      const { account_id, created_by, instance_id } = req.body;
+      const { instance_id: instanceIdQuery } = req.query;
+      const files = req.files as Express.Multer.File[];
+
+      const bodyInstanceRaw = Array.isArray(instance_id)
+        ? instance_id[0]
+        : instance_id;
+      const queryInstanceRaw = Array.isArray(instanceIdQuery)
+        ? instanceIdQuery[0]
+        : instanceIdQuery;
+      const parsedInstanceId =
+        typeof bodyInstanceRaw !== "undefined"
+          ? Number(bodyInstanceRaw)
+          : typeof queryInstanceRaw !== "undefined"
+          ? Number(queryInstanceRaw)
+          : undefined;
+      const instanceIdValue = Number.isFinite(parsedInstanceId)
+        ? parsedInstanceId
+        : undefined;
+
+      if (!vendorId || !leadId || !created_by) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId, leadId and created_by are required",
+        });
+      }
+
+      if (!files || files.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "At least one file must be uploaded",
+        });
+      }
+
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+      for (const file of files) {
+        const sysName = await uploadToWasabiPreProductionFilesFile(
+          file.path,
+          Number(vendorId),
+          Number(leadId),
+          file.originalname,
+          file.mimetype,
+        );
+
+        await fs.unlink(file.path);
+
+        uploadedFiles.push({ originalName: file.originalname, sysName });
+      }
+
+      const uploaded = await service.uploadPreProductionFiles(
+        Number(vendorId),
+        Number(leadId),
+        account_id ? Number(account_id) : null,
+        Number(created_by),
+        uploadedFiles,
+        instanceIdValue,
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Pre-production files uploaded successfully",
+        count: uploaded.length,
+        data: uploaded,
+      });
+    } catch (error: any) {
+      console.error(
+        "[PostProductionController] uploadPreProductionFiles Error:",
+        error,
+      );
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message:
+          error.message ||
+          "Internal server error while uploading pre-production files",
+      });
+    }
+  }
+
+  async getPreProductionFiles(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+      const { instance_id } = req.query;
+      const parsedInstanceId =
+        typeof instance_id !== "undefined" ? Number(instance_id) : undefined;
+      const safeInstanceId = Number.isFinite(parsedInstanceId)
+        ? parsedInstanceId
+        : undefined;
+
+      if (!vendorId || !leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and leadId are required",
+        });
+      }
+
+      const data = await service.getPreProductionFiles(
+        Number(vendorId),
+        Number(leadId),
+        safeInstanceId,
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Pre-production files fetched successfully",
+        count: data.length,
+        data,
+      });
+    } catch (error: any) {
+      console.error(
+        "[PostProductionController] getPreProductionFiles Error:",
+        error,
+      );
+      return res.status(500).json({
+        success: false,
+        message:
+          error.message ||
+          "Internal server error while fetching pre-production files",
+      });
+    }
+  }
+
+  async checkPreProductionFilesReady(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+      const { instance_id } = req.query;
+
+      if (!vendorId || !leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and leadId are required",
+        });
+      }
+
+      const result = await service.checkPreProductionFilesReady(
+        Number(vendorId),
+        Number(leadId),
+        typeof instance_id !== "undefined" ? Number(instance_id) : undefined,
+      );
+
+      return res.status(200).json({
+        success: true,
+        ...result,
+      });
+    } catch (error: any) {
+      console.error(
+        "[PostProductionController] checkPreProductionFilesReady Error:",
+        error,
       );
       return res.status(500).json({
         success: false,

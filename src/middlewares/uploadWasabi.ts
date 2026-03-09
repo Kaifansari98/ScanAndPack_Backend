@@ -403,6 +403,20 @@ export const uploadPostProductionFiles = multer({
   limits: { fileSize: 200 * 1024 * 1024, files: 10 },
 });
 
+export const uploadPreProductionFiles = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/pre_production_files";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 10 },
+});
+
 export const uploadReadyToDispatchPhotos = multer({
   storage: multer.diskStorage({
     destination: (_req, _file, cb) => {

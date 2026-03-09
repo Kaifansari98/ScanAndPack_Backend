@@ -449,6 +449,33 @@ export const uploadToWasabiProductionFilesWoodworkPackingDocsFile = async (
   return sysName;
 };
 
+export const uploadToWasabiPreProductionFilesFile = async (
+  filePath: string,
+  vendorId: number,
+  leadId: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `pre_production_files/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
+
+  return sysName;
+};
+
 export const uploadToWasabiCurrentSitePhotosReadyToDispatch = async (
   buffer: Buffer,
   vendorId: number,
