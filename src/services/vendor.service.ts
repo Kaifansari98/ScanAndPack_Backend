@@ -82,6 +82,28 @@ export const getVendorStatusTypes = async (vendorId: number) => {
       id: "asc",
     },
   });
-
   return statusTypes;
+};
+
+
+
+export const getVendorSettingValue = async (
+  vendorId: number,
+  key: string
+) => {
+  const setting = await prisma.vendorSettingKey.findFirst({
+    where: { key },
+
+    select: {
+      default_value: true,
+
+      vendorSettings: {
+        where: { vendor_id: vendorId },
+        select: { value: true },
+        take: 1,
+      },
+    },
+  });
+
+  return setting?.vendorSettings?.[0]?.value ?? setting?.default_value ?? null;
 };

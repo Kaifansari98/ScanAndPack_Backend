@@ -15,7 +15,7 @@ export async function resolveEmailIdentity(vendorId: number) {
   }
 
   return {
-    senderName: vendor.vendor_name + "CRM",
+    senderName: vendor.vendor_name + " CRM",
     senderEmail: vendor.primary_contact_email,
   };
 }

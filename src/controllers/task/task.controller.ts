@@ -8,17 +8,19 @@ export class TaskController {
     try {
       const vendorId = Number(req.params.vendorId);
       const userId = Number(req.params.userId);
+      const franchiseId = Number(req.query.franchise_id);
 
-      if (isNaN(vendorId) || isNaN(userId)) {
+      if (isNaN(vendorId) || isNaN(userId) || isNaN(franchiseId)) {
         return res.status(400).json({
           success: false,
-          message: "Invalid vendorId or userId",
+          message: "Invalid vendorId, userId, or franchise_id",
         });
       }
 
       const { tasks, count } = await TaskService.getTasksByVendorAndUser2(
         vendorId,
         userId,
+        franchiseId,
         1,
         1000,
         {},
@@ -43,6 +45,7 @@ export class TaskController {
     try {
       const vendorId = Number(req.params.vendorId);
       const userId = Number(req.params.userId);
+      const franchiseId = Number(req.body.franchise_id);
 
       const page = parseInt((req.body.page as string) || "1");
       const limit = parseInt((req.body.limit as string) || "10");
@@ -150,7 +153,7 @@ export class TaskController {
       // ======================
       // VALIDATION GATE
       // ======================
-      if (!vendorId || !userId) {
+      if (!vendorId || !userId || !franchiseId) {
         logger.warn("[TaskController] Missing vendorId or userId", {
           vendorId,
           userId,
@@ -158,7 +161,7 @@ export class TaskController {
 
         return res.status(400).json({
           success: false,
-          message: "Vendor ID and User ID are required",
+          message: "Vendor ID, User ID, and Franchise ID are required",
         });
       }
 
@@ -174,6 +177,7 @@ export class TaskController {
         await TaskService.getTasksByVendorAndUser2(
           vendorId,
           userId,
+          franchiseId,
           page,
           limit,
           filters,
@@ -291,16 +295,18 @@ export class TaskController {
   static async getTasksByVendor(req: Request, res: Response) {
     try {
       const vendorId = Number(req.params.vendorId);
+      const franchiseId = Number(req.query.franchise_id);
 
-      if (isNaN(vendorId)) {
+      if (isNaN(vendorId) || isNaN(franchiseId)) {
         return res.status(400).json({
           success: false,
-          message: "Invalid vendorId",
+          message: "Invalid vendorId or franchise_id",
         });
       }
 
       const { tasks, count } = await TaskService.getTasksFilterByVendor2(
         vendorId,
+        franchiseId,
         1,
         1000,
         {},
@@ -324,6 +330,7 @@ export class TaskController {
   static async getTasksFilterByVendorAll(req: Request, res: Response) {
     try {
       const vendorId = Number(req.params.vendorId);
+      const franchiseId = Number(req.body.franchise_id);
 
       const page = parseInt((req.body.page as string) || "1");
       const limit = parseInt((req.body.limit as string) || "10");
@@ -427,14 +434,14 @@ export class TaskController {
       // ======================
       // VALIDATION GATE
       // ======================
-      if (!vendorId) {
+      if (!vendorId || !franchiseId) {
         logger.warn("[TaskController] Missing vendorId", {
           vendorId,
         });
 
         return res.status(400).json({
           success: false,
-          message: "Vendor ID is required",
+          message: "Vendor ID and Franchise ID are required",
         });
       }
 
@@ -448,6 +455,7 @@ export class TaskController {
       const { tasks, count, summary } =
         await TaskService.getTasksFilterByVendor2(
           vendorId,
+          franchiseId,
           page,
           limit,
           filters,
@@ -485,16 +493,21 @@ export class TaskController {
     try {
       const vendorId = Number(req.params.vendorId);
       const leadId = Number(req.params.leadId);
+      const franchiseId = Number(req.query.franchise_id);
 
-      if (isNaN(vendorId) || isNaN(leadId)) {
+      if (isNaN(vendorId) || isNaN(leadId) || isNaN(franchiseId)) {
         return res
           .status(400)
-          .json({ success: false, message: "Invalid vendorId or leadId" });
+          .json({
+            success: false,
+            message: "Invalid vendorId, leadId, or franchise_id",
+          });
       }
 
       const tasks = await TaskService.getActiveTasksByVendorAndLead(
         vendorId,
         leadId,
+        franchiseId,
       );
       return res
         .status(200)

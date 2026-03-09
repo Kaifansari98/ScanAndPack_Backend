@@ -3,9 +3,14 @@ import { prisma } from "../../prisma/client";
 import logger from "../../utils/logger";
 
 export class LeadStatsService {
-  static async getVendorLeadStats(vendorId: number, userId?: number) {
+  static async getVendorLeadStats(
+    vendorId: number,
+    franchiseId: number | undefined,
+    userId?: number
+  ) {
     logger.info("[LeadStatsService] getVendorLeadStats called", {
       vendorId,
+      franchiseId,
       userId,
     });
 
@@ -35,16 +40,40 @@ export class LeadStatsService {
       }
 
       const userType = user.user_type.user_type.toLowerCase();
+      const shouldIncludeFranchise = [
+        "sales-executive",
+        "site-supervisor",
+        "admin",
+        "super-admin",
+      ].includes(userType);
+      const shouldUseMapping = [
+        "sales-executive",
+        "site-supervisor",
+        "backend",
+        "tech-check",
+        "factory",
+        "head-site-supervisor",
+      ].includes(userType);
+
+      if (shouldIncludeFranchise && franchiseId) {
+        whereClause = {
+          ...whereClause,
+          franchise_id: franchiseId,
+        };
+      }
 
       totalMyTasks = await prisma.userLeadTask.count({
         where: {
           vendor_id: vendorId,
+          ...(shouldIncludeFranchise && franchiseId
+            ? { franchise_id: franchiseId }
+            : {}),
           user_id: userId,
           status: { in: ["open", "in_progress"] },
         },
       });
 
-      if (userType === "sales-executive" || userType === "site-supervisor") {
+      if (shouldUseMapping) {
         // ✅ Leads from LeadUserMapping
         const mappedLeads = await prisma.leadUserMapping.findMany({
           where: { vendor_id: vendorId, user_id: userId, status: "active" },

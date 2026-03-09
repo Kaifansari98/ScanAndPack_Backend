@@ -1,6 +1,6 @@
 
 import { Request, Response } from "express"
-import { uploadCutListMachineExcel } from "src/services/trackTraceServices/upload-cutlist.service";
+import { uploadCutListMachineExcel } from "../../../src/services/trackTraceServices/upload-cutlist.service";
 import * as XLSX from "xlsx";
 
 

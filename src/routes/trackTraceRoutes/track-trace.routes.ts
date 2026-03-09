@@ -17,19 +17,32 @@ import {
   assignMachine,
   createQR,
   downloadCutListExcel,
+  downloadCutListExcelFile,
+  downloadQrLabelsFile,
   getVendorLead,
   linkLeadToProject,
 } from "../../controllers/trackTraceController/trackTrace.controller";
 
-import { scan_item } from "../../controllers/trackTraceController/trackTrace.controller";
+import { 
+    scan_item,
+    check_item,
+    get_defect,
+    mark_Defect,
+    check_defect,
+    getScanStatsDashboard
+} from '../../controllers/trackTraceController/trackTrace.controller';
+
 import { uploadMachineExcel } from "../../../src/controllers/trackTraceController/upload-cutlist.controller";
+
 
 const router = Router();
 
 router.get("/project/:vendor_id", getAllProjectsTrackTrace);
 router.get("/get-filter-track-trace/:vendor_id", get_filter_track_trace);
 
-router.post("/scan/item", scan_item);
+router.post('/scan/item', scan_item);
+router.post('/scan/check-item', check_item);
+
 
 router.get("/machines/:vendor_id/:user_id", getAllMachines);
 
@@ -48,8 +61,10 @@ router.get("/cut-list-machine/:vendor_id/:project_id", getCutListMachine);
 router.post("/assign-machine", assignMachine);
 
 router.post("/create-qr-code", createQR);
+router.get("/qr-labels/:filename", downloadQrLabelsFile);
 
 router.post("/download-cut-list-excel", downloadCutListExcel);
+router.get("/cutlist-excel/:filename", downloadCutListExcelFile);
 
 router.get("/leads/search/:vendor_id/:search", getVendorLead);
 
@@ -57,9 +72,17 @@ router.post("/link-lead/:project_id/lead", linkLeadToProject);
 
 const storage = multer.memoryStorage();
 
+router.get('/defect-master/:vendor_id',get_defect);
+router.post('/mark-defect',mark_Defect);
+router.post('/scan/check-defect', check_defect);
+router.get('/get-scan-status-dashboard/:vendor_id/:user_id',getScanStatsDashboard);
+
+
+
 const upload = multer({
   storage,
 });
+
 
 router.post(
   "/upload-machine-excel/:vendor_id/:project_token",

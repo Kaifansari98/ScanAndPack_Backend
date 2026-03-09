@@ -78,6 +78,12 @@ model VendorMaster {
   taxInfo                     VendorTaxInfo[]
   tokens                      VendorTokens[]
   userMachineMapping          UserMachineMapping[]
+  vendorSetting               VendorSetting[]
+  defectMaster                DefectMaster[]
+  defectedItems DefectedItem[]
+
+  franchises                  FranchiseMaster[]
+  headSiteSupervisorFranchiseMappings HeadSiteSupervisorFranchiseMapping[]
 }
 
 model VendorAddress {
@@ -112,6 +118,7 @@ model UserTypeMaster {
 model UserMaster {
   id                                   Int                                 @id @default(autoincrement())
   vendor_id                            Int
+  franchise_id                         Int?
   user_name                            String
   user_contact                         String                              @unique
   user_email                           String
@@ -179,12 +186,18 @@ model UserMaster {
   vendor                               VendorMaster                        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   pushTokens                           UserPushToken[]
   operator                             CutListMachineMapping[]
+  createdDefects DefectedItem[]
+
 
   userMachineMappings        UserMachineMapping[] @relation("UserMachine_user")
   createdUserMachineMappings UserMachineMapping[] @relation("UserMachine_createdBy")
   updatedUserMachineMappings UserMachineMapping[] @relation("UserMachine_updatedBy")
   orderLoginPoFilesCreated   OrderLoginPoFileMapping[] @relation("OrderLoginPoFileCreatedBy")
   orderLoginPoFilesDeleted   OrderLoginPoFileMapping[] @relation("OrderLoginPoFileDeletedBy")
+  userGeographicalMappings   UserGeographicalMapping[]
+  franchise                            FranchiseMaster?                    @relation(fields: [franchise_id], references: [id])
+  headSiteSupervisorFranchiseMappings HeadSiteSupervisorFranchiseMapping[] @relation("HeadSiteSupervisorFranchiseMappingUser")
+  headSiteSupervisorFranchiseMappingsCreated HeadSiteSupervisorFranchiseMapping[] @relation("HeadSiteSupervisorFranchiseMappingCreatedBy")
 }
 
 model UserDocument {
@@ -218,6 +231,7 @@ model ProjectMaster {
   createdByUser         UserMaster              @relation("CreatedByUser", fields: [created_by], references: [id], onDelete: Cascade)
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   scanItems             ScanAndPackItem[]
+  defectedItems DefectedItem[]
 }
 
 model ProjectDetails {
@@ -343,6 +357,7 @@ model LeadMaster {
   site_address                                String?
   site_type_id                                Int?
   source_id                                   Int?
+  franchise_id                                Int?
   archetech_name                              String?
   designer_remark                             String?
   created_by                                  Int
@@ -418,6 +433,7 @@ model LeadMaster {
   statusType                                  StatusTypeMaster?                   @relation(fields: [status_id], references: [id], onDelete: Cascade)
   updatedBy                                   UserMaster?                         @relation("LeadUpdatedBy", fields: [updated_by], references: [id])
   vendor                                      VendorMaster                        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  franchise                                  FranchiseMaster?                    @relation(fields: [franchise_id], references: [id])
   productMappings                             LeadProductMapping[]
   productStructureInstances                   LeadProductStructureInstance[]
   leadProductStructureMapping                 LeadProductStructureMapping[]
@@ -499,6 +515,7 @@ model AccountMaster {
   alt_contact_no              String?
   email                       String?
   vendor_id                   Int
+  franchise_id                Int?
   created_by                  Int
   created_at                  DateTime                            @default(now())
   updated_by                  Int?
@@ -509,6 +526,7 @@ model AccountMaster {
   createdBy                   UserMaster                          @relation("AccountCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   updatedBy                   UserMaster?                         @relation("AccountUpdatedBy", fields: [updated_by], references: [id])
   vendor                      VendorMaster                        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  franchise                   FranchiseMaster?                    @relation(fields: [franchise_id], references: [id])
   installationIssueLogMaster  InstallationIssueLogMaster[]
   installationUpdates         InstallationUpdate[]
   installerMappings           InstallerUserMapping[]
@@ -893,6 +911,7 @@ model UserLeadTask {
   lead_id     Int
   account_id  Int
   vendor_id   Int
+  franchise_id Int?
   user_id     Int
 
   // ✅ NEW COLUMN
@@ -1312,7 +1331,6 @@ model MachineMaster {
   machine_type_id       Int?
   machineType           MachineTypeMaster? @relation(fields: [machine_type_id], references: [id])
 
-
   status                MachineStatus           @default(ACTIVE)
   scan_type             ScanType
   description           String?
@@ -1328,9 +1346,10 @@ model MachineMaster {
   cutListMachineMapping CutListMachineMapping[]
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])  
   userMachineMappings UserMachineMapping[]
-
+  defectedItems DefectedItem[]
 
 }
+
 
 model CutList {
   id                    Int                     @id @default(autoincrement())
@@ -1360,6 +1379,9 @@ model CutList {
   
   lead                  LeadMaster?              @relation(fields: [lead_id], references: [id])
   cutListMachineMapping CutListMachineMapping[]
+  defectedItems DefectedItem[]
+  @@index([unique_code])
+  
 }
 
 model CutListMachineMapping {
@@ -1386,6 +1408,7 @@ model CutListMachineMapping {
   vendor        VendorMaster  @relation(fields: [vendor_id], references: [id])  
   lead          LeadMaster?    @relation(fields: [lead_id], references: [id])
   operator      UserMaster?    @relation(fields: [in_operator], references: [id])
+  defectedItems DefectedItem[]
 
   @@index([cut_list_id])
   @@index([machine_id])
@@ -1458,6 +1481,90 @@ model MachineTypeMaster {
 
   machineMaster     MachineMaster[]
   
+}
+
+
+model VendorSettingKey {
+  id            Int      @id @default(autoincrement())
+  key           String   @unique
+  display_name  String
+  default_value String?
+
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  vendorSettings VendorSetting[]
+}
+
+model VendorSetting {
+  id          Int      @id @default(autoincrement())
+
+  setting_id  Int
+  vendor_id   Int
+  value       String?
+
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+
+  vendorSettingKey     VendorSettingKey @relation(fields: [setting_id], references: [id])
+  vendor      VendorMaster     @relation(fields: [vendor_id], references: [id])
+
+  @@unique([setting_id, vendor_id])
+}
+
+model DefectMaster {
+  id          Int     @id @default(autoincrement())
+  defect_name String
+
+  vendor_id   Int?    
+
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  // ================= RELATIONS =================
+  vendorMaster      VendorMaster? @relation(fields: [vendor_id], references: [id])
+  defectedItems DefectedItem[]
+
+  @@index([vendor_id])
+}
+
+
+model DefectedItem {
+  id          Int      @id @default(autoincrement())
+
+  vendor_id   Int
+  project_id  Int
+  cut_list_machine_mapping_id Int
+  cut_list_id Int?
+  machine_id  Int
+  defect_id   Int?
+
+  previous_scanned_by Int?
+  previous_scanned_at DateTime?
+  previous_scanned_machine_id Int?
+
+  remark      String?
+
+  created_by  Int
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now()) @updatedAt
+
+  // ================= RELATIONS =================
+
+  vendor      VendorMaster   @relation(fields: [vendor_id], references: [id])
+  project     ProjectMaster  @relation(fields: [project_id], references: [id])
+  cutListMachineMapping CutListMachineMapping @relation(fields: [cut_list_machine_mapping_id], references: [id])
+  cutList     CutList?       @relation(fields: [cut_list_id], references: [id])
+  machine     MachineMaster  @relation(fields: [machine_id], references: [id])
+  defect      DefectMaster?   @relation(fields: [defect_id], references: [id])
+  createdBy   UserMaster     @relation(fields: [created_by], references: [id])
+
+  @@index([vendor_id])
+  @@index([project_id])
+  @@index([machine_id])
+  @@index([cut_list_machine_mapping_id])
+  @@index([cut_list_id])
 }
 
 enum MachineTypeMasterStatus {
@@ -1556,6 +1663,137 @@ enum ActiveStatus {
 enum ModulesVendorMappingActiveStatus {
   Yes
   No
+}
+
+model FranchiseMaster {
+  id              Int     @id @default(autoincrement())
+  vendor_id       Int
+  franchise_name  String
+  franchise_code  String?
+
+  contact_number  String?
+  contact_email   String?
+  contact_person  String?
+
+  is_head_office  Boolean @default(false)
+
+  zone_id         Int?
+  country_id      Int?
+  region_id       Int?
+  state_id        Int?
+  city_id         Int?
+  area_id         Int?
+
+  address         String?
+  pincode         String?
+
+  status          String  @default("active")
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  vendor          VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  users           UserMaster[]
+  leads           LeadMaster[]
+  accounts        AccountMaster[]
+  headSiteSupervisorFranchiseMappings HeadSiteSupervisorFranchiseMapping[]
+
+  @@unique([vendor_id, franchise_code])
+}
+
+model HeadSiteSupervisorFranchiseMapping {
+  id           Int          @id @default(autoincrement())
+  vendor_id    Int
+  user_id      Int
+  franchise_id Int
+  status       Boolean      @default(true)
+  created_by   Int
+  created_at   DateTime     @default(now())
+
+  vendor     VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  user       UserMaster     @relation("HeadSiteSupervisorFranchiseMappingUser", fields: [user_id], references: [id], onDelete: Cascade)
+  franchise  FranchiseMaster @relation(fields: [franchise_id], references: [id], onDelete: Cascade)
+  createdBy  UserMaster     @relation("HeadSiteSupervisorFranchiseMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id])
+  @@index([user_id])
+  @@index([franchise_id])
+  @@unique([vendor_id, user_id, franchise_id])
+  @@unique([vendor_id, franchise_id])
+}
+
+
+model CountryMaster {
+  id    Int    @id @default(autoincrement())
+  name  String
+
+  regions RegionMaster[]
+}
+
+model RegionMaster {
+  id         Int @id @default(autoincrement())
+  name       String
+  country_id Int
+
+  country CountryMaster @relation(fields: [country_id], references: [id])
+  states  StateMaster[]
+}
+
+model StateMaster {
+  id        Int @id @default(autoincrement())
+  name      String
+  region_id Int
+
+  region RegionMaster @relation(fields: [region_id], references: [id])
+  cities CityMaster[]
+}
+
+model CityMaster {
+  id       Int @id @default(autoincrement())
+  name     String
+  state_id Int
+
+  state StateMaster @relation(fields: [state_id], references: [id])
+  areas AreaMaster[]
+}
+
+model AreaMaster {
+  id      Int @id @default(autoincrement())
+  name    String
+  city_id Int
+
+  city CityMaster @relation(fields: [city_id], references: [id])
+}
+
+model GeographicalMapping {
+  id           Int     @id @default(autoincrement())
+  name         String  // e.g. "Mumbai West Zone"
+
+  country_id Int?
+  region_id  Int?
+  state_id   Int?
+  city_id    Int?
+  area_id    Int?
+
+  is_active Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userMappings UserGeographicalMapping[]
+
+}
+
+model UserGeographicalMapping {
+  id              Int @id @default(autoincrement())
+  user_id         Int
+  geographical_id Int
+
+  user         UserMaster           @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  geographical GeographicalMapping @relation(fields: [geographical_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, geographical_id])
 }
 
 enum MachineStatus {

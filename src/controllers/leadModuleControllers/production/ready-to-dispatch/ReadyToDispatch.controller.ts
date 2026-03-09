@@ -273,7 +273,7 @@ export class ReadyToDispatchController {
           }),
           prisma.leadMaster.findUnique({
             where: { id: leadId },
-            select: { firstname: true, lastname: true, lead_code: true },
+            select: { firstname: true, lastname: true, lead_code: true, franchise_id: true },
           }),
           actorId
             ? prisma.userMaster.findUnique({
@@ -289,6 +289,7 @@ export class ReadyToDispatchController {
         const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
         const isSelfAssigned =
           Boolean(actorId) && Number(actorId) === Number(user_id);
+        const franchiseId = lead?.franchise_id ?? null;
 
         if (
           !isSelfAssigned &&
@@ -300,7 +301,7 @@ export class ReadyToDispatchController {
             user_id: Number(user_id),
             sender_id: Number(actorId) || null,
             type: NotificationType.LEAD_ASSIGNED,
-            title: "Lead assigned",
+            title: "Lead assigned", 
             message:
               leadName.length > 0
                 ? `Lead ${leadName} has been assigned to you.`
@@ -374,7 +375,7 @@ export class ReadyToDispatchController {
           }),
           prisma.leadMaster.findUnique({
             where: { id: leadId },
-            select: { firstname: true, lastname: true, lead_code: true },
+            select: { firstname: true, lastname: true, lead_code: true, franchise_id: true },
           }),
         ]);
 
@@ -384,6 +385,7 @@ export class ReadyToDispatchController {
         const recipientIds = new Set<number>();
         admins.forEach((admin) => recipientIds.add(admin.id));
         mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
+        const franchiseId = lead?.franchise_id ?? null;
 
         if (recipientIds.size > 0) {
           const redirectUrl = accountId

@@ -126,6 +126,7 @@ export class UnderInstallationStageController {
         : req.params.vendorId;
       const vendorId = Number(vendorIdParam);
       const userId = Number(req.body.userId);
+      const franchiseId = Number(req.body.franchise_id);
       const page = parseInt((req.body.page as string) || "1");
       const limit = parseInt((req.body.limit as string) || "10");
 
@@ -197,17 +198,18 @@ export class UnderInstallationStageController {
       // ============================
       // VALIDATION GATE
       // ============================
-      if (!vendorId || !userId) {
+      if (!vendorId || !userId || !franchiseId) {
         logger.warn(
-          "[UnderInstallationStageController] Missing vendorId or userId",
+          "[UnderInstallationStageController] Missing vendorId or userId or franchiseId",
           {
             vendorId,
             userId,
+            franchiseId,
           },
         );
         return res.status(400).json({
           success: false,
-          message: "Vendor ID and User ID are required",
+          message: "Vendor ID, User ID, and Franchise ID are required",
         });
       }
 
@@ -229,6 +231,7 @@ export class UnderInstallationStageController {
       const { leads, count } = await BookingStageService.getUniversalTableData(
         vendorId,
         userId,
+        franchiseId,
         "Type 15",
         page,
         limit,

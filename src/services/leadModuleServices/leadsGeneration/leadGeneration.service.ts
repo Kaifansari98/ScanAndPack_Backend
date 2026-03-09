@@ -108,6 +108,7 @@ export const createLeadService = async (
     archetech_name,
     designer_remark,
     vendor_id,
+    franchise_id,
     created_by,
     assign_to,
     assigned_by,
@@ -123,11 +124,25 @@ export const createLeadService = async (
         // 🔍 optional input snapshot
         logger.debug("[SERVICE] createLead input", {
           vendor_id,
+          franchise_id,
           created_by,
           product_types,
           product_structures,
           fileCount: files.length,
         });
+
+        // Validate franchise belongs to vendor
+        const franchise = await tx.franchiseMaster.findFirst({
+          where: {
+            id: franchise_id,
+            vendor_id,
+          },
+          select: { id: true },
+        });
+
+        if (!franchise) {
+          throw new Error("Invalid franchise_id for the given vendor_id.");
+        }
         // 1. AccountMaster (reuse if same phone/email exists for this vendor)
         const matchConditions: Array<Record<string, string>> = [];
         const normalizedEmail = email?.trim();
@@ -165,12 +180,13 @@ export const createLeadService = async (
               alt_contact_no,
               email: normalizedEmail,
               vendor_id,
+              franchise_id,
               created_by,
             },
           }));
 
-      // 2) ⬅️ NEW: generate lead_code for this vendor
-      const lead_code = await generateLeadCode(tx, vendor_id);
+      // 2) ⬅️ NEW: generate lead_code for this franchise
+      const lead_code = await generateLeadCode(tx, franchise_id);
 
       // 3) Create Lead with the generated code
       const lead = await tx.leadMaster.create({
@@ -190,6 +206,7 @@ export const createLeadService = async (
           archetech_name,
           designer_remark,
           vendor_id,
+          franchise_id,
           created_by,
           account_id: account.id, // Add account_id reference
           assign_to,
@@ -845,6 +862,7 @@ export const getLeadById = async (
     if (
       userType === "sales-executive" ||
       userType === "site-supervisor" ||
+      userType === "head-site-supervisor" ||
       userType === "tech-check" ||
       userType === "backend" ||
       userType === "factory"
@@ -926,6 +944,30 @@ export const getLeadById = async (
           }
         : null;
 
+    const oldestSiteSupervisorMapping =
+      await prisma.leadUserMapping.findFirst({
+        where: {
+          lead_id: lead.id,
+          vendor_id: vendorId,
+          status: "active",
+          user: {
+            user_type: {
+              user_type: {
+                equals: "site-supervisor",
+                mode: "insensitive",
+              },
+            },
+          },
+        },
+        orderBy: { created_at: "asc" },
+        select: {
+          id: true,
+          user_id: true,
+          created_at: true,
+          user: { select: { id: true, user_name: true } },
+        },
+      });
+
     // 5️⃣ Add signed URLs
     const documentsWithUrls = await Promise.all(
       lead.documents.map(async (doc) => {
@@ -941,6 +983,13 @@ export const getLeadById = async (
         ...lead,
         documents: documentsWithUrls,
         latest_activity_status: activityStatusPayload,
+        assigned_site_supervisor_from_mapping: oldestSiteSupervisorMapping
+          ? {
+              user_id: oldestSiteSupervisorMapping.user_id,
+              user_name: oldestSiteSupervisorMapping.user?.user_name ?? null,
+              created_at: oldestSiteSupervisorMapping.created_at,
+            }
+          : null,
       },
       userInfo: {
         role: userType,
@@ -1748,7 +1797,8 @@ export const isContactOrEmailExists = async (
 };
 
 export const getSalesExecutivesByVendor = async (
-  vendorId: number
+  vendorId: number,
+  franchiseId?: number,
 ): Promise<SalesExecutiveData[]> => {
   try {
     console.log(
@@ -1781,6 +1831,7 @@ export const getSalesExecutivesByVendor = async (
         user_type_id: salesExecutiveType.id,
         // Optionally filter only active users
         status: "active",
+        ...(franchiseId ? { franchise_id: franchiseId } : {}),
       },
       include: {
         user_type: true,
@@ -1900,6 +1951,86 @@ export const getSiteSupervisorByVendor = async (
   } catch (error: any) {
     console.error("[SERVICE] Error fetching Site Supervisors:", error);
     throw new Error(`Failed to fetch Site Supervisors: ${error.message}`);
+  }
+};
+
+export const getHeadSiteSupervisorByVendor = async (
+  vendorId: number
+): Promise<SiteSupervisorData[]> => {
+  try {
+    console.log(
+      `[SERVICE] Fetching Head Site Supervisor for vendor ID: ${vendorId}`
+    );
+
+    // First, find the user type ID for 'head-site-supervisor'
+    const headSiteSupervisorType = await prisma.userTypeMaster.findFirst({
+      where: {
+        user_type: {
+          equals: "head-site-supervisor",
+          mode: "insensitive", // Case insensitive search
+        },
+      },
+    });
+
+    if (!headSiteSupervisorType) {
+      console.log("[SERVICE] Head Site Supervisor user type not found");
+      return [];
+    }
+
+    console.log(
+      `[SERVICE] Found Head Site Supervisor type ID: ${headSiteSupervisorType.id}`
+    );
+
+    const headSiteSupervisors = await prisma.userMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        user_type_id: headSiteSupervisorType.id,
+        status: "active",
+      },
+      include: {
+        user_type: true,
+        documents: true,
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+
+    console.log(
+      `[SERVICE] Found ${headSiteSupervisors.length} Head Site Supervisors`
+    );
+
+    const transformedData: SiteSupervisorData[] = headSiteSupervisors.map(
+      (supervisor) => ({
+        id: supervisor.id,
+        vendor_id: supervisor.vendor_id,
+        franchise_id: supervisor.franchise_id,
+        user_name: supervisor.user_name,
+        user_contact: supervisor.user_contact,
+        user_email: supervisor.user_email,
+        user_timezone: supervisor.user_timezone,
+        status: supervisor.status,
+        created_at: supervisor.created_at,
+        updated_at: supervisor.updated_at,
+        user_type: {
+          id: supervisor.user_type.id,
+          user_type: supervisor.user_type.user_type,
+        },
+        documents: supervisor.documents.map((doc) => ({
+          id: doc.id,
+          document_name: doc.document_name,
+          document_number: doc.document_number,
+          filename: doc.filename,
+        })),
+      })
+    );
+
+    return transformedData;
+  } catch (error: any) {
+    console.error("[SERVICE] Error fetching Head Site Supervisors:", error);
+    throw new Error(
+      `Failed to fetch Head Site Supervisors: ${error.message}`
+    );
   }
 };
 

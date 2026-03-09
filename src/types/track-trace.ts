@@ -21,3 +21,16 @@ export interface QRParam {
     vendorId: number;
     cutListIds?: string;    
 }
+
+
+export interface MarkDefectPayload {
+  vendor_id: number;
+  project_id: number;
+  cut_list_machine_mapping_id: number;
+  machine_id: number;
+  unique_code: string;
+  created_by: number;
+  defect_id: number;
+  defect_name: string;
+  cut_list_id:number;
+}

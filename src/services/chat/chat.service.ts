@@ -348,7 +348,7 @@ export class ChatService {
         const [lead, sender] = await Promise.all([
           prisma.leadMaster.findUnique({
             where: { id: leadId },
-            select: { account_id: true, firstname: true, lastname: true, lead_code: true },
+            select: { account_id: true, firstname: true, lastname: true, lead_code: true, franchise_id: true },
           }),
           prisma.userMaster.findUnique({
             where: { id: userId },
@@ -363,6 +363,7 @@ export class ChatService {
         const redirectUrl = lead?.account_id
           ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}&tab=chats&messageId=${messageResult.id}`
           : `/dashboard/leads/details/${leadId}?tab=chats&messageId=${messageResult.id}`;
+        const franchiseId = lead?.franchise_id ?? null;
 
         await Promise.all(
           mentionIds.map((mentionedUserId) =>

@@ -5,27 +5,27 @@ type Tx = PrismaClient | Prisma.TransactionClient;
 
 export async function generateLeadCode(
   tx: Tx,
-  vendorId: number
+  franchiseId: number
 ): Promise<string> {
-  // 1️⃣ Get vendor_code
-  const vendor = await tx.vendorMaster.findUnique({
-    where: { id: vendorId },
-    select: { vendor_code: true },
+  // 1️⃣ Get franchise_code
+  const franchise = await tx.franchiseMaster.findUnique({
+    where: { id: franchiseId },
+    select: { franchise_code: true },
   });
 
-  if (!vendor || !vendor.vendor_code) {
-    logger.error("[LEAD CODE] Vendor code missing", { vendorId });
-    throw new Error(`Vendor code not found for vendor ${vendorId}`);
+  if (!franchise || !franchise.franchise_code) {
+    logger.error("[LEAD CODE] Franchise code missing", { franchiseId });
+    throw new Error(`Franchise code not found for franchise ${franchiseId}`);
   }
 
-  const prefix = vendor.vendor_code
+  const prefix = franchise.franchise_code
     .replace(/[^A-Za-z]/g, "")
     .toUpperCase();
 
-  // 2️⃣ Get latest lead for this vendor
+  // 2️⃣ Get latest lead for this franchise
   const lastLead = await tx.leadMaster.findFirst({
     where: {
-      vendor_id: vendorId,
+      franchise_id: franchiseId,
       lead_code: {
         startsWith: `${prefix}-`,
       },
@@ -52,7 +52,7 @@ export async function generateLeadCode(
 
   // 🔍 VERY IMPORTANT DEBUG
   logger.debug("[LEAD CODE GENERATED]", {
-    vendorId,
+    franchiseId,
     prefix,
     lastLead: lastLead?.lead_code,
     generatedCode,

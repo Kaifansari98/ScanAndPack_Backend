@@ -1,5 +1,4 @@
 import { prisma } from "../../../prisma/client";
-import { sanitizeFilename } from "../../../utils/sanitizeFilename";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
 import { NotificationType } from "../../../prisma/generated";
@@ -36,6 +35,7 @@ interface BackendData {
     filename: string | null;
   }[];
 }
+
 export interface UploadOrderLoginPoFileInput {
   vendorId: number;
   leadId: number;
@@ -1722,53 +1722,56 @@ export class OrderLoginService {
         }
       }
 
-      if (missingTypes.length > 0) {
-        if (missingTypes.length > 0 && instanceId) {
-          const backendTaskMapping = await prisma.leadUserMapping.findFirst({
+      if (missingTypes.length > 0 && instanceId) {
+        const leadFranchise = await prisma.leadMaster.findUnique({
+          where: { id: leadId },
+          select: { franchise_id: true },
+        });
+        const backendTaskMapping = await prisma.leadUserMapping.findFirst({
+          where: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            status: "active",
+            user: {
+              user_type: {
+                user_type: { equals: "backend", mode: "insensitive" },
+              },
+            },
+          },
+          select: { user_id: true },
+        });
+
+        if (backendTaskMapping?.user_id) {
+          // 🔑 Check existing task for THIS INSTANCE
+          const existingTask = await prisma.userLeadTask.findFirst({
             where: {
               vendor_id: vendorId,
               lead_id: leadId,
-              status: "active",
-              user: {
-                user_type: {
-                  user_type: { equals: "backend", mode: "insensitive" },
-                },
-              },
+              instance_id: instanceId, // ✅ Instance specific
+              user_id: backendTaskMapping.user_id,
+              task_type: "Order Login",
+              status: "open",
             },
-            select: { user_id: true },
+            select: { id: true },
           });
 
-          if (backendTaskMapping?.user_id) {
-            // 🔑 Check existing task for THIS INSTANCE
-            const existingTask = await prisma.userLeadTask.findFirst({
-              where: {
-                vendor_id: vendorId,
+          if (!existingTask) {
+            await prisma.userLeadTask.create({
+              data: {
                 lead_id: leadId,
-                instance_id: instanceId, // ✅ Instance specific
+                account_id: effectiveAccountId,
+                vendor_id: vendorId,
+                franchise_id: leadFranchise?.franchise_id ?? null,
                 user_id: backendTaskMapping.user_id,
+                instance_id: instanceId, // ✅ Bind to instance
                 task_type: "Order Login",
+                lead_stage: "order-login-stage",
+                due_date: new Date(Date.now() + 24 * 60 * 60 * 1000),
+                remark: `Missing order login items for ${instanceCode}: ${missingTypes.join(", ")}`,
                 status: "open",
+                created_by: userId,
               },
-              select: { id: true },
             });
-
-            if (!existingTask) {
-              await prisma.userLeadTask.create({
-                data: {
-                  lead_id: leadId,
-                  account_id: effectiveAccountId,
-                  vendor_id: vendorId,
-                  user_id: backendTaskMapping.user_id,
-                  instance_id: instanceId, // ✅ Bind to instance
-                  task_type: "Order Login",
-                  lead_stage: "order-login-stage",
-                  due_date: new Date(Date.now() + 24 * 60 * 60 * 1000),
-                  remark: `Missing order login items for ${instanceCode}: ${missingTypes.join(", ")}`,
-                  status: "open",
-                  created_by: userId,
-                },
-              });
-            }
           }
         }
       }
@@ -1831,6 +1834,10 @@ export class OrderLoginService {
     );
 
     if (missingTypes.length > 0) {
+      const leadFranchise = await prisma.leadMaster.findUnique({
+        where: { id: leadId },
+        select: { franchise_id: true },
+      });
       const backendMapping = await prisma.leadUserMapping.findFirst({
         where: {
           vendor_id: vendorId,
@@ -1863,6 +1870,7 @@ export class OrderLoginService {
               lead_id: leadId,
               account_id: accountId,
               vendor_id: vendorId,
+              franchise_id: leadFranchise?.franchise_id ?? null,
               user_id: backendMapping.user_id,
               task_type: "Order Login",
               lead_stage: "order-login-stage",
@@ -2238,13 +2246,26 @@ export class OrderLoginService {
       },
     });
 
-    return records.map((r) => ({
-      id: r.id, // ✅ OrderLoginPoFileMapping.id
-      doc_og_name: r.document.doc_og_name,
-      created_at: r.document.created_at,
-      file_path: r.document.doc_sys_name,
-      signed_url: r.document.doc_sys_name,
-    }));
+    return await Promise.all(
+      records.map(async (r) => {
+        const fileName = r.document.doc_og_name ?? "";
+        const ext = fileName.split(".").pop()?.toLowerCase() ?? "";
+        const inlineExts = new Set(["jpg", "jpeg", "png", "webp", "gif"]);
+        const disposition = inlineExts.has(ext) ? "inline" : "attachment";
+
+        return {
+          id: r.document.id,
+          doc_og_name: r.document.doc_og_name,
+          created_at: r.document.created_at,
+          file_path: r.document.doc_sys_name,
+          signed_url: await generateSignedUrl(
+            r.document.doc_sys_name,
+            3600,
+            disposition,
+          ),
+        };
+      }),
+    );
   }
 
   async deleteOrderLoginPoFile({
