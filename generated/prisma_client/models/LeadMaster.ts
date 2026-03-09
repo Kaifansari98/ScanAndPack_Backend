@@ -111,6 +111,7 @@ export type LeadMasterMinAggregateOutputType = {
   no_of_client_documents_initially_submitted: number | null
   hardware_packing_details_remark: string | null
   woodwork_packing_details_remark: string | null
+  order_login_prod_files_remark: string | null
   no_of_boxes: number | null
   dispatch_planning_remark: string | null
   material_lift_availability: boolean | null
@@ -178,6 +179,7 @@ export type LeadMasterMaxAggregateOutputType = {
   no_of_client_documents_initially_submitted: number | null
   hardware_packing_details_remark: string | null
   woodwork_packing_details_remark: string | null
+  order_login_prod_files_remark: string | null
   no_of_boxes: number | null
   dispatch_planning_remark: string | null
   material_lift_availability: boolean | null
@@ -245,6 +247,7 @@ export type LeadMasterCountAggregateOutputType = {
   no_of_client_documents_initially_submitted: number
   hardware_packing_details_remark: number
   woodwork_packing_details_remark: number
+  order_login_prod_files_remark: number
   no_of_boxes: number
   dispatch_planning_remark: number
   material_lift_availability: number
@@ -356,6 +359,7 @@ export type LeadMasterMinAggregateInputType = {
   no_of_client_documents_initially_submitted?: true
   hardware_packing_details_remark?: true
   woodwork_packing_details_remark?: true
+  order_login_prod_files_remark?: true
   no_of_boxes?: true
   dispatch_planning_remark?: true
   material_lift_availability?: true
@@ -423,6 +427,7 @@ export type LeadMasterMaxAggregateInputType = {
   no_of_client_documents_initially_submitted?: true
   hardware_packing_details_remark?: true
   woodwork_packing_details_remark?: true
+  order_login_prod_files_remark?: true
   no_of_boxes?: true
   dispatch_planning_remark?: true
   material_lift_availability?: true
@@ -490,6 +495,7 @@ export type LeadMasterCountAggregateInputType = {
   no_of_client_documents_initially_submitted?: true
   hardware_packing_details_remark?: true
   woodwork_packing_details_remark?: true
+  order_login_prod_files_remark?: true
   no_of_boxes?: true
   dispatch_planning_remark?: true
   material_lift_availability?: true
@@ -644,6 +650,7 @@ export type LeadMasterGroupByOutputType = {
   no_of_client_documents_initially_submitted: number | null
   hardware_packing_details_remark: string | null
   woodwork_packing_details_remark: string | null
+  order_login_prod_files_remark: string | null
   no_of_boxes: number | null
   dispatch_planning_remark: string | null
   material_lift_availability: boolean | null
@@ -734,6 +741,7 @@ export type LeadMasterWhereInput = {
   no_of_client_documents_initially_submitted?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   hardware_packing_details_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   woodwork_packing_details_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
+  order_login_prod_files_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   no_of_boxes?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   dispatch_planning_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   material_lift_availability?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
@@ -839,6 +847,7 @@ export type LeadMasterOrderByWithRelationInput = {
   no_of_client_documents_initially_submitted?: Prisma.SortOrderInput | Prisma.SortOrder
   hardware_packing_details_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   woodwork_packing_details_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  order_login_prod_files_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   no_of_boxes?: Prisma.SortOrderInput | Prisma.SortOrder
   dispatch_planning_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   material_lift_availability?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -948,6 +957,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   no_of_client_documents_initially_submitted?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   hardware_packing_details_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   woodwork_packing_details_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
+  order_login_prod_files_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   no_of_boxes?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   dispatch_planning_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   material_lift_availability?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
@@ -1053,6 +1063,7 @@ export type LeadMasterOrderByWithAggregationInput = {
   no_of_client_documents_initially_submitted?: Prisma.SortOrderInput | Prisma.SortOrder
   hardware_packing_details_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   woodwork_packing_details_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  order_login_prod_files_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   no_of_boxes?: Prisma.SortOrderInput | Prisma.SortOrder
   dispatch_planning_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   material_lift_availability?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1128,6 +1139,7 @@ export type LeadMasterScalarWhereWithAggregatesInput = {
   no_of_client_documents_initially_submitted?: Prisma.IntNullableWithAggregatesFilter<"LeadMaster"> | number | null
   hardware_packing_details_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
   woodwork_packing_details_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
+  order_login_prod_files_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
   no_of_boxes?: Prisma.IntNullableWithAggregatesFilter<"LeadMaster"> | number | null
   dispatch_planning_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
   material_lift_availability?: Prisma.BoolNullableWithAggregatesFilter<"LeadMaster"> | boolean | null
@@ -1184,6 +1196,7 @@ export type LeadMasterCreateInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -1289,6 +1302,7 @@ export type LeadMasterUncheckedCreateInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -1373,6 +1387,7 @@ export type LeadMasterUpdateInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1478,6 +1493,7 @@ export type LeadMasterUncheckedUpdateInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1573,6 +1589,7 @@ export type LeadMasterCreateManyInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -1629,6 +1646,7 @@ export type LeadMasterUpdateManyMutationInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1696,6 +1714,7 @@ export type LeadMasterUncheckedUpdateManyInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1783,6 +1802,7 @@ export type LeadMasterCountOrderByAggregateInput = {
   no_of_client_documents_initially_submitted?: Prisma.SortOrder
   hardware_packing_details_remark?: Prisma.SortOrder
   woodwork_packing_details_remark?: Prisma.SortOrder
+  order_login_prod_files_remark?: Prisma.SortOrder
   no_of_boxes?: Prisma.SortOrder
   dispatch_planning_remark?: Prisma.SortOrder
   material_lift_availability?: Prisma.SortOrder
@@ -1871,6 +1891,7 @@ export type LeadMasterMaxOrderByAggregateInput = {
   no_of_client_documents_initially_submitted?: Prisma.SortOrder
   hardware_packing_details_remark?: Prisma.SortOrder
   woodwork_packing_details_remark?: Prisma.SortOrder
+  order_login_prod_files_remark?: Prisma.SortOrder
   no_of_boxes?: Prisma.SortOrder
   dispatch_planning_remark?: Prisma.SortOrder
   material_lift_availability?: Prisma.SortOrder
@@ -1938,6 +1959,7 @@ export type LeadMasterMinOrderByAggregateInput = {
   no_of_client_documents_initially_submitted?: Prisma.SortOrder
   hardware_packing_details_remark?: Prisma.SortOrder
   woodwork_packing_details_remark?: Prisma.SortOrder
+  order_login_prod_files_remark?: Prisma.SortOrder
   no_of_boxes?: Prisma.SortOrder
   dispatch_planning_remark?: Prisma.SortOrder
   material_lift_availability?: Prisma.SortOrder
@@ -2858,6 +2880,7 @@ export type LeadMasterCreateWithoutVendorInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -2961,6 +2984,7 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -3085,6 +3109,7 @@ export type LeadMasterScalarWhereInput = {
   no_of_client_documents_initially_submitted?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   hardware_packing_details_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   woodwork_packing_details_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
+  order_login_prod_files_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   no_of_boxes?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   dispatch_planning_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   material_lift_availability?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
@@ -3141,6 +3166,7 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -3244,6 +3270,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -3338,6 +3365,7 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -3441,6 +3469,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -3535,6 +3564,7 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -3638,6 +3668,7 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -3732,6 +3763,7 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -3835,6 +3867,7 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -3993,6 +4026,7 @@ export type LeadMasterCreateWithoutProjectsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -4097,6 +4131,7 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -4196,6 +4231,7 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -4300,6 +4336,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -4383,6 +4420,7 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -4487,6 +4525,7 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -4586,6 +4625,7 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -4690,6 +4730,7 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -4773,6 +4814,7 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -4877,6 +4919,7 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -4976,6 +5019,7 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -5080,6 +5124,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -5163,6 +5208,7 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -5266,6 +5312,7 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -5376,6 +5423,7 @@ export type LeadMasterCreateWithoutSourceInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -5479,6 +5527,7 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -5589,6 +5638,7 @@ export type LeadMasterCreateWithoutAccountInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -5692,6 +5742,7 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -5802,6 +5853,7 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -5906,6 +5958,7 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -6005,6 +6058,7 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6109,6 +6163,7 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6192,6 +6247,7 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -6296,6 +6352,7 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -6395,6 +6452,7 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6499,6 +6557,7 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6582,6 +6641,7 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -6686,6 +6746,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -6785,6 +6846,7 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6889,6 +6951,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6972,6 +7035,7 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -7076,6 +7140,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -7175,6 +7240,7 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -7279,6 +7345,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -7362,6 +7429,7 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -7466,6 +7534,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -7565,6 +7634,7 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -7669,6 +7739,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -7752,6 +7823,7 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -7856,6 +7928,7 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -7955,6 +8028,7 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8059,6 +8133,7 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8142,6 +8217,7 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -8246,6 +8322,7 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -8345,6 +8422,7 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8449,6 +8527,7 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8532,6 +8611,7 @@ export type LeadMasterCreateWithoutLedgersInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -8636,6 +8716,7 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -8735,6 +8816,7 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8839,6 +8921,7 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8922,6 +9005,7 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -9025,6 +9109,7 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -9135,6 +9220,7 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -9239,6 +9325,7 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -9338,6 +9425,7 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -9442,6 +9530,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -9525,6 +9614,7 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -9629,6 +9719,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -9728,6 +9819,7 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -9832,6 +9924,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -9915,6 +10008,7 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -10019,6 +10113,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -10118,6 +10213,7 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -10222,6 +10318,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -10305,6 +10402,7 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -10409,6 +10507,7 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -10508,6 +10607,7 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -10612,6 +10712,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -10695,6 +10796,7 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -10799,6 +10901,7 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -10898,6 +11001,7 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -11002,6 +11106,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -11085,6 +11190,7 @@ export type LeadMasterCreateWithoutTasksInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -11189,6 +11295,7 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -11288,6 +11395,7 @@ export type LeadMasterUpdateWithoutTasksInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -11392,6 +11500,7 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -11475,6 +11584,7 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -11579,6 +11689,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -11678,6 +11789,7 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -11782,6 +11894,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -11865,6 +11978,7 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -11969,6 +12083,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -12068,6 +12183,7 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12172,6 +12288,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12255,6 +12372,7 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -12359,6 +12477,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -12458,6 +12577,7 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12562,6 +12682,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12645,6 +12766,7 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -12749,6 +12871,7 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -12848,6 +12971,7 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12952,6 +13076,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -13035,6 +13160,7 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -13139,6 +13265,7 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -13238,6 +13365,7 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -13342,6 +13470,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -13425,6 +13554,7 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -13529,6 +13659,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -13628,6 +13759,7 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -13732,6 +13864,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -13815,6 +13948,7 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -13919,6 +14053,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -14018,6 +14153,7 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -14122,6 +14258,7 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -14205,6 +14342,7 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -14309,6 +14447,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -14408,6 +14547,7 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -14512,6 +14652,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -14595,6 +14736,7 @@ export type LeadMasterCreateWithoutCutListInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -14699,6 +14841,7 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -14798,6 +14941,7 @@ export type LeadMasterUpdateWithoutCutListInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -14902,6 +15046,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -14985,6 +15130,7 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -15089,6 +15235,7 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -15188,6 +15335,7 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -15292,6 +15440,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -15375,6 +15524,7 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -15479,6 +15629,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -15578,6 +15729,7 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -15682,6 +15834,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -15765,6 +15918,7 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -15868,6 +16022,7 @@ export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -15988,6 +16143,7 @@ export type LeadMasterCreateManyVendorInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -16044,6 +16200,7 @@ export type LeadMasterUpdateWithoutVendorInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -16147,6 +16304,7 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -16241,6 +16399,7 @@ export type LeadMasterUncheckedUpdateManyWithoutVendorInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -16307,6 +16466,7 @@ export type LeadMasterCreateManyAssignedToInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -16373,6 +16533,7 @@ export type LeadMasterCreateManyAssignedByInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -16439,6 +16600,7 @@ export type LeadMasterCreateManyCreatedByInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -16505,6 +16667,7 @@ export type LeadMasterCreateManyUpdatedByInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -16561,6 +16724,7 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -16664,6 +16828,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -16758,6 +16923,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedToInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -16814,6 +16980,7 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -16917,6 +17084,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17011,6 +17179,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedByInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17067,6 +17236,7 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17170,6 +17340,7 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17264,6 +17435,7 @@ export type LeadMasterUncheckedUpdateManyWithoutCreatedByInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17320,6 +17492,7 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17423,6 +17596,7 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17517,6 +17691,7 @@ export type LeadMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17583,6 +17758,7 @@ export type LeadMasterCreateManySiteTypeInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -17639,6 +17815,7 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17742,6 +17919,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17836,6 +18014,7 @@ export type LeadMasterUncheckedUpdateManyWithoutSiteTypeInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17902,6 +18081,7 @@ export type LeadMasterCreateManySourceInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -17958,6 +18138,7 @@ export type LeadMasterUpdateWithoutSourceInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18061,6 +18242,7 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18155,6 +18337,7 @@ export type LeadMasterUncheckedUpdateManyWithoutSourceInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18221,6 +18404,7 @@ export type LeadMasterCreateManyAccountInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -18277,6 +18461,7 @@ export type LeadMasterUpdateWithoutAccountInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18380,6 +18565,7 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18474,6 +18660,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAccountInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18540,6 +18727,7 @@ export type LeadMasterCreateManyStatusTypeInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -18596,6 +18784,7 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18699,6 +18888,7 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18793,6 +18983,7 @@ export type LeadMasterUncheckedUpdateManyWithoutStatusTypeInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18859,6 +19050,7 @@ export type LeadMasterCreateManyFranchiseInput = {
   no_of_client_documents_initially_submitted?: number | null
   hardware_packing_details_remark?: string | null
   woodwork_packing_details_remark?: string | null
+  order_login_prod_files_remark?: string | null
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
@@ -18915,6 +19107,7 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -19018,6 +19211,7 @@ export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -19112,6 +19306,7 @@ export type LeadMasterUncheckedUpdateManyWithoutFranchiseInput = {
   no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -19453,6 +19648,7 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   no_of_client_documents_initially_submitted?: boolean
   hardware_packing_details_remark?: boolean
   woodwork_packing_details_remark?: boolean
+  order_login_prod_files_remark?: boolean
   no_of_boxes?: boolean
   dispatch_planning_remark?: boolean
   material_lift_availability?: boolean
@@ -19559,6 +19755,7 @@ export type LeadMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   no_of_client_documents_initially_submitted?: boolean
   hardware_packing_details_remark?: boolean
   woodwork_packing_details_remark?: boolean
+  order_login_prod_files_remark?: boolean
   no_of_boxes?: boolean
   dispatch_planning_remark?: boolean
   material_lift_availability?: boolean
@@ -19636,6 +19833,7 @@ export type LeadMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   no_of_client_documents_initially_submitted?: boolean
   hardware_packing_details_remark?: boolean
   woodwork_packing_details_remark?: boolean
+  order_login_prod_files_remark?: boolean
   no_of_boxes?: boolean
   dispatch_planning_remark?: boolean
   material_lift_availability?: boolean
@@ -19713,6 +19911,7 @@ export type LeadMasterSelectScalar = {
   no_of_client_documents_initially_submitted?: boolean
   hardware_packing_details_remark?: boolean
   woodwork_packing_details_remark?: boolean
+  order_login_prod_files_remark?: boolean
   no_of_boxes?: boolean
   dispatch_planning_remark?: boolean
   material_lift_availability?: boolean
@@ -19737,7 +19936,7 @@ export type LeadMasterSelectScalar = {
   mrp_value?: boolean
 }
 
-export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "franchise_id" | "archetech_name" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "actual_installation_start_date" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "usable_handover_completed" | "mrp_value", ExtArgs["result"]["leadMaster"]>
+export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "franchise_id" | "archetech_name" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "order_login_prod_files_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "actual_installation_start_date" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "usable_handover_completed" | "mrp_value", ExtArgs["result"]["leadMaster"]>
 export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   installationIssueLogMaster?: boolean | Prisma.LeadMaster$installationIssueLogMasterArgs<ExtArgs>
   installationUpdates?: boolean | Prisma.LeadMaster$installationUpdatesArgs<ExtArgs>
@@ -19889,6 +20088,7 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     no_of_client_documents_initially_submitted: number | null
     hardware_packing_details_remark: string | null
     woodwork_packing_details_remark: string | null
+    order_login_prod_files_remark: string | null
     no_of_boxes: number | null
     dispatch_planning_remark: string | null
     material_lift_availability: boolean | null
@@ -20414,6 +20614,7 @@ export interface LeadMasterFieldRefs {
   readonly no_of_client_documents_initially_submitted: Prisma.FieldRef<"LeadMaster", 'Int'>
   readonly hardware_packing_details_remark: Prisma.FieldRef<"LeadMaster", 'String'>
   readonly woodwork_packing_details_remark: Prisma.FieldRef<"LeadMaster", 'String'>
+  readonly order_login_prod_files_remark: Prisma.FieldRef<"LeadMaster", 'String'>
   readonly no_of_boxes: Prisma.FieldRef<"LeadMaster", 'Int'>
   readonly dispatch_planning_remark: Prisma.FieldRef<"LeadMaster", 'String'>
   readonly material_lift_availability: Prisma.FieldRef<"LeadMaster", 'Boolean'>

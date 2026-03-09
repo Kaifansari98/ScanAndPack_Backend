@@ -103,4 +103,15 @@ orderLoginRoutes.patch(
   controller.markFilled
 );
 
+orderLoginRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/prod-files-remark",
+  controller.getProductionFilesRemark,
+);
+
+orderLoginRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/prod-files-remark",
+  upload.none(),
+  controller.upsertProductionFilesRemark,
+);
+
 export default orderLoginRoutes;

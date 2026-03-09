@@ -860,4 +860,54 @@ export class OrderLoginController {
       });
     }
   }
+
+  async getProductionFilesRemark(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+
+      const remark = await service.getProductionFilesRemark(
+        Number(vendorId),
+        Number(leadId),
+      );
+
+      return res.status(200).json({
+        success: true,
+        data: { remark },
+      });
+    } catch (error: any) {
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message: error.message || "Internal Server Error",
+      });
+    }
+  }
+
+  async upsertProductionFilesRemark(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+      const { remark, updated_by } = req.body;
+
+      if (!updated_by) {
+        return res.status(400).json({ success: false, message: "updated_by is required." });
+      }
+
+      const result = await service.upsertProductionFilesRemark(
+        Number(vendorId),
+        Number(leadId),
+        remark ?? "N/A",
+        Number(updated_by),
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Production files remark updated successfully.",
+        data: result,
+      });
+    } catch (error: any) {
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message: error.message || "Internal Server Error",
+      });
+    }
+  }
 }

@@ -2381,4 +2381,53 @@ export class OrderLoginService {
 
     return updated;
   }
+
+  // ─────────────────────────────────────────────────────────────
+  // Production Files Remark (order_login_prod_files_remark on LeadMaster)
+  // ─────────────────────────────────────────────────────────────
+
+  async getProductionFilesRemark(vendorId: number, leadId: number) {
+    const lead = await prisma.leadMaster.findFirst({
+      where: { id: leadId, vendor_id: vendorId },
+      select: { order_login_prod_files_remark: true },
+    });
+
+    if (!lead) {
+      const error = new Error("Lead not found.");
+      (error as any).statusCode = 404;
+      throw error;
+    }
+
+    return lead.order_login_prod_files_remark ?? "N/A";
+  }
+
+  async upsertProductionFilesRemark(
+    vendorId: number,
+    leadId: number,
+    remark: string,
+    updatedBy: number,
+  ) {
+    const lead = await prisma.leadMaster.findFirst({
+      where: { id: leadId, vendor_id: vendorId },
+      select: { id: true },
+    });
+
+    if (!lead) {
+      const error = new Error("Lead not found.");
+      (error as any).statusCode = 404;
+      throw error;
+    }
+
+    const updated = await prisma.leadMaster.update({
+      where: { id: leadId },
+      data: {
+        order_login_prod_files_remark: remark.trim() || "N/A",
+        updated_by: updatedBy,
+        updated_at: new Date(),
+      },
+      select: { id: true, order_login_prod_files_remark: true },
+    });
+
+    return updated;
+  }
 }
