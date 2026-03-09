@@ -248,7 +248,7 @@ private static mapTaskWithLead(task: any) {
   static async getTasksByVendorAndUser2(
     vendorId: number,
     userId: number,
-    franchiseId: number,
+    franchiseId: number | undefined,
     page: number = 1,
     limit: number = 10,
     filters: {
@@ -284,7 +284,14 @@ private static mapTaskWithLead(task: any) {
       include: { user_type: true },
     });
 
-    const isAdmin = creator?.user_type?.user_type?.toLowerCase() === "admin";
+    const normalizedUserType = creator?.user_type?.user_type?.toLowerCase();
+    const isAdmin = normalizedUserType === "admin";
+    const shouldIncludeFranchise = [
+      "sales-executive",
+      "admin",
+      "super-admin",
+    ].includes(normalizedUserType ?? "");
+    const includeFranchise = shouldIncludeFranchise && !!franchiseId;
 
     const skip = (page - 1) * limit;
 
@@ -540,18 +547,22 @@ private static mapTaskWithLead(task: any) {
       // ✅ UNFILTERED BASE (for inactive tabs)
       const unfilteredBaseWhereClause: any = {
         vendor_id: vendorId,
-        franchise_id: franchiseId,
         user_id: userId,
-        status: "open",
+        status: { in: ["open", "in_progress"] },
       };
+      if (includeFranchise) {
+        unfilteredBaseWhereClause.franchise_id = franchiseId;
+      }
 
       // ✅ FILTERED BASE (for active tab)
       const filteredBaseWhereClause = addFilterConditions({
         vendor_id: vendorId,
-        franchise_id: franchiseId,
         user_id: userId,
-        status: "open",
+        status: { in: ["open", "in_progress"] },
       });
+      if (includeFranchise) {
+        filteredBaseWhereClause.franchise_id = franchiseId;
+      }
 
       const dataWhereClause: any = { ...filteredBaseWhereClause };
 
@@ -692,8 +703,8 @@ private static mapTaskWithLead(task: any) {
     const ownedTasks = await prisma.userLeadTask.findMany({
       where: {
         vendor_id: vendorId,
-        franchise_id: franchiseId,
         user_id: userId,
+        ...(includeFranchise ? { franchise_id: franchiseId } : {}),
       },
       select: { id: true },
     });
@@ -712,17 +723,21 @@ private static mapTaskWithLead(task: any) {
     const unfilteredBaseWhereClause: any = {
       id: { in: taskIds },
       vendor_id: vendorId,
-      franchise_id: franchiseId,
-      status: "open",
+      status: { in: ["open", "in_progress"] },
     };
+    if (includeFranchise) {
+      unfilteredBaseWhereClause.franchise_id = franchiseId;
+    }
 
     // ✅ FILTERED BASE (for active tab)
     const filteredBaseWhereClause = addFilterConditions({
       id: { in: taskIds },
       vendor_id: vendorId,
-      franchise_id: franchiseId,
-      status: "open",
+      status: { in: ["open", "in_progress"] },
     });
+    if (includeFranchise) {
+      filteredBaseWhereClause.franchise_id = franchiseId;
+    }
 
     const dataWhereClause: any = { ...filteredBaseWhereClause };
 
