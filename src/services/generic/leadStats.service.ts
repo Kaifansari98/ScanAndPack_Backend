@@ -41,7 +41,7 @@ export class LeadStatsService {
 
       const userType = user.user_type.user_type.toLowerCase();
       const shouldIncludeFranchise = [
-        "sales-executive",
+        // "sales-executive",
         // "site-supervisor",
         "admin",
         "super-admin",
