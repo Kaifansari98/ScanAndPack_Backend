@@ -44,6 +44,7 @@ export class BookingStageService {
         select: {
           id: true,
           title: true,
+          description: true,
           quantity_index: true,
           product_structure_id: true,
           is_tech_check_completed: true,
