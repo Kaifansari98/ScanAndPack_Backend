@@ -894,7 +894,7 @@ export class PostProductionService {
           doc_id: doc.id,
           lead_logs_id: detailedLog.id,
           created_by: userId,
-        })),
+        })),  
       });
     }
 
