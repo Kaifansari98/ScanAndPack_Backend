@@ -212,12 +212,18 @@ export class TechCheckService {
               },
             });
 
+            const assignedUser = await tx.userMaster.findUnique({
+              where: { id: assignToUserId },
+              select: { user_name: true },
+            });
+            const assignedUserName = assignedUser?.user_name ?? `User #${assignToUserId}`;
+
             await tx.leadDetailedLogs.create({
               data: {
                 vendor_id: vendorId,
                 lead_id: leadId,
                 account_id: effectiveAccountId,
-                action: `All instances tech check completed. Lead moved to Order Login and assigned to backend user ${assignToUserId}`,
+                action: `All instances tech check completed. Lead moved to Order Login and assigned to ${assignedUserName}`,
                 action_type: "STATUS_CHANGE",
                 created_by: userId,
               },
@@ -336,12 +342,18 @@ export class TechCheckService {
         });
 
         // 5️⃣ Detailed Logs
+        const assignedUserForLog = await tx.userMaster.findUnique({
+          where: { id: assignToUserId },
+          select: { user_name: true },
+        });
+        const assignedUserNameForLog = assignedUserForLog?.user_name ?? `User #${assignToUserId}`;
+
         await tx.leadDetailedLogs.create({
           data: {
             vendor_id: vendorId,
             lead_id: leadId,
             account_id: accountId,
-            action: `Tech Check approved and assigned to backend user ${assignToUserId}`,
+            action: `Tech Check approved. Lead moved to Order Login and assigned to ${assignedUserNameForLog}`,
             action_type: "STATUS_CHANGE",
             created_by: userId,
           },
