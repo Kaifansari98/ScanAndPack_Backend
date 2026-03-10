@@ -1301,25 +1301,30 @@ export class BookingStageService {
     const normalizedTag = String(tag || "")
       .trim()
       .toLowerCase();
-    const statusTags =
-      normalizedTag === "type 8"
-        ? ["Type 8", "Type 9"]
-        : normalizedTag === "type 9"
+
+    let statusIds: number[] | null = null; // null means "all statuses"
+
+    if (normalizedTag !== "all") {
+      const statusTags =
+        normalizedTag === "type 8"
           ? ["Type 8", "Type 9"]
-          : normalizedTag === "type 10"
-            ? ["Type 8", "Type 9", "Type 10"]
-            : [tag];
+          : normalizedTag === "type 9"
+            ? ["Type 8", "Type 9"]
+            : normalizedTag === "type 10"
+              ? ["Type 8", "Type 9", "Type 10"]
+              : [tag];
 
-    const statusTypes = await prisma.statusTypeMaster.findMany({
-      where: { vendor_id: vendorId, tag: { in: statusTags } },
-      select: { id: true, tag: true },
-    });
+      const statusTypes = await prisma.statusTypeMaster.findMany({
+        where: { vendor_id: vendorId, tag: { in: statusTags } },
+        select: { id: true, tag: true },
+      });
 
-    if (!statusTypes.length) {
-      throw new Error(`Status ${tag} not found for vendor ${vendorId}`);
+      if (!statusTypes.length) {
+        throw new Error(`Status ${tag} not found for vendor ${vendorId}`);
+      }
+
+      statusIds = statusTypes.map((status) => status.id);
     }
-
-    const statusIds = statusTypes.map((status) => status.id);
 
     // ============================
     // EXCLUDE USER LINKED LEADS
@@ -1596,7 +1601,7 @@ export class BookingStageService {
       vendor_id: vendorId,
       franchise_id: franchiseId,
       is_deleted: false,
-      status_id: { in: statusIds },
+      ...(statusIds !== null && { status_id: { in: statusIds } }),
       activity_status: "onGoing",
       ...(excludedLeadIds.length && { id: { notIn: excludedLeadIds } }),
     });
