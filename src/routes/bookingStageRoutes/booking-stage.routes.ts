@@ -110,4 +110,9 @@ bookingStageRouter.get(
   bookingStageController.getCSPBooking,
 );
 
+bookingStageRouter.post(
+  "/leadId/:leadId/tasks/assign-booking",
+  bookingStageController.assignTaskBooking,
+);
+
 export default bookingStageRouter;

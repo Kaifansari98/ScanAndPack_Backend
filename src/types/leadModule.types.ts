@@ -649,3 +649,12 @@ export interface AssignTaskFMInput {
   assignee_user_id: number;
   created_by: number;
 };
+
+export interface AssignTaskBookingInput {
+  lead_id: number;
+  task_type: string;
+  due_date: string | Date;
+  remark?: string;
+  assignee_user_id: number;
+  created_by: number;
+};

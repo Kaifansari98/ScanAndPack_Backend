@@ -19,6 +19,19 @@ import {
   sendLeadMovedToBookingEmail,
   sendPaymentAddedEmail,
 } from "../email/brevoEmail.service";
+import { AssignTaskBookingInput } from "../../types/leadModule.types";
+import Joi from "joi";
+
+const assignTaskBookingSchema = Joi.object({
+  lead_id: Joi.number().integer().positive().required(),
+  task_type: Joi.string().trim().required(),
+  due_date: Joi.alternatives()
+    .try(Joi.string().isoDate(), Joi.date())
+    .required(),
+  remark: Joi.string().allow("", null),
+  assignee_user_id: Joi.number().integer().positive().required(),
+  created_by: Joi.number().integer().positive().required(),
+});
 
 export class BookingStageService {
   // Helper to avoid repeating include structure
@@ -2329,6 +2342,17 @@ export class BookingStageService {
         throw new Error("Invalid or inactive site supervisor");
       }
 
+      // Check if there's already an active supervisor before deactivating
+      const hasExistingActiveSupervisor = await tx.leadSiteSupervisorMapping.findFirst({
+        where: {
+          lead_id: lead.id,
+          vendor_id: data.vendor_id,
+          account_id: lead.account_id!,
+          status: "active",
+        },
+        select: { id: true },
+      });
+
       await tx.leadSiteSupervisorMapping.updateMany({
         where: {
           lead_id: lead.id,
@@ -2416,15 +2440,36 @@ export class BookingStageService {
         });
       }
 
+      const logAction = hasExistingActiveSupervisor
+        ? `Site supervisor assigned: ${supervisor.user_name}`
+        : `Site supervisor assigned: ${supervisor.user_name}`;
+
       await tx.leadDetailedLogs.create({
         data: {
           vendor_id: data.vendor_id,
           lead_id: lead.id,
           account_id: lead.account_id!,
-          action: `Site supervisor assigned to ${supervisor.user_name}`,
+          action: logAction,
           action_type: "UPDATE",
           created_by: data.created_by,
           created_at: new Date(),
+        },
+      });
+
+      // Complete any open/in_progress "Assign a Site Supervisor" tasks for this lead
+      await tx.userLeadTask.updateMany({
+        where: {
+          lead_id: lead.id,
+          vendor_id: data.vendor_id,
+          task_type: "Assign a Site Supervisor",
+          status: { in: ["open", "in_progress"] },
+        },
+        data: {
+          status: "completed",
+          closed_by: data.created_by,
+          closed_at: new Date(),
+          updated_by: data.created_by,
+          updated_at: new Date(),
         },
       });
 
@@ -3352,5 +3397,58 @@ const statusTags =
     );
 
     return { leads: processed, count: total };
+  }
+
+  public async assignTaskBookingService(payload: AssignTaskBookingInput) {
+    const { error, value } = assignTaskBookingSchema.validate(payload);
+    if (error) {
+      throw new Error(
+        `Validation failed: ${error.details.map((d) => d.message).join(", ")}`,
+      );
+    }
+
+    const { lead_id, task_type, due_date, remark, assignee_user_id, created_by } = value;
+
+    return prisma.$transaction(async (tx) => {
+      const lead = await tx.leadMaster.findUnique({
+        where: { id: lead_id },
+        select: { id: true, vendor_id: true, account_id: true, status_id: true, franchise_id: true },
+      });
+      if (!lead) throw new Error(`Lead ${lead_id} not found`);
+
+      const leadStage = lead.status_id
+        ? ((await tx.statusTypeMaster.findUnique({
+            where: { id: lead.status_id },
+            select: { type: true },
+          }))?.type ?? null)
+        : null;
+
+      const assignee = await tx.userMaster.findUnique({
+        where: { id: assignee_user_id },
+        select: { id: true, vendor_id: true },
+      });
+      if (!assignee) throw new Error(`Assignee user ${assignee_user_id} not found`);
+      if (assignee.vendor_id !== lead.vendor_id) {
+        throw new Error(`Assignee does not belong to vendor ${lead.vendor_id}`);
+      }
+
+      const task = await tx.userLeadTask.create({
+        data: {
+          lead_id: lead.id,
+          account_id: lead.account_id!,
+          vendor_id: lead.vendor_id,
+          franchise_id: lead.franchise_id ?? null,
+          user_id: assignee_user_id,
+          task_type,
+          lead_stage: leadStage,
+          due_date: new Date(due_date),
+          remark: remark || null,
+          status: "open",
+          created_by,
+        },
+      });
+
+      return task;
+    });
   }
 }

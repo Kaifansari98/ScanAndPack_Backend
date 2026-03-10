@@ -1331,4 +1331,32 @@ export class BookingStageController {
       });
     }
   };
+
+  public assignTaskBooking = async (req: Request, res: Response) => {
+    try {
+      const leadId = Number(req.params.leadId);
+      const { task_type, due_date, remark, user_id, created_by } = req.body;
+
+      if (!leadId || !task_type || !due_date || !user_id) {
+        return res.status(400).json({
+          success: false,
+          message: "leadId, task_type, due_date, and user_id are required",
+        });
+      }
+
+      const task = await this.bookingStageService.assignTaskBookingService({
+        lead_id: leadId,
+        task_type,
+        due_date,
+        remark,
+        assignee_user_id: Number(user_id),
+        created_by: Number(created_by),
+      });
+
+      return res.status(201).json({ success: true, data: task });
+    } catch (error: any) {
+      console.error("[assignTaskBooking] Error:", error);
+      return res.status(500).json({ success: false, message: error.message });
+    }
+  };
 }
