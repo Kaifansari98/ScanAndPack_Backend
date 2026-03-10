@@ -415,6 +415,39 @@ export class SiteReadinessService {
   }
 
   /**
+   * ✅ Fetch assigned Site Supervisor for a lead
+   */
+  async getAssignedSiteSupervisor(vendorId: number, leadId: number) {
+    if (!vendorId || !leadId) {
+      throw Object.assign(new Error("vendorId and leadId are required"), {
+        statusCode: 400,
+      });
+    }
+
+    const mapping = await prisma.leadSiteSupervisorMapping.findFirst({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        status: "active",
+      },
+      include: {
+        supervisor: {
+          select: {
+            id: true,
+            user_name: true,
+            user_contact: true,
+            user_email: true,
+            user_timezone: true,
+            status: true,
+          },
+        },
+      },
+    });
+
+    return mapping;
+  }
+
+  /**
    * ✅ Move Lead to Dispatch Planning Stage (Type 13)
    */
   static async moveLeadToDispatchPlanning(

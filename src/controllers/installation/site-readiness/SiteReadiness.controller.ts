@@ -369,6 +369,45 @@ export class SiteReadinessController {
   }
 
   /**
+   * ✅ Fetch assigned Site Supervisor for a lead
+   * @route GET /leads/installation/site-readiness/vendorId/:vendorId/leadId/:leadId/site-supervisor
+   */
+  async getAssignedSiteSupervisor(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+
+      if (!vendorId || !leadId) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("vendorId and leadId are required", 400));
+      }
+
+      const supervisor = await service.getAssignedSiteSupervisor(
+        vendorId,
+        leadId
+      );
+
+      return res
+        .status(200)
+        .json(
+          ApiResponse.success(
+            supervisor,
+            "Assigned site supervisor fetched successfully"
+          )
+        );
+    } catch (error: any) {
+      console.error(
+        "[SiteReadinessController] getAssignedSiteSupervisor Error:",
+        error
+      );
+      return res
+        .status(500)
+        .json(ApiResponse.error(error.message || "Internal server error"));
+    }
+  }
+
+  /**
    * ✅ Move Lead to Dispatch Planning Stage
    * @route PUT /leads/installation/site-readiness/vendorId/:vendorId/leadId/:leadId/move-to-dispatch-planning
    */

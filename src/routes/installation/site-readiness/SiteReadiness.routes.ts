@@ -48,6 +48,12 @@ siteReadinessRoutes.get(
   controller.checkSiteReadinessCompletion
 );
 
+// ✅ GET → Fetch assigned Site Supervisor for a lead
+siteReadinessRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/site-supervisor",
+  controller.getAssignedSiteSupervisor
+);
+
 // ✅ Move Lead to Dispatch Planning Stage
 siteReadinessRoutes.put(
   "/vendorId/:vendorId/leadId/:leadId/move-to-dispatch-planning",
