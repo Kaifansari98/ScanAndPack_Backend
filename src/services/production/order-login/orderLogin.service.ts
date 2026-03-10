@@ -1445,7 +1445,6 @@ export class OrderLoginService {
         // 7. If all instances done → move lead to Production
         let leadMoved = false;
         let updatedLead: any = null;
-        let statusTypeId: number | null = null;
 
         if (pendingInstances === 0) {
           if (!assignToUserId || !effectiveAccountId) {
@@ -1465,8 +1464,6 @@ export class OrderLoginService {
             (error as any).statusCode = 404;
             throw error;
           }
-
-          statusTypeId = statusType.id;
 
           updatedLead = await tx.leadMaster.update({
             where: { id: leadId },
@@ -2311,18 +2308,25 @@ export class OrderLoginService {
         });
       }
 
-      const lead = await tx.leadMaster.findUnique({
-        where: { id: leadId },
-        select: { account_id: true },
-      });
+      const [lead, orderLoginRecord] = await Promise.all([
+        tx.leadMaster.findUnique({
+          where: { id: leadId },
+          select: { account_id: true },
+        }),
+        tx.orderLoginDetails.findUnique({
+          where: { id: orderLoginId },
+          select: { item_type: true },
+        }),
+      ]);
 
       if (lead?.account_id) {
+        const orderLoginLabel = orderLoginRecord?.item_type ?? `Order Login #${orderLoginId}`;
         const detailedLog = await tx.leadDetailedLogs.create({
           data: {
             vendor_id: vendorId,
             lead_id: leadId,
             account_id: lead.account_id,
-            action: `PO files uploaded for Order Login #${orderLoginId}: ${files.length} file(s)`,
+            action: `PO files uploaded for "${orderLoginLabel}": ${files.length} file(s)`,
             action_type: "CREATE",
             created_by: userId,
           },
