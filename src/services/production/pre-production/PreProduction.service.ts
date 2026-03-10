@@ -162,6 +162,23 @@ export class PreProductionService {
           },
         });
 
+        if (existing.account_id) {
+          const action = company_vendor_id
+            ? `Factory vendor selected for Order Login: ${existing.item_type}`
+            : `Factory vendor cleared for Order Login: ${existing.item_type}`;
+
+          await prisma.leadDetailedLogs.create({
+            data: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: existing.account_id,
+              action,
+              action_type: "UPDATE",
+              created_by: Number(updated_by),
+            },
+          });
+        }
+
         results.push(updated);
       } catch (err: any) {
         errors.push({ index, message: err.message });
@@ -195,20 +212,19 @@ export class PreProductionService {
       },
     });
 
-    // Optionally log the change
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        account_id: lead.account_id ?? 0,
-        action: `Expected Order Login Ready Date updated to ${new Date(
-          date,
-        ).toLocaleString()}`,
-        action_type: "UPDATE",
-        created_by: updatedBy,
-        created_at: new Date(),
-      },
-    });
+    // Log the change
+    if (lead.account_id) {
+      await prisma.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: lead.account_id,
+          action: `Expected Order Login ready date updated to ${new Date(date).toLocaleDateString()}`,
+          action_type: "UPDATE",
+          created_by: updatedBy,
+        },
+      });
+    }
 
     return updatedLead;
   }
@@ -442,6 +458,23 @@ export class PreProductionService {
         logger.info(`[OrderLoginCompletion] orderLogin updated [${index}]`, {
           updatedId: updated.id,
         });
+
+        if (existing.account_id) {
+          const logAction = completionFlag
+            ? `Order Login item marked as completed: ${existing.item_type}`
+            : `Order Login item estimated date updated: ${existing.item_type} → ${estimated_completion_date ?? "N/A"}`;
+
+          await prisma.leadDetailedLogs.create({
+            data: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: existing.account_id,
+              action: logAction,
+              action_type: "UPDATE",
+              created_by: Number(updated_by),
+            },
+          });
+        }
 
         // ─── Fetch Instance Title for Remark ──────────────────────
         const instance = await prisma.leadProductStructureInstance.findUnique({

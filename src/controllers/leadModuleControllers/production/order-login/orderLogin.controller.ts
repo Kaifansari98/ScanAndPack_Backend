@@ -182,6 +182,7 @@ export class OrderLoginController {
   async deleteOrderLogin(req: Request, res: Response) {
     try {
       const { vendorId, orderLoginId } = req.params;
+      const { deleted_by } = req.body;
 
       if (!vendorId || !orderLoginId) {
         return res.status(400).json({
@@ -190,9 +191,17 @@ export class OrderLoginController {
         });
       }
 
+      if (!deleted_by) {
+        return res.status(400).json({
+          success: false,
+          message: "deleted_by is required",
+        });
+      }
+
       const deleted = await service.deleteOrderLogin(
         Number(vendorId),
         Number(orderLoginId),
+        Number(deleted_by),
       );
 
       return res.status(200).json({

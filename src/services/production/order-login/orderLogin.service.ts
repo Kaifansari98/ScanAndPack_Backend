@@ -582,6 +582,17 @@ export class OrderLoginService {
       },
     });
 
+    await prisma.leadDetailedLogs.create({
+      data: {
+        vendor_id: vendorId,
+        lead_id: Number(lead_id),
+        account_id: Number(account_id),
+        action: `Order Login entry created: ${item_type} — ${item_desc}`,
+        action_type: "CREATE",
+        created_by: Number(created_by),
+      },
+    });
+
     return newOrderLogin;
   }
 
@@ -670,6 +681,20 @@ export class OrderLoginService {
       } catch (err: any) {
         errors.push({ index, message: err.message });
       }
+    }
+
+    if (results.length > 0) {
+      const firstCreatedBy = breakups.find((b) => b.created_by)?.created_by;
+      await prisma.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          action: `Order Login entries submitted: ${results.length} created/updated`,
+          action_type: "CREATE",
+          created_by: Number(firstCreatedBy),
+        },
+      });
     }
 
     return { results, errors };
@@ -819,6 +844,17 @@ export class OrderLoginService {
       },
     });
 
+    await prisma.leadDetailedLogs.create({
+      data: {
+        vendor_id: vendorId,
+        lead_id: Number(lead_id),
+        account_id: existing.account_id,
+        action: `Order Login entry updated: ${item_type} — ${item_desc}`,
+        action_type: "UPDATE",
+        created_by: Number(updated_by),
+      },
+    });
+
     return updated;
   }
 
@@ -895,6 +931,17 @@ export class OrderLoginService {
           },
         });
 
+        await prisma.leadDetailedLogs.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: existing.account_id,
+            action: `Order Login entry updated: ${item_type} — ${item_desc}`,
+            action_type: "UPDATE",
+            created_by: Number(updated_by),
+          },
+        });
+
         results.push(updated);
       } catch (err: any) {
         errors.push({ index, message: err.message });
@@ -904,7 +951,7 @@ export class OrderLoginService {
     return { results, errors };
   }
 
-  async deleteOrderLogin(vendorId: number, orderLoginId: number) {
+  async deleteOrderLogin(vendorId: number, orderLoginId: number, userId: number) {
     if (!vendorId || !orderLoginId) {
       const error = new Error("vendorId and orderLoginId are required");
       (error as any).statusCode = 400;
@@ -921,9 +968,22 @@ export class OrderLoginService {
       throw error;
     }
 
-    return prisma.orderLoginDetails.delete({
+    const deleted = await prisma.orderLoginDetails.delete({
       where: { id: orderLoginId },
     });
+
+    await prisma.leadDetailedLogs.create({
+      data: {
+        vendor_id: vendorId,
+        lead_id: existing.lead_id,
+        account_id: existing.account_id,
+        action: `Order Login entry deleted: ${existing.item_type} — ${existing.item_desc}`,
+        action_type: "DELETE",
+        created_by: userId,
+      },
+    });
+
+    return deleted;
   }
 
   async getLeadsWithStatusOrderLogin(
@@ -1079,6 +1139,19 @@ export class OrderLoginService {
       });
 
       uploadedDocs.push(savedDoc);
+    }
+
+    if (accountId) {
+      await prisma.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          action: `Production files uploaded: ${files.length} file(s)`,
+          action_type: "CREATE",
+          created_by: userId,
+        },
+      });
     }
 
     return uploadedDocs;
@@ -1428,13 +1501,19 @@ export class OrderLoginService {
             },
           });
 
+          const assignedUserForProd = await tx.userMaster.findUnique({
+            where: { id: assignToUserId },
+            select: { user_name: true },
+          });
+          const assignedUserNameForProd = assignedUserForProd?.user_name ?? `User #${assignToUserId}`;
+
           await tx.leadDetailedLogs.create({
             data: {
               vendor_id: vendorId,
               lead_id: leadId,
               account_id: effectiveAccountId,
-              action: `All instances order login completed. Lead moved to Production and assigned to user ID ${assignToUserId}. Required completion date: ${requiredDate.toLocaleDateString()}`,
-              action_type: "UPDATE",
+              action: `All instances order login completed. Lead moved to Production and assigned to ${assignedUserNameForProd}. Required completion date: ${requiredDate.toLocaleDateString()}`,
+              action_type: "STATUS_CHANGE",
               created_by: userId,
             },
           });
@@ -1939,13 +2018,19 @@ export class OrderLoginService {
       },
     });
 
+    const assignedUserForLog = await prisma.userMaster.findUnique({
+      where: { id: assignToUserId },
+      select: { user_name: true },
+    });
+    const assignedUserNameForLog = assignedUserForLog?.user_name ?? `User #${assignToUserId}`;
+
     await prisma.leadDetailedLogs.create({
       data: {
         vendor_id: vendorId,
         lead_id: leadId,
         account_id: accountId,
-        action: `Lead moved to Production Stage and assigned to user ID ${assignToUserId}. Required completion date: ${requiredDate.toLocaleDateString()}`,
-        action_type: "UPDATE",
+        action: `Lead moved to Production Stage and assigned to ${assignedUserNameForLog}. Required completion date: ${requiredDate.toLocaleDateString()}`,
+        action_type: "STATUS_CHANGE",
         created_by: userId,
       },
     });
@@ -2209,6 +2294,24 @@ export class OrderLoginService {
           file_path: savedDoc.doc_sys_name,
         });
       }
+
+      const lead = await tx.leadMaster.findUnique({
+        where: { id: leadId },
+        select: { account_id: true },
+      });
+
+      if (lead?.account_id) {
+        await tx.leadDetailedLogs.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: lead.account_id,
+            action: `PO files uploaded for Order Login #${orderLoginId}: ${files.length} file(s)`,
+            action_type: "CREATE",
+            created_by: userId,
+          },
+        });
+      }
     });
   }
 
@@ -2322,7 +2425,7 @@ export class OrderLoginService {
       const mapping = await tx.orderLoginPoFileMapping.findUnique({
         where: { id: documentId },
         include: {
-          lead: { select: { vendor_id: true } },
+          lead: { select: { vendor_id: true, id: true, account_id: true } },
           document: true,
         },
       });
@@ -2353,6 +2456,19 @@ export class OrderLoginService {
           deleted_by: userId,
         },
       });
+
+      if (mapping.lead?.account_id) {
+        await tx.leadDetailedLogs.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: mapping.lead_id,
+            account_id: mapping.lead.account_id,
+            action: `PO file deleted: ${mapping.document.doc_og_name ?? "Unknown file"}`,
+            action_type: "DELETE",
+            created_by: userId,
+          },
+        });
+      }
 
       return { success: true };
     });
@@ -2400,6 +2516,24 @@ export class OrderLoginService {
       },
     });
 
+    const leadForLog = await prisma.leadMaster.findUnique({
+      where: { id: leadId },
+      select: { account_id: true },
+    });
+
+    if (leadForLog?.account_id) {
+      await prisma.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: leadForLog.account_id,
+          action: `Order Login marked as filled for instance #${instanceId}`,
+          action_type: "UPDATE",
+          created_by: updatedBy,
+        },
+      });
+    }
+
     await triggerOrderLoginCompletionNotification(
       vendorId,
       leadId,
@@ -2441,7 +2575,7 @@ export class OrderLoginService {
   ) {
     const lead = await prisma.leadMaster.findFirst({
       where: { id: leadId, vendor_id: vendorId },
-      select: { id: true },
+      select: { id: true, account_id: true },
     });
 
     if (!lead) {
@@ -2459,6 +2593,19 @@ export class OrderLoginService {
       },
       select: { id: true, order_login_prod_files_remark: true },
     });
+
+    if (lead.account_id) {
+      await prisma.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: lead.account_id,
+          action: `Production files remark updated: ${remark.trim() || "N/A"}`,
+          action_type: "UPDATE",
+          created_by: updatedBy,
+        },
+      });
+    }
 
     return updated;
   }
