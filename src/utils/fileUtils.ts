@@ -96,3 +96,95 @@ export async function resolveLeadCode(
 
   return `${baseLeadCode}.${instanceInfo.quantity_index}`;
 }
+
+export const resolveDateRange = (
+  date_range?: string,
+  start_date?: string,
+  end_date?: string
+) => {
+  const now = new Date();
+
+  let startDate: Date;
+  let endDate: Date;
+
+  const setStartOfDay = (date: Date) => {
+    date.setHours(0, 0, 0, 0);
+    return date;
+  };
+
+  const setEndOfDay = (date: Date) => {
+    date.setHours(23, 59, 59, 999);
+    return date;
+  };
+
+  switch (date_range) {
+    case "yesterday": {
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+      startDate = setStartOfDay(yesterday);
+      endDate = setEndOfDay(new Date(yesterday));
+      break;
+    }
+
+    case "last7days": {
+      const start = new Date();
+      start.setDate(start.getDate() - 7);
+      startDate = setStartOfDay(start);
+      endDate = setEndOfDay(new Date());
+      break;
+    }
+
+    // ✅ ADDED: was missing, frontend sends "last30days"
+    case "last30days": {
+      const start = new Date();
+      start.setDate(start.getDate() - 30);
+      startDate = setStartOfDay(start);
+      endDate = setEndOfDay(new Date());
+      break;
+    }
+
+    case "thisMonth": {
+      startDate = setStartOfDay(new Date(now.getFullYear(), now.getMonth(), 1));
+      endDate = setEndOfDay(new Date());
+      break;
+    }
+
+    case "lastMonth": {
+      startDate = setStartOfDay(new Date(now.getFullYear(), now.getMonth() - 1, 1));
+      endDate = setEndOfDay(new Date(now.getFullYear(), now.getMonth(), 0));
+      break;
+    }
+
+    case "custom": {
+      if (!start_date || !end_date) {
+        // Fallback to today if custom dates not provided
+        startDate = setStartOfDay(new Date());
+        endDate = setEndOfDay(new Date());
+      } else {
+        startDate = setStartOfDay(new Date(start_date));
+        endDate = setEndOfDay(new Date(end_date));
+      }
+      break;
+    }
+
+    case "today":
+    default: {
+      startDate = setStartOfDay(new Date());
+      endDate = setEndOfDay(new Date());
+      break;
+    }
+  }
+
+  return { startDate, endDate };
+};
+
+export const resolvePreviousRange = (startDate: Date, endDate: Date) => {
+  const duration = endDate.getTime() - startDate.getTime();
+
+  const previousEnd = new Date(startDate);
+  previousEnd.setMilliseconds(previousEnd.getMilliseconds() - 1);
+
+  const previousStart = new Date(previousEnd.getTime() - duration);
+
+  return { previousStart, previousEnd };
+};

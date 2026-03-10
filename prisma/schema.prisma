@@ -389,6 +389,7 @@ model LeadMaster {
   no_of_client_documents_initially_submitted  Int?
   hardware_packing_details_remark             String?                             @db.VarChar(2000)
   woodwork_packing_details_remark             String?                             @db.VarChar(2000)
+  order_login_prod_files_remark               String?                             @db.Text
   no_of_boxes                                 Int?
   dispatch_planning_remark                    String?                             @db.VarChar(2000)
   material_lift_availability                  Boolean?                           
@@ -1440,7 +1441,6 @@ model UserMachineMapping {
   createdBy   UserMaster        @relation("UserMachine_createdBy", fields: [created_by], references: [id])
   updatedBy   UserMaster        @relation("UserMachine_updatedBy", fields: [updated_by], references: [id])
   vendor      VendorMaster      @relation(fields: [vendor_id], references: [id])
-  @@unique([machine_id, user_id])
 }
 
 

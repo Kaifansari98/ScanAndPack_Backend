@@ -400,6 +400,7 @@ export const LeadMasterScalarFieldEnum = {
   no_of_client_documents_initially_submitted: 'no_of_client_documents_initially_submitted',
   hardware_packing_details_remark: 'hardware_packing_details_remark',
   woodwork_packing_details_remark: 'woodwork_packing_details_remark',
+  order_login_prod_files_remark: 'order_login_prod_files_remark',
   no_of_boxes: 'no_of_boxes',
   dispatch_planning_remark: 'dispatch_planning_remark',
   material_lift_availability: 'material_lift_availability',
