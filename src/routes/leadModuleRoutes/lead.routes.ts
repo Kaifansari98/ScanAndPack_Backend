@@ -218,4 +218,9 @@ leadsRouter.post(
   leadController.checkContactNumberExists
 );
 
+leadsRouter.get(
+  "/vendorId/:vendorId/leadId/:leadId/check-site-supervisor-assigned",
+  leadController.checkSiteSupervisorAssigned
+);
+
 export default leadsRouter;

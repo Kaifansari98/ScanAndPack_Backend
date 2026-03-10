@@ -2709,6 +2709,21 @@ export const getLeadLogsWithDocuments = async (params: {
   };
 };
 
+export const checkSiteSupervisorAssigned = async (
+  vendorId: number,
+  leadId: number
+): Promise<{ isSiteSupervisorAssigned: boolean }> => {
+  const mapping = await prisma.leadUserMapping.findFirst({
+    where: {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      type: "site-supervisor",
+      status: "active",
+    },
+  });
+  return { isSiteSupervisorAssigned: !!mapping };
+};
+
 export const getClientRequiredCompletionDate = async (
   vendorId: number,
   leadId: number

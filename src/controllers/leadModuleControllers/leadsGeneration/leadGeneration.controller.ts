@@ -16,6 +16,7 @@ import {
   verifyUserTokenService,
   isContactOrEmailExists,
   uploadMoreSitePhotosService,
+  checkSiteSupervisorAssigned,
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import {
   createLeadSchema,
@@ -2075,6 +2076,29 @@ export class LeadController {
         .json(ApiResponse.success(result, "Contact/email lookup completed"));
     } catch (error: any) {
       logger.error("[CONTROLLER] checkContactNumberExists error", error);
+      return res
+        .status(500)
+        .json(ApiResponse.error(error.message || "Internal server error"));
+    }
+  };
+
+  checkSiteSupervisorAssigned = async (req: Request, res: Response) => {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+
+      if (!vendorId || !leadId) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("vendorId and leadId are required", 400));
+      }
+
+      const result = await checkSiteSupervisorAssigned(vendorId, leadId);
+      return res
+        .status(200)
+        .json(ApiResponse.success(result, "Site supervisor check completed"));
+    } catch (error: any) {
+      logger.error("[CONTROLLER] checkSiteSupervisorAssigned error", error);
       return res
         .status(500)
         .json(ApiResponse.error(error.message || "Internal server error"));

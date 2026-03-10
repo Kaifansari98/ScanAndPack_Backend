@@ -298,7 +298,7 @@ export class BookingStageService {
             account_id: data.account_id,
             lead_id: data.lead_id,
             user_id: data.siteSupervisorId,
-            type: "site-supervisor",
+            type: "head-site-supervisor",
             status: "active",
             created_by: data.created_by,
           },
@@ -737,37 +737,49 @@ export class BookingStageService {
   }
 
   public async getBookingStage(leadId: number, vendorId: number) {
-    const lead = await prisma.leadMaster.findUnique({
-      where: { id: leadId },
-      include: {
-        documents: {
-          where: {
-            is_deleted: false,
-            documentType: {
-              tag: "Type 8",
-              vendor_id: vendorId, // ✅ now directly filter
+    const [lead, siteSupervisorMappings] = await Promise.all([
+      prisma.leadMaster.findUnique({
+        where: { id: leadId },
+        include: {
+          documents: {
+            where: {
+              is_deleted: false,
+              documentType: {
+                tag: "Type 8",
+                vendor_id: vendorId,
+              },
+            },
+            include: { documentType: true },
+          },
+          payments: {
+            where: {
+              paymentType: {
+                type: "booking_amount",
+              },
+            },
+            include: {
+              paymentType: true,
+              document: true,
             },
           },
-          include: { documentType: true },
-        },
-        payments: {
-          where: {
-            paymentType: {
-              type: "booking_amount", // ✅ filter only booking_amount type payments
-            },
-          },
-          include: {
-            paymentType: true,
-            document: true,
+          siteSupervisors: {
+            where: { status: "active" },
+            include: { supervisor: true },
           },
         },
-        // ledgers: true,
-        siteSupervisors: {
-          where: { status: "active" }, // ✅ only active supervisors
-          include: { supervisor: true },
+      }),
+      prisma.leadUserMapping.findMany({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+          type: "site-supervisor",
+          status: "active",
         },
-      },
-    });
+        include: {
+          user: { select: { id: true, user_name: true } },
+        },
+      }),
+    ]);
 
     if (!lead) {
       throw new Error("Lead not found");
@@ -787,7 +799,7 @@ export class BookingStageService {
           s3Key: doc.doc_sys_name,
           type: doc.documentType?.tag,
           created_at: doc.created_at,
-          signedUrl, // ✅ added signed URL
+          signedUrl,
         };
       }),
     );
@@ -826,17 +838,10 @@ export class BookingStageService {
           };
         }),
       ),
-      // ledger: lead.ledgers.map((l) => ({
-      //   id: l.id,
-      //   type: l.type,
-      //   amount: l.amount,
-      //   date: l.payment_date,
-      // })),
-      supervisors: lead.siteSupervisors.map((s: any) => ({
-        // id: s.id,
-        userId: s.user_id,
-        userName: s.supervisor.user_name,
-        status: s.status,
+      supervisors: siteSupervisorMappings.map((m: any) => ({
+        userId: m.user_id,
+        userName: m.user.user_name,
+        status: m.status,
       })),
     };
   }
@@ -2363,7 +2368,7 @@ export class BookingStageService {
           lead_id: lead.id,
           vendor_id: data.vendor_id,
           account_id: lead.account_id!,
-          type: "ISM",
+          type: "site-supervisor",
           status: "active",
         },
         data: {
@@ -2379,7 +2384,7 @@ export class BookingStageService {
           vendor_id: data.vendor_id,
           account_id: lead.account_id!,
           user_id: data.siteSupervisorId,
-          type: "ISM",
+          type: "site-supervisor",
         },
       });
 
@@ -2399,7 +2404,7 @@ export class BookingStageService {
             account_id: lead.account_id!,
             lead_id: lead.id,
             user_id: data.siteSupervisorId,
-            type: "ISM",
+            type: "site-supervisor",
             status: "active",
             created_by: data.created_by,
           },
@@ -2411,7 +2416,7 @@ export class BookingStageService {
           vendor_id: data.vendor_id,
           lead_id: lead.id,
           account_id: lead.account_id!,
-          action: `Site supervisor reassigned to ${supervisor.user_name}`,
+          action: `Site supervisor assigned to ${supervisor.user_name}`,
           action_type: "UPDATE",
           created_by: data.created_by,
           created_at: new Date(),
