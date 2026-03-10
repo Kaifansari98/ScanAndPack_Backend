@@ -2246,6 +2246,16 @@ export class OrderLoginService {
       },
     });
 
+    logger.info("[OrderLoginPoFiles] Fetch", {
+      vendorId,
+      leadId,
+      orderLoginId,
+      count: records.length,
+      bucket: process.env.WASABI_BUCKET_NAME,
+      endpoint: process.env.WASABI_ENDPOINT,
+      region: process.env.WASABI_REGION,
+    });
+
     return await Promise.all(
       records.map(async (r) => {
         const fileName = r.document.doc_og_name ?? "";
@@ -2253,16 +2263,38 @@ export class OrderLoginService {
         const inlineExts = new Set(["jpg", "jpeg", "png", "webp", "gif"]);
         const disposition = inlineExts.has(ext) ? "inline" : "attachment";
 
+        const key = r.document.doc_sys_name;
+        let signedUrl = "";
+        try {
+          signedUrl = await generateSignedUrl(key, 3600, disposition);
+          logger.info("[OrderLoginPoFiles] Signed URL generated", {
+            vendorId,
+            leadId,
+            orderLoginId,
+            documentId: r.document.id,
+            key,
+            disposition,
+            signedUrlPreview: signedUrl.slice(0, 120),
+          });
+        } catch (err: any) {
+          logger.error("[OrderLoginPoFiles] Signed URL generation failed", {
+            vendorId,
+            leadId,
+            orderLoginId,
+            documentId: r.document.id,
+            key,
+            disposition,
+            error: err?.message || err,
+          });
+          throw err;
+        }
+
         return {
           id: r.document.id,
           doc_og_name: r.document.doc_og_name,
           created_at: r.document.created_at,
           file_path: r.document.doc_sys_name,
-          signed_url: await generateSignedUrl(
-            r.document.doc_sys_name,
-            3600,
-            disposition,
-          ),
+          signed_url: signedUrl,
         };
       }),
     );
