@@ -1142,7 +1142,7 @@ export class OrderLoginService {
     }
 
     if (accountId) {
-      await prisma.leadDetailedLogs.create({
+      const detailedLog = await prisma.leadDetailedLogs.create({
         data: {
           vendor_id: vendorId,
           lead_id: leadId,
@@ -1151,6 +1151,18 @@ export class OrderLoginService {
           action_type: "CREATE",
           created_by: userId,
         },
+      });
+
+      await prisma.leadDocumentLogs.createMany({
+        data: uploadedDocs.map((doc) => ({
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: userId,
+          created_at: new Date(),
+        })),
       });
     }
 
@@ -2261,7 +2273,7 @@ export class OrderLoginService {
     const docType = await this.getOrderLoginPoDocType(vendorId);
     if (!docType) throw new Error("Doc Type (Type 36) not found");
 
-    const uploadedDocs = [];
+    const uploadedDocs: { mapping_id: number; document_id: number; file_name: string | null; file_path: string }[] = [];
 
     await prisma.$transaction(async (tx) => {
       for (const file of files) {
@@ -2301,7 +2313,7 @@ export class OrderLoginService {
       });
 
       if (lead?.account_id) {
-        await tx.leadDetailedLogs.create({
+        const detailedLog = await tx.leadDetailedLogs.create({
           data: {
             vendor_id: vendorId,
             lead_id: leadId,
@@ -2310,6 +2322,18 @@ export class OrderLoginService {
             action_type: "CREATE",
             created_by: userId,
           },
+        });
+
+        await tx.leadDocumentLogs.createMany({
+          data: uploadedDocs.map((doc) => ({
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: lead.account_id!,
+            doc_id: doc.document_id,
+            lead_logs_id: detailedLog.id,
+            created_by: userId,
+            created_at: new Date(),
+          })),
         });
       }
     });
@@ -2458,7 +2482,7 @@ export class OrderLoginService {
       });
 
       if (mapping.lead?.account_id) {
-        await tx.leadDetailedLogs.create({
+        const detailedLog = await tx.leadDetailedLogs.create({
           data: {
             vendor_id: vendorId,
             lead_id: mapping.lead_id,
@@ -2466,6 +2490,18 @@ export class OrderLoginService {
             action: `PO file deleted: ${mapping.document.doc_og_name ?? "Unknown file"}`,
             action_type: "DELETE",
             created_by: userId,
+          },
+        });
+
+        await tx.leadDocumentLogs.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: mapping.lead_id,
+            account_id: mapping.lead.account_id,
+            doc_id: mapping.document_id,
+            lead_logs_id: detailedLog.id,
+            created_by: userId,
+            created_at: new Date(),
           },
         });
       }
