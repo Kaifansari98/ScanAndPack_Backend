@@ -53,6 +53,19 @@ export class PostProductionService {
       uploadedDocs.push(doc);
     }
 
+    if (accountId) {
+      await prisma.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          action: `QC Photos uploaded: ${files.length} file(s)${instanceId ? ` for instance #${instanceId}` : ""}`,
+          action_type: "CREATE",
+          created_by: userId,
+        },
+      });
+    }
+
     return uploadedDocs;
   }
 
@@ -131,16 +144,18 @@ export class PostProductionService {
       }
 
       // Log the remark update
-      await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId ?? 0,
-          action: `Hardware Packing Details Remark added/updated: "${remark}"`,
-          action_type: "UPDATE",
-          created_by: userId,
-        },
-      });
+      if (accountId) {
+        await prisma.leadDetailedLogs.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: accountId,
+            action: `Hardware Packing Details remark added/updated${instanceId ? ` for instance #${instanceId}` : ""}: "${remark}"`,
+            action_type: "UPDATE",
+            created_by: userId,
+          },
+        });
+      }
     }
 
     // ✅ 3. Handle File Uploads
@@ -161,6 +176,19 @@ export class PostProductionService {
         });
 
         uploadedDocs.push(doc);
+      }
+
+      if (accountId) {
+        await prisma.leadDetailedLogs.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: accountId,
+            action: `Hardware Packing Details files uploaded: ${files.length} file(s)${instanceId ? ` for instance #${instanceId}` : ""}`,
+            action_type: "CREATE",
+            created_by: userId,
+          },
+        });
       }
     }
 
@@ -243,18 +271,20 @@ export class PostProductionService {
         }
       }
 
-      await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId ?? 0,
-          action: instanceId
-            ? `Woodwork Packing Details Remark added/updated for instance ${instanceId}: "${remark}"`
-            : `Woodwork Packing Details Remark added/updated: "${remark}"`,
-          action_type: "UPDATE",
-          created_by: userId,
-        },
-      });
+      if (accountId) {
+        await prisma.leadDetailedLogs.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: accountId,
+            action: instanceId
+              ? `Woodwork Packing Details remark added/updated for instance #${instanceId}: "${remark}"`
+              : `Woodwork Packing Details remark added/updated: "${remark}"`,
+            action_type: "UPDATE",
+            created_by: userId,
+          },
+        });
+      }
     }
 
     if (files && files.length > 0) {
@@ -274,6 +304,19 @@ export class PostProductionService {
         });
 
         uploadedDocs.push(doc);
+      }
+
+      if (accountId) {
+        await prisma.leadDetailedLogs.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: accountId,
+            action: `Woodwork Packing Details files uploaded: ${files.length} file(s)${instanceId ? ` for instance #${instanceId}` : ""}`,
+            action_type: "CREATE",
+            created_by: userId,
+          },
+        });
       }
     }
 
@@ -497,17 +540,18 @@ export class PostProductionService {
         },
       });
 
-      await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId ?? 0,
-          action: `Number of Boxes updated to ${noOfBoxes} for instance ${instanceId}`,
-          action_type: "UPDATE",
-          created_by: userId,
-          created_at: new Date(),
-        },
-      });
+      if (accountId) {
+        await prisma.leadDetailedLogs.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: accountId,
+            action: `Number of boxes updated to ${noOfBoxes} for instance #${instanceId}`,
+            action_type: "UPDATE",
+            created_by: userId,
+          },
+        });
+      }
 
       return updatedInstance;
     }
@@ -538,17 +582,18 @@ export class PostProductionService {
     });
 
     // ✅ Log the update
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        account_id: accountId ?? 0,
-        action: `Number of Boxes updated to ${noOfBoxes}`,
-        action_type: "UPDATE",
-        created_by: userId,
-        created_at: new Date(),
-      },
-    });
+    if (accountId) {
+      await prisma.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          action: `Number of boxes updated to ${noOfBoxes}`,
+          action_type: "UPDATE",
+          created_by: userId,
+        },
+      });
+    }
 
     return updatedLead;
   }
@@ -756,6 +801,19 @@ export class PostProductionService {
       uploadedDocs.push(doc);
     }
 
+    if (accountId) {
+      await prisma.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          action: `Pre-production files uploaded: ${files.length} file(s)${instanceId ? ` for instance #${instanceId}` : ""}`,
+          action_type: "CREATE",
+          created_by: userId,
+        },
+      });
+    }
+
     return uploadedDocs;
   }
 
@@ -853,17 +911,18 @@ export class PostProductionService {
       },
     });
 
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        account_id: instance.account_id ?? 0,
-        action: `Production completed for instance ${instance.title}`,
-        action_type: "UPDATE",
-        created_by: updatedBy,
-        created_at: new Date(),
-      },
-    });
+    if (instance.account_id) {
+      await prisma.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: instance.account_id,
+          action: `Production marked as completed for instance "${instance.title}"`,
+          action_type: "UPDATE",
+          created_by: updatedBy,
+        },
+      });
+    }
 
     return updatedInstance;
   }
@@ -918,17 +977,18 @@ export class PostProductionService {
       });
 
       // 4️⃣ Audit log
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: currentLead.account_id ?? 0,
-          action: "Lead moved to Ready To Dispatch stage",
-          action_type: "STATUS_CHANGE",
-          created_by: updatedBy,
-          created_at: new Date(),
-        },
-      });
+      if (currentLead.account_id) {
+        await tx.leadDetailedLogs.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: currentLead.account_id,
+            action: "Lead moved to Ready To Dispatch stage",
+            action_type: "STATUS_CHANGE",
+            created_by: updatedBy,
+          },
+        });
+      }
 
       return {
         updatedLead,
