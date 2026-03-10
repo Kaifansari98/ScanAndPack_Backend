@@ -54,15 +54,35 @@ export class PostProductionService {
     }
 
     if (accountId) {
-      await prisma.leadDetailedLogs.create({
+      let instanceTitle: string | undefined;
+      if (instanceId) {
+        const inst = await prisma.leadProductStructureInstance.findFirst({
+          where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
+          select: { title: true },
+        });
+        instanceTitle = inst?.title ?? undefined;
+      }
+
+      const detailedLog = await prisma.leadDetailedLogs.create({
         data: {
           vendor_id: vendorId,
           lead_id: leadId,
           account_id: accountId,
-          action: `QC Photos uploaded: ${files.length} file(s)${instanceId ? ` for instance #${instanceId}` : ""}`,
+          action: `QC Photos uploaded: ${files.length} file(s)${instanceTitle ? ` for instance "${instanceTitle}"` : ""}`,
           action_type: "CREATE",
           created_by: userId,
         },
+      });
+
+      await prisma.leadDocumentLogs.createMany({
+        data: uploadedDocs.map((doc) => ({
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: userId,
+        })),
       });
     }
 
@@ -92,6 +112,7 @@ export class PostProductionService {
       );
 
     const uploadedDocs = [];
+    let instanceTitle: string | undefined;
 
     // ✅ 2. If remark provided, update LeadMaster
     if (remark && remark.trim() !== "") {
@@ -109,6 +130,8 @@ export class PostProductionService {
         if (!instance) {
           throw new Error("Product structure instance not found for this lead");
         }
+
+        instanceTitle = instance.title ?? undefined;
 
         await prisma.leadProductStructureInstance.update({
           where: { id: instanceId },
@@ -150,7 +173,7 @@ export class PostProductionService {
             vendor_id: vendorId,
             lead_id: leadId,
             account_id: accountId,
-            action: `Hardware Packing Details remark added/updated${instanceId ? ` for instance #${instanceId}` : ""}: "${remark}"`,
+            action: `Hardware Packing Details remark added/updated${instanceTitle ? ` for instance "${instanceTitle}"` : ""}: "${remark}"`,
             action_type: "UPDATE",
             created_by: userId,
           },
@@ -179,15 +202,34 @@ export class PostProductionService {
       }
 
       if (accountId) {
-        await prisma.leadDetailedLogs.create({
+        if (instanceId && !instanceTitle) {
+          const inst = await prisma.leadProductStructureInstance.findFirst({
+            where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
+            select: { title: true },
+          });
+          instanceTitle = inst?.title ?? undefined;
+        }
+
+        const detailedLog = await prisma.leadDetailedLogs.create({
           data: {
             vendor_id: vendorId,
             lead_id: leadId,
             account_id: accountId,
-            action: `Hardware Packing Details files uploaded: ${files.length} file(s)${instanceId ? ` for instance #${instanceId}` : ""}`,
+            action: `Hardware Packing Details files uploaded: ${files.length} file(s)${instanceTitle ? ` for instance "${instanceTitle}"` : ""}`,
             action_type: "CREATE",
             created_by: userId,
           },
+        });
+
+        await prisma.leadDocumentLogs.createMany({
+          data: uploadedDocs.map((doc) => ({
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: accountId,
+            doc_id: doc.id,
+            lead_logs_id: detailedLog.id,
+            created_by: userId,
+          })),
         });
       }
     }
@@ -221,6 +263,7 @@ export class PostProductionService {
       );
 
     const uploadedDocs = [];
+    let instanceTitle: string | undefined;
 
     if (remark && remark.trim() !== "") {
       if (instanceId) {
@@ -237,6 +280,8 @@ export class PostProductionService {
         if (!instance) {
           throw new Error("Product structure instance not found for this lead");
         }
+
+        instanceTitle = instance.title ?? undefined;
 
         await prisma.leadProductStructureInstance.update({
           where: { id: instanceId },
@@ -277,8 +322,8 @@ export class PostProductionService {
             vendor_id: vendorId,
             lead_id: leadId,
             account_id: accountId,
-            action: instanceId
-              ? `Woodwork Packing Details remark added/updated for instance #${instanceId}: "${remark}"`
+            action: instanceTitle
+              ? `Woodwork Packing Details remark added/updated for instance "${instanceTitle}": "${remark}"`
               : `Woodwork Packing Details remark added/updated: "${remark}"`,
             action_type: "UPDATE",
             created_by: userId,
@@ -307,15 +352,34 @@ export class PostProductionService {
       }
 
       if (accountId) {
-        await prisma.leadDetailedLogs.create({
+        if (instanceId && !instanceTitle) {
+          const inst = await prisma.leadProductStructureInstance.findFirst({
+            where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
+            select: { title: true },
+          });
+          instanceTitle = inst?.title ?? undefined;
+        }
+
+        const detailedLog = await prisma.leadDetailedLogs.create({
           data: {
             vendor_id: vendorId,
             lead_id: leadId,
             account_id: accountId,
-            action: `Woodwork Packing Details files uploaded: ${files.length} file(s)${instanceId ? ` for instance #${instanceId}` : ""}`,
+            action: `Woodwork Packing Details files uploaded: ${files.length} file(s)${instanceTitle ? ` for instance "${instanceTitle}"` : ""}`,
             action_type: "CREATE",
             created_by: userId,
           },
+        });
+
+        await prisma.leadDocumentLogs.createMany({
+          data: uploadedDocs.map((doc) => ({
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: accountId,
+            doc_id: doc.id,
+            lead_logs_id: detailedLog.id,
+            created_by: userId,
+          })),
         });
       }
     }
@@ -514,7 +578,7 @@ export class PostProductionService {
           lead_id: leadId,
           vendor_id: vendorId,
         },
-        select: { id: true, no_of_boxes: true },
+        select: { id: true, title: true, no_of_boxes: true },
       });
 
       if (!instance) {
@@ -546,7 +610,7 @@ export class PostProductionService {
             vendor_id: vendorId,
             lead_id: leadId,
             account_id: accountId,
-            action: `Number of boxes updated to ${noOfBoxes} for instance #${instanceId}`,
+            action: `Number of boxes updated to ${noOfBoxes} for instance "${instance.title}"`,
             action_type: "UPDATE",
             created_by: userId,
           },
@@ -802,15 +866,35 @@ export class PostProductionService {
     }
 
     if (accountId) {
-      await prisma.leadDetailedLogs.create({
+      let instanceTitle: string | undefined;
+      if (instanceId) {
+        const inst = await prisma.leadProductStructureInstance.findFirst({
+          where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
+          select: { title: true },
+        });
+        instanceTitle = inst?.title ?? undefined;
+      }
+
+      const detailedLog = await prisma.leadDetailedLogs.create({
         data: {
           vendor_id: vendorId,
           lead_id: leadId,
           account_id: accountId,
-          action: `Pre-production files uploaded: ${files.length} file(s)${instanceId ? ` for instance #${instanceId}` : ""}`,
+          action: `Pre-production files uploaded: ${files.length} file(s)${instanceTitle ? ` for instance "${instanceTitle}"` : ""}`,
           action_type: "CREATE",
           created_by: userId,
         },
+      });
+
+      await prisma.leadDocumentLogs.createMany({
+        data: uploadedDocs.map((doc) => ({
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: userId,
+        })),
       });
     }
 
