@@ -1411,9 +1411,13 @@ export class OrderLoginService {
         // 5. Log instance action
         const rawLeadCode =
           leadMeta?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
-        const instanceCode = instance.quantity_index
-          ? `${rawLeadCode}.${instance.quantity_index}`
-          : rawLeadCode;
+        const totalInstanceCount = await tx.leadProductStructureInstance.count({
+          where: { lead_id: leadId, vendor_id: vendorId },
+        });
+        const instanceCode =
+          totalInstanceCount > 1 && instance.quantity_index
+            ? `${rawLeadCode}.${instance.quantity_index}`
+            : rawLeadCode;
 
         await tx.leadDetailedLogs.create({
           data: {
@@ -2530,7 +2534,7 @@ export class OrderLoginService {
         vendor_id: vendorId,
         lead_id: leadId,
       },
-      select: { id: true, is_order_login_filled: true },
+      select: { id: true, title: true, is_order_login_filled: true },
     });
 
     if (!instance) {
@@ -2563,7 +2567,7 @@ export class OrderLoginService {
           vendor_id: vendorId,
           lead_id: leadId,
           account_id: leadForLog.account_id,
-          action: `Order Login marked as filled for instance #${instanceId}`,
+          action: `Order Login marked as filled for instance "${instance.title}"`,
           action_type: "UPDATE",
           created_by: updatedBy,
         },
