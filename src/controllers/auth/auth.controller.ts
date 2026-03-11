@@ -73,6 +73,16 @@ export const login = async (req: Request, res: Response) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
+    // ✅ Fetch is_head_office from FranchiseMaster
+    let is_ho_user = false;
+    if (user.franchise_id) {
+      const franchise = await prisma.franchiseMaster.findUnique({
+        where: { id: user.franchise_id },
+        select: { is_head_office: true },
+      });
+      is_ho_user = franchise?.is_head_office ?? false;
+    }
+
     // ✅ Generate JWT
     const token = jwt.sign(
       {
@@ -89,7 +99,7 @@ export const login = async (req: Request, res: Response) => {
       message: "Login successful",
       token,
       franchise_id: user.franchise_id,
-      user,
+      user: { ...user, is_ho_user },
     });
   } catch (err) {
     console.error("Login error:", err);
