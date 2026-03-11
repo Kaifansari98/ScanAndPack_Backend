@@ -1694,7 +1694,7 @@ export const getBottleNeck = async (payload: TrackTraceDashboardPayload) => {
       return b.queueCount - a.queueCount;
     });
 
-    return sortedBottlenecks;
+    return sortedBottlenecks.slice(0, 5);
   } catch (error) {
     console.error("Error fetching bottlenecks:", error);
     throw new Error("Failed to fetch bottleneck data");
