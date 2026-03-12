@@ -494,6 +494,37 @@ export class PreProductionService {
         const userId = Number(updated_by);
         const status: LeadTaskStatus = completionFlag ? "completed" : "open";
 
+        // ─── Resolve Assignee ─────────────────────────────────────
+        let assigneeUserId = userId;
+        const actor = await prisma.userMaster.findUnique({
+          where: { id: userId },
+          include: { user_type: true },
+        });
+        const actorRole = actor?.user_type?.user_type?.toLowerCase();
+
+        if (actorRole !== "factory") {
+          const factoryType = await prisma.userTypeMaster.findFirst({
+            where: { user_type: { equals: "factory", mode: "insensitive" } },
+            select: { id: true },
+          });
+
+          if (factoryType) {
+            const factoryMapping = await prisma.leadUserMapping.findFirst({
+              where: {
+                vendor_id: vendorId,
+                lead_id: leadId,
+                status: "active",
+                user: { user_type_id: factoryType.id },
+              },
+              select: { user_id: true },
+            });
+
+            if (factoryMapping?.user_id) {
+              assigneeUserId = factoryMapping.user_id;
+            }
+          }
+        }
+
         // ✅ remark mein ||OL:id|| embed karo — orderlogin item wise unique identification
         const remark = `${instance?.title ?? "Unknown"} (${existing.item_type}) - still needs to be marked as ready. ||OL:${id}||`;
 
@@ -530,6 +561,7 @@ export class PreProductionService {
               status: completionFlag ? "completed" : existingTask.status,
               updated_by: userId,
               updated_at: new Date(),
+              user_id: assigneeUserId,
               ...(completionFlag && {
                 closed_by: userId,
                 closed_at: new Date(),
@@ -551,7 +583,7 @@ export class PreProductionService {
               account_id: existing.account_id,
               franchise_id: leadFranchise?.franchise_id ?? null,
               instance_id: instance_id,
-              user_id: userId,
+              user_id: assigneeUserId,
               task_type: "Production Ready",
               lead_stage: leadStage,
               due_date: new Date(dueDate),
