@@ -95,6 +95,17 @@ export const login = async (req: Request, res: Response) => {
       { expiresIn: "30d" }
     );
 
+    await prisma.userActivityLog.create({
+      data: {
+        user_id: user.id,
+        action: "User logged in successfully.",
+        activity_type: "LOGIN",
+        ip_address: (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim() || req.socket.remoteAddress || null,
+        user_agent: req.headers["user-agent"] || null,
+        metadata: { logged_in_at: new Date().toISOString() },
+      },
+    });
+
     return res.status(200).json({
       message: "Login successful",
       token,
@@ -104,6 +115,64 @@ export const login = async (req: Request, res: Response) => {
   } catch (err) {
     console.error("Login error:", err);
     res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const logoutActivity = async (req: Request, res: Response) => {
+  const userId = (req as any).user?.id;
+
+  try {
+    await prisma.userActivityLog.create({
+      data: {
+        user_id: userId,
+        action: "User logged out successfully.",
+        activity_type: "LOGOUT",
+        ip_address: (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim() || req.socket.remoteAddress || null,
+        user_agent: req.headers["user-agent"] || null,
+        metadata: { logged_out_at: new Date().toISOString() },
+      },
+    });
+
+    return res.status(200).json({ message: "Logout activity logged." });
+  } catch (err) {
+    console.error("Logout activity log error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const changePassword = async (req: Request, res: Response) => {
+  const userId = (req as any).user?.id;
+  const { currentPassword, newPassword } = req.body;
+
+  if (!currentPassword || !newPassword) {
+    return res.status(400).json({ message: "currentPassword and newPassword are required" });
+  }
+
+  try {
+    const user = await prisma.userMaster.findUnique({ where: { id: userId } });
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) return res.status(401).json({ message: "Current password is incorrect" });
+
+    const hashed = await bcrypt.hash(newPassword, 10);
+    await prisma.userMaster.update({ where: { id: userId }, data: { password: hashed } });
+
+    await prisma.userActivityLog.create({
+      data: {
+        user_id: userId,
+        action: "User successfully changed their password.",
+        activity_type: "RESET_PASSWORD",
+        ip_address: (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim() || req.socket.remoteAddress || null,
+        user_agent: req.headers["user-agent"] || null,
+        metadata: { changed_at: new Date().toISOString() },
+      },
+    });
+
+    return res.status(200).json({ message: "Password changed successfully" });
+  } catch (err) {
+    console.error("Change password error:", err);
+    return res.status(500).json({ message: "Server error" });
   }
 };
 

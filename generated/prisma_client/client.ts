@@ -467,3 +467,8 @@ export type GeographicalMapping = Prisma.GeographicalMappingModel
  * 
  */
 export type UserGeographicalMapping = Prisma.UserGeographicalMappingModel
+/**
+ * Model UserActivityLog
+ * 
+ */
+export type UserActivityLog = Prisma.UserActivityLogModel

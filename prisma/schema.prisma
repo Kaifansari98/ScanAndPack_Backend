@@ -195,6 +195,7 @@ model UserMaster {
   orderLoginPoFilesCreated   OrderLoginPoFileMapping[] @relation("OrderLoginPoFileCreatedBy")
   orderLoginPoFilesDeleted   OrderLoginPoFileMapping[] @relation("OrderLoginPoFileDeletedBy")
   userGeographicalMappings   UserGeographicalMapping[]
+  activityLogs               UserActivityLog[]
   franchise                            FranchiseMaster?                    @relation(fields: [franchise_id], references: [id])
   headSiteSupervisorFranchiseMappings HeadSiteSupervisorFranchiseMapping[] @relation("HeadSiteSupervisorFranchiseMappingUser")
   headSiteSupervisorFranchiseMappingsCreated HeadSiteSupervisorFranchiseMapping[] @relation("HeadSiteSupervisorFranchiseMappingCreatedBy")
@@ -1813,4 +1814,22 @@ enum ScanType {
 enum UserMachineStatus {
   ACTIVE
   INACTIVE
+}
+
+model UserActivityLog {
+  id            Int                 @id @default(autoincrement())
+  user_id       Int
+  action        String
+  activity_type UserActivityType
+  metadata      Json?
+  ip_address    String?
+  user_agent    String?
+  created_at    DateTime            @default(now())
+  user          UserMaster          @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+enum UserActivityType {
+  RESET_PASSWORD
+  LOGIN
+  LOGOUT
 }

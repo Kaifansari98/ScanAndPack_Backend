@@ -180,3 +180,12 @@ export const UserMachineStatus = {
 } as const
 
 export type UserMachineStatus = (typeof UserMachineStatus)[keyof typeof UserMachineStatus]
+
+
+export const UserActivityType = {
+  RESET_PASSWORD: 'RESET_PASSWORD',
+  LOGIN: 'LOGIN',
+  LOGOUT: 'LOGOUT'
+} as const
+
+export type UserActivityType = (typeof UserActivityType)[keyof typeof UserActivityType]
