@@ -1072,7 +1072,7 @@ export class BookingStageController {
 
       res.status(200).json({
         success: true,
-        message: "Site supervisor reassigned successfully",
+        message: "Site supervisor assigned successfully",
         data: result,
       });
     } catch (error: any) {
