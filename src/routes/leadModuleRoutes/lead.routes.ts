@@ -223,4 +223,9 @@ leadsRouter.get(
   leadController.checkSiteSupervisorAssigned
 );
 
+leadsRouter.get(
+  "/vendorId/:vendorId/leadId/:leadId/all-documents",
+  leadController.getAllLeadDocuments
+);
+
 export default leadsRouter;

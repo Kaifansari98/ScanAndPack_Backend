@@ -40,6 +40,7 @@ import {
   sendLeadCreatedEmail,
   sendLeadAssignedEmail,
 } from "../../../services/email/brevoEmail.service";
+import { generateSignedUrl } from "../../../utils/wasabiClient";
 
 const resolveClientBaseUrl = (req: Request): string => {
   const origin = req.headers.origin;
@@ -2076,6 +2077,64 @@ export class LeadController {
         .json(ApiResponse.success(result, "Contact/email lookup completed"));
     } catch (error: any) {
       logger.error("[CONTROLLER] checkContactNumberExists error", error);
+      return res
+        .status(500)
+        .json(ApiResponse.error(error.message || "Internal server error"));
+    }
+  };
+
+  getAllLeadDocuments = async (req: Request, res: Response) => {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+
+      if (!vendorId || !leadId) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("vendorId and leadId are required", 400));
+      }
+
+      const documents = await prisma.leadDocuments.findMany({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          is_deleted: false,
+        },
+        include: {
+          documentType: {
+            select: { id: true, type: true, tag: true },
+          },
+        },
+        orderBy: { created_at: "asc" },
+      });
+
+      const withSignedUrls = await Promise.all(
+        documents.map(async (doc) => {
+          const signedUrl = await generateSignedUrl(doc.doc_sys_name);
+          return {
+            id: doc.id,
+            doc_og_name: doc.doc_og_name,
+            doc_sys_name: doc.doc_sys_name,
+            doc_type_id: doc.doc_type_id,
+            doc_type_tag: doc.documentType.tag,
+            doc_type_type: doc.documentType.type,
+            tech_check_status: doc.tech_check_status,
+            created_at: doc.created_at,
+            signed_url: signedUrl,
+          };
+        })
+      );
+
+      return res
+        .status(200)
+        .json(
+          ApiResponse.success(
+            withSignedUrls,
+            "All lead documents fetched successfully"
+          )
+        );
+    } catch (error: any) {
+      logger.error("[CONTROLLER] getAllLeadDocuments error", error);
       return res
         .status(500)
         .json(ApiResponse.error(error.message || "Internal server error"));
