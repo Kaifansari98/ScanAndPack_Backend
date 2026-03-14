@@ -38,7 +38,7 @@ export class ChatService {
     const messageResult = await prisma.$transaction(async (tx) => {
       const lead = await tx.leadMaster.findUnique({
         where: { id: leadId },
-        select: { id: true, vendor_id: true },
+        select: { id: true, vendor_id: true, franchise_id: true },
       });
 
       if (!lead) {
@@ -57,14 +57,25 @@ export class ChatService {
         },
       });
 
-      const adminUsers = await tx.userMaster.findMany({
-        where: {
-          vendor_id: lead.vendor_id,
-          status: "active",
-          user_type: { user_type: { in: ["admin", "super-admin"] } },
-        },
-        select: { id: true },
-      });
+      const [superAdminUsers, adminUsers] = await Promise.all([
+        tx.userMaster.findMany({
+          where: {
+            vendor_id: lead.vendor_id,
+            status: "active",
+            user_type: { user_type: "super-admin" },
+          },
+          select: { id: true },
+        }),
+        tx.userMaster.findMany({
+          where: {
+            vendor_id: lead.vendor_id,
+            franchise_id: lead.franchise_id ?? null,
+            status: "active",
+            user_type: { user_type: "admin" },
+          },
+          select: { id: true },
+        }),
+      ]);
 
       const mappedUsers = await tx.leadUserMapping.findMany({
         where: {
@@ -76,6 +87,7 @@ export class ChatService {
       });
 
       const desiredMemberIds = new Set<number>([
+        ...superAdminUsers.map((user) => user.id),
         ...adminUsers.map((user) => user.id),
         ...mappedUsers.map((mapping) => mapping.user_id),
         userId,
