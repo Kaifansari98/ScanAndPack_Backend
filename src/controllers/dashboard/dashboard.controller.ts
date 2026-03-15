@@ -146,6 +146,7 @@ export class DashboardController {
   public getProjectsOverview = async (req: Request, res: Response) => {
     try {
       const vendor_id = Number(req.query.vendor_id);
+      const franchise_id = req.query.franchise_id ? Number(req.query.franchise_id) : undefined;
 
       if (!vendor_id) {
         return res.status(400).json({
@@ -154,7 +155,7 @@ export class DashboardController {
         });
       }
 
-      const data = await dashboardService.getProjectsOverview(vendor_id);
+      const data = await dashboardService.getProjectsOverview(vendor_id, franchise_id);
 
       return res.status(200).json({
         success: true,
@@ -196,6 +197,7 @@ export class DashboardController {
   public getTotalRevenue = async (req: Request, res: Response) => {
     try {
       const vendor_id = Number(req.query.vendor_id);
+      const franchise_id = req.query.franchise_id ? Number(req.query.franchise_id) : undefined;
 
       if (!vendor_id) {
         return res.status(400).json({
@@ -204,7 +206,7 @@ export class DashboardController {
         });
       }
 
-      const data = await dashboardService.getTotalRevenue(vendor_id);
+      const data = await dashboardService.getTotalRevenue(vendor_id, franchise_id);
 
       return res.status(200).json({
         success: true,
@@ -221,6 +223,7 @@ export class DashboardController {
   public getAdminStageCounts = async (req: Request, res: Response) => {
     try {
       const vendor_id = Number(req.query.vendor_id);
+      const franchise_id = req.query.franchise_id ? Number(req.query.franchise_id) : undefined;
 
       if (!vendor_id) {
         return res.status(400).json({
@@ -229,7 +232,7 @@ export class DashboardController {
         });
       }
 
-      const data = await dashboardService.getAdminStageCounts(vendor_id);
+      const data = await dashboardService.getAdminStageCounts(vendor_id, franchise_id);
 
       return res.status(200).json({
         success: true,
@@ -406,6 +409,7 @@ export class DashboardController {
   public getAdminAllStageLeads = async (req: Request, res: Response) => {
     try {
       const vendor_id = Number(req.query.vendor_id);
+      const franchise_id = req.query.franchise_id ? Number(req.query.franchise_id) : undefined;
 
       if (!vendor_id) {
         return res.status(400).json({
@@ -414,7 +418,7 @@ export class DashboardController {
         });
       }
 
-      const data = await dashboardService.getAdminAllStageLeads(vendor_id);
+      const data = await dashboardService.getAdminAllStageLeads(vendor_id, franchise_id);
 
       return res.status(200).json({
         success: true,

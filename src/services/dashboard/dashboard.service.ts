@@ -666,7 +666,7 @@ export class DashboardService {
   // Admin Dashboard : Projects Overview (distinct lead counts by created_at)
   // Only count leads whose FINAL status is between Type 4 ↠ Type 16
   // ----------------------------------------------------------------
-  public async getProjectsOverview(vendor_id: number) {
+  public async getProjectsOverview(vendor_id: number, franchise_id?: number) {
     // Get Type 4 (booking) ID
     const type4 = await prisma.statusTypeMaster.findFirst({
       where: { vendor_id, tag: "Type 4" },
@@ -696,6 +696,7 @@ export class DashboardService {
       vendor_id,
       is_deleted: false, // Only active leads
       status_id: { gte: type4.id, lte: type16.id }, // Only Type 4 → Type 16
+      ...(franchise_id ? { franchise_id } : {}),
     };
 
     // Helper to count distinct leads in a date range
@@ -750,7 +751,7 @@ export class DashboardService {
   // ----------------------------------------------------------------
   // Admin Dashboard : Total Revenue (sum total_project_amount)
   // ----------------------------------------------------------------
-  public async getTotalRevenue(vendor_id: number) {
+  public async getTotalRevenue(vendor_id: number, franchise_id?: number) {
     const baseWhere = {
       vendor_id,
       is_deleted: false,
@@ -761,6 +762,7 @@ export class DashboardService {
           ActivityStatus.onHold,
         ],
       },
+      ...(franchise_id ? { franchise_id } : {}),
     };
 
     const sumByRange = (range?: { start: Date; end: Date }) =>
@@ -810,7 +812,7 @@ export class DashboardService {
   // -------------------------------------------------------
   // Admin Dashboard : Stage Counts (Type 1 → Type 17 buckets)
   // -------------------------------------------------------
-  public async getAdminStageCounts(vendor_id: number) {
+  public async getAdminStageCounts(vendor_id: number, franchise_id?: number) {
     const statuses = await prisma.statusTypeMaster.findMany({
       where: { vendor_id },
       select: { id: true, tag: true },
@@ -829,6 +831,7 @@ export class DashboardService {
           ActivityStatus.lost,
         ],
       },
+      ...(franchise_id ? { franchise_id } : {}),
     };
 
     const countByTags = async (tags: string[]) => {
@@ -1340,7 +1343,7 @@ export class DashboardService {
   // -------------------------------------------------------
   // Admin : All stage leads (Type 1–17) onGoing only, not deleted
   // -------------------------------------------------------
-  public async getAdminAllStageLeads(vendor_id: number) {
+  public async getAdminAllStageLeads(vendor_id: number, franchise_id?: number) {
     const targetTags = [
       { tag: "Type 1", key: "openStage" },
       { tag: "Type 2", key: "initialSiteMeasurementStage" },
@@ -1382,6 +1385,7 @@ export class DashboardService {
           is_deleted: false,
           status_id,
           activity_status: ActivityStatus.onGoing,
+          ...(franchise_id ? { franchise_id } : {}),
         },
         select: {
           id: true,
