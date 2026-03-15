@@ -1146,7 +1146,7 @@ export class LeadController {
         resolvedProductTypeId = productType.id;
       }
 
-      const mapping = await prisma.leadProductMapping.findFirst({
+      let mapping = await prisma.leadProductMapping.findFirst({
         where: {
           lead_id: leadId,
           vendor_id: lead.vendor_id,
@@ -1155,18 +1155,25 @@ export class LeadController {
       });
 
       if (!mapping) {
-        res
-          .status(404)
-          .json(ApiResponse.error("Lead product mapping not found", 404));
-        return;
+        // No mapping yet — create one (first-time product type assignment)
+        mapping = await prisma.leadProductMapping.create({
+          data: {
+            lead_id: leadId,
+            vendor_id: lead.vendor_id,
+            account_id: lead.account_id!,
+            product_type_id: resolvedProductTypeId,
+            created_by: updatedBy,
+          },
+          select: { id: true, product_type_id: true },
+        });
+      } else {
+        await prisma.leadProductMapping.update({
+          where: { id: mapping.id },
+          data: {
+            product_type_id: resolvedProductTypeId,
+          },
+        });
       }
-
-      await prisma.leadProductMapping.update({
-        where: { id: mapping.id },
-        data: {
-          product_type_id: resolvedProductTypeId,
-        },
-      });
 
       await prisma.leadProductStructureInstance.updateMany({
         where: {
