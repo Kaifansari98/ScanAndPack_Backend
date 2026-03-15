@@ -10,9 +10,6 @@ import logger from "../../../utils/logger";
 import { assignTaskISMService } from "../../../services/leadModuleServices/leadsGeneration/initial-site_measurement.service";
 import { NotificationService } from "../../../services/notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
-import {
-  sendTaskAssignedEmail,
-} from "../../../services/email/brevoEmail.service";
 
 const getParam = (param: string | string[] | undefined): string | undefined =>
   Array.isArray(param) ? param[0] : param;
@@ -166,7 +163,7 @@ export class PaymentUploadController {
       // ===============================
 
       try {
-        const [assignee, lead, assignedBy] = await Promise.all([
+        const [assignee, lead] = await Promise.all([
           prisma.userMaster.findUnique({
             where: { id: Number(user_id) },
             select: {
@@ -181,24 +178,14 @@ export class PaymentUploadController {
             select: {
               firstname: true,
               lastname: true,
-              lead_code: true,
               account_id: true,
               franchise_id: true,
             },
           }),
-          actorId
-            ? prisma.userMaster.findUnique({
-                where: { id: Number(actorId) },
-                select: { user_name: true },
-              })
-            : Promise.resolve(null),
         ]);
 
         const leadName =
           `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
-
-        const leadCode =
-          lead?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
 
         const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
 
@@ -232,46 +219,6 @@ export class PaymentUploadController {
           });
         }
 
-        // ===============================
-        // SALES EXEC EMAIL (UNCHANGED)
-        // ===============================
-
-        let assigneeEmail = assignee?.user_email?.trim();
-        if (!assigneeEmail && assignee?.id) {
-          const fallbackAssignee = await prisma.userMaster.findUnique({
-            where: { id: assignee.id },
-            select: { user_email: true },
-          });
-          assigneeEmail = fallbackAssignee?.user_email?.trim();
-        }
-
-        if (assigneeEmail && !isSelfAssigned) {
-          const clientBaseUrl = resolveClientBaseUrl(req);
-          const taskUrl = `${clientBaseUrl}/dashboard/my-tasks`;
-
-          const assignedByName = assignedBy?.user_name ?? "Admin";
-
-          const dueDate = due_date
-            ? new Date(due_date).toLocaleDateString("en-IN", {
-                day: "2-digit",
-                month: "short",
-                year: "numeric",
-              })
-            : "—";
-
-          await sendTaskAssignedEmail({
-            vendor_id: result.lead.vendor_id,
-            toEmail: assigneeEmail,
-            toName: assignee?.user_name ?? undefined,
-            leadCode,
-            taskTitle: task_type,
-            leadName: leadName || "—",
-            assignedBy: assignedByName,
-            dueDate,
-            remark,
-            taskUrl,
-          });
-        }
 
       } catch (notificationError: any) {
         logger.warn("⚠️ Failed to send notification", {

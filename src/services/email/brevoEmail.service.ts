@@ -261,6 +261,18 @@ export const sendBrevoEmail = async (
     };
   }
 
+  // Skip email if recipient is super-admin
+  const recipientUser = await prisma.userMaster.findFirst({
+    where: { user_email: payload.toEmail },
+    select: { user_type: { select: { user_type: true } } },
+  });
+  if (recipientUser?.user_type?.user_type?.toLowerCase() === "super-admin") {
+    logger.info("Email skipped: recipient is super-admin", {
+      to: payload.toEmail,
+    });
+    return { success: false, skipped: true, reason: "Skipped: recipient is super-admin" };
+  }
+
   if (!apiKey || !senderEmail) {
     logger.warn("Brevo email skipped: missing configuration", {
       missing_api_key: !apiKey,

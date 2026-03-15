@@ -3,9 +3,7 @@ import { prisma } from "../../../prisma/client";
 import logger from "../../../utils/logger";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 import {
-  sendOrderLoginAssignedEmail, // approved tehccheck
-  sendTechCheckApprovedEmail,
-  sendTechCheckRejectedEmail,
+  sendOrderLoginAssignedEmail,
 } from "../../../../src/services/email/brevoEmail.service";
 import { resolveLeadCode } from "../../../../src/utils/fileUtils";
 
@@ -389,38 +387,24 @@ export class TechCheckService {
       try {
         const actorId = userId;
 
-        const [lead, actor] = await Promise.all([
-          prisma.leadMaster.findUnique({
-            where: { id: leadId },
-            select: {
-              firstname: true,
-              lastname: true,
-              lead_code: true,
-              vendor_id: true,
-              account_id: true,
-            },
-          }),
-
-          prisma.userMaster.findUnique({
-            where: { id: actorId },
-            select: { user_name: true },
-          }),
-        ]);
+        const lead = await prisma.leadMaster.findUnique({
+          where: { id: leadId },
+          select: {
+            firstname: true,
+            lastname: true,
+            lead_code: true,
+            vendor_id: true,
+            account_id: true,
+          },
+        });
 
         if (!lead) return;
 
         const leadName =
           `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
 
-        const updatedAt = new Date().toLocaleString("en-IN", {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-        });
-
         // ✅ redirectPath with instance_id
         const redirectPath = buildRedirectPath(lead.account_id);
-        const projectUrl = `${baseUrl}${redirectPath}`;
 
         const admins = await prisma.userMaster.findMany({
           where: {
@@ -708,7 +692,7 @@ export class TechCheckService {
     // ===============================
 
     try {
-      const [leadInfo, approvedByUser, leadCode] = await Promise.all([
+      const [leadInfo, leadCode] = await Promise.all([
         prisma.leadMaster.findUnique({
           where: { id: leadId, vendor_id: vendorId },
           select: {
@@ -719,11 +703,6 @@ export class TechCheckService {
           },
         }),
 
-        prisma.userMaster.findUnique({
-          where: { id: userId },
-          select: { user_name: true },
-        }),
-
         resolveLeadCode(vendorId, leadId, instanceId), // ✅ helper call
       ]);
 
@@ -731,14 +710,6 @@ export class TechCheckService {
 
       const leadName =
         `${leadInfo.firstname ?? ""} ${leadInfo.lastname ?? ""}`.trim();
-
-      const approvedByName = approvedByUser?.user_name ?? "Tech Check Team";
-
-      const approvedAt = new Date().toLocaleString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      });
 
       // ✅ redirectPath — accountId + instance_id (optional) dono include
       const queryParams = new URLSearchParams();
@@ -750,8 +721,6 @@ export class TechCheckService {
       }
       const queryString = queryParams.toString();
       const redirectPath = `/dashboard/leads/details/${leadId}${queryString ? `?${queryString}` : ""}`;
-
-      const projectUrl = `${baseUrl}${redirectPath}`;
 
       const mappings = await prisma.leadUserMapping.findMany({
         where: {
@@ -794,19 +763,6 @@ export class TechCheckService {
             entity_type: "lead",
             entity_id: leadId,
             redirect_url: redirectPath,
-          });
-
-          if (!salesExec.user_email) return;
-
-          await sendTechCheckApprovedEmail({
-            vendor_id: vendorId,
-            toEmail: salesExec.user_email,
-            toName: salesExec.user_name ?? undefined,
-            leadCode, // ✅ vloq-46.1 ya vloq-46
-            leadName,
-            approvedBy: approvedByName,
-            approvedAt,
-            projectUrl,
           });
         }),
       );
@@ -901,7 +857,7 @@ export class TechCheckService {
     // ===============================
 
     try {
-      const [leadInfo, rejectedByUser, leadCode] = await Promise.all([
+      const [leadInfo, leadCode] = await Promise.all([
         prisma.leadMaster.findUnique({
           where: { id: leadId, vendor_id: vendorId },
           select: {
@@ -912,11 +868,6 @@ export class TechCheckService {
           },
         }),
 
-        prisma.userMaster.findUnique({
-          where: { id: userId },
-          select: { user_name: true },
-        }),
-
         resolveLeadCode(vendorId, leadId, instanceId), // ✅ helper call
       ]);
 
@@ -924,14 +875,6 @@ export class TechCheckService {
 
       const leadName =
         `${leadInfo.firstname ?? ""} ${leadInfo.lastname ?? ""}`.trim();
-
-      const rejectedByName = rejectedByUser?.user_name ?? "Tech Check Team";
-
-      const rejectedAt = new Date().toLocaleString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      });
 
       // ✅ redirectPath — accountId + instance_id (optional) dono include
       const queryParams = new URLSearchParams();
@@ -943,8 +886,6 @@ export class TechCheckService {
       }
       const queryString = queryParams.toString();
       const redirectPath = `/dashboard/leads/details/${leadId}${queryString ? `?${queryString}` : ""}`;
-
-      const projectUrl = `${baseUrl}${redirectPath}`;
 
       const mappings = await prisma.leadUserMapping.findMany({
         where: {
@@ -988,19 +929,6 @@ export class TechCheckService {
             redirect_url: redirectPath,
           });
 
-          if (!salesExec.user_email) return;
-
-          await sendTechCheckRejectedEmail({
-            vendor_id: vendorId,
-            toEmail: salesExec.user_email,
-            toName: salesExec.user_name ?? undefined,
-            leadCode,
-            leadName,
-            rejectedBy: rejectedByName,
-            rejectedAt,
-            remark,
-            projectUrl,
-          });
         }),
       );
     } catch (err: any) {

@@ -17,7 +17,10 @@ import { prisma } from "../../../prisma/client";
 import {
   sendLeadAssignedToSiteSupervisorEmail,
   sendMajorMilestoneEmail,
+  sendTaskAssignedEmail,
 } from "../../../services/email/brevoEmail.service";
+import { NotificationService } from "../../../services/notification/notification.service";
+import { NotificationType } from "../../../prisma/generated";
 
 const resolveClientBaseUrl = (req: Request): string => {
   const origin = req.headers.origin;
@@ -1352,6 +1355,104 @@ export class BookingStageController {
         assignee_user_id: Number(user_id),
         created_by: Number(created_by),
       });
+
+      // ===============================
+      // NOTIFICATION + EMAIL (fire-and-forget)
+      // ===============================
+      void (async () => {
+        try {
+          const isSelfAssigned =
+            Number(created_by) === Number(user_id);
+
+          if (isSelfAssigned) return;
+
+          const [assignee, lead, assigner] = await Promise.all([
+            prisma.userMaster.findUnique({
+              where: { id: Number(user_id) },
+              select: { user_name: true, user_email: true },
+            }),
+            prisma.leadMaster.findUnique({
+              where: { id: leadId },
+              select: {
+                firstname: true,
+                lastname: true,
+                lead_code: true,
+                vendor_id: true,
+                account_id: true,
+                status_id: true,
+              },
+            }),
+            prisma.userMaster.findUnique({
+              where: { id: Number(created_by) },
+              select: { user_name: true },
+            }),
+          ]);
+
+          if (!assignee || !lead) return;
+
+          const leadName =
+            `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+          const leadCode =
+            lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+
+          // ✅ Dynamic redirect — always points to current lead state
+          const redirectPath = lead.account_id
+            ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
+            : `/dashboard/leads/details/${leadId}`;
+
+          // 🔔 In-App Notification
+          await NotificationService.createAndSend({
+            vendor_id: lead.vendor_id,
+            user_id: Number(user_id),
+            sender_id: Number(created_by) || null,
+            type: NotificationType.TASK_ASSIGNED,
+            title: "New task assigned",
+            message:
+              leadName.length > 0
+                ? `Task assigned for ${leadName}: ${task_type}.`
+                : `Task assigned: ${task_type}.`,
+            entity_type: "lead",
+            entity_id: leadId,
+            redirect_url: redirectPath,
+          });
+
+          // 📧 Email
+          if (assignee.user_email) {
+            const clientBaseUrl = resolveClientBaseUrl(req);
+            const projectUrl = `${clientBaseUrl}${redirectPath}`;
+            const assignedAt = new Date().toLocaleDateString("en-IN", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            });
+            const dueDateFormatted = due_date
+              ? new Date(due_date).toLocaleDateString("en-IN", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })
+              : "—";
+
+            await sendTaskAssignedEmail({
+              vendor_id: lead.vendor_id,
+              toEmail: assignee.user_email,
+              toName: assignee.user_name ?? undefined,
+              leadCode,
+              taskTitle: task_type,
+              leadName: leadName || "—",
+              assignedBy: assigner?.user_name ?? "Admin",
+              dueDate: dueDateFormatted,
+              remark,
+              taskUrl: projectUrl,
+            });
+          }
+        } catch (notifyErr: any) {
+          logger.warn("⚠️ assignTaskBooking notification failed", {
+            lead_id: leadId,
+            error: notifyErr?.message,
+          });
+        }
+      })();
 
       return res.status(201).json({ success: true, data: task });
     } catch (error: any) {
