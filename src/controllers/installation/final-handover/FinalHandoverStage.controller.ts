@@ -11,7 +11,12 @@ import { ApiResponse } from "../../../utils/apiResponse";
 import logger from "../../../utils/logger";
 import fs from "node:fs/promises";
 import { prisma } from "../../../prisma/client";
-import { sendMajorMilestoneEmail } from "../../../services/email/brevoEmail.service";
+import {
+  sendMajorMilestoneEmail,
+  sendFinalHandoverCompletedEmail,
+} from "../../../services/email/brevoEmail.service";
+import { NotificationService } from "../../../services/notification/notification.service";
+import { NotificationType } from "../../../prisma/generated";
 
 const resolveClientBaseUrl = (req: Request): string => {
   const origin = req.headers.origin;
@@ -303,6 +308,86 @@ export class FinalHandoverStageController {
         updated_by,
         baseUrl
       );
+
+      // Fire-and-forget: notify Head Site Supervisor that Final Handover is completed
+      void (async () => {
+        try {
+          const [hssMapping, lead, updater] = await Promise.all([
+            prisma.leadUserMapping.findFirst({
+              where: {
+                vendor_id: vendorId,
+                lead_id: leadId,
+                type: "head-site-supervisor",
+                status: "active",
+              },
+              select: { user_id: true },
+            }),
+            prisma.leadMaster.findUnique({
+              where: { id: leadId },
+              select: {
+                firstname: true,
+                lastname: true,
+                account_id: true,
+                lead_code: true,
+              },
+            }),
+            prisma.userMaster.findUnique({
+              where: { id: Number(updated_by) },
+              select: { user_name: true, user_email: true },
+            }),
+          ]);
+
+          if (!hssMapping) return;
+
+          const hss = await prisma.userMaster.findUnique({
+            where: { id: hssMapping.user_id },
+            select: { id: true, user_name: true, user_email: true },
+          });
+          if (!hss) return;
+
+          const leadName =
+            `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+          const leadCode =
+            lead?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+          const clientBaseUrl = resolveClientBaseUrl(req);
+          const projectUrl = lead?.account_id
+            ? `${clientBaseUrl}/dashboard/installation/final-handover/details/${leadId}?accountId=${lead.account_id}`
+            : `${clientBaseUrl}/dashboard/installation/final-handover/details/${leadId}`;
+          const completedOn = new Date().toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          });
+          const title = "Final Handover Completed";
+          const message = `Final Handover completed for ${leadCode} – ${leadName}`;
+
+          await NotificationService.createAndSend({
+            recipientId: hss.id,
+            title,
+            message,
+            type: NotificationType.GENERAL,
+            actionUrl: projectUrl,
+          });
+
+          if (hss.user_email) {
+            await sendFinalHandoverCompletedEmail({
+              vendor_id: vendorId,
+              toEmail: hss.user_email,
+              toName: hss.user_name ?? undefined,
+              leadCode,
+              leadName: leadName || "Lead",
+              updatedBy: updater?.user_name ?? "Team",
+              updatedOn: completedOn,
+              projectUrl,
+            });
+          }
+        } catch (err: any) {
+          logger.warn(
+            "⚠️ Failed to send Final Handover Completed notification to Head Site Supervisor",
+            { error: err?.message, lead_id: leadId }
+          );
+        }
+      })();
 
       try {
         const [admins, mappings, lead] = await Promise.all([

@@ -7343,3 +7343,110 @@ export const sendPaymentAddedEmail = async (
     identity,
   );
 };
+
+// ---------------------------------------------------------------------------
+// Final Handover Completed — sent to Head Site Supervisor
+// ---------------------------------------------------------------------------
+export const sendFinalHandoverCompletedEmail = async (payload: {
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  updatedBy: string;
+  updatedOn: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const subject = `Final Handover completed for ${payload.leadCode} \u2013 ${payload.leadName}`;
+
+  const text = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `Final Handover has been completed for ${payload.leadCode} \u2013 ${payload.leadName}.`,
+    "",
+    `Updated By: ${payload.updatedBy}`,
+    `Updated On: ${payload.updatedOn}`,
+    "",
+    payload.projectUrl ? `View Lead: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; word-break: break-word; }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row { display: block !important; margin-bottom: 4px !important; }
+      .lead-info-label, .lead-info-value { display: block !important; width: 100% !important; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background-color:#f3f4f6;font-family:'Helvetica Neue',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f3f4f6;padding:32px 16px;">
+    <tr>
+      <td align="center">
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+          <tr>
+            <td style="background-color:#111827;padding:24px 32px;">
+              <p style="margin:0;font-size:20px;font-weight:700;color:#ffffff;">Final Handover Completed</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:32px;">
+              <p style="margin:0 0 24px;font-size:15px;color:#374151;">Hello ${payload.toName ?? "there"},</p>
+              <p style="margin:0 0 24px;font-size:15px;color:#374151;">
+                Final Handover has been completed for <strong>${payload.leadCode} \u2013 ${payload.leadName}</strong>.
+              </p>
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border-top:1px solid #e5e7eb;">
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
+                  <div class="lead-info-row">
+                    <span class="lead-info-label">Updated By</span>
+                    <span class="lead-info-value">${payload.updatedBy}</span>
+                  </div>
+                </td></tr>
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
+                  <div class="lead-info-row">
+                    <span class="lead-info-label">Updated On</span>
+                    <span class="lead-info-value">${payload.updatedOn}</span>
+                  </div>
+                </td></tr>
+              </table>
+              ${
+                payload.projectUrl
+                  ? `<table cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="background-color:#111827;border-radius:6px;padding:12px 24px;">
+                          <a href="${payload.projectUrl}" style="color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;">View Lead</a>
+                        </td>
+                      </tr>
+                    </table>`
+                  : ""
+              }
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
