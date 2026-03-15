@@ -9,6 +9,55 @@ import {
 import fs from "node:fs/promises";
 
 export class ChatService {
+  private static async resolveChatMemberIds(
+    tx: Parameters<Parameters<typeof prisma.$transaction>[0]>[0],
+    params: {
+      leadId: number;
+      vendorId: number;
+      franchiseId: number | null;
+      userId: number;
+    }
+  ) {
+    const { leadId, vendorId, franchiseId, userId } = params;
+
+    const [superAdminUsers, adminUsers, mappedUsers] = await Promise.all([
+      tx.userMaster.findMany({
+        where: {
+          vendor_id: vendorId,
+          status: "active",
+          user_type: { user_type: "super-admin" },
+        },
+        select: { id: true },
+      }),
+      franchiseId == null
+        ? Promise.resolve([])
+        : tx.userMaster.findMany({
+            where: {
+              vendor_id: vendorId,
+              franchise_id: franchiseId,
+              status: "active",
+              user_type: { user_type: "admin" },
+            },
+            select: { id: true },
+          }),
+      tx.leadUserMapping.findMany({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+          status: "active",
+        },
+        select: { user_id: true },
+      }),
+    ]);
+
+    return new Set<number>([
+      ...superAdminUsers.map((user) => user.id),
+      ...adminUsers.map((user) => user.id),
+      ...mappedUsers.map((mapping) => mapping.user_id),
+      userId,
+    ]);
+  }
+
   static async checkChatRoomByLeadId(leadId: number) {
     const lead = await prisma.leadMaster.findUnique({
       where: { id: leadId },
@@ -57,41 +106,12 @@ export class ChatService {
         },
       });
 
-      const [superAdminUsers, adminUsers] = await Promise.all([
-        tx.userMaster.findMany({
-          where: {
-            vendor_id: lead.vendor_id,
-            status: "active",
-            user_type: { user_type: "super-admin" },
-          },
-          select: { id: true },
-        }),
-        tx.userMaster.findMany({
-          where: {
-            vendor_id: lead.vendor_id,
-            franchise_id: lead.franchise_id ?? null,
-            status: "active",
-            user_type: { user_type: "admin" },
-          },
-          select: { id: true },
-        }),
-      ]);
-
-      const mappedUsers = await tx.leadUserMapping.findMany({
-        where: {
-          lead_id: leadId,
-          vendor_id: lead.vendor_id,
-          status: "active",
-        },
-        select: { user_id: true },
-      });
-
-      const desiredMemberIds = new Set<number>([
-        ...superAdminUsers.map((user) => user.id),
-        ...adminUsers.map((user) => user.id),
-        ...mappedUsers.map((mapping) => mapping.user_id),
+      const desiredMemberIds = await ChatService.resolveChatMemberIds(tx, {
+        leadId,
+        vendorId: lead.vendor_id,
+        franchiseId: lead.franchise_id ?? null,
         userId,
-      ]);
+      });
 
       if (existingRoom) {
         const existingMembers = await tx.leadChatMember.findMany({
@@ -253,7 +273,7 @@ export class ChatService {
     const messageResult = await prisma.$transaction(async (tx) => {
       const lead = await tx.leadMaster.findFirst({
         where: { id: leadId, vendor_id: vendorId, is_deleted: false },
-        select: { id: true, vendor_id: true, account_id: true },
+        select: { id: true, vendor_id: true, account_id: true, franchise_id: true },
       });
   
       if (!lead) {
@@ -274,6 +294,24 @@ export class ChatService {
           data: { lead_id: leadId, vendor_id: vendorId },
           select: { id: true },
         });
+
+        const memberIds = await ChatService.resolveChatMemberIds(tx, {
+          leadId,
+          vendorId,
+          franchiseId: lead.franchise_id ?? null,
+          userId,
+        });
+
+        if (memberIds.size > 0) {
+          await tx.leadChatMember.createMany({
+            data: Array.from(memberIds).map((memberId) => ({
+              chat_room_id: chatRoom!.id,
+              user_id: memberId,
+              added_by: userId,
+            })),
+            skipDuplicates: true,
+          });
+        }
       }
   
       const message = await tx.leadChatMessage.create({
