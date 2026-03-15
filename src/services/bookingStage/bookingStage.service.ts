@@ -16,7 +16,6 @@ import logger from "../../utils/logger";
 import { isLeadComplete } from "../../validations/leadValidation";
 import { cache } from "../../utils/cache";
 import {
-  sendLeadMovedToBookingEmail,
   sendPaymentAddedEmail,
 } from "../email/brevoEmail.service";
 import { AssignTaskBookingInput } from "../../types/leadModule.types";
@@ -452,24 +451,17 @@ export class BookingStageService {
     try {
       const actorId = data.created_by;
 
-      const [lead, actor] = await Promise.all([
-        prisma.leadMaster.findUnique({
-          where: { id: data.lead_id },
-          select: {
-            firstname: true,
-            lastname: true,
-            lead_code: true,
-            vendor_id: true,
-            account_id: true,
-            franchise_id: true,
-          },
-        }),
-
-        prisma.userMaster.findUnique({
-          where: { id: actorId },
-          select: { user_name: true },
-        }),
-      ]);
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: data.lead_id },
+        select: {
+          firstname: true,
+          lastname: true,
+          lead_code: true,
+          vendor_id: true,
+          account_id: true,
+          franchise_id: true,
+        },
+      });
 
       if (!lead) return response;
 
@@ -478,19 +470,7 @@ export class BookingStageService {
       const leadCode =
         lead.lead_code ?? `LEAD-${String(data.lead_id).padStart(4, "0")}`;
 
-      const updatedAt = new Date().toLocaleString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      });
-
       const franchiseId = lead?.franchise_id ?? null;
-
-      const baseUrl = data.baseUrl;
-
-      const projectUrl = lead.account_id
-        ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
-        : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;
 
       // Fetch Active Admins
       const admins = await prisma.userMaster.findMany({
@@ -527,19 +507,6 @@ export class BookingStageService {
             : `/dashboard/leads/details/${data.lead_id}`,
         });
 
-        // 📧 Email Notification
-        if (!admin.user_email) continue;
-
-        await sendLeadMovedToBookingEmail({
-          vendor_id: lead.vendor_id,
-          toEmail: admin.user_email,
-          toName: admin.user_name,
-          leadCode,
-          leadName,
-          updatedBy: actor?.user_name ?? "System",
-          updatedAt,
-          projectUrl,
-        });
       }
     } catch (err: any) {
       logger.warn("⚠️ Booking stage admin notification failed", {
@@ -650,24 +617,17 @@ export class BookingStageService {
       try {
         const actorId = data.created_by;
 
-        const [lead, actor] = await Promise.all([
-          prisma.leadMaster.findUnique({
-            where: { id: data.lead_id },
-            select: {
-              firstname: true,
-              lastname: true,
-              lead_code: true,
-              vendor_id: true,
-              account_id: true,
-              franchise_id: true,
-            },
-          }),
-
-          prisma.userMaster.findUnique({
-            where: { id: actorId },
-            select: { user_name: true },
-          }),
-        ]);
+        const lead = await prisma.leadMaster.findUnique({
+          where: { id: data.lead_id },
+          select: {
+            firstname: true,
+            lastname: true,
+            lead_code: true,
+            vendor_id: true,
+            account_id: true,
+            franchise_id: true,
+          },
+        });
 
         if (!lead) return response;
 
@@ -677,18 +637,7 @@ export class BookingStageService {
         const leadCode =
           lead.lead_code ?? `LEAD-${String(data.lead_id).padStart(4, "0")}`;
 
-        const updatedAt = new Date().toLocaleString("en-IN", {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-        });
-
         const franchiseId = lead?.franchise_id ?? null;
-
-        const baseUrl = data.baseUrl;
-        const projectUrl = lead.account_id
-          ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
-          : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;
 
         // Fetch Active Admins
         const admins = await prisma.userMaster.findMany({
@@ -725,19 +674,6 @@ export class BookingStageService {
               : `/dashboard/leads/details/${data.lead_id}`,
           });
 
-          // 📧 Email Notification
-          if (!admin.user_email) continue;
-
-          await sendLeadMovedToBookingEmail({
-            vendor_id: lead.vendor_id,
-            toEmail: admin.user_email,
-            toName: admin.user_name,
-            leadCode,
-            leadName,
-            updatedBy: actor?.user_name ?? "System",
-            updatedAt,
-            projectUrl,
-          });
         }
       } catch (err: any) {
         logger.warn("⚠️ Booking stage admin notification failed", {

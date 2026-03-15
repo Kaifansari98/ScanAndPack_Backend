@@ -11,7 +11,6 @@ import { assignTaskISMService } from "../../../services/leadModuleServices/leads
 import { NotificationService } from "../../../services/notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
 import {
-  sendLeadMovedToISMEmail,
   sendTaskAssignedEmail,
 } from "../../../services/email/brevoEmail.service";
 
@@ -274,55 +273,6 @@ export class PaymentUploadController {
           });
         }
 
-        // ======================================================
-        // ✅ NEW ADDITION — ADMIN EMAIL ON ISM STAGE MOVE ONLY
-        // ======================================================
-
-        const isISMStageMove = task_type === "Initial Site Measurement";
-
-        if (isISMStageMove) {
-          const admins = await prisma.userMaster.findMany({
-            where: {
-              vendor_id: result.lead.vendor_id,
-              status: "active",
-              user_type: {
-                user_type: { in: ["admin"] },
-              },
-            },
-            select: {
-              id: true,
-              user_name: true,
-              user_email: true,
-            },
-          });
-
-          const clientBaseUrl = resolveClientBaseUrl(req);
-          const projectUrl = `${clientBaseUrl}/dashboard/leads/details/${leadId}?accountId=${lead?.account_id}`;
-
-          const updatedAt = new Date().toLocaleString("en-IN", {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-          });
-
-          for (const admin of admins) {
-            // ❌ Admin self-trigger block
-            if (admin.id === actorId) continue;
-
-            if (!admin.user_email) continue;
-
-            await sendLeadMovedToISMEmail({
-              vendor_id: result.lead.vendor_id,
-              toEmail: admin.user_email,
-              toName: admin.user_name,
-              leadCode,
-              leadName,
-              updatedBy: assignedBy?.user_name ?? "System",
-              updatedAt,
-              projectUrl,
-            });
-          }
-        }
       } catch (notificationError: any) {
         logger.warn("⚠️ Failed to send notification", {
           error: notificationError?.message,

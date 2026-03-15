@@ -3,7 +3,6 @@ import { prisma } from "../../../prisma/client";
 import logger from "../../../utils/logger";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 import {
-  sendLeadMovedToOrderLoginEmail, // approved techcheck
   sendOrderLoginAssignedEmail, // approved tehccheck
   sendTechCheckApprovedEmail,
   sendTechCheckRejectedEmail,
@@ -453,18 +452,6 @@ export class TechCheckService {
             redirect_url: redirectPath, // ✅ instance_id included
           });
 
-          if (!admin.user_email) continue;
-
-          await sendLeadMovedToOrderLoginEmail({
-            vendor_id: lead.vendor_id,
-            toEmail: admin.user_email,
-            toName: admin.user_name,
-            leadCode, // ✅ vloq-46.1 ya vloq-46
-            leadName,
-            updatedBy: actor?.user_name ?? "System",
-            updatedAt,
-            projectUrl, // ✅ instance_id included
-          });
         }
       } catch (err: any) {
         logger.warn("⚠️ Order login admin notification failed", {

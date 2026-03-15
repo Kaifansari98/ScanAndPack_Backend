@@ -1,7 +1,7 @@
 import logger from "../../../../src/utils/logger";
 import { prisma } from "../../../prisma/client";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
-import { sendLeadMovedToReadyToDispatchEmail, sendReadyToDispatchEmail } from "../../../../src/services/email/brevoEmail.service";
+import { sendReadyToDispatchEmail } from "../../../../src/services/email/brevoEmail.service";
 import { NotificationType } from "../../../prisma/generated";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 
@@ -1218,23 +1218,16 @@ export class PostProductionService {
     try {
       const actorId = updatedBy; // factory user who marked dispatch ready
 
-      const [lead, actor] = await Promise.all([
-        prisma.leadMaster.findUnique({
-          where: { id: leadId },
-          select: {
-            firstname: true,
-            lastname: true,
-            lead_code: true,
-            vendor_id: true,
-            account_id: true,
-          },
-        }),
-
-        prisma.userMaster.findUnique({
-          where: { id: actorId },
-          select: { user_name: true },
-        }),
-      ]);
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: leadId },
+        select: {
+          firstname: true,
+          lastname: true,
+          lead_code: true,
+          vendor_id: true,
+          account_id: true,
+        },
+      });
 
       // Safety guard
       if (!lead) return result.updatedLead;
@@ -1244,20 +1237,9 @@ export class PostProductionService {
       const leadCode =
         lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
 
-      const markedBy = actor?.user_name ?? "Factory Team";
-
-      const markedAt = new Date().toLocaleString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      });
-
-
       const redirectPath = lead.account_id
         ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
         : `/dashboard/leads/details/${leadId}`;
-
-      const projectUrl = `${baseUrl}${redirectPath}`;
 
       // Fetch Active Admin Users
       const admins = await prisma.userMaster.findMany({
@@ -1292,19 +1274,6 @@ export class PostProductionService {
           redirect_url: redirectPath,
         });
 
-        // 📧 Email Notification (ADMIN)
-        if (!admin.user_email) continue;
-
-        await sendLeadMovedToReadyToDispatchEmail({
-          vendor_id: lead.vendor_id,
-          toEmail: admin.user_email,
-          toName: admin.user_name,
-          leadCode,
-          leadName,
-          markedBy,
-          markedAt,
-          projectUrl,
-        });
       }
     } catch (adminNotifyErr: any) {
       logger.warn("⚠️ Ready To Dispatch admin notification failed", {
