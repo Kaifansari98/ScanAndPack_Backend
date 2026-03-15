@@ -362,11 +362,13 @@ export class FinalHandoverStageController {
           const message = `Final Handover completed for ${leadCode} – ${leadName}`;
 
           await NotificationService.createAndSend({
-            recipientId: hss.id,
+            vendor_id: vendorId,
+            user_id: hss.id,
+            sender_id: Number(updated_by),
             title,
             message,
-            type: NotificationType.GENERAL,
-            actionUrl: projectUrl,
+            type: NotificationType.LEAD_MILESTONE,
+            redirect_url: projectUrl,
           });
 
           if (hss.user_email) {
