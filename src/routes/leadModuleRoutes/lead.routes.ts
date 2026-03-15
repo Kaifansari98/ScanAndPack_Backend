@@ -135,6 +135,13 @@ leadsRouter.get(
   leadController.fetchHeadSiteSupervisorsByVendor
 );
 
+// GET /api/leads/follow-up-users/vendor/:vendorId/lead/:leadId?franchise_id=...
+// Fetch users eligible for Follow Up task assignment
+leadsRouter.get(
+  "/follow-up-users/vendor/:vendorId/lead/:leadId",
+  leadController.fetchFollowUpUsers
+);
+
 /**
  * Lead Assignment Routes
  * Base path: /api/leads/assignment

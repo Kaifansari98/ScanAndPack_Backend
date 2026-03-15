@@ -2163,6 +2163,79 @@ export class LeadController {
         .json(ApiResponse.error(error.message || "Internal server error"));
     }
   };
+
+  /**
+   * GET /leads/follow-up-users/vendor/:vendorId/lead/:leadId
+   * Returns users eligible as Follow Up assignees:
+   *   - Admins with matching vendor_id (+ franchise_id if provided)
+   *   - All users mapped to the lead via leadUserMapping
+   */
+  fetchFollowUpUsers = async (
+    req: Request,
+    res: Response,
+  ): Promise<Response> => {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+      const franchiseId = req.query.franchise_id
+        ? Number(req.query.franchise_id)
+        : null;
+
+      if (!vendorId || !leadId) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("vendorId and leadId are required", 400));
+      }
+
+      // Admins filtered by vendor + optional franchise_id
+      const adminWhere: any = {
+        vendor_id: vendorId,
+        status: "active",
+        user_type: { user_type: { in: ["admin", "super-admin"] } },
+      };
+      if (franchiseId) {
+        adminWhere.franchise_id = franchiseId;
+      }
+
+      const [admins, mappings] = await Promise.all([
+        prisma.userMaster.findMany({
+          where: adminWhere,
+          select: { id: true, user_name: true },
+        }),
+        prisma.leadUserMapping.findMany({
+          where: { lead_id: leadId, vendor_id: vendorId, status: "active" },
+          select: {
+            user: { select: { id: true, user_name: true } },
+          },
+        }),
+      ]);
+
+      const seen = new Set<number>();
+      const users: { id: number; user_name: string | null }[] = [];
+
+      for (const a of admins) {
+        if (!seen.has(a.id)) {
+          seen.add(a.id);
+          users.push(a);
+        }
+      }
+      for (const m of mappings) {
+        if (m.user && !seen.has(m.user.id)) {
+          seen.add(m.user.id);
+          users.push(m.user);
+        }
+      }
+
+      return res
+        .status(200)
+        .json(ApiResponse.success({ users, count: users.length }, "Follow-up users fetched successfully"));
+    } catch (error: any) {
+      logger.error("[CONTROLLER] fetchFollowUpUsers error", error);
+      return res
+        .status(500)
+        .json(ApiResponse.error(error.message || "Internal server error"));
+    }
+  };
 }
 
 // Export a single instance of the controller
