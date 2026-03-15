@@ -3,7 +3,6 @@ import { NotificationType, Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
-import { sendLeadMovedToDispatchPlanningEmail } from "../../../../src/services/email/brevoEmail.service";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 
 interface SiteReadinessPayload {
@@ -659,19 +658,6 @@ export class SiteReadinessService {
           redirect_url: redirectPath,
         });
 
-        // 📧 Email Notification
-        if (!admin.user_email) continue;
-
-        await sendLeadMovedToDispatchPlanningEmail({
-          vendor_id: lead.vendor_id,
-          toEmail: admin.user_email,
-          toName: admin.user_name,
-          leadCode,
-          leadName,
-          movedBy,
-          movedAt,
-          projectUrl,
-        });
       }
 
       logger.info("✅ Dispatch Planning admin notifications sent", {

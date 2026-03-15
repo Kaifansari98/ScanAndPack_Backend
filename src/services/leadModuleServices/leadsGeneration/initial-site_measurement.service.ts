@@ -25,7 +25,6 @@ import { NotificationType, Prisma } from "../../../prisma/generated";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { cache } from "../../../utils/cache";
 import fs from "node:fs/promises";
-import { sendLeadMovedToDesigningEmail } from "../../../../src/services/email/brevoEmail.service";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 
 export interface CreateBDISMPaymentUploadDto {
@@ -900,19 +899,6 @@ export class PaymentUploadService {
               : `/dashboard/leads/details/${data.lead_id}`,
           });
 
-          // 📧 Email
-          if (!admin.user_email) continue;
-
-          await sendLeadMovedToDesigningEmail({
-            vendor_id: lead.vendor_id,
-            toEmail: admin.user_email,
-            toName: admin.user_name,
-            leadCode,
-            leadName,
-            updatedBy: actor?.user_name ?? "System",
-            updatedAt,
-            projectUrl,
-          });
         }
       } catch (err: any) {
         logger.warn("⚠️ Designing stage notification failed", {

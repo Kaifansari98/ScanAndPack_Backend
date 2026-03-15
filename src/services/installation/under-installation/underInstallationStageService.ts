@@ -4,15 +4,6 @@ import logger from "../../../utils/logger";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
-import {
-  sendMiscERDUpdatedEmail,
-  sendMiscRequirementEmail,
-  sendMarkAsReadyEmail,
-  sendMiscResolvedEmail,
-  sendFinalHandoverEmail,
-  sendLeadMovedToUnderInstallationEmail,
-} from "../../../../src/services/email/brevoEmail.service";
-import { sendUnderInstallationAssignedEmail } from "../../../../src/services/email/brevoEmail2.service";
 
 interface MiscPayload {
   vendor_id: number;
@@ -236,19 +227,6 @@ export class UnderInstallationStageService {
           redirect_url: redirectPath,
         });
 
-        // 📧 Email Notification
-        if (!admin.user_email) continue;
-
-        await sendLeadMovedToUnderInstallationEmail({
-          vendor_id: lead.vendor_id,
-          toEmail: admin.user_email,
-          toName: admin.user_name,
-          leadCode,
-          leadName,
-          dispatchedBy,
-          dispatchedAt,
-          projectUrl,
-        });
       }
 
       // ===============================
@@ -296,19 +274,6 @@ export class UnderInstallationStageService {
           redirect_url: redirectPath,
         });
 
-        // 📧 EMAIL (YOUR REQUIREMENT)
-        if (supervisor.user_email) {
-          await sendUnderInstallationAssignedEmail({
-            vendor_id: lead.vendor_id,
-            toEmail: supervisor.user_email,
-            toName: supervisor.user_name,
-            leadCode,
-            leadName,
-            dispatchedBy,
-            dispatchedAt,
-            projectUrl,
-          });
-        }
       }
     } catch (err: any) {
       logger.warn("⚠️ Under Installation notification failed", {
@@ -1304,20 +1269,6 @@ export class UnderInstallationStageService {
             redirect_url: redirectPath,
           });
 
-          // 📧 Email Notification
-          if (!user.user_email) return;
-
-          await sendMiscRequirementEmail({
-            vendor_id,
-            toEmail: user.user_email,
-            toName: user.user_name ?? undefined,
-            leadCode,
-            leadName,
-            assignedBy: creator?.user_name ?? "Sales Team",
-            assignedAt,
-            requirementDescription: problem_description,
-            projectUrl,
-          });
         }),
       );
 
@@ -2061,18 +2012,6 @@ export class UnderInstallationStageService {
             redirect_url: redirectPath,
           });
 
-          // 📧 Email
-          if (!user.user_email) return;
-
-          await sendMiscERDUpdatedEmail({
-            vendor_id,
-            toEmail: user.user_email,
-            toName: user.user_name ?? undefined,
-            leadCode,
-            leadName,
-            fulfillmentDate,
-            projectUrl,
-          });
         }),
       );
     } catch (err: any) {
@@ -2604,17 +2543,6 @@ export class UnderInstallationStageService {
             redirect_url: redirectPath,
           });
 
-          // 📧 Email
-          if (!user.user_email) return;
-
-          await sendFinalHandoverEmail({
-            vendor_id: vendorId,
-            toEmail: user.user_email,
-            toName: user.user_name ?? undefined,
-            leadCode,
-            leadName,
-            projectUrl,
-          });
         }),
       );
     } catch (err: any) {
@@ -2979,19 +2907,6 @@ export class UnderInstallationStageService {
             redirect_url: redirectPath,
           });
 
-          // 📧 Email
-          if (!user.user_email) return;
-
-          await sendMiscResolvedEmail({
-            vendor_id,
-            toEmail: user.user_email,
-            toName: user.user_name ?? undefined,
-            leadCode,
-            leadName,
-            resolvedBy: supervisor?.user_name ?? "Site Supervisor",
-            resolvedAt,
-            projectUrl,
-          });
         }),
       );
     } catch (err: any) {
@@ -3162,18 +3077,6 @@ export class UnderInstallationStageService {
             redirect_url: redirectPath,
           });
 
-          // 📧 Email
-          if (!user.user_email) return;
-
-          await sendMarkAsReadyEmail({
-            vendor_id,
-            toEmail: user.user_email,
-            toName: user.user_name ?? undefined,
-            leadCode,
-            leadName,
-            readyAt,
-            projectUrl,
-          });
         }),
       );
     } catch (err: any) {

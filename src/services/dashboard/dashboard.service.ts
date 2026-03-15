@@ -172,7 +172,7 @@ export class DashboardService {
   // 2️⃣ PERFORMANCE SNAPSHOT (Leads + Bookings Value)
   //     ✔ Admin → sees vendor-wide performance
   // -------------------------------------------------------
-  public async getPerformanceSnapshot(vendor_id: number, user_id: number) {
+  public async getPerformanceSnapshot(vendor_id: number, user_id: number, franchise_id?: number) {
     const ranges = getDateRanges();
 
     // Fetch user and check role
@@ -183,12 +183,22 @@ export class DashboardService {
 
     const isAdmin = user?.user_type?.user_type?.toLowerCase() === "admin";
 
+    // Pre-fetch franchise lead IDs if franchise filter is active
+    const franchiseLeadIds = franchise_id
+      ? (await prisma.leadMaster.findMany({
+          where: { vendor_id, franchise_id, is_deleted: false },
+          select: { id: true },
+        })).map((l) => l.id)
+      : null;
+
+    const franchiseLeadFilter = franchiseLeadIds ? { lead_id: { in: franchiseLeadIds } } : {};
+
     // -------------------------------------
     // LEADS ASSIGNED
     // -------------------------------------
     const assignedWhere = isAdmin
-      ? { vendor_id, status: LeadUserStatus.active }
-      : { vendor_id, user_id, status: LeadUserStatus.active };
+      ? { vendor_id, status: LeadUserStatus.active, ...franchiseLeadFilter }
+      : { vendor_id, user_id, status: LeadUserStatus.active, ...franchiseLeadFilter };
 
     const activityStatusExclusion = {
       lead: {
@@ -226,10 +236,12 @@ export class DashboardService {
         ? {
             vendor_id,
             status_id: completedStatus.id,
+            ...(franchiseLeadIds ? { id: { in: franchiseLeadIds } } : {}),
           }
         : {
             vendor_id,
             status_id: completedStatus.id,
+            ...(franchiseLeadIds ? { id: { in: franchiseLeadIds } } : {}),
             userMappings: {
               some: { user_id, status: LeadUserStatus.active },
             },
@@ -267,6 +279,7 @@ export class DashboardService {
           vendor_id,
           user_id,
           status: LeadUserStatus.active,
+          ...franchiseLeadFilter,
         },
         select: { lead_id: true },
       })
@@ -354,6 +367,7 @@ export class DashboardService {
             vendor_id,
             status_id: bookingStatus.id,
             ...(start && end ? { created_at: { gte: start, lte: end } } : {}),
+            ...franchiseLeadFilter,
           },
           distinct: ["lead_id"],
           select: { lead_id: true },
@@ -425,7 +439,8 @@ export class DashboardService {
     const avgDaysToBooking = await this.calculateAvgDaysToBooking(
       vendor_id,
       user_id,
-      isAdmin
+      isAdmin,
+      franchise_id
     );
 
     return {
@@ -458,7 +473,8 @@ export class DashboardService {
   public async calculateAvgDaysToBooking(
     vendor_id: number,
     user_id: number,
-    isAdmin?: boolean
+    isAdmin?: boolean,
+    franchise_id?: number
   ) {
     // Compute isAdmin if not provided (e.g., when called externally)
     if (isAdmin === undefined) {
@@ -491,11 +507,13 @@ export class DashboardService {
     // ---------------------------------------------
     // Admin → no user filter
     // SE → only leads mapped to SE
-    let leadFilter: any = { vendor_id };
+    const franchiseFilter = franchise_id ? { franchise_id } : {};
+    let leadFilter: any = { vendor_id, ...franchiseFilter };
 
     if (!isAdmin) {
       leadFilter = {
         vendor_id,
+        ...franchiseFilter,
         userMappings: {
           some: {
             user_id,
@@ -903,7 +921,8 @@ export class DashboardService {
   // -------------------------------------------------------
   public async getSalesExecutiveStageCounts(
     vendor_id: number,
-    user_id: number
+    user_id: number,
+    franchise_id?: number
   ) {
     const targetTags = [
       "Type 1", // Open Lead
@@ -944,6 +963,8 @@ export class DashboardService {
       },
     };
 
+    const franchiseFilter = franchise_id ? { franchise_id } : {};
+
     const countForTag = async (tag: string) => {
       const status_id = statusMap.get(tag);
       if (!status_id) return 0;
@@ -954,6 +975,7 @@ export class DashboardService {
           status_id,
           ...activityStatusFilter,
           ...userFilter,
+          ...franchiseFilter,
         },
       });
     };

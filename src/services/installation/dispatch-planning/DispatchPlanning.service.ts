@@ -1,7 +1,6 @@
 import { NotificationType, Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import logger from "../../../utils/logger";
-import { sendLeadMovedToDispatchEmail } from "../../../../src/services/email/brevoEmail2.service";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 
 export class DispatchPlanningService {
@@ -517,7 +516,6 @@ export class DispatchPlanningService {
     vendorId: number,
     leadId: number,
     updatedBy: number,
-    baseUrl: string,
   ) {
     // ==========================
     // CORE TRANSACTION LAYER
@@ -655,11 +653,6 @@ export class DispatchPlanningService {
         },
       });
 
-      const actor = await prisma.userMaster.findUnique({
-        where: { id: actorId },
-        select: { user_name: true },
-      });
-
       if (!lead) return result;
 
       const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
@@ -667,19 +660,9 @@ export class DispatchPlanningService {
       const leadCode =
         lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
 
-      const movedBy = actor?.user_name ?? "System";
-
-      const movedAt = new Date().toLocaleString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      });
-
       const redirectPath = lead.account_id
         ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
         : `/dashboard/leads/details/${leadId}`;
-
-      const projectUrl = `${baseUrl}${redirectPath}`;
 
       // ===============================
       // FACTORY SME FETCH
@@ -732,36 +715,6 @@ export class DispatchPlanningService {
         redirect_url: redirectPath,
       });
 
-      // ===============================
-      // 📧 FACTORY EMAIL
-      // ===============================
-
-      if (factoryUser.user_email) {
-        await sendLeadMovedToDispatchEmail({
-          vendor_id: vendorId,
-          toEmail: factoryUser.user_email,
-          toName: factoryUser.user_name,
-
-          leadCode,
-          leadName,
-
-          onsiteContactName: lead.onsite_contact_person_name ?? "N/A",
-
-          onsiteContactNumber: lead.onsite_contact_person_number ?? "N/A",
-
-          requiredDeliveryDate: lead.required_date_for_dispatch
-            ? new Date(lead.required_date_for_dispatch).toLocaleDateString(
-                "en-IN",
-              )
-            : "N/A",
-
-          liftAvailability: lead.material_lift_availability ? "Yes" : "No",
-
-          movedBy,
-          movedAt,
-          projectUrl,
-        });
-      }
     } catch (err: any) {
       logger.warn("⚠️ Dispatch Factory notification failed", {
         lead_id: leadId,

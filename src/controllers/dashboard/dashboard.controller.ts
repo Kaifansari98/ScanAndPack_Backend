@@ -33,6 +33,7 @@ export class DashboardController {
     try {
       const vendor_id = Number(req.query.vendor_id);
       const user_id = Number(req.query.user_id);
+      const franchise_id = req.query.franchise_id ? Number(req.query.franchise_id) : undefined;
 
       if (!vendor_id || !user_id) {
         return res.status(400).json({
@@ -41,7 +42,7 @@ export class DashboardController {
         });
       }
 
-      const redisKey = `performance:snapshot:${vendor_id}:${user_id}`;
+      const redisKey = `performance:snapshot:${vendor_id}:${user_id}:${franchise_id ?? "all"}`;
 
       // ⭐ Check cache
       const cached = await cache.get(redisKey);
@@ -58,7 +59,8 @@ export class DashboardController {
       // Fetch fresh data
       const snapshot = await dashboardService.getPerformanceSnapshot(
         vendor_id,
-        user_id
+        user_id,
+        franchise_id
       );
 
       // Store in cache (10 minutes)
@@ -117,6 +119,7 @@ export class DashboardController {
     try {
       const vendor_id = Number(req.query.vendor_id);
       const user_id = Number(req.query.user_id);
+      const franchise_id = req.query.franchise_id ? Number(req.query.franchise_id) : undefined;
 
       if (!vendor_id || !user_id) {
         return res.status(400).json({
@@ -128,7 +131,8 @@ export class DashboardController {
       const result = await dashboardService.calculateAvgDaysToBooking(
         vendor_id,
         user_id,
-        false
+        false,
+        franchise_id
       );
 
       return res.status(200).json({
@@ -253,6 +257,7 @@ export class DashboardController {
     try {
       const vendor_id = Number(req.query.vendor_id);
       const user_id = Number(req.query.user_id);
+      const franchise_id = req.query.franchise_id ? Number(req.query.franchise_id) : undefined;
 
       if (!vendor_id || !user_id) {
         return res.status(400).json({
@@ -263,7 +268,8 @@ export class DashboardController {
 
       const data = await dashboardService.getSalesExecutiveStageCounts(
         vendor_id,
-        user_id
+        user_id,
+        franchise_id
       );
 
       return res.status(200).json({

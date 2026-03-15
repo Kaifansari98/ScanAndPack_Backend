@@ -3,13 +3,6 @@ import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
 import { NotificationType } from "../../../prisma/generated";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
-import { sendLeadMovedToProductionEmail } from "../../../../src/services/email/brevoEmail.service";
-import {
-  sendMovedToProductionOrderLoginPendingEmail,
-  sendMovedToProductionWithOrderLoginEmail,
-  sendMovedToProductionWithoutOrderLoginEmail,
-  sendOrderLoginCompletedEmail,
-} from "../../../../src/services/email/brevoEmail2.service";
 import { resolveLeadCode } from "../../../../src/utils/fileUtils";
 
 // 🧩 Define this at the top of your service file
@@ -380,12 +373,6 @@ export async function triggerOrderLoginCompletionNotification(
   // ─────────────────────────────────────────────────────────────
   // 5️⃣ Actor + Lead Info
   // ─────────────────────────────────────────────────────────────
-  const actorUser = await prisma.userMaster.findUnique({
-    where: { id: userId },
-    select: { user_name: true },
-  });
-
-  const updatedBy = actorUser?.user_name ?? "System";
   const leadName =
     `${leadRecord!.firstname ?? ""} ${leadRecord!.lastname ?? ""}`.trim();
 
@@ -427,39 +414,6 @@ export async function triggerOrderLoginCompletionNotification(
     logger.error("❌ [PROD-NOTIF] In-app notification failed", {
       ...debugCtx,
       error: err?.message,
-    });
-  }
-
-  // ─────────────────────────────────────────────────────────────
-  // 8️⃣ Email
-  // ─────────────────────────────────────────────────────────────
-  if (factoryUser.user_email) {
-    try {
-      await sendOrderLoginCompletedEmail({
-        vendor_id: vendorId,
-        toEmail: factoryUser.user_email,
-        toName: factoryUser.user_name,
-        leadCode: instanceCode,
-        leadName,
-        updatedBy,
-        updatedAt: new Date().toLocaleString("en-IN"),
-        projectUrl,
-      });
-
-      logger.info("✅ [PROD-NOTIF] Email sent", {
-        ...debugCtx,
-        toEmail: factoryUser.user_email,
-      });
-    } catch (err: any) {
-      logger.error("❌ [PROD-NOTIF] Email send failed", {
-        ...debugCtx,
-        error: err?.message,
-      });
-    }
-  } else {
-    logger.warn("⚠️ [PROD-NOTIF] Factory user has no email — skipping", {
-      ...debugCtx,
-      factory_user_id: factoryUser.id,
     });
   }
 
@@ -1576,21 +1530,10 @@ export class OrderLoginService {
       queryParams.set("instance_id", String(instanceId));
       const queryString = queryParams.toString();
       const redirectUrl = `/dashboard/leads/details/${leadId}?${queryString}`;
-      const projectUrl = `${baseUrl}${redirectUrl}`;
-
-      const updatedAt = new Date().toLocaleString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      });
 
       // Fetch users for notifications (safe — outside transaction)
-      const [actor, factoryUser, admins, backendMappingData] =
+      const [factoryUser, admins, backendMappingData] =
         await Promise.all([
-          prisma.userMaster.findUnique({
-            where: { id: userId },
-            select: { user_name: true },
-          }),
           prisma.userMaster.findUnique({
             where: { id: assignToUserId },
             select: { id: true, user_name: true, user_email: true },
@@ -1667,18 +1610,6 @@ export class OrderLoginService {
               redirect_url: redirectUrl,
             });
 
-            if (admin.user_email) {
-              await sendLeadMovedToProductionEmail({
-                vendor_id: vendorId,
-                toEmail: admin.user_email,
-                toName: admin.user_name,
-                leadCode: instanceCode,
-                leadName,
-                updatedBy: actor?.user_name ?? "System",
-                updatedAt,
-                projectUrl,
-              });
-            }
           } catch (err: any) {
             console.error(`❌ Admin ${admin.id} failed:`, err.message);
           }
@@ -1697,19 +1628,6 @@ export class OrderLoginService {
               entity_id: leadId,
               redirect_url: redirectUrl,
             });
-
-            if (factoryUser.user_email) {
-              await sendMovedToProductionWithOrderLoginEmail({
-                vendor_id: vendorId,
-                toEmail: factoryUser.user_email,
-                toName: factoryUser.user_name,
-                leadCode: instanceCode,
-                leadName,
-                updatedBy: actor?.user_name ?? "System",
-                updatedAt,
-                projectUrl,
-              });
-            }
             console.log("✅ Factory notified");
           } catch (err: any) {
             console.error("❌ Factory notification failed:", err.message);
@@ -1733,18 +1651,6 @@ export class OrderLoginService {
               redirect_url: redirectUrl,
             });
 
-            if (admin.user_email) {
-              await sendLeadMovedToProductionEmail({
-                vendor_id: vendorId,
-                toEmail: admin.user_email,
-                toName: admin.user_name,
-                leadCode: instanceCode,
-                leadName,
-                updatedBy: actor?.user_name ?? "System",
-                updatedAt,
-                projectUrl,
-              });
-            }
             console.log(`✅ Admin ${admin.id} notified`);
           } catch (err: any) {
             console.error(`❌ Admin ${admin.id} failed:`, err.message);
@@ -1765,16 +1671,6 @@ export class OrderLoginService {
               redirect_url: redirectUrl,
             });
 
-            if (factoryUser.user_email) {
-              await sendMovedToProductionOrderLoginPendingEmail({
-                vendor_id: vendorId,
-                toEmail: factoryUser.user_email,
-                toName: factoryUser.user_name,
-                leadCode: instanceCode,
-                leadName,
-                projectUrl,
-              });
-            }
             console.log("✅ Factory notified");
           } catch (err: any) {
             console.error("❌ Factory notification failed:", err.message);
@@ -1795,16 +1691,6 @@ export class OrderLoginService {
               redirect_url: redirectUrl,
             });
 
-            if (backendMappingData.user.user_email) {
-              await sendMovedToProductionWithoutOrderLoginEmail({
-                vendor_id: vendorId,
-                toEmail: backendMappingData.user.user_email,
-                toName: backendMappingData.user.user_name,
-                leadCode: instanceCode,
-                leadName,
-                projectUrl,
-              });
-            }
             console.log("✅ Backend notified");
           } catch (err: any) {
             console.error("❌ Backend notification failed:", err.message);
@@ -2109,18 +1995,6 @@ export class OrderLoginService {
           redirect_url: redirectUrl,
         });
 
-        if (admin.user_email) {
-          await sendLeadMovedToProductionEmail({
-            vendor_id: leadMeta.vendor_id,
-            toEmail: admin.user_email,
-            toName: admin.user_name,
-            leadCode,
-            leadName,
-            updatedBy: actor?.user_name ?? "System",
-            updatedAt,
-            projectUrl,
-          });
-        }
       }
     } catch (err: any) {
       logger.warn("⚠️ Production stage admin notification failed", {
@@ -2169,17 +2043,6 @@ export class OrderLoginService {
         });
       }
 
-      if (factoryUser?.user_email) {
-        await sendMovedToProductionOrderLoginPendingEmail({
-          vendor_id: vendorId,
-          toEmail: factoryUser.user_email,
-          toName: factoryUser.user_name,
-          leadCode,
-          leadName,
-          projectUrl,
-        });
-      }
-
       if (backendMapping?.user?.id) {
         await NotificationService.createAndSend({
           vendor_id: vendorId,
@@ -2194,16 +2057,6 @@ export class OrderLoginService {
         });
       }
 
-      if (backendMapping?.user?.user_email) {
-        await sendMovedToProductionWithoutOrderLoginEmail({
-          vendor_id: vendorId,
-          toEmail: backendMapping.user.user_email,
-          toName: backendMapping.user.user_name,
-          leadCode,
-          leadName,
-          projectUrl,
-        });
-      }
     }
 
     if (orderLoginCompleted) {
@@ -2221,29 +2074,6 @@ export class OrderLoginService {
         });
       }
 
-      if (factoryUser?.user_email) {
-        const actor = await prisma.userMaster.findUnique({
-          where: { id: userId },
-          select: { user_name: true },
-        });
-
-        const updatedAt = new Date().toLocaleString("en-IN", {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-        });
-
-        await sendMovedToProductionWithOrderLoginEmail({
-          vendor_id: vendorId,
-          toEmail: factoryUser.user_email,
-          toName: factoryUser.user_name,
-          leadCode,
-          leadName,
-          updatedBy: actor?.user_name ?? "System",
-          updatedAt,
-          projectUrl,
-        });
-      }
     }
 
     return { lead: updatedLead, leadUserMapping };
