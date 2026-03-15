@@ -1024,6 +1024,7 @@ export class LeadActivityStatusService {
     page: number = 1,
     limit: number = 10,
     filters: {
+      franchise_id?: number;
       global_search?: string;
       filter_lead_code?: string;
       filter_name?: string;
@@ -1057,6 +1058,7 @@ export class LeadActivityStatusService {
     const whereClause = LeadActivityStatusService.addFilterConditions(
       {
         vendor_id: vendorId,
+        ...(filters.franchise_id ? { franchise_id: filters.franchise_id } : {}),
         activity_status: ActivityStatus.onHold,
         is_deleted: false,
       },
@@ -1100,6 +1102,7 @@ export class LeadActivityStatusService {
     page: number = 1,
     limit: number = 10,
     filters: {
+      franchise_id?: number;
       global_search?: string;
       filter_lead_code?: string;
       filter_name?: string;
@@ -1133,6 +1136,7 @@ export class LeadActivityStatusService {
     const whereClause = LeadActivityStatusService.addFilterConditions(
       {
         vendor_id: vendorId,
+        ...(filters.franchise_id ? { franchise_id: filters.franchise_id } : {}),
         activity_status: ActivityStatus.lost,
         is_deleted: false,
       },
@@ -1176,6 +1180,7 @@ export class LeadActivityStatusService {
     page: number = 1,
     limit: number = 10,
     filters: {
+      franchise_id?: number;
       global_search?: string;
       filter_lead_code?: string;
       filter_name?: string;
@@ -1212,6 +1217,7 @@ export class LeadActivityStatusService {
     const whereClause = LeadActivityStatusService.addFilterConditions(
       {
         vendor_id: vendorId,
+        ...(filters.franchise_id ? { franchise_id: filters.franchise_id } : {}),
         activity_status: ActivityStatus.lostApproval,
         is_deleted: false,
       },
@@ -1250,11 +1256,15 @@ export class LeadActivityStatusService {
   }
 
   // ✅ Get activity status counts
-  static async getActivityStatusCount(vendorId: number) {
+  static async getActivityStatusCount(
+    vendorId: number,
+    franchiseId?: number,
+  ) {
     const counts = await prisma.leadMaster.groupBy({
       by: ["activity_status"],
       where: {
         vendor_id: vendorId,
+        ...(franchiseId ? { franchise_id: franchiseId } : {}),
         is_deleted: false,
       },
       _count: {
@@ -1294,6 +1304,7 @@ export class LeadActivityStatusService {
     const openOnGoingCount = await prisma.leadMaster.count({
       where: {
         vendor_id: vendorId,
+        ...(franchiseId ? { franchise_id: franchiseId } : {}),
         is_deleted: false,
         activity_status: "onGoing",
         statusType: {

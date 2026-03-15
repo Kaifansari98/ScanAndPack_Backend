@@ -5,8 +5,11 @@ import { ActivityStatus } from "../../../prisma/generated";
 import logger from "../../../utils/logger";
 import { resolveClientBaseUrl } from "../../../../src/utils/fileUtils";
 
-const getParam = (param: string | string[] | undefined): string | undefined =>
-  Array.isArray(param) ? param[0] : param;
+const getParam = (param: unknown): string | undefined => {
+  if (typeof param === "string") return param;
+  if (Array.isArray(param) && typeof param[0] === "string") return param[0];
+  return undefined;
+};
 
 export class LeadActivityStatusController {
   static async updateStatus(req: Request, res: Response) {
@@ -103,6 +106,9 @@ export class LeadActivityStatusController {
   static async getActivityStatusCounts(req: Request, res: Response) {
     try {
       const vendorId = Number(getParam(req.params.vendorId));
+      const franchiseIdRaw = getParam(req.query.franchise_id);
+      const franchiseId =
+        franchiseIdRaw !== undefined ? Number(franchiseIdRaw) : undefined;
       if (!vendorId) {
         return res
           .status(400)
@@ -110,9 +116,16 @@ export class LeadActivityStatusController {
       }
 
       const data =
-        await LeadActivityStatusService.getActivityStatusCount(vendorId);
+        await LeadActivityStatusService.getActivityStatusCount(
+          vendorId,
+          Number.isNaN(franchiseId) ? undefined : franchiseId,
+        );
 
-      logger.info("Fetched lead activity status counts", { vendorId, data });
+      logger.info("Fetched lead activity status counts", {
+        vendorId,
+        franchiseId,
+        data,
+      });
 
       return res.json(
         ApiResponse.success(data, "Lead activity status counts fetched"),
@@ -172,6 +185,7 @@ export class LeadActivityStatusController {
       }
 
       const filters = {
+        franchise_id: req.body.franchise_id,
         global_search: req.body.global_search,
         filter_lead_code: req.body.filter_lead_code,
         filter_name: req.body.filter_name,
@@ -294,6 +308,7 @@ export class LeadActivityStatusController {
       }
 
       const filters = {
+        franchise_id: req.body.franchise_id,
         global_search: req.body.global_search,
         filter_lead_code: req.body.filter_lead_code,
         filter_name: req.body.filter_name,
@@ -410,6 +425,7 @@ export class LeadActivityStatusController {
       }
 
       const filters = {
+        franchise_id: req.body.franchise_id,
         global_search: req.body.global_search,
         filter_lead_code: req.body.filter_lead_code,
         filter_name: req.body.filter_name,
