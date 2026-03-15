@@ -4,7 +4,6 @@ import { NotificationType, Prisma } from "../../../prisma/generated";
 import logger from "../../../utils/logger";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 import {
-  sendLeadMovedToClientApprovalEmail,
   sendOrderLoginEnabledEmail,
   sendRevisedDocumentsUploadedEmail,
 } from "../../../../src/services/email/brevoEmail.service";
@@ -389,39 +388,32 @@ export class ClientDocumentationService {
     // CLIENT APPROVAL STAGE → ADMIN NOTIFICATION ✅
     // ===============================
     try {
-      const [leadInfo, actor] = await Promise.all([
-        prisma.leadMaster.findUnique({
-          where: { id: data.lead_id },
-          select: {
-            firstname: true,
-            lastname: true,
-            lead_code: true,
-            vendor_id: true,
-            account_id: true,
-          },
-        }),
-        prisma.userMaster.findUnique({
-          where: { id: data.updated_by },
-          select: { user_name: true },
-        }),
-      ]);
+      const leadInfo = await prisma.leadMaster.findUnique({
+        where: { id: data.lead_id },
+        select: {
+          firstname: true,
+          lastname: true,
+          lead_code: true,
+          vendor_id: true,
+          account_id: true,
+        },
+      });
 
       if (!leadInfo) return result;
+
+      const actor = await prisma.userMaster.findUnique({
+        where: { id: data.updated_by },
+        select: { user_name: true },
+      });
 
       const leadName =
         `${leadInfo.firstname ?? ""} ${leadInfo.lastname ?? ""}`.trim();
       const leadCode =
         leadInfo.lead_code ?? `LEAD-${String(data.lead_id).padStart(4, "0")}`;
       const movedBy = actor?.user_name ?? "System";
-      const movedAt = new Date().toLocaleString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      });
 
       // ✅ Correct route
       const redirectPath = `/dashboard/leads/deails/${data.lead_id}?accountId=${leadInfo.account_id}`;
-      const projectUrl = `${data.baseUrl}${redirectPath}`;
 
       // Fetch active admins
       const admins = await prisma.userMaster.findMany({
@@ -452,19 +444,6 @@ export class ClientDocumentationService {
           redirect_url: redirectPath,
         });
 
-        // 📧 Email Notification
-        if (!admin.user_email) continue;
-
-        await sendLeadMovedToClientApprovalEmail({
-          vendor_id: leadInfo.vendor_id,
-          toEmail: admin.user_email,
-          toName: admin.user_name ?? undefined,
-          leadCode,
-          leadName,
-          updatedBy: movedBy,
-          updatedAt: movedAt,
-          projectUrl,
-        });
       }
 
       logger.info("✅ Client Approval admin notifications sent", {

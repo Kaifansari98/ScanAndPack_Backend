@@ -6,9 +6,6 @@ import { AssignTaskFMInput } from "../../../types/leadModule.types";
 import { NotificationType, Prisma } from "../../../prisma/generated";
 import { cache } from "../../../utils/cache";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
-import {
-  sendLeadMovedToClientDocumentationEmail,
-} from "../../../../src/services/email/brevoEmail.service";
 
 interface FinalMeasurementDto {
   lead_id: number;
@@ -218,23 +215,16 @@ export class FinalMeasurementService {
     try {
       const actorId = data.created_by;
 
-      const [lead, actor] = await Promise.all([
-        prisma.leadMaster.findUnique({
-          where: { id: data.lead_id },
-          select: {
-            firstname: true,
-            lastname: true,
-            lead_code: true,
-            vendor_id: true,
-            account_id: true,
-          },
-        }),
-
-        prisma.userMaster.findUnique({
-          where: { id: actorId },
-          select: { user_name: true },
-        }),
-      ]);
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: data.lead_id },
+        select: {
+          firstname: true,
+          lastname: true,
+          lead_code: true,
+          vendor_id: true,
+          account_id: true,
+        },
+      });
 
       // Safety guard
       if (!lead) return response;
@@ -244,19 +234,6 @@ export class FinalMeasurementService {
       const leadCode =
         lead.lead_code ?? `LEAD-${String(data.lead_id).padStart(4, "0")}`;
 
-      const updatedAt = new Date().toLocaleString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      });
-
-      
-
-      const baseUrl = data.baseUrl;
-      // Account-aware deep link
-      const projectUrl = lead.account_id
-        ? `${baseUrl}/dashboard/project/details/${data.lead_id}?accountId=${lead.account_id}`
-        : `${baseUrl}/dashboard/project/details/${data.lead_id}`;
 
       // Fetch Active Admin Users
       const admins = await prisma.userMaster.findMany({
@@ -293,19 +270,6 @@ export class FinalMeasurementService {
             : `/dashboard/leads/details/${data.lead_id}`,
         });
 
-        // 📧 EMAIL Notification (Client Documentation Mail)
-        if (!admin.user_email) continue;
-
-        await sendLeadMovedToClientDocumentationEmail({
-          vendor_id: lead.vendor_id,
-          toEmail: admin.user_email,
-          toName: admin.user_name,
-          leadCode,
-          leadName,
-          updatedBy: actor?.user_name ?? "System",
-          updatedAt,
-          projectUrl,
-        });
       }
     } catch (err: any) {
       logger.warn("⚠️ Client documentation admin notification failed", {
