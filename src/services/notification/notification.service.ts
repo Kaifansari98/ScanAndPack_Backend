@@ -114,6 +114,20 @@ export const NotificationService = {
       };
     }
 
+    const firebaseEnabled = process.env.FIREBASE_ENABLED === "true";
+    if (!firebaseEnabled) {
+      logger.info("Firebase push notification skipped: disabled", {
+        user_id: input.user_id,
+        title: input.title,
+      });
+      return {
+        total_tokens: tokens.length,
+        success_count: 0,
+        failure_count: 0,
+        invalid_token_count: 0,
+      };
+    }
+
     const messaging = getFirebaseMessaging();
     const webpush = {
       notification: {
