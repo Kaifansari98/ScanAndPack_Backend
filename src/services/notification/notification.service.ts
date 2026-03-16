@@ -73,9 +73,18 @@ export const NotificationService = {
   async createAndSend(
     input: CreateNotificationInput,
   ): Promise<{
-    notification: Notification;
+    notification: Notification | null;
     delivery: PushDeliverySummary | null;
   }> {
+    const notificationsEnabled = process.env.NOTIFICATIONS_ENABLED === "true";
+    if (!notificationsEnabled) {
+      logger.info("Notification skipped: notifications disabled", {
+        user_id: input.user_id,
+        title: input.title,
+      });
+      return { notification: null, delivery: null };
+    }
+
     const notification = await this.create(input);
     let delivery: PushDeliverySummary | null = null;
 
