@@ -611,19 +611,6 @@ export class ClientDocumentationService {
       return;
     }
 
-    // 4️⃣ Duplicate protection
-    const alreadySent = await prisma.notification.findFirst({
-      where: {
-        vendor_id: vendorId,
-        entity_type: "lead",
-        entity_id: leadId,
-        type: NotificationType.LEAD_ACTION,
-        title: "Order Login Enabled",
-      },
-    });
-
-    if (alreadySent) return;
-
     const leadCode = await resolveLeadCode(vendorId, leadId, instanceId);
 
     const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
@@ -665,6 +652,20 @@ export class ClientDocumentationService {
     if (!mapping?.user) return;
 
     const targetUser = mapping.user;
+
+    // 4️⃣ Duplicate protection (per recipient)
+    const alreadySent = await prisma.notification.findFirst({
+      where: {
+        vendor_id: vendorId,
+        entity_type: "lead",
+        entity_id: leadId,
+        type: NotificationType.LEAD_ACTION,
+        title: "Order Login Enabled",
+        user_id: targetUser.id,
+      },
+    });
+
+    if (alreadySent) return;
 
     // ✅ redirectPath — accountId + instance_id (optional) dono include
     const queryParams = new URLSearchParams();

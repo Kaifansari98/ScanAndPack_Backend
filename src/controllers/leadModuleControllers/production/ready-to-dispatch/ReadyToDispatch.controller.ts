@@ -28,6 +28,7 @@ import { ReadyToDispatchService } from "../../../../services/production/ready-to
 import { uploadToWasabiCurrentSitePhotosReadyToDispatchFile } from "../../../../utils/wasabiClient";
 import logger from "../../../../utils/logger";
 import fs from "node:fs/promises";
+import { STAGE_PATH_BY_TAG } from "../../../../services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 
 const service = new ReadyToDispatchService();
 
@@ -357,22 +358,7 @@ export class ReadyToDispatchController {
       try {
         const vendorId = result.lead.vendor_id;
         const accountId = result.lead.account_id;
-        const [admins, mappings, lead, firstInstance] = await Promise.all([
-          prisma.userMaster.findMany({
-            where: {
-              vendor_id: vendorId,
-              user_type: { user_type: { in: ["admin", "super-admin"] } },
-            },
-            select: { id: true },
-          }),
-          prisma.leadUserMapping.findMany({
-            where: {
-              vendor_id: vendorId,
-              lead_id: leadId,
-              status: "active",
-            },
-            select: { user_id: true },
-          }),
+        const [lead, firstInstance] = await Promise.all([
           prisma.leadMaster.findUnique({
             where: { id: leadId },
             select: {
@@ -393,91 +379,76 @@ export class ReadyToDispatchController {
         const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
         const leadCode =
           lead?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
-        const recipientIds = new Set<number>();
-        admins.forEach((admin) => recipientIds.add(admin.id));
-        mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
         const franchiseId = lead?.franchise_id ?? null;
+        const stageTag = lead?.statusType?.tag;
+        const instanceId = firstInstance?.id;
 
-        if (recipientIds.size > 0) {
-          // Resolve stage-specific path at notification time (not stored)
-          const stageTag = lead?.statusType?.tag;
-          const instanceId = firstInstance?.id;
+        // Build redirect URL using STAGE_PATH_BY_TAG
+        const stagePath =
+          stageTag && STAGE_PATH_BY_TAG[stageTag]
+            ? `${STAGE_PATH_BY_TAG[stageTag]}/${leadId}`
+            : `/dashboard/installation/site-readiness/details/${leadId}`;
 
-          const stagePath =
-            stageTag === "Type 11"
-              ? `/dashboard/production/ready-to-dispatch/details/${leadId}`
-              : stageTag === "Type 12"
-                ? `/dashboard/installation/site-readiness/details/${leadId}`
-                : stageTag === "Type 13"
-                  ? `/dashboard/installation/dispatch-planning/details/${leadId}`
-                  : stageTag === "Type 14"
-                    ? `/dashboard/installation/dispatch-stage/details/${leadId}`
-                    : stageTag === "Type 15"
-                      ? `/dashboard/installation/under-installation/details/${leadId}`
-                      : stageTag === "Type 16"
-                        ? `/dashboard/installation/final-handover/details/${leadId}`
-                        : `/dashboard/installation/site-readiness/details/${leadId}`;
+        const queryParams = new URLSearchParams();
+        if (accountId) queryParams.set("accountId", String(accountId));
+        if (instanceId) queryParams.set("instance_id", String(instanceId));
+        const qs = queryParams.toString();
+        const redirectUrl = qs ? `${stagePath}?${qs}` : stagePath;
 
-          const queryParams = new URLSearchParams();
-          if (accountId) queryParams.set("accountId", String(accountId));
-          if (instanceId) queryParams.set("instance_id", String(instanceId));
-          const qs = queryParams.toString();
-          const redirectUrl = qs ? `${stagePath}?${qs}` : stagePath;
+        // Only admins matching vendor_id + franchise_id
+        const users = await prisma.userMaster.findMany({
+          where: {
+            vendor_id: vendorId,
+            status: "active",
+            user_type: { user_type: { equals: "admin", mode: "insensitive" } },
+            ...(franchiseId ? { franchise_id: franchiseId } : {}),
+          },
+          select: { id: true, user_name: true, user_email: true },
+        });
 
-          // Only admin users (matching franchise) receive the milestone notification and email
-          const users = await prisma.userMaster.findMany({
-            where: {
-              id: { in: Array.from(recipientIds) },
-              status: "active",
-              user_type: { user_type: { equals: "admin", mode: "insensitive" } },
-              ...(franchiseId ? { franchise_id: franchiseId } : {}),
-            },
-            select: { id: true, user_name: true, user_email: true },
-          });
+        await Promise.all(
+          users.map((user) =>
+            NotificationService.createAndSend({
+              vendor_id: vendorId,
+              user_id: user.id,
+              sender_id: Number(actorId) || null,
+              type: NotificationType.LEAD_MILESTONE,
+              title: "Lead moved to Installation",
+              message:
+                leadName.length > 0
+                  ? `Lead ${leadName} moved to Installation stage.`
+                  : "Lead moved to Installation stage.",
+              entity_type: "lead",
+              entity_id: leadId,
+              redirect_url: redirectUrl,
+            })
+          )
+        );
 
-          await Promise.all(
-            users.map((user) =>
-              NotificationService.createAndSend({
-                vendor_id: vendorId,
-                user_id: user.id,
-                sender_id: Number(actorId) || null,
-                type: NotificationType.LEAD_MILESTONE,
-                title: "Lead moved to Installation",
-                message:
-                  leadName.length > 0
-                    ? `Lead ${leadName} moved to Installation stage.`
-                    : "Lead moved to Installation stage.",
-                entity_type: "lead",
-                entity_id: leadId,
-                redirect_url: redirectUrl,
+        const clientBaseUrl = resolveClientBaseUrl(req);
+        const detailsUrl = `${clientBaseUrl}${redirectUrl}`;
+        const completedOn = new Date().toLocaleDateString("en-IN", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        });
+
+        await Promise.allSettled(
+          users
+            .filter((user) => user.user_email)
+            .map((user) =>
+              sendMajorMilestoneEmail({
+                vendor_id: result.lead.vendor_id,
+                toEmail: user.user_email!,
+                toName: user.user_name ?? undefined,
+                leadCode,
+                leadName: leadName || "Lead",
+                milestoneName: "Production to Installation",
+                completedOn,
+                detailsUrl,
               })
             )
-          );
-          const clientBaseUrl = resolveClientBaseUrl(req);
-          const detailsUrl = `${clientBaseUrl}${redirectUrl}`;
-          const completedOn = new Date().toLocaleDateString("en-IN", {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-          });
-
-          await Promise.allSettled(
-            users
-              .filter((user) => user.user_email)
-              .map((user) =>
-                sendMajorMilestoneEmail({
-                  vendor_id: result.lead.vendor_id,
-                  toEmail: user.user_email!,
-                  toName: user.user_name ?? undefined,
-                  leadCode,
-                  leadName: leadName || "Lead",
-                  milestoneName: "Production to Installation",
-                  completedOn,
-                  detailsUrl,
-                })
-              )
-          );
-        }
+        );
       } catch (milestoneError: any) {
         logger.warn("⚠️ Failed to send production-to-installation notification", {
           error: milestoneError?.message,
