@@ -1451,6 +1451,7 @@ export const updateLeadService = async (
   clientBaseUrl?: string
 ) => {
   let leadCreatedEmailPayload: LeadCreatedEmailPayload | null = null;
+  let leadFranchiseId: number | null = null;
   const {
     firstname,
     lastname,
@@ -1624,6 +1625,7 @@ export const updateLeadService = async (
             createdBy: createdByName,
             leadUrl,
           };
+          leadFranchiseId = (hydratedLead as any).franchise_id ?? null;
         }
       }
     }
@@ -1734,8 +1736,38 @@ export const updateLeadService = async (
   });
 
   if (leadCreatedEmailPayload) {
+    const payload: LeadCreatedEmailPayload = leadCreatedEmailPayload;
     try {
-      await sendLeadCreatedEmail(leadCreatedEmailPayload);
+      await sendLeadCreatedEmail(payload);
+
+      // Also notify franchise-filtered admins (mirrors createLead behaviour)
+      const adminUsers = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: payload.vendor_id,
+          status: "active",
+          user_type: {
+            user_type: { in: ["admin", "super-admin"], mode: "insensitive" },
+          },
+          ...(leadFranchiseId ? { franchise_id: leadFranchiseId } : {}),
+        },
+        select: { id: true, user_email: true, user_name: true },
+      });
+
+      const adminRecipients = adminUsers.filter(
+        (u) => u.id !== updated_by && u.user_email,
+      );
+
+      if (adminRecipients.length > 0) {
+        await Promise.allSettled(
+          adminRecipients.map((admin) =>
+            sendLeadCreatedEmail({
+              ...payload,
+              toEmail: admin.user_email!,
+              toName: admin.user_name ?? undefined,
+            }),
+          ),
+        );
+      }
     } catch (emailError: any) {
       logger.warn("⚠️ Failed to send lead created email after draft completion", {
         error: emailError?.message,

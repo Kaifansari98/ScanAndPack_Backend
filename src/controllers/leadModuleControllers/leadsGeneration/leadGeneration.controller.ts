@@ -321,6 +321,7 @@ export class LeadController {
                     mode: "insensitive",
                   },
                 },
+                ...(value.franchise_id ? { franchise_id: value.franchise_id } : {}),
               },
               select: { id: true, user_email: true, user_name: true },
             });
