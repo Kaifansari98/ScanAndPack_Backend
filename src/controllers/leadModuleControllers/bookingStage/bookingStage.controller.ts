@@ -19,6 +19,7 @@ import {
   sendMajorMilestoneEmail,
   sendTaskAssignedEmail,
 } from "../../../services/email/brevoEmail.service";
+import { sendSiteSupervisorAssignedEmail } from "../../../services/email/brevoEmail2.service";
 import { NotificationService } from "../../../services/notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
 
@@ -1078,6 +1079,102 @@ export class BookingStageController {
         message: "Site supervisor assigned successfully",
         data: result,
       });
+
+      // ─── Notify + email sales-executive(s) assigned to this lead ───────────
+      void (async () => {
+        try {
+          const [lead, supervisor, salesExecMappings] = await Promise.all([
+            prisma.leadMaster.findUnique({
+              where: { id: leadId },
+              select: {
+                id: true,
+                lead_code: true,
+                firstname: true,
+                lastname: true,
+                country_code: true,
+                contact_no: true,
+                account_id: true,
+              },
+            }),
+            prisma.userMaster.findUnique({
+              where: { id: siteSupervisorId },
+              select: { user_name: true },
+            }),
+            prisma.leadUserMapping.findMany({
+              where: {
+                lead_id: leadId,
+                vendor_id: vendorId,
+                status: "active",
+                user: {
+                  user_type: { user_type: { equals: "sales-executive", mode: "insensitive" } },
+                },
+              },
+              select: {
+                user: { select: { id: true, user_name: true, user_email: true } },
+              },
+            }),
+          ]);
+
+          if (!lead || salesExecMappings.length === 0) return;
+
+          const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+          const leadCode = lead.lead_code ?? `LEAD-${String(lead.id).padStart(4, "0")}`;
+          const contact = `${lead.country_code ?? ""} ${lead.contact_no ?? ""}`.trim();
+          const supervisorName = supervisor?.user_name ?? "—";
+          const assignedOn = new Date().toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          });
+          const clientBaseUrl = resolveClientBaseUrl(req);
+          const leadUrl = lead.account_id
+            ? `${clientBaseUrl}/dashboard/leads/booking-stage/details/${leadId}?accountId=${lead.account_id}`
+            : `${clientBaseUrl}/dashboard/leads/booking-stage/details/${leadId}`;
+          const redirectPath = lead.account_id
+            ? `/dashboard/leads/booking-stage/details/${leadId}?accountId=${lead.account_id}`
+            : `/dashboard/leads/booking-stage/details/${leadId}`;
+
+          await Promise.allSettled(
+            salesExecMappings.map(async ({ user }) => {
+              // In-app notification
+              await NotificationService.createAndSend({
+                vendor_id: vendorId,
+                user_id: user.id,
+                sender_id: createdBy,
+                type: NotificationType.LEAD_ASSIGNED,
+                title: "Site Supervisor Assigned",
+                message:
+                  leadName.length > 0
+                    ? `Site Supervisor ${supervisorName} has been assigned to ${leadCode} - ${leadName}. Kindly assign the Final Measurement task.`
+                    : `Site Supervisor ${supervisorName} has been assigned to ${leadCode}. Kindly assign the Final Measurement task.`,
+                entity_type: "lead",
+                entity_id: leadId,
+                redirect_url: redirectPath,
+              });
+
+              // Email
+              if (user.user_email) {
+                await sendSiteSupervisorAssignedEmail({
+                  vendor_id: vendorId,
+                  toEmail: user.user_email,
+                  toName: user.user_name ?? undefined,
+                  leadCode,
+                  leadName: leadName || "—",
+                  contact: contact || "—",
+                  assignedTo: supervisorName,
+                  assignedOn,
+                  leadUrl,
+                });
+              }
+            }),
+          );
+        } catch (notifyErr: any) {
+          logger.warn("⚠️ Failed to send site-supervisor-assigned notification", {
+            lead_id: leadId,
+            error: notifyErr?.message,
+          });
+        }
+      })();
     } catch (error: any) {
       console.error("[BookingStageController] Reassign Error:", error);
       res.status(500).json({

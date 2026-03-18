@@ -17,6 +17,7 @@ export const ORDER_LOGIN_TEMPLATE_KEYS = {
   TECHCHECK_REJECTED_DOCUMENT_KEY: "TECH_CHECK_FILES_REJECTED_SA",
   TECHCHECK_APPROVED_DOCUMENT_KEY: "TECH_CHECK_APPROVED_SA",
   TECH_CHECK_ASSIGNED_TEMPLATE_KEY: "TECH_CHECK_ASSIGNED",
+  SITE_SUPERVISOR_ASSIGNED_TEMPLATE_KEY: "SITE_SUPERVISOR_ASSIGNED",
 };
 
 const renderTemplate = (template: string, values: Record<string, string>) => {
@@ -1596,4 +1597,121 @@ export const sendTechCheckAssignedEmail = async (
     },
     identity,
   );
+};
+
+export const sendSiteSupervisorAssignedEmail = async (payload: {
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  contact: string;
+  assignedTo: string;
+  assignedOn: string;
+  leadUrl: string;
+}): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Site Supervisor Assigned on ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "Site Supervisor has been assigned for the following project.",
+    "",
+    "Project Details",
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
+    `Contact Details: ${payload.contact}`,
+    `Assigned To: ${payload.assignedTo}`,
+    `Assigned On: ${payload.assignedOn}`,
+    "",
+    "Kindly assign the Final Measurement task to the site supervisor.",
+    `View Lead Details: ${payload.leadUrl}`,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <style>
+        .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+        .lead-info-label { display: table-cell; color: #6b7280; font-size: 14px; width: 40%; vertical-align: top; }
+        .lead-info-value { display: table-cell; color: #111827; font-weight: 600; font-size: 14px; width: 60%; }
+        @media only screen and (max-width: 600px) {
+          .lead-info-row { display: block !important; margin-bottom: 4px !important; padding-bottom: 4px !important; border-bottom: 1px solid #e5e7eb !important; }
+          .lead-info-row:last-child { border-bottom: none !important; margin-bottom: 0 !important; padding-bottom: 0 !important; }
+          .lead-info-label { display: block !important; width: 100% !important; margin-bottom: 4px !important; font-size: 13px !important; }
+          .lead-info-value { display: block !important; width: 100% !important; }
+          .lead-info-row.no-border { border-bottom: none !important; margin-bottom: 0 !important; padding-bottom: 0 !important; }
+        }
+      </style>
+    </head>
+    <body style="margin: 0; padding: 0; font-family: Arial, sans-serif;">
+      <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 10px;">
+        <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
+          <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Site Supervisor Assigned</h2>
+          <p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p>
+          <p style="margin: 0 0 16px; color: #4b5563;">Site Supervisor has been assigned for the following project.</p>
+          <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
+            <p style="margin: 0 0 8px; font-weight: 600; color: #111827;">Project Details</p>
+            <div class="lead-info-row">
+              <div class="lead-info-label">Lead Code</div>
+              <div class="lead-info-value">${payload.leadCode}</div>
+            </div>
+            <div class="lead-info-row">
+              <div class="lead-info-label">Lead Name</div>
+              <div class="lead-info-value">${payload.leadName}</div>
+            </div>
+            <div class="lead-info-row">
+              <div class="lead-info-label">Contact Details</div>
+              <div class="lead-info-value">${payload.contact}</div>
+            </div>
+            <div class="lead-info-row">
+              <div class="lead-info-label">Assigned To</div>
+              <div class="lead-info-value">${payload.assignedTo}</div>
+            </div>
+            <div class="lead-info-row no-border">
+              <div class="lead-info-label">Assigned On</div>
+              <div class="lead-info-value">${payload.assignedOn}</div>
+            </div>
+          </div>
+          <p style="margin: 16px 0 0; color: #4b5563;">Kindly assign the Final Measurement task to the site supervisor.</p>
+          <div style="margin: 16px 0 0; text-align: start;">
+            <a href="${payload.leadUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 16px; border-radius: 6px; font-size: 14px;" target="_blank" rel="noopener noreferrer">
+              👉 View Lead Details
+            </a>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    contact: payload.contact,
+    assignedTo: payload.assignedTo,
+    assignedOn: payload.assignedOn,
+    leadUrl: payload.leadUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: ORDER_LOGIN_TEMPLATE_KEYS.SITE_SUPERVISOR_ASSIGNED_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  const subject = template ? renderTemplate(template.subject, templateValues) : defaultSubject;
+  const text = template ? renderTemplate(template.text, templateValues) : defaultText;
+  const html = template ? renderTemplate(template.html, templateValues) : defaultHtml;
+
+  return sendBrevoEmail({ toEmail: payload.toEmail, toName: payload.toName, subject, text, html }, identity);
 };
