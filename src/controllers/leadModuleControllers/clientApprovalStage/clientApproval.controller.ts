@@ -623,16 +623,12 @@ export class ClientApprovalController {
           const qs = queryParams.toString();
           const redirectUrl = qs ? `${stagePath}?${qs}` : stagePath;
 
-          // Fetch eligible recipients — exclude tech-check and super-admin users from both notification and email
+          // Only admin users receive the milestone notification and email
           const users = await prisma.userMaster.findMany({
             where: {
               id: { in: Array.from(recipientIds) },
               status: "active",
-              NOT: {
-                user_type: {
-                  user_type: { in: ["tech-check", "super-admin"], mode: "insensitive" },
-                },
-              },
+              user_type: { user_type: { equals: "admin", mode: "insensitive" } },
             },
             select: { id: true, user_name: true, user_email: true },
           });

@@ -424,11 +424,21 @@ export class ReadyToDispatchController {
           const qs = queryParams.toString();
           const redirectUrl = qs ? `${stagePath}?${qs}` : stagePath;
 
+          // Only admin users receive the milestone notification and email
+          const users = await prisma.userMaster.findMany({
+            where: {
+              id: { in: Array.from(recipientIds) },
+              status: "active",
+              user_type: { user_type: { equals: "admin", mode: "insensitive" } },
+            },
+            select: { id: true, user_name: true, user_email: true },
+          });
+
           await Promise.all(
-            Array.from(recipientIds).map((recipientId) =>
+            users.map((user) =>
               NotificationService.createAndSend({
                 vendor_id: vendorId,
-                user_id: recipientId,
+                user_id: user.id,
                 sender_id: Number(actorId) || null,
                 type: NotificationType.LEAD_MILESTONE,
                 title: "Lead moved to Installation",
@@ -442,14 +452,6 @@ export class ReadyToDispatchController {
               })
             )
           );
-
-          const users = await prisma.userMaster.findMany({
-            where: {
-              id: { in: Array.from(recipientIds) },
-              status: "active",
-            },
-            select: { id: true, user_name: true, user_email: true },
-          });
           const clientBaseUrl = resolveClientBaseUrl(req);
           const detailsUrl = `${clientBaseUrl}${redirectUrl}`;
           const completedOn = new Date().toLocaleDateString("en-IN", {

@@ -427,6 +427,7 @@ export class FinalHandoverStageController {
             where: {
               id: { in: Array.from(recipientIds) },
               status: "active",
+              user_type: { user_type: { equals: "admin", mode: "insensitive" } },
             },
             select: { id: true, user_name: true, user_email: true },
           });

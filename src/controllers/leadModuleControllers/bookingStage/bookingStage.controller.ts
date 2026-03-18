@@ -291,11 +291,7 @@ export class BookingStageController {
             where: {
               id: { in: Array.from(recipientIds) },
               status: "active",
-              NOT: {
-                user_type: {
-                  user_type: { in: ["site-supervisor", "head-site-supervisor"], mode: "insensitive" },
-                },
-              },
+              user_type: { user_type: { equals: "admin", mode: "insensitive" } },
             },
             select: { id: true, user_name: true, user_email: true },
           });

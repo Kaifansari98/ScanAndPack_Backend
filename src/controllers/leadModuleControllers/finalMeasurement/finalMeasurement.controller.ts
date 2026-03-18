@@ -721,14 +721,12 @@ export class FinalMeasurementController {
               ? `/dashboard/leads/details/${leadId}?accountId=${accountId}`
               : `/dashboard/leads/details/${leadId}`;
 
-            // Fetch eligible recipients — exclude site-supervisor from both notification and email
+            // Only admin users receive the milestone notification and email
             const users = await prisma.userMaster.findMany({
               where: {
                 id: { in: Array.from(recipientIds) },
                 status: "active",
-                NOT: {
-                  user_type: { user_type: { equals: "site-supervisor", mode: "insensitive" } },
-                },
+                user_type: { user_type: { equals: "admin", mode: "insensitive" } },
               },
               select: { id: true, user_name: true, user_email: true },
             });
