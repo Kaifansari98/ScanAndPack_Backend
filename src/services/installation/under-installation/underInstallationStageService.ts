@@ -226,7 +226,6 @@ export class UnderInstallationStageService {
           entity_id: leadId,
           redirect_url: redirectPath,
         });
-
       }
 
       // ===============================
@@ -273,7 +272,6 @@ export class UnderInstallationStageService {
           entity_id: leadId,
           redirect_url: redirectPath,
         });
-
       }
     } catch (err: any) {
       logger.warn("⚠️ Under Installation notification failed", {
@@ -1268,7 +1266,6 @@ export class UnderInstallationStageService {
             entity_id: misc.misc.id,
             redirect_url: redirectPath,
           });
-
         }),
       );
 
@@ -1287,6 +1284,64 @@ export class UnderInstallationStageService {
     return misc.misc;
   }
 
+  static async addMiscDocumentsService(payload: {
+    misc_id: number;
+    vendor_id: number;
+    lead_id: number;
+    created_by: number;
+    files: { originalName: string; sysName: string }[];
+  }) {
+    const { misc_id, vendor_id, lead_id, created_by, files } = payload;
+
+    return await prisma.$transaction(async (tx) => {
+      const misc = await tx.miscellaneousMaster.findUnique({
+        where: { id: misc_id },
+      });
+
+      if (!misc) {
+        throw new Error("Miscellaneous not found");
+      }
+
+      const docType = await tx.documentTypeMaster.findFirst({
+        where: { vendor_id, tag: "Type 24" },
+      });
+
+      if (!docType) {
+        throw new Error("Doc type not found");
+      }
+
+      const result = [];
+
+      for (const file of files) {
+        const leadDoc = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: file.originalName,
+            doc_sys_name: file.sysName,
+            vendor_id,
+            lead_id,
+            created_by,
+            doc_type_id: docType.id,
+          },
+        });
+
+        const miscDoc = await tx.miscellaneousDocument.create({
+          data: {
+            vendor_id,
+            miscellaneous_id: misc_id,
+            document_id: leadDoc.id,
+            created_by,
+          },
+        });
+
+        result.push({
+          doc_id: leadDoc.id,
+          misc_doc_id: miscDoc.id,
+        });
+      }
+
+      return result;
+    });
+  }
   static async getAllMiscellaneousService(vendor_id: number, lead_id: number) {
     const miscList = await prisma.miscellaneousMaster.findMany({
       where: { vendor_id, lead_id },
@@ -2011,7 +2066,6 @@ export class UnderInstallationStageService {
             entity_id: misc_id,
             redirect_url: redirectPath,
           });
-
         }),
       );
     } catch (err: any) {
@@ -2542,7 +2596,6 @@ export class UnderInstallationStageService {
             entity_id: leadId,
             redirect_url: redirectPath,
           });
-
         }),
       );
     } catch (err: any) {
@@ -2906,7 +2959,6 @@ export class UnderInstallationStageService {
             entity_id: misc_id,
             redirect_url: redirectPath,
           });
-
         }),
       );
     } catch (err: any) {
@@ -3076,7 +3128,6 @@ export class UnderInstallationStageService {
             entity_id: misc_id,
             redirect_url: redirectPath,
           });
-
         }),
       );
     } catch (err: any) {

@@ -87,6 +87,12 @@ underInstallationStageRoutes.post(
   controller.createMiscellaneousEntry,
 );
 
+underInstallationStageRoutes.post(
+  "/miscellaneous/:miscId/documents",
+  uploadUnderInstallationFiles.array("files"),
+  controller.addMiscDocumentsController
+);
+
 underInstallationStageRoutes.get(
   "/vendorId/:vendorId/leadId/:leadId/get-all",
   controller.getAllMiscellaneousEntries,
