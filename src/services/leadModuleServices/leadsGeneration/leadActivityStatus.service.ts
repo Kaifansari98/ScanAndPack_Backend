@@ -159,6 +159,7 @@ export class LeadActivityStatusService {
             account_id: true,
             created_by: true,
             assign_to: true,
+            franchise_id: true,
           },
         }),
         prisma.userMaster.findUnique({
@@ -176,6 +177,7 @@ export class LeadActivityStatusService {
       const leadName = `${leadInfo?.firstname ?? ""} ${
         leadInfo?.lastname ?? ""
       }`.trim();
+      const franchiseId = leadInfo?.franchise_id ?? null;
       const updatedByName = updatedByUser?.user_name ?? "Sales Executive";
       const updatedByRole = updatedByUser?.user_type?.user_type?.toLowerCase();
       const isAdminActor =
@@ -208,6 +210,7 @@ export class LeadActivityStatusService {
             user_type: {
               user_type: { in: ["admin", "super-admin"], mode: "insensitive" },
             },
+            ...(franchiseId ? { franchise_id: franchiseId } : {}),
           },
           select: { id: true, user_name: true, user_email: true },
         });
@@ -489,6 +492,7 @@ export class LeadActivityStatusService {
             lastname: true,
             account_id: true,
             created_by: true,
+            franchise_id: true,
           },
         }),
         prisma.userMaster.findUnique({
@@ -506,6 +510,7 @@ export class LeadActivityStatusService {
       const leadName = `${leadInfo?.firstname ?? ""} ${
         leadInfo?.lastname ?? ""
       }`.trim();
+      const franchiseId = leadInfo?.franchise_id ?? null;
       const rejectedByName = rejectedByUser?.user_name ?? "Admin";
       const rejectedByRole =
         rejectedByUser?.user_type?.user_type?.toLowerCase();
@@ -534,6 +539,7 @@ export class LeadActivityStatusService {
                 mode: "insensitive",
               },
             },
+            ...(franchiseId ? { franchise_id: franchiseId } : {}),
           },
           select: { id: true, user_name: true, user_email: true },
         });
