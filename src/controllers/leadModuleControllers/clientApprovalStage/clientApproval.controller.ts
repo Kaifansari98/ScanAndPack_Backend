@@ -597,6 +597,9 @@ export class ClientApprovalController {
             where: {
               id: { in: Array.from(recipientIds) },
               status: "active",
+              NOT: {
+                user_type: { user_type: { equals: "tech-check", mode: "insensitive" } },
+              },
             },
             select: { id: true, user_name: true, user_email: true },
           });
