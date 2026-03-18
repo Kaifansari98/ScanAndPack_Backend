@@ -5,8 +5,6 @@ import {
   UploadOrderLoginPoFileInput,
 } from "../../../../services/production/order-login/orderLogin.service";
 import { prisma } from "../../../../prisma/client";
-import { NotificationService } from "../../../../services/notification/notification.service";
-import { NotificationType } from "../../../../prisma/generated";
 import {
   generateSignedUrl,
   uploadToWasabiOrderLoginPoFile,
@@ -536,46 +534,6 @@ export class OrderLoginController {
         requiredDate: new Date(client_required_order_login_complition_date),
         instanceId: instance_id ? Number(instance_id) : undefined,
       });
-
-      try {
-        const assignee = await prisma.userMaster.findUnique({
-          where: { id: Number(assign_to_user_id) },
-          select: {
-            user_type: { select: { user_type: true } },
-          },
-        });
-        const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
-        if (assigneeRole !== "admin" && assigneeRole !== "super-admin") {
-          const lead = await prisma.leadMaster.findUnique({
-            where: { id: Number(leadId) },
-            select: { firstname: true, lastname: true, franchise_id: true },
-          });
-          const leadName =
-            `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
-          const franchiseId = lead?.franchise_id ?? null;
-
-          await NotificationService.createAndSend({
-            vendor_id: Number(vendorId),
-            user_id: Number(assign_to_user_id),
-            sender_id: Number(user_id) || null,
-            type: NotificationType.LEAD_ASSIGNED,
-            title: "Lead assigned",
-            message:
-              leadName.length > 0
-                ? `Lead ${leadName} has been assigned to you.`
-                : "A lead has been assigned to you.",
-            entity_type: "lead",
-            entity_id: Number(leadId),
-            redirect_url: `/dashboard/leads/details/${leadId}?accountId=${account_id}`,
-          });
-        }
-      } catch (notificationError: any) {
-        console.error("⚠️ Failed to send production assignment notification", {
-          error: notificationError?.message,
-          lead_id: leadId,
-          assignee_user_id: assign_to_user_id,
-        });
-      }
 
       const movedToProduction = Boolean(
         (updatedLead as any)?.moved_to_production,

@@ -507,7 +507,7 @@ export class ClientApprovalController {
 
       // ─── 3. Milestone notification + email (admins + mapped users) ────────
       try {
-        const [admins, mappings, lead] = await Promise.all([
+        const [admins, mappings, lead, firstInstance] = await Promise.all([
           prisma.userMaster.findMany({
             where: {
               vendor_id: dto.vendor_id,
@@ -525,7 +525,18 @@ export class ClientApprovalController {
           }),
           prisma.leadMaster.findUnique({
             where: { id: dto.lead_id },
-            select: { firstname: true, lastname: true, lead_code: true, franchise_id: true },
+            select: {
+              firstname: true,
+              lastname: true,
+              lead_code: true,
+              franchise_id: true,
+              statusType: { select: { tag: true } },
+            },
+          }),
+          prisma.leadProductStructureInstance.findFirst({
+            where: { lead_id: dto.lead_id, vendor_id: dto.vendor_id },
+            select: { id: true },
+            orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
           }),
         ]);
 
@@ -539,9 +550,29 @@ export class ClientApprovalController {
         const franchiseId = lead?.franchise_id ?? null;
 
         if (recipientIds.size > 0) {
-          const redirectUrl = dto.account_id
-            ? `/dashboard/production/details/${dto.lead_id}?accountId=${dto.account_id}`
-            : `/dashboard/production/details/${dto.lead_id}`;
+          // Resolve stage-specific path at notification time (not stored)
+          const stageTag = lead?.statusType?.tag;
+          const instanceId = firstInstance?.id;
+
+          const stagePath =
+            stageTag === "Type 8"
+              ? `/dashboard/production/tech-check/details/${dto.lead_id}`
+              : stageTag === "Type 9"
+                ? `/dashboard/production/order-login/details/${dto.lead_id}`
+                : stageTag === "Type 10"
+                  ? `/dashboard/production/pre-post-prod/details/${dto.lead_id}`
+                  : `/dashboard/production/details/${dto.lead_id}`;
+
+          const queryParams = new URLSearchParams();
+          if (dto.account_id) queryParams.set("accountId", String(dto.account_id));
+          if (
+            instanceId &&
+            (stageTag === "Type 8" || stageTag === "Type 9" || stageTag === "Type 10")
+          ) {
+            queryParams.set("instance_id", String(instanceId));
+          }
+          const qs = queryParams.toString();
+          const redirectUrl = qs ? `${stagePath}?${qs}` : stagePath;
 
           await Promise.all(
             Array.from(recipientIds).map((recipientId) =>

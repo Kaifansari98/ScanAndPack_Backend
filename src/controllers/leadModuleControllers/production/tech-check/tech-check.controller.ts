@@ -3,9 +3,6 @@ import {
   TechCheckService,
   ApproveTechCheckResult,
 } from "../../../../services/production/tech-check/tech-check.service";
-import { prisma } from "../../../../prisma/client";
-import { NotificationService } from "../../../../services/notification/notification.service";
-import { NotificationType } from "../../../../prisma/generated";
 import { resolveClientBaseUrl } from "../../../../utils/fileUtils";
 
 const techCheckService = new TechCheckService();
@@ -130,58 +127,6 @@ export class TechCheckController {
             instanceId
           );
 
-        const hasMoveInfo =
-          "moved_to_order_login" in result &&
-          result.moved_to_order_login === true &&
-          "assign_to_user_id" in result &&
-          typeof result.assign_to_user_id === "number";
-
-        if (hasMoveInfo) {
-          try {
-            const assignee = await prisma.userMaster.findUnique({
-              where: { id: Number(result.assign_to_user_id) },
-              select: {
-                user_type: { select: { user_type: true } },
-              },
-            });
-            const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
-            if (assigneeRole !== "admin" && assigneeRole !== "super-admin") {
-              const lead = await prisma.leadMaster.findUnique({
-                where: { id: leadId },
-                select: { firstname: true, lastname: true, franchise_id: true },
-              });
-              const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
-              const franchiseId = lead?.franchise_id ?? null;
-              
-              await NotificationService.createAndSend({
-                vendor_id: vendorId,
-                user_id: Number(result.assign_to_user_id),
-                sender_id: userId,
-                type: NotificationType.LEAD_ASSIGNED,
-                title: "Lead assigned",
-                message:
-                  leadName.length > 0
-                    ? `Lead ${leadName} has been assigned to you.`
-                    : "A lead has been assigned to you.",
-                entity_type: "lead",
-                entity_id: leadId,
-                redirect_url: `/dashboard/leads/details/${leadId}?accountId=${
-                  "account_id" in result && result.account_id
-                    ? result.account_id
-                    : account_id
-                }`,
-              });
-            }
-          } catch (notificationError: any) {
-            console.error("⚠️ Failed to send order-login assignment notification", {
-              error: notificationError?.message,
-              lead_id: leadId,
-              assignee_user_id:
-                "assign_to_user_id" in result ? result.assign_to_user_id : null,
-            });
-          }
-        }
-
         return res.status(200).json({
           success: true,
           message:
@@ -215,45 +160,6 @@ export class TechCheckController {
         baseUrl,
         undefined
       );
-
-      try {
-        const assignee = await prisma.userMaster.findUnique({
-          where: { id: Number(assign_to_user_id) },
-          select: {
-            user_type: { select: { user_type: true } },
-          },
-        });
-        const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
-        if (assigneeRole !== "admin" && assigneeRole !== "super-admin") {
-          const lead = await prisma.leadMaster.findUnique({
-            where: { id: leadId },
-            select: { firstname: true, lastname: true, franchise_id: true },
-          });
-          const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
-          const franchiseId = lead?.franchise_id ?? null;
-          
-          await NotificationService.createAndSend({
-            vendor_id: vendorId,
-            user_id: Number(assign_to_user_id),
-            sender_id: userId,
-            type: NotificationType.LEAD_ASSIGNED,
-            title: "Lead assigned",
-            message:
-              leadName.length > 0
-                ? `Lead ${leadName} has been assigned to you.`
-                : "A lead has been assigned to you.",
-            entity_type: "lead",
-            entity_id: leadId,
-            redirect_url: `/dashboard/leads/details/${leadId}?accountId=${account_id}`,
-          });
-        }
-      } catch (notificationError: any) {
-        console.error("⚠️ Failed to send order-login assignment notification", {
-          error: notificationError?.message,
-          lead_id: leadId,
-          assignee_user_id: assign_to_user_id,
-        });
-      }
 
       return res.status(200).json({
         success: true,

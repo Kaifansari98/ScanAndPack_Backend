@@ -357,7 +357,7 @@ export class ReadyToDispatchController {
       try {
         const vendorId = result.lead.vendor_id;
         const accountId = result.lead.account_id;
-        const [admins, mappings, lead] = await Promise.all([
+        const [admins, mappings, lead, firstInstance] = await Promise.all([
           prisma.userMaster.findMany({
             where: {
               vendor_id: vendorId,
@@ -375,7 +375,18 @@ export class ReadyToDispatchController {
           }),
           prisma.leadMaster.findUnique({
             where: { id: leadId },
-            select: { firstname: true, lastname: true, lead_code: true, franchise_id: true },
+            select: {
+              firstname: true,
+              lastname: true,
+              lead_code: true,
+              franchise_id: true,
+              statusType: { select: { tag: true } },
+            },
+          }),
+          prisma.leadProductStructureInstance.findFirst({
+            where: { lead_id: leadId, vendor_id: vendorId },
+            select: { id: true },
+            orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
           }),
         ]);
 
@@ -388,9 +399,30 @@ export class ReadyToDispatchController {
         const franchiseId = lead?.franchise_id ?? null;
 
         if (recipientIds.size > 0) {
-          const redirectUrl = accountId
-            ? `/dashboard/leads/details/${leadId}?accountId=${accountId}`
-            : `/dashboard/leads/details/${leadId}`;
+          // Resolve stage-specific path at notification time (not stored)
+          const stageTag = lead?.statusType?.tag;
+          const instanceId = firstInstance?.id;
+
+          const stagePath =
+            stageTag === "Type 11"
+              ? `/dashboard/production/ready-to-dispatch/details/${leadId}`
+              : stageTag === "Type 12"
+                ? `/dashboard/installation/site-readiness/details/${leadId}`
+                : stageTag === "Type 13"
+                  ? `/dashboard/installation/dispatch-planning/details/${leadId}`
+                  : stageTag === "Type 14"
+                    ? `/dashboard/installation/dispatch-stage/details/${leadId}`
+                    : stageTag === "Type 15"
+                      ? `/dashboard/installation/under-installation/details/${leadId}`
+                      : stageTag === "Type 16"
+                        ? `/dashboard/installation/final-handover/details/${leadId}`
+                        : `/dashboard/installation/site-readiness/details/${leadId}`;
+
+          const queryParams = new URLSearchParams();
+          if (accountId) queryParams.set("accountId", String(accountId));
+          if (instanceId) queryParams.set("instance_id", String(instanceId));
+          const qs = queryParams.toString();
+          const redirectUrl = qs ? `${stagePath}?${qs}` : stagePath;
 
           await Promise.all(
             Array.from(recipientIds).map((recipientId) =>

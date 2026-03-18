@@ -637,21 +637,29 @@ export class DispatchPlanningService {
     try {
       const actorId = updatedBy;
 
-      const lead = await prisma.leadMaster.findUnique({
-        where: { id: leadId },
-        select: {
-          firstname: true,
-          lastname: true,
-          lead_code: true,
-          vendor_id: true,
-          account_id: true,
-          franchise_id: true,
-          onsite_contact_person_name: true,
-          onsite_contact_person_number: true,
-          required_date_for_dispatch: true,
-          material_lift_availability: true,
-        },
-      });
+      const [lead, firstInstance] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: leadId },
+          select: {
+            firstname: true,
+            lastname: true,
+            lead_code: true,
+            vendor_id: true,
+            account_id: true,
+            franchise_id: true,
+            onsite_contact_person_name: true,
+            onsite_contact_person_number: true,
+            required_date_for_dispatch: true,
+            material_lift_availability: true,
+            statusType: { select: { tag: true } },
+          },
+        }),
+        prisma.leadProductStructureInstance.findFirst({
+          where: { lead_id: leadId, vendor_id: vendorId },
+          select: { id: true },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+        }),
+      ]);
 
       if (!lead) return result;
 
@@ -660,9 +668,30 @@ export class DispatchPlanningService {
       const leadCode =
         lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
 
-      const redirectPath = lead.account_id
-        ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
-        : `/dashboard/leads/details/${leadId}`;
+      // Resolve stage-specific path at notification time (not stored)
+      const stageTag = lead.statusType?.tag;
+      const instanceId = firstInstance?.id;
+
+      const stagePath =
+        stageTag === "Type 11"
+          ? `/dashboard/production/ready-to-dispatch/details/${leadId}`
+          : stageTag === "Type 12"
+            ? `/dashboard/installation/site-readiness/details/${leadId}`
+            : stageTag === "Type 13"
+              ? `/dashboard/installation/dispatch-planning/details/${leadId}`
+              : stageTag === "Type 14"
+                ? `/dashboard/installation/dispatch-stage/details/${leadId}`
+                : stageTag === "Type 15"
+                  ? `/dashboard/installation/under-installation/details/${leadId}`
+                  : stageTag === "Type 16"
+                    ? `/dashboard/installation/final-handover/details/${leadId}`
+                    : `/dashboard/installation/dispatch-stage/details/${leadId}`;
+
+      const queryParams = new URLSearchParams();
+      if (lead.account_id) queryParams.set("accountId", String(lead.account_id));
+      if (instanceId) queryParams.set("instance_id", String(instanceId));
+      const qs = queryParams.toString();
+      const redirectPath = qs ? `${stagePath}?${qs}` : stagePath;
 
       // ===============================
       // FACTORY SME FETCH
@@ -707,8 +736,8 @@ export class DispatchPlanningService {
         vendor_id: vendorId,
         user_id: factoryUser.id,
         sender_id: actorId,
-        type: NotificationType.LEAD_MILESTONE,
-        title: "Lead Dispatched To Factory",
+        type: NotificationType.LEAD_ACTION,
+        title: "Lead moved To Dispatch",
         message: `${leadCode} - ${leadName} moved to Dispatch stage.`,
         entity_type: "lead",
         entity_id: leadId,

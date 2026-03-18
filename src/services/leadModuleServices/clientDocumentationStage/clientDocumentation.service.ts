@@ -1209,13 +1209,17 @@ export class ClientDocumentationService {
       },
     });
 
-    const techCheckUsers = leadUserMappings
+    const techCheckUsersRaw = leadUserMappings
       .map((m) => m.user)
       .filter(
         (u) =>
           u.status === "active" &&
           u.user_type.user_type.toLowerCase() === "tech-check",
       );
+
+    const techCheckUsers = techCheckUsersRaw.filter(
+      (u, index, arr) => arr.findIndex((x) => x.id === u.id) === index,
+    );
 
     if (!techCheckUsers.length) return result;
 
