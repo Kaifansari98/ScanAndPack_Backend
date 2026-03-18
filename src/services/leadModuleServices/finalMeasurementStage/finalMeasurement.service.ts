@@ -287,6 +287,8 @@ export class FinalMeasurementService {
     // NOTIFY SALES EXECUTIVES → FM DOCS UPLOADED
     // ===============================
     try {
+      logger.info("[FM] Sales-exec notify: start", { lead_id: data.lead_id, vendor_id: data.vendor_id, created_by: data.created_by });
+
       const [fmLead, firstInstance, mappings] = await Promise.all([
         prisma.leadMaster.findUnique({
           where: { id: data.lead_id },
@@ -312,6 +314,16 @@ export class FinalMeasurementService {
         }),
       ]);
 
+      logger.info("[FM] Sales-exec notify: data fetched", {
+        lead_id: data.lead_id,
+        fmLeadFound: !!fmLead,
+        stageTag: fmLead?.statusType?.tag,
+        mappingCount: mappings.length,
+        mappedUserIds: mappings.map((m) => m.user_id),
+        instanceId: firstInstance?.id ?? null,
+        notificationsEnabled: process.env.NOTIFICATIONS_ENABLED,
+      });
+
       if (!fmLead) return response;
 
       const leadName = `${fmLead.firstname ?? ""} ${fmLead.lastname ?? ""}`.trim();
@@ -336,6 +348,12 @@ export class FinalMeasurementService {
         (id) => id !== data.created_by,
       );
 
+      logger.info("[FM] Sales-exec notify: uniqueUserIds after dedup+filter", {
+        lead_id: data.lead_id,
+        uniqueUserIds,
+        created_by: data.created_by,
+      });
+
       if (uniqueUserIds.length > 0) {
         const salesExecs = await prisma.userMaster.findMany({
           where: {
@@ -346,7 +364,13 @@ export class FinalMeasurementService {
           select: { id: true, user_name: true, user_email: true },
         });
 
-        await Promise.allSettled([
+        logger.info("[FM] Sales-exec notify: salesExecs resolved", {
+          lead_id: data.lead_id,
+          salesExecIds: salesExecs.map((se) => se.id),
+          redirectPath,
+        });
+
+        const results = await Promise.allSettled([
           ...salesExecs.map((se) =>
             NotificationService.createAndSend({
               vendor_id: fmLead.vendor_id,
@@ -374,6 +398,16 @@ export class FinalMeasurementService {
               }),
             ),
         ]);
+
+        results.forEach((result, i) => {
+          if (result.status === "rejected") {
+            logger.warn("[FM] Sales-exec notify: one action failed", { lead_id: data.lead_id, index: i, reason: result.reason?.message });
+          }
+        });
+
+        logger.info("[FM] Sales-exec notify: done", { lead_id: data.lead_id, total: results.length });
+      } else {
+        logger.info("[FM] Sales-exec notify: skipped — no eligible users", { lead_id: data.lead_id });
       }
     } catch (err: any) {
       logger.warn("⚠️ FM uploaded sales-exec notification failed", {
