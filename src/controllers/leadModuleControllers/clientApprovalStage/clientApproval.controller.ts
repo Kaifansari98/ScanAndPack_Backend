@@ -404,34 +404,60 @@ export class ClientApprovalController {
         });
         const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
         if (assigneeRole !== "admin" && assigneeRole !== "super-admin") {
-          const lead = await prisma.leadMaster.findUnique({
-            where: { id: dto.lead_id },
-            select: { firstname: true, lastname: true, lead_code: true, franchise_id: true },
-          });
+          const [lead, instances] = await Promise.all([
+            prisma.leadMaster.findUnique({
+              where: { id: dto.lead_id },
+              select: { firstname: true, lastname: true, lead_code: true, franchise_id: true },
+            }),
+            prisma.leadProductStructureInstance.findMany({
+              where: { lead_id: dto.lead_id, vendor_id: dto.vendor_id },
+              select: { id: true, quantity_index: true },
+              orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+            }),
+          ]);
+
           const leadName =
             `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
-          const leadCode =
+          const baseLeadCode =
             lead?.lead_code ?? `LEAD-${String(dto.lead_id).padStart(4, "0")}`;
-          const franchiseId = lead?.franchise_id ?? null;
 
-          // ✅ Spec: "You have been assigned {{Lead Code - Lead Name}} for Tech Check Review.
-          //          Please review the documents uploaded by the Sales Executive."
-          const notificationMessage =
-            leadName.length > 0
-              ? `You have been assigned ${leadCode} - ${leadName} for Tech Check Review. Please review the documents uploaded by the Sales Executive.`
-              : `You have been assigned ${leadCode} for Tech Check Review. Please review the documents uploaded by the Sales Executive.`;
+          // Build one notification entry per instance (or one without suffix if no instances)
+          const notificationTargets =
+            instances.length > 1
+              ? instances.map((inst) => ({
+                  instanceId: inst.id,
+                  leadCode: `${baseLeadCode}.${inst.quantity_index}`,
+                }))
+              : [
+                  {
+                    instanceId: instances[0]?.id ?? null,
+                    leadCode: baseLeadCode,
+                  },
+                ];
 
-          await NotificationService.createAndSend({
-            vendor_id: dto.vendor_id,
-            user_id: dto.assign_to_user_id,
-            sender_id: dto.created_by,
-            type: NotificationType.LEAD_ASSIGNED,
-            title: "Tech Check Review Required", // ✅ Spec title
-            message: notificationMessage, // ✅ Spec message
-            entity_type: "lead",
-            entity_id: dto.lead_id,
-            redirect_url: `/dashboard/production/tech-check/details/${dto.lead_id}?accountId=${dto.account_id}`, // ✅ Spec action URL
-          });
+          for (const target of notificationTargets) {
+            const redirectUrl =
+              target.instanceId != null
+                ? `/dashboard/production/tech-check/details/${dto.lead_id}?accountId=${dto.account_id}&instance_id=${target.instanceId}`
+                : `/dashboard/production/tech-check/details/${dto.lead_id}?accountId=${dto.account_id}`;
+
+            const notificationMessage =
+              leadName.length > 0
+                ? `You have been assigned ${target.leadCode} - ${leadName} for Tech Check Review. Please review the documents uploaded by the Sales Executive.`
+                : `You have been assigned ${target.leadCode} for Tech Check Review. Please review the documents uploaded by the Sales Executive.`;
+
+            await NotificationService.createAndSend({
+              vendor_id: dto.vendor_id,
+              user_id: dto.assign_to_user_id,
+              sender_id: dto.created_by,
+              type: NotificationType.LEAD_ASSIGNED,
+              title: "Tech Check Review Required",
+              message: notificationMessage,
+              entity_type: "lead",
+              entity_id: dto.lead_id,
+              redirect_url: redirectUrl,
+            });
+          }
         }
       } catch (notificationError: any) {
         console.error("⚠️ Failed to send tech-check assignment notification", {
