@@ -1758,15 +1758,32 @@ export const updateLeadService = async (
       );
 
       if (adminRecipients.length > 0) {
-        await Promise.allSettled(
-          adminRecipients.map((admin) =>
+        const redirectUrl = result.lead.account_id
+          ? `/dashboard/leads/details/${leadId}?accountId=${result.lead.account_id}`
+          : `/dashboard/leads/details/${leadId}`;
+
+        await Promise.allSettled([
+          ...adminRecipients.map((admin) =>
             sendLeadCreatedEmail({
               ...payload,
               toEmail: admin.user_email!,
               toName: admin.user_name ?? undefined,
             }),
           ),
-        );
+          ...adminRecipients.map((admin) =>
+            NotificationService.createAndSend({
+              vendor_id: result.lead.vendor_id,
+              user_id: admin.id,
+              sender_id: updated_by ?? null,
+              type: NotificationType.LEAD_ASSIGNED,
+              title: "New lead created",
+              message: `Lead ${payload.leadName || payload.leadCode || `#${leadId}`} has been created.`,
+              entity_type: "lead",
+              entity_id: leadId,
+              redirect_url: redirectUrl,
+            }),
+          ),
+        ]);
       }
     } catch (emailError: any) {
       logger.warn("⚠️ Failed to send lead created email after draft completion", {

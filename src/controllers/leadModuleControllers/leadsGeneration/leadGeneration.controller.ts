@@ -336,15 +336,32 @@ export class LeadController {
                 created_by: value.created_by,
               });
             } else {
-              await Promise.allSettled(
-                recipients.map((recipient) =>
+              const redirectUrl = result.lead.account_id
+                ? `/dashboard/leads/details/${result.lead.id}?accountId=${result.lead.account_id}`
+                : `/dashboard/leads/details/${result.lead.id}`;
+
+              await Promise.allSettled([
+                ...recipients.map((recipient) =>
                   sendLeadCreatedEmail({
                     ...emailPayload,
                     toEmail: recipient.user_email!,
                     toName: recipient.user_name ?? undefined,
                   }),
                 ),
-              );
+                ...recipients.map((recipient) =>
+                  NotificationService.createAndSend({
+                    vendor_id: value.vendor_id,
+                    user_id: recipient.id,
+                    sender_id: value.created_by ?? null,
+                    type: NotificationType.LEAD_ASSIGNED,
+                    title: "New lead created",
+                    message: `Lead ${leadName} has been created.`,
+                    entity_type: "lead",
+                    entity_id: result.lead.id,
+                    redirect_url: redirectUrl,
+                  }),
+                ),
+              ]);
             }
           }
         } catch (notificationError: any) {
