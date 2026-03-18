@@ -872,6 +872,71 @@ export class UnderInstallationStageController {
       });
     }
   }
+  async addMiscDocumentsController(req: Request, res: Response) {
+    try {
+      const miscId = Number(req.params.miscId);
+      const vendor_id = Number(req.body.vendor_id); // ✅ parse
+      const lead_id = Number(req.body.lead_id); // ✅ parse
+      const created_by = Number(req.body.created_by); // ✅ parse
+
+      // validate parsed values
+      if (!vendor_id || !lead_id || !created_by) {
+        return res.status(400).json({
+          success: false,
+          message: "vendor_id, lead_id, and created_by are required",
+        });
+      }
+
+      const files = req.files as Express.Multer.File[];
+
+      if (!files?.length) {
+        return res.status(400).json({
+          success: false,
+          message: "No files uploaded",
+        });
+      }
+
+      const uploadedFiles = [];
+
+      for (const file of files) {
+        const sysName =
+          await uploadToWasabiUnderInstallationMiscellaneousDocumentsFile(
+            file.path,
+            vendor_id,
+            lead_id,
+            file.originalname,
+            file.mimetype,
+          );
+
+        await fs.unlink(file.path);
+
+        uploadedFiles.push({
+          originalName: file.originalname,
+          sysName,
+        });
+      }
+
+      const result =
+        await UnderInstallationStageService.addMiscDocumentsService({
+          misc_id: miscId,
+          vendor_id,
+          lead_id,
+          created_by,
+          files: uploadedFiles,
+        });
+
+      return res.status(201).json({
+        success: true,
+        message: "Documents uploaded successfully",
+        data: result,
+      });
+    } catch (err: any) {
+      return res.status(500).json({
+        success: false,
+        error: err.message,
+      });
+    }
+  }
 
   async getAllMiscellaneousEntries(req: Request, res: Response) {
     try {
