@@ -28,7 +28,7 @@ const assignTaskISMSchema = Joi.object({
   remark: Joi.string().allow("", null),
   assignee_user_id: Joi.number().integer().positive().required(),
   created_by: Joi.number().integer().positive().required(),
-});
+}).unknown(true);
 
 export class FinalMeasurementService {
   public async createFinalMeasurementStage(data: FinalMeasurementDto) {
