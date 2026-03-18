@@ -164,7 +164,7 @@ export class BookingStageController {
           const [supervisor, createdBy, lead] = await Promise.all([
             prisma.userMaster.findUnique({
               where: { id: dto.siteSupervisorId },
-              select: { user_name: true, user_email: true },
+              select: { user_name: true, user_email: true, user_type: { select: { user_type: true } } },
             }),
             prisma.userMaster.findUnique({
               where: { id: dto.created_by },
@@ -190,8 +190,11 @@ export class BookingStageController {
             }),
           ]);
 
+          const supervisorRole = supervisor?.user_type?.user_type?.toLowerCase();
           const supervisorEmail = supervisor?.user_email?.trim();
-          if (!supervisorEmail) {
+          if (supervisorRole === "site-supervisor" || supervisorRole === "head-site-supervisor") {
+            // skip — lead-assigned email is not sent to site-supervisor or head-site-supervisor
+          } else if (!supervisorEmail) {
             logger.warn(
               "Booking stage email skipped: missing supervisor email",
               {
@@ -288,6 +291,11 @@ export class BookingStageController {
             where: {
               id: { in: Array.from(recipientIds) },
               status: "active",
+              NOT: {
+                user_type: {
+                  user_type: { in: ["site-supervisor", "head-site-supervisor"], mode: "insensitive" },
+                },
+              },
             },
             select: { id: true, user_name: true, user_email: true },
           });
