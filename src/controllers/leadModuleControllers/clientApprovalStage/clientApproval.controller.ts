@@ -623,12 +623,13 @@ export class ClientApprovalController {
           const qs = queryParams.toString();
           const redirectUrl = qs ? `${stagePath}?${qs}` : stagePath;
 
-          // Only admin users receive the milestone notification and email
+          // Only admin users (matching franchise) receive the milestone notification and email
           const users = await prisma.userMaster.findMany({
             where: {
               id: { in: Array.from(recipientIds) },
               status: "active",
               user_type: { user_type: { equals: "admin", mode: "insensitive" } },
+              ...(franchiseId ? { franchise_id: franchiseId } : {}),
             },
             select: { id: true, user_name: true, user_email: true },
           });

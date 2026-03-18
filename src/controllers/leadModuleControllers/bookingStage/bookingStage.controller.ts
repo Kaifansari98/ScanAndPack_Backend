@@ -274,7 +274,7 @@ export class BookingStageController {
           }),
           prisma.leadMaster.findUnique({
             where: { id: dto.lead_id },
-            select: { firstname: true, lastname: true, lead_code: true },
+            select: { firstname: true, lastname: true, lead_code: true, franchise_id: true },
           }),
         ]);
 
@@ -282,6 +282,7 @@ export class BookingStageController {
           `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
         const leadCode =
           lead?.lead_code ?? `LEAD-${String(dto.lead_id).padStart(4, "0")}`;
+        const franchiseId = lead?.franchise_id ?? null;
         const recipientIds = new Set<number>();
         admins.forEach((admin) => recipientIds.add(admin.id));
         mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
@@ -292,6 +293,7 @@ export class BookingStageController {
               id: { in: Array.from(recipientIds) },
               status: "active",
               user_type: { user_type: { equals: "admin", mode: "insensitive" } },
+              ...(franchiseId ? { franchise_id: franchiseId } : {}),
             },
             select: { id: true, user_name: true, user_email: true },
           });
