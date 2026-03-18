@@ -721,11 +721,23 @@ export class FinalMeasurementController {
               ? `/dashboard/leads/details/${leadId}?accountId=${accountId}`
               : `/dashboard/leads/details/${leadId}`;
 
+            // Fetch eligible recipients — exclude site-supervisor from both notification and email
+            const users = await prisma.userMaster.findMany({
+              where: {
+                id: { in: Array.from(recipientIds) },
+                status: "active",
+                NOT: {
+                  user_type: { user_type: { equals: "site-supervisor", mode: "insensitive" } },
+                },
+              },
+              select: { id: true, user_name: true, user_email: true },
+            });
+
             await Promise.all(
-              Array.from(recipientIds).map((recipientId) =>
+              users.map((user) =>
                 NotificationService.createAndSend({
                   vendor_id: vendorId,
-                  user_id: recipientId,
+                  user_id: user.id,
                   sender_id: Number(actorId) || null,
                   type: NotificationType.LEAD_MILESTONE,
                   title: "Lead moved to Project",
@@ -739,14 +751,6 @@ export class FinalMeasurementController {
                 })
               )
             );
-
-            const users = await prisma.userMaster.findMany({
-              where: {
-                id: { in: Array.from(recipientIds) },
-                status: "active",
-              },
-              select: { id: true, user_name: true, user_email: true },
-            });
             const clientBaseUrl = resolveClientBaseUrl(req);
             const detailsUrl = `${clientBaseUrl}${redirectUrl}`;
             const completedOn = new Date().toLocaleDateString("en-IN", {
