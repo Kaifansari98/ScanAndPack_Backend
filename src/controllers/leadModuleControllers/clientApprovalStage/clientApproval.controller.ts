@@ -470,7 +470,7 @@ export class ClientApprovalController {
       // ─── 2. Email to assignee (Tech Check) ────────────────────────────────
       try {
         if (dto.assign_to_user_id !== dto.created_by) {
-          const [assignee, assignedBy, lead] = await Promise.all([
+          const [assignee, assignedBy, lead, instances] = await Promise.all([
             prisma.userMaster.findUnique({
               where: { id: dto.assign_to_user_id },
               select: { user_name: true, user_email: true },
@@ -488,6 +488,11 @@ export class ClientApprovalController {
                 lastname: true,
               },
             }),
+            prisma.leadProductStructureInstance.findMany({
+              where: { lead_id: dto.lead_id, vendor_id: dto.vendor_id },
+              select: { id: true, quantity_index: true },
+              orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+            }),
           ]);
 
           const assigneeEmail = assignee?.user_email?.trim();
@@ -499,7 +504,7 @@ export class ClientApprovalController {
           } else if (lead) {
             const leadName =
               `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
-            const leadCode =
+            const baseLeadCode =
               lead.lead_code ?? `LEAD-${String(lead.id).padStart(4, "0")}`;
             const assignedByName = assignedBy?.user_name ?? "Admin";
             const assignedDate = new Date().toLocaleDateString("en-IN", {
@@ -508,19 +513,37 @@ export class ClientApprovalController {
               year: "numeric",
             });
             const clientBaseUrl = resolveClientBaseUrl(req);
-            const leadUrl = `${clientBaseUrl}/dashboard/leads/details/${dto.lead_id}?accountId=${dto.account_id}`;
 
-            // ✅ Spec email: subject, body, lead details, CTA
-            await sendTechCheckAssignedEmail({
-              vendor_id: dto.vendor_id,
-              toEmail: assigneeEmail,
-              toName: assignee?.user_name ?? undefined,
-              leadCode,
-              leadName: leadName || "—",
-              assignedBy: assignedByName,
-              assignedDate,
-              leadUrl,
-            });
+            const emailTargets =
+              instances.length > 1
+                ? instances.map((inst) => ({
+                    instanceId: inst.id,
+                    leadCode: `${baseLeadCode}.${inst.quantity_index}`,
+                  }))
+                : [
+                    {
+                      instanceId: instances[0]?.id ?? null,
+                      leadCode: baseLeadCode,
+                    },
+                  ];
+
+            for (const target of emailTargets) {
+              const leadUrl =
+                target.instanceId != null
+                  ? `${clientBaseUrl}/dashboard/production/tech-check/details/${dto.lead_id}?accountId=${dto.account_id}&instance_id=${target.instanceId}`
+                  : `${clientBaseUrl}/dashboard/production/tech-check/details/${dto.lead_id}?accountId=${dto.account_id}`;
+
+              await sendTechCheckAssignedEmail({
+                vendor_id: dto.vendor_id,
+                toEmail: assigneeEmail,
+                toName: assignee?.user_name ?? undefined,
+                leadCode: target.leadCode,
+                leadName: leadName || "—",
+                assignedBy: assignedByName,
+                assignedDate,
+                leadUrl,
+              });
+            }
           }
         }
       } catch (emailError: any) {
