@@ -16,7 +16,7 @@ import {
   sendLeadMarkedActiveEmail,
 } from "../../email/brevoEmail.service";
 
-const STAGE_PATH_BY_TAG: Record<string, string> = {
+export const STAGE_PATH_BY_TAG: Record<string, string> = {
   "Type 1":  "/dashboard/leads/leadstable/details",
   "Type 2":  "/dashboard/leads/initial-site-measurement/details",
   "Type 3":  "/dashboard/leads/designing-stage/details",

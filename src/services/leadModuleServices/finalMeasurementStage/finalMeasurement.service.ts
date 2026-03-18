@@ -6,7 +6,11 @@ import { AssignTaskFMInput } from "../../../types/leadModule.types";
 import { NotificationType, Prisma } from "../../../prisma/generated";
 import { cache } from "../../../utils/cache";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
-import { sendMajorMilestoneEmail } from "../../email/brevoEmail.service";
+import {
+  sendMajorMilestoneEmail,
+  sendFinalMeasurementUploadedEmail,
+} from "../../email/brevoEmail.service";
+import { STAGE_PATH_BY_TAG } from "../leadsGeneration/leadActivityStatus.service";
 
 interface FinalMeasurementDto {
   lead_id: number;
@@ -278,6 +282,106 @@ export class FinalMeasurementService {
         error: err?.message,
       });
     }
+
+    // ===============================
+    // NOTIFY SALES EXECUTIVES → FM DOCS UPLOADED
+    // ===============================
+    try {
+      const [fmLead, firstInstance, mappings] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: data.lead_id },
+          select: {
+            firstname: true,
+            lastname: true,
+            lead_code: true,
+            vendor_id: true,
+            account_id: true,
+            contact_no: true,
+            country_code: true,
+            statusType: { select: { tag: true } },
+          },
+        }),
+        prisma.leadProductStructureInstance.findFirst({
+          where: { lead_id: data.lead_id, vendor_id: data.vendor_id },
+          select: { id: true },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+        }),
+        prisma.leadUserMapping.findMany({
+          where: { lead_id: data.lead_id, vendor_id: data.vendor_id, status: "active" },
+          select: { user_id: true },
+        }),
+      ]);
+
+      if (!fmLead) return response;
+
+      const leadName = `${fmLead.firstname ?? ""} ${fmLead.lastname ?? ""}`.trim();
+      const leadCode = fmLead.lead_code ?? `LEAD-${String(data.lead_id).padStart(4, "0")}`;
+      const contact = `${fmLead.country_code ?? ""} ${fmLead.contact_no ?? ""}`.trim() || "—";
+      const stageTag = fmLead.statusType?.tag ?? null;
+      const instanceId = firstInstance?.id ?? null;
+
+      // Build stage-aware redirect path with accountId + instance_id
+      const stagePath = stageTag && STAGE_PATH_BY_TAG[stageTag]
+        ? `${STAGE_PATH_BY_TAG[stageTag]}/${data.lead_id}`
+        : `/dashboard/leads/leadstable/details/${data.lead_id}`;
+      const queryParams = new URLSearchParams();
+      if (fmLead.account_id) queryParams.set("accountId", String(fmLead.account_id));
+      if (instanceId) queryParams.set("instance_id", String(instanceId));
+      const qs = queryParams.toString();
+      const redirectPath = qs ? `${stagePath}?${qs}` : stagePath;
+      const redirectUrl = `${data.baseUrl}${redirectPath}`;
+
+      // Deduplicate sales exec user IDs, exclude the uploader
+      const uniqueUserIds = [...new Set(mappings.map((m) => m.user_id))].filter(
+        (id) => id !== data.created_by,
+      );
+
+      if (uniqueUserIds.length > 0) {
+        const salesExecs = await prisma.userMaster.findMany({
+          where: {
+            id: { in: uniqueUserIds },
+            status: "active",
+            user_type: { user_type: { equals: "sales-executive", mode: "insensitive" } },
+          },
+          select: { id: true, user_name: true, user_email: true },
+        });
+
+        await Promise.allSettled([
+          ...salesExecs.map((se) =>
+            NotificationService.createAndSend({
+              vendor_id: fmLead.vendor_id,
+              user_id: se.id,
+              sender_id: data.created_by,
+              type: NotificationType.LEAD_ACTION,
+              title: "Final Measurement Documents Uploaded",
+              message: `Final Measurement Documents for ${leadCode} - ${leadName} have been uploaded. Kindly upload the Client Documentation.`,
+              entity_type: "lead",
+              entity_id: data.lead_id,
+              redirect_url: redirectPath,
+            }),
+          ),
+          ...salesExecs
+            .filter((se) => se.user_email)
+            .map((se) =>
+              sendFinalMeasurementUploadedEmail({
+                vendor_id: fmLead.vendor_id,
+                toEmail: se.user_email!,
+                toName: se.user_name ?? undefined,
+                leadCode,
+                leadName: leadName || "Lead",
+                contact,
+                leadUrl: redirectUrl,
+              }),
+            ),
+        ]);
+      }
+    } catch (err: any) {
+      logger.warn("⚠️ FM uploaded sales-exec notification failed", {
+        lead_id: data.lead_id,
+        error: err?.message,
+      });
+    }
+
     return response;
   }
 

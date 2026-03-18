@@ -69,6 +69,16 @@ export type MajorMilestoneEmailPayload = {
   detailsUrl?: string;
 };
 
+export type FinalMeasurementUploadedEmailPayload = {
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  leadCode: string;
+  leadName: string;
+  contact: string;
+  leadUrl?: string;
+};
+
 export type LeadOnHoldEmailPayload = {
   vendor_id: number;
   toEmail: string;
@@ -201,6 +211,7 @@ const MISC_READY_TEMPLATE_KEY = "MISC_READY";
 const MISC_RESOLVED_TEMPLATE_KEY = "MISC_RESOLVED";
 const FINAL_HANDOVER_TEMPLATE_KEY = "FINAL_HANDOVER";
 const PROJECT_COMPLETED_TEMPLATE_KEY = "PROJECT_COMPLETED";
+const FM_UPLOADED_TEMPLATE_KEY = "FM_UPLOADED";
 const TECH_CHECK_APPROVED_TEMPLATE_KEY = "TECHCHECK_DOCUMENT_APPROVED";
 const TECH_CHECK_REJECTED_TEMPLATE_KEY = "TECHCHECK_DOCUMENT_REJECT";
 const REVISED_DOCUMENTS_UPLOADED_TEMPLATE_KEY = "REVISED_DOCUMENTS_UPLOADED";
@@ -7438,6 +7449,144 @@ export const sendFinalHandoverCompletedEmail = async (payload: {
   </table>
 </body>
 </html>`;
+
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export const sendFinalMeasurementUploadedEmail = async (
+  payload: FinalMeasurementUploadedEmailPayload,
+): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+
+  const defaultSubject = `Upload Client Documentation for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "Site Supervisor has uploaded the Final Measurement Documents for the below project.",
+    "",
+    "Project Details",
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
+    `Contact Details: ${payload.contact}`,
+    "",
+    "Kindly upload the Client Documentation and add selections.",
+    "",
+    payload.leadUrl ? `View Lead Details: ${payload.leadUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row { display: block !important; margin-bottom: 4px !important; padding-bottom: 4px !important; border-bottom: 1px solid #e5e7eb !important; }
+      .lead-info-row:last-child { border-bottom: none !important; margin-bottom: 0 !important; padding-bottom: 0 !important; }
+      .lead-info-label, .lead-info-value { display: block !important; width: 100% !important; }
+      .lead-info-label { font-size: 13px !important; margin-bottom: 4px !important; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Final Measurement Documents Uploaded
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Site Supervisor has uploaded the Final Measurement Documents for the below project.
+        Kindly upload the Client Documentation and add selections.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 8px;font-weight:600;color:#111827;">Project Details</p>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Contact Details</div>
+          <div class="lead-info-value">${payload.contact}</div>
+        </div>
+      </div>
+
+      ${
+        payload.leadUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.leadUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead Details
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    contact: payload.contact,
+    leadUrl: payload.leadUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: FM_UPLOADED_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
 
   return sendBrevoEmail(
     {
