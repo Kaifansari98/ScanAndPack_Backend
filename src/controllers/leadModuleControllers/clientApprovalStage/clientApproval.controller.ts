@@ -574,11 +574,25 @@ export class ClientApprovalController {
           const qs = queryParams.toString();
           const redirectUrl = qs ? `${stagePath}?${qs}` : stagePath;
 
+          // Fetch eligible recipients — exclude tech-check and super-admin users from both notification and email
+          const users = await prisma.userMaster.findMany({
+            where: {
+              id: { in: Array.from(recipientIds) },
+              status: "active",
+              NOT: {
+                user_type: {
+                  user_type: { in: ["tech-check", "super-admin"], mode: "insensitive" },
+                },
+              },
+            },
+            select: { id: true, user_name: true, user_email: true },
+          });
+
           await Promise.all(
-            Array.from(recipientIds).map((recipientId) =>
+            users.map((user) =>
               NotificationService.createAndSend({
                 vendor_id: dto.vendor_id,
-                user_id: recipientId,
+                user_id: user.id,
                 sender_id: dto.created_by,
                 type: NotificationType.LEAD_MILESTONE,
                 title: "Lead moved to Production",
@@ -592,17 +606,6 @@ export class ClientApprovalController {
               }),
             ),
           );
-
-          const users = await prisma.userMaster.findMany({
-            where: {
-              id: { in: Array.from(recipientIds) },
-              status: "active",
-              NOT: {
-                user_type: { user_type: { equals: "tech-check", mode: "insensitive" } },
-              },
-            },
-            select: { id: true, user_name: true, user_email: true },
-          });
           const clientBaseUrl = resolveClientBaseUrl(req);
           const detailsUrl = `${clientBaseUrl}${redirectUrl}`;
           const completedOn = new Date().toLocaleDateString("en-IN", {
