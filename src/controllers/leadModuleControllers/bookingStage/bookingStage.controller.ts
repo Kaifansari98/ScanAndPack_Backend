@@ -1117,6 +1117,16 @@ export class BookingStageController {
 
           if (!lead || salesExecMappings.length === 0) return;
 
+          // Deduplicate — a user can have multiple active mapping rows for the same lead
+          const seenIds = new Set<number>();
+          const uniqueSalesExecs = salesExecMappings
+            .map((m) => m.user)
+            .filter((user) => {
+              if (seenIds.has(user.id)) return false;
+              seenIds.add(user.id);
+              return true;
+            });
+
           const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
           const leadCode = lead.lead_code ?? `LEAD-${String(lead.id).padStart(4, "0")}`;
           const contact = `${lead.country_code ?? ""} ${lead.contact_no ?? ""}`.trim();
@@ -1135,7 +1145,7 @@ export class BookingStageController {
             : `/dashboard/leads/booking-stage/details/${leadId}`;
 
           await Promise.allSettled(
-            salesExecMappings.map(async ({ user }) => {
+            uniqueSalesExecs.map(async (user) => {
               // In-app notification
               await NotificationService.createAndSend({
                 vendor_id: vendorId,
