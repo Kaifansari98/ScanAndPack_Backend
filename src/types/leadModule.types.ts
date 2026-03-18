@@ -648,6 +648,7 @@ export interface AssignTaskFMInput {
   remark?: string;
   assignee_user_id: number;
   created_by: number;
+  baseUrl?: string;
 };
 
 export interface AssignTaskBookingInput {

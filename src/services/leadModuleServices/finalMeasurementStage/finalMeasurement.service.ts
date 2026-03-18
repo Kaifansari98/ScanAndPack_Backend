@@ -6,6 +6,7 @@ import { AssignTaskFMInput } from "../../../types/leadModule.types";
 import { NotificationType, Prisma } from "../../../prisma/generated";
 import { cache } from "../../../utils/cache";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
+import { sendMajorMilestoneEmail } from "../../email/brevoEmail.service";
 
 interface FinalMeasurementDto {
   lead_id: number;
@@ -797,8 +798,9 @@ export class FinalMeasurementService {
       assignee_user_id,
       created_by,
     } = value;
+    const baseUrl = payload.baseUrl ?? "http://localhost:3000";
 
-    return prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx) => {
       // 1️⃣ Validate lead
       const lead = await tx.leadMaster.findUnique({
         where: { id: lead_id },
@@ -981,5 +983,93 @@ export class FinalMeasurementService {
 
       return { task, lead: updatedLead };
     });
+
+    // Fire-and-forget: send "Lead to Project" milestone email to admins
+    void (async () => {
+      try {
+        const [admins, mappings, fmLead] = await Promise.all([
+          prisma.userMaster.findMany({
+            where: {
+              vendor_id: result.lead.vendor_id,
+              status: "active",
+              user_type: { user_type: { in: ["admin"] } },
+            },
+            select: { id: true },
+          }),
+          prisma.leadUserMapping.findMany({
+            where: {
+              vendor_id: result.lead.vendor_id,
+              lead_id: lead_id,
+              status: "active",
+            },
+            select: { user_id: true },
+          }),
+          prisma.leadMaster.findUnique({
+            where: { id: lead_id },
+            select: {
+              firstname: true,
+              lastname: true,
+              lead_code: true,
+              franchise_id: true,
+            },
+          }),
+        ]);
+
+        const leadName =
+          `${fmLead?.firstname ?? ""} ${fmLead?.lastname ?? ""}`.trim();
+        const leadCode =
+          fmLead?.lead_code ?? `LEAD-${String(lead_id).padStart(4, "0")}`;
+        const franchiseId = fmLead?.franchise_id ?? null;
+
+        const recipientIds = new Set<number>();
+        admins.forEach((admin) => recipientIds.add(admin.id));
+        mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
+
+        if (recipientIds.size > 0) {
+          const users = await prisma.userMaster.findMany({
+            where: {
+              id: { in: Array.from(recipientIds) },
+              status: "active",
+              user_type: { user_type: { equals: "admin", mode: "insensitive" } },
+              ...(franchiseId ? { franchise_id: franchiseId } : {}),
+            },
+            select: { id: true, user_name: true, user_email: true },
+          });
+
+          const detailsUrl = result.lead.account_id
+            ? `${baseUrl}/dashboard/project/final-measurement/details/${lead_id}?accountId=${result.lead.account_id}`
+            : `${baseUrl}/dashboard/project/final-measurement/details/${lead_id}`;
+          const completedOn = new Date().toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          });
+
+          await Promise.allSettled(
+            users
+              .filter((user) => user.user_email)
+              .map((user) =>
+                sendMajorMilestoneEmail({
+                  vendor_id: result.lead.vendor_id,
+                  toEmail: user.user_email!,
+                  toName: user.user_name ?? undefined,
+                  leadCode,
+                  leadName: leadName || "Lead",
+                  milestoneName: "Lead to Project",
+                  completedOn,
+                  detailsUrl,
+                }),
+              ),
+          );
+        }
+      } catch (err: any) {
+        logger.warn("⚠️ Failed to send lead-to-project milestone email", {
+          lead_id,
+          error: err?.message,
+        });
+      }
+    })();
+
+    return result;
   }
 }
