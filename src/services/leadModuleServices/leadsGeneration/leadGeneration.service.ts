@@ -27,6 +27,7 @@ import { generateLeadCode } from "../../../utils/generateLeadCode";
 import { logDbError } from "../../../utils/prismaErrorLogger";
 import { NotificationService } from "../../notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
+import { resolveLeadStagePath } from "./leadActivityStatus.service";
 import {
   sendLeadAssignedEmail,
   sendLeadCreatedEmail,
@@ -1452,6 +1453,7 @@ export const updateLeadService = async (
 ) => {
   let leadCreatedEmailPayload: LeadCreatedEmailPayload | null = null;
   let leadFranchiseId: number | null = null;
+  let leadStageTag: string | null = null;
   const {
     firstname,
     lastname,
@@ -1567,6 +1569,7 @@ export const updateLeadService = async (
           leadProductStructureMapping: { include: { productStructure: true } },
           assignedTo: { select: { user_email: true, user_name: true } },
           createdBy: { select: { user_name: true } },
+          statusType: { select: { tag: true } },
         },
       });
 
@@ -1625,7 +1628,8 @@ export const updateLeadService = async (
             createdBy: createdByName,
             leadUrl,
           };
-          leadFranchiseId = (hydratedLead as any).franchise_id ?? null;
+          leadFranchiseId = hydratedLead.franchise_id ?? null;
+          leadStageTag = hydratedLead.statusType?.tag ?? null;
         }
       }
     }
@@ -1758,9 +1762,7 @@ export const updateLeadService = async (
       );
 
       if (adminRecipients.length > 0) {
-        const redirectUrl = result.lead.account_id
-          ? `/dashboard/leads/details/${leadId}?accountId=${result.lead.account_id}`
-          : `/dashboard/leads/details/${leadId}`;
+        const redirectUrl = resolveLeadStagePath(leadId, leadStageTag, result.lead.account_id);
 
         await Promise.allSettled([
           ...adminRecipients.map((admin) =>

@@ -36,6 +36,7 @@ import { prisma } from "../../../prisma/client";
 import logger from "../../../utils/logger";
 import { NotificationService } from "../../../services/notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
+import { resolveLeadStagePath } from "../../../services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import {
   sendLeadCreatedEmail,
   sendLeadAssignedEmail,
@@ -277,7 +278,7 @@ export class LeadController {
               message: `Lead ${leadName} has been assigned to you.`,
               entity_type: "lead",
               entity_id: result.lead.id,
-              redirect_url: `/dashboard/leads/details/${result.lead.id}?accountId=${result.lead.account_id}`,
+              redirect_url: resolveLeadStagePath(result.lead.id, "Type 1", result.lead.account_id),
             });
           }
 
@@ -336,9 +337,7 @@ export class LeadController {
                 created_by: value.created_by,
               });
             } else {
-              const redirectUrl = result.lead.account_id
-                ? `/dashboard/leads/details/${result.lead.id}?accountId=${result.lead.account_id}`
-                : `/dashboard/leads/details/${result.lead.id}`;
+              const redirectUrl = resolveLeadStagePath(result.lead.id, "Type 1", result.lead.account_id);
 
               await Promise.allSettled([
                 ...recipients.map((recipient) =>

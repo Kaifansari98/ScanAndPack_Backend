@@ -16,6 +16,37 @@ import {
   sendLeadMarkedActiveEmail,
 } from "../../email/brevoEmail.service";
 
+const STAGE_PATH_BY_TAG: Record<string, string> = {
+  "Type 1":  "/dashboard/leads/leadstable/details",
+  "Type 2":  "/dashboard/leads/initial-site-measurement/details",
+  "Type 3":  "/dashboard/leads/designing-stage/details",
+  "Type 4":  "/dashboard/leads/booking-stage/details",
+  "Type 5":  "/dashboard/project/final-measurement/details",
+  "Type 6":  "/dashboard/project/client-documentation/details",
+  "Type 7":  "/dashboard/project/client-approval/details",
+  "Type 8":  "/dashboard/production/tech-check/details",
+  "Type 9":  "/dashboard/production/order-login/details",
+  "Type 10": "/dashboard/production/pre-post-prod/details",
+  "Type 11": "/dashboard/production/ready-to-dispatch/details",
+  "Type 12": "/dashboard/installation/site-readiness/details",
+  "Type 13": "/dashboard/installation/dispatch-planning/details",
+  "Type 14": "/dashboard/installation/dispatch-stage/details",
+  "Type 15": "/dashboard/installation/under-installation/details",
+  "Type 16": "/dashboard/installation/final-handover/details",
+  "Type 17": "/dashboard/installation/final-handover/details",
+};
+
+export const resolveLeadStagePath = (
+  leadId: number,
+  stageTag: string | null | undefined,
+  accountId?: number | null,
+): string => {
+  const base = stageTag && STAGE_PATH_BY_TAG[stageTag]
+    ? `${STAGE_PATH_BY_TAG[stageTag]}/${leadId}`
+    : `/dashboard/leads/leadstable/details/${leadId}`;
+  return accountId ? `${base}?accountId=${accountId}` : base;
+};
+
 export const buildLeadDetailsPath = (leadId: number, accountId?: number) => {
   return accountId
     ? `/dashboard/leads/details/${leadId}?accountId=${accountId}`
@@ -493,6 +524,7 @@ export class LeadActivityStatusService {
             account_id: true,
             created_by: true,
             franchise_id: true,
+            statusType: { select: { tag: true } },
           },
         }),
         prisma.userMaster.findUnique({
@@ -511,6 +543,7 @@ export class LeadActivityStatusService {
         leadInfo?.lastname ?? ""
       }`.trim();
       const franchiseId = leadInfo?.franchise_id ?? null;
+      const stageTag = leadInfo?.statusType?.tag ?? null;
       const rejectedByName = rejectedByUser?.user_name ?? "Admin";
       const rejectedByRole =
         rejectedByUser?.user_type?.user_type?.toLowerCase();
@@ -523,8 +556,8 @@ export class LeadActivityStatusService {
         year: "numeric",
       });
 
-      // ✅ UPDATED: Correct route with leadId and accountId
-      const leadDetailsPath = `/dashboard/leads/details/${leadId}?accountId=${accountId}`;
+      // Resolve stage-aware redirect path
+      const leadDetailsPath = resolveLeadStagePath(leadId, stageTag, leadInfo?.account_id);
       const leadDetailsUrl = `${baseUrl}${leadDetailsPath}`;
 
       // 🔔 Handle onHold → onGoing revert notifications
