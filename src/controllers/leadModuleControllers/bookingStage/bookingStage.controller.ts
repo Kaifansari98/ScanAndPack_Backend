@@ -1380,6 +1380,7 @@ export class BookingStageController {
                 vendor_id: true,
                 account_id: true,
                 status_id: true,
+                statusType: { select: { tag: true } },
               },
             }),
             prisma.userMaster.findUnique({
@@ -1395,10 +1396,21 @@ export class BookingStageController {
           const leadCode =
             lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
 
-          // ✅ Dynamic redirect — always points to current lead state
+          // Resolve stage-aware redirect based on the lead's current status tag
+          const stageTag = lead.statusType?.tag;
+          const stagePath =
+            stageTag === "Type 8"
+              ? `/dashboard/production/tech-check/details/${leadId}`
+              : stageTag === "Type 9"
+                ? `/dashboard/production/order-login/details/${leadId}`
+                : stageTag === "Type 10"
+                  ? `/dashboard/production/pre-post-prod/details/${leadId}`
+                  : stageTag === "Type 7"
+                    ? `/dashboard/production/details/${leadId}`
+                    : `/dashboard/leads/details/${leadId}`;
           const redirectPath = lead.account_id
-            ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
-            : `/dashboard/leads/details/${leadId}`;
+            ? `${stagePath}?accountId=${lead.account_id}`
+            : stagePath;
 
           // 🔔 In-App Notification
           await NotificationService.createAndSend({
