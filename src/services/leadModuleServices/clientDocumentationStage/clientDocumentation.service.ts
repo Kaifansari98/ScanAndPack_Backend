@@ -8,6 +8,7 @@ import {
   sendRevisedDocumentsUploadedEmail,
 } from "../../../../src/services/email/brevoEmail.service";
 import { resolveLeadCode } from "../../../../src/utils/fileUtils";
+import { STAGE_PATH_BY_TAG } from "../leadsGeneration/leadActivityStatus.service";
 
 export type DocTypeTag = "Type 11" | "Type 12";
 
@@ -1163,8 +1164,10 @@ export class ClientDocumentationService {
     });
 
     // ==================================================
-    // 5️⃣ INSTANCE-AWARE REDIRECT URL
+    // 5️⃣ INSTANCE-AWARE REDIRECT URL (via STAGE_PATH_BY_TAG)
     // ==================================================
+
+    const stagePath = STAGE_PATH_BY_TAG[leadStatus!.tag!] ?? `/dashboard/production/tech-check/details`;
 
     const queryParams = new URLSearchParams();
 
@@ -1179,7 +1182,7 @@ export class ClientDocumentationService {
       );
     }
 
-    const redirectPath = `/dashboard/leads/details/${lead.id}${
+    const redirectPath = `${stagePath}/${lead.id}${
       queryParams.toString() ? `?${queryParams.toString()}` : ""
     }`;
 
@@ -1225,11 +1228,28 @@ export class ClientDocumentationService {
     if (!techCheckUsers.length) return result;
 
     // ==================================================
-    // 7️⃣ ALWAYS SEND NOTIFICATION (NO DUPLICATE BLOCK)
+    // 7️⃣ SEND NOTIFICATION (PER-USER DEDUP: 5-min window)
     // ==================================================
+
+    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
 
     await Promise.allSettled(
       techCheckUsers.map(async (user) => {
+        // Dedup guard: skip if already sent to this user in the last 5 minutes
+        const alreadySent = await prisma.notification.findFirst({
+          where: {
+            vendor_id: data.vendor_id,
+            entity_type: "lead",
+            entity_id: lead.id,
+            user_id: user.id,
+            type: NotificationType.LEAD_ACTION,
+            title: "Revised Documents Uploaded",
+            created_at: { gte: fiveMinutesAgo },
+          },
+        });
+
+        if (alreadySent) return;
+
         await NotificationService.createAndSend({
           vendor_id: data.vendor_id,
           user_id: user.id,
