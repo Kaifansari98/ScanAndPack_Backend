@@ -4,6 +4,7 @@ import logger from "../../../utils/logger";
 import { NotificationType } from "../../../prisma/generated";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 import { resolveLeadCode } from "../../../../src/utils/fileUtils";
+import { STAGE_PATH_BY_TAG } from "../../leadModuleServices/leadsGeneration/leadActivityStatus.service";
 
 // 🧩 Define this at the top of your service file
 
@@ -1531,6 +1532,13 @@ export class OrderLoginService {
       const queryString = queryParams.toString();
       const redirectUrl = `/dashboard/leads/details/${leadId}?${queryString}`;
 
+      // Redirect for "Order Login Pending" notifications → pre-post-prod + tab=orderLogin
+      const olPendingParams = new URLSearchParams();
+      if (leadMeta?.account_id) olPendingParams.set("accountId", String(leadMeta.account_id));
+      olPendingParams.set("instance_id", String(instanceId));
+      olPendingParams.set("tab", "orderLogin");
+      const orderLoginRedirectUrl = `${STAGE_PATH_BY_TAG["Type 10"]}/${leadId}?${olPendingParams.toString()}`;
+
       // Fetch users for notifications (safe — outside transaction)
       const [factoryUser, admins, backendMappingData] =
         await Promise.all([
@@ -1668,7 +1676,7 @@ export class OrderLoginService {
               message: `You've been assigned ${instanceCode} - ${leadName} for Order Login. Upload production files and order login details.`,
               entity_type: "lead",
               entity_id: leadId,
-              redirect_url: redirectUrl,
+              redirect_url: orderLoginRedirectUrl,
             });
 
             console.log("✅ Factory notified");
@@ -1688,7 +1696,7 @@ export class OrderLoginService {
               message: `${instanceCode} - ${leadName} has entered Production. Production files are available, but Order Login details are pending.`,
               entity_type: "lead",
               entity_id: leadId,
-              redirect_url: redirectUrl,
+              redirect_url: orderLoginRedirectUrl,
             });
 
             console.log("✅ Backend notified");
@@ -1959,6 +1967,12 @@ export class OrderLoginService {
       ? `/dashboard/leads/details/${leadId}?accountId=${leadMeta.account_id}`
       : `/dashboard/leads/details/${leadId}`;
 
+    // Redirect for "Order Login Pending" notifications → pre-post-prod + tab=orderLogin
+    const olPendingParamsB = new URLSearchParams();
+    if (leadMeta.account_id) olPendingParamsB.set("accountId", String(leadMeta.account_id));
+    olPendingParamsB.set("tab", "orderLogin");
+    const orderLoginRedirectUrl = `${STAGE_PATH_BY_TAG["Type 10"]}/${leadId}?${olPendingParamsB.toString()}`;
+
     try {
       const actor = await prisma.userMaster.findUnique({
         where: { id: userId },
@@ -2039,7 +2053,7 @@ export class OrderLoginService {
           message: `${leadCode} - ${leadName} entered Production. Files available but Order Login is pending.`,
           entity_type: "lead",
           entity_id: leadId,
-          redirect_url: redirectUrl,
+          redirect_url: orderLoginRedirectUrl,
         });
       }
 
@@ -2053,7 +2067,7 @@ export class OrderLoginService {
           message: `${leadCode} - ${leadName} moved to Production without Order Login completion. Action required.`,
           entity_type: "lead",
           entity_id: leadId,
-          redirect_url: redirectUrl,
+          redirect_url: orderLoginRedirectUrl,
         });
       }
 
