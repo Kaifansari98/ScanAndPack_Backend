@@ -710,7 +710,9 @@ export const DocumentTypeMasterScalarFieldEnum = {
   id: 'id',
   type: 'type',
   vendor_id: 'vendor_id',
-  tag: 'tag'
+  tag: 'tag',
+  doc_title: 'doc_title',
+  stage: 'stage'
 } as const
 
 export type DocumentTypeMasterScalarFieldEnum = (typeof DocumentTypeMasterScalarFieldEnum)[keyof typeof DocumentTypeMasterScalarFieldEnum]

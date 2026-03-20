@@ -52,9 +52,11 @@ export interface ProductStructureType{
 }
 
 export interface DocumentTypeInput {
-    vendor_id: number;
-    type: string;
-    tag: string;
+  vendor_id: number;
+  type: string;
+  tag: string;
+  doc_title?: string;
+  stage?: string;
 }
 
 export interface DocumentTypeValue{

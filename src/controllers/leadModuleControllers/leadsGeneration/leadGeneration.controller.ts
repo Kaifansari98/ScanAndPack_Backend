@@ -64,6 +64,161 @@ const resolveClientBaseUrl = (req: Request): string => {
 const getParam = (param: string | string[] | undefined): string | undefined =>
   Array.isArray(param) ? param[0] : param;
 
+// ─── Stage Config (same as frontend STAGES) ───────────────────────────────────
+
+const STAGE_CONFIGS = [
+  { id: "ism", tags: ["Type 2", "Type 3", "Type 4"], onlyApproved: false },
+  { id: "finalMeasurement", tags: ["Type 9", "Type 10"], onlyApproved: false },
+  { id: "clientDoc", tags: ["Type 11", "Type 12"], onlyApproved: false },
+  { id: "clientApproval", tags: ["Type 13"], onlyApproved: false },
+  { id: "techCheck", tags: ["Type 11", "Type 12"], onlyApproved: true },
+  {
+    id: "production",
+    tags: ["Type 15", "Type 16", "Type 17"],
+    onlyApproved: false,
+  },
+  { id: "siteReadiness", tags: ["Type 19"], onlyApproved: false },
+  { id: "dispatch", tags: ["Type 21"], onlyApproved: false },
+  {
+    id: "underInstallation",
+    tags: ["Type 25", "Type 26"],
+    onlyApproved: false,
+  },
+  {
+    id: "finalHandover",
+    tags: ["Type 27", "Type 28", "Type 29", "Type 30", "Type 31"],
+    onlyApproved: false,
+  },
+] as const;
+
+// ─── Types ─────────────────────────────────────────────────────────────────────
+
+interface FlatDoc {
+  id: number;
+  doc_og_name: string;
+  doc_sys_name: string;
+  doc_type_id: number;
+  doc_type_tag: string;
+  doc_type_type: string;
+  doc_title: string | null;
+  stage: string | null;
+  tech_check_status: string | null;
+  product_structure_instance_id: number | null;
+  instance_title: string | null;
+  instance_type: string | null; // ✅ NEW — ProductStructure.type (original name)
+  created_at: Date;
+  signed_url: string;
+}
+
+// One card in UI
+interface DocGroup {
+  title: string;
+  totalDocs: number;
+  docs: FlatDoc[];
+}
+
+// One instance section (header + its cards)
+interface InstanceGroup {
+  instanceId: number | null;
+  instanceTitle: string | null; // user-defined  e.g. "Kitchen - 1"
+  instanceType: string | null; // original name e.g. "Kitchen"
+  docGroups: DocGroup[];
+}
+
+interface StageResult {
+  stageId: string;
+  totalFiles: number;
+  instanceGroups: InstanceGroup[];
+}
+
+// ─── Helper: filter docs for one stage ────────────────────────────────────────
+
+function filterDocsForStage(
+  docs: FlatDoc[],
+  stage: (typeof STAGE_CONFIGS)[number],
+  instanceId: number | null,
+): FlatDoc[] {
+  return docs.filter((doc) => {
+    if (!stage.tags.includes(doc.doc_type_tag as never)) return false;
+
+    if (stage.onlyApproved) {
+      const isApproved = doc.tech_check_status === "APPROVED";
+      if (instanceId)
+        return isApproved && doc.product_structure_instance_id === instanceId;
+      return isApproved;
+    }
+
+    if (stage.id === "production" && instanceId) {
+      return doc.product_structure_instance_id === instanceId;
+    }
+
+    return true;
+  });
+}
+
+function groupByInstance(docs: FlatDoc[]): InstanceGroup[] {
+  // ── Step 1: collect unique instances in insertion order ──────────────────
+  const instanceMap: Record<string, InstanceGroup> = {};
+  const instanceOrder: string[] = [];
+
+  for (const doc of docs) {
+    const key =
+      doc.product_structure_instance_id != null
+        ? String(doc.product_structure_instance_id)
+        : "__lead__";
+
+    if (!instanceMap[key]) {
+      instanceMap[key] = {
+        instanceId: doc.product_structure_instance_id ?? null,
+        instanceTitle: doc.instance_title ?? null,
+        instanceType: doc.instance_type ?? null,
+        docGroups: [],
+      };
+      instanceOrder.push(key);
+    }
+  }
+
+  // ── Step 2: for each instance, group its docs by doc_title ───────────────
+  for (const instanceKey of instanceOrder) {
+    const instanceDocs = docs.filter((doc) => {
+      const k =
+        doc.product_structure_instance_id != null
+          ? String(doc.product_structure_instance_id)
+          : "__lead__";
+      return k === instanceKey;
+    });
+
+    const docGroupMap: Record<string, DocGroup> = {};
+    const docGroupOrder: string[] = [];
+
+    for (const doc of instanceDocs) {
+      const docTitle = doc.doc_title ?? doc.doc_type_type ?? "Other";
+      if (!docGroupMap[docTitle]) {
+        docGroupMap[docTitle] = { title: docTitle, totalDocs: 0, docs: [] };
+        docGroupOrder.push(docTitle);
+      }
+      docGroupMap[docTitle].docs.push(doc);
+      docGroupMap[docTitle].totalDocs += 1;
+    }
+
+    instanceMap[instanceKey].docGroups = docGroupOrder.map(
+      (k) => docGroupMap[k],
+    );
+  }
+
+  // ── Step 3: sort — instance docs first (by instanceId asc), lead-level last
+  return instanceOrder
+    .map((k) => instanceMap[k])
+    .sort((a, b) => {
+      if (a.instanceId === null && b.instanceId === null) return 0;
+      if (a.instanceId === null) return 1;
+      if (b.instanceId === null) return -1;
+      return a.instanceId - b.instanceId;
+    });
+}
+
+// ─── Controller ───────────────────────────────────────────────────────────────
+
 export class LeadController {
   /**
    * Helper method to explain access levels
@@ -1124,8 +1279,8 @@ export class LeadController {
           .json(
             ApiResponse.error(
               "product_type_id or product_type is required",
-              400
-            )
+              400,
+            ),
           );
         return;
       }
@@ -1136,9 +1291,7 @@ export class LeadController {
       });
 
       if (!lead) {
-        res
-          .status(404)
-          .json(ApiResponse.error("Lead not found", 404));
+        res.status(404).json(ApiResponse.error("Lead not found", 404));
         return;
       }
 
@@ -1276,7 +1429,10 @@ export class LeadController {
           .status(400)
           .json(ApiResponse.error("Invalid vendor ID provided", 400));
       }
-      if (franchiseId !== undefined && (isNaN(franchiseId) || franchiseId <= 0)) {
+      if (
+        franchiseId !== undefined &&
+        (isNaN(franchiseId) || franchiseId <= 0)
+      ) {
         return res
           .status(400)
           .json(ApiResponse.error("Invalid franchise ID provided", 400));
@@ -2107,10 +2263,15 @@ export class LeadController {
     }
   };
 
+  
   getAllLeadDocuments = async (req: Request, res: Response) => {
     try {
       const vendorId = Number(req.params.vendorId);
       const leadId = Number(req.params.leadId);
+      const instanceId =
+        req.query.instance_id && !isNaN(Number(req.query.instance_id))
+          ? Number(req.query.instance_id)
+          : null;
 
       if (!vendorId || !leadId) {
         return res
@@ -2118,44 +2279,79 @@ export class LeadController {
           .json(ApiResponse.error("vendorId and leadId are required", 400));
       }
 
+      // ── 1. Fetch all docs ────────────────────────────────────────────────────
       const documents = await prisma.leadDocuments.findMany({
         where: {
           vendor_id: vendorId,
           lead_id: leadId,
           is_deleted: false,
+          paymentInfo: { none: {} },
         },
         include: {
           documentType: {
-            select: { id: true, type: true, tag: true },
+            select: {
+              id: true,
+              type: true,
+              tag: true,
+              doc_title: true,
+              stage: true,
+            },
+          },
+          productStructureInstance: {
+            select: {
+              id: true,
+              title: true,
+              productStructure: {
+                // ✅ nested include for original name
+                select: { id: true, type: true },
+              },
+            },
           },
         },
         orderBy: { created_at: "asc" },
       });
 
-      const withSignedUrls = await Promise.all(
-        documents.map(async (doc) => {
-          const signedUrl = await generateSignedUrl(doc.doc_sys_name);
-          return {
-            id: doc.id,
-            doc_og_name: doc.doc_og_name,
-            doc_sys_name: doc.doc_sys_name,
-            doc_type_id: doc.doc_type_id,
-            doc_type_tag: doc.documentType.tag,
-            doc_type_type: doc.documentType.type,
-            tech_check_status: doc.tech_check_status,
-            created_at: doc.created_at,
-            signed_url: signedUrl,
-          };
-        })
+      // ── 2. Generate signed URLs + flatten ────────────────────────────────────
+      const flatDocs: FlatDoc[] = await Promise.all(
+        documents.map(async (doc) => ({
+          id: doc.id,
+          doc_og_name: doc.doc_og_name,
+          doc_sys_name: doc.doc_sys_name,
+          doc_type_id: doc.doc_type_id,
+          doc_type_tag: doc.documentType.tag,
+          doc_type_type: doc.documentType.type,
+          doc_title: doc.documentType.doc_title,
+          stage: doc.documentType.stage,
+          tech_check_status: doc.tech_check_status,
+          created_at: doc.created_at,
+          product_structure_instance_id:
+            doc.product_structure_instance_id ?? null,
+          instance_title: doc.productStructureInstance?.title ?? null,
+          instance_type:
+            doc.productStructureInstance?.productStructure?.type ?? null, // ✅ NEW
+          signed_url: await generateSignedUrl(doc.doc_sys_name),
+        })),
       );
+
+      // ── 3. Per stage: filter → group by instance → group by doc_title ────────
+      const result: StageResult[] = STAGE_CONFIGS.map((stage) => {
+        const filtered = filterDocsForStage(flatDocs, stage, instanceId);
+        const instanceGroups = groupByInstance(filtered);
+
+        return {
+          stageId: stage.id,
+          totalFiles: filtered.length,
+          instanceGroups,
+        };
+      });
 
       return res
         .status(200)
         .json(
           ApiResponse.success(
-            withSignedUrls,
-            "All lead documents fetched successfully"
-          )
+            result,
+            "All lead documents fetched successfully",
+          ),
         );
     } catch (error: any) {
       logger.error("[CONTROLLER] getAllLeadDocuments error", error);
@@ -2188,12 +2384,6 @@ export class LeadController {
     }
   };
 
-  /**
-   * GET /leads/follow-up-users/vendor/:vendorId/lead/:leadId
-   * Returns users eligible as Follow Up assignees:
-   *   - Admins with matching vendor_id (+ franchise_id if provided)
-   *   - All users mapped to the lead via leadUserMapping
-   */
   fetchFollowUpUsers = async (
     req: Request,
     res: Response,
@@ -2252,7 +2442,12 @@ export class LeadController {
 
       return res
         .status(200)
-        .json(ApiResponse.success({ users, count: users.length }, "Follow-up users fetched successfully"));
+        .json(
+          ApiResponse.success(
+            { users, count: users.length },
+            "Follow-up users fetched successfully",
+          ),
+        );
     } catch (error: any) {
       logger.error("[CONTROLLER] fetchFollowUpUsers error", error);
       return res
