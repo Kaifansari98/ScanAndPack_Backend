@@ -470,7 +470,9 @@ export const ModelName = {
   AreaMaster: 'AreaMaster',
   GeographicalMapping: 'GeographicalMapping',
   UserGeographicalMapping: 'UserGeographicalMapping',
-  UserActivityLog: 'UserActivityLog'
+  UserActivityLog: 'UserActivityLog',
+  ThemeMaster: 'ThemeMaster',
+  ThemeMapping: 'ThemeMapping'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -486,7 +488,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -6928,6 +6930,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ThemeMaster: {
+      payload: Prisma.$ThemeMasterPayload<ExtArgs>
+      fields: Prisma.ThemeMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ThemeMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ThemeMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.ThemeMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ThemeMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMasterPayload>
+        }
+        findMany: {
+          args: Prisma.ThemeMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMasterPayload>[]
+        }
+        create: {
+          args: Prisma.ThemeMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMasterPayload>
+        }
+        createMany: {
+          args: Prisma.ThemeMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ThemeMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.ThemeMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMasterPayload>
+        }
+        update: {
+          args: Prisma.ThemeMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.ThemeMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ThemeMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ThemeMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.ThemeMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.ThemeMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateThemeMaster>
+        }
+        groupBy: {
+          args: Prisma.ThemeMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ThemeMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ThemeMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ThemeMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    ThemeMapping: {
+      payload: Prisma.$ThemeMappingPayload<ExtArgs>
+      fields: Prisma.ThemeMappingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ThemeMappingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMappingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ThemeMappingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMappingPayload>
+        }
+        findFirst: {
+          args: Prisma.ThemeMappingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMappingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ThemeMappingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMappingPayload>
+        }
+        findMany: {
+          args: Prisma.ThemeMappingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMappingPayload>[]
+        }
+        create: {
+          args: Prisma.ThemeMappingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMappingPayload>
+        }
+        createMany: {
+          args: Prisma.ThemeMappingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ThemeMappingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMappingPayload>[]
+        }
+        delete: {
+          args: Prisma.ThemeMappingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMappingPayload>
+        }
+        update: {
+          args: Prisma.ThemeMappingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMappingPayload>
+        }
+        deleteMany: {
+          args: Prisma.ThemeMappingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ThemeMappingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ThemeMappingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMappingPayload>[]
+        }
+        upsert: {
+          args: Prisma.ThemeMappingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ThemeMappingPayload>
+        }
+        aggregate: {
+          args: Prisma.ThemeMappingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateThemeMapping>
+        }
+        groupBy: {
+          args: Prisma.ThemeMappingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ThemeMappingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ThemeMappingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ThemeMappingCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -8287,6 +8437,28 @@ export const UserActivityLogScalarFieldEnum = {
 export type UserActivityLogScalarFieldEnum = (typeof UserActivityLogScalarFieldEnum)[keyof typeof UserActivityLogScalarFieldEnum]
 
 
+export const ThemeMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  name: 'name',
+  is_active: 'is_active',
+  created_at: 'created_at'
+} as const
+
+export type ThemeMasterScalarFieldEnum = (typeof ThemeMasterScalarFieldEnum)[keyof typeof ThemeMasterScalarFieldEnum]
+
+
+export const ThemeMappingScalarFieldEnum = {
+  id: 'id',
+  theme_id: 'theme_id',
+  key: 'key',
+  light: 'light',
+  dark: 'dark'
+} as const
+
+export type ThemeMappingScalarFieldEnum = (typeof ThemeMappingScalarFieldEnum)[keyof typeof ThemeMappingScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -8872,6 +9044,8 @@ export type GlobalOmitConfig = {
   geographicalMapping?: Prisma.GeographicalMappingOmit
   userGeographicalMapping?: Prisma.UserGeographicalMappingOmit
   userActivityLog?: Prisma.UserActivityLogOmit
+  themeMaster?: Prisma.ThemeMasterOmit
+  themeMapping?: Prisma.ThemeMappingOmit
 }
 
 /* Types for Logging */

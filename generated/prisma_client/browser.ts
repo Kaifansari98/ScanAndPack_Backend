@@ -452,3 +452,13 @@ export type UserGeographicalMapping = Prisma.UserGeographicalMappingModel
  * 
  */
 export type UserActivityLog = Prisma.UserActivityLogModel
+/**
+ * Model ThemeMaster
+ * 
+ */
+export type ThemeMaster = Prisma.ThemeMasterModel
+/**
+ * Model ThemeMapping
+ * 
+ */
+export type ThemeMapping = Prisma.ThemeMappingModel

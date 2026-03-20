@@ -137,7 +137,9 @@ export const ModelName = {
   AreaMaster: 'AreaMaster',
   GeographicalMapping: 'GeographicalMapping',
   UserGeographicalMapping: 'UserGeographicalMapping',
-  UserActivityLog: 'UserActivityLog'
+  UserActivityLog: 'UserActivityLog',
+  ThemeMaster: 'ThemeMaster',
+  ThemeMapping: 'ThemeMapping'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1474,6 +1476,28 @@ export const UserActivityLogScalarFieldEnum = {
 } as const
 
 export type UserActivityLogScalarFieldEnum = (typeof UserActivityLogScalarFieldEnum)[keyof typeof UserActivityLogScalarFieldEnum]
+
+
+export const ThemeMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  name: 'name',
+  is_active: 'is_active',
+  created_at: 'created_at'
+} as const
+
+export type ThemeMasterScalarFieldEnum = (typeof ThemeMasterScalarFieldEnum)[keyof typeof ThemeMasterScalarFieldEnum]
+
+
+export const ThemeMappingScalarFieldEnum = {
+  id: 'id',
+  theme_id: 'theme_id',
+  key: 'key',
+  light: 'light',
+  dark: 'dark'
+} as const
+
+export type ThemeMappingScalarFieldEnum = (typeof ThemeMappingScalarFieldEnum)[keyof typeof ThemeMappingScalarFieldEnum]
 
 
 export const SortOrder = {

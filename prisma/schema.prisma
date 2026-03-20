@@ -84,6 +84,7 @@ model VendorMaster {
 
   franchises                  FranchiseMaster[]
   headSiteSupervisorFranchiseMappings HeadSiteSupervisorFranchiseMapping[]
+  themes                      ThemeMaster[]
 }
 
 model VendorAddress {
@@ -1832,4 +1833,33 @@ enum UserActivityType {
   RESET_PASSWORD
   LOGIN
   LOGOUT
+}
+
+model ThemeMaster {
+  id         Int      @id @default(autoincrement())
+
+  vendor_id  Int
+  name       String
+  is_active  Boolean  @default(false)
+
+  created_at DateTime @default(now())
+
+  vendor     VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  mappings   ThemeMapping[]
+
+  @@index([vendor_id])
+}
+
+model ThemeMapping {
+  id       Int    @id @default(autoincrement())
+
+  theme_id Int
+
+  key      String
+  light    String
+  dark     String
+
+  theme    ThemeMaster @relation(fields: [theme_id], references: [id], onDelete: Cascade)
+
+  @@unique([theme_id, key])
 }
