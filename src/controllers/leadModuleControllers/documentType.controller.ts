@@ -5,24 +5,32 @@ import { DocumentTypeInput } from "../../types/leadModule.types";
 const getParam = (param: string | string[] | undefined): string | undefined =>
   Array.isArray(param) ? param[0] : param;
 
-export const createDocumentType = async (req: Request, res: Response) => {
+ export const createDocumentType = async (req: Request, res: Response) => {
   console.log("[CONTROLLER] createDocumentType called", { body: req.body });
 
   try {
-      const { vendor_id, type, tag } = req.body as DocumentTypeInput;
+    const { vendor_id, type, tag, doc_title, stage } = req.body as DocumentTypeInput;
 
-      if (!vendor_id || !type || !tag) {
-          console.warn("[CONTROLLER] Missing required fields", { vendor_id, type, tag });
-          return res.status(400).json({ error: "vendor_id, type, and tag are required" });
-      }
+    // ✅ Required validation (unchanged)
+    if (!vendor_id || !type || !tag) {
+      console.warn("[CONTROLLER] Missing required fields", { vendor_id, type, tag });
+      return res.status(400).json({ error: "vendor_id, type, and tag are required" });
+    }
 
-      const documentType = await addDocumentType({ vendor_id, type, tag });
+    const documentType = await addDocumentType({
+      vendor_id,
+      type,
+      tag,
+      doc_title, // ✅ pass
+      stage      // ✅ pass
+    });
 
-      console.log("[CONTROLLER] createDocumentType created successfully", documentType);
-      return res.status(201).json({ success: true, data: documentType });
+    console.log("[CONTROLLER] createDocumentType created successfully", documentType);
+    return res.status(201).json({ success: true, data: documentType });
+
   } catch (error: any) {
-      console.error("[CONTROLLER] Error creating document type", { error: error.message });
-      return res.status(500).json({ success: false, error: error.message });
+    console.error("[CONTROLLER] Error creating document type", { error: error.message });
+    return res.status(500).json({ success: false, error: error.message });
   }
 };
 

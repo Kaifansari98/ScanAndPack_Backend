@@ -799,6 +799,8 @@ model DocumentTypeMaster {
   type      String
   vendor_id Int
   tag       String
+  doc_title String?        
+  stage     String?         
   vendor    VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   documents LeadDocuments[]
 }
