@@ -4,6 +4,8 @@ import logger from "../../../utils/logger";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
+import { sendLeadMovedToUnderInstallationEmail, sendMiscRequirementEmail, sendMiscERDUpdatedEmail, sendMarkAsReadyEmail, sendMiscRequiredDeliveryDateEmail, sendLeadMovedToFinalHandoverEmail } from "../../../../src/services/email/brevoEmail.service";
+import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 
 interface MiscPayload {
   vendor_id: number;
@@ -155,7 +157,7 @@ export class UnderInstallationStageService {
     try {
       const actorId = updatedBy;
 
-      const [lead, actor] = await Promise.all([
+      const [lead, actor, firstInstance] = await Promise.all([
         prisma.leadMaster.findUnique({
           where: { id: leadId },
           select: {
@@ -164,115 +166,118 @@ export class UnderInstallationStageService {
             lead_code: true,
             vendor_id: true,
             account_id: true,
+            franchise_id: true,
+            statusType: { select: { tag: true } },
           },
         }),
-
         prisma.userMaster.findUnique({
           where: { id: actorId },
           select: { user_name: true },
+        }),
+        prisma.leadProductStructureInstance.findFirst({
+          where: { lead_id: leadId, vendor_id: vendorId },
+          select: { id: true },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
         }),
       ]);
 
       if (!lead) return result;
 
       const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
-
-      const leadCode =
-        lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
-
+      const leadCode = lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
       const dispatchedBy = actor?.user_name ?? "System";
-
       const dispatchedAt = new Date().toLocaleString("en-IN", {
         day: "2-digit",
         month: "short",
         year: "numeric",
       });
+      const franchiseId = lead.franchise_id ?? null;
+      const stageTag = lead.statusType?.tag;
 
-      const redirectPath = lead.account_id
-        ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
-        : `/dashboard/leads/details/${leadId}`;
-
+      // Build redirect URL using STAGE_PATH_BY_TAG + instance_id
+      const uiBase = stageTag && STAGE_PATH_BY_TAG[stageTag]
+        ? `${STAGE_PATH_BY_TAG[stageTag]}/${leadId}`
+        : `/dashboard/installation/under-installation/details/${leadId}`;
+      const uiParams = new URLSearchParams();
+      if (lead.account_id) uiParams.set("accountId", String(lead.account_id));
+      if (firstInstance?.id) uiParams.set("instance_id", String(firstInstance.id));
+      const uiQs = uiParams.toString();
+      const redirectPath = uiQs ? `${uiBase}?${uiQs}` : uiBase;
       const projectUrl = `${baseUrl}${redirectPath}`;
 
-      // Fetch Admin Users
+      // Admins — franchise-filtered, no super-admin
       const admins = await prisma.userMaster.findMany({
         where: {
           vendor_id: lead.vendor_id,
           status: "active",
-          user_type: {
-            user_type: { in: ["admin"] },
-          },
+          user_type: { user_type: { equals: "admin", mode: "insensitive" } },
+          ...(franchiseId ? { franchise_id: franchiseId } : {}),
         },
-        select: {
-          id: true,
-          user_name: true,
-          user_email: true,
-        },
+        select: { id: true, user_name: true, user_email: true },
       });
 
-      // Notify Each Admin
-      for (const admin of admins) {
-        if (admin.id === actorId) continue;
-
-        // 🔔 In-App Notification
-        await NotificationService.createAndSend({
-          vendor_id: lead.vendor_id,
-          user_id: admin.id,
-          sender_id: actorId,
-          type: NotificationType.LEAD_MILESTONE,
-          title: "Lead Moved To Under Installation",
-          message: `${leadCode} - ${leadName} moved to Under Installation stage by ${dispatchedBy}.`,
-          entity_type: "lead",
-          entity_id: leadId,
-          redirect_url: redirectPath,
-        });
-      }
-
-      // ===============================
-      // SITE SUPERVISOR NOTIFICATION
-      // ===============================
-
+      // Site supervisor from lead mapping
       const siteSupervisorMapping = await prisma.leadUserMapping.findFirst({
         where: {
           lead_id: leadId,
           vendor_id: lead.vendor_id,
           status: "active",
           user: {
-            user_type: {
-              user_type: {
-                equals: "site-supervisor",
-                mode: "insensitive",
-              },
-            },
+            user_type: { user_type: { equals: "site-supervisor", mode: "insensitive" } },
           },
         },
         select: {
-          user: {
-            select: {
-              id: true,
-              user_name: true,
-              user_email: true,
-            },
-          },
+          user: { select: { id: true, user_name: true, user_email: true } },
         },
       });
 
-      if (siteSupervisorMapping?.user) {
-        const supervisor = siteSupervisorMapping.user;
-
-        // 🔔 IN-APP (OPTIONAL BUT RECOMMENDED)
-        await NotificationService.createAndSend({
-          vendor_id: lead.vendor_id,
-          user_id: supervisor.id,
-          sender_id: actorId,
-          type: NotificationType.LEAD_MILESTONE,
-          title: "Lead Assigned For Installation",
-          message: `${leadCode} - ${leadName} is now Under Installation.`,
-          entity_type: "lead",
-          entity_id: leadId,
-          redirect_url: redirectPath,
-        });
+      // Deduplicate recipients, exclude actor
+      const recipientMap = new Map<number, { id: number; user_name: string | null; user_email: string | null }>();
+      for (const u of admins) {
+        if (u.id !== actorId) recipientMap.set(u.id, u);
       }
+      if (siteSupervisorMapping?.user && siteSupervisorMapping.user.id !== actorId) {
+        recipientMap.set(siteSupervisorMapping.user.id, siteSupervisorMapping.user);
+      }
+
+      await Promise.allSettled(
+        Array.from(recipientMap.values()).map(async (user) => {
+          const isAdmin = admins.some((a) => a.id === user.id);
+
+          await NotificationService.createAndSend({
+            vendor_id: lead.vendor_id,
+            user_id: user.id,
+            sender_id: actorId,
+            type: NotificationType.LEAD_MILESTONE,
+            title: isAdmin ? "Lead Moved To Under Installation" : "Lead Assigned For Installation",
+            message: isAdmin
+              ? `${leadCode} - ${leadName} moved to Under Installation stage by ${dispatchedBy}.`
+              : `${leadCode} - ${leadName} is now Under Installation.`,
+            entity_type: "lead",
+            entity_id: leadId,
+            redirect_url: redirectPath,
+          });
+
+          if (!user.user_email) return;
+
+          await sendLeadMovedToUnderInstallationEmail({
+            vendor_id: lead.vendor_id,
+            toEmail: user.user_email,
+            toName: user.user_name ?? undefined,
+            leadCode,
+            leadName,
+            dispatchedBy,
+            dispatchedAt,
+            projectUrl,
+          });
+        }),
+      );
+
+      logger.info("✅ Under Installation notifications sent", {
+        vendor_id: lead.vendor_id,
+        lead_id: leadId,
+        recipients: recipientMap.size,
+      });
     } catch (err: any) {
       logger.warn("⚠️ Under Installation notification failed", {
         lead_id: leadId,
@@ -1212,40 +1217,48 @@ export class UnderInstallationStageService {
       // Fetch Lead Meta (Single Query)
       // -----------------------------
 
-      const leadMeta = await prisma.leadMaster.findUnique({
-        where: { id: lead_id },
-        select: {
-          lead_code: true,
-          firstname: true,
-          lastname: true,
-          account_id: true,
-        },
-      });
-
-      const creator = await prisma.userMaster.findUnique({
-        where: { id: created_by },
-        select: { user_name: true },
-      });
+      const [leadMeta, creator, firstInstance] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: lead_id },
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            account_id: true,
+            statusType: { select: { tag: true } },
+          },
+        }),
+        prisma.userMaster.findUnique({
+          where: { id: created_by },
+          select: { user_name: true },
+        }),
+        prisma.leadProductStructureInstance.findFirst({
+          where: { lead_id, vendor_id },
+          select: { id: true },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+        }),
+      ]);
 
       const leadCode = leadMeta?.lead_code ?? `LEAD-${lead_id}`;
-      const leadName =
-        `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
-
+      const leadName = `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
+      const assignedBy = creator?.user_name ?? "System";
       const assignedAt = new Date().toLocaleString("en-IN", {
         day: "2-digit",
         month: "short",
         year: "numeric",
       });
 
-      // -----------------------------
-      // Build Deep-Link Redirect URL
-      // -----------------------------
-
-      const redirectPath =
-        leadMeta?.account_id && leadMeta.account_id > 0
-          ? `/dashboard/leads/details/${lead_id}?accountId=${leadMeta.account_id}&tab=misc&taskId=${misc.taskId}`
-          : `/dashboard/leads/details/${lead_id}?tab=misc&taskId=${misc.taskId}`;
-
+      // Build redirect URL using STAGE_PATH_BY_TAG + instance_id
+      const stageTag = leadMeta?.statusType?.tag;
+      const miscBase = stageTag && STAGE_PATH_BY_TAG[stageTag]
+        ? `${STAGE_PATH_BY_TAG[stageTag]}/${lead_id}`
+        : `/dashboard/installation/under-installation/details/${lead_id}`;
+      const miscParams = new URLSearchParams();
+      if (leadMeta?.account_id) miscParams.set("accountId", String(leadMeta.account_id));
+      if (firstInstance?.id) miscParams.set("instance_id", String(firstInstance.id));
+      if (misc.taskId) miscParams.set("taskId", String(misc.taskId));
+      miscParams.set("tab", "misc");
+      const redirectPath = `${miscBase}?${miscParams.toString()}`;
       const projectUrl = `${baseUrl}${redirectPath}`;
 
       // ===============================
@@ -1254,7 +1267,6 @@ export class UnderInstallationStageService {
 
       await Promise.allSettled(
         factoryUsers.map(async ({ user }) => {
-          // 🔔 In-App Notification
           await NotificationService.createAndSend({
             vendor_id,
             user_id: user.id,
@@ -1265,6 +1277,20 @@ export class UnderInstallationStageService {
             entity_type: "miscellaneous",
             entity_id: misc.misc.id,
             redirect_url: redirectPath,
+          });
+
+          if (!user.user_email) return;
+
+          await sendMiscRequirementEmail({
+            vendor_id,
+            toEmail: user.user_email,
+            toName: user.user_name ?? undefined,
+            leadCode,
+            leadName,
+            assignedBy,
+            assignedAt,
+            requirementDescription: problem_description,
+            projectUrl,
           });
         }),
       );
@@ -1549,6 +1575,88 @@ export class UnderInstallationStageService {
       });
     }
 
+    // ===============================
+    // NOTIFY SITE SUPERVISOR
+    // ===============================
+
+    try {
+      const miscFull = await prisma.miscellaneousMaster.findFirst({
+        where: { id: misc_id, vendor_id },
+        select: { lead_id: true },
+      });
+
+      if (miscFull) {
+        const leadId = miscFull.lead_id;
+
+        const [lead, firstInstance, supervisorMapping] = await Promise.all([
+          prisma.leadMaster.findUnique({
+            where: { id: leadId },
+            select: {
+              lead_code: true,
+              firstname: true,
+              lastname: true,
+              account_id: true,
+              statusType: { select: { tag: true } },
+            },
+          }),
+          prisma.leadProductStructureInstance.findFirst({
+            where: { lead_id: leadId, vendor_id },
+            select: { id: true },
+            orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+          }),
+          prisma.leadUserMapping.findFirst({
+            where: {
+              lead_id: leadId,
+              vendor_id,
+              status: "active",
+              user: {
+                user_type: { user_type: { equals: "site-supervisor", mode: "insensitive" } },
+              },
+            },
+            select: {
+              user: { select: { id: true } },
+            },
+          }),
+        ]);
+
+        if (lead && supervisorMapping?.user) {
+          const leadCode = lead.lead_code ?? `LEAD-${leadId}`;
+          const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+          const stageTag = lead.statusType?.tag;
+
+          const uiBase = stageTag && STAGE_PATH_BY_TAG[stageTag]
+            ? `${STAGE_PATH_BY_TAG[stageTag]}/${leadId}`
+            : `/dashboard/installation/under-installation/details/${leadId}`;
+          const uiParams = new URLSearchParams();
+          if (lead.account_id) uiParams.set("accountId", String(lead.account_id));
+          if (firstInstance?.id) uiParams.set("instance_id", String(firstInstance.id));
+          uiParams.set("tab", "misc");
+          const redirectPath = `${uiBase}?${uiParams.toString()}`;
+
+          await NotificationService.createAndSend({
+            vendor_id,
+            user_id: supervisorMapping.user.id,
+            sender_id: updated_by,
+            type: NotificationType.LEAD_ACTION,
+            title: misc_approved
+              ? "Miscellaneous Request Approved"
+              : "Miscellaneous Request Rejected",
+            message: misc_approved
+              ? `Your miscellaneous request for ${leadCode} - ${leadName} has been approved.`
+              : `Your miscellaneous request for ${leadCode} - ${leadName} has been rejected. Reason: ${exp_of_rejection ?? "No reason provided"}.`,
+            entity_type: "miscellaneous",
+            entity_id: misc_id,
+            redirect_url: redirectPath,
+          });
+        }
+      }
+    } catch (err: any) {
+      logger.warn("Misc approval notification failed", {
+        misc_id,
+        error: err?.message,
+      });
+    }
+
     return updated;
   }
 
@@ -1557,11 +1665,13 @@ export class UnderInstallationStageService {
     misc_id,
     required_delivery_date,
     updated_by,
+    baseUrl,
   }: {
     vendor_id: number;
     misc_id: number;
     required_delivery_date: string;
     updated_by: number;
+    baseUrl: string;
   }) {
     const result = await prisma.$transaction(async (tx) => {
       const existing = await tx.miscellaneousMaster.findFirst({
@@ -1693,6 +1803,115 @@ export class UnderInstallationStageService {
       return updated;
     });
 
+    // ===============================
+    // COMMUNICATION LAYER
+    // ===============================
+
+    try {
+      const miscRecord = await prisma.miscellaneousMaster.findUnique({
+        where: { id: misc_id },
+        select: { lead_id: true, account_id: true },
+      });
+
+      if (!miscRecord) return result;
+
+      const [leadMeta, firstInstance, factoryRole, setByUser] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: miscRecord.lead_id },
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            account_id: true,
+            statusType: { select: { tag: true } },
+          },
+        }),
+        prisma.leadProductStructureInstance.findFirst({
+          where: { lead_id: miscRecord.lead_id, vendor_id },
+          select: { id: true },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+        }),
+        prisma.userTypeMaster.findFirst({
+          where: { user_type: { equals: "factory", mode: "insensitive" } },
+          select: { id: true },
+        }),
+        prisma.userMaster.findUnique({
+          where: { id: updated_by },
+          select: { user_name: true },
+        }),
+      ]);
+
+      const leadCode = leadMeta?.lead_code ?? `LEAD-${miscRecord.lead_id}`;
+      const leadName = `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
+      const setBy = setByUser?.user_name ?? "Admin";
+
+      const deliveryDate = new Date(required_delivery_date).toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
+
+      const stageTag = leadMeta?.statusType?.tag;
+      const stagePath =
+        stageTag && STAGE_PATH_BY_TAG[stageTag]
+          ? `${STAGE_PATH_BY_TAG[stageTag]}/${miscRecord.lead_id}`
+          : `/dashboard/installation/under-installation/details/${miscRecord.lead_id}`;
+
+      const qp = new URLSearchParams();
+      if (leadMeta?.account_id) qp.set("accountId", String(leadMeta.account_id));
+      if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
+      qp.set("tab", "misc");
+      const redirectPath = `${stagePath}?${qp.toString()}`;
+      const projectUrl = `${baseUrl}${redirectPath}`;
+
+      // Notify factory user
+      if (factoryRole) {
+        const factoryMapping = await prisma.leadUserMapping.findFirst({
+          where: {
+            vendor_id,
+            lead_id: miscRecord.lead_id,
+            status: "active",
+            user: { user_type_id: factoryRole.id },
+          },
+          select: { user: { select: { id: true, user_name: true, user_email: true } } },
+        });
+
+        if (factoryMapping?.user) {
+          const { user } = factoryMapping;
+
+          await NotificationService.createAndSend({
+            vendor_id,
+            user_id: user.id,
+            sender_id: updated_by,
+            type: NotificationType.LEAD_ACTION,
+            title: "Required Delivery Date Set",
+            message: `A required delivery date (${deliveryDate}) has been set for a miscellaneous requirement on ${leadCode} - ${leadName}.`,
+            entity_type: "miscellaneous",
+            entity_id: misc_id,
+            redirect_url: redirectPath,
+          });
+
+          if (user.user_email) {
+            await sendMiscRequiredDeliveryDateEmail({
+              vendor_id,
+              toEmail: user.user_email,
+              toName: user.user_name ?? undefined,
+              leadCode,
+              leadName,
+              setBy,
+              deliveryDate,
+              projectUrl,
+            });
+          }
+        }
+      }
+    } catch (err: any) {
+      logger.warn("Required delivery date notification failed", {
+        misc_id,
+        error: err?.message,
+      });
+    }
+
     return result;
   }
 
@@ -1701,11 +1920,13 @@ export class UnderInstallationStageService {
     task_id,
     required_delivery_date,
     updated_by,
+    baseUrl,
   }: {
     vendor_id: number;
     task_id: number;
     required_delivery_date: string;
     updated_by: number;
+    baseUrl: string;
   }) {
     const result = await prisma.$transaction(async (tx) => {
       const task = await tx.userLeadTask.findFirst({
@@ -1772,10 +1993,110 @@ export class UnderInstallationStageService {
         },
       });
 
-      return updated;
+      return { updated, lead_id: task.lead_id, misc_id: misc.id };
     });
 
-    return result;
+    // ===============================
+    // COMMUNICATION LAYER
+    // ===============================
+
+    try {
+      const [leadMeta, firstInstance, factoryRole, setByUser] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: result.lead_id },
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            account_id: true,
+            statusType: { select: { tag: true } },
+          },
+        }),
+        prisma.leadProductStructureInstance.findFirst({
+          where: { lead_id: result.lead_id, vendor_id },
+          select: { id: true },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+        }),
+        prisma.userTypeMaster.findFirst({
+          where: { user_type: { equals: "factory", mode: "insensitive" } },
+          select: { id: true },
+        }),
+        prisma.userMaster.findUnique({
+          where: { id: updated_by },
+          select: { user_name: true },
+        }),
+      ]);
+
+      const leadCode = leadMeta?.lead_code ?? `LEAD-${result.lead_id}`;
+      const leadName = `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
+      const setBy = setByUser?.user_name ?? "Admin";
+      const deliveryDate = new Date(required_delivery_date).toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
+
+      const stageTag = leadMeta?.statusType?.tag;
+      const stagePath =
+        stageTag && STAGE_PATH_BY_TAG[stageTag]
+          ? `${STAGE_PATH_BY_TAG[stageTag]}/${result.lead_id}`
+          : `/dashboard/installation/under-installation/details/${result.lead_id}`;
+
+      const qp = new URLSearchParams();
+      if (leadMeta?.account_id) qp.set("accountId", String(leadMeta.account_id));
+      if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
+      qp.set("tab", "misc");
+      const redirectPath = `${stagePath}?${qp.toString()}`;
+      const projectUrl = `${baseUrl}${redirectPath}`;
+
+      if (factoryRole) {
+        const factoryMapping = await prisma.leadUserMapping.findFirst({
+          where: {
+            vendor_id,
+            lead_id: result.lead_id,
+            status: "active",
+            user: { user_type_id: factoryRole.id },
+          },
+          select: { user: { select: { id: true, user_name: true, user_email: true } } },
+        });
+
+        if (factoryMapping?.user) {
+          const { user } = factoryMapping;
+
+          await NotificationService.createAndSend({
+            vendor_id,
+            user_id: user.id,
+            sender_id: updated_by,
+            type: NotificationType.LEAD_ACTION,
+            title: "Required Delivery Date Set",
+            message: `A required delivery date (${deliveryDate}) has been set for a miscellaneous requirement on ${leadCode} - ${leadName}.`,
+            entity_type: "miscellaneous",
+            entity_id: result.misc_id,
+            redirect_url: redirectPath,
+          });
+
+          if (user.user_email) {
+            await sendMiscRequiredDeliveryDateEmail({
+              vendor_id,
+              toEmail: user.user_email,
+              toName: user.user_name ?? undefined,
+              leadCode,
+              leadName,
+              setBy,
+              deliveryDate,
+              projectUrl,
+            });
+          }
+        }
+      }
+    } catch (err: any) {
+      logger.warn("Required delivery date (by task) notification failed", {
+        task_id,
+        error: err?.message,
+      });
+    }
+
+    return result.updated;
   }
 
   static async uploadMiscCompletionDocumentsByTaskIdService({
@@ -2014,15 +2335,23 @@ export class UnderInstallationStageService {
       // Lead Meta
       // -------------------------
 
-      const leadMeta = await prisma.leadMaster.findUnique({
-        where: { id: result.lead_id },
-        select: {
-          lead_code: true,
-          firstname: true,
-          lastname: true,
-          account_id: true,
-        },
-      });
+      const [leadMeta, firstInstance] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: result.lead_id },
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            account_id: true,
+            statusType: { select: { tag: true } },
+          },
+        }),
+        prisma.leadProductStructureInstance.findFirst({
+          where: { lead_id: result.lead_id, vendor_id },
+          select: { id: true },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+        }),
+      ]);
 
       const leadCode = leadMeta?.lead_code ?? `LEAD-${result.lead_id}`;
       const leadName =
@@ -2041,10 +2370,18 @@ export class UnderInstallationStageService {
       // Deep Link Builder
       // -------------------------
 
-      const redirectPath =
-        leadMeta?.account_id && leadMeta.account_id > 0
-          ? `/dashboard/leads/details/${result.lead_id}?accountId=${leadMeta.account_id}&tab=misc&taskId=${result.taskId}`
-          : `/dashboard/leads/details/${result.lead_id}?tab=misc&taskId=${result.taskId}`;
+      const stageTag = leadMeta?.statusType?.tag;
+      const stagePath =
+        stageTag && STAGE_PATH_BY_TAG[stageTag]
+          ? `${STAGE_PATH_BY_TAG[stageTag]}/${result.lead_id}`
+          : `/dashboard/installation/under-installation/details/${result.lead_id}`;
+
+      const qp = new URLSearchParams();
+      if (leadMeta?.account_id) qp.set("accountId", String(leadMeta.account_id));
+      if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
+      qp.set("tab", "misc");
+      qp.set("taskId", String(result.taskId));
+      const redirectPath = `${stagePath}?${qp.toString()}`;
 
       const projectUrl = `${baseUrl}${redirectPath}`;
 
@@ -2066,6 +2403,19 @@ export class UnderInstallationStageService {
             entity_id: misc_id,
             redirect_url: redirectPath,
           });
+
+          // 📧 Email Notification
+          if (user.user_email) {
+            await sendMiscERDUpdatedEmail({
+              vendor_id,
+              toEmail: user.user_email,
+              toName: user.user_name ?? undefined,
+              leadCode,
+              leadName,
+              fulfillmentDate,
+              projectUrl,
+            });
+          }
         }),
       );
     } catch (err: any) {
@@ -2521,81 +2871,107 @@ export class UnderInstallationStageService {
     // ===============================
 
     try {
-      // Sales + Admin Roles
-      const targetRoles = await prisma.userTypeMaster.findMany({
-        where: {
-          user_type: {
-            in: ["sales-executive", "admin"],
-            mode: "insensitive",
+      const [leadMeta, firstInstance, mappedUsers, updatedByUser] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: leadId },
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            account_id: true,
+            franchise_id: true,
           },
-        },
-        select: { id: true },
-      });
+        }),
+        prisma.leadProductStructureInstance.findFirst({
+          where: { lead_id: leadId, vendor_id: vendorId },
+          select: { id: true },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+        }),
+        prisma.leadUserMapping.findMany({
+          where: { vendor_id: vendorId, lead_id: leadId, status: "active" },
+          select: { user_id: true },
+        }),
+        prisma.userMaster.findUnique({
+          where: { id: updatedBy },
+          select: { user_name: true },
+        }),
+      ]);
 
-      if (!targetRoles.length) return result;
+      const franchiseId = leadMeta?.franchise_id ?? null;
+      const salesUserIds = Array.from(new Set(mappedUsers.map((m) => m.user_id)));
 
-      const roleIds = targetRoles.map((r) => r.id);
-
-      // Fetch Receivers
-      const receivers = await prisma.leadUserMapping.findMany({
-        where: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          status: "active",
-          user: {
-            user_type_id: { in: roleIds },
+      const [admins, salesExecutives] = await Promise.all([
+        prisma.userMaster.findMany({
+          where: {
+            vendor_id: vendorId,
+            status: "active",
+            user_type: { user_type: { equals: "admin", mode: "insensitive" } },
+            ...(franchiseId ? { franchise_id: franchiseId } : {}),
           },
-        },
-        select: {
-          user: {
-            select: {
-              id: true,
-              user_name: true,
-              user_email: true,
-            },
-          },
-        },
-      });
+          select: { id: true, user_name: true, user_email: true },
+        }),
+        salesUserIds.length > 0
+          ? prisma.userMaster.findMany({
+              where: {
+                id: { in: salesUserIds },
+                status: "active",
+                user_type: { user_type: { in: ["sales-executive"], mode: "insensitive" } },
+              },
+              select: { id: true, user_name: true, user_email: true },
+            })
+          : Promise.resolve([]),
+      ]);
 
-      if (!receivers.length) return result;
+      const recipientMap = new Map<number, { id: number; user_name: string | null; user_email: string | null }>();
+      for (const u of [...admins, ...salesExecutives]) recipientMap.set(u.id, u);
+      const recipients = Array.from(recipientMap.values());
 
-      // Lead Meta
-      const leadMeta = await prisma.leadMaster.findUnique({
-        where: { id: leadId },
-        select: {
-          lead_code: true,
-          firstname: true,
-          lastname: true,
-          account_id: true,
-        },
-      });
+      if (!recipients.length) return result;
 
       const leadCode = leadMeta?.lead_code ?? `LEAD-${leadId}`;
-      const leadName =
-        `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
+      const leadName = `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
+      const updatedByName = updatedByUser?.user_name ?? "Admin";
+      const updatedAt = new Date().toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
 
-      const redirectPath =
-        leadMeta?.account_id && leadMeta.account_id > 0
-          ? `/dashboard/leads/details/${leadId}?accountId=${leadMeta.account_id}`
-          : `/dashboard/leads/details/${leadId}`;
-
+      const stagePath = `${STAGE_PATH_BY_TAG["Type 16"]}/${leadId}`;
+      const qp = new URLSearchParams();
+      if (leadMeta?.account_id) qp.set("accountId", String(leadMeta.account_id));
+      if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
+      const redirectPath = qp.toString() ? `${stagePath}?${qp.toString()}` : stagePath;
       const projectUrl = `${baseUrl}${redirectPath}`;
 
-      // Broadcast
       await Promise.allSettled(
-        receivers.map(async ({ user }) => {
+        recipients.map(async (user) => {
           // 🔔 In-App Notification
           await NotificationService.createAndSend({
             vendor_id: vendorId,
             user_id: user.id,
             sender_id: updatedBy,
-            type: NotificationType.LEAD_ACTION,
+            type: NotificationType.LEAD_MILESTONE,
             title: "Lead Moved to Final Handover",
             message: `${leadCode} - ${leadName} has been moved to the Final Handover stage.`,
             entity_type: "lead",
             entity_id: leadId,
             redirect_url: redirectPath,
           });
+
+          // 📧 Email
+          if (user.user_email) {
+            await sendLeadMovedToFinalHandoverEmail({
+              vendor_id: vendorId,
+              toEmail: user.user_email,
+              toName: user.user_name ?? undefined,
+              leadCode,
+              leadName,
+              updatedBy: updatedByName,
+              updatedAt,
+              projectUrl,
+            });
+          }
         }),
       );
     } catch (err: any) {
@@ -3083,16 +3459,24 @@ export class UnderInstallationStageService {
 
       if (!supervisors.length) return { ok: true };
 
-      // Fetch Lead Meta
-      const leadMeta = await prisma.leadMaster.findUnique({
-        where: { id: lead_id },
-        select: {
-          lead_code: true,
-          firstname: true,
-          lastname: true,
-          account_id: true,
-        },
-      });
+      // Fetch Lead Meta + First Instance
+      const [leadMeta, firstInstance] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: lead_id },
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            account_id: true,
+            statusType: { select: { tag: true } },
+          },
+        }),
+        prisma.leadProductStructureInstance.findFirst({
+          where: { lead_id, vendor_id },
+          select: { id: true },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+        }),
+      ]);
 
       const leadCode = leadMeta?.lead_code ?? `LEAD-${lead_id}`;
       const leadName =
@@ -3105,11 +3489,18 @@ export class UnderInstallationStageService {
       });
 
       // Build Deep Link
+      const stageTag = leadMeta?.statusType?.tag;
+      const stagePath =
+        stageTag && STAGE_PATH_BY_TAG[stageTag]
+          ? `${STAGE_PATH_BY_TAG[stageTag]}/${lead_id}`
+          : `/dashboard/installation/under-installation/details/${lead_id}`;
 
-      const redirectPath =
-        leadMeta?.account_id && leadMeta.account_id > 0
-          ? `/dashboard/leads/details/${lead_id}?accountId=${leadMeta.account_id}&tab=misc&taskId=${result.taskId}`
-          : `/dashboard/leads/details/${lead_id}?tab=misc&taskId=${result.taskId}`;
+      const qp = new URLSearchParams();
+      if (leadMeta?.account_id) qp.set("accountId", String(leadMeta.account_id));
+      if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
+      qp.set("tab", "misc");
+      if (result.taskId) qp.set("taskId", String(result.taskId));
+      const redirectPath = `${stagePath}?${qp.toString()}`;
 
       const projectUrl = `${baseUrl}${redirectPath}`;
 
@@ -3128,6 +3519,19 @@ export class UnderInstallationStageService {
             entity_id: misc_id,
             redirect_url: redirectPath,
           });
+
+          // 📧 Email Notification
+          if (user.user_email) {
+            await sendMarkAsReadyEmail({
+              vendor_id,
+              toEmail: user.user_email,
+              toName: user.user_name ?? undefined,
+              leadCode,
+              leadName,
+              readyAt,
+              projectUrl,
+            });
+          }
         }),
       );
     } catch (err: any) {

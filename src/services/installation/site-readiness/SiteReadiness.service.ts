@@ -4,6 +4,8 @@ import { prisma } from "../../../prisma/client";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
+import { sendLeadMovedToDispatchPlanningEmail } from "../../../../src/services/email/brevoEmail.service";
+import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 
 interface SiteReadinessPayload {
   account_id: number;
@@ -570,18 +572,13 @@ export class SiteReadinessService {
     });
 
     // ===============================
-    // DISPATCH PLANNING STAGE → ADMIN NOTIFICATION
+    // DISPATCH PLANNING STAGE → NOTIFICATION + EMAIL
     // ===============================
 
     try {
-      console.log("[SiteReadiness] dispatch planning notifications:start", {
-        vendorId,
-        leadId,
-        updatedBy,
-      });
-      const actorId = updatedBy; // user who moved lead to dispatch planning
+      const actorId = updatedBy;
 
-      const [lead, actor] = await Promise.all([
+      const [lead, actor, firstInstance] = await Promise.all([
         prisma.leadMaster.findUnique({
           where: { id: leadId },
           select: {
@@ -590,101 +587,124 @@ export class SiteReadinessService {
             lead_code: true,
             vendor_id: true,
             account_id: true,
+            franchise_id: true,
           },
         }),
-
         prisma.userMaster.findUnique({
           where: { id: actorId },
           select: { user_name: true },
         }),
+        prisma.leadProductStructureInstance.findFirst({
+          where: { lead_id: leadId, vendor_id: vendorId },
+          select: { id: true },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+        }),
       ]);
 
-      // Safety guard
-      if (!lead) return;
+      if (!lead) return result;
 
       const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
-
-      const leadCode =
-        lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
-
+      const leadCode = lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
       const movedBy = actor?.user_name ?? "System";
-
       const movedAt = new Date().toLocaleString("en-IN", {
         day: "2-digit",
         month: "short",
         year: "numeric",
       });
+      const franchiseId = lead.franchise_id ?? null;
 
-      const redirectPath = lead.account_id
-        ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
-        : `/dashboard/leads/details/${leadId}`;
-
+      // Build redirect URL using STAGE_PATH_BY_TAG["Type 13"] + instance_id
+      const dpBase = `${STAGE_PATH_BY_TAG["Type 13"]}/${leadId}`;
+      const dpParams = new URLSearchParams();
+      if (lead.account_id) dpParams.set("accountId", String(lead.account_id));
+      if (firstInstance?.id) dpParams.set("instance_id", String(firstInstance.id));
+      const dpQs = dpParams.toString();
+      const redirectPath = dpQs ? `${dpBase}?${dpQs}` : dpBase;
       const projectUrl = `${baseUrl}${redirectPath}`;
 
-      // Fetch Active Admin Users
+      // Fetch admins (franchise-filtered, no super-admin)
       const admins = await prisma.userMaster.findMany({
         where: {
           vendor_id: lead.vendor_id,
           status: "active",
-          user_type: {
-            user_type: { in: ["admin", "super-admin"] },
-          },
+          user_type: { user_type: { equals: "admin", mode: "insensitive" } },
+          ...(franchiseId ? { franchise_id: franchiseId } : {}),
         },
-        select: {
-          id: true,
-          user_name: true,
-          user_email: true,
-        },
-      });
-      console.log("[SiteReadiness] admins fetched for notification", {
-        admin_count: admins.length,
-        lead_id: leadId,
+        select: { id: true, user_name: true, user_email: true },
       });
 
-      for (const admin of admins) {
-        // ❌ Prevent self-notification
-        if (admin.id === actorId) continue;
+      // Fetch sales executives from lead user mapping
+      const leadMappings = await prisma.leadUserMapping.findMany({
+        where: { vendor_id: vendorId, lead_id: leadId, status: "active" },
+        select: { user_id: true },
+      });
 
-        // 🔔 In-App Notification
-        await NotificationService.createAndSend({
-          vendor_id: lead.vendor_id,
-          user_id: admin.id,
-          sender_id: actorId,
-          type: NotificationType.LEAD_MILESTONE,
-          title: "Dispatch Planning Started",
-          message: `${leadCode} - ${leadName} moved to Dispatch Planning stage by ${movedBy}.`,
-          entity_type: "lead",
-          entity_id: leadId,
-          redirect_url: redirectPath,
-        });
+      const salesExecRole = await prisma.userTypeMaster.findFirst({
+        where: { user_type: { equals: "sales-executive", mode: "insensitive" } },
+        select: { id: true },
+      });
 
+      const salesExecs = salesExecRole
+        ? await prisma.userMaster.findMany({
+            where: {
+              id: { in: leadMappings.map((m) => m.user_id) },
+              vendor_id: lead.vendor_id,
+              status: "active",
+              user_type_id: salesExecRole.id,
+            },
+            select: { id: true, user_name: true, user_email: true },
+          })
+        : [];
+
+      // Deduplicate recipients
+      const recipientMap = new Map<number, { id: number; user_name: string | null; user_email: string | null }>();
+      for (const u of [...admins, ...salesExecs]) {
+        if (u.id !== actorId) recipientMap.set(u.id, u);
       }
+      const recipients = Array.from(recipientMap.values());
 
-      logger.info("✅ Dispatch Planning admin notifications sent", {
+      // Send in-app + email to all recipients
+      await Promise.allSettled(
+        recipients.map(async (user) => {
+          await NotificationService.createAndSend({
+            vendor_id: lead.vendor_id,
+            user_id: user.id,
+            sender_id: actorId,
+            type: NotificationType.LEAD_MILESTONE,
+            title: "Dispatch Planning Started",
+            message: `${leadCode} - ${leadName} moved to Dispatch Planning stage.`,
+            entity_type: "lead",
+            entity_id: leadId,
+            redirect_url: redirectPath,
+          });
+
+          if (!user.user_email) return;
+
+          await sendLeadMovedToDispatchPlanningEmail({
+            vendor_id: lead.vendor_id,
+            toEmail: user.user_email,
+            toName: user.user_name ?? undefined,
+            leadCode,
+            leadName,
+            movedBy,
+            movedAt,
+            projectUrl,
+          });
+        }),
+      );
+
+      logger.info("✅ Dispatch Planning notifications sent", {
         vendor_id: lead.vendor_id,
         lead_id: leadId,
-        admin_count: admins.length,
-      });
-      console.log("[SiteReadiness] dispatch planning notifications:done", {
-        vendor_id: lead.vendor_id,
-        lead_id: leadId,
-        admin_count: admins.length,
+        recipients: recipients.length,
       });
     } catch (dispatchNotifyErr: any) {
-      logger.warn("⚠️ Dispatch Planning admin notification failed", {
-        lead_id: leadId,
-        error: dispatchNotifyErr?.message,
-      });
-      console.log("[SiteReadiness] dispatch planning notifications:error", {
+      logger.warn("⚠️ Dispatch Planning notification failed", {
         lead_id: leadId,
         error: dispatchNotifyErr?.message,
       });
     }
-    console.log("[SiteReadiness] moveLeadToDispatchPlanning:end", {
-      vendorId,
-      leadId,
-      updatedBy,
-    });
+
     return result;
   }
 }

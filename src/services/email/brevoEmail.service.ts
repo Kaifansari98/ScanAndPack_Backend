@@ -3648,6 +3648,94 @@ export const sendMiscResolvedEmail = async (payload: {
   );
 };
 
+// 6.5
+export const sendMiscRequiredDeliveryDateEmail = async (payload: {
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  setBy: string;
+  deliveryDate: string;
+  projectUrl?: string;
+}): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Required Delivery Date Set for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "A required delivery date has been set for a miscellaneous requirement on the following lead:",
+    "",
+    "Lead Details",
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
+    `Set By: ${payload.setBy}`,
+    `Required Delivery Date: ${payload.deliveryDate}`,
+    "",
+    "Please ensure the requirement is fulfilled by the specified delivery date.",
+    "",
+    payload.projectUrl ? `View Requirement: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; border-bottom: 1px solid #f3f4f6; }
+    .lead-info-row.no-border { border-bottom: none; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-size: 14px; font-weight: 500; }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">Required Delivery Date Set</h2>
+      <p style="margin:0 0 12px;color:#111827;">Hello ${payload.toName ?? "there"},</p>
+      <p style="margin:0 0 16px;color:#4b5563;">A required delivery date has been set for a miscellaneous requirement on the following lead:</p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Set By</div>
+          <div class="lead-info-value">${payload.setBy}</div>
+        </div>
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Required Delivery Date</div>
+          <div class="lead-info-value">${payload.deliveryDate}</div>
+        </div>
+      </div>
+      <p style="margin:16px 0 0;color:#4b5563;">Please ensure the requirement is fulfilled by the specified delivery date.</p>
+      ${payload.projectUrl ? `<p style="margin:12px 0 0;"><a href="${payload.projectUrl}" style="color:#2563eb;">View Requirement</a></p>` : ""}
+    </div>
+  </div>
+</body>
+</html>`;
+
+  return sendBrevoEmail(
+    {
+      subject: defaultSubject,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      text: defaultText,
+      html: defaultHtml,
+    },
+    identity,
+  );
+};
+
 // 7
 export const sendFinalHandoverEmail = async (payload: {
   vendor_id: number;

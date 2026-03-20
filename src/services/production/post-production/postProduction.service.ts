@@ -4,6 +4,7 @@ import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { sendReadyToDispatchEmail } from "../../../../src/services/email/brevoEmail.service";
 import { NotificationType } from "../../../prisma/generated";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
+import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 
 export class PostProductionService {
   async uploadQcPhotos(
@@ -1157,9 +1158,18 @@ export class PostProductionService {
         year: "numeric",
       });
 
-      const redirectPath = leadMeta.account_id
-        ? `/dashboard/leads/details/${leadId}?accountId=${leadMeta.account_id}`
-        : `/dashboard/leads/details/${leadId}`;
+      const firstInstance = await prisma.leadProductStructureInstance.findFirst({
+        where: { lead_id: leadId, vendor_id: vendorId },
+        select: { id: true },
+        orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+      });
+
+      const rtdBase = `${STAGE_PATH_BY_TAG["Type 11"]}/${leadId}`;
+      const rtdParams = new URLSearchParams();
+      if (leadMeta.account_id) rtdParams.set("accountId", String(leadMeta.account_id));
+      if (firstInstance?.id) rtdParams.set("instance_id", String(firstInstance.id));
+      const rtdQs = rtdParams.toString();
+      const redirectPath = rtdQs ? `${rtdBase}?${rtdQs}` : rtdBase;
 
       const projectUrl = `${baseUrl}${redirectPath}`;
 
@@ -1237,9 +1247,18 @@ export class PostProductionService {
       const leadCode =
         lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
 
-      const redirectPath = lead.account_id
-        ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
-        : `/dashboard/leads/details/${leadId}`;
+      const adminFirstInstance = await prisma.leadProductStructureInstance.findFirst({
+        where: { lead_id: leadId, vendor_id: lead.vendor_id },
+        select: { id: true },
+        orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+      });
+
+      const adminRtdBase = `${STAGE_PATH_BY_TAG["Type 11"]}/${leadId}`;
+      const adminRtdParams = new URLSearchParams();
+      if (lead.account_id) adminRtdParams.set("accountId", String(lead.account_id));
+      if (adminFirstInstance?.id) adminRtdParams.set("instance_id", String(adminFirstInstance.id));
+      const adminRtdQs = adminRtdParams.toString();
+      const redirectPath = adminRtdQs ? `${adminRtdBase}?${adminRtdQs}` : adminRtdBase;
 
       // Fetch Active Admin Users
       const admins = await prisma.userMaster.findMany({

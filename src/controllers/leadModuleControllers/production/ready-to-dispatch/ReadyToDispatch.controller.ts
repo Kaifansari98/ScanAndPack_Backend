@@ -262,7 +262,7 @@ export class ReadyToDispatchController {
       });
 
       try {
-        const [assignee, lead, assignedBy] = await Promise.all([
+        const [assignee, lead, assignedBy, firstInstance] = await Promise.all([
           prisma.userMaster.findUnique({
             where: { id: Number(user_id) },
             select: {
@@ -274,7 +274,7 @@ export class ReadyToDispatchController {
           }),
           prisma.leadMaster.findUnique({
             where: { id: leadId },
-            select: { firstname: true, lastname: true, lead_code: true, franchise_id: true },
+            select: { firstname: true, lastname: true, lead_code: true, franchise_id: true, account_id: true },
           }),
           actorId
             ? prisma.userMaster.findUnique({
@@ -282,6 +282,11 @@ export class ReadyToDispatchController {
                 select: { user_name: true },
               })
             : Promise.resolve(null),
+          prisma.leadProductStructureInstance.findFirst({
+            where: { lead_id: leadId, vendor_id: result.lead.vendor_id },
+            select: { id: true },
+            orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+          }),
         ]);
 
         const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
@@ -309,7 +314,14 @@ export class ReadyToDispatchController {
                 : "A lead has been assigned to you.",
             entity_type: "lead",
             entity_id: result.lead.id,
-            redirect_url: `/dashboard/leads/details/${result.lead.id}?accountId=${result.lead.account_id}`,
+            redirect_url: (() => {
+              const base = `${STAGE_PATH_BY_TAG["Type 11"]}/${result.lead.id}`;
+              const qp = new URLSearchParams();
+              if (lead?.account_id) qp.set("accountId", String(lead.account_id));
+              if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
+              const qs = qp.toString();
+              return qs ? `${base}?${qs}` : base;
+            })(),
           });
         }
 

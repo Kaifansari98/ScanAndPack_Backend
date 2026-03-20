@@ -2,6 +2,8 @@ import { NotificationType, Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import logger from "../../../utils/logger";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
+import { sendLeadMovedToDispatchEmail } from "../../../../src/services/email/brevoEmail.service";
+import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 
 export class DispatchPlanningService {
   /** ✅ Fetch all leads with status = Type 13 (Dispatch Planning) */
@@ -516,6 +518,7 @@ export class DispatchPlanningService {
     vendorId: number,
     leadId: number,
     updatedBy: number,
+    baseUrl: string,
   ) {
     // ==========================
     // CORE TRANSACTION LAYER
@@ -637,7 +640,7 @@ export class DispatchPlanningService {
     try {
       const actorId = updatedBy;
 
-      const [lead, firstInstance] = await Promise.all([
+      const [lead, firstInstance, actor] = await Promise.all([
         prisma.leadMaster.findUnique({
           where: { id: leadId },
           select: {
@@ -647,10 +650,6 @@ export class DispatchPlanningService {
             vendor_id: true,
             account_id: true,
             franchise_id: true,
-            onsite_contact_person_name: true,
-            onsite_contact_person_number: true,
-            required_date_for_dispatch: true,
-            material_lift_availability: true,
             statusType: { select: { tag: true } },
           },
         }),
@@ -659,93 +658,118 @@ export class DispatchPlanningService {
           select: { id: true },
           orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
         }),
+        prisma.userMaster.findUnique({
+          where: { id: updatedBy },
+          select: { user_name: true },
+        }),
       ]);
 
       if (!lead) return result;
 
       const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
-
-      const leadCode =
-        lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
-
-      // Resolve stage-specific path at notification time (not stored)
+      const leadCode = lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+      const movedBy = actor?.user_name ?? "System";
+      const movedAt = new Date().toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
+      const franchiseId = lead.franchise_id ?? null;
       const stageTag = lead.statusType?.tag;
       const instanceId = firstInstance?.id;
 
-      const stagePath =
-        stageTag === "Type 11"
-          ? `/dashboard/production/ready-to-dispatch/details/${leadId}`
-          : stageTag === "Type 12"
-            ? `/dashboard/installation/site-readiness/details/${leadId}`
-            : stageTag === "Type 13"
-              ? `/dashboard/installation/dispatch-planning/details/${leadId}`
-              : stageTag === "Type 14"
-                ? `/dashboard/installation/dispatch-stage/details/${leadId}`
-                : stageTag === "Type 15"
-                  ? `/dashboard/installation/under-installation/details/${leadId}`
-                  : stageTag === "Type 16"
-                    ? `/dashboard/installation/final-handover/details/${leadId}`
-                    : `/dashboard/installation/dispatch-stage/details/${leadId}`;
+      // Build redirect using STAGE_PATH_BY_TAG
+      const dpBase = stageTag && STAGE_PATH_BY_TAG[stageTag]
+        ? `${STAGE_PATH_BY_TAG[stageTag]}/${leadId}`
+        : `/dashboard/installation/dispatch-stage/details/${leadId}`;
+      const dpParams = new URLSearchParams();
+      if (lead.account_id) dpParams.set("accountId", String(lead.account_id));
+      if (instanceId) dpParams.set("instance_id", String(instanceId));
+      const dpQs = dpParams.toString();
+      const redirectPath = dpQs ? `${dpBase}?${dpQs}` : dpBase;
+      const projectUrl = `${baseUrl}${redirectPath}`;
 
-      const queryParams = new URLSearchParams();
-      if (lead.account_id) queryParams.set("accountId", String(lead.account_id));
-      if (instanceId) queryParams.set("instance_id", String(instanceId));
-      const qs = queryParams.toString();
-      const redirectPath = qs ? `${stagePath}?${qs}` : stagePath;
-
-      // ===============================
-      // FACTORY SME FETCH
-      // ===============================
-
-      const factoryMapping = await prisma.leadUserMapping.findFirst({
-        where: {
-          lead_id: leadId,
-          vendor_id: vendorId,
-          status: "active",
-          user: {
-            user_type: {
-              user_type: {
-                equals: "factory",
-                mode: "insensitive",
-              },
-            },
-          },
-        },
+      // Collect all mapped users for this lead
+      const leadMappings = await prisma.leadUserMapping.findMany({
+        where: { lead_id: leadId, vendor_id: vendorId, status: "active" },
         select: {
           user: {
             select: {
               id: true,
               user_name: true,
               user_email: true,
+              user_type: { select: { user_type: true } },
             },
           },
         },
       });
 
-      if (!factoryMapping?.user) return result;
+      const mappedUsers = leadMappings.map((m) => m.user).filter(Boolean);
 
-      const factoryUser = factoryMapping.user;
+      // Factory user
+      const factoryUser = mappedUsers.find(
+        (u) => u.user_type.user_type.toLowerCase() === "factory",
+      ) ?? null;
 
-      const franchiseId = lead?.franchise_id ?? null;
+      // Sales executives from mapping
+      const salesExecs = mappedUsers.filter(
+        (u) => u.user_type.user_type.toLowerCase() === "sales-executive",
+      );
 
-      // ===============================
-      // 🔔 FACTORY IN-APP
-      // ===============================
-
-      await NotificationService.createAndSend({
-        vendor_id: vendorId,
-        user_id: factoryUser.id,
-        sender_id: actorId,
-        type: NotificationType.LEAD_ACTION,
-        title: "Lead moved To Dispatch",
-        message: `${leadCode} - ${leadName} moved to Dispatch stage.`,
-        entity_type: "lead",
-        entity_id: leadId,
-        redirect_url: redirectPath,
+      // Admins — franchise-filtered, no super-admin
+      const admins = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: lead.vendor_id,
+          status: "active",
+          user_type: { user_type: { equals: "admin", mode: "insensitive" } },
+          ...(franchiseId ? { franchise_id: franchiseId } : {}),
+        },
+        select: { id: true, user_name: true, user_email: true },
       });
 
+      // Deduplicate all recipients, exclude actor
+      const recipientMap = new Map<number, { id: number; user_name: string | null; user_email: string | null }>();
+      for (const u of [...(factoryUser ? [factoryUser] : []), ...salesExecs, ...admins]) {
+        if (u.id !== actorId) recipientMap.set(u.id, u);
+      }
+      const recipients = Array.from(recipientMap.values());
+
+      await Promise.allSettled(
+        recipients.map(async (user) => {
+          await NotificationService.createAndSend({
+            vendor_id: lead.vendor_id,
+            user_id: user.id,
+            sender_id: actorId,
+            type: NotificationType.LEAD_ACTION,
+            title: "Lead moved To Dispatch",
+            message: `${leadCode} - ${leadName} moved to Dispatch stage.`,
+            entity_type: "lead",
+            entity_id: leadId,
+            redirect_url: redirectPath,
+          });
+
+          if (!user.user_email) return;
+
+          await sendLeadMovedToDispatchEmail({
+            vendor_id: lead.vendor_id,
+            toEmail: user.user_email,
+            toName: user.user_name ?? undefined,
+            leadCode,
+            leadName,
+            movedBy,
+            movedAt,
+            projectUrl,
+          });
+        }),
+      );
+
+      logger.info("✅ Move to Dispatch notifications sent", {
+        vendor_id: lead.vendor_id,
+        lead_id: leadId,
+        recipients: recipients.length,
+      });
     } catch (err: any) {
-      logger.warn("⚠️ Dispatch Factory notification failed", {
+      logger.warn("⚠️ Move to Dispatch notification failed", {
         lead_id: leadId,
         error: err?.message,
       });

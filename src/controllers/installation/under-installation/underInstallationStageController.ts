@@ -1061,6 +1061,7 @@ export class UnderInstallationStageController {
         });
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       const data =
         await UnderInstallationStageService.updateMiscRequiredDeliveryDateService(
           {
@@ -1068,6 +1069,7 @@ export class UnderInstallationStageController {
             misc_id: miscId,
             required_delivery_date,
             updated_by,
+            baseUrl,
           },
         );
 
@@ -1098,6 +1100,7 @@ export class UnderInstallationStageController {
         });
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       const data =
         await UnderInstallationStageService.updateMiscRequiredDeliveryDateByTaskIdService(
           {
@@ -1105,6 +1108,7 @@ export class UnderInstallationStageController {
             task_id: taskId,
             required_delivery_date,
             updated_by,
+            baseUrl,
           },
         );
 

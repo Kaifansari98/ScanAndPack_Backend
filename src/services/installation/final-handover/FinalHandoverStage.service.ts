@@ -4,6 +4,7 @@ import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
 import { sendProjectCompletedEmail } from "../../../../src/services/email/brevoEmail.service";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
+import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 
 export class FinalHandoverStageService {
   /**
@@ -529,33 +530,36 @@ export class FinalHandoverStageService {
     // ==================================================
 
     try {
-      const [leadUsers, admins] = await Promise.all([
-        // SALES EXECUTIVES FROM MAPPING
+      const [leadUsers, leadMeta, firstInstance] = await Promise.all([
+        // MAPPED USERS
         prisma.leadUserMapping.findMany({
-          where: {
-            vendor_id: vendorId,
-            lead_id: leadId,
-            status: "active",
-          },
+          where: { vendor_id: vendorId, lead_id: leadId, status: "active" },
           select: { user_id: true },
         }),
-
-        // ADMINS
-        prisma.userMaster.findMany({
-          where: {
-            vendor_id: vendorId,
-            status: "active",
-            user_type: {
-              user_type: { in: ["admin"], mode: "insensitive" },
-            },
-          },
-          select: {
-            id: true,
-            user_name: true,
-            user_email: true,
-          },
+        // FRANCHISE ID for admin filter
+        prisma.leadMaster.findUnique({
+          where: { id: leadId },
+          select: { franchise_id: true },
+        }),
+        // FIRST INSTANCE for deep link
+        prisma.leadProductStructureInstance.findFirst({
+          where: { lead_id: leadId, vendor_id: vendorId },
+          select: { id: true },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
         }),
       ]);
+
+      const franchiseId = leadMeta?.franchise_id ?? null;
+
+      const admins = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: vendorId,
+          status: "active",
+          user_type: { user_type: { equals: "admin", mode: "insensitive" } },
+          ...(franchiseId ? { franchise_id: franchiseId } : {}),
+        },
+        select: { id: true, user_name: true, user_email: true },
+      });
 
       const salesUserIds = Array.from(new Set(leadUsers.map((m) => m.user_id)));
 
@@ -565,31 +569,24 @@ export class FinalHandoverStageService {
               where: {
                 id: { in: salesUserIds },
                 status: "active",
-                user_type: {
-                  user_type: {
-                    in: ["sales-executive"],
-                    mode: "insensitive",
-                  },
-                },
+                user_type: { user_type: { in: ["sales-executive"], mode: "insensitive" } },
               },
-              select: {
-                id: true,
-                user_name: true,
-                user_email: true,
-              },
+              select: { id: true, user_name: true, user_email: true },
             })
           : [];
 
-      const recipients = [...admins, ...salesExecutives];
+      const recipientMap = new Map<number, { id: number; user_name: string | null; user_email: string | null }>();
+      for (const u of [...admins, ...salesExecutives]) recipientMap.set(u.id, u);
+      const recipients = Array.from(recipientMap.values());
 
       if (!recipients.length) return result;
 
-
-      const redirectPath = `/dashboard/leads/details/${leadId}?accountId=${result.accountId}`;
-
-      const projectUrl = result.accountId
-        ? `${baseUrl}${redirectPath}`
-        : `${baseUrl}${redirectPath}`;
+      const stagePath = `${STAGE_PATH_BY_TAG["Type 17"]}/${leadId}`;
+      const qp = new URLSearchParams();
+      if (result.accountId) qp.set("accountId", String(result.accountId));
+      if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
+      const redirectPath = qp.toString() ? `${stagePath}?${qp.toString()}` : stagePath;
+      const projectUrl = `${baseUrl}${redirectPath}`;
 
       // ==================================================
       // 3️⃣ SEND NOTIFICATIONS + EMAILS

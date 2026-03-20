@@ -1231,11 +1231,12 @@ export class ClientDocumentationService {
     // 7️⃣ SEND NOTIFICATION (PER-USER DEDUP: 5-min window)
     // ==================================================
 
-    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
 
-    await Promise.allSettled(
-      techCheckUsers.map(async (user) => {
-        // Dedup guard: skip if already sent to this user in the last 5 minutes
+    // Sequential to avoid race-condition duplicates if the frontend double-submits
+    for (const user of techCheckUsers) {
+      try {
+        // Dedup guard: skip if already sent to this user in the last hour
         const alreadySent = await prisma.notification.findFirst({
           where: {
             vendor_id: data.vendor_id,
@@ -1244,11 +1245,11 @@ export class ClientDocumentationService {
             user_id: user.id,
             type: NotificationType.LEAD_ACTION,
             title: "Revised Documents Uploaded",
-            created_at: { gte: fiveMinutesAgo },
+            created_at: { gte: oneHourAgo },
           },
         });
 
-        if (alreadySent) return;
+        if (alreadySent) continue;
 
         await NotificationService.createAndSend({
           vendor_id: data.vendor_id,
@@ -1262,7 +1263,7 @@ export class ClientDocumentationService {
           redirect_url: redirectPath,
         });
 
-        if (!user.user_email) return;
+        if (!user.user_email) continue;
 
         await sendRevisedDocumentsUploadedEmail({
           vendor_id: data.vendor_id,
@@ -1274,8 +1275,14 @@ export class ClientDocumentationService {
           uploadedAt,
           projectUrl,
         });
-      }),
-    );
+      } catch (err: any) {
+        logger.warn("⚠️ Failed to send Revised Documents Uploaded notification", {
+          user_id: user.id,
+          lead_id: lead.id,
+          error: err?.message,
+        });
+      }
+    }
 
     return result;
   }
