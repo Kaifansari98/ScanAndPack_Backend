@@ -12,22 +12,40 @@ export const app = express();
   await connectRedis();
 })();
 
+// ===============================
+// ✅ CORS CONFIG (Wildcard Support)
+// ===============================
 const allowedOrigins = [
-  'https://shambhala.furnixcrm.com',
-  'https://vloq.furnixcrm.com',
-  'https://cadbid.com',
-  'http://localhost:3000',
-  'http://localhost:5173',
-  'https://vloq.com/'
+  "https://cadbid.com",
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "https://vloq.com",
 ];
+
+function isFurnixSubdomain(origin: string) {
+  try {
+    const url = new URL(origin);
+    return url.hostname.endsWith(".furnixcrm.com");
+  } catch {
+    return false;
+  }
+}
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin) return callback(null, true); // allow REST clients, Postman, etc.
+      if (!origin) return callback(null, true); // Postman / mobile apps
+
+      // ✅ Allow *.furnixcrm.com
+      if (isFurnixSubdomain(origin)) {
+        return callback(null, true);
+      }
+
+      // ✅ Allow fixed domains
       if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
+
       logger.warn(`❌ Blocked by CORS: ${origin}`);
       return callback(new Error("Not allowed by CORS"));
     },
@@ -40,26 +58,42 @@ app.use(
       "Accept",
       "Origin",
     ],
-  }),
+  })
 );
 
-// ✅ Increase request size limits (fixes “CORS” caused by 413 Payload Too Large)
+// ===============================
+// ✅ BODY PARSER (LARGE PAYLOAD)
+// ===============================
 app.use(express.json({ limit: "200mb" }));
 app.use(express.urlencoded({ extended: true, limit: "200mb" }));
 
+// ===============================
+// ✅ LOGGING
+// ===============================
 app.use(requestLogger);
-// ✅ Serve static assets (e.g., PDFs, images, etc.) from /assets
-// app.use("/assets", express.static(path.join(__dirname, "..", "assets")));
-app.use("/assets", express.static(path.join(__dirname, "..", "public", "assets")));
-app.use(express.static(path.join(__dirname, "..", "public")));
-// Now: http://yourdomain.com/assets/filename.pdf
 
-// ✅ Root test route
+// ===============================
+// ✅ STATIC FILES
+// ===============================
+app.use(
+  "/assets",
+  express.static(path.join(__dirname, "..", "public", "assets"))
+);
+app.use(express.static(path.join(__dirname, "..", "public")));
+
+// ===============================
+// ✅ ROOT TEST ROUTE
+// ===============================
 app.get("/", (_req, res) => {
   res.send("✅ Backend Server is working exactly like i wanted it to be!");
 });
 
-// ✅ /api test route
+// ===============================
+// ✅ API ROUTES
+// ===============================
 app.use("/api", router);
 
+// ===============================
+// ✅ ERROR LOGGER
+// ===============================
 app.use(errorLogger);
