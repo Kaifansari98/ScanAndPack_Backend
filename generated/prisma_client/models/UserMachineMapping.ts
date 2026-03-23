@@ -268,10 +268,10 @@ export type UserMachineMappingWhereInput = {
   created_at?: Prisma.DateTimeFilter<"UserMachineMapping"> | Date | string
   updated_by?: Prisma.IntFilter<"UserMachineMapping"> | number
   updated_at?: Prisma.DateTimeFilter<"UserMachineMapping"> | Date | string
-  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
-  machine?: Prisma.XOR<Prisma.MachineMasterScalarRelationFilter, Prisma.MachineMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  machine?: Prisma.XOR<Prisma.MachineMasterScalarRelationFilter, Prisma.MachineMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
@@ -285,10 +285,10 @@ export type UserMachineMappingOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  user?: Prisma.UserMasterOrderByWithRelationInput
-  machine?: Prisma.MachineMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  machine?: Prisma.MachineMasterOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
+  user?: Prisma.UserMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
@@ -305,10 +305,10 @@ export type UserMachineMappingWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"UserMachineMapping"> | Date | string
   updated_by?: Prisma.IntFilter<"UserMachineMapping"> | number
   updated_at?: Prisma.DateTimeFilter<"UserMachineMapping"> | Date | string
-  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
-  machine?: Prisma.XOR<Prisma.MachineMasterScalarRelationFilter, Prisma.MachineMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  machine?: Prisma.XOR<Prisma.MachineMasterScalarRelationFilter, Prisma.MachineMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
@@ -348,10 +348,10 @@ export type UserMachineMappingCreateInput = {
   status?: $Enums.UserMachineStatus
   created_at?: Date | string
   updated_at?: Date | string
-  user: Prisma.UserMasterCreateNestedOneWithoutUserMachineMappingsInput
-  machine: Prisma.MachineMasterCreateNestedOneWithoutUserMachineMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedUserMachineMappingsInput
+  machine: Prisma.MachineMasterCreateNestedOneWithoutUserMachineMappingsInput
   updatedBy: Prisma.UserMasterCreateNestedOneWithoutUpdatedUserMachineMappingsInput
+  user: Prisma.UserMasterCreateNestedOneWithoutUserMachineMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserMachineMappingInput
 }
 
@@ -371,10 +371,10 @@ export type UserMachineMappingUpdateInput = {
   status?: Prisma.EnumUserMachineStatusFieldUpdateOperationsInput | $Enums.UserMachineStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutUserMachineMappingsNestedInput
-  machine?: Prisma.MachineMasterUpdateOneRequiredWithoutUserMachineMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedUserMachineMappingsNestedInput
+  machine?: Prisma.MachineMasterUpdateOneRequiredWithoutUserMachineMappingsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutUpdatedUserMachineMappingsNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutUserMachineMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserMachineMappingNestedInput
 }
 
@@ -526,13 +526,6 @@ export type UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput = {
   deleteMany?: Prisma.UserMachineMappingScalarWhereInput | Prisma.UserMachineMappingScalarWhereInput[]
 }
 
-export type UserMachineMappingCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.UserMachineMappingCreateWithoutUserInput, Prisma.UserMachineMappingUncheckedCreateWithoutUserInput> | Prisma.UserMachineMappingCreateWithoutUserInput[] | Prisma.UserMachineMappingUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.UserMachineMappingCreateOrConnectWithoutUserInput | Prisma.UserMachineMappingCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.UserMachineMappingCreateManyUserInputEnvelope
-  connect?: Prisma.UserMachineMappingWhereUniqueInput | Prisma.UserMachineMappingWhereUniqueInput[]
-}
-
 export type UserMachineMappingCreateNestedManyWithoutCreatedByInput = {
   create?: Prisma.XOR<Prisma.UserMachineMappingCreateWithoutCreatedByInput, Prisma.UserMachineMappingUncheckedCreateWithoutCreatedByInput> | Prisma.UserMachineMappingCreateWithoutCreatedByInput[] | Prisma.UserMachineMappingUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.UserMachineMappingCreateOrConnectWithoutCreatedByInput | Prisma.UserMachineMappingCreateOrConnectWithoutCreatedByInput[]
@@ -547,7 +540,7 @@ export type UserMachineMappingCreateNestedManyWithoutUpdatedByInput = {
   connect?: Prisma.UserMachineMappingWhereUniqueInput | Prisma.UserMachineMappingWhereUniqueInput[]
 }
 
-export type UserMachineMappingUncheckedCreateNestedManyWithoutUserInput = {
+export type UserMachineMappingCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.UserMachineMappingCreateWithoutUserInput, Prisma.UserMachineMappingUncheckedCreateWithoutUserInput> | Prisma.UserMachineMappingCreateWithoutUserInput[] | Prisma.UserMachineMappingUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.UserMachineMappingCreateOrConnectWithoutUserInput | Prisma.UserMachineMappingCreateOrConnectWithoutUserInput[]
   createMany?: Prisma.UserMachineMappingCreateManyUserInputEnvelope
@@ -568,18 +561,11 @@ export type UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput = {
   connect?: Prisma.UserMachineMappingWhereUniqueInput | Prisma.UserMachineMappingWhereUniqueInput[]
 }
 
-export type UserMachineMappingUpdateManyWithoutUserNestedInput = {
+export type UserMachineMappingUncheckedCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.UserMachineMappingCreateWithoutUserInput, Prisma.UserMachineMappingUncheckedCreateWithoutUserInput> | Prisma.UserMachineMappingCreateWithoutUserInput[] | Prisma.UserMachineMappingUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.UserMachineMappingCreateOrConnectWithoutUserInput | Prisma.UserMachineMappingCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.UserMachineMappingUpsertWithWhereUniqueWithoutUserInput | Prisma.UserMachineMappingUpsertWithWhereUniqueWithoutUserInput[]
   createMany?: Prisma.UserMachineMappingCreateManyUserInputEnvelope
-  set?: Prisma.UserMachineMappingWhereUniqueInput | Prisma.UserMachineMappingWhereUniqueInput[]
-  disconnect?: Prisma.UserMachineMappingWhereUniqueInput | Prisma.UserMachineMappingWhereUniqueInput[]
-  delete?: Prisma.UserMachineMappingWhereUniqueInput | Prisma.UserMachineMappingWhereUniqueInput[]
   connect?: Prisma.UserMachineMappingWhereUniqueInput | Prisma.UserMachineMappingWhereUniqueInput[]
-  update?: Prisma.UserMachineMappingUpdateWithWhereUniqueWithoutUserInput | Prisma.UserMachineMappingUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.UserMachineMappingUpdateManyWithWhereWithoutUserInput | Prisma.UserMachineMappingUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.UserMachineMappingScalarWhereInput | Prisma.UserMachineMappingScalarWhereInput[]
 }
 
 export type UserMachineMappingUpdateManyWithoutCreatedByNestedInput = {
@@ -610,7 +596,7 @@ export type UserMachineMappingUpdateManyWithoutUpdatedByNestedInput = {
   deleteMany?: Prisma.UserMachineMappingScalarWhereInput | Prisma.UserMachineMappingScalarWhereInput[]
 }
 
-export type UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput = {
+export type UserMachineMappingUpdateManyWithoutUserNestedInput = {
   create?: Prisma.XOR<Prisma.UserMachineMappingCreateWithoutUserInput, Prisma.UserMachineMappingUncheckedCreateWithoutUserInput> | Prisma.UserMachineMappingCreateWithoutUserInput[] | Prisma.UserMachineMappingUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.UserMachineMappingCreateOrConnectWithoutUserInput | Prisma.UserMachineMappingCreateOrConnectWithoutUserInput[]
   upsert?: Prisma.UserMachineMappingUpsertWithWhereUniqueWithoutUserInput | Prisma.UserMachineMappingUpsertWithWhereUniqueWithoutUserInput[]
@@ -649,6 +635,20 @@ export type UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput = {
   connect?: Prisma.UserMachineMappingWhereUniqueInput | Prisma.UserMachineMappingWhereUniqueInput[]
   update?: Prisma.UserMachineMappingUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.UserMachineMappingUpdateWithWhereUniqueWithoutUpdatedByInput[]
   updateMany?: Prisma.UserMachineMappingUpdateManyWithWhereWithoutUpdatedByInput | Prisma.UserMachineMappingUpdateManyWithWhereWithoutUpdatedByInput[]
+  deleteMany?: Prisma.UserMachineMappingScalarWhereInput | Prisma.UserMachineMappingScalarWhereInput[]
+}
+
+export type UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.UserMachineMappingCreateWithoutUserInput, Prisma.UserMachineMappingUncheckedCreateWithoutUserInput> | Prisma.UserMachineMappingCreateWithoutUserInput[] | Prisma.UserMachineMappingUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.UserMachineMappingCreateOrConnectWithoutUserInput | Prisma.UserMachineMappingCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.UserMachineMappingUpsertWithWhereUniqueWithoutUserInput | Prisma.UserMachineMappingUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.UserMachineMappingCreateManyUserInputEnvelope
+  set?: Prisma.UserMachineMappingWhereUniqueInput | Prisma.UserMachineMappingWhereUniqueInput[]
+  disconnect?: Prisma.UserMachineMappingWhereUniqueInput | Prisma.UserMachineMappingWhereUniqueInput[]
+  delete?: Prisma.UserMachineMappingWhereUniqueInput | Prisma.UserMachineMappingWhereUniqueInput[]
+  connect?: Prisma.UserMachineMappingWhereUniqueInput | Prisma.UserMachineMappingWhereUniqueInput[]
+  update?: Prisma.UserMachineMappingUpdateWithWhereUniqueWithoutUserInput | Prisma.UserMachineMappingUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.UserMachineMappingUpdateManyWithWhereWithoutUserInput | Prisma.UserMachineMappingUpdateManyWithWhereWithoutUserInput[]
   deleteMany?: Prisma.UserMachineMappingScalarWhereInput | Prisma.UserMachineMappingScalarWhereInput[]
 }
 
@@ -702,10 +702,10 @@ export type UserMachineMappingCreateWithoutVendorInput = {
   status?: $Enums.UserMachineStatus
   created_at?: Date | string
   updated_at?: Date | string
-  user: Prisma.UserMasterCreateNestedOneWithoutUserMachineMappingsInput
-  machine: Prisma.MachineMasterCreateNestedOneWithoutUserMachineMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedUserMachineMappingsInput
+  machine: Prisma.MachineMasterCreateNestedOneWithoutUserMachineMappingsInput
   updatedBy: Prisma.UserMasterCreateNestedOneWithoutUpdatedUserMachineMappingsInput
+  user: Prisma.UserMasterCreateNestedOneWithoutUserMachineMappingsInput
 }
 
 export type UserMachineMappingUncheckedCreateWithoutVendorInput = {
@@ -760,44 +760,13 @@ export type UserMachineMappingScalarWhereInput = {
   updated_at?: Prisma.DateTimeFilter<"UserMachineMapping"> | Date | string
 }
 
-export type UserMachineMappingCreateWithoutUserInput = {
-  status?: $Enums.UserMachineStatus
-  created_at?: Date | string
-  updated_at?: Date | string
-  machine: Prisma.MachineMasterCreateNestedOneWithoutUserMachineMappingsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedUserMachineMappingsInput
-  updatedBy: Prisma.UserMasterCreateNestedOneWithoutUpdatedUserMachineMappingsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutUserMachineMappingInput
-}
-
-export type UserMachineMappingUncheckedCreateWithoutUserInput = {
-  id?: number
-  machine_id: number
-  vendor_id: number
-  status?: $Enums.UserMachineStatus
-  created_by: number
-  created_at?: Date | string
-  updated_by: number
-  updated_at?: Date | string
-}
-
-export type UserMachineMappingCreateOrConnectWithoutUserInput = {
-  where: Prisma.UserMachineMappingWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserMachineMappingCreateWithoutUserInput, Prisma.UserMachineMappingUncheckedCreateWithoutUserInput>
-}
-
-export type UserMachineMappingCreateManyUserInputEnvelope = {
-  data: Prisma.UserMachineMappingCreateManyUserInput | Prisma.UserMachineMappingCreateManyUserInput[]
-  skipDuplicates?: boolean
-}
-
 export type UserMachineMappingCreateWithoutCreatedByInput = {
   status?: $Enums.UserMachineStatus
   created_at?: Date | string
   updated_at?: Date | string
-  user: Prisma.UserMasterCreateNestedOneWithoutUserMachineMappingsInput
   machine: Prisma.MachineMasterCreateNestedOneWithoutUserMachineMappingsInput
   updatedBy: Prisma.UserMasterCreateNestedOneWithoutUpdatedUserMachineMappingsInput
+  user: Prisma.UserMasterCreateNestedOneWithoutUserMachineMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserMachineMappingInput
 }
 
@@ -826,9 +795,9 @@ export type UserMachineMappingCreateWithoutUpdatedByInput = {
   status?: $Enums.UserMachineStatus
   created_at?: Date | string
   updated_at?: Date | string
-  user: Prisma.UserMasterCreateNestedOneWithoutUserMachineMappingsInput
-  machine: Prisma.MachineMasterCreateNestedOneWithoutUserMachineMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedUserMachineMappingsInput
+  machine: Prisma.MachineMasterCreateNestedOneWithoutUserMachineMappingsInput
+  user: Prisma.UserMasterCreateNestedOneWithoutUserMachineMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserMachineMappingInput
 }
 
@@ -853,20 +822,35 @@ export type UserMachineMappingCreateManyUpdatedByInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type UserMachineMappingUpsertWithWhereUniqueWithoutUserInput = {
+export type UserMachineMappingCreateWithoutUserInput = {
+  status?: $Enums.UserMachineStatus
+  created_at?: Date | string
+  updated_at?: Date | string
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedUserMachineMappingsInput
+  machine: Prisma.MachineMasterCreateNestedOneWithoutUserMachineMappingsInput
+  updatedBy: Prisma.UserMasterCreateNestedOneWithoutUpdatedUserMachineMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUserMachineMappingInput
+}
+
+export type UserMachineMappingUncheckedCreateWithoutUserInput = {
+  id?: number
+  machine_id: number
+  vendor_id: number
+  status?: $Enums.UserMachineStatus
+  created_by: number
+  created_at?: Date | string
+  updated_by: number
+  updated_at?: Date | string
+}
+
+export type UserMachineMappingCreateOrConnectWithoutUserInput = {
   where: Prisma.UserMachineMappingWhereUniqueInput
-  update: Prisma.XOR<Prisma.UserMachineMappingUpdateWithoutUserInput, Prisma.UserMachineMappingUncheckedUpdateWithoutUserInput>
   create: Prisma.XOR<Prisma.UserMachineMappingCreateWithoutUserInput, Prisma.UserMachineMappingUncheckedCreateWithoutUserInput>
 }
 
-export type UserMachineMappingUpdateWithWhereUniqueWithoutUserInput = {
-  where: Prisma.UserMachineMappingWhereUniqueInput
-  data: Prisma.XOR<Prisma.UserMachineMappingUpdateWithoutUserInput, Prisma.UserMachineMappingUncheckedUpdateWithoutUserInput>
-}
-
-export type UserMachineMappingUpdateManyWithWhereWithoutUserInput = {
-  where: Prisma.UserMachineMappingScalarWhereInput
-  data: Prisma.XOR<Prisma.UserMachineMappingUpdateManyMutationInput, Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserInput>
+export type UserMachineMappingCreateManyUserInputEnvelope = {
+  data: Prisma.UserMachineMappingCreateManyUserInput | Prisma.UserMachineMappingCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type UserMachineMappingUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -901,13 +885,29 @@ export type UserMachineMappingUpdateManyWithWhereWithoutUpdatedByInput = {
   data: Prisma.XOR<Prisma.UserMachineMappingUpdateManyMutationInput, Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByInput>
 }
 
+export type UserMachineMappingUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.UserMachineMappingWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserMachineMappingUpdateWithoutUserInput, Prisma.UserMachineMappingUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.UserMachineMappingCreateWithoutUserInput, Prisma.UserMachineMappingUncheckedCreateWithoutUserInput>
+}
+
+export type UserMachineMappingUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.UserMachineMappingWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserMachineMappingUpdateWithoutUserInput, Prisma.UserMachineMappingUncheckedUpdateWithoutUserInput>
+}
+
+export type UserMachineMappingUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.UserMachineMappingScalarWhereInput
+  data: Prisma.XOR<Prisma.UserMachineMappingUpdateManyMutationInput, Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserInput>
+}
+
 export type UserMachineMappingCreateWithoutMachineInput = {
   status?: $Enums.UserMachineStatus
   created_at?: Date | string
   updated_at?: Date | string
-  user: Prisma.UserMasterCreateNestedOneWithoutUserMachineMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedUserMachineMappingsInput
   updatedBy: Prisma.UserMasterCreateNestedOneWithoutUpdatedUserMachineMappingsInput
+  user: Prisma.UserMasterCreateNestedOneWithoutUserMachineMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserMachineMappingInput
 }
 
@@ -963,10 +963,10 @@ export type UserMachineMappingUpdateWithoutVendorInput = {
   status?: Prisma.EnumUserMachineStatusFieldUpdateOperationsInput | $Enums.UserMachineStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutUserMachineMappingsNestedInput
-  machine?: Prisma.MachineMasterUpdateOneRequiredWithoutUserMachineMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedUserMachineMappingsNestedInput
+  machine?: Prisma.MachineMasterUpdateOneRequiredWithoutUserMachineMappingsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutUpdatedUserMachineMappingsNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutUserMachineMappingsNestedInput
 }
 
 export type UserMachineMappingUncheckedUpdateWithoutVendorInput = {
@@ -991,17 +991,6 @@ export type UserMachineMappingUncheckedUpdateManyWithoutVendorInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type UserMachineMappingCreateManyUserInput = {
-  id?: number
-  machine_id: number
-  vendor_id: number
-  status?: $Enums.UserMachineStatus
-  created_by: number
-  created_at?: Date | string
-  updated_by: number
-  updated_at?: Date | string
-}
-
 export type UserMachineMappingCreateManyCreatedByInput = {
   id?: number
   user_id: number
@@ -1024,45 +1013,24 @@ export type UserMachineMappingCreateManyUpdatedByInput = {
   updated_at?: Date | string
 }
 
-export type UserMachineMappingUpdateWithoutUserInput = {
-  status?: Prisma.EnumUserMachineStatusFieldUpdateOperationsInput | $Enums.UserMachineStatus
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  machine?: Prisma.MachineMasterUpdateOneRequiredWithoutUserMachineMappingsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedUserMachineMappingsNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutUpdatedUserMachineMappingsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserMachineMappingNestedInput
-}
-
-export type UserMachineMappingUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  machine_id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumUserMachineStatusFieldUpdateOperationsInput | $Enums.UserMachineStatus
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_by?: Prisma.IntFieldUpdateOperationsInput | number
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type UserMachineMappingUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  machine_id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumUserMachineStatusFieldUpdateOperationsInput | $Enums.UserMachineStatus
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_by?: Prisma.IntFieldUpdateOperationsInput | number
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type UserMachineMappingCreateManyUserInput = {
+  id?: number
+  machine_id: number
+  vendor_id: number
+  status?: $Enums.UserMachineStatus
+  created_by: number
+  created_at?: Date | string
+  updated_by: number
+  updated_at?: Date | string
 }
 
 export type UserMachineMappingUpdateWithoutCreatedByInput = {
   status?: Prisma.EnumUserMachineStatusFieldUpdateOperationsInput | $Enums.UserMachineStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutUserMachineMappingsNestedInput
   machine?: Prisma.MachineMasterUpdateOneRequiredWithoutUserMachineMappingsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutUpdatedUserMachineMappingsNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutUserMachineMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserMachineMappingNestedInput
 }
 
@@ -1092,9 +1060,9 @@ export type UserMachineMappingUpdateWithoutUpdatedByInput = {
   status?: Prisma.EnumUserMachineStatusFieldUpdateOperationsInput | $Enums.UserMachineStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutUserMachineMappingsNestedInput
-  machine?: Prisma.MachineMasterUpdateOneRequiredWithoutUserMachineMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedUserMachineMappingsNestedInput
+  machine?: Prisma.MachineMasterUpdateOneRequiredWithoutUserMachineMappingsNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutUserMachineMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserMachineMappingNestedInput
 }
 
@@ -1120,6 +1088,38 @@ export type UserMachineMappingUncheckedUpdateManyWithoutUpdatedByInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type UserMachineMappingUpdateWithoutUserInput = {
+  status?: Prisma.EnumUserMachineStatusFieldUpdateOperationsInput | $Enums.UserMachineStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedUserMachineMappingsNestedInput
+  machine?: Prisma.MachineMasterUpdateOneRequiredWithoutUserMachineMappingsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutUpdatedUserMachineMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserMachineMappingNestedInput
+}
+
+export type UserMachineMappingUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  machine_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumUserMachineStatusFieldUpdateOperationsInput | $Enums.UserMachineStatus
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserMachineMappingUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  machine_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumUserMachineStatusFieldUpdateOperationsInput | $Enums.UserMachineStatus
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type UserMachineMappingCreateManyMachineInput = {
   id?: number
   user_id: number
@@ -1135,9 +1135,9 @@ export type UserMachineMappingUpdateWithoutMachineInput = {
   status?: Prisma.EnumUserMachineStatusFieldUpdateOperationsInput | $Enums.UserMachineStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutUserMachineMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedUserMachineMappingsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutUpdatedUserMachineMappingsNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutUserMachineMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserMachineMappingNestedInput
 }
 
@@ -1175,10 +1175,10 @@ export type UserMachineMappingSelect<ExtArgs extends runtime.Types.Extensions.In
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  machine?: boolean | Prisma.MachineMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  machine?: boolean | Prisma.MachineMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userMachineMapping"]>
 
@@ -1192,10 +1192,10 @@ export type UserMachineMappingSelectCreateManyAndReturn<ExtArgs extends runtime.
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  machine?: boolean | Prisma.MachineMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  machine?: boolean | Prisma.MachineMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userMachineMapping"]>
 
@@ -1209,10 +1209,10 @@ export type UserMachineMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  machine?: boolean | Prisma.MachineMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  machine?: boolean | Prisma.MachineMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userMachineMapping"]>
 
@@ -1230,34 +1230,34 @@ export type UserMachineMappingSelectScalar = {
 
 export type UserMachineMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "machine_id" | "vendor_id" | "status" | "created_by" | "created_at" | "updated_by" | "updated_at", ExtArgs["result"]["userMachineMapping"]>
 export type UserMachineMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  machine?: boolean | Prisma.MachineMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  machine?: boolean | Prisma.MachineMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type UserMachineMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  machine?: boolean | Prisma.MachineMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  machine?: boolean | Prisma.MachineMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type UserMachineMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  machine?: boolean | Prisma.MachineMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  machine?: boolean | Prisma.MachineMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $UserMachineMappingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "UserMachineMapping"
   objects: {
-    user: Prisma.$UserMasterPayload<ExtArgs>
-    machine: Prisma.$MachineMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    machine: Prisma.$MachineMasterPayload<ExtArgs>
     updatedBy: Prisma.$UserMasterPayload<ExtArgs>
+    user: Prisma.$UserMasterPayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1664,10 +1664,10 @@ readonly fields: UserMachineMappingFieldRefs;
  */
 export interface Prisma__UserMachineMappingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  machine<T extends Prisma.MachineMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MachineMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__MachineMasterClient<runtime.Types.Result.GetResult<Prisma.$MachineMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  machine<T extends Prisma.MachineMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MachineMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__MachineMasterClient<runtime.Types.Result.GetResult<Prisma.$MachineMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.

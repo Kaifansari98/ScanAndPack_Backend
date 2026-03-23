@@ -208,16 +208,16 @@ export type UserGeographicalMappingWhereInput = {
   id?: Prisma.IntFilter<"UserGeographicalMapping"> | number
   user_id?: Prisma.IntFilter<"UserGeographicalMapping"> | number
   geographical_id?: Prisma.IntFilter<"UserGeographicalMapping"> | number
-  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   geographical?: Prisma.XOR<Prisma.GeographicalMappingScalarRelationFilter, Prisma.GeographicalMappingWhereInput>
+  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
 }
 
 export type UserGeographicalMappingOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   geographical_id?: Prisma.SortOrder
-  user?: Prisma.UserMasterOrderByWithRelationInput
   geographical?: Prisma.GeographicalMappingOrderByWithRelationInput
+  user?: Prisma.UserMasterOrderByWithRelationInput
 }
 
 export type UserGeographicalMappingWhereUniqueInput = Prisma.AtLeast<{
@@ -228,8 +228,8 @@ export type UserGeographicalMappingWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserGeographicalMappingWhereInput | Prisma.UserGeographicalMappingWhereInput[]
   user_id?: Prisma.IntFilter<"UserGeographicalMapping"> | number
   geographical_id?: Prisma.IntFilter<"UserGeographicalMapping"> | number
-  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   geographical?: Prisma.XOR<Prisma.GeographicalMappingScalarRelationFilter, Prisma.GeographicalMappingWhereInput>
+  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
 }, "id" | "user_id_geographical_id">
 
 export type UserGeographicalMappingOrderByWithAggregationInput = {
@@ -253,8 +253,8 @@ export type UserGeographicalMappingScalarWhereWithAggregatesInput = {
 }
 
 export type UserGeographicalMappingCreateInput = {
-  user: Prisma.UserMasterCreateNestedOneWithoutUserGeographicalMappingsInput
   geographical: Prisma.GeographicalMappingCreateNestedOneWithoutUserMappingsInput
+  user: Prisma.UserMasterCreateNestedOneWithoutUserGeographicalMappingsInput
 }
 
 export type UserGeographicalMappingUncheckedCreateInput = {
@@ -264,8 +264,8 @@ export type UserGeographicalMappingUncheckedCreateInput = {
 }
 
 export type UserGeographicalMappingUpdateInput = {
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutUserGeographicalMappingsNestedInput
   geographical?: Prisma.GeographicalMappingUpdateOneRequiredWithoutUserMappingsNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutUserGeographicalMappingsNestedInput
 }
 
 export type UserGeographicalMappingUncheckedUpdateInput = {
@@ -542,24 +542,24 @@ export type UserGeographicalMappingSelect<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   user_id?: boolean
   geographical_id?: boolean
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   geographical?: boolean | Prisma.GeographicalMappingDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userGeographicalMapping"]>
 
 export type UserGeographicalMappingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   user_id?: boolean
   geographical_id?: boolean
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   geographical?: boolean | Prisma.GeographicalMappingDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userGeographicalMapping"]>
 
 export type UserGeographicalMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   user_id?: boolean
   geographical_id?: boolean
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   geographical?: boolean | Prisma.GeographicalMappingDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userGeographicalMapping"]>
 
 export type UserGeographicalMappingSelectScalar = {
@@ -570,23 +570,23 @@ export type UserGeographicalMappingSelectScalar = {
 
 export type UserGeographicalMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "geographical_id", ExtArgs["result"]["userGeographicalMapping"]>
 export type UserGeographicalMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   geographical?: boolean | Prisma.GeographicalMappingDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
 }
 export type UserGeographicalMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   geographical?: boolean | Prisma.GeographicalMappingDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
 }
 export type UserGeographicalMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   geographical?: boolean | Prisma.GeographicalMappingDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
 }
 
 export type $UserGeographicalMappingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "UserGeographicalMapping"
   objects: {
-    user: Prisma.$UserMasterPayload<ExtArgs>
     geographical: Prisma.$GeographicalMappingPayload<ExtArgs>
+    user: Prisma.$UserMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -986,8 +986,8 @@ readonly fields: UserGeographicalMappingFieldRefs;
  */
 export interface Prisma__UserGeographicalMappingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   geographical<T extends Prisma.GeographicalMappingDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GeographicalMappingDefaultArgs<ExtArgs>>): Prisma.Prisma__GeographicalMappingClient<runtime.Types.Result.GetResult<Prisma.$GeographicalMappingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
