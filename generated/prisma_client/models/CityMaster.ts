@@ -204,16 +204,16 @@ export type CityMasterWhereInput = {
   id?: Prisma.IntFilter<"CityMaster"> | number
   name?: Prisma.StringFilter<"CityMaster"> | string
   state_id?: Prisma.IntFilter<"CityMaster"> | number
-  state?: Prisma.XOR<Prisma.StateMasterScalarRelationFilter, Prisma.StateMasterWhereInput>
   areas?: Prisma.AreaMasterListRelationFilter
+  state?: Prisma.XOR<Prisma.StateMasterScalarRelationFilter, Prisma.StateMasterWhereInput>
 }
 
 export type CityMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   state_id?: Prisma.SortOrder
-  state?: Prisma.StateMasterOrderByWithRelationInput
   areas?: Prisma.AreaMasterOrderByRelationAggregateInput
+  state?: Prisma.StateMasterOrderByWithRelationInput
 }
 
 export type CityMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -223,8 +223,8 @@ export type CityMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.CityMasterWhereInput | Prisma.CityMasterWhereInput[]
   name?: Prisma.StringFilter<"CityMaster"> | string
   state_id?: Prisma.IntFilter<"CityMaster"> | number
-  state?: Prisma.XOR<Prisma.StateMasterScalarRelationFilter, Prisma.StateMasterWhereInput>
   areas?: Prisma.AreaMasterListRelationFilter
+  state?: Prisma.XOR<Prisma.StateMasterScalarRelationFilter, Prisma.StateMasterWhereInput>
 }, "id">
 
 export type CityMasterOrderByWithAggregationInput = {
@@ -249,8 +249,8 @@ export type CityMasterScalarWhereWithAggregatesInput = {
 
 export type CityMasterCreateInput = {
   name: string
-  state: Prisma.StateMasterCreateNestedOneWithoutCitiesInput
   areas?: Prisma.AreaMasterCreateNestedManyWithoutCityInput
+  state: Prisma.StateMasterCreateNestedOneWithoutCitiesInput
 }
 
 export type CityMasterUncheckedCreateInput = {
@@ -262,8 +262,8 @@ export type CityMasterUncheckedCreateInput = {
 
 export type CityMasterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StateMasterUpdateOneRequiredWithoutCitiesNestedInput
   areas?: Prisma.AreaMasterUpdateManyWithoutCityNestedInput
+  state?: Prisma.StateMasterUpdateOneRequiredWithoutCitiesNestedInput
 }
 
 export type CityMasterUncheckedUpdateInput = {
@@ -528,8 +528,8 @@ export type CityMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   id?: boolean
   name?: boolean
   state_id?: boolean
-  state?: boolean | Prisma.StateMasterDefaultArgs<ExtArgs>
   areas?: boolean | Prisma.CityMaster$areasArgs<ExtArgs>
+  state?: boolean | Prisma.StateMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.CityMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["cityMaster"]>
 
@@ -555,8 +555,8 @@ export type CityMasterSelectScalar = {
 
 export type CityMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "state_id", ExtArgs["result"]["cityMaster"]>
 export type CityMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  state?: boolean | Prisma.StateMasterDefaultArgs<ExtArgs>
   areas?: boolean | Prisma.CityMaster$areasArgs<ExtArgs>
+  state?: boolean | Prisma.StateMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.CityMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CityMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -569,8 +569,8 @@ export type CityMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type $CityMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CityMaster"
   objects: {
-    state: Prisma.$StateMasterPayload<ExtArgs>
     areas: Prisma.$AreaMasterPayload<ExtArgs>[]
+    state: Prisma.$StateMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -970,8 +970,8 @@ readonly fields: CityMasterFieldRefs;
  */
 export interface Prisma__CityMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  state<T extends Prisma.StateMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StateMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__StateMasterClient<runtime.Types.Result.GetResult<Prisma.$StateMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   areas<T extends Prisma.CityMaster$areasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CityMaster$areasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AreaMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  state<T extends Prisma.StateMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StateMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__StateMasterClient<runtime.Types.Result.GetResult<Prisma.$StateMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

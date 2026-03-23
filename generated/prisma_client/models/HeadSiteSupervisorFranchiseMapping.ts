@@ -248,10 +248,10 @@ export type HeadSiteSupervisorFranchiseMappingWhereInput = {
   status?: Prisma.BoolFilter<"HeadSiteSupervisorFranchiseMapping"> | boolean
   created_by?: Prisma.IntFilter<"HeadSiteSupervisorFranchiseMapping"> | number
   created_at?: Prisma.DateTimeFilter<"HeadSiteSupervisorFranchiseMapping"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
-  franchise?: Prisma.XOR<Prisma.FranchiseMasterScalarRelationFilter, Prisma.FranchiseMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  franchise?: Prisma.XOR<Prisma.FranchiseMasterScalarRelationFilter, Prisma.FranchiseMasterWhereInput>
+  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type HeadSiteSupervisorFranchiseMappingOrderByWithRelationInput = {
@@ -262,10 +262,10 @@ export type HeadSiteSupervisorFranchiseMappingOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  user?: Prisma.UserMasterOrderByWithRelationInput
-  franchise?: Prisma.FranchiseMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  franchise?: Prisma.FranchiseMasterOrderByWithRelationInput
+  user?: Prisma.UserMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type HeadSiteSupervisorFranchiseMappingWhereUniqueInput = Prisma.AtLeast<{
@@ -281,10 +281,10 @@ export type HeadSiteSupervisorFranchiseMappingWhereUniqueInput = Prisma.AtLeast<
   status?: Prisma.BoolFilter<"HeadSiteSupervisorFranchiseMapping"> | boolean
   created_by?: Prisma.IntFilter<"HeadSiteSupervisorFranchiseMapping"> | number
   created_at?: Prisma.DateTimeFilter<"HeadSiteSupervisorFranchiseMapping"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
-  franchise?: Prisma.XOR<Prisma.FranchiseMasterScalarRelationFilter, Prisma.FranchiseMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  franchise?: Prisma.XOR<Prisma.FranchiseMasterScalarRelationFilter, Prisma.FranchiseMasterWhereInput>
+  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id" | "vendor_id_user_id_franchise_id" | "vendor_id_franchise_id">
 
 export type HeadSiteSupervisorFranchiseMappingOrderByWithAggregationInput = {
@@ -318,10 +318,10 @@ export type HeadSiteSupervisorFranchiseMappingScalarWhereWithAggregatesInput = {
 export type HeadSiteSupervisorFranchiseMappingCreateInput = {
   status?: boolean
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
-  user: Prisma.UserMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
-  franchise: Prisma.FranchiseMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsCreatedInput
+  franchise: Prisma.FranchiseMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
+  user: Prisma.UserMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
 }
 
 export type HeadSiteSupervisorFranchiseMappingUncheckedCreateInput = {
@@ -337,10 +337,10 @@ export type HeadSiteSupervisorFranchiseMappingUncheckedCreateInput = {
 export type HeadSiteSupervisorFranchiseMappingUpdateInput = {
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
 }
 
 export type HeadSiteSupervisorFranchiseMappingUncheckedUpdateInput = {
@@ -487,13 +487,6 @@ export type HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNe
   deleteMany?: Prisma.HeadSiteSupervisorFranchiseMappingScalarWhereInput | Prisma.HeadSiteSupervisorFranchiseMappingScalarWhereInput[]
 }
 
-export type HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.HeadSiteSupervisorFranchiseMappingCreateWithoutUserInput, Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateWithoutUserInput> | Prisma.HeadSiteSupervisorFranchiseMappingCreateWithoutUserInput[] | Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.HeadSiteSupervisorFranchiseMappingCreateOrConnectWithoutUserInput | Prisma.HeadSiteSupervisorFranchiseMappingCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.HeadSiteSupervisorFranchiseMappingCreateManyUserInputEnvelope
-  connect?: Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput | Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput[]
-}
-
 export type HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput = {
   create?: Prisma.XOR<Prisma.HeadSiteSupervisorFranchiseMappingCreateWithoutCreatedByInput, Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateWithoutCreatedByInput> | Prisma.HeadSiteSupervisorFranchiseMappingCreateWithoutCreatedByInput[] | Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.HeadSiteSupervisorFranchiseMappingCreateOrConnectWithoutCreatedByInput | Prisma.HeadSiteSupervisorFranchiseMappingCreateOrConnectWithoutCreatedByInput[]
@@ -501,7 +494,7 @@ export type HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByIn
   connect?: Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput | Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput[]
 }
 
-export type HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUserInput = {
+export type HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.HeadSiteSupervisorFranchiseMappingCreateWithoutUserInput, Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateWithoutUserInput> | Prisma.HeadSiteSupervisorFranchiseMappingCreateWithoutUserInput[] | Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.HeadSiteSupervisorFranchiseMappingCreateOrConnectWithoutUserInput | Prisma.HeadSiteSupervisorFranchiseMappingCreateOrConnectWithoutUserInput[]
   createMany?: Prisma.HeadSiteSupervisorFranchiseMappingCreateManyUserInputEnvelope
@@ -515,18 +508,11 @@ export type HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCr
   connect?: Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput | Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput[]
 }
 
-export type HeadSiteSupervisorFranchiseMappingUpdateManyWithoutUserNestedInput = {
+export type HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.HeadSiteSupervisorFranchiseMappingCreateWithoutUserInput, Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateWithoutUserInput> | Prisma.HeadSiteSupervisorFranchiseMappingCreateWithoutUserInput[] | Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.HeadSiteSupervisorFranchiseMappingCreateOrConnectWithoutUserInput | Prisma.HeadSiteSupervisorFranchiseMappingCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.HeadSiteSupervisorFranchiseMappingUpsertWithWhereUniqueWithoutUserInput | Prisma.HeadSiteSupervisorFranchiseMappingUpsertWithWhereUniqueWithoutUserInput[]
   createMany?: Prisma.HeadSiteSupervisorFranchiseMappingCreateManyUserInputEnvelope
-  set?: Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput | Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput[]
-  disconnect?: Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput | Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput[]
-  delete?: Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput | Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput[]
   connect?: Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput | Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput[]
-  update?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateWithWhereUniqueWithoutUserInput | Prisma.HeadSiteSupervisorFranchiseMappingUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithWhereWithoutUserInput | Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.HeadSiteSupervisorFranchiseMappingScalarWhereInput | Prisma.HeadSiteSupervisorFranchiseMappingScalarWhereInput[]
 }
 
 export type HeadSiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput = {
@@ -543,7 +529,7 @@ export type HeadSiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedIn
   deleteMany?: Prisma.HeadSiteSupervisorFranchiseMappingScalarWhereInput | Prisma.HeadSiteSupervisorFranchiseMappingScalarWhereInput[]
 }
 
-export type HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUserNestedInput = {
+export type HeadSiteSupervisorFranchiseMappingUpdateManyWithoutUserNestedInput = {
   create?: Prisma.XOR<Prisma.HeadSiteSupervisorFranchiseMappingCreateWithoutUserInput, Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateWithoutUserInput> | Prisma.HeadSiteSupervisorFranchiseMappingCreateWithoutUserInput[] | Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.HeadSiteSupervisorFranchiseMappingCreateOrConnectWithoutUserInput | Prisma.HeadSiteSupervisorFranchiseMappingCreateOrConnectWithoutUserInput[]
   upsert?: Prisma.HeadSiteSupervisorFranchiseMappingUpsertWithWhereUniqueWithoutUserInput | Prisma.HeadSiteSupervisorFranchiseMappingUpsertWithWhereUniqueWithoutUserInput[]
@@ -568,6 +554,20 @@ export type HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedB
   connect?: Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput | Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput[]
   update?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.HeadSiteSupervisorFranchiseMappingUpdateWithWhereUniqueWithoutCreatedByInput[]
   updateMany?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithWhereWithoutCreatedByInput | Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithWhereWithoutCreatedByInput[]
+  deleteMany?: Prisma.HeadSiteSupervisorFranchiseMappingScalarWhereInput | Prisma.HeadSiteSupervisorFranchiseMappingScalarWhereInput[]
+}
+
+export type HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.HeadSiteSupervisorFranchiseMappingCreateWithoutUserInput, Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateWithoutUserInput> | Prisma.HeadSiteSupervisorFranchiseMappingCreateWithoutUserInput[] | Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.HeadSiteSupervisorFranchiseMappingCreateOrConnectWithoutUserInput | Prisma.HeadSiteSupervisorFranchiseMappingCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.HeadSiteSupervisorFranchiseMappingUpsertWithWhereUniqueWithoutUserInput | Prisma.HeadSiteSupervisorFranchiseMappingUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.HeadSiteSupervisorFranchiseMappingCreateManyUserInputEnvelope
+  set?: Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput | Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput[]
+  disconnect?: Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput | Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput[]
+  delete?: Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput | Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput[]
+  connect?: Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput | Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput[]
+  update?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateWithWhereUniqueWithoutUserInput | Prisma.HeadSiteSupervisorFranchiseMappingUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithWhereWithoutUserInput | Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithWhereWithoutUserInput[]
   deleteMany?: Prisma.HeadSiteSupervisorFranchiseMappingScalarWhereInput | Prisma.HeadSiteSupervisorFranchiseMappingScalarWhereInput[]
 }
 
@@ -616,9 +616,9 @@ export type HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchis
 export type HeadSiteSupervisorFranchiseMappingCreateWithoutVendorInput = {
   status?: boolean
   created_at?: Date | string
-  user: Prisma.UserMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
-  franchise: Prisma.FranchiseMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsCreatedInput
+  franchise: Prisma.FranchiseMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
+  user: Prisma.UserMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
 }
 
 export type HeadSiteSupervisorFranchiseMappingUncheckedCreateWithoutVendorInput = {
@@ -669,39 +669,12 @@ export type HeadSiteSupervisorFranchiseMappingScalarWhereInput = {
   created_at?: Prisma.DateTimeFilter<"HeadSiteSupervisorFranchiseMapping"> | Date | string
 }
 
-export type HeadSiteSupervisorFranchiseMappingCreateWithoutUserInput = {
-  status?: boolean
-  created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
-  franchise: Prisma.FranchiseMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsCreatedInput
-}
-
-export type HeadSiteSupervisorFranchiseMappingUncheckedCreateWithoutUserInput = {
-  id?: number
-  vendor_id: number
-  franchise_id: number
-  status?: boolean
-  created_by: number
-  created_at?: Date | string
-}
-
-export type HeadSiteSupervisorFranchiseMappingCreateOrConnectWithoutUserInput = {
-  where: Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput
-  create: Prisma.XOR<Prisma.HeadSiteSupervisorFranchiseMappingCreateWithoutUserInput, Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateWithoutUserInput>
-}
-
-export type HeadSiteSupervisorFranchiseMappingCreateManyUserInputEnvelope = {
-  data: Prisma.HeadSiteSupervisorFranchiseMappingCreateManyUserInput | Prisma.HeadSiteSupervisorFranchiseMappingCreateManyUserInput[]
-  skipDuplicates?: boolean
-}
-
 export type HeadSiteSupervisorFranchiseMappingCreateWithoutCreatedByInput = {
   status?: boolean
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
-  user: Prisma.UserMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
   franchise: Prisma.FranchiseMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
+  user: Prisma.UserMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
 }
 
 export type HeadSiteSupervisorFranchiseMappingUncheckedCreateWithoutCreatedByInput = {
@@ -723,20 +696,31 @@ export type HeadSiteSupervisorFranchiseMappingCreateManyCreatedByInputEnvelope =
   skipDuplicates?: boolean
 }
 
-export type HeadSiteSupervisorFranchiseMappingUpsertWithWhereUniqueWithoutUserInput = {
+export type HeadSiteSupervisorFranchiseMappingCreateWithoutUserInput = {
+  status?: boolean
+  created_at?: Date | string
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsCreatedInput
+  franchise: Prisma.FranchiseMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
+}
+
+export type HeadSiteSupervisorFranchiseMappingUncheckedCreateWithoutUserInput = {
+  id?: number
+  vendor_id: number
+  franchise_id: number
+  status?: boolean
+  created_by: number
+  created_at?: Date | string
+}
+
+export type HeadSiteSupervisorFranchiseMappingCreateOrConnectWithoutUserInput = {
   where: Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput
-  update: Prisma.XOR<Prisma.HeadSiteSupervisorFranchiseMappingUpdateWithoutUserInput, Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateWithoutUserInput>
   create: Prisma.XOR<Prisma.HeadSiteSupervisorFranchiseMappingCreateWithoutUserInput, Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateWithoutUserInput>
 }
 
-export type HeadSiteSupervisorFranchiseMappingUpdateWithWhereUniqueWithoutUserInput = {
-  where: Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput
-  data: Prisma.XOR<Prisma.HeadSiteSupervisorFranchiseMappingUpdateWithoutUserInput, Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateWithoutUserInput>
-}
-
-export type HeadSiteSupervisorFranchiseMappingUpdateManyWithWhereWithoutUserInput = {
-  where: Prisma.HeadSiteSupervisorFranchiseMappingScalarWhereInput
-  data: Prisma.XOR<Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyMutationInput, Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUserInput>
+export type HeadSiteSupervisorFranchiseMappingCreateManyUserInputEnvelope = {
+  data: Prisma.HeadSiteSupervisorFranchiseMappingCreateManyUserInput | Prisma.HeadSiteSupervisorFranchiseMappingCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type HeadSiteSupervisorFranchiseMappingUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -755,12 +739,28 @@ export type HeadSiteSupervisorFranchiseMappingUpdateManyWithWhereWithoutCreatedB
   data: Prisma.XOR<Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyMutationInput, Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByInput>
 }
 
+export type HeadSiteSupervisorFranchiseMappingUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput
+  update: Prisma.XOR<Prisma.HeadSiteSupervisorFranchiseMappingUpdateWithoutUserInput, Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.HeadSiteSupervisorFranchiseMappingCreateWithoutUserInput, Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateWithoutUserInput>
+}
+
+export type HeadSiteSupervisorFranchiseMappingUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.HeadSiteSupervisorFranchiseMappingWhereUniqueInput
+  data: Prisma.XOR<Prisma.HeadSiteSupervisorFranchiseMappingUpdateWithoutUserInput, Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateWithoutUserInput>
+}
+
+export type HeadSiteSupervisorFranchiseMappingUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.HeadSiteSupervisorFranchiseMappingScalarWhereInput
+  data: Prisma.XOR<Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyMutationInput, Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUserInput>
+}
+
 export type HeadSiteSupervisorFranchiseMappingCreateWithoutFranchiseInput = {
   status?: boolean
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
-  user: Prisma.UserMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsCreatedInput
+  user: Prisma.UserMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutHeadSiteSupervisorFranchiseMappingsInput
 }
 
 export type HeadSiteSupervisorFranchiseMappingUncheckedCreateWithoutFranchiseInput = {
@@ -810,9 +810,9 @@ export type HeadSiteSupervisorFranchiseMappingCreateManyVendorInput = {
 export type HeadSiteSupervisorFranchiseMappingUpdateWithoutVendorInput = {
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
 }
 
 export type HeadSiteSupervisorFranchiseMappingUncheckedUpdateWithoutVendorInput = {
@@ -833,15 +833,6 @@ export type HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorIn
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type HeadSiteSupervisorFranchiseMappingCreateManyUserInput = {
-  id?: number
-  vendor_id: number
-  franchise_id: number
-  status?: boolean
-  created_by: number
-  created_at?: Date | string
-}
-
 export type HeadSiteSupervisorFranchiseMappingCreateManyCreatedByInput = {
   id?: number
   vendor_id: number
@@ -851,38 +842,21 @@ export type HeadSiteSupervisorFranchiseMappingCreateManyCreatedByInput = {
   created_at?: Date | string
 }
 
-export type HeadSiteSupervisorFranchiseMappingUpdateWithoutUserInput = {
-  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsCreatedNestedInput
-}
-
-export type HeadSiteSupervisorFranchiseMappingUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type HeadSiteSupervisorFranchiseMappingCreateManyUserInput = {
+  id?: number
+  vendor_id: number
+  franchise_id: number
+  status?: boolean
+  created_by: number
+  created_at?: Date | string
 }
 
 export type HeadSiteSupervisorFranchiseMappingUpdateWithoutCreatedByInput = {
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
 }
 
 export type HeadSiteSupervisorFranchiseMappingUncheckedUpdateWithoutCreatedByInput = {
@@ -903,6 +877,32 @@ export type HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedB
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type HeadSiteSupervisorFranchiseMappingUpdateWithoutUserInput = {
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
+}
+
+export type HeadSiteSupervisorFranchiseMappingUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type HeadSiteSupervisorFranchiseMappingCreateManyFranchiseInput = {
   id?: number
   vendor_id: number
@@ -915,9 +915,9 @@ export type HeadSiteSupervisorFranchiseMappingCreateManyFranchiseInput = {
 export type HeadSiteSupervisorFranchiseMappingUpdateWithoutFranchiseInput = {
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsCreatedNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMappingsNestedInput
 }
 
 export type HeadSiteSupervisorFranchiseMappingUncheckedUpdateWithoutFranchiseInput = {
@@ -948,10 +948,10 @@ export type HeadSiteSupervisorFranchiseMappingSelect<ExtArgs extends runtime.Typ
   status?: boolean
   created_by?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  franchise?: boolean | Prisma.FranchiseMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  franchise?: boolean | Prisma.FranchiseMasterDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["headSiteSupervisorFranchiseMapping"]>
 
 export type HeadSiteSupervisorFranchiseMappingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -962,10 +962,10 @@ export type HeadSiteSupervisorFranchiseMappingSelectCreateManyAndReturn<ExtArgs 
   status?: boolean
   created_by?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  franchise?: boolean | Prisma.FranchiseMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  franchise?: boolean | Prisma.FranchiseMasterDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["headSiteSupervisorFranchiseMapping"]>
 
 export type HeadSiteSupervisorFranchiseMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -976,10 +976,10 @@ export type HeadSiteSupervisorFranchiseMappingSelectUpdateManyAndReturn<ExtArgs 
   status?: boolean
   created_by?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  franchise?: boolean | Prisma.FranchiseMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  franchise?: boolean | Prisma.FranchiseMasterDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["headSiteSupervisorFranchiseMapping"]>
 
 export type HeadSiteSupervisorFranchiseMappingSelectScalar = {
@@ -994,31 +994,31 @@ export type HeadSiteSupervisorFranchiseMappingSelectScalar = {
 
 export type HeadSiteSupervisorFranchiseMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "user_id" | "franchise_id" | "status" | "created_by" | "created_at", ExtArgs["result"]["headSiteSupervisorFranchiseMapping"]>
 export type HeadSiteSupervisorFranchiseMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  franchise?: boolean | Prisma.FranchiseMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  franchise?: boolean | Prisma.FranchiseMasterDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type HeadSiteSupervisorFranchiseMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  franchise?: boolean | Prisma.FranchiseMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  franchise?: boolean | Prisma.FranchiseMasterDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type HeadSiteSupervisorFranchiseMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  franchise?: boolean | Prisma.FranchiseMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  franchise?: boolean | Prisma.FranchiseMasterDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $HeadSiteSupervisorFranchiseMappingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "HeadSiteSupervisorFranchiseMapping"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    user: Prisma.$UserMasterPayload<ExtArgs>
-    franchise: Prisma.$FranchiseMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    franchise: Prisma.$FranchiseMasterPayload<ExtArgs>
+    user: Prisma.$UserMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1422,10 +1422,10 @@ readonly fields: HeadSiteSupervisorFranchiseMappingFieldRefs;
  */
 export interface Prisma__HeadSiteSupervisorFranchiseMappingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  franchise<T extends Prisma.FranchiseMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FranchiseMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__FranchiseMasterClient<runtime.Types.Result.GetResult<Prisma.$FranchiseMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  franchise<T extends Prisma.FranchiseMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FranchiseMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__FranchiseMasterClient<runtime.Types.Result.GetResult<Prisma.$FranchiseMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
