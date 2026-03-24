@@ -220,8 +220,8 @@ export type ThemeMasterWhereInput = {
   name?: Prisma.StringFilter<"ThemeMaster"> | string
   is_active?: Prisma.BoolFilter<"ThemeMaster"> | boolean
   created_at?: Prisma.DateTimeFilter<"ThemeMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   mappings?: Prisma.ThemeMappingListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type ThemeMasterOrderByWithRelationInput = {
@@ -230,8 +230,8 @@ export type ThemeMasterOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   mappings?: Prisma.ThemeMappingOrderByRelationAggregateInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type ThemeMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -243,8 +243,8 @@ export type ThemeMasterWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"ThemeMaster"> | string
   is_active?: Prisma.BoolFilter<"ThemeMaster"> | boolean
   created_at?: Prisma.DateTimeFilter<"ThemeMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   mappings?: Prisma.ThemeMappingListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type ThemeMasterOrderByWithAggregationInput = {
@@ -275,8 +275,8 @@ export type ThemeMasterCreateInput = {
   name: string
   is_active?: boolean
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutThemesInput
   mappings?: Prisma.ThemeMappingCreateNestedManyWithoutThemeInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutThemesInput
 }
 
 export type ThemeMasterUncheckedCreateInput = {
@@ -292,8 +292,8 @@ export type ThemeMasterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutThemesNestedInput
   mappings?: Prisma.ThemeMappingUpdateManyWithoutThemeNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutThemesNestedInput
 }
 
 export type ThemeMasterUncheckedUpdateInput = {
@@ -596,8 +596,8 @@ export type ThemeMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   name?: boolean
   is_active?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   mappings?: boolean | Prisma.ThemeMaster$mappingsArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ThemeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["themeMaster"]>
 
@@ -629,8 +629,8 @@ export type ThemeMasterSelectScalar = {
 
 export type ThemeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "name" | "is_active" | "created_at", ExtArgs["result"]["themeMaster"]>
 export type ThemeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   mappings?: boolean | Prisma.ThemeMaster$mappingsArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ThemeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ThemeMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -643,8 +643,8 @@ export type ThemeMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.
 export type $ThemeMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ThemeMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     mappings: Prisma.$ThemeMappingPayload<ExtArgs>[]
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1046,8 +1046,8 @@ readonly fields: ThemeMasterFieldRefs;
  */
 export interface Prisma__ThemeMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   mappings<T extends Prisma.ThemeMaster$mappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ThemeMaster$mappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ThemeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

@@ -268,11 +268,11 @@ export type OrderLoginPoFileMappingWhereInput = {
   deleted_at?: Prisma.DateTimeNullableFilter<"OrderLoginPoFileMapping"> | Date | string | null
   deleted_by?: Prisma.IntNullableFilter<"OrderLoginPoFileMapping"> | number | null
   is_deleted?: Prisma.BoolFilter<"OrderLoginPoFileMapping"> | boolean
-  orderLogin?: Prisma.XOR<Prisma.OrderLoginDetailsScalarRelationFilter, Prisma.OrderLoginDetailsWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
-  document?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   deletedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  document?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  orderLogin?: Prisma.XOR<Prisma.OrderLoginDetailsScalarRelationFilter, Prisma.OrderLoginDetailsWhereInput>
 }
 
 export type OrderLoginPoFileMappingOrderByWithRelationInput = {
@@ -285,11 +285,11 @@ export type OrderLoginPoFileMappingOrderByWithRelationInput = {
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
-  orderLogin?: Prisma.OrderLoginDetailsOrderByWithRelationInput
-  lead?: Prisma.LeadMasterOrderByWithRelationInput
-  document?: Prisma.LeadDocumentsOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   deletedBy?: Prisma.UserMasterOrderByWithRelationInput
+  document?: Prisma.LeadDocumentsOrderByWithRelationInput
+  lead?: Prisma.LeadMasterOrderByWithRelationInput
+  orderLogin?: Prisma.OrderLoginDetailsOrderByWithRelationInput
 }
 
 export type OrderLoginPoFileMappingWhereUniqueInput = Prisma.AtLeast<{
@@ -305,11 +305,11 @@ export type OrderLoginPoFileMappingWhereUniqueInput = Prisma.AtLeast<{
   deleted_at?: Prisma.DateTimeNullableFilter<"OrderLoginPoFileMapping"> | Date | string | null
   deleted_by?: Prisma.IntNullableFilter<"OrderLoginPoFileMapping"> | number | null
   is_deleted?: Prisma.BoolFilter<"OrderLoginPoFileMapping"> | boolean
-  orderLogin?: Prisma.XOR<Prisma.OrderLoginDetailsScalarRelationFilter, Prisma.OrderLoginDetailsWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
-  document?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   deletedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  document?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  orderLogin?: Prisma.XOR<Prisma.OrderLoginDetailsScalarRelationFilter, Prisma.OrderLoginDetailsWhereInput>
 }, "id">
 
 export type OrderLoginPoFileMappingOrderByWithAggregationInput = {
@@ -348,11 +348,11 @@ export type OrderLoginPoFileMappingCreateInput = {
   created_at?: Date | string
   deleted_at?: Date | string | null
   is_deleted?: boolean
-  orderLogin: Prisma.OrderLoginDetailsCreateNestedOneWithoutPoFilesInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutOrderLoginPoFilesInput
-  document: Prisma.LeadDocumentsCreateNestedOneWithoutOrderLoginPoFilesInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutOrderLoginPoFilesCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutOrderLoginPoFilesDeletedInput
+  document: Prisma.LeadDocumentsCreateNestedOneWithoutOrderLoginPoFilesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutOrderLoginPoFilesInput
+  orderLogin: Prisma.OrderLoginDetailsCreateNestedOneWithoutPoFilesInput
 }
 
 export type OrderLoginPoFileMappingUncheckedCreateInput = {
@@ -371,11 +371,11 @@ export type OrderLoginPoFileMappingUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  orderLogin?: Prisma.OrderLoginDetailsUpdateOneRequiredWithoutPoFilesNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput
-  document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutOrderLoginPoFilesCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutOrderLoginPoFilesDeletedNestedInput
+  document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput
+  orderLogin?: Prisma.OrderLoginDetailsUpdateOneRequiredWithoutPoFilesNestedInput
 }
 
 export type OrderLoginPoFileMappingUncheckedUpdateInput = {
@@ -698,10 +698,10 @@ export type OrderLoginPoFileMappingCreateWithoutCreatedByInput = {
   created_at?: Date | string
   deleted_at?: Date | string | null
   is_deleted?: boolean
-  orderLogin: Prisma.OrderLoginDetailsCreateNestedOneWithoutPoFilesInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutOrderLoginPoFilesInput
-  document: Prisma.LeadDocumentsCreateNestedOneWithoutOrderLoginPoFilesInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutOrderLoginPoFilesDeletedInput
+  document: Prisma.LeadDocumentsCreateNestedOneWithoutOrderLoginPoFilesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutOrderLoginPoFilesInput
+  orderLogin: Prisma.OrderLoginDetailsCreateNestedOneWithoutPoFilesInput
 }
 
 export type OrderLoginPoFileMappingUncheckedCreateWithoutCreatedByInput = {
@@ -729,10 +729,10 @@ export type OrderLoginPoFileMappingCreateWithoutDeletedByInput = {
   created_at?: Date | string
   deleted_at?: Date | string | null
   is_deleted?: boolean
-  orderLogin: Prisma.OrderLoginDetailsCreateNestedOneWithoutPoFilesInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutOrderLoginPoFilesInput
-  document: Prisma.LeadDocumentsCreateNestedOneWithoutOrderLoginPoFilesInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutOrderLoginPoFilesCreatedInput
+  document: Prisma.LeadDocumentsCreateNestedOneWithoutOrderLoginPoFilesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutOrderLoginPoFilesInput
+  orderLogin: Prisma.OrderLoginDetailsCreateNestedOneWithoutPoFilesInput
 }
 
 export type OrderLoginPoFileMappingUncheckedCreateWithoutDeletedByInput = {
@@ -807,10 +807,10 @@ export type OrderLoginPoFileMappingCreateWithoutLeadInput = {
   created_at?: Date | string
   deleted_at?: Date | string | null
   is_deleted?: boolean
-  orderLogin: Prisma.OrderLoginDetailsCreateNestedOneWithoutPoFilesInput
-  document: Prisma.LeadDocumentsCreateNestedOneWithoutOrderLoginPoFilesInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutOrderLoginPoFilesCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutOrderLoginPoFilesDeletedInput
+  document: Prisma.LeadDocumentsCreateNestedOneWithoutOrderLoginPoFilesInput
+  orderLogin: Prisma.OrderLoginDetailsCreateNestedOneWithoutPoFilesInput
 }
 
 export type OrderLoginPoFileMappingUncheckedCreateWithoutLeadInput = {
@@ -854,10 +854,10 @@ export type OrderLoginPoFileMappingCreateWithoutDocumentInput = {
   created_at?: Date | string
   deleted_at?: Date | string | null
   is_deleted?: boolean
-  orderLogin: Prisma.OrderLoginDetailsCreateNestedOneWithoutPoFilesInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutOrderLoginPoFilesInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutOrderLoginPoFilesCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutOrderLoginPoFilesDeletedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutOrderLoginPoFilesInput
+  orderLogin: Prisma.OrderLoginDetailsCreateNestedOneWithoutPoFilesInput
 }
 
 export type OrderLoginPoFileMappingUncheckedCreateWithoutDocumentInput = {
@@ -901,10 +901,10 @@ export type OrderLoginPoFileMappingCreateWithoutOrderLoginInput = {
   created_at?: Date | string
   deleted_at?: Date | string | null
   is_deleted?: boolean
-  lead: Prisma.LeadMasterCreateNestedOneWithoutOrderLoginPoFilesInput
-  document: Prisma.LeadDocumentsCreateNestedOneWithoutOrderLoginPoFilesInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutOrderLoginPoFilesCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutOrderLoginPoFilesDeletedInput
+  document: Prisma.LeadDocumentsCreateNestedOneWithoutOrderLoginPoFilesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutOrderLoginPoFilesInput
 }
 
 export type OrderLoginPoFileMappingUncheckedCreateWithoutOrderLoginInput = {
@@ -970,10 +970,10 @@ export type OrderLoginPoFileMappingUpdateWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  orderLogin?: Prisma.OrderLoginDetailsUpdateOneRequiredWithoutPoFilesNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput
-  document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutOrderLoginPoFilesDeletedNestedInput
+  document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput
+  orderLogin?: Prisma.OrderLoginDetailsUpdateOneRequiredWithoutPoFilesNestedInput
 }
 
 export type OrderLoginPoFileMappingUncheckedUpdateWithoutCreatedByInput = {
@@ -1002,10 +1002,10 @@ export type OrderLoginPoFileMappingUpdateWithoutDeletedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  orderLogin?: Prisma.OrderLoginDetailsUpdateOneRequiredWithoutPoFilesNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput
-  document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutOrderLoginPoFilesCreatedNestedInput
+  document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput
+  orderLogin?: Prisma.OrderLoginDetailsUpdateOneRequiredWithoutPoFilesNestedInput
 }
 
 export type OrderLoginPoFileMappingUncheckedUpdateWithoutDeletedByInput = {
@@ -1045,10 +1045,10 @@ export type OrderLoginPoFileMappingUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  orderLogin?: Prisma.OrderLoginDetailsUpdateOneRequiredWithoutPoFilesNestedInput
-  document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutOrderLoginPoFilesCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutOrderLoginPoFilesDeletedNestedInput
+  document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput
+  orderLogin?: Prisma.OrderLoginDetailsUpdateOneRequiredWithoutPoFilesNestedInput
 }
 
 export type OrderLoginPoFileMappingUncheckedUpdateWithoutLeadInput = {
@@ -1088,10 +1088,10 @@ export type OrderLoginPoFileMappingUpdateWithoutDocumentInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  orderLogin?: Prisma.OrderLoginDetailsUpdateOneRequiredWithoutPoFilesNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutOrderLoginPoFilesCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutOrderLoginPoFilesDeletedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput
+  orderLogin?: Prisma.OrderLoginDetailsUpdateOneRequiredWithoutPoFilesNestedInput
 }
 
 export type OrderLoginPoFileMappingUncheckedUpdateWithoutDocumentInput = {
@@ -1131,10 +1131,10 @@ export type OrderLoginPoFileMappingUpdateWithoutOrderLoginInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput
-  document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutOrderLoginPoFilesCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutOrderLoginPoFilesDeletedNestedInput
+  document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput
 }
 
 export type OrderLoginPoFileMappingUncheckedUpdateWithoutOrderLoginInput = {
@@ -1171,11 +1171,11 @@ export type OrderLoginPoFileMappingSelect<ExtArgs extends runtime.Types.Extensio
   deleted_at?: boolean
   deleted_by?: boolean
   is_deleted?: boolean
-  orderLogin?: boolean | Prisma.OrderLoginDetailsDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.OrderLoginPoFileMapping$deletedByArgs<ExtArgs>
+  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  orderLogin?: boolean | Prisma.OrderLoginDetailsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["orderLoginPoFileMapping"]>
 
 export type OrderLoginPoFileMappingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1188,11 +1188,11 @@ export type OrderLoginPoFileMappingSelectCreateManyAndReturn<ExtArgs extends run
   deleted_at?: boolean
   deleted_by?: boolean
   is_deleted?: boolean
-  orderLogin?: boolean | Prisma.OrderLoginDetailsDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.OrderLoginPoFileMapping$deletedByArgs<ExtArgs>
+  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  orderLogin?: boolean | Prisma.OrderLoginDetailsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["orderLoginPoFileMapping"]>
 
 export type OrderLoginPoFileMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1205,11 +1205,11 @@ export type OrderLoginPoFileMappingSelectUpdateManyAndReturn<ExtArgs extends run
   deleted_at?: boolean
   deleted_by?: boolean
   is_deleted?: boolean
-  orderLogin?: boolean | Prisma.OrderLoginDetailsDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.OrderLoginPoFileMapping$deletedByArgs<ExtArgs>
+  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  orderLogin?: boolean | Prisma.OrderLoginDetailsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["orderLoginPoFileMapping"]>
 
 export type OrderLoginPoFileMappingSelectScalar = {
@@ -1226,35 +1226,35 @@ export type OrderLoginPoFileMappingSelectScalar = {
 
 export type OrderLoginPoFileMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderlogin_id" | "lead_id" | "document_id" | "created_by" | "created_at" | "deleted_at" | "deleted_by" | "is_deleted", ExtArgs["result"]["orderLoginPoFileMapping"]>
 export type OrderLoginPoFileMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  orderLogin?: boolean | Prisma.OrderLoginDetailsDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.OrderLoginPoFileMapping$deletedByArgs<ExtArgs>
+  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  orderLogin?: boolean | Prisma.OrderLoginDetailsDefaultArgs<ExtArgs>
 }
 export type OrderLoginPoFileMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  orderLogin?: boolean | Prisma.OrderLoginDetailsDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.OrderLoginPoFileMapping$deletedByArgs<ExtArgs>
+  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  orderLogin?: boolean | Prisma.OrderLoginDetailsDefaultArgs<ExtArgs>
 }
 export type OrderLoginPoFileMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  orderLogin?: boolean | Prisma.OrderLoginDetailsDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.OrderLoginPoFileMapping$deletedByArgs<ExtArgs>
+  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  orderLogin?: boolean | Prisma.OrderLoginDetailsDefaultArgs<ExtArgs>
 }
 
 export type $OrderLoginPoFileMappingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "OrderLoginPoFileMapping"
   objects: {
-    orderLogin: Prisma.$OrderLoginDetailsPayload<ExtArgs>
-    lead: Prisma.$LeadMasterPayload<ExtArgs>
-    document: Prisma.$LeadDocumentsPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
     deletedBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    document: Prisma.$LeadDocumentsPayload<ExtArgs>
+    lead: Prisma.$LeadMasterPayload<ExtArgs>
+    orderLogin: Prisma.$OrderLoginDetailsPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1660,11 +1660,11 @@ readonly fields: OrderLoginPoFileMappingFieldRefs;
  */
 export interface Prisma__OrderLoginPoFileMappingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  orderLogin<T extends Prisma.OrderLoginDetailsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrderLoginDetailsDefaultArgs<ExtArgs>>): Prisma.Prisma__OrderLoginDetailsClient<runtime.Types.Result.GetResult<Prisma.$OrderLoginDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  document<T extends Prisma.LeadDocumentsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocumentsDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadDocumentsClient<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   deletedBy<T extends Prisma.OrderLoginPoFileMapping$deletedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrderLoginPoFileMapping$deletedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  document<T extends Prisma.LeadDocumentsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocumentsDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadDocumentsClient<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  orderLogin<T extends Prisma.OrderLoginDetailsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrderLoginDetailsDefaultArgs<ExtArgs>>): Prisma.Prisma__OrderLoginDetailsClient<runtime.Types.Result.GetResult<Prisma.$OrderLoginDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

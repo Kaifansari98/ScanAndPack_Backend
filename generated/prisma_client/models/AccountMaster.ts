@@ -29,19 +29,19 @@ export type AggregateAccountMaster = {
 export type AccountMasterAvgAggregateOutputType = {
   id: number | null
   vendor_id: number | null
-  franchise_id: number | null
   created_by: number | null
   updated_by: number | null
   deleted_by: number | null
+  franchise_id: number | null
 }
 
 export type AccountMasterSumAggregateOutputType = {
   id: number | null
   vendor_id: number | null
-  franchise_id: number | null
   created_by: number | null
   updated_by: number | null
   deleted_by: number | null
+  franchise_id: number | null
 }
 
 export type AccountMasterMinAggregateOutputType = {
@@ -52,7 +52,6 @@ export type AccountMasterMinAggregateOutputType = {
   alt_contact_no: string | null
   email: string | null
   vendor_id: number | null
-  franchise_id: number | null
   created_by: number | null
   created_at: Date | null
   updated_by: number | null
@@ -60,6 +59,7 @@ export type AccountMasterMinAggregateOutputType = {
   deleted_at: Date | null
   deleted_by: number | null
   is_deleted: boolean | null
+  franchise_id: number | null
 }
 
 export type AccountMasterMaxAggregateOutputType = {
@@ -70,7 +70,6 @@ export type AccountMasterMaxAggregateOutputType = {
   alt_contact_no: string | null
   email: string | null
   vendor_id: number | null
-  franchise_id: number | null
   created_by: number | null
   created_at: Date | null
   updated_by: number | null
@@ -78,6 +77,7 @@ export type AccountMasterMaxAggregateOutputType = {
   deleted_at: Date | null
   deleted_by: number | null
   is_deleted: boolean | null
+  franchise_id: number | null
 }
 
 export type AccountMasterCountAggregateOutputType = {
@@ -88,7 +88,6 @@ export type AccountMasterCountAggregateOutputType = {
   alt_contact_no: number
   email: number
   vendor_id: number
-  franchise_id: number
   created_by: number
   created_at: number
   updated_by: number
@@ -96,6 +95,7 @@ export type AccountMasterCountAggregateOutputType = {
   deleted_at: number
   deleted_by: number
   is_deleted: number
+  franchise_id: number
   _all: number
 }
 
@@ -103,19 +103,19 @@ export type AccountMasterCountAggregateOutputType = {
 export type AccountMasterAvgAggregateInputType = {
   id?: true
   vendor_id?: true
-  franchise_id?: true
   created_by?: true
   updated_by?: true
   deleted_by?: true
+  franchise_id?: true
 }
 
 export type AccountMasterSumAggregateInputType = {
   id?: true
   vendor_id?: true
-  franchise_id?: true
   created_by?: true
   updated_by?: true
   deleted_by?: true
+  franchise_id?: true
 }
 
 export type AccountMasterMinAggregateInputType = {
@@ -126,7 +126,6 @@ export type AccountMasterMinAggregateInputType = {
   alt_contact_no?: true
   email?: true
   vendor_id?: true
-  franchise_id?: true
   created_by?: true
   created_at?: true
   updated_by?: true
@@ -134,6 +133,7 @@ export type AccountMasterMinAggregateInputType = {
   deleted_at?: true
   deleted_by?: true
   is_deleted?: true
+  franchise_id?: true
 }
 
 export type AccountMasterMaxAggregateInputType = {
@@ -144,7 +144,6 @@ export type AccountMasterMaxAggregateInputType = {
   alt_contact_no?: true
   email?: true
   vendor_id?: true
-  franchise_id?: true
   created_by?: true
   created_at?: true
   updated_by?: true
@@ -152,6 +151,7 @@ export type AccountMasterMaxAggregateInputType = {
   deleted_at?: true
   deleted_by?: true
   is_deleted?: true
+  franchise_id?: true
 }
 
 export type AccountMasterCountAggregateInputType = {
@@ -162,7 +162,6 @@ export type AccountMasterCountAggregateInputType = {
   alt_contact_no?: true
   email?: true
   vendor_id?: true
-  franchise_id?: true
   created_by?: true
   created_at?: true
   updated_by?: true
@@ -170,6 +169,7 @@ export type AccountMasterCountAggregateInputType = {
   deleted_at?: true
   deleted_by?: true
   is_deleted?: true
+  franchise_id?: true
   _all?: true
 }
 
@@ -267,7 +267,6 @@ export type AccountMasterGroupByOutputType = {
   alt_contact_no: string | null
   email: string | null
   vendor_id: number
-  franchise_id: number | null
   created_by: number
   created_at: Date
   updated_by: number | null
@@ -275,6 +274,7 @@ export type AccountMasterGroupByOutputType = {
   deleted_at: Date | null
   deleted_by: number | null
   is_deleted: boolean
+  franchise_id: number | null
   _count: AccountMasterCountAggregateOutputType | null
   _avg: AccountMasterAvgAggregateOutputType | null
   _sum: AccountMasterSumAggregateOutputType | null
@@ -308,7 +308,6 @@ export type AccountMasterWhereInput = {
   alt_contact_no?: Prisma.StringNullableFilter<"AccountMaster"> | string | null
   email?: Prisma.StringNullableFilter<"AccountMaster"> | string | null
   vendor_id?: Prisma.IntFilter<"AccountMaster"> | number
-  franchise_id?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
   created_by?: Prisma.IntFilter<"AccountMaster"> | number
   created_at?: Prisma.DateTimeFilter<"AccountMaster"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
@@ -316,10 +315,11 @@ export type AccountMasterWhereInput = {
   deleted_at?: Prisma.DateTimeNullableFilter<"AccountMaster"> | Date | string | null
   deleted_by?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
   is_deleted?: Prisma.BoolFilter<"AccountMaster"> | boolean
+  franchise_id?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  franchise?: Prisma.XOR<Prisma.FranchiseMasterNullableScalarRelationFilter, Prisma.FranchiseMasterWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  franchise?: Prisma.XOR<Prisma.FranchiseMasterNullableScalarRelationFilter, Prisma.FranchiseMasterWhereInput> | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterListRelationFilter
   installationUpdates?: Prisma.InstallationUpdateListRelationFilter
   installerMappings?: Prisma.InstallerUserMappingListRelationFilter
@@ -354,7 +354,6 @@ export type AccountMasterOrderByWithRelationInput = {
   alt_contact_no?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  franchise_id?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -362,10 +361,11 @@ export type AccountMasterOrderByWithRelationInput = {
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
+  franchise_id?: Prisma.SortOrderInput | Prisma.SortOrder
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  franchise?: Prisma.FranchiseMasterOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  franchise?: Prisma.FranchiseMasterOrderByWithRelationInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterOrderByRelationAggregateInput
   installationUpdates?: Prisma.InstallationUpdateOrderByRelationAggregateInput
   installerMappings?: Prisma.InstallerUserMappingOrderByRelationAggregateInput
@@ -403,7 +403,6 @@ export type AccountMasterWhereUniqueInput = Prisma.AtLeast<{
   alt_contact_no?: Prisma.StringNullableFilter<"AccountMaster"> | string | null
   email?: Prisma.StringNullableFilter<"AccountMaster"> | string | null
   vendor_id?: Prisma.IntFilter<"AccountMaster"> | number
-  franchise_id?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
   created_by?: Prisma.IntFilter<"AccountMaster"> | number
   created_at?: Prisma.DateTimeFilter<"AccountMaster"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
@@ -411,10 +410,11 @@ export type AccountMasterWhereUniqueInput = Prisma.AtLeast<{
   deleted_at?: Prisma.DateTimeNullableFilter<"AccountMaster"> | Date | string | null
   deleted_by?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
   is_deleted?: Prisma.BoolFilter<"AccountMaster"> | boolean
+  franchise_id?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  franchise?: Prisma.XOR<Prisma.FranchiseMasterNullableScalarRelationFilter, Prisma.FranchiseMasterWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  franchise?: Prisma.XOR<Prisma.FranchiseMasterNullableScalarRelationFilter, Prisma.FranchiseMasterWhereInput> | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterListRelationFilter
   installationUpdates?: Prisma.InstallationUpdateListRelationFilter
   installerMappings?: Prisma.InstallerUserMappingListRelationFilter
@@ -449,7 +449,6 @@ export type AccountMasterOrderByWithAggregationInput = {
   alt_contact_no?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  franchise_id?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -457,6 +456,7 @@ export type AccountMasterOrderByWithAggregationInput = {
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
+  franchise_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.AccountMasterCountOrderByAggregateInput
   _avg?: Prisma.AccountMasterAvgOrderByAggregateInput
   _max?: Prisma.AccountMasterMaxOrderByAggregateInput
@@ -475,7 +475,6 @@ export type AccountMasterScalarWhereWithAggregatesInput = {
   alt_contact_no?: Prisma.StringNullableWithAggregatesFilter<"AccountMaster"> | string | null
   email?: Prisma.StringNullableWithAggregatesFilter<"AccountMaster"> | string | null
   vendor_id?: Prisma.IntWithAggregatesFilter<"AccountMaster"> | number
-  franchise_id?: Prisma.IntNullableWithAggregatesFilter<"AccountMaster"> | number | null
   created_by?: Prisma.IntWithAggregatesFilter<"AccountMaster"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"AccountMaster"> | Date | string
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"AccountMaster"> | number | null
@@ -483,6 +482,7 @@ export type AccountMasterScalarWhereWithAggregatesInput = {
   deleted_at?: Prisma.DateTimeNullableWithAggregatesFilter<"AccountMaster"> | Date | string | null
   deleted_by?: Prisma.IntNullableWithAggregatesFilter<"AccountMaster"> | number | null
   is_deleted?: Prisma.BoolWithAggregatesFilter<"AccountMaster"> | boolean
+  franchise_id?: Prisma.IntNullableWithAggregatesFilter<"AccountMaster"> | number | null
 }
 
 export type AccountMasterCreateInput = {
@@ -497,9 +497,9 @@ export type AccountMasterCreateInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -534,7 +534,6 @@ export type AccountMasterUncheckedCreateInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -542,6 +541,7 @@ export type AccountMasterUncheckedCreateInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -580,9 +580,9 @@ export type AccountMasterUpdateInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -617,7 +617,6 @@ export type AccountMasterUncheckedUpdateInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -625,6 +624,7 @@ export type AccountMasterUncheckedUpdateInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -659,7 +659,6 @@ export type AccountMasterCreateManyInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -667,6 +666,7 @@ export type AccountMasterCreateManyInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
 }
 
 export type AccountMasterUpdateManyMutationInput = {
@@ -690,7 +690,6 @@ export type AccountMasterUncheckedUpdateManyInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -698,6 +697,7 @@ export type AccountMasterUncheckedUpdateManyInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type AccountMasterListRelationFilter = {
@@ -728,7 +728,6 @@ export type AccountMasterCountOrderByAggregateInput = {
   alt_contact_no?: Prisma.SortOrder
   email?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  franchise_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
@@ -736,15 +735,16 @@ export type AccountMasterCountOrderByAggregateInput = {
   deleted_at?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
+  franchise_id?: Prisma.SortOrder
 }
 
 export type AccountMasterAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  franchise_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
+  franchise_id?: Prisma.SortOrder
 }
 
 export type AccountMasterMaxOrderByAggregateInput = {
@@ -755,7 +755,6 @@ export type AccountMasterMaxOrderByAggregateInput = {
   alt_contact_no?: Prisma.SortOrder
   email?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  franchise_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
@@ -763,6 +762,7 @@ export type AccountMasterMaxOrderByAggregateInput = {
   deleted_at?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
+  franchise_id?: Prisma.SortOrder
 }
 
 export type AccountMasterMinOrderByAggregateInput = {
@@ -773,7 +773,6 @@ export type AccountMasterMinOrderByAggregateInput = {
   alt_contact_no?: Prisma.SortOrder
   email?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  franchise_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
@@ -781,15 +780,16 @@ export type AccountMasterMinOrderByAggregateInput = {
   deleted_at?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
+  franchise_id?: Prisma.SortOrder
 }
 
 export type AccountMasterSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  franchise_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
+  franchise_id?: Prisma.SortOrder
 }
 
 export type AccountMasterCreateNestedManyWithoutVendorInput = {
@@ -1314,8 +1314,8 @@ export type AccountMasterCreateWithoutVendorInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -1349,7 +1349,6 @@ export type AccountMasterUncheckedCreateWithoutVendorInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -1357,6 +1356,7 @@ export type AccountMasterUncheckedCreateWithoutVendorInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -1420,7 +1420,6 @@ export type AccountMasterScalarWhereInput = {
   alt_contact_no?: Prisma.StringNullableFilter<"AccountMaster"> | string | null
   email?: Prisma.StringNullableFilter<"AccountMaster"> | string | null
   vendor_id?: Prisma.IntFilter<"AccountMaster"> | number
-  franchise_id?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
   created_by?: Prisma.IntFilter<"AccountMaster"> | number
   created_at?: Prisma.DateTimeFilter<"AccountMaster"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
@@ -1428,6 +1427,7 @@ export type AccountMasterScalarWhereInput = {
   deleted_at?: Prisma.DateTimeNullableFilter<"AccountMaster"> | Date | string | null
   deleted_by?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
   is_deleted?: Prisma.BoolFilter<"AccountMaster"> | boolean
+  franchise_id?: Prisma.IntNullableFilter<"AccountMaster"> | number | null
 }
 
 export type AccountMasterCreateWithoutCreatedByInput = {
@@ -1441,9 +1441,9 @@ export type AccountMasterCreateWithoutCreatedByInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -1478,13 +1478,13 @@ export type AccountMasterUncheckedCreateWithoutCreatedByInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -1533,8 +1533,8 @@ export type AccountMasterCreateWithoutUpdatedByInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -1569,13 +1569,13 @@ export type AccountMasterUncheckedCreateWithoutUpdatedByInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -1656,9 +1656,9 @@ export type AccountMasterCreateWithoutLeadsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -1692,7 +1692,6 @@ export type AccountMasterUncheckedCreateWithoutLeadsInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -1700,6 +1699,7 @@ export type AccountMasterUncheckedCreateWithoutLeadsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -1753,9 +1753,9 @@ export type AccountMasterUpdateWithoutLeadsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -1789,7 +1789,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadsInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1797,6 +1796,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -1834,9 +1834,9 @@ export type AccountMasterCreateWithoutLeadUserMappingsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -1870,7 +1870,6 @@ export type AccountMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -1878,6 +1877,7 @@ export type AccountMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -1931,9 +1931,9 @@ export type AccountMasterUpdateWithoutLeadUserMappingsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -1967,7 +1967,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1975,6 +1974,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -2012,9 +2012,9 @@ export type AccountMasterCreateWithoutLeadActivityStatusLogInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -2048,7 +2048,6 @@ export type AccountMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -2056,6 +2055,7 @@ export type AccountMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -2109,9 +2109,9 @@ export type AccountMasterUpdateWithoutLeadActivityStatusLogInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -2145,7 +2145,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2153,6 +2152,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -2190,9 +2190,9 @@ export type AccountMasterCreateWithoutLeadsMappingInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -2226,7 +2226,6 @@ export type AccountMasterUncheckedCreateWithoutLeadsMappingInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -2234,6 +2233,7 @@ export type AccountMasterUncheckedCreateWithoutLeadsMappingInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -2287,9 +2287,9 @@ export type AccountMasterUpdateWithoutLeadsMappingInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -2323,7 +2323,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadsMappingInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2331,6 +2330,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadsMappingInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -2368,9 +2368,9 @@ export type AccountMasterCreateWithoutDocumentsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -2404,7 +2404,6 @@ export type AccountMasterUncheckedCreateWithoutDocumentsInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -2412,6 +2411,7 @@ export type AccountMasterUncheckedCreateWithoutDocumentsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -2465,9 +2465,9 @@ export type AccountMasterUpdateWithoutDocumentsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -2501,7 +2501,6 @@ export type AccountMasterUncheckedUpdateWithoutDocumentsInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2509,6 +2508,7 @@ export type AccountMasterUncheckedUpdateWithoutDocumentsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -2546,9 +2546,9 @@ export type AccountMasterCreateWithoutLeadChatDocumentInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -2582,7 +2582,6 @@ export type AccountMasterUncheckedCreateWithoutLeadChatDocumentInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -2590,6 +2589,7 @@ export type AccountMasterUncheckedCreateWithoutLeadChatDocumentInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -2643,9 +2643,9 @@ export type AccountMasterUpdateWithoutLeadChatDocumentInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -2679,7 +2679,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadChatDocumentInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2687,6 +2686,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadChatDocumentInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -2724,9 +2724,9 @@ export type AccountMasterCreateWithoutLeadProductStructureMappingInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -2760,7 +2760,6 @@ export type AccountMasterUncheckedCreateWithoutLeadProductStructureMappingInput 
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -2768,6 +2767,7 @@ export type AccountMasterUncheckedCreateWithoutLeadProductStructureMappingInput 
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -2821,9 +2821,9 @@ export type AccountMasterUpdateWithoutLeadProductStructureMappingInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -2857,7 +2857,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadProductStructureMappingInput 
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2865,6 +2864,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadProductStructureMappingInput 
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -2902,9 +2902,9 @@ export type AccountMasterCreateWithoutProductStructureInstancesInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -2938,7 +2938,6 @@ export type AccountMasterUncheckedCreateWithoutProductStructureInstancesInput = 
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -2946,6 +2945,7 @@ export type AccountMasterUncheckedCreateWithoutProductStructureInstancesInput = 
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -2999,9 +2999,9 @@ export type AccountMasterUpdateWithoutProductStructureInstancesInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -3035,7 +3035,6 @@ export type AccountMasterUncheckedUpdateWithoutProductStructureInstancesInput = 
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -3043,6 +3042,7 @@ export type AccountMasterUncheckedUpdateWithoutProductStructureInstancesInput = 
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -3080,9 +3080,9 @@ export type AccountMasterCreateWithoutPaymentsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -3116,7 +3116,6 @@ export type AccountMasterUncheckedCreateWithoutPaymentsInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -3124,6 +3123,7 @@ export type AccountMasterUncheckedCreateWithoutPaymentsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -3177,9 +3177,9 @@ export type AccountMasterUpdateWithoutPaymentsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -3213,7 +3213,6 @@ export type AccountMasterUncheckedUpdateWithoutPaymentsInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -3221,6 +3220,7 @@ export type AccountMasterUncheckedUpdateWithoutPaymentsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -3258,9 +3258,9 @@ export type AccountMasterCreateWithoutLedgersInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -3294,7 +3294,6 @@ export type AccountMasterUncheckedCreateWithoutLedgersInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -3302,6 +3301,7 @@ export type AccountMasterUncheckedCreateWithoutLedgersInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -3355,9 +3355,9 @@ export type AccountMasterUpdateWithoutLedgersInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -3391,7 +3391,6 @@ export type AccountMasterUncheckedUpdateWithoutLedgersInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -3399,6 +3398,7 @@ export type AccountMasterUncheckedUpdateWithoutLedgersInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -3436,9 +3436,9 @@ export type AccountMasterCreateWithoutLeadStatusLogsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -3472,7 +3472,6 @@ export type AccountMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -3480,6 +3479,7 @@ export type AccountMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -3533,9 +3533,9 @@ export type AccountMasterUpdateWithoutLeadStatusLogsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -3569,7 +3569,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -3577,6 +3576,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -3614,9 +3614,9 @@ export type AccountMasterCreateWithoutDesignMeetingInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -3650,7 +3650,6 @@ export type AccountMasterUncheckedCreateWithoutDesignMeetingInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -3658,6 +3657,7 @@ export type AccountMasterUncheckedCreateWithoutDesignMeetingInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -3711,9 +3711,9 @@ export type AccountMasterUpdateWithoutDesignMeetingInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -3747,7 +3747,6 @@ export type AccountMasterUncheckedUpdateWithoutDesignMeetingInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -3755,6 +3754,7 @@ export type AccountMasterUncheckedUpdateWithoutDesignMeetingInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -3792,9 +3792,9 @@ export type AccountMasterCreateWithoutDesignMeetingDocsMappingInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -3828,7 +3828,6 @@ export type AccountMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -3836,6 +3835,7 @@ export type AccountMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -3889,9 +3889,9 @@ export type AccountMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -3925,7 +3925,6 @@ export type AccountMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -3933,6 +3932,7 @@ export type AccountMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -3970,9 +3970,9 @@ export type AccountMasterCreateWithoutDesignSelectionInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -4006,7 +4006,6 @@ export type AccountMasterUncheckedCreateWithoutDesignSelectionInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -4014,6 +4013,7 @@ export type AccountMasterUncheckedCreateWithoutDesignSelectionInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -4067,9 +4067,9 @@ export type AccountMasterUpdateWithoutDesignSelectionInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -4103,7 +4103,6 @@ export type AccountMasterUncheckedUpdateWithoutDesignSelectionInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -4111,6 +4110,7 @@ export type AccountMasterUncheckedUpdateWithoutDesignSelectionInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -4148,9 +4148,9 @@ export type AccountMasterCreateWithoutSiteSupervisorsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -4184,7 +4184,6 @@ export type AccountMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -4192,6 +4191,7 @@ export type AccountMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -4245,9 +4245,9 @@ export type AccountMasterUpdateWithoutSiteSupervisorsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -4281,7 +4281,6 @@ export type AccountMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -4289,6 +4288,7 @@ export type AccountMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -4326,9 +4326,9 @@ export type AccountMasterCreateWithoutTasksInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -4362,7 +4362,6 @@ export type AccountMasterUncheckedCreateWithoutTasksInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -4370,6 +4369,7 @@ export type AccountMasterUncheckedCreateWithoutTasksInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -4423,9 +4423,9 @@ export type AccountMasterUpdateWithoutTasksInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -4459,7 +4459,6 @@ export type AccountMasterUncheckedUpdateWithoutTasksInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -4467,6 +4466,7 @@ export type AccountMasterUncheckedUpdateWithoutTasksInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -4504,9 +4504,9 @@ export type AccountMasterCreateWithoutLeadDetailedLogsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -4540,7 +4540,6 @@ export type AccountMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -4548,6 +4547,7 @@ export type AccountMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -4601,9 +4601,9 @@ export type AccountMasterUpdateWithoutLeadDetailedLogsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -4637,7 +4637,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -4645,6 +4644,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -4682,9 +4682,9 @@ export type AccountMasterCreateWithoutLeadDocumentLogsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -4718,7 +4718,6 @@ export type AccountMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -4726,6 +4725,7 @@ export type AccountMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -4779,9 +4779,9 @@ export type AccountMasterUpdateWithoutLeadDocumentLogsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -4815,7 +4815,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -4823,6 +4822,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -4860,9 +4860,9 @@ export type AccountMasterCreateWithoutOrderLoginDetailsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -4896,7 +4896,6 @@ export type AccountMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -4904,6 +4903,7 @@ export type AccountMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -4957,9 +4957,9 @@ export type AccountMasterUpdateWithoutOrderLoginDetailsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -4993,7 +4993,6 @@ export type AccountMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5001,6 +5000,7 @@ export type AccountMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -5038,9 +5038,9 @@ export type AccountMasterCreateWithoutSiteReadinessInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -5074,7 +5074,6 @@ export type AccountMasterUncheckedCreateWithoutSiteReadinessInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -5082,6 +5081,7 @@ export type AccountMasterUncheckedCreateWithoutSiteReadinessInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -5135,9 +5135,9 @@ export type AccountMasterUpdateWithoutSiteReadinessInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -5171,7 +5171,6 @@ export type AccountMasterUncheckedUpdateWithoutSiteReadinessInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5179,6 +5178,7 @@ export type AccountMasterUncheckedUpdateWithoutSiteReadinessInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -5216,9 +5216,9 @@ export type AccountMasterCreateWithoutInstallerMappingsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
@@ -5252,7 +5252,6 @@ export type AccountMasterUncheckedCreateWithoutInstallerMappingsInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -5260,6 +5259,7 @@ export type AccountMasterUncheckedCreateWithoutInstallerMappingsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
@@ -5313,9 +5313,9 @@ export type AccountMasterUpdateWithoutInstallerMappingsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
@@ -5349,7 +5349,6 @@ export type AccountMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5357,6 +5356,7 @@ export type AccountMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
@@ -5394,9 +5394,9 @@ export type AccountMasterCreateWithoutInstallationUpdatesInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
@@ -5430,7 +5430,6 @@ export type AccountMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -5438,6 +5437,7 @@ export type AccountMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
@@ -5491,9 +5491,9 @@ export type AccountMasterUpdateWithoutInstallationUpdatesInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
@@ -5527,7 +5527,6 @@ export type AccountMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5535,6 +5534,7 @@ export type AccountMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
@@ -5572,9 +5572,9 @@ export type AccountMasterCreateWithoutMiscellaneousMasterInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
@@ -5608,7 +5608,6 @@ export type AccountMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -5616,6 +5615,7 @@ export type AccountMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -5669,9 +5669,9 @@ export type AccountMasterUpdateWithoutMiscellaneousMasterInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -5705,7 +5705,6 @@ export type AccountMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5713,6 +5712,7 @@ export type AccountMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -5750,9 +5750,9 @@ export type AccountMasterCreateWithoutInstallationIssueLogMasterInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
@@ -5786,7 +5786,6 @@ export type AccountMasterUncheckedCreateWithoutInstallationIssueLogMasterInput =
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -5794,6 +5793,7 @@ export type AccountMasterUncheckedCreateWithoutInstallationIssueLogMasterInput =
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
@@ -5847,9 +5847,9 @@ export type AccountMasterUpdateWithoutInstallationIssueLogMasterInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
@@ -5883,7 +5883,6 @@ export type AccountMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput =
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5891,6 +5890,7 @@ export type AccountMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput =
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
@@ -6030,7 +6030,6 @@ export type AccountMasterCreateManyVendorInput = {
   contact_no: string
   alt_contact_no?: string | null
   email?: string | null
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_by?: number | null
@@ -6038,6 +6037,7 @@ export type AccountMasterCreateManyVendorInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
 }
 
 export type AccountMasterUpdateWithoutVendorInput = {
@@ -6052,8 +6052,8 @@ export type AccountMasterUpdateWithoutVendorInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -6087,7 +6087,6 @@ export type AccountMasterUncheckedUpdateWithoutVendorInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6095,6 +6094,7 @@ export type AccountMasterUncheckedUpdateWithoutVendorInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -6128,7 +6128,6 @@ export type AccountMasterUncheckedUpdateManyWithoutVendorInput = {
   contact_no?: Prisma.StringFieldUpdateOperationsInput | string
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6136,6 +6135,7 @@ export type AccountMasterUncheckedUpdateManyWithoutVendorInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type AccountMasterCreateManyCreatedByInput = {
@@ -6146,13 +6146,13 @@ export type AccountMasterCreateManyCreatedByInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
 }
 
 export type AccountMasterCreateManyUpdatedByInput = {
@@ -6163,13 +6163,13 @@ export type AccountMasterCreateManyUpdatedByInput = {
   alt_contact_no?: string | null
   email?: string | null
   vendor_id: number
-  franchise_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  franchise_id?: number | null
 }
 
 export type AccountMasterUpdateWithoutCreatedByInput = {
@@ -6183,9 +6183,9 @@ export type AccountMasterUpdateWithoutCreatedByInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -6220,13 +6220,13 @@ export type AccountMasterUncheckedUpdateWithoutCreatedByInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -6261,13 +6261,13 @@ export type AccountMasterUncheckedUpdateManyWithoutCreatedByInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type AccountMasterUpdateWithoutUpdatedByInput = {
@@ -6282,8 +6282,8 @@ export type AccountMasterUpdateWithoutUpdatedByInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
@@ -6318,13 +6318,13 @@ export type AccountMasterUncheckedUpdateWithoutUpdatedByInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -6359,13 +6359,13 @@ export type AccountMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type AccountMasterCreateManyFranchiseInput = {
@@ -6729,7 +6729,6 @@ export type AccountMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   alt_contact_no?: boolean
   email?: boolean
   vendor_id?: boolean
-  franchise_id?: boolean
   created_by?: boolean
   created_at?: boolean
   updated_by?: boolean
@@ -6737,10 +6736,11 @@ export type AccountMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   deleted_at?: boolean
   deleted_by?: boolean
   is_deleted?: boolean
+  franchise_id?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  franchise?: boolean | Prisma.AccountMaster$franchiseArgs<ExtArgs>
   updatedBy?: boolean | Prisma.AccountMaster$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  franchise?: boolean | Prisma.AccountMaster$franchiseArgs<ExtArgs>
   installationIssueLogMaster?: boolean | Prisma.AccountMaster$installationIssueLogMasterArgs<ExtArgs>
   installationUpdates?: boolean | Prisma.AccountMaster$installationUpdatesArgs<ExtArgs>
   installerMappings?: boolean | Prisma.AccountMaster$installerMappingsArgs<ExtArgs>
@@ -6776,7 +6776,6 @@ export type AccountMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   alt_contact_no?: boolean
   email?: boolean
   vendor_id?: boolean
-  franchise_id?: boolean
   created_by?: boolean
   created_at?: boolean
   updated_by?: boolean
@@ -6784,10 +6783,11 @@ export type AccountMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   deleted_at?: boolean
   deleted_by?: boolean
   is_deleted?: boolean
+  franchise_id?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  franchise?: boolean | Prisma.AccountMaster$franchiseArgs<ExtArgs>
   updatedBy?: boolean | Prisma.AccountMaster$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  franchise?: boolean | Prisma.AccountMaster$franchiseArgs<ExtArgs>
 }, ExtArgs["result"]["accountMaster"]>
 
 export type AccountMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -6798,7 +6798,6 @@ export type AccountMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   alt_contact_no?: boolean
   email?: boolean
   vendor_id?: boolean
-  franchise_id?: boolean
   created_by?: boolean
   created_at?: boolean
   updated_by?: boolean
@@ -6806,10 +6805,11 @@ export type AccountMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   deleted_at?: boolean
   deleted_by?: boolean
   is_deleted?: boolean
+  franchise_id?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  franchise?: boolean | Prisma.AccountMaster$franchiseArgs<ExtArgs>
   updatedBy?: boolean | Prisma.AccountMaster$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  franchise?: boolean | Prisma.AccountMaster$franchiseArgs<ExtArgs>
 }, ExtArgs["result"]["accountMaster"]>
 
 export type AccountMasterSelectScalar = {
@@ -6820,7 +6820,6 @@ export type AccountMasterSelectScalar = {
   alt_contact_no?: boolean
   email?: boolean
   vendor_id?: boolean
-  franchise_id?: boolean
   created_by?: boolean
   created_at?: boolean
   updated_by?: boolean
@@ -6828,14 +6827,15 @@ export type AccountMasterSelectScalar = {
   deleted_at?: boolean
   deleted_by?: boolean
   is_deleted?: boolean
+  franchise_id?: boolean
 }
 
-export type AccountMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "vendor_id" | "franchise_id" | "created_by" | "created_at" | "updated_by" | "updated_at" | "deleted_at" | "deleted_by" | "is_deleted", ExtArgs["result"]["accountMaster"]>
+export type AccountMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "vendor_id" | "created_by" | "created_at" | "updated_by" | "updated_at" | "deleted_at" | "deleted_by" | "is_deleted" | "franchise_id", ExtArgs["result"]["accountMaster"]>
 export type AccountMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  franchise?: boolean | Prisma.AccountMaster$franchiseArgs<ExtArgs>
   updatedBy?: boolean | Prisma.AccountMaster$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  franchise?: boolean | Prisma.AccountMaster$franchiseArgs<ExtArgs>
   installationIssueLogMaster?: boolean | Prisma.AccountMaster$installationIssueLogMasterArgs<ExtArgs>
   installationUpdates?: boolean | Prisma.AccountMaster$installationUpdatesArgs<ExtArgs>
   installerMappings?: boolean | Prisma.AccountMaster$installerMappingsArgs<ExtArgs>
@@ -6864,24 +6864,24 @@ export type AccountMasterInclude<ExtArgs extends runtime.Types.Extensions.Intern
 }
 export type AccountMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  franchise?: boolean | Prisma.AccountMaster$franchiseArgs<ExtArgs>
   updatedBy?: boolean | Prisma.AccountMaster$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  franchise?: boolean | Prisma.AccountMaster$franchiseArgs<ExtArgs>
 }
 export type AccountMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  franchise?: boolean | Prisma.AccountMaster$franchiseArgs<ExtArgs>
   updatedBy?: boolean | Prisma.AccountMaster$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  franchise?: boolean | Prisma.AccountMaster$franchiseArgs<ExtArgs>
 }
 
 export type $AccountMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "AccountMaster"
   objects: {
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    franchise: Prisma.$FranchiseMasterPayload<ExtArgs> | null
     updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    franchise: Prisma.$FranchiseMasterPayload<ExtArgs> | null
     installationIssueLogMaster: Prisma.$InstallationIssueLogMasterPayload<ExtArgs>[]
     installationUpdates: Prisma.$InstallationUpdatePayload<ExtArgs>[]
     installerMappings: Prisma.$InstallerUserMappingPayload<ExtArgs>[]
@@ -6915,7 +6915,6 @@ export type $AccountMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     alt_contact_no: string | null
     email: string | null
     vendor_id: number
-    franchise_id: number | null
     created_by: number
     created_at: Date
     updated_by: number | null
@@ -6923,6 +6922,7 @@ export type $AccountMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     deleted_at: Date | null
     deleted_by: number | null
     is_deleted: boolean
+    franchise_id: number | null
   }, ExtArgs["result"]["accountMaster"]>
   composites: {}
 }
@@ -7318,9 +7318,9 @@ readonly fields: AccountMasterFieldRefs;
 export interface Prisma__AccountMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  franchise<T extends Prisma.AccountMaster$franchiseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$franchiseArgs<ExtArgs>>): Prisma.Prisma__FranchiseMasterClient<runtime.Types.Result.GetResult<Prisma.$FranchiseMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.AccountMaster$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  franchise<T extends Prisma.AccountMaster$franchiseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$franchiseArgs<ExtArgs>>): Prisma.Prisma__FranchiseMasterClient<runtime.Types.Result.GetResult<Prisma.$FranchiseMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   installationIssueLogMaster<T extends Prisma.AccountMaster$installationIssueLogMasterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$installationIssueLogMasterArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallationIssueLogMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   installationUpdates<T extends Prisma.AccountMaster$installationUpdatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$installationUpdatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallationUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   installerMappings<T extends Prisma.AccountMaster$installerMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$installerMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallerUserMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -7381,7 +7381,6 @@ export interface AccountMasterFieldRefs {
   readonly alt_contact_no: Prisma.FieldRef<"AccountMaster", 'String'>
   readonly email: Prisma.FieldRef<"AccountMaster", 'String'>
   readonly vendor_id: Prisma.FieldRef<"AccountMaster", 'Int'>
-  readonly franchise_id: Prisma.FieldRef<"AccountMaster", 'Int'>
   readonly created_by: Prisma.FieldRef<"AccountMaster", 'Int'>
   readonly created_at: Prisma.FieldRef<"AccountMaster", 'DateTime'>
   readonly updated_by: Prisma.FieldRef<"AccountMaster", 'Int'>
@@ -7389,6 +7388,7 @@ export interface AccountMasterFieldRefs {
   readonly deleted_at: Prisma.FieldRef<"AccountMaster", 'DateTime'>
   readonly deleted_by: Prisma.FieldRef<"AccountMaster", 'Int'>
   readonly is_deleted: Prisma.FieldRef<"AccountMaster", 'Boolean'>
+  readonly franchise_id: Prisma.FieldRef<"AccountMaster", 'Int'>
 }
     
 
@@ -7785,25 +7785,6 @@ export type AccountMasterDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
- * AccountMaster.updatedBy
- */
-export type AccountMaster$updatedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UserMaster
-   */
-  select?: Prisma.UserMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the UserMaster
-   */
-  omit?: Prisma.UserMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserMasterInclude<ExtArgs> | null
-  where?: Prisma.UserMasterWhereInput
-}
-
-/**
  * AccountMaster.franchise
  */
 export type AccountMaster$franchiseArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -7820,6 +7801,25 @@ export type AccountMaster$franchiseArgs<ExtArgs extends runtime.Types.Extensions
    */
   include?: Prisma.FranchiseMasterInclude<ExtArgs> | null
   where?: Prisma.FranchiseMasterWhereInput
+}
+
+/**
+ * AccountMaster.updatedBy
+ */
+export type AccountMaster$updatedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserMaster
+   */
+  select?: Prisma.UserMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserMaster
+   */
+  omit?: Prisma.UserMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserMasterInclude<ExtArgs> | null
+  where?: Prisma.UserMasterWhereInput
 }
 
 /**

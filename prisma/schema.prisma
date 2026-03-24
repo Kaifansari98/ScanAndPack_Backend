@@ -8,83 +8,82 @@ datasource db {
 }
 
 model VendorMaster {
-  id                          Int                                 @id @default(autoincrement())
-  vendor_name                 String
-  vendor_code                 String
-  primary_contact_number      String
-  primary_contact_email       String
-  primary_contact_name        String
-  country_code                String
-  head_office_id              Int?
-  status                      String                              @default("inactive")
-  logo                        String
-  time_zone                   String
-  createdAt                   DateTime                            @default(now())
-  updatedAt                   DateTime                            @updatedAt
-  accounts                    AccountMaster[]
-  boxes                       BoxMaster[]
-  CompanyVendorsMaster        CompanyVendorsMaster[]
-  CutList                     CutList[]
-  cutListMachineMapping       CutListMachineMapping[]
-  documentTypes               DocumentTypeMaster[]
-  notificationMasters         EmailNotificationMaster[]
-  installationIssueLogMaster  InstallationIssueLogMaster[]
-  installationUpdates         InstallationUpdate[]
-  installationUpdateDocs      InstallationUpdateDocuments[]
-  installerMappings           InstallerUserMapping[]
-  installers                  InstallerUserMaster[]
-  issueLogTypeMaster          IssueLogTypeMaster[]
-  leadActivityStatusLog       LeadActivityStatusLog[]
-  leadChatDocuments           LeadChatDocument[]
-  leadChatRooms               LeadChatRoom[]
-  designMeeting               LeadDesignMeeting[]
-  designMeetingDocsMapping    LeadDesignMeetingDocumentsMapping[]
-  designSelection             LeadDesignSelection[]
-  leadDetailedLogs            LeadDetailedLogs[]
-  leadDocumentLogs            LeadDocumentLogs[]
-  documents                   LeadDocuments[]
-  leads                       LeadMaster[]
-  leadProductMaps             LeadProductMapping[]
-  productStructureInstances   LeadProductStructureInstance[]
-  leadProductStructureMapping LeadProductStructureMapping[]
-  siteSupervisors             LeadSiteSupervisorMapping[]
-  leadStatusLogs              LeadStatusLogs[]
-  leadUserMappings            LeadUserMapping[]
-  ledgers                     Ledger[]
-  machineMaster               MachineMaster[]
-  miscellaneousDocument       MiscellaneousDocument[]
-  miscellaneousMaster         MiscellaneousMaster[]
-  miscellaneousTeamMaster     MiscellaneousTeamMaster[]
-  miscellaneousTypeMaster     MiscellaneousTypeMaster[]
-  notifications               Notification[]
-  orderLoginDetails           OrderLoginDetails[]
-  payments                    PaymentInfo[]
-  paymentTypeMaster           PaymentTypeMaster[]
-  productStructure            ProductStructure[]
-  productTypes                ProductTypeMaster[]
-  projectDetails              ProjectDetails[]
-  projectItems                ProjectItemsMaster[]
-  projects                    ProjectMaster[]
-  scanItems                   ScanAndPackItem[]
-  siteReadiness               SiteReadiness[]
-  siteTypes                   SiteTypeMaster[]
-  sources                     SourceMaster[]
-  statusTypes                 StatusTypeMaster[]
-  userLeadTasks               UserLeadTask[]
-  users                       UserMaster[]
-  userPushTokens              UserPushToken[]
-  addresses                   VendorAddress[]
-  vendorModulesMappings       VendorModulesMapping[]
-  taxInfo                     VendorTaxInfo[]
-  tokens                      VendorTokens[]
-  userMachineMapping          UserMachineMapping[]
-  vendorSetting               VendorSetting[]
-  defectMaster                DefectMaster[]
-  defectedItems DefectedItem[]
-
-  franchises                  FranchiseMaster[]
+  id                                  Int                                  @id @default(autoincrement())
+  vendor_name                         String
+  vendor_code                         String
+  primary_contact_number              String
+  primary_contact_email               String
+  primary_contact_name                String
+  country_code                        String
+  head_office_id                      Int?
+  status                              String                               @default("inactive")
+  logo                                String
+  time_zone                           String
+  createdAt                           DateTime                             @default(now())
+  updatedAt                           DateTime                             @updatedAt
+  accounts                            AccountMaster[]
+  boxes                               BoxMaster[]
+  CompanyVendorsMaster                CompanyVendorsMaster[]
+  CutList                             CutList[]
+  cutListMachineMapping               CutListMachineMapping[]
+  defectMaster                        DefectMaster[]
+  defectedItems                       DefectedItem[]
+  documentTypes                       DocumentTypeMaster[]
+  notificationMasters                 EmailNotificationMaster[]
+  franchises                          FranchiseMaster[]
   headSiteSupervisorFranchiseMappings HeadSiteSupervisorFranchiseMapping[]
-  themes                      ThemeMaster[]
+  installationIssueLogMaster          InstallationIssueLogMaster[]
+  installationUpdates                 InstallationUpdate[]
+  installationUpdateDocs              InstallationUpdateDocuments[]
+  installerMappings                   InstallerUserMapping[]
+  installers                          InstallerUserMaster[]
+  issueLogTypeMaster                  IssueLogTypeMaster[]
+  leadActivityStatusLog               LeadActivityStatusLog[]
+  leadChatDocuments                   LeadChatDocument[]
+  leadChatRooms                       LeadChatRoom[]
+  designMeeting                       LeadDesignMeeting[]
+  designMeetingDocsMapping            LeadDesignMeetingDocumentsMapping[]
+  designSelection                     LeadDesignSelection[]
+  leadDetailedLogs                    LeadDetailedLogs[]
+  leadDocumentLogs                    LeadDocumentLogs[]
+  documents                           LeadDocuments[]
+  leads                               LeadMaster[]
+  leadProductMaps                     LeadProductMapping[]
+  productStructureInstances           LeadProductStructureInstance[]
+  leadProductStructureMapping         LeadProductStructureMapping[]
+  siteSupervisors                     LeadSiteSupervisorMapping[]
+  leadStatusLogs                      LeadStatusLogs[]
+  leadUserMappings                    LeadUserMapping[]
+  ledgers                             Ledger[]
+  machineMaster                       MachineMaster[]
+  miscellaneousDocument               MiscellaneousDocument[]
+  miscellaneousMaster                 MiscellaneousMaster[]
+  miscellaneousTeamMaster             MiscellaneousTeamMaster[]
+  miscellaneousTypeMaster             MiscellaneousTypeMaster[]
+  notifications                       Notification[]
+  orderLoginDetails                   OrderLoginDetails[]
+  payments                            PaymentInfo[]
+  paymentTypeMaster                   PaymentTypeMaster[]
+  productStructure                    ProductStructure[]
+  productTypes                        ProductTypeMaster[]
+  projectDetails                      ProjectDetails[]
+  projectItems                        ProjectItemsMaster[]
+  projects                            ProjectMaster[]
+  scanItems                           ScanAndPackItem[]
+  siteReadiness                       SiteReadiness[]
+  siteTypes                           SiteTypeMaster[]
+  sources                             SourceMaster[]
+  statusTypes                         StatusTypeMaster[]
+  themes                              ThemeMaster[]
+  userLeadTasks                       UserLeadTask[]
+  userMachineMapping                  UserMachineMapping[]
+  users                               UserMaster[]
+  userPushTokens                      UserPushToken[]
+  addresses                           VendorAddress[]
+  vendorModulesMappings               VendorModulesMapping[]
+  vendorSetting                       VendorSetting[]
+  taxInfo                             VendorTaxInfo[]
+  tokens                              VendorTokens[]
 }
 
 model VendorAddress {
@@ -117,89 +116,87 @@ model UserTypeMaster {
 }
 
 model UserMaster {
-  id                                   Int                                 @id @default(autoincrement())
-  vendor_id                            Int
-  franchise_id                         Int?
-  user_name                            String
-  user_contact                         String                              @unique
-  user_email                           String
-  user_timezone                        String
-  password                             String
-  user_type_id                         Int
-  status                               String                              @default("inactive")
-  created_at                           DateTime                            @default(now())
-  updated_at                           DateTime                            @updatedAt
-  accountsCreated                      AccountMaster[]                     @relation("AccountCreatedBy")
-  accountsUpdated                      AccountMaster[]                     @relation("AccountUpdatedBy")
-  companyVendorsCreated                CompanyVendorsMaster[]              @relation("CompanyVendorCreatedBy")
-  companyVendorsDeleted                CompanyVendorsMaster[]              @relation("CompanyVendorDeletedBy")
-  companyVendorsUpdated                CompanyVendorsMaster[]              @relation("CompanyVendorUpdatedBy")
-  installationIssueLogMaster           InstallationIssueLogMaster[]
-  installationUpdatesCreated           InstallationUpdate[]
-  installersAssigned                   InstallerUserMapping[]              @relation("InstallerAssignedBy")
-  installersCreated                    InstallerUserMaster[]               @relation("InstallerUserCreatedBy")
-  leadActivityStatusLog                LeadActivityStatusLog[]
-  leadChatDocumentsCreated             LeadChatDocument[]                  @relation("LeadChatDocumentCreatedBy")
-  leadChatDocumentsDeleted             LeadChatDocument[]                  @relation("LeadChatDocumentDeletedBy")
-  leadChatMembersAdded                 LeadChatMember[]                    @relation("LeadChatMemberAddedBy")
-  leadChatMembers                      LeadChatMember[]                    @relation("LeadChatMemberUser")
-  leadChatMentions                     LeadChatMention[]                   @relation("LeadChatMentionUser")
-  leadChatMessagesSent                 LeadChatMessage[]                   @relation("LeadChatMessageSender")
-  designMeetingsCreated                LeadDesignMeeting[]                 @relation("DesignMeetingCreatedBy")
-  designMeetingsUpdated                LeadDesignMeeting[]                 @relation("DesignMeetingUpdatedBy")
-  designMeetingDocsMappingForCreatedBY LeadDesignMeetingDocumentsMapping[] @relation("DesignMeetingDocsMappingCreatedBy")
-  designSelectionsCreated              LeadDesignSelection[]               @relation("DesignSelectionCreatedBy")
-  designSelectionsUpdated              LeadDesignSelection[]               @relation("DesignSelectionUpdatedBy")
-  leadDetailedLogs                     LeadDetailedLogs[]
-  leadDocumentLogs                     LeadDocumentLogs[]
-  documentsCreated                     LeadDocuments[]                     @relation("DocumentCreatedBy")
-  documentsDeleted                     LeadDocuments[]                     @relation("DocumentDeletedBy")
-  leadsAssigned                        LeadMaster[]                        @relation("LeadAssignedTo")
-  leadsDelegated                       LeadMaster[]                        @relation("LeadAssignedBy")
-  leadsCreated                         LeadMaster[]                        @relation("LeadCreatedBy")
-  leadsUpdated                         LeadMaster[]                        @relation("LeadUpdatedBy")
-  leadProductsCreated                  LeadProductMapping[]                @relation("LeadProductCreatedBy")
-  productStructureInstances            LeadProductStructureInstance[]
-  supervisorMappingsCreated            LeadSiteSupervisorMapping[]         @relation("SupervisorCreatedBy")
-  supervisorMappings                   LeadSiteSupervisorMapping[]         @relation("SupervisorUser")
-  leadStatusLogs                       LeadStatusLogs[]
-  leadUserCreated                      LeadUserMapping[]                   @relation("LeadUser_CreatedBy")
-  leadUserUpdated                      LeadUserMapping[]                   @relation("LeadUser_UpdatedBy")
-  leadUserAsUser                       LeadUserMapping[]                   @relation("LeadUser_User")
-  ledgersCreated                       Ledger[]
-  miscDocumentsCreated                 MiscellaneousDocument[]             @relation("MiscDocCreatedBy")
-  miscCreated                          MiscellaneousMaster[]               @relation("MiscCreatedBy")
-  miscUpdated                          MiscellaneousMaster[]               @relation("MiscUpdatedBy")
-  notificationsSent                    Notification[]                      @relation("NotificationSender")
-  notificationsReceived                Notification[]                      @relation("NotificationUser")
-  orderLoginDetails                    OrderLoginDetails[]
-  orderLoginsUpdated                   OrderLoginDetails[]                 @relation("OrderLoginUpdatedBy")
-  paymentsCreated                      PaymentInfo[]
-  createdProjects                      ProjectMaster[]                     @relation("CreatedByUser")
-  scanItemsCreated                     ScanAndPackItem[]
-  siteReadinessCreated                 SiteReadiness[]                     @relation("SiteReadinessCreatedBy")
-  siteReadinessUpdated                 SiteReadiness[]                     @relation("SiteReadinessUpdatedBy")
-  documents                            UserDocument[]
-  leadTasksClosed                      UserLeadTask[]                      @relation("LeadTask_ClosedBy")
-  leadTasksCreated                     UserLeadTask[]                      @relation("LeadTask_CreatedBy")
-  leadTasksAssigned                    UserLeadTask[]                      @relation("LeadTask_User")
-  user_type                            UserTypeMaster                      @relation(fields: [user_type_id], references: [id])
-  vendor                               VendorMaster                        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  pushTokens                           UserPushToken[]
-  operator                             CutListMachineMapping[]
-  createdDefects DefectedItem[]
-
-
-  userMachineMappings        UserMachineMapping[] @relation("UserMachine_user")
-  createdUserMachineMappings UserMachineMapping[] @relation("UserMachine_createdBy")
-  updatedUserMachineMappings UserMachineMapping[] @relation("UserMachine_updatedBy")
-  orderLoginPoFilesCreated   OrderLoginPoFileMapping[] @relation("OrderLoginPoFileCreatedBy")
-  orderLoginPoFilesDeleted   OrderLoginPoFileMapping[] @relation("OrderLoginPoFileDeletedBy")
-  userGeographicalMappings   UserGeographicalMapping[]
-  activityLogs               UserActivityLog[]
-  franchise                            FranchiseMaster?                    @relation(fields: [franchise_id], references: [id])
-  headSiteSupervisorFranchiseMappings HeadSiteSupervisorFranchiseMapping[] @relation("HeadSiteSupervisorFranchiseMappingUser")
+  id                                         Int                                  @id @default(autoincrement())
+  vendor_id                                  Int
+  user_name                                  String
+  user_contact                               String                               @unique
+  user_email                                 String
+  user_timezone                              String
+  password                                   String
+  user_type_id                               Int
+  status                                     String                               @default("inactive")
+  created_at                                 DateTime                             @default(now())
+  updated_at                                 DateTime                             @updatedAt
+  franchise_id                               Int?
+  accountsCreated                            AccountMaster[]                      @relation("AccountCreatedBy")
+  accountsUpdated                            AccountMaster[]                      @relation("AccountUpdatedBy")
+  companyVendorsCreated                      CompanyVendorsMaster[]               @relation("CompanyVendorCreatedBy")
+  companyVendorsDeleted                      CompanyVendorsMaster[]               @relation("CompanyVendorDeletedBy")
+  companyVendorsUpdated                      CompanyVendorsMaster[]               @relation("CompanyVendorUpdatedBy")
+  operator                                   CutListMachineMapping[]
+  createdDefects                             DefectedItem[]
   headSiteSupervisorFranchiseMappingsCreated HeadSiteSupervisorFranchiseMapping[] @relation("HeadSiteSupervisorFranchiseMappingCreatedBy")
+  headSiteSupervisorFranchiseMappings        HeadSiteSupervisorFranchiseMapping[] @relation("HeadSiteSupervisorFranchiseMappingUser")
+  installationIssueLogMaster                 InstallationIssueLogMaster[]
+  installationUpdatesCreated                 InstallationUpdate[]
+  installersAssigned                         InstallerUserMapping[]               @relation("InstallerAssignedBy")
+  installersCreated                          InstallerUserMaster[]                @relation("InstallerUserCreatedBy")
+  leadActivityStatusLog                      LeadActivityStatusLog[]
+  leadChatDocumentsCreated                   LeadChatDocument[]                   @relation("LeadChatDocumentCreatedBy")
+  leadChatDocumentsDeleted                   LeadChatDocument[]                   @relation("LeadChatDocumentDeletedBy")
+  leadChatMembersAdded                       LeadChatMember[]                     @relation("LeadChatMemberAddedBy")
+  leadChatMembers                            LeadChatMember[]                     @relation("LeadChatMemberUser")
+  leadChatMentions                           LeadChatMention[]                    @relation("LeadChatMentionUser")
+  leadChatMessagesSent                       LeadChatMessage[]                    @relation("LeadChatMessageSender")
+  designMeetingsCreated                      LeadDesignMeeting[]                  @relation("DesignMeetingCreatedBy")
+  designMeetingsUpdated                      LeadDesignMeeting[]                  @relation("DesignMeetingUpdatedBy")
+  designMeetingDocsMappingForCreatedBY       LeadDesignMeetingDocumentsMapping[]  @relation("DesignMeetingDocsMappingCreatedBy")
+  designSelectionsCreated                    LeadDesignSelection[]                @relation("DesignSelectionCreatedBy")
+  designSelectionsUpdated                    LeadDesignSelection[]                @relation("DesignSelectionUpdatedBy")
+  leadDetailedLogs                           LeadDetailedLogs[]
+  leadDocumentLogs                           LeadDocumentLogs[]
+  documentsCreated                           LeadDocuments[]                      @relation("DocumentCreatedBy")
+  documentsDeleted                           LeadDocuments[]                      @relation("DocumentDeletedBy")
+  leadsAssigned                              LeadMaster[]                         @relation("LeadAssignedTo")
+  leadsDelegated                             LeadMaster[]                         @relation("LeadAssignedBy")
+  leadsCreated                               LeadMaster[]                         @relation("LeadCreatedBy")
+  leadsUpdated                               LeadMaster[]                         @relation("LeadUpdatedBy")
+  leadProductsCreated                        LeadProductMapping[]                 @relation("LeadProductCreatedBy")
+  productStructureInstances                  LeadProductStructureInstance[]
+  supervisorMappingsCreated                  LeadSiteSupervisorMapping[]          @relation("SupervisorCreatedBy")
+  supervisorMappings                         LeadSiteSupervisorMapping[]          @relation("SupervisorUser")
+  leadStatusLogs                             LeadStatusLogs[]
+  leadUserCreated                            LeadUserMapping[]                    @relation("LeadUser_CreatedBy")
+  leadUserUpdated                            LeadUserMapping[]                    @relation("LeadUser_UpdatedBy")
+  leadUserAsUser                             LeadUserMapping[]                    @relation("LeadUser_User")
+  ledgersCreated                             Ledger[]
+  miscDocumentsCreated                       MiscellaneousDocument[]              @relation("MiscDocCreatedBy")
+  miscCreated                                MiscellaneousMaster[]                @relation("MiscCreatedBy")
+  miscUpdated                                MiscellaneousMaster[]                @relation("MiscUpdatedBy")
+  notificationsSent                          Notification[]                       @relation("NotificationSender")
+  notificationsReceived                      Notification[]                       @relation("NotificationUser")
+  orderLoginDetails                          OrderLoginDetails[]
+  orderLoginsUpdated                         OrderLoginDetails[]                  @relation("OrderLoginUpdatedBy")
+  orderLoginPoFilesCreated                   OrderLoginPoFileMapping[]            @relation("OrderLoginPoFileCreatedBy")
+  orderLoginPoFilesDeleted                   OrderLoginPoFileMapping[]            @relation("OrderLoginPoFileDeletedBy")
+  paymentsCreated                            PaymentInfo[]
+  createdProjects                            ProjectMaster[]                      @relation("CreatedByUser")
+  scanItemsCreated                           ScanAndPackItem[]
+  siteReadinessCreated                       SiteReadiness[]                      @relation("SiteReadinessCreatedBy")
+  siteReadinessUpdated                       SiteReadiness[]                      @relation("SiteReadinessUpdatedBy")
+  activityLogs                               UserActivityLog[]
+  documents                                  UserDocument[]
+  userGeographicalMappings                   UserGeographicalMapping[]
+  leadTasksClosed                            UserLeadTask[]                       @relation("LeadTask_ClosedBy")
+  leadTasksCreated                           UserLeadTask[]                       @relation("LeadTask_CreatedBy")
+  leadTasksAssigned                          UserLeadTask[]                       @relation("LeadTask_User")
+  createdUserMachineMappings                 UserMachineMapping[]                 @relation("UserMachine_createdBy")
+  updatedUserMachineMappings                 UserMachineMapping[]                 @relation("UserMachine_updatedBy")
+  userMachineMappings                        UserMachineMapping[]                 @relation("UserMachine_user")
+  franchise                                  FranchiseMaster?                     @relation(fields: [franchise_id], references: [id])
+  user_type                                  UserTypeMaster                       @relation(fields: [user_type_id], references: [id])
+  vendor                                     VendorMaster                         @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  pushTokens                                 UserPushToken[]
 }
 
 model UserDocument {
@@ -216,24 +213,24 @@ model ProjectMaster {
   project_name          String
   vendor_id             Int
   client_id             Int?
-  lead_id               Int?
   created_by            Int
   project_status        String                  @default("Initiated")
   created_at            DateTime                @default(now())
   unique_project_id     String
   is_grouping           Boolean                 @default(false)
+  lead_id               Int?
   track_trace_status    String                  @default("Not Started")
   boxes                 BoxMaster[]
   CutList               CutList[]
   cutListMachineMapping CutListMachineMapping[]
+  defectedItems         DefectedItem[]
   details               ProjectDetails[]
   items                 ProjectItemsMaster[]
-  lead                  LeadMaster?             @relation(fields: [lead_id], references: [id])
   client                ClientMaster?           @relation(fields: [client_id], references: [id], onDelete: Cascade)
   createdByUser         UserMaster              @relation("CreatedByUser", fields: [created_by], references: [id], onDelete: Cascade)
+  lead                  LeadMaster?             @relation(fields: [lead_id], references: [id])
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   scanItems             ScanAndPackItem[]
-  defectedItems DefectedItem[]
 }
 
 model ProjectDetails {
@@ -344,7 +341,7 @@ model ClientMaster {
   ledgers     Ledger[]
   details     ProjectDetails[]
   items       ProjectItemsMaster[]
-  projects   ProjectMaster[]
+  projects    ProjectMaster[]
   scanItems   ScanAndPackItem[]
 }
 
@@ -359,7 +356,6 @@ model LeadMaster {
   site_address                                String?
   site_type_id                                Int?
   source_id                                   Int?
-  franchise_id                                Int?
   archetech_name                              String?
   designer_remark                             String?
   created_by                                  Int
@@ -391,10 +387,9 @@ model LeadMaster {
   no_of_client_documents_initially_submitted  Int?
   hardware_packing_details_remark             String?                             @db.VarChar(2000)
   woodwork_packing_details_remark             String?                             @db.VarChar(2000)
-  order_login_prod_files_remark               String?                             @db.Text
   no_of_boxes                                 Int?
   dispatch_planning_remark                    String?                             @db.VarChar(2000)
-  material_lift_availability                  Boolean?                           
+  material_lift_availability                  Boolean?
   onsite_contact_person_name                  String?
   onsite_contact_person_number                String?
   required_date_for_dispatch                  DateTime?
@@ -412,8 +407,12 @@ model LeadMaster {
   is_shutter_installation_completed           Boolean?                            @default(false)
   shutter_installation_completion_date        DateTime?
   usable_handover_pending_work_details        String?
-  usable_handover_completed                   Boolean?                            @default(false)
   mrp_value                                   Float?
+  usable_handover_completed                   Boolean?                            @default(false)
+  franchise_id                                Int?
+  order_login_prod_files_remark               String?
+  cutList                                     CutList[]
+  cutListMachineMapping                       CutListMachineMapping[]
   installationIssueLogMaster                  InstallationIssueLogMaster[]
   installationUpdates                         InstallationUpdate[]
   installerMappings                           InstallerUserMapping[]
@@ -425,18 +424,17 @@ model LeadMaster {
   designSelection                             LeadDesignSelection[]
   leadDetailedLogs                            LeadDetailedLogs[]
   leadDocumentLogs                            LeadDocumentLogs[]
-  projects                                     ProjectMaster[]
   documents                                   LeadDocuments[]
   account                                     AccountMaster?                      @relation(fields: [account_id], references: [id], onDelete: Cascade)
   assignedTo                                  UserMaster?                         @relation("LeadAssignedTo", fields: [assign_to], references: [id])
   assignedBy                                  UserMaster?                         @relation("LeadAssignedBy", fields: [assigned_by], references: [id])
   createdBy                                   UserMaster                          @relation("LeadCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  franchise                                   FranchiseMaster?                    @relation(fields: [franchise_id], references: [id])
   siteType                                    SiteTypeMaster?                     @relation(fields: [site_type_id], references: [id], onDelete: Cascade)
   source                                      SourceMaster?                       @relation(fields: [source_id], references: [id], onDelete: Cascade)
   statusType                                  StatusTypeMaster?                   @relation(fields: [status_id], references: [id], onDelete: Cascade)
   updatedBy                                   UserMaster?                         @relation("LeadUpdatedBy", fields: [updated_by], references: [id])
   vendor                                      VendorMaster                        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  franchise                                  FranchiseMaster?                    @relation(fields: [franchise_id], references: [id])
   productMappings                             LeadProductMapping[]
   productStructureInstances                   LeadProductStructureInstance[]
   leadProductStructureMapping                 LeadProductStructureMapping[]
@@ -446,12 +444,11 @@ model LeadMaster {
   ledgers                                     Ledger[]
   miscellaneousMaster                         MiscellaneousMaster[]
   orderLoginDetails                           OrderLoginDetails[]
+  orderLoginPoFiles                           OrderLoginPoFileMapping[]
   payments                                    PaymentInfo[]
+  projects                                    ProjectMaster[]
   siteReadiness                               SiteReadiness[]
   tasks                                       UserLeadTask[]
-  cutList                                     CutList[]
-  cutListMachineMapping                       CutListMachineMapping[]
-  orderLoginPoFiles                           OrderLoginPoFileMapping[]
 
   @@unique([vendor_id, lead_code], name: "uniq_vendor_lead_code")
 }
@@ -518,7 +515,6 @@ model AccountMaster {
   alt_contact_no              String?
   email                       String?
   vendor_id                   Int
-  franchise_id                Int?
   created_by                  Int
   created_at                  DateTime                            @default(now())
   updated_by                  Int?
@@ -526,10 +522,11 @@ model AccountMaster {
   deleted_at                  DateTime?
   deleted_by                  Int?
   is_deleted                  Boolean                             @default(false)
+  franchise_id                Int?
   createdBy                   UserMaster                          @relation("AccountCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  franchise                   FranchiseMaster?                    @relation(fields: [franchise_id], references: [id])
   updatedBy                   UserMaster?                         @relation("AccountUpdatedBy", fields: [updated_by], references: [id])
   vendor                      VendorMaster                        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  franchise                   FranchiseMaster?                    @relation(fields: [franchise_id], references: [id])
   installationIssueLogMaster  InstallationIssueLogMaster[]
   installationUpdates         InstallationUpdate[]
   installerMappings           InstallerUserMapping[]
@@ -607,9 +604,9 @@ model LeadDocuments {
   productStructureInstance      LeadProductStructureInstance? @relation(fields: [product_structure_instance_id], references: [id])
   vendor                        VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   miscellaneousDocument         MiscellaneousDocument[]
+  orderLoginPoFiles             OrderLoginPoFileMapping[]
   paymentInfo                   PaymentInfo[]
   site_readiness_photos         SiteReadiness[]               @relation("LeadDocumentsToSiteReadiness")
-  orderLoginPoFiles             OrderLoginPoFileMapping[]
 }
 
 model LeadChatRoom {
@@ -734,7 +731,6 @@ model LeadProductStructureInstance {
   updated_by                                 Int?
   updated_at                                 DateTime              @updatedAt
   is_order_login_completed                   Boolean?
-  is_order_login_filled                      Boolean?              @default(false)
   order_login_completed_at                   DateTime?
   is_under_production                        Boolean?
   under_production_at                        DateTime?
@@ -745,18 +741,19 @@ model LeadProductStructureInstance {
   woodwork_packing_details_remark            String?               @db.VarChar(2000)
   hardware_packing_details_remark            String?               @db.VarChar(2000)
   no_of_boxes                                Int?
+  no_of_client_documents_initially_submitted Int?
   is_tech_check_completed                    Boolean?
   tech_check_completed_at                    DateTime?
-  no_of_client_documents_initially_submitted Int?
+  is_order_login_filled                      Boolean?              @default(false)
   designSelections                           LeadDesignSelection[]
   documents                                  LeadDocuments[]
-  tasks                                      UserLeadTask[]
   account                                    AccountMaster         @relation(fields: [account_id], references: [id], onDelete: Cascade)
   lead                                       LeadMaster            @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   productStructure                           ProductStructure      @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
   productType                                ProductTypeMaster     @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
   updatedBy                                  UserMaster?           @relation(fields: [updated_by], references: [id])
   vendor                                     VendorMaster          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  tasks                                      UserLeadTask[]
 
   @@unique([lead_id, vendor_id, product_structure_id, quantity_index], name: "uniq_structure_instance")
 }
@@ -804,8 +801,8 @@ model DocumentTypeMaster {
   type      String
   vendor_id Int
   tag       String
-  doc_title String?        
-  stage     String?         
+  doc_title String?
+  stage     String?
   vendor    VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   documents LeadDocuments[]
 }
@@ -916,37 +913,31 @@ model LeadSiteSupervisorMapping {
 }
 
 model UserLeadTask {
-  id          Int            @id @default(autoincrement())
-  lead_id     Int
-  account_id  Int
-  vendor_id   Int
+  id           Int                           @id @default(autoincrement())
+  lead_id      Int
+  account_id   Int
+  vendor_id    Int
+  user_id      Int
+  task_type    String
+  due_date     DateTime
+  remark       String?                       @db.VarChar(2000)
+  status       LeadTaskStatus                @default(open)
+  closed_by    Int?
+  closed_at    DateTime?
+  created_by   Int
+  created_at   DateTime                      @default(now())
+  updated_at   DateTime                      @updatedAt
+  updated_by   Int?
+  lead_stage   String?
+  instance_id  Int?
   franchise_id Int?
-  user_id     Int
-
-  // ✅ NEW COLUMN
-  instance_id Int?   // nullable by default
-
-  task_type   String
-  due_date    DateTime
-  remark      String?        @db.VarChar(2000)
-  status      LeadTaskStatus @default(open)
-
-  closed_by   Int?
-  closed_at   DateTime?
-
-  created_by  Int
-  created_at  DateTime       @default(now())
-  updated_at  DateTime       @updatedAt
-  updated_by  Int?
-  lead_stage  String?
-
-  account     AccountMaster  @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  closedBy    UserMaster?    @relation("LeadTask_ClosedBy", fields: [closed_by], references: [id])
-  createdBy   UserMaster     @relation("LeadTask_CreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
-  lead        LeadMaster     @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  user        UserMaster     @relation("LeadTask_User", fields: [user_id], references: [id], onDelete: Cascade)
-  vendor      VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  instance    LeadProductStructureInstance? @relation(fields: [instance_id], references: [id])
+  account      AccountMaster                 @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  closedBy     UserMaster?                   @relation("LeadTask_ClosedBy", fields: [closed_by], references: [id])
+  createdBy    UserMaster                    @relation("LeadTask_CreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  instance     LeadProductStructureInstance? @relation(fields: [instance_id], references: [id])
+  lead         LeadMaster                    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  user         UserMaster                    @relation("LeadTask_User", fields: [user_id], references: [id], onDelete: Cascade)
+  vendor       VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
 model LeadDetailedLogs {
@@ -1007,7 +998,7 @@ model CompanyVendorsMaster {
 }
 
 model OrderLoginDetails {
-  id                                   Int                   @id @default(autoincrement())
+  id                                   Int                       @id @default(autoincrement())
   lead_id                              Int
   account_id                           Int
   vendor_id                            Int
@@ -1015,20 +1006,20 @@ model OrderLoginDetails {
   item_desc                            String
   estimated_completion_date            DateTime?
   completion_date                      DateTime?
-  is_completed                         Boolean               @default(false)
-  created_at                           DateTime              @default(now())
+  is_completed                         Boolean                   @default(false)
+  created_at                           DateTime                  @default(now())
   created_by                           Int
   company_vendor_id                    Int?
-  updated_at                           DateTime              @updatedAt
+  updated_at                           DateTime                  @updatedAt
   updated_by                           Int?
   factory_user_vendor_selection_remark String?
   instance_id                          Int?
-  account                              AccountMaster         @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  companyVendor                        CompanyVendorsMaster? @relation(fields: [company_vendor_id], references: [id])
-  createdBy                            UserMaster            @relation(fields: [created_by], references: [id], onDelete: Cascade)
-  lead                                 LeadMaster            @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  updatedBy                            UserMaster?           @relation("OrderLoginUpdatedBy", fields: [updated_by], references: [id])
-  vendor                               VendorMaster          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  account                              AccountMaster             @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  companyVendor                        CompanyVendorsMaster?     @relation(fields: [company_vendor_id], references: [id])
+  createdBy                            UserMaster                @relation(fields: [created_by], references: [id], onDelete: Cascade)
+  lead                                 LeadMaster                @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  updatedBy                            UserMaster?               @relation("OrderLoginUpdatedBy", fields: [updated_by], references: [id])
+  vendor                               VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   poFiles                              OrderLoginPoFileMapping[]
 }
 
@@ -1121,15 +1112,15 @@ model MiscellaneousMaster {
   cost                     Float?
   supervisor_remark        String?
   expected_ready_date      DateTime?
-  required_delivery_date   DateTime?
-  misc_approved            Boolean?
-  exp_of_rejection         String?
   is_resolved              Boolean                    @default(false)
   resolved_at              DateTime?
   created_by               Int
   updated_by               Int?
   created_at               DateTime                   @default(now())
   updated_at               DateTime                   @updatedAt
+  exp_of_rejection         String?
+  misc_approved            Boolean?
+  required_delivery_date   DateTime?
   documents                MiscellaneousDocument[]
   account                  AccountMaster              @relation(fields: [account_id], references: [id], onDelete: Cascade)
   createdBy                UserMaster                 @relation("MiscCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
@@ -1338,8 +1329,6 @@ model MachineMaster {
   machine_code          String                  @unique
   machine_type          String?
   machine_type_id       Int?
-  machineType           MachineTypeMaster? @relation(fields: [machine_type_id], references: [id])
-
   status                MachineStatus           @default(ACTIVE)
   scan_type             ScanType
   description           String?
@@ -1353,18 +1342,17 @@ model MachineMaster {
   updated_at            DateTime                @default(now())
   updated_by            Int
   cutListMachineMapping CutListMachineMapping[]
-  vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])  
-  userMachineMappings UserMachineMapping[]
-  defectedItems DefectedItem[]
-
+  defectedItems         DefectedItem[]
+  machineType           MachineTypeMaster?      @relation(fields: [machine_type_id], references: [id])
+  vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])
+  userMachineMappings   UserMachineMapping[]
 }
-
 
 model CutList {
   id                    Int                     @id @default(autoincrement())
   project_id            Int
   vendor_id             Int
-  lead_id               Int?                     
+  lead_id               Int?
   description           String
   length                Decimal?                @db.Decimal(18, 2)
   width                 Decimal?                @db.Decimal(18, 2)
@@ -1383,40 +1371,39 @@ model CutList {
   elb                   String?
   esl                   String?
   esr                   String?
+  lead                  LeadMaster?             @relation(fields: [lead_id], references: [id])
   project               ProjectMaster           @relation(fields: [project_id], references: [id])
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])
-  
-  lead                  LeadMaster?              @relation(fields: [lead_id], references: [id])
   cutListMachineMapping CutListMachineMapping[]
-  defectedItems DefectedItem[]
+  defectedItems         DefectedItem[]
+
   @@index([unique_code])
-  
 }
 
 model CutListMachineMapping {
-  id            Int           @id @default(autoincrement())
+  id            Int            @id @default(autoincrement())
   cut_list_id   Int
   machine_id    Int
   vendor_id     Int
   lead_id       Int?
   project_id    Int
   sequence_no   Int
-  is_optional   Boolean       @default(false)
-  expected_in   Boolean       @default(false)
-  expected_out  Boolean       @default(false)
+  is_optional   Boolean        @default(false)
+  expected_in   Boolean        @default(false)
+  expected_out  Boolean        @default(false)
   status        String
   actual_in_at  DateTime?
   actual_out_at DateTime?
   in_operator   Int?
   out_operator  Int?
   created_by    Int
-  created_at    DateTime      @default(now())
-  cut_list      CutList       @relation(fields: [cut_list_id], references: [id])
-  machine       MachineMaster @relation(fields: [machine_id], references: [id])
-  project       ProjectMaster @relation(fields: [project_id], references: [id])
-  vendor        VendorMaster  @relation(fields: [vendor_id], references: [id])  
-  lead          LeadMaster?    @relation(fields: [lead_id], references: [id])
+  created_at    DateTime       @default(now())
+  cut_list      CutList        @relation(fields: [cut_list_id], references: [id])
   operator      UserMaster?    @relation(fields: [in_operator], references: [id])
+  lead          LeadMaster?    @relation(fields: [lead_id], references: [id])
+  machine       MachineMaster  @relation(fields: [machine_id], references: [id])
+  project       ProjectMaster  @relation(fields: [project_id], references: [id])
+  vendor        VendorMaster   @relation(fields: [vendor_id], references: [id])
   defectedItems DefectedItem[]
 
   @@index([cut_list_id])
@@ -1426,53 +1413,38 @@ model CutListMachineMapping {
   @@index([sequence_no])
 }
 
-
 model UserMachineMapping {
-  id          Int               @id @default(autoincrement())
-
-  user_id     Int
-  machine_id  Int
-  vendor_id   Int
-
-  status      UserMachineStatus @default(ACTIVE)
-
-  created_by  Int
-  created_at  DateTime          @default(now())
-
-  updated_by  Int
-  updated_at  DateTime          @default(now())
-
-  // Relations
-  user        UserMaster        @relation("UserMachine_user", fields: [user_id], references: [id])
-  machine     MachineMaster     @relation(fields: [machine_id], references: [id])
-
-  createdBy   UserMaster        @relation("UserMachine_createdBy", fields: [created_by], references: [id])
-  updatedBy   UserMaster        @relation("UserMachine_updatedBy", fields: [updated_by], references: [id])
-  vendor      VendorMaster      @relation(fields: [vendor_id], references: [id])
+  id         Int               @id @default(autoincrement())
+  user_id    Int
+  machine_id Int
+  vendor_id  Int
+  status     UserMachineStatus @default(ACTIVE)
+  created_by Int
+  created_at DateTime          @default(now())
+  updated_by Int
+  updated_at DateTime          @default(now())
+  createdBy  UserMaster        @relation("UserMachine_createdBy", fields: [created_by], references: [id])
+  machine    MachineMaster     @relation(fields: [machine_id], references: [id])
+  updatedBy  UserMaster        @relation("UserMachine_updatedBy", fields: [updated_by], references: [id])
+  user       UserMaster        @relation("UserMachine_user", fields: [user_id], references: [id])
+  vendor     VendorMaster      @relation(fields: [vendor_id], references: [id])
 }
 
-
 model OrderLoginPoFileMapping {
-  id             Int            @id @default(autoincrement())
-
-  orderlogin_id  Int
-  lead_id        Int
-  document_id    Int
-
-  created_by     Int
-  created_at     DateTime       @default(now())
-
-  deleted_at     DateTime?
-  deleted_by     Int?
-  is_deleted     Boolean        @default(false)
-
-  // ================= RELATIONS =================
-
-  orderLogin     OrderLoginDetails @relation(fields: [orderlogin_id], references: [id], onDelete: Cascade)
-  lead           LeadMaster        @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  document       LeadDocuments     @relation(fields: [document_id], references: [id], onDelete: Cascade)
-  createdBy      UserMaster        @relation("OrderLoginPoFileCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
-  deletedBy      UserMaster?       @relation("OrderLoginPoFileDeletedBy", fields: [deleted_by], references: [id])
+  id            Int               @id @default(autoincrement())
+  orderlogin_id Int
+  lead_id       Int
+  document_id   Int
+  created_by    Int
+  created_at    DateTime          @default(now())
+  deleted_at    DateTime?
+  deleted_by    Int?
+  is_deleted    Boolean           @default(false)
+  createdBy     UserMaster        @relation("OrderLoginPoFileCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  deletedBy     UserMaster?       @relation("OrderLoginPoFileDeletedBy", fields: [deleted_by], references: [id])
+  document      LeadDocuments     @relation(fields: [document_id], references: [id], onDelete: Cascade)
+  lead          LeadMaster        @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  orderLogin    OrderLoginDetails @relation(fields: [orderlogin_id], references: [id], onDelete: Cascade)
 
   @@index([orderlogin_id])
   @@index([lead_id])
@@ -1480,93 +1452,71 @@ model OrderLoginPoFileMapping {
 }
 
 model MachineTypeMaster {
-  id           Int            @id @default(autoincrement())
-  machine_type String
-  active       MachineTypeMasterStatus @default(YES)
-
-  created_at   DateTime       @default(now())
-  updated_at   DateTime       @updatedAt
-
-  machineMaster     MachineMaster[]
-  
+  id            Int                     @id @default(autoincrement())
+  machine_type  String
+  active        MachineTypeMasterStatus @default(YES)
+  created_at    DateTime                @default(now())
+  updated_at    DateTime                @updatedAt
+  machineMaster MachineMaster[]
 }
 
-
 model VendorSettingKey {
-  id            Int      @id @default(autoincrement())
-  key           String   @unique
-  display_name  String
-  default_value String?
-
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
-
+  id             Int             @id @default(autoincrement())
+  key            String          @unique
+  display_name   String
+  default_value  String?
+  created_at     DateTime        @default(now())
+  updated_at     DateTime        @updatedAt
   vendorSettings VendorSetting[]
 }
 
 model VendorSetting {
-  id          Int      @id @default(autoincrement())
-
-  setting_id  Int
-  vendor_id   Int
-  value       String?
-
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
-
-
-  vendorSettingKey     VendorSettingKey @relation(fields: [setting_id], references: [id])
-  vendor      VendorMaster     @relation(fields: [vendor_id], references: [id])
+  id               Int              @id @default(autoincrement())
+  setting_id       Int
+  vendor_id        Int
+  value            String?
+  created_at       DateTime         @default(now())
+  updated_at       DateTime         @updatedAt
+  vendorSettingKey VendorSettingKey @relation(fields: [setting_id], references: [id])
+  vendor           VendorMaster     @relation(fields: [vendor_id], references: [id])
 
   @@unique([setting_id, vendor_id])
 }
 
 model DefectMaster {
-  id          Int     @id @default(autoincrement())
-  defect_name String
-
-  vendor_id   Int?    
-
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
-
-  // ================= RELATIONS =================
-  vendorMaster      VendorMaster? @relation(fields: [vendor_id], references: [id])
+  id            Int            @id @default(autoincrement())
+  defect_name   String
+  vendor_id     Int?
+  created_at    DateTime       @default(now())
+  updated_at    DateTime       @updatedAt
+  vendorMaster  VendorMaster?  @relation(fields: [vendor_id], references: [id])
   defectedItems DefectedItem[]
 
   @@index([vendor_id])
 }
 
-
 model DefectedItem {
-  id          Int      @id @default(autoincrement())
-
-  vendor_id   Int
-  project_id  Int
+  id                          Int                   @id @default(autoincrement())
+  vendor_id                   Int
+  project_id                  Int
   cut_list_machine_mapping_id Int
-  cut_list_id Int?
-  machine_id  Int
-  defect_id   Int?
-
-  previous_scanned_by Int?
-  previous_scanned_at DateTime?
+  cut_list_id                 Int?
+  machine_id                  Int
+  defect_id                   Int?
+  previous_scanned_by         Int?
+  previous_scanned_at         DateTime?
   previous_scanned_machine_id Int?
-
-  remark      String?
-
-  created_by  Int
-  created_at  DateTime @default(now())
-  updated_at  DateTime @default(now()) @updatedAt
-
-  // ================= RELATIONS =================
-
-  vendor      VendorMaster   @relation(fields: [vendor_id], references: [id])
-  project     ProjectMaster  @relation(fields: [project_id], references: [id])
-  cutListMachineMapping CutListMachineMapping @relation(fields: [cut_list_machine_mapping_id], references: [id])
-  cutList     CutList?       @relation(fields: [cut_list_id], references: [id])
-  machine     MachineMaster  @relation(fields: [machine_id], references: [id])
-  defect      DefectMaster?   @relation(fields: [defect_id], references: [id])
-  createdBy   UserMaster     @relation(fields: [created_by], references: [id])
+  remark                      String?
+  created_by                  Int
+  created_at                  DateTime              @default(now())
+  updated_at                  DateTime              @default(now()) @updatedAt
+  createdBy                   UserMaster            @relation(fields: [created_by], references: [id])
+  cutList                     CutList?              @relation(fields: [cut_list_id], references: [id])
+  cutListMachineMapping       CutListMachineMapping @relation(fields: [cut_list_machine_mapping_id], references: [id])
+  defect                      DefectMaster?         @relation(fields: [defect_id], references: [id])
+  machine                     MachineMaster         @relation(fields: [machine_id], references: [id])
+  project                     ProjectMaster         @relation(fields: [project_id], references: [id])
+  vendor                      VendorMaster          @relation(fields: [vendor_id], references: [id])
 
   @@index([vendor_id])
   @@index([project_id])
@@ -1575,11 +1525,155 @@ model DefectedItem {
   @@index([cut_list_id])
 }
 
+model FranchiseMaster {
+  id                                  Int                                  @id @default(autoincrement())
+  vendor_id                           Int
+  franchise_name                      String
+  franchise_code                      String?
+  contact_number                      String?
+  contact_email                       String?
+  contact_person                      String?
+  is_head_office                      Boolean                              @default(false)
+  zone_id                             Int?
+  country_id                          Int?
+  region_id                           Int?
+  state_id                            Int?
+  city_id                             Int?
+  area_id                             Int?
+  address                             String?
+  pincode                             String?
+  status                              String                               @default("active")
+  createdAt                           DateTime                             @default(now())
+  updatedAt                           DateTime                             @updatedAt
+  accounts                            AccountMaster[]
+  vendor                              VendorMaster                         @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  headSiteSupervisorFranchiseMappings HeadSiteSupervisorFranchiseMapping[]
+  leads                               LeadMaster[]
+  users                               UserMaster[]
+
+  @@unique([vendor_id, franchise_code])
+}
+
+model HeadSiteSupervisorFranchiseMapping {
+  id           Int             @id @default(autoincrement())
+  vendor_id    Int
+  user_id      Int
+  franchise_id Int
+  status       Boolean         @default(true)
+  created_by   Int
+  created_at   DateTime        @default(now())
+  createdBy    UserMaster      @relation("HeadSiteSupervisorFranchiseMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  franchise    FranchiseMaster @relation(fields: [franchise_id], references: [id], onDelete: Cascade)
+  user         UserMaster      @relation("HeadSiteSupervisorFranchiseMappingUser", fields: [user_id], references: [id], onDelete: Cascade)
+  vendor       VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  @@unique([vendor_id, user_id, franchise_id])
+  @@unique([vendor_id, franchise_id])
+  @@index([vendor_id])
+  @@index([user_id])
+  @@index([franchise_id])
+}
+
+model CountryMaster {
+  id      Int            @id @default(autoincrement())
+  name    String
+  regions RegionMaster[]
+}
+
+model RegionMaster {
+  id         Int           @id @default(autoincrement())
+  name       String
+  country_id Int
+  country    CountryMaster @relation(fields: [country_id], references: [id])
+  states     StateMaster[]
+}
+
+model StateMaster {
+  id        Int          @id @default(autoincrement())
+  name      String
+  region_id Int
+  cities    CityMaster[]
+  region    RegionMaster @relation(fields: [region_id], references: [id])
+}
+
+model CityMaster {
+  id       Int          @id @default(autoincrement())
+  name     String
+  state_id Int
+  areas    AreaMaster[]
+  state    StateMaster  @relation(fields: [state_id], references: [id])
+}
+
+model AreaMaster {
+  id      Int        @id @default(autoincrement())
+  name    String
+  city_id Int
+  city    CityMaster @relation(fields: [city_id], references: [id])
+}
+
+model GeographicalMapping {
+  id           Int                       @id @default(autoincrement())
+  name         String
+  country_id   Int?
+  region_id    Int?
+  state_id     Int?
+  city_id      Int?
+  area_id      Int?
+  is_active    Boolean                   @default(true)
+  createdAt    DateTime                  @default(now())
+  updatedAt    DateTime                  @updatedAt
+  userMappings UserGeographicalMapping[]
+}
+
+model UserGeographicalMapping {
+  id              Int                 @id @default(autoincrement())
+  user_id         Int
+  geographical_id Int
+  geographical    GeographicalMapping @relation(fields: [geographical_id], references: [id], onDelete: Cascade)
+  user            UserMaster          @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, geographical_id])
+}
+
+model UserActivityLog {
+  id            Int              @id @default(autoincrement())
+  user_id       Int
+  action        String
+  activity_type UserActivityType
+  metadata      Json?
+  ip_address    String?
+  user_agent    String?
+  created_at    DateTime         @default(now())
+  user          UserMaster       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model ThemeMaster {
+  id         Int            @id @default(autoincrement())
+  vendor_id  Int
+  name       String
+  is_active  Boolean        @default(false)
+  created_at DateTime       @default(now())
+  mappings   ThemeMapping[]
+  vendor     VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id])
+}
+
+model ThemeMapping {
+  id       Int         @id @default(autoincrement())
+  theme_id Int
+  key      String
+  light    String
+  dark     String
+  theme    ThemeMaster @relation(fields: [theme_id], references: [id], onDelete: Cascade)
+
+  @@unique([theme_id, key])
+}
+
 enum MachineTypeMasterStatus {
   YES
   NO
 }
-
 
 enum NotificationType {
   LEAD_ASSIGNED
@@ -1673,137 +1767,6 @@ enum ModulesVendorMappingActiveStatus {
   No
 }
 
-model FranchiseMaster {
-  id              Int     @id @default(autoincrement())
-  vendor_id       Int
-  franchise_name  String
-  franchise_code  String?
-
-  contact_number  String?
-  contact_email   String?
-  contact_person  String?
-
-  is_head_office  Boolean @default(false)
-
-  zone_id         Int?
-  country_id      Int?
-  region_id       Int?
-  state_id        Int?
-  city_id         Int?
-  area_id         Int?
-
-  address         String?
-  pincode         String?
-
-  status          String  @default("active")
-
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-
-  vendor          VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-
-  users           UserMaster[]
-  leads           LeadMaster[]
-  accounts        AccountMaster[]
-  headSiteSupervisorFranchiseMappings HeadSiteSupervisorFranchiseMapping[]
-
-  @@unique([vendor_id, franchise_code])
-}
-
-model HeadSiteSupervisorFranchiseMapping {
-  id           Int          @id @default(autoincrement())
-  vendor_id    Int
-  user_id      Int
-  franchise_id Int
-  status       Boolean      @default(true)
-  created_by   Int
-  created_at   DateTime     @default(now())
-
-  vendor     VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  user       UserMaster     @relation("HeadSiteSupervisorFranchiseMappingUser", fields: [user_id], references: [id], onDelete: Cascade)
-  franchise  FranchiseMaster @relation(fields: [franchise_id], references: [id], onDelete: Cascade)
-  createdBy  UserMaster     @relation("HeadSiteSupervisorFranchiseMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
-
-  @@index([vendor_id])
-  @@index([user_id])
-  @@index([franchise_id])
-  @@unique([vendor_id, user_id, franchise_id])
-  @@unique([vendor_id, franchise_id])
-}
-
-
-model CountryMaster {
-  id    Int    @id @default(autoincrement())
-  name  String
-
-  regions RegionMaster[]
-}
-
-model RegionMaster {
-  id         Int @id @default(autoincrement())
-  name       String
-  country_id Int
-
-  country CountryMaster @relation(fields: [country_id], references: [id])
-  states  StateMaster[]
-}
-
-model StateMaster {
-  id        Int @id @default(autoincrement())
-  name      String
-  region_id Int
-
-  region RegionMaster @relation(fields: [region_id], references: [id])
-  cities CityMaster[]
-}
-
-model CityMaster {
-  id       Int @id @default(autoincrement())
-  name     String
-  state_id Int
-
-  state StateMaster @relation(fields: [state_id], references: [id])
-  areas AreaMaster[]
-}
-
-model AreaMaster {
-  id      Int @id @default(autoincrement())
-  name    String
-  city_id Int
-
-  city CityMaster @relation(fields: [city_id], references: [id])
-}
-
-model GeographicalMapping {
-  id           Int     @id @default(autoincrement())
-  name         String  // e.g. "Mumbai West Zone"
-
-  country_id Int?
-  region_id  Int?
-  state_id   Int?
-  city_id    Int?
-  area_id    Int?
-
-  is_active Boolean @default(true)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  userMappings UserGeographicalMapping[]
-
-}
-
-model UserGeographicalMapping {
-  id              Int @id @default(autoincrement())
-  user_id         Int
-  geographical_id Int
-
-  user         UserMaster           @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  geographical GeographicalMapping @relation(fields: [geographical_id], references: [id], onDelete: Cascade)
-
-  @@unique([user_id, geographical_id])
-}
-
 enum MachineStatus {
   ACTIVE
   MAINTENANCE
@@ -1823,49 +1786,8 @@ enum UserMachineStatus {
   INACTIVE
 }
 
-model UserActivityLog {
-  id            Int                 @id @default(autoincrement())
-  user_id       Int
-  action        String
-  activity_type UserActivityType
-  metadata      Json?
-  ip_address    String?
-  user_agent    String?
-  created_at    DateTime            @default(now())
-  user          UserMaster          @relation(fields: [user_id], references: [id], onDelete: Cascade)
-}
-
 enum UserActivityType {
   RESET_PASSWORD
   LOGIN
   LOGOUT
-}
-
-model ThemeMaster {
-  id         Int      @id @default(autoincrement())
-
-  vendor_id  Int
-  name       String
-  is_active  Boolean  @default(false)
-
-  created_at DateTime @default(now())
-
-  vendor     VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  mappings   ThemeMapping[]
-
-  @@index([vendor_id])
-}
-
-model ThemeMapping {
-  id       Int    @id @default(autoincrement())
-
-  theme_id Int
-
-  key      String
-  light    String
-  dark     String
-
-  theme    ThemeMaster @relation(fields: [theme_id], references: [id], onDelete: Cascade)
-
-  @@unique([theme_id, key])
 }
