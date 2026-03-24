@@ -736,6 +736,10 @@ model LeadProductStructureInstance {
   is_order_login_completed                   Boolean?
   is_order_login_filled                      Boolean?              @default(false)
   order_login_completed_at                   DateTime?
+  is_under_production                        Boolean?
+  under_production_at                        DateTime?
+  is_pre_prod_done                           Boolean?
+  pre_prod_done_at                           DateTime?
   is_production_completed                    Boolean?
   production_completed_at                    DateTime?
   woodwork_packing_details_remark            String?               @db.VarChar(2000)

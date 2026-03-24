@@ -72,6 +72,10 @@ export type LeadProductStructureInstanceMinAggregateOutputType = {
   is_order_login_completed: boolean | null
   is_order_login_filled: boolean | null
   order_login_completed_at: Date | null
+  is_under_production: boolean | null
+  under_production_at: Date | null
+  is_pre_prod_done: boolean | null
+  pre_prod_done_at: Date | null
   is_production_completed: boolean | null
   production_completed_at: Date | null
   woodwork_packing_details_remark: string | null
@@ -100,6 +104,10 @@ export type LeadProductStructureInstanceMaxAggregateOutputType = {
   is_order_login_completed: boolean | null
   is_order_login_filled: boolean | null
   order_login_completed_at: Date | null
+  is_under_production: boolean | null
+  under_production_at: Date | null
+  is_pre_prod_done: boolean | null
+  pre_prod_done_at: Date | null
   is_production_completed: boolean | null
   production_completed_at: Date | null
   woodwork_packing_details_remark: string | null
@@ -128,6 +136,10 @@ export type LeadProductStructureInstanceCountAggregateOutputType = {
   is_order_login_completed: number
   is_order_login_filled: number
   order_login_completed_at: number
+  is_under_production: number
+  under_production_at: number
+  is_pre_prod_done: number
+  pre_prod_done_at: number
   is_production_completed: number
   production_completed_at: number
   woodwork_packing_details_remark: number
@@ -186,6 +198,10 @@ export type LeadProductStructureInstanceMinAggregateInputType = {
   is_order_login_completed?: true
   is_order_login_filled?: true
   order_login_completed_at?: true
+  is_under_production?: true
+  under_production_at?: true
+  is_pre_prod_done?: true
+  pre_prod_done_at?: true
   is_production_completed?: true
   production_completed_at?: true
   woodwork_packing_details_remark?: true
@@ -214,6 +230,10 @@ export type LeadProductStructureInstanceMaxAggregateInputType = {
   is_order_login_completed?: true
   is_order_login_filled?: true
   order_login_completed_at?: true
+  is_under_production?: true
+  under_production_at?: true
+  is_pre_prod_done?: true
+  pre_prod_done_at?: true
   is_production_completed?: true
   production_completed_at?: true
   woodwork_packing_details_remark?: true
@@ -242,6 +262,10 @@ export type LeadProductStructureInstanceCountAggregateInputType = {
   is_order_login_completed?: true
   is_order_login_filled?: true
   order_login_completed_at?: true
+  is_under_production?: true
+  under_production_at?: true
+  is_pre_prod_done?: true
+  pre_prod_done_at?: true
   is_production_completed?: true
   production_completed_at?: true
   woodwork_packing_details_remark?: true
@@ -357,6 +381,10 @@ export type LeadProductStructureInstanceGroupByOutputType = {
   is_order_login_completed: boolean | null
   is_order_login_filled: boolean | null
   order_login_completed_at: Date | null
+  is_under_production: boolean | null
+  under_production_at: Date | null
+  is_pre_prod_done: boolean | null
+  pre_prod_done_at: Date | null
   is_production_completed: boolean | null
   production_completed_at: Date | null
   woodwork_packing_details_remark: string | null
@@ -408,6 +436,10 @@ export type LeadProductStructureInstanceWhereInput = {
   is_order_login_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
   is_order_login_filled?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
   order_login_completed_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_under_production?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  under_production_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_pre_prod_done?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  pre_prod_done_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
   is_production_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
   production_completed_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
   woodwork_packing_details_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
@@ -445,6 +477,10 @@ export type LeadProductStructureInstanceOrderByWithRelationInput = {
   is_order_login_completed?: Prisma.SortOrderInput | Prisma.SortOrder
   is_order_login_filled?: Prisma.SortOrderInput | Prisma.SortOrder
   order_login_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_under_production?: Prisma.SortOrderInput | Prisma.SortOrder
+  under_production_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_pre_prod_done?: Prisma.SortOrderInput | Prisma.SortOrder
+  pre_prod_done_at?: Prisma.SortOrderInput | Prisma.SortOrder
   is_production_completed?: Prisma.SortOrderInput | Prisma.SortOrder
   production_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
   woodwork_packing_details_remark?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -486,6 +522,10 @@ export type LeadProductStructureInstanceWhereUniqueInput = Prisma.AtLeast<{
   is_order_login_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
   is_order_login_filled?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
   order_login_completed_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_under_production?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  under_production_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_pre_prod_done?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  pre_prod_done_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
   is_production_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
   production_completed_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
   woodwork_packing_details_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
@@ -523,6 +563,10 @@ export type LeadProductStructureInstanceOrderByWithAggregationInput = {
   is_order_login_completed?: Prisma.SortOrderInput | Prisma.SortOrder
   is_order_login_filled?: Prisma.SortOrderInput | Prisma.SortOrder
   order_login_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_under_production?: Prisma.SortOrderInput | Prisma.SortOrder
+  under_production_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_pre_prod_done?: Prisma.SortOrderInput | Prisma.SortOrder
+  pre_prod_done_at?: Prisma.SortOrderInput | Prisma.SortOrder
   is_production_completed?: Prisma.SortOrderInput | Prisma.SortOrder
   production_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
   woodwork_packing_details_remark?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -559,6 +603,10 @@ export type LeadProductStructureInstanceScalarWhereWithAggregatesInput = {
   is_order_login_completed?: Prisma.BoolNullableWithAggregatesFilter<"LeadProductStructureInstance"> | boolean | null
   is_order_login_filled?: Prisma.BoolNullableWithAggregatesFilter<"LeadProductStructureInstance"> | boolean | null
   order_login_completed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_under_production?: Prisma.BoolNullableWithAggregatesFilter<"LeadProductStructureInstance"> | boolean | null
+  under_production_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_pre_prod_done?: Prisma.BoolNullableWithAggregatesFilter<"LeadProductStructureInstance"> | boolean | null
+  pre_prod_done_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string | null
   is_production_completed?: Prisma.BoolNullableWithAggregatesFilter<"LeadProductStructureInstance"> | boolean | null
   production_completed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string | null
   woodwork_packing_details_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
@@ -580,6 +628,10 @@ export type LeadProductStructureInstanceCreateInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -617,6 +669,10 @@ export type LeadProductStructureInstanceUncheckedCreateInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -641,6 +697,10 @@ export type LeadProductStructureInstanceUpdateInput = {
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -678,6 +738,10 @@ export type LeadProductStructureInstanceUncheckedUpdateInput = {
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -709,6 +773,10 @@ export type LeadProductStructureInstanceCreateManyInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -730,6 +798,10 @@ export type LeadProductStructureInstanceUpdateManyMutationInput = {
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -758,6 +830,10 @@ export type LeadProductStructureInstanceUncheckedUpdateManyInput = {
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -808,6 +884,10 @@ export type LeadProductStructureInstanceCountOrderByAggregateInput = {
   is_order_login_completed?: Prisma.SortOrder
   is_order_login_filled?: Prisma.SortOrder
   order_login_completed_at?: Prisma.SortOrder
+  is_under_production?: Prisma.SortOrder
+  under_production_at?: Prisma.SortOrder
+  is_pre_prod_done?: Prisma.SortOrder
+  pre_prod_done_at?: Prisma.SortOrder
   is_production_completed?: Prisma.SortOrder
   production_completed_at?: Prisma.SortOrder
   woodwork_packing_details_remark?: Prisma.SortOrder
@@ -850,6 +930,10 @@ export type LeadProductStructureInstanceMaxOrderByAggregateInput = {
   is_order_login_completed?: Prisma.SortOrder
   is_order_login_filled?: Prisma.SortOrder
   order_login_completed_at?: Prisma.SortOrder
+  is_under_production?: Prisma.SortOrder
+  under_production_at?: Prisma.SortOrder
+  is_pre_prod_done?: Prisma.SortOrder
+  pre_prod_done_at?: Prisma.SortOrder
   is_production_completed?: Prisma.SortOrder
   production_completed_at?: Prisma.SortOrder
   woodwork_packing_details_remark?: Prisma.SortOrder
@@ -878,6 +962,10 @@ export type LeadProductStructureInstanceMinOrderByAggregateInput = {
   is_order_login_completed?: Prisma.SortOrder
   is_order_login_filled?: Prisma.SortOrder
   order_login_completed_at?: Prisma.SortOrder
+  is_under_production?: Prisma.SortOrder
+  under_production_at?: Prisma.SortOrder
+  is_pre_prod_done?: Prisma.SortOrder
+  pre_prod_done_at?: Prisma.SortOrder
   is_production_completed?: Prisma.SortOrder
   production_completed_at?: Prisma.SortOrder
   woodwork_packing_details_remark?: Prisma.SortOrder
@@ -1217,6 +1305,10 @@ export type LeadProductStructureInstanceCreateWithoutVendorInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -1252,6 +1344,10 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutVendorInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -1312,6 +1408,10 @@ export type LeadProductStructureInstanceScalarWhereInput = {
   is_order_login_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
   is_order_login_filled?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
   order_login_completed_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_under_production?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  under_production_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_pre_prod_done?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  pre_prod_done_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
   is_production_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
   production_completed_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
   woodwork_packing_details_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
@@ -1333,6 +1433,10 @@ export type LeadProductStructureInstanceCreateWithoutUpdatedByInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -1368,6 +1472,10 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutUpdatedByInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -1418,6 +1526,10 @@ export type LeadProductStructureInstanceCreateWithoutLeadInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -1453,6 +1565,10 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutLeadInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -1503,6 +1619,10 @@ export type LeadProductStructureInstanceCreateWithoutAccountInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -1538,6 +1658,10 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutAccountInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -1588,6 +1712,10 @@ export type LeadProductStructureInstanceCreateWithoutProductTypeInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -1623,6 +1751,10 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductTypeInput =
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -1673,6 +1805,10 @@ export type LeadProductStructureInstanceCreateWithoutDocumentsInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -1709,6 +1845,10 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutDocumentsInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -1748,6 +1888,10 @@ export type LeadProductStructureInstanceUpdateWithoutDocumentsInput = {
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1784,6 +1928,10 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutDocumentsInput = {
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1807,6 +1955,10 @@ export type LeadProductStructureInstanceCreateWithoutProductStructureInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -1842,6 +1994,10 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductStructureIn
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -1892,6 +2048,10 @@ export type LeadProductStructureInstanceCreateWithoutDesignSelectionsInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -1928,6 +2088,10 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutDesignSelectionsIn
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -1967,6 +2131,10 @@ export type LeadProductStructureInstanceUpdateWithoutDesignSelectionsInput = {
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2003,6 +2171,10 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutDesignSelectionsIn
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2026,6 +2198,10 @@ export type LeadProductStructureInstanceCreateWithoutTasksInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -2062,6 +2238,10 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutTasksInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -2101,6 +2281,10 @@ export type LeadProductStructureInstanceUpdateWithoutTasksInput = {
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2137,6 +2321,10 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutTasksInput = {
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2166,6 +2354,10 @@ export type LeadProductStructureInstanceCreateManyVendorInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -2187,6 +2379,10 @@ export type LeadProductStructureInstanceUpdateWithoutVendorInput = {
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2222,6 +2418,10 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutVendorInput = {
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2252,6 +2452,10 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorInput = 
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2279,6 +2483,10 @@ export type LeadProductStructureInstanceCreateManyUpdatedByInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -2300,6 +2508,10 @@ export type LeadProductStructureInstanceUpdateWithoutUpdatedByInput = {
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2335,6 +2547,10 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutUpdatedByInput = {
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2365,6 +2581,10 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByInput
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2392,6 +2612,10 @@ export type LeadProductStructureInstanceCreateManyLeadInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -2413,6 +2637,10 @@ export type LeadProductStructureInstanceUpdateWithoutLeadInput = {
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2448,6 +2676,10 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutLeadInput = {
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2478,6 +2710,10 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadInput = {
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2505,6 +2741,10 @@ export type LeadProductStructureInstanceCreateManyAccountInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -2526,6 +2766,10 @@ export type LeadProductStructureInstanceUpdateWithoutAccountInput = {
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2561,6 +2805,10 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutAccountInput = {
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2591,6 +2839,10 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountInput =
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2618,6 +2870,10 @@ export type LeadProductStructureInstanceCreateManyProductTypeInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -2639,6 +2895,10 @@ export type LeadProductStructureInstanceUpdateWithoutProductTypeInput = {
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2674,6 +2934,10 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductTypeInput =
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2704,6 +2968,10 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductTypeInp
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2731,6 +2999,10 @@ export type LeadProductStructureInstanceCreateManyProductStructureInput = {
   is_order_login_completed?: boolean | null
   is_order_login_filled?: boolean | null
   order_login_completed_at?: Date | string | null
+  is_under_production?: boolean | null
+  under_production_at?: Date | string | null
+  is_pre_prod_done?: boolean | null
+  pre_prod_done_at?: Date | string | null
   is_production_completed?: boolean | null
   production_completed_at?: Date | string | null
   woodwork_packing_details_remark?: string | null
@@ -2752,6 +3024,10 @@ export type LeadProductStructureInstanceUpdateWithoutProductStructureInput = {
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2787,6 +3063,10 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductStructureIn
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2817,6 +3097,10 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductStructu
   is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2894,6 +3178,10 @@ export type LeadProductStructureInstanceSelect<ExtArgs extends runtime.Types.Ext
   is_order_login_completed?: boolean
   is_order_login_filled?: boolean
   order_login_completed_at?: boolean
+  is_under_production?: boolean
+  under_production_at?: boolean
+  is_pre_prod_done?: boolean
+  pre_prod_done_at?: boolean
   is_production_completed?: boolean
   production_completed_at?: boolean
   woodwork_packing_details_remark?: boolean
@@ -2932,6 +3220,10 @@ export type LeadProductStructureInstanceSelectCreateManyAndReturn<ExtArgs extend
   is_order_login_completed?: boolean
   is_order_login_filled?: boolean
   order_login_completed_at?: boolean
+  is_under_production?: boolean
+  under_production_at?: boolean
+  is_pre_prod_done?: boolean
+  pre_prod_done_at?: boolean
   is_production_completed?: boolean
   production_completed_at?: boolean
   woodwork_packing_details_remark?: boolean
@@ -2966,6 +3258,10 @@ export type LeadProductStructureInstanceSelectUpdateManyAndReturn<ExtArgs extend
   is_order_login_completed?: boolean
   is_order_login_filled?: boolean
   order_login_completed_at?: boolean
+  is_under_production?: boolean
+  under_production_at?: boolean
+  is_pre_prod_done?: boolean
+  pre_prod_done_at?: boolean
   is_production_completed?: boolean
   production_completed_at?: boolean
   woodwork_packing_details_remark?: boolean
@@ -3000,6 +3296,10 @@ export type LeadProductStructureInstanceSelectScalar = {
   is_order_login_completed?: boolean
   is_order_login_filled?: boolean
   order_login_completed_at?: boolean
+  is_under_production?: boolean
+  under_production_at?: boolean
+  is_pre_prod_done?: boolean
+  pre_prod_done_at?: boolean
   is_production_completed?: boolean
   production_completed_at?: boolean
   woodwork_packing_details_remark?: boolean
@@ -3010,7 +3310,7 @@ export type LeadProductStructureInstanceSelectScalar = {
   no_of_client_documents_initially_submitted?: boolean
 }
 
-export type LeadProductStructureInstanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "product_type_id" | "product_structure_id" | "quantity_index" | "title" | "status" | "description" | "created_by" | "created_at" | "updated_by" | "updated_at" | "is_order_login_completed" | "is_order_login_filled" | "order_login_completed_at" | "is_production_completed" | "production_completed_at" | "woodwork_packing_details_remark" | "hardware_packing_details_remark" | "no_of_boxes" | "is_tech_check_completed" | "tech_check_completed_at" | "no_of_client_documents_initially_submitted", ExtArgs["result"]["leadProductStructureInstance"]>
+export type LeadProductStructureInstanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "product_type_id" | "product_structure_id" | "quantity_index" | "title" | "status" | "description" | "created_by" | "created_at" | "updated_by" | "updated_at" | "is_order_login_completed" | "is_order_login_filled" | "order_login_completed_at" | "is_under_production" | "under_production_at" | "is_pre_prod_done" | "pre_prod_done_at" | "is_production_completed" | "production_completed_at" | "woodwork_packing_details_remark" | "hardware_packing_details_remark" | "no_of_boxes" | "is_tech_check_completed" | "tech_check_completed_at" | "no_of_client_documents_initially_submitted", ExtArgs["result"]["leadProductStructureInstance"]>
 export type LeadProductStructureInstanceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   designSelections?: boolean | Prisma.LeadProductStructureInstance$designSelectionsArgs<ExtArgs>
   documents?: boolean | Prisma.LeadProductStructureInstance$documentsArgs<ExtArgs>
@@ -3071,6 +3371,10 @@ export type $LeadProductStructureInstancePayload<ExtArgs extends runtime.Types.E
     is_order_login_completed: boolean | null
     is_order_login_filled: boolean | null
     order_login_completed_at: Date | null
+    is_under_production: boolean | null
+    under_production_at: Date | null
+    is_pre_prod_done: boolean | null
+    pre_prod_done_at: Date | null
     is_production_completed: boolean | null
     production_completed_at: Date | null
     woodwork_packing_details_remark: string | null
@@ -3528,6 +3832,10 @@ export interface LeadProductStructureInstanceFieldRefs {
   readonly is_order_login_completed: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
   readonly is_order_login_filled: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
   readonly order_login_completed_at: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
+  readonly is_under_production: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
+  readonly under_production_at: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
+  readonly is_pre_prod_done: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
+  readonly pre_prod_done_at: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
   readonly is_production_completed: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
   readonly production_completed_at: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
   readonly woodwork_packing_details_remark: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>

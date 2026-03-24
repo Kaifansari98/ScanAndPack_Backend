@@ -63,6 +63,10 @@ export class BookingStageService {
           tech_check_completed_at: true,
           is_order_login_completed: true,
           order_login_completed_at: true,
+          is_pre_prod_done: true,
+          pre_prod_done_at: true,
+          is_under_production: true,
+          under_production_at: true,
           is_production_completed: true,
           productStructure: {
             select: {
