@@ -84,6 +84,8 @@ model VendorMaster {
   vendorSetting                       VendorSetting[]
   taxInfo                             VendorTaxInfo[]
   tokens                              VendorTokens[]
+  dealerLedgers                       DealerLedger[]
+  dealerPaymentLogs                   DealerPaymentLogs[]
 }
 
 model VendorAddress {
@@ -197,6 +199,7 @@ model UserMaster {
   user_type                                  UserTypeMaster                       @relation(fields: [user_type_id], references: [id])
   vendor                                     VendorMaster                         @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   pushTokens                                 UserPushToken[]
+  dealerPaymentLogsUpdated                   DealerPaymentLogs[]                  @relation("DealerPaymentLogsUpdatedBy")
 }
 
 model UserDocument {
@@ -442,6 +445,8 @@ model LeadMaster {
   leadStatusLogs                              LeadStatusLogs[]
   userMappings                                LeadUserMapping[]
   ledgers                                     Ledger[]
+  dealerLedgers                               DealerLedger[]
+  dealerPaymentLogs                           DealerPaymentLogs[]
   miscellaneousMaster                         MiscellaneousMaster[]
   orderLoginDetails                           OrderLoginDetails[]
   orderLoginPoFiles                           OrderLoginPoFileMapping[]
@@ -1550,6 +1555,8 @@ model FranchiseMaster {
   headSiteSupervisorFranchiseMappings HeadSiteSupervisorFranchiseMapping[]
   leads                               LeadMaster[]
   users                               UserMaster[]
+  dealerLedgers                       DealerLedger[]
+  dealerPaymentLogs                   DealerPaymentLogs[]
 
   @@unique([vendor_id, franchise_code])
 }
@@ -1790,4 +1797,50 @@ enum UserActivityType {
   RESET_PASSWORD
   LOGIN
   LOGOUT
+}
+
+enum DealerLedgerType {
+  debit
+  credit
+}
+
+model DealerLedger {
+  id               Int              @id @default(autoincrement())
+  vendor_id        Int
+  franchise_id     Int
+  lead_id          Int
+  amount           Float
+  type             DealerLedgerType
+  fixed_narration  String?
+  narration        String?
+  created_at       DateTime         @default(now())
+  vendor           VendorMaster     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  franchise        FranchiseMaster  @relation(fields: [franchise_id], references: [id], onDelete: Cascade)
+  lead             LeadMaster       @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id])
+  @@index([franchise_id])
+  @@index([lead_id])
+}
+
+model DealerPaymentLogs {
+  id               Int             @id @default(autoincrement())
+  vendor_id        Int
+  franchise_id     Int
+  lead_id          Int
+  amount           Float
+  fixed_narration  String
+  narration        String?
+  is_approved      Boolean         @default(false)
+  updated_by       Int?
+  created_at       DateTime        @default(now())
+  updated_at       DateTime        @updatedAt
+  vendor           VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  franchise        FranchiseMaster @relation(fields: [franchise_id], references: [id], onDelete: Cascade)
+  lead             LeadMaster      @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  updatedBy        UserMaster?     @relation("DealerPaymentLogsUpdatedBy", fields: [updated_by], references: [id])
+
+  @@index([vendor_id])
+  @@index([franchise_id])
+  @@index([lead_id])
 }
