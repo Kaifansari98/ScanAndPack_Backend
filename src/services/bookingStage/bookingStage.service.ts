@@ -2381,7 +2381,7 @@ export class BookingStageService {
       }
 
       const logAction = hasExistingActiveSupervisor
-        ? `Site supervisor assigned: ${supervisor.user_name}`
+        ? `Site supervisor reassigned: ${supervisor.user_name}`
         : `Site supervisor assigned: ${supervisor.user_name}`;
 
       await tx.leadDetailedLogs.create({
