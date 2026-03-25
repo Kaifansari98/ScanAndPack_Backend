@@ -1948,8 +1948,8 @@ export class UnderInstallationStageService {
 
       const remark = task.remark || "";
       const match =
-        remark.match(/\*\*(.+?)\*\*\s*-\s*(.+)$/) ||
-        remark.match(/^(.+?)\s*-\s*(.+)$/);
+        remark.match(/\*\*(.+?)\*\*\s*-\s*([\s\S]+)$/) ||
+        remark.match(/^(.+?)\s*-\s*([\s\S]+)$/);
 
       if (!match) {
         throw new Error("Unable to parse miscellaneous details from remark");
@@ -2130,8 +2130,8 @@ export class UnderInstallationStageService {
 
       const remark = task.remark || "";
       const match =
-        remark.match(/\*\*(.+?)\*\*\s*-\s*(.+)$/) ||
-        remark.match(/^(.+?)\s*-\s*(.+)$/);
+        remark.match(/\*\*(.+?)\*\*\s*-\s*([\s\S]+)$/) ||
+        remark.match(/^(.+?)\s*-\s*([\s\S]+)$/);
 
       if (!match) {
         throw new Error("Unable to parse miscellaneous details from remark");
