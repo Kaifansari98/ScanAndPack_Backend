@@ -1219,6 +1219,7 @@ export class BookingStageService {
       email?: string;
       designer_remark?: string;
       date_range?: { from: string; to: string };
+      production_status?: string;
     },
   ): Promise<{ leads: any[]; count: number }> {
     logger.info("[BookingStageService] getVendorLeadsByTag2 called", {
@@ -1541,6 +1542,36 @@ export class BookingStageService {
             OR: [{ site_map_link: null }, { site_map_link: "" }],
           });
         }
+      }
+
+      // ---------- PRODUCTION STATUS FILTER (Type 10 only) ----------
+      const productionStatus = filters.production_status;
+      if (productionStatus && normalizedTag === "type 10") {
+        const notTrue = (field: string) => ({
+          OR: [{ [field]: false }, { [field]: null }],
+        });
+
+        const instanceAnd: any[] = [
+          { is_tech_check_completed: true },
+          { is_order_login_completed: true },
+        ];
+
+        if (productionStatus === "Completed") {
+          instanceAnd.push({ is_production_completed: true });
+        } else if (productionStatus === "Under Production") {
+          instanceAnd.push({ is_under_production: true });
+          instanceAnd.push(notTrue("is_production_completed"));
+        } else if (productionStatus === "Pre Prod Done") {
+          instanceAnd.push({ is_pre_prod_done: true });
+          instanceAnd.push(notTrue("is_under_production"));
+          instanceAnd.push(notTrue("is_production_completed"));
+        } else if (productionStatus === "Pending") {
+          instanceAnd.push(notTrue("is_pre_prod_done"));
+          instanceAnd.push(notTrue("is_under_production"));
+          instanceAnd.push(notTrue("is_production_completed"));
+        }
+
+        addAnd({ productStructureInstances: { some: { AND: instanceAnd } } });
       }
 
       return whereClause;
@@ -2633,6 +2664,7 @@ export class BookingStageService {
       email?: string;
       designer_remark?: string;
       date_range?: { from: string; to: string };
+      production_status?: string;
     } = {},
     options: {
       requireMiscellaneous?: boolean;
@@ -3150,15 +3182,34 @@ const statusTags =
         // -------- TYPE 10 : PRODUCTION STAGE --------
         // Order login completed → now waiting for production
         if (isProductionStage) {
+          const notTrue = (field: string) => ({
+            OR: [{ [field]: false }, { [field]: null }],
+          });
+
+          const instanceAnd: any[] = [
+            { is_tech_check_completed: true },
+            { is_order_login_completed: true },
+          ];
+
+          const productionStatus = filters.production_status;
+          if (productionStatus === "Completed") {
+            instanceAnd.push({ is_production_completed: true });
+          } else if (productionStatus === "Under Production") {
+            instanceAnd.push({ is_under_production: true });
+            instanceAnd.push(notTrue("is_production_completed"));
+          } else if (productionStatus === "Pre Prod Done") {
+            instanceAnd.push({ is_pre_prod_done: true });
+            instanceAnd.push(notTrue("is_under_production"));
+            instanceAnd.push(notTrue("is_production_completed"));
+          } else if (productionStatus === "Pending") {
+            instanceAnd.push(notTrue("is_pre_prod_done"));
+            instanceAnd.push(notTrue("is_under_production"));
+            instanceAnd.push(notTrue("is_production_completed"));
+          }
+
           addAnd({
             productStructureInstances: {
-              some: {
-                AND: [
-                  { is_tech_check_completed: true },
-                  { is_order_login_completed: true },
-                  
-                ],
-              },
+              some: { AND: instanceAnd },
             },
           });
         }

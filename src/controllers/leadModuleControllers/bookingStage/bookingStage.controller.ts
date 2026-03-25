@@ -533,7 +533,8 @@ export class BookingStageController {
         alt_contact_no: req.body.alt_contact_no,
         email: req.body.email,
         designer_remark: req.body.designer_remark,
-        date_range: dateRange, // Normalized date range
+        date_range: dateRange,
+        production_status: req.body.production_status,
       };
 
       // ============================
@@ -678,7 +679,8 @@ export class BookingStageController {
         alt_contact_no: req.body.alt_contact_no,
         email: req.body.email,
         designer_remark: req.body.designer_remark,
-        date_range: dateRange, // Normalized date range
+        date_range: dateRange,
+        production_status: req.body.production_status,
       };
 
       if (!vendorId || !userId) {
