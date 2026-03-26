@@ -5,6 +5,7 @@ import { NotificationType } from "../../../prisma/generated";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 import { resolveLeadCode } from "../../../../src/utils/fileUtils";
 import { STAGE_PATH_BY_TAG } from "../../leadModuleServices/leadsGeneration/leadActivityStatus.service";
+import { sendMovedToProductionWithOrderLoginEmail } from "../../email/brevoEmail2.service";
 
 // 🧩 Define this at the top of your service file
 
@@ -338,16 +339,16 @@ export async function triggerOrderLoginCompletionNotification(
   }
 
   // ─────────────────────────────────────────────────────────────
-  // 4️⃣ Factory User
+  // 4️⃣ Factory + Pre-Prod Users (both receive notifications)
   // ─────────────────────────────────────────────────────────────
-  const mapping = await prisma.leadUserMapping.findFirst({
+  const mappings = await prisma.leadUserMapping.findMany({
     where: {
       vendor_id: vendorId,
       lead_id: leadId,
       status: "active",
       user: {
         user_type: {
-          user_type: { equals: "factory", mode: "insensitive" },
+          user_type: { in: ["factory", "pre-prod"], mode: "insensitive" },
         },
       },
     },
@@ -356,26 +357,35 @@ export async function triggerOrderLoginCompletionNotification(
     },
   });
 
+  const recipients = mappings
+    .map((m) => m.user)
+    .filter((u): u is NonNullable<typeof u> => !!u);
+
   logger.info(
-    `🔍 [PROD-NOTIF] factory mapping found = ${!!mapping?.user}`,
+    `🔍 [PROD-NOTIF] recipients found (factory + pre-prod) = ${recipients.length}`,
     debugCtx,
   );
 
-  if (!mapping?.user) {
+  if (recipients.length === 0) {
     logger.warn(
-      "⛔ [PROD-NOTIF] No active factory user mapping — exiting",
+      "⛔ [PROD-NOTIF] No active factory/pre-prod user mapping — skipping notifications",
       debugCtx,
     );
     return;
   }
-
-  const factoryUser = mapping.user;
 
   // ─────────────────────────────────────────────────────────────
   // 5️⃣ Actor + Lead Info
   // ─────────────────────────────────────────────────────────────
   const leadName =
     `${leadRecord!.firstname ?? ""} ${leadRecord!.lastname ?? ""}`.trim();
+
+  const actor = await prisma.userMaster.findUnique({
+    where: { id: userId },
+    select: { user_name: true },
+  });
+  const actorName = actor?.user_name ?? "System";
+  const updatedAt = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
 
   // ─────────────────────────────────────────────────────────────
   // 6️⃣ URLs
@@ -392,30 +402,69 @@ export async function triggerOrderLoginCompletionNotification(
   logger.info(`🔗 [PROD-NOTIF] projectUrl = ${projectUrl}`, debugCtx);
 
   // ─────────────────────────────────────────────────────────────
-  // 7️⃣ In-App Notification
+  // 7️⃣ In-App + Email Notifications (factory & pre-prod)
   // ─────────────────────────────────────────────────────────────
-  try {
-    await NotificationService.createAndSend({
-      vendor_id: vendorId,
-      user_id: factoryUser.id,
-      sender_id: userId,
-      type: NotificationType.LEAD_ACTION,
-      title: "Order Login Completed",
-      message: `${instanceCode} - ${leadName} Order Login completed`,
-      entity_type: "lead",
-      entity_id: leadId,
-      redirect_url: redirectUrl,
-    });
+  for (const recipient of recipients) {
+    // In-app
+    try {
+      await NotificationService.createAndSend({
+        vendor_id: vendorId,
+        user_id: recipient.id,
+        sender_id: userId,
+        type: NotificationType.LEAD_ACTION,
+        title: "Order Login Completed",
+        message: `${instanceCode} - ${leadName} Order Login completed`,
+        entity_type: "lead",
+        entity_id: leadId,
+        redirect_url: redirectUrl,
+      });
 
-    logger.info("✅ [PROD-NOTIF] In-app notification sent", {
-      ...debugCtx,
-      factory_user_id: factoryUser.id,
-    });
-  } catch (err: any) {
-    logger.error("❌ [PROD-NOTIF] In-app notification failed", {
-      ...debugCtx,
-      error: err?.message,
-    });
+      logger.info("✅ [PROD-NOTIF] In-app notification sent", {
+        ...debugCtx,
+        recipient_id: recipient.id,
+        recipient_name: recipient.user_name,
+      });
+    } catch (err: any) {
+      logger.error("❌ [PROD-NOTIF] In-app notification failed", {
+        ...debugCtx,
+        recipient_id: recipient.id,
+        error: err?.message,
+      });
+    }
+
+    // Email
+    if (recipient.user_email) {
+      try {
+        await sendMovedToProductionWithOrderLoginEmail({
+          vendor_id: vendorId,
+          toEmail: recipient.user_email,
+          toName: recipient.user_name,
+          leadCode: instanceCode,
+          leadName,
+          updatedBy: actorName,
+          updatedAt,
+          projectUrl,
+        });
+
+        logger.info("✅ [PROD-NOTIF] Email sent", {
+          ...debugCtx,
+          recipient_id: recipient.id,
+          email: recipient.user_email,
+        });
+      } catch (err: any) {
+        logger.error("❌ [PROD-NOTIF] Email failed", {
+          ...debugCtx,
+          recipient_id: recipient.id,
+          error: err?.message,
+        });
+      }
+    } else {
+      logger.warn("⚠️ [PROD-NOTIF] No email address for recipient — skipping email", {
+        ...debugCtx,
+        recipient_id: recipient.id,
+        recipient_name: recipient.user_name,
+      });
+    }
   }
 
   logger.info("🎉 [PROD-NOTIF] Done", { ...debugCtx, instanceCode });
