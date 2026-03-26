@@ -257,16 +257,32 @@ export const createLeadService = async (
         },
       });
 
-      const adminUsers = await tx.userMaster.findMany({
-        where: {
-          vendor_id,
-          status: "active",
-          user_type: { user_type: { in: ["admin", "super-admin"] } },
-        },
-        select: { id: true },
-      });
+      const [superAdminUsers, adminUsers] = await Promise.all([
+        tx.userMaster.findMany({
+          where: {
+            vendor_id,
+            status: "active",
+            user_type: { user_type: "super-admin" },
+          },
+          select: { id: true },
+        }),
+        franchise_id
+          ? tx.userMaster.findMany({
+              where: {
+                vendor_id,
+                franchise_id,
+                status: "active",
+                user_type: { user_type: "admin" },
+              },
+              select: { id: true },
+            })
+          : Promise.resolve([]),
+      ]);
 
-      const memberIds = new Set<number>(adminUsers.map((user) => user.id));
+      const memberIds = new Set<number>([
+        ...superAdminUsers.map((user) => user.id),
+        ...adminUsers.map((user) => user.id),
+      ]);
       memberIds.add(created_by);
 
       if (creatorRole === "admin" && assign_to) {
