@@ -53,6 +53,7 @@ export class LeadStatsService {
         "tech-check",
         "factory",
         "head-site-supervisor",
+        "pre-prod",
       ].includes(userType);
       console.log("[LeadStatsService] role flags", {
         userType,
