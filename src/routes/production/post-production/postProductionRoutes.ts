@@ -87,4 +87,9 @@ postProductionRoutes.get(
   controller.checkPreProductionFilesReady
 );
 
+postProductionRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/mark-pre-prod-done",
+  controller.markPreProdDone
+);
+
 export default postProductionRoutes;

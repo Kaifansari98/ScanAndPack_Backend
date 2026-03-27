@@ -939,18 +939,34 @@ export class PostProductionService {
       });
     }
 
-    console.log("[uploadPreProductionFiles] instanceId:", instanceId);
-    if (instanceId) {
-      const result = await prisma.leadProductStructureInstance.updateMany({
-        where: { id: instanceId },
-        data: { is_pre_prod_done: true, pre_prod_done_at: new Date() },
-      });
-      console.log("[uploadPreProductionFiles] is_pre_prod_done update result:", result);
-    } else {
-      console.log("[uploadPreProductionFiles] skipped is_pre_prod_done update — no instanceId");
+    return uploadedDocs;
+  }
+
+  async markPreProdDone(
+    vendorId: number,
+    leadId: number,
+    instanceId: number,
+    _userId: number,
+  ) {
+    const instance = await prisma.leadProductStructureInstance.findFirst({
+      where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
+      select: { id: true, is_pre_prod_done: true },
+    });
+
+    if (!instance) {
+      throw Object.assign(new Error("Instance not found"), { statusCode: 404 });
     }
 
-    return uploadedDocs;
+    if (instance.is_pre_prod_done) {
+      throw Object.assign(new Error("Pre-prod already marked as done"), { statusCode: 400 });
+    }
+
+    await prisma.leadProductStructureInstance.update({
+      where: { id: instanceId },
+      data: { is_pre_prod_done: true, pre_prod_done_at: new Date() },
+    });
+
+    return { instanceId, is_pre_prod_done: true };
   }
 
   async getPreProductionFiles(

@@ -858,6 +858,39 @@ export class PostProductionController {
     }
   }
 
+  async markPreProdDone(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+      const { instance_id, updated_by } = req.body;
+
+      if (!vendorId || !leadId || !instance_id || !updated_by) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId, leadId, instance_id, and updated_by are required",
+        });
+      }
+
+      const result = await service.markPreProdDone(
+        Number(vendorId),
+        Number(leadId),
+        Number(instance_id),
+        Number(updated_by),
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Pre-prod marked as done",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error("[PostProductionController] markPreProdDone Error:", error);
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  }
+
   async moveLeadToReadyToDispatch(req: Request, res: Response) {
     try {
       const vendorId = Number(getParam(req.params.vendorId));
