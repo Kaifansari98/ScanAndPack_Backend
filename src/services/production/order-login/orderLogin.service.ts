@@ -1719,11 +1719,11 @@ export class OrderLoginService {
               user_id: factoryUser.id,
               sender_id: userId,
               type: NotificationType.LEAD_ASSIGNED,
-              title: "Moved to Production",
-              message: `${instanceCode} - ${leadName} has entered Production.`,
+              title: "Project Assigned : Order Login Completed",
+              message: `${instanceCode} - ${leadName} has been assigned to you. Order Login is complete.`,
               entity_type: "lead",
               entity_id: leadId,
-              redirect_url: redirectUrl,
+              redirect_url: orderLoginRedirectUrl,
             });
             console.log("✅ Factory notified");
           } catch (err: any) {
@@ -1806,6 +1806,24 @@ export class OrderLoginService {
         const actorName = actor?.user_name ?? "System";
         const updatedAtStr = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
 
+        // Build redirect URLs using STAGE_PATH_BY_TAG["Type 10"]
+        const postProdParams = new URLSearchParams();
+        if (leadMeta?.account_id) postProdParams.set("accountId", String(leadMeta.account_id));
+        postProdParams.set("instance_id", String(instanceId));
+        const postProdRedirectUrl = `${STAGE_PATH_BY_TAG["Type 10"]}/${leadId}?${postProdParams.toString()}`;
+
+        // OL pending → include tab=orderLogin; OL complete → just pre-post-prod
+        const prodNotifRedirect = instanceOrderLoginComplete
+          ? postProdRedirectUrl
+          : orderLoginRedirectUrl;
+
+        const notifTitle = instanceOrderLoginComplete
+          ? "Project Assigned : Order Login Completed"
+          : "Project Assigned – Order Login Pending";
+        const notifMessage = instanceOrderLoginComplete
+          ? `${instanceCode} - ${leadName} has been assigned to you. Order Login is complete.`
+          : `${instanceCode} - ${leadName} has been assigned to you. Order Login is pending.`;
+
         const preProdMapping = await prisma.leadUserMapping.findFirst({
           where: {
             vendor_id: vendorId,
@@ -1825,11 +1843,11 @@ export class OrderLoginService {
               user_id: preProdMapping.user.id,
               sender_id: userId,
               type: NotificationType.LEAD_ACTION,
-              title: "Project Assigned – Order Login Pending",
-              message: `You've been assigned ${instanceCode} - ${leadName} for Pre-Production.`,
+              title: notifTitle,
+              message: notifMessage,
               entity_type: "lead",
               entity_id: leadId,
-              redirect_url: orderLoginRedirectUrl,
+              redirect_url: prodNotifRedirect,
             });
             console.log("✅ Pre-Prod in-app notified");
           } catch (err: any) {
@@ -1852,7 +1870,7 @@ export class OrderLoginService {
               leadName,
               updatedBy: actorName,
               updatedAt: updatedAtStr,
-              projectUrl: `${baseUrl}${orderLoginRedirectUrl}`,
+              projectUrl: `${baseUrl}${prodNotifRedirect}`,
             });
             console.log(`✅ Email sent to ${target.user_email}`);
           } catch (err: any) {
@@ -2235,22 +2253,44 @@ export class OrderLoginService {
       },
     });
 
-    if (!orderLoginCompleted) {
-      if (factoryUser?.id) {
+    // Build redirect URLs using STAGE_PATH_BY_TAG["Type 10"]
+    const postProdParamsB = new URLSearchParams();
+    if (leadMeta.account_id) postProdParamsB.set("accountId", String(leadMeta.account_id));
+    const postProdRedirectUrlB = `${STAGE_PATH_BY_TAG["Type 10"]}/${leadId}?${postProdParamsB.toString()}`;
+
+    // OL pending → include tab=orderLogin; OL complete → just pre-post-prod
+    const prodNotifRedirectB = orderLoginCompleted
+      ? postProdRedirectUrlB
+      : orderLoginRedirectUrl;
+
+    const notifTitleB = orderLoginCompleted
+      ? "Project Assigned : Order Login Completed"
+      : "Project Assigned – Order Login Pending";
+    const notifMessageB = orderLoginCompleted
+      ? `${leadCode} - ${leadName} has been assigned to you. Order Login is complete.`
+      : `${leadCode} - ${leadName} has been assigned to you. Order Login is pending.`;
+
+    if (factoryUser?.id) {
+      try {
         await NotificationService.createAndSend({
           vendor_id: vendorId,
           user_id: factoryUser.id,
           sender_id: userId,
-          type: NotificationType.LEAD_MILESTONE,
-          title: "Moved to Production (Order Login Pending)",
-          message: `${leadCode} - ${leadName} entered Production. Files available but Order Login is pending.`,
+          type: NotificationType.LEAD_ACTION,
+          title: notifTitleB,
+          message: notifMessageB,
           entity_type: "lead",
           entity_id: leadId,
-          redirect_url: orderLoginRedirectUrl,
+          redirect_url: prodNotifRedirectB,
         });
+        console.log("✅ Factory notified");
+      } catch (err: any) {
+        console.error("❌ Factory notification failed:", err.message);
       }
+    }
 
-      if (backendMapping?.user?.id) {
+    if (backendMapping?.user?.id) {
+      try {
         await NotificationService.createAndSend({
           vendor_id: vendorId,
           user_id: backendMapping.user.id,
@@ -2262,25 +2302,9 @@ export class OrderLoginService {
           entity_id: leadId,
           redirect_url: orderLoginRedirectUrl,
         });
+      } catch (err: any) {
+        console.error("❌ Backend notification failed:", err.message);
       }
-
-    }
-
-    if (orderLoginCompleted) {
-      if (factoryUser?.id) {
-        await NotificationService.createAndSend({
-          vendor_id: vendorId,
-          user_id: factoryUser.id,
-          sender_id: userId,
-          type: NotificationType.LEAD_ACTION,
-          title: "Moved to Production",
-          message: `${leadCode} - ${leadName} has entered Production.`,
-          entity_type: "lead",
-          entity_id: leadId,
-          redirect_url: redirectUrl,
-        });
-      }
-
     }
 
     // ── Pre-Prod in-app notification + Email for factory & pre-prod ──
@@ -2311,11 +2335,11 @@ export class OrderLoginService {
             user_id: preProdMappingB.user.id,
             sender_id: userId,
             type: NotificationType.LEAD_ACTION,
-            title: "Project Assigned – Order Login Pending",
-            message: `You've been assigned ${leadCode} - ${leadName} for Pre-Production.`,
+            title: notifTitleB,
+            message: notifMessageB,
             entity_type: "lead",
             entity_id: leadId,
-            redirect_url: orderLoginRedirectUrl,
+            redirect_url: prodNotifRedirectB,
           });
           console.log("✅ Pre-Prod in-app notified");
         } catch (err: any) {
@@ -2338,7 +2362,7 @@ export class OrderLoginService {
             leadName,
             updatedBy: actorNameB,
             updatedAt: updatedAtStrB,
-            projectUrl,
+            projectUrl: `${baseUrl}${prodNotifRedirectB}`,
           });
           console.log(`✅ Email sent to ${target.user_email}`);
         } catch (err: any) {
