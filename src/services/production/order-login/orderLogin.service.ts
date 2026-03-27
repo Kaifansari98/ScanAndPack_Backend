@@ -1412,6 +1412,46 @@ export class OrderLoginService {
           }
         }
 
+        // 4b. Create Pre-Prod user mapping (if not exists)
+        const preProdUser = await tx.userMaster.findFirst({
+          where: {
+            vendor_id: vendorId,
+            status: "active",
+            user_type: {
+              user_type: { equals: "pre-prod", mode: "insensitive" },
+            },
+          },
+          select: { id: true },
+        });
+
+        if (preProdUser && effectiveAccountId) {
+          const existingPreProdMapping = await tx.leadUserMapping.findFirst({
+            where: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: effectiveAccountId,
+              user_id: preProdUser.id,
+              type: "production-stage",
+              status: "active",
+            },
+            select: { id: true },
+          });
+
+          if (!existingPreProdMapping) {
+            await tx.leadUserMapping.create({
+              data: {
+                account_id: effectiveAccountId,
+                lead_id: leadId,
+                vendor_id: vendorId,
+                user_id: preProdUser.id,
+                type: "production-stage",
+                status: "active",
+                created_by: userId,
+              },
+            });
+          }
+        }
+
         // 5. Log instance action
         const rawLeadCode =
           leadMeta?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
@@ -1930,6 +1970,46 @@ export class OrderLoginService {
         created_by: userId,
       },
     });
+
+    // Assign pre-prod user to lead as well
+    const preProdUser = await prisma.userMaster.findFirst({
+      where: {
+        vendor_id: vendorId,
+        status: "active",
+        user_type: {
+          user_type: { equals: "pre-prod", mode: "insensitive" },
+        },
+      },
+      select: { id: true },
+    });
+
+    if (preProdUser) {
+      const existingPreProdMapping = await prisma.leadUserMapping.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          user_id: preProdUser.id,
+          type: "production-stage",
+          status: "active",
+        },
+        select: { id: true },
+      });
+
+      if (!existingPreProdMapping) {
+        await prisma.leadUserMapping.create({
+          data: {
+            account_id: accountId,
+            lead_id: leadId,
+            vendor_id: vendorId,
+            user_id: preProdUser.id,
+            type: "production-stage",
+            status: "active",
+            created_by: userId,
+          },
+        });
+      }
+    }
 
     let chatRoom = await prisma.leadChatRoom.findFirst({
       where: { lead_id: leadId, vendor_id: vendorId },
