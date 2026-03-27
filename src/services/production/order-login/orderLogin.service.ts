@@ -1797,6 +1797,70 @@ export class OrderLoginService {
         }
       }
 
+      // ── Pre-Prod in-app notification + Email for factory & pre-prod ──
+      {
+        const actor = await prisma.userMaster.findUnique({
+          where: { id: userId },
+          select: { user_name: true },
+        });
+        const actorName = actor?.user_name ?? "System";
+        const updatedAtStr = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+
+        const preProdMapping = await prisma.leadUserMapping.findFirst({
+          where: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            status: "active",
+            user: {
+              user_type: { user_type: { equals: "pre-prod", mode: "insensitive" } },
+            },
+          },
+          select: { user: { select: { id: true, user_name: true, user_email: true } } },
+        });
+
+        if (preProdMapping?.user?.id) {
+          try {
+            await NotificationService.createAndSend({
+              vendor_id: vendorId,
+              user_id: preProdMapping.user.id,
+              sender_id: userId,
+              type: NotificationType.LEAD_ACTION,
+              title: "Project Assigned – Order Login Pending",
+              message: `You've been assigned ${instanceCode} - ${leadName} for Pre-Production.`,
+              entity_type: "lead",
+              entity_id: leadId,
+              redirect_url: orderLoginRedirectUrl,
+            });
+            console.log("✅ Pre-Prod in-app notified");
+          } catch (err: any) {
+            console.error("❌ Pre-Prod in-app notification failed:", err.message);
+          }
+        }
+
+        const emailTargets = [
+          factoryUser,
+          preProdMapping?.user ?? null,
+        ].filter((u): u is NonNullable<typeof u> => !!u && !!u.user_email);
+
+        for (const target of emailTargets) {
+          try {
+            await sendMovedToProductionWithOrderLoginEmail({
+              vendor_id: vendorId,
+              toEmail: target.user_email!,
+              toName: target.user_name ?? undefined,
+              leadCode: instanceCode,
+              leadName,
+              updatedBy: actorName,
+              updatedAt: updatedAtStr,
+              projectUrl: `${baseUrl}${orderLoginRedirectUrl}`,
+            });
+            console.log(`✅ Email sent to ${target.user_email}`);
+          } catch (err: any) {
+            console.error(`❌ Email to ${target.user_email} failed:`, err.message);
+          }
+        }
+      }
+
       if (missingTypes.length > 0 && instanceId) {
         const leadFranchise = await prisma.leadMaster.findUnique({
           where: { id: leadId },
@@ -2217,6 +2281,70 @@ export class OrderLoginService {
         });
       }
 
+    }
+
+    // ── Pre-Prod in-app notification + Email for factory & pre-prod ──
+    {
+      const actorB = await prisma.userMaster.findUnique({
+        where: { id: userId },
+        select: { user_name: true },
+      });
+      const actorNameB = actorB?.user_name ?? "System";
+      const updatedAtStrB = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+
+      const preProdMappingB = await prisma.leadUserMapping.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          status: "active",
+          user: {
+            user_type: { user_type: { equals: "pre-prod", mode: "insensitive" } },
+          },
+        },
+        select: { user: { select: { id: true, user_name: true, user_email: true } } },
+      });
+
+      if (preProdMappingB?.user?.id) {
+        try {
+          await NotificationService.createAndSend({
+            vendor_id: vendorId,
+            user_id: preProdMappingB.user.id,
+            sender_id: userId,
+            type: NotificationType.LEAD_ACTION,
+            title: "Project Assigned – Order Login Pending",
+            message: `You've been assigned ${leadCode} - ${leadName} for Pre-Production.`,
+            entity_type: "lead",
+            entity_id: leadId,
+            redirect_url: orderLoginRedirectUrl,
+          });
+          console.log("✅ Pre-Prod in-app notified");
+        } catch (err: any) {
+          console.error("❌ Pre-Prod in-app notification failed:", err.message);
+        }
+      }
+
+      const emailTargetsB = [
+        factoryUser,
+        preProdMappingB?.user ?? null,
+      ].filter((u): u is NonNullable<typeof u> => !!u && !!u.user_email);
+
+      for (const target of emailTargetsB) {
+        try {
+          await sendMovedToProductionWithOrderLoginEmail({
+            vendor_id: vendorId,
+            toEmail: target.user_email!,
+            toName: target.user_name ?? undefined,
+            leadCode: leadCode ?? "",
+            leadName,
+            updatedBy: actorNameB,
+            updatedAt: updatedAtStrB,
+            projectUrl,
+          });
+          console.log(`✅ Email sent to ${target.user_email}`);
+        } catch (err: any) {
+          console.error(`❌ Email to ${target.user_email} failed:`, err.message);
+        }
+      }
     }
 
     return { lead: updatedLead, leadUserMapping };
