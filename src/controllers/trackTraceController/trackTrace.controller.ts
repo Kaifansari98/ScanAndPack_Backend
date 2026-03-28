@@ -7,8 +7,6 @@ import * as machineService from '../../services/machineService/machineService.se
 
 import { ApiResponse } from '../../../src/utils/apiResponse';
 import { CutListSavePayload, MarkDefectPayload, QRParam } from '../../../src/types/track-trace';
-import * as XLSX from "xlsx";
-
 import { generateWarehouseQRPDF } from "../../utils/warehouse-qr-generator";
 
 export const scan_item = async (req: Request, res: Response) => {

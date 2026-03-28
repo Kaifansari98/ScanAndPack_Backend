@@ -2,7 +2,7 @@ import { validationResponse } from '../../../src/utils/validationResponse';
 import { prisma } from '../../prisma/client';
 import { Prisma, CutListMachineMapping } from '../../prisma/generated';
 import { CutListSavePayload, MarkDefectPayload, QRParam, TrackTraceDashboardPayload } from '../../../src/types/track-trace';
-import * as XLSX from "xlsx";
+import ExcelJS from "exceljs";
 import * as fs from "fs";
 import * as path from "path";
 import { getVendorSettingValue } from '../vendor.service';
@@ -2316,37 +2316,21 @@ export const downloadCutListExcel = async (
 
     //   return excelData;
 
-    // Create worksheet
-    const worksheet = XLSX.utils.json_to_sheet(excelData);
-    //   return worksheet;
+    // Create workbook and worksheet
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet("Cut List");
 
-    // Set column widths
-    const columnWidths = [
-        { wch: 30 }, // Description
-        { wch: 12 }, // Length
-        { wch: 12 }, // Width
-        { wch: 12 }, // Thickness
-        { wch: 8 }, // Qty
-        { wch: 35 }, // Material Details
-        { wch: 30 }, // Item Name
-        { wch: 20 }, // Unique Code
-        { wch: 20 }, // Unique Code 2
-        { wch: 15 }, // ELF
-        { wch: 15 }, // ELB
-        { wch: 15 }, // ESL
-        { wch: 15 }, // ESR
-    ];
+    // Set columns from keys of first row
+    const headers = excelData.length > 0 ? Object.keys(excelData[0]) : [];
+    const fixedWidths: number[] = [30, 12, 12, 12, 8, 35, 30, 20, 20, 15, 15, 15, 15];
+    worksheet.columns = headers.map((header, i) => ({
+        header,
+        key: header,
+        width: i < fixedWidths.length ? fixedWidths[i] : 15,
+    }));
 
-    // Add widths for machine columns
-    machineColumns.forEach(() => {
-        columnWidths.push({ wch: 15 });
-    });
-
-    worksheet["!cols"] = columnWidths;
-
-    // Create workbook
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Cut List");
+    // Add rows
+    excelData.forEach((row) => worksheet.addRow(row));
 
     // ✅ Define the directory path
     // const publicDir = process.cwd();
@@ -2365,7 +2349,7 @@ export const downloadCutListExcel = async (
     const filePath = path.join(excelDir, filename);
 
     // ✅ Write the Excel file to disk
-    XLSX.writeFile(workbook, filePath);
+    await workbook.xlsx.writeFile(filePath);
 
     // ✅ Return filename; API will build a served URL
     return filename;
