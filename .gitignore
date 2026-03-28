@@ -121,3 +121,5 @@ dist
 
 /assets/track-trace/qr/
 /assets/track-trace/excel/
+
+ecosystem.backend.config.cjs
