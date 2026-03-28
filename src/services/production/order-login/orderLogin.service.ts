@@ -1818,11 +1818,11 @@ export class OrderLoginService {
           : orderLoginRedirectUrl;
 
         const notifTitle = instanceOrderLoginComplete
-          ? "Project Assigned : Order Login Completed"
-          : "Project Assigned – Order Login Pending";
+          ? "Moved to Production"
+          : "Moved to Production (Order Login Pending)";
         const notifMessage = instanceOrderLoginComplete
-          ? `${instanceCode} - ${leadName} has been assigned to you. Order Login is complete.`
-          : `${instanceCode} - ${leadName} has been assigned to you. Order Login is pending.`;
+          ? `${instanceCode} - ${leadName} has entered Production.`
+          : `${instanceCode} - ${leadName} has entered Production. Production files are available, but Order Login details are pending.`;
 
         const preProdMapping = await prisma.leadUserMapping.findFirst({
           where: {
@@ -1871,6 +1871,7 @@ export class OrderLoginService {
               updatedBy: actorName,
               updatedAt: updatedAtStr,
               projectUrl: `${baseUrl}${prodNotifRedirect}`,
+              orderLoginComplete: instanceOrderLoginComplete,
             });
             console.log(`✅ Email sent to ${target.user_email}`);
           } catch (err: any) {
@@ -2264,11 +2265,11 @@ export class OrderLoginService {
       : orderLoginRedirectUrl;
 
     const notifTitleB = orderLoginCompleted
-      ? "Project Assigned : Order Login Completed"
-      : "Project Assigned – Order Login Pending";
+      ? "Moved to Production"
+      : "Moved to Production (Order Login Pending)";
     const notifMessageB = orderLoginCompleted
-      ? `${leadCode} - ${leadName} has been assigned to you. Order Login is complete.`
-      : `${leadCode} - ${leadName} has been assigned to you. Order Login is pending.`;
+      ? `${leadCode} - ${leadName} has entered Production.`
+      : `${leadCode} - ${leadName} has entered Production. Production files are available, but Order Login details are pending.`;
 
     if (factoryUser?.id) {
       try {
@@ -2363,6 +2364,7 @@ export class OrderLoginService {
             updatedBy: actorNameB,
             updatedAt: updatedAtStrB,
             projectUrl: `${baseUrl}${prodNotifRedirectB}`,
+            orderLoginComplete: orderLoginCompleted,
           });
           console.log(`✅ Email sent to ${target.user_email}`);
         } catch (err: any) {
