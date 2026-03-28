@@ -105,7 +105,8 @@ export const createProjectService = async (
       if (rowNumber === 1) {
         row.eachCell((cell) => { _headers.push(String(cell.value ?? "")); });
       } else {
-        const hasData = row.values.slice(1).some((v) => v !== null && v !== undefined && v !== "");
+        const cellValues = (row.values as ExcelJS.CellValue[]).slice(1);
+        const hasData = cellValues.some((v) => v !== null && v !== undefined && v !== "");
         if (!hasData) return;
         const obj: Record<string, unknown> = {};
         row.eachCell({ includeEmpty: true }, (cell, colNumber) => {

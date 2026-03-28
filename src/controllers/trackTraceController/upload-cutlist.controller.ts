@@ -19,7 +19,7 @@ export const uploadMachineExcel = async (req: Request, res: Response) => {
     }
 
     const workbook = new ExcelJS.Workbook();
-    await workbook.xlsx.load(file.buffer);
+    await workbook.xlsx.load(file.buffer.buffer.slice(file.buffer.byteOffset, file.buffer.byteOffset + file.buffer.byteLength) as ArrayBuffer);
     const sheet = workbook.worksheets[0];
     const headers: string[] = [];
     const rows: Record<string, unknown>[] = [];
