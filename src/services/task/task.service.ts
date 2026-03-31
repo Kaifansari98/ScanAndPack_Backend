@@ -548,7 +548,6 @@ private static mapTaskWithLead(task: any) {
       const unfilteredBaseWhereClause: any = {
         vendor_id: vendorId,
         user_id: userId,
-        status: { in: ["open", "in_progress"] },
       };
       if (includeFranchise) {
         unfilteredBaseWhereClause.franchise_id = franchiseId;
@@ -558,7 +557,6 @@ private static mapTaskWithLead(task: any) {
       const filteredBaseWhereClause = addFilterConditions({
         vendor_id: vendorId,
         user_id: userId,
-        status: { in: ["open", "in_progress"] },
       });
       if (includeFranchise) {
         filteredBaseWhereClause.franchise_id = franchiseId;
@@ -723,7 +721,6 @@ private static mapTaskWithLead(task: any) {
     const unfilteredBaseWhereClause: any = {
       id: { in: taskIds },
       vendor_id: vendorId,
-      status: { in: ["open", "in_progress"] },
     };
     if (includeFranchise) {
       unfilteredBaseWhereClause.franchise_id = franchiseId;
@@ -733,7 +730,6 @@ private static mapTaskWithLead(task: any) {
     const filteredBaseWhereClause = addFilterConditions({
       id: { in: taskIds },
       vendor_id: vendorId,
-      status: { in: ["open", "in_progress"] },
     });
     if (includeFranchise) {
       filteredBaseWhereClause.franchise_id = franchiseId;
@@ -1218,7 +1214,6 @@ private static mapTaskWithLead(task: any) {
     const unfilteredBaseWhereClause: any = {
       vendor_id: vendorId,
       franchise_id: franchiseId,
-      status: { in: ["open", "in_progress"] },
     };
 
     // ============================
@@ -1228,7 +1223,6 @@ private static mapTaskWithLead(task: any) {
     const filteredBaseWhereClause: any = addFilterConditions({
       vendor_id: vendorId,
       franchise_id: franchiseId,
-      status: { in: ["open", "in_progress"] },
     });
 
     // ============================
