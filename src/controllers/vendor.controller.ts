@@ -50,6 +50,40 @@ export const getVendorUsersController = async (
   }
 };
 
+export const seedVendorMastersController = async (req: Request, res: Response) => {
+  try {
+    const vendorId = Number(req.body.vendor_id);
+    if (!vendorId) {
+      return res.status(400).json({ success: false, message: "vendor_id is required" });
+    }
+    await vendorService.seedVendorMasters(vendorId);
+    return res.status(201).json({
+      success: true,
+      message: "Vendor masters seeded successfully",
+    });
+  } catch (err) {
+    console.error("Seed Vendor Masters Error:", err);
+    return res.status(500).json({ success: false, message: "Seeding failed" });
+  }
+};
+
+export const onboardVendorController = async (req: Request, res: Response) => {
+  try {
+    const vendor = await vendorService.onboardVendor(req.body);
+    return res.status(201).json({
+      success: true,
+      message: "Vendor onboarded successfully",
+      data: vendor,
+    });
+  } catch (err) {
+    console.error("Onboard Vendor Error:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Vendor onboarding failed",
+    });
+  }
+};
+
 export const getVendorStatusTypesController = async (
   req: Request,
   res: Response
