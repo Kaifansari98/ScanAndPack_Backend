@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
-import * as vendorService from '../services/vendor.service';
+import { Request, Response } from "express";
+import * as vendorService from "../services/vendor.service";
 
 export const createVendor = async (req: Request, res: Response) => {
   try {
@@ -7,7 +7,7 @@ export const createVendor = async (req: Request, res: Response) => {
     res.status(201).json(vendor);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Vendor creation failed' });
+    res.status(500).json({ error: "Vendor creation failed" });
   }
 };
 
@@ -16,11 +16,7 @@ export const getAllVendors = async (_req: Request, res: Response) => {
   res.json(vendors);
 };
 
-
-export const getVendorUsersController = async (
-  req: Request,
-  res: Response
-) => {
+export const getVendorUsersController = async (req: Request, res: Response) => {
   try {
     const vendorId = Number(req.query.vendor_id);
 
@@ -39,7 +35,6 @@ export const getVendorUsersController = async (
       message: "Vendor users fetched successfully",
       data: users,
     });
-
   } catch (error) {
     console.error("Get Vendor Users Error:", error);
 
@@ -50,16 +45,26 @@ export const getVendorUsersController = async (
   }
 };
 
-export const seedVendorMastersController = async (req: Request, res: Response) => {
+export const seedVendorMastersController = async (
+  req: Request,
+  res: Response,
+) => {
   try {
     const vendorId = Number(req.body.vendor_id);
     if (!vendorId) {
-      return res.status(400).json({ success: false, message: "vendor_id is required" });
+      return res
+        .status(400)
+        .json({ success: false, message: "vendor_id is required" });
     }
 
     const vendor = await vendorService.getVendorById(vendorId);
     if (!vendor) {
-      return res.status(404).json({ success: false, message: `Vendor with id ${vendorId} not found` });
+      return res
+        .status(404)
+        .json({
+          success: false,
+          message: `Vendor with id ${vendorId} not found`,
+        });
     }
 
     await vendorService.seedVendorMasters(vendorId);
@@ -69,7 +74,9 @@ export const seedVendorMastersController = async (req: Request, res: Response) =
     });
   } catch (err: any) {
     console.error("Seed Vendor Masters Error:", err?.message ?? err);
-    return res.status(500).json({ success: false, message: "Seeding failed", error: err?.message });
+    return res
+      .status(500)
+      .json({ success: false, message: "Seeding failed", error: err?.message });
   }
 };
 
@@ -92,10 +99,9 @@ export const onboardVendorController = async (req: Request, res: Response) => {
 
 export const getVendorStatusTypesController = async (
   req: Request,
-  res: Response
+  res: Response,
 ) => {
   try {
-
     const vendorId = Number(req.query.vendor_id);
 
     // Input validation
@@ -113,7 +119,6 @@ export const getVendorStatusTypesController = async (
       message: "Status types fetched successfully",
       data: data,
     });
-
   } catch (error) {
     console.error("Status Type API Error:", error);
 
