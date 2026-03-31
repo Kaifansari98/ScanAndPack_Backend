@@ -14,6 +14,11 @@ taskRouter.post(
   TaskController.getTasks2,
 );
 
+taskRouter.post(
+  "/vendorId/:vendorId/userId/:userId/tasks/report/filter",
+  TaskController.getReportTasksByUser,
+);
+
 // GET /api/tasks/vendorId/:vendorId/tasks/all
 taskRouter.get(
   "/vendorId/:vendorId/tasks/all",
@@ -23,6 +28,11 @@ taskRouter.get(
 taskRouter.post(
   "/vendorId/:vendorId/tasks/filter/all",
   TaskController.getTasksFilterByVendorAll,
+);
+
+taskRouter.post(
+  "/vendorId/:vendorId/tasks/report/filter/all",
+  TaskController.getReportTasksFilterByVendorAll,
 );
 
 // GET /api/tasks/user/:userId/lead/:leadId/initial-site-measurement
