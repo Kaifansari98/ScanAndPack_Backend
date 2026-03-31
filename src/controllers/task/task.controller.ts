@@ -210,6 +210,149 @@ export class TaskController {
     }
   }
 
+  static async getReportTasksByUser(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const userId = Number(req.params.userId);
+      const franchiseId = Number(req.body.franchise_id);
+
+      const page = parseInt((req.body.page as string) || "1");
+      const limit = parseInt((req.body.limit as string) || "10");
+
+      let dateRange: { from: string; to: string } | undefined;
+
+      if (req.body.date_range) {
+        const { from, to } = req.body.date_range;
+
+        if (from && isNaN(Date.parse(from))) {
+          return res.status(400).json({
+            success: false,
+            message: "Invalid 'from' date format in date_range. Use YYYY-MM-DD",
+          });
+        }
+
+        if (to && isNaN(Date.parse(to))) {
+          return res.status(400).json({
+            success: false,
+            message: "Invalid 'to' date format in date_range. Use YYYY-MM-DD",
+          });
+        }
+
+        if (from && !to) {
+          dateRange = { from, to: from };
+        } else if (from && to) {
+          if (new Date(from) > new Date(to)) {
+            return res.status(400).json({
+              success: false,
+              message: "'from' date cannot be after 'to' date in date_range",
+            });
+          }
+          dateRange = { from, to };
+        } else if (!from && to) {
+          dateRange = { from: to, to };
+        }
+      }
+
+      let assignatRange: { from: string; to: string } | undefined;
+
+      if (req.body.assignat_range) {
+        const { from, to } = req.body.assignat_range;
+
+        if (from && isNaN(Date.parse(from))) {
+          return res.status(400).json({
+            success: false,
+            message:
+              "Invalid 'from' date format in assignat_range. Use YYYY-MM-DD",
+          });
+        }
+
+        if (to && isNaN(Date.parse(to))) {
+          return res.status(400).json({
+            success: false,
+            message:
+              "Invalid 'to' date format in assignat_range. Use YYYY-MM-DD",
+          });
+        }
+
+        if (from && !to) {
+          assignatRange = { from, to: from };
+        } else if (from && to) {
+          if (new Date(from) > new Date(to)) {
+            return res.status(400).json({
+              success: false,
+              message:
+                "'from' date cannot be after 'to' date in assignat_range",
+            });
+          }
+          assignatRange = { from, to };
+        } else if (!from && to) {
+          assignatRange = { from: to, to };
+        }
+      }
+
+      const filters = {
+        global_search: req.body.global_search,
+        lead_code: req.body.lead_code,
+        lead_name: req.body.lead_name,
+        phone: req.body.phone,
+        task_type: req.body.task_type,
+        due_date: req.body.due_date,
+        due_filter: req.body.due_filter,
+        site_map_link: req.body.site_map_link,
+        site_type: req.body.site_type,
+        product_type: req.body.product_type,
+        product_structure: req.body.product_structure,
+        assign_by: req.body.assign_by,
+        assign_to: req.body.assign_to,
+        created_at: req.body.created_at,
+        date_range: dateRange,
+        assignat_range: assignatRange,
+      };
+
+      if (!vendorId || !userId || !franchiseId) {
+        return res.status(400).json({
+          success: false,
+          message: "Vendor ID, User ID, and Franchise ID are required",
+        });
+      }
+
+      const { tasks, count, summary } =
+        await TaskService.getTasksByVendorAndUserReport(
+          vendorId,
+          userId,
+          franchiseId,
+          page,
+          limit,
+          filters,
+        );
+
+      return res.status(200).json({
+        success: true,
+        message: "Report tasks fetched successfully",
+        count,
+        summary,
+        data: tasks,
+        pagination: {
+          currentPage: page,
+          totalPages: Math.ceil(count / limit),
+          totalRecords: count,
+          hasNext: page * limit < count,
+          hasPrev: page > 1,
+        },
+      });
+    } catch (error: any) {
+      logger.error("[TaskController] getReportTasksByUser Error", {
+        error: error.message,
+        stack: error.stack,
+      });
+
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Something went wrong",
+      });
+    }
+  }
+
   static async getInitialSiteMeasurementTasks(req: Request, res: Response) {
     try {
       const userId = Number(req.params.userId);
@@ -477,6 +620,147 @@ export class TaskController {
       });
     } catch (error: any) {
       logger.error("[TaskController] getTasksByVendorAll Error", {
+        error: error.message,
+        stack: error.stack,
+      });
+
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Something went wrong",
+      });
+    }
+  }
+
+  static async getReportTasksFilterByVendorAll(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const franchiseId = Number(req.body.franchise_id);
+
+      const page = parseInt((req.body.page as string) || "1");
+      const limit = parseInt((req.body.limit as string) || "10");
+
+      let dateRange: { from: string; to: string } | undefined;
+
+      if (req.body.date_range) {
+        const { from, to } = req.body.date_range;
+
+        if (from && isNaN(Date.parse(from))) {
+          return res.status(400).json({
+            success: false,
+            message: "Invalid 'from' date format in date_range. Use YYYY-MM-DD",
+          });
+        }
+
+        if (to && isNaN(Date.parse(to))) {
+          return res.status(400).json({
+            success: false,
+            message: "Invalid 'to' date format in date_range. Use YYYY-MM-DD",
+          });
+        }
+
+        if (from && !to) {
+          dateRange = { from, to: from };
+        } else if (from && to) {
+          if (new Date(from) > new Date(to)) {
+            return res.status(400).json({
+              success: false,
+              message: "'from' date cannot be after 'to' date in date_range",
+            });
+          }
+          dateRange = { from, to };
+        } else if (!from && to) {
+          dateRange = { from: to, to };
+        }
+      }
+
+      let assignatRange: { from: string; to: string } | undefined;
+
+      if (req.body.assignat_range) {
+        const { from, to } = req.body.assignat_range;
+
+        if (from && isNaN(Date.parse(from))) {
+          return res.status(400).json({
+            success: false,
+            message:
+              "Invalid 'from' date format in assignat_range. Use YYYY-MM-DD",
+          });
+        }
+
+        if (to && isNaN(Date.parse(to))) {
+          return res.status(400).json({
+            success: false,
+            message:
+              "Invalid 'to' date format in assignat_range. Use YYYY-MM-DD",
+          });
+        }
+
+        if (from && !to) {
+          assignatRange = { from, to: from };
+        } else if (from && to) {
+          if (new Date(from) > new Date(to)) {
+            return res.status(400).json({
+              success: false,
+              message:
+                "'from' date cannot be after 'to' date in assignat_range",
+            });
+          }
+          assignatRange = { from, to };
+        } else if (!from && to) {
+          assignatRange = { from: to, to };
+        }
+      }
+
+      const filters = {
+        global_search: req.body.global_search,
+        lead_code: req.body.lead_code,
+        lead_name: req.body.lead_name,
+        phone: req.body.phone,
+        task_type: req.body.task_type,
+        due_date: req.body.due_date,
+        due_filter: req.body.due_filter,
+        site_map_link: req.body.site_map_link,
+        site_type: req.body.site_type,
+        product_type: req.body.product_type,
+        product_structure: req.body.product_structure,
+        assign_by: req.body.assign_by,
+        assign_to: req.body.assign_to,
+        created_at: req.body.created_at,
+        date_range: dateRange,
+        assignat_range: assignatRange,
+      };
+
+      if (!vendorId || !franchiseId) {
+        return res.status(400).json({
+          success: false,
+          message: "Vendor ID and Franchise ID are required",
+        });
+      }
+
+      const { tasks, count, summary } =
+        await TaskService.getTasksFilterByVendorReport(
+          vendorId,
+          franchiseId,
+          page,
+          limit,
+          filters,
+        );
+
+      return res.status(200).json({
+        success: true,
+        message: "Report vendor tasks fetched successfully",
+        count,
+        summary,
+        data: tasks,
+        pagination: {
+          currentPage: page,
+          totalPages: Math.ceil(count / limit),
+          totalRecords: count,
+          hasNext: page * limit < count,
+          hasPrev: page > 1,
+        },
+      });
+    } catch (error: any) {
+      logger.error("[TaskController] getReportTasksFilterByVendorAll Error", {
         error: error.message,
         stack: error.stack,
       });

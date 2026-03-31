@@ -278,6 +278,51 @@ private static mapTaskWithLead(task: any) {
       overdue: number;
     };
   }> {
+    return this.getTasksByVendorAndUserReport(
+      vendorId,
+      userId,
+      franchiseId,
+      page,
+      limit,
+      filters,
+      false,
+    );
+  }
+
+  static async getTasksByVendorAndUserReport(
+    vendorId: number,
+    userId: number,
+    franchiseId: number | undefined,
+    page: number = 1,
+    limit: number = 10,
+    filters: {
+      global_search?: string;
+      lead_code?: string;
+      lead_name?: string;
+      phone?: string;
+      task_type?: string[];
+      due_date?: string;
+      due_filter?: "today" | "upcoming" | "overdue";
+      site_map_link?: boolean;
+      site_type?: number[];
+      product_type?: number[];
+      product_structure?: number[];
+      assign_by?: number;
+      assign_to?: number[];
+      created_at?: "asc" | "desc";
+      date_range?: { from: string; to: string };
+      assignat_range?: { from: string; to: string };
+    },
+    includeAllStatuses: boolean = true,
+  ): Promise<{
+    tasks: any[];
+    count: number;
+    summary: {
+      today: number;
+      upcoming: number;
+      overdue: number;
+    };
+  }> {
     // USER ROLE RESOLUTION
     const creator = await prisma.userMaster.findUnique({
       where: { id: userId },
@@ -548,6 +593,7 @@ private static mapTaskWithLead(task: any) {
       const unfilteredBaseWhereClause: any = {
         vendor_id: vendorId,
         user_id: userId,
+        ...(includeAllStatuses ? {} : { status: { in: ["open", "in_progress"] } }),
       };
       if (includeFranchise) {
         unfilteredBaseWhereClause.franchise_id = franchiseId;
@@ -557,6 +603,7 @@ private static mapTaskWithLead(task: any) {
       const filteredBaseWhereClause = addFilterConditions({
         vendor_id: vendorId,
         user_id: userId,
+        ...(includeAllStatuses ? {} : { status: { in: ["open", "in_progress"] } }),
       });
       if (includeFranchise) {
         filteredBaseWhereClause.franchise_id = franchiseId;
@@ -721,6 +768,7 @@ private static mapTaskWithLead(task: any) {
     const unfilteredBaseWhereClause: any = {
       id: { in: taskIds },
       vendor_id: vendorId,
+      ...(includeAllStatuses ? {} : { status: { in: ["open", "in_progress"] } }),
     };
     if (includeFranchise) {
       unfilteredBaseWhereClause.franchise_id = franchiseId;
@@ -730,6 +778,7 @@ private static mapTaskWithLead(task: any) {
     const filteredBaseWhereClause = addFilterConditions({
       id: { in: taskIds },
       vendor_id: vendorId,
+      ...(includeAllStatuses ? {} : { status: { in: ["open", "in_progress"] } }),
     });
     if (includeFranchise) {
       filteredBaseWhereClause.franchise_id = franchiseId;
@@ -950,6 +999,49 @@ private static mapTaskWithLead(task: any) {
       date_range?: { from: string; to: string };
       assignat_range?: { from: string; to: string };
     },
+  ): Promise<{
+    tasks: any[];
+    count: number;
+    summary: {
+      today: number;
+      upcoming: number;
+      overdue: number;
+    };
+  }> {
+    return this.getTasksFilterByVendorReport(
+      vendorId,
+      franchiseId,
+      page,
+      limit,
+      filters,
+      false,
+    );
+  }
+
+  static async getTasksFilterByVendorReport(
+    vendorId: number,
+    franchiseId: number,
+    page: number = 1,
+    limit: number = 10,
+    filters: {
+      global_search?: string;
+      lead_code?: string;
+      lead_name?: string;
+      phone?: string;
+      task_type?: string[];
+      due_date?: string;
+      due_filter?: "today" | "upcoming" | "overdue";
+      site_map_link?: boolean;
+      site_type?: number[];
+      product_type?: number[];
+      product_structure?: number[];
+      assign_by?: number;
+      assign_to?: number[];
+      created_at?: "asc" | "desc";
+      date_range?: { from: string; to: string };
+      assignat_range?: { from: string; to: string };
+    },
+    includeAllStatuses: boolean = true,
   ): Promise<{
     tasks: any[];
     count: number;
@@ -1214,6 +1306,7 @@ private static mapTaskWithLead(task: any) {
     const unfilteredBaseWhereClause: any = {
       vendor_id: vendorId,
       franchise_id: franchiseId,
+      ...(includeAllStatuses ? {} : { status: { in: ["open", "in_progress"] } }),
     };
 
     // ============================
@@ -1223,6 +1316,7 @@ private static mapTaskWithLead(task: any) {
     const filteredBaseWhereClause: any = addFilterConditions({
       vendor_id: vendorId,
       franchise_id: franchiseId,
+      ...(includeAllStatuses ? {} : { status: { in: ["open", "in_progress"] } }),
     });
 
     // ============================
