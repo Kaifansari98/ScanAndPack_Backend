@@ -56,14 +56,20 @@ export const seedVendorMastersController = async (req: Request, res: Response) =
     if (!vendorId) {
       return res.status(400).json({ success: false, message: "vendor_id is required" });
     }
+
+    const vendor = await vendorService.getVendorById(vendorId);
+    if (!vendor) {
+      return res.status(404).json({ success: false, message: `Vendor with id ${vendorId} not found` });
+    }
+
     await vendorService.seedVendorMasters(vendorId);
     return res.status(201).json({
       success: true,
       message: "Vendor masters seeded successfully",
     });
-  } catch (err) {
-    console.error("Seed Vendor Masters Error:", err);
-    return res.status(500).json({ success: false, message: "Seeding failed" });
+  } catch (err: any) {
+    console.error("Seed Vendor Masters Error:", err?.message ?? err);
+    return res.status(500).json({ success: false, message: "Seeding failed", error: err?.message });
   }
 };
 

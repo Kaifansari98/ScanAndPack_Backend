@@ -84,6 +84,10 @@ export const getVendorStatusTypes = async (vendorId: number) => {
   return statusTypes;
 };
 
+export const getVendorById = async (vendorId: number) => {
+  return prisma.vendorMaster.findUnique({ where: { id: vendorId } });
+};
+
 export const seedVendorMasters = async (vendorId: number) => {
   // Fetch all existing entries for this vendor in parallel
   const [
