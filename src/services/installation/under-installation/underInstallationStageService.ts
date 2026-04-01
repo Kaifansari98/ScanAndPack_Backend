@@ -3565,7 +3565,7 @@ export class UnderInstallationStageService {
 
   /**
    * ✅ Installation Report — fetch all installation-stage leads with misc + issue counts
-   * Covers Type 15 (Under Installation), Type 16 (Final Handover), Type 27-31 (Project Completed)
+   * Covers Type 15 (Under Installation), Type 16 (Final Handover), Type 17 (Project Completed)
    */
   static async getInstallationReportData(
     vendorId: number,
@@ -3573,7 +3573,7 @@ export class UnderInstallationStageService {
     fromDate: string | null,
     toDate: string | null,
   ) {
-    const INSTALLATION_TAGS = ["Type 15", "Type 16", "Type 27", "Type 28", "Type 29", "Type 30", "Type 31"];
+    const INSTALLATION_TAGS = ["Type 15", "Type 16", "Type 17"];
 
     // Resolve status IDs for all installation tags
     const statuses = await prisma.statusTypeMaster.findMany({
@@ -3649,5 +3649,147 @@ export class UnderInstallationStageService {
       misc_count: lead._count.miscellaneousMaster,
       issue_count: lead._count.installationIssueLogMaster,
     }));
+  }
+
+  static async getMiscIssueLogReportData(
+    vendorId: number,
+    franchiseId: number | null,
+    fromDate: string | null,
+    toDate: string | null,
+  ) {
+    const INSTALLATION_TAGS = ["Type 15", "Type 16", "Type 17"];
+    const dateFilter =
+      fromDate && toDate
+        ? {
+            gte: new Date(fromDate),
+            lte: new Date(new Date(toDate).setHours(23, 59, 59, 999)),
+          }
+        : undefined;
+
+    const leadWhere = {
+      is_deleted: false,
+      statusType: {
+        tag: { in: INSTALLATION_TAGS },
+      },
+      ...(franchiseId !== null ? { franchise_id: franchiseId } : {}),
+    };
+
+    const miscEntries = await prisma.miscellaneousMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        ...(dateFilter ? { created_at: dateFilter } : {}),
+        lead: leadWhere,
+      },
+      include: {
+        type: {
+          select: { name: true },
+        },
+        teams: {
+          include: {
+            team: {
+              select: { name: true },
+            },
+          },
+        },
+        lead: {
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            dispatch_date: true,
+            franchise: {
+              select: {
+                franchise_name: true,
+              },
+            },
+          },
+        },
+      },
+      orderBy: { created_at: "asc" },
+    });
+
+    const issueLogs = await prisma.installationIssueLogMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        ...(dateFilter ? { created_at: dateFilter } : {}),
+        lead: leadWhere,
+      },
+      include: {
+        issueTypes: {
+          include: {
+            type: {
+              select: { name: true },
+            },
+          },
+        },
+        responsibleTeams: {
+          include: {
+            team: {
+              select: { name: true },
+            },
+          },
+        },
+        lead: {
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            franchise: {
+              select: {
+                franchise_name: true,
+              },
+            },
+          },
+        },
+      },
+      orderBy: { created_at: "asc" },
+    });
+
+    const miscRows = miscEntries.map((entry) => ({
+      row_type: "misc" as const,
+      row_id: entry.id,
+      lead_code: entry.lead.lead_code,
+      client_name: `${entry.lead.firstname} ${entry.lead.lastname}`.trim(),
+      franchise_store: entry.lead.franchise?.franchise_name ?? null,
+      miscl_issue_type: entry.type.name,
+      responsible_team:
+        entry.teams.map((team) => team.team.name).join(", ") || "-",
+      issue_impact: "-",
+      instance: "-",
+      reorder_material_type: entry.reorder_material_details,
+      approve_reject_date:
+        entry.misc_approved === null ? null : entry.updated_at,
+      rtd_date: entry.expected_ready_date,
+      dispatch_req_date: entry.required_delivery_date,
+      dispatch_date: entry.lead.dispatch_date,
+      resolved_date: entry.resolved_at,
+      created_at: entry.created_at,
+    }));
+
+    const issueRows = issueLogs.map((entry) => ({
+      row_type: "issue" as const,
+      row_id: entry.id,
+      lead_code: entry.lead.lead_code,
+      client_name: `${entry.lead.firstname} ${entry.lead.lastname}`.trim(),
+      franchise_store: entry.lead.franchise?.franchise_name ?? null,
+      miscl_issue_type:
+        entry.issueTypes.map((issueType) => issueType.type.name).join(", ") ||
+        "Issue",
+      responsible_team:
+        entry.responsibleTeams.map((team) => team.team.name).join(", ") || "-",
+      issue_impact: entry.issue_impact ?? "-",
+      instance: "-",
+      reorder_material_type: "-",
+      approve_reject_date: null,
+      rtd_date: null,
+      dispatch_req_date: null,
+      dispatch_date: null,
+      resolved_date: null,
+      created_at: entry.created_at,
+    }));
+
+    return [...miscRows, ...issueRows].sort(
+      (a, b) => a.created_at.getTime() - b.created_at.getTime(),
+    );
   }
 }

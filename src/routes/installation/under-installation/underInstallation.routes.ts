@@ -224,4 +224,10 @@ underInstallationStageRoutes.get(
   controller.getInstallationReportData,
 );
 
+/** ✅ GET → Misc + Issue Log Report Data */
+underInstallationStageRoutes.get(
+  "/vendorId/:vendorId/report/misc-issue-log-data",
+  controller.getMiscIssueLogReportData,
+);
+
 export default underInstallationStageRoutes;
