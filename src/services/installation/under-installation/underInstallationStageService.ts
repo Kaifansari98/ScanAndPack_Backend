@@ -2764,6 +2764,7 @@ export class UnderInstallationStageService {
       where: { id: lead_id, vendor_id },
       data: {
         usable_handover_completed: true,
+        usable_handover_completed_at: new Date(),
         updated_by,
         updated_at: new Date(),
       },

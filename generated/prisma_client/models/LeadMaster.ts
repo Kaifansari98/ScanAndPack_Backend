@@ -132,6 +132,7 @@ export type LeadMasterMinAggregateOutputType = {
   usable_handover_pending_work_details: string | null
   mrp_value: number | null
   usable_handover_completed: boolean | null
+  usable_handover_completed_at: Date | null
   franchise_id: number | null
   order_login_prod_files_remark: string | null
 }
@@ -200,6 +201,7 @@ export type LeadMasterMaxAggregateOutputType = {
   usable_handover_pending_work_details: string | null
   mrp_value: number | null
   usable_handover_completed: boolean | null
+  usable_handover_completed_at: Date | null
   franchise_id: number | null
   order_login_prod_files_remark: string | null
 }
@@ -268,6 +270,7 @@ export type LeadMasterCountAggregateOutputType = {
   usable_handover_pending_work_details: number
   mrp_value: number
   usable_handover_completed: number
+  usable_handover_completed_at: number
   franchise_id: number
   order_login_prod_files_remark: number
   _all: number
@@ -380,6 +383,7 @@ export type LeadMasterMinAggregateInputType = {
   usable_handover_pending_work_details?: true
   mrp_value?: true
   usable_handover_completed?: true
+  usable_handover_completed_at?: true
   franchise_id?: true
   order_login_prod_files_remark?: true
 }
@@ -448,6 +452,7 @@ export type LeadMasterMaxAggregateInputType = {
   usable_handover_pending_work_details?: true
   mrp_value?: true
   usable_handover_completed?: true
+  usable_handover_completed_at?: true
   franchise_id?: true
   order_login_prod_files_remark?: true
 }
@@ -516,6 +521,7 @@ export type LeadMasterCountAggregateInputType = {
   usable_handover_pending_work_details?: true
   mrp_value?: true
   usable_handover_completed?: true
+  usable_handover_completed_at?: true
   franchise_id?: true
   order_login_prod_files_remark?: true
   _all?: true
@@ -671,6 +677,7 @@ export type LeadMasterGroupByOutputType = {
   usable_handover_pending_work_details: string | null
   mrp_value: number | null
   usable_handover_completed: boolean | null
+  usable_handover_completed_at: Date | null
   franchise_id: number | null
   order_login_prod_files_remark: string | null
   _count: LeadMasterCountAggregateOutputType | null
@@ -762,6 +769,7 @@ export type LeadMasterWhereInput = {
   usable_handover_pending_work_details?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   mrp_value?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
   usable_handover_completed?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
+  usable_handover_completed_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   franchise_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   order_login_prod_files_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   cutList?: Prisma.CutListListRelationFilter
@@ -868,6 +876,7 @@ export type LeadMasterOrderByWithRelationInput = {
   usable_handover_pending_work_details?: Prisma.SortOrderInput | Prisma.SortOrder
   mrp_value?: Prisma.SortOrderInput | Prisma.SortOrder
   usable_handover_completed?: Prisma.SortOrderInput | Prisma.SortOrder
+  usable_handover_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
   franchise_id?: Prisma.SortOrderInput | Prisma.SortOrder
   order_login_prod_files_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   cutList?: Prisma.CutListOrderByRelationAggregateInput
@@ -978,6 +987,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   usable_handover_pending_work_details?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   mrp_value?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
   usable_handover_completed?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
+  usable_handover_completed_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   franchise_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   order_login_prod_files_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   cutList?: Prisma.CutListListRelationFilter
@@ -1084,6 +1094,7 @@ export type LeadMasterOrderByWithAggregationInput = {
   usable_handover_pending_work_details?: Prisma.SortOrderInput | Prisma.SortOrder
   mrp_value?: Prisma.SortOrderInput | Prisma.SortOrder
   usable_handover_completed?: Prisma.SortOrderInput | Prisma.SortOrder
+  usable_handover_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
   franchise_id?: Prisma.SortOrderInput | Prisma.SortOrder
   order_login_prod_files_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.LeadMasterCountOrderByAggregateInput
@@ -1160,6 +1171,7 @@ export type LeadMasterScalarWhereWithAggregatesInput = {
   usable_handover_pending_work_details?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
   mrp_value?: Prisma.FloatNullableWithAggregatesFilter<"LeadMaster"> | number | null
   usable_handover_completed?: Prisma.BoolNullableWithAggregatesFilter<"LeadMaster"> | boolean | null
+  usable_handover_completed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadMaster"> | Date | string | null
   franchise_id?: Prisma.IntNullableWithAggregatesFilter<"LeadMaster"> | number | null
   order_login_prod_files_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
 }
@@ -1218,6 +1230,7 @@ export type LeadMasterCreateInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -1323,6 +1336,7 @@ export type LeadMasterUncheckedCreateInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -1409,6 +1423,7 @@ export type LeadMasterUpdateInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -1514,6 +1529,7 @@ export type LeadMasterUncheckedUpdateInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -1610,6 +1626,7 @@ export type LeadMasterCreateManyInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
 }
@@ -1668,6 +1685,7 @@ export type LeadMasterUpdateManyMutationInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -1735,6 +1753,7 @@ export type LeadMasterUncheckedUpdateManyInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -1823,6 +1842,7 @@ export type LeadMasterCountOrderByAggregateInput = {
   usable_handover_pending_work_details?: Prisma.SortOrder
   mrp_value?: Prisma.SortOrder
   usable_handover_completed?: Prisma.SortOrder
+  usable_handover_completed_at?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
   order_login_prod_files_remark?: Prisma.SortOrder
 }
@@ -1912,6 +1932,7 @@ export type LeadMasterMaxOrderByAggregateInput = {
   usable_handover_pending_work_details?: Prisma.SortOrder
   mrp_value?: Prisma.SortOrder
   usable_handover_completed?: Prisma.SortOrder
+  usable_handover_completed_at?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
   order_login_prod_files_remark?: Prisma.SortOrder
 }
@@ -1980,6 +2001,7 @@ export type LeadMasterMinOrderByAggregateInput = {
   usable_handover_pending_work_details?: Prisma.SortOrder
   mrp_value?: Prisma.SortOrder
   usable_handover_completed?: Prisma.SortOrder
+  usable_handover_completed_at?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
   order_login_prod_files_remark?: Prisma.SortOrder
 }
@@ -2902,6 +2924,7 @@ export type LeadMasterCreateWithoutVendorInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -3005,6 +3028,7 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -3130,6 +3154,7 @@ export type LeadMasterScalarWhereInput = {
   usable_handover_pending_work_details?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   mrp_value?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
   usable_handover_completed?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
+  usable_handover_completed_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   franchise_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   order_login_prod_files_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
 }
@@ -3188,6 +3213,7 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -3291,6 +3317,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -3387,6 +3414,7 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -3490,6 +3518,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -3586,6 +3615,7 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -3689,6 +3719,7 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -3785,6 +3816,7 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -3888,6 +3920,7 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -4048,6 +4081,7 @@ export type LeadMasterCreateWithoutProjectsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -4152,6 +4186,7 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -4253,6 +4288,7 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -4357,6 +4393,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -4442,6 +4479,7 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -4546,6 +4584,7 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -4647,6 +4686,7 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -4751,6 +4791,7 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -4836,6 +4877,7 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -4940,6 +4982,7 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -5041,6 +5084,7 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -5145,6 +5189,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -5230,6 +5275,7 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -5333,6 +5379,7 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -5445,6 +5492,7 @@ export type LeadMasterCreateWithoutSourceInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -5548,6 +5596,7 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -5660,6 +5709,7 @@ export type LeadMasterCreateWithoutAccountInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -5763,6 +5813,7 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -5875,6 +5926,7 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -5979,6 +6031,7 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -6080,6 +6133,7 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -6184,6 +6238,7 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -6269,6 +6324,7 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -6373,6 +6429,7 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -6474,6 +6531,7 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -6578,6 +6636,7 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -6663,6 +6722,7 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -6767,6 +6827,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -6868,6 +6929,7 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -6972,6 +7034,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -7057,6 +7120,7 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -7161,6 +7225,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -7262,6 +7327,7 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -7366,6 +7432,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -7451,6 +7518,7 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -7555,6 +7623,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -7656,6 +7725,7 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -7760,6 +7830,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -7845,6 +7916,7 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -7949,6 +8021,7 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -8050,6 +8123,7 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -8154,6 +8228,7 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -8239,6 +8314,7 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -8343,6 +8419,7 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -8444,6 +8521,7 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -8548,6 +8626,7 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -8633,6 +8712,7 @@ export type LeadMasterCreateWithoutLedgersInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -8737,6 +8817,7 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -8838,6 +8919,7 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -8942,6 +9024,7 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -9027,6 +9110,7 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -9130,6 +9214,7 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -9242,6 +9327,7 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -9346,6 +9432,7 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -9447,6 +9534,7 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -9551,6 +9639,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -9636,6 +9725,7 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -9740,6 +9830,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -9841,6 +9932,7 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -9945,6 +10037,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -10030,6 +10123,7 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -10134,6 +10228,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -10235,6 +10330,7 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -10339,6 +10435,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -10424,6 +10521,7 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -10528,6 +10626,7 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -10629,6 +10728,7 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -10733,6 +10833,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -10818,6 +10919,7 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -10922,6 +11024,7 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -11023,6 +11126,7 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -11127,6 +11231,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -11212,6 +11317,7 @@ export type LeadMasterCreateWithoutTasksInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -11316,6 +11422,7 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -11417,6 +11524,7 @@ export type LeadMasterUpdateWithoutTasksInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -11521,6 +11629,7 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -11606,6 +11715,7 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -11710,6 +11820,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -11811,6 +11922,7 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -11915,6 +12027,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -12000,6 +12113,7 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -12104,6 +12218,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -12205,6 +12320,7 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -12309,6 +12425,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -12394,6 +12511,7 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -12498,6 +12616,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -12599,6 +12718,7 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -12703,6 +12823,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -12788,6 +12909,7 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -12892,6 +13014,7 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -12993,6 +13116,7 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -13097,6 +13221,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -13182,6 +13307,7 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -13286,6 +13412,7 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -13387,6 +13514,7 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -13491,6 +13619,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -13576,6 +13705,7 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -13680,6 +13810,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -13781,6 +13912,7 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -13885,6 +14017,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -13970,6 +14103,7 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -14074,6 +14208,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -14175,6 +14310,7 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -14279,6 +14415,7 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -14364,6 +14501,7 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -14468,6 +14606,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -14569,6 +14708,7 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -14673,6 +14813,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -14758,6 +14899,7 @@ export type LeadMasterCreateWithoutCutListInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
@@ -14862,6 +15004,7 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -14963,6 +15106,7 @@ export type LeadMasterUpdateWithoutCutListInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
@@ -15067,6 +15211,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -15152,6 +15297,7 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
@@ -15256,6 +15402,7 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -15357,6 +15504,7 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
@@ -15461,6 +15609,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -15546,6 +15695,7 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -15650,6 +15800,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -15751,6 +15902,7 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -15855,6 +16007,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -15940,6 +16093,7 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -16044,6 +16198,7 @@ export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -16164,6 +16319,7 @@ export type LeadMasterCreateManyVendorInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
 }
@@ -16222,6 +16378,7 @@ export type LeadMasterUpdateWithoutVendorInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -16325,6 +16482,7 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -16420,6 +16578,7 @@ export type LeadMasterUncheckedUpdateManyWithoutVendorInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -16487,6 +16646,7 @@ export type LeadMasterCreateManyAssignedToInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
 }
@@ -16554,6 +16714,7 @@ export type LeadMasterCreateManyAssignedByInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
 }
@@ -16621,6 +16782,7 @@ export type LeadMasterCreateManyCreatedByInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
 }
@@ -16688,6 +16850,7 @@ export type LeadMasterCreateManyUpdatedByInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
 }
@@ -16746,6 +16909,7 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -16849,6 +17013,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -16944,6 +17109,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedToInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -17002,6 +17168,7 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -17105,6 +17272,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -17200,6 +17368,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedByInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -17258,6 +17427,7 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -17361,6 +17531,7 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -17456,6 +17627,7 @@ export type LeadMasterUncheckedUpdateManyWithoutCreatedByInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -17514,6 +17686,7 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -17617,6 +17790,7 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -17712,6 +17886,7 @@ export type LeadMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -17779,6 +17954,7 @@ export type LeadMasterCreateManySiteTypeInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
 }
@@ -17837,6 +18013,7 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -17940,6 +18117,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -18035,6 +18213,7 @@ export type LeadMasterUncheckedUpdateManyWithoutSiteTypeInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -18102,6 +18281,7 @@ export type LeadMasterCreateManySourceInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
 }
@@ -18160,6 +18340,7 @@ export type LeadMasterUpdateWithoutSourceInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -18263,6 +18444,7 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -18358,6 +18540,7 @@ export type LeadMasterUncheckedUpdateManyWithoutSourceInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -18425,6 +18608,7 @@ export type LeadMasterCreateManyAccountInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
 }
@@ -18483,6 +18667,7 @@ export type LeadMasterUpdateWithoutAccountInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -18586,6 +18771,7 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -18681,6 +18867,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAccountInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -18748,6 +18935,7 @@ export type LeadMasterCreateManyStatusTypeInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
 }
@@ -18806,6 +18994,7 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -18909,6 +19098,7 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -19004,6 +19194,7 @@ export type LeadMasterUncheckedUpdateManyWithoutStatusTypeInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -19072,6 +19263,7 @@ export type LeadMasterCreateManyFranchiseInput = {
   usable_handover_pending_work_details?: string | null
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
   order_login_prod_files_remark?: string | null
 }
 
@@ -19129,6 +19321,7 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -19233,6 +19426,7 @@ export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -19328,6 +19522,7 @@ export type LeadMasterUncheckedUpdateManyWithoutFranchiseInput = {
   usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -19669,6 +19864,7 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   usable_handover_pending_work_details?: boolean
   mrp_value?: boolean
   usable_handover_completed?: boolean
+  usable_handover_completed_at?: boolean
   franchise_id?: boolean
   order_login_prod_files_remark?: boolean
   cutList?: boolean | Prisma.LeadMaster$cutListArgs<ExtArgs>
@@ -19776,6 +19972,7 @@ export type LeadMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   usable_handover_pending_work_details?: boolean
   mrp_value?: boolean
   usable_handover_completed?: boolean
+  usable_handover_completed_at?: boolean
   franchise_id?: boolean
   order_login_prod_files_remark?: boolean
   account?: boolean | Prisma.LeadMaster$accountArgs<ExtArgs>
@@ -19854,6 +20051,7 @@ export type LeadMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   usable_handover_pending_work_details?: boolean
   mrp_value?: boolean
   usable_handover_completed?: boolean
+  usable_handover_completed_at?: boolean
   franchise_id?: boolean
   order_login_prod_files_remark?: boolean
   account?: boolean | Prisma.LeadMaster$accountArgs<ExtArgs>
@@ -19932,11 +20130,12 @@ export type LeadMasterSelectScalar = {
   usable_handover_pending_work_details?: boolean
   mrp_value?: boolean
   usable_handover_completed?: boolean
+  usable_handover_completed_at?: boolean
   franchise_id?: boolean
   order_login_prod_files_remark?: boolean
 }
 
-export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "actual_installation_start_date" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "franchise_id" | "order_login_prod_files_remark", ExtArgs["result"]["leadMaster"]>
+export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "actual_installation_start_date" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "usable_handover_completed_at" | "franchise_id" | "order_login_prod_files_remark", ExtArgs["result"]["leadMaster"]>
 export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cutList?: boolean | Prisma.LeadMaster$cutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.LeadMaster$cutListMachineMappingArgs<ExtArgs>
@@ -20109,6 +20308,7 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     usable_handover_pending_work_details: string | null
     mrp_value: number | null
     usable_handover_completed: boolean | null
+    usable_handover_completed_at: Date | null
     franchise_id: number | null
     order_login_prod_files_remark: string | null
   }, ExtArgs["result"]["leadMaster"]>
@@ -20635,6 +20835,7 @@ export interface LeadMasterFieldRefs {
   readonly usable_handover_pending_work_details: Prisma.FieldRef<"LeadMaster", 'String'>
   readonly mrp_value: Prisma.FieldRef<"LeadMaster", 'Float'>
   readonly usable_handover_completed: Prisma.FieldRef<"LeadMaster", 'Boolean'>
+  readonly usable_handover_completed_at: Prisma.FieldRef<"LeadMaster", 'DateTime'>
   readonly franchise_id: Prisma.FieldRef<"LeadMaster", 'Int'>
   readonly order_login_prod_files_remark: Prisma.FieldRef<"LeadMaster", 'String'>
 }
