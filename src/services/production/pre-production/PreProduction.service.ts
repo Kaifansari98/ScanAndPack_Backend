@@ -3,6 +3,48 @@ import { prisma } from "../../../prisma/client";
 import logger from "../../../../src/utils/logger";
 
 export class PreProductionService {
+  private async recomputeLeadExpectedOrderLoginReadyDate(
+    vendorId: number,
+    leadId: number,
+    updatedBy: number,
+  ) {
+    const latestOrder = await prisma.orderLoginDetails.findFirst({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        estimated_completion_date: {
+          not: null,
+        },
+      },
+      orderBy: {
+        estimated_completion_date: "desc",
+      },
+      select: {
+        estimated_completion_date: true,
+      },
+    });
+
+    if (!latestOrder?.estimated_completion_date) {
+      return null;
+    }
+
+    const bufferedDate = new Date(latestOrder.estimated_completion_date);
+    bufferedDate.setDate(bufferedDate.getDate() + 3);
+
+    return prisma.leadMaster.update({
+      where: { id: leadId },
+      data: {
+        expected_order_login_ready_date: bufferedDate,
+        updated_by: updatedBy,
+        updated_at: new Date(),
+      },
+      select: {
+        id: true,
+        expected_order_login_ready_date: true,
+      },
+    });
+  }
+
   async getLeadsWithStatusPreProduction(
     vendorId: number,
     userId: number,
@@ -294,11 +336,11 @@ export class PreProductionService {
   async getLatestOrderLoginByLead(
     vendorId: number,
     leadId: number,
-    instanceId: number,
+    instanceId?: number,
   ) {
-    if (!vendorId || !leadId || !instanceId) {
+    if (!vendorId || !leadId) {
       const error = new Error(
-        "vendor_id, lead_id and instance_id are required",
+        "vendor_id and lead_id are required",
       );
       (error as any).statusCode = 400;
       throw error;
@@ -308,7 +350,7 @@ export class PreProductionService {
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
-        instance_id: instanceId,
+        ...(typeof instanceId !== "undefined" ? { instance_id: instanceId } : {}),
         estimated_completion_date: {
           not: null,
         },
@@ -619,6 +661,18 @@ export class PreProductionService {
       failed: errors.length,
       errors,
     });
+
+    const latestUpdatedBy = updates
+      .map((update) => Number(update?.updated_by))
+      .find((value) => !Number.isNaN(value) && value > 0);
+
+    if (results.length > 0 && latestUpdatedBy) {
+      await this.recomputeLeadExpectedOrderLoginReadyDate(
+        vendorId,
+        leadId,
+        latestUpdatedBy,
+      );
+    }
 
     return { results, errors };
   }

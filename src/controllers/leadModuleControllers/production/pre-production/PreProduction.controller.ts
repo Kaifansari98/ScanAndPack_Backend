@@ -222,7 +222,7 @@ export class PreProductionController {
       const result = await service.getLatestOrderLoginByLead(
         Number(vendorId),
         Number(lead_id),
-        Number(instance_id)
+        typeof instance_id !== "undefined" ? Number(instance_id) : undefined,
       );
 
       return res.status(200).json({
