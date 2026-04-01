@@ -1,17 +1,13 @@
 import { Router } from "express";
 import { TrackTraceMasterController } from "../../../src/controllers/trackTraceController/trackTraceMasterController";
 import { uploadMachineFiles } from "../../../src/middlewares/uploadWasabi";
-import { 
-
-  getMachineType
-} from '../../controllers/trackTraceController/trackTraceMasterController';
+import { getMachineType } from "../../controllers/trackTraceController/trackTraceMasterController";
 const router = Router();
-
 
 router.post(
   "/machines",
   uploadMachineFiles.single("machine_image"),
-  TrackTraceMasterController.createMachine
+  TrackTraceMasterController.createMachine,
 );
 router.get(
   "/machines/vendor/:vendor_id",
@@ -20,8 +16,17 @@ router.get(
 router.put(
   "/machines/:id/vendor/:vendor_id",
   uploadMachineFiles.single("machine_image"),
-  TrackTraceMasterController.updateMachine
+  TrackTraceMasterController.updateMachine,
 );
 
-router.get("/machine-type",getMachineType);
+router.post(
+  "/machine-users-assign",
+  TrackTraceMasterController.assignUsersToMachineController,
+);
+router.get(
+  "/machines/:machine_id/assigned-users",
+  TrackTraceMasterController.getAssignedUsersController,
+);
+
+router.get("/machine-type", getMachineType);
 export default router;

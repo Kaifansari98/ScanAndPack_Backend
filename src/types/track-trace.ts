@@ -1,27 +1,29 @@
 export interface TrackTraceDashboardPayload {
-    project_id?: string;
-    vendor_id: number;
-    machine_id?: string;
-    created_by?: string;
+  project_id?: string;
+  vendor_id: number;
+  machine_id?: string;
+  created_by?: string;
+
+  date_range?: string;
+  start_date?: string;
+  end_date?: string;
 }
 
 export interface CutListSavePayload {
-    project_id: string;
-    vendor_id: number;
-    cutListIds: string;
-    machine_id: number;
-    machine_name: string;
-    assigned: boolean;
-    created_by: Number
+  project_id: string;
+  vendor_id: number;
+  cutListIds: string;
+  machine_id: number;
+  machine_name: string;
+  assigned: boolean;
+  created_by: Number;
 }
-
 
 export interface QRParam {
-    projectId?: string;
-    vendorId: number;
-    cutListIds?: string;    
+  projectId?: string;
+  vendorId: number;
+  cutListIds?: string;
 }
-
 
 export interface MarkDefectPayload {
   vendor_id: number;
@@ -32,5 +34,5 @@ export interface MarkDefectPayload {
   created_by: number;
   defect_id: number;
   defect_name: string;
-  cut_list_id:number;
+  cut_list_id: number;
 }

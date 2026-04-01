@@ -387,6 +387,7 @@ model LeadMaster {
   no_of_client_documents_initially_submitted  Int?
   hardware_packing_details_remark             String?                             @db.VarChar(2000)
   woodwork_packing_details_remark             String?                             @db.VarChar(2000)
+  order_login_prod_files_remark               String?                             @db.Text
   no_of_boxes                                 Int?
   dispatch_planning_remark                    String?                             @db.VarChar(2000)
   material_lift_availability                  Boolean?
@@ -410,7 +411,6 @@ model LeadMaster {
   mrp_value                                   Float?
   usable_handover_completed                   Boolean?                            @default(false)
   franchise_id                                Int?
-  order_login_prod_files_remark               String?
   cutList                                     CutList[]
   cutListMachineMapping                       CutListMachineMapping[]
   installationIssueLogMaster                  InstallationIssueLogMaster[]

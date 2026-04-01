@@ -7361,6 +7361,7 @@ export const LeadMasterScalarFieldEnum = {
   no_of_client_documents_initially_submitted: 'no_of_client_documents_initially_submitted',
   hardware_packing_details_remark: 'hardware_packing_details_remark',
   woodwork_packing_details_remark: 'woodwork_packing_details_remark',
+  order_login_prod_files_remark: 'order_login_prod_files_remark',
   no_of_boxes: 'no_of_boxes',
   dispatch_planning_remark: 'dispatch_planning_remark',
   material_lift_availability: 'material_lift_availability',
@@ -7383,8 +7384,7 @@ export const LeadMasterScalarFieldEnum = {
   usable_handover_pending_work_details: 'usable_handover_pending_work_details',
   mrp_value: 'mrp_value',
   usable_handover_completed: 'usable_handover_completed',
-  franchise_id: 'franchise_id',
-  order_login_prod_files_remark: 'order_login_prod_files_remark'
+  franchise_id: 'franchise_id'
 } as const
 
 export type LeadMasterScalarFieldEnum = (typeof LeadMasterScalarFieldEnum)[keyof typeof LeadMasterScalarFieldEnum]
