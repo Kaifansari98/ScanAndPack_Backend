@@ -3673,6 +3673,34 @@ export class UnderInstallationStageService {
       },
       ...(franchiseId !== null ? { franchise_id: franchiseId } : {}),
     };
+    const splitMiscMaterial = (value: string | null) => {
+      const raw = value?.trim() ?? "";
+      if (!raw) {
+        return {
+          instance: "-",
+          reorderMaterialType: "-",
+        };
+      }
+
+      const delimiter = " - ";
+      const delimiterIndex = raw.indexOf(delimiter);
+
+      if (delimiterIndex === -1) {
+        return {
+          instance: "-",
+          reorderMaterialType: raw,
+        };
+      }
+
+      const instance = raw.slice(0, delimiterIndex).trim() || "-";
+      const reorderMaterialType =
+        raw.slice(delimiterIndex + delimiter.length).trim() || "-";
+
+      return {
+        instance,
+        reorderMaterialType,
+      };
+    };
 
     const miscEntries = await prisma.miscellaneousMaster.findMany({
       where: {
@@ -3745,26 +3773,32 @@ export class UnderInstallationStageService {
       orderBy: { created_at: "asc" },
     });
 
-    const miscRows = miscEntries.map((entry) => ({
-      row_type: "misc" as const,
-      row_id: entry.id,
-      lead_code: entry.lead.lead_code,
-      client_name: `${entry.lead.firstname} ${entry.lead.lastname}`.trim(),
-      franchise_store: entry.lead.franchise?.franchise_name ?? null,
-      miscl_issue_type: entry.type.name,
-      responsible_team:
-        entry.teams.map((team) => team.team.name).join(", ") || "-",
-      issue_impact: "-",
-      instance: "-",
-      reorder_material_type: entry.reorder_material_details,
-      approve_reject_date:
-        entry.misc_approved === null ? null : entry.updated_at,
-      rtd_date: entry.expected_ready_date,
-      dispatch_req_date: entry.required_delivery_date,
-      dispatch_date: entry.lead.dispatch_date,
-      resolved_date: entry.resolved_at,
-      created_at: entry.created_at,
-    }));
+    const miscRows = miscEntries.map((entry) => {
+      const { instance, reorderMaterialType } = splitMiscMaterial(
+        entry.reorder_material_details,
+      );
+
+      return {
+        row_type: "misc" as const,
+        row_id: entry.id,
+        lead_code: entry.lead.lead_code,
+        client_name: `${entry.lead.firstname} ${entry.lead.lastname}`.trim(),
+        franchise_store: entry.lead.franchise?.franchise_name ?? null,
+        miscl_issue_type: entry.type.name,
+        responsible_team:
+          entry.teams.map((team) => team.team.name).join(", ") || "-",
+        issue_impact: "-",
+        instance,
+        reorder_material_type: reorderMaterialType,
+        approve_reject_date:
+          entry.misc_approved === null ? null : entry.updated_at,
+        rtd_date: entry.expected_ready_date,
+        dispatch_req_date: entry.required_delivery_date,
+        dispatch_date: entry.lead.dispatch_date,
+        resolved_date: entry.resolved_at,
+        created_at: entry.created_at,
+      };
+    });
 
     const issueRows = issueLogs.map((entry) => ({
       row_type: "issue" as const,
