@@ -210,3 +210,44 @@ export const getTechCheckStageReportController = async (
     });
   }
 };
+
+export const getErdReportController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const vendorId = Number(req.query.vendor_id);
+    const franchiseId = req.query.franchise_id
+      ? Number(req.query.franchise_id)
+      : null;
+    const fromDate = req.query.from_date ? String(req.query.from_date) : null;
+    const toDate = req.query.to_date ? String(req.query.to_date) : null;
+
+    if (!vendorId) {
+      return res.status(400).json({
+        success: false,
+        message: "vendor_id is required",
+      });
+    }
+
+    const data = await vendorService.getErdReportData(
+      vendorId,
+      franchiseId,
+      fromDate,
+      toDate,
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "ERD report data fetched successfully",
+      data,
+    });
+  } catch (error) {
+    console.error("ERD Report Error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};

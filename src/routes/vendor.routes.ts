@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createVendor,
   getAllVendors,
+  getErdReportController,
   getLeadsOverviewReportController,
   getTechCheckStageReportController,
   getVendorStatusTypesController,
@@ -20,5 +21,6 @@ router.get("/vendor-users", getVendorUsersController);
 router.get("/status-types", getVendorStatusTypesController);
 router.get("/reports/leads-overview", getLeadsOverviewReportController);
 router.get("/reports/techcheck-stage", getTechCheckStageReportController);
+router.get("/reports/erd", getErdReportController);
 
 export default router;

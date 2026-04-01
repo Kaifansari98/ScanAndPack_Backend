@@ -40,6 +40,15 @@ interface TechCheckStageReportRow {
   tech_check_approved_date: Date | null;
 }
 
+interface ErdReportRow {
+  lead_id: number;
+  lead_code: string;
+  client_name: string;
+  franchise_store: string;
+  required_date: Date | null;
+  erd_date: Date | null;
+}
+
 export const createVendor = async (data: any) => {
   const {
     vendor_name,
@@ -493,6 +502,62 @@ export const getTechCheckStageReportData = async (
       buildRow(instance.id, instance.quantity_index),
     );
   });
+};
+
+export const getErdReportData = async (
+  vendorId: number,
+  franchiseId: number | null,
+  fromDate: string | null,
+  toDate: string | null,
+): Promise<ErdReportRow[]> => {
+  const where: any = {
+    vendor_id: vendorId,
+    is_deleted: false,
+    OR: [
+      { client_required_order_login_complition_date: { not: null } },
+      { expected_order_login_ready_date: { not: null } },
+    ],
+  };
+
+  if (franchiseId !== null) {
+    where.franchise_id = franchiseId;
+  }
+
+  if (fromDate && toDate) {
+    where.client_required_order_login_complition_date = {
+      gte: new Date(fromDate),
+      lte: new Date(new Date(toDate).setHours(23, 59, 59, 999)),
+    };
+  }
+
+  const leads = await prisma.leadMaster.findMany({
+    where,
+    select: {
+      id: true,
+      lead_code: true,
+      firstname: true,
+      lastname: true,
+      client_required_order_login_complition_date: true,
+      expected_order_login_ready_date: true,
+      franchise: {
+        select: {
+          franchise_name: true,
+        },
+      },
+    },
+    orderBy: {
+      client_required_order_login_complition_date: "asc",
+    },
+  });
+
+  return leads.map((lead) => ({
+    lead_id: lead.id,
+    lead_code: lead.lead_code,
+    client_name: `${lead.firstname} ${lead.lastname}`.trim(),
+    franchise_store: lead.franchise?.franchise_name ?? "-",
+    required_date: lead.client_required_order_login_complition_date,
+    erd_date: lead.expected_order_login_ready_date,
+  }));
 };
 
 export const getVendorById = async (vendorId: number) => {
