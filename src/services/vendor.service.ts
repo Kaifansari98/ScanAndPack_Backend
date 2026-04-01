@@ -111,8 +111,11 @@ const normalizeSelectionType = (value: string | null | undefined) =>
 const formatOverviewLeadCode = (
   leadCode: string,
   quantityIndex: number | null | undefined,
+  hasMultipleInstances: boolean,
 ) =>
-  quantityIndex !== null && quantityIndex !== undefined
+  hasMultipleInstances &&
+  quantityIndex !== null &&
+  quantityIndex !== undefined
     ? `${leadCode}.${quantityIndex}`
     : leadCode;
 
@@ -289,6 +292,8 @@ export const getLeadsOverviewReportData = async (
       ];
     }
 
+    const hasMultipleInstances = lead.productStructureInstances.length > 1;
+
     return lead.productStructureInstances.map((instance) => {
       const carcassSelection =
         instance.designSelections.find((selection) => {
@@ -311,6 +316,7 @@ export const getLeadsOverviewReportData = async (
         lead_code: formatOverviewLeadCode(
           lead.lead_code,
           instance.quantity_index,
+          hasMultipleInstances,
         ),
         client_name: `${lead.firstname} ${lead.lastname}`.trim(),
         franchise_store: lead.franchise?.franchise_name ?? "-",
