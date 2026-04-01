@@ -492,6 +492,7 @@ export class FinalHandoverStageService {
         where: { id: leadId },
         data: {
           status_id: status.id,
+          final_handover_marked_at: new Date(),
           updated_by: updatedBy,
           updated_at: new Date(),
         },

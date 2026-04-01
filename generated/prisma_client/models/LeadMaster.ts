@@ -124,6 +124,7 @@ export type LeadMasterMinAggregateOutputType = {
   driver_number: string | null
   vehicle_no: string | null
   actual_installation_start_date: Date | null
+  actual_installation_completion_at: Date | null
   carcass_installation_completion_date: Date | null
   expected_installation_end_date: Date | null
   is_carcass_installation_completed: boolean | null
@@ -133,6 +134,7 @@ export type LeadMasterMinAggregateOutputType = {
   mrp_value: number | null
   usable_handover_completed: boolean | null
   usable_handover_completed_at: Date | null
+  final_handover_marked_at: Date | null
   franchise_id: number | null
   order_login_prod_files_remark: string | null
 }
@@ -193,6 +195,7 @@ export type LeadMasterMaxAggregateOutputType = {
   driver_number: string | null
   vehicle_no: string | null
   actual_installation_start_date: Date | null
+  actual_installation_completion_at: Date | null
   carcass_installation_completion_date: Date | null
   expected_installation_end_date: Date | null
   is_carcass_installation_completed: boolean | null
@@ -202,6 +205,7 @@ export type LeadMasterMaxAggregateOutputType = {
   mrp_value: number | null
   usable_handover_completed: boolean | null
   usable_handover_completed_at: Date | null
+  final_handover_marked_at: Date | null
   franchise_id: number | null
   order_login_prod_files_remark: string | null
 }
@@ -262,6 +266,7 @@ export type LeadMasterCountAggregateOutputType = {
   driver_number: number
   vehicle_no: number
   actual_installation_start_date: number
+  actual_installation_completion_at: number
   carcass_installation_completion_date: number
   expected_installation_end_date: number
   is_carcass_installation_completed: number
@@ -271,6 +276,7 @@ export type LeadMasterCountAggregateOutputType = {
   mrp_value: number
   usable_handover_completed: number
   usable_handover_completed_at: number
+  final_handover_marked_at: number
   franchise_id: number
   order_login_prod_files_remark: number
   _all: number
@@ -375,6 +381,7 @@ export type LeadMasterMinAggregateInputType = {
   driver_number?: true
   vehicle_no?: true
   actual_installation_start_date?: true
+  actual_installation_completion_at?: true
   carcass_installation_completion_date?: true
   expected_installation_end_date?: true
   is_carcass_installation_completed?: true
@@ -384,6 +391,7 @@ export type LeadMasterMinAggregateInputType = {
   mrp_value?: true
   usable_handover_completed?: true
   usable_handover_completed_at?: true
+  final_handover_marked_at?: true
   franchise_id?: true
   order_login_prod_files_remark?: true
 }
@@ -444,6 +452,7 @@ export type LeadMasterMaxAggregateInputType = {
   driver_number?: true
   vehicle_no?: true
   actual_installation_start_date?: true
+  actual_installation_completion_at?: true
   carcass_installation_completion_date?: true
   expected_installation_end_date?: true
   is_carcass_installation_completed?: true
@@ -453,6 +462,7 @@ export type LeadMasterMaxAggregateInputType = {
   mrp_value?: true
   usable_handover_completed?: true
   usable_handover_completed_at?: true
+  final_handover_marked_at?: true
   franchise_id?: true
   order_login_prod_files_remark?: true
 }
@@ -513,6 +523,7 @@ export type LeadMasterCountAggregateInputType = {
   driver_number?: true
   vehicle_no?: true
   actual_installation_start_date?: true
+  actual_installation_completion_at?: true
   carcass_installation_completion_date?: true
   expected_installation_end_date?: true
   is_carcass_installation_completed?: true
@@ -522,6 +533,7 @@ export type LeadMasterCountAggregateInputType = {
   mrp_value?: true
   usable_handover_completed?: true
   usable_handover_completed_at?: true
+  final_handover_marked_at?: true
   franchise_id?: true
   order_login_prod_files_remark?: true
   _all?: true
@@ -669,6 +681,7 @@ export type LeadMasterGroupByOutputType = {
   driver_number: string | null
   vehicle_no: string | null
   actual_installation_start_date: Date | null
+  actual_installation_completion_at: Date | null
   carcass_installation_completion_date: Date | null
   expected_installation_end_date: Date | null
   is_carcass_installation_completed: boolean | null
@@ -678,6 +691,7 @@ export type LeadMasterGroupByOutputType = {
   mrp_value: number | null
   usable_handover_completed: boolean | null
   usable_handover_completed_at: Date | null
+  final_handover_marked_at: Date | null
   franchise_id: number | null
   order_login_prod_files_remark: string | null
   _count: LeadMasterCountAggregateOutputType | null
@@ -761,6 +775,7 @@ export type LeadMasterWhereInput = {
   driver_number?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   vehicle_no?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   actual_installation_start_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
+  actual_installation_completion_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   carcass_installation_completion_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   expected_installation_end_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   is_carcass_installation_completed?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
@@ -770,6 +785,7 @@ export type LeadMasterWhereInput = {
   mrp_value?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
   usable_handover_completed?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
   usable_handover_completed_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
+  final_handover_marked_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   franchise_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   order_login_prod_files_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   cutList?: Prisma.CutListListRelationFilter
@@ -868,6 +884,7 @@ export type LeadMasterOrderByWithRelationInput = {
   driver_number?: Prisma.SortOrderInput | Prisma.SortOrder
   vehicle_no?: Prisma.SortOrderInput | Prisma.SortOrder
   actual_installation_start_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  actual_installation_completion_at?: Prisma.SortOrderInput | Prisma.SortOrder
   carcass_installation_completion_date?: Prisma.SortOrderInput | Prisma.SortOrder
   expected_installation_end_date?: Prisma.SortOrderInput | Prisma.SortOrder
   is_carcass_installation_completed?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -877,6 +894,7 @@ export type LeadMasterOrderByWithRelationInput = {
   mrp_value?: Prisma.SortOrderInput | Prisma.SortOrder
   usable_handover_completed?: Prisma.SortOrderInput | Prisma.SortOrder
   usable_handover_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  final_handover_marked_at?: Prisma.SortOrderInput | Prisma.SortOrder
   franchise_id?: Prisma.SortOrderInput | Prisma.SortOrder
   order_login_prod_files_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   cutList?: Prisma.CutListOrderByRelationAggregateInput
@@ -979,6 +997,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   driver_number?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   vehicle_no?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   actual_installation_start_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
+  actual_installation_completion_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   carcass_installation_completion_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   expected_installation_end_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   is_carcass_installation_completed?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
@@ -988,6 +1007,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   mrp_value?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
   usable_handover_completed?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
   usable_handover_completed_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
+  final_handover_marked_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   franchise_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   order_login_prod_files_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   cutList?: Prisma.CutListListRelationFilter
@@ -1086,6 +1106,7 @@ export type LeadMasterOrderByWithAggregationInput = {
   driver_number?: Prisma.SortOrderInput | Prisma.SortOrder
   vehicle_no?: Prisma.SortOrderInput | Prisma.SortOrder
   actual_installation_start_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  actual_installation_completion_at?: Prisma.SortOrderInput | Prisma.SortOrder
   carcass_installation_completion_date?: Prisma.SortOrderInput | Prisma.SortOrder
   expected_installation_end_date?: Prisma.SortOrderInput | Prisma.SortOrder
   is_carcass_installation_completed?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1095,6 +1116,7 @@ export type LeadMasterOrderByWithAggregationInput = {
   mrp_value?: Prisma.SortOrderInput | Prisma.SortOrder
   usable_handover_completed?: Prisma.SortOrderInput | Prisma.SortOrder
   usable_handover_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  final_handover_marked_at?: Prisma.SortOrderInput | Prisma.SortOrder
   franchise_id?: Prisma.SortOrderInput | Prisma.SortOrder
   order_login_prod_files_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.LeadMasterCountOrderByAggregateInput
@@ -1163,6 +1185,7 @@ export type LeadMasterScalarWhereWithAggregatesInput = {
   driver_number?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
   vehicle_no?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
   actual_installation_start_date?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadMaster"> | Date | string | null
+  actual_installation_completion_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadMaster"> | Date | string | null
   carcass_installation_completion_date?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadMaster"> | Date | string | null
   expected_installation_end_date?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadMaster"> | Date | string | null
   is_carcass_installation_completed?: Prisma.BoolNullableWithAggregatesFilter<"LeadMaster"> | boolean | null
@@ -1172,6 +1195,7 @@ export type LeadMasterScalarWhereWithAggregatesInput = {
   mrp_value?: Prisma.FloatNullableWithAggregatesFilter<"LeadMaster"> | number | null
   usable_handover_completed?: Prisma.BoolNullableWithAggregatesFilter<"LeadMaster"> | boolean | null
   usable_handover_completed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadMaster"> | Date | string | null
+  final_handover_marked_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadMaster"> | Date | string | null
   franchise_id?: Prisma.IntNullableWithAggregatesFilter<"LeadMaster"> | number | null
   order_login_prod_files_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
 }
@@ -1222,6 +1246,7 @@ export type LeadMasterCreateInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -1231,6 +1256,7 @@ export type LeadMasterCreateInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -1328,6 +1354,7 @@ export type LeadMasterUncheckedCreateInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -1337,6 +1364,7 @@ export type LeadMasterUncheckedCreateInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -1415,6 +1443,7 @@ export type LeadMasterUpdateInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1424,6 +1453,7 @@ export type LeadMasterUpdateInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -1521,6 +1551,7 @@ export type LeadMasterUncheckedUpdateInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1530,6 +1561,7 @@ export type LeadMasterUncheckedUpdateInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -1618,6 +1650,7 @@ export type LeadMasterCreateManyInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -1627,6 +1660,7 @@ export type LeadMasterCreateManyInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
 }
@@ -1677,6 +1711,7 @@ export type LeadMasterUpdateManyMutationInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1686,6 +1721,7 @@ export type LeadMasterUpdateManyMutationInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -1745,6 +1781,7 @@ export type LeadMasterUncheckedUpdateManyInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1754,6 +1791,7 @@ export type LeadMasterUncheckedUpdateManyInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -1834,6 +1872,7 @@ export type LeadMasterCountOrderByAggregateInput = {
   driver_number?: Prisma.SortOrder
   vehicle_no?: Prisma.SortOrder
   actual_installation_start_date?: Prisma.SortOrder
+  actual_installation_completion_at?: Prisma.SortOrder
   carcass_installation_completion_date?: Prisma.SortOrder
   expected_installation_end_date?: Prisma.SortOrder
   is_carcass_installation_completed?: Prisma.SortOrder
@@ -1843,6 +1882,7 @@ export type LeadMasterCountOrderByAggregateInput = {
   mrp_value?: Prisma.SortOrder
   usable_handover_completed?: Prisma.SortOrder
   usable_handover_completed_at?: Prisma.SortOrder
+  final_handover_marked_at?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
   order_login_prod_files_remark?: Prisma.SortOrder
 }
@@ -1924,6 +1964,7 @@ export type LeadMasterMaxOrderByAggregateInput = {
   driver_number?: Prisma.SortOrder
   vehicle_no?: Prisma.SortOrder
   actual_installation_start_date?: Prisma.SortOrder
+  actual_installation_completion_at?: Prisma.SortOrder
   carcass_installation_completion_date?: Prisma.SortOrder
   expected_installation_end_date?: Prisma.SortOrder
   is_carcass_installation_completed?: Prisma.SortOrder
@@ -1933,6 +1974,7 @@ export type LeadMasterMaxOrderByAggregateInput = {
   mrp_value?: Prisma.SortOrder
   usable_handover_completed?: Prisma.SortOrder
   usable_handover_completed_at?: Prisma.SortOrder
+  final_handover_marked_at?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
   order_login_prod_files_remark?: Prisma.SortOrder
 }
@@ -1993,6 +2035,7 @@ export type LeadMasterMinOrderByAggregateInput = {
   driver_number?: Prisma.SortOrder
   vehicle_no?: Prisma.SortOrder
   actual_installation_start_date?: Prisma.SortOrder
+  actual_installation_completion_at?: Prisma.SortOrder
   carcass_installation_completion_date?: Prisma.SortOrder
   expected_installation_end_date?: Prisma.SortOrder
   is_carcass_installation_completed?: Prisma.SortOrder
@@ -2002,6 +2045,7 @@ export type LeadMasterMinOrderByAggregateInput = {
   mrp_value?: Prisma.SortOrder
   usable_handover_completed?: Prisma.SortOrder
   usable_handover_completed_at?: Prisma.SortOrder
+  final_handover_marked_at?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
   order_login_prod_files_remark?: Prisma.SortOrder
 }
@@ -2916,6 +2960,7 @@ export type LeadMasterCreateWithoutVendorInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -2925,6 +2970,7 @@ export type LeadMasterCreateWithoutVendorInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -3020,6 +3066,7 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -3029,6 +3076,7 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -3146,6 +3194,7 @@ export type LeadMasterScalarWhereInput = {
   driver_number?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   vehicle_no?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   actual_installation_start_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
+  actual_installation_completion_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   carcass_installation_completion_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   expected_installation_end_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   is_carcass_installation_completed?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
@@ -3155,6 +3204,7 @@ export type LeadMasterScalarWhereInput = {
   mrp_value?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
   usable_handover_completed?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
   usable_handover_completed_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
+  final_handover_marked_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   franchise_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   order_login_prod_files_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
 }
@@ -3205,6 +3255,7 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -3214,6 +3265,7 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -3309,6 +3361,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -3318,6 +3371,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -3406,6 +3460,7 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -3415,6 +3470,7 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -3510,6 +3566,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -3519,6 +3576,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -3607,6 +3665,7 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -3616,6 +3675,7 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -3711,6 +3771,7 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -3720,6 +3781,7 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -3808,6 +3870,7 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -3817,6 +3880,7 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -3912,6 +3976,7 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -3921,6 +3986,7 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -4073,6 +4139,7 @@ export type LeadMasterCreateWithoutProjectsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -4082,6 +4149,7 @@ export type LeadMasterCreateWithoutProjectsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -4178,6 +4246,7 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -4187,6 +4256,7 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -4280,6 +4350,7 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -4289,6 +4360,7 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -4385,6 +4457,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -4394,6 +4467,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -4471,6 +4545,7 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -4480,6 +4555,7 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -4576,6 +4652,7 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -4585,6 +4662,7 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -4678,6 +4756,7 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -4687,6 +4766,7 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -4783,6 +4863,7 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -4792,6 +4873,7 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -4869,6 +4951,7 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -4878,6 +4961,7 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -4974,6 +5058,7 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -4983,6 +5068,7 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -5076,6 +5162,7 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -5085,6 +5172,7 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -5181,6 +5269,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -5190,6 +5279,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -5267,6 +5357,7 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -5276,6 +5367,7 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -5371,6 +5463,7 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -5380,6 +5473,7 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -5484,6 +5578,7 @@ export type LeadMasterCreateWithoutSourceInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -5493,6 +5588,7 @@ export type LeadMasterCreateWithoutSourceInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -5588,6 +5684,7 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -5597,6 +5694,7 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -5701,6 +5799,7 @@ export type LeadMasterCreateWithoutAccountInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -5710,6 +5809,7 @@ export type LeadMasterCreateWithoutAccountInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -5805,6 +5905,7 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -5814,6 +5915,7 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -5918,6 +6020,7 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -5927,6 +6030,7 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -6023,6 +6127,7 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -6032,6 +6137,7 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -6125,6 +6231,7 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6134,6 +6241,7 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -6230,6 +6338,7 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6239,6 +6348,7 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -6316,6 +6426,7 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -6325,6 +6436,7 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -6421,6 +6533,7 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -6430,6 +6543,7 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -6523,6 +6637,7 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6532,6 +6647,7 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -6628,6 +6744,7 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6637,6 +6754,7 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -6714,6 +6832,7 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -6723,6 +6842,7 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -6819,6 +6939,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -6828,6 +6949,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -6921,6 +7043,7 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6930,6 +7053,7 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -7026,6 +7150,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -7035,6 +7160,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -7112,6 +7238,7 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -7121,6 +7248,7 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -7217,6 +7345,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -7226,6 +7355,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -7319,6 +7449,7 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -7328,6 +7459,7 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -7424,6 +7556,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -7433,6 +7566,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -7510,6 +7644,7 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -7519,6 +7654,7 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -7615,6 +7751,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -7624,6 +7761,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -7717,6 +7855,7 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -7726,6 +7865,7 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -7822,6 +7962,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -7831,6 +7972,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -7908,6 +8050,7 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -7917,6 +8060,7 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -8013,6 +8157,7 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -8022,6 +8167,7 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -8115,6 +8261,7 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8124,6 +8271,7 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -8220,6 +8368,7 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8229,6 +8378,7 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -8306,6 +8456,7 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -8315,6 +8466,7 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -8411,6 +8563,7 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -8420,6 +8573,7 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -8513,6 +8667,7 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8522,6 +8677,7 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -8618,6 +8774,7 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8627,6 +8784,7 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -8704,6 +8862,7 @@ export type LeadMasterCreateWithoutLedgersInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -8713,6 +8872,7 @@ export type LeadMasterCreateWithoutLedgersInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -8809,6 +8969,7 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -8818,6 +8979,7 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -8911,6 +9073,7 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8920,6 +9083,7 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -9016,6 +9180,7 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -9025,6 +9190,7 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -9102,6 +9268,7 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -9111,6 +9278,7 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -9206,6 +9374,7 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -9215,6 +9384,7 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -9319,6 +9489,7 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -9328,6 +9499,7 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -9424,6 +9596,7 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -9433,6 +9606,7 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -9526,6 +9700,7 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -9535,6 +9710,7 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -9631,6 +9807,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -9640,6 +9817,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -9717,6 +9895,7 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -9726,6 +9905,7 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -9822,6 +10002,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -9831,6 +10012,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -9924,6 +10106,7 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -9933,6 +10116,7 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -10029,6 +10213,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -10038,6 +10223,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -10115,6 +10301,7 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -10124,6 +10311,7 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -10220,6 +10408,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -10229,6 +10418,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -10322,6 +10512,7 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -10331,6 +10522,7 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -10427,6 +10619,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -10436,6 +10629,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -10513,6 +10707,7 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -10522,6 +10717,7 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -10618,6 +10814,7 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -10627,6 +10824,7 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -10720,6 +10918,7 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -10729,6 +10928,7 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -10825,6 +11025,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -10834,6 +11035,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -10911,6 +11113,7 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -10920,6 +11123,7 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -11016,6 +11220,7 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -11025,6 +11230,7 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -11118,6 +11324,7 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -11127,6 +11334,7 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -11223,6 +11431,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -11232,6 +11441,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -11309,6 +11519,7 @@ export type LeadMasterCreateWithoutTasksInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -11318,6 +11529,7 @@ export type LeadMasterCreateWithoutTasksInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -11414,6 +11626,7 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -11423,6 +11636,7 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -11516,6 +11730,7 @@ export type LeadMasterUpdateWithoutTasksInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -11525,6 +11740,7 @@ export type LeadMasterUpdateWithoutTasksInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -11621,6 +11837,7 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -11630,6 +11847,7 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -11707,6 +11925,7 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -11716,6 +11935,7 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -11812,6 +12032,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -11821,6 +12042,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -11914,6 +12136,7 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -11923,6 +12146,7 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -12019,6 +12243,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12028,6 +12253,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -12105,6 +12331,7 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -12114,6 +12341,7 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -12210,6 +12438,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -12219,6 +12448,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -12312,6 +12542,7 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12321,6 +12552,7 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -12417,6 +12649,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12426,6 +12659,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -12503,6 +12737,7 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -12512,6 +12747,7 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -12608,6 +12844,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -12617,6 +12854,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -12710,6 +12948,7 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12719,6 +12958,7 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -12815,6 +13055,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12824,6 +13065,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -12901,6 +13143,7 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -12910,6 +13153,7 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -13006,6 +13250,7 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -13015,6 +13260,7 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -13108,6 +13354,7 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -13117,6 +13364,7 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -13213,6 +13461,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -13222,6 +13471,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -13299,6 +13549,7 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -13308,6 +13559,7 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -13404,6 +13656,7 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -13413,6 +13666,7 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -13506,6 +13760,7 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -13515,6 +13770,7 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -13611,6 +13867,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -13620,6 +13877,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -13697,6 +13955,7 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -13706,6 +13965,7 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -13802,6 +14062,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -13811,6 +14072,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -13904,6 +14166,7 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -13913,6 +14176,7 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -14009,6 +14273,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -14018,6 +14283,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -14095,6 +14361,7 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -14104,6 +14371,7 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -14200,6 +14468,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -14209,6 +14478,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -14302,6 +14572,7 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -14311,6 +14582,7 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -14407,6 +14679,7 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -14416,6 +14689,7 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -14493,6 +14767,7 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -14502,6 +14777,7 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -14598,6 +14874,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -14607,6 +14884,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -14700,6 +14978,7 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -14709,6 +14988,7 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -14805,6 +15085,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -14814,6 +15095,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -14891,6 +15173,7 @@ export type LeadMasterCreateWithoutCutListInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -14900,6 +15183,7 @@ export type LeadMasterCreateWithoutCutListInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
@@ -14996,6 +15280,7 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -15005,6 +15290,7 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -15098,6 +15384,7 @@ export type LeadMasterUpdateWithoutCutListInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -15107,6 +15394,7 @@ export type LeadMasterUpdateWithoutCutListInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
@@ -15203,6 +15491,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -15212,6 +15501,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -15289,6 +15579,7 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -15298,6 +15589,7 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
@@ -15394,6 +15686,7 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -15403,6 +15696,7 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -15496,6 +15790,7 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -15505,6 +15800,7 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
@@ -15601,6 +15897,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -15610,6 +15907,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -15687,6 +15985,7 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -15696,6 +15995,7 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -15792,6 +16092,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -15801,6 +16102,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -15894,6 +16196,7 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -15903,6 +16206,7 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -15999,6 +16303,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -16008,6 +16313,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -16085,6 +16391,7 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -16094,6 +16401,7 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -16190,6 +16498,7 @@ export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -16199,6 +16508,7 @@ export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -16311,6 +16621,7 @@ export type LeadMasterCreateManyVendorInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -16320,6 +16631,7 @@ export type LeadMasterCreateManyVendorInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
 }
@@ -16370,6 +16682,7 @@ export type LeadMasterUpdateWithoutVendorInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -16379,6 +16692,7 @@ export type LeadMasterUpdateWithoutVendorInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -16474,6 +16788,7 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -16483,6 +16798,7 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -16570,6 +16886,7 @@ export type LeadMasterUncheckedUpdateManyWithoutVendorInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -16579,6 +16896,7 @@ export type LeadMasterUncheckedUpdateManyWithoutVendorInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -16638,6 +16956,7 @@ export type LeadMasterCreateManyAssignedToInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -16647,6 +16966,7 @@ export type LeadMasterCreateManyAssignedToInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
 }
@@ -16706,6 +17026,7 @@ export type LeadMasterCreateManyAssignedByInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -16715,6 +17036,7 @@ export type LeadMasterCreateManyAssignedByInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
 }
@@ -16774,6 +17096,7 @@ export type LeadMasterCreateManyCreatedByInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -16783,6 +17106,7 @@ export type LeadMasterCreateManyCreatedByInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
 }
@@ -16842,6 +17166,7 @@ export type LeadMasterCreateManyUpdatedByInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -16851,6 +17176,7 @@ export type LeadMasterCreateManyUpdatedByInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
 }
@@ -16901,6 +17227,7 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -16910,6 +17237,7 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -17005,6 +17333,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17014,6 +17343,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -17101,6 +17431,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedToInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17110,6 +17441,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedToInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -17160,6 +17492,7 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17169,6 +17502,7 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -17264,6 +17598,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17273,6 +17608,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -17360,6 +17696,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedByInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17369,6 +17706,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedByInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -17419,6 +17757,7 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17428,6 +17767,7 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -17523,6 +17863,7 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17532,6 +17873,7 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -17619,6 +17961,7 @@ export type LeadMasterUncheckedUpdateManyWithoutCreatedByInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17628,6 +17971,7 @@ export type LeadMasterUncheckedUpdateManyWithoutCreatedByInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -17678,6 +18022,7 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17687,6 +18032,7 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -17782,6 +18128,7 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17791,6 +18138,7 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -17878,6 +18226,7 @@ export type LeadMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17887,6 +18236,7 @@ export type LeadMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -17946,6 +18296,7 @@ export type LeadMasterCreateManySiteTypeInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -17955,6 +18306,7 @@ export type LeadMasterCreateManySiteTypeInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
 }
@@ -18005,6 +18357,7 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18014,6 +18367,7 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -18109,6 +18463,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18118,6 +18473,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -18205,6 +18561,7 @@ export type LeadMasterUncheckedUpdateManyWithoutSiteTypeInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18214,6 +18571,7 @@ export type LeadMasterUncheckedUpdateManyWithoutSiteTypeInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -18273,6 +18631,7 @@ export type LeadMasterCreateManySourceInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -18282,6 +18641,7 @@ export type LeadMasterCreateManySourceInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
 }
@@ -18332,6 +18692,7 @@ export type LeadMasterUpdateWithoutSourceInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18341,6 +18702,7 @@ export type LeadMasterUpdateWithoutSourceInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -18436,6 +18798,7 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18445,6 +18808,7 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -18532,6 +18896,7 @@ export type LeadMasterUncheckedUpdateManyWithoutSourceInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18541,6 +18906,7 @@ export type LeadMasterUncheckedUpdateManyWithoutSourceInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -18600,6 +18966,7 @@ export type LeadMasterCreateManyAccountInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -18609,6 +18976,7 @@ export type LeadMasterCreateManyAccountInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
 }
@@ -18659,6 +19027,7 @@ export type LeadMasterUpdateWithoutAccountInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18668,6 +19037,7 @@ export type LeadMasterUpdateWithoutAccountInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -18763,6 +19133,7 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18772,6 +19143,7 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -18859,6 +19231,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAccountInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18868,6 +19241,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAccountInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -18927,6 +19301,7 @@ export type LeadMasterCreateManyStatusTypeInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -18936,6 +19311,7 @@ export type LeadMasterCreateManyStatusTypeInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
 }
@@ -18986,6 +19362,7 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18995,6 +19372,7 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -19090,6 +19468,7 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -19099,6 +19478,7 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -19186,6 +19566,7 @@ export type LeadMasterUncheckedUpdateManyWithoutStatusTypeInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -19195,6 +19576,7 @@ export type LeadMasterUncheckedUpdateManyWithoutStatusTypeInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -19255,6 +19637,7 @@ export type LeadMasterCreateManyFranchiseInput = {
   driver_number?: string | null
   vehicle_no?: string | null
   actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
   carcass_installation_completion_date?: Date | string | null
   expected_installation_end_date?: Date | string | null
   is_carcass_installation_completed?: boolean | null
@@ -19264,6 +19647,7 @@ export type LeadMasterCreateManyFranchiseInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
 }
 
@@ -19313,6 +19697,7 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -19322,6 +19707,7 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -19418,6 +19804,7 @@ export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -19427,6 +19814,7 @@ export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -19514,6 +19902,7 @@ export type LeadMasterUncheckedUpdateManyWithoutFranchiseInput = {
   driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -19523,6 +19912,7 @@ export type LeadMasterUncheckedUpdateManyWithoutFranchiseInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -19856,6 +20246,7 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   driver_number?: boolean
   vehicle_no?: boolean
   actual_installation_start_date?: boolean
+  actual_installation_completion_at?: boolean
   carcass_installation_completion_date?: boolean
   expected_installation_end_date?: boolean
   is_carcass_installation_completed?: boolean
@@ -19865,6 +20256,7 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   mrp_value?: boolean
   usable_handover_completed?: boolean
   usable_handover_completed_at?: boolean
+  final_handover_marked_at?: boolean
   franchise_id?: boolean
   order_login_prod_files_remark?: boolean
   cutList?: boolean | Prisma.LeadMaster$cutListArgs<ExtArgs>
@@ -19964,6 +20356,7 @@ export type LeadMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   driver_number?: boolean
   vehicle_no?: boolean
   actual_installation_start_date?: boolean
+  actual_installation_completion_at?: boolean
   carcass_installation_completion_date?: boolean
   expected_installation_end_date?: boolean
   is_carcass_installation_completed?: boolean
@@ -19973,6 +20366,7 @@ export type LeadMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   mrp_value?: boolean
   usable_handover_completed?: boolean
   usable_handover_completed_at?: boolean
+  final_handover_marked_at?: boolean
   franchise_id?: boolean
   order_login_prod_files_remark?: boolean
   account?: boolean | Prisma.LeadMaster$accountArgs<ExtArgs>
@@ -20043,6 +20437,7 @@ export type LeadMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   driver_number?: boolean
   vehicle_no?: boolean
   actual_installation_start_date?: boolean
+  actual_installation_completion_at?: boolean
   carcass_installation_completion_date?: boolean
   expected_installation_end_date?: boolean
   is_carcass_installation_completed?: boolean
@@ -20052,6 +20447,7 @@ export type LeadMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   mrp_value?: boolean
   usable_handover_completed?: boolean
   usable_handover_completed_at?: boolean
+  final_handover_marked_at?: boolean
   franchise_id?: boolean
   order_login_prod_files_remark?: boolean
   account?: boolean | Prisma.LeadMaster$accountArgs<ExtArgs>
@@ -20122,6 +20518,7 @@ export type LeadMasterSelectScalar = {
   driver_number?: boolean
   vehicle_no?: boolean
   actual_installation_start_date?: boolean
+  actual_installation_completion_at?: boolean
   carcass_installation_completion_date?: boolean
   expected_installation_end_date?: boolean
   is_carcass_installation_completed?: boolean
@@ -20131,11 +20528,12 @@ export type LeadMasterSelectScalar = {
   mrp_value?: boolean
   usable_handover_completed?: boolean
   usable_handover_completed_at?: boolean
+  final_handover_marked_at?: boolean
   franchise_id?: boolean
   order_login_prod_files_remark?: boolean
 }
 
-export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "actual_installation_start_date" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "usable_handover_completed_at" | "franchise_id" | "order_login_prod_files_remark", ExtArgs["result"]["leadMaster"]>
+export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "actual_installation_start_date" | "actual_installation_completion_at" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "usable_handover_completed_at" | "final_handover_marked_at" | "franchise_id" | "order_login_prod_files_remark", ExtArgs["result"]["leadMaster"]>
 export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cutList?: boolean | Prisma.LeadMaster$cutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.LeadMaster$cutListMachineMappingArgs<ExtArgs>
@@ -20300,6 +20698,7 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     driver_number: string | null
     vehicle_no: string | null
     actual_installation_start_date: Date | null
+    actual_installation_completion_at: Date | null
     carcass_installation_completion_date: Date | null
     expected_installation_end_date: Date | null
     is_carcass_installation_completed: boolean | null
@@ -20309,6 +20708,7 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     mrp_value: number | null
     usable_handover_completed: boolean | null
     usable_handover_completed_at: Date | null
+    final_handover_marked_at: Date | null
     franchise_id: number | null
     order_login_prod_files_remark: string | null
   }, ExtArgs["result"]["leadMaster"]>
@@ -20827,6 +21227,7 @@ export interface LeadMasterFieldRefs {
   readonly driver_number: Prisma.FieldRef<"LeadMaster", 'String'>
   readonly vehicle_no: Prisma.FieldRef<"LeadMaster", 'String'>
   readonly actual_installation_start_date: Prisma.FieldRef<"LeadMaster", 'DateTime'>
+  readonly actual_installation_completion_at: Prisma.FieldRef<"LeadMaster", 'DateTime'>
   readonly carcass_installation_completion_date: Prisma.FieldRef<"LeadMaster", 'DateTime'>
   readonly expected_installation_end_date: Prisma.FieldRef<"LeadMaster", 'DateTime'>
   readonly is_carcass_installation_completed: Prisma.FieldRef<"LeadMaster", 'Boolean'>
@@ -20836,6 +21237,7 @@ export interface LeadMasterFieldRefs {
   readonly mrp_value: Prisma.FieldRef<"LeadMaster", 'Float'>
   readonly usable_handover_completed: Prisma.FieldRef<"LeadMaster", 'Boolean'>
   readonly usable_handover_completed_at: Prisma.FieldRef<"LeadMaster", 'DateTime'>
+  readonly final_handover_marked_at: Prisma.FieldRef<"LeadMaster", 'DateTime'>
   readonly franchise_id: Prisma.FieldRef<"LeadMaster", 'Int'>
   readonly order_login_prod_files_remark: Prisma.FieldRef<"LeadMaster", 'String'>
 }

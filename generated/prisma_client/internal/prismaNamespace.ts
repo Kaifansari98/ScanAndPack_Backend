@@ -7375,6 +7375,7 @@ export const LeadMasterScalarFieldEnum = {
   driver_number: 'driver_number',
   vehicle_no: 'vehicle_no',
   actual_installation_start_date: 'actual_installation_start_date',
+  actual_installation_completion_at: 'actual_installation_completion_at',
   carcass_installation_completion_date: 'carcass_installation_completion_date',
   expected_installation_end_date: 'expected_installation_end_date',
   is_carcass_installation_completed: 'is_carcass_installation_completed',
@@ -7384,6 +7385,7 @@ export const LeadMasterScalarFieldEnum = {
   mrp_value: 'mrp_value',
   usable_handover_completed: 'usable_handover_completed',
   usable_handover_completed_at: 'usable_handover_completed_at',
+  final_handover_marked_at: 'final_handover_marked_at',
   franchise_id: 'franchise_id',
   order_login_prod_files_remark: 'order_login_prod_files_remark'
 } as const

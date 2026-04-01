@@ -2841,6 +2841,7 @@ export class UnderInstallationStageService {
         where: { id: lead.id },
         data: {
           status_id: toStatus.id,
+          actual_installation_completion_at: new Date(),
           updated_by: updatedBy,
           updated_at: new Date(),
         },

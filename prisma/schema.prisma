@@ -401,6 +401,7 @@ model LeadMaster {
   driver_number                               String?                             @db.VarChar(50)
   vehicle_no                                  String?                             @db.VarChar(100)
   actual_installation_start_date              DateTime?
+  actual_installation_completion_at           DateTime?
   carcass_installation_completion_date        DateTime?
   expected_installation_end_date              DateTime?
   is_carcass_installation_completed           Boolean?                            @default(false)
@@ -410,6 +411,7 @@ model LeadMaster {
   mrp_value                                   Float?
   usable_handover_completed                   Boolean?                            @default(false)
   usable_handover_completed_at                DateTime?
+  final_handover_marked_at                    DateTime?
   franchise_id                                Int?
   order_login_prod_files_remark               String?
   cutList                                     CutList[]
