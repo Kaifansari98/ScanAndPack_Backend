@@ -7,6 +7,27 @@ interface VendorTaxInfoPayload {
   tax_country: string;
 }
 
+interface LeadsOverviewReportRow {
+  lead_id: number;
+  instance_id: number | null;
+  lead_code: string;
+  client_name: string;
+  franchise_store: string;
+  client_number: string;
+  address: string;
+  site_type: string;
+  source: string;
+  furniture_type: string;
+  furniture_structure: string;
+  instance: string;
+  architect_name: string;
+  carcass_selection: string;
+  shutter_selection: string;
+  handle_selection: string;
+  designer_assigned: string;
+  supervisor_assigned: string;
+}
+
 export const createVendor = async (data: any) => {
   const {
     vendor_name,
@@ -82,6 +103,227 @@ export const getVendorStatusTypes = async (vendorId: number) => {
     },
   });
   return statusTypes;
+};
+
+const normalizeSelectionType = (value: string | null | undefined) =>
+  (value ?? "").trim().toLowerCase();
+
+const formatOverviewLeadCode = (
+  leadCode: string,
+  quantityIndex: number | null | undefined,
+) =>
+  quantityIndex !== null && quantityIndex !== undefined
+    ? `${leadCode}.${quantityIndex}`
+    : leadCode;
+
+export const getLeadsOverviewReportData = async (
+  vendorId: number,
+  franchiseId: number | null,
+  fromDate: string | null,
+  toDate: string | null,
+): Promise<LeadsOverviewReportRow[]> => {
+  const where: any = {
+    vendor_id: vendorId,
+    is_deleted: false,
+  };
+
+  if (franchiseId !== null) {
+    where.franchise_id = franchiseId;
+  }
+
+  if (fromDate && toDate) {
+    where.created_at = {
+      gte: new Date(fromDate),
+      lte: new Date(new Date(toDate).setHours(23, 59, 59, 999)),
+    };
+  }
+
+  const leads = await prisma.leadMaster.findMany({
+    where,
+    select: {
+      id: true,
+      lead_code: true,
+      firstname: true,
+      lastname: true,
+      contact_no: true,
+      site_address: true,
+      archetech_name: true,
+      franchise: {
+        select: {
+          franchise_name: true,
+        },
+      },
+      siteType: {
+        select: {
+          type: true,
+        },
+      },
+      source: {
+        select: {
+          type: true,
+        },
+      },
+      productMappings: {
+        select: {
+          productType: {
+            select: {
+              type: true,
+            },
+          },
+        },
+      },
+      leadProductStructureMapping: {
+        select: {
+          productStructure: {
+            select: {
+              type: true,
+            },
+          },
+        },
+      },
+      productStructureInstances: {
+        select: {
+          id: true,
+          title: true,
+          quantity_index: true,
+          productType: {
+            select: {
+              type: true,
+            },
+          },
+          productStructure: {
+            select: {
+              type: true,
+            },
+          },
+          designSelections: {
+            select: {
+              type: true,
+              desc: true,
+              created_at: true,
+              updated_at: true,
+            },
+            orderBy: [{ updated_at: "desc" }, { created_at: "desc" }],
+          },
+        },
+        orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+      },
+      userMappings: {
+        where: {
+          status: "active",
+        },
+        select: {
+          type: true,
+          created_at: true,
+          user: {
+            select: {
+              user_name: true,
+            },
+          },
+        },
+        orderBy: {
+          created_at: "asc",
+        },
+      },
+    },
+    orderBy: {
+      created_at: "asc",
+    },
+  });
+
+  return leads.flatMap<LeadsOverviewReportRow>((lead) => {
+    const defaultFurnitureTypes = [
+      ...new Set(
+        lead.productMappings
+          .map((mapping) => mapping.productType.type)
+          .filter(Boolean),
+      ),
+    ];
+    const defaultFurnitureStructures = [
+      ...new Set(
+        lead.leadProductStructureMapping
+          .map((mapping) => mapping.productStructure.type)
+          .filter(Boolean),
+      ),
+    ];
+
+    const designerAssigned =
+      lead.userMappings.find((mapping) => {
+        const type = mapping.type.trim().toLowerCase();
+        return type === "sales-executive";
+      })?.user.user_name ?? "-";
+    const supervisorAssigned =
+      lead.userMappings.find((mapping) => mapping.type === "site-supervisor")
+        ?.user.user_name ?? "-";
+
+    if (!lead.productStructureInstances.length) {
+      return [
+        {
+          lead_id: lead.id,
+          instance_id: null,
+          lead_code: lead.lead_code,
+          client_name: `${lead.firstname} ${lead.lastname}`.trim(),
+          franchise_store: lead.franchise?.franchise_name ?? "-",
+          client_number: lead.contact_no ?? "-",
+          address: lead.site_address ?? "-",
+          site_type: lead.siteType?.type ?? "-",
+          source: lead.source?.type ?? "-",
+          furniture_type: defaultFurnitureTypes.join(", ") || "-",
+          furniture_structure: defaultFurnitureStructures.join(", ") || "-",
+          instance: "-",
+          architect_name: lead.archetech_name ?? "-",
+          carcass_selection: "-",
+          shutter_selection: "-",
+          handle_selection: "-",
+          designer_assigned: designerAssigned,
+          supervisor_assigned: supervisorAssigned,
+        },
+      ];
+    }
+
+    return lead.productStructureInstances.map((instance) => {
+      const carcassSelection =
+        instance.designSelections.find((selection) => {
+          const type = normalizeSelectionType(selection.type);
+          return type === "carcas" || type === "carcass";
+        })?.desc ?? "-";
+      const shutterSelection =
+        instance.designSelections.find(
+          (selection) => normalizeSelectionType(selection.type) === "shutter",
+        )?.desc ?? "-";
+      const handleSelection =
+        instance.designSelections.find((selection) => {
+          const type = normalizeSelectionType(selection.type);
+          return type === "handles" || type === "handle";
+        })?.desc ?? "-";
+
+      return {
+        lead_id: lead.id,
+        instance_id: instance.id,
+        lead_code: formatOverviewLeadCode(
+          lead.lead_code,
+          instance.quantity_index,
+        ),
+        client_name: `${lead.firstname} ${lead.lastname}`.trim(),
+        franchise_store: lead.franchise?.franchise_name ?? "-",
+        client_number: lead.contact_no ?? "-",
+        address: lead.site_address ?? "-",
+        site_type: lead.siteType?.type ?? "-",
+        source: lead.source?.type ?? "-",
+        furniture_type: instance.productType?.type ?? "-",
+        furniture_structure: instance.productStructure?.type ?? "-",
+        instance:
+          instance.title?.trim() ||
+          `Instance ${instance.quantity_index ?? instance.id}`,
+        architect_name: lead.archetech_name ?? "-",
+        carcass_selection: carcassSelection,
+        shutter_selection: shutterSelection,
+        handle_selection: handleSelection,
+        designer_assigned: designerAssigned,
+        supervisor_assigned: supervisorAssigned,
+      };
+    });
+  });
 };
 
 export const getVendorById = async (vendorId: number) => {
