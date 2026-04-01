@@ -3562,4 +3562,92 @@ export class UnderInstallationStageService {
       all_resolved: unresolvedCount === 0,
     };
   }
+
+  /**
+   * ✅ Installation Report — fetch all installation-stage leads with misc + issue counts
+   * Covers Type 15 (Under Installation), Type 16 (Final Handover), Type 27-31 (Project Completed)
+   */
+  static async getInstallationReportData(
+    vendorId: number,
+    franchiseId: number | null, // null = all franchises
+    fromDate: string | null,
+    toDate: string | null,
+  ) {
+    const INSTALLATION_TAGS = ["Type 15", "Type 16", "Type 27", "Type 28", "Type 29", "Type 30", "Type 31"];
+
+    // Resolve status IDs for all installation tags
+    const statuses = await prisma.statusTypeMaster.findMany({
+      where: { vendor_id: vendorId, tag: { in: INSTALLATION_TAGS } },
+      select: { id: true },
+    });
+
+    if (!statuses.length) {
+      return [];
+    }
+
+    const statusIds = statuses.map((s) => s.id);
+
+    const where: any = {
+      vendor_id: vendorId,
+      is_deleted: false,
+      status_id: { in: statusIds },
+    };
+
+    if (franchiseId !== null) {
+      where.franchise_id = franchiseId;
+    }
+
+    if (fromDate && toDate) {
+      where.actual_installation_start_date = {
+        gte: new Date(fromDate),
+        lte: new Date(new Date(toDate).setHours(23, 59, 59, 999)),
+      };
+    }
+
+    const leads = await prisma.leadMaster.findMany({
+      where,
+      select: {
+        id: true,
+        lead_code: true,
+        firstname: true,
+        lastname: true,
+        franchise_id: true,
+        actual_installation_start_date: true,
+        expected_installation_end_date: true,
+        actual_installation_completion_at: true,
+        carcass_installation_completion_date: true,
+        shutter_installation_completion_date: true,
+        usable_handover_completed_at: true,
+        final_handover_marked_at: true,
+        franchise: {
+          select: { franchise_name: true },
+        },
+        _count: {
+          select: {
+            miscellaneousMaster: true,
+            installationIssueLogMaster: true,
+          },
+        },
+      },
+      orderBy: { actual_installation_start_date: "asc" },
+    });
+
+    return leads.map((lead) => ({
+      id: lead.id,
+      lead_code: lead.lead_code,
+      firstname: lead.firstname,
+      lastname: lead.lastname,
+      franchise_id: lead.franchise_id,
+      franchise_name: lead.franchise?.franchise_name ?? null,
+      actual_installation_start_date: lead.actual_installation_start_date,
+      expected_installation_end_date: lead.expected_installation_end_date,
+      actual_installation_completion_at: lead.actual_installation_completion_at,
+      carcass_installation_completion_date: lead.carcass_installation_completion_date,
+      shutter_installation_completion_date: lead.shutter_installation_completion_date,
+      usable_handover_completed_at: lead.usable_handover_completed_at,
+      final_handover_marked_at: lead.final_handover_marked_at,
+      misc_count: lead._count.miscellaneousMaster,
+      issue_count: lead._count.installationIssueLogMaster,
+    }));
+  }
 }

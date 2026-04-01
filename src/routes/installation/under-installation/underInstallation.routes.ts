@@ -217,4 +217,11 @@ underInstallationStageRoutes.get(
   "/vendor/:vendorId/lead/:leadId/resolution-status",
   controller.getMiscellaneousResolutionStatus,
 );
+
+/** ✅ GET → Installation Report Data (all installation-stage leads with misc + issue counts) */
+underInstallationStageRoutes.get(
+  "/vendorId/:vendorId/report/installation-data",
+  controller.getInstallationReportData,
+);
+
 export default underInstallationStageRoutes;

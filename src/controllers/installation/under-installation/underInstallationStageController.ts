@@ -1743,4 +1743,37 @@ export class UnderInstallationStageController {
       });
     }
   }
+
+  /**
+   * GET /leads/installation/under-installation/vendorId/:vendorId/report/installation-data
+   * Query params: franchise_id (optional), from_date (optional), to_date (optional)
+   */
+  getInstallationReportData = async (req: Request, res: Response) => {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const franchiseId = req.query.franchise_id ? Number(req.query.franchise_id) : null;
+      const fromDate = req.query.from_date ? String(req.query.from_date) : null;
+      const toDate = req.query.to_date ? String(req.query.to_date) : null;
+
+      if (!vendorId) {
+        return res.status(400).json(ApiResponse.error("vendorId is required", 400));
+      }
+
+      console.log("[InstallationReport] Fetching report data", { vendorId, franchiseId, fromDate, toDate });
+
+      const data = await UnderInstallationStageService.getInstallationReportData(
+        vendorId,
+        franchiseId,
+        fromDate,
+        toDate,
+      );
+
+      console.log(`[InstallationReport] Returning ${data.length} leads`);
+
+      return res.status(200).json(ApiResponse.success(data, `Fetched ${data.length} installation leads`));
+    } catch (error: any) {
+      console.error("[InstallationReport] Error:", error);
+      return res.status(500).json(ApiResponse.error("Failed to fetch installation report data"));
+    }
+  };
 }
