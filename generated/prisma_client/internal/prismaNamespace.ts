@@ -7374,6 +7374,8 @@ export const LeadMasterScalarFieldEnum = {
   driver_name: 'driver_name',
   driver_number: 'driver_number',
   vehicle_no: 'vehicle_no',
+  tech_check_reached_at: 'tech_check_reached_at',
+  tech_check_completed_at: 'tech_check_completed_at',
   actual_installation_start_date: 'actual_installation_start_date',
   actual_installation_completion_at: 'actual_installation_completion_at',
   carcass_installation_completion_date: 'carcass_installation_completion_date',

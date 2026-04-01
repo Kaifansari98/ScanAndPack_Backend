@@ -158,6 +158,7 @@ export class TechCheckService {
               where: { id: leadId },
               data: {
                 status_id: orderLoginStatus.id,
+                tech_check_completed_at: new Date(),
                 updated_by: userId,
                 updated_at: new Date(),
               },
@@ -263,6 +264,7 @@ export class TechCheckService {
           where: { id: leadId },
           data: {
             status_id: orderLoginStatus.id,
+            tech_check_completed_at: new Date(),
             updated_by: userId,
             updated_at: new Date(),
           },

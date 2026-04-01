@@ -400,6 +400,8 @@ model LeadMaster {
   driver_name                                 String?                             @db.VarChar(255)
   driver_number                               String?                             @db.VarChar(50)
   vehicle_no                                  String?                             @db.VarChar(100)
+  tech_check_reached_at                       DateTime?
+  tech_check_completed_at                     DateTime?
   actual_installation_start_date              DateTime?
   actual_installation_completion_at           DateTime?
   carcass_installation_completion_date        DateTime?

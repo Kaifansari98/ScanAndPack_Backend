@@ -3,6 +3,7 @@ import {
   createVendor,
   getAllVendors,
   getLeadsOverviewReportController,
+  getTechCheckStageReportController,
   getVendorStatusTypesController,
   getVendorUsersController,
   onboardVendorController,
@@ -18,5 +19,6 @@ router.get("/", getAllVendors);
 router.get("/vendor-users", getVendorUsersController);
 router.get("/status-types", getVendorStatusTypesController);
 router.get("/reports/leads-overview", getLeadsOverviewReportController);
+router.get("/reports/techcheck-stage", getTechCheckStageReportController);
 
 export default router;

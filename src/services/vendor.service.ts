@@ -28,6 +28,18 @@ interface LeadsOverviewReportRow {
   supervisor_assigned: string;
 }
 
+interface TechCheckStageReportRow {
+  lead_id: number;
+  instance_id: number | null;
+  lead_code: string;
+  client_name: string;
+  franchise_store: string;
+  tech_check_req_date: Date | null;
+  rejection_dates: Date[];
+  revised_upload_dates: Date[];
+  tech_check_approved_date: Date | null;
+}
+
 export const createVendor = async (data: any) => {
   const {
     vendor_name,
@@ -337,6 +349,149 @@ export const getLeadsOverviewReportData = async (
         supervisor_assigned: supervisorAssigned,
       };
     });
+  });
+};
+
+export const getTechCheckStageReportData = async (
+  vendorId: number,
+  franchiseId: number | null,
+  fromDate: string | null,
+  toDate: string | null,
+): Promise<TechCheckStageReportRow[]> => {
+  const where: any = {
+    vendor_id: vendorId,
+    is_deleted: false,
+    tech_check_reached_at: { not: null },
+  };
+
+  if (franchiseId !== null) {
+    where.franchise_id = franchiseId;
+  }
+
+  if (fromDate && toDate) {
+    where.tech_check_reached_at = {
+      gte: new Date(fromDate),
+      lte: new Date(new Date(toDate).setHours(23, 59, 59, 999)),
+    };
+  }
+
+  const leads = await prisma.leadMaster.findMany({
+    where,
+    select: {
+      id: true,
+      lead_code: true,
+      firstname: true,
+      lastname: true,
+      tech_check_reached_at: true,
+      tech_check_completed_at: true,
+      franchise: {
+        select: {
+          franchise_name: true,
+        },
+      },
+      productStructureInstances: {
+        select: {
+          id: true,
+          title: true,
+          quantity_index: true,
+        },
+        orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+      },
+      documents: {
+        where: {
+          is_deleted: false,
+          documentType: {
+            type: { in: ["client_documentations_ppt", "client_documentations_pytha"] },
+          },
+        },
+        select: {
+          id: true,
+          created_at: true,
+          tech_check_status: true,
+          product_structure_instance_id: true,
+        },
+        orderBy: {
+          created_at: "asc",
+        },
+      },
+      leadDetailedLogs: {
+        where: {
+          action: {
+            endsWith: "additional Client Documentation uploaded.",
+          },
+        },
+        select: {
+          id: true,
+          created_at: true,
+          docLogs: {
+            select: {
+              doc: {
+                select: {
+                  product_structure_instance_id: true,
+                },
+              },
+            },
+          },
+        },
+        orderBy: {
+          created_at: "asc",
+        },
+      },
+    },
+    orderBy: {
+      tech_check_reached_at: "asc",
+    },
+  });
+
+  return leads.flatMap<TechCheckStageReportRow>((lead) => {
+    const hasMultipleInstances = lead.productStructureInstances.length > 1;
+
+    const buildRow = (instanceId: number | null, quantityIndex?: number | null) => {
+      const rejectedDocs = lead.documents.filter(
+        (doc) =>
+          doc.tech_check_status === "REJECTED" &&
+          (doc.product_structure_instance_id ?? null) === instanceId,
+      );
+
+      const rejectionDates = [
+        ...new Map(
+          rejectedDocs.map((doc) => [doc.created_at.toISOString(), doc.created_at]),
+        ).values(),
+      ];
+
+      const revisedDates = lead.leadDetailedLogs
+        .filter((log) =>
+          log.docLogs.some(
+            (docLog) =>
+              (docLog.doc.product_structure_instance_id ?? null) === instanceId,
+          ),
+        )
+        .map((log) => log.created_at);
+
+      return {
+        lead_id: lead.id,
+        instance_id: instanceId,
+        lead_code: formatOverviewLeadCode(
+          lead.lead_code,
+          quantityIndex,
+          hasMultipleInstances,
+        ),
+        client_name: `${lead.firstname} ${lead.lastname}`.trim(),
+        franchise_store: lead.franchise?.franchise_name ?? "-",
+        tech_check_req_date: lead.tech_check_reached_at,
+        rejection_dates: rejectionDates,
+        revised_upload_dates: revisedDates,
+        tech_check_approved_date: lead.tech_check_completed_at,
+      };
+    };
+
+    if (!lead.productStructureInstances.length) {
+      return [buildRow(null, null)];
+    }
+
+    return lead.productStructureInstances.map((instance) =>
+      buildRow(instance.id, instance.quantity_index),
+    );
   });
 };
 
