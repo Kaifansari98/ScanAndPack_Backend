@@ -218,6 +218,11 @@ export const getLeadsOverviewReportData = async (
           user: {
             select: {
               user_name: true,
+              user_type: {
+                select: {
+                  user_type: true,
+                },
+              },
             },
           },
         },
@@ -249,11 +254,14 @@ export const getLeadsOverviewReportData = async (
 
     const designerAssigned =
       lead.userMappings.find((mapping) => {
-        const type = mapping.type.trim().toLowerCase();
-        return type === "sales-executive";
+        const role = mapping.user.user_type.user_type.trim().toLowerCase();
+        return role === "sales-executive";
       })?.user.user_name ?? "-";
     const supervisorAssigned =
-      lead.userMappings.find((mapping) => mapping.type === "site-supervisor")
+      lead.userMappings.find((mapping) => {
+        const role = mapping.user.user_type.user_type.trim().toLowerCase();
+        return role === "site-supervisor";
+      })
         ?.user.user_name ?? "-";
 
     if (!lead.productStructureInstances.length) {
