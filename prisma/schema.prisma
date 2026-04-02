@@ -370,6 +370,7 @@ model LeadMaster {
   deleted_by                                  Int?
   is_deleted                                  Boolean                             @default(false)
   status_id                                   Int?
+  priority                                    String?
   initial_site_measurement_date               DateTime?
   final_desc_note                             String?                             @db.VarChar(2000)
   advance_payment_date                        DateTime?

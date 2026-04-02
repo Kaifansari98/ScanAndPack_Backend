@@ -19,6 +19,10 @@ const structureInstanceSchema = Joi.object({
   description: Joi.string().trim().max(2000).optional().allow("", null),
 });
 
+const prioritySchema = Joi.string()
+  .trim()
+  .valid("High", "Medium", "Low");
+
 export const createLeadSchema = Joi.object({
   firstname: Joi.string().trim().min(2).max(50).required(),
   lastname: Joi.string().trim().min(2).max(50).required(),
@@ -52,6 +56,7 @@ export const createLeadSchema = Joi.object({
   vendor_id: numberLike.required(),
   franchise_id: numberLike.required(),
   created_by: numberLike.required(),
+  priority: prioritySchema.required(),
   assign_to: numberLike.optional().allow(null),
   assigned_by: numberLike.optional().allow(null),
 
@@ -107,6 +112,7 @@ export const createLeadDraftSchema = Joi.object({
   vendor_id: numberLike.required(),
   franchise_id: numberLike.required(),
   created_by: numberLike.required(),
+  priority: prioritySchema.optional().allow(null, ""),
   assign_to: numberLike.optional().allow(null),
   assigned_by: numberLike.optional().allow(null),
 

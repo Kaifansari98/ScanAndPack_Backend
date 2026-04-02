@@ -385,6 +385,7 @@ export const LeadMasterScalarFieldEnum = {
   deleted_by: 'deleted_by',
   is_deleted: 'is_deleted',
   status_id: 'status_id',
+  priority: 'priority',
   initial_site_measurement_date: 'initial_site_measurement_date',
   final_desc_note: 'final_desc_note',
   advance_payment_date: 'advance_payment_date',

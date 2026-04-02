@@ -107,6 +107,7 @@ export interface CreateLeadDTO {
     franchise_id: number;
     created_by: number;
     status_id: number;
+    priority?: string;
     assign_to?: number;
     assigned_by?: number;
     product_types: number[];

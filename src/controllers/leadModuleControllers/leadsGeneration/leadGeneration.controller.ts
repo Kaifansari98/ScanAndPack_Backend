@@ -64,6 +64,13 @@ const resolveClientBaseUrl = (req: Request): string => {
 const getParam = (param: string | string[] | undefined): string | undefined =>
   Array.isArray(param) ? param[0] : param;
 
+const getSingleBodyValue = (
+  value: string | string[] | undefined,
+): string | undefined => {
+  if (Array.isArray(value)) return value[0];
+  return value;
+};
+
 // ─── Stage Config (same as frontend STAGES) ───────────────────────────────────
 
 const STAGE_CONFIGS = [
@@ -283,6 +290,7 @@ export class LeadController {
         vendor_id: Number(req.body.vendor_id),
         franchise_id: Number(req.body.franchise_id),
         created_by: Number(req.body.created_by),
+        priority: getSingleBodyValue(req.body.priority)?.trim() || undefined,
         assign_to: req.body.assign_to ? Number(req.body.assign_to) : undefined,
         assigned_by: req.body.assigned_by
           ? Number(req.body.assigned_by)

@@ -93,6 +93,7 @@ export type LeadMasterMinAggregateOutputType = {
   deleted_by: number | null
   is_deleted: boolean | null
   status_id: number | null
+  priority: string | null
   initial_site_measurement_date: Date | null
   final_desc_note: string | null
   advance_payment_date: Date | null
@@ -166,6 +167,7 @@ export type LeadMasterMaxAggregateOutputType = {
   deleted_by: number | null
   is_deleted: boolean | null
   status_id: number | null
+  priority: string | null
   initial_site_measurement_date: Date | null
   final_desc_note: string | null
   advance_payment_date: Date | null
@@ -239,6 +241,7 @@ export type LeadMasterCountAggregateOutputType = {
   deleted_by: number
   is_deleted: number
   status_id: number
+  priority: number
   initial_site_measurement_date: number
   final_desc_note: number
   advance_payment_date: number
@@ -356,6 +359,7 @@ export type LeadMasterMinAggregateInputType = {
   deleted_by?: true
   is_deleted?: true
   status_id?: true
+  priority?: true
   initial_site_measurement_date?: true
   final_desc_note?: true
   advance_payment_date?: true
@@ -429,6 +433,7 @@ export type LeadMasterMaxAggregateInputType = {
   deleted_by?: true
   is_deleted?: true
   status_id?: true
+  priority?: true
   initial_site_measurement_date?: true
   final_desc_note?: true
   advance_payment_date?: true
@@ -502,6 +507,7 @@ export type LeadMasterCountAggregateInputType = {
   deleted_by?: true
   is_deleted?: true
   status_id?: true
+  priority?: true
   initial_site_measurement_date?: true
   final_desc_note?: true
   advance_payment_date?: true
@@ -662,6 +668,7 @@ export type LeadMasterGroupByOutputType = {
   deleted_by: number | null
   is_deleted: boolean
   status_id: number | null
+  priority: string | null
   initial_site_measurement_date: Date | null
   final_desc_note: string | null
   advance_payment_date: Date | null
@@ -758,6 +765,7 @@ export type LeadMasterWhereInput = {
   deleted_by?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   is_deleted?: Prisma.BoolFilter<"LeadMaster"> | boolean
   status_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
+  priority?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   initial_site_measurement_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   final_desc_note?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   advance_payment_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
@@ -869,6 +877,7 @@ export type LeadMasterOrderByWithRelationInput = {
   deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   status_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  priority?: Prisma.SortOrderInput | Prisma.SortOrder
   initial_site_measurement_date?: Prisma.SortOrderInput | Prisma.SortOrder
   final_desc_note?: Prisma.SortOrderInput | Prisma.SortOrder
   advance_payment_date?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -984,6 +993,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   deleted_by?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   is_deleted?: Prisma.BoolFilter<"LeadMaster"> | boolean
   status_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
+  priority?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   initial_site_measurement_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   final_desc_note?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   advance_payment_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
@@ -1095,6 +1105,7 @@ export type LeadMasterOrderByWithAggregationInput = {
   deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   status_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  priority?: Prisma.SortOrderInput | Prisma.SortOrder
   initial_site_measurement_date?: Prisma.SortOrderInput | Prisma.SortOrder
   final_desc_note?: Prisma.SortOrderInput | Prisma.SortOrder
   advance_payment_date?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1176,6 +1187,7 @@ export type LeadMasterScalarWhereWithAggregatesInput = {
   deleted_by?: Prisma.IntNullableWithAggregatesFilter<"LeadMaster"> | number | null
   is_deleted?: Prisma.BoolWithAggregatesFilter<"LeadMaster"> | boolean
   status_id?: Prisma.IntNullableWithAggregatesFilter<"LeadMaster"> | number | null
+  priority?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
   initial_site_measurement_date?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadMaster"> | Date | string | null
   final_desc_note?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
   advance_payment_date?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadMaster"> | Date | string | null
@@ -1239,6 +1251,7 @@ export type LeadMasterCreateInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -1349,6 +1362,7 @@ export type LeadMasterUncheckedCreateInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -1440,6 +1454,7 @@ export type LeadMasterUpdateInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1550,6 +1565,7 @@ export type LeadMasterUncheckedUpdateInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1651,6 +1667,7 @@ export type LeadMasterCreateManyInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -1714,6 +1731,7 @@ export type LeadMasterUpdateManyMutationInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1786,6 +1804,7 @@ export type LeadMasterUncheckedUpdateManyInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1879,6 +1898,7 @@ export type LeadMasterCountOrderByAggregateInput = {
   deleted_by?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   status_id?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
   initial_site_measurement_date?: Prisma.SortOrder
   final_desc_note?: Prisma.SortOrder
   advance_payment_date?: Prisma.SortOrder
@@ -1973,6 +1993,7 @@ export type LeadMasterMaxOrderByAggregateInput = {
   deleted_by?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   status_id?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
   initial_site_measurement_date?: Prisma.SortOrder
   final_desc_note?: Prisma.SortOrder
   advance_payment_date?: Prisma.SortOrder
@@ -2046,6 +2067,7 @@ export type LeadMasterMinOrderByAggregateInput = {
   deleted_by?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   status_id?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
   initial_site_measurement_date?: Prisma.SortOrder
   final_desc_note?: Prisma.SortOrder
   advance_payment_date?: Prisma.SortOrder
@@ -2973,6 +2995,7 @@ export type LeadMasterCreateWithoutVendorInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -3081,6 +3104,7 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -3211,6 +3235,7 @@ export type LeadMasterScalarWhereInput = {
   deleted_by?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   is_deleted?: Prisma.BoolFilter<"LeadMaster"> | boolean
   status_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
+  priority?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   initial_site_measurement_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   final_desc_note?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   advance_payment_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
@@ -3274,6 +3299,7 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -3382,6 +3408,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -3483,6 +3510,7 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -3591,6 +3619,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -3692,6 +3721,7 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -3800,6 +3830,7 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -3901,6 +3932,7 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -4009,6 +4041,7 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -4174,6 +4207,7 @@ export type LeadMasterCreateWithoutProjectsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -4283,6 +4317,7 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -4389,6 +4424,7 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4498,6 +4534,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4588,6 +4625,7 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -4697,6 +4735,7 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -4803,6 +4842,7 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4912,6 +4952,7 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5002,6 +5043,7 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -5111,6 +5153,7 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -5217,6 +5260,7 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5326,6 +5370,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5416,6 +5461,7 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -5524,6 +5570,7 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -5641,6 +5688,7 @@ export type LeadMasterCreateWithoutSourceInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -5749,6 +5797,7 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -5866,6 +5915,7 @@ export type LeadMasterCreateWithoutAccountInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -5974,6 +6024,7 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -6091,6 +6142,7 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -6200,6 +6252,7 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -6306,6 +6359,7 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6415,6 +6469,7 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6505,6 +6560,7 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -6614,6 +6670,7 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -6720,6 +6777,7 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6829,6 +6887,7 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6919,6 +6978,7 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -7028,6 +7088,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -7134,6 +7195,7 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7243,6 +7305,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7333,6 +7396,7 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -7442,6 +7506,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -7548,6 +7613,7 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7657,6 +7723,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7747,6 +7814,7 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -7856,6 +7924,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -7962,6 +8031,7 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8071,6 +8141,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8161,6 +8232,7 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -8270,6 +8342,7 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -8376,6 +8449,7 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8485,6 +8559,7 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8575,6 +8650,7 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -8684,6 +8760,7 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -8790,6 +8867,7 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8899,6 +8977,7 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8989,6 +9068,7 @@ export type LeadMasterCreateWithoutLedgersInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -9098,6 +9178,7 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -9204,6 +9285,7 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9313,6 +9395,7 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9403,6 +9486,7 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -9511,6 +9595,7 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -9628,6 +9713,7 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -9737,6 +9823,7 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -9843,6 +9930,7 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9952,6 +10040,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10042,6 +10131,7 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -10151,6 +10241,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -10257,6 +10348,7 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10366,6 +10458,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10456,6 +10549,7 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -10565,6 +10659,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -10671,6 +10766,7 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10780,6 +10876,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10870,6 +10967,7 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -10979,6 +11077,7 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -11085,6 +11184,7 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -11194,6 +11294,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -11284,6 +11385,7 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -11393,6 +11495,7 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -11499,6 +11602,7 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -11608,6 +11712,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -11698,6 +11803,7 @@ export type LeadMasterCreateWithoutTasksInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -11807,6 +11913,7 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -11913,6 +12020,7 @@ export type LeadMasterUpdateWithoutTasksInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12022,6 +12130,7 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12112,6 +12221,7 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -12221,6 +12331,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -12327,6 +12438,7 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12436,6 +12548,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12526,6 +12639,7 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -12635,6 +12749,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -12741,6 +12856,7 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12850,6 +12966,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12940,6 +13057,7 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -13049,6 +13167,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -13155,6 +13274,7 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -13264,6 +13384,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -13354,6 +13475,7 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -13463,6 +13585,7 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -13569,6 +13692,7 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -13678,6 +13802,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -13768,6 +13893,7 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -13877,6 +14003,7 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -13983,6 +14110,7 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -14092,6 +14220,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -14182,6 +14311,7 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -14291,6 +14421,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -14397,6 +14528,7 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -14506,6 +14638,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -14596,6 +14729,7 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -14705,6 +14839,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -14811,6 +14946,7 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -14920,6 +15056,7 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -15010,6 +15147,7 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -15119,6 +15257,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -15225,6 +15364,7 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -15334,6 +15474,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -15424,6 +15565,7 @@ export type LeadMasterCreateWithoutCutListInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -15533,6 +15675,7 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -15639,6 +15782,7 @@ export type LeadMasterUpdateWithoutCutListInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -15748,6 +15892,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -15838,6 +15983,7 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -15947,6 +16093,7 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -16053,6 +16200,7 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16162,6 +16310,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16252,6 +16401,7 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -16361,6 +16511,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -16467,6 +16618,7 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16576,6 +16728,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16666,6 +16819,7 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -16775,6 +16929,7 @@ export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -16900,6 +17055,7 @@ export type LeadMasterCreateManyVendorInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -16963,6 +17119,7 @@ export type LeadMasterUpdateWithoutVendorInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17071,6 +17228,7 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17171,6 +17329,7 @@ export type LeadMasterUncheckedUpdateManyWithoutVendorInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17243,6 +17402,7 @@ export type LeadMasterCreateManyAssignedToInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -17315,6 +17475,7 @@ export type LeadMasterCreateManyAssignedByInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -17387,6 +17548,7 @@ export type LeadMasterCreateManyCreatedByInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -17459,6 +17621,7 @@ export type LeadMasterCreateManyUpdatedByInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -17522,6 +17685,7 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17630,6 +17794,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17730,6 +17895,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedToInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17793,6 +17959,7 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17901,6 +18068,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18001,6 +18169,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedByInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18064,6 +18233,7 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18172,6 +18342,7 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18272,6 +18443,7 @@ export type LeadMasterUncheckedUpdateManyWithoutCreatedByInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18335,6 +18507,7 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18443,6 +18616,7 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18543,6 +18717,7 @@ export type LeadMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18615,6 +18790,7 @@ export type LeadMasterCreateManySiteTypeInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -18678,6 +18854,7 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18786,6 +18963,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18886,6 +19064,7 @@ export type LeadMasterUncheckedUpdateManyWithoutSiteTypeInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18958,6 +19137,7 @@ export type LeadMasterCreateManySourceInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -19021,6 +19201,7 @@ export type LeadMasterUpdateWithoutSourceInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19129,6 +19310,7 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19229,6 +19411,7 @@ export type LeadMasterUncheckedUpdateManyWithoutSourceInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19301,6 +19484,7 @@ export type LeadMasterCreateManyAccountInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -19364,6 +19548,7 @@ export type LeadMasterUpdateWithoutAccountInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19472,6 +19657,7 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19572,6 +19758,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAccountInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19644,6 +19831,7 @@ export type LeadMasterCreateManyStatusTypeInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -19707,6 +19895,7 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19815,6 +20004,7 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19915,6 +20105,7 @@ export type LeadMasterUncheckedUpdateManyWithoutStatusTypeInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19988,6 +20179,7 @@ export type LeadMasterCreateManyFranchiseInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   status_id?: number | null
+  priority?: string | null
   initial_site_measurement_date?: Date | string | null
   final_desc_note?: string | null
   advance_payment_date?: Date | string | null
@@ -20050,6 +20242,7 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20159,6 +20352,7 @@ export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20259,6 +20453,7 @@ export type LeadMasterUncheckedUpdateManyWithoutFranchiseInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20605,6 +20800,7 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   deleted_by?: boolean
   is_deleted?: boolean
   status_id?: boolean
+  priority?: boolean
   initial_site_measurement_date?: boolean
   final_desc_note?: boolean
   advance_payment_date?: boolean
@@ -20717,6 +20913,7 @@ export type LeadMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   deleted_by?: boolean
   is_deleted?: boolean
   status_id?: boolean
+  priority?: boolean
   initial_site_measurement_date?: boolean
   final_desc_note?: boolean
   advance_payment_date?: boolean
@@ -20800,6 +20997,7 @@ export type LeadMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   deleted_by?: boolean
   is_deleted?: boolean
   status_id?: boolean
+  priority?: boolean
   initial_site_measurement_date?: boolean
   final_desc_note?: boolean
   advance_payment_date?: boolean
@@ -20883,6 +21081,7 @@ export type LeadMasterSelectScalar = {
   deleted_by?: boolean
   is_deleted?: boolean
   status_id?: boolean
+  priority?: boolean
   initial_site_measurement_date?: boolean
   final_desc_note?: boolean
   advance_payment_date?: boolean
@@ -20931,7 +21130,7 @@ export type LeadMasterSelectScalar = {
   order_login_prod_files_remark?: boolean
 }
 
-export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "tech_check_reached_at" | "tech_check_completed_at" | "actual_installation_start_date" | "actual_installation_completion_at" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "usable_handover_completed_at" | "final_handover_marked_at" | "franchise_id" | "order_login_prod_files_remark", ExtArgs["result"]["leadMaster"]>
+export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "priority" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "tech_check_reached_at" | "tech_check_completed_at" | "actual_installation_start_date" | "actual_installation_completion_at" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "usable_handover_completed_at" | "final_handover_marked_at" | "franchise_id" | "order_login_prod_files_remark", ExtArgs["result"]["leadMaster"]>
 export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cutList?: boolean | Prisma.LeadMaster$cutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.LeadMaster$cutListMachineMappingArgs<ExtArgs>
@@ -21065,6 +21264,7 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     deleted_by: number | null
     is_deleted: boolean
     status_id: number | null
+    priority: string | null
     initial_site_measurement_date: Date | null
     final_desc_note: string | null
     advance_payment_date: Date | null
@@ -21596,6 +21796,7 @@ export interface LeadMasterFieldRefs {
   readonly deleted_by: Prisma.FieldRef<"LeadMaster", 'Int'>
   readonly is_deleted: Prisma.FieldRef<"LeadMaster", 'Boolean'>
   readonly status_id: Prisma.FieldRef<"LeadMaster", 'Int'>
+  readonly priority: Prisma.FieldRef<"LeadMaster", 'String'>
   readonly initial_site_measurement_date: Prisma.FieldRef<"LeadMaster", 'DateTime'>
   readonly final_desc_note: Prisma.FieldRef<"LeadMaster", 'String'>
   readonly advance_payment_date: Prisma.FieldRef<"LeadMaster", 'DateTime'>

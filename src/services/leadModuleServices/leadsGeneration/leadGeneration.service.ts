@@ -111,6 +111,7 @@ export const createLeadService = async (
     vendor_id,
     franchise_id,
     created_by,
+    priority,
     assign_to,
     assigned_by,
     product_types = [],
@@ -127,6 +128,7 @@ export const createLeadService = async (
           vendor_id,
           franchise_id,
           created_by,
+          priority,
           product_types,
           product_structures,
           fileCount: files.length,
@@ -190,31 +192,34 @@ export const createLeadService = async (
       const lead_code = await generateLeadCode(tx, franchise_id);
 
       // 3) Create Lead with the generated code
+      const leadCreateData: any = {
+        lead_code,
+        firstname,
+        lastname,
+        country_code,
+        contact_no,
+        alt_contact_no,
+        email: email ?? "",
+        site_address,
+        site_map_link,
+        site_type_id,
+        status_id,
+        source_id,
+        archetech_name,
+        designer_remark,
+        vendor_id,
+        franchise_id,
+        created_by,
+        priority: priority?.trim() || null,
+        account_id: account.id, // Add account_id reference
+        assign_to,
+        assigned_by,
+        initial_site_measurement_date,
+        is_draft: !!payload.is_draft,
+      };
+
       const lead = await tx.leadMaster.create({
-        data: {
-          lead_code,
-          firstname,
-          lastname,
-          country_code,
-          contact_no,
-          alt_contact_no,
-          email: email ?? "",
-          site_address,
-          site_map_link,
-          site_type_id,
-          status_id,
-          source_id,
-          archetech_name,
-          designer_remark,
-          vendor_id,
-          franchise_id,
-          created_by,
-          account_id: account.id, // Add account_id reference
-          assign_to,
-          assigned_by,
-          initial_site_measurement_date,
-          is_draft: !!payload.is_draft,
-        },
+        data: leadCreateData,
       });
 
       /* ✅ NEW: LeadUserMapping writes (cases: admin vs sales-executive)
