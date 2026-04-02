@@ -30,12 +30,6 @@ export interface CadbidItem {
   rotation?: number | null;
 }
 
-/* ------------------ COLUMN REGISTRY ------------------
-   REQUIRED  → upload fails if header is missing
-   OPTIONAL  → accepted when present; null when absent
-               ⚠ Misspelled headers (e.g. "EFL" vs "ELF") are rejected
-   IGNORED   → present in download template, never read
------------------------------------------------------ */
 const REQUIRED_COLUMNS = [
   "Description",
   "Length",
@@ -91,12 +85,7 @@ const requiredString = (field: string) =>
     z.string().min(1, `${field} is required`),
   );
 
-/**
- * Numeric fields (Length, Width, Thickness):
- * - null / empty  → "X is required"
- * - alphabets / non-numeric text → "X must be a number, alphabets are not allowed"
- * - negative value → "X must be 0 or greater"
- */
+
 const requiredNumber = (field: string) =>
   z.preprocess(
     (val) => {
@@ -128,9 +117,7 @@ const requiredNumber = (field: string) =>
       .pipe(z.number()),
   );
 
-/**
- * Qty — same alphabet guard, but must also be a positive integer.
- */
+
 const requiredQty = z.preprocess(
   (val) => {
     if (val === null || val === undefined || String(val).trim() === "")
@@ -172,11 +159,7 @@ const optionalString = (field: string, maxLen: number) =>
       .optional(),
   );
 
-/**
- * Optional Unique Code fields:
- * - blank / null → null (will be auto-generated or skipped)
- * - provided     → must be at least 4 characters
- */
+
 const optionalUniqueCode = (field: string) =>
   z.preprocess(
     (val) =>
@@ -191,7 +174,7 @@ const optionalUniqueCode = (field: string) =>
       .optional(),
   );
 
-/* ------------------ ZOD SCHEMA ------------------ */
+
 
 const itemSchema = z.object({
   articleCode: requiredString("Material Details"),
@@ -260,7 +243,7 @@ export const validateCutlistPayload = (payload: unknown): ValidationResult => {
   return { success: true, data: result.data as CadbidPayload };
 };
 
-/* ------------------ COLUMN HEADER VALIDATION ------------------ */
+
 
 function validateExcelHeaders(rows: unknown[]): void {
   if (!rows.length) return;
@@ -337,11 +320,7 @@ function validateUniqueCodeUniqueness(items: CadbidItem[]): void {
   }
 }
 
-/* ------------------  DB UNIQUE CODE EXISTENCE CHECK  ------------------
-   Checks whether any Unique Code or Unique Code 2 value provided in the
-   Excel already exists in the CutList table for this vendor.
-   Called AFTER in-file uniqueness check, BEFORE any Wasabi/DB write.
--------------------------------------------------------------------- */
+
 async function validateUniqueCodesNotInDB(
   items: CadbidItem[],
   vendorId: number,

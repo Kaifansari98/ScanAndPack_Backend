@@ -2,9 +2,7 @@ import { Request, Response } from "express";
 import { createProjectService } from "../../../src/services/trackTraceServices/track-trace-project.service";
 import logger from "../../utils/logger";
 
-/* ── Patterns that map to 422 Unprocessable Entity ──
-   Covers both our custom messages AND any Zod internal
-   messages that might slip through in edge cases.       */
+
 const VALIDATION_PATTERNS = [
   "is required",
   "is missing",
