@@ -10,7 +10,7 @@ import {
   MarkDefectPayload,
   QRParam,
 } from "../../../src/types/track-trace";
-import * as XLSX from "xlsx";
+
 
 import { generateWarehouseQRPDF } from "../../utils/warehouse-qr-generator";
 
