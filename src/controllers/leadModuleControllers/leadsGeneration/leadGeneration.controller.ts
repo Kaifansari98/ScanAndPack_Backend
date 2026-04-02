@@ -75,6 +75,7 @@ const getSingleBodyValue = (
 
 const STAGE_CONFIGS = [
   { id: "ism", tags: ["Type 2", "Type 3", "Type 4"], onlyApproved: false },
+  { id: "bookingDone", tags: ["Type 8", "Type 32"], onlyApproved: false },
   { id: "finalMeasurement", tags: ["Type 9", "Type 10"], onlyApproved: false },
   { id: "clientDoc", tags: ["Type 11", "Type 12"], onlyApproved: false },
   { id: "clientApproval", tags: ["Type 13"], onlyApproved: false },
