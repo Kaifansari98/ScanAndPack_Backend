@@ -1,7 +1,7 @@
 
 import { Request, Response } from "express"
 import { uploadCutListMachineExcel } from "../../../src/services/trackTraceServices/upload-cutlist.service";
-import * as XLSX from "xlsx";
+import ExcelJS from "exceljs";
 
 
 export const uploadMachineExcel = async (req: Request, res: Response) => {
@@ -18,9 +18,22 @@ export const uploadMachineExcel = async (req: Request, res: Response) => {
       });
     }
 
-    const workbook = XLSX.read(file.buffer);
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
-    const rows = XLSX.utils.sheet_to_json<Record<string, unknown>>(sheet); // ✅ unknown instead of ExcelRow
+    const workbook = new ExcelJS.Workbook();
+    await workbook.xlsx.load(file.buffer.buffer.slice(file.buffer.byteOffset, file.buffer.byteOffset + file.buffer.byteLength) as ArrayBuffer);
+    const sheet = workbook.worksheets[0];
+    const headers: string[] = [];
+    const rows: Record<string, unknown>[] = [];
+    sheet.eachRow((row, rowNumber) => {
+      if (rowNumber === 1) {
+        row.eachCell((cell) => { headers.push(String(cell.value ?? "")); });
+      } else {
+        const obj: Record<string, unknown> = {};
+        row.eachCell({ includeEmpty: true }, (cell, colNumber) => {
+          obj[headers[colNumber - 1]] = cell.value ?? null;
+        });
+        rows.push(obj);
+      }
+    });
 
     const result = await uploadCutListMachineExcel(
       vendorId,

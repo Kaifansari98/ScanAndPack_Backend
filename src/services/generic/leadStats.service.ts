@@ -80,19 +80,25 @@ export class LeadStatsService {
       });
 
       if (shouldUseMapping) {
-        // ✅ Leads from LeadUserMapping + UserLeadTask (match universal table logic)
+        // Pre-prod and factory are mapping-only — taskLeads would pull leads they
+        // don't own (e.g. tasks they created) and inflate the sidebar count.
+        const mappingOnlyRoles = ["pre-prod", "factory"];
+        const isMappingOnly = mappingOnlyRoles.includes(userType);
+
         const [mappedLeads, taskLeads] = await Promise.all([
           prisma.leadUserMapping.findMany({
             where: { vendor_id: vendorId, user_id: userId, status: "active" },
             select: { lead_id: true },
           }),
-          prisma.userLeadTask.findMany({
-            where: {
-              vendor_id: vendorId,
-              OR: [{ created_by: userId }, { user_id: userId }],
-            },
-            select: { lead_id: true },
-          }),
+          isMappingOnly
+            ? Promise.resolve([])
+            : prisma.userLeadTask.findMany({
+                where: {
+                  vendor_id: vendorId,
+                  OR: [{ created_by: userId }, { user_id: userId }],
+                },
+                select: { lead_id: true },
+              }),
         ]);
 
         const leadIds = [

@@ -1,6 +1,6 @@
 import { z } from "zod";
 import fs from "fs";
-import * as XLSX from "xlsx";
+import ExcelJS from "exceljs";
 import { Prisma, prisma } from "../../../src/prisma/client";
 import { randomUUID } from "crypto";
 import logger from "../../../src/utils/logger";
@@ -497,14 +497,26 @@ export const createProjectService = async (
   try {
     logger.info("Project import started", { projectName });
 
-    /* STEP 1 — Parse Excel */
-    const workbook = XLSX.readFile(file.path);
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
-
-    const rawRows: unknown[] = XLSX.utils.sheet_to_json(sheet, {
-      defval: null,
-      blankrows: false,
-      raw: false,
+    /* STEP 1 — Parse Excel with proper options */
+    const _workbook = new ExcelJS.Workbook();
+    await _workbook.xlsx.readFile(file.path);
+    const _sheet = _workbook.worksheets[0];
+    const _headers: string[] = [];
+    const rawRows: unknown[] = [];
+    _sheet.eachRow((row, rowNumber) => {
+      if (rowNumber === 1) {
+        row.eachCell((cell) => { _headers.push(String(cell.value ?? "")); });
+      } else {
+        const cellValues = (row.values as ExcelJS.CellValue[]).slice(1);
+        const hasData = cellValues.some((v) => v !== null && v !== undefined && v !== "");
+        if (!hasData) return;
+        const obj: Record<string, unknown> = {};
+        row.eachCell({ includeEmpty: true }, (cell, colNumber) => {
+          const val = cell.text !== "" ? cell.text : null;
+          obj[_headers[colNumber - 1]] = val;
+        });
+        rawRows.push(obj);
+      }
     });
 
     logger.info("Excel parsed", { totalRows: rawRows.length });

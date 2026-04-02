@@ -819,100 +819,71 @@ export const sendMovedToProductionWithOrderLoginEmail = async (payload: {
   updatedBy: string;
   updatedAt: string;
   projectUrl: string;
+  orderLoginComplete?: boolean;
 }): Promise<BrevoEmailResult> => {
   const identity = await resolveEmailIdentity(payload.vendor_id);
-  const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved to Production`;
+  const olComplete = payload.orderLoginComplete !== false;
 
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    "The following project has been moved to the Production stage.",
-    "",
-    `Lead Code: ${payload.leadCode}`,
-    `Lead Name: ${payload.leadName}`,
-    `Updated By: ${payload.updatedBy}`,
-    `Updated On: ${payload.updatedAt}`,
-    "",
-    payload.projectUrl ? `View Production Files: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
+  const defaultSubject = olComplete
+    ? `${payload.leadCode} - ${payload.leadName} moved to Production`
+    : `${payload.leadCode} - ${payload.leadName} moved to Production with Partial Details`;
 
-  const defaultHtml = `
+  const defaultText = olComplete
+    ? [
+        `Hello ${payload.toName ?? "there"},`,
+        "",
+        `The project ${payload.leadCode} - ${payload.leadName} has been moved to the Production stage.`,
+        "",
+        `Updated By: ${payload.updatedBy}`,
+        `Updated On: ${payload.updatedAt}`,
+        "",
+        payload.projectUrl ? `View Production Files: ${payload.projectUrl}` : "",
+      ]
+        .filter(Boolean)
+        .join("\n")
+    : [
+        `Hello ${payload.toName ?? "there"},`,
+        "",
+        `The project ${payload.leadCode} - ${payload.leadName} has been moved to the Production stage.`,
+        "",
+        "What's Available",
+        "✅ Production files have been uploaded",
+        "❌ Order Login details are not yet completed",
+        "",
+        "You may begin preliminary production activities using the available files.",
+        "However, vendor allocation, file breakup and PO details are still pending and will be updated by the Backend team shortly.",
+        "Please note that final scheduling and commitments should be aligned once Order Login details are completed.",
+        "",
+        payload.projectUrl ? `View Production Files: ${payload.projectUrl}` : "",
+      ]
+        .filter(Boolean)
+        .join("\n");
+
+  const defaultHtml = olComplete
+    ? `
 <!DOCTYPE html>
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    .lead-info-row {
-      display: table;
-      width: 100%;
-      padding: 4px 0;
-    }
-    .lead-info-label {
-      display: table-cell;
-      width: 40%;
-      color: #6b7280;
-      font-size: 14px;
-      vertical-align: top;
-    }
-    .lead-info-value {
-      display: table-cell;
-      width: 60%;
-      color: #111827;
-      font-weight: 600;
-      font-size: 14px;
-      word-break: break-word;
-    }
-
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; word-break: break-word; }
     @media only screen and (max-width: 600px) {
-      .lead-info-row {
-        display: block !important;
-        border-bottom: 1px solid #e5e7eb;
-        margin-bottom: 4px;
-        padding-bottom: 4px;
-      }
-      .lead-info-row:last-child {
-        border-bottom: none;
-      }
-      .lead-info-label,
-      .lead-info-value {
-        display: block;
-        width: 100%;
-      }
-      .lead-info-label {
-        font-size: 13px;
-        margin-bottom: 4px;
-      }
+      .lead-info-row { display: block !important; border-bottom: 1px solid #e5e7eb; margin-bottom: 4px; padding-bottom: 4px; }
+      .lead-info-row:last-child { border-bottom: none; }
+      .lead-info-label, .lead-info-value { display: block; width: 100%; }
+      .lead-info-label { font-size: 13px; margin-bottom: 4px; }
     }
   </style>
 </head>
-
 <body style="margin:0;padding:0;font-family:Arial,sans-serif;">
   <div style="background:#f9fafb;padding:10px;">
     <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
-
-      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
-        Moved to Production
-      </h2>
-
-      <p style="margin:0 0 12px;color:#111827;">
-        Hello ${payload.toName ?? "there"},
-      </p>
-
-      <p style="margin:0 0 16px;color:#4b5563;">
-        The following project has been moved to the Production stage.
-      </p>
-
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">Moved to Production</h2>
+      <p style="margin:0 0 12px;color:#111827;">Hello ${payload.toName ?? "there"},</p>
+      <p style="margin:0 0 16px;color:#4b5563;">The project ${payload.leadCode} - ${payload.leadName} has been moved to the Production stage.</p>
       <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
-        <div class="lead-info-row">
-          <div class="lead-info-label">Lead Code</div>
-          <div class="lead-info-value">${payload.leadCode}</div>
-        </div>
-        <div class="lead-info-row">
-          <div class="lead-info-label">Lead Name</div>
-          <div class="lead-info-value">${payload.leadName}</div>
-        </div>
         <div class="lead-info-row">
           <div class="lead-info-label">Updated By</div>
           <div class="lead-info-value">${payload.updatedBy}</div>
@@ -922,22 +893,33 @@ export const sendMovedToProductionWithOrderLoginEmail = async (payload: {
           <div class="lead-info-value">${payload.updatedAt}</div>
         </div>
       </div>
-
-      ${
-        payload.projectUrl
-          ? `<div style="margin:16px 0 0;text-align:start;">
-              <a
-                href="${payload.projectUrl}"
-                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View Production Files
-              </a>
-            </div>`
-          : ""
-      }
-
+      ${payload.projectUrl ? `<div style="margin:16px 0 0;text-align:start;"><a href="${payload.projectUrl}" style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;" target="_blank" rel="noopener noreferrer">👉 View Production Files</a></div>` : ""}
+    </div>
+  </div>
+</body>
+</html>
+`
+    : `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">Moved to Production (Order Login Pending)</h2>
+      <p style="margin:0 0 12px;color:#111827;">Hello ${payload.toName ?? "there"},</p>
+      <p style="margin:0 0 16px;color:#4b5563;">The project ${payload.leadCode} - ${payload.leadName} has been moved to the Production stage.</p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:16px;background:#f8fafc;margin-bottom:16px;">
+        <p style="margin:0 0 8px;font-weight:600;color:#111827;font-size:14px;">What's Available</p>
+        <p style="margin:0 0 6px;font-size:14px;color:#374151;">✅ Production files have been uploaded</p>
+        <p style="margin:0;font-size:14px;color:#374151;">❌ Order Login details are not yet completed</p>
+      </div>
+      <p style="margin:0 0 8px;font-size:14px;color:#4b5563;">You may begin preliminary production activities using the available files.</p>
+      <p style="margin:0 0 8px;font-size:14px;color:#4b5563;">However, vendor allocation, file breakup and PO details are still pending and will be updated by the Backend team shortly.</p>
+      <p style="margin:0 0 16px;font-size:14px;color:#4b5563;">Please note that final scheduling and commitments should be aligned once Order Login details are completed.</p>
+      ${payload.projectUrl ? `<div style="text-align:start;"><a href="${payload.projectUrl}" style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;" target="_blank" rel="noopener noreferrer">👉 View Production Files</a></div>` : ""}
     </div>
   </div>
 </body>
