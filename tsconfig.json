@@ -7,8 +7,8 @@
     "skipLibCheck": true,
     "outDir": "dist",
     "types": ["node"],
-    "baseUrl": ".",
     "paths": {
+      "*": ["./*"],
       "@prisma/client": ["./generated/prisma_client/client"]
     },
     "rootDir": "."
