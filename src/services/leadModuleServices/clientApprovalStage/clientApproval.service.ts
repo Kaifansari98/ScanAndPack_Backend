@@ -176,7 +176,7 @@ export class ClientApprovalService {
       });
 
       try {
-        const [leadInfo, updatedByUser, admins] = await Promise.all([
+        const [leadInfo, updatedByUser] = await Promise.all([
           prisma.leadMaster.findUnique({
             where: { id: data.lead_id },
             select: {
@@ -184,23 +184,28 @@ export class ClientApprovalService {
               firstname: true,
               lastname: true,
               account_id: true,
+              franchise_id: true,
             },
           }),
           prisma.userMaster.findUnique({
             where: { id: data.created_by },
             select: { user_name: true },
           }),
-          prisma.userMaster.findMany({
-            where: {
-              vendor_id: data.vendor_id,
-              status: "active",
-              user_type: {
-                user_type: { in: ["admin", "super-admin"], mode: "insensitive" },
-              },
-            },
-            select: { id: true, user_name: true, user_email: true },
-          }),
         ]);
+
+        const admins = await prisma.userMaster.findMany({
+          where: {
+            vendor_id: data.vendor_id,
+            status: "active",
+            user_type: {
+              user_type: { in: ["admin", "super-admin"], mode: "insensitive" },
+            },
+            ...(leadInfo?.franchise_id
+              ? { franchise_id: leadInfo.franchise_id }
+              : {}),
+          },
+          select: { id: true, user_name: true, user_email: true },
+        });
 
         const leadCode =
           leadInfo?.lead_code ?? `LEAD-${String(data.lead_id).padStart(4, "0")}`;
@@ -217,6 +222,7 @@ export class ClientApprovalService {
         const leadUrl = leadInfo?.account_id
           ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${leadInfo.account_id}`
           : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;
+        const franchiseId = leadInfo?.franchise_id ?? null;
 
         await Promise.allSettled(
           admins.map(async (admin) => {
@@ -238,6 +244,7 @@ export class ClientApprovalService {
 
             await sendPaymentAddedEmail({
               vendor_id: data.vendor_id,
+              franchise_id: franchiseId,
               toEmail: admin.user_email,
               toName: admin.user_name ?? undefined,
               leadCode,

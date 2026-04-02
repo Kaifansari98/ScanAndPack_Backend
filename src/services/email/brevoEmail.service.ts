@@ -143,6 +143,7 @@ export type LeadLostRejectedEmailPayload = {
 
 export type PaymentAddedEmailPayload = {
   vendor_id: number;
+  franchise_id?: number | null;
   toEmail: string;
   toName?: string | null;
   leadCode: string;
