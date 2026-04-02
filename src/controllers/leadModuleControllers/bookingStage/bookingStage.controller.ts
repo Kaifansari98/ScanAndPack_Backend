@@ -43,6 +43,20 @@ const resolveClientBaseUrl = (req: Request): string => {
 const getParam = (param: string | string[] | undefined): string | undefined =>
   Array.isArray(param) ? param[0] : param;
 
+const normalizeStringArray = (value: unknown): string[] | undefined => {
+  if (Array.isArray(value)) {
+    const normalized = value.map((item) => String(item).trim()).filter(Boolean);
+    return normalized.length > 0 ? normalized : undefined;
+  }
+
+  if (typeof value === "string") {
+    const normalized = value.trim();
+    return normalized ? [normalized] : undefined;
+  }
+
+  return undefined;
+};
+
 export class BookingStageController {
   private bookingStageService = new BookingStageService();
 
@@ -525,6 +539,7 @@ export class BookingStageController {
         site_map_link: req.body.site_map_link,
         site_type: req.body.site_type,
         assign_to: req.body.assign_to,
+        priority: normalizeStringArray(req.body.priority),
         stagetag: req.body.stagetag,
         site_address: req.body.site_address,
         archetech_name: req.body.archetech_name,
@@ -671,6 +686,7 @@ export class BookingStageController {
         site_map_link: req.body.site_map_link,
         site_type: req.body.site_type,
         assign_to: req.body.assign_to,
+        priority: normalizeStringArray(req.body.priority),
         stagetag: req.body.stagetag,
         site_address: req.body.site_address,
         archetech_name: req.body.archetech_name,

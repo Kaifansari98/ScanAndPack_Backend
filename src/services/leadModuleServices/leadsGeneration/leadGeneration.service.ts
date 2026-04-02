@@ -1487,6 +1487,7 @@ export const updateLeadService = async (
     site_map_link,
     site_type_id,
     source_id,
+    priority,
     archetech_name,
     designer_remark,
     updated_by,
@@ -1571,6 +1572,9 @@ export const updateLeadService = async (
     if (site_address !== undefined) leadUpdateData.site_address = site_address;
     if (site_type_id !== undefined) leadUpdateData.site_type_id = site_type_id;
     if (source_id !== undefined) leadUpdateData.source_id = source_id;
+    if (priority !== undefined) {
+      leadUpdateData.priority = priority?.trim() || null;
+    }
     if (archetech_name !== undefined)
       leadUpdateData.archetech_name = archetech_name;
     if (designer_remark !== undefined)

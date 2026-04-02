@@ -1211,6 +1211,7 @@ export class BookingStageService {
       site_map_link?: boolean;
       site_type?: Array<number | string>;
       assign_to?: Array<number | string>;
+      priority?: Array<string>;
       site_address?: string;
       archetech_name?: string;
       source?: Array<number | string>;
@@ -1500,6 +1501,23 @@ export class BookingStageService {
             assign_to: {
               in: assignIds,
             },
+          });
+        }
+      }
+
+      if (Array.isArray(filters.priority) && filters.priority.length > 0) {
+        const priorities = filters.priority
+          .map((item) => String(item).trim())
+          .filter(Boolean);
+
+        if (priorities.length > 0) {
+          addAnd({
+            OR: priorities.map((priority) => ({
+              priority: {
+                equals: priority,
+                mode: "insensitive",
+              },
+            })),
           });
         }
       }
@@ -2656,6 +2674,7 @@ export class BookingStageService {
       site_map_link?: boolean;
       site_type?: Array<number | string>;
       assign_to?: Array<number | string>;
+      priority?: Array<string>;
       site_address?: string;
       archetech_name?: string;
       source?: Array<number | string>;
@@ -3052,6 +3071,23 @@ const statusTags =
             assign_to: {
               in: assignIds,
             },
+          });
+        }
+      }
+
+      if (Array.isArray(filters.priority) && filters.priority.length > 0) {
+        const priorities = filters.priority
+          .map((item) => String(item).trim())
+          .filter(Boolean);
+
+        if (priorities.length > 0) {
+          addAnd({
+            OR: priorities.map((priority) => ({
+              priority: {
+                equals: priority,
+                mode: "insensitive",
+              },
+            })),
           });
         }
       }

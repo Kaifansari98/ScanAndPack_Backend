@@ -175,6 +175,7 @@ interface UpdateLeadInput {
   site_address?: string;
   site_type_id?: number;
   source_id?: number;
+  priority?: string;
   archetech_name?: string;
   designer_remark?: string;
   updated_by?: number;
@@ -234,6 +235,17 @@ export const validateUpdateLeadInput = (
   if (input.source_id !== undefined) {
     if (typeof input.source_id !== "number") {
       errors.push("source_id must be a number if provided");
+    }
+  }
+
+  if (input.priority !== undefined && input.priority !== null) {
+    if (
+      typeof input.priority !== "string" ||
+      !["High", "Medium", "Low"].includes(input.priority.trim())
+    ) {
+      errors.push(
+        "priority must be one of High, Medium, or Low if provided"
+      );
     }
   }
 
