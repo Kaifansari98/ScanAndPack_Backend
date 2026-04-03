@@ -3,15 +3,23 @@ import { prisma } from "../../../prisma/client";
 import logger from "../../../../src/utils/logger";
 
 export class PreProductionService {
-  private async recomputeLeadExpectedOrderLoginReadyDate(
+  private addThreeDayBuffer(date: Date) {
+    const bufferedDate = new Date(date);
+    bufferedDate.setDate(bufferedDate.getDate() + 3);
+    return bufferedDate;
+  }
+
+  private async recomputeInstanceProductionErdDate(
     vendorId: number,
     leadId: number,
+    instanceId: number,
     updatedBy: number,
   ) {
     const latestOrder = await prisma.orderLoginDetails.findFirst({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
+        instance_id: instanceId,
         estimated_completion_date: {
           not: null,
         },
@@ -24,17 +32,50 @@ export class PreProductionService {
       },
     });
 
-    if (!latestOrder?.estimated_completion_date) {
-      return null;
-    }
+    const productionErdDate = latestOrder?.estimated_completion_date
+      ? this.addThreeDayBuffer(latestOrder.estimated_completion_date)
+      : null;
 
-    const bufferedDate = new Date(latestOrder.estimated_completion_date);
-    bufferedDate.setDate(bufferedDate.getDate() + 3);
+    return prisma.leadProductStructureInstance.updateMany({
+      where: {
+        id: instanceId,
+        lead_id: leadId,
+        vendor_id: vendorId,
+      },
+      data: {
+        production_erd_date: productionErdDate,
+        updated_by: updatedBy,
+        updated_at: new Date(),
+      },
+    });
+  }
+
+  private async recomputeLeadExpectedOrderLoginReadyDate(
+    vendorId: number,
+    leadId: number,
+    updatedBy: number,
+  ) {
+    const latestInstanceErd = await prisma.leadProductStructureInstance.findFirst({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        production_erd_date: {
+          not: null,
+        },
+      },
+      orderBy: {
+        production_erd_date: "desc",
+      },
+      select: {
+        production_erd_date: true,
+      },
+    });
 
     return prisma.leadMaster.update({
       where: { id: leadId },
       data: {
-        expected_order_login_ready_date: bufferedDate,
+        expected_order_login_ready_date:
+          latestInstanceErd?.production_erd_date ?? null,
         updated_by: updatedBy,
         updated_at: new Date(),
       },
@@ -235,6 +276,7 @@ export class PreProductionService {
     leadId: number,
     date: string,
     updatedBy: number,
+    instanceId?: number,
   ) {
     // Verify lead belongs to vendor
     const lead = await prisma.leadMaster.findFirst({
@@ -245,14 +287,34 @@ export class PreProductionService {
       throw new Error(`Lead ${leadId} not found for vendor ${vendorId}`);
     }
 
-    // Update expected date
-    const updatedLead = await prisma.leadMaster.update({
-      where: { id: leadId },
-      data: {
-        expected_order_login_ready_date: new Date(date),
-        updated_by: updatedBy,
-      },
-    });
+    if (instanceId) {
+      await prisma.leadProductStructureInstance.updateMany({
+        where: {
+          id: instanceId,
+          lead_id: leadId,
+          vendor_id: vendorId,
+        },
+        data: {
+          production_erd_date: new Date(date),
+          updated_by: updatedBy,
+          updated_at: new Date(),
+        },
+      });
+    }
+
+    const updatedLead = instanceId
+      ? await this.recomputeLeadExpectedOrderLoginReadyDate(
+          vendorId,
+          leadId,
+          updatedBy,
+        )
+      : await prisma.leadMaster.update({
+          where: { id: leadId },
+          data: {
+            expected_order_login_ready_date: new Date(date),
+            updated_by: updatedBy,
+          },
+        });
 
     // Log the change
     if (lead.account_id) {
@@ -261,7 +323,9 @@ export class PreProductionService {
           vendor_id: vendorId,
           lead_id: leadId,
           account_id: lead.account_id,
-          action: `Expected Order Login ready date updated to ${new Date(date).toLocaleDateString()}`,
+          action: instanceId
+            ? `Instance ERD updated to ${new Date(date).toLocaleDateString()} and lead ERD recalculated`
+            : `Expected Order Login ready date updated to ${new Date(date).toLocaleDateString()}`,
           action_type: "UPDATE",
           created_by: updatedBy,
         },
@@ -412,6 +476,7 @@ export class PreProductionService {
 
     const results = [];
     const errors = [];
+    const touchedInstanceIds = new Set<number>();
 
     for (const [index, u] of updates.entries()) {
       logger.debug(`[OrderLoginCompletion] Processing update [${index}]`, {
@@ -500,6 +565,8 @@ export class PreProductionService {
         logger.info(`[OrderLoginCompletion] orderLogin updated [${index}]`, {
           updatedId: updated.id,
         });
+
+        touchedInstanceIds.add(Number(instance_id));
 
         if (existing.account_id) {
           const logAction = completionFlag
@@ -667,6 +734,15 @@ export class PreProductionService {
       .find((value) => !Number.isNaN(value) && value > 0);
 
     if (results.length > 0 && latestUpdatedBy) {
+      for (const instanceId of touchedInstanceIds) {
+        await this.recomputeInstanceProductionErdDate(
+          vendorId,
+          leadId,
+          instanceId,
+          latestUpdatedBy,
+        );
+      }
+
       await this.recomputeLeadExpectedOrderLoginReadyDate(
         vendorId,
         leadId,

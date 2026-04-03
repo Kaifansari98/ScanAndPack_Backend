@@ -7630,6 +7630,7 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   pre_prod_done_at: 'pre_prod_done_at',
   is_production_completed: 'is_production_completed',
   production_completed_at: 'production_completed_at',
+  production_erd_date: 'production_erd_date',
   woodwork_packing_details_remark: 'woodwork_packing_details_remark',
   hardware_packing_details_remark: 'hardware_packing_details_remark',
   no_of_boxes: 'no_of_boxes',
