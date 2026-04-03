@@ -390,6 +390,21 @@ export class PreProductionService {
       all_order_login_marked_completed &&
       hasExpectedDate;
 
+    if (readyForPostProduction && typeof instanceId !== "undefined" && instanceId !== null) {
+      await prisma.leadProductStructureInstance.updateMany({
+        where: {
+          id: instanceId,
+          vendor_id: vendorId,
+          lead_id: leadId,
+          is_post_production: { not: true },
+        },
+        data: {
+          is_post_production: true,
+          updated_at: new Date(),
+        },
+      });
+    }
+
     return {
       readyForPostProduction,
       all_order_login_dates_added,
@@ -588,7 +603,7 @@ export class PreProductionService {
         // ─── Fetch Instance Title for Remark ──────────────────────
         const instance = await prisma.leadProductStructureInstance.findUnique({
           where: { id: instance_id },
-          select: { title: true },
+          select: { title: true, is_pre_prod_done: true },
         });
         logger.debug(`[OrderLoginCompletion] instance [${index}]`, {
           instance_id,
@@ -602,6 +617,27 @@ export class PreProductionService {
 
         const userId = Number(updated_by);
         const status: LeadTaskStatus = completionFlag ? "completed" : "open";
+
+        if (completionFlag) {
+          await prisma.leadProductStructureInstance.updateMany({
+            where: {
+              id: instance_id,
+              vendor_id: vendorId,
+              lead_id: leadId,
+            },
+            data: {
+              is_order_login_filled: true,
+              ...(instance?.is_pre_prod_done === true
+                ? {
+                    is_under_production: true,
+                    under_production_at: new Date(),
+                  }
+                : {}),
+              updated_by: userId,
+              updated_at: new Date(),
+            },
+          });
+        }
 
         // ─── Resolve Assignee ─────────────────────────────────────
         let assigneeUserId = userId;

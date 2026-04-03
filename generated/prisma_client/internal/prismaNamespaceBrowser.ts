@@ -667,6 +667,7 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   order_login_completed_at: 'order_login_completed_at',
   is_under_production: 'is_under_production',
   under_production_at: 'under_production_at',
+  is_post_production: 'is_post_production',
   is_pre_prod_done: 'is_pre_prod_done',
   pre_prod_done_at: 'pre_prod_done_at',
   is_production_completed: 'is_production_completed',

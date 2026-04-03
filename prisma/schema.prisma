@@ -740,6 +740,7 @@ model LeadProductStructureInstance {
   order_login_completed_at                   DateTime?
   is_under_production                        Boolean?
   under_production_at                        DateTime?
+  is_post_production                         Boolean?
   is_pre_prod_done                           Boolean?
   pre_prod_done_at                           DateTime?
   is_production_completed                    Boolean?

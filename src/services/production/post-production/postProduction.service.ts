@@ -87,17 +87,6 @@ export class PostProductionService {
       });
     }
 
-    console.log("[uploadQcPhotos] instanceId:", instanceId);
-    if (instanceId) {
-      const result = await prisma.leadProductStructureInstance.updateMany({
-        where: { id: instanceId },
-        data: { is_under_production: true, under_production_at: new Date() },
-      });
-      console.log("[uploadQcPhotos] is_under_production update result:", result);
-    } else {
-      console.log("[uploadQcPhotos] skipped is_under_production update — no instanceId");
-    }
-
     return uploadedDocs;
   }
 
@@ -244,17 +233,6 @@ export class PostProductionService {
           })),
         });
       }
-    }
-
-    console.log("[uploadHardwarePackingDetails] instanceId:", instanceId);
-    if (instanceId) {
-      const result = await prisma.leadProductStructureInstance.updateMany({
-        where: { id: instanceId },
-        data: { is_under_production: true, under_production_at: new Date() },
-      });
-      console.log("[uploadHardwarePackingDetails] is_under_production update result:", result);
-    } else {
-      console.log("[uploadHardwarePackingDetails] skipped is_under_production update — no instanceId");
     }
 
     return {
@@ -405,17 +383,6 @@ export class PostProductionService {
           })),
         });
       }
-    }
-
-    console.log("[uploadWoodworkPackingDetails] instanceId:", instanceId);
-    if (instanceId) {
-      const result = await prisma.leadProductStructureInstance.updateMany({
-        where: { id: instanceId },
-        data: { is_under_production: true, under_production_at: new Date() },
-      });
-      console.log("[uploadWoodworkPackingDetails] is_under_production update result:", result);
-    } else {
-      console.log("[uploadWoodworkPackingDetails] skipped is_under_production update — no instanceId");
     }
 
     return {
@@ -650,13 +617,6 @@ export class PostProductionService {
           },
         });
       }
-
-      console.log("[updateNoOfBoxes] instanceId:", instanceId);
-      const underProdResult = await prisma.leadProductStructureInstance.updateMany({
-        where: { id: instanceId },
-        data: { is_under_production: true, under_production_at: new Date() },
-      });
-      console.log("[updateNoOfBoxes] is_under_production update result:", underProdResult);
 
       return updatedInstance;
     }
@@ -950,7 +910,7 @@ export class PostProductionService {
   ) {
     const instance = await prisma.leadProductStructureInstance.findFirst({
       where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
-      select: { id: true, is_pre_prod_done: true },
+      select: { id: true, is_pre_prod_done: true, is_order_login_filled: true },
     });
 
     if (!instance) {
@@ -963,10 +923,23 @@ export class PostProductionService {
 
     await prisma.leadProductStructureInstance.update({
       where: { id: instanceId },
-      data: { is_pre_prod_done: true, pre_prod_done_at: new Date() },
+      data: {
+        is_pre_prod_done: true,
+        pre_prod_done_at: new Date(),
+        ...(instance.is_order_login_filled === true
+          ? {
+              is_under_production: true,
+              under_production_at: new Date(),
+            }
+          : {}),
+      },
     });
 
-    return { instanceId, is_pre_prod_done: true };
+    return {
+      instanceId,
+      is_pre_prod_done: true,
+      is_under_production: instance.is_order_login_filled === true,
+    };
   }
 
   async getPreProductionFiles(

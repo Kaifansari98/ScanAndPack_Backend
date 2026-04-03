@@ -2665,7 +2665,12 @@ export class OrderLoginService {
         vendor_id: vendorId,
         lead_id: leadId,
       },
-      select: { id: true, title: true, is_order_login_filled: true },
+      select: {
+        id: true,
+        title: true,
+        is_order_login_filled: true,
+        is_pre_prod_done: true,
+      },
     });
 
     if (!instance) {
@@ -2682,6 +2687,12 @@ export class OrderLoginService {
       where: { id: instanceId },
       data: {
         is_order_login_filled: true,
+        ...(instance.is_pre_prod_done === true
+          ? {
+              is_under_production: true,
+              under_production_at: new Date(),
+            }
+          : {}),
         updated_by: updatedBy,
         updated_at: new Date(),
       },
