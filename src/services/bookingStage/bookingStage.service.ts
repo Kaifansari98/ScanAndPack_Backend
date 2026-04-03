@@ -67,6 +67,7 @@ export class BookingStageService {
           pre_prod_done_at: true,
           is_under_production: true,
           under_production_at: true,
+          is_post_production: true,
           is_production_completed: true,
           productStructure: {
             select: {
@@ -1576,16 +1577,22 @@ export class BookingStageService {
 
         if (productionStatus === "Completed") {
           instanceAnd.push({ is_production_completed: true });
+        } else if (productionStatus === "Post Production") {
+          instanceAnd.push({ is_post_production: true });
+          instanceAnd.push(notTrue("is_production_completed"));
         } else if (productionStatus === "Under Production") {
           instanceAnd.push({ is_under_production: true });
+          instanceAnd.push(notTrue("is_post_production"));
           instanceAnd.push(notTrue("is_production_completed"));
         } else if (productionStatus === "Pre Prod Done") {
           instanceAnd.push({ is_pre_prod_done: true });
           instanceAnd.push(notTrue("is_under_production"));
+          instanceAnd.push(notTrue("is_post_production"));
           instanceAnd.push(notTrue("is_production_completed"));
         } else if (productionStatus === "Pending") {
           instanceAnd.push(notTrue("is_pre_prod_done"));
           instanceAnd.push(notTrue("is_under_production"));
+          instanceAnd.push(notTrue("is_post_production"));
           instanceAnd.push(notTrue("is_production_completed"));
         }
 
@@ -3235,16 +3242,22 @@ const statusTags =
           const productionStatus = filters.production_status;
           if (productionStatus === "Completed") {
             instanceAnd.push({ is_production_completed: true });
+          } else if (productionStatus === "Post Production") {
+            instanceAnd.push({ is_post_production: true });
+            instanceAnd.push(notTrue("is_production_completed"));
           } else if (productionStatus === "Under Production") {
             instanceAnd.push({ is_under_production: true });
+            instanceAnd.push(notTrue("is_post_production"));
             instanceAnd.push(notTrue("is_production_completed"));
           } else if (productionStatus === "Pre Prod Done") {
             instanceAnd.push({ is_pre_prod_done: true });
             instanceAnd.push(notTrue("is_under_production"));
+            instanceAnd.push(notTrue("is_post_production"));
             instanceAnd.push(notTrue("is_production_completed"));
           } else if (productionStatus === "Pending") {
             instanceAnd.push(notTrue("is_pre_prod_done"));
             instanceAnd.push(notTrue("is_under_production"));
+            instanceAnd.push(notTrue("is_post_production"));
             instanceAnd.push(notTrue("is_production_completed"));
           }
 
