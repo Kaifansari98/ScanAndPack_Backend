@@ -632,30 +632,43 @@ export const getRealTimeItemTracking = async (
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const formattedResult = result.map((item) => {
-    const date = new Date(item.actual_in_at ?? new Date());
-    const isToday = date >= today;
+const formattedResult = result.map((item) => {
+  const date = new Date(item.actual_in_at ?? new Date());
 
-    const formattedDate = isToday
-      ? date.toLocaleTimeString("en-IN", {
-          hour: "numeric",
-          minute: "2-digit",
-          hour12: true,
-        })
-      : date.toLocaleString("en-IN", {
-          day: "numeric",
-          month: "short",
-          year: "2-digit",
-          hour: "numeric",
-          minute: "2-digit",
-          hour12: true,
-        });
+  const today = new Date();
+  const todayIST = new Date(
+    today.toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  );
+  todayIST.setHours(0, 0, 0, 0);
 
-    return {
-      ...item,
-      actual_in_at_formatted: formattedDate,
-    };
-  });
+  const dateIST = new Date(
+    date.toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  );
+
+  const isToday = dateIST >= todayIST;
+
+  const formattedDate = isToday
+    ? date.toLocaleTimeString("en-IN", {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+        timeZone: "Asia/Kolkata", 
+      })
+    : date.toLocaleString("en-IN", {
+        day: "numeric",
+        month: "short",
+        year: "2-digit",
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+        timeZone: "Asia/Kolkata", 
+      });
+
+  return {
+    ...item,
+    actual_in_at_formatted: formattedDate,
+  };
+});
 
   return formattedResult;
 };
