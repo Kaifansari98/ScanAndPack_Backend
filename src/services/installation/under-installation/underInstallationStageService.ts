@@ -3788,6 +3788,7 @@ export class UnderInstallationStageService {
       return {
         row_type: "misc" as const,
         row_id: entry.id,
+        lead_id: entry.lead_id,
         lead_code: entry.lead.lead_code,
         client_name: `${entry.lead.firstname} ${entry.lead.lastname}`.trim(),
         franchise_store: entry.lead.franchise?.franchise_name ?? null,
@@ -3810,6 +3811,7 @@ export class UnderInstallationStageService {
     const issueRows = issueLogs.map((entry) => ({
       row_type: "issue" as const,
       row_id: entry.id,
+      lead_id: entry.lead_id,
       lead_code: entry.lead.lead_code,
       client_name: `${entry.lead.firstname} ${entry.lead.lastname}`.trim(),
       franchise_store: entry.lead.franchise?.franchise_name ?? null,
