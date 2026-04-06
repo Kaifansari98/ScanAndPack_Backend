@@ -6,6 +6,10 @@ import {
   fetchMiscTypes,
   removeMiscTeam,
   removeMiscType,
+  updateMiscTeam,
+  updateMiscTeamStatus,
+  updateMiscType,
+  updateMiscTypeStatus,
   getPendingMiscellaneousLeads as getPendingMiscellaneousLeadsService,
   getPendingMiscellaneousLeadCountService
 } from "../../services/leadModuleServices/miscellaneousMaster.service";
@@ -79,6 +83,53 @@ export const deleteMiscType = async (req: Request, res: Response) => {
   }
 };
 
+export const editMiscType = async (req: Request, res: Response) => {
+  console.log("[CONTROLLER] editMiscType called", {
+    params: req.params,
+    body: req.body,
+  });
+
+  try {
+    const id = Number(getParam(req.params.id));
+    const name = String(req.body?.name ?? "").trim();
+
+    if (!id) return res.status(400).json({ error: "id is required" });
+    if (!name) return res.status(400).json({ error: "name is required" });
+
+    const data = await updateMiscType(id, name);
+    return res.status(200).json({ success: true, data });
+  } catch (error: any) {
+    console.error("[CONTROLLER] Error editing misc type", error.message);
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const toggleMiscTypeStatus = async (req: Request, res: Response) => {
+  console.log("[CONTROLLER] toggleMiscTypeStatus called", {
+    params: req.params,
+    body: req.body,
+  });
+
+  try {
+    const id = Number(getParam(req.params.id));
+    const status = String(req.body?.status ?? "").toLowerCase();
+
+    if (!id) return res.status(400).json({ error: "id is required" });
+    if (!status) return res.status(400).json({ error: "status is required" });
+    if (!["active", "inactive"].includes(status)) {
+      return res.status(400).json({
+        error: "status must be either 'active' or 'inactive'",
+      });
+    }
+
+    const data = await updateMiscTypeStatus(id, status as "active" | "inactive");
+    return res.status(200).json({ success: true, data });
+  } catch (error: any) {
+    console.error("[CONTROLLER] Error updating misc type status", error.message);
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
 /* -------------------------- Miscellaneous Team Master -------------------------- */
 
 // CREATE Team
@@ -134,6 +185,53 @@ export const deleteMiscTeam = async (req: Request, res: Response) => {
       .json({ success: true, message: "Team deleted successfully" });
   } catch (error: any) {
     console.error("[CONTROLLER] Error deleting misc team", error.message);
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const editMiscTeam = async (req: Request, res: Response) => {
+  console.log("[CONTROLLER] editMiscTeam called", {
+    params: req.params,
+    body: req.body,
+  });
+
+  try {
+    const id = Number(getParam(req.params.id));
+    const name = String(req.body?.name ?? "").trim();
+
+    if (!id) return res.status(400).json({ error: "id is required" });
+    if (!name) return res.status(400).json({ error: "name is required" });
+
+    const data = await updateMiscTeam(id, name);
+    return res.status(200).json({ success: true, data });
+  } catch (error: any) {
+    console.error("[CONTROLLER] Error editing misc team", error.message);
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const toggleMiscTeamStatus = async (req: Request, res: Response) => {
+  console.log("[CONTROLLER] toggleMiscTeamStatus called", {
+    params: req.params,
+    body: req.body,
+  });
+
+  try {
+    const id = Number(getParam(req.params.id));
+    const status = String(req.body?.status ?? "").toLowerCase();
+
+    if (!id) return res.status(400).json({ error: "id is required" });
+    if (!status) return res.status(400).json({ error: "status is required" });
+    if (!["active", "inactive"].includes(status)) {
+      return res.status(400).json({
+        error: "status must be either 'active' or 'inactive'",
+      });
+    }
+
+    const data = await updateMiscTeamStatus(id, status as "active" | "inactive");
+    return res.status(200).json({ success: true, data });
+  } catch (error: any) {
+    console.error("[CONTROLLER] Error updating misc team status", error.message);
     return res.status(500).json({ success: false, error: error.message });
   }
 };

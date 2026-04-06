@@ -186,6 +186,24 @@ export class CompanyVendorsService {
     return vendors;
   }
 
+  async getCompanyVendorsByVendorIdForMaster(vendorId: number) {
+    if (!vendorId) {
+      const error = new Error("vendor_id is required");
+      (error as any).statusCode = 400;
+      throw error;
+    }
+
+    return prisma.companyVendorsMaster.findMany({
+      where: { vendor_id: vendorId },
+      orderBy: { created_at: "desc" },
+      include: {
+        vendor: {
+          select: { vendor_name: true, vendor_code: true },
+        },
+      },
+    });
+  }
+
   async updateCompanyVendor(
     vendorId: number,
     companyVendorId: number,
@@ -292,5 +310,49 @@ export class CompanyVendorsService {
     });
 
     return deletedVendor;
+  }
+
+  async toggleCompanyVendorStatus(
+    vendorId: number,
+    companyVendorId: number,
+    updatedBy: number,
+    isDeleted: boolean
+  ) {
+    const missingFields: string[] = [];
+    if (!vendorId) missingFields.push("vendor_id");
+    if (!companyVendorId) missingFields.push("company_vendor_id");
+    if (!updatedBy) missingFields.push("updated_by");
+
+    if (missingFields.length > 0) {
+      const error = new Error(
+        `Missing required field(s): ${missingFields.join(", ")}`
+      );
+      (error as any).statusCode = 400;
+      throw error;
+    }
+
+    const existingVendor = await prisma.companyVendorsMaster.findFirst({
+      where: {
+        id: companyVendorId,
+        vendor_id: vendorId,
+      },
+    });
+
+    if (!existingVendor) {
+      const error = new Error("Company vendor not found for this vendor_id");
+      (error as any).statusCode = 404;
+      throw error;
+    }
+
+    return prisma.companyVendorsMaster.update({
+      where: { id: companyVendorId },
+      data: {
+        is_deleted: isDeleted,
+        deleted_by: isDeleted ? updatedBy : null,
+        deleted_at: isDeleted ? new Date() : null,
+        updated_by: updatedBy,
+        updated_at: new Date(),
+      },
+    });
   }
 }

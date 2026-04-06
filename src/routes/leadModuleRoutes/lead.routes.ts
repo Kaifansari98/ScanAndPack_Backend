@@ -7,12 +7,15 @@ import {
 } from "../../controllers/leadModuleControllers/productType.controller";
 import {
   createSiteType,
+  editSiteType,
   fetchAllSiteTypes,
+  fetchAllSiteTypesForMaster,
   removeSiteType,
   toggleSiteTypeStatus,
 } from "../../controllers/leadModuleControllers/siteType.controller";
 import {
   createSourceType,
+  editSourceType,
   fetchAllSourceTypes,
   removeSourceType,
   toggleSourceTypeStatus,
@@ -58,7 +61,9 @@ leadsRouter.get("/get-all-product-types/:vendor_id", fetchAllProductTypes);
 leadsRouter.delete("/delete-product-type/:id", removeProductType);
 leadsRouter.patch("/update-product-type-status/:id", toggleProductTypeStatus);
 leadsRouter.get("/get-all-site-types/:vendor_id", fetchAllSiteTypes);
+leadsRouter.get("/get-all-site-types-master/:vendor_id", fetchAllSiteTypesForMaster);
 leadsRouter.delete("/delete-site-type/:id", removeSiteType);
+leadsRouter.patch("/update-site-type/:id", editSiteType);
 leadsRouter.patch("/update-site-type-status/:id", toggleSiteTypeStatus);
 leadsRouter.get(
   "/get-all-productStructure-types/:vendor_id",
@@ -74,6 +79,7 @@ leadsRouter.delete(
 );
 leadsRouter.get("/get-all-source-types/:vendor_id", fetchAllSourceTypes);
 leadsRouter.delete("/delete-source-type/:id", removeSourceType);
+leadsRouter.patch("/update-source-type/:id", editSourceType);
 leadsRouter.patch("/update-source-type-status/:id", toggleSourceTypeStatus);
 leadsRouter.delete("/delete-document-type/:id", removeDocumentType);
 leadsRouter.delete("/delete-status-type/:id", removeStatusType);

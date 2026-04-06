@@ -7977,6 +7977,7 @@ export const MiscellaneousTypeMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   name: 'name',
+  status: 'status',
   created_by: 'created_by',
   created_at: 'created_at'
 } as const
@@ -7988,6 +7989,7 @@ export const MiscellaneousTeamMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   name: 'name',
+  status: 'status',
   created_by: 'created_by',
   created_at: 'created_at'
 } as const
@@ -8034,6 +8036,7 @@ export const IssueLogTypeMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   name: 'name',
+  status: 'status',
   created_by: 'created_by',
   created_at: 'created_at'
 } as const

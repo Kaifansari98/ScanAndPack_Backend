@@ -54,3 +54,36 @@ export const removeIssueType = async (id: number) => {
 
   return true;
 };
+
+export const updateIssueType = async (id: number, name: string) => {
+  console.log("[SERVICE] updateIssueType", { id, name });
+
+  const existing = await prisma.issueLogTypeMaster.findUnique({
+    where: { id },
+  });
+
+  if (!existing) throw new Error("Issue Type not found");
+
+  return prisma.issueLogTypeMaster.update({
+    where: { id },
+    data: { name },
+  });
+};
+
+export const updateIssueTypeStatus = async (
+  id: number,
+  status: "active" | "inactive",
+) => {
+  console.log("[SERVICE] updateIssueTypeStatus", { id, status });
+
+  const existing = await prisma.issueLogTypeMaster.findUnique({
+    where: { id },
+  });
+
+  if (!existing) throw new Error("Issue Type not found");
+
+  return prisma.issueLogTypeMaster.update({
+    where: { id },
+    data: { status },
+  });
+};

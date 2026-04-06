@@ -70,6 +70,80 @@ export const getAllInstallerUsers = async (vendor_id: number) => {
   return installers;
 };
 
+export const getAllInstallerUsersForMaster = async (vendor_id: number) => {
+  console.log("[SERVICE] getAllInstallerUsersForMaster called", { vendor_id });
+
+  const vendor = await prisma.vendorMaster.findUnique({
+    where: { id: vendor_id },
+  });
+
+  if (!vendor) {
+    console.error("[SERVICE] Vendor not found", { vendor_id });
+    throw new Error("Invalid vendor_id");
+  }
+
+  const installers = await prisma.installerUserMaster.findMany({
+    where: { vendor_id },
+    include: {
+      createdBy: {
+        select: { id: true, user_name: true },
+      },
+    },
+    orderBy: { created_at: "desc" },
+  });
+
+  console.log("[SERVICE] Found installers for master", { count: installers.length });
+  return installers;
+};
+
+export const updateInstallerUser = async (
+  id: number,
+  payload: {
+    installer_name: string;
+    contact_number?: string;
+  },
+) => {
+  console.log("[SERVICE] updateInstallerUser called", { id, payload });
+
+  const existing = await prisma.installerUserMaster.findUnique({ where: { id } });
+  if (!existing) {
+    console.error("[SERVICE] InstallerUser not found for update", { id });
+    throw new Error("Installer user not found");
+  }
+
+  const installerUser = await prisma.installerUserMaster.update({
+    where: { id },
+    data: {
+      installer_name: payload.installer_name,
+      contact_number: payload.contact_number,
+    },
+  });
+
+  console.log("[SERVICE] InstallerUser updated successfully", installerUser);
+  return installerUser;
+};
+
+export const updateInstallerUserStatus = async (
+  id: number,
+  status: "active" | "inactive",
+) => {
+  console.log("[SERVICE] updateInstallerUserStatus called", { id, status });
+
+  const existing = await prisma.installerUserMaster.findUnique({ where: { id } });
+  if (!existing) {
+    console.error("[SERVICE] InstallerUser not found for status update", { id });
+    throw new Error("Installer user not found");
+  }
+
+  const installerUser = await prisma.installerUserMaster.update({
+    where: { id },
+    data: { status },
+  });
+
+  console.log("[SERVICE] InstallerUser status updated successfully", installerUser);
+  return installerUser;
+};
+
 export const deleteInstallerUser = async (id: number): Promise<boolean> => {
   console.log("[SERVICE] deleteInstallerUser called", { id });
 

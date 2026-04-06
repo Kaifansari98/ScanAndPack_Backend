@@ -42,6 +42,7 @@ export type IssueLogTypeMasterMinAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   name: string | null
+  status: string | null
   created_by: number | null
   created_at: Date | null
 }
@@ -50,6 +51,7 @@ export type IssueLogTypeMasterMaxAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   name: string | null
+  status: string | null
   created_by: number | null
   created_at: Date | null
 }
@@ -58,6 +60,7 @@ export type IssueLogTypeMasterCountAggregateOutputType = {
   id: number
   vendor_id: number
   name: number
+  status: number
   created_by: number
   created_at: number
   _all: number
@@ -80,6 +83,7 @@ export type IssueLogTypeMasterMinAggregateInputType = {
   id?: true
   vendor_id?: true
   name?: true
+  status?: true
   created_by?: true
   created_at?: true
 }
@@ -88,6 +92,7 @@ export type IssueLogTypeMasterMaxAggregateInputType = {
   id?: true
   vendor_id?: true
   name?: true
+  status?: true
   created_by?: true
   created_at?: true
 }
@@ -96,6 +101,7 @@ export type IssueLogTypeMasterCountAggregateInputType = {
   id?: true
   vendor_id?: true
   name?: true
+  status?: true
   created_by?: true
   created_at?: true
   _all?: true
@@ -191,6 +197,7 @@ export type IssueLogTypeMasterGroupByOutputType = {
   id: number
   vendor_id: number
   name: string
+  status: string
   created_by: number
   created_at: Date
   _count: IssueLogTypeMasterCountAggregateOutputType | null
@@ -222,6 +229,7 @@ export type IssueLogTypeMasterWhereInput = {
   id?: Prisma.IntFilter<"IssueLogTypeMaster"> | number
   vendor_id?: Prisma.IntFilter<"IssueLogTypeMaster"> | number
   name?: Prisma.StringFilter<"IssueLogTypeMaster"> | string
+  status?: Prisma.StringFilter<"IssueLogTypeMaster"> | string
   created_by?: Prisma.IntFilter<"IssueLogTypeMaster"> | number
   created_at?: Prisma.DateTimeFilter<"IssueLogTypeMaster"> | Date | string
   issueTypeMappings?: Prisma.IssueLogTypeMappingListRelationFilter
@@ -232,6 +240,7 @@ export type IssueLogTypeMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   issueTypeMappings?: Prisma.IssueLogTypeMappingOrderByRelationAggregateInput
@@ -245,6 +254,7 @@ export type IssueLogTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.IssueLogTypeMasterWhereInput | Prisma.IssueLogTypeMasterWhereInput[]
   vendor_id?: Prisma.IntFilter<"IssueLogTypeMaster"> | number
   name?: Prisma.StringFilter<"IssueLogTypeMaster"> | string
+  status?: Prisma.StringFilter<"IssueLogTypeMaster"> | string
   created_by?: Prisma.IntFilter<"IssueLogTypeMaster"> | number
   created_at?: Prisma.DateTimeFilter<"IssueLogTypeMaster"> | Date | string
   issueTypeMappings?: Prisma.IssueLogTypeMappingListRelationFilter
@@ -255,6 +265,7 @@ export type IssueLogTypeMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   _count?: Prisma.IssueLogTypeMasterCountOrderByAggregateInput
@@ -271,12 +282,14 @@ export type IssueLogTypeMasterScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"IssueLogTypeMaster"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"IssueLogTypeMaster"> | number
   name?: Prisma.StringWithAggregatesFilter<"IssueLogTypeMaster"> | string
+  status?: Prisma.StringWithAggregatesFilter<"IssueLogTypeMaster"> | string
   created_by?: Prisma.IntWithAggregatesFilter<"IssueLogTypeMaster"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"IssueLogTypeMaster"> | Date | string
 }
 
 export type IssueLogTypeMasterCreateInput = {
   name: string
+  status?: string
   created_by: number
   created_at?: Date | string
   issueTypeMappings?: Prisma.IssueLogTypeMappingCreateNestedManyWithoutTypeInput
@@ -287,6 +300,7 @@ export type IssueLogTypeMasterUncheckedCreateInput = {
   id?: number
   vendor_id: number
   name: string
+  status?: string
   created_by: number
   created_at?: Date | string
   issueTypeMappings?: Prisma.IssueLogTypeMappingUncheckedCreateNestedManyWithoutTypeInput
@@ -294,6 +308,7 @@ export type IssueLogTypeMasterUncheckedCreateInput = {
 
 export type IssueLogTypeMasterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueTypeMappings?: Prisma.IssueLogTypeMappingUpdateManyWithoutTypeNestedInput
@@ -304,6 +319,7 @@ export type IssueLogTypeMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueTypeMappings?: Prisma.IssueLogTypeMappingUncheckedUpdateManyWithoutTypeNestedInput
@@ -313,12 +329,14 @@ export type IssueLogTypeMasterCreateManyInput = {
   id?: number
   vendor_id: number
   name: string
+  status?: string
   created_by: number
   created_at?: Date | string
 }
 
 export type IssueLogTypeMasterUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -327,6 +345,7 @@ export type IssueLogTypeMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -345,6 +364,7 @@ export type IssueLogTypeMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
@@ -359,6 +379,7 @@ export type IssueLogTypeMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
@@ -367,6 +388,7 @@ export type IssueLogTypeMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
@@ -440,6 +462,7 @@ export type IssueLogTypeMasterUpdateOneRequiredWithoutIssueTypeMappingsNestedInp
 
 export type IssueLogTypeMasterCreateWithoutVendorInput = {
   name: string
+  status?: string
   created_by: number
   created_at?: Date | string
   issueTypeMappings?: Prisma.IssueLogTypeMappingCreateNestedManyWithoutTypeInput
@@ -448,6 +471,7 @@ export type IssueLogTypeMasterCreateWithoutVendorInput = {
 export type IssueLogTypeMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   name: string
+  status?: string
   created_by: number
   created_at?: Date | string
   issueTypeMappings?: Prisma.IssueLogTypeMappingUncheckedCreateNestedManyWithoutTypeInput
@@ -486,12 +510,14 @@ export type IssueLogTypeMasterScalarWhereInput = {
   id?: Prisma.IntFilter<"IssueLogTypeMaster"> | number
   vendor_id?: Prisma.IntFilter<"IssueLogTypeMaster"> | number
   name?: Prisma.StringFilter<"IssueLogTypeMaster"> | string
+  status?: Prisma.StringFilter<"IssueLogTypeMaster"> | string
   created_by?: Prisma.IntFilter<"IssueLogTypeMaster"> | number
   created_at?: Prisma.DateTimeFilter<"IssueLogTypeMaster"> | Date | string
 }
 
 export type IssueLogTypeMasterCreateWithoutIssueTypeMappingsInput = {
   name: string
+  status?: string
   created_by: number
   created_at?: Date | string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutIssueLogTypeMasterInput
@@ -501,6 +527,7 @@ export type IssueLogTypeMasterUncheckedCreateWithoutIssueTypeMappingsInput = {
   id?: number
   vendor_id: number
   name: string
+  status?: string
   created_by: number
   created_at?: Date | string
 }
@@ -523,6 +550,7 @@ export type IssueLogTypeMasterUpdateToOneWithWhereWithoutIssueTypeMappingsInput 
 
 export type IssueLogTypeMasterUpdateWithoutIssueTypeMappingsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutIssueLogTypeMasterNestedInput
@@ -532,6 +560,7 @@ export type IssueLogTypeMasterUncheckedUpdateWithoutIssueTypeMappingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -539,12 +568,14 @@ export type IssueLogTypeMasterUncheckedUpdateWithoutIssueTypeMappingsInput = {
 export type IssueLogTypeMasterCreateManyVendorInput = {
   id?: number
   name: string
+  status?: string
   created_by: number
   created_at?: Date | string
 }
 
 export type IssueLogTypeMasterUpdateWithoutVendorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueTypeMappings?: Prisma.IssueLogTypeMappingUpdateManyWithoutTypeNestedInput
@@ -553,6 +584,7 @@ export type IssueLogTypeMasterUpdateWithoutVendorInput = {
 export type IssueLogTypeMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueTypeMappings?: Prisma.IssueLogTypeMappingUncheckedUpdateManyWithoutTypeNestedInput
@@ -561,6 +593,7 @@ export type IssueLogTypeMasterUncheckedUpdateWithoutVendorInput = {
 export type IssueLogTypeMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -600,6 +633,7 @@ export type IssueLogTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.In
   id?: boolean
   vendor_id?: boolean
   name?: boolean
+  status?: boolean
   created_by?: boolean
   created_at?: boolean
   issueTypeMappings?: boolean | Prisma.IssueLogTypeMaster$issueTypeMappingsArgs<ExtArgs>
@@ -611,6 +645,7 @@ export type IssueLogTypeMasterSelectCreateManyAndReturn<ExtArgs extends runtime.
   id?: boolean
   vendor_id?: boolean
   name?: boolean
+  status?: boolean
   created_by?: boolean
   created_at?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -620,6 +655,7 @@ export type IssueLogTypeMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.
   id?: boolean
   vendor_id?: boolean
   name?: boolean
+  status?: boolean
   created_by?: boolean
   created_at?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -629,11 +665,12 @@ export type IssueLogTypeMasterSelectScalar = {
   id?: boolean
   vendor_id?: boolean
   name?: boolean
+  status?: boolean
   created_by?: boolean
   created_at?: boolean
 }
 
-export type IssueLogTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "name" | "created_by" | "created_at", ExtArgs["result"]["issueLogTypeMaster"]>
+export type IssueLogTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "name" | "status" | "created_by" | "created_at", ExtArgs["result"]["issueLogTypeMaster"]>
 export type IssueLogTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   issueTypeMappings?: boolean | Prisma.IssueLogTypeMaster$issueTypeMappingsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -656,6 +693,7 @@ export type $IssueLogTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.
     id: number
     vendor_id: number
     name: string
+    status: string
     created_by: number
     created_at: Date
   }, ExtArgs["result"]["issueLogTypeMaster"]>
@@ -1086,6 +1124,7 @@ export interface IssueLogTypeMasterFieldRefs {
   readonly id: Prisma.FieldRef<"IssueLogTypeMaster", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"IssueLogTypeMaster", 'Int'>
   readonly name: Prisma.FieldRef<"IssueLogTypeMaster", 'String'>
+  readonly status: Prisma.FieldRef<"IssueLogTypeMaster", 'String'>
   readonly created_by: Prisma.FieldRef<"IssueLogTypeMaster", 'Int'>
   readonly created_at: Prisma.FieldRef<"IssueLogTypeMaster", 'DateTime'>
 }

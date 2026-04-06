@@ -18,6 +18,10 @@ export interface SiteTypeInput {
     type: string;
 }
 
+export interface UpdateSiteTypeInput {
+    type: string;
+}
+
 export interface SiteType{
     id: number;
     type: string;
@@ -27,6 +31,10 @@ export interface SiteType{
 
 export interface SourceTypeInput {
     vendor_id: number;
+    type: string;
+}
+
+export interface UpdateSourceTypeInput {
     type: string;
 }
 

@@ -3,6 +3,8 @@ import {
   addIssueType,
   fetchIssueTypes,
   removeIssueType,
+  updateIssueType,
+  updateIssueTypeStatus,
 } from "../../services/leadModuleServices/issueType.service";
 
 const getParam = (param: string | string[] | undefined): string | undefined =>
@@ -65,6 +67,56 @@ export const deleteIssueType = async (req: Request, res: Response) => {
       .json({ success: true, message: "Issue type deleted successfully" });
   } catch (error: any) {
     console.error("[CONTROLLER] Error deleting issue type", error.message);
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const editIssueType = async (req: Request, res: Response) => {
+  console.log("[CONTROLLER] editIssueType called", {
+    params: req.params,
+    body: req.body,
+  });
+
+  try {
+    const id = Number(getParam(req.params.id));
+    const name = String(req.body?.name ?? "").trim();
+
+    if (!id) return res.status(400).json({ success: false, error: "id is required" });
+    if (!name) return res.status(400).json({ success: false, error: "name is required" });
+
+    const data = await updateIssueType(id, name);
+    return res.status(200).json({ success: true, data });
+  } catch (error: any) {
+    console.error("[CONTROLLER] Error editing issue type", error.message);
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const toggleIssueTypeStatus = async (req: Request, res: Response) => {
+  console.log("[CONTROLLER] toggleIssueTypeStatus called", {
+    params: req.params,
+    body: req.body,
+  });
+
+  try {
+    const id = Number(getParam(req.params.id));
+    const status = String(req.body?.status ?? "").toLowerCase();
+
+    if (!id) return res.status(400).json({ success: false, error: "id is required" });
+    if (!status) {
+      return res.status(400).json({ success: false, error: "status is required" });
+    }
+    if (!["active", "inactive"].includes(status)) {
+      return res.status(400).json({
+        success: false,
+        error: "status must be either 'active' or 'inactive'",
+      });
+    }
+
+    const data = await updateIssueTypeStatus(id, status as "active" | "inactive");
+    return res.status(200).json({ success: true, data });
+  } catch (error: any) {
+    console.error("[CONTROLLER] Error updating issue type status", error.message);
     return res.status(500).json({ success: false, error: error.message });
   }
 };

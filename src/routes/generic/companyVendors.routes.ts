@@ -25,6 +25,10 @@ companyVendorsRoutes.get(
   "/vendorId/:vendorId",
   controller.getCompanyVendorsByVendorId
 );
+companyVendorsRoutes.get(
+  "/vendorId/:vendorId/master",
+  controller.getCompanyVendorsByVendorIdForMaster
+);
 
 // ✅ Update company vendor details by vendor_id and company_vendor_id
 companyVendorsRoutes.put(
@@ -38,6 +42,11 @@ companyVendorsRoutes.delete(
   "/vendorId/:vendorId/companyVendorId/:companyVendorId/delete",
   upload.none(),
   controller.softDeleteCompanyVendor
+);
+companyVendorsRoutes.patch(
+  "/vendorId/:vendorId/companyVendorId/:companyVendorId/status",
+  upload.none(),
+  controller.toggleCompanyVendorStatus
 );
 
 export default companyVendorsRoutes;

@@ -51,6 +51,37 @@ export const removeMiscType = async (id: number) => {
   return true;
 };
 
+export const updateMiscType = async (id: number, name: string) => {
+  console.log("[SERVICE] updateMiscType", { id, name });
+
+  const existing = await prisma.miscellaneousTypeMaster.findUnique({
+    where: { id },
+  });
+  if (!existing) throw new Error("Misc Type not found");
+
+  return prisma.miscellaneousTypeMaster.update({
+    where: { id },
+    data: { name },
+  });
+};
+
+export const updateMiscTypeStatus = async (
+  id: number,
+  status: "active" | "inactive",
+) => {
+  console.log("[SERVICE] updateMiscTypeStatus", { id, status });
+
+  const existing = await prisma.miscellaneousTypeMaster.findUnique({
+    where: { id },
+  });
+  if (!existing) throw new Error("Misc Type not found");
+
+  return prisma.miscellaneousTypeMaster.update({
+    where: { id },
+    data: { status },
+  });
+};
+
 /* ------------------------------ Team Master ------------------------------ */
 
 export const addMiscTeam = async (payload: {
@@ -98,6 +129,37 @@ export const removeMiscTeam = async (id: number) => {
 
   await prisma.miscellaneousTeamMaster.delete({ where: { id } });
   return true;
+};
+
+export const updateMiscTeam = async (id: number, name: string) => {
+  console.log("[SERVICE] updateMiscTeam", { id, name });
+
+  const existing = await prisma.miscellaneousTeamMaster.findUnique({
+    where: { id },
+  });
+  if (!existing) throw new Error("Team not found");
+
+  return prisma.miscellaneousTeamMaster.update({
+    where: { id },
+    data: { name },
+  });
+};
+
+export const updateMiscTeamStatus = async (
+  id: number,
+  status: "active" | "inactive",
+) => {
+  console.log("[SERVICE] updateMiscTeamStatus", { id, status });
+
+  const existing = await prisma.miscellaneousTeamMaster.findUnique({
+    where: { id },
+  });
+  if (!existing) throw new Error("Team not found");
+
+  return prisma.miscellaneousTeamMaster.update({
+    where: { id },
+    data: { status },
+  });
 };
 
 export const getPendingMiscellaneousLeads = async (
