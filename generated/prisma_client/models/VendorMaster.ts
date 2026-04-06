@@ -40,6 +40,7 @@ export type VendorMasterMinAggregateOutputType = {
   id: number | null
   vendor_name: string | null
   vendor_code: string | null
+  vendor_report_code: string | null
   primary_contact_number: string | null
   primary_contact_email: string | null
   primary_contact_name: string | null
@@ -56,6 +57,7 @@ export type VendorMasterMaxAggregateOutputType = {
   id: number | null
   vendor_name: string | null
   vendor_code: string | null
+  vendor_report_code: string | null
   primary_contact_number: string | null
   primary_contact_email: string | null
   primary_contact_name: string | null
@@ -72,6 +74,7 @@ export type VendorMasterCountAggregateOutputType = {
   id: number
   vendor_name: number
   vendor_code: number
+  vendor_report_code: number
   primary_contact_number: number
   primary_contact_email: number
   primary_contact_name: number
@@ -100,6 +103,7 @@ export type VendorMasterMinAggregateInputType = {
   id?: true
   vendor_name?: true
   vendor_code?: true
+  vendor_report_code?: true
   primary_contact_number?: true
   primary_contact_email?: true
   primary_contact_name?: true
@@ -116,6 +120,7 @@ export type VendorMasterMaxAggregateInputType = {
   id?: true
   vendor_name?: true
   vendor_code?: true
+  vendor_report_code?: true
   primary_contact_number?: true
   primary_contact_email?: true
   primary_contact_name?: true
@@ -132,6 +137,7 @@ export type VendorMasterCountAggregateInputType = {
   id?: true
   vendor_name?: true
   vendor_code?: true
+  vendor_report_code?: true
   primary_contact_number?: true
   primary_contact_email?: true
   primary_contact_name?: true
@@ -235,6 +241,7 @@ export type VendorMasterGroupByOutputType = {
   id: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -274,6 +281,7 @@ export type VendorMasterWhereInput = {
   id?: Prisma.IntFilter<"VendorMaster"> | number
   vendor_name?: Prisma.StringFilter<"VendorMaster"> | string
   vendor_code?: Prisma.StringFilter<"VendorMaster"> | string
+  vendor_report_code?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   primary_contact_number?: Prisma.StringFilter<"VendorMaster"> | string
   primary_contact_email?: Prisma.StringFilter<"VendorMaster"> | string
   primary_contact_name?: Prisma.StringFilter<"VendorMaster"> | string
@@ -353,6 +361,7 @@ export type VendorMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vendor_name?: Prisma.SortOrder
   vendor_code?: Prisma.SortOrder
+  vendor_report_code?: Prisma.SortOrderInput | Prisma.SortOrder
   primary_contact_number?: Prisma.SortOrder
   primary_contact_email?: Prisma.SortOrder
   primary_contact_name?: Prisma.SortOrder
@@ -435,6 +444,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.VendorMasterWhereInput | Prisma.VendorMasterWhereInput[]
   vendor_name?: Prisma.StringFilter<"VendorMaster"> | string
   vendor_code?: Prisma.StringFilter<"VendorMaster"> | string
+  vendor_report_code?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   primary_contact_number?: Prisma.StringFilter<"VendorMaster"> | string
   primary_contact_email?: Prisma.StringFilter<"VendorMaster"> | string
   primary_contact_name?: Prisma.StringFilter<"VendorMaster"> | string
@@ -514,6 +524,7 @@ export type VendorMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vendor_name?: Prisma.SortOrder
   vendor_code?: Prisma.SortOrder
+  vendor_report_code?: Prisma.SortOrderInput | Prisma.SortOrder
   primary_contact_number?: Prisma.SortOrder
   primary_contact_email?: Prisma.SortOrder
   primary_contact_name?: Prisma.SortOrder
@@ -538,6 +549,7 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"VendorMaster"> | number
   vendor_name?: Prisma.StringWithAggregatesFilter<"VendorMaster"> | string
   vendor_code?: Prisma.StringWithAggregatesFilter<"VendorMaster"> | string
+  vendor_report_code?: Prisma.StringNullableWithAggregatesFilter<"VendorMaster"> | string | null
   primary_contact_number?: Prisma.StringWithAggregatesFilter<"VendorMaster"> | string
   primary_contact_email?: Prisma.StringWithAggregatesFilter<"VendorMaster"> | string
   primary_contact_name?: Prisma.StringWithAggregatesFilter<"VendorMaster"> | string
@@ -553,6 +565,7 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
 export type VendorMasterCreateInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -632,6 +645,7 @@ export type VendorMasterUncheckedCreateInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -710,6 +724,7 @@ export type VendorMasterUncheckedCreateInput = {
 export type VendorMasterUpdateInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -789,6 +804,7 @@ export type VendorMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -868,6 +884,7 @@ export type VendorMasterCreateManyInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -883,6 +900,7 @@ export type VendorMasterCreateManyInput = {
 export type VendorMasterUpdateManyMutationInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -899,6 +917,7 @@ export type VendorMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -915,6 +934,7 @@ export type VendorMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_name?: Prisma.SortOrder
   vendor_code?: Prisma.SortOrder
+  vendor_report_code?: Prisma.SortOrder
   primary_contact_number?: Prisma.SortOrder
   primary_contact_email?: Prisma.SortOrder
   primary_contact_name?: Prisma.SortOrder
@@ -936,6 +956,7 @@ export type VendorMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_name?: Prisma.SortOrder
   vendor_code?: Prisma.SortOrder
+  vendor_report_code?: Prisma.SortOrder
   primary_contact_number?: Prisma.SortOrder
   primary_contact_email?: Prisma.SortOrder
   primary_contact_name?: Prisma.SortOrder
@@ -952,6 +973,7 @@ export type VendorMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_name?: Prisma.SortOrder
   vendor_code?: Prisma.SortOrder
+  vendor_report_code?: Prisma.SortOrder
   primary_contact_number?: Prisma.SortOrder
   primary_contact_email?: Prisma.SortOrder
   primary_contact_name?: Prisma.SortOrder
@@ -981,6 +1003,10 @@ export type VendorMasterNullableScalarRelationFilter = {
 
 export type StringFieldUpdateOperationsInput = {
   set?: string
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type NullableIntFieldUpdateOperationsInput = {
@@ -1890,6 +1916,7 @@ export type VendorMasterUpdateOneRequiredWithoutThemesNestedInput = {
 export type VendorMasterCreateWithoutAddressesInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -1968,6 +1995,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -2061,6 +2089,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutAddressesInput = {
 export type VendorMasterUpdateWithoutAddressesInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2139,6 +2168,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2216,6 +2246,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
 export type VendorMasterCreateWithoutTaxInfoInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -2294,6 +2325,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -2387,6 +2419,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutTaxInfoInput = {
 export type VendorMasterUpdateWithoutTaxInfoInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2465,6 +2498,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2542,6 +2576,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
 export type VendorMasterCreateWithoutUsersInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -2620,6 +2655,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -2713,6 +2749,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutUsersInput = {
 export type VendorMasterUpdateWithoutUsersInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2791,6 +2828,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2868,6 +2906,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
 export type VendorMasterCreateWithoutProjectsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -2946,6 +2985,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -3039,6 +3079,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProjectsInput = {
 export type VendorMasterUpdateWithoutProjectsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3117,6 +3158,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3194,6 +3236,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
 export type VendorMasterCreateWithoutProjectDetailsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -3272,6 +3315,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -3365,6 +3409,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProjectDetailsInput = {
 export type VendorMasterUpdateWithoutProjectDetailsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3443,6 +3488,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3520,6 +3566,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
 export type VendorMasterCreateWithoutProjectItemsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -3598,6 +3645,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -3691,6 +3739,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProjectItemsInput = {
 export type VendorMasterUpdateWithoutProjectItemsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3769,6 +3818,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3846,6 +3896,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
 export type VendorMasterCreateWithoutBoxesInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -3924,6 +3975,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -4017,6 +4069,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutBoxesInput = {
 export type VendorMasterUpdateWithoutBoxesInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4095,6 +4148,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4172,6 +4226,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
 export type VendorMasterCreateWithoutScanItemsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -4250,6 +4305,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -4343,6 +4399,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutScanItemsInput = {
 export type VendorMasterUpdateWithoutScanItemsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4421,6 +4478,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4498,6 +4556,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
 export type VendorMasterCreateWithoutTokensInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -4576,6 +4635,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -4669,6 +4729,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutTokensInput = {
 export type VendorMasterUpdateWithoutTokensInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4747,6 +4808,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4824,6 +4886,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
 export type VendorMasterCreateWithoutLeadsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -4902,6 +4965,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -4995,6 +5059,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadsInput = {
 export type VendorMasterUpdateWithoutLeadsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5073,6 +5138,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5150,6 +5216,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
 export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -5228,6 +5295,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -5321,6 +5389,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadUserMappingsInput = {
 export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5399,6 +5468,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5476,6 +5546,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
 export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -5554,6 +5625,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -5647,6 +5719,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadActivityStatusLogInput = 
 export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5725,6 +5798,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5802,6 +5876,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
 export type VendorMasterCreateWithoutSiteTypesInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -5880,6 +5955,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -5973,6 +6049,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutSiteTypesInput = {
 export type VendorMasterUpdateWithoutSiteTypesInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -6051,6 +6128,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -6128,6 +6206,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
 export type VendorMasterCreateWithoutSourcesInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -6206,6 +6285,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -6299,6 +6379,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutSourcesInput = {
 export type VendorMasterUpdateWithoutSourcesInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -6377,6 +6458,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -6454,6 +6536,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
 export type VendorMasterCreateWithoutAccountsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -6532,6 +6615,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -6625,6 +6709,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutAccountsInput = {
 export type VendorMasterUpdateWithoutAccountsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -6703,6 +6788,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -6780,6 +6866,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
 export type VendorMasterCreateWithoutLeadProductMapsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -6858,6 +6945,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -6951,6 +7039,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadProductMapsInput = {
 export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -7029,6 +7118,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -7106,6 +7196,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
 export type VendorMasterCreateWithoutProductTypesInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -7184,6 +7275,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -7277,6 +7369,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProductTypesInput = {
 export type VendorMasterUpdateWithoutProductTypesInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -7355,6 +7448,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -7432,6 +7526,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
 export type VendorMasterCreateWithoutDocumentsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -7510,6 +7605,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -7603,6 +7699,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutDocumentsInput = {
 export type VendorMasterUpdateWithoutDocumentsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -7681,6 +7778,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -7758,6 +7856,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
 export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -7836,6 +7935,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -7929,6 +8029,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadChatRoomsInput = {
 export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -8007,6 +8108,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -8084,6 +8186,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
 export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -8162,6 +8265,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -8255,6 +8359,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadChatDocumentsInput = {
 export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -8333,6 +8438,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -8410,6 +8516,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
 export type VendorMasterCreateWithoutProductStructureInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -8488,6 +8595,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -8581,6 +8689,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProductStructureInput = {
 export type VendorMasterUpdateWithoutProductStructureInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -8659,6 +8768,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -8736,6 +8846,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
 export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -8814,6 +8925,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -8907,6 +9019,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadProductStructureMappingIn
 export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -8985,6 +9098,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -9062,6 +9176,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
 export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -9140,6 +9255,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -9233,6 +9349,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProductStructureInstancesInpu
 export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -9311,6 +9428,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -9388,6 +9506,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
 export type VendorMasterCreateWithoutPaymentsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -9466,6 +9585,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -9559,6 +9679,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutPaymentsInput = {
 export type VendorMasterUpdateWithoutPaymentsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -9637,6 +9758,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -9714,6 +9836,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
 export type VendorMasterCreateWithoutLedgersInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -9792,6 +9915,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -9885,6 +10009,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLedgersInput = {
 export type VendorMasterUpdateWithoutLedgersInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -9963,6 +10088,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -10040,6 +10166,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
 export type VendorMasterCreateWithoutDocumentTypesInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -10118,6 +10245,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -10211,6 +10339,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutDocumentTypesInput = {
 export type VendorMasterUpdateWithoutDocumentTypesInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -10289,6 +10418,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -10366,6 +10496,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
 export type VendorMasterCreateWithoutStatusTypesInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -10444,6 +10575,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -10537,6 +10669,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutStatusTypesInput = {
 export type VendorMasterUpdateWithoutStatusTypesInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -10615,6 +10748,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -10692,6 +10826,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
 export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -10770,6 +10905,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -10863,6 +10999,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadStatusLogsInput = {
 export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -10941,6 +11078,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -11018,6 +11156,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
 export type VendorMasterCreateWithoutDesignMeetingInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -11096,6 +11235,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -11189,6 +11329,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutDesignMeetingInput = {
 export type VendorMasterUpdateWithoutDesignMeetingInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -11267,6 +11408,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -11344,6 +11486,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
 export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -11422,6 +11565,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -11515,6 +11659,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutDesignMeetingDocsMappingInput
 export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -11593,6 +11738,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -11670,6 +11816,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
 export type VendorMasterCreateWithoutDesignSelectionInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -11748,6 +11895,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -11841,6 +11989,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutDesignSelectionInput = {
 export type VendorMasterUpdateWithoutDesignSelectionInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -11919,6 +12068,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -11996,6 +12146,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
 export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -12074,6 +12225,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -12167,6 +12319,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutPaymentTypeMasterInput = {
 export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -12245,6 +12398,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -12322,6 +12476,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
 export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -12400,6 +12555,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -12493,6 +12649,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutSiteSupervisorsInput = {
 export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -12571,6 +12728,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -12648,6 +12806,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
 export type VendorMasterCreateWithoutUserLeadTasksInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -12726,6 +12885,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -12819,6 +12979,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutUserLeadTasksInput = {
 export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -12897,6 +13058,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -12974,6 +13136,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
 export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -13052,6 +13215,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -13145,6 +13309,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadDetailedLogsInput = {
 export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -13223,6 +13388,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -13300,6 +13466,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
 export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -13378,6 +13545,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -13471,6 +13639,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadDocumentLogsInput = {
 export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -13549,6 +13718,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -13626,6 +13796,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
 export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -13704,6 +13875,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -13797,6 +13969,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutCompanyVendorsMasterInput = {
 export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -13875,6 +14048,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -13952,6 +14126,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
 export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -14030,6 +14205,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -14123,6 +14299,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutOrderLoginDetailsInput = {
 export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -14201,6 +14378,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -14278,6 +14456,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
 export type VendorMasterCreateWithoutSiteReadinessInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -14356,6 +14535,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -14449,6 +14629,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutSiteReadinessInput = {
 export type VendorMasterUpdateWithoutSiteReadinessInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -14527,6 +14708,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -14604,6 +14786,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
 export type VendorMasterCreateWithoutInstallersInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -14682,6 +14865,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -14775,6 +14959,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutInstallersInput = {
 export type VendorMasterUpdateWithoutInstallersInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -14853,6 +15038,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -14930,6 +15116,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
 export type VendorMasterCreateWithoutInstallerMappingsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -15008,6 +15195,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -15101,6 +15289,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutInstallerMappingsInput = {
 export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -15179,6 +15368,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -15256,6 +15446,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
 export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -15334,6 +15525,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -15427,6 +15619,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutInstallationUpdatesInput = {
 export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -15505,6 +15698,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -15582,6 +15776,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
 export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -15660,6 +15855,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -15753,6 +15949,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutInstallationUpdateDocsInput =
 export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -15831,6 +16028,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -15908,6 +16106,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
 export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -15986,6 +16185,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -16079,6 +16279,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutMiscellaneousMasterInput = {
 export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -16157,6 +16358,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -16234,6 +16436,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
 export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -16312,6 +16515,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -16405,6 +16609,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutMiscellaneousTypeMasterInput 
 export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -16483,6 +16688,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -16560,6 +16766,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
 export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -16638,6 +16845,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -16731,6 +16939,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutMiscellaneousTeamMasterInput 
 export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -16809,6 +17018,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -16886,6 +17096,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
 export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -16964,6 +17175,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -17057,6 +17269,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutMiscellaneousDocumentInput = 
 export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -17135,6 +17348,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -17212,6 +17426,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
 export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -17290,6 +17505,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -17383,6 +17599,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutInstallationIssueLogMasterInp
 export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -17461,6 +17678,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -17538,6 +17756,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
 export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -17616,6 +17835,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -17709,6 +17929,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutIssueLogTypeMasterInput = {
 export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -17787,6 +18008,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -17864,6 +18086,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
 export type VendorMasterCreateWithoutNotificationMastersInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -17942,6 +18165,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -18035,6 +18259,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutNotificationMastersInput = {
 export type VendorMasterUpdateWithoutNotificationMastersInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -18113,6 +18338,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -18190,6 +18416,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
 export type VendorMasterCreateWithoutNotificationsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -18268,6 +18495,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -18361,6 +18589,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutNotificationsInput = {
 export type VendorMasterUpdateWithoutNotificationsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -18439,6 +18668,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -18516,6 +18746,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
 export type VendorMasterCreateWithoutUserPushTokensInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -18594,6 +18825,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -18687,6 +18919,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutUserPushTokensInput = {
 export type VendorMasterUpdateWithoutUserPushTokensInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -18765,6 +18998,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -18842,6 +19076,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
 export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -18920,6 +19155,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -19013,6 +19249,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutVendorModulesMappingsInput = 
 export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -19091,6 +19328,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -19168,6 +19406,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
 export type VendorMasterCreateWithoutMachineMasterInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -19246,6 +19485,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -19339,6 +19579,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutMachineMasterInput = {
 export type VendorMasterUpdateWithoutMachineMasterInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -19417,6 +19658,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -19494,6 +19736,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
 export type VendorMasterCreateWithoutCutListInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -19572,6 +19815,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -19665,6 +19909,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutCutListInput = {
 export type VendorMasterUpdateWithoutCutListInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -19743,6 +19988,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -19820,6 +20066,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
 export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -19898,6 +20145,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -19991,6 +20239,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutCutListMachineMappingInput = 
 export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -20069,6 +20318,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -20146,6 +20396,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
 export type VendorMasterCreateWithoutUserMachineMappingInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -20224,6 +20475,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -20317,6 +20569,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutUserMachineMappingInput = {
 export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -20395,6 +20648,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -20472,6 +20726,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
 export type VendorMasterCreateWithoutVendorSettingInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -20550,6 +20805,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -20643,6 +20899,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutVendorSettingInput = {
 export type VendorMasterUpdateWithoutVendorSettingInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -20721,6 +20978,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -20798,6 +21056,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
 export type VendorMasterCreateWithoutDefectMasterInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -20876,6 +21135,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -20969,6 +21229,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutDefectMasterInput = {
 export type VendorMasterUpdateWithoutDefectMasterInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -21047,6 +21308,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -21124,6 +21386,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
 export type VendorMasterCreateWithoutDefectedItemsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -21202,6 +21465,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -21295,6 +21559,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutDefectedItemsInput = {
 export type VendorMasterUpdateWithoutDefectedItemsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -21373,6 +21638,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -21450,6 +21716,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
 export type VendorMasterCreateWithoutFranchisesInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -21528,6 +21795,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -21621,6 +21889,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutFranchisesInput = {
 export type VendorMasterUpdateWithoutFranchisesInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -21699,6 +21968,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -21776,6 +22046,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
 export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -21854,6 +22125,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -21947,6 +22219,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutHeadSiteSupervisorFranchiseMa
 export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -22025,6 +22298,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -22102,6 +22376,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
 export type VendorMasterCreateWithoutThemesInput = {
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -22180,6 +22455,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   id?: number
   vendor_name: string
   vendor_code: string
+  vendor_report_code?: string | null
   primary_contact_number: string
   primary_contact_email: string
   primary_contact_name: string
@@ -22273,6 +22549,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutThemesInput = {
 export type VendorMasterUpdateWithoutThemesInput = {
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -22351,6 +22628,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
   primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -23018,6 +23296,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   id?: boolean
   vendor_name?: boolean
   vendor_code?: boolean
+  vendor_report_code?: boolean
   primary_contact_number?: boolean
   primary_contact_email?: boolean
   primary_contact_name?: boolean
@@ -23098,6 +23377,7 @@ export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   vendor_name?: boolean
   vendor_code?: boolean
+  vendor_report_code?: boolean
   primary_contact_number?: boolean
   primary_contact_email?: boolean
   primary_contact_name?: boolean
@@ -23114,6 +23394,7 @@ export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   vendor_name?: boolean
   vendor_code?: boolean
+  vendor_report_code?: boolean
   primary_contact_number?: boolean
   primary_contact_email?: boolean
   primary_contact_name?: boolean
@@ -23130,6 +23411,7 @@ export type VendorMasterSelectScalar = {
   id?: boolean
   vendor_name?: boolean
   vendor_code?: boolean
+  vendor_report_code?: boolean
   primary_contact_number?: boolean
   primary_contact_email?: boolean
   primary_contact_name?: boolean
@@ -23142,7 +23424,7 @@ export type VendorMasterSelectScalar = {
   updatedAt?: boolean
 }
 
-export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "createdAt" | "updatedAt", ExtArgs["result"]["vendorMaster"]>
+export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "createdAt" | "updatedAt", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
   boxes?: boolean | Prisma.VendorMaster$boxesArgs<ExtArgs>
@@ -23283,6 +23565,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     id: number
     vendor_name: string
     vendor_code: string
+    vendor_report_code: string | null
     primary_contact_number: string
     primary_contact_email: string
     primary_contact_name: string
@@ -23782,6 +24065,7 @@ export interface VendorMasterFieldRefs {
   readonly id: Prisma.FieldRef<"VendorMaster", 'Int'>
   readonly vendor_name: Prisma.FieldRef<"VendorMaster", 'String'>
   readonly vendor_code: Prisma.FieldRef<"VendorMaster", 'String'>
+  readonly vendor_report_code: Prisma.FieldRef<"VendorMaster", 'String'>
   readonly primary_contact_number: Prisma.FieldRef<"VendorMaster", 'String'>
   readonly primary_contact_email: Prisma.FieldRef<"VendorMaster", 'String'>
   readonly primary_contact_name: Prisma.FieldRef<"VendorMaster", 'String'>

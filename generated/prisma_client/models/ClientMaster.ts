@@ -602,10 +602,6 @@ export type ClientMasterUpdateOneRequiredWithoutScanItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClientMasterUpdateToOneWithWhereWithoutScanItemsInput, Prisma.ClientMasterUpdateWithoutScanItemsInput>, Prisma.ClientMasterUncheckedUpdateWithoutScanItemsInput>
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type ClientMasterCreateNestedOneWithoutLedgersInput = {
   create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutLedgersInput, Prisma.ClientMasterUncheckedCreateWithoutLedgersInput>
   connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutLedgersInput

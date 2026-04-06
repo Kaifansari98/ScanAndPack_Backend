@@ -11,6 +11,7 @@ model VendorMaster {
   id                                  Int                                  @id @default(autoincrement())
   vendor_name                         String
   vendor_code                         String
+  vendor_report_code                  String?                              @map("vendor-report-code")
   primary_contact_number              String
   primary_contact_email               String
   primary_contact_name                String
