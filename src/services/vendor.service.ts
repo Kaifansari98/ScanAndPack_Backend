@@ -49,6 +49,39 @@ interface ErdReportRow {
   erd_date: Date | null;
 }
 
+interface LeadTrackingReportRow {
+  lead_id: number;
+  instance_id: number;
+  lead_code: string;
+  client_name: string;
+  franchise_store: string;
+  designer: string;
+  furniture_type: string;
+  furniture_structure: string;
+  lead_creation_date: Date | null;
+  ism_completion_date: Date | null;
+  booking_done_date: Date | null;
+  booking_adv_cleared_date: Date | null;
+  fm_scheduled_date: Date | null;
+  fm_completion_date: Date | null;
+  client_approval_date: Date | null;
+  tc_req_date: Date | null;
+  tc_approval_date: Date | null;
+  ol_date: Date | null;
+  production_start_date: Date | null;
+  production_completion_date: Date | null;
+  site_readiness_scheduled_date: Date | null;
+  site_readiness_completion_date: Date | null;
+  dispatch_planning_done_date: Date | null;
+  dispatch_date: Date | null;
+  installation_start_date: Date | null;
+  carcass_completion_date: Date | null;
+  shutter_installation_completion_date: Date | null;
+  usable_handover_date: Date | null;
+  full_installation_completion_date: Date | null;
+  final_handover_date: Date | null;
+}
+
 export const createVendor = async (data: any) => {
   const {
     vendor_name,
@@ -558,6 +591,272 @@ export const getErdReportData = async (
     required_date: lead.client_required_order_login_complition_date,
     erd_date: lead.expected_order_login_ready_date,
   }));
+};
+
+export const getLeadTrackingReportData = async (
+  vendorId: number,
+  franchiseId: number | null,
+  userType: string | null,
+  userId: number | null,
+  fromDate: string | null,
+  toDate: string | null,
+): Promise<LeadTrackingReportRow[]> => {
+  const where: any = {
+    vendor_id: vendorId,
+    is_deleted: false,
+  };
+
+  if (franchiseId !== null) {
+    where.franchise_id = franchiseId;
+  }
+
+  if (fromDate && toDate) {
+    where.created_at = {
+      gte: new Date(fromDate),
+      lte: new Date(new Date(toDate).setHours(23, 59, 59, 999)),
+    };
+  }
+
+  const normalizedUserType =
+    userType && userType !== "all" ? userType.trim().toLowerCase() : null;
+
+  const leads = await prisma.leadMaster.findMany({
+    where,
+    select: {
+      id: true,
+      lead_code: true,
+      firstname: true,
+      lastname: true,
+      created_at: true,
+      actual_installation_start_date: true,
+      actual_installation_completion_at: true,
+      carcass_installation_completion_date: true,
+      shutter_installation_completion_date: true,
+      usable_handover_completed_at: true,
+      final_handover_marked_at: true,
+      franchise: {
+        select: {
+          franchise_name: true,
+        },
+      },
+      productStructureInstances: {
+        select: {
+          id: true,
+          quantity_index: true,
+          order_login_completed_at: true,
+          production_completed_at: true,
+          productType: {
+            select: {
+              type: true,
+            },
+          },
+          productStructure: {
+            select: {
+              type: true,
+            },
+          },
+        },
+        orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+      },
+      userMappings: {
+        where: {
+          status: "active",
+        },
+        select: {
+          user_id: true,
+          type: true,
+          created_at: true,
+          user: {
+            select: {
+              id: true,
+              user_name: true,
+              user_type: {
+                select: {
+                  user_type: true,
+                },
+              },
+            },
+          },
+        },
+        orderBy: {
+          created_at: "asc",
+        },
+      },
+      siteSupervisors: {
+        select: {
+          user_id: true,
+          created_at: true,
+          supervisor: {
+            select: {
+              id: true,
+              user_name: true,
+              user_type: {
+                select: {
+                  user_type: true,
+                },
+              },
+            },
+          },
+        },
+        orderBy: {
+          created_at: "asc",
+        },
+      },
+      leadStatusLogs: {
+        where: {
+          statusType: {
+            tag: {
+              in: ["Type 3", "Type 5", "Type 7", "Type 8", "Type 9", "Type 14", "Type 15"],
+            },
+          },
+        },
+        select: {
+          created_at: true,
+          statusType: {
+            select: {
+              tag: true,
+            },
+          },
+        },
+        orderBy: {
+          created_at: "asc",
+        },
+      },
+      payments: {
+        where: {
+          paymentType: {
+            tag: "Type 2",
+          },
+        },
+        select: {
+          payment_date: true,
+          created_at: true,
+        },
+        orderBy: {
+          created_at: "asc",
+        },
+      },
+      tasks: {
+        where: {
+          task_type: {
+            in: ["Final Measurements", "Site Readiness"],
+          },
+        },
+        select: {
+          task_type: true,
+          created_at: true,
+          closed_at: true,
+          user_id: true,
+          created_by: true,
+        },
+        orderBy: {
+          created_at: "asc",
+        },
+      },
+    },
+    orderBy: {
+      created_at: "asc",
+    },
+  });
+
+  const roleMatchesLead = (lead: (typeof leads)[number]) => {
+    if (!normalizedUserType) return true;
+
+    const mappedUsers = lead.userMappings
+      .filter(
+        (mapping) =>
+          mapping.user.user_type.user_type.trim().toLowerCase() === normalizedUserType,
+      )
+      .map((mapping) => ({
+        id: mapping.user.id,
+      }));
+
+    const supervisorUsers =
+      normalizedUserType === "site-supervisor"
+        ? lead.siteSupervisors
+            .filter(
+              (mapping) =>
+                mapping.supervisor.user_type.user_type.trim().toLowerCase() ===
+                "site-supervisor",
+            )
+            .map((mapping) => ({
+              id: mapping.supervisor.id,
+            }))
+        : [];
+
+    const matchedUsers = [...mappedUsers, ...supervisorUsers];
+
+    if (userId !== null) {
+      return matchedUsers.some((user) => user.id === userId);
+    }
+
+    return matchedUsers.length > 0;
+  };
+
+  return leads
+    .filter((lead) => lead.productStructureInstances.length > 0)
+    .filter(roleMatchesLead)
+    .flatMap<LeadTrackingReportRow>((lead) => {
+      const hasMultipleInstances = lead.productStructureInstances.length > 1;
+
+      const firstStatusDate = (tag: string) =>
+        lead.leadStatusLogs.find((log) => log.statusType.tag === tag)?.created_at ??
+        null;
+
+      const firstTaskCreatedAt = (taskType: string) =>
+        lead.tasks.find((task) => task.task_type === taskType)?.created_at ?? null;
+
+      const firstTaskClosedAt = (taskType: string) =>
+        lead.tasks.find((task) => task.task_type === taskType)?.closed_at ?? null;
+
+      const designer =
+        lead.userMappings.find(
+          (mapping) =>
+            mapping.user.user_type.user_type.trim().toLowerCase() ===
+            "sales-executive",
+        )?.user.user_name ?? "-";
+
+      const bookingAdvanceClearedDate =
+        lead.payments[0]?.payment_date ?? lead.payments[0]?.created_at ?? null;
+
+      return lead.productStructureInstances.map((instance) => ({
+        lead_id: lead.id,
+        instance_id: instance.id,
+        lead_code: formatOverviewLeadCode(
+          lead.lead_code,
+          instance.quantity_index,
+          hasMultipleInstances,
+        ),
+        client_name: `${lead.firstname} ${lead.lastname}`.trim(),
+        franchise_store: lead.franchise?.franchise_name ?? "-",
+        designer,
+        furniture_type: instance.productType?.type ?? "-",
+        furniture_structure: instance.productStructure?.type ?? "-",
+        lead_creation_date: lead.created_at,
+        ism_completion_date: firstStatusDate("Type 3"),
+        booking_done_date: firstStatusDate("Type 5"),
+        booking_adv_cleared_date: bookingAdvanceClearedDate,
+        fm_scheduled_date: firstTaskCreatedAt("Final Measurements"),
+        fm_completion_date: firstTaskClosedAt("Final Measurements"),
+        client_approval_date: firstStatusDate("Type 8"),
+        tc_req_date: firstStatusDate("Type 7"),
+        tc_approval_date: firstStatusDate("Type 9"),
+        ol_date: instance.order_login_completed_at,
+        production_start_date: instance.order_login_completed_at,
+        production_completion_date: instance.production_completed_at,
+        site_readiness_scheduled_date: firstTaskCreatedAt("Site Readiness"),
+        site_readiness_completion_date: firstTaskClosedAt("Site Readiness"),
+        dispatch_planning_done_date: firstStatusDate("Type 14"),
+        dispatch_date: firstStatusDate("Type 15"),
+        installation_start_date: lead.actual_installation_start_date,
+        carcass_completion_date: lead.carcass_installation_completion_date,
+        shutter_installation_completion_date:
+          lead.shutter_installation_completion_date,
+        usable_handover_date: lead.usable_handover_completed_at,
+        full_installation_completion_date: lead.actual_installation_completion_at,
+        final_handover_date: lead.final_handover_marked_at,
+      }));
+    });
 };
 
 export const getVendorById = async (vendorId: number) => {
