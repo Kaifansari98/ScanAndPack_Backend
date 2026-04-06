@@ -1789,6 +1789,7 @@ export class UnderInstallationStageController {
       const franchiseId = req.query.franchise_id
         ? Number(req.query.franchise_id)
         : null;
+      const leadId = req.query.lead_id ? Number(req.query.lead_id) : null;
       const fromDate = req.query.from_date ? String(req.query.from_date) : null;
       const toDate = req.query.to_date ? String(req.query.to_date) : null;
 
@@ -1801,6 +1802,7 @@ export class UnderInstallationStageController {
       const data = await UnderInstallationStageService.getMiscIssueLogReportData(
         vendorId,
         franchiseId,
+        leadId,
         fromDate,
         toDate,
       );

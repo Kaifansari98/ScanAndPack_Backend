@@ -3659,6 +3659,7 @@ export class UnderInstallationStageService {
   static async getMiscIssueLogReportData(
     vendorId: number,
     franchiseId: number | null,
+    leadId: number | null,
     fromDate: string | null,
     toDate: string | null,
   ) {
@@ -3676,6 +3677,7 @@ export class UnderInstallationStageService {
       statusType: {
         tag: { in: INSTALLATION_TAGS },
       },
+      ...(leadId !== null ? { id: leadId } : {}),
       ...(franchiseId !== null ? { franchise_id: franchiseId } : {}),
     };
     const splitMiscMaterial = (value: string | null) => {
