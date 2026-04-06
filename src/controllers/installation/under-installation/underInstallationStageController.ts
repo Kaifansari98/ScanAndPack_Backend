@@ -1752,6 +1752,7 @@ export class UnderInstallationStageController {
     try {
       const vendorId = Number(req.params.vendorId);
       const franchiseId = req.query.franchise_id ? Number(req.query.franchise_id) : null;
+      const leadId = req.query.lead_id ? Number(req.query.lead_id) : null;
       const fromDate = req.query.from_date ? String(req.query.from_date) : null;
       const toDate = req.query.to_date ? String(req.query.to_date) : null;
 
@@ -1759,11 +1760,12 @@ export class UnderInstallationStageController {
         return res.status(400).json(ApiResponse.error("vendorId is required", 400));
       }
 
-      console.log("[InstallationReport] Fetching report data", { vendorId, franchiseId, fromDate, toDate });
+      console.log("[InstallationReport] Fetching report data", { vendorId, franchiseId, leadId, fromDate, toDate });
 
       const data = await UnderInstallationStageService.getInstallationReportData(
         vendorId,
         franchiseId,
+        leadId,
         fromDate,
         toDate,
       );

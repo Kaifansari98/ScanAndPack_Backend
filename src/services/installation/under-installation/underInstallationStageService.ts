@@ -3570,6 +3570,7 @@ export class UnderInstallationStageService {
   static async getInstallationReportData(
     vendorId: number,
     franchiseId: number | null, // null = all franchises
+    leadId: number | null,
     fromDate: string | null,
     toDate: string | null,
   ) {
@@ -3595,6 +3596,10 @@ export class UnderInstallationStageService {
 
     if (franchiseId !== null) {
       where.franchise_id = franchiseId;
+    }
+
+    if (leadId !== null) {
+      where.id = leadId;
     }
 
     if (fromDate && toDate) {
