@@ -263,6 +263,7 @@ export const getLeadTrackingReportController = async (
       : null;
     const userType = req.query.user_type ? String(req.query.user_type) : null;
     const userId = req.query.user_id ? Number(req.query.user_id) : null;
+    const leadId = req.query.lead_id ? Number(req.query.lead_id) : null;
     const fromDate = req.query.from_date ? String(req.query.from_date) : null;
     const toDate = req.query.to_date ? String(req.query.to_date) : null;
 
@@ -278,6 +279,7 @@ export const getLeadTrackingReportController = async (
       franchiseId,
       userType,
       userId,
+      leadId,
       fromDate,
       toDate,
     );

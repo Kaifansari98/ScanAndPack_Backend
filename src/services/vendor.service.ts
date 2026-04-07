@@ -598,6 +598,7 @@ export const getLeadTrackingReportData = async (
   franchiseId: number | null,
   userType: string | null,
   userId: number | null,
+  leadId: number | null,
   fromDate: string | null,
   toDate: string | null,
 ): Promise<LeadTrackingReportRow[]> => {
@@ -608,6 +609,10 @@ export const getLeadTrackingReportData = async (
 
   if (franchiseId !== null) {
     where.franchise_id = franchiseId;
+  }
+
+  if (leadId !== null) {
+    where.id = leadId;
   }
 
   if (fromDate && toDate) {
