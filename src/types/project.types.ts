@@ -78,6 +78,8 @@ export interface CadbidItems {
   sl2: string;
   barcode1: string;
   barcode2: string;
+  procurement: string;
+  categoryName: string;
 }
 
 

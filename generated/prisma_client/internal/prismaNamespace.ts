@@ -8285,7 +8285,10 @@ export const CutListScalarFieldEnum = {
   elf: 'elf',
   elb: 'elb',
   esl: 'esl',
-  esr: 'esr'
+  esr: 'esr',
+  group_name: 'group_name',
+  procurement: 'procurement',
+  category_name: 'category_name'
 } as const
 
 export type CutListScalarFieldEnum = (typeof CutListScalarFieldEnum)[keyof typeof CutListScalarFieldEnum]

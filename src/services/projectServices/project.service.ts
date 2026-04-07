@@ -881,25 +881,25 @@ export const handelItems = async (
     let resolvedVendorId: number | null = null;
     let resolvedProjectId: number | null = null;
 
-  
+
 
 
     try {
-        await prisma.apiRequestLog.create({
-          data: {
-            endpoint: "handelItems",
-            vendor_token: vendorToken,
-            vendor_id: resolvedVendorId,       // always safe, null if not yet resolved
-            payload: payload as any,
-            success:  false,
-            response: '',
-            error:  null,
-            project_id: resolvedProjectId,     // always safe, null if not yet resolved
-          }
-        });
-      } catch (logError) {
-        console.error("Failed to write api log:", logError);
-      }
+      await prisma.apiRequestLog.create({
+        data: {
+          endpoint: "handelItems",
+          vendor_token: vendorToken,
+          vendor_id: resolvedVendorId,       // always safe, null if not yet resolved
+          payload: payload as any,
+          success: false,
+          response: '',
+          error: null,
+          project_id: resolvedProjectId,     // always safe, null if not yet resolved
+        }
+      });
+    } catch (logError) {
+      console.error("Failed to write api log:", logError);
+    }
 
     console.log("payload", payload);
 
@@ -1064,7 +1064,7 @@ export const handelItems = async (
             thickness: Number(item.l3),
             qty: quantity,
             material_details: item.articleCode,
-            item_name: item.groupName,
+            item_name: item.name,
             status: "Active",
             created_by: createdByUserId,
             lead_id: lead_id,
@@ -1074,6 +1074,10 @@ export const handelItems = async (
             esr: item.sl2 || '',
             unique_code: "",
             unique_code_2: item.barcode2 || null,
+            group_name: item.groupName || null,
+            category_name: item.categoryName || null,
+            procurement: item.procurement || null,
+
           }
         });
 

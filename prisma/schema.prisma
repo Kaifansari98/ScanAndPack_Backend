@@ -1391,6 +1391,10 @@ model CutList {
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])
   cutListMachineMapping CutListMachineMapping[]
   defectedItems         DefectedItem[]
+  group_name            String?
+  procurement           String?
+  category_name         String?
+
 
   @@index([unique_code])
 }
