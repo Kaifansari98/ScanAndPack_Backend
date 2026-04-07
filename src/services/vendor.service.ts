@@ -711,7 +711,7 @@ export const getLeadTrackingReportData = async (
         where: {
           statusType: {
             tag: {
-              in: ["Type 3", "Type 5", "Type 7", "Type 8", "Type 9", "Type 14", "Type 15"],
+              in: ["Type 3", "Type 4", "Type 7", "Type 8", "Type 9", "Type 14", "Type 15"],
             },
           },
         },
@@ -839,7 +839,7 @@ export const getLeadTrackingReportData = async (
         furniture_structure: instance.productStructure?.type ?? "-",
         lead_creation_date: lead.created_at,
         ism_completion_date: firstStatusDate("Type 3"),
-        booking_done_date: firstStatusDate("Type 5"),
+        booking_done_date: firstStatusDate("Type 4"),
         booking_adv_cleared_date: bookingAdvanceClearedDate,
         fm_scheduled_date: firstTaskCreatedAt("Final Measurements"),
         fm_completion_date: firstTaskClosedAt("Final Measurements"),
