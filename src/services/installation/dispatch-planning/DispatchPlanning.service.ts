@@ -274,12 +274,18 @@ export class DispatchPlanningService {
         throw new Error("Payment Type (Type 5) not found for this vendor");
 
       // 3️⃣ Create PaymentInfo Record
+      const leadForPayment = await tx.leadMaster.findUnique({
+        where: { id: lead_id },
+        select: { status_id: true },
+      });
+
       const payment = await tx.paymentInfo.create({
         data: {
           vendor_id,
           lead_id,
           account_id,
           created_by,
+          status_id: leadForPayment?.status_id ?? null,
           payment_type_id: paymentType.id,
           payment_date: new Date(),
           amount: pending_payment,

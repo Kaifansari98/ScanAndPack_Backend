@@ -635,12 +635,18 @@ export class PaymentUploadService {
               );
             }
 
+            const leadForPayment = await tx.leadMaster.findUnique({
+              where: { id: data.lead_id },
+              select: { status_id: true },
+            });
+
             const paymentInfo = await tx.paymentInfo.create({
               data: {
                 lead_id: data.lead_id,
                 account_id: data.account_id,
                 vendor_id: data.vendor_id,
                 created_by: data.created_by,
+                status_id: leadForPayment?.status_id ?? null,
                 amount: data.amount,
                 payment_date: data.payment_date,
                 payment_text: data.payment_text || null,
@@ -1085,12 +1091,18 @@ export class PaymentUploadService {
               throw new Error("Payment type not found");
             }
 
+            const leadForPayment = await tx.leadMaster.findUnique({
+              where: { id: data.lead_id },
+              select: { status_id: true },
+            });
+
             const payment = await tx.paymentInfo.create({
               data: {
                 lead_id: data.lead_id,
                 account_id: data.account_id,
                 vendor_id: data.vendor_id,
                 created_by: data.created_by,
+                status_id: leadForPayment?.status_id ?? null,
                 amount: data.amount,
                 payment_date: data.payment_date,
                 payment_text: data.payment_text || null,

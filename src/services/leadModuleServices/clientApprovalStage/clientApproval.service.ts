@@ -111,6 +111,11 @@ export class ClientApprovalService {
         paymentFileId = uploadedPaymentDocs[0]?.id || null;
       }
 
+      const leadForPayment = await prisma.leadMaster.findUnique({
+        where: { id: data.lead_id },
+        select: { status_id: true },
+      });
+
       // ✅ Payment Entry
       const paymentInfo = await prisma.paymentInfo.create({
         data: {
@@ -118,6 +123,7 @@ export class ClientApprovalService {
           vendor_id: data.vendor_id,
           account_id: data.account_id,
           created_by: data.created_by,
+          status_id: leadForPayment?.status_id ?? null,
           payment_type_id: paymentType.id,
           amount: data.amount_paid,
           payment_text: data.payment_text,

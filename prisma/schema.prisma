@@ -771,6 +771,7 @@ model PaymentInfo {
   id              Int               @id @default(autoincrement())
   lead_id         Int
   account_id      Int
+  status_id       Int?
   amount          Float?
   payment_date    DateTime?
   payment_text    String?           @db.VarChar(2000)
@@ -784,6 +785,7 @@ model PaymentInfo {
   lead            LeadMaster        @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   document        LeadDocuments?    @relation(fields: [payment_file_id], references: [id])
   paymentType     PaymentTypeMaster @relation(fields: [payment_type_id], references: [id], onDelete: Cascade)
+  statusType      StatusTypeMaster? @relation(fields: [status_id], references: [id], onDelete: Cascade)
   vendor          VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
@@ -823,6 +825,7 @@ model StatusTypeMaster {
   tag            String
   leads          LeadMaster[]
   leadStatusLogs LeadStatusLogs[]
+  payments       PaymentInfo[]
   vendor         VendorMaster     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
