@@ -885,6 +885,7 @@ export const getLeadTrackingReportData = async (
 export const getPaymentsBetweenClientAndStoreReportData = async (
   vendorId: number,
   franchiseId: number | null,
+  leadId: number | null,
   fromDate: string | null,
   toDate: string | null,
 ): Promise<PaymentsBetweenClientAndStoreReportRow[]> => {
@@ -898,6 +899,10 @@ export const getPaymentsBetweenClientAndStoreReportData = async (
 
   if (franchiseId !== null) {
     where.franchise_id = franchiseId;
+  }
+
+  if (leadId !== null) {
+    where.id = leadId;
   }
 
   if (fromDate && toDate) {

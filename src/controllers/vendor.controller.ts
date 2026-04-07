@@ -308,6 +308,7 @@ export const getPaymentsBetweenClientAndStoreReportController = async (
     const franchiseId = req.query.franchise_id
       ? Number(req.query.franchise_id)
       : null;
+    const leadId = req.query.lead_id ? Number(req.query.lead_id) : null;
     const fromDate = req.query.from_date ? String(req.query.from_date) : null;
     const toDate = req.query.to_date ? String(req.query.to_date) : null;
 
@@ -321,6 +322,7 @@ export const getPaymentsBetweenClientAndStoreReportController = async (
     const data = await vendorService.getPaymentsBetweenClientAndStoreReportData(
       vendorId,
       franchiseId,
+      leadId,
       fromDate,
       toDate,
     );
