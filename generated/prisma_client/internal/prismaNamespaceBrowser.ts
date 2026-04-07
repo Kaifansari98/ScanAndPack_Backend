@@ -690,6 +690,7 @@ export const PaymentInfoScalarFieldEnum = {
   id: 'id',
   lead_id: 'lead_id',
   account_id: 'account_id',
+  status_id: 'status_id',
   amount: 'amount',
   payment_date: 'payment_date',
   payment_text: 'payment_text',

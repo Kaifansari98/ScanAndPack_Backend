@@ -30,6 +30,7 @@ export type PaymentInfoAvgAggregateOutputType = {
   id: number | null
   lead_id: number | null
   account_id: number | null
+  status_id: number | null
   amount: number | null
   payment_file_id: number | null
   created_by: number | null
@@ -41,6 +42,7 @@ export type PaymentInfoSumAggregateOutputType = {
   id: number | null
   lead_id: number | null
   account_id: number | null
+  status_id: number | null
   amount: number | null
   payment_file_id: number | null
   created_by: number | null
@@ -52,6 +54,7 @@ export type PaymentInfoMinAggregateOutputType = {
   id: number | null
   lead_id: number | null
   account_id: number | null
+  status_id: number | null
   amount: number | null
   payment_date: Date | null
   payment_text: string | null
@@ -66,6 +69,7 @@ export type PaymentInfoMaxAggregateOutputType = {
   id: number | null
   lead_id: number | null
   account_id: number | null
+  status_id: number | null
   amount: number | null
   payment_date: Date | null
   payment_text: string | null
@@ -80,6 +84,7 @@ export type PaymentInfoCountAggregateOutputType = {
   id: number
   lead_id: number
   account_id: number
+  status_id: number
   amount: number
   payment_date: number
   payment_text: number
@@ -96,6 +101,7 @@ export type PaymentInfoAvgAggregateInputType = {
   id?: true
   lead_id?: true
   account_id?: true
+  status_id?: true
   amount?: true
   payment_file_id?: true
   created_by?: true
@@ -107,6 +113,7 @@ export type PaymentInfoSumAggregateInputType = {
   id?: true
   lead_id?: true
   account_id?: true
+  status_id?: true
   amount?: true
   payment_file_id?: true
   created_by?: true
@@ -118,6 +125,7 @@ export type PaymentInfoMinAggregateInputType = {
   id?: true
   lead_id?: true
   account_id?: true
+  status_id?: true
   amount?: true
   payment_date?: true
   payment_text?: true
@@ -132,6 +140,7 @@ export type PaymentInfoMaxAggregateInputType = {
   id?: true
   lead_id?: true
   account_id?: true
+  status_id?: true
   amount?: true
   payment_date?: true
   payment_text?: true
@@ -146,6 +155,7 @@ export type PaymentInfoCountAggregateInputType = {
   id?: true
   lead_id?: true
   account_id?: true
+  status_id?: true
   amount?: true
   payment_date?: true
   payment_text?: true
@@ -247,6 +257,7 @@ export type PaymentInfoGroupByOutputType = {
   id: number
   lead_id: number
   account_id: number
+  status_id: number | null
   amount: number | null
   payment_date: Date | null
   payment_text: string | null
@@ -284,6 +295,7 @@ export type PaymentInfoWhereInput = {
   id?: Prisma.IntFilter<"PaymentInfo"> | number
   lead_id?: Prisma.IntFilter<"PaymentInfo"> | number
   account_id?: Prisma.IntFilter<"PaymentInfo"> | number
+  status_id?: Prisma.IntNullableFilter<"PaymentInfo"> | number | null
   amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
   payment_date?: Prisma.DateTimeNullableFilter<"PaymentInfo"> | Date | string | null
   payment_text?: Prisma.StringNullableFilter<"PaymentInfo"> | string | null
@@ -297,6 +309,7 @@ export type PaymentInfoWhereInput = {
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   document?: Prisma.XOR<Prisma.LeadDocumentsNullableScalarRelationFilter, Prisma.LeadDocumentsWhereInput> | null
   paymentType?: Prisma.XOR<Prisma.PaymentTypeMasterScalarRelationFilter, Prisma.PaymentTypeMasterWhereInput>
+  statusType?: Prisma.XOR<Prisma.StatusTypeMasterNullableScalarRelationFilter, Prisma.StatusTypeMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
@@ -304,6 +317,7 @@ export type PaymentInfoOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
+  status_id?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrderInput | Prisma.SortOrder
   payment_date?: Prisma.SortOrderInput | Prisma.SortOrder
   payment_text?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -317,6 +331,7 @@ export type PaymentInfoOrderByWithRelationInput = {
   lead?: Prisma.LeadMasterOrderByWithRelationInput
   document?: Prisma.LeadDocumentsOrderByWithRelationInput
   paymentType?: Prisma.PaymentTypeMasterOrderByWithRelationInput
+  statusType?: Prisma.StatusTypeMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
@@ -327,6 +342,7 @@ export type PaymentInfoWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.PaymentInfoWhereInput | Prisma.PaymentInfoWhereInput[]
   lead_id?: Prisma.IntFilter<"PaymentInfo"> | number
   account_id?: Prisma.IntFilter<"PaymentInfo"> | number
+  status_id?: Prisma.IntNullableFilter<"PaymentInfo"> | number | null
   amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
   payment_date?: Prisma.DateTimeNullableFilter<"PaymentInfo"> | Date | string | null
   payment_text?: Prisma.StringNullableFilter<"PaymentInfo"> | string | null
@@ -340,6 +356,7 @@ export type PaymentInfoWhereUniqueInput = Prisma.AtLeast<{
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   document?: Prisma.XOR<Prisma.LeadDocumentsNullableScalarRelationFilter, Prisma.LeadDocumentsWhereInput> | null
   paymentType?: Prisma.XOR<Prisma.PaymentTypeMasterScalarRelationFilter, Prisma.PaymentTypeMasterWhereInput>
+  statusType?: Prisma.XOR<Prisma.StatusTypeMasterNullableScalarRelationFilter, Prisma.StatusTypeMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
@@ -347,6 +364,7 @@ export type PaymentInfoOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
+  status_id?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrderInput | Prisma.SortOrder
   payment_date?: Prisma.SortOrderInput | Prisma.SortOrder
   payment_text?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -369,6 +387,7 @@ export type PaymentInfoScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"PaymentInfo"> | number
   lead_id?: Prisma.IntWithAggregatesFilter<"PaymentInfo"> | number
   account_id?: Prisma.IntWithAggregatesFilter<"PaymentInfo"> | number
+  status_id?: Prisma.IntNullableWithAggregatesFilter<"PaymentInfo"> | number | null
   amount?: Prisma.FloatNullableWithAggregatesFilter<"PaymentInfo"> | number | null
   payment_date?: Prisma.DateTimeNullableWithAggregatesFilter<"PaymentInfo"> | Date | string | null
   payment_text?: Prisma.StringNullableWithAggregatesFilter<"PaymentInfo"> | string | null
@@ -389,6 +408,7 @@ export type PaymentInfoCreateInput = {
   lead: Prisma.LeadMasterCreateNestedOneWithoutPaymentsInput
   document?: Prisma.LeadDocumentsCreateNestedOneWithoutPaymentInfoInput
   paymentType: Prisma.PaymentTypeMasterCreateNestedOneWithoutPaymentsInput
+  statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutPaymentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentsInput
 }
 
@@ -396,6 +416,7 @@ export type PaymentInfoUncheckedCreateInput = {
   id?: number
   lead_id: number
   account_id: number
+  status_id?: number | null
   amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
@@ -416,6 +437,7 @@ export type PaymentInfoUpdateInput = {
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutPaymentsNestedInput
   document?: Prisma.LeadDocumentsUpdateOneWithoutPaymentInfoNestedInput
   paymentType?: Prisma.PaymentTypeMasterUpdateOneRequiredWithoutPaymentsNestedInput
+  statusType?: Prisma.StatusTypeMasterUpdateOneWithoutPaymentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentsNestedInput
 }
 
@@ -423,6 +445,7 @@ export type PaymentInfoUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -437,6 +460,7 @@ export type PaymentInfoCreateManyInput = {
   id?: number
   lead_id: number
   account_id: number
+  status_id?: number | null
   amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
@@ -458,6 +482,7 @@ export type PaymentInfoUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -482,6 +507,7 @@ export type PaymentInfoCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
+  status_id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   payment_date?: Prisma.SortOrder
   payment_text?: Prisma.SortOrder
@@ -496,6 +522,7 @@ export type PaymentInfoAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
+  status_id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   payment_file_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
@@ -507,6 +534,7 @@ export type PaymentInfoMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
+  status_id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   payment_date?: Prisma.SortOrder
   payment_text?: Prisma.SortOrder
@@ -521,6 +549,7 @@ export type PaymentInfoMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
+  status_id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   payment_date?: Prisma.SortOrder
   payment_text?: Prisma.SortOrder
@@ -535,6 +564,7 @@ export type PaymentInfoSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
+  status_id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   payment_file_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
@@ -752,6 +782,48 @@ export type PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput = {
   deleteMany?: Prisma.PaymentInfoScalarWhereInput | Prisma.PaymentInfoScalarWhereInput[]
 }
 
+export type PaymentInfoCreateNestedManyWithoutStatusTypeInput = {
+  create?: Prisma.XOR<Prisma.PaymentInfoCreateWithoutStatusTypeInput, Prisma.PaymentInfoUncheckedCreateWithoutStatusTypeInput> | Prisma.PaymentInfoCreateWithoutStatusTypeInput[] | Prisma.PaymentInfoUncheckedCreateWithoutStatusTypeInput[]
+  connectOrCreate?: Prisma.PaymentInfoCreateOrConnectWithoutStatusTypeInput | Prisma.PaymentInfoCreateOrConnectWithoutStatusTypeInput[]
+  createMany?: Prisma.PaymentInfoCreateManyStatusTypeInputEnvelope
+  connect?: Prisma.PaymentInfoWhereUniqueInput | Prisma.PaymentInfoWhereUniqueInput[]
+}
+
+export type PaymentInfoUncheckedCreateNestedManyWithoutStatusTypeInput = {
+  create?: Prisma.XOR<Prisma.PaymentInfoCreateWithoutStatusTypeInput, Prisma.PaymentInfoUncheckedCreateWithoutStatusTypeInput> | Prisma.PaymentInfoCreateWithoutStatusTypeInput[] | Prisma.PaymentInfoUncheckedCreateWithoutStatusTypeInput[]
+  connectOrCreate?: Prisma.PaymentInfoCreateOrConnectWithoutStatusTypeInput | Prisma.PaymentInfoCreateOrConnectWithoutStatusTypeInput[]
+  createMany?: Prisma.PaymentInfoCreateManyStatusTypeInputEnvelope
+  connect?: Prisma.PaymentInfoWhereUniqueInput | Prisma.PaymentInfoWhereUniqueInput[]
+}
+
+export type PaymentInfoUpdateManyWithoutStatusTypeNestedInput = {
+  create?: Prisma.XOR<Prisma.PaymentInfoCreateWithoutStatusTypeInput, Prisma.PaymentInfoUncheckedCreateWithoutStatusTypeInput> | Prisma.PaymentInfoCreateWithoutStatusTypeInput[] | Prisma.PaymentInfoUncheckedCreateWithoutStatusTypeInput[]
+  connectOrCreate?: Prisma.PaymentInfoCreateOrConnectWithoutStatusTypeInput | Prisma.PaymentInfoCreateOrConnectWithoutStatusTypeInput[]
+  upsert?: Prisma.PaymentInfoUpsertWithWhereUniqueWithoutStatusTypeInput | Prisma.PaymentInfoUpsertWithWhereUniqueWithoutStatusTypeInput[]
+  createMany?: Prisma.PaymentInfoCreateManyStatusTypeInputEnvelope
+  set?: Prisma.PaymentInfoWhereUniqueInput | Prisma.PaymentInfoWhereUniqueInput[]
+  disconnect?: Prisma.PaymentInfoWhereUniqueInput | Prisma.PaymentInfoWhereUniqueInput[]
+  delete?: Prisma.PaymentInfoWhereUniqueInput | Prisma.PaymentInfoWhereUniqueInput[]
+  connect?: Prisma.PaymentInfoWhereUniqueInput | Prisma.PaymentInfoWhereUniqueInput[]
+  update?: Prisma.PaymentInfoUpdateWithWhereUniqueWithoutStatusTypeInput | Prisma.PaymentInfoUpdateWithWhereUniqueWithoutStatusTypeInput[]
+  updateMany?: Prisma.PaymentInfoUpdateManyWithWhereWithoutStatusTypeInput | Prisma.PaymentInfoUpdateManyWithWhereWithoutStatusTypeInput[]
+  deleteMany?: Prisma.PaymentInfoScalarWhereInput | Prisma.PaymentInfoScalarWhereInput[]
+}
+
+export type PaymentInfoUncheckedUpdateManyWithoutStatusTypeNestedInput = {
+  create?: Prisma.XOR<Prisma.PaymentInfoCreateWithoutStatusTypeInput, Prisma.PaymentInfoUncheckedCreateWithoutStatusTypeInput> | Prisma.PaymentInfoCreateWithoutStatusTypeInput[] | Prisma.PaymentInfoUncheckedCreateWithoutStatusTypeInput[]
+  connectOrCreate?: Prisma.PaymentInfoCreateOrConnectWithoutStatusTypeInput | Prisma.PaymentInfoCreateOrConnectWithoutStatusTypeInput[]
+  upsert?: Prisma.PaymentInfoUpsertWithWhereUniqueWithoutStatusTypeInput | Prisma.PaymentInfoUpsertWithWhereUniqueWithoutStatusTypeInput[]
+  createMany?: Prisma.PaymentInfoCreateManyStatusTypeInputEnvelope
+  set?: Prisma.PaymentInfoWhereUniqueInput | Prisma.PaymentInfoWhereUniqueInput[]
+  disconnect?: Prisma.PaymentInfoWhereUniqueInput | Prisma.PaymentInfoWhereUniqueInput[]
+  delete?: Prisma.PaymentInfoWhereUniqueInput | Prisma.PaymentInfoWhereUniqueInput[]
+  connect?: Prisma.PaymentInfoWhereUniqueInput | Prisma.PaymentInfoWhereUniqueInput[]
+  update?: Prisma.PaymentInfoUpdateWithWhereUniqueWithoutStatusTypeInput | Prisma.PaymentInfoUpdateWithWhereUniqueWithoutStatusTypeInput[]
+  updateMany?: Prisma.PaymentInfoUpdateManyWithWhereWithoutStatusTypeInput | Prisma.PaymentInfoUpdateManyWithWhereWithoutStatusTypeInput[]
+  deleteMany?: Prisma.PaymentInfoScalarWhereInput | Prisma.PaymentInfoScalarWhereInput[]
+}
+
 export type PaymentInfoCreateNestedManyWithoutPaymentTypeInput = {
   create?: Prisma.XOR<Prisma.PaymentInfoCreateWithoutPaymentTypeInput, Prisma.PaymentInfoUncheckedCreateWithoutPaymentTypeInput> | Prisma.PaymentInfoCreateWithoutPaymentTypeInput[] | Prisma.PaymentInfoUncheckedCreateWithoutPaymentTypeInput[]
   connectOrCreate?: Prisma.PaymentInfoCreateOrConnectWithoutPaymentTypeInput | Prisma.PaymentInfoCreateOrConnectWithoutPaymentTypeInput[]
@@ -804,12 +876,14 @@ export type PaymentInfoCreateWithoutVendorInput = {
   lead: Prisma.LeadMasterCreateNestedOneWithoutPaymentsInput
   document?: Prisma.LeadDocumentsCreateNestedOneWithoutPaymentInfoInput
   paymentType: Prisma.PaymentTypeMasterCreateNestedOneWithoutPaymentsInput
+  statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutPaymentsInput
 }
 
 export type PaymentInfoUncheckedCreateWithoutVendorInput = {
   id?: number
   lead_id: number
   account_id: number
+  status_id?: number | null
   amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
@@ -852,6 +926,7 @@ export type PaymentInfoScalarWhereInput = {
   id?: Prisma.IntFilter<"PaymentInfo"> | number
   lead_id?: Prisma.IntFilter<"PaymentInfo"> | number
   account_id?: Prisma.IntFilter<"PaymentInfo"> | number
+  status_id?: Prisma.IntNullableFilter<"PaymentInfo"> | number | null
   amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
   payment_date?: Prisma.DateTimeNullableFilter<"PaymentInfo"> | Date | string | null
   payment_text?: Prisma.StringNullableFilter<"PaymentInfo"> | string | null
@@ -871,6 +946,7 @@ export type PaymentInfoCreateWithoutCreatedByInput = {
   lead: Prisma.LeadMasterCreateNestedOneWithoutPaymentsInput
   document?: Prisma.LeadDocumentsCreateNestedOneWithoutPaymentInfoInput
   paymentType: Prisma.PaymentTypeMasterCreateNestedOneWithoutPaymentsInput
+  statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutPaymentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentsInput
 }
 
@@ -878,6 +954,7 @@ export type PaymentInfoUncheckedCreateWithoutCreatedByInput = {
   id?: number
   lead_id: number
   account_id: number
+  status_id?: number | null
   amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
@@ -922,12 +999,14 @@ export type PaymentInfoCreateWithoutLeadInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPaymentsCreatedInput
   document?: Prisma.LeadDocumentsCreateNestedOneWithoutPaymentInfoInput
   paymentType: Prisma.PaymentTypeMasterCreateNestedOneWithoutPaymentsInput
+  statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutPaymentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentsInput
 }
 
 export type PaymentInfoUncheckedCreateWithoutLeadInput = {
   id?: number
   account_id: number
+  status_id?: number | null
   amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
@@ -973,12 +1052,14 @@ export type PaymentInfoCreateWithoutAccountInput = {
   lead: Prisma.LeadMasterCreateNestedOneWithoutPaymentsInput
   document?: Prisma.LeadDocumentsCreateNestedOneWithoutPaymentInfoInput
   paymentType: Prisma.PaymentTypeMasterCreateNestedOneWithoutPaymentsInput
+  statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutPaymentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentsInput
 }
 
 export type PaymentInfoUncheckedCreateWithoutAccountInput = {
   id?: number
   lead_id: number
+  status_id?: number | null
   amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
@@ -1024,6 +1105,7 @@ export type PaymentInfoCreateWithoutDocumentInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPaymentsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutPaymentsInput
   paymentType: Prisma.PaymentTypeMasterCreateNestedOneWithoutPaymentsInput
+  statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutPaymentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentsInput
 }
 
@@ -1031,6 +1113,7 @@ export type PaymentInfoUncheckedCreateWithoutDocumentInput = {
   id?: number
   lead_id: number
   account_id: number
+  status_id?: number | null
   amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
@@ -1066,6 +1149,59 @@ export type PaymentInfoUpdateManyWithWhereWithoutDocumentInput = {
   data: Prisma.XOR<Prisma.PaymentInfoUpdateManyMutationInput, Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentInput>
 }
 
+export type PaymentInfoCreateWithoutStatusTypeInput = {
+  amount?: number | null
+  payment_date?: Date | string | null
+  payment_text?: string | null
+  created_at?: Date | string
+  account: Prisma.AccountMasterCreateNestedOneWithoutPaymentsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutPaymentsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutPaymentsInput
+  document?: Prisma.LeadDocumentsCreateNestedOneWithoutPaymentInfoInput
+  paymentType: Prisma.PaymentTypeMasterCreateNestedOneWithoutPaymentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentsInput
+}
+
+export type PaymentInfoUncheckedCreateWithoutStatusTypeInput = {
+  id?: number
+  lead_id: number
+  account_id: number
+  amount?: number | null
+  payment_date?: Date | string | null
+  payment_text?: string | null
+  payment_file_id?: number | null
+  created_at?: Date | string
+  created_by: number
+  vendor_id: number
+  payment_type_id: number
+}
+
+export type PaymentInfoCreateOrConnectWithoutStatusTypeInput = {
+  where: Prisma.PaymentInfoWhereUniqueInput
+  create: Prisma.XOR<Prisma.PaymentInfoCreateWithoutStatusTypeInput, Prisma.PaymentInfoUncheckedCreateWithoutStatusTypeInput>
+}
+
+export type PaymentInfoCreateManyStatusTypeInputEnvelope = {
+  data: Prisma.PaymentInfoCreateManyStatusTypeInput | Prisma.PaymentInfoCreateManyStatusTypeInput[]
+  skipDuplicates?: boolean
+}
+
+export type PaymentInfoUpsertWithWhereUniqueWithoutStatusTypeInput = {
+  where: Prisma.PaymentInfoWhereUniqueInput
+  update: Prisma.XOR<Prisma.PaymentInfoUpdateWithoutStatusTypeInput, Prisma.PaymentInfoUncheckedUpdateWithoutStatusTypeInput>
+  create: Prisma.XOR<Prisma.PaymentInfoCreateWithoutStatusTypeInput, Prisma.PaymentInfoUncheckedCreateWithoutStatusTypeInput>
+}
+
+export type PaymentInfoUpdateWithWhereUniqueWithoutStatusTypeInput = {
+  where: Prisma.PaymentInfoWhereUniqueInput
+  data: Prisma.XOR<Prisma.PaymentInfoUpdateWithoutStatusTypeInput, Prisma.PaymentInfoUncheckedUpdateWithoutStatusTypeInput>
+}
+
+export type PaymentInfoUpdateManyWithWhereWithoutStatusTypeInput = {
+  where: Prisma.PaymentInfoScalarWhereInput
+  data: Prisma.XOR<Prisma.PaymentInfoUpdateManyMutationInput, Prisma.PaymentInfoUncheckedUpdateManyWithoutStatusTypeInput>
+}
+
 export type PaymentInfoCreateWithoutPaymentTypeInput = {
   amount?: number | null
   payment_date?: Date | string | null
@@ -1075,6 +1211,7 @@ export type PaymentInfoCreateWithoutPaymentTypeInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPaymentsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutPaymentsInput
   document?: Prisma.LeadDocumentsCreateNestedOneWithoutPaymentInfoInput
+  statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutPaymentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentsInput
 }
 
@@ -1082,6 +1219,7 @@ export type PaymentInfoUncheckedCreateWithoutPaymentTypeInput = {
   id?: number
   lead_id: number
   account_id: number
+  status_id?: number | null
   amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
@@ -1121,6 +1259,7 @@ export type PaymentInfoCreateManyVendorInput = {
   id?: number
   lead_id: number
   account_id: number
+  status_id?: number | null
   amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
@@ -1140,12 +1279,14 @@ export type PaymentInfoUpdateWithoutVendorInput = {
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutPaymentsNestedInput
   document?: Prisma.LeadDocumentsUpdateOneWithoutPaymentInfoNestedInput
   paymentType?: Prisma.PaymentTypeMasterUpdateOneRequiredWithoutPaymentsNestedInput
+  statusType?: Prisma.StatusTypeMasterUpdateOneWithoutPaymentsNestedInput
 }
 
 export type PaymentInfoUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1159,6 +1300,7 @@ export type PaymentInfoUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1172,6 +1314,7 @@ export type PaymentInfoCreateManyCreatedByInput = {
   id?: number
   lead_id: number
   account_id: number
+  status_id?: number | null
   amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
@@ -1190,6 +1333,7 @@ export type PaymentInfoUpdateWithoutCreatedByInput = {
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutPaymentsNestedInput
   document?: Prisma.LeadDocumentsUpdateOneWithoutPaymentInfoNestedInput
   paymentType?: Prisma.PaymentTypeMasterUpdateOneRequiredWithoutPaymentsNestedInput
+  statusType?: Prisma.StatusTypeMasterUpdateOneWithoutPaymentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentsNestedInput
 }
 
@@ -1197,6 +1341,7 @@ export type PaymentInfoUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1210,6 +1355,7 @@ export type PaymentInfoUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1222,6 +1368,7 @@ export type PaymentInfoUncheckedUpdateManyWithoutCreatedByInput = {
 export type PaymentInfoCreateManyLeadInput = {
   id?: number
   account_id: number
+  status_id?: number | null
   amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
@@ -1241,12 +1388,14 @@ export type PaymentInfoUpdateWithoutLeadInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPaymentsCreatedNestedInput
   document?: Prisma.LeadDocumentsUpdateOneWithoutPaymentInfoNestedInput
   paymentType?: Prisma.PaymentTypeMasterUpdateOneRequiredWithoutPaymentsNestedInput
+  statusType?: Prisma.StatusTypeMasterUpdateOneWithoutPaymentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentsNestedInput
 }
 
 export type PaymentInfoUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1260,6 +1409,7 @@ export type PaymentInfoUncheckedUpdateWithoutLeadInput = {
 export type PaymentInfoUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1273,6 +1423,7 @@ export type PaymentInfoUncheckedUpdateManyWithoutLeadInput = {
 export type PaymentInfoCreateManyAccountInput = {
   id?: number
   lead_id: number
+  status_id?: number | null
   amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
@@ -1292,12 +1443,14 @@ export type PaymentInfoUpdateWithoutAccountInput = {
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutPaymentsNestedInput
   document?: Prisma.LeadDocumentsUpdateOneWithoutPaymentInfoNestedInput
   paymentType?: Prisma.PaymentTypeMasterUpdateOneRequiredWithoutPaymentsNestedInput
+  statusType?: Prisma.StatusTypeMasterUpdateOneWithoutPaymentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentsNestedInput
 }
 
 export type PaymentInfoUncheckedUpdateWithoutAccountInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1311,6 +1464,7 @@ export type PaymentInfoUncheckedUpdateWithoutAccountInput = {
 export type PaymentInfoUncheckedUpdateManyWithoutAccountInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1325,6 +1479,7 @@ export type PaymentInfoCreateManyDocumentInput = {
   id?: number
   lead_id: number
   account_id: number
+  status_id?: number | null
   amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
@@ -1343,6 +1498,7 @@ export type PaymentInfoUpdateWithoutDocumentInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPaymentsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutPaymentsNestedInput
   paymentType?: Prisma.PaymentTypeMasterUpdateOneRequiredWithoutPaymentsNestedInput
+  statusType?: Prisma.StatusTypeMasterUpdateOneWithoutPaymentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentsNestedInput
 }
 
@@ -1350,6 +1506,7 @@ export type PaymentInfoUncheckedUpdateWithoutDocumentInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1363,9 +1520,65 @@ export type PaymentInfoUncheckedUpdateManyWithoutDocumentInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  payment_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type PaymentInfoCreateManyStatusTypeInput = {
+  id?: number
+  lead_id: number
+  account_id: number
+  amount?: number | null
+  payment_date?: Date | string | null
+  payment_text?: string | null
+  payment_file_id?: number | null
+  created_at?: Date | string
+  created_by: number
+  vendor_id: number
+  payment_type_id: number
+}
+
+export type PaymentInfoUpdateWithoutStatusTypeInput = {
+  amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutPaymentsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPaymentsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutPaymentsNestedInput
+  document?: Prisma.LeadDocumentsUpdateOneWithoutPaymentInfoNestedInput
+  paymentType?: Prisma.PaymentTypeMasterUpdateOneRequiredWithoutPaymentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentsNestedInput
+}
+
+export type PaymentInfoUncheckedUpdateWithoutStatusTypeInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payment_file_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  payment_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type PaymentInfoUncheckedUpdateManyWithoutStatusTypeInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  payment_file_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1376,6 +1589,7 @@ export type PaymentInfoCreateManyPaymentTypeInput = {
   id?: number
   lead_id: number
   account_id: number
+  status_id?: number | null
   amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
@@ -1394,6 +1608,7 @@ export type PaymentInfoUpdateWithoutPaymentTypeInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPaymentsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutPaymentsNestedInput
   document?: Prisma.LeadDocumentsUpdateOneWithoutPaymentInfoNestedInput
+  statusType?: Prisma.StatusTypeMasterUpdateOneWithoutPaymentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentsNestedInput
 }
 
@@ -1401,6 +1616,7 @@ export type PaymentInfoUncheckedUpdateWithoutPaymentTypeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1414,6 +1630,7 @@ export type PaymentInfoUncheckedUpdateManyWithoutPaymentTypeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1429,6 +1646,7 @@ export type PaymentInfoSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   id?: boolean
   lead_id?: boolean
   account_id?: boolean
+  status_id?: boolean
   amount?: boolean
   payment_date?: boolean
   payment_text?: boolean
@@ -1442,6 +1660,7 @@ export type PaymentInfoSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   document?: boolean | Prisma.PaymentInfo$documentArgs<ExtArgs>
   paymentType?: boolean | Prisma.PaymentTypeMasterDefaultArgs<ExtArgs>
+  statusType?: boolean | Prisma.PaymentInfo$statusTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["paymentInfo"]>
 
@@ -1449,6 +1668,7 @@ export type PaymentInfoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   lead_id?: boolean
   account_id?: boolean
+  status_id?: boolean
   amount?: boolean
   payment_date?: boolean
   payment_text?: boolean
@@ -1462,6 +1682,7 @@ export type PaymentInfoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   document?: boolean | Prisma.PaymentInfo$documentArgs<ExtArgs>
   paymentType?: boolean | Prisma.PaymentTypeMasterDefaultArgs<ExtArgs>
+  statusType?: boolean | Prisma.PaymentInfo$statusTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["paymentInfo"]>
 
@@ -1469,6 +1690,7 @@ export type PaymentInfoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   lead_id?: boolean
   account_id?: boolean
+  status_id?: boolean
   amount?: boolean
   payment_date?: boolean
   payment_text?: boolean
@@ -1482,6 +1704,7 @@ export type PaymentInfoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   document?: boolean | Prisma.PaymentInfo$documentArgs<ExtArgs>
   paymentType?: boolean | Prisma.PaymentTypeMasterDefaultArgs<ExtArgs>
+  statusType?: boolean | Prisma.PaymentInfo$statusTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["paymentInfo"]>
 
@@ -1489,6 +1712,7 @@ export type PaymentInfoSelectScalar = {
   id?: boolean
   lead_id?: boolean
   account_id?: boolean
+  status_id?: boolean
   amount?: boolean
   payment_date?: boolean
   payment_text?: boolean
@@ -1499,13 +1723,14 @@ export type PaymentInfoSelectScalar = {
   payment_type_id?: boolean
 }
 
-export type PaymentInfoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "amount" | "payment_date" | "payment_text" | "payment_file_id" | "created_at" | "created_by" | "vendor_id" | "payment_type_id", ExtArgs["result"]["paymentInfo"]>
+export type PaymentInfoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "status_id" | "amount" | "payment_date" | "payment_text" | "payment_file_id" | "created_at" | "created_by" | "vendor_id" | "payment_type_id", ExtArgs["result"]["paymentInfo"]>
 export type PaymentInfoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   document?: boolean | Prisma.PaymentInfo$documentArgs<ExtArgs>
   paymentType?: boolean | Prisma.PaymentTypeMasterDefaultArgs<ExtArgs>
+  statusType?: boolean | Prisma.PaymentInfo$statusTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type PaymentInfoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1514,6 +1739,7 @@ export type PaymentInfoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   document?: boolean | Prisma.PaymentInfo$documentArgs<ExtArgs>
   paymentType?: boolean | Prisma.PaymentTypeMasterDefaultArgs<ExtArgs>
+  statusType?: boolean | Prisma.PaymentInfo$statusTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type PaymentInfoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1522,6 +1748,7 @@ export type PaymentInfoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   document?: boolean | Prisma.PaymentInfo$documentArgs<ExtArgs>
   paymentType?: boolean | Prisma.PaymentTypeMasterDefaultArgs<ExtArgs>
+  statusType?: boolean | Prisma.PaymentInfo$statusTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
@@ -1533,12 +1760,14 @@ export type $PaymentInfoPayload<ExtArgs extends runtime.Types.Extensions.Interna
     lead: Prisma.$LeadMasterPayload<ExtArgs>
     document: Prisma.$LeadDocumentsPayload<ExtArgs> | null
     paymentType: Prisma.$PaymentTypeMasterPayload<ExtArgs>
+    statusType: Prisma.$StatusTypeMasterPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     lead_id: number
     account_id: number
+    status_id: number | null
     amount: number | null
     payment_date: Date | null
     payment_text: string | null
@@ -1946,6 +2175,7 @@ export interface Prisma__PaymentInfoClient<T, Null = never, ExtArgs extends runt
   lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   document<T extends Prisma.PaymentInfo$documentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentInfo$documentArgs<ExtArgs>>): Prisma.Prisma__LeadDocumentsClient<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   paymentType<T extends Prisma.PaymentTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PaymentTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$PaymentTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  statusType<T extends Prisma.PaymentInfo$statusTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentInfo$statusTypeArgs<ExtArgs>>): Prisma.Prisma__StatusTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$StatusTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1979,6 +2209,7 @@ export interface PaymentInfoFieldRefs {
   readonly id: Prisma.FieldRef<"PaymentInfo", 'Int'>
   readonly lead_id: Prisma.FieldRef<"PaymentInfo", 'Int'>
   readonly account_id: Prisma.FieldRef<"PaymentInfo", 'Int'>
+  readonly status_id: Prisma.FieldRef<"PaymentInfo", 'Int'>
   readonly amount: Prisma.FieldRef<"PaymentInfo", 'Float'>
   readonly payment_date: Prisma.FieldRef<"PaymentInfo", 'DateTime'>
   readonly payment_text: Prisma.FieldRef<"PaymentInfo", 'String'>
@@ -2399,6 +2630,25 @@ export type PaymentInfo$documentArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   include?: Prisma.LeadDocumentsInclude<ExtArgs> | null
   where?: Prisma.LeadDocumentsWhereInput
+}
+
+/**
+ * PaymentInfo.statusType
+ */
+export type PaymentInfo$statusTypeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StatusTypeMaster
+   */
+  select?: Prisma.StatusTypeMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StatusTypeMaster
+   */
+  omit?: Prisma.StatusTypeMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StatusTypeMasterInclude<ExtArgs> | null
+  where?: Prisma.StatusTypeMasterWhereInput
 }
 
 /**
