@@ -11,6 +11,7 @@ import {
   sendFinalMeasurementUploadedEmail,
 } from "../../email/brevoEmail.service";
 import { STAGE_PATH_BY_TAG } from "../leadsGeneration/leadActivityStatus.service";
+import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 
 interface FinalMeasurementDto {
   lead_id: number;
@@ -114,6 +115,14 @@ export class FinalMeasurementService {
             final_desc_note: data.critical_discussion_notes,
             status_id: clientDocumentationStatus.id,
           },
+        });
+
+        await ensureLeadStatusLog(tx, {
+          vendorId: data.vendor_id,
+          leadId: data.lead_id,
+          accountId: data.account_id,
+          statusId: clientDocumentationStatus.id,
+          createdBy: data.created_by,
         });
 
         // 5️⃣ Mark related Final Measurement task as completed
@@ -1072,6 +1081,14 @@ export class FinalMeasurementService {
             vendor_id: true,
             status_id: true,
           },
+        });
+
+        await ensureLeadStatusLog(tx, {
+          vendorId: lead.vendor_id,
+          leadId: lead.id,
+          accountId: lead.account_id,
+          statusId: toStatus.id,
+          createdBy: created_by,
         });
       }
 

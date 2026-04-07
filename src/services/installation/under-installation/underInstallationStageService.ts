@@ -6,6 +6,7 @@ import { NotificationService } from "../../../../src/services/notification/notif
 import { NotificationType } from "../../../prisma/generated";
 import { sendLeadMovedToUnderInstallationEmail, sendMiscRequirementEmail, sendMiscERDUpdatedEmail, sendMarkAsReadyEmail, sendMiscRequiredDeliveryDateEmail, sendLeadMovedToFinalHandoverEmail } from "../../../../src/services/email/brevoEmail.service";
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
+import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 
 interface MiscPayload {
   vendor_id: number;
@@ -95,6 +96,14 @@ export class UnderInstallationStageService {
           updated_by: updatedBy,
           updated_at: new Date(),
         },
+      });
+
+      await ensureLeadStatusLog(tx, {
+        vendorId,
+        leadId: lead.id,
+        accountId: lead.account_id,
+        statusId: toStatus.id,
+        createdBy: updatedBy,
       });
 
       // 4️⃣ Activity Log
@@ -2845,6 +2854,14 @@ export class UnderInstallationStageService {
           updated_by: updatedBy,
           updated_at: new Date(),
         },
+      });
+
+      await ensureLeadStatusLog(tx, {
+        vendorId,
+        leadId: lead.id,
+        accountId: lead.account_id,
+        statusId: toStatus.id,
+        createdBy: updatedBy,
       });
 
       // Detailed Log

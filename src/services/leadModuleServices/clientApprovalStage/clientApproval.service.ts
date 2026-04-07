@@ -7,6 +7,7 @@ import { NotificationType, Prisma } from "../../../prisma/generated";
 import logger from '../../../utils/logger'
 import { NotificationService } from "../../notification/notification.service";
 import { sendPaymentAddedEmail } from "../../email/brevoEmail.service";
+import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 
 export class ClientApprovalService {
   public async addApprovalDocuments(data: {
@@ -596,6 +597,14 @@ export class ClientApprovalService {
         updated_by: data.created_by,
         updated_at: new Date(),
       },
+    });
+
+    await ensureLeadStatusLog(prisma, {
+      vendorId: data.vendor_id,
+      leadId: data.lead_id,
+      accountId: data.account_id,
+      statusId: techCheckStatus.id,
+      createdBy: data.created_by,
     });
 
     // Step 3. Create LeadUserMapping (assign to backend user)

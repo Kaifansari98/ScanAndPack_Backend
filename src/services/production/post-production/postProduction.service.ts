@@ -5,6 +5,7 @@ import { sendReadyToDispatchEmail } from "../../../../src/services/email/brevoEm
 import { NotificationType } from "../../../prisma/generated";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
+import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 
 export class PostProductionService {
   async uploadQcPhotos(
@@ -1099,6 +1100,14 @@ export class PostProductionService {
           status_id: readyToDispatchStatus.id,
           updated_by: updatedBy,
         },
+      });
+
+      await ensureLeadStatusLog(tx, {
+        vendorId,
+        leadId,
+        accountId: currentLead.account_id,
+        statusId: readyToDispatchStatus.id,
+        createdBy: updatedBy,
       });
 
       // 4️⃣ Audit log

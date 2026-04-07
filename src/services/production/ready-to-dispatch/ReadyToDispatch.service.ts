@@ -5,6 +5,7 @@ import logger from "../../../utils/logger";
 import { AssignTaskFMInput } from "../../../types/leadModule.types";
 import Joi from "joi";
 import { cache } from "../../../utils/cache";
+import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 
 const assignTaskSiteReadinessSchema = Joi.object({
   lead_id: Joi.number().required(),
@@ -374,6 +375,14 @@ export class ReadyToDispatchService {
             vendor_id: true,
             status_id: true,
           },
+        });
+
+        await ensureLeadStatusLog(tx, {
+          vendorId: lead.vendor_id,
+          leadId: lead.id,
+          accountId: lead.account_id,
+          statusId: toStatus.id,
+          createdBy: created_by,
         });
       }
 

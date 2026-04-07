@@ -4,6 +4,7 @@ import logger from "../../../utils/logger";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 import { sendLeadMovedToDispatchEmail } from "../../../../src/services/email/brevoEmail.service";
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
+import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 
 export class DispatchPlanningService {
   /** ✅ Fetch all leads with status = Type 13 (Dispatch Planning) */
@@ -548,6 +549,14 @@ export class DispatchPlanningService {
           updated_by: updatedBy,
           updated_at: new Date(),
         },
+      });
+
+      await ensureLeadStatusLog(tx, {
+        vendorId,
+        leadId: lead.id,
+        accountId: lead.account_id,
+        statusId: toStatus.id,
+        createdBy: updatedBy,
       });
 
       await tx.leadDetailedLogs.create({

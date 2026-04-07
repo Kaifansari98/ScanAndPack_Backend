@@ -9,6 +9,7 @@ import {
 } from "../../../../src/services/email/brevoEmail.service";
 import { resolveLeadCode } from "../../../../src/utils/fileUtils";
 import { STAGE_PATH_BY_TAG } from "../leadsGeneration/leadActivityStatus.service";
+import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 
 export type DocTypeTag = "Type 11" | "Type 12";
 
@@ -368,6 +369,14 @@ export class ClientDocumentationService {
           updated_by: data.updated_by,
           updated_at: new Date(),
         },
+      });
+
+      await ensureLeadStatusLog(tx, {
+        vendorId: data.vendor_id,
+        leadId: data.lead_id,
+        accountId: lead.account_id,
+        statusId: clientApprovalStatus.id,
+        createdBy: data.updated_by,
       });
 
       await tx.leadDetailedLogs.create({
