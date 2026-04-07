@@ -139,7 +139,8 @@ export const ModelName = {
   UserGeographicalMapping: 'UserGeographicalMapping',
   UserActivityLog: 'UserActivityLog',
   ThemeMaster: 'ThemeMaster',
-  ThemeMapping: 'ThemeMapping'
+  ThemeMapping: 'ThemeMapping',
+  ApiRequestLog: 'ApiRequestLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1519,6 +1520,22 @@ export const ThemeMappingScalarFieldEnum = {
 export type ThemeMappingScalarFieldEnum = (typeof ThemeMappingScalarFieldEnum)[keyof typeof ThemeMappingScalarFieldEnum]
 
 
+export const ApiRequestLogScalarFieldEnum = {
+  id: 'id',
+  endpoint: 'endpoint',
+  vendor_token: 'vendor_token',
+  vendor_id: 'vendor_id',
+  payload: 'payload',
+  success: 'success',
+  response: 'response',
+  error: 'error',
+  project_id: 'project_id',
+  created_at: 'created_at'
+} as const
+
+export type ApiRequestLogScalarFieldEnum = (typeof ApiRequestLogScalarFieldEnum)[keyof typeof ApiRequestLogScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1533,6 +1550,13 @@ export const NullableJsonNullValueInput = {
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {

@@ -1685,6 +1685,22 @@ model ThemeMapping {
   @@unique([theme_id, key])
 }
 
+model ApiRequestLog {
+  id           Int      @id @default(autoincrement())
+  endpoint     String                        // e.g. "handelItems"
+  vendor_token String?                       // token used
+  vendor_id    Int?                          // resolved vendor id
+  payload      Json                          // full incoming payload
+  success      Boolean                       // true/false outcome
+  response     Json                          // full response returned
+  error        String?                       // error message if crashed
+  project_id   Int?                          // project created (if success)
+  created_at   DateTime @default(now())
+
+  @@index([vendor_id])
+  @@index([created_at])
+}
+
 enum MachineTypeMasterStatus {
   YES
   NO

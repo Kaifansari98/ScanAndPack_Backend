@@ -877,6 +877,30 @@ export const handelItems = async (
 ) => {
   try {
 
+    // ✅ Declared at top scope so always accessible in catch
+    let resolvedVendorId: number | null = null;
+    let resolvedProjectId: number | null = null;
+
+  
+
+
+    try {
+        await prisma.apiRequestLog.create({
+          data: {
+            endpoint: "handelItems",
+            vendor_token: vendorToken,
+            vendor_id: resolvedVendorId,       // always safe, null if not yet resolved
+            payload: payload as any,
+            success:  false,
+            response: '',
+            error:  null,
+            project_id: resolvedProjectId,     // always safe, null if not yet resolved
+          }
+        });
+      } catch (logError) {
+        console.error("Failed to write api log:", logError);
+      }
+
     console.log("payload", payload);
 
     const requiredString = (field: string) =>

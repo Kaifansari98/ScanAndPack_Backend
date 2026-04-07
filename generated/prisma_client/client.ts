@@ -482,3 +482,8 @@ export type ThemeMaster = Prisma.ThemeMasterModel
  * 
  */
 export type ThemeMapping = Prisma.ThemeMappingModel
+/**
+ * Model ApiRequestLog
+ * 
+ */
+export type ApiRequestLog = Prisma.ApiRequestLogModel
