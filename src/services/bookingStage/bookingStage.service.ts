@@ -2114,6 +2114,11 @@ export class BookingStageService {
               user_name: true,
             },
           },
+          statusType: {
+            select: {
+              type: true,
+            },
+          },
         },
       });
 
@@ -2138,6 +2143,8 @@ export class BookingStageService {
         paymentLogs.push({
           id: p.id,
           amount: p.amount,
+          status_id: p.status_id,
+          status_type: p.statusType?.type ?? null,
           payment_text: p.payment_text,
           payment_date: p.payment_date,
           entry_date: p.created_at,
