@@ -82,6 +82,20 @@ interface LeadTrackingReportRow {
   final_handover_date: Date | null;
 }
 
+interface PaymentsBetweenClientAndStoreReportRow {
+  lead_id: number;
+  lead_code: string;
+  client_name: string;
+  franchise_store: string;
+  project_mrp: number | null;
+  ism_amount_collected: number | null;
+  ism_amt_date: Date | null;
+  ism_amt_description: string | null;
+  booking_advance_collected: number | null;
+  ba_date: Date | null;
+  ba_description: string | null;
+}
+
 export const createVendor = async (data: any) => {
   const {
     vendor_name,
@@ -862,6 +876,119 @@ export const getLeadTrackingReportData = async (
         final_handover_date: lead.final_handover_marked_at,
       }));
     });
+};
+
+export const getPaymentsBetweenClientAndStoreReportData = async (
+  vendorId: number,
+  franchiseId: number | null,
+  fromDate: string | null,
+  toDate: string | null,
+): Promise<PaymentsBetweenClientAndStoreReportRow[]> => {
+  const where: any = {
+    vendor_id: vendorId,
+    is_deleted: false,
+    payments: {
+      some: {
+        paymentType: {
+          tag: {
+            in: ["Type 1", "Type 2"],
+          },
+        },
+      },
+    },
+  };
+
+  if (franchiseId !== null) {
+    where.franchise_id = franchiseId;
+  }
+
+  if (fromDate && toDate) {
+    where.payments = {
+      some: {
+        paymentType: {
+          tag: {
+            in: ["Type 1", "Type 2"],
+          },
+        },
+        created_at: {
+          gte: new Date(fromDate),
+          lte: new Date(new Date(toDate).setHours(23, 59, 59, 999)),
+        },
+      },
+    };
+  }
+
+  const leads = await prisma.leadMaster.findMany({
+    where,
+    select: {
+      id: true,
+      lead_code: true,
+      firstname: true,
+      lastname: true,
+      mrp_value: true,
+      franchise: {
+        select: {
+          franchise_name: true,
+        },
+      },
+      payments: {
+        where: {
+          paymentType: {
+            tag: {
+              in: ["Type 1", "Type 2"],
+            },
+          },
+          ...(fromDate && toDate
+            ? {
+                created_at: {
+                  gte: new Date(fromDate),
+                  lte: new Date(new Date(toDate).setHours(23, 59, 59, 999)),
+                },
+              }
+            : {}),
+        },
+        select: {
+          amount: true,
+          payment_text: true,
+          created_at: true,
+          paymentType: {
+            select: {
+              tag: true,
+            },
+          },
+        },
+        orderBy: {
+          created_at: "asc",
+        },
+      },
+    },
+    orderBy: {
+      created_at: "asc",
+    },
+  });
+
+  return leads.map((lead) => {
+    const ismPayment =
+      lead.payments.find((payment) => payment.paymentType.tag === "Type 1") ??
+      null;
+    const bookingAdvancePayment =
+      lead.payments.find((payment) => payment.paymentType.tag === "Type 2") ??
+      null;
+
+    return {
+      lead_id: lead.id,
+      lead_code: lead.lead_code,
+      client_name: `${lead.firstname} ${lead.lastname}`.trim(),
+      franchise_store: lead.franchise?.franchise_name ?? "-",
+      project_mrp: lead.mrp_value,
+      ism_amount_collected: ismPayment?.amount ?? null,
+      ism_amt_date: ismPayment?.created_at ?? null,
+      ism_amt_description: ismPayment?.payment_text ?? null,
+      booking_advance_collected: bookingAdvancePayment?.amount ?? null,
+      ba_date: bookingAdvancePayment?.created_at ?? null,
+      ba_description: bookingAdvancePayment?.payment_text ?? null,
+    };
+  });
 };
 
 export const getVendorById = async (vendorId: number) => {

@@ -5,6 +5,7 @@ import {
   getErdReportController,
   getLeadTrackingReportController,
   getLeadsOverviewReportController,
+  getPaymentsBetweenClientAndStoreReportController,
   getTechCheckStageReportController,
   getVendorStatusTypesController,
   getVendorUsersController,
@@ -23,6 +24,10 @@ router.get("/status-types", getVendorStatusTypesController);
 router.get("/reports/leads-overview", getLeadsOverviewReportController);
 router.get("/reports/lead-tracking", getLeadTrackingReportController);
 router.get("/reports/techcheck-stage", getTechCheckStageReportController);
+router.get(
+  "/reports/payments-between-client-and-store",
+  getPaymentsBetweenClientAndStoreReportController,
+);
 router.get("/reports/erd", getErdReportController);
 
 export default router;
