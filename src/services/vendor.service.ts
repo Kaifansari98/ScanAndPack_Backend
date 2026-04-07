@@ -94,6 +94,10 @@ interface PaymentsBetweenClientAndStoreReportRow {
   booking_advance_collected: number | null;
   ba_date: Date | null;
   ba_description: string | null;
+  additional_payments: {
+    amount: number | null;
+    created_at: Date | null;
+  }[];
 }
 
 export const createVendor = async (data: any) => {
@@ -888,13 +892,7 @@ export const getPaymentsBetweenClientAndStoreReportData = async (
     vendor_id: vendorId,
     is_deleted: false,
     payments: {
-      some: {
-        paymentType: {
-          tag: {
-            in: ["Type 1", "Type 2"],
-          },
-        },
-      },
+      some: {},
     },
   };
 
@@ -905,11 +903,6 @@ export const getPaymentsBetweenClientAndStoreReportData = async (
   if (fromDate && toDate) {
     where.payments = {
       some: {
-        paymentType: {
-          tag: {
-            in: ["Type 1", "Type 2"],
-          },
-        },
         created_at: {
           gte: new Date(fromDate),
           lte: new Date(new Date(toDate).setHours(23, 59, 59, 999)),
@@ -933,11 +926,6 @@ export const getPaymentsBetweenClientAndStoreReportData = async (
       },
       payments: {
         where: {
-          paymentType: {
-            tag: {
-              in: ["Type 1", "Type 2"],
-            },
-          },
           ...(fromDate && toDate
             ? {
                 created_at: {
@@ -974,6 +962,16 @@ export const getPaymentsBetweenClientAndStoreReportData = async (
     const bookingAdvancePayment =
       lead.payments.find((payment) => payment.paymentType.tag === "Type 2") ??
       null;
+    const additionalPayments = lead.payments
+      .filter(
+        (payment) =>
+          payment.paymentType.tag !== "Type 1" &&
+          payment.paymentType.tag !== "Type 2",
+      )
+      .map((payment) => ({
+        amount: payment.amount ?? null,
+        created_at: payment.created_at ?? null,
+      }));
 
     return {
       lead_id: lead.id,
@@ -987,6 +985,7 @@ export const getPaymentsBetweenClientAndStoreReportData = async (
       booking_advance_collected: bookingAdvancePayment?.amount ?? null,
       ba_date: bookingAdvancePayment?.created_at ?? null,
       ba_description: bookingAdvancePayment?.payment_text ?? null,
+      additional_payments: additionalPayments,
     };
   });
 };
