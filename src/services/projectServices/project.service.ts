@@ -879,7 +879,6 @@ export const handelItems = async (
 
     console.log("payload", payload);
 
-
     const requiredString = (field: string) =>
       z.string().min(1, `${field} blank`);
 
@@ -887,9 +886,6 @@ export const handelItems = async (
       z.coerce.number({
         error: `${field} missing`
       });
-
-
-
 
     const itemSchema = z.object({
       articleCode: requiredString("articleCode"),
@@ -931,19 +927,17 @@ export const handelItems = async (
       };
     }
 
-    // ✅ Step 1: Collect all unique_codes (barcode1) that will be inserted
+    // ✅ Step 1: Collect unique barcode1 values across items (not expanded by qty)
+    // Same barcode1 with qty > 1 is valid — only cross-item duplicates are rejected
     const uniqueCodesToInsert: string[] = [];
 
     for (const item of payload.items) {
       if (item.barcode1) {
-        const quantity = Number(item.qty);
-        for (let i = 0; i < quantity; i++) {
-          uniqueCodesToInsert.push(item.barcode1);
-        }
+        uniqueCodesToInsert.push(item.barcode1);
       }
     }
 
-    // ✅ Step 2: Check for duplicates within the payload itself
+    // ✅ Step 2: Check for duplicate barcode1 across different items in the payload
     const duplicatesInPayload = uniqueCodesToInsert.filter(
       (code, index) => uniqueCodesToInsert.indexOf(code) !== index
     );
@@ -1033,89 +1027,76 @@ export const handelItems = async (
       for (const item of payload.items) {
 
         const quantity = Number(item.qty);
+        const hasEdgeBanding = item.el1 || item.el2 || item.sl1 || item.sl2;
 
-        for (let i = 0; i < quantity; i++) {
+        // ✅ 1 cutList row per item regardless of qty
+        const row = await tx.cutList.create({
+          data: {
+            project_id: project.id,
+            vendor_id: vendor.id,
+            description: item.name,
+            length: Number(item.l1),
+            width: Number(item.l2),
+            thickness: Number(item.l3),
+            qty: quantity,
+            material_details: item.articleCode,
+            item_name: item.groupName,
+            status: "Active",
+            created_by: createdByUserId,
+            lead_id: lead_id,
+            elf: item.el1 || '',
+            elb: item.el2 || '',
+            esl: item.sl1 || '',
+            esr: item.sl2 || '',
+            unique_code: "",
+            unique_code_2: item.barcode2 || null,
+          }
+        });
 
-          const row = await tx.cutList.create({
-            data: {
-              project_id: project.id,
-              vendor_id: vendor.id,
-              description: item.name,
-              length: Number(item.l1),
-              width: Number(item.l2),
-              thickness: Number(item.l3),
-              qty: 1,
-              material_details: item.articleCode,
-              item_name: item.groupName,
-              status: "Active",
-              created_by: createdByUserId,
-              lead_id: lead_id,
-              elf: item.el1 || '',
-              elb: item.el2 || '',
-              esl: item.sl1 || '',
-              esr: item.sl2 || '',
-              unique_code: "",
-              unique_code_2: item.barcode2 || null,
+        // Set unique_code: use barcode1 if provided, else generate from row id
+        const uniqueCode = item.barcode1 || `${row.id}-${project.id}`;
+        await tx.cutList.update({
+          where: { id: row.id },
+          data: { unique_code: uniqueCode }
+        });
+
+        // ✅ cutListMachineMapping: 1 row per qty unit
+        if (hasEdgeBanding) {
+
+          const machine_type = await tx.machineMaster.findFirst({
+            where: {
+              vendor_id: Number(vendor.id),
+              machine_type_id: 11
+            },
+            select: {
+              id: true,
+              sequence_no: true
             }
           });
 
-          const uniqueCode = item.barcode1 || `${row.id}-${project.id}`;
+          if (!machine_type) {
+            throw new Error("Edgebanding machine is not configured");
+          }
 
-          await tx.cutList.update({
-            where: { id: row.id },
-            data: { unique_code: uniqueCode }
-          });
+          const machine_type_id = machine_type.id;
+          const sequence_no = machine_type.sequence_no ?? 0;
 
-          let machine_type_id = 0;
-          let sequence_no = 0;
-          const hasEdgeBanding = item.el1 || item.el2 || item.sl1 || item.sl2;
-
-          if (hasEdgeBanding) {
-
-            if (machine_type_id == 0) {
-              const machine_type = await tx.machineMaster.findFirst({
-                where: {
-                  vendor_id: Number(vendor.id),
-                  machine_type_id: 11
-                },
-                select: {
-                  id: true,
-                  sequence_no: true
-                }
-              });
-              if (machine_type) {
-                machine_type_id = machine_type.id ?? 0;
-                sequence_no = machine_type.sequence_no ?? 0;
+          for (let i = 0; i < quantity; i++) {
+            await tx.cutListMachineMapping.create({
+              data: {
+                cut_list_id: row.id,
+                machine_id: machine_type_id,
+                project_id: project.id,
+                vendor_id: vendor.id,
+                lead_id: lead_id,
+                sequence_no: sequence_no,
+                status: "Pending",
+                created_by: createdByUserId,
+                expected_in: true
               }
-            }
-
-            if (machine_type_id == 0) {
-              throw new Error("Edgebanding machine is not configured");
-              // return {
-              //   success: false,
-              //   message: "Edgebanding machine is not configured"
-              // };
-
-              //throw new Error("Edgebanding machine is not configured");
-            } else {
-              await tx.cutListMachineMapping.create({
-                data: {
-                  cut_list_id: row.id,
-                  machine_id: machine_type_id,
-                  project_id: project.id,
-                  vendor_id: vendor.id,
-                  lead_id: lead_id,
-                  sequence_no: sequence_no,
-                  status: "Pending",
-                  created_by: createdByUserId,
-                  expected_in: true
-                }
-              });
-            }
+            });
           }
         }
-
-
       }
 
       return project;

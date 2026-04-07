@@ -2085,18 +2085,12 @@ export const assignMachine = async (payload: CutListSavePayload) => {
 
         if (!projectId) {
             return validationResponse(0, 'Project not found');
-            //throw new Error("Project not found");
         }
-
-
-        let lead_id = 0;
 
         const cutListIdArray = payload.cutListIds
             .split(",")
             .map(id => Number(id.trim()))
             .filter(id => !isNaN(id));
-
-
 
         return await prisma.$transaction(async (tx) => {
 
@@ -2110,10 +2104,23 @@ export const assignMachine = async (payload: CutListSavePayload) => {
                 });
 
                 return validationResponse(1, 'Machine unmapped');
-
-                //return { message: "Mappings removed" };
             }
 
+            // ✅ Fetch cutList rows to get qty and lead_id per cut_list_id
+            const cutListRows = await tx.cutList.findMany({
+                where: {
+                    id: { in: cutListIdArray }
+                },
+                select: {
+                    id: true,
+                    qty: true,
+                    lead_id: true
+                }
+            });
+
+            console.log(cutListRows);
+
+            // ✅ Find which cut_list_ids already have mapping for this machine
             const existing = await tx.cutListMachineMapping.findMany({
                 where: {
                     cut_list_id: { in: cutListIdArray },
@@ -2123,61 +2130,70 @@ export const assignMachine = async (payload: CutListSavePayload) => {
                 select: { cut_list_id: true }
             });
 
-            const existingIds = existing.map(e => e.cut_list_id);
-            const newIds = cutListIdArray.filter(id => !existingIds.includes(id));
+            const existingIds = new Set(existing.map(e => e.cut_list_id));
 
-            const machine = await prisma.machineMaster.findFirst({
+            // ✅ Only process cut_list_ids that don't already have a mapping
+            const newCutListRows = cutListRows.filter(row => !existingIds.has(row.id));
+
+            if (newCutListRows.length === 0) {
+                return validationResponse(1, 'Machine mapped successfully');
+            }
+
+            const machine = await tx.machineMaster.findFirst({
                 where: {
                     id: payload.machine_id
                 }
             });
-
 
             const sequence = machine?.sequence_no;
             if (sequence == null) {
                 return validationResponse(0, 'Machine sequence not set');
             }
 
-            if (newIds.length > 0) {
+            // ✅ Build mapping rows — one entry per qty unit per cut_list_id
+            const mappingData: {
+                cut_list_id: number;
+                machine_id: number;
+                project_id: number;
+                vendor_id: number;
+                lead_id: number;
+                sequence_no: number;
+                status: string;
+                created_by: number;
+                expected_in: boolean;
+            }[] = [];
 
-                if (lead_id == 0) {
-                    const lead = await prisma.cutList.findFirst({
-                        where: {
-                            id: newIds[0]
-                        },
-                        select: {
-                            lead_id: true
-                        }
-                    });
+            for (const cutListRow of newCutListRows) {
+                const qty = Number(cutListRow.qty) || 1;
+                const lead_id = Number(cutListRow.lead_id) || 0;
 
-                    lead_id = Number(lead?.lead_id);
-                }
-
-
-                await tx.cutListMachineMapping.createMany({
-                    data: newIds.map(id => ({
-                        cut_list_id: id,
+                for (let i = 0; i < qty; i++) {
+                    mappingData.push({
+                        cut_list_id: cutListRow.id,
                         machine_id: payload.machine_id,
                         project_id: projectId,
                         vendor_id: payload.vendor_id,
-                        lead_id: lead_id, // don't hardcode 1
+                        lead_id: lead_id,
                         sequence_no: sequence,
                         status: "Pending",
                         created_by: Number(payload.created_by),
                         expected_in: true
-                    }))
-                });
+                    });
+                }
             }
+
+            await tx.cutListMachineMapping.createMany({
+                data: mappingData
+            });
 
             return validationResponse(1, 'Machine mapped successfully');
 
         });
     } catch (error) {
-        console.log(error)
+        console.log(error);
         return validationResponse(0, 'Something went wrong');
-
     }
-}
+};
 
 
 export const createQR = async (payload: QRParam) => {
