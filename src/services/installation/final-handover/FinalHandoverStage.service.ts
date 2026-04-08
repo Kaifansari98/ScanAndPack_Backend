@@ -604,6 +604,7 @@ export class FinalHandoverStageService {
           id: true,
           vendor_id: true,
           account_id: true,
+          franchise_id: true,
           lead_code: true,
           firstname: true,
           lastname: true,
@@ -626,6 +627,44 @@ export class FinalHandoverStageService {
         throw new Error("Project Completed status not configured");
       }
 
+      const siteSupervisorMapping = await tx.leadUserMapping.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          type: "site-supervisor",
+          status: "active",
+        },
+        select: {
+          user_id: true,
+        },
+      });
+
+      if (!siteSupervisorMapping) {
+        throw new Error("Active site supervisor is not assigned to this lead");
+      }
+
+      const freeServiceSchedules = await tx.leadServiceSchedule.findMany({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          service_type: "free",
+          service_no: { in: [1, 2, 3] },
+        },
+        select: {
+          service_no: true,
+          scheduled_for: true,
+        },
+        orderBy: {
+          service_no: "asc",
+        },
+      });
+
+      if (freeServiceSchedules.length < 3) {
+        throw new Error(
+          "Free service schedule is not ready. Complete usable handover first.",
+        );
+      }
+
       // 3. Update Lead Status
       await tx.leadMaster.update({
         where: { id: leadId },
@@ -644,6 +683,46 @@ export class FinalHandoverStageService {
         statusId: status.id,
         createdBy: updatedBy,
       });
+
+      const taskTypeByServiceNo: Record<number, string> = {
+        1: "1st Servicing",
+        2: "2nd Servicing",
+        3: "3rd Servicing",
+      };
+
+      for (const service of freeServiceSchedules) {
+        const taskType = taskTypeByServiceNo[service.service_no];
+        if (!taskType) continue;
+
+        const existingTask = await tx.userLeadTask.findFirst({
+          where: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            user_id: siteSupervisorMapping.user_id,
+            task_type: taskType,
+            due_date: service.scheduled_for,
+          },
+          select: { id: true },
+        });
+
+        if (!existingTask) {
+          await tx.userLeadTask.create({
+            data: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: lead.account_id!,
+              franchise_id: lead.franchise_id ?? null,
+              user_id: siteSupervisorMapping.user_id,
+              task_type: taskType,
+              lead_stage: "servicing-stage",
+              due_date: service.scheduled_for,
+              remark: null,
+              status: "open",
+              created_by: updatedBy,
+            },
+          });
+        }
+      }
 
       // 4. Insert Audit Log
       const actionMessage = `Lead moved to Project Completed Stage.`;
