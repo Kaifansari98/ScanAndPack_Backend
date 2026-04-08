@@ -973,39 +973,45 @@ export const getHourlyProduction = async (
     payload: TrackTraceDashboardPayload
 ) => {
     try {
-        const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
+        const timeZone = 'Asia/Kolkata';
+
+        // Today's date in vendor timezone
+        const todayStr = new Date().toLocaleDateString('en-CA', { timeZone }); // "2025-04-08"
+
+        // Get vendor's UTC offset in ms
+        // e.g. Asia/Kolkata = +5:30 = +19800000ms
+        const offsetMs = (() => {
+            const utcDate = new Date(`${todayStr}T12:00:00Z`);
+            const localStr = utcDate.toLocaleString('en-CA', { timeZone, hour12: false })
+                .replace(',', '');
+            const localDate = new Date(localStr + 'Z');
+            return localDate.getTime() - utcDate.getTime();
+        })();
 
         const labels: string[] = [];
         const data: number[] = [];
 
         for (let hour = 8; hour <= 20; hour++) {
-            const hourStart = new Date(todayStart);
-            hourStart.setHours(hour, 0, 0, 0);
-
-            const hourEnd = new Date(todayStart);
-            hourEnd.setHours(hour + 1, 0, 0, 0);
-
+            // Build hour boundaries as if in vendor timezone, then shift to UTC
+            const hourStartUTC = new Date(
+                new Date(`${todayStr}T${String(hour).padStart(2, '0')}:00:00Z`).getTime() - offsetMs
+            );
+            const hourEndUTC = new Date(
+                new Date(`${todayStr}T${String(hour + 1).padStart(2, '0')}:00:00Z`).getTime() - offsetMs
+            );
 
             const baseWhere: any = {
                 vendor_id: payload.vendor_id,
                 actual_in_at: {
-                    gte: hourStart,
-                    lt: hourEnd,
+                    gte: hourStartUTC,
+                    lt: hourEndUTC,
                     not: null,
                 },
             };
 
-            if (payload.project_id) {
-                baseWhere.project_id = Number(payload.project_id);
-            }
-
-            if (payload.machine_id) {
-                baseWhere.machine_id = Number(payload.machine_id);
-            }
-
-            if (payload.created_by) {
-                baseWhere.operator = Number(payload.created_by);
-            }
+            if (payload.project_id) baseWhere.project_id = Number(payload.project_id);
+            if (payload.machine_id) baseWhere.machine_id = Number(payload.machine_id);
+            if (payload.created_by) baseWhere.operator = Number(payload.created_by);
 
             const scans = await prisma.cutListMachineMapping.findMany({
                 where: baseWhere,
@@ -1020,28 +1026,19 @@ export const getHourlyProduction = async (
             });
 
             let sqftThisHour = 0;
-
             for (const scan of scans) {
                 if (!scan.cut_list) continue;
-
-                const sqft =
+                sqftThisHour +=
                     (Number(scan.cut_list.length) * Number(scan.cut_list.width)) / 92903;
-
-                sqftThisHour += sqft;
             }
 
             const hourLabel =
-                hour === 12
-                    ? '12 PM'
-                    : hour > 12
-                        ? `${hour - 12} PM`
-                        : `${hour} AM`;
+                hour === 12 ? '12 PM' : hour > 12 ? `${hour - 12} PM` : `${hour} AM`;
 
             labels.push(hourLabel);
             data.push(Math.round(sqftThisHour * 100) / 100);
         }
 
-        // Example target: 500 sqft per hour
         const targetSqftPerHour = 500;
         const target = new Array(labels.length).fill(targetSqftPerHour);
 
