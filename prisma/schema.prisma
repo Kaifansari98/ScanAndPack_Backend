@@ -49,9 +49,11 @@ model VendorMaster {
   leadDocumentLogs                    LeadDocumentLogs[]
   documents                           LeadDocuments[]
   leads                               LeadMaster[]
+  leadAmcContracts                    LeadAmcContract[]
   leadProductMaps                     LeadProductMapping[]
   productStructureInstances           LeadProductStructureInstance[]
   leadProductStructureMapping         LeadProductStructureMapping[]
+  leadServiceSchedules                LeadServiceSchedule[]
   siteSupervisors                     LeadSiteSupervisorMapping[]
   leadStatusLogs                      LeadStatusLogs[]
   leadUserMappings                    LeadUserMapping[]
@@ -194,6 +196,12 @@ model UserMaster {
   createdUserMachineMappings                 UserMachineMapping[]                 @relation("UserMachine_createdBy")
   updatedUserMachineMappings                 UserMachineMapping[]                 @relation("UserMachine_updatedBy")
   userMachineMappings                        UserMachineMapping[]                 @relation("UserMachine_user")
+  leadAmcContractsCreated                    LeadAmcContract[]                    @relation("LeadAmcContractCreatedBy")
+  leadAmcContractsUpdated                    LeadAmcContract[]                    @relation("LeadAmcContractUpdatedBy")
+  leadServiceSchedulesCreated                LeadServiceSchedule[]                @relation("LeadServiceScheduleCreatedBy")
+  leadServiceSchedulesUpdated                LeadServiceSchedule[]                @relation("LeadServiceScheduleUpdatedBy")
+  leadServiceSchedulesCompleted              LeadServiceSchedule[]                @relation("LeadServiceScheduleCompletedBy")
+  leadServiceSchedulesRejected               LeadServiceSchedule[]                @relation("LeadServiceScheduleRejectedBy")
   franchise                                  FranchiseMaster?                     @relation(fields: [franchise_id], references: [id])
   user_type                                  UserTypeMaster                       @relation(fields: [user_type_id], references: [id])
   vendor                                     VendorMaster                         @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
@@ -417,6 +425,8 @@ model LeadMaster {
   usable_handover_completed_at                DateTime?
   is_amc_opted                               Boolean?                            @default(false)
   amc_opted_at                               DateTime?
+  amc_plan_started_at                        DateTime?
+  amc_plan_closed_at                         DateTime?
   final_handover_marked_at                    DateTime?
   franchise_id                                Int?
   order_login_prod_files_remark               String?
@@ -434,6 +444,7 @@ model LeadMaster {
   leadDetailedLogs                            LeadDetailedLogs[]
   leadDocumentLogs                            LeadDocumentLogs[]
   documents                                   LeadDocuments[]
+  amcContracts                                LeadAmcContract[]
   account                                     AccountMaster?                      @relation(fields: [account_id], references: [id], onDelete: Cascade)
   assignedTo                                  UserMaster?                         @relation("LeadAssignedTo", fields: [assign_to], references: [id])
   assignedBy                                  UserMaster?                         @relation("LeadAssignedBy", fields: [assigned_by], references: [id])
@@ -456,6 +467,7 @@ model LeadMaster {
   orderLoginPoFiles                           OrderLoginPoFileMapping[]
   payments                                    PaymentInfo[]
   projects                                    ProjectMaster[]
+  serviceSchedules                            LeadServiceSchedule[]
   siteReadiness                               SiteReadiness[]
   tasks                                       UserLeadTask[]
 
@@ -548,9 +560,11 @@ model AccountMaster {
   leadDocumentLogs            LeadDocumentLogs[]
   documents                   LeadDocuments[]
   leads                       LeadMaster[]
+  leadAmcContracts            LeadAmcContract[]
   leadsMapping                LeadProductMapping[]
   productStructureInstances   LeadProductStructureInstance[]
   leadProductStructureMapping LeadProductStructureMapping[]
+  leadServiceSchedules        LeadServiceSchedule[]
   siteSupervisors             LeadSiteSupervisorMapping[]
   leadStatusLogs              LeadStatusLogs[]
   leadUserMappings            LeadUserMapping[]
@@ -605,7 +619,9 @@ model LeadDocuments {
   product_structure_instance_id Int?
   installationUpdateDocs        InstallationUpdateDocuments[] @relation("InstallationUpdateDocumentLink")
   leadDocumentLogs              LeadDocumentLogs[]
+  amcContracts                  LeadAmcContract[]          @relation("LeadAmcContractDocument")
   account                       AccountMaster?                @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  completedServiceSchedules     LeadServiceSchedule[]      @relation("LeadServiceScheduleCompletionDocument")
   createdBy                     UserMaster                    @relation("DocumentCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   deletedBy                     UserMaster?                   @relation("DocumentDeletedBy", fields: [deleted_by], references: [id])
   documentType                  DocumentTypeMaster            @relation(fields: [doc_type_id], references: [id], onDelete: Cascade)
@@ -818,6 +834,69 @@ model DocumentTypeMaster {
   stage     String?
   vendor    VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   documents LeadDocuments[]
+}
+
+model LeadAmcContract {
+  id                  Int            @id @default(autoincrement())
+  vendor_id           Int
+  lead_id             Int
+  account_id          Int
+  contract_start_date DateTime
+  contract_end_date   DateTime?
+  document_id         Int?
+  status              String         @default("active")
+  created_by          Int
+  created_at          DateTime       @default(now())
+  updated_by          Int?
+  updated_at          DateTime       @updatedAt
+  account             AccountMaster  @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  createdBy           UserMaster     @relation("LeadAmcContractCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  document            LeadDocuments? @relation("LeadAmcContractDocument", fields: [document_id], references: [id])
+  lead                LeadMaster     @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  updatedBy           UserMaster?    @relation("LeadAmcContractUpdatedBy", fields: [updated_by], references: [id])
+  vendor              VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id, lead_id])
+}
+
+model LeadServiceSchedule {
+  id                     Int                  @id @default(autoincrement())
+  vendor_id              Int
+  lead_id                Int
+  account_id             Int
+  service_no             Int
+  service_type           ServiceVisitType     @default(free)
+  scheduled_for          DateTime
+  original_scheduled_for DateTime
+  status                 ServiceVisitStatus   @default(open)
+  rescheduled_once       Boolean              @default(false)
+  rescheduled_from       DateTime?
+  completed_at           DateTime?
+  completed_by           Int?
+  completion_remark      String?              @db.VarChar(2000)
+  completion_document_id Int?
+  rejected_at            DateTime?
+  rejected_by            Int?
+  rejection_remark       String?              @db.VarChar(2000)
+  closure_reason         ServiceClosureReason?
+  created_by             Int
+  created_at             DateTime             @default(now())
+  updated_by             Int?
+  updated_at             DateTime             @updatedAt
+  account                AccountMaster        @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  completedBy            UserMaster?          @relation("LeadServiceScheduleCompletedBy", fields: [completed_by], references: [id])
+  completionDocument     LeadDocuments?       @relation("LeadServiceScheduleCompletionDocument", fields: [completion_document_id], references: [id])
+  createdBy              UserMaster           @relation("LeadServiceScheduleCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  lead                   LeadMaster           @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  rejectedBy             UserMaster?          @relation("LeadServiceScheduleRejectedBy", fields: [rejected_by], references: [id])
+  updatedBy              UserMaster?          @relation("LeadServiceScheduleUpdatedBy", fields: [updated_by], references: [id])
+  vendor                 VendorMaster         @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  @@unique([lead_id, service_no, service_type], name: "uniq_lead_service_no_type")
+  @@index([vendor_id, status, scheduled_for])
+  @@index([lead_id, service_no])
+  @@index([completed_at])
+  @@index([rejected_at])
 }
 
 model StatusTypeMaster {
@@ -1827,4 +1906,21 @@ enum UserActivityType {
   RESET_PASSWORD
   LOGIN
   LOGOUT
+}
+
+enum ServiceVisitStatus {
+  open
+  completed
+  rejected
+}
+
+enum ServiceVisitType {
+  free
+  amc
+}
+
+enum ServiceClosureReason {
+  no_amc_after_free
+  converted_to_amc
+  manually_closed
 }

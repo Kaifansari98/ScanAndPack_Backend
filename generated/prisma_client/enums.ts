@@ -189,3 +189,29 @@ export const UserActivityType = {
 } as const
 
 export type UserActivityType = (typeof UserActivityType)[keyof typeof UserActivityType]
+
+
+export const ServiceVisitStatus = {
+  open: 'open',
+  completed: 'completed',
+  rejected: 'rejected'
+} as const
+
+export type ServiceVisitStatus = (typeof ServiceVisitStatus)[keyof typeof ServiceVisitStatus]
+
+
+export const ServiceVisitType = {
+  free: 'free',
+  amc: 'amc'
+} as const
+
+export type ServiceVisitType = (typeof ServiceVisitType)[keyof typeof ServiceVisitType]
+
+
+export const ServiceClosureReason = {
+  no_amc_after_free: 'no_amc_after_free',
+  converted_to_amc: 'converted_to_amc',
+  manually_closed: 'manually_closed'
+} as const
+
+export type ServiceClosureReason = (typeof ServiceClosureReason)[keyof typeof ServiceClosureReason]

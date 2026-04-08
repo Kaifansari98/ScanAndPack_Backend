@@ -208,6 +208,16 @@ export type Ledger = Prisma.LedgerModel
  */
 export type DocumentTypeMaster = Prisma.DocumentTypeMasterModel
 /**
+ * Model LeadAmcContract
+ * 
+ */
+export type LeadAmcContract = Prisma.LeadAmcContractModel
+/**
+ * Model LeadServiceSchedule
+ * 
+ */
+export type LeadServiceSchedule = Prisma.LeadServiceScheduleModel
+/**
  * Model StatusTypeMaster
  * 
  */

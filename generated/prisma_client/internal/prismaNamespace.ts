@@ -418,6 +418,8 @@ export const ModelName = {
   PaymentInfo: 'PaymentInfo',
   Ledger: 'Ledger',
   DocumentTypeMaster: 'DocumentTypeMaster',
+  LeadAmcContract: 'LeadAmcContract',
+  LeadServiceSchedule: 'LeadServiceSchedule',
   StatusTypeMaster: 'StatusTypeMaster',
   LeadStatusLogs: 'LeadStatusLogs',
   LeadDesignMeeting: 'LeadDesignMeeting',
@@ -489,7 +491,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3006,6 +3008,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.DocumentTypeMasterCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.DocumentTypeMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    LeadAmcContract: {
+      payload: Prisma.$LeadAmcContractPayload<ExtArgs>
+      fields: Prisma.LeadAmcContractFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadAmcContractFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadAmcContractPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadAmcContractFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadAmcContractPayload>
+        }
+        findFirst: {
+          args: Prisma.LeadAmcContractFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadAmcContractPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadAmcContractFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadAmcContractPayload>
+        }
+        findMany: {
+          args: Prisma.LeadAmcContractFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadAmcContractPayload>[]
+        }
+        create: {
+          args: Prisma.LeadAmcContractCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadAmcContractPayload>
+        }
+        createMany: {
+          args: Prisma.LeadAmcContractCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadAmcContractCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadAmcContractPayload>[]
+        }
+        delete: {
+          args: Prisma.LeadAmcContractDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadAmcContractPayload>
+        }
+        update: {
+          args: Prisma.LeadAmcContractUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadAmcContractPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadAmcContractDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadAmcContractUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadAmcContractUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadAmcContractPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadAmcContractUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadAmcContractPayload>
+        }
+        aggregate: {
+          args: Prisma.LeadAmcContractAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadAmcContract>
+        }
+        groupBy: {
+          args: Prisma.LeadAmcContractGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadAmcContractGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadAmcContractCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadAmcContractCountAggregateOutputType> | number
+        }
+      }
+    }
+    LeadServiceSchedule: {
+      payload: Prisma.$LeadServiceSchedulePayload<ExtArgs>
+      fields: Prisma.LeadServiceScheduleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadServiceScheduleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadServiceSchedulePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadServiceScheduleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadServiceSchedulePayload>
+        }
+        findFirst: {
+          args: Prisma.LeadServiceScheduleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadServiceSchedulePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadServiceScheduleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadServiceSchedulePayload>
+        }
+        findMany: {
+          args: Prisma.LeadServiceScheduleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadServiceSchedulePayload>[]
+        }
+        create: {
+          args: Prisma.LeadServiceScheduleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadServiceSchedulePayload>
+        }
+        createMany: {
+          args: Prisma.LeadServiceScheduleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadServiceScheduleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadServiceSchedulePayload>[]
+        }
+        delete: {
+          args: Prisma.LeadServiceScheduleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadServiceSchedulePayload>
+        }
+        update: {
+          args: Prisma.LeadServiceScheduleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadServiceSchedulePayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadServiceScheduleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadServiceScheduleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadServiceScheduleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadServiceSchedulePayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadServiceScheduleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadServiceSchedulePayload>
+        }
+        aggregate: {
+          args: Prisma.LeadServiceScheduleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadServiceSchedule>
+        }
+        groupBy: {
+          args: Prisma.LeadServiceScheduleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadServiceScheduleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadServiceScheduleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadServiceScheduleCountAggregateOutputType> | number
         }
       }
     }
@@ -7466,6 +7616,8 @@ export const LeadMasterScalarFieldEnum = {
   usable_handover_completed_at: 'usable_handover_completed_at',
   is_amc_opted: 'is_amc_opted',
   amc_opted_at: 'amc_opted_at',
+  amc_plan_started_at: 'amc_plan_started_at',
+  amc_plan_closed_at: 'amc_plan_closed_at',
   final_handover_marked_at: 'final_handover_marked_at',
   franchise_id: 'franchise_id',
   order_login_prod_files_remark: 'order_login_prod_files_remark'
@@ -7766,6 +7918,53 @@ export const DocumentTypeMasterScalarFieldEnum = {
 } as const
 
 export type DocumentTypeMasterScalarFieldEnum = (typeof DocumentTypeMasterScalarFieldEnum)[keyof typeof DocumentTypeMasterScalarFieldEnum]
+
+
+export const LeadAmcContractScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  account_id: 'account_id',
+  contract_start_date: 'contract_start_date',
+  contract_end_date: 'contract_end_date',
+  document_id: 'document_id',
+  status: 'status',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at'
+} as const
+
+export type LeadAmcContractScalarFieldEnum = (typeof LeadAmcContractScalarFieldEnum)[keyof typeof LeadAmcContractScalarFieldEnum]
+
+
+export const LeadServiceScheduleScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  account_id: 'account_id',
+  service_no: 'service_no',
+  service_type: 'service_type',
+  scheduled_for: 'scheduled_for',
+  original_scheduled_for: 'original_scheduled_for',
+  status: 'status',
+  rescheduled_once: 'rescheduled_once',
+  rescheduled_from: 'rescheduled_from',
+  completed_at: 'completed_at',
+  completed_by: 'completed_by',
+  completion_remark: 'completion_remark',
+  completion_document_id: 'completion_document_id',
+  rejected_at: 'rejected_at',
+  rejected_by: 'rejected_by',
+  rejection_remark: 'rejection_remark',
+  closure_reason: 'closure_reason',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at'
+} as const
+
+export type LeadServiceScheduleScalarFieldEnum = (typeof LeadServiceScheduleScalarFieldEnum)[keyof typeof LeadServiceScheduleScalarFieldEnum]
 
 
 export const StatusTypeMasterScalarFieldEnum = {
@@ -8804,6 +9003,48 @@ export type ListEnumLedgerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$P
 
 
 /**
+ * Reference to a field of type 'ServiceVisitType'
+ */
+export type EnumServiceVisitTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ServiceVisitType'>
+    
+
+
+/**
+ * Reference to a field of type 'ServiceVisitType[]'
+ */
+export type ListEnumServiceVisitTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ServiceVisitType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ServiceVisitStatus'
+ */
+export type EnumServiceVisitStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ServiceVisitStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ServiceVisitStatus[]'
+ */
+export type ListEnumServiceVisitStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ServiceVisitStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ServiceClosureReason'
+ */
+export type EnumServiceClosureReasonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ServiceClosureReason'>
+    
+
+
+/**
+ * Reference to a field of type 'ServiceClosureReason[]'
+ */
+export type ListEnumServiceClosureReasonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ServiceClosureReason[]'>
+    
+
+
+/**
  * Reference to a field of type 'SupervisorStatus'
  */
 export type EnumSupervisorStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SupervisorStatus'>
@@ -9113,6 +9354,8 @@ export type GlobalOmitConfig = {
   paymentInfo?: Prisma.PaymentInfoOmit
   ledger?: Prisma.LedgerOmit
   documentTypeMaster?: Prisma.DocumentTypeMasterOmit
+  leadAmcContract?: Prisma.LeadAmcContractOmit
+  leadServiceSchedule?: Prisma.LeadServiceScheduleOmit
   statusTypeMaster?: Prisma.StatusTypeMasterOmit
   leadStatusLogs?: Prisma.LeadStatusLogsOmit
   leadDesignMeeting?: Prisma.LeadDesignMeetingOmit

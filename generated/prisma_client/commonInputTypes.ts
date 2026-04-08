@@ -405,6 +405,57 @@ export type EnumLedgerTypeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumLedgerTypeFilter<$PrismaModel>
 }
 
+export type EnumServiceVisitTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ServiceVisitType | Prisma.EnumServiceVisitTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ServiceVisitType[] | Prisma.ListEnumServiceVisitTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ServiceVisitType[] | Prisma.ListEnumServiceVisitTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumServiceVisitTypeFilter<$PrismaModel> | $Enums.ServiceVisitType
+}
+
+export type EnumServiceVisitStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ServiceVisitStatus | Prisma.EnumServiceVisitStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ServiceVisitStatus[] | Prisma.ListEnumServiceVisitStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ServiceVisitStatus[] | Prisma.ListEnumServiceVisitStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumServiceVisitStatusFilter<$PrismaModel> | $Enums.ServiceVisitStatus
+}
+
+export type EnumServiceClosureReasonNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.ServiceClosureReason | Prisma.EnumServiceClosureReasonFieldRefInput<$PrismaModel> | null
+  in?: $Enums.ServiceClosureReason[] | Prisma.ListEnumServiceClosureReasonFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.ServiceClosureReason[] | Prisma.ListEnumServiceClosureReasonFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumServiceClosureReasonNullableFilter<$PrismaModel> | $Enums.ServiceClosureReason | null
+}
+
+export type EnumServiceVisitTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ServiceVisitType | Prisma.EnumServiceVisitTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ServiceVisitType[] | Prisma.ListEnumServiceVisitTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ServiceVisitType[] | Prisma.ListEnumServiceVisitTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumServiceVisitTypeWithAggregatesFilter<$PrismaModel> | $Enums.ServiceVisitType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumServiceVisitTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumServiceVisitTypeFilter<$PrismaModel>
+}
+
+export type EnumServiceVisitStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ServiceVisitStatus | Prisma.EnumServiceVisitStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ServiceVisitStatus[] | Prisma.ListEnumServiceVisitStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ServiceVisitStatus[] | Prisma.ListEnumServiceVisitStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumServiceVisitStatusWithAggregatesFilter<$PrismaModel> | $Enums.ServiceVisitStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumServiceVisitStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumServiceVisitStatusFilter<$PrismaModel>
+}
+
+export type EnumServiceClosureReasonNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ServiceClosureReason | Prisma.EnumServiceClosureReasonFieldRefInput<$PrismaModel> | null
+  in?: $Enums.ServiceClosureReason[] | Prisma.ListEnumServiceClosureReasonFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.ServiceClosureReason[] | Prisma.ListEnumServiceClosureReasonFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumServiceClosureReasonNullableWithAggregatesFilter<$PrismaModel> | $Enums.ServiceClosureReason | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumServiceClosureReasonNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumServiceClosureReasonNullableFilter<$PrismaModel>
+}
+
 export type EnumSupervisorStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.SupervisorStatus | Prisma.EnumSupervisorStatusFieldRefInput<$PrismaModel>
   in?: $Enums.SupervisorStatus[] | Prisma.ListEnumSupervisorStatusFieldRefInput<$PrismaModel>
@@ -1101,6 +1152,57 @@ export type NestedEnumLedgerTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumLedgerTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumLedgerTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumServiceVisitTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ServiceVisitType | Prisma.EnumServiceVisitTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ServiceVisitType[] | Prisma.ListEnumServiceVisitTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ServiceVisitType[] | Prisma.ListEnumServiceVisitTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumServiceVisitTypeFilter<$PrismaModel> | $Enums.ServiceVisitType
+}
+
+export type NestedEnumServiceVisitStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ServiceVisitStatus | Prisma.EnumServiceVisitStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ServiceVisitStatus[] | Prisma.ListEnumServiceVisitStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ServiceVisitStatus[] | Prisma.ListEnumServiceVisitStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumServiceVisitStatusFilter<$PrismaModel> | $Enums.ServiceVisitStatus
+}
+
+export type NestedEnumServiceClosureReasonNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.ServiceClosureReason | Prisma.EnumServiceClosureReasonFieldRefInput<$PrismaModel> | null
+  in?: $Enums.ServiceClosureReason[] | Prisma.ListEnumServiceClosureReasonFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.ServiceClosureReason[] | Prisma.ListEnumServiceClosureReasonFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumServiceClosureReasonNullableFilter<$PrismaModel> | $Enums.ServiceClosureReason | null
+}
+
+export type NestedEnumServiceVisitTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ServiceVisitType | Prisma.EnumServiceVisitTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ServiceVisitType[] | Prisma.ListEnumServiceVisitTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ServiceVisitType[] | Prisma.ListEnumServiceVisitTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumServiceVisitTypeWithAggregatesFilter<$PrismaModel> | $Enums.ServiceVisitType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumServiceVisitTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumServiceVisitTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumServiceVisitStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ServiceVisitStatus | Prisma.EnumServiceVisitStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ServiceVisitStatus[] | Prisma.ListEnumServiceVisitStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ServiceVisitStatus[] | Prisma.ListEnumServiceVisitStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumServiceVisitStatusWithAggregatesFilter<$PrismaModel> | $Enums.ServiceVisitStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumServiceVisitStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumServiceVisitStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumServiceClosureReasonNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ServiceClosureReason | Prisma.EnumServiceClosureReasonFieldRefInput<$PrismaModel> | null
+  in?: $Enums.ServiceClosureReason[] | Prisma.ListEnumServiceClosureReasonFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.ServiceClosureReason[] | Prisma.ListEnumServiceClosureReasonFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumServiceClosureReasonNullableWithAggregatesFilter<$PrismaModel> | $Enums.ServiceClosureReason | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumServiceClosureReasonNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumServiceClosureReasonNullableFilter<$PrismaModel>
 }
 
 export type NestedEnumSupervisorStatusFilter<$PrismaModel = never> = {

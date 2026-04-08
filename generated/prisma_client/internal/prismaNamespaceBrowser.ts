@@ -85,6 +85,8 @@ export const ModelName = {
   PaymentInfo: 'PaymentInfo',
   Ledger: 'Ledger',
   DocumentTypeMaster: 'DocumentTypeMaster',
+  LeadAmcContract: 'LeadAmcContract',
+  LeadServiceSchedule: 'LeadServiceSchedule',
   StatusTypeMaster: 'StatusTypeMaster',
   LeadStatusLogs: 'LeadStatusLogs',
   LeadDesignMeeting: 'LeadDesignMeeting',
@@ -433,6 +435,8 @@ export const LeadMasterScalarFieldEnum = {
   usable_handover_completed_at: 'usable_handover_completed_at',
   is_amc_opted: 'is_amc_opted',
   amc_opted_at: 'amc_opted_at',
+  amc_plan_started_at: 'amc_plan_started_at',
+  amc_plan_closed_at: 'amc_plan_closed_at',
   final_handover_marked_at: 'final_handover_marked_at',
   franchise_id: 'franchise_id',
   order_login_prod_files_remark: 'order_login_prod_files_remark'
@@ -733,6 +737,53 @@ export const DocumentTypeMasterScalarFieldEnum = {
 } as const
 
 export type DocumentTypeMasterScalarFieldEnum = (typeof DocumentTypeMasterScalarFieldEnum)[keyof typeof DocumentTypeMasterScalarFieldEnum]
+
+
+export const LeadAmcContractScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  account_id: 'account_id',
+  contract_start_date: 'contract_start_date',
+  contract_end_date: 'contract_end_date',
+  document_id: 'document_id',
+  status: 'status',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at'
+} as const
+
+export type LeadAmcContractScalarFieldEnum = (typeof LeadAmcContractScalarFieldEnum)[keyof typeof LeadAmcContractScalarFieldEnum]
+
+
+export const LeadServiceScheduleScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  account_id: 'account_id',
+  service_no: 'service_no',
+  service_type: 'service_type',
+  scheduled_for: 'scheduled_for',
+  original_scheduled_for: 'original_scheduled_for',
+  status: 'status',
+  rescheduled_once: 'rescheduled_once',
+  rescheduled_from: 'rescheduled_from',
+  completed_at: 'completed_at',
+  completed_by: 'completed_by',
+  completion_remark: 'completion_remark',
+  completion_document_id: 'completion_document_id',
+  rejected_at: 'rejected_at',
+  rejected_by: 'rejected_by',
+  rejection_remark: 'rejection_remark',
+  closure_reason: 'closure_reason',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at'
+} as const
+
+export type LeadServiceScheduleScalarFieldEnum = (typeof LeadServiceScheduleScalarFieldEnum)[keyof typeof LeadServiceScheduleScalarFieldEnum]
 
 
 export const StatusTypeMasterScalarFieldEnum = {
