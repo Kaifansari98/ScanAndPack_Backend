@@ -862,7 +862,7 @@ export const getLeadTrackingReportData = async (
         booking_adv_cleared_date: bookingAdvanceClearedDate,
         fm_scheduled_date: firstTaskCreatedAt("Final Measurements"),
         fm_completion_date: firstTaskClosedAt("Final Measurements"),
-        client_approval_date: firstStatusDate("Type 8"),
+        client_approval_date: firstStatusDate("Type 7"),
         tc_req_date: firstStatusDate("Type 7"),
         tc_approval_date: firstStatusDate("Type 9"),
         ol_date: instance.order_login_completed_at,
