@@ -443,6 +443,7 @@ export const getTechCheckStageReportData = async (
       firstname: true,
       lastname: true,
       tech_check_reached_at: true,
+      client_required_order_login_complition_date: true,
       tech_check_completed_at: true,
       franchise: {
         select: {
@@ -538,7 +539,7 @@ export const getTechCheckStageReportData = async (
         ),
         client_name: `${lead.firstname} ${lead.lastname}`.trim(),
         franchise_store: lead.franchise?.franchise_name ?? "-",
-        tech_check_req_date: lead.tech_check_reached_at,
+        tech_check_req_date: lead.client_required_order_login_complition_date,
         rejection_dates: rejectionDates,
         revised_upload_dates: revisedDates,
         tech_check_approved_date: lead.tech_check_completed_at,
