@@ -137,6 +137,8 @@ export type LeadMasterMinAggregateOutputType = {
   mrp_value: number | null
   usable_handover_completed: boolean | null
   usable_handover_completed_at: Date | null
+  is_amc_opted: boolean | null
+  amc_opted_at: Date | null
   final_handover_marked_at: Date | null
   franchise_id: number | null
   order_login_prod_files_remark: string | null
@@ -211,6 +213,8 @@ export type LeadMasterMaxAggregateOutputType = {
   mrp_value: number | null
   usable_handover_completed: boolean | null
   usable_handover_completed_at: Date | null
+  is_amc_opted: boolean | null
+  amc_opted_at: Date | null
   final_handover_marked_at: Date | null
   franchise_id: number | null
   order_login_prod_files_remark: string | null
@@ -285,6 +289,8 @@ export type LeadMasterCountAggregateOutputType = {
   mrp_value: number
   usable_handover_completed: number
   usable_handover_completed_at: number
+  is_amc_opted: number
+  amc_opted_at: number
   final_handover_marked_at: number
   franchise_id: number
   order_login_prod_files_remark: number
@@ -403,6 +409,8 @@ export type LeadMasterMinAggregateInputType = {
   mrp_value?: true
   usable_handover_completed?: true
   usable_handover_completed_at?: true
+  is_amc_opted?: true
+  amc_opted_at?: true
   final_handover_marked_at?: true
   franchise_id?: true
   order_login_prod_files_remark?: true
@@ -477,6 +485,8 @@ export type LeadMasterMaxAggregateInputType = {
   mrp_value?: true
   usable_handover_completed?: true
   usable_handover_completed_at?: true
+  is_amc_opted?: true
+  amc_opted_at?: true
   final_handover_marked_at?: true
   franchise_id?: true
   order_login_prod_files_remark?: true
@@ -551,6 +561,8 @@ export type LeadMasterCountAggregateInputType = {
   mrp_value?: true
   usable_handover_completed?: true
   usable_handover_completed_at?: true
+  is_amc_opted?: true
+  amc_opted_at?: true
   final_handover_marked_at?: true
   franchise_id?: true
   order_login_prod_files_remark?: true
@@ -712,6 +724,8 @@ export type LeadMasterGroupByOutputType = {
   mrp_value: number | null
   usable_handover_completed: boolean | null
   usable_handover_completed_at: Date | null
+  is_amc_opted: boolean | null
+  amc_opted_at: Date | null
   final_handover_marked_at: Date | null
   franchise_id: number | null
   order_login_prod_files_remark: string | null
@@ -809,6 +823,8 @@ export type LeadMasterWhereInput = {
   mrp_value?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
   usable_handover_completed?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
   usable_handover_completed_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
+  is_amc_opted?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
+  amc_opted_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   final_handover_marked_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   franchise_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   order_login_prod_files_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
@@ -921,6 +937,8 @@ export type LeadMasterOrderByWithRelationInput = {
   mrp_value?: Prisma.SortOrderInput | Prisma.SortOrder
   usable_handover_completed?: Prisma.SortOrderInput | Prisma.SortOrder
   usable_handover_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_amc_opted?: Prisma.SortOrderInput | Prisma.SortOrder
+  amc_opted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   final_handover_marked_at?: Prisma.SortOrderInput | Prisma.SortOrder
   franchise_id?: Prisma.SortOrderInput | Prisma.SortOrder
   order_login_prod_files_remark?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1037,6 +1055,8 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   mrp_value?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
   usable_handover_completed?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
   usable_handover_completed_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
+  is_amc_opted?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
+  amc_opted_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   final_handover_marked_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   franchise_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   order_login_prod_files_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
@@ -1149,6 +1169,8 @@ export type LeadMasterOrderByWithAggregationInput = {
   mrp_value?: Prisma.SortOrderInput | Prisma.SortOrder
   usable_handover_completed?: Prisma.SortOrderInput | Prisma.SortOrder
   usable_handover_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_amc_opted?: Prisma.SortOrderInput | Prisma.SortOrder
+  amc_opted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   final_handover_marked_at?: Prisma.SortOrderInput | Prisma.SortOrder
   franchise_id?: Prisma.SortOrderInput | Prisma.SortOrder
   order_login_prod_files_remark?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1231,6 +1253,8 @@ export type LeadMasterScalarWhereWithAggregatesInput = {
   mrp_value?: Prisma.FloatNullableWithAggregatesFilter<"LeadMaster"> | number | null
   usable_handover_completed?: Prisma.BoolNullableWithAggregatesFilter<"LeadMaster"> | boolean | null
   usable_handover_completed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadMaster"> | Date | string | null
+  is_amc_opted?: Prisma.BoolNullableWithAggregatesFilter<"LeadMaster"> | boolean | null
+  amc_opted_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadMaster"> | Date | string | null
   final_handover_marked_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadMaster"> | Date | string | null
   franchise_id?: Prisma.IntNullableWithAggregatesFilter<"LeadMaster"> | number | null
   order_login_prod_files_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
@@ -1295,6 +1319,8 @@ export type LeadMasterCreateInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -1406,6 +1432,8 @@ export type LeadMasterUncheckedCreateInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -1498,6 +1526,8 @@ export type LeadMasterUpdateInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -1609,6 +1639,8 @@ export type LeadMasterUncheckedUpdateInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1711,6 +1743,8 @@ export type LeadMasterCreateManyInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -1775,6 +1809,8 @@ export type LeadMasterUpdateManyMutationInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -1848,6 +1884,8 @@ export type LeadMasterUncheckedUpdateManyInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1942,6 +1980,8 @@ export type LeadMasterCountOrderByAggregateInput = {
   mrp_value?: Prisma.SortOrder
   usable_handover_completed?: Prisma.SortOrder
   usable_handover_completed_at?: Prisma.SortOrder
+  is_amc_opted?: Prisma.SortOrder
+  amc_opted_at?: Prisma.SortOrder
   final_handover_marked_at?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
   order_login_prod_files_remark?: Prisma.SortOrder
@@ -2037,6 +2077,8 @@ export type LeadMasterMaxOrderByAggregateInput = {
   mrp_value?: Prisma.SortOrder
   usable_handover_completed?: Prisma.SortOrder
   usable_handover_completed_at?: Prisma.SortOrder
+  is_amc_opted?: Prisma.SortOrder
+  amc_opted_at?: Prisma.SortOrder
   final_handover_marked_at?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
   order_login_prod_files_remark?: Prisma.SortOrder
@@ -2111,6 +2153,8 @@ export type LeadMasterMinOrderByAggregateInput = {
   mrp_value?: Prisma.SortOrder
   usable_handover_completed?: Prisma.SortOrder
   usable_handover_completed_at?: Prisma.SortOrder
+  is_amc_opted?: Prisma.SortOrder
+  amc_opted_at?: Prisma.SortOrder
   final_handover_marked_at?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
   order_login_prod_files_remark?: Prisma.SortOrder
@@ -3039,6 +3083,8 @@ export type LeadMasterCreateWithoutVendorInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -3148,6 +3194,8 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -3279,6 +3327,8 @@ export type LeadMasterScalarWhereInput = {
   mrp_value?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
   usable_handover_completed?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
   usable_handover_completed_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
+  is_amc_opted?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
+  amc_opted_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   final_handover_marked_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   franchise_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   order_login_prod_files_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
@@ -3343,6 +3393,8 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -3452,6 +3504,8 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -3554,6 +3608,8 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -3663,6 +3719,8 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -3765,6 +3823,8 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -3874,6 +3934,8 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -3976,6 +4038,8 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -4085,6 +4149,8 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -4251,6 +4317,8 @@ export type LeadMasterCreateWithoutProjectsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -4361,6 +4429,8 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -4468,6 +4538,8 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -4578,6 +4650,8 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4669,6 +4743,8 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -4779,6 +4855,8 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -4886,6 +4964,8 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -4996,6 +5076,8 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5087,6 +5169,8 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -5197,6 +5281,8 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -5304,6 +5390,8 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -5414,6 +5502,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5505,6 +5595,8 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -5614,6 +5706,8 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -5732,6 +5826,8 @@ export type LeadMasterCreateWithoutSourceInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -5841,6 +5937,8 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -5959,6 +6057,8 @@ export type LeadMasterCreateWithoutAccountInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -6068,6 +6168,8 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -6186,6 +6288,8 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -6296,6 +6400,8 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -6403,6 +6509,8 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -6513,6 +6621,8 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6604,6 +6714,8 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -6714,6 +6826,8 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -6821,6 +6935,8 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -6931,6 +7047,8 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7022,6 +7140,8 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -7132,6 +7252,8 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -7239,6 +7361,8 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -7349,6 +7473,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7440,6 +7566,8 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -7550,6 +7678,8 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -7657,6 +7787,8 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -7767,6 +7899,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7858,6 +7992,8 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -7968,6 +8104,8 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -8075,6 +8213,8 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -8185,6 +8325,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8276,6 +8418,8 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -8386,6 +8530,8 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -8493,6 +8639,8 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -8603,6 +8751,8 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8694,6 +8844,8 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -8804,6 +8956,8 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -8911,6 +9065,8 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -9021,6 +9177,8 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9112,6 +9270,8 @@ export type LeadMasterCreateWithoutLedgersInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -9222,6 +9382,8 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -9329,6 +9491,8 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -9439,6 +9603,8 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9530,6 +9696,8 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -9639,6 +9807,8 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -9757,6 +9927,8 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -9867,6 +10039,8 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -9974,6 +10148,8 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -10084,6 +10260,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10175,6 +10353,8 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -10285,6 +10465,8 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -10392,6 +10574,8 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -10502,6 +10686,8 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10593,6 +10779,8 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -10703,6 +10891,8 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -10810,6 +11000,8 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -10920,6 +11112,8 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11011,6 +11205,8 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -11121,6 +11317,8 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -11228,6 +11426,8 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -11338,6 +11538,8 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11429,6 +11631,8 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -11539,6 +11743,8 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -11646,6 +11852,8 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -11756,6 +11964,8 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11847,6 +12057,8 @@ export type LeadMasterCreateWithoutTasksInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -11957,6 +12169,8 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -12064,6 +12278,8 @@ export type LeadMasterUpdateWithoutTasksInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -12174,6 +12390,8 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12265,6 +12483,8 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -12375,6 +12595,8 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -12482,6 +12704,8 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -12592,6 +12816,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12683,6 +12909,8 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -12793,6 +13021,8 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -12900,6 +13130,8 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -13010,6 +13242,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13101,6 +13335,8 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -13211,6 +13447,8 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -13318,6 +13556,8 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -13428,6 +13668,8 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13519,6 +13761,8 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -13629,6 +13873,8 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -13736,6 +13982,8 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -13846,6 +14094,8 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13937,6 +14187,8 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -14047,6 +14299,8 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -14154,6 +14408,8 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -14264,6 +14520,8 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14355,6 +14613,8 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -14465,6 +14725,8 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -14572,6 +14834,8 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -14682,6 +14946,8 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14773,6 +15039,8 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -14883,6 +15151,8 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -14990,6 +15260,8 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -15100,6 +15372,8 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15191,6 +15465,8 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -15301,6 +15577,8 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -15408,6 +15686,8 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -15518,6 +15798,8 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15609,6 +15891,8 @@ export type LeadMasterCreateWithoutCutListInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -15719,6 +16003,8 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -15826,6 +16112,8 @@ export type LeadMasterUpdateWithoutCutListInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -15936,6 +16224,8 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16027,6 +16317,8 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -16137,6 +16429,8 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -16244,6 +16538,8 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -16354,6 +16650,8 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16445,6 +16743,8 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -16555,6 +16855,8 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -16662,6 +16964,8 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -16772,6 +17076,8 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16863,6 +17169,8 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -16973,6 +17281,8 @@ export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -17099,6 +17409,8 @@ export type LeadMasterCreateManyVendorInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -17163,6 +17475,8 @@ export type LeadMasterUpdateWithoutVendorInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -17272,6 +17586,8 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17373,6 +17689,8 @@ export type LeadMasterUncheckedUpdateManyWithoutVendorInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17446,6 +17764,8 @@ export type LeadMasterCreateManyAssignedToInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -17519,6 +17839,8 @@ export type LeadMasterCreateManyAssignedByInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -17592,6 +17914,8 @@ export type LeadMasterCreateManyCreatedByInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -17665,6 +17989,8 @@ export type LeadMasterCreateManyUpdatedByInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -17729,6 +18055,8 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -17838,6 +18166,8 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17939,6 +18269,8 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedToInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18003,6 +18335,8 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -18112,6 +18446,8 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18213,6 +18549,8 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedByInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18277,6 +18615,8 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -18386,6 +18726,8 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18487,6 +18829,8 @@ export type LeadMasterUncheckedUpdateManyWithoutCreatedByInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18551,6 +18895,8 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -18660,6 +19006,8 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18761,6 +19109,8 @@ export type LeadMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18834,6 +19184,8 @@ export type LeadMasterCreateManySiteTypeInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -18898,6 +19250,8 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -19007,6 +19361,8 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -19108,6 +19464,8 @@ export type LeadMasterUncheckedUpdateManyWithoutSiteTypeInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -19181,6 +19539,8 @@ export type LeadMasterCreateManySourceInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -19245,6 +19605,8 @@ export type LeadMasterUpdateWithoutSourceInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -19354,6 +19716,8 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -19455,6 +19819,8 @@ export type LeadMasterUncheckedUpdateManyWithoutSourceInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -19528,6 +19894,8 @@ export type LeadMasterCreateManyAccountInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -19592,6 +19960,8 @@ export type LeadMasterUpdateWithoutAccountInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -19701,6 +20071,8 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -19802,6 +20174,8 @@ export type LeadMasterUncheckedUpdateManyWithoutAccountInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -19875,6 +20249,8 @@ export type LeadMasterCreateManyStatusTypeInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   franchise_id?: number | null
   order_login_prod_files_remark?: string | null
@@ -19939,6 +20315,8 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -20048,6 +20426,8 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20149,6 +20529,8 @@ export type LeadMasterUncheckedUpdateManyWithoutStatusTypeInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20223,6 +20605,8 @@ export type LeadMasterCreateManyFranchiseInput = {
   mrp_value?: number | null
   usable_handover_completed?: boolean | null
   usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
   final_handover_marked_at?: Date | string | null
   order_login_prod_files_remark?: string | null
 }
@@ -20286,6 +20670,8 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -20396,6 +20782,8 @@ export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -20497,6 +20885,8 @@ export type LeadMasterUncheckedUpdateManyWithoutFranchiseInput = {
   mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -20844,6 +21234,8 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   mrp_value?: boolean
   usable_handover_completed?: boolean
   usable_handover_completed_at?: boolean
+  is_amc_opted?: boolean
+  amc_opted_at?: boolean
   final_handover_marked_at?: boolean
   franchise_id?: boolean
   order_login_prod_files_remark?: boolean
@@ -20957,6 +21349,8 @@ export type LeadMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   mrp_value?: boolean
   usable_handover_completed?: boolean
   usable_handover_completed_at?: boolean
+  is_amc_opted?: boolean
+  amc_opted_at?: boolean
   final_handover_marked_at?: boolean
   franchise_id?: boolean
   order_login_prod_files_remark?: boolean
@@ -21041,6 +21435,8 @@ export type LeadMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   mrp_value?: boolean
   usable_handover_completed?: boolean
   usable_handover_completed_at?: boolean
+  is_amc_opted?: boolean
+  amc_opted_at?: boolean
   final_handover_marked_at?: boolean
   franchise_id?: boolean
   order_login_prod_files_remark?: boolean
@@ -21125,12 +21521,14 @@ export type LeadMasterSelectScalar = {
   mrp_value?: boolean
   usable_handover_completed?: boolean
   usable_handover_completed_at?: boolean
+  is_amc_opted?: boolean
+  amc_opted_at?: boolean
   final_handover_marked_at?: boolean
   franchise_id?: boolean
   order_login_prod_files_remark?: boolean
 }
 
-export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "priority" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "tech_check_reached_at" | "tech_check_completed_at" | "actual_installation_start_date" | "actual_installation_completion_at" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "usable_handover_completed_at" | "final_handover_marked_at" | "franchise_id" | "order_login_prod_files_remark", ExtArgs["result"]["leadMaster"]>
+export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "priority" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "tech_check_reached_at" | "tech_check_completed_at" | "actual_installation_start_date" | "actual_installation_completion_at" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "usable_handover_completed_at" | "is_amc_opted" | "amc_opted_at" | "final_handover_marked_at" | "franchise_id" | "order_login_prod_files_remark", ExtArgs["result"]["leadMaster"]>
 export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cutList?: boolean | Prisma.LeadMaster$cutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.LeadMaster$cutListMachineMappingArgs<ExtArgs>
@@ -21308,6 +21706,8 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     mrp_value: number | null
     usable_handover_completed: boolean | null
     usable_handover_completed_at: Date | null
+    is_amc_opted: boolean | null
+    amc_opted_at: Date | null
     final_handover_marked_at: Date | null
     franchise_id: number | null
     order_login_prod_files_remark: string | null
@@ -21840,6 +22240,8 @@ export interface LeadMasterFieldRefs {
   readonly mrp_value: Prisma.FieldRef<"LeadMaster", 'Float'>
   readonly usable_handover_completed: Prisma.FieldRef<"LeadMaster", 'Boolean'>
   readonly usable_handover_completed_at: Prisma.FieldRef<"LeadMaster", 'DateTime'>
+  readonly is_amc_opted: Prisma.FieldRef<"LeadMaster", 'Boolean'>
+  readonly amc_opted_at: Prisma.FieldRef<"LeadMaster", 'DateTime'>
   readonly final_handover_marked_at: Prisma.FieldRef<"LeadMaster", 'DateTime'>
   readonly franchise_id: Prisma.FieldRef<"LeadMaster", 'Int'>
   readonly order_login_prod_files_remark: Prisma.FieldRef<"LeadMaster", 'String'>

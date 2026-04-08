@@ -280,6 +280,53 @@ export class FinalHandoverStageController {
     }
   }
 
+  async updateAmcOptedStatus(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+      const { updated_by, is_amc_opted } = req.body;
+
+      if (
+        !vendorId ||
+        !leadId ||
+        !updated_by ||
+        typeof is_amc_opted !== "boolean"
+      ) {
+        return res.status(400).json(
+          ApiResponse.error(
+            "vendorId, leadId, updated_by, and is_amc_opted are required",
+            400,
+          ),
+        );
+      }
+
+      const result = await service.updateAmcOptedStatus(
+        vendorId,
+        leadId,
+        Number(updated_by),
+        is_amc_opted,
+      );
+
+      return res.status(200).json(
+        ApiResponse.success(
+          result,
+          is_amc_opted
+            ? "AMC opted status updated to yes"
+            : "AMC opted status updated to no",
+        ),
+      );
+    } catch (error: any) {
+      return res
+        .status(error.statusCode || 500)
+        .json(
+          ApiResponse.error(
+            error.message || "Internal server error",
+            error.statusCode || 500,
+          ),
+        );
+    }
+  }
+
   /**
    * ✅ Move Lead to Project Completed Stage (Type 17)
    * @route PUT /leads/installation/final-handover/vendorId/:vendorId/leadId/:leadId/move-to-project-completed

@@ -37,6 +37,7 @@ import underInstallationStageRoutes from "./installation/under-installation/unde
 import miscRoutes from "./miscellaneousMaster.routes";
 import issueLogRoutes from "./issueLogRoutes";
 import finalHandoverStageRoutes from "./installation/final-handover/FinalHandoverStage.routes";
+import servicingRoutes from "./installation/servicing/Servicing.routes";
 import DashboardRouter from "./dashboard/dashboard.route";
 import chatRoutes from "./chat/chat.routes";
 import notificationRoutes from "./notification/notification.routes";
@@ -99,6 +100,7 @@ router.use("/miscellaneous-master", miscRoutes);
 router.use("/issue-logs", issueLogRoutes);
 
 router.use("/leads/installation/final-handover", finalHandoverStageRoutes);
+router.use("/leads/installation/servicing", servicingRoutes);
 router.use("/leads/chats", chatRoutes);
 router.use("/notifications", notificationRoutes);
 router.use("/email-notification-master", emailNotificationMasterRoutes);

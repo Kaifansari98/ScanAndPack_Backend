@@ -431,6 +431,8 @@ export const LeadMasterScalarFieldEnum = {
   mrp_value: 'mrp_value',
   usable_handover_completed: 'usable_handover_completed',
   usable_handover_completed_at: 'usable_handover_completed_at',
+  is_amc_opted: 'is_amc_opted',
+  amc_opted_at: 'amc_opted_at',
   final_handover_marked_at: 'final_handover_marked_at',
   franchise_id: 'franchise_id',
   order_login_prod_files_remark: 'order_login_prod_files_remark'

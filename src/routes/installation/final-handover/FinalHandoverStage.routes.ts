@@ -50,6 +50,11 @@ finalHandoverStageRoutes.get(
   controller.isTotalProjectAmountPaid
 );
 
+finalHandoverStageRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/amc-opted",
+  controller.updateAmcOptedStatus,
+);
+
 /** ✅ PUT → Move Lead to Project Completed Stage (Type 17) */
 finalHandoverStageRoutes.put(
   "/vendorId/:vendorId/leadId/:leadId/move-to-project-completed",

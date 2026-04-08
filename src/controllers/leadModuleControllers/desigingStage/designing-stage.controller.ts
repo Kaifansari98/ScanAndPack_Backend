@@ -1729,6 +1729,8 @@ export class DesigingStageController {
         select: {
           id: true,
           status_id: true,
+          is_amc_opted: true,
+          amc_opted_at: true,
           statusType: {
             select: {
               id: true,
@@ -1750,6 +1752,8 @@ export class DesigingStageController {
           status_type_id: lead.status_id,
           status: lead.statusType?.type,
           status_tag: lead.statusType?.tag,
+          is_amc_opted: lead.is_amc_opted,
+          amc_opted_at: lead.amc_opted_at,
         },
       });
     } catch (error: any) {

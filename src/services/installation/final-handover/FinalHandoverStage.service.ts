@@ -336,8 +336,23 @@ export class FinalHandoverStageService {
         statusCode: 400,
       });
 
+    const lead = await prisma.leadMaster.findFirst({
+      where: {
+        id: leadId,
+        vendor_id: vendorId,
+        is_deleted: false,
+      },
+      select: {
+        is_amc_opted: true,
+      },
+    });
+
+    if (!lead) {
+      throw Object.assign(new Error("Lead not found"), { statusCode: 404 });
+    }
+
     // 🔹 Required final handover document types
-    const REQUIRED_TAGS = [
+    const requiredTags = [
       "Type 27",
       "Type 28",
       "Type 29",
@@ -345,17 +360,22 @@ export class FinalHandoverStageService {
       "Type 31",
     ];
 
+    if (lead.is_amc_opted) {
+      requiredTags.push("Type 39");
+    }
+
     // 1️⃣ Fetch document type ids
     const docTypes = await prisma.documentTypeMaster.findMany({
-      where: { vendor_id: vendorId, tag: { in: REQUIRED_TAGS } },
+      where: { vendor_id: vendorId, tag: { in: requiredTags } },
       select: { id: true, tag: true },
     });
 
-    if (docTypes.length !== REQUIRED_TAGS.length) {
+    if (docTypes.length !== requiredTags.length) {
       return {
         docs_complete: false,
         pending_tasks_clear: false,
         can_move_to_final_handover: false,
+        requires_amc_documents: lead.is_amc_opted,
       };
     }
 
@@ -399,6 +419,7 @@ export class FinalHandoverStageService {
       docs_complete,
       pending_tasks_clear,
       can_move_to_final_handover: docs_complete && pending_tasks_clear,
+      requires_amc_documents: lead.is_amc_opted,
     };
   }
 
@@ -443,6 +464,123 @@ export class FinalHandoverStageService {
       pending_amount: pendingAmount ?? 0,
       total_project_amount: totalProjectAmount,
     };
+  }
+
+  async updateAmcOptedStatus(
+    vendorId: number,
+    leadId: number,
+    updatedBy: number,
+    isAmcOpted: boolean,
+  ) {
+    if (!vendorId || !leadId || !updatedBy) {
+      throw Object.assign(
+        new Error("vendorId, leadId, updatedBy, and isAmcOpted are required"),
+        { statusCode: 400 },
+      );
+    }
+
+    const [lead, user] = await Promise.all([
+      prisma.leadMaster.findFirst({
+        where: {
+          id: leadId,
+          vendor_id: vendorId,
+          is_deleted: false,
+        },
+        select: {
+          id: true,
+          account_id: true,
+          is_amc_opted: true,
+          amc_opted_at: true,
+        },
+      }),
+      prisma.userMaster.findFirst({
+        where: {
+          id: updatedBy,
+          vendor_id: vendorId,
+          status: "active",
+        },
+        select: {
+          id: true,
+          user_name: true,
+          user_type: {
+            select: {
+              user_type: true,
+            },
+          },
+        },
+      }),
+    ]);
+
+    if (!lead) {
+      throw Object.assign(new Error("Lead not found"), { statusCode: 404 });
+    }
+
+    if (!user) {
+      throw Object.assign(new Error("User not found"), { statusCode: 404 });
+    }
+
+    const role = user.user_type?.user_type?.toLowerCase() ?? "";
+    const canSetTrue = ["site-supervisor", "admin", "super-admin"].includes(
+      role,
+    );
+    const canSetFalse = ["admin", "super-admin"].includes(role);
+
+    if (isAmcOpted && !canSetTrue) {
+      throw Object.assign(
+        new Error(
+          "Only site-supervisor, admin, or super-admin can mark AMC as opted",
+        ),
+        { statusCode: 403 },
+      );
+    }
+
+    if (!isAmcOpted && !canSetFalse) {
+      throw Object.assign(
+        new Error("Only admin or super-admin can unmark AMC opted status"),
+        { statusCode: 403 },
+      );
+    }
+
+    if (lead.is_amc_opted === isAmcOpted) {
+      return {
+        id: lead.id,
+        is_amc_opted: lead.is_amc_opted,
+        amc_opted_at: lead.amc_opted_at,
+      };
+    }
+
+    const amcOptedAt = isAmcOpted ? new Date() : null;
+
+    const updatedLead = await prisma.leadMaster.update({
+      where: { id: leadId },
+      data: {
+        is_amc_opted: isAmcOpted,
+        amc_opted_at: amcOptedAt,
+        updated_by: updatedBy,
+        updated_at: new Date(),
+      },
+      select: {
+        id: true,
+        is_amc_opted: true,
+        amc_opted_at: true,
+      },
+    });
+
+    await prisma.leadDetailedLogs.create({
+      data: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: lead.account_id!,
+        action: isAmcOpted
+          ? "AMC opted in marked as Yes."
+          : "AMC opted in marked as No.",
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        created_at: new Date(),
+      },
+    });
+
+    return updatedLead;
   }
 
   /**
