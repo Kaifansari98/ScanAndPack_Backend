@@ -467,3 +467,13 @@ export type ThemeMapping = Prisma.ThemeMappingModel
  * 
  */
 export type ApiRequestLog = Prisma.ApiRequestLogModel
+/**
+ * Model ExternalPlatformMaster
+ * 
+ */
+export type ExternalPlatformMaster = Prisma.ExternalPlatformMasterModel
+/**
+ * Model ExternalPlatformToken
+ * 
+ */
+export type ExternalPlatformToken = Prisma.ExternalPlatformTokenModel

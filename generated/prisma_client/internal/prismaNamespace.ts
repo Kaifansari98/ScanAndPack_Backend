@@ -473,7 +473,9 @@ export const ModelName = {
   UserActivityLog: 'UserActivityLog',
   ThemeMaster: 'ThemeMaster',
   ThemeMapping: 'ThemeMapping',
-  ApiRequestLog: 'ApiRequestLog'
+  ApiRequestLog: 'ApiRequestLog',
+  ExternalPlatformMaster: 'ExternalPlatformMaster',
+  ExternalPlatformToken: 'ExternalPlatformToken'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -489,7 +491,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -7153,6 +7155,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ExternalPlatformMaster: {
+      payload: Prisma.$ExternalPlatformMasterPayload<ExtArgs>
+      fields: Prisma.ExternalPlatformMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ExternalPlatformMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ExternalPlatformMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.ExternalPlatformMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ExternalPlatformMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformMasterPayload>
+        }
+        findMany: {
+          args: Prisma.ExternalPlatformMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformMasterPayload>[]
+        }
+        create: {
+          args: Prisma.ExternalPlatformMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformMasterPayload>
+        }
+        createMany: {
+          args: Prisma.ExternalPlatformMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ExternalPlatformMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.ExternalPlatformMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformMasterPayload>
+        }
+        update: {
+          args: Prisma.ExternalPlatformMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.ExternalPlatformMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ExternalPlatformMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ExternalPlatformMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.ExternalPlatformMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.ExternalPlatformMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateExternalPlatformMaster>
+        }
+        groupBy: {
+          args: Prisma.ExternalPlatformMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExternalPlatformMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ExternalPlatformMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExternalPlatformMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    ExternalPlatformToken: {
+      payload: Prisma.$ExternalPlatformTokenPayload<ExtArgs>
+      fields: Prisma.ExternalPlatformTokenFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ExternalPlatformTokenFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformTokenPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ExternalPlatformTokenFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformTokenPayload>
+        }
+        findFirst: {
+          args: Prisma.ExternalPlatformTokenFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformTokenPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ExternalPlatformTokenFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformTokenPayload>
+        }
+        findMany: {
+          args: Prisma.ExternalPlatformTokenFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformTokenPayload>[]
+        }
+        create: {
+          args: Prisma.ExternalPlatformTokenCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformTokenPayload>
+        }
+        createMany: {
+          args: Prisma.ExternalPlatformTokenCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ExternalPlatformTokenCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformTokenPayload>[]
+        }
+        delete: {
+          args: Prisma.ExternalPlatformTokenDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformTokenPayload>
+        }
+        update: {
+          args: Prisma.ExternalPlatformTokenUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformTokenPayload>
+        }
+        deleteMany: {
+          args: Prisma.ExternalPlatformTokenDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ExternalPlatformTokenUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ExternalPlatformTokenUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformTokenPayload>[]
+        }
+        upsert: {
+          args: Prisma.ExternalPlatformTokenUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalPlatformTokenPayload>
+        }
+        aggregate: {
+          args: Prisma.ExternalPlatformTokenAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateExternalPlatformToken>
+        }
+        groupBy: {
+          args: Prisma.ExternalPlatformTokenGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExternalPlatformTokenGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ExternalPlatformTokenCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExternalPlatformTokenCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -8572,6 +8722,34 @@ export const ApiRequestLogScalarFieldEnum = {
 export type ApiRequestLogScalarFieldEnum = (typeof ApiRequestLogScalarFieldEnum)[keyof typeof ApiRequestLogScalarFieldEnum]
 
 
+export const ExternalPlatformMasterScalarFieldEnum = {
+  id: 'id',
+  external_platform_name: 'external_platform_name',
+  active: 'active'
+} as const
+
+export type ExternalPlatformMasterScalarFieldEnum = (typeof ExternalPlatformMasterScalarFieldEnum)[keyof typeof ExternalPlatformMasterScalarFieldEnum]
+
+
+export const ExternalPlatformTokenScalarFieldEnum = {
+  id: 'id',
+  external_platform_id: 'external_platform_id',
+  token: 'token',
+  email: 'email',
+  name: 'name',
+  user_id: 'user_id',
+  company_id: 'company_id',
+  vendor_id: 'vendor_id',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  active: 'active'
+} as const
+
+export type ExternalPlatformTokenScalarFieldEnum = (typeof ExternalPlatformTokenScalarFieldEnum)[keyof typeof ExternalPlatformTokenScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -8982,6 +9160,34 @@ export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'J
 export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
+
+/**
+ * Reference to a field of type 'ExternalPlatformMasterActiveStatus'
+ */
+export type EnumExternalPlatformMasterActiveStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExternalPlatformMasterActiveStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ExternalPlatformMasterActiveStatus[]'
+ */
+export type ListEnumExternalPlatformMasterActiveStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExternalPlatformMasterActiveStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ExternalPlatformTokenActiveStatus'
+ */
+export type EnumExternalPlatformTokenActiveStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExternalPlatformTokenActiveStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ExternalPlatformTokenActiveStatus[]'
+ */
+export type ListEnumExternalPlatformTokenActiveStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExternalPlatformTokenActiveStatus[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -9167,6 +9373,8 @@ export type GlobalOmitConfig = {
   themeMaster?: Prisma.ThemeMasterOmit
   themeMapping?: Prisma.ThemeMappingOmit
   apiRequestLog?: Prisma.ApiRequestLogOmit
+  externalPlatformMaster?: Prisma.ExternalPlatformMasterOmit
+  externalPlatformToken?: Prisma.ExternalPlatformTokenOmit
 }
 
 /* Types for Logging */

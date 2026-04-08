@@ -108,6 +108,7 @@ export const getProjectDetailsById = async (req: Request, res: Response) => {
 export const getProjectItemById = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
+    console.log("id:",id);
     const item = await projectService.getProjectItemById(id);
     res.json(item);
   } catch (err) {
