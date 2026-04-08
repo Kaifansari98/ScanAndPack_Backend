@@ -772,6 +772,40 @@ export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
   _max?: Prisma.NestedJsonFilter<$PrismaModel>
 }
 
+export type EnumExternalPlatformMasterActiveStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExternalPlatformMasterActiveStatus | Prisma.EnumExternalPlatformMasterActiveStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ExternalPlatformMasterActiveStatus[] | Prisma.ListEnumExternalPlatformMasterActiveStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ExternalPlatformMasterActiveStatus[] | Prisma.ListEnumExternalPlatformMasterActiveStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumExternalPlatformMasterActiveStatusFilter<$PrismaModel> | $Enums.ExternalPlatformMasterActiveStatus
+}
+
+export type EnumExternalPlatformMasterActiveStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExternalPlatformMasterActiveStatus | Prisma.EnumExternalPlatformMasterActiveStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ExternalPlatformMasterActiveStatus[] | Prisma.ListEnumExternalPlatformMasterActiveStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ExternalPlatformMasterActiveStatus[] | Prisma.ListEnumExternalPlatformMasterActiveStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumExternalPlatformMasterActiveStatusWithAggregatesFilter<$PrismaModel> | $Enums.ExternalPlatformMasterActiveStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumExternalPlatformMasterActiveStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumExternalPlatformMasterActiveStatusFilter<$PrismaModel>
+}
+
+export type EnumExternalPlatformTokenActiveStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExternalPlatformTokenActiveStatus | Prisma.EnumExternalPlatformTokenActiveStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ExternalPlatformTokenActiveStatus[] | Prisma.ListEnumExternalPlatformTokenActiveStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ExternalPlatformTokenActiveStatus[] | Prisma.ListEnumExternalPlatformTokenActiveStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumExternalPlatformTokenActiveStatusFilter<$PrismaModel> | $Enums.ExternalPlatformTokenActiveStatus
+}
+
+export type EnumExternalPlatformTokenActiveStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExternalPlatformTokenActiveStatus | Prisma.EnumExternalPlatformTokenActiveStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ExternalPlatformTokenActiveStatus[] | Prisma.ListEnumExternalPlatformTokenActiveStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ExternalPlatformTokenActiveStatus[] | Prisma.ListEnumExternalPlatformTokenActiveStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumExternalPlatformTokenActiveStatusWithAggregatesFilter<$PrismaModel> | $Enums.ExternalPlatformTokenActiveStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumExternalPlatformTokenActiveStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumExternalPlatformTokenActiveStatusFilter<$PrismaModel>
+}
+
 export type NestedIntFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel>
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
@@ -1465,6 +1499,40 @@ export type NestedJsonFilterBase<$PrismaModel = never> = {
   gt?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
   gte?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
   not?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | Prisma.JsonNullValueFilter
+}
+
+export type NestedEnumExternalPlatformMasterActiveStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExternalPlatformMasterActiveStatus | Prisma.EnumExternalPlatformMasterActiveStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ExternalPlatformMasterActiveStatus[] | Prisma.ListEnumExternalPlatformMasterActiveStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ExternalPlatformMasterActiveStatus[] | Prisma.ListEnumExternalPlatformMasterActiveStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumExternalPlatformMasterActiveStatusFilter<$PrismaModel> | $Enums.ExternalPlatformMasterActiveStatus
+}
+
+export type NestedEnumExternalPlatformMasterActiveStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExternalPlatformMasterActiveStatus | Prisma.EnumExternalPlatformMasterActiveStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ExternalPlatformMasterActiveStatus[] | Prisma.ListEnumExternalPlatformMasterActiveStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ExternalPlatformMasterActiveStatus[] | Prisma.ListEnumExternalPlatformMasterActiveStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumExternalPlatformMasterActiveStatusWithAggregatesFilter<$PrismaModel> | $Enums.ExternalPlatformMasterActiveStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumExternalPlatformMasterActiveStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumExternalPlatformMasterActiveStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumExternalPlatformTokenActiveStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExternalPlatformTokenActiveStatus | Prisma.EnumExternalPlatformTokenActiveStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ExternalPlatformTokenActiveStatus[] | Prisma.ListEnumExternalPlatformTokenActiveStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ExternalPlatformTokenActiveStatus[] | Prisma.ListEnumExternalPlatformTokenActiveStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumExternalPlatformTokenActiveStatusFilter<$PrismaModel> | $Enums.ExternalPlatformTokenActiveStatus
+}
+
+export type NestedEnumExternalPlatformTokenActiveStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExternalPlatformTokenActiveStatus | Prisma.EnumExternalPlatformTokenActiveStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ExternalPlatformTokenActiveStatus[] | Prisma.ListEnumExternalPlatformTokenActiveStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ExternalPlatformTokenActiveStatus[] | Prisma.ListEnumExternalPlatformTokenActiveStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumExternalPlatformTokenActiveStatusWithAggregatesFilter<$PrismaModel> | $Enums.ExternalPlatformTokenActiveStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumExternalPlatformTokenActiveStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumExternalPlatformTokenActiveStatusFilter<$PrismaModel>
 }
 
 

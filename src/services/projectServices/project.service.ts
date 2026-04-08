@@ -136,6 +136,7 @@ export const getProjectDetailsById = (id: number) => {
   });
 };
 
+
 export const getProjectItemById = (id: number) => {
   return prisma.projectItemsMaster.findUnique({
     where: { id },
@@ -146,6 +147,7 @@ export const getProjectItemById = (id: number) => {
     },
   });
 };
+
 
 export const getProjectsByVendorIdService = async (vendorId: number) => {
   const projects = await prisma.projectMaster.findMany({
