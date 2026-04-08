@@ -55,6 +55,23 @@ interface UsableHandoverPayload {
 }
 
 export class UnderInstallationStageService {
+  private static addMonthsPreservingDay(date: Date, monthsToAdd: number) {
+    const result = new Date(date);
+    const originalDay = result.getDate();
+
+    result.setMonth(result.getMonth() + monthsToAdd, 1);
+
+    const lastDayOfTargetMonth = new Date(
+      result.getFullYear(),
+      result.getMonth() + 1,
+      0,
+    ).getDate();
+
+    result.setDate(Math.min(originalDay, lastDayOfTargetMonth));
+
+    return result;
+  }
+
   /**
    * ✅ Move Lead to Under Installation Stage (Type 15)
    */
@@ -2769,26 +2786,84 @@ export class UnderInstallationStageService {
     lead_id: number,
     updated_by: number,
   ) {
-    const updatedLead = await prisma.leadMaster.update({
-      where: { id: lead_id, vendor_id },
-      data: {
-        usable_handover_completed: true,
-        usable_handover_completed_at: new Date(),
-        updated_by,
-        updated_at: new Date(),
-      },
-    });
+    const updatedLead = await prisma.$transaction(async (tx) => {
+      const existingLead = await tx.leadMaster.findFirst({
+        where: {
+          id: lead_id,
+          vendor_id,
+          is_deleted: false,
+        },
+        select: {
+          id: true,
+          account_id: true,
+          usable_handover_completed_at: true,
+        },
+      });
 
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id,
-        lead_id,
-        account_id: updatedLead.account_id!,
-        action: "Usable handover marked as completed.",
-        action_type: "UPDATE",
-        created_by: updated_by,
-        created_at: new Date(),
-      },
+      if (!existingLead) {
+        throw new Error("Lead not found");
+      }
+
+      if (!existingLead.account_id) {
+        throw new Error("Account ID not found for this lead");
+      }
+
+      const usableHandoverCompletedAt =
+        existingLead.usable_handover_completed_at ?? new Date();
+
+      const updatedLead = await tx.leadMaster.update({
+        where: { id: lead_id, vendor_id },
+        data: {
+          usable_handover_completed: true,
+          usable_handover_completed_at: usableHandoverCompletedAt,
+          updated_by,
+          updated_at: new Date(),
+        },
+      });
+
+      for (const [index, monthGap] of [4, 8, 12].entries()) {
+        const scheduledDate =
+          UnderInstallationStageService.addMonthsPreservingDay(
+            usableHandoverCompletedAt,
+            monthGap,
+          );
+
+        await tx.leadServiceSchedule.upsert({
+          where: {
+            uniq_lead_service_no_type: {
+              lead_id,
+              service_no: index + 1,
+              service_type: "free",
+            },
+          },
+          update: {},
+          create: {
+            vendor_id,
+            lead_id,
+            account_id: existingLead.account_id,
+            service_no: index + 1,
+            service_type: "free",
+            scheduled_for: scheduledDate,
+            original_scheduled_for: scheduledDate,
+            created_by: updated_by,
+            updated_by,
+          },
+        });
+      }
+
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id,
+          lead_id,
+          account_id: existingLead.account_id,
+          action: "Usable handover marked as completed.",
+          action_type: "UPDATE",
+          created_by: updated_by,
+          created_at: new Date(),
+        },
+      });
+
+      return updatedLead;
     });
 
     return updatedLead;
