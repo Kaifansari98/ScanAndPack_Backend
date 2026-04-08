@@ -140,7 +140,9 @@ export const ModelName = {
   UserActivityLog: 'UserActivityLog',
   ThemeMaster: 'ThemeMaster',
   ThemeMapping: 'ThemeMapping',
-  ApiRequestLog: 'ApiRequestLog'
+  ApiRequestLog: 'ApiRequestLog',
+  ExternalPlatformMaster: 'ExternalPlatformMaster',
+  ExternalPlatformToken: 'ExternalPlatformToken'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1539,6 +1541,34 @@ export const ApiRequestLogScalarFieldEnum = {
 } as const
 
 export type ApiRequestLogScalarFieldEnum = (typeof ApiRequestLogScalarFieldEnum)[keyof typeof ApiRequestLogScalarFieldEnum]
+
+
+export const ExternalPlatformMasterScalarFieldEnum = {
+  id: 'id',
+  external_platform_name: 'external_platform_name',
+  active: 'active'
+} as const
+
+export type ExternalPlatformMasterScalarFieldEnum = (typeof ExternalPlatformMasterScalarFieldEnum)[keyof typeof ExternalPlatformMasterScalarFieldEnum]
+
+
+export const ExternalPlatformTokenScalarFieldEnum = {
+  id: 'id',
+  external_platform_id: 'external_platform_id',
+  token: 'token',
+  email: 'email',
+  name: 'name',
+  user_id: 'user_id',
+  company_id: 'company_id',
+  vendor_id: 'vendor_id',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  active: 'active'
+} as const
+
+export type ExternalPlatformTokenScalarFieldEnum = (typeof ExternalPlatformTokenScalarFieldEnum)[keyof typeof ExternalPlatformTokenScalarFieldEnum]
 
 
 export const SortOrder = {

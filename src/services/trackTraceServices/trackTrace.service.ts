@@ -755,6 +755,7 @@ export const getRealTimeItemTracking = async (payload: TrackTraceDashboardPayloa
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
+    
 
     const formattedResult = result.map(item => {
         const date = new Date(item.actual_in_at ?? new Date());
@@ -765,6 +766,7 @@ export const getRealTimeItemTracking = async (payload: TrackTraceDashboardPayloa
                 hour: 'numeric',
                 minute: '2-digit',
                 hour12: true,
+                timeZone: 'Asia/Kolkata',
             })
             : date.toLocaleString('en-IN', {
                 day: 'numeric',
@@ -773,6 +775,7 @@ export const getRealTimeItemTracking = async (payload: TrackTraceDashboardPayloa
                 hour: 'numeric',
                 minute: '2-digit',
                 hour12: true,
+                timeZone: 'Asia/Kolkata',
             });
 
         return {
@@ -781,6 +784,8 @@ export const getRealTimeItemTracking = async (payload: TrackTraceDashboardPayloa
         };
     });
 
+    console.log("********************************************");
+    console.log(formattedResult);
     return formattedResult;
 
 

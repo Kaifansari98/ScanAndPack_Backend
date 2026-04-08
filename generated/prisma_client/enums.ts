@@ -9,6 +9,22 @@
 * 🟢 You can import this file directly.
 */
 
+export const ExternalPlatformTokenActiveStatus = {
+  Yes: 'Yes',
+  No: 'No'
+} as const
+
+export type ExternalPlatformTokenActiveStatus = (typeof ExternalPlatformTokenActiveStatus)[keyof typeof ExternalPlatformTokenActiveStatus]
+
+
+export const ExternalPlatformMasterActiveStatus = {
+  Yes: 'Yes',
+  No: 'No'
+} as const
+
+export type ExternalPlatformMasterActiveStatus = (typeof ExternalPlatformMasterActiveStatus)[keyof typeof ExternalPlatformMasterActiveStatus]
+
+
 export const MachineTypeMasterStatus = {
   YES: 'YES',
   NO: 'NO'

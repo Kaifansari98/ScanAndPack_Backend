@@ -353,6 +353,8 @@ export type UserMasterWhereInput = {
   user_type?: Prisma.XOR<Prisma.UserTypeMasterScalarRelationFilter, Prisma.UserTypeMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   pushTokens?: Prisma.UserPushTokenListRelationFilter
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenListRelationFilter
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenListRelationFilter
 }
 
 export type UserMasterOrderByWithRelationInput = {
@@ -437,6 +439,8 @@ export type UserMasterOrderByWithRelationInput = {
   user_type?: Prisma.UserTypeMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   pushTokens?: Prisma.UserPushTokenOrderByRelationAggregateInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenOrderByRelationAggregateInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenOrderByRelationAggregateInput
 }
 
 export type UserMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -524,6 +528,8 @@ export type UserMasterWhereUniqueInput = Prisma.AtLeast<{
   user_type?: Prisma.XOR<Prisma.UserTypeMasterScalarRelationFilter, Prisma.UserTypeMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   pushTokens?: Prisma.UserPushTokenListRelationFilter
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenListRelationFilter
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenListRelationFilter
 }, "id" | "user_contact">
 
 export type UserMasterOrderByWithAggregationInput = {
@@ -642,6 +648,8 @@ export type UserMasterCreateInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateInput = {
@@ -723,6 +731,8 @@ export type UserMasterUncheckedCreateInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUpdateInput = {
@@ -803,6 +813,8 @@ export type UserMasterUpdateInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateInput = {
@@ -884,6 +896,8 @@ export type UserMasterUncheckedUpdateInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateManyInput = {
@@ -2094,6 +2108,34 @@ export type UserMasterUpdateOneRequiredWithoutActivityLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutActivityLogsInput, Prisma.UserMasterUpdateWithoutActivityLogsInput>, Prisma.UserMasterUncheckedUpdateWithoutActivityLogsInput>
 }
 
+export type UserMasterCreateNestedOneWithoutExternalPlatformTokensCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutExternalPlatformTokensCreatedInput, Prisma.UserMasterUncheckedCreateWithoutExternalPlatformTokensCreatedInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutExternalPlatformTokensCreatedInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+}
+
+export type UserMasterCreateNestedOneWithoutExternalPlatformTokensUpdatedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutExternalPlatformTokensUpdatedInput, Prisma.UserMasterUncheckedCreateWithoutExternalPlatformTokensUpdatedInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutExternalPlatformTokensUpdatedInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+}
+
+export type UserMasterUpdateOneRequiredWithoutExternalPlatformTokensCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutExternalPlatformTokensCreatedInput, Prisma.UserMasterUncheckedCreateWithoutExternalPlatformTokensCreatedInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutExternalPlatformTokensCreatedInput
+  upsert?: Prisma.UserMasterUpsertWithoutExternalPlatformTokensCreatedInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutExternalPlatformTokensCreatedInput, Prisma.UserMasterUpdateWithoutExternalPlatformTokensCreatedInput>, Prisma.UserMasterUncheckedUpdateWithoutExternalPlatformTokensCreatedInput>
+}
+
+export type UserMasterUpdateOneRequiredWithoutExternalPlatformTokensUpdatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutExternalPlatformTokensUpdatedInput, Prisma.UserMasterUncheckedCreateWithoutExternalPlatformTokensUpdatedInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutExternalPlatformTokensUpdatedInput
+  upsert?: Prisma.UserMasterUpsertWithoutExternalPlatformTokensUpdatedInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutExternalPlatformTokensUpdatedInput, Prisma.UserMasterUpdateWithoutExternalPlatformTokensUpdatedInput>, Prisma.UserMasterUncheckedUpdateWithoutExternalPlatformTokensUpdatedInput>
+}
+
 export type UserMasterCreateWithoutVendorInput = {
   user_name: string
   user_contact: string
@@ -2171,6 +2213,8 @@ export type UserMasterCreateWithoutVendorInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutVendorInput = {
@@ -2251,6 +2295,8 @@ export type UserMasterUncheckedCreateWithoutVendorInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutVendorInput = {
@@ -2374,6 +2420,8 @@ export type UserMasterCreateWithoutUser_typeInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutUser_typeInput = {
@@ -2454,6 +2502,8 @@ export type UserMasterUncheckedCreateWithoutUser_typeInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutUser_typeInput = {
@@ -2559,6 +2609,8 @@ export type UserMasterCreateWithoutDocumentsInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutDocumentsInput = {
@@ -2639,6 +2691,8 @@ export type UserMasterUncheckedCreateWithoutDocumentsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDocumentsInput = {
@@ -2734,6 +2788,8 @@ export type UserMasterUpdateWithoutDocumentsInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDocumentsInput = {
@@ -2814,6 +2870,8 @@ export type UserMasterUncheckedUpdateWithoutDocumentsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutCreatedProjectsInput = {
@@ -2893,6 +2951,8 @@ export type UserMasterCreateWithoutCreatedProjectsInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutCreatedProjectsInput = {
@@ -2973,6 +3033,8 @@ export type UserMasterUncheckedCreateWithoutCreatedProjectsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutCreatedProjectsInput = {
@@ -3068,6 +3130,8 @@ export type UserMasterUpdateWithoutCreatedProjectsInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCreatedProjectsInput = {
@@ -3148,6 +3212,8 @@ export type UserMasterUncheckedUpdateWithoutCreatedProjectsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutScanItemsCreatedInput = {
@@ -3227,6 +3293,8 @@ export type UserMasterCreateWithoutScanItemsCreatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutScanItemsCreatedInput = {
@@ -3307,6 +3375,8 @@ export type UserMasterUncheckedCreateWithoutScanItemsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutScanItemsCreatedInput = {
@@ -3402,6 +3472,8 @@ export type UserMasterUpdateWithoutScanItemsCreatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutScanItemsCreatedInput = {
@@ -3482,6 +3554,8 @@ export type UserMasterUncheckedUpdateWithoutScanItemsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadsAssignedInput = {
@@ -3561,6 +3635,8 @@ export type UserMasterCreateWithoutLeadsAssignedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadsAssignedInput = {
@@ -3641,6 +3717,8 @@ export type UserMasterUncheckedCreateWithoutLeadsAssignedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadsAssignedInput = {
@@ -3725,6 +3803,8 @@ export type UserMasterCreateWithoutLeadsDelegatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadsDelegatedInput = {
@@ -3805,6 +3885,8 @@ export type UserMasterUncheckedCreateWithoutLeadsDelegatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadsDelegatedInput = {
@@ -3889,6 +3971,8 @@ export type UserMasterCreateWithoutLeadsCreatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadsCreatedInput = {
@@ -3969,6 +4053,8 @@ export type UserMasterUncheckedCreateWithoutLeadsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadsCreatedInput = {
@@ -4053,6 +4139,8 @@ export type UserMasterCreateWithoutLeadsUpdatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadsUpdatedInput = {
@@ -4133,6 +4221,8 @@ export type UserMasterUncheckedCreateWithoutLeadsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadsUpdatedInput = {
@@ -4228,6 +4318,8 @@ export type UserMasterUpdateWithoutLeadsAssignedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadsAssignedInput = {
@@ -4308,6 +4400,8 @@ export type UserMasterUncheckedUpdateWithoutLeadsAssignedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadsDelegatedInput = {
@@ -4398,6 +4492,8 @@ export type UserMasterUpdateWithoutLeadsDelegatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadsDelegatedInput = {
@@ -4478,6 +4574,8 @@ export type UserMasterUncheckedUpdateWithoutLeadsDelegatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadsCreatedInput = {
@@ -4568,6 +4666,8 @@ export type UserMasterUpdateWithoutLeadsCreatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadsCreatedInput = {
@@ -4648,6 +4748,8 @@ export type UserMasterUncheckedUpdateWithoutLeadsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadsUpdatedInput = {
@@ -4738,6 +4840,8 @@ export type UserMasterUpdateWithoutLeadsUpdatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
@@ -4818,6 +4922,8 @@ export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadUserCreatedInput = {
@@ -4897,6 +5003,8 @@ export type UserMasterCreateWithoutLeadUserCreatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadUserCreatedInput = {
@@ -4977,6 +5085,8 @@ export type UserMasterUncheckedCreateWithoutLeadUserCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadUserCreatedInput = {
@@ -5061,6 +5171,8 @@ export type UserMasterCreateWithoutLeadUserUpdatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadUserUpdatedInput = {
@@ -5141,6 +5253,8 @@ export type UserMasterUncheckedCreateWithoutLeadUserUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadUserUpdatedInput = {
@@ -5225,6 +5339,8 @@ export type UserMasterCreateWithoutLeadUserAsUserInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadUserAsUserInput = {
@@ -5305,6 +5421,8 @@ export type UserMasterUncheckedCreateWithoutLeadUserAsUserInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadUserAsUserInput = {
@@ -5400,6 +5518,8 @@ export type UserMasterUpdateWithoutLeadUserCreatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadUserCreatedInput = {
@@ -5480,6 +5600,8 @@ export type UserMasterUncheckedUpdateWithoutLeadUserCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadUserUpdatedInput = {
@@ -5570,6 +5692,8 @@ export type UserMasterUpdateWithoutLeadUserUpdatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadUserUpdatedInput = {
@@ -5650,6 +5774,8 @@ export type UserMasterUncheckedUpdateWithoutLeadUserUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadUserAsUserInput = {
@@ -5740,6 +5866,8 @@ export type UserMasterUpdateWithoutLeadUserAsUserInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadUserAsUserInput = {
@@ -5820,6 +5948,8 @@ export type UserMasterUncheckedUpdateWithoutLeadUserAsUserInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadActivityStatusLogInput = {
@@ -5899,6 +6029,8 @@ export type UserMasterCreateWithoutLeadActivityStatusLogInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
@@ -5979,6 +6111,8 @@ export type UserMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadActivityStatusLogInput = {
@@ -6074,6 +6208,8 @@ export type UserMasterUpdateWithoutLeadActivityStatusLogInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
@@ -6154,6 +6290,8 @@ export type UserMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutAccountsCreatedInput = {
@@ -6233,6 +6371,8 @@ export type UserMasterCreateWithoutAccountsCreatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutAccountsCreatedInput = {
@@ -6313,6 +6453,8 @@ export type UserMasterUncheckedCreateWithoutAccountsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutAccountsCreatedInput = {
@@ -6397,6 +6539,8 @@ export type UserMasterCreateWithoutAccountsUpdatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutAccountsUpdatedInput = {
@@ -6477,6 +6621,8 @@ export type UserMasterUncheckedCreateWithoutAccountsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutAccountsUpdatedInput = {
@@ -6572,6 +6718,8 @@ export type UserMasterUpdateWithoutAccountsCreatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutAccountsCreatedInput = {
@@ -6652,6 +6800,8 @@ export type UserMasterUncheckedUpdateWithoutAccountsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutAccountsUpdatedInput = {
@@ -6742,6 +6892,8 @@ export type UserMasterUpdateWithoutAccountsUpdatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutAccountsUpdatedInput = {
@@ -6822,6 +6974,8 @@ export type UserMasterUncheckedUpdateWithoutAccountsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadProductsCreatedInput = {
@@ -6901,6 +7055,8 @@ export type UserMasterCreateWithoutLeadProductsCreatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadProductsCreatedInput = {
@@ -6981,6 +7137,8 @@ export type UserMasterUncheckedCreateWithoutLeadProductsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadProductsCreatedInput = {
@@ -7076,6 +7234,8 @@ export type UserMasterUpdateWithoutLeadProductsCreatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadProductsCreatedInput = {
@@ -7156,6 +7316,8 @@ export type UserMasterUncheckedUpdateWithoutLeadProductsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutDocumentsCreatedInput = {
@@ -7235,6 +7397,8 @@ export type UserMasterCreateWithoutDocumentsCreatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutDocumentsCreatedInput = {
@@ -7315,6 +7479,8 @@ export type UserMasterUncheckedCreateWithoutDocumentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDocumentsCreatedInput = {
@@ -7399,6 +7565,8 @@ export type UserMasterCreateWithoutDocumentsDeletedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutDocumentsDeletedInput = {
@@ -7479,6 +7647,8 @@ export type UserMasterUncheckedCreateWithoutDocumentsDeletedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDocumentsDeletedInput = {
@@ -7574,6 +7744,8 @@ export type UserMasterUpdateWithoutDocumentsCreatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDocumentsCreatedInput = {
@@ -7654,6 +7826,8 @@ export type UserMasterUncheckedUpdateWithoutDocumentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutDocumentsDeletedInput = {
@@ -7744,6 +7918,8 @@ export type UserMasterUpdateWithoutDocumentsDeletedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDocumentsDeletedInput = {
@@ -7824,6 +8000,8 @@ export type UserMasterUncheckedUpdateWithoutDocumentsDeletedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadChatMembersAddedInput = {
@@ -7903,6 +8081,8 @@ export type UserMasterCreateWithoutLeadChatMembersAddedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatMembersAddedInput = {
@@ -7983,6 +8163,8 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersAddedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatMembersAddedInput = {
@@ -8067,6 +8249,8 @@ export type UserMasterCreateWithoutLeadChatMembersInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatMembersInput = {
@@ -8147,6 +8331,8 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatMembersInput = {
@@ -8242,6 +8428,8 @@ export type UserMasterUpdateWithoutLeadChatMembersAddedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatMembersAddedInput = {
@@ -8322,6 +8510,8 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersAddedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadChatMembersInput = {
@@ -8412,6 +8602,8 @@ export type UserMasterUpdateWithoutLeadChatMembersInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatMembersInput = {
@@ -8492,6 +8684,8 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadChatMessagesSentInput = {
@@ -8571,6 +8765,8 @@ export type UserMasterCreateWithoutLeadChatMessagesSentInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatMessagesSentInput = {
@@ -8651,6 +8847,8 @@ export type UserMasterUncheckedCreateWithoutLeadChatMessagesSentInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatMessagesSentInput = {
@@ -8746,6 +8944,8 @@ export type UserMasterUpdateWithoutLeadChatMessagesSentInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatMessagesSentInput = {
@@ -8826,6 +9026,8 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMessagesSentInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadChatMentionsInput = {
@@ -8905,6 +9107,8 @@ export type UserMasterCreateWithoutLeadChatMentionsInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatMentionsInput = {
@@ -8985,6 +9189,8 @@ export type UserMasterUncheckedCreateWithoutLeadChatMentionsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatMentionsInput = {
@@ -9080,6 +9286,8 @@ export type UserMasterUpdateWithoutLeadChatMentionsInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatMentionsInput = {
@@ -9160,6 +9368,8 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMentionsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadChatDocumentsCreatedInput = {
@@ -9239,6 +9449,8 @@ export type UserMasterCreateWithoutLeadChatDocumentsCreatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatDocumentsCreatedInput = {
@@ -9319,6 +9531,8 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatDocumentsCreatedInput = {
@@ -9403,6 +9617,8 @@ export type UserMasterCreateWithoutLeadChatDocumentsDeletedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatDocumentsDeletedInput = {
@@ -9483,6 +9699,8 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsDeletedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatDocumentsDeletedInput = {
@@ -9578,6 +9796,8 @@ export type UserMasterUpdateWithoutLeadChatDocumentsCreatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsCreatedInput = {
@@ -9658,6 +9878,8 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadChatDocumentsDeletedInput = {
@@ -9748,6 +9970,8 @@ export type UserMasterUpdateWithoutLeadChatDocumentsDeletedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsDeletedInput = {
@@ -9828,6 +10052,8 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsDeletedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutProductStructureInstancesInput = {
@@ -9907,6 +10133,8 @@ export type UserMasterCreateWithoutProductStructureInstancesInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutProductStructureInstancesInput = {
@@ -9987,6 +10215,8 @@ export type UserMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutProductStructureInstancesInput = {
@@ -10082,6 +10312,8 @@ export type UserMasterUpdateWithoutProductStructureInstancesInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
@@ -10162,6 +10394,8 @@ export type UserMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutPaymentsCreatedInput = {
@@ -10241,6 +10475,8 @@ export type UserMasterCreateWithoutPaymentsCreatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutPaymentsCreatedInput = {
@@ -10321,6 +10557,8 @@ export type UserMasterUncheckedCreateWithoutPaymentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutPaymentsCreatedInput = {
@@ -10416,6 +10654,8 @@ export type UserMasterUpdateWithoutPaymentsCreatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPaymentsCreatedInput = {
@@ -10496,6 +10736,8 @@ export type UserMasterUncheckedUpdateWithoutPaymentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLedgersCreatedInput = {
@@ -10575,6 +10817,8 @@ export type UserMasterCreateWithoutLedgersCreatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLedgersCreatedInput = {
@@ -10655,6 +10899,8 @@ export type UserMasterUncheckedCreateWithoutLedgersCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLedgersCreatedInput = {
@@ -10750,6 +10996,8 @@ export type UserMasterUpdateWithoutLedgersCreatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLedgersCreatedInput = {
@@ -10830,6 +11078,8 @@ export type UserMasterUncheckedUpdateWithoutLedgersCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadStatusLogsInput = {
@@ -10909,6 +11159,8 @@ export type UserMasterCreateWithoutLeadStatusLogsInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadStatusLogsInput = {
@@ -10989,6 +11241,8 @@ export type UserMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadStatusLogsInput = {
@@ -11084,6 +11338,8 @@ export type UserMasterUpdateWithoutLeadStatusLogsInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
@@ -11164,6 +11420,8 @@ export type UserMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutDesignMeetingsCreatedInput = {
@@ -11243,6 +11501,8 @@ export type UserMasterCreateWithoutDesignMeetingsCreatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignMeetingsCreatedInput = {
@@ -11323,6 +11583,8 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignMeetingsCreatedInput = {
@@ -11407,6 +11669,8 @@ export type UserMasterCreateWithoutDesignMeetingsUpdatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignMeetingsUpdatedInput = {
@@ -11487,6 +11751,8 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignMeetingsUpdatedInput = {
@@ -11582,6 +11848,8 @@ export type UserMasterUpdateWithoutDesignMeetingsCreatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignMeetingsCreatedInput = {
@@ -11662,6 +11930,8 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutDesignMeetingsUpdatedInput = {
@@ -11752,6 +12022,8 @@ export type UserMasterUpdateWithoutDesignMeetingsUpdatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignMeetingsUpdatedInput = {
@@ -11832,6 +12104,8 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
@@ -11911,6 +12185,8 @@ export type UserMasterCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
@@ -11991,6 +12267,8 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingDocsMappingForCreatedBY
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignMeetingDocsMappingForCreatedBYInput = {
@@ -12086,6 +12364,8 @@ export type UserMasterUpdateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
@@ -12166,6 +12446,8 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingDocsMappingForCreatedBY
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutDesignSelectionsCreatedInput = {
@@ -12245,6 +12527,8 @@ export type UserMasterCreateWithoutDesignSelectionsCreatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignSelectionsCreatedInput = {
@@ -12325,6 +12609,8 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignSelectionsCreatedInput = {
@@ -12409,6 +12695,8 @@ export type UserMasterCreateWithoutDesignSelectionsUpdatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignSelectionsUpdatedInput = {
@@ -12489,6 +12777,8 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignSelectionsUpdatedInput = {
@@ -12584,6 +12874,8 @@ export type UserMasterUpdateWithoutDesignSelectionsCreatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignSelectionsCreatedInput = {
@@ -12664,6 +12956,8 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutDesignSelectionsUpdatedInput = {
@@ -12754,6 +13048,8 @@ export type UserMasterUpdateWithoutDesignSelectionsUpdatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignSelectionsUpdatedInput = {
@@ -12834,6 +13130,8 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutSupervisorMappingsCreatedInput = {
@@ -12913,6 +13211,8 @@ export type UserMasterCreateWithoutSupervisorMappingsCreatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutSupervisorMappingsCreatedInput = {
@@ -12993,6 +13293,8 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutSupervisorMappingsCreatedInput = {
@@ -13077,6 +13379,8 @@ export type UserMasterCreateWithoutSupervisorMappingsInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutSupervisorMappingsInput = {
@@ -13157,6 +13461,8 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutSupervisorMappingsInput = {
@@ -13252,6 +13558,8 @@ export type UserMasterUpdateWithoutSupervisorMappingsCreatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSupervisorMappingsCreatedInput = {
@@ -13332,6 +13640,8 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutSupervisorMappingsInput = {
@@ -13422,6 +13732,8 @@ export type UserMasterUpdateWithoutSupervisorMappingsInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSupervisorMappingsInput = {
@@ -13502,6 +13814,8 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadTasksClosedInput = {
@@ -13581,6 +13895,8 @@ export type UserMasterCreateWithoutLeadTasksClosedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadTasksClosedInput = {
@@ -13661,6 +13977,8 @@ export type UserMasterUncheckedCreateWithoutLeadTasksClosedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadTasksClosedInput = {
@@ -13745,6 +14063,8 @@ export type UserMasterCreateWithoutLeadTasksCreatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadTasksCreatedInput = {
@@ -13825,6 +14145,8 @@ export type UserMasterUncheckedCreateWithoutLeadTasksCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadTasksCreatedInput = {
@@ -13909,6 +14231,8 @@ export type UserMasterCreateWithoutLeadTasksAssignedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadTasksAssignedInput = {
@@ -13989,6 +14313,8 @@ export type UserMasterUncheckedCreateWithoutLeadTasksAssignedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadTasksAssignedInput = {
@@ -14084,6 +14410,8 @@ export type UserMasterUpdateWithoutLeadTasksClosedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadTasksClosedInput = {
@@ -14164,6 +14492,8 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksClosedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadTasksCreatedInput = {
@@ -14254,6 +14584,8 @@ export type UserMasterUpdateWithoutLeadTasksCreatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadTasksCreatedInput = {
@@ -14334,6 +14666,8 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadTasksAssignedInput = {
@@ -14424,6 +14758,8 @@ export type UserMasterUpdateWithoutLeadTasksAssignedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadTasksAssignedInput = {
@@ -14504,6 +14840,8 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksAssignedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadDetailedLogsInput = {
@@ -14583,6 +14921,8 @@ export type UserMasterCreateWithoutLeadDetailedLogsInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
@@ -14663,6 +15003,8 @@ export type UserMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadDetailedLogsInput = {
@@ -14758,6 +15100,8 @@ export type UserMasterUpdateWithoutLeadDetailedLogsInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
@@ -14838,6 +15182,8 @@ export type UserMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadDocumentLogsInput = {
@@ -14917,6 +15263,8 @@ export type UserMasterCreateWithoutLeadDocumentLogsInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
@@ -14997,6 +15345,8 @@ export type UserMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadDocumentLogsInput = {
@@ -15092,6 +15442,8 @@ export type UserMasterUpdateWithoutLeadDocumentLogsInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
@@ -15172,6 +15524,8 @@ export type UserMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutCompanyVendorsCreatedInput = {
@@ -15251,6 +15605,8 @@ export type UserMasterCreateWithoutCompanyVendorsCreatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutCompanyVendorsCreatedInput = {
@@ -15331,6 +15687,8 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutCompanyVendorsCreatedInput = {
@@ -15415,6 +15773,8 @@ export type UserMasterCreateWithoutCompanyVendorsDeletedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutCompanyVendorsDeletedInput = {
@@ -15495,6 +15855,8 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsDeletedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutCompanyVendorsDeletedInput = {
@@ -15579,6 +15941,8 @@ export type UserMasterCreateWithoutCompanyVendorsUpdatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutCompanyVendorsUpdatedInput = {
@@ -15659,6 +16023,8 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutCompanyVendorsUpdatedInput = {
@@ -15754,6 +16120,8 @@ export type UserMasterUpdateWithoutCompanyVendorsCreatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCompanyVendorsCreatedInput = {
@@ -15834,6 +16202,8 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutCompanyVendorsDeletedInput = {
@@ -15924,6 +16294,8 @@ export type UserMasterUpdateWithoutCompanyVendorsDeletedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCompanyVendorsDeletedInput = {
@@ -16004,6 +16376,8 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsDeletedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutCompanyVendorsUpdatedInput = {
@@ -16094,6 +16468,8 @@ export type UserMasterUpdateWithoutCompanyVendorsUpdatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCompanyVendorsUpdatedInput = {
@@ -16174,6 +16550,8 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutOrderLoginDetailsInput = {
@@ -16253,6 +16631,8 @@ export type UserMasterCreateWithoutOrderLoginDetailsInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
@@ -16333,6 +16713,8 @@ export type UserMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutOrderLoginDetailsInput = {
@@ -16417,6 +16799,8 @@ export type UserMasterCreateWithoutOrderLoginsUpdatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutOrderLoginsUpdatedInput = {
@@ -16497,6 +16881,8 @@ export type UserMasterUncheckedCreateWithoutOrderLoginsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutOrderLoginsUpdatedInput = {
@@ -16592,6 +16978,8 @@ export type UserMasterUpdateWithoutOrderLoginDetailsInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
@@ -16672,6 +17060,8 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutOrderLoginsUpdatedInput = {
@@ -16762,6 +17152,8 @@ export type UserMasterUpdateWithoutOrderLoginsUpdatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOrderLoginsUpdatedInput = {
@@ -16842,6 +17234,8 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginsUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutSiteReadinessCreatedInput = {
@@ -16921,6 +17315,8 @@ export type UserMasterCreateWithoutSiteReadinessCreatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutSiteReadinessCreatedInput = {
@@ -17001,6 +17397,8 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutSiteReadinessCreatedInput = {
@@ -17085,6 +17483,8 @@ export type UserMasterCreateWithoutSiteReadinessUpdatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutSiteReadinessUpdatedInput = {
@@ -17165,6 +17565,8 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutSiteReadinessUpdatedInput = {
@@ -17260,6 +17662,8 @@ export type UserMasterUpdateWithoutSiteReadinessCreatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSiteReadinessCreatedInput = {
@@ -17340,6 +17744,8 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutSiteReadinessUpdatedInput = {
@@ -17430,6 +17836,8 @@ export type UserMasterUpdateWithoutSiteReadinessUpdatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSiteReadinessUpdatedInput = {
@@ -17510,6 +17918,8 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutInstallersCreatedInput = {
@@ -17589,6 +17999,8 @@ export type UserMasterCreateWithoutInstallersCreatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutInstallersCreatedInput = {
@@ -17669,6 +18081,8 @@ export type UserMasterUncheckedCreateWithoutInstallersCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutInstallersCreatedInput = {
@@ -17764,6 +18178,8 @@ export type UserMasterUpdateWithoutInstallersCreatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutInstallersCreatedInput = {
@@ -17844,6 +18260,8 @@ export type UserMasterUncheckedUpdateWithoutInstallersCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutInstallersAssignedInput = {
@@ -17923,6 +18341,8 @@ export type UserMasterCreateWithoutInstallersAssignedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutInstallersAssignedInput = {
@@ -18003,6 +18423,8 @@ export type UserMasterUncheckedCreateWithoutInstallersAssignedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutInstallersAssignedInput = {
@@ -18098,6 +18520,8 @@ export type UserMasterUpdateWithoutInstallersAssignedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutInstallersAssignedInput = {
@@ -18178,6 +18602,8 @@ export type UserMasterUncheckedUpdateWithoutInstallersAssignedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutInstallationUpdatesCreatedInput = {
@@ -18257,6 +18683,8 @@ export type UserMasterCreateWithoutInstallationUpdatesCreatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutInstallationUpdatesCreatedInput = {
@@ -18337,6 +18765,8 @@ export type UserMasterUncheckedCreateWithoutInstallationUpdatesCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutInstallationUpdatesCreatedInput = {
@@ -18432,6 +18862,8 @@ export type UserMasterUpdateWithoutInstallationUpdatesCreatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutInstallationUpdatesCreatedInput = {
@@ -18512,6 +18944,8 @@ export type UserMasterUncheckedUpdateWithoutInstallationUpdatesCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutMiscCreatedInput = {
@@ -18591,6 +19025,8 @@ export type UserMasterCreateWithoutMiscCreatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutMiscCreatedInput = {
@@ -18671,6 +19107,8 @@ export type UserMasterUncheckedCreateWithoutMiscCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutMiscCreatedInput = {
@@ -18755,6 +19193,8 @@ export type UserMasterCreateWithoutMiscUpdatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutMiscUpdatedInput = {
@@ -18835,6 +19275,8 @@ export type UserMasterUncheckedCreateWithoutMiscUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutMiscUpdatedInput = {
@@ -18930,6 +19372,8 @@ export type UserMasterUpdateWithoutMiscCreatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMiscCreatedInput = {
@@ -19010,6 +19454,8 @@ export type UserMasterUncheckedUpdateWithoutMiscCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutMiscUpdatedInput = {
@@ -19100,6 +19546,8 @@ export type UserMasterUpdateWithoutMiscUpdatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMiscUpdatedInput = {
@@ -19180,6 +19628,8 @@ export type UserMasterUncheckedUpdateWithoutMiscUpdatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutMiscDocumentsCreatedInput = {
@@ -19259,6 +19709,8 @@ export type UserMasterCreateWithoutMiscDocumentsCreatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutMiscDocumentsCreatedInput = {
@@ -19339,6 +19791,8 @@ export type UserMasterUncheckedCreateWithoutMiscDocumentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutMiscDocumentsCreatedInput = {
@@ -19434,6 +19888,8 @@ export type UserMasterUpdateWithoutMiscDocumentsCreatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMiscDocumentsCreatedInput = {
@@ -19514,6 +19970,8 @@ export type UserMasterUncheckedUpdateWithoutMiscDocumentsCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutInstallationIssueLogMasterInput = {
@@ -19593,6 +20051,8 @@ export type UserMasterCreateWithoutInstallationIssueLogMasterInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
@@ -19673,6 +20133,8 @@ export type UserMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutInstallationIssueLogMasterInput = {
@@ -19768,6 +20230,8 @@ export type UserMasterUpdateWithoutInstallationIssueLogMasterInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
@@ -19848,6 +20312,8 @@ export type UserMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutNotificationsSentInput = {
@@ -19927,6 +20393,8 @@ export type UserMasterCreateWithoutNotificationsSentInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutNotificationsSentInput = {
@@ -20007,6 +20475,8 @@ export type UserMasterUncheckedCreateWithoutNotificationsSentInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutNotificationsSentInput = {
@@ -20091,6 +20561,8 @@ export type UserMasterCreateWithoutNotificationsReceivedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutNotificationsReceivedInput = {
@@ -20171,6 +20643,8 @@ export type UserMasterUncheckedCreateWithoutNotificationsReceivedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutNotificationsReceivedInput = {
@@ -20266,6 +20740,8 @@ export type UserMasterUpdateWithoutNotificationsSentInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutNotificationsSentInput = {
@@ -20346,6 +20822,8 @@ export type UserMasterUncheckedUpdateWithoutNotificationsSentInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutNotificationsReceivedInput = {
@@ -20436,6 +20914,8 @@ export type UserMasterUpdateWithoutNotificationsReceivedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutNotificationsReceivedInput = {
@@ -20516,6 +20996,8 @@ export type UserMasterUncheckedUpdateWithoutNotificationsReceivedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutPushTokensInput = {
@@ -20595,6 +21077,8 @@ export type UserMasterCreateWithoutPushTokensInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutPushTokensInput = {
@@ -20675,6 +21159,8 @@ export type UserMasterUncheckedCreateWithoutPushTokensInput = {
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutPushTokensInput = {
@@ -20770,6 +21256,8 @@ export type UserMasterUpdateWithoutPushTokensInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
@@ -20850,6 +21338,8 @@ export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutOperatorInput = {
@@ -20929,6 +21419,8 @@ export type UserMasterCreateWithoutOperatorInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutOperatorInput = {
@@ -21009,6 +21501,8 @@ export type UserMasterUncheckedCreateWithoutOperatorInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutOperatorInput = {
@@ -21104,6 +21598,8 @@ export type UserMasterUpdateWithoutOperatorInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOperatorInput = {
@@ -21184,6 +21680,8 @@ export type UserMasterUncheckedUpdateWithoutOperatorInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutCreatedUserMachineMappingsInput = {
@@ -21263,6 +21761,8 @@ export type UserMasterCreateWithoutCreatedUserMachineMappingsInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutCreatedUserMachineMappingsInput = {
@@ -21343,6 +21843,8 @@ export type UserMasterUncheckedCreateWithoutCreatedUserMachineMappingsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutCreatedUserMachineMappingsInput = {
@@ -21427,6 +21929,8 @@ export type UserMasterCreateWithoutUpdatedUserMachineMappingsInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutUpdatedUserMachineMappingsInput = {
@@ -21507,6 +22011,8 @@ export type UserMasterUncheckedCreateWithoutUpdatedUserMachineMappingsInput = {
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutUpdatedUserMachineMappingsInput = {
@@ -21591,6 +22097,8 @@ export type UserMasterCreateWithoutUserMachineMappingsInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutUserMachineMappingsInput = {
@@ -21671,6 +22179,8 @@ export type UserMasterUncheckedCreateWithoutUserMachineMappingsInput = {
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutUserMachineMappingsInput = {
@@ -21766,6 +22276,8 @@ export type UserMasterUpdateWithoutCreatedUserMachineMappingsInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCreatedUserMachineMappingsInput = {
@@ -21846,6 +22358,8 @@ export type UserMasterUncheckedUpdateWithoutCreatedUserMachineMappingsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutUpdatedUserMachineMappingsInput = {
@@ -21936,6 +22450,8 @@ export type UserMasterUpdateWithoutUpdatedUserMachineMappingsInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput = {
@@ -22016,6 +22532,8 @@ export type UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput = {
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutUserMachineMappingsInput = {
@@ -22106,6 +22624,8 @@ export type UserMasterUpdateWithoutUserMachineMappingsInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
@@ -22186,6 +22706,8 @@ export type UserMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
   createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutOrderLoginPoFilesCreatedInput = {
@@ -22265,6 +22787,8 @@ export type UserMasterCreateWithoutOrderLoginPoFilesCreatedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput = {
@@ -22345,6 +22869,8 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutOrderLoginPoFilesCreatedInput = {
@@ -22429,6 +22955,8 @@ export type UserMasterCreateWithoutOrderLoginPoFilesDeletedInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput = {
@@ -22509,6 +23037,8 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutOrderLoginPoFilesDeletedInput = {
@@ -22604,6 +23134,8 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesCreatedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesCreatedInput = {
@@ -22684,6 +23216,8 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesCreatedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutOrderLoginPoFilesDeletedInput = {
@@ -22774,6 +23308,8 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesDeletedInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput = {
@@ -22854,6 +23390,8 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutCreatedDefectsInput = {
@@ -22933,6 +23471,8 @@ export type UserMasterCreateWithoutCreatedDefectsInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutCreatedDefectsInput = {
@@ -23013,6 +23553,8 @@ export type UserMasterUncheckedCreateWithoutCreatedDefectsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutCreatedDefectsInput = {
@@ -23108,6 +23650,8 @@ export type UserMasterUpdateWithoutCreatedDefectsInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
@@ -23188,6 +23732,8 @@ export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutFranchiseInput = {
@@ -23267,6 +23813,8 @@ export type UserMasterCreateWithoutFranchiseInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutFranchiseInput = {
@@ -23347,6 +23895,8 @@ export type UserMasterUncheckedCreateWithoutFranchiseInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutFranchiseInput = {
@@ -23452,6 +24002,8 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInput = {
@@ -23532,6 +24084,8 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsC
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutHeadSiteSupervisorFranchiseMappingsCreatedInput = {
@@ -23616,6 +24170,8 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -23696,6 +24252,8 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsI
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -23791,6 +24349,8 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInput = {
@@ -23871,6 +24431,8 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsC
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -23961,6 +24523,8 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -24041,6 +24605,8 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsI
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutUserGeographicalMappingsInput = {
@@ -24120,6 +24686,8 @@ export type UserMasterCreateWithoutUserGeographicalMappingsInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput = {
@@ -24200,6 +24768,8 @@ export type UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutUserGeographicalMappingsInput = {
@@ -24295,6 +24865,8 @@ export type UserMasterUpdateWithoutUserGeographicalMappingsInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput = {
@@ -24375,6 +24947,8 @@ export type UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutActivityLogsInput = {
@@ -24454,6 +25028,8 @@ export type UserMasterCreateWithoutActivityLogsInput = {
   user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
   pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutActivityLogsInput = {
@@ -24534,6 +25110,8 @@ export type UserMasterUncheckedCreateWithoutActivityLogsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
   pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutActivityLogsInput = {
@@ -24629,6 +25207,8 @@ export type UserMasterUpdateWithoutActivityLogsInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutActivityLogsInput = {
@@ -24709,6 +25289,692 @@ export type UserMasterUncheckedUpdateWithoutActivityLogsInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+}
+
+export type UserMasterCreateWithoutExternalPlatformTokensCreatedInput = {
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageCreateNestedManyWithoutSenderInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsCreateNestedManyWithoutDeletedByInput
+  leadsAssigned?: Prisma.LeadMasterCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutUpdatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutSupervisorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
+  createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
+  scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
+  user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
+  pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
+}
+
+export type UserMasterUncheckedCreateWithoutExternalPlatformTokensCreatedInput = {
+  id?: number
+  vendor_id: number
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  user_type_id: number
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  franchise_id?: number | null
+  accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutSenderInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDeletedByInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutUpdatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerUncheckedCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
+  createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
+  pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
+}
+
+export type UserMasterCreateOrConnectWithoutExternalPlatformTokensCreatedInput = {
+  where: Prisma.UserMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutExternalPlatformTokensCreatedInput, Prisma.UserMasterUncheckedCreateWithoutExternalPlatformTokensCreatedInput>
+}
+
+export type UserMasterCreateWithoutExternalPlatformTokensUpdatedInput = {
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageCreateNestedManyWithoutSenderInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsCreateNestedManyWithoutDeletedByInput
+  leadsAssigned?: Prisma.LeadMasterCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutUpdatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutSupervisorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
+  createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
+  scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
+  user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
+  pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+}
+
+export type UserMasterUncheckedCreateWithoutExternalPlatformTokensUpdatedInput = {
+  id?: number
+  vendor_id: number
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  user_type_id: number
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  franchise_id?: number | null
+  accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutSenderInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDeletedByInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutUpdatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerUncheckedCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
+  createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
+  pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+}
+
+export type UserMasterCreateOrConnectWithoutExternalPlatformTokensUpdatedInput = {
+  where: Prisma.UserMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutExternalPlatformTokensUpdatedInput, Prisma.UserMasterUncheckedCreateWithoutExternalPlatformTokensUpdatedInput>
+}
+
+export type UserMasterUpsertWithoutExternalPlatformTokensCreatedInput = {
+  update: Prisma.XOR<Prisma.UserMasterUpdateWithoutExternalPlatformTokensCreatedInput, Prisma.UserMasterUncheckedUpdateWithoutExternalPlatformTokensCreatedInput>
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutExternalPlatformTokensCreatedInput, Prisma.UserMasterUncheckedCreateWithoutExternalPlatformTokensCreatedInput>
+  where?: Prisma.UserMasterWhereInput
+}
+
+export type UserMasterUpdateToOneWithWhereWithoutExternalPlatformTokensCreatedInput = {
+  where?: Prisma.UserMasterWhereInput
+  data: Prisma.XOR<Prisma.UserMasterUpdateWithoutExternalPlatformTokensCreatedInput, Prisma.UserMasterUncheckedUpdateWithoutExternalPlatformTokensCreatedInput>
+}
+
+export type UserMasterUpdateWithoutExternalPlatformTokensCreatedInput = {
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUpdateManyWithoutSenderNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUpdateManyWithoutDeletedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutUpdatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutSupervisorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
+  user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
+  pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
+}
+
+export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensCreatedInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
+  pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+}
+
+export type UserMasterUpsertWithoutExternalPlatformTokensUpdatedInput = {
+  update: Prisma.XOR<Prisma.UserMasterUpdateWithoutExternalPlatformTokensUpdatedInput, Prisma.UserMasterUncheckedUpdateWithoutExternalPlatformTokensUpdatedInput>
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutExternalPlatformTokensUpdatedInput, Prisma.UserMasterUncheckedCreateWithoutExternalPlatformTokensUpdatedInput>
+  where?: Prisma.UserMasterWhereInput
+}
+
+export type UserMasterUpdateToOneWithWhereWithoutExternalPlatformTokensUpdatedInput = {
+  where?: Prisma.UserMasterWhereInput
+  data: Prisma.XOR<Prisma.UserMasterUpdateWithoutExternalPlatformTokensUpdatedInput, Prisma.UserMasterUncheckedUpdateWithoutExternalPlatformTokensUpdatedInput>
+}
+
+export type UserMasterUpdateWithoutExternalPlatformTokensUpdatedInput = {
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUpdateManyWithoutSenderNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUpdateManyWithoutDeletedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutUpdatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutSupervisorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
+  user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
+  pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+}
+
+export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensUpdatedInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
+  pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
 }
 
 export type UserMasterCreateManyVendorInput = {
@@ -24802,6 +26068,8 @@ export type UserMasterUpdateWithoutVendorInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutVendorInput = {
@@ -24882,6 +26150,8 @@ export type UserMasterUncheckedUpdateWithoutVendorInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -24989,6 +26259,8 @@ export type UserMasterUpdateWithoutUser_typeInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUser_typeInput = {
@@ -25069,6 +26341,8 @@ export type UserMasterUncheckedUpdateWithoutUser_typeInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateManyWithoutUser_typeInput = {
@@ -25176,6 +26450,8 @@ export type UserMasterUpdateWithoutFranchiseInput = {
   user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
   pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFranchiseInput = {
@@ -25256,6 +26532,8 @@ export type UserMasterUncheckedUpdateWithoutFranchiseInput = {
   updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateManyWithoutFranchiseInput = {
@@ -25344,6 +26622,8 @@ export type UserMasterCountOutputType = {
   updatedUserMachineMappings: number
   userMachineMappings: number
   pushTokens: number
+  externalPlatformTokensCreated: number
+  externalPlatformTokensUpdated: number
 }
 
 export type UserMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -25413,6 +26693,8 @@ export type UserMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   updatedUserMachineMappings?: boolean | UserMasterCountOutputTypeCountUpdatedUserMachineMappingsArgs
   userMachineMappings?: boolean | UserMasterCountOutputTypeCountUserMachineMappingsArgs
   pushTokens?: boolean | UserMasterCountOutputTypeCountPushTokensArgs
+  externalPlatformTokensCreated?: boolean | UserMasterCountOutputTypeCountExternalPlatformTokensCreatedArgs
+  externalPlatformTokensUpdated?: boolean | UserMasterCountOutputTypeCountExternalPlatformTokensUpdatedArgs
 }
 
 /**
@@ -25887,6 +27169,20 @@ export type UserMasterCountOutputTypeCountPushTokensArgs<ExtArgs extends runtime
   where?: Prisma.UserPushTokenWhereInput
 }
 
+/**
+ * UserMasterCountOutputType without action
+ */
+export type UserMasterCountOutputTypeCountExternalPlatformTokensCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExternalPlatformTokenWhereInput
+}
+
+/**
+ * UserMasterCountOutputType without action
+ */
+export type UserMasterCountOutputTypeCountExternalPlatformTokensUpdatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExternalPlatformTokenWhereInput
+}
+
 
 export type UserMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -25970,6 +27266,8 @@ export type UserMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   user_type?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   pushTokens?: boolean | Prisma.UserMaster$pushTokensArgs<ExtArgs>
+  externalPlatformTokensCreated?: boolean | Prisma.UserMaster$externalPlatformTokensCreatedArgs<ExtArgs>
+  externalPlatformTokensUpdated?: boolean | Prisma.UserMaster$externalPlatformTokensUpdatedArgs<ExtArgs>
   _count?: boolean | Prisma.UserMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userMaster"]>
 
@@ -26095,6 +27393,8 @@ export type UserMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   user_type?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   pushTokens?: boolean | Prisma.UserMaster$pushTokensArgs<ExtArgs>
+  externalPlatformTokensCreated?: boolean | Prisma.UserMaster$externalPlatformTokensCreatedArgs<ExtArgs>
+  externalPlatformTokensUpdated?: boolean | Prisma.UserMaster$externalPlatformTokensUpdatedArgs<ExtArgs>
   _count?: boolean | Prisma.UserMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -26180,6 +27480,8 @@ export type $UserMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     user_type: Prisma.$UserTypeMasterPayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     pushTokens: Prisma.$UserPushTokenPayload<ExtArgs>[]
+    externalPlatformTokensCreated: Prisma.$ExternalPlatformTokenPayload<ExtArgs>[]
+    externalPlatformTokensUpdated: Prisma.$ExternalPlatformTokenPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -26657,6 +27959,8 @@ export interface Prisma__UserMasterClient<T, Null = never, ExtArgs extends runti
   user_type<T extends Prisma.UserTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$UserTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   pushTokens<T extends Prisma.UserMaster$pushTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$pushTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPushTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  externalPlatformTokensCreated<T extends Prisma.UserMaster$externalPlatformTokensCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$externalPlatformTokensCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExternalPlatformTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  externalPlatformTokensUpdated<T extends Prisma.UserMaster$externalPlatformTokensUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$externalPlatformTokensUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExternalPlatformTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -28694,6 +29998,54 @@ export type UserMaster$pushTokensArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.UserPushTokenScalarFieldEnum | Prisma.UserPushTokenScalarFieldEnum[]
+}
+
+/**
+ * UserMaster.externalPlatformTokensCreated
+ */
+export type UserMaster$externalPlatformTokensCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ExternalPlatformToken
+   */
+  select?: Prisma.ExternalPlatformTokenSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ExternalPlatformToken
+   */
+  omit?: Prisma.ExternalPlatformTokenOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExternalPlatformTokenInclude<ExtArgs> | null
+  where?: Prisma.ExternalPlatformTokenWhereInput
+  orderBy?: Prisma.ExternalPlatformTokenOrderByWithRelationInput | Prisma.ExternalPlatformTokenOrderByWithRelationInput[]
+  cursor?: Prisma.ExternalPlatformTokenWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExternalPlatformTokenScalarFieldEnum | Prisma.ExternalPlatformTokenScalarFieldEnum[]
+}
+
+/**
+ * UserMaster.externalPlatformTokensUpdated
+ */
+export type UserMaster$externalPlatformTokensUpdatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ExternalPlatformToken
+   */
+  select?: Prisma.ExternalPlatformTokenSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ExternalPlatformToken
+   */
+  omit?: Prisma.ExternalPlatformTokenOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExternalPlatformTokenInclude<ExtArgs> | null
+  where?: Prisma.ExternalPlatformTokenWhereInput
+  orderBy?: Prisma.ExternalPlatformTokenOrderByWithRelationInput | Prisma.ExternalPlatformTokenOrderByWithRelationInput[]
+  cursor?: Prisma.ExternalPlatformTokenWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExternalPlatformTokenScalarFieldEnum | Prisma.ExternalPlatformTokenScalarFieldEnum[]
 }
 
 /**

@@ -85,6 +85,7 @@ model VendorMaster {
   vendorSetting                       VendorSetting[]
   taxInfo                             VendorTaxInfo[]
   tokens                              VendorTokens[]
+  externalPlatformTokens              ExternalPlatformToken[]
 }
 
 model VendorAddress {
@@ -198,6 +199,8 @@ model UserMaster {
   user_type                                  UserTypeMaster                       @relation(fields: [user_type_id], references: [id])
   vendor                                     VendorMaster                         @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   pushTokens                                 UserPushToken[]
+  externalPlatformTokensCreated              ExternalPlatformToken[]              @relation("ExternalPlatformTokenCreatedBy")
+  externalPlatformTokensUpdated              ExternalPlatformToken[]              @relation("ExternalPlatformTokenUpdatedBy")
 }
 
 model UserDocument {
@@ -1705,6 +1708,44 @@ model ApiRequestLog {
 
   @@index([vendor_id])
   @@index([created_at])
+}
+
+
+model ExternalPlatformMaster {
+  id                     Int                      @id @default(autoincrement())
+  external_platform_name String
+  active                 ExternalPlatformMasterActiveStatus             @default(Yes)
+  tokens                 ExternalPlatformToken[]
+}
+
+model ExternalPlatformToken {
+  id                   Int                    @id @default(autoincrement())
+  external_platform_id Int
+  token                String
+  email                String
+  name                 String
+  user_id              String
+  company_id           String
+  vendor_id            Int
+  created_at           DateTime               @default(now())
+  created_by           Int
+  updated_at           DateTime               @updatedAt
+  updated_by           Int
+  active               ExternalPlatformTokenActiveStatus           @default(Yes)
+  externalPlatform     ExternalPlatformMaster @relation(fields: [external_platform_id], references: [id], onDelete: Cascade)
+  vendor               VendorMaster           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdByUser        UserMaster             @relation("ExternalPlatformTokenCreatedBy", fields: [created_by], references: [id])
+  updatedByUser        UserMaster             @relation("ExternalPlatformTokenUpdatedBy", fields: [updated_by], references: [id])
+}
+
+enum ExternalPlatformTokenActiveStatus {
+  Yes
+  No
+}
+
+enum ExternalPlatformMasterActiveStatus {
+  Yes
+  No
 }
 
 enum MachineTypeMasterStatus {
