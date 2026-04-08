@@ -2721,6 +2721,7 @@ export class BookingStageService {
       designer_remark?: string;
       date_range?: { from: string; to: string };
       production_status?: string;
+      pending_services?: boolean;
     } = {},
     options: {
       requireMiscellaneous?: boolean;
@@ -3212,6 +3213,16 @@ const statusTags =
         addAnd({ miscellaneousMaster: { some: { is_resolved: false } } });
       } else if (options.requireMiscellaneous) {
         addAnd({ miscellaneousMaster: { some: {} } });
+      }
+
+      if (filters.pending_services) {
+        addAnd({
+          serviceSchedules: {
+            some: {
+              status: "open",
+            },
+          },
+        });
       }
 
       // ================= INSTANCE DRIVEN STAGE FILTER =================

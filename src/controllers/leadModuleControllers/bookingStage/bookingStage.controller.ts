@@ -550,6 +550,7 @@ export class BookingStageController {
         designer_remark: req.body.designer_remark,
         date_range: dateRange,
         production_status: req.body.production_status,
+        pending_services: req.body.pending_services,
       };
 
       // ============================
