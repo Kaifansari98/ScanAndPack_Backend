@@ -40,11 +40,14 @@ import { uploadMachineExcel } from "../../../src/controllers/trackTraceControlle
 
 
 const router = Router();
+const uploadDisk = multer({ dest: os.tmpdir() });
 
 router.get("/project/:vendor_id", getAllProjectsTrackTrace);
 router.get("/get-filter-track-trace/:vendor_id", get_filter_track_trace);
 
-router.post('/scan/item', scan_item);
+
+router.post('/scan/item', uploadDisk.array("photos[]", 10), scan_item);
+// router.post('/scan/item', scan_item);
 router.post('/scan/check-item', check_item);
 
 
@@ -77,7 +80,7 @@ router.post("/link-lead/:project_id/lead", linkLeadToProject);
 const storage = multer.memoryStorage();
 
 router.get('/defect-master/:vendor_id',get_defect);
-const uploadDisk = multer({ dest: os.tmpdir() });
+
 router.post('/mark-defect', uploadDisk.array("photos[]", 10), mark_Defect);
 // router.post('/mark-defect',mark_Defect);
 router.post('/scan/check-defect', check_defect);

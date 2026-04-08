@@ -482,3 +482,8 @@ export type ExternalPlatformToken = Prisma.ExternalPlatformTokenModel
  * 
  */
 export type DefectedItemImage = Prisma.DefectedItemImageModel
+/**
+ * Model DefectCompletionPhoto
+ * 
+ */
+export type DefectCompletionPhoto = Prisma.DefectCompletionPhotoModel

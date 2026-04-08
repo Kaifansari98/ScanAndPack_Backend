@@ -1738,3 +1738,57 @@ export const uploadToWasabiDefectedItems = async (
 
   return Promise.all(uploads);
 };
+
+
+export const uploadToWasabiCompletionItem = async (
+  filePath: string,
+  vendorId: number,
+  mappingId: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `completion/${vendorId}/${mappingId}/${uuidv4()}.${ext}`;
+
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
+  return sysName;
+};
+
+export const uploadToWasabiCompletionPhotos = async (
+  files: Express.Multer.File[],
+  vendorId: number,
+  mappingId: number
+): Promise<UploadedImage[]> => {
+  const uploads = files.map(async (file) => {
+    const sysName = await uploadToWasabiCompletionItem(
+      file.path,
+      vendorId,
+      mappingId,
+      file.originalname,
+      file.mimetype,
+    );
+
+    const url = `${process.env.WASABI_ENDPOINT}/${process.env.WASABI_BUCKET_NAME}/${sysName}`;
+
+    return {
+      url,
+      key: sysName,
+      originalName: file.originalname,
+      systemName: sysName,
+    };
+  });
+
+  return Promise.all(uploads);
+};

@@ -38,6 +38,7 @@ export type DefectedItemAvgAggregateOutputType = {
   previous_scanned_machine_id: number | null
   created_by: number | null
   rework_machine_id: number | null
+  defect_completed_by: number | null
 }
 
 export type DefectedItemSumAggregateOutputType = {
@@ -52,6 +53,7 @@ export type DefectedItemSumAggregateOutputType = {
   previous_scanned_machine_id: number | null
   created_by: number | null
   rework_machine_id: number | null
+  defect_completed_by: number | null
 }
 
 export type DefectedItemMinAggregateOutputType = {
@@ -72,6 +74,8 @@ export type DefectedItemMinAggregateOutputType = {
   action: string | null
   rework_machine_id: number | null
   defect_status: $Enums.DefectStatus | null
+  defect_completed_by: number | null
+  defect_completed_at: Date | null
 }
 
 export type DefectedItemMaxAggregateOutputType = {
@@ -92,6 +96,8 @@ export type DefectedItemMaxAggregateOutputType = {
   action: string | null
   rework_machine_id: number | null
   defect_status: $Enums.DefectStatus | null
+  defect_completed_by: number | null
+  defect_completed_at: Date | null
 }
 
 export type DefectedItemCountAggregateOutputType = {
@@ -112,6 +118,8 @@ export type DefectedItemCountAggregateOutputType = {
   action: number
   rework_machine_id: number
   defect_status: number
+  defect_completed_by: number
+  defect_completed_at: number
   _all: number
 }
 
@@ -128,6 +136,7 @@ export type DefectedItemAvgAggregateInputType = {
   previous_scanned_machine_id?: true
   created_by?: true
   rework_machine_id?: true
+  defect_completed_by?: true
 }
 
 export type DefectedItemSumAggregateInputType = {
@@ -142,6 +151,7 @@ export type DefectedItemSumAggregateInputType = {
   previous_scanned_machine_id?: true
   created_by?: true
   rework_machine_id?: true
+  defect_completed_by?: true
 }
 
 export type DefectedItemMinAggregateInputType = {
@@ -162,6 +172,8 @@ export type DefectedItemMinAggregateInputType = {
   action?: true
   rework_machine_id?: true
   defect_status?: true
+  defect_completed_by?: true
+  defect_completed_at?: true
 }
 
 export type DefectedItemMaxAggregateInputType = {
@@ -182,6 +194,8 @@ export type DefectedItemMaxAggregateInputType = {
   action?: true
   rework_machine_id?: true
   defect_status?: true
+  defect_completed_by?: true
+  defect_completed_at?: true
 }
 
 export type DefectedItemCountAggregateInputType = {
@@ -202,6 +216,8 @@ export type DefectedItemCountAggregateInputType = {
   action?: true
   rework_machine_id?: true
   defect_status?: true
+  defect_completed_by?: true
+  defect_completed_at?: true
   _all?: true
 }
 
@@ -309,6 +325,8 @@ export type DefectedItemGroupByOutputType = {
   action: string | null
   rework_machine_id: number | null
   defect_status: $Enums.DefectStatus
+  defect_completed_by: number | null
+  defect_completed_at: Date | null
   _count: DefectedItemCountAggregateOutputType | null
   _avg: DefectedItemAvgAggregateOutputType | null
   _sum: DefectedItemSumAggregateOutputType | null
@@ -352,6 +370,8 @@ export type DefectedItemWhereInput = {
   action?: Prisma.StringNullableFilter<"DefectedItem"> | string | null
   rework_machine_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
   defect_status?: Prisma.EnumDefectStatusFilter<"DefectedItem"> | $Enums.DefectStatus
+  defect_completed_by?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
+  defect_completed_at?: Prisma.DateTimeNullableFilter<"DefectedItem"> | Date | string | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   cutList?: Prisma.XOR<Prisma.CutListNullableScalarRelationFilter, Prisma.CutListWhereInput> | null
   cutListMachineMapping?: Prisma.XOR<Prisma.CutListMachineMappingScalarRelationFilter, Prisma.CutListMachineMappingWhereInput>
@@ -360,6 +380,7 @@ export type DefectedItemWhereInput = {
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   images?: Prisma.DefectedItemImageListRelationFilter
+  completionPhotos?: Prisma.DefectCompletionPhotoListRelationFilter
 }
 
 export type DefectedItemOrderByWithRelationInput = {
@@ -380,6 +401,8 @@ export type DefectedItemOrderByWithRelationInput = {
   action?: Prisma.SortOrderInput | Prisma.SortOrder
   rework_machine_id?: Prisma.SortOrderInput | Prisma.SortOrder
   defect_status?: Prisma.SortOrder
+  defect_completed_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  defect_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   cutList?: Prisma.CutListOrderByWithRelationInput
   cutListMachineMapping?: Prisma.CutListMachineMappingOrderByWithRelationInput
@@ -388,6 +411,7 @@ export type DefectedItemOrderByWithRelationInput = {
   project?: Prisma.ProjectMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   images?: Prisma.DefectedItemImageOrderByRelationAggregateInput
+  completionPhotos?: Prisma.DefectCompletionPhotoOrderByRelationAggregateInput
 }
 
 export type DefectedItemWhereUniqueInput = Prisma.AtLeast<{
@@ -411,6 +435,8 @@ export type DefectedItemWhereUniqueInput = Prisma.AtLeast<{
   action?: Prisma.StringNullableFilter<"DefectedItem"> | string | null
   rework_machine_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
   defect_status?: Prisma.EnumDefectStatusFilter<"DefectedItem"> | $Enums.DefectStatus
+  defect_completed_by?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
+  defect_completed_at?: Prisma.DateTimeNullableFilter<"DefectedItem"> | Date | string | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   cutList?: Prisma.XOR<Prisma.CutListNullableScalarRelationFilter, Prisma.CutListWhereInput> | null
   cutListMachineMapping?: Prisma.XOR<Prisma.CutListMachineMappingScalarRelationFilter, Prisma.CutListMachineMappingWhereInput>
@@ -419,6 +445,7 @@ export type DefectedItemWhereUniqueInput = Prisma.AtLeast<{
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   images?: Prisma.DefectedItemImageListRelationFilter
+  completionPhotos?: Prisma.DefectCompletionPhotoListRelationFilter
 }, "id">
 
 export type DefectedItemOrderByWithAggregationInput = {
@@ -439,6 +466,8 @@ export type DefectedItemOrderByWithAggregationInput = {
   action?: Prisma.SortOrderInput | Prisma.SortOrder
   rework_machine_id?: Prisma.SortOrderInput | Prisma.SortOrder
   defect_status?: Prisma.SortOrder
+  defect_completed_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  defect_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.DefectedItemCountOrderByAggregateInput
   _avg?: Prisma.DefectedItemAvgOrderByAggregateInput
   _max?: Prisma.DefectedItemMaxOrderByAggregateInput
@@ -467,6 +496,8 @@ export type DefectedItemScalarWhereWithAggregatesInput = {
   action?: Prisma.StringNullableWithAggregatesFilter<"DefectedItem"> | string | null
   rework_machine_id?: Prisma.IntNullableWithAggregatesFilter<"DefectedItem"> | number | null
   defect_status?: Prisma.EnumDefectStatusWithAggregatesFilter<"DefectedItem"> | $Enums.DefectStatus
+  defect_completed_by?: Prisma.IntNullableWithAggregatesFilter<"DefectedItem"> | number | null
+  defect_completed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"DefectedItem"> | Date | string | null
 }
 
 export type DefectedItemCreateInput = {
@@ -479,6 +510,8 @@ export type DefectedItemCreateInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedDefectsInput
   cutList?: Prisma.CutListCreateNestedOneWithoutDefectedItemsInput
   cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutDefectedItemsInput
@@ -487,6 +520,7 @@ export type DefectedItemCreateInput = {
   project: Prisma.ProjectMasterCreateNestedOneWithoutDefectedItemsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDefectedItemsInput
   images?: Prisma.DefectedItemImageCreateNestedManyWithoutDefected_itemInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutDefectedItemInput
 }
 
 export type DefectedItemUncheckedCreateInput = {
@@ -507,7 +541,10 @@ export type DefectedItemUncheckedCreateInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
   images?: Prisma.DefectedItemImageUncheckedCreateNestedManyWithoutDefected_itemInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutDefectedItemInput
 }
 
 export type DefectedItemUpdateInput = {
@@ -520,6 +557,8 @@ export type DefectedItemUpdateInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedDefectsNestedInput
   cutList?: Prisma.CutListUpdateOneWithoutDefectedItemsNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutDefectedItemsNestedInput
@@ -528,6 +567,7 @@ export type DefectedItemUpdateInput = {
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
   images?: Prisma.DefectedItemImageUpdateManyWithoutDefected_itemNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutDefectedItemNestedInput
 }
 
 export type DefectedItemUncheckedUpdateInput = {
@@ -548,7 +588,10 @@ export type DefectedItemUncheckedUpdateInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   images?: Prisma.DefectedItemImageUncheckedUpdateManyWithoutDefected_itemNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutDefectedItemNestedInput
 }
 
 export type DefectedItemCreateManyInput = {
@@ -569,6 +612,8 @@ export type DefectedItemCreateManyInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
 }
 
 export type DefectedItemUpdateManyMutationInput = {
@@ -581,6 +626,8 @@ export type DefectedItemUpdateManyMutationInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type DefectedItemUncheckedUpdateManyInput = {
@@ -601,6 +648,8 @@ export type DefectedItemUncheckedUpdateManyInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type DefectedItemListRelationFilter = {
@@ -631,6 +680,8 @@ export type DefectedItemCountOrderByAggregateInput = {
   action?: Prisma.SortOrder
   rework_machine_id?: Prisma.SortOrder
   defect_status?: Prisma.SortOrder
+  defect_completed_by?: Prisma.SortOrder
+  defect_completed_at?: Prisma.SortOrder
 }
 
 export type DefectedItemAvgOrderByAggregateInput = {
@@ -645,6 +696,7 @@ export type DefectedItemAvgOrderByAggregateInput = {
   previous_scanned_machine_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   rework_machine_id?: Prisma.SortOrder
+  defect_completed_by?: Prisma.SortOrder
 }
 
 export type DefectedItemMaxOrderByAggregateInput = {
@@ -665,6 +717,8 @@ export type DefectedItemMaxOrderByAggregateInput = {
   action?: Prisma.SortOrder
   rework_machine_id?: Prisma.SortOrder
   defect_status?: Prisma.SortOrder
+  defect_completed_by?: Prisma.SortOrder
+  defect_completed_at?: Prisma.SortOrder
 }
 
 export type DefectedItemMinOrderByAggregateInput = {
@@ -685,6 +739,8 @@ export type DefectedItemMinOrderByAggregateInput = {
   action?: Prisma.SortOrder
   rework_machine_id?: Prisma.SortOrder
   defect_status?: Prisma.SortOrder
+  defect_completed_by?: Prisma.SortOrder
+  defect_completed_at?: Prisma.SortOrder
 }
 
 export type DefectedItemSumOrderByAggregateInput = {
@@ -699,11 +755,17 @@ export type DefectedItemSumOrderByAggregateInput = {
   previous_scanned_machine_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   rework_machine_id?: Prisma.SortOrder
+  defect_completed_by?: Prisma.SortOrder
 }
 
 export type DefectedItemScalarRelationFilter = {
   is?: Prisma.DefectedItemWhereInput
   isNot?: Prisma.DefectedItemWhereInput
+}
+
+export type DefectedItemNullableScalarRelationFilter = {
+  is?: Prisma.DefectedItemWhereInput | null
+  isNot?: Prisma.DefectedItemWhereInput | null
 }
 
 export type DefectedItemCreateNestedManyWithoutVendorInput = {
@@ -1018,6 +1080,22 @@ export type DefectedItemUpdateOneRequiredWithoutImagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DefectedItemUpdateToOneWithWhereWithoutImagesInput, Prisma.DefectedItemUpdateWithoutImagesInput>, Prisma.DefectedItemUncheckedUpdateWithoutImagesInput>
 }
 
+export type DefectedItemCreateNestedOneWithoutCompletionPhotosInput = {
+  create?: Prisma.XOR<Prisma.DefectedItemCreateWithoutCompletionPhotosInput, Prisma.DefectedItemUncheckedCreateWithoutCompletionPhotosInput>
+  connectOrCreate?: Prisma.DefectedItemCreateOrConnectWithoutCompletionPhotosInput
+  connect?: Prisma.DefectedItemWhereUniqueInput
+}
+
+export type DefectedItemUpdateOneWithoutCompletionPhotosNestedInput = {
+  create?: Prisma.XOR<Prisma.DefectedItemCreateWithoutCompletionPhotosInput, Prisma.DefectedItemUncheckedCreateWithoutCompletionPhotosInput>
+  connectOrCreate?: Prisma.DefectedItemCreateOrConnectWithoutCompletionPhotosInput
+  upsert?: Prisma.DefectedItemUpsertWithoutCompletionPhotosInput
+  disconnect?: Prisma.DefectedItemWhereInput | boolean
+  delete?: Prisma.DefectedItemWhereInput | boolean
+  connect?: Prisma.DefectedItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DefectedItemUpdateToOneWithWhereWithoutCompletionPhotosInput, Prisma.DefectedItemUpdateWithoutCompletionPhotosInput>, Prisma.DefectedItemUncheckedUpdateWithoutCompletionPhotosInput>
+}
+
 export type DefectedItemCreateWithoutVendorInput = {
   previous_scanned_by?: number | null
   previous_scanned_at?: Date | string | null
@@ -1028,6 +1106,8 @@ export type DefectedItemCreateWithoutVendorInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedDefectsInput
   cutList?: Prisma.CutListCreateNestedOneWithoutDefectedItemsInput
   cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutDefectedItemsInput
@@ -1035,6 +1115,7 @@ export type DefectedItemCreateWithoutVendorInput = {
   machine: Prisma.MachineMasterCreateNestedOneWithoutDefectedItemsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutDefectedItemsInput
   images?: Prisma.DefectedItemImageCreateNestedManyWithoutDefected_itemInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutDefectedItemInput
 }
 
 export type DefectedItemUncheckedCreateWithoutVendorInput = {
@@ -1054,7 +1135,10 @@ export type DefectedItemUncheckedCreateWithoutVendorInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
   images?: Prisma.DefectedItemImageUncheckedCreateNestedManyWithoutDefected_itemInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutDefectedItemInput
 }
 
 export type DefectedItemCreateOrConnectWithoutVendorInput = {
@@ -1104,6 +1188,8 @@ export type DefectedItemScalarWhereInput = {
   action?: Prisma.StringNullableFilter<"DefectedItem"> | string | null
   rework_machine_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
   defect_status?: Prisma.EnumDefectStatusFilter<"DefectedItem"> | $Enums.DefectStatus
+  defect_completed_by?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
+  defect_completed_at?: Prisma.DateTimeNullableFilter<"DefectedItem"> | Date | string | null
 }
 
 export type DefectedItemCreateWithoutCreatedByInput = {
@@ -1116,6 +1202,8 @@ export type DefectedItemCreateWithoutCreatedByInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
   cutList?: Prisma.CutListCreateNestedOneWithoutDefectedItemsInput
   cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutDefectedItemsInput
   defect?: Prisma.DefectMasterCreateNestedOneWithoutDefectedItemsInput
@@ -1123,6 +1211,7 @@ export type DefectedItemCreateWithoutCreatedByInput = {
   project: Prisma.ProjectMasterCreateNestedOneWithoutDefectedItemsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDefectedItemsInput
   images?: Prisma.DefectedItemImageCreateNestedManyWithoutDefected_itemInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutDefectedItemInput
 }
 
 export type DefectedItemUncheckedCreateWithoutCreatedByInput = {
@@ -1142,7 +1231,10 @@ export type DefectedItemUncheckedCreateWithoutCreatedByInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
   images?: Prisma.DefectedItemImageUncheckedCreateNestedManyWithoutDefected_itemInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutDefectedItemInput
 }
 
 export type DefectedItemCreateOrConnectWithoutCreatedByInput = {
@@ -1181,6 +1273,8 @@ export type DefectedItemCreateWithoutProjectInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedDefectsInput
   cutList?: Prisma.CutListCreateNestedOneWithoutDefectedItemsInput
   cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutDefectedItemsInput
@@ -1188,6 +1282,7 @@ export type DefectedItemCreateWithoutProjectInput = {
   machine: Prisma.MachineMasterCreateNestedOneWithoutDefectedItemsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDefectedItemsInput
   images?: Prisma.DefectedItemImageCreateNestedManyWithoutDefected_itemInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutDefectedItemInput
 }
 
 export type DefectedItemUncheckedCreateWithoutProjectInput = {
@@ -1207,7 +1302,10 @@ export type DefectedItemUncheckedCreateWithoutProjectInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
   images?: Prisma.DefectedItemImageUncheckedCreateNestedManyWithoutDefected_itemInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutDefectedItemInput
 }
 
 export type DefectedItemCreateOrConnectWithoutProjectInput = {
@@ -1246,6 +1344,8 @@ export type DefectedItemCreateWithoutMachineInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedDefectsInput
   cutList?: Prisma.CutListCreateNestedOneWithoutDefectedItemsInput
   cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutDefectedItemsInput
@@ -1253,6 +1353,7 @@ export type DefectedItemCreateWithoutMachineInput = {
   project: Prisma.ProjectMasterCreateNestedOneWithoutDefectedItemsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDefectedItemsInput
   images?: Prisma.DefectedItemImageCreateNestedManyWithoutDefected_itemInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutDefectedItemInput
 }
 
 export type DefectedItemUncheckedCreateWithoutMachineInput = {
@@ -1272,7 +1373,10 @@ export type DefectedItemUncheckedCreateWithoutMachineInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
   images?: Prisma.DefectedItemImageUncheckedCreateNestedManyWithoutDefected_itemInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutDefectedItemInput
 }
 
 export type DefectedItemCreateOrConnectWithoutMachineInput = {
@@ -1311,6 +1415,8 @@ export type DefectedItemCreateWithoutCutListInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedDefectsInput
   cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutDefectedItemsInput
   defect?: Prisma.DefectMasterCreateNestedOneWithoutDefectedItemsInput
@@ -1318,6 +1424,7 @@ export type DefectedItemCreateWithoutCutListInput = {
   project: Prisma.ProjectMasterCreateNestedOneWithoutDefectedItemsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDefectedItemsInput
   images?: Prisma.DefectedItemImageCreateNestedManyWithoutDefected_itemInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutDefectedItemInput
 }
 
 export type DefectedItemUncheckedCreateWithoutCutListInput = {
@@ -1337,7 +1444,10 @@ export type DefectedItemUncheckedCreateWithoutCutListInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
   images?: Prisma.DefectedItemImageUncheckedCreateNestedManyWithoutDefected_itemInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutDefectedItemInput
 }
 
 export type DefectedItemCreateOrConnectWithoutCutListInput = {
@@ -1376,6 +1486,8 @@ export type DefectedItemCreateWithoutCutListMachineMappingInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedDefectsInput
   cutList?: Prisma.CutListCreateNestedOneWithoutDefectedItemsInput
   defect?: Prisma.DefectMasterCreateNestedOneWithoutDefectedItemsInput
@@ -1383,6 +1495,7 @@ export type DefectedItemCreateWithoutCutListMachineMappingInput = {
   project: Prisma.ProjectMasterCreateNestedOneWithoutDefectedItemsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDefectedItemsInput
   images?: Prisma.DefectedItemImageCreateNestedManyWithoutDefected_itemInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutDefectedItemInput
 }
 
 export type DefectedItemUncheckedCreateWithoutCutListMachineMappingInput = {
@@ -1402,7 +1515,10 @@ export type DefectedItemUncheckedCreateWithoutCutListMachineMappingInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
   images?: Prisma.DefectedItemImageUncheckedCreateNestedManyWithoutDefected_itemInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutDefectedItemInput
 }
 
 export type DefectedItemCreateOrConnectWithoutCutListMachineMappingInput = {
@@ -1441,6 +1557,8 @@ export type DefectedItemCreateWithoutDefectInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedDefectsInput
   cutList?: Prisma.CutListCreateNestedOneWithoutDefectedItemsInput
   cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutDefectedItemsInput
@@ -1448,6 +1566,7 @@ export type DefectedItemCreateWithoutDefectInput = {
   project: Prisma.ProjectMasterCreateNestedOneWithoutDefectedItemsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDefectedItemsInput
   images?: Prisma.DefectedItemImageCreateNestedManyWithoutDefected_itemInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutDefectedItemInput
 }
 
 export type DefectedItemUncheckedCreateWithoutDefectInput = {
@@ -1467,7 +1586,10 @@ export type DefectedItemUncheckedCreateWithoutDefectInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
   images?: Prisma.DefectedItemImageUncheckedCreateNestedManyWithoutDefected_itemInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutDefectedItemInput
 }
 
 export type DefectedItemCreateOrConnectWithoutDefectInput = {
@@ -1506,6 +1628,8 @@ export type DefectedItemCreateWithoutImagesInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedDefectsInput
   cutList?: Prisma.CutListCreateNestedOneWithoutDefectedItemsInput
   cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutDefectedItemsInput
@@ -1513,6 +1637,7 @@ export type DefectedItemCreateWithoutImagesInput = {
   machine: Prisma.MachineMasterCreateNestedOneWithoutDefectedItemsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutDefectedItemsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDefectedItemsInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutDefectedItemInput
 }
 
 export type DefectedItemUncheckedCreateWithoutImagesInput = {
@@ -1533,6 +1658,9 @@ export type DefectedItemUncheckedCreateWithoutImagesInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutDefectedItemInput
 }
 
 export type DefectedItemCreateOrConnectWithoutImagesInput = {
@@ -1561,6 +1689,8 @@ export type DefectedItemUpdateWithoutImagesInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedDefectsNestedInput
   cutList?: Prisma.CutListUpdateOneWithoutDefectedItemsNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutDefectedItemsNestedInput
@@ -1568,6 +1698,7 @@ export type DefectedItemUpdateWithoutImagesInput = {
   machine?: Prisma.MachineMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutDefectedItemNestedInput
 }
 
 export type DefectedItemUncheckedUpdateWithoutImagesInput = {
@@ -1588,6 +1719,115 @@ export type DefectedItemUncheckedUpdateWithoutImagesInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutDefectedItemNestedInput
+}
+
+export type DefectedItemCreateWithoutCompletionPhotosInput = {
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
+  remark?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  action?: string | null
+  rework_machine_id?: number | null
+  defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedDefectsInput
+  cutList?: Prisma.CutListCreateNestedOneWithoutDefectedItemsInput
+  cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutDefectedItemsInput
+  defect?: Prisma.DefectMasterCreateNestedOneWithoutDefectedItemsInput
+  machine: Prisma.MachineMasterCreateNestedOneWithoutDefectedItemsInput
+  project: Prisma.ProjectMasterCreateNestedOneWithoutDefectedItemsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDefectedItemsInput
+  images?: Prisma.DefectedItemImageCreateNestedManyWithoutDefected_itemInput
+}
+
+export type DefectedItemUncheckedCreateWithoutCompletionPhotosInput = {
+  id?: number
+  vendor_id: number
+  project_id: number
+  cut_list_machine_mapping_id: number
+  cut_list_id?: number | null
+  machine_id: number
+  defect_id?: number | null
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
+  remark?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  action?: string | null
+  rework_machine_id?: number | null
+  defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
+  images?: Prisma.DefectedItemImageUncheckedCreateNestedManyWithoutDefected_itemInput
+}
+
+export type DefectedItemCreateOrConnectWithoutCompletionPhotosInput = {
+  where: Prisma.DefectedItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.DefectedItemCreateWithoutCompletionPhotosInput, Prisma.DefectedItemUncheckedCreateWithoutCompletionPhotosInput>
+}
+
+export type DefectedItemUpsertWithoutCompletionPhotosInput = {
+  update: Prisma.XOR<Prisma.DefectedItemUpdateWithoutCompletionPhotosInput, Prisma.DefectedItemUncheckedUpdateWithoutCompletionPhotosInput>
+  create: Prisma.XOR<Prisma.DefectedItemCreateWithoutCompletionPhotosInput, Prisma.DefectedItemUncheckedCreateWithoutCompletionPhotosInput>
+  where?: Prisma.DefectedItemWhereInput
+}
+
+export type DefectedItemUpdateToOneWithWhereWithoutCompletionPhotosInput = {
+  where?: Prisma.DefectedItemWhereInput
+  data: Prisma.XOR<Prisma.DefectedItemUpdateWithoutCompletionPhotosInput, Prisma.DefectedItemUncheckedUpdateWithoutCompletionPhotosInput>
+}
+
+export type DefectedItemUpdateWithoutCompletionPhotosInput = {
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedDefectsNestedInput
+  cutList?: Prisma.CutListUpdateOneWithoutDefectedItemsNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutDefectedItemsNestedInput
+  defect?: Prisma.DefectMasterUpdateOneWithoutDefectedItemsNestedInput
+  machine?: Prisma.MachineMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
+  project?: Prisma.ProjectMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
+  images?: Prisma.DefectedItemImageUpdateManyWithoutDefected_itemNestedInput
+}
+
+export type DefectedItemUncheckedUpdateWithoutCompletionPhotosInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  machine_id?: Prisma.IntFieldUpdateOperationsInput | number
+  defect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  images?: Prisma.DefectedItemImageUncheckedUpdateManyWithoutDefected_itemNestedInput
 }
 
 export type DefectedItemCreateManyVendorInput = {
@@ -1607,6 +1847,8 @@ export type DefectedItemCreateManyVendorInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
 }
 
 export type DefectedItemUpdateWithoutVendorInput = {
@@ -1619,6 +1861,8 @@ export type DefectedItemUpdateWithoutVendorInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedDefectsNestedInput
   cutList?: Prisma.CutListUpdateOneWithoutDefectedItemsNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutDefectedItemsNestedInput
@@ -1626,6 +1870,7 @@ export type DefectedItemUpdateWithoutVendorInput = {
   machine?: Prisma.MachineMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
   images?: Prisma.DefectedItemImageUpdateManyWithoutDefected_itemNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutDefectedItemNestedInput
 }
 
 export type DefectedItemUncheckedUpdateWithoutVendorInput = {
@@ -1645,7 +1890,10 @@ export type DefectedItemUncheckedUpdateWithoutVendorInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   images?: Prisma.DefectedItemImageUncheckedUpdateManyWithoutDefected_itemNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutDefectedItemNestedInput
 }
 
 export type DefectedItemUncheckedUpdateManyWithoutVendorInput = {
@@ -1665,6 +1913,8 @@ export type DefectedItemUncheckedUpdateManyWithoutVendorInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type DefectedItemCreateManyCreatedByInput = {
@@ -1684,6 +1934,8 @@ export type DefectedItemCreateManyCreatedByInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
 }
 
 export type DefectedItemUpdateWithoutCreatedByInput = {
@@ -1696,6 +1948,8 @@ export type DefectedItemUpdateWithoutCreatedByInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cutList?: Prisma.CutListUpdateOneWithoutDefectedItemsNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutDefectedItemsNestedInput
   defect?: Prisma.DefectMasterUpdateOneWithoutDefectedItemsNestedInput
@@ -1703,6 +1957,7 @@ export type DefectedItemUpdateWithoutCreatedByInput = {
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
   images?: Prisma.DefectedItemImageUpdateManyWithoutDefected_itemNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutDefectedItemNestedInput
 }
 
 export type DefectedItemUncheckedUpdateWithoutCreatedByInput = {
@@ -1722,7 +1977,10 @@ export type DefectedItemUncheckedUpdateWithoutCreatedByInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   images?: Prisma.DefectedItemImageUncheckedUpdateManyWithoutDefected_itemNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutDefectedItemNestedInput
 }
 
 export type DefectedItemUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1742,6 +2000,8 @@ export type DefectedItemUncheckedUpdateManyWithoutCreatedByInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type DefectedItemCreateManyProjectInput = {
@@ -1761,6 +2021,8 @@ export type DefectedItemCreateManyProjectInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
 }
 
 export type DefectedItemUpdateWithoutProjectInput = {
@@ -1773,6 +2035,8 @@ export type DefectedItemUpdateWithoutProjectInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedDefectsNestedInput
   cutList?: Prisma.CutListUpdateOneWithoutDefectedItemsNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutDefectedItemsNestedInput
@@ -1780,6 +2044,7 @@ export type DefectedItemUpdateWithoutProjectInput = {
   machine?: Prisma.MachineMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
   images?: Prisma.DefectedItemImageUpdateManyWithoutDefected_itemNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutDefectedItemNestedInput
 }
 
 export type DefectedItemUncheckedUpdateWithoutProjectInput = {
@@ -1799,7 +2064,10 @@ export type DefectedItemUncheckedUpdateWithoutProjectInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   images?: Prisma.DefectedItemImageUncheckedUpdateManyWithoutDefected_itemNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutDefectedItemNestedInput
 }
 
 export type DefectedItemUncheckedUpdateManyWithoutProjectInput = {
@@ -1819,6 +2087,8 @@ export type DefectedItemUncheckedUpdateManyWithoutProjectInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type DefectedItemCreateManyMachineInput = {
@@ -1838,6 +2108,8 @@ export type DefectedItemCreateManyMachineInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
 }
 
 export type DefectedItemUpdateWithoutMachineInput = {
@@ -1850,6 +2122,8 @@ export type DefectedItemUpdateWithoutMachineInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedDefectsNestedInput
   cutList?: Prisma.CutListUpdateOneWithoutDefectedItemsNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutDefectedItemsNestedInput
@@ -1857,6 +2131,7 @@ export type DefectedItemUpdateWithoutMachineInput = {
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
   images?: Prisma.DefectedItemImageUpdateManyWithoutDefected_itemNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutDefectedItemNestedInput
 }
 
 export type DefectedItemUncheckedUpdateWithoutMachineInput = {
@@ -1876,7 +2151,10 @@ export type DefectedItemUncheckedUpdateWithoutMachineInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   images?: Prisma.DefectedItemImageUncheckedUpdateManyWithoutDefected_itemNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutDefectedItemNestedInput
 }
 
 export type DefectedItemUncheckedUpdateManyWithoutMachineInput = {
@@ -1896,6 +2174,8 @@ export type DefectedItemUncheckedUpdateManyWithoutMachineInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type DefectedItemCreateManyCutListInput = {
@@ -1915,6 +2195,8 @@ export type DefectedItemCreateManyCutListInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
 }
 
 export type DefectedItemUpdateWithoutCutListInput = {
@@ -1927,6 +2209,8 @@ export type DefectedItemUpdateWithoutCutListInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedDefectsNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutDefectedItemsNestedInput
   defect?: Prisma.DefectMasterUpdateOneWithoutDefectedItemsNestedInput
@@ -1934,6 +2218,7 @@ export type DefectedItemUpdateWithoutCutListInput = {
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
   images?: Prisma.DefectedItemImageUpdateManyWithoutDefected_itemNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutDefectedItemNestedInput
 }
 
 export type DefectedItemUncheckedUpdateWithoutCutListInput = {
@@ -1953,7 +2238,10 @@ export type DefectedItemUncheckedUpdateWithoutCutListInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   images?: Prisma.DefectedItemImageUncheckedUpdateManyWithoutDefected_itemNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutDefectedItemNestedInput
 }
 
 export type DefectedItemUncheckedUpdateManyWithoutCutListInput = {
@@ -1973,6 +2261,8 @@ export type DefectedItemUncheckedUpdateManyWithoutCutListInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type DefectedItemCreateManyCutListMachineMappingInput = {
@@ -1992,6 +2282,8 @@ export type DefectedItemCreateManyCutListMachineMappingInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
 }
 
 export type DefectedItemUpdateWithoutCutListMachineMappingInput = {
@@ -2004,6 +2296,8 @@ export type DefectedItemUpdateWithoutCutListMachineMappingInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedDefectsNestedInput
   cutList?: Prisma.CutListUpdateOneWithoutDefectedItemsNestedInput
   defect?: Prisma.DefectMasterUpdateOneWithoutDefectedItemsNestedInput
@@ -2011,6 +2305,7 @@ export type DefectedItemUpdateWithoutCutListMachineMappingInput = {
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
   images?: Prisma.DefectedItemImageUpdateManyWithoutDefected_itemNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutDefectedItemNestedInput
 }
 
 export type DefectedItemUncheckedUpdateWithoutCutListMachineMappingInput = {
@@ -2030,7 +2325,10 @@ export type DefectedItemUncheckedUpdateWithoutCutListMachineMappingInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   images?: Prisma.DefectedItemImageUncheckedUpdateManyWithoutDefected_itemNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutDefectedItemNestedInput
 }
 
 export type DefectedItemUncheckedUpdateManyWithoutCutListMachineMappingInput = {
@@ -2050,6 +2348,8 @@ export type DefectedItemUncheckedUpdateManyWithoutCutListMachineMappingInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type DefectedItemCreateManyDefectInput = {
@@ -2069,6 +2369,8 @@ export type DefectedItemCreateManyDefectInput = {
   action?: string | null
   rework_machine_id?: number | null
   defect_status?: $Enums.DefectStatus
+  defect_completed_by?: number | null
+  defect_completed_at?: Date | string | null
 }
 
 export type DefectedItemUpdateWithoutDefectInput = {
@@ -2081,6 +2383,8 @@ export type DefectedItemUpdateWithoutDefectInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedDefectsNestedInput
   cutList?: Prisma.CutListUpdateOneWithoutDefectedItemsNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutDefectedItemsNestedInput
@@ -2088,6 +2392,7 @@ export type DefectedItemUpdateWithoutDefectInput = {
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDefectedItemsNestedInput
   images?: Prisma.DefectedItemImageUpdateManyWithoutDefected_itemNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutDefectedItemNestedInput
 }
 
 export type DefectedItemUncheckedUpdateWithoutDefectInput = {
@@ -2107,7 +2412,10 @@ export type DefectedItemUncheckedUpdateWithoutDefectInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   images?: Prisma.DefectedItemImageUncheckedUpdateManyWithoutDefected_itemNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutDefectedItemNestedInput
 }
 
 export type DefectedItemUncheckedUpdateManyWithoutDefectInput = {
@@ -2127,6 +2435,8 @@ export type DefectedItemUncheckedUpdateManyWithoutDefectInput = {
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -2136,10 +2446,12 @@ export type DefectedItemUncheckedUpdateManyWithoutDefectInput = {
 
 export type DefectedItemCountOutputType = {
   images: number
+  completionPhotos: number
 }
 
 export type DefectedItemCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   images?: boolean | DefectedItemCountOutputTypeCountImagesArgs
+  completionPhotos?: boolean | DefectedItemCountOutputTypeCountCompletionPhotosArgs
 }
 
 /**
@@ -2157,6 +2469,13 @@ export type DefectedItemCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types
  */
 export type DefectedItemCountOutputTypeCountImagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.DefectedItemImageWhereInput
+}
+
+/**
+ * DefectedItemCountOutputType without action
+ */
+export type DefectedItemCountOutputTypeCountCompletionPhotosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DefectCompletionPhotoWhereInput
 }
 
 
@@ -2178,6 +2497,8 @@ export type DefectedItemSelect<ExtArgs extends runtime.Types.Extensions.Internal
   action?: boolean
   rework_machine_id?: boolean
   defect_status?: boolean
+  defect_completed_by?: boolean
+  defect_completed_at?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   cutList?: boolean | Prisma.DefectedItem$cutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.CutListMachineMappingDefaultArgs<ExtArgs>
@@ -2186,6 +2507,7 @@ export type DefectedItemSelect<ExtArgs extends runtime.Types.Extensions.Internal
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   images?: boolean | Prisma.DefectedItem$imagesArgs<ExtArgs>
+  completionPhotos?: boolean | Prisma.DefectedItem$completionPhotosArgs<ExtArgs>
   _count?: boolean | Prisma.DefectedItemCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["defectedItem"]>
 
@@ -2207,6 +2529,8 @@ export type DefectedItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   action?: boolean
   rework_machine_id?: boolean
   defect_status?: boolean
+  defect_completed_by?: boolean
+  defect_completed_at?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   cutList?: boolean | Prisma.DefectedItem$cutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.CutListMachineMappingDefaultArgs<ExtArgs>
@@ -2234,6 +2558,8 @@ export type DefectedItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   action?: boolean
   rework_machine_id?: boolean
   defect_status?: boolean
+  defect_completed_by?: boolean
+  defect_completed_at?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   cutList?: boolean | Prisma.DefectedItem$cutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.CutListMachineMappingDefaultArgs<ExtArgs>
@@ -2261,9 +2587,11 @@ export type DefectedItemSelectScalar = {
   action?: boolean
   rework_machine_id?: boolean
   defect_status?: boolean
+  defect_completed_by?: boolean
+  defect_completed_at?: boolean
 }
 
-export type DefectedItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "project_id" | "cut_list_machine_mapping_id" | "cut_list_id" | "machine_id" | "defect_id" | "previous_scanned_by" | "previous_scanned_at" | "previous_scanned_machine_id" | "remark" | "created_by" | "created_at" | "updated_at" | "action" | "rework_machine_id" | "defect_status", ExtArgs["result"]["defectedItem"]>
+export type DefectedItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "project_id" | "cut_list_machine_mapping_id" | "cut_list_id" | "machine_id" | "defect_id" | "previous_scanned_by" | "previous_scanned_at" | "previous_scanned_machine_id" | "remark" | "created_by" | "created_at" | "updated_at" | "action" | "rework_machine_id" | "defect_status" | "defect_completed_by" | "defect_completed_at", ExtArgs["result"]["defectedItem"]>
 export type DefectedItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   cutList?: boolean | Prisma.DefectedItem$cutListArgs<ExtArgs>
@@ -2273,6 +2601,7 @@ export type DefectedItemInclude<ExtArgs extends runtime.Types.Extensions.Interna
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   images?: boolean | Prisma.DefectedItem$imagesArgs<ExtArgs>
+  completionPhotos?: boolean | Prisma.DefectedItem$completionPhotosArgs<ExtArgs>
   _count?: boolean | Prisma.DefectedItemCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DefectedItemIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2305,6 +2634,7 @@ export type $DefectedItemPayload<ExtArgs extends runtime.Types.Extensions.Intern
     project: Prisma.$ProjectMasterPayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     images: Prisma.$DefectedItemImagePayload<ExtArgs>[]
+    completionPhotos: Prisma.$DefectCompletionPhotoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2324,6 +2654,8 @@ export type $DefectedItemPayload<ExtArgs extends runtime.Types.Extensions.Intern
     action: string | null
     rework_machine_id: number | null
     defect_status: $Enums.DefectStatus
+    defect_completed_by: number | null
+    defect_completed_at: Date | null
   }, ExtArgs["result"]["defectedItem"]>
   composites: {}
 }
@@ -2726,6 +3058,7 @@ export interface Prisma__DefectedItemClient<T, Null = never, ExtArgs extends run
   project<T extends Prisma.ProjectMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectMasterClient<runtime.Types.Result.GetResult<Prisma.$ProjectMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   images<T extends Prisma.DefectedItem$imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DefectedItem$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DefectedItemImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  completionPhotos<T extends Prisma.DefectedItem$completionPhotosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DefectedItem$completionPhotosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DefectCompletionPhotoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2772,6 +3105,8 @@ export interface DefectedItemFieldRefs {
   readonly action: Prisma.FieldRef<"DefectedItem", 'String'>
   readonly rework_machine_id: Prisma.FieldRef<"DefectedItem", 'Int'>
   readonly defect_status: Prisma.FieldRef<"DefectedItem", 'DefectStatus'>
+  readonly defect_completed_by: Prisma.FieldRef<"DefectedItem", 'Int'>
+  readonly defect_completed_at: Prisma.FieldRef<"DefectedItem", 'DateTime'>
 }
     
 
@@ -3227,6 +3562,30 @@ export type DefectedItem$imagesArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.DefectedItemImageScalarFieldEnum | Prisma.DefectedItemImageScalarFieldEnum[]
+}
+
+/**
+ * DefectedItem.completionPhotos
+ */
+export type DefectedItem$completionPhotosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DefectCompletionPhoto
+   */
+  select?: Prisma.DefectCompletionPhotoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DefectCompletionPhoto
+   */
+  omit?: Prisma.DefectCompletionPhotoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DefectCompletionPhotoInclude<ExtArgs> | null
+  where?: Prisma.DefectCompletionPhotoWhereInput
+  orderBy?: Prisma.DefectCompletionPhotoOrderByWithRelationInput | Prisma.DefectCompletionPhotoOrderByWithRelationInput[]
+  cursor?: Prisma.DefectCompletionPhotoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DefectCompletionPhotoScalarFieldEnum | Prisma.DefectCompletionPhotoScalarFieldEnum[]
 }
 
 /**

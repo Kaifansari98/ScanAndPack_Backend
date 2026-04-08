@@ -86,6 +86,8 @@ model VendorMaster {
   taxInfo                             VendorTaxInfo[]
   tokens                              VendorTokens[]
   externalPlatformTokens              ExternalPlatformToken[]
+  completionPhotos  DefectCompletionPhoto[]
+
 }
 
 model VendorAddress {
@@ -201,6 +203,8 @@ model UserMaster {
   pushTokens                                 UserPushToken[]
   externalPlatformTokensCreated              ExternalPlatformToken[]              @relation("ExternalPlatformTokenCreatedBy")
   externalPlatformTokensUpdated              ExternalPlatformToken[]              @relation("ExternalPlatformTokenUpdatedBy")
+  completionPhotos  DefectCompletionPhoto[]  
+
 }
 
 model UserDocument {
@@ -1399,6 +1403,8 @@ model CutList {
   group_name            String?
   procurement           String?
   category_name         String?
+  completionPhotos  DefectCompletionPhoto[]
+
 
 
   @@index([unique_code])
@@ -1429,6 +1435,8 @@ model CutListMachineMapping {
   project       ProjectMaster  @relation(fields: [project_id], references: [id])
   vendor        VendorMaster   @relation(fields: [vendor_id], references: [id])
   defectedItems DefectedItem[]
+  completionPhotos  DefectCompletionPhoto[]
+
 
   @@index([cut_list_id])
   @@index([machine_id])
@@ -1543,10 +1551,15 @@ model DefectedItem {
   vendor                      VendorMaster          @relation(fields: [vendor_id], references: [id])
 
   images                    DefectedItemImage[]
+  completionPhotos            DefectCompletionPhoto[]
+
   action                    String?
   rework_machine_id         Int?
   defect_status             DefectStatus             @default(Pending)
-  
+  defect_completed_by         Int?
+  defect_completed_at         DateTime?
+
+
   @@index([vendor_id])
   @@index([project_id])
   @@index([machine_id])
@@ -1751,6 +1764,29 @@ model DefectedItemImage {
   created_at       DateTime     @default(now())
 
   defected_item    DefectedItem @relation(fields: [defected_item_id], references: [id])
+}
+
+model DefectCompletionPhoto {
+  id                        Int                   @id @default(autoincrement())
+  cut_list_machine_mapping_id Int
+  cut_list_id               Int
+  vendor_id                 Int
+  defected_item_id            Int?
+  doc_og_name               String
+  doc_sys_name              String
+  created_by                Int
+  created_at                DateTime              @default(now())
+
+  cutListMachineMapping     CutListMachineMapping @relation(fields: [cut_list_machine_mapping_id], references: [id])
+  cutList                   CutList               @relation(fields: [cut_list_id], references: [id])
+  vendor                    VendorMaster          @relation(fields: [vendor_id], references: [id])
+  createdBy                 UserMaster            @relation(fields: [created_by], references: [id])
+  defectedItem                DefectedItem?          @relation(fields: [defected_item_id], references: [id])
+
+
+  @@index([cut_list_machine_mapping_id])
+  @@index([cut_list_id])
+  @@index([vendor_id])
 }
 
 enum ExternalPlatformTokenActiveStatus {

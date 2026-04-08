@@ -6,7 +6,7 @@ import ExcelJS from "exceljs";
 import * as fs from "fs";
 import * as path from "path";
 import { getVendorSettingValue } from '../vendor.service';
-import { generateSignedUrl, uploadToWasabiDefectedItems } from 'src/utils/wasabiClient';
+import { generateSignedUrl, uploadToWasabiCompletionPhotos, uploadToWasabiDefectedItems } from 'src/utils/wasabiClient';
 
 
 interface TrackTracePayload {
@@ -145,7 +145,7 @@ interface TrackTracePayload {
 // };
 
 
-export const updateScannedItem = async (payload: TrackTracePayload, is_check: boolean = false) => {
+export const updateScannedItem_old = async (payload: TrackTracePayload, is_check: boolean = false) => {
 
   try {
 
@@ -443,6 +443,317 @@ export const updateScannedItem = async (payload: TrackTracePayload, is_check: bo
 
 
 
+};
+
+
+export const updateScannedItem = async (
+  payload: TrackTracePayload,
+  is_check: boolean = false,
+  files: Express.Multer.File[] = [],
+) => {
+  try {
+    const { project_id, vendor_id, machine_id, unique_code, created_by } = payload;
+
+    // check if item is mapped to any machine
+    const currentMapping = await prisma.cutListMachineMapping.findFirst({
+      where: {
+        machine_id: machine_id,
+        vendor_id: vendor_id,
+        cut_list: {
+          unique_code: {
+            equals: unique_code,
+            mode: "insensitive",
+          },
+        },
+      },
+      select: {
+        id: true,
+        sequence_no: true,
+        cut_list_id: true,
+        project_id: true,
+        project: {
+          select: {
+            track_trace_status: true,
+          },
+        },
+      },
+    });
+
+    if (!currentMapping) {
+      return validationResponse(0, 'Machine mapping not found');
+    }
+
+    const nextMapping = await prisma.cutListMachineMapping.findFirst({
+      where: {
+        machine_id: machine_id,
+        vendor_id: vendor_id,
+        cut_list: {
+          unique_code: {
+            equals: unique_code,
+            mode: "insensitive",
+          },
+        },
+        actual_in_at: null,
+      },
+      select: {
+        id: true,
+        sequence_no: true,
+        cut_list_id: true,
+      },
+    });
+
+    if (!nextMapping) {
+      console.log("Already Scanned");
+      return validationResponse(0, 'Already Scanned');
+    }
+
+    const { id, sequence_no, cut_list_id } = nextMapping;
+
+    console.log(id, sequence_no, cut_list_id);
+
+    const scanned_count = await prisma.cutListMachineMapping.count({
+      where: {
+        cut_list_id: cut_list_id,
+        vendor_id: vendor_id,
+        sequence_no: sequence_no,
+        expected_in: true,
+        actual_in_at: null,
+        machine_id: machine_id,
+      },
+    });
+
+    console.log("scanned_count", scanned_count);
+
+    if (scanned_count == 0) {
+      return validationResponse(0, 'Already Scanned');
+    }
+
+    // check if any machine is left in sequence (excluding 'pass' type machines)
+    const count = await prisma.cutListMachineMapping.count({
+      where: {
+        cut_list_id: cut_list_id,
+        vendor_id: vendor_id,
+        sequence_no: { lt: sequence_no },
+        actual_in_at: null,
+        machine: {
+          scan_type: {
+            not: 'PASS',
+          },
+        },
+      },
+    });
+
+    const passMachines = await prisma.cutListMachineMapping.findMany({
+      where: {
+        cut_list_id: cut_list_id,
+        vendor_id: vendor_id,
+        sequence_no: { lt: sequence_no },
+        actual_in_at: null,
+        machine: {
+          scan_type: 'PASS',
+        },
+      },
+      select: {
+        id: true,
+        machine: {
+          select: {
+            machine_name: true,
+          },
+        },
+      },
+    });
+
+    console.log("pass_machines_to_update", passMachines.length);
+
+    if (count == 0) {
+
+      if (is_check) {
+
+        const value = await getVendorSettingValue(vendor_id, 'SHOW_STATUS_ON_SCAN');
+        if (value == "1") {
+
+          const mappedItem = await prisma.cutListMachineMapping.findFirst({
+            where: {
+              machine_id: machine_id,
+              vendor_id: vendor_id,
+              cut_list: {
+                unique_code: {
+                  equals: unique_code,
+                  mode: "insensitive",
+                },
+              },
+            },
+            select: {
+              id: true,
+              sequence_no: true,
+              cut_list_id: true,
+              project_id: true,
+              actual_in_at: true,
+              machine_id: true,
+              machine: {
+                select: {
+                  id: true,
+                  machine_name: true,
+                },
+              },
+              cut_list: {
+                select: {
+                  unique_code: true,
+                  description: true,
+                  item_name: true,
+                },
+              },
+              project: {
+                select: {
+                  track_trace_status: true,
+                  project_name: true,
+                },
+              },
+            },
+          });
+
+          if (!mappedItem) {
+            return validationResponse(0, "Item not found for this machine");
+          }
+
+          let activeDefect = null;
+          if (mappedItem.cut_list_id) {
+            activeDefect = await prisma.defectedItem.findFirst({
+              where: {
+                cut_list_id: mappedItem.cut_list_id,
+                defect_status: { not: "Completed" },
+              },
+              orderBy: { created_at: "desc" },
+              select: {
+                id: true,
+                defect_id: true,
+                remark: true,
+                action: true,
+                rework_machine_id: true,
+                defect_status: true,
+                created_at: true,
+                defect: {
+                  select: {
+                    id: true,
+                    defect_name: true,
+                  },
+                },
+                images: {
+                  select: {
+                    id: true,
+                    doc_og_name: true,
+                    doc_sys_name: true,
+                    created_at: true,
+                  },
+                },
+              },
+            });
+          }
+
+          if (activeDefect && activeDefect.images.length > 0) {
+            const imagesWithUrls = await Promise.all(
+              activeDefect.images.map(async (img) => ({
+                ...img,
+                signed_url: await generateSignedUrl(img.doc_sys_name),
+              }))
+            );
+            activeDefect = { ...activeDefect, images: imagesWithUrls };
+          }
+
+          console.log("mappedItem", mappedItem);
+          return validationResponse(1, '', { mappedItem, activeDefect });
+
+        } else {
+          updateScannedItem(payload, false, files);
+        }
+
+      } else {
+
+        // auto-pass pass-type machines
+        if (passMachines.length > 0) {
+          await prisma.cutListMachineMapping.updateMany({
+            where: {
+              id: { in: passMachines.map(m => m.id) },
+            },
+            data: {
+              actual_in_at: new Date(),
+              in_operator: created_by,
+            },
+          });
+          console.log(`Auto-passed ${passMachines.length} machines with scan_type='pass'`);
+        }
+
+        // update current machine as scanned
+        await prisma.cutListMachineMapping.update({
+          where: { id: id },
+          data: {
+            actual_in_at: new Date(),
+            in_operator: created_by,
+          },
+        });
+
+        // ── mark defect as completed + save completion photos ──
+        if (cut_list_id) {
+          const pendingDefect = await prisma.defectedItem.findFirst({
+            where: {
+              cut_list_id: cut_list_id,
+              defect_status: { not: "Completed" },
+            },
+          });
+
+          if (pendingDefect) {
+            // mark defect as completed with completed_by and completed_at
+            await prisma.defectedItem.update({
+              where: { id: pendingDefect.id },
+              data: {
+                defect_status: "Completed",
+                defect_completed_by: created_by,
+                defect_completed_at: new Date(),
+              },
+            });
+
+            // save completion photos linked to the defected item
+            if (files.length > 0) {
+              const uploadedPhotos = await uploadToWasabiCompletionPhotos(
+                files,
+                vendor_id,
+                id,
+              );
+
+              await prisma.defectCompletionPhoto.createMany({
+                data: uploadedPhotos.map((photo) => ({
+                  cut_list_machine_mapping_id: id,
+                  cut_list_id: cut_list_id,
+                  vendor_id: vendor_id,
+                  defected_item_id: pendingDefect.id,
+                  doc_og_name: photo.originalName,
+                  doc_sys_name: photo.systemName,
+                  created_by: created_by,
+                })),
+              });
+
+              console.log(
+                `Saved ${uploadedPhotos.length} completion photos for defect ${pendingDefect.id}`
+              );
+            }
+          }
+        }
+
+        if (currentMapping.project.track_trace_status == "Not Started") {
+          await updateProjectStatus(currentMapping.project_id);
+        }
+
+        return validationResponse(1, 'Scan done');
+      }
+
+    } else {
+      return validationResponse(0, 'Scan on other machine first');
+    }
+
+  } catch (error) {
+    console.log("Error in api", error);
+    return validationResponse(0, 'Something went wrong');
+  }
 };
 
 

@@ -9,8 +9,20 @@ import { ApiResponse } from '../../../src/utils/apiResponse';
 import { CutListSavePayload, MarkDefectPayload, QRParam } from '../../../src/types/track-trace';
 import { generateWarehouseQRPDF } from "../../utils/warehouse-qr-generator";
 
-export const scan_item = async (req: Request, res: Response) => {
+
+interface TrackTracePayload {
+  project_id: number;
+  vendor_id: number;
+  machine_id: number;
+  unique_code: string;
+  created_by: number;
+}
+export const scan_item_old = async (req: Request, res: Response) => {
     console.log("Query params:", req.body);
+
+    
+
+
     let serviceResponse = await trackTraceService.updateScannedItem(req.body, false);
     if (serviceResponse?.status == 0) {
         return res
@@ -33,6 +45,40 @@ export const scan_item = async (req: Request, res: Response) => {
             );
     }
 
+};
+
+
+export const scan_item = async (_req: Request, res: Response) => {
+    
+    console.log(_req.body);
+
+  const files = (_req.files ?? []) as Express.Multer.File[];
+  try {
+    const payload: TrackTracePayload = {
+      project_id: Number(_req.body.project_id),
+      vendor_id: Number(_req.body.vendor_id),
+      machine_id: Number(_req.body.machine_id),
+      unique_code: String(_req.body.unique_code),
+      created_by: Number(_req.body.created_by),
+    };
+
+    const serviceResponse = await trackTraceService.updateScannedItem(payload, false, files);
+
+    if (serviceResponse?.status == 0) {
+      return res.status(200).json(ApiResponse.error(serviceResponse?.message, 500));
+    }
+
+    return res.status(200).json(
+      ApiResponse.success(serviceResponse?.status, serviceResponse?.message, 200)
+    );
+
+  } catch (err) {
+    throw err;
+  } finally {
+    files.forEach((file) => {
+      if (fs.existsSync(file.path)) fs.unlinkSync(file.path);
+    });
+  }
 };
 
 export const check_item = async (req: Request, res: Response) => {
