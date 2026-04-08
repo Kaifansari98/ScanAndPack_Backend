@@ -205,3 +205,11 @@ export const UserActivityType = {
 } as const
 
 export type UserActivityType = (typeof UserActivityType)[keyof typeof UserActivityType]
+
+
+export const DefectStatus = {
+  Pending: 'Pending',
+  Completed: 'Completed'
+} as const
+
+export type DefectStatus = (typeof DefectStatus)[keyof typeof DefectStatus]

@@ -475,7 +475,8 @@ export const ModelName = {
   ThemeMapping: 'ThemeMapping',
   ApiRequestLog: 'ApiRequestLog',
   ExternalPlatformMaster: 'ExternalPlatformMaster',
-  ExternalPlatformToken: 'ExternalPlatformToken'
+  ExternalPlatformToken: 'ExternalPlatformToken',
+  DefectedItemImage: 'DefectedItemImage'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -491,7 +492,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "defectedItemImage"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -7303,6 +7304,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    DefectedItemImage: {
+      payload: Prisma.$DefectedItemImagePayload<ExtArgs>
+      fields: Prisma.DefectedItemImageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DefectedItemImageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DefectedItemImageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload>
+        }
+        findFirst: {
+          args: Prisma.DefectedItemImageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DefectedItemImageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload>
+        }
+        findMany: {
+          args: Prisma.DefectedItemImageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload>[]
+        }
+        create: {
+          args: Prisma.DefectedItemImageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload>
+        }
+        createMany: {
+          args: Prisma.DefectedItemImageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DefectedItemImageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload>[]
+        }
+        delete: {
+          args: Prisma.DefectedItemImageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload>
+        }
+        update: {
+          args: Prisma.DefectedItemImageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload>
+        }
+        deleteMany: {
+          args: Prisma.DefectedItemImageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DefectedItemImageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DefectedItemImageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload>[]
+        }
+        upsert: {
+          args: Prisma.DefectedItemImageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload>
+        }
+        aggregate: {
+          args: Prisma.DefectedItemImageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDefectedItemImage>
+        }
+        groupBy: {
+          args: Prisma.DefectedItemImageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DefectedItemImageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DefectedItemImageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DefectedItemImageCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -8559,7 +8634,10 @@ export const DefectedItemScalarFieldEnum = {
   remark: 'remark',
   created_by: 'created_by',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  action: 'action',
+  rework_machine_id: 'rework_machine_id',
+  defect_status: 'defect_status'
 } as const
 
 export type DefectedItemScalarFieldEnum = (typeof DefectedItemScalarFieldEnum)[keyof typeof DefectedItemScalarFieldEnum]
@@ -8750,6 +8828,17 @@ export const ExternalPlatformTokenScalarFieldEnum = {
 } as const
 
 export type ExternalPlatformTokenScalarFieldEnum = (typeof ExternalPlatformTokenScalarFieldEnum)[keyof typeof ExternalPlatformTokenScalarFieldEnum]
+
+
+export const DefectedItemImageScalarFieldEnum = {
+  id: 'id',
+  defected_item_id: 'defected_item_id',
+  doc_og_name: 'doc_og_name',
+  doc_sys_name: 'doc_sys_name',
+  created_at: 'created_at'
+} as const
+
+export type DefectedItemImageScalarFieldEnum = (typeof DefectedItemImageScalarFieldEnum)[keyof typeof DefectedItemImageScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -9136,6 +9225,20 @@ export type ListEnumMachineTypeMasterStatusFieldRefInput<$PrismaModel> = FieldRe
 
 
 /**
+ * Reference to a field of type 'DefectStatus'
+ */
+export type EnumDefectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DefectStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'DefectStatus[]'
+ */
+export type ListEnumDefectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DefectStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'UserActivityType'
  */
 export type EnumUserActivityTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserActivityType'>
@@ -9377,6 +9480,7 @@ export type GlobalOmitConfig = {
   apiRequestLog?: Prisma.ApiRequestLogOmit
   externalPlatformMaster?: Prisma.ExternalPlatformMasterOmit
   externalPlatformToken?: Prisma.ExternalPlatformTokenOmit
+  defectedItemImage?: Prisma.DefectedItemImageOmit
 }
 
 /* Types for Logging */

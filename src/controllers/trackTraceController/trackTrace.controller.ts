@@ -442,7 +442,7 @@ export const createQR = async (_req: Request, res: Response) => {
     try {
         const data = await trackTraceService.createQR(payload);
         const baseUrl =
-          process.env.PUBLIC_BASE_URL || `${_req.protocol}://${_req.get("host")}`;
+            process.env.PUBLIC_BASE_URL || `${_req.protocol}://${_req.get("host")}`;
         console.log("[downloadCutListExcel] baseUrl", baseUrl);
 
         if (data) {
@@ -503,7 +503,7 @@ export const downloadCutListExcel = async (_req: Request, res: Response) => {
         const searchParams = _req.body.searchParams;
         const vendorId = _req.body.vendorId;
         const baseUrl =
-          process.env.PUBLIC_BASE_URL || `${_req.protocol}://${_req.get("host")}`;
+            process.env.PUBLIC_BASE_URL || `${_req.protocol}://${_req.get("host")}`;
         console.log("vendorId", vendorId);
         const unique_project_id = _req.body.unique_project_id; // searchParams.get('unique_project_id');
 
@@ -614,13 +614,21 @@ export const linkLeadToProject = async (_req: Request, res: Response) => {
 
 export const mark_Defect = async (_req: Request, res: Response) => {
 
-    console.log("Query params:", _req.body);
-    // res.json(_req.params.vendor_id);
+    // console.log("-----------------");
+    console.log(_req.body);
 
+    const files = (_req.files ?? []) as Express.Multer.File[];
     try {
+        if (files.length === 0) {
+            return res.status(200).json(ApiResponse.error("At least 1 photo is required", 422));
+        }
 
+        const vendorId = Number(_req.body.vendor_id);
+        console.log("vendorId", vendorId);
+
+        // create defected item first to get the ID for the wasabi path
         const payload: MarkDefectPayload = {
-            vendor_id: Number(_req.body.vendor_id),
+            vendor_id: vendorId,
             project_id: Number(_req.body.project_id),
             cut_list_machine_mapping_id: Number(_req.body.cut_list_machine_mapping_id),
             cut_list_id: Number(_req.body.cut_list_id),
@@ -628,49 +636,89 @@ export const mark_Defect = async (_req: Request, res: Response) => {
             unique_code: String(_req.body.unique_code),
             created_by: Number(_req.body.created_by),
             defect_id: Number(_req.body.defect_id),
-            defect_name: String(_req.body.defect_name)
+            defect_name: String(_req.body.defect_name),
+            action: String(_req.body.defect_type),
+            rework_machine_id: Number(_req.body.rework_machine_id),
+            images: [],
         };
 
-        console.log("payload", payload);
-        // const vendor_id = Number(_req.params.vendor_id);
-        // const project_id = String(_req.params.project_id);
-
-
-        const serviceResponse = await trackTraceService.mark_Defect(payload);
-
+        const serviceResponse = await trackTraceService.mark_Defect(payload, files, vendorId);
+        console.log(serviceResponse)
         if (serviceResponse.status == 0) {
-            return res
-                .status(200)
-                .json(
-                    ApiResponse.error(
-                        serviceResponse.message,
-                        500
-                    )
-                );
-        } else {
-            return res
-                .status(200)
-                .json(
-                    ApiResponse.success(
-                        serviceResponse.status,
-                        serviceResponse.message,
-                        200
-                    )
-                );
+            return res.status(200).json(ApiResponse.error(serviceResponse.message, 500));
         }
-    } catch (err) {
 
+        return res.status(200).json(ApiResponse.success(serviceResponse.status, serviceResponse.message, 200));
+
+    } catch (err) {
         throw err;
-        return res
-            .status(200)
-            .json(
-                ApiResponse.error(
-                    "Error",
-                    500
-                )
-            );
+    } finally {
+        // cleanup tmp files regardless of success/failure
+        files.forEach((file) => {
+            if (fs.existsSync(file.path)) fs.unlinkSync(file.path);
+        });
     }
-}
+};
+
+// export const mark_Defect_old = async (_req: Request, res: Response) => {
+
+//     console.log("Query params:", _req.body);
+//     // res.json(_req.params.vendor_id);
+
+//     try {
+
+//         const payload: MarkDefectPayload = {
+//             vendor_id: Number(_req.body.vendor_id),
+//             project_id: Number(_req.body.project_id),
+//             cut_list_machine_mapping_id: Number(_req.body.cut_list_machine_mapping_id),
+//             cut_list_id: Number(_req.body.cut_list_id),
+//             machine_id: Number(_req.body.machine_id),
+//             unique_code: String(_req.body.unique_code),
+//             created_by: Number(_req.body.created_by),
+//             defect_id: Number(_req.body.defect_id),
+//             defect_name: String(_req.body.defect_name)
+//         };
+
+//         console.log("payload", payload);
+//         // const vendor_id = Number(_req.params.vendor_id);
+//         // const project_id = String(_req.params.project_id);
+
+
+//         const serviceResponse = await trackTraceService.mark_Defect(payload);
+
+//         if (serviceResponse.status == 0) {
+//             return res
+//                 .status(200)
+//                 .json(
+//                     ApiResponse.error(
+//                         serviceResponse.message,
+//                         500
+//                     )
+//                 );
+//         } else {
+//             return res
+//                 .status(200)
+//                 .json(
+//                     ApiResponse.success(
+//                         serviceResponse.status,
+//                         serviceResponse.message,
+//                         200
+//                     )
+//                 );
+//         }
+//     } catch (err) {
+
+//         throw err;
+//         return res
+//             .status(200)
+//             .json(
+//                 ApiResponse.error(
+//                     "Error",
+//                     500
+//                 )
+//             );
+//     }
+// }
 
 
 export const getScanStatsDashboard = async (req: Request, res: Response) => {
@@ -700,5 +748,21 @@ export const getScanStatsDashboard = async (req: Request, res: Response) => {
                     200
                 )
             );
+    }
+};
+
+export const getReworkMachines = async (_req: Request, res: Response) => {
+    try {
+        // console.log(_req.params);return;
+        const vendor_id = Number(_req.params.vendor_id);
+        const machine_id = Number(_req.params.machine_id);
+
+        const serviceResponse = await trackTraceService.getReworkMachines(vendor_id, machine_id);
+
+        return res.status(200).json(
+            ApiResponse.success({ serviceResponse }, "Machines fetched", 200)
+        );
+    } catch (err) {
+        throw err;
     }
 };

@@ -1,5 +1,8 @@
 import { Router } from "express";
 import multer from "multer";
+import os from "os";
+
+
 import { getAllProjectsTrackTrace } from "../../controllers/trackTraceController/project.controller";
 
 import {
@@ -21,6 +24,7 @@ import {
   downloadQrLabelsFile,
   getVendorLead,
   linkLeadToProject,
+  getReworkMachines,
 } from "../../controllers/trackTraceController/trackTrace.controller";
 
 import { 
@@ -73,21 +77,33 @@ router.post("/link-lead/:project_id/lead", linkLeadToProject);
 const storage = multer.memoryStorage();
 
 router.get('/defect-master/:vendor_id',get_defect);
-router.post('/mark-defect',mark_Defect);
+const uploadDisk = multer({ dest: os.tmpdir() });
+router.post('/mark-defect', uploadDisk.array("photos[]", 10), mark_Defect);
+// router.post('/mark-defect',mark_Defect);
 router.post('/scan/check-defect', check_defect);
 router.get('/get-scan-status-dashboard/:vendor_id/:user_id',getScanStatsDashboard);
+router.get('/rework-machines/:vendor_id/:machine_id', getReworkMachines);
 
 
 
-const upload = multer({
-  storage,
-});
 
 
+// const upload = multer({
+//   storage,
+// });
+
+const upload = multer({ storage: multer.memoryStorage() });
 router.post(
   "/upload-machine-excel/:vendor_id/:project_token",
   upload.single("file"),
   uploadMachineExcel,
 );
+
+
+// router.post(
+//   "/upload-machine-excel/:vendor_id/:project_token",
+//   upload.single("file"),
+//   uploadMachineExcel,
+// );
 
 export default router;

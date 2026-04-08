@@ -497,3 +497,8 @@ export type ExternalPlatformMaster = Prisma.ExternalPlatformMasterModel
  * 
  */
 export type ExternalPlatformToken = Prisma.ExternalPlatformTokenModel
+/**
+ * Model DefectedItemImage
+ * 
+ */
+export type DefectedItemImage = Prisma.DefectedItemImageModel

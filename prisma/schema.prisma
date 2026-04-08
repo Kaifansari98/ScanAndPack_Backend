@@ -1542,6 +1542,11 @@ model DefectedItem {
   project                     ProjectMaster         @relation(fields: [project_id], references: [id])
   vendor                      VendorMaster          @relation(fields: [vendor_id], references: [id])
 
+  images                    DefectedItemImage[]
+  action                    String?
+  rework_machine_id         Int?
+  defect_status             DefectStatus             @default(Pending)
+  
   @@index([vendor_id])
   @@index([project_id])
   @@index([machine_id])
@@ -1738,6 +1743,16 @@ model ExternalPlatformToken {
   updatedByUser        UserMaster             @relation("ExternalPlatformTokenUpdatedBy", fields: [updated_by], references: [id])
 }
 
+model DefectedItemImage {
+  id               Int          @id @default(autoincrement())
+  defected_item_id Int
+  doc_og_name      String
+  doc_sys_name     String  
+  created_at       DateTime     @default(now())
+
+  defected_item    DefectedItem @relation(fields: [defected_item_id], references: [id])
+}
+
 enum ExternalPlatformTokenActiveStatus {
   Yes
   No
@@ -1868,4 +1883,10 @@ enum UserActivityType {
   RESET_PASSWORD
   LOGIN
   LOGOUT
+}
+
+
+enum DefectStatus {
+  Pending
+  Completed
 }

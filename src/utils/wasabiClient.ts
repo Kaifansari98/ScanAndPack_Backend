@@ -1676,3 +1676,65 @@ export const uploadToWasabiProjectExcel = async (
     throw error;
   }
 };
+
+
+
+export const uploadToWasabiItems = async (
+  filePath: string,
+  vendorId: number,
+  defected_item_id: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `defect/${vendorId}/${defected_item_id}/${uuidv4()}.${ext}`;
+
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
+
+  return sysName;
+};
+
+export interface UploadedImage {
+  url: string;
+  key: string;
+  originalName: string;
+  systemName: string;
+}
+export const uploadToWasabiDefectedItems = async (
+  files: Express.Multer.File[],
+  vendorId: number,
+  defectedItemId: number
+): Promise<UploadedImage[]> => {
+  const uploads = files.map(async (file) => {
+    const sysName = await uploadToWasabiItems(
+      file.path,
+      vendorId,
+      defectedItemId,
+      file.originalname,
+      file.mimetype,
+    );
+
+    const url = `${process.env.WASABI_ENDPOINT}/${process.env.WASABI_BUCKET_NAME}/${sysName}`;
+
+    return {
+      url,
+      key: sysName,
+      originalName: file.originalname,
+      systemName: sysName,
+    };
+  });
+
+  return Promise.all(uploads);
+};

@@ -142,7 +142,8 @@ export const ModelName = {
   ThemeMapping: 'ThemeMapping',
   ApiRequestLog: 'ApiRequestLog',
   ExternalPlatformMaster: 'ExternalPlatformMaster',
-  ExternalPlatformToken: 'ExternalPlatformToken'
+  ExternalPlatformToken: 'ExternalPlatformToken',
+  DefectedItemImage: 'DefectedItemImage'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1378,7 +1379,10 @@ export const DefectedItemScalarFieldEnum = {
   remark: 'remark',
   created_by: 'created_by',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  action: 'action',
+  rework_machine_id: 'rework_machine_id',
+  defect_status: 'defect_status'
 } as const
 
 export type DefectedItemScalarFieldEnum = (typeof DefectedItemScalarFieldEnum)[keyof typeof DefectedItemScalarFieldEnum]
@@ -1569,6 +1573,17 @@ export const ExternalPlatformTokenScalarFieldEnum = {
 } as const
 
 export type ExternalPlatformTokenScalarFieldEnum = (typeof ExternalPlatformTokenScalarFieldEnum)[keyof typeof ExternalPlatformTokenScalarFieldEnum]
+
+
+export const DefectedItemImageScalarFieldEnum = {
+  id: 'id',
+  defected_item_id: 'defected_item_id',
+  doc_og_name: 'doc_og_name',
+  doc_sys_name: 'doc_sys_name',
+  created_at: 'created_at'
+} as const
+
+export type DefectedItemImageScalarFieldEnum = (typeof DefectedItemImageScalarFieldEnum)[keyof typeof DefectedItemImageScalarFieldEnum]
 
 
 export const SortOrder = {
