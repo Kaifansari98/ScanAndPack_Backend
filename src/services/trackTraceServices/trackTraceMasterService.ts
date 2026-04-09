@@ -1,3 +1,4 @@
+import { generateSignedUrl } from "src/utils/wasabiClient";
 import {
   MachineStatus,
   ScanType,
@@ -55,6 +56,95 @@ export const validateCreateMachine = (data: any) => {
 };
 
 export class TrackTraceMasterService {
+
+   static async assignUsersToMachineService({
+    machine_id,
+    vendor_id,
+    user_ids,
+    created_by,
+  }: {
+    machine_id: number;
+    vendor_id: number;
+    user_ids: number[];
+    created_by: number;
+  }) {
+    return prisma.$transaction(async (tx) => {
+      // 1️⃣ Validate Machine
+      const machine = await tx.machineMaster.findFirst({
+        where: {
+          id: machine_id,
+          vendor_id: vendor_id,
+        },
+      });
+
+      if (!machine) {
+        throw new Error("Machine not found for this vendor");
+      }
+
+      const existingMappings = await tx.userMachineMapping.findMany({
+        where: { machine_id: machine_id },
+        select: { user_id: true },
+      });
+      const existingUserIds = existingMappings.map((m) => m.user_id);
+
+      const userIdsToAdd = user_ids.filter(
+        (id) => !existingUserIds.includes(id),
+      );
+      const uesrIdsToRemove = existingUserIds.filter(
+        (id) => !user_ids.includes(id),
+      );
+
+      // 3️⃣ Add new mappings for userIdsToAdd
+
+      if (userIdsToAdd.length > 0) {
+        await tx.userMachineMapping.createMany({
+          data: userIdsToAdd.map((user_id) => ({
+            machine_id,
+            user_id: user_id,
+            vendor_id,
+            created_by,
+            updated_by: created_by,
+          })),
+        });
+      }
+
+      // 2️⃣ Remove old mappings that are not in the new list
+
+      if (uesrIdsToRemove.length) {
+        await tx.userMachineMapping.deleteMany({
+          where: {
+            machine_id,
+            user_id: { in: uesrIdsToRemove },
+          },
+        });
+      }
+
+      return {
+        success: true,
+        message: "Users assigned successfully",
+      };
+    });
+  }
+
+  static async getAssignedUsersService(machine_id: number) {
+    const mappings = await prisma.userMachineMapping.findMany({
+      where: {
+        machine_id,
+        status: "ACTIVE",
+      },
+      select: {
+        user_id: true,
+      },
+    });
+
+    const userIds = mappings.map((m) => m.user_id);
+
+    return {
+      users: userIds,
+      count: userIds.length,
+    };
+  }
+
   static async createMachine(data: MachineData) {
     try {
       logger.info("Creating machine", { vendor_id: data.vendor_id });
@@ -93,36 +183,37 @@ export class TrackTraceMasterService {
       throw error;
     }
   }
+static async getMachinesByVendor(vendor_id: number) {
+  try {
+    logger.info("Fetching machines for vendor", { vendor_id });
 
-  static async getMachinesByVendor(vendor_id: number) {
-    try {
-      logger.info("Fetching machines for vendor", { vendor_id });
+    const rawMachines = await prisma.machineMaster.findMany({
+      where: {
+        vendor_id,
+        machineType: { isNot: null },
+      },
+      orderBy: { sequence_no: "asc" },
+      include: {
+        machineType: {
+          select: { machine_type: true },
+        },
+      },
+    });
 
-      const machines = (
-        await prisma.machineMaster.findMany({
-          where: {
-            vendor_id,
-            machineType: { isNot: null }, 
-          },
-          orderBy: { sequence_no: "asc" },
-          include: {
-            machineType: {
-              select: { machine_type: true },
-            },
-          },
-        })
-      ).map(({ machineType, ...machine }) => ({
+    const machines = await Promise.all(
+      rawMachines.map(async ({ machineType, ...machine }) => ({
         ...machine,
-        image_path: machine.image_path,
+        image_path: machine.image_path ? await generateSignedUrl(machine.image_path) : null,
         machine_type: machineType?.machine_type ?? null,
-      }));
+      }))
+    );
 
-      return machines;
-    } catch (error) {
-      logger.error("Error fetching machines", error);
-      throw error;
-    }
+    return machines;
+  } catch (error) {
+    logger.error("Error fetching machines", error);
+    throw error;
   }
+}
 
   static async updateMachine(
     id: number,
@@ -194,3 +285,5 @@ export const getMachineType = async () => {
     return null;
   }
 };
+
+

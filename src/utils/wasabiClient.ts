@@ -1615,19 +1615,7 @@ export const uploadToWasabiMachineImage = async (
 
   await upload.done();
 
-  // 2️⃣ Generate signed URL
-  const command = new GetObjectCommand({
-    Bucket: process.env.WASABI_BUCKET_NAME!,
-    Key: key,
-    ResponseContentDisposition: "inline",
-  });
-
-  const signedUrl = await getSignedUrl(wasabi, command, {
-    expiresIn: 60 * 60, // 1 hour
-  });
-
-  // 3️⃣ return signed URL
-  return signedUrl;
+  return key;
 };
 
 export const uploadToWasabiProjectExcel = async (

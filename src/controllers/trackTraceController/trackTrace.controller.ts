@@ -812,3 +812,18 @@ export const getReworkMachines = async (_req: Request, res: Response) => {
         throw err;
     }
 };
+
+// controller
+export const getUserModules = async (_req: Request, res: Response) => {
+  const { vendor_id, user_id } = _req.params;
+  const serviceResponse = await trackTraceService.getUserModules(
+    Number(vendor_id),
+    Number(user_id)
+  );
+  if (serviceResponse.status == 0) {
+    return res.status(200).json(ApiResponse.error(serviceResponse.message, 500));
+  }
+  return res.status(200).json(
+    ApiResponse.success(serviceResponse.data,'',200)
+  );
+};

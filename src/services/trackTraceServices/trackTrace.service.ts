@@ -2945,13 +2945,28 @@ export const mark_Defect = async (
       });
     }
 
+    console.log("payload.action:", payload.action);
+    console.log("payload.rework_machine_id:", payload.rework_machine_id);
+
     if (payload.action == "replace") {
       await tx.cutListMachineMapping.updateMany({
         where: { cut_list_id: payload.cut_list_id },
         data: { actual_in_at: null, in_operator: null },
       });
     }
-    else if (payload.action === "rework" && payload.rework_machine_id) {
+    else if (payload.action == "rework" && payload.rework_machine_id) {
+      console.log("Triggered");
+      await tx.cutListMachineMapping.updateMany({
+        where: {
+          cut_list_id: payload.cut_list_id,
+          machine_id: payload.rework_machine_id,
+        },
+        data: { actual_in_at: null, in_operator: null },
+      });
+    }
+
+
+    /*else if (payload.action === "rework" && payload.rework_machine_id) {
 
       // get sequence_no of the rework machine
       const reworkMachine = await tx.machineMaster.findFirst({
@@ -2982,7 +2997,7 @@ export const mark_Defect = async (
           });
         }
       }
-    }
+    }*/
 
 
 
@@ -3061,4 +3076,53 @@ export const getReworkMachines = async (vendor_id: number, machine_id: number) =
   });
 
   return machines;
+};
+
+// service: getUserModules
+export const getUserModules = async (vendor_id: number, user_id: number) => {
+  try {
+    // Get all machine type IDs assigned to this user
+    const mappings = await prisma.userMachineMapping.findMany({
+      where: {
+        user_id,
+        vendor_id,
+        status: "ACTIVE",
+      },
+      select: {
+        machine: {
+          select: {
+            machine_type_id: true,
+          },
+        },
+      },
+    });
+
+    // Collect unique machine_type_ids
+    const typeIds = [...new Set(
+      mappings
+        .map(m => m.machine.machine_type_id)
+        .filter((id): id is number => id !== null)
+    )];
+
+    const modules = {
+      track_and_trace: false,
+      quality_check: false,
+      scan_and_pack: false,
+    };
+
+    for (const typeId of typeIds) {
+      if (typeId === 17) {
+        modules.quality_check = true;
+      } else if (typeId === 18) {
+        modules.scan_and_pack = true;
+      } else {
+        modules.track_and_trace = true;
+      }
+    }
+
+    return validationResponse(1, "", { modules });
+  } catch (error) {
+    console.log("Error in getUserModules", error);
+    return validationResponse(0, "Something went wrong");
+  }
 };

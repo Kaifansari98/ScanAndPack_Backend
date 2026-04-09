@@ -25,6 +25,7 @@ import {
   getVendorLead,
   linkLeadToProject,
   getReworkMachines,
+  getUserModules,
 } from "../../controllers/trackTraceController/trackTrace.controller";
 
 import { 
@@ -87,7 +88,7 @@ router.post('/scan/check-defect', check_defect);
 router.get('/get-scan-status-dashboard/:vendor_id/:user_id',getScanStatsDashboard);
 router.get('/rework-machines/:vendor_id/:machine_id', getReworkMachines);
 
-
+router.get('/user-modules/:vendor_id/:user_id', getUserModules);
 
 
 

@@ -23,5 +23,15 @@ router.put(
   TrackTraceMasterController.updateMachine
 );
 
+router.post(
+  "/machine-users-assign",
+  TrackTraceMasterController.assignUsersToMachineController,
+);
+
+router.get(
+  "/machines/:machine_id/assigned-users",
+  TrackTraceMasterController.getAssignedUsersController,
+);
+
 router.get("/machine-type",getMachineType);
 export default router;
