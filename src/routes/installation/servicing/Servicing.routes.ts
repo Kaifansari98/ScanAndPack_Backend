@@ -16,6 +16,16 @@ servicingRoutes.put(
   controller.rescheduleService,
 );
 
+servicingRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/serviceId/:serviceId/reject",
+  controller.rejectService,
+);
+
+servicingRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/serviceId/:serviceId/reopen",
+  controller.reopenRejectedService,
+);
+
 servicingRoutes.get(
   "/vendorId/:vendorId/leadId/:leadId/schedules",
   controller.getServiceSchedules,

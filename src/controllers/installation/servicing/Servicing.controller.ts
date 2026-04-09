@@ -7,6 +7,80 @@ import { ServicingService } from "../../../services/installation/servicing/Servi
 const service = new ServicingService();
 
 export class ServicingController {
+  async rejectService(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+      const serviceId = Number(req.params.serviceId);
+      const updatedBy = Number(req.body.updated_by);
+      const remark = String(req.body.remark ?? "");
+
+      if (!vendorId || !leadId || !serviceId || !updatedBy) {
+        return res.status(400).json(
+          ApiResponse.error(
+            "vendorId, leadId, serviceId, and updated_by are required",
+            400,
+          ),
+        );
+      }
+
+      const result = await service.rejectService(
+        vendorId,
+        leadId,
+        serviceId,
+        updatedBy,
+        remark,
+      );
+
+      return res
+        .status(200)
+        .json(ApiResponse.success(result, "Service rejected successfully"));
+    } catch (error: any) {
+      return res.status(error.statusCode || 500).json(
+        ApiResponse.error(
+          error.message || "Internal server error while rejecting service",
+          error.statusCode || 500,
+        ),
+      );
+    }
+  }
+
+  async reopenRejectedService(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+      const serviceId = Number(req.params.serviceId);
+      const updatedBy = Number(req.body.updated_by);
+
+      if (!vendorId || !leadId || !serviceId || !updatedBy) {
+        return res.status(400).json(
+          ApiResponse.error(
+            "vendorId, leadId, serviceId, and updated_by are required",
+            400,
+          ),
+        );
+      }
+
+      const result = await service.reopenRejectedService(
+        vendorId,
+        leadId,
+        serviceId,
+        updatedBy,
+      );
+
+      return res
+        .status(200)
+        .json(ApiResponse.success(result, "Service reopened successfully"));
+    } catch (error: any) {
+      return res.status(error.statusCode || 500).json(
+        ApiResponse.error(
+          error.message || "Internal server error while reopening service",
+          error.statusCode || 500,
+        ),
+      );
+    }
+  }
+
   async rescheduleService(req: Request, res: Response) {
     try {
       const vendorId = Number(req.params.vendorId);

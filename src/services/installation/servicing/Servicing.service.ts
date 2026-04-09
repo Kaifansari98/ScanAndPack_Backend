@@ -19,6 +19,35 @@ export class ServicingService {
     return result;
   }
 
+  private async getValidatedUserRole(
+    tx: Pick<typeof prisma, "userMaster">,
+    vendorId: number,
+    userId: number,
+  ) {
+    const user = await tx.userMaster.findFirst({
+      where: {
+        id: userId,
+        vendor_id: vendorId,
+        status: "active",
+      },
+      select: {
+        id: true,
+        user_name: true,
+        user_type: {
+          select: {
+            user_type: true,
+          },
+        },
+      },
+    });
+
+    if (!user) {
+      throw Object.assign(new Error("User not found"), { statusCode: 404 });
+    }
+
+    return user.user_type?.user_type?.toLowerCase() ?? "";
+  }
+
   async getServiceSchedules(vendorId: number, leadId: number) {
     if (!vendorId || !leadId) {
       throw Object.assign(new Error("vendorId and leadId are required"), {
@@ -235,6 +264,249 @@ export class ServicingService {
           action_type: "UPDATE",
           created_by: updatedBy,
           created_at: new Date(),
+        },
+      });
+
+      return updatedService;
+    });
+  }
+
+  async rejectService(
+    vendorId: number,
+    leadId: number,
+    serviceId: number,
+    updatedBy: number,
+    remark: string,
+  ) {
+    if (!vendorId || !leadId || !serviceId || !updatedBy) {
+      throw Object.assign(
+        new Error("vendorId, leadId, serviceId, updatedBy are required"),
+        { statusCode: 400 },
+      );
+    }
+
+    if (!remark?.trim()) {
+      throw Object.assign(new Error("Remark is required"), {
+        statusCode: 400,
+      });
+    }
+
+    return prisma.$transaction(async (tx) => {
+      const role = await this.getValidatedUserRole(tx, vendorId, updatedBy);
+      const canReject = [
+        "head-site-supervisor",
+        "admin",
+        "super-admin",
+      ].includes(role);
+
+      if (!canReject) {
+        throw Object.assign(
+          new Error(
+            "Only head-site-supervisor, admin, or super-admin can reject a service",
+          ),
+          { statusCode: 403 },
+        );
+      }
+
+      const service = await tx.leadServiceSchedule.findFirst({
+        where: {
+          id: serviceId,
+          vendor_id: vendorId,
+          lead_id: leadId,
+          service_type: "free",
+        },
+        select: {
+          id: true,
+          account_id: true,
+          service_no: true,
+          scheduled_for: true,
+          status: true,
+        },
+      });
+
+      if (!service) {
+        throw Object.assign(new Error("Service schedule not found"), {
+          statusCode: 404,
+        });
+      }
+
+      if (service.status === "rejected") {
+        throw Object.assign(new Error("This service is already rejected"), {
+          statusCode: 400,
+        });
+      }
+
+      if (service.status !== "open") {
+        throw Object.assign(
+          new Error("Only pending services can be rejected"),
+          { statusCode: 400 },
+        );
+      }
+
+      const rejectedAt = new Date();
+
+      const updatedService = await tx.leadServiceSchedule.update({
+        where: { id: service.id },
+        data: {
+          status: "rejected",
+          rejected_at: rejectedAt,
+          rejected_by: updatedBy,
+          rejection_remark: remark.trim(),
+          updated_by: updatedBy,
+          updated_at: rejectedAt,
+        },
+      });
+
+      const taskTypeByServiceNo: Record<number, string> = {
+        1: "1st Servicing",
+        2: "2nd Servicing",
+        3: "3rd Servicing",
+      };
+
+      const taskType = taskTypeByServiceNo[service.service_no];
+
+      if (taskType) {
+        await tx.userLeadTask.updateMany({
+          where: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: service.account_id,
+            task_type: taskType,
+            lead_stage: "servicing-stage",
+            status: "open",
+            due_date: service.scheduled_for,
+          },
+          data: {
+            status: "cancelled",
+            remark: remark.trim(),
+            closed_at: rejectedAt,
+            closed_by: updatedBy,
+            updated_by: updatedBy,
+            updated_at: rejectedAt,
+          },
+        });
+      }
+
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: service.account_id,
+          action: `${service.service_no} Service marked as rejected. Remark: ${remark.trim()}`,
+          action_type: "UPDATE",
+          created_by: updatedBy,
+          created_at: rejectedAt,
+        },
+      });
+
+      return updatedService;
+    });
+  }
+
+  async reopenRejectedService(
+    vendorId: number,
+    leadId: number,
+    serviceId: number,
+    updatedBy: number,
+  ) {
+    if (!vendorId || !leadId || !serviceId || !updatedBy) {
+      throw Object.assign(
+        new Error("vendorId, leadId, serviceId, updatedBy are required"),
+        { statusCode: 400 },
+      );
+    }
+
+    return prisma.$transaction(async (tx) => {
+      const role = await this.getValidatedUserRole(tx, vendorId, updatedBy);
+      const canReopen = ["admin", "super-admin"].includes(role);
+
+      if (!canReopen) {
+        throw Object.assign(
+          new Error("Only admin or super-admin can reopen a rejected service"),
+          { statusCode: 403 },
+        );
+      }
+
+      const service = await tx.leadServiceSchedule.findFirst({
+        where: {
+          id: serviceId,
+          vendor_id: vendorId,
+          lead_id: leadId,
+          service_type: "free",
+        },
+        select: {
+          id: true,
+          account_id: true,
+          service_no: true,
+          scheduled_for: true,
+          status: true,
+        },
+      });
+
+      if (!service) {
+        throw Object.assign(new Error("Service schedule not found"), {
+          statusCode: 404,
+        });
+      }
+
+      if (service.status !== "rejected") {
+        throw Object.assign(new Error("Only rejected services can be reopened"), {
+          statusCode: 400,
+        });
+      }
+
+      const reopenedAt = new Date();
+
+      const updatedService = await tx.leadServiceSchedule.update({
+        where: { id: service.id },
+        data: {
+          status: "open",
+          rejected_at: null,
+          rejected_by: null,
+          rejection_remark: null,
+          updated_by: updatedBy,
+          updated_at: reopenedAt,
+        },
+      });
+
+      const taskTypeByServiceNo: Record<number, string> = {
+        1: "1st Servicing",
+        2: "2nd Servicing",
+        3: "3rd Servicing",
+      };
+
+      const taskType = taskTypeByServiceNo[service.service_no];
+
+      if (taskType) {
+        await tx.userLeadTask.updateMany({
+          where: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: service.account_id,
+            task_type: taskType,
+            lead_stage: "servicing-stage",
+            status: "cancelled",
+            due_date: service.scheduled_for,
+          },
+          data: {
+            status: "open",
+            closed_at: null,
+            closed_by: null,
+            updated_by: updatedBy,
+            updated_at: reopenedAt,
+          },
+        });
+      }
+
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: service.account_id,
+          action: `${service.service_no} Service status changed from rejected to open.`,
+          action_type: "UPDATE",
+          created_by: updatedBy,
+          created_at: reopenedAt,
         },
       });
 
