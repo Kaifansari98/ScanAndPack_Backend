@@ -42,6 +42,7 @@ import {
   sendLeadAssignedEmail,
 } from "../../../services/email/brevoEmail.service";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
+import { cadbidIntegrationWithFurnixcrmService } from "../../../services/cadbid-integration-with-furnixcrm/CadbidIntegrationWithFurnixcrm.service";
 
 const resolveClientBaseUrl = (req: Request): string => {
   const origin = req.headers.origin;
@@ -536,12 +537,49 @@ export class LeadController {
         }
       }
 
+      let cadbidSync:
+        | {
+            success: boolean;
+            status?: number;
+            response?: unknown;
+            error?: string;
+          }
+        | undefined;
+
+      if (!result.draft) {
+        try {
+          const cadbidResult =
+            await cadbidIntegrationWithFurnixcrmService.syncLeadToCadbid(
+              value.vendor_id,
+              result.lead.id,
+            );
+
+          cadbidSync = {
+            success: true,
+            status: cadbidResult.status,
+            response: cadbidResult.response,
+          };
+        } catch (cadbidError: any) {
+          logger.warn("Cadbid sync failed after lead creation", {
+            lead_id: result.lead.id,
+            vendor_id: value.vendor_id,
+            error: cadbidError?.message,
+          });
+
+          cadbidSync = {
+            success: false,
+            error: cadbidError?.message || "Cadbid sync failed",
+          };
+        }
+      }
+
       return res.status(201).json({
         success: true,
         message: "Lead created successfully",
         data: {
           ...result,
           documentsUploaded: files.length,
+          cadbidSync,
         },
       });
     } catch (error: any) {
