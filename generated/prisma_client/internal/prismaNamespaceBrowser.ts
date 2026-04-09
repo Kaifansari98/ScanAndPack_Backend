@@ -412,6 +412,7 @@ export const LeadMasterScalarFieldEnum = {
   no_of_boxes: 'no_of_boxes',
   dispatch_planning_remark: 'dispatch_planning_remark',
   material_lift_availability: 'material_lift_availability',
+  vehicle_approachability_for_dispatch: 'vehicle_approachability_for_dispatch',
   onsite_contact_person_name: 'onsite_contact_person_name',
   onsite_contact_person_number: 'onsite_contact_person_number',
   required_date_for_dispatch: 'required_date_for_dispatch',

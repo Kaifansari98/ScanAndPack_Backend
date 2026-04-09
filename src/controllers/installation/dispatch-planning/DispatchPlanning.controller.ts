@@ -74,6 +74,7 @@ export class DispatchPlanningController {
         alt_onsite_contact_person_name,
         alt_onsite_contact_person_number,
         material_lift_availability,
+        vehicle_approachability,
         dispatch_planning_remark,
         created_by,
       } = req.body;
@@ -98,6 +99,7 @@ export class DispatchPlanningController {
         alt_onsite_contact_person_name,
         alt_onsite_contact_person_number,
         material_lift_availability: material_lift_availability === "true",
+        vehicle_approachability: vehicle_approachability === "true",
         dispatch_planning_remark,
         created_by: Number(created_by),
       });

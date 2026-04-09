@@ -183,6 +183,7 @@ export class DispatchPlanningService {
       alt_onsite_contact_person_name,
       alt_onsite_contact_person_number,
       material_lift_availability,
+      vehicle_approachability,
       dispatch_planning_remark,
       created_by,
     } = payload;
@@ -193,6 +194,13 @@ export class DispatchPlanningService {
 
     if (!dispatchDate) {
       throw new Error("Dispatch date is required.");
+    }
+
+    if (
+      vehicle_approachability === null ||
+      vehicle_approachability === undefined
+    ) {
+      throw new Error("Vehicle approachability is required.");
     }
 
     return await prisma.$transaction(async (tx) => {
@@ -207,6 +215,7 @@ export class DispatchPlanningService {
           alt_onsite_contact_person_name,
           alt_onsite_contact_person_number,
           material_lift_availability,
+          vehicle_approachability_for_dispatch: vehicle_approachability,
           dispatch_planning_remark,
           updated_by: created_by,
         },
@@ -379,6 +388,7 @@ export class DispatchPlanningService {
         alt_onsite_contact_person_name: true,
         alt_onsite_contact_person_number: true,
         material_lift_availability: true,
+        vehicle_approachability_for_dispatch: true,
         dispatch_planning_remark: true,
         updated_at: true,
       },
@@ -490,6 +500,7 @@ export class DispatchPlanningService {
         onsite_contact_person_name: true,
         onsite_contact_person_number: true,
         material_lift_availability: true,
+        vehicle_approachability_for_dispatch: true,
         dispatch_planning_remark: true,
       },
     });
@@ -510,6 +521,11 @@ export class DispatchPlanningService {
       lead.material_lift_availability === undefined
     )
       missingFields.push("Material Lift Availability");
+    if (
+      lead.vehicle_approachability_for_dispatch === null ||
+      lead.vehicle_approachability_for_dispatch === undefined
+    )
+      missingFields.push("Vehicle Approachability for Dispatch");
 
     const isReadyForDispatch = missingFields.length === 0;
 
