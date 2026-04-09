@@ -47,6 +47,11 @@ export class ServicingService {
           select: {
             id: true,
             user_name: true,
+            user_type: {
+              select: {
+                user_type: true,
+              },
+            },
           },
         },
         updatedBy: {
