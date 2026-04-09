@@ -7,6 +7,130 @@ export class ServicingService {
   private readonly completionDocType = "servicing-complition-Documents";
   private readonly completionDocTag = "Type 40";
 
+  private formatServiceLogLabel(serviceType: "free" | "amc", serviceNo: number) {
+    const ordinal =
+      serviceNo === 1 ? "1st" : serviceNo === 2 ? "2nd" : serviceNo === 3 ? "3rd" : `${serviceNo}th`;
+    return serviceType === "amc" ? `AMC ${ordinal} Service` : `${ordinal} Service`;
+  }
+
+  private async createAmcSchedulesIfEligible(
+    tx: Pick<
+      typeof prisma,
+      "leadMaster" | "leadServiceSchedule" | "leadDetailedLogs"
+    >,
+    vendorId: number,
+    leadId: number,
+    completedBy: number,
+    service: {
+      account_id: number;
+      service_no: number;
+      service_type: "free" | "amc";
+    },
+    completedAt: Date,
+  ) {
+    if (service.service_type !== "free" || service.service_no !== 3) {
+      return;
+    }
+
+    const lead = await tx.leadMaster.findFirst({
+      where: {
+        id: leadId,
+        vendor_id: vendorId,
+        is_deleted: false,
+      },
+      select: {
+        id: true,
+        account_id: true,
+        is_amc_opted: true,
+      },
+    });
+
+    if (!lead?.is_amc_opted) {
+      return;
+    }
+
+    const createdSchedules: Array<{ service_no: number; scheduled_for: Date }> = [];
+
+    for (const serviceNo of [1, 2, 3]) {
+      const existing = await tx.leadServiceSchedule.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          service_type: "amc",
+          service_no: serviceNo,
+        },
+        select: { id: true },
+      });
+
+      if (existing) {
+        continue;
+      }
+
+      const scheduledFor = this.addMonthsPreservingDay(completedAt, serviceNo * 4);
+
+      await tx.leadServiceSchedule.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: service.account_id,
+          service_no: serviceNo,
+          service_type: "amc",
+          scheduled_for: scheduledFor,
+          original_scheduled_for: scheduledFor,
+          created_by: completedBy,
+          updated_by: completedBy,
+        },
+      });
+
+      createdSchedules.push({
+        service_no: serviceNo,
+        scheduled_for: scheduledFor,
+      });
+    }
+
+    if (!createdSchedules.length) {
+      return;
+    }
+
+    await tx.leadMaster.update({
+      where: { id: leadId },
+      data: {
+        amc_plan_started_at: createdSchedules[0]?.scheduled_for ?? null,
+        amc_plan_closed_at:
+          createdSchedules[createdSchedules.length - 1]?.scheduled_for ?? null,
+        updated_by: completedBy,
+        updated_at: completedAt,
+      },
+    });
+
+    const formatter = new Intl.DateTimeFormat("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    const scheduleSummary = createdSchedules
+      .map(
+        (item) =>
+          `${this.formatServiceLogLabel("amc", item.service_no)} scheduled for ${formatter.format(item.scheduled_for)}`,
+      )
+      .join(", ");
+
+    await tx.leadDetailedLogs.create({
+      data: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: service.account_id,
+        action: `AMC service schedule created after 3rd free service completion. ${scheduleSummary}.`,
+        action_type: "UPDATE",
+        created_by: completedBy,
+        created_at: completedAt,
+      },
+    });
+  }
+
   private addMonthsPreservingDay(date: Date, monthsToAdd: number) {
     const source = new Date(date);
     const originalDay = source.getDate();
@@ -61,11 +185,8 @@ export class ServicingService {
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
-        service_type: "free",
       },
-      orderBy: {
-        service_no: "asc",
-      },
+      orderBy: [{ service_type: "asc" }, { service_no: "asc" }],
       select: {
         id: true,
         vendor_id: true,
@@ -78,6 +199,7 @@ export class ServicingService {
         status: true,
         rescheduled_once: true,
         rescheduled_from: true,
+        completed_by: true,
         completed_at: true,
         completion_remark: true,
         completion_document_id: true,
@@ -137,9 +259,8 @@ export class ServicingService {
                   vendor_id: vendorId,
                   lead_id: leadId,
                   account_id: schedule.account_id,
-                  action: {
-                    contains: `${schedule.service_no} Service completed successfully`,
-                  },
+                  created_at: schedule.completed_at ?? undefined,
+                  created_by: schedule.completed_by ?? undefined,
                 },
                 include: {
                   docLogs: {
@@ -207,12 +328,12 @@ export class ServicingService {
           id: serviceId,
           vendor_id: vendorId,
           lead_id: leadId,
-          service_type: "free",
         },
         select: {
           id: true,
           account_id: true,
           service_no: true,
+          service_type: true,
           status: true,
           scheduled_for: true,
           rescheduled_once: true,
@@ -271,7 +392,7 @@ export class ServicingService {
 
       const taskType = taskTypeByServiceNo[service.service_no];
 
-      if (taskType) {
+      if (taskType && service.service_type === "free") {
         await tx.userLeadTask.updateMany({
           where: {
             vendor_id: vendorId,
@@ -303,7 +424,7 @@ export class ServicingService {
           vendor_id: vendorId,
           lead_id: leadId,
           account_id: service.account_id,
-          action: `${service.service_no} Service rescheduled from ${formatter.format(
+          action: `${this.formatServiceLogLabel(service.service_type, service.service_no)} rescheduled from ${formatter.format(
             currentScheduledFor,
           )} to ${formatter.format(nextScheduledFor)}.`,
           action_type: "UPDATE",
@@ -358,12 +479,12 @@ export class ServicingService {
           id: serviceId,
           vendor_id: vendorId,
           lead_id: leadId,
-          service_type: "free",
         },
         select: {
           id: true,
           account_id: true,
           service_no: true,
+          service_type: true,
           scheduled_for: true,
           status: true,
         },
@@ -410,7 +531,7 @@ export class ServicingService {
 
       const taskType = taskTypeByServiceNo[service.service_no];
 
-      if (taskType) {
+      if (taskType && service.service_type === "free") {
         await tx.userLeadTask.updateMany({
           where: {
             vendor_id: vendorId,
@@ -437,7 +558,7 @@ export class ServicingService {
           vendor_id: vendorId,
           lead_id: leadId,
           account_id: service.account_id,
-          action: `${service.service_no} Service marked as rejected. Remark: ${remark.trim()}`,
+          action: `${this.formatServiceLogLabel(service.service_type, service.service_no)} marked as rejected. Remark: ${remark.trim()}`,
           action_type: "UPDATE",
           created_by: updatedBy,
           created_at: rejectedAt,
@@ -477,12 +598,12 @@ export class ServicingService {
           id: serviceId,
           vendor_id: vendorId,
           lead_id: leadId,
-          service_type: "free",
         },
         select: {
           id: true,
           account_id: true,
           service_no: true,
+          service_type: true,
           scheduled_for: true,
           status: true,
         },
@@ -522,7 +643,7 @@ export class ServicingService {
 
       const taskType = taskTypeByServiceNo[service.service_no];
 
-      if (taskType) {
+      if (taskType && service.service_type === "free") {
         await tx.userLeadTask.updateMany({
           where: {
             vendor_id: vendorId,
@@ -548,7 +669,7 @@ export class ServicingService {
           vendor_id: vendorId,
           lead_id: leadId,
           account_id: service.account_id,
-          action: `${service.service_no} Service status changed from rejected to open.`,
+          action: `${this.formatServiceLogLabel(service.service_type, service.service_no)} status changed from rejected to open.`,
           action_type: "UPDATE",
           created_by: updatedBy,
           created_at: reopenedAt,
@@ -604,12 +725,12 @@ export class ServicingService {
           id: serviceId,
           vendor_id: vendorId,
           lead_id: leadId,
-          service_type: "free",
         },
         select: {
           id: true,
           account_id: true,
           service_no: true,
+          service_type: true,
           scheduled_for: true,
           status: true,
         },
@@ -693,7 +814,7 @@ export class ServicingService {
 
       const taskType = taskTypeByServiceNo[service.service_no];
 
-      if (taskType) {
+      if (taskType && service.service_type === "free") {
         await tx.userLeadTask.updateMany({
           where: {
             vendor_id: vendorId,
@@ -722,7 +843,7 @@ export class ServicingService {
           vendor_id: vendorId,
           lead_id: leadId,
           account_id: service.account_id,
-          action: `${service.service_no} Service completed successfully — ${docCount} servicing completion ${plural} been uploaded successfully.${remark?.trim() ? ` Remark: ${remark.trim()}` : ""}`,
+          action: `${this.formatServiceLogLabel(service.service_type, service.service_no)} completed successfully — ${docCount} servicing completion ${plural} been uploaded successfully.${remark?.trim() ? ` Remark: ${remark.trim()}` : ""}`,
           action_type: "UPDATE",
           created_by: completedBy,
           created_at: completedAt,
@@ -740,6 +861,19 @@ export class ServicingService {
           created_at: completedAt,
         })),
       });
+
+      await this.createAmcSchedulesIfEligible(
+        tx,
+        vendorId,
+        leadId,
+        completedBy,
+        {
+          account_id: service.account_id,
+          service_no: service.service_no,
+          service_type: service.service_type,
+        },
+        completedAt,
+      );
 
       return {
         service: updatedService,
