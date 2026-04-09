@@ -12,6 +12,11 @@ servicingRoutes.post(
 );
 
 servicingRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/schedules",
+  controller.getServiceSchedules,
+);
+
+servicingRoutes.get(
   "/vendorId/:vendorId/leadId/:leadId/documents",
   controller.getAmcContractDocuments,
 );

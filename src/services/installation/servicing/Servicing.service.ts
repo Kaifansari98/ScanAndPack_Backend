@@ -5,6 +5,96 @@ export class ServicingService {
   private readonly amcDocType = "AMC-contract-Documents";
   private readonly amcDocTag = "Type 39";
 
+  async getServiceSchedules(vendorId: number, leadId: number) {
+    if (!vendorId || !leadId) {
+      throw Object.assign(new Error("vendorId and leadId are required"), {
+        statusCode: 400,
+      });
+    }
+
+    const schedules = await prisma.leadServiceSchedule.findMany({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        service_type: "free",
+      },
+      orderBy: {
+        service_no: "asc",
+      },
+      select: {
+        id: true,
+        vendor_id: true,
+        lead_id: true,
+        account_id: true,
+        service_no: true,
+        service_type: true,
+        scheduled_for: true,
+        original_scheduled_for: true,
+        status: true,
+        rescheduled_once: true,
+        rescheduled_from: true,
+        completed_at: true,
+        completion_remark: true,
+        completion_document_id: true,
+        rejected_at: true,
+        rejection_remark: true,
+        closure_reason: true,
+        created_by: true,
+        created_at: true,
+        updated_by: true,
+        updated_at: true,
+        createdBy: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+        updatedBy: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+        completedBy: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+        rejectedBy: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+        completionDocument: {
+          select: {
+            id: true,
+            doc_og_name: true,
+            doc_sys_name: true,
+            created_at: true,
+          },
+        },
+      },
+    });
+
+    return Promise.all(
+      schedules.map(async (schedule) => ({
+        ...schedule,
+        completionDocument: schedule.completionDocument
+          ? {
+              ...schedule.completionDocument,
+              signed_url: await generateSignedUrl(
+                schedule.completionDocument.doc_sys_name,
+                3600,
+                "inline",
+              ),
+            }
+          : null,
+      })),
+    );
+  }
+
   async uploadAmcContractDocuments(
     vendorId: number,
     leadId: number,

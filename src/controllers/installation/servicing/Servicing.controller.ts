@@ -7,6 +7,32 @@ import { ServicingService } from "../../../services/installation/servicing/Servi
 const service = new ServicingService();
 
 export class ServicingController {
+  async getServiceSchedules(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+
+      if (!vendorId || !leadId) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("vendorId and leadId are required", 400));
+      }
+
+      const result = await service.getServiceSchedules(vendorId, leadId);
+
+      return res
+        .status(200)
+        .json(ApiResponse.success(result, "Service schedules fetched successfully"));
+    } catch (error: any) {
+      return res.status(error.statusCode || 500).json(
+        ApiResponse.error(
+          error.message || "Internal server error while fetching service schedules",
+          error.statusCode || 500,
+        ),
+      );
+    }
+  }
+
   async uploadAmcContractDocuments(req: Request, res: Response) {
     try {
       const vendorId = Number(req.body.vendorId);
