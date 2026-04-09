@@ -5,6 +5,20 @@ export class ServicingService {
   private readonly amcDocType = "AMC-contract-Documents";
   private readonly amcDocTag = "Type 39";
 
+  private addMonthsPreservingDay(date: Date, monthsToAdd: number) {
+    const source = new Date(date);
+    const originalDay = source.getDate();
+    const result = new Date(source);
+
+    result.setMonth(result.getMonth() + monthsToAdd);
+
+    if (result.getDate() !== originalDay) {
+      result.setDate(0);
+    }
+
+    return result;
+  }
+
   async getServiceSchedules(vendorId: number, leadId: number) {
     if (!vendorId || !leadId) {
       throw Object.assign(new Error("vendorId and leadId are required"), {
@@ -98,6 +112,134 @@ export class ServicingService {
           : null,
       })),
     );
+  }
+
+  async rescheduleService(
+    vendorId: number,
+    leadId: number,
+    serviceId: number,
+    updatedBy: number,
+  ) {
+    if (!vendorId || !leadId || !serviceId || !updatedBy) {
+      throw Object.assign(
+        new Error("vendorId, leadId, serviceId, and updatedBy are required"),
+        { statusCode: 400 },
+      );
+    }
+
+    return prisma.$transaction(async (tx) => {
+      const service = await tx.leadServiceSchedule.findFirst({
+        where: {
+          id: serviceId,
+          vendor_id: vendorId,
+          lead_id: leadId,
+          service_type: "free",
+        },
+        select: {
+          id: true,
+          account_id: true,
+          service_no: true,
+          status: true,
+          scheduled_for: true,
+          rescheduled_once: true,
+        },
+      });
+
+      if (!service) {
+        throw Object.assign(new Error("Service schedule not found"), {
+          statusCode: 404,
+        });
+      }
+
+      if (service.status !== "open") {
+        throw Object.assign(
+          new Error("Only pending services can be rescheduled"),
+          { statusCode: 400 },
+        );
+      }
+
+      if (service.rescheduled_once) {
+        throw Object.assign(
+          new Error("This service has already been rescheduled once"),
+          { statusCode: 400 },
+        );
+      }
+
+      const currentScheduledFor = new Date(service.scheduled_for);
+      const nextScheduledFor = this.addMonthsPreservingDay(
+        currentScheduledFor,
+        1,
+      );
+
+      const updatedService = await tx.leadServiceSchedule.update({
+        where: { id: service.id },
+        data: {
+          scheduled_for: nextScheduledFor,
+          rescheduled_once: true,
+          rescheduled_from: currentScheduledFor,
+          updated_by: updatedBy,
+          updated_at: new Date(),
+        },
+        select: {
+          id: true,
+          service_no: true,
+          scheduled_for: true,
+          rescheduled_once: true,
+          rescheduled_from: true,
+        },
+      });
+
+      const taskTypeByServiceNo: Record<number, string> = {
+        1: "1st Servicing",
+        2: "2nd Servicing",
+        3: "3rd Servicing",
+      };
+
+      const taskType = taskTypeByServiceNo[service.service_no];
+
+      if (taskType) {
+        await tx.userLeadTask.updateMany({
+          where: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: service.account_id,
+            task_type: taskType,
+            lead_stage: "servicing-stage",
+            status: "open",
+            due_date: currentScheduledFor,
+          },
+          data: {
+            due_date: nextScheduledFor,
+            updated_by: updatedBy,
+            updated_at: new Date(),
+          },
+        });
+      }
+
+      const formatter = new Intl.DateTimeFormat("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: service.account_id,
+          action: `${service.service_no} Service rescheduled from ${formatter.format(
+            currentScheduledFor,
+          )} to ${formatter.format(nextScheduledFor)}.`,
+          action_type: "UPDATE",
+          created_by: updatedBy,
+          created_at: new Date(),
+        },
+      });
+
+      return updatedService;
+    });
   }
 
   async uploadAmcContractDocuments(

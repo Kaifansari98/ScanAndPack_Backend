@@ -7,6 +7,42 @@ import { ServicingService } from "../../../services/installation/servicing/Servi
 const service = new ServicingService();
 
 export class ServicingController {
+  async rescheduleService(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+      const serviceId = Number(req.params.serviceId);
+      const updatedBy = Number(req.body.updated_by);
+
+      if (!vendorId || !leadId || !serviceId || !updatedBy) {
+        return res.status(400).json(
+          ApiResponse.error(
+            "vendorId, leadId, serviceId, and updated_by are required",
+            400,
+          ),
+        );
+      }
+
+      const result = await service.rescheduleService(
+        vendorId,
+        leadId,
+        serviceId,
+        updatedBy,
+      );
+
+      return res
+        .status(200)
+        .json(ApiResponse.success(result, "Service rescheduled successfully"));
+    } catch (error: any) {
+      return res.status(error.statusCode || 500).json(
+        ApiResponse.error(
+          error.message || "Internal server error while rescheduling service",
+          error.statusCode || 500,
+        ),
+      );
+    }
+  }
+
   async getServiceSchedules(req: Request, res: Response) {
     try {
       const vendorId = Number(req.params.vendorId);

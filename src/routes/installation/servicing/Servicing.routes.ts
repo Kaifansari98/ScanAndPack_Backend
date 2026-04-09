@@ -11,6 +11,11 @@ servicingRoutes.post(
   controller.uploadAmcContractDocuments,
 );
 
+servicingRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/serviceId/:serviceId/reschedule",
+  controller.rescheduleService,
+);
+
 servicingRoutes.get(
   "/vendorId/:vendorId/leadId/:leadId/schedules",
   controller.getServiceSchedules,
