@@ -827,3 +827,14 @@ export const getUserModules = async (_req: Request, res: Response) => {
     ApiResponse.success(serviceResponse.data,'',200)
   );
 };
+
+export const getQualityCheckProjects = async (_req: Request, res: Response) => {
+  const { vendor_id } = _req.params;
+  const serviceResponse = await trackTraceService.getQualityCheckProjects(Number(vendor_id));
+  if (serviceResponse.status == 0) {
+    return res.status(200).json(ApiResponse.error(serviceResponse.message, 500));
+  }
+  return res.status(200).json(
+    ApiResponse.success(serviceResponse.data,'',200)
+  );
+};

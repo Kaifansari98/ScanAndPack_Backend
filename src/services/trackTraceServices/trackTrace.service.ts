@@ -3126,3 +3126,97 @@ export const getUserModules = async (vendor_id: number, user_id: number) => {
     return validationResponse(0, "Something went wrong");
   }
 };
+
+
+export const getQualityCheckProjects = async (vendor_id: number) => {
+  try {
+    // Get the quality check machine (machine_type_id = 17) for this vendor
+    const qualityMachine = await prisma.machineMaster.findFirst({
+      where: {
+        vendor_id,
+        machine_type_id: 17,
+        status: 'ACTIVE',
+      },
+      select: { id: true, sequence_no: true,machine_name: true },
+    });
+
+    if (!qualityMachine) {
+      return validationResponse(1, '', { projects: [] });
+    }
+
+    const qualityMachineId = qualityMachine.id;
+    const qualitySequenceNo = qualityMachine.sequence_no ?? 0;
+
+    console.log("qualitySequenceNo",qualitySequenceNo);
+
+    // Find all projects that have at least 1 item:
+    // - pending in quality machine (actual_in_at = null, machine_id = qualityMachineId)
+    // - AND all previous machines (sequence_no < qualitySequenceNo, non-PASS) are scanned
+    const projects = await prisma.projectMaster.findMany({
+      where: {
+        vendor_id,
+        cutListMachineMapping: {
+          some: {
+            machine_id: qualityMachineId,
+            actual_in_at: null,
+            expected_in: true,
+            cut_list: {
+              cutListMachineMapping: {
+                none: {
+                  vendor_id,
+                  actual_in_at: null,
+                  sequence_no: { lt: qualitySequenceNo },
+                  machine: {
+                    scan_type: { not: 'PASS' },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+      select: {
+        id: true,
+        project_name: true,
+        project_status: true,
+        track_trace_status: true,
+        created_at: true,
+      },
+    });
+
+    // Get pending count per project
+    const projectsWithCount = await Promise.all(
+      projects.map(async (project) => {
+        const pending_count = await prisma.cutListMachineMapping.count({
+          where: {
+            project_id: project.id,
+            vendor_id,
+            machine_id: qualityMachineId,
+            actual_in_at: null,
+            expected_in: true,
+            cut_list: {
+              cutListMachineMapping: {
+                none: {
+                  vendor_id,
+                  actual_in_at: null,
+                  sequence_no: { lt: qualitySequenceNo },
+                  machine: {
+                    scan_type: { not: 'PASS' },
+                  },
+                },
+              },
+            },
+          },
+        });
+
+        return { ...project, pending_count,qualityMachineId,qualityMachineName: qualityMachine.machine_name };
+      })
+    );
+
+    return validationResponse(1, '', { projects: projectsWithCount });
+  } catch (error) {
+    console.log('Error in getQualityCheckProjects', error);
+    return validationResponse(0, 'Something went wrong');
+  }
+};
+

@@ -44,6 +44,9 @@ export const getAllMachines = async (
     where: {
       status: 'ACTIVE',
       vendor_id: vendor_id,
+      machine_type_id: {
+        notIn: [17, 18],
+      },
       userMachineMappings: {
         some: {
           user_id: user_id,
@@ -101,3 +104,4 @@ export const getAllMachines = async (
     })
   );
 };
+
