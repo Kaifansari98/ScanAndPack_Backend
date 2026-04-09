@@ -1,12 +1,90 @@
 import { Request, Response } from "express";
 import fs from "node:fs/promises";
 import { ApiResponse } from "../../../utils/apiResponse";
-import { uploadToWasabiServicingAmcContractDocumentFile } from "../../../utils/wasabiClient";
+import {
+  uploadToWasabiServicingAmcContractDocumentFile,
+  uploadToWasabiServicingCompletionDocumentFile,
+} from "../../../utils/wasabiClient";
 import { ServicingService } from "../../../services/installation/servicing/Servicing.service";
 
 const service = new ServicingService();
 
 export class ServicingController {
+  async completeService(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.body.vendorId);
+      const leadId = Number(req.body.leadId);
+      const accountId = Number(req.body.accountId);
+      const serviceId = Number(req.body.serviceId);
+      const userId = Number(req.body.userId);
+      const remark =
+        typeof req.body.remark === "string" ? req.body.remark : null;
+
+      if (!vendorId || !leadId || !accountId || !serviceId || !userId) {
+        return res.status(400).json(
+          ApiResponse.error(
+            "vendorId, leadId, accountId, serviceId, and userId are required",
+            400,
+          ),
+        );
+      }
+
+      const files = req.files as {
+        [fieldname: string]: Express.Multer.File[];
+      };
+
+      const completionDocs = files?.service_completion_documents ?? [];
+
+      if (completionDocs.length === 0) {
+        return res.status(400).json(
+          ApiResponse.error(
+            "At least one service completion document is required",
+            400,
+          ),
+        );
+      }
+
+      const uploaded = [];
+
+      for (const doc of completionDocs) {
+        const sysName = await uploadToWasabiServicingCompletionDocumentFile(
+          doc.path,
+          vendorId,
+          leadId,
+          doc.originalname,
+          doc.mimetype,
+        );
+
+        await fs.unlink(doc.path);
+
+        uploaded.push({
+          originalName: doc.originalname,
+          sysName,
+        });
+      }
+
+      const result = await service.completeService(
+        vendorId,
+        leadId,
+        serviceId,
+        userId,
+        remark,
+        uploaded,
+      );
+
+      return res
+        .status(200)
+        .json(ApiResponse.success(result, "Service completed successfully"));
+    } catch (error: any) {
+      return res.status(error.statusCode || 500).json(
+        ApiResponse.error(
+          error.message || "Internal server error while completing service",
+          error.statusCode || 500,
+        ),
+      );
+    }
+  }
+
   async rejectService(req: Request, res: Response) {
     try {
       const vendorId = Number(req.params.vendorId);

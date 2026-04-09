@@ -11,6 +11,14 @@ servicingRoutes.post(
   controller.uploadAmcContractDocuments,
 );
 
+servicingRoutes.post(
+  "/complete",
+  uploadServicingFiles.fields([
+    { name: "service_completion_documents", maxCount: 10 },
+  ]),
+  controller.completeService,
+);
+
 servicingRoutes.put(
   "/vendorId/:vendorId/leadId/:leadId/serviceId/:serviceId/reschedule",
   controller.rescheduleService,

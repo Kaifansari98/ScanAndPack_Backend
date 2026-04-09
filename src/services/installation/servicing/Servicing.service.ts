@@ -4,6 +4,8 @@ import { generateSignedUrl } from "../../../utils/wasabiClient";
 export class ServicingService {
   private readonly amcDocType = "AMC-contract-Documents";
   private readonly amcDocTag = "Type 39";
+  private readonly completionDocType = "servicing-complition-Documents";
+  private readonly completionDocTag = "Type 40";
 
   private addMonthsPreservingDay(date: Date, monthsToAdd: number) {
     const source = new Date(date);
@@ -511,6 +513,195 @@ export class ServicingService {
       });
 
       return updatedService;
+    });
+  }
+
+  async completeService(
+    vendorId: number,
+    leadId: number,
+    serviceId: number,
+    completedBy: number,
+    remark: string | null,
+    files: { originalName: string; sysName: string }[],
+  ) {
+    if (!vendorId || !leadId || !serviceId || !completedBy) {
+      throw Object.assign(
+        new Error("vendorId, leadId, serviceId, and completedBy are required"),
+        { statusCode: 400 },
+      );
+    }
+
+    if (!files.length) {
+      throw Object.assign(
+        new Error("At least one completion document is required"),
+        { statusCode: 400 },
+      );
+    }
+
+    return prisma.$transaction(async (tx) => {
+      const role = await this.getValidatedUserRole(tx, vendorId, completedBy);
+      const canComplete = [
+        "site-supervisor",
+        "head-site-supervisor",
+        "admin",
+        "super-admin",
+      ].includes(role);
+
+      if (!canComplete) {
+        throw Object.assign(
+          new Error(
+            "Only site-supervisor, head-site-supervisor, admin, or super-admin can complete a service",
+          ),
+          { statusCode: 403 },
+        );
+      }
+
+      const service = await tx.leadServiceSchedule.findFirst({
+        where: {
+          id: serviceId,
+          vendor_id: vendorId,
+          lead_id: leadId,
+          service_type: "free",
+        },
+        select: {
+          id: true,
+          account_id: true,
+          service_no: true,
+          scheduled_for: true,
+          status: true,
+        },
+      });
+
+      if (!service) {
+        throw Object.assign(new Error("Service schedule not found"), {
+          statusCode: 404,
+        });
+      }
+
+      if (service.status === "completed") {
+        throw Object.assign(new Error("This service is already completed"), {
+          statusCode: 400,
+        });
+      }
+
+      if (service.status !== "open") {
+        throw Object.assign(
+          new Error("Only open services can be marked as completed"),
+          { statusCode: 400 },
+        );
+      }
+
+      const docType = await tx.documentTypeMaster.findFirst({
+        where: {
+          vendor_id: vendorId,
+          OR: [
+            { tag: this.completionDocTag },
+            { type: this.completionDocType },
+          ],
+        },
+        select: { id: true },
+      });
+
+      if (!docType) {
+        throw Object.assign(
+          new Error(
+            `Document Type ${this.completionDocType} / ${this.completionDocTag} not found for vendor ${vendorId}`,
+          ),
+          { statusCode: 404 },
+        );
+      }
+
+      const completedAt = new Date();
+      const uploadedDocs = [];
+
+      for (const file of files) {
+        const saved = await tx.leadDocuments.create({
+          data: {
+            vendor_id: vendorId,
+            account_id: service.account_id,
+            lead_id: leadId,
+            created_by: completedBy,
+            doc_og_name: file.originalName,
+            doc_sys_name: file.sysName,
+            doc_type_id: docType.id,
+          },
+        });
+
+        uploadedDocs.push(saved);
+      }
+
+      const updatedService = await tx.leadServiceSchedule.update({
+        where: { id: service.id },
+        data: {
+          status: "completed",
+          completed_at: completedAt,
+          completed_by: completedBy,
+          completion_remark: remark?.trim() || null,
+          updated_by: completedBy,
+          updated_at: completedAt,
+        },
+      });
+
+      const taskTypeByServiceNo: Record<number, string> = {
+        1: "1st Servicing",
+        2: "2nd Servicing",
+        3: "3rd Servicing",
+      };
+
+      const taskType = taskTypeByServiceNo[service.service_no];
+
+      if (taskType) {
+        await tx.userLeadTask.updateMany({
+          where: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: service.account_id,
+            task_type: taskType,
+            lead_stage: "servicing-stage",
+            status: "open",
+            due_date: service.scheduled_for,
+          },
+          data: {
+            status: "completed",
+            remark: remark?.trim() || null,
+            closed_at: completedAt,
+            closed_by: completedBy,
+            updated_by: completedBy,
+            updated_at: completedAt,
+          },
+        });
+      }
+
+      const docCount = uploadedDocs.length;
+      const plural = docCount > 1 ? "documents have" : "document has";
+      const detailedLog = await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: service.account_id,
+          action: `${service.service_no} Service completed successfully — ${docCount} servicing completion ${plural} been uploaded successfully.${remark?.trim() ? ` Remark: ${remark.trim()}` : ""}`,
+          action_type: "UPDATE",
+          created_by: completedBy,
+          created_at: completedAt,
+        },
+      });
+
+      await tx.leadDocumentLogs.createMany({
+        data: uploadedDocs.map((doc) => ({
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: service.account_id,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: completedBy,
+          created_at: completedAt,
+        })),
+      });
+
+      return {
+        service: updatedService,
+        documents: uploadedDocs,
+      };
     });
   }
 
