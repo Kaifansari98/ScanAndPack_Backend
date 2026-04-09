@@ -34,6 +34,7 @@ export class ServicingController {
       };
 
       const completionDocs = files?.service_completion_documents ?? [];
+      const amcContractDocs = files?.amc_contract_documents ?? [];
 
       if (completionDocs.length === 0) {
         return res.status(400).json(
@@ -45,6 +46,7 @@ export class ServicingController {
       }
 
       const uploaded = [];
+      const uploadedAmcContracts = [];
 
       for (const doc of completionDocs) {
         const sysName = await uploadToWasabiServicingCompletionDocumentFile(
@@ -63,6 +65,23 @@ export class ServicingController {
         });
       }
 
+      for (const doc of amcContractDocs) {
+        const sysName = await uploadToWasabiServicingAmcContractDocumentFile(
+          doc.path,
+          vendorId,
+          leadId,
+          doc.originalname,
+          doc.mimetype,
+        );
+
+        await fs.unlink(doc.path);
+
+        uploadedAmcContracts.push({
+          originalName: doc.originalname,
+          sysName,
+        });
+      }
+
       const result = await service.completeService(
         vendorId,
         leadId,
@@ -70,6 +89,7 @@ export class ServicingController {
         userId,
         remark,
         uploaded,
+        uploadedAmcContracts,
       );
 
       return res

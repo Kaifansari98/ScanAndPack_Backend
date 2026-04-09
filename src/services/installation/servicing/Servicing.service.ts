@@ -682,6 +682,7 @@ export class ServicingService {
     completedBy: number,
     remark: string | null,
     files: { originalName: string; sysName: string }[],
+    amcContractFiles: { originalName: string; sysName: string }[] = [],
   ) {
     if (!vendorId || !leadId || !serviceId || !completedBy) {
       throw Object.assign(
@@ -750,6 +751,38 @@ export class ServicingService {
         );
       }
 
+      const lead = await tx.leadMaster.findFirst({
+        where: {
+          id: leadId,
+          vendor_id: vendorId,
+          is_deleted: false,
+        },
+        select: {
+          id: true,
+          is_amc_opted: true,
+        },
+      });
+
+      if (!lead) {
+        throw Object.assign(new Error("Lead not found"), {
+          statusCode: 404,
+        });
+      }
+
+      const requiresAmcContractDocuments =
+        service.service_type === "free" &&
+        service.service_no === 3 &&
+        lead.is_amc_opted;
+
+      if (requiresAmcContractDocuments && !amcContractFiles.length) {
+        throw Object.assign(
+          new Error(
+            "AMC Contract Documents are required when AMC is opted for the 3rd service completion",
+          ),
+          { statusCode: 400 },
+        );
+      }
+
       const docType = await tx.documentTypeMaster.findFirst({
         where: {
           vendor_id: vendorId,
@@ -770,8 +803,28 @@ export class ServicingService {
         );
       }
 
+      const amcDocType = requiresAmcContractDocuments
+        ? await tx.documentTypeMaster.findFirst({
+            where: {
+              vendor_id: vendorId,
+              OR: [{ tag: this.amcDocTag }, { type: this.amcDocType }],
+            },
+            select: { id: true },
+          })
+        : null;
+
+      if (requiresAmcContractDocuments && !amcDocType) {
+        throw Object.assign(
+          new Error(
+            `Document Type ${this.amcDocType} / ${this.amcDocTag} not found for vendor ${vendorId}`,
+          ),
+          { statusCode: 404 },
+        );
+      }
+
       const completedAt = new Date();
       const uploadedDocs = [];
+      const uploadedAmcDocs = [];
 
       for (const file of files) {
         const saved = await tx.leadDocuments.create({
@@ -787,6 +840,22 @@ export class ServicingService {
         });
 
         uploadedDocs.push(saved);
+      }
+
+      for (const file of amcContractFiles) {
+        const saved = await tx.leadDocuments.create({
+          data: {
+            vendor_id: vendorId,
+            account_id: service.account_id,
+            lead_id: leadId,
+            created_by: completedBy,
+            doc_og_name: file.originalName,
+            doc_sys_name: file.sysName,
+            doc_type_id: amcDocType!.id,
+          },
+        });
+
+        uploadedAmcDocs.push(saved);
       }
 
       const updatedService = await tx.leadServiceSchedule.update({
@@ -833,12 +902,19 @@ export class ServicingService {
 
       const docCount = uploadedDocs.length;
       const plural = docCount > 1 ? "documents have" : "document has";
+      const amcDocCount = uploadedAmcDocs.length;
+      const amcDocMessage =
+        amcDocCount > 0
+          ? ` ${amcDocCount} AMC contract ${
+              amcDocCount > 1 ? "documents have" : "document has"
+            } been uploaded successfully.`
+          : "";
       const detailedLog = await tx.leadDetailedLogs.create({
         data: {
           vendor_id: vendorId,
           lead_id: leadId,
           account_id: service.account_id,
-          action: `${this.formatServiceLogLabel(service.service_type, service.service_no)} completed successfully — ${docCount} servicing completion ${plural} been uploaded successfully.${remark?.trim() ? ` Remark: ${remark.trim()}` : ""}`,
+          action: `${this.formatServiceLogLabel(service.service_type, service.service_no)} completed successfully — ${docCount} servicing completion ${plural} been uploaded successfully.${amcDocMessage}${remark?.trim() ? ` Remark: ${remark.trim()}` : ""}`,
           action_type: "UPDATE",
           created_by: completedBy,
           created_at: completedAt,
@@ -846,7 +922,7 @@ export class ServicingService {
       });
 
       await tx.leadDocumentLogs.createMany({
-        data: uploadedDocs.map((doc) => ({
+        data: [...uploadedDocs, ...uploadedAmcDocs].map((doc) => ({
           vendor_id: vendorId,
           lead_id: leadId,
           account_id: service.account_id,
@@ -872,7 +948,7 @@ export class ServicingService {
 
       return {
         service: updatedService,
-        documents: uploadedDocs,
+        documents: [...uploadedDocs, ...uploadedAmcDocs],
       };
     });
   }

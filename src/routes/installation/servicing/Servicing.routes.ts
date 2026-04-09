@@ -15,6 +15,7 @@ servicingRoutes.post(
   "/complete",
   uploadServicingFiles.fields([
     { name: "service_completion_documents", maxCount: 10 },
+    { name: "amc_contract_documents", maxCount: 10 },
   ]),
   controller.completeService,
 );
