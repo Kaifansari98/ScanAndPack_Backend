@@ -129,19 +129,62 @@ export class ServicingService {
     });
 
     return Promise.all(
-      schedules.map(async (schedule) => ({
-        ...schedule,
-        completionDocument: schedule.completionDocument
-          ? {
-              ...schedule.completionDocument,
-              signed_url: await generateSignedUrl(
-                schedule.completionDocument.doc_sys_name,
-                3600,
-                "inline",
-              ),
-            }
-          : null,
-      })),
+      schedules.map(async (schedule) => {
+        const completionLog =
+          schedule.status === "completed"
+            ? await prisma.leadDetailedLogs.findFirst({
+                where: {
+                  vendor_id: vendorId,
+                  lead_id: leadId,
+                  account_id: schedule.account_id,
+                  action: {
+                    contains: `${schedule.service_no} Service completed successfully`,
+                  },
+                },
+                include: {
+                  docLogs: {
+                    include: {
+                      doc: true,
+                    },
+                  },
+                },
+                orderBy: {
+                  created_at: "desc",
+                },
+              })
+            : null;
+
+        const completionDocuments = completionLog
+          ? await Promise.all(
+              completionLog.docLogs.map(async (docLog) => ({
+                id: docLog.doc.id,
+                doc_og_name: docLog.doc.doc_og_name,
+                doc_sys_name: docLog.doc.doc_sys_name,
+                created_at: docLog.doc.created_at,
+                signed_url: await generateSignedUrl(
+                  docLog.doc.doc_sys_name,
+                  3600,
+                  "inline",
+                ),
+              })),
+            )
+          : [];
+
+        return {
+          ...schedule,
+          completionDocument: schedule.completionDocument
+            ? {
+                ...schedule.completionDocument,
+                signed_url: await generateSignedUrl(
+                  schedule.completionDocument.doc_sys_name,
+                  3600,
+                  "inline",
+                ),
+              }
+            : null,
+          completionDocuments,
+        };
+      }),
     );
   }
 
