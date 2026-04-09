@@ -8,6 +8,17 @@ import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/l
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 
 export class FinalHandoverStageService {
+  private formatDateTimeInIndia(date: Date) {
+    return new Intl.DateTimeFormat("en-IN", {
+      timeZone: "Asia/Kolkata",
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    }).format(date);
+  }
+
   /**
    * ✅ Fetch all leads with status = Type 16 (Final Handover Stage)
    */
@@ -572,8 +583,8 @@ export class FinalHandoverStageService {
         lead_id: leadId,
         account_id: lead.account_id!,
         action: isAmcOpted
-          ? "AMC opted in marked as Yes."
-          : "AMC opted in marked as No.",
+          ? `AMC opted in marked as Yes on ${this.formatDateTimeInIndia(amcOptedAt!)}.`
+          : "AMC opted in marked as No and AMC date/time cleared.",
         action_type: "UPDATE",
         created_by: updatedBy,
         created_at: new Date(),

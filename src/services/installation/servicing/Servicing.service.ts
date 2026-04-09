@@ -7,6 +7,17 @@ export class ServicingService {
   private readonly completionDocType = "servicing-complition-Documents";
   private readonly completionDocTag = "Type 40";
 
+  private formatDateTimeInIndia(date: Date) {
+    return new Intl.DateTimeFormat("en-IN", {
+      timeZone: "Asia/Kolkata",
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    }).format(date);
+  }
+
   private formatServiceLogLabel(serviceType: "free" | "amc", serviceNo: number) {
     const ordinal =
       serviceNo === 1 ? "1st" : serviceNo === 2 ? "2nd" : serviceNo === 3 ? "3rd" : `${serviceNo}th`;
@@ -103,18 +114,10 @@ export class ServicingService {
       },
     });
 
-    const formatter = new Intl.DateTimeFormat("en-IN", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-
     const scheduleSummary = createdSchedules
       .map(
         (item) =>
-          `${this.formatServiceLogLabel("amc", item.service_no)} scheduled for ${formatter.format(item.scheduled_for)}`,
+          `${this.formatServiceLogLabel("amc", item.service_no)} scheduled for ${this.formatDateTimeInIndia(item.scheduled_for)}`,
       )
       .join(", ");
 
@@ -411,22 +414,14 @@ export class ServicingService {
         });
       }
 
-      const formatter = new Intl.DateTimeFormat("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-
       await tx.leadDetailedLogs.create({
         data: {
           vendor_id: vendorId,
           lead_id: leadId,
           account_id: service.account_id,
-          action: `${this.formatServiceLogLabel(service.service_type, service.service_no)} rescheduled from ${formatter.format(
+          action: `${this.formatServiceLogLabel(service.service_type, service.service_no)} rescheduled from ${this.formatDateTimeInIndia(
             currentScheduledFor,
-          )} to ${formatter.format(nextScheduledFor)}.`,
+          )} to ${this.formatDateTimeInIndia(nextScheduledFor)}.`,
           action_type: "UPDATE",
           created_by: updatedBy,
           created_at: new Date(),
