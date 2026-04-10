@@ -1241,6 +1241,7 @@ export class BookingStageService {
       designer_remark?: string;
       date_range?: { from: string; to: string };
       production_status?: string;
+      pending_services?: boolean;
     },
   ): Promise<{ leads: any[]; count: number }> {
     logger.info("[BookingStageService] getVendorLeadsByTag2 called", {
@@ -1456,8 +1457,10 @@ export class BookingStageService {
       // --------------------
 
       const dateRange = filters.date_range;
+      const shouldFilterPendingServicesBySchedule =
+        filters.pending_services && (dateRange?.from || dateRange?.to);
 
-      if (dateRange && (dateRange.from || dateRange.to)) {
+      if (dateRange && (dateRange.from || dateRange.to) && !shouldFilterPendingServicesBySchedule) {
         let fromDate: Date | null = null;
         let toDate: Date | null = null;
 
@@ -1505,6 +1508,51 @@ export class BookingStageService {
             },
           });
         }
+      }
+
+      if (filters.pending_services) {
+        const openScheduleFilter: Prisma.LeadServiceScheduleWhereInput = {
+          status: "open",
+        };
+
+        if (dateRange && (dateRange.from || dateRange.to)) {
+          let fromDate: Date | null = null;
+          let toDate: Date | null = null;
+
+          if (dateRange.from) {
+            fromDate = new Date(dateRange.from);
+            fromDate.setHours(0, 0, 0, 0);
+          }
+
+          if (dateRange.to) {
+            toDate = new Date(dateRange.to);
+            toDate.setHours(23, 59, 59, 999);
+          }
+
+          if (fromDate && toDate) {
+            openScheduleFilter.scheduled_for = {
+              gte: fromDate,
+              lte: toDate,
+            };
+          } else if (fromDate) {
+            const endOfDay = new Date(fromDate);
+            endOfDay.setHours(23, 59, 59, 999);
+            openScheduleFilter.scheduled_for = {
+              gte: fromDate,
+              lte: endOfDay,
+            };
+          } else if (toDate) {
+            openScheduleFilter.scheduled_for = {
+              lte: toDate,
+            };
+          }
+        }
+
+        addAnd({
+          serviceSchedules: {
+            some: openScheduleFilter,
+          },
+        });
       }
 
       // --------------------
@@ -3226,16 +3274,6 @@ const statusTags =
         addAnd({ miscellaneousMaster: { some: { is_resolved: false } } });
       } else if (options.requireMiscellaneous) {
         addAnd({ miscellaneousMaster: { some: {} } });
-      }
-
-      if (filters.pending_services) {
-        addAnd({
-          serviceSchedules: {
-            some: {
-              status: "open",
-            },
-          },
-        });
       }
 
       // ================= INSTANCE DRIVEN STAGE FILTER =================
