@@ -145,6 +145,7 @@ export class DispatchStageService {
         onsite_contact_person_name: true,
         onsite_contact_person_number: true,
         material_lift_availability: true,
+        vehicle_approachability_for_dispatch: true,
       },
     });
 

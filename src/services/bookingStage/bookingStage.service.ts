@@ -3,6 +3,7 @@ import { NotificationService } from "../notification/notification.service";
 import {
   NotificationType,
   Prisma,
+  ServiceVisitStatus,
   SupervisorStatus,
 } from "../../prisma/generated";
 import {
@@ -114,6 +115,18 @@ export class BookingStageService {
           created_at: true,
         },
         orderBy: { created_at: Prisma.SortOrder.desc }, // ✅ fixed
+      },
+      serviceSchedules: {
+        where: { status: ServiceVisitStatus.open },
+        select: {
+          service_no: true,
+          service_type: true,
+          scheduled_for: true,
+        },
+        orderBy: [
+          { scheduled_for: Prisma.SortOrder.asc },
+          { service_no: Prisma.SortOrder.asc },
+        ],
       },
     };
   }
