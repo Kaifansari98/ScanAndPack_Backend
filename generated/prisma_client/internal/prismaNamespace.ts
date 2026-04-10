@@ -477,7 +477,8 @@ export const ModelName = {
   ThemeMapping: 'ThemeMapping',
   ApiRequestLog: 'ApiRequestLog',
   ExternalPlatformMaster: 'ExternalPlatformMaster',
-  ExternalPlatformToken: 'ExternalPlatformToken'
+  ExternalPlatformToken: 'ExternalPlatformToken',
+  LeadExternalPlatformCustomerMapping: 'LeadExternalPlatformCustomerMapping'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -493,7 +494,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -7453,6 +7454,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    LeadExternalPlatformCustomerMapping: {
+      payload: Prisma.$LeadExternalPlatformCustomerMappingPayload<ExtArgs>
+      fields: Prisma.LeadExternalPlatformCustomerMappingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadExternalPlatformCustomerMappingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadExternalPlatformCustomerMappingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadExternalPlatformCustomerMappingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadExternalPlatformCustomerMappingPayload>
+        }
+        findFirst: {
+          args: Prisma.LeadExternalPlatformCustomerMappingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadExternalPlatformCustomerMappingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadExternalPlatformCustomerMappingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadExternalPlatformCustomerMappingPayload>
+        }
+        findMany: {
+          args: Prisma.LeadExternalPlatformCustomerMappingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadExternalPlatformCustomerMappingPayload>[]
+        }
+        create: {
+          args: Prisma.LeadExternalPlatformCustomerMappingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadExternalPlatformCustomerMappingPayload>
+        }
+        createMany: {
+          args: Prisma.LeadExternalPlatformCustomerMappingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadExternalPlatformCustomerMappingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadExternalPlatformCustomerMappingPayload>[]
+        }
+        delete: {
+          args: Prisma.LeadExternalPlatformCustomerMappingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadExternalPlatformCustomerMappingPayload>
+        }
+        update: {
+          args: Prisma.LeadExternalPlatformCustomerMappingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadExternalPlatformCustomerMappingPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadExternalPlatformCustomerMappingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadExternalPlatformCustomerMappingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadExternalPlatformCustomerMappingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadExternalPlatformCustomerMappingPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadExternalPlatformCustomerMappingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadExternalPlatformCustomerMappingPayload>
+        }
+        aggregate: {
+          args: Prisma.LeadExternalPlatformCustomerMappingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadExternalPlatformCustomerMapping>
+        }
+        groupBy: {
+          args: Prisma.LeadExternalPlatformCustomerMappingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadExternalPlatformCustomerMappingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadExternalPlatformCustomerMappingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadExternalPlatformCustomerMappingCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -8927,6 +9002,7 @@ export type ApiRequestLogScalarFieldEnum = (typeof ApiRequestLogScalarFieldEnum)
 export const ExternalPlatformMasterScalarFieldEnum = {
   id: 'id',
   external_platform_name: 'external_platform_name',
+  type: 'type',
   active: 'active'
 } as const
 
@@ -8950,6 +9026,18 @@ export const ExternalPlatformTokenScalarFieldEnum = {
 } as const
 
 export type ExternalPlatformTokenScalarFieldEnum = (typeof ExternalPlatformTokenScalarFieldEnum)[keyof typeof ExternalPlatformTokenScalarFieldEnum]
+
+
+export const LeadExternalPlatformCustomerMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  external_platform_customer_id: 'external_platform_customer_id',
+  external_platform_id: 'external_platform_id',
+  external_platform_token_id: 'external_platform_token_id'
+} as const
+
+export type LeadExternalPlatformCustomerMappingScalarFieldEnum = (typeof LeadExternalPlatformCustomerMappingScalarFieldEnum)[keyof typeof LeadExternalPlatformCustomerMappingScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -9621,6 +9709,7 @@ export type GlobalOmitConfig = {
   apiRequestLog?: Prisma.ApiRequestLogOmit
   externalPlatformMaster?: Prisma.ExternalPlatformMasterOmit
   externalPlatformToken?: Prisma.ExternalPlatformTokenOmit
+  leadExternalPlatformCustomerMapping?: Prisma.LeadExternalPlatformCustomerMappingOmit
 }
 
 /* Types for Logging */

@@ -507,3 +507,8 @@ export type ExternalPlatformMaster = Prisma.ExternalPlatformMasterModel
  * 
  */
 export type ExternalPlatformToken = Prisma.ExternalPlatformTokenModel
+/**
+ * Model LeadExternalPlatformCustomerMapping
+ * 
+ */
+export type LeadExternalPlatformCustomerMapping = Prisma.LeadExternalPlatformCustomerMappingModel

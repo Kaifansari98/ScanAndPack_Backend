@@ -37,18 +37,21 @@ export type ExternalPlatformMasterSumAggregateOutputType = {
 export type ExternalPlatformMasterMinAggregateOutputType = {
   id: number | null
   external_platform_name: string | null
+  type: string | null
   active: $Enums.ExternalPlatformMasterActiveStatus | null
 }
 
 export type ExternalPlatformMasterMaxAggregateOutputType = {
   id: number | null
   external_platform_name: string | null
+  type: string | null
   active: $Enums.ExternalPlatformMasterActiveStatus | null
 }
 
 export type ExternalPlatformMasterCountAggregateOutputType = {
   id: number
   external_platform_name: number
+  type: number
   active: number
   _all: number
 }
@@ -65,18 +68,21 @@ export type ExternalPlatformMasterSumAggregateInputType = {
 export type ExternalPlatformMasterMinAggregateInputType = {
   id?: true
   external_platform_name?: true
+  type?: true
   active?: true
 }
 
 export type ExternalPlatformMasterMaxAggregateInputType = {
   id?: true
   external_platform_name?: true
+  type?: true
   active?: true
 }
 
 export type ExternalPlatformMasterCountAggregateInputType = {
   id?: true
   external_platform_name?: true
+  type?: true
   active?: true
   _all?: true
 }
@@ -170,6 +176,7 @@ export type ExternalPlatformMasterGroupByArgs<ExtArgs extends runtime.Types.Exte
 export type ExternalPlatformMasterGroupByOutputType = {
   id: number
   external_platform_name: string
+  type: string | null
   active: $Enums.ExternalPlatformMasterActiveStatus
   _count: ExternalPlatformMasterCountAggregateOutputType | null
   _avg: ExternalPlatformMasterAvgAggregateOutputType | null
@@ -199,30 +206,37 @@ export type ExternalPlatformMasterWhereInput = {
   NOT?: Prisma.ExternalPlatformMasterWhereInput | Prisma.ExternalPlatformMasterWhereInput[]
   id?: Prisma.IntFilter<"ExternalPlatformMaster"> | number
   external_platform_name?: Prisma.StringFilter<"ExternalPlatformMaster"> | string
+  type?: Prisma.StringNullableFilter<"ExternalPlatformMaster"> | string | null
   active?: Prisma.EnumExternalPlatformMasterActiveStatusFilter<"ExternalPlatformMaster"> | $Enums.ExternalPlatformMasterActiveStatus
   tokens?: Prisma.ExternalPlatformTokenListRelationFilter
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingListRelationFilter
 }
 
 export type ExternalPlatformMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   external_platform_name?: Prisma.SortOrder
+  type?: Prisma.SortOrderInput | Prisma.SortOrder
   active?: Prisma.SortOrder
   tokens?: Prisma.ExternalPlatformTokenOrderByRelationAggregateInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingOrderByRelationAggregateInput
 }
 
 export type ExternalPlatformMasterWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  type?: string
   AND?: Prisma.ExternalPlatformMasterWhereInput | Prisma.ExternalPlatformMasterWhereInput[]
   OR?: Prisma.ExternalPlatformMasterWhereInput[]
   NOT?: Prisma.ExternalPlatformMasterWhereInput | Prisma.ExternalPlatformMasterWhereInput[]
   external_platform_name?: Prisma.StringFilter<"ExternalPlatformMaster"> | string
   active?: Prisma.EnumExternalPlatformMasterActiveStatusFilter<"ExternalPlatformMaster"> | $Enums.ExternalPlatformMasterActiveStatus
   tokens?: Prisma.ExternalPlatformTokenListRelationFilter
-}, "id">
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingListRelationFilter
+}, "id" | "type">
 
 export type ExternalPlatformMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   external_platform_name?: Prisma.SortOrder
+  type?: Prisma.SortOrderInput | Prisma.SortOrder
   active?: Prisma.SortOrder
   _count?: Prisma.ExternalPlatformMasterCountOrderByAggregateInput
   _avg?: Prisma.ExternalPlatformMasterAvgOrderByAggregateInput
@@ -237,55 +251,68 @@ export type ExternalPlatformMasterScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ExternalPlatformMasterScalarWhereWithAggregatesInput | Prisma.ExternalPlatformMasterScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"ExternalPlatformMaster"> | number
   external_platform_name?: Prisma.StringWithAggregatesFilter<"ExternalPlatformMaster"> | string
+  type?: Prisma.StringNullableWithAggregatesFilter<"ExternalPlatformMaster"> | string | null
   active?: Prisma.EnumExternalPlatformMasterActiveStatusWithAggregatesFilter<"ExternalPlatformMaster"> | $Enums.ExternalPlatformMasterActiveStatus
 }
 
 export type ExternalPlatformMasterCreateInput = {
   external_platform_name: string
+  type?: string | null
   active?: $Enums.ExternalPlatformMasterActiveStatus
   tokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutExternalPlatformInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutExternalPlatformInput
 }
 
 export type ExternalPlatformMasterUncheckedCreateInput = {
   id?: number
   external_platform_name: string
+  type?: string | null
   active?: $Enums.ExternalPlatformMasterActiveStatus
   tokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutExternalPlatformInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutExternalPlatformInput
 }
 
 export type ExternalPlatformMasterUpdateInput = {
   external_platform_name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.EnumExternalPlatformMasterActiveStatusFieldUpdateOperationsInput | $Enums.ExternalPlatformMasterActiveStatus
   tokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutExternalPlatformNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutExternalPlatformNestedInput
 }
 
 export type ExternalPlatformMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   external_platform_name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.EnumExternalPlatformMasterActiveStatusFieldUpdateOperationsInput | $Enums.ExternalPlatformMasterActiveStatus
   tokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutExternalPlatformNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutExternalPlatformNestedInput
 }
 
 export type ExternalPlatformMasterCreateManyInput = {
   id?: number
   external_platform_name: string
+  type?: string | null
   active?: $Enums.ExternalPlatformMasterActiveStatus
 }
 
 export type ExternalPlatformMasterUpdateManyMutationInput = {
   external_platform_name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.EnumExternalPlatformMasterActiveStatusFieldUpdateOperationsInput | $Enums.ExternalPlatformMasterActiveStatus
 }
 
 export type ExternalPlatformMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   external_platform_name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.EnumExternalPlatformMasterActiveStatusFieldUpdateOperationsInput | $Enums.ExternalPlatformMasterActiveStatus
 }
 
 export type ExternalPlatformMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   external_platform_name?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   active?: Prisma.SortOrder
 }
 
@@ -296,12 +323,14 @@ export type ExternalPlatformMasterAvgOrderByAggregateInput = {
 export type ExternalPlatformMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   external_platform_name?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   active?: Prisma.SortOrder
 }
 
 export type ExternalPlatformMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   external_platform_name?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   active?: Prisma.SortOrder
 }
 
@@ -332,15 +361,33 @@ export type ExternalPlatformMasterUpdateOneRequiredWithoutTokensNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ExternalPlatformMasterUpdateToOneWithWhereWithoutTokensInput, Prisma.ExternalPlatformMasterUpdateWithoutTokensInput>, Prisma.ExternalPlatformMasterUncheckedUpdateWithoutTokensInput>
 }
 
+export type ExternalPlatformMasterCreateNestedOneWithoutLeadExternalPlatformCustomerMappingsInput = {
+  create?: Prisma.XOR<Prisma.ExternalPlatformMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput, Prisma.ExternalPlatformMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappingsInput>
+  connectOrCreate?: Prisma.ExternalPlatformMasterCreateOrConnectWithoutLeadExternalPlatformCustomerMappingsInput
+  connect?: Prisma.ExternalPlatformMasterWhereUniqueInput
+}
+
+export type ExternalPlatformMasterUpdateOneRequiredWithoutLeadExternalPlatformCustomerMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.ExternalPlatformMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput, Prisma.ExternalPlatformMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappingsInput>
+  connectOrCreate?: Prisma.ExternalPlatformMasterCreateOrConnectWithoutLeadExternalPlatformCustomerMappingsInput
+  upsert?: Prisma.ExternalPlatformMasterUpsertWithoutLeadExternalPlatformCustomerMappingsInput
+  connect?: Prisma.ExternalPlatformMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ExternalPlatformMasterUpdateToOneWithWhereWithoutLeadExternalPlatformCustomerMappingsInput, Prisma.ExternalPlatformMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput>, Prisma.ExternalPlatformMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappingsInput>
+}
+
 export type ExternalPlatformMasterCreateWithoutTokensInput = {
   external_platform_name: string
+  type?: string | null
   active?: $Enums.ExternalPlatformMasterActiveStatus
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutExternalPlatformInput
 }
 
 export type ExternalPlatformMasterUncheckedCreateWithoutTokensInput = {
   id?: number
   external_platform_name: string
+  type?: string | null
   active?: $Enums.ExternalPlatformMasterActiveStatus
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutExternalPlatformInput
 }
 
 export type ExternalPlatformMasterCreateOrConnectWithoutTokensInput = {
@@ -361,13 +408,63 @@ export type ExternalPlatformMasterUpdateToOneWithWhereWithoutTokensInput = {
 
 export type ExternalPlatformMasterUpdateWithoutTokensInput = {
   external_platform_name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.EnumExternalPlatformMasterActiveStatusFieldUpdateOperationsInput | $Enums.ExternalPlatformMasterActiveStatus
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutExternalPlatformNestedInput
 }
 
 export type ExternalPlatformMasterUncheckedUpdateWithoutTokensInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   external_platform_name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.EnumExternalPlatformMasterActiveStatusFieldUpdateOperationsInput | $Enums.ExternalPlatformMasterActiveStatus
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutExternalPlatformNestedInput
+}
+
+export type ExternalPlatformMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput = {
+  external_platform_name: string
+  type?: string | null
+  active?: $Enums.ExternalPlatformMasterActiveStatus
+  tokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutExternalPlatformInput
+}
+
+export type ExternalPlatformMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappingsInput = {
+  id?: number
+  external_platform_name: string
+  type?: string | null
+  active?: $Enums.ExternalPlatformMasterActiveStatus
+  tokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutExternalPlatformInput
+}
+
+export type ExternalPlatformMasterCreateOrConnectWithoutLeadExternalPlatformCustomerMappingsInput = {
+  where: Prisma.ExternalPlatformMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ExternalPlatformMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput, Prisma.ExternalPlatformMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappingsInput>
+}
+
+export type ExternalPlatformMasterUpsertWithoutLeadExternalPlatformCustomerMappingsInput = {
+  update: Prisma.XOR<Prisma.ExternalPlatformMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput, Prisma.ExternalPlatformMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappingsInput>
+  create: Prisma.XOR<Prisma.ExternalPlatformMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput, Prisma.ExternalPlatformMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappingsInput>
+  where?: Prisma.ExternalPlatformMasterWhereInput
+}
+
+export type ExternalPlatformMasterUpdateToOneWithWhereWithoutLeadExternalPlatformCustomerMappingsInput = {
+  where?: Prisma.ExternalPlatformMasterWhereInput
+  data: Prisma.XOR<Prisma.ExternalPlatformMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput, Prisma.ExternalPlatformMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappingsInput>
+}
+
+export type ExternalPlatformMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput = {
+  external_platform_name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.EnumExternalPlatformMasterActiveStatusFieldUpdateOperationsInput | $Enums.ExternalPlatformMasterActiveStatus
+  tokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutExternalPlatformNestedInput
+}
+
+export type ExternalPlatformMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  external_platform_name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.EnumExternalPlatformMasterActiveStatusFieldUpdateOperationsInput | $Enums.ExternalPlatformMasterActiveStatus
+  tokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutExternalPlatformNestedInput
 }
 
 
@@ -377,10 +474,12 @@ export type ExternalPlatformMasterUncheckedUpdateWithoutTokensInput = {
 
 export type ExternalPlatformMasterCountOutputType = {
   tokens: number
+  leadExternalPlatformCustomerMappings: number
 }
 
 export type ExternalPlatformMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tokens?: boolean | ExternalPlatformMasterCountOutputTypeCountTokensArgs
+  leadExternalPlatformCustomerMappings?: boolean | ExternalPlatformMasterCountOutputTypeCountLeadExternalPlatformCustomerMappingsArgs
 }
 
 /**
@@ -400,36 +499,49 @@ export type ExternalPlatformMasterCountOutputTypeCountTokensArgs<ExtArgs extends
   where?: Prisma.ExternalPlatformTokenWhereInput
 }
 
+/**
+ * ExternalPlatformMasterCountOutputType without action
+ */
+export type ExternalPlatformMasterCountOutputTypeCountLeadExternalPlatformCustomerMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadExternalPlatformCustomerMappingWhereInput
+}
+
 
 export type ExternalPlatformMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   external_platform_name?: boolean
+  type?: boolean
   active?: boolean
   tokens?: boolean | Prisma.ExternalPlatformMaster$tokensArgs<ExtArgs>
+  leadExternalPlatformCustomerMappings?: boolean | Prisma.ExternalPlatformMaster$leadExternalPlatformCustomerMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.ExternalPlatformMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["externalPlatformMaster"]>
 
 export type ExternalPlatformMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   external_platform_name?: boolean
+  type?: boolean
   active?: boolean
 }, ExtArgs["result"]["externalPlatformMaster"]>
 
 export type ExternalPlatformMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   external_platform_name?: boolean
+  type?: boolean
   active?: boolean
 }, ExtArgs["result"]["externalPlatformMaster"]>
 
 export type ExternalPlatformMasterSelectScalar = {
   id?: boolean
   external_platform_name?: boolean
+  type?: boolean
   active?: boolean
 }
 
-export type ExternalPlatformMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "external_platform_name" | "active", ExtArgs["result"]["externalPlatformMaster"]>
+export type ExternalPlatformMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "external_platform_name" | "type" | "active", ExtArgs["result"]["externalPlatformMaster"]>
 export type ExternalPlatformMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tokens?: boolean | Prisma.ExternalPlatformMaster$tokensArgs<ExtArgs>
+  leadExternalPlatformCustomerMappings?: boolean | Prisma.ExternalPlatformMaster$leadExternalPlatformCustomerMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.ExternalPlatformMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ExternalPlatformMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -439,10 +551,12 @@ export type $ExternalPlatformMasterPayload<ExtArgs extends runtime.Types.Extensi
   name: "ExternalPlatformMaster"
   objects: {
     tokens: Prisma.$ExternalPlatformTokenPayload<ExtArgs>[]
+    leadExternalPlatformCustomerMappings: Prisma.$LeadExternalPlatformCustomerMappingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     external_platform_name: string
+    type: string | null
     active: $Enums.ExternalPlatformMasterActiveStatus
   }, ExtArgs["result"]["externalPlatformMaster"]>
   composites: {}
@@ -839,6 +953,7 @@ readonly fields: ExternalPlatformMasterFieldRefs;
 export interface Prisma__ExternalPlatformMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   tokens<T extends Prisma.ExternalPlatformMaster$tokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ExternalPlatformMaster$tokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExternalPlatformTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadExternalPlatformCustomerMappings<T extends Prisma.ExternalPlatformMaster$leadExternalPlatformCustomerMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ExternalPlatformMaster$leadExternalPlatformCustomerMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadExternalPlatformCustomerMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -870,6 +985,7 @@ export interface Prisma__ExternalPlatformMasterClient<T, Null = never, ExtArgs e
 export interface ExternalPlatformMasterFieldRefs {
   readonly id: Prisma.FieldRef<"ExternalPlatformMaster", 'Int'>
   readonly external_platform_name: Prisma.FieldRef<"ExternalPlatformMaster", 'String'>
+  readonly type: Prisma.FieldRef<"ExternalPlatformMaster", 'String'>
   readonly active: Prisma.FieldRef<"ExternalPlatformMaster", 'ExternalPlatformMasterActiveStatus'>
 }
     
@@ -1280,6 +1396,30 @@ export type ExternalPlatformMaster$tokensArgs<ExtArgs extends runtime.Types.Exte
   take?: number
   skip?: number
   distinct?: Prisma.ExternalPlatformTokenScalarFieldEnum | Prisma.ExternalPlatformTokenScalarFieldEnum[]
+}
+
+/**
+ * ExternalPlatformMaster.leadExternalPlatformCustomerMappings
+ */
+export type ExternalPlatformMaster$leadExternalPlatformCustomerMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadExternalPlatformCustomerMapping
+   */
+  select?: Prisma.LeadExternalPlatformCustomerMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadExternalPlatformCustomerMapping
+   */
+  omit?: Prisma.LeadExternalPlatformCustomerMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadExternalPlatformCustomerMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadExternalPlatformCustomerMappingWhereInput
+  orderBy?: Prisma.LeadExternalPlatformCustomerMappingOrderByWithRelationInput | Prisma.LeadExternalPlatformCustomerMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadExternalPlatformCustomerMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadExternalPlatformCustomerMappingScalarFieldEnum | Prisma.LeadExternalPlatformCustomerMappingScalarFieldEnum[]
 }
 
 /**

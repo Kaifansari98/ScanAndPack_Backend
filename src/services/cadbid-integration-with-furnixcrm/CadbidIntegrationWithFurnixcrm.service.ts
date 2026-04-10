@@ -3,7 +3,7 @@ import logger from "../../utils/logger";
 
 const CADBID_CREATE_EXTERNAL_CUSTOMER_URL =
   "https://cadbid.com/api/customers/create-external-customer";
-const CADBID_SECRET_KEY = "8f2a4f3c-26db-4548-9612-6db96ece1fe9";
+const CADBID_EXTERNAL_PLATFORM_TYPE = "CADBID";
 
 type CadbidExternalCustomerPayload = {
   cadbidSecretKey: string;
@@ -20,6 +20,111 @@ type CadbidExternalCustomerPayload = {
 };
 
 export class CadbidIntegrationWithFurnixcrmService {
+  private async getCadbidExternalPlatformToken(vendorId: number) {
+    const externalPlatform = await prisma.externalPlatformMaster.findUnique({
+      where: {
+        type: CADBID_EXTERNAL_PLATFORM_TYPE,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    if (!externalPlatform) {
+      throw Object.assign(
+        new Error(
+          `External platform master not found for type ${CADBID_EXTERNAL_PLATFORM_TYPE}`,
+        ),
+        { statusCode: 404 },
+      );
+    }
+
+    const externalPlatformToken = await prisma.externalPlatformToken.findFirst({
+      where: {
+        external_platform_id: externalPlatform.id,
+        vendor_id: vendorId,
+        active: "Yes",
+      },
+      orderBy: {
+        updated_at: "desc",
+      },
+      select: {
+        id: true,
+        token: true,
+      },
+    });
+
+    if (!externalPlatformToken) {
+      throw Object.assign(
+        new Error(
+          `Active external platform token not found for vendor ${vendorId} and type ${CADBID_EXTERNAL_PLATFORM_TYPE}`,
+        ),
+        { statusCode: 404 },
+      );
+    }
+
+    return {
+      externalPlatformId: externalPlatform.id,
+      externalPlatformTokenId: externalPlatformToken.id,
+      token: externalPlatformToken.token,
+    };
+  }
+
+  private extractCadbidCustomerId(responseBody: unknown): string | null {
+    if (!responseBody || typeof responseBody !== "object") {
+      return null;
+    }
+
+    const directCadbidCustomerId =
+      "cadbidCustomerId" in responseBody
+        ? responseBody.cadbidCustomerId
+        : "cadbid_customer_id" in responseBody
+          ? responseBody.cadbid_customer_id
+          : null;
+
+    if (
+      typeof directCadbidCustomerId === "string" ||
+      typeof directCadbidCustomerId === "number"
+    ) {
+      return String(directCadbidCustomerId);
+    }
+
+    if ("data" in responseBody) {
+      return this.extractCadbidCustomerId(responseBody.data);
+    }
+
+    return null;
+  }
+
+  private async syncLeadExternalCustomerMapping(
+    vendorId: number,
+    leadId: number,
+    externalPlatformCustomerId: string,
+    externalPlatformId: number,
+    externalPlatformTokenId: number,
+  ) {
+    await prisma.leadExternalPlatformCustomerMapping.upsert({
+      where: {
+        uniq_vendor_lead_external_platform_customer_mapping: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          external_platform_id: externalPlatformId,
+        },
+      },
+      update: {
+        external_platform_customer_id: externalPlatformCustomerId,
+        external_platform_token_id: externalPlatformTokenId,
+      },
+      create: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        external_platform_customer_id: externalPlatformCustomerId,
+        external_platform_id: externalPlatformId,
+        external_platform_token_id: externalPlatformTokenId,
+      },
+    });
+  }
+
   private splitAddressIntoThreeParts(address?: string | null) {
     const normalized = address?.replace(/\s+/g, " ").trim() || "-";
     const commaParts = normalized
@@ -58,7 +163,11 @@ export class CadbidIntegrationWithFurnixcrmService {
     return [part1, part2, part3] as const;
   }
 
-  private async buildPayload(vendorId: number, leadId: number) {
+  private async buildPayload(
+    vendorId: number,
+    leadId: number,
+    cadbidSecretKey: string,
+  ) {
     const lead = await prisma.leadMaster.findFirst({
       where: {
         id: leadId,
@@ -91,7 +200,7 @@ export class CadbidIntegrationWithFurnixcrmService {
     );
 
     const payload: CadbidExternalCustomerPayload = {
-      cadbidSecretKey: CADBID_SECRET_KEY,
+      cadbidSecretKey,
       sName: `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim() || "-",
       sAddr1,
       sAddr2,
@@ -114,7 +223,14 @@ export class CadbidIntegrationWithFurnixcrmService {
       });
     }
 
-    const payload = await this.buildPayload(vendorId, leadId);
+    const cadbidPlatformToken =
+      await this.getCadbidExternalPlatformToken(vendorId);
+
+    const payload = await this.buildPayload(
+      vendorId,
+      leadId,
+      cadbidPlatformToken.token,
+    );
 
     const response = await fetch(CADBID_CREATE_EXTERNAL_CUSTOMER_URL, {
       method: "POST",
@@ -150,6 +266,25 @@ export class CadbidIntegrationWithFurnixcrmService {
         { statusCode: response.status || 500 },
       );
     }
+
+    const cadbidCustomerId = this.extractCadbidCustomerId(parsedBody);
+
+    if (!cadbidCustomerId) {
+      throw Object.assign(
+        new Error(
+          "Cadbid customer synced but cadbidCustomerId was missing in the response",
+        ),
+        { statusCode: 502 },
+      );
+    }
+
+    await this.syncLeadExternalCustomerMapping(
+      vendorId,
+      leadId,
+      cadbidCustomerId,
+      cadbidPlatformToken.externalPlatformId,
+      cadbidPlatformToken.externalPlatformTokenId,
+    );
 
     return {
       payload,

@@ -88,6 +88,7 @@ model VendorMaster {
   taxInfo                             VendorTaxInfo[]
   tokens                              VendorTokens[]
   externalPlatformTokens              ExternalPlatformToken[]
+  leadExternalPlatformCustomerMappings LeadExternalPlatformCustomerMapping[]
 }
 
 model VendorAddress {
@@ -474,6 +475,7 @@ model LeadMaster {
   serviceSchedules                            LeadServiceSchedule[]
   siteReadiness                               SiteReadiness[]
   tasks                                       UserLeadTask[]
+  externalPlatformCustomerMappings            LeadExternalPlatformCustomerMapping[]
 
   @@unique([vendor_id, lead_code], name: "uniq_vendor_lead_code")
 }
@@ -1794,8 +1796,10 @@ model ApiRequestLog {
 model ExternalPlatformMaster {
   id                     Int                      @id @default(autoincrement())
   external_platform_name String
+  type                   String?                  @unique
   active                 ExternalPlatformMasterActiveStatus             @default(Yes)
   tokens                 ExternalPlatformToken[]
+  leadExternalPlatformCustomerMappings LeadExternalPlatformCustomerMapping[]
 }
 
 model ExternalPlatformToken {
@@ -1816,6 +1820,22 @@ model ExternalPlatformToken {
   vendor               VendorMaster           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   createdByUser        UserMaster             @relation("ExternalPlatformTokenCreatedBy", fields: [created_by], references: [id])
   updatedByUser        UserMaster             @relation("ExternalPlatformTokenUpdatedBy", fields: [updated_by], references: [id])
+  leadExternalPlatformCustomerMappings LeadExternalPlatformCustomerMapping[]
+}
+
+model LeadExternalPlatformCustomerMapping {
+  id                            Int                    @id @default(autoincrement())
+  vendor_id                     Int
+  lead_id                       Int
+  external_platform_customer_id String
+  external_platform_id          Int
+  external_platform_token_id    Int
+  vendor                        VendorMaster           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead                          LeadMaster             @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  externalPlatform              ExternalPlatformMaster @relation(fields: [external_platform_id], references: [id], onDelete: Cascade)
+  externalPlatformToken         ExternalPlatformToken  @relation(fields: [external_platform_token_id], references: [id], onDelete: Cascade)
+
+  @@unique([vendor_id, lead_id, external_platform_id], name: "uniq_vendor_lead_external_platform_customer_mapping")
 }
 
 enum ExternalPlatformTokenActiveStatus {
