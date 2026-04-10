@@ -543,10 +543,18 @@ export class LeadController {
             status?: number;
             response?: unknown;
             error?: string;
+            skipped?: boolean;
+            reason?: string;
           }
         | undefined;
 
-      if (!result.draft) {
+      const backendEnvironment = String(
+        process.env.BACKEND_ENVIRONMENT || "",
+      ).toUpperCase();
+      const shouldSyncCadbid =
+        backendEnvironment === "LOCAL" || backendEnvironment === "STAGING";
+
+      if (!result.draft && shouldSyncCadbid) {
         try {
           const cadbidResult =
             await cadbidIntegrationWithFurnixcrmService.syncLeadToCadbid(
@@ -571,6 +579,13 @@ export class LeadController {
             error: cadbidError?.message || "Cadbid sync failed",
           };
         }
+      } else if (!result.draft) {
+        cadbidSync = {
+          success: false,
+          skipped: true,
+          reason:
+            "Cadbid sync is enabled only when BACKEND_ENVIRONMENT is LOCAL or STAGING",
+        };
       }
 
       return res.status(201).json({
