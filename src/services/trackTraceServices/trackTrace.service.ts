@@ -1,4 +1,5 @@
 import { validationResponse } from '../../../src/utils/validationResponse';
+
 import { prisma } from '../../prisma/client';
 import { Prisma, CutListMachineMapping } from '../../prisma/generated';
 import { CutListSavePayload, MarkDefectPayload, QRParam, TrackTraceDashboardPayload } from '../../../src/types/track-trace';
@@ -7,7 +8,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { getVendorSettingValue } from '../vendor.service';
 import { generateSignedUrl, uploadToWasabiCompletionPhotos, uploadToWasabiDefectedItems } from 'src/utils/wasabiClient';
-
+import { cache } from "../../utils/cache";
 
 interface TrackTracePayload {
   project_id: number;
@@ -454,11 +455,15 @@ export const updateScannedItem = async (
   try {
     const { project_id, vendor_id, machine_id, unique_code, created_by } = payload;
 
+    // conditionally add project_id filter if provided
+    const projectFilter = project_id ? { project_id } : {};
+
     // check if item is mapped to any machine
     const currentMapping = await prisma.cutListMachineMapping.findFirst({
       where: {
         machine_id: machine_id,
         vendor_id: vendor_id,
+        ...projectFilter,
         cut_list: {
           unique_code: {
             equals: unique_code,
@@ -480,13 +485,17 @@ export const updateScannedItem = async (
     });
 
     if (!currentMapping) {
-      return validationResponse(0, 'Machine mapping not found');
+      return validationResponse(0, project_id
+        ? 'Item not found for this machine in the selected project'
+        : 'Machine mapping not found'
+      );
     }
 
     const nextMapping = await prisma.cutListMachineMapping.findFirst({
       where: {
         machine_id: machine_id,
         vendor_id: vendor_id,
+        ...projectFilter,
         cut_list: {
           unique_code: {
             equals: unique_code,
@@ -576,6 +585,7 @@ export const updateScannedItem = async (
             where: {
               machine_id: machine_id,
               vendor_id: vendor_id,
+              ...projectFilter,
               cut_list: {
                 unique_code: {
                   equals: unique_code,
@@ -758,22 +768,21 @@ export const updateScannedItem = async (
 
 
 export const check_defect = async (payload: TrackTracePayload) => {
-
   console.log(payload);
   try {
-
     const { project_id, vendor_id, machine_id, unique_code, created_by } = payload;
 
+    const projectFilter = project_id ? { project_id } : {};
 
     const mappedItem = await prisma.cutListMachineMapping.findFirst({
       where: {
         machine_id: machine_id,
         vendor_id: vendor_id,
+        ...projectFilter,
         cut_list: {
           unique_code: unique_code,
         },
       },
-
       select: {
         id: true,
         sequence_no: true,
@@ -794,26 +803,27 @@ export const check_defect = async (payload: TrackTracePayload) => {
             item_name: true,
           },
         },
-
         project: {
           select: {
             track_trace_status: true,
-            project_name: true
+            project_name: true,
           },
         },
       },
     });
+
     console.log("mappedItem", mappedItem);
     if (!mappedItem) {
-      return validationResponse(0, "Item not found for this machine");
+      return validationResponse(0, project_id
+        ? 'Item not found for this machine in the selected project'
+        : 'Item not found for this machine'
+      );
     }
     return validationResponse(1, '', mappedItem);
   } catch (error) {
     console.log("Error in api", error);
     return validationResponse(0, 'Something went wrong');
   }
-
-
 };
 
 export const updateProjectStatus = async (project_id: Number) => {
@@ -3137,7 +3147,7 @@ export const getQualityCheckProjects = async (vendor_id: number) => {
         machine_type_id: 17,
         status: 'ACTIVE',
       },
-      select: { id: true, sequence_no: true,machine_name: true },
+      select: { id: true, sequence_no: true, machine_name: true },
     });
 
     if (!qualityMachine) {
@@ -3147,7 +3157,7 @@ export const getQualityCheckProjects = async (vendor_id: number) => {
     const qualityMachineId = qualityMachine.id;
     const qualitySequenceNo = qualityMachine.sequence_no ?? 0;
 
-    console.log("qualitySequenceNo",qualitySequenceNo);
+    console.log("qualitySequenceNo", qualitySequenceNo);
 
     // Find all projects that have at least 1 item:
     // - pending in quality machine (actual_in_at = null, machine_id = qualityMachineId)
@@ -3209,7 +3219,7 @@ export const getQualityCheckProjects = async (vendor_id: number) => {
           },
         });
 
-        return { ...project, pending_count,qualityMachineId,qualityMachineName: qualityMachine.machine_name };
+        return { ...project, pending_count, qualityMachineId, qualityMachineName: qualityMachine.machine_name };
       })
     );
 
@@ -3220,3 +3230,164 @@ export const getQualityCheckProjects = async (vendor_id: number) => {
   }
 };
 
+
+// ─── Helper: sum qty of cut_lists by their ids ────────────────────────────────
+async function sumQty(cutListIds: number[]): Promise<number> {
+  if (cutListIds.length === 0) return 0;
+  const result = await prisma.cutList.aggregate({
+    where: { id: { in: cutListIds } },
+    _sum: { qty: true },
+  });
+  return result._sum.qty ?? 0;
+}
+
+
+
+// ─── Helper: sum qty of cut_list rows from CutListMachineMapping ──────────────
+// Each mapping row corresponds to one panel instance.
+// We use the cut_list.qty indirectly — one mapping row per panel is already
+// how the data is structured (qty=4 on CutList → 4 mapping rows per machine).
+// So COUNT of mapping rows = total panels correctly.
+
+export const getTraceTraceDashboard = async (vendor_id: number) => {
+  try {
+
+    
+
+    // ── 1. Fetch all projects for this vendor ──────────────────────────────
+    const projects = await prisma.projectMaster.findMany({
+      where: { vendor_id },
+      select: {
+        id: true,
+        project_name: true,
+        project_status: true,
+        track_trace_status: true,
+        created_at: true,
+      },
+      orderBy: { created_at: "desc" },
+    });
+
+    // ── 2. Fetch all non-PASS machines ordered by sequence ─────────────────
+    const machines = await prisma.machineMaster.findMany({
+      where: {
+        vendor_id,
+        status: "ACTIVE",
+        scan_type: { not: "PASS" },
+      },
+      select: { id: true, machine_name: true, sequence_no: true },
+      orderBy: { sequence_no: "asc" },
+    });
+
+    // ── 3. For each project, compute per-machine counts ────────────────────
+    const buildProjectStatus = async (project: (typeof projects)[0]) => {
+
+      // Pre-compute scanned count per machine for this project (used for waterfall)
+      const scannedPerMachine: Map<number, number> = new Map();
+      for (const machine of machines) {
+        const count = await prisma.cutListMachineMapping.count({
+          where: {
+            project_id: project.id,
+            vendor_id,
+            machine_id: machine.id,
+            expected_in: true,
+            actual_in_at: { not: null },
+          },
+        });
+        scannedPerMachine.set(machine.id, count);
+      }
+
+      const machineStatuses = await Promise.all(
+        machines.map(async (machine, index) => {
+          // Check if this machine is assigned to this project at all
+          const assigned = await prisma.cutListMachineMapping.count({
+            where: {
+              project_id: project.id,
+              vendor_id,
+              machine_id: machine.id,
+              expected_in: true,
+            },
+          });
+
+          if (assigned === 0) return null;
+
+          const scanned = scannedPerMachine.get(machine.id) ?? 0;
+
+          // Waterfall total:
+          // - First machine (index 0): total = all assigned rows
+          // - Machine N: total = scanned count of previous machine
+          //   because each scan at machine N-1 unlocks exactly one panel for machine N
+          let total: number;
+          if (index === 0) {
+            total = assigned;
+          } else {
+            const prevMachine = machines[index - 1];
+            total = scannedPerMachine.get(prevMachine.id) ?? 0;
+          }
+
+          const pending = Math.max(0, total - scanned);
+
+          return {
+            machine_id: machine.id,
+            machine_name: machine.machine_name,
+            sequence_no: machine.sequence_no ?? 0,
+            total,
+            scanned,
+            pending,
+            all_scanned: total > 0 && scanned >= total,
+          };
+        })
+      );
+
+      // ── Panels: total and fully scanned ───────────────────────────────────
+      // total_panels = assigned rows on first machine (each row = 1 panel)
+      // panels_scanned = scanned rows on last machine (passed all machines)
+      const firstMachine = machines[0];
+      const lastMachine = machines[machines.length - 1];
+
+      const total_panels = firstMachine
+        ? await prisma.cutListMachineMapping.count({
+          where: {
+            project_id: project.id,
+            vendor_id,
+            machine_id: firstMachine.id,
+            expected_in: true,
+          },
+        })
+        : 0;
+
+      const panels_scanned = lastMachine
+        ? (scannedPerMachine.get(lastMachine.id) ?? 0)
+        : 0;
+
+      return {
+        project_id: project.id,
+        project_name: project.project_name,
+        project_status: project.project_status,
+        track_trace_status: project.track_trace_status,
+        created_at: project.created_at.toISOString(),
+        panels_scanned,
+        total_panels,
+        machines: machineStatuses.filter(Boolean),
+      };
+    };
+
+    const allStatuses = await Promise.all(projects.map(buildProjectStatus));
+
+    // ── 4. Split into active vs archived ───────────────────────────────────
+    const activeStatuses = ["Initiated", "Started"];
+    const active = allStatuses.filter((p) => activeStatuses.includes(p.project_status));
+    const archived = allStatuses.filter((p) => !activeStatuses.includes(p.project_status));
+
+
+
+    return validationResponse(1, "", {
+      active,
+      archived,
+      active_count: active.length,
+      archived_count: archived.length,
+    });
+  } catch (error) {
+    console.error("Error in getTraceTraceDashboard", error);
+    return validationResponse(0, "Something went wrong");
+  }
+};

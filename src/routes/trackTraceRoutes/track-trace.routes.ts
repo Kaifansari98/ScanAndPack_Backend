@@ -27,6 +27,7 @@ import {
   getReworkMachines,
   getUserModules,
   getQualityCheckProjects,
+  getTraceTraceDashboard,
 } from "../../controllers/trackTraceController/trackTrace.controller";
 
 import { 
@@ -91,6 +92,11 @@ router.get('/rework-machines/:vendor_id/:machine_id', getReworkMachines);
 
 router.get('/user-modules/:vendor_id/:user_id', getUserModules);
 router.get('/quality-check-projects/:vendor_id', getQualityCheckProjects);
+
+
+
+router.get('/dashboard/:vendor_id', getTraceTraceDashboard);
+
 
 
 
