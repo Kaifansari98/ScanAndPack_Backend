@@ -1,4 +1,5 @@
 import { validationResponse } from '../../../src/utils/validationResponse';
+
 import { prisma } from '../../prisma/client';
 import { Prisma, CutListMachineMapping } from '../../prisma/generated';
 import { CutListSavePayload, MarkDefectPayload, QRParam, TrackTraceDashboardPayload } from '../../../src/types/track-trace';
@@ -6,14 +7,15 @@ import ExcelJS from "exceljs";
 import * as fs from "fs";
 import * as path from "path";
 import { getVendorSettingValue } from '../vendor.service';
-
+import { generateSignedUrl, uploadToWasabiCompletionPhotos, uploadToWasabiDefectedItems } from 'src/utils/wasabiClient';
+import { cache } from "../../utils/cache";
 
 interface TrackTracePayload {
-    project_id: number;
-    vendor_id: number;
-    machine_id: number;
-    unique_code: string;
-    created_by: number;
+  project_id: number;
+  vendor_id: number;
+  machine_id: number;
+  unique_code: string;
+  created_by: number;
 }
 
 // export const updateScannedItem = async (payload: TrackTracePayload) => {
@@ -144,251 +146,298 @@ interface TrackTracePayload {
 // };
 
 
-export const updateScannedItem = async (payload: TrackTracePayload, is_check: boolean = false) => {
+export const updateScannedItem_old = async (payload: TrackTracePayload, is_check: boolean = false) => {
 
-    try {
-
-
-        const { project_id, vendor_id, machine_id, unique_code, created_by } = payload;
+  try {
 
 
-        //check if item is mapped to any machine
-        const currentMapping = await prisma.cutListMachineMapping.findFirst({
-            where: {
-                machine_id: machine_id,
-                vendor_id: vendor_id,
-                cut_list: {
-                    unique_code: {
-                        equals: unique_code,
-                        mode: "insensitive",
-                    },
-                },
-            },
-            select: {
-                id: true,
-                sequence_no: true,
-                cut_list_id: true,
-                project_id: true,
-                project: {
-                    select: {
-                        track_trace_status: true,
-                    },
-                },
-            },
-        });
-
-        //console.log("currentMapping",currentMapping)
-        if (!currentMapping) {
-            return validationResponse(0, 'Machine mapping not found');
-        }
-
-        //return currentMapping;
+    const { project_id, vendor_id, machine_id, unique_code, created_by } = payload;
 
 
-        const nextMapping = await prisma.cutListMachineMapping.findFirst({
-            where: {
-                machine_id: machine_id,
-                vendor_id: vendor_id,
-                cut_list: {
-                    unique_code: {
-                        equals: unique_code,
-                        mode: "insensitive",
-                    },
-                },
-                actual_in_at: null,
-            },
-            select: {
-                id: true,
-                sequence_no: true,
-                cut_list_id: true,
-            },
-        });
+    //check if item is mapped to any machine
+    const currentMapping = await prisma.cutListMachineMapping.findFirst({
+      where: {
+        machine_id: machine_id,
+        vendor_id: vendor_id,
+        cut_list: {
+          unique_code: {
+            equals: unique_code,
+            mode: "insensitive",
+          },
+        },
+      },
+      select: {
+        id: true,
+        sequence_no: true,
+        cut_list_id: true,
+        project_id: true,
+        project: {
+          select: {
+            track_trace_status: true,
+          },
+        },
+      },
+    });
 
-
-        if (!nextMapping) {
-            console.log("Already Scanned");
-            return validationResponse(0, 'Already Scanned');
-        }
-
-        const { id, sequence_no, cut_list_id } = nextMapping;
-        // return currentMapping;
-        // return id;
-
-        // 679 1 364
-
-        console.log(id, sequence_no, cut_list_id)
-
-        //check if already scanned in machine
-
-        const scanned_count = await prisma.cutListMachineMapping.count({
-            where: {
-                cut_list_id: cut_list_id,
-                vendor_id: vendor_id,
-                sequence_no: sequence_no,
-                expected_in: true,
-                actual_in_at: null,
-                machine_id: machine_id
-
-            }
-        });
-
-        console.log("scanned_count", scanned_count);
-
-        //return scanned_count;
-
-
-        // this item is already scanned in provided machine
-        if (scanned_count == 0) {
-            return validationResponse(0, 'Already Scanned');
-        }
-
-
-
-        // ✅ Check if any machine is left in sequence (excluding 'pass' type machines)
-        const count = await prisma.cutListMachineMapping.count({
-            where: {
-                cut_list_id: cut_list_id,
-                vendor_id: vendor_id,
-                sequence_no: { lt: sequence_no },
-                actual_in_at: null,
-                machine: {
-                    scan_type: {
-                        not: 'PASS'  // Only count machines that require scanning
-                    }
-                }
-            }
-        });
-
-        // console.log("pending_scans_count", count);
-
-
-        const passMachines = await prisma.cutListMachineMapping.findMany({
-            where: {
-                cut_list_id: cut_list_id,
-                vendor_id: vendor_id,
-                sequence_no: { lt: sequence_no },
-                actual_in_at: null,
-                machine: {
-                    scan_type: 'PASS'
-                }
-            },
-            select: {
-                id: true,
-                machine: {
-                    select: {
-                        machine_name: true
-                    }
-                }
-            }
-        });
-
-        console.log("pass_machines_to_update", passMachines.length);
-
-        if (count == 0) {
-
-
-            if (is_check) {
-
-                const value = await getVendorSettingValue(vendor_id, 'SHOW_STATUS_ON_SCAN');
-                if (value == "1") {
-
-                    const mappedItem = await prisma.cutListMachineMapping.findFirst({
-                        where: {
-                            machine_id: machine_id,
-                            vendor_id: vendor_id,
-                            cut_list: {
-                                unique_code: {
-                                    equals: unique_code,
-                                    mode: "insensitive",
-                                },
-                            },
-                        },
-                        select: {
-                            id: true,
-                            sequence_no: true,
-                            cut_list_id: true,
-                            project_id: true,
-                            actual_in_at: true,
-                            machine_id: true,
-                            machine: {
-                                select: {
-                                    id: true,
-                                    machine_name: true,
-                                },
-                            },
-                            cut_list: {
-                                select: {
-                                    unique_code: true,
-                                    description: true,
-                                    item_name: true,
-                                },
-                            },
-                            project: {
-                                select: {
-                                    track_trace_status: true,
-                                    project_name: true,
-                                },
-                            },
-                        },
-                    });
-                    console.log("mappedItem", mappedItem);
-                    return validationResponse(1, '', mappedItem);
-                } else {
-                    updateScannedItem(payload, false);
-                }
-
-            } else {
-
-                // ✅ Update all 'pass' type machines as scanned
-                if (passMachines.length > 0) {
-                    await prisma.cutListMachineMapping.updateMany({
-                        where: {
-                            id: {
-                                in: passMachines.map(m => m.id)
-                            }
-                        },
-                        data: {
-                            actual_in_at: new Date(),
-                            in_operator: created_by,
-                        }
-                    });
-
-                    console.log(`Auto-passed ${passMachines.length} machines with scan_type='pass'`);
-                }
-
-                // ✅ Update current machine as scanned
-                const updated = await prisma.cutListMachineMapping.update({
-                    where: {
-                        id: id,
-                    },
-                    data: {
-                        actual_in_at: new Date(),
-                        in_operator: created_by,
-                    },
-                });
-
-                console.log("currentMapping.project.track_trace_status", currentMapping.project.track_trace_status);
-                if (currentMapping.project.track_trace_status == "Not Started") {
-                    await updateProjectStatus(currentMapping.project_id);
-                }
-
-                return validationResponse(1, 'Scan done');
-            }
-
-
-
-
-
-
-        } else {
-            // ✅ There are still machines that need to be scanned before this one
-            return validationResponse(0, 'Scan on other machine first');
-        }
-
-    } catch (error) {
-        console.log("Error in api", error);
-        return validationResponse(0, 'Something went wrong');
+    //console.log("currentMapping",currentMapping)
+    if (!currentMapping) {
+      return validationResponse(0, 'Machine mapping not found');
     }
+
+    //return currentMapping;
+
+
+    const nextMapping = await prisma.cutListMachineMapping.findFirst({
+      where: {
+        machine_id: machine_id,
+        vendor_id: vendor_id,
+        cut_list: {
+          unique_code: {
+            equals: unique_code,
+            mode: "insensitive",
+          },
+        },
+        actual_in_at: null,
+      },
+      select: {
+        id: true,
+        sequence_no: true,
+        cut_list_id: true,
+      },
+    });
+
+
+    if (!nextMapping) {
+      console.log("Already Scanned");
+      return validationResponse(0, 'Already Scanned');
+    }
+
+    const { id, sequence_no, cut_list_id } = nextMapping;
+    // return currentMapping;
+    // return id;
+
+    // 679 1 364
+
+    console.log(id, sequence_no, cut_list_id)
+
+    //check if already scanned in machine
+
+    const scanned_count = await prisma.cutListMachineMapping.count({
+      where: {
+        cut_list_id: cut_list_id,
+        vendor_id: vendor_id,
+        sequence_no: sequence_no,
+        expected_in: true,
+        actual_in_at: null,
+        machine_id: machine_id
+
+      }
+    });
+
+    console.log("scanned_count", scanned_count);
+
+    //return scanned_count;
+
+
+    // this item is already scanned in provided machine
+    if (scanned_count == 0) {
+      return validationResponse(0, 'Already Scanned');
+    }
+
+
+
+    // ✅ Check if any machine is left in sequence (excluding 'pass' type machines)
+    const count = await prisma.cutListMachineMapping.count({
+      where: {
+        cut_list_id: cut_list_id,
+        vendor_id: vendor_id,
+        sequence_no: { lt: sequence_no },
+        actual_in_at: null,
+        machine: {
+          scan_type: {
+            not: 'PASS'  // Only count machines that require scanning
+          }
+        }
+      }
+    });
+
+    // console.log("pending_scans_count", count);
+
+
+    const passMachines = await prisma.cutListMachineMapping.findMany({
+      where: {
+        cut_list_id: cut_list_id,
+        vendor_id: vendor_id,
+        sequence_no: { lt: sequence_no },
+        actual_in_at: null,
+        machine: {
+          scan_type: 'PASS'
+        }
+      },
+      select: {
+        id: true,
+        machine: {
+          select: {
+            machine_name: true
+          }
+        }
+      }
+    });
+
+    console.log("pass_machines_to_update", passMachines.length);
+
+    if (count == 0) {
+
+
+      if (is_check) {
+
+        const value = await getVendorSettingValue(vendor_id, 'SHOW_STATUS_ON_SCAN');
+        if (value == "1") {
+
+          const mappedItem = await prisma.cutListMachineMapping.findFirst({
+            where: {
+              machine_id: machine_id,
+              vendor_id: vendor_id,
+              cut_list: {
+                unique_code: {
+                  equals: unique_code,
+                  mode: "insensitive",
+                },
+              },
+            },
+            select: {
+              id: true,
+              sequence_no: true,
+              cut_list_id: true,
+              project_id: true,
+              actual_in_at: true,
+              machine_id: true,
+              machine: {
+                select: {
+                  id: true,
+                  machine_name: true,
+                },
+              },
+              cut_list: {
+                select: {
+                  unique_code: true,
+                  description: true,
+                  item_name: true,
+                },
+              },
+              project: {
+                select: {
+                  track_trace_status: true,
+                  project_name: true,
+                },
+              },
+            },
+          });
+          if (!mappedItem) {
+            return validationResponse(0, "Item not found for this machine");
+          }
+          let activeDefect = null;
+          if (mappedItem.cut_list_id) {
+            activeDefect = await prisma.defectedItem.findFirst({
+              where: {
+                cut_list_id: mappedItem.cut_list_id,
+                defect_status: { not: "Completed" },
+              },
+              orderBy: { created_at: "desc" },
+              select: {
+                id: true,
+                defect_id: true,
+                remark: true,
+                action: true,
+                rework_machine_id: true,
+                defect_status: true,
+                created_at: true,
+                defect: {
+                  select: {
+                    id: true,
+                    defect_name: true,
+                  },
+                },
+                images: {
+                  select: {
+                    id: true,
+                    doc_og_name: true,
+                    doc_sys_name: true,
+                    created_at: true,
+                  },
+                },
+              },
+            });
+          }
+          // generate signed URLs for each image after fetching
+          if (activeDefect && activeDefect.images.length > 0) {
+            const imagesWithUrls = await Promise.all(
+              activeDefect.images.map(async (img) => ({
+                ...img,
+                signed_url: await generateSignedUrl(img.doc_sys_name),
+              }))
+            );
+
+            activeDefect = { ...activeDefect, images: imagesWithUrls };
+          }
+          console.log("mappedItem", mappedItem);
+          return validationResponse(1, '', { mappedItem, activeDefect });
+        } else {
+          updateScannedItem(payload, false);
+        }
+
+      } else {
+
+        // ✅ Update all 'pass' type machines as scanned
+        if (passMachines.length > 0) {
+          await prisma.cutListMachineMapping.updateMany({
+            where: {
+              id: {
+                in: passMachines.map(m => m.id)
+              }
+            },
+            data: {
+              actual_in_at: new Date(),
+              in_operator: created_by,
+            }
+          });
+
+          console.log(`Auto-passed ${passMachines.length} machines with scan_type='pass'`);
+        }
+
+        // ✅ Update current machine as scanned
+        const updated = await prisma.cutListMachineMapping.update({
+          where: {
+            id: id,
+          },
+          data: {
+            actual_in_at: new Date(),
+            in_operator: created_by,
+          },
+        });
+
+        console.log("currentMapping.project.track_trace_status", currentMapping.project.track_trace_status);
+        if (currentMapping.project.track_trace_status == "Not Started") {
+          await updateProjectStatus(currentMapping.project_id);
+        }
+
+        return validationResponse(1, 'Scan done');
+      }
+
+
+
+
+
+
+    } else {
+      // ✅ There are still machines that need to be scanned before this one
+      return validationResponse(0, 'Scan on other machine first');
+    }
+
+  } catch (error) {
+    console.log("Error in api", error);
+    return validationResponse(0, 'Something went wrong');
+  }
 
 
 
@@ -398,279 +447,598 @@ export const updateScannedItem = async (payload: TrackTracePayload, is_check: bo
 };
 
 
-export const check_defect = async (payload: TrackTracePayload) => {
+export const updateScannedItem = async (
+  payload: TrackTracePayload,
+  is_check: boolean = false,
+  files: Express.Multer.File[] = [],
+) => {
+  try {
+    const { project_id, vendor_id, machine_id, unique_code, created_by } = payload;
 
+    // conditionally add project_id filter if provided
+    const projectFilter = project_id ? { project_id } : {};
 
-    try {
+    // check if item is mapped to any machine
+    const currentMapping = await prisma.cutListMachineMapping.findFirst({
+      where: {
+        machine_id: machine_id,
+        vendor_id: vendor_id,
+        ...projectFilter,
+        cut_list: {
+          unique_code: {
+            equals: unique_code,
+            mode: "insensitive",
+          },
+        },
+      },
+      select: {
+        id: true,
+        sequence_no: true,
+        cut_list_id: true,
+        project_id: true,
+        project: {
+          select: {
+            track_trace_status: true,
+          },
+        },
+      },
+    });
 
-        const { project_id, vendor_id, machine_id, unique_code, created_by } = payload;
-
-
-        const mappedItem = await prisma.cutListMachineMapping.findFirst({
-            where: {
-                machine_id: machine_id,
-                vendor_id: vendor_id,
-                cut_list: {
-                    unique_code: unique_code,
-                },
-            },
-
-            select: {
-                id: true,
-                sequence_no: true,
-                cut_list_id: true,
-                project_id: true,
-                actual_in_at: true,
-                machine_id: true,
-                machine: {
-                    select: {
-                        id: true,
-                        machine_name: true,
-                    },
-                },
-                cut_list: {
-                    select: {
-                        unique_code: true,
-                        description: true,
-                        item_name: true,
-                    },
-                },
-
-                project: {
-                    select: {
-                        track_trace_status: true,
-                        project_name: true
-                    },
-                },
-            },
-        });
-        console.log("mappedItem", mappedItem);
-        return validationResponse(1, '', mappedItem);
-    } catch (error) {
-        console.log("Error in api", error);
-        return validationResponse(0, 'Something went wrong');
+    if (!currentMapping) {
+      return validationResponse(0, project_id
+        ? 'Item not found for this machine in the selected project'
+        : 'Machine mapping not found'
+      );
     }
 
+    const nextMapping = await prisma.cutListMachineMapping.findFirst({
+      where: {
+        machine_id: machine_id,
+        vendor_id: vendor_id,
+        ...projectFilter,
+        cut_list: {
+          unique_code: {
+            equals: unique_code,
+            mode: "insensitive",
+          },
+        },
+        actual_in_at: null,
+      },
+      select: {
+        id: true,
+        sequence_no: true,
+        cut_list_id: true,
+      },
+    });
+
+    if (!nextMapping) {
+      console.log("Already Scanned");
+      return validationResponse(0, 'Already Scanned');
+    }
+
+    const { id, sequence_no, cut_list_id } = nextMapping;
+
+    console.log(id, sequence_no, cut_list_id);
+
+    const scanned_count = await prisma.cutListMachineMapping.count({
+      where: {
+        cut_list_id: cut_list_id,
+        vendor_id: vendor_id,
+        sequence_no: sequence_no,
+        expected_in: true,
+        actual_in_at: null,
+        machine_id: machine_id,
+      },
+    });
+
+    console.log("scanned_count", scanned_count);
+
+    if (scanned_count == 0) {
+      return validationResponse(0, 'Already Scanned');
+    }
+
+    // check if any machine is left in sequence (excluding 'pass' type machines)
+    const count = await prisma.cutListMachineMapping.count({
+      where: {
+        cut_list_id: cut_list_id,
+        vendor_id: vendor_id,
+        sequence_no: { lt: sequence_no },
+        actual_in_at: null,
+        machine: {
+          scan_type: {
+            not: 'PASS',
+          },
+        },
+      },
+    });
+
+    const passMachines = await prisma.cutListMachineMapping.findMany({
+      where: {
+        cut_list_id: cut_list_id,
+        vendor_id: vendor_id,
+        sequence_no: { lt: sequence_no },
+        actual_in_at: null,
+        machine: {
+          scan_type: 'PASS',
+        },
+      },
+      select: {
+        id: true,
+        machine: {
+          select: {
+            machine_name: true,
+          },
+        },
+      },
+    });
+
+    console.log("pass_machines_to_update", passMachines.length);
+
+    if (count == 0) {
+
+      if (is_check) {
+
+        const value = await getVendorSettingValue(vendor_id, 'SHOW_STATUS_ON_SCAN');
+        if (value == "1") {
+
+          const mappedItem = await prisma.cutListMachineMapping.findFirst({
+            where: {
+              machine_id: machine_id,
+              vendor_id: vendor_id,
+              ...projectFilter,
+              cut_list: {
+                unique_code: {
+                  equals: unique_code,
+                  mode: "insensitive",
+                },
+              },
+            },
+            select: {
+              id: true,
+              sequence_no: true,
+              cut_list_id: true,
+              project_id: true,
+              actual_in_at: true,
+              machine_id: true,
+              machine: {
+                select: {
+                  id: true,
+                  machine_name: true,
+                },
+              },
+              cut_list: {
+                select: {
+                  unique_code: true,
+                  description: true,
+                  item_name: true,
+                },
+              },
+              project: {
+                select: {
+                  track_trace_status: true,
+                  project_name: true,
+                },
+              },
+            },
+          });
+
+          if (!mappedItem) {
+            return validationResponse(0, "Item not found for this machine");
+          }
+
+          let activeDefect = null;
+          if (mappedItem.cut_list_id) {
+            activeDefect = await prisma.defectedItem.findFirst({
+              where: {
+                cut_list_id: mappedItem.cut_list_id,
+                defect_status: { not: "Completed" },
+              },
+              orderBy: { created_at: "desc" },
+              select: {
+                id: true,
+                defect_id: true,
+                remark: true,
+                action: true,
+                rework_machine_id: true,
+                defect_status: true,
+                created_at: true,
+                defect: {
+                  select: {
+                    id: true,
+                    defect_name: true,
+                  },
+                },
+                images: {
+                  select: {
+                    id: true,
+                    doc_og_name: true,
+                    doc_sys_name: true,
+                    created_at: true,
+                  },
+                },
+              },
+            });
+          }
+
+          if (activeDefect && activeDefect.images.length > 0) {
+            const imagesWithUrls = await Promise.all(
+              activeDefect.images.map(async (img) => ({
+                ...img,
+                signed_url: await generateSignedUrl(img.doc_sys_name),
+              }))
+            );
+            activeDefect = { ...activeDefect, images: imagesWithUrls };
+          }
+
+          console.log("mappedItem", mappedItem);
+          return validationResponse(1, '', { mappedItem, activeDefect });
+
+        } else {
+          updateScannedItem(payload, false, files);
+        }
+
+      } else {
+
+        // auto-pass pass-type machines
+        if (passMachines.length > 0) {
+          await prisma.cutListMachineMapping.updateMany({
+            where: {
+              id: { in: passMachines.map(m => m.id) },
+            },
+            data: {
+              actual_in_at: new Date(),
+              in_operator: created_by,
+            },
+          });
+          console.log(`Auto-passed ${passMachines.length} machines with scan_type='pass'`);
+        }
+
+        // update current machine as scanned
+        await prisma.cutListMachineMapping.update({
+          where: { id: id },
+          data: {
+            actual_in_at: new Date(),
+            in_operator: created_by,
+          },
+        });
+
+        // ── mark defect as completed + save completion photos ──
+        if (cut_list_id) {
+          const pendingDefect = await prisma.defectedItem.findFirst({
+            where: {
+              cut_list_id: cut_list_id,
+              defect_status: { not: "Completed" },
+            },
+          });
+
+          if (pendingDefect) {
+            // mark defect as completed with completed_by and completed_at
+            await prisma.defectedItem.update({
+              where: { id: pendingDefect.id },
+              data: {
+                defect_status: "Completed",
+                defect_completed_by: created_by,
+                defect_completed_at: new Date(),
+              },
+            });
+
+            // save completion photos linked to the defected item
+            if (files.length > 0) {
+              const uploadedPhotos = await uploadToWasabiCompletionPhotos(
+                files,
+                vendor_id,
+                id,
+              );
+
+              await prisma.defectCompletionPhoto.createMany({
+                data: uploadedPhotos.map((photo) => ({
+                  cut_list_machine_mapping_id: id,
+                  cut_list_id: cut_list_id,
+                  vendor_id: vendor_id,
+                  defected_item_id: pendingDefect.id,
+                  doc_og_name: photo.originalName,
+                  doc_sys_name: photo.systemName,
+                  created_by: created_by,
+                })),
+              });
+
+              console.log(
+                `Saved ${uploadedPhotos.length} completion photos for defect ${pendingDefect.id}`
+              );
+            }
+          }
+        }
+
+        if (currentMapping.project.track_trace_status == "Not Started") {
+          await updateProjectStatus(currentMapping.project_id);
+        }
+
+        return validationResponse(1, 'Scan done');
+      }
+
+    } else {
+      return validationResponse(0, 'Scan on other machine first');
+    }
+
+  } catch (error) {
+    console.log("Error in api", error);
+    return validationResponse(0, 'Something went wrong');
+  }
+};
 
 
+export const check_defect = async (payload: TrackTracePayload) => {
+  console.log(payload);
+  try {
+    const { project_id, vendor_id, machine_id, unique_code, created_by } = payload;
 
+    const projectFilter = project_id ? { project_id } : {};
 
+    const mappedItem = await prisma.cutListMachineMapping.findFirst({
+      where: {
+        machine_id: machine_id,
+        vendor_id: vendor_id,
+        ...projectFilter,
+        cut_list: {
+          unique_code: unique_code,
+        },
+      },
+      select: {
+        id: true,
+        sequence_no: true,
+        cut_list_id: true,
+        project_id: true,
+        actual_in_at: true,
+        machine_id: true,
+        machine: {
+          select: {
+            id: true,
+            machine_name: true,
+          },
+        },
+        cut_list: {
+          select: {
+            unique_code: true,
+            description: true,
+            item_name: true,
+          },
+        },
+        project: {
+          select: {
+            track_trace_status: true,
+            project_name: true,
+          },
+        },
+      },
+    });
 
+    console.log("mappedItem", mappedItem);
+    if (!mappedItem) {
+      return validationResponse(0, project_id
+        ? 'Item not found for this machine in the selected project'
+        : 'Item not found for this machine'
+      );
+    }
+    return validationResponse(1, '', mappedItem);
+  } catch (error) {
+    console.log("Error in api", error);
+    return validationResponse(0, 'Something went wrong');
+  }
 };
 
 export const updateProjectStatus = async (project_id: Number) => {
 
 
-    try {
-        const updatedProject = await prisma.projectMaster.update({
-            where: {
-                id: Number(project_id),
-            },
-            data: {
-                track_trace_status: "Started"
-            },
-        });
+  try {
+    const updatedProject = await prisma.projectMaster.update({
+      where: {
+        id: Number(project_id),
+      },
+      data: {
+        track_trace_status: "Started"
+      },
+    });
 
-        console.log("Updated project:", updatedProject);
-        return updatedProject;
-    } catch (error) {
-        console.error("Error updating project:", error);
-        throw error;
-    }
+    console.log("Updated project:", updatedProject);
+    return updatedProject;
+  } catch (error) {
+    console.error("Error updating project:", error);
+    throw error;
+  }
 };
 
 
 
 export const getKPIS = async (payload: TrackTraceDashboardPayload) => {
 
-    const todayStart = new Date();
-    todayStart.setHours(0, 0, 0, 0);
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
 
-    const tomorrow = new Date(todayStart);
-    tomorrow.setDate(todayStart.getDate() + 1);
+  const tomorrow = new Date(todayStart);
+  tomorrow.setDate(todayStart.getDate() + 1);
 
-    const yesterdayStart = new Date(todayStart.getTime() - 24 * 60 * 60 * 1000);
+  const yesterdayStart = new Date(todayStart.getTime() - 24 * 60 * 60 * 1000);
 
-    const baseWhere: any = {
-        vendor_id: payload.vendor_id,
-        actual_in_at: {
-            gte: todayStart,
-            lte: tomorrow,
-        },
-    };
+  const baseWhere: any = {
+    vendor_id: payload.vendor_id,
+    actual_in_at: {
+      gte: todayStart,
+      lte: tomorrow,
+    },
+  };
 
-    console.log("payload.project_id", payload.project_id);
-    if (payload.project_id) {
-        baseWhere.project_id = Number(payload.project_id);
-    }
+  console.log("payload.project_id", payload.project_id);
+  if (payload.project_id) {
+    baseWhere.project_id = Number(payload.project_id);
+  }
 
-    if (payload.machine_id) {
-        baseWhere.machine_id = Number(payload.machine_id);
-    }
+  if (payload.machine_id) {
+    baseWhere.machine_id = Number(payload.machine_id);
+  }
 
-    if (payload.created_by) {
-        baseWhere.operator = Number(payload.created_by);
-    }
+  if (payload.created_by) {
+    baseWhere.operator = Number(payload.created_by);
+  }
 
-    const itemsToday = await prisma.cutListMachineMapping.count({
-        where: baseWhere,
-    });
+  const itemsToday = await prisma.cutListMachineMapping.count({
+    where: baseWhere,
+  });
 
-    // where: {
-    //             vendor_id: payload.vendor_id,
-    //             actual_in_at: {
-    //                 gte: todayStart,
-    //                 lte: tomorrow,
-    //             },
-    //         },
-    const processedItemsToday = await prisma.cutListMachineMapping.findMany({
-        where: baseWhere,
+  // where: {
+  //             vendor_id: payload.vendor_id,
+  //             actual_in_at: {
+  //                 gte: todayStart,
+  //                 lte: tomorrow,
+  //             },
+  //         },
+  const processedItemsToday = await prisma.cutListMachineMapping.findMany({
+    where: baseWhere,
+    select: {
+      cut_list: {
         select: {
-            cut_list: {
-                select: {
-                    length: true,
-                    width: true,
-                },
-            },
+          length: true,
+          width: true,
         },
-    });
+      },
+    },
+  });
 
-    const totalSqft = Math.round(
-        processedItemsToday.reduce((sum, item) => {
-            const length = Number(item.cut_list?.length ?? 0);
-            const width = Number(item.cut_list?.width ?? 0);
-            return sum + (length * width) / 92903;
-        }, 0) * 100
-    ) / 100;
+  const totalSqft = Math.round(
+    processedItemsToday.reduce((sum, item) => {
+      const length = Number(item.cut_list?.length ?? 0);
+      const width = Number(item.cut_list?.width ?? 0);
+      return sum + (length * width) / 92903;
+    }, 0) * 100
+  ) / 100;
 
 
 
-    const baseWhereYesterday: any = {
-        vendor_id: payload.vendor_id,
-        actual_in_at: {
-            gte: yesterdayStart,
-            lte: todayStart,
-        },
-    };
+  const baseWhereYesterday: any = {
+    vendor_id: payload.vendor_id,
+    actual_in_at: {
+      gte: yesterdayStart,
+      lte: todayStart,
+    },
+  };
 
-    console.log("payload.project_id", payload.project_id);
-    if (payload.project_id) {
-        baseWhereYesterday.project_id = Number(payload.project_id);
-    }
+  console.log("payload.project_id", payload.project_id);
+  if (payload.project_id) {
+    baseWhereYesterday.project_id = Number(payload.project_id);
+  }
 
-    if (payload.machine_id) {
-        baseWhereYesterday.machine_id = Number(payload.machine_id);
-    }
+  if (payload.machine_id) {
+    baseWhereYesterday.machine_id = Number(payload.machine_id);
+  }
 
-    if (payload.created_by) {
-        baseWhereYesterday.operator = Number(payload.created_by);
-    }
+  if (payload.created_by) {
+    baseWhereYesterday.operator = Number(payload.created_by);
+  }
 
-    const processedItemsYesterday = await prisma.cutListMachineMapping.findMany({
-        where: baseWhereYesterday,
+  const processedItemsYesterday = await prisma.cutListMachineMapping.findMany({
+    where: baseWhereYesterday,
+    select: {
+      cut_list: {
         select: {
-            cut_list: {
-                select: {
-                    length: true,
-                    width: true,
-                },
-            },
+          length: true,
+          width: true,
         },
-    });
+      },
+    },
+  });
 
-    const yesterdaySqft = Math.round(
-        processedItemsYesterday.reduce((sum, item) => {
-            const length = Number(item.cut_list?.length ?? 0);
-            const width = Number(item.cut_list?.width ?? 0);
-            return sum + (length * width) / 92903;
-        }, 0) * 100
-    ) / 100;
-
-
-    const sqftChange =
-        yesterdaySqft > 0
-            ? Math.round(((totalSqft - yesterdaySqft) / yesterdaySqft) * 100)
-            : 0;
-
-    const sqftTrend = totalSqft >= yesterdaySqft ? 'up' : 'down';
-
-    const sqftSubtitle = `${sqftTrend === 'up' ? '↑' : '↓'} ${Math.abs(
-        totalSqft - yesterdaySqft
-    ).toFixed(2)} sqft`;
+  const yesterdaySqft = Math.round(
+    processedItemsYesterday.reduce((sum, item) => {
+      const length = Number(item.cut_list?.length ?? 0);
+      const width = Number(item.cut_list?.width ?? 0);
+      return sum + (length * width) / 92903;
+    }, 0) * 100
+  ) / 100;
 
 
-    const itemsYesterday = await prisma.cutListMachineMapping.count({
-        where: baseWhereYesterday,
-    });
+  const sqftChange =
+    yesterdaySqft > 0
+      ? Math.round(((totalSqft - yesterdaySqft) / yesterdaySqft) * 100)
+      : 0;
 
-    const itemsChange = itemsYesterday > 0
-        ? Math.round(((itemsToday - itemsYesterday) / itemsYesterday) * 100)
-        : 0;
+  const sqftTrend = totalSqft >= yesterdaySqft ? 'up' : 'down';
 
-    const totalMachines = await prisma.machineMaster.count({
-        where: {
-            vendor_id: payload.vendor_id, // or just vendor_id if variable name matches
-        },
-    });
-    const activeMachines = await prisma.machineMaster.count({
-        where: {
-            status: 'ACTIVE',
-            vendor_id: payload.vendor_id
-        }
-    });
+  const sqftSubtitle = `${sqftTrend === 'up' ? '↑' : '↓'} ${Math.abs(
+    totalSqft - yesterdaySqft
+  ).toFixed(2)} sqft`;
 
-    const machineUtilization = totalMachines > 0
-        ? Math.round((activeMachines / totalMachines) * 100)
-        : 0;
 
-    const totalOperators = await prisma.userMaster.count({
-        where: {
-            status: 'active',
-            vendor_id: payload.vendor_id
-        }
-    });
+  const itemsYesterday = await prisma.cutListMachineMapping.count({
+    where: baseWhereYesterday,
+  });
 
-    const activeOperatorGroups = await prisma.userMachineMapping.groupBy({
-        by: ['user_id'],
-        where: {
-            status: 'ACTIVE',
-            vendor_id: payload.vendor_id,
-        },
-    });
+  const itemsChange = itemsYesterday > 0
+    ? Math.round(((itemsToday - itemsYesterday) / itemsYesterday) * 100)
+    : 0;
 
-    const activeOperatorMappings = activeOperatorGroups.length;
+  const totalMachines = await prisma.machineMaster.count({
+    where: {
+      vendor_id: payload.vendor_id, // or just vendor_id if variable name matches
+    },
+  });
+  const activeMachines = await prisma.machineMaster.count({
+    where: {
+      status: 'ACTIVE',
+      vendor_id: payload.vendor_id
+    }
+  });
 
-    const operatorAvailability = totalOperators > 0
-        ? Math.round((activeOperatorMappings / totalOperators) * 100)
-        : 0;
+  const machineUtilization = totalMachines > 0
+    ? Math.round((activeMachines / totalMachines) * 100)
+    : 0;
 
-    return {
-        totalItemsProcessed: {
-            value: itemsToday,
-            change: `${itemsChange >= 0 ? '+' : ''}${itemsChange}% vs yesterday`,
-            subtitle: `${itemsChange >= 0 ? '↑' : '↓'} ${Math.abs(itemsToday - itemsYesterday)}`,
-            trend: itemsChange >= 0 ? 'up' : 'down',
-            sqft: {
-                value: totalSqft,
-                change: `${sqftChange >= 0 ? '+' : ''}${sqftChange}% vs yesterday`,
-                subtitle: sqftSubtitle,
-                trend: sqftTrend,
-            },
+  const totalOperators = await prisma.userMaster.count({
+    where: {
+      status: 'active',
+      vendor_id: payload.vendor_id
+    }
+  });
 
-        },
-        activeMachines: {
-            value: `${activeMachines}/${totalMachines}`,
-            change: `${machineUtilization}% utilization`,
-            subtitle: `${totalMachines - activeMachines} idle`,
-            trend: 'neutral',
-        },
-        activeOperators: {
-            value: `${activeOperatorMappings}/${totalOperators}`,
-            change: `${operatorAvailability}% availability`,
-            subtitle: `${totalOperators - activeOperatorMappings} available`,
-            trend: 'neutral',
-        },
-    };
+  const activeOperatorGroups = await prisma.userMachineMapping.groupBy({
+    by: ['user_id'],
+    where: {
+      status: 'ACTIVE',
+      vendor_id: payload.vendor_id,
+    },
+  });
+
+  const activeOperatorMappings = activeOperatorGroups.length;
+
+  const operatorAvailability = totalOperators > 0
+    ? Math.round((activeOperatorMappings / totalOperators) * 100)
+    : 0;
+
+  return {
+    totalItemsProcessed: {
+      value: itemsToday,
+      change: `${itemsChange >= 0 ? '+' : ''}${itemsChange}% vs yesterday`,
+      subtitle: `${itemsChange >= 0 ? '↑' : '↓'} ${Math.abs(itemsToday - itemsYesterday)}`,
+      trend: itemsChange >= 0 ? 'up' : 'down',
+      sqft: {
+        value: totalSqft,
+        change: `${sqftChange >= 0 ? '+' : ''}${sqftChange}% vs yesterday`,
+        subtitle: sqftSubtitle,
+        trend: sqftTrend,
+      },
+
+    },
+    activeMachines: {
+      value: `${activeMachines}/${totalMachines}`,
+      change: `${machineUtilization}% utilization`,
+      subtitle: `${totalMachines - activeMachines} idle`,
+      trend: 'neutral',
+    },
+    activeOperators: {
+      value: `${activeOperatorMappings}/${totalOperators}`,
+      change: `${operatorAvailability}% availability`,
+      subtitle: `${totalOperators - activeOperatorMappings} available`,
+      trend: 'neutral',
+    },
+  };
 
 
 };
@@ -678,115 +1046,115 @@ export const getKPIS = async (payload: TrackTraceDashboardPayload) => {
 
 export const getRealTimeItemTracking = async (payload: TrackTraceDashboardPayload) => {
 
-    // const searchParams = request.nextUrl.searchParams;
-    const project = payload.project_id;
-    const machine = payload.machine_id;
-    const operator = payload.created_by;
-    const vendor_id = payload.vendor_id;
+  // const searchParams = request.nextUrl.searchParams;
+  const project = payload.project_id;
+  const machine = payload.machine_id;
+  const operator = payload.created_by;
+  const vendor_id = payload.vendor_id;
 
-    const baseWhere: any = {
-        vendor_id: vendor_id,
-        actual_in_at: {
-            not: null,
-        },
-    };
+  const baseWhere: any = {
+    vendor_id: vendor_id,
+    actual_in_at: {
+      not: null,
+    },
+  };
 
-    console.log("payload.project_id", payload.project_id);
-    if (payload.project_id) {
-        baseWhere.project_id = Number(payload.project_id);
-    }
+  console.log("payload.project_id", payload.project_id);
+  if (payload.project_id) {
+    baseWhere.project_id = Number(payload.project_id);
+  }
 
-    if (payload.machine_id) {
-        baseWhere.machine_id = Number(payload.machine_id);
-    }
+  if (payload.machine_id) {
+    baseWhere.machine_id = Number(payload.machine_id);
+  }
 
-    if (payload.created_by) {
-        baseWhere.operator = Number(payload.created_by);
-    }
+  if (payload.created_by) {
+    baseWhere.operator = Number(payload.created_by);
+  }
 
 
 
-    const result = await prisma.cutListMachineMapping.findMany({
-        where: baseWhere,
+  const result = await prisma.cutListMachineMapping.findMany({
+    where: baseWhere,
+    select: {
+      id: true,
+      actual_in_at: true,
+      sequence_no: true,
+
+      cut_list: {
         select: {
-            id: true,
-            actual_in_at: true,
-            sequence_no: true,
-
-            cut_list: {
-                select: {
-                    item_name: true,
-                    material_details: true,
-                    description: true,
-                },
-            },
-
-            machine: {
-                select: {
-                    machine_name: true,
-                    image_path: true,
-                },
-            },
-
-            operator: {
-                select: {
-                    user_name: true,
-                },
-            },
-
-            project: {
-                select: {
-                    project_name: true,
-                },
-            },
-
-            lead: {
-                select: {
-                    lead_code: true,
-                },
-            },
+          item_name: true,
+          material_details: true,
+          description: true,
         },
-        orderBy: {
-            actual_in_at: 'desc',
+      },
+
+      machine: {
+        select: {
+          machine_name: true,
+          image_path: true,
         },
-        take: 10,
-    });
+      },
+
+      operator: {
+        select: {
+          user_name: true,
+        },
+      },
+
+      project: {
+        select: {
+          project_name: true,
+        },
+      },
+
+      lead: {
+        select: {
+          lead_code: true,
+        },
+      },
+    },
+    orderBy: {
+      actual_in_at: 'desc',
+    },
+    take: 10,
+  });
 
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
-    const formattedResult = result.map(item => {
-        const date = new Date(item.actual_in_at ?? new Date());
-        const isToday = date >= today;
 
-        const formattedDate = isToday
-            ? date.toLocaleTimeString('en-IN', {
-                hour: 'numeric',
-                minute: '2-digit',
-                hour12: true,
-                timeZone: 'Asia/Kolkata',
-            })
-            : date.toLocaleString('en-IN', {
-                day: 'numeric',
-                month: 'short',
-                year: '2-digit',
-                hour: 'numeric',
-                minute: '2-digit',
-                hour12: true,
-                timeZone: 'Asia/Kolkata',
-            });
+  const formattedResult = result.map(item => {
+    const date = new Date(item.actual_in_at ?? new Date());
+    const isToday = date >= today;
 
-        return {
-            ...item,
-            actual_in_at_formatted: formattedDate,
-        };
-    });
+    const formattedDate = isToday
+      ? date.toLocaleTimeString('en-IN', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+        timeZone: 'Asia/Kolkata',
+      })
+      : date.toLocaleString('en-IN', {
+        day: 'numeric',
+        month: 'short',
+        year: '2-digit',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+        timeZone: 'Asia/Kolkata',
+      });
 
-    console.log("********************************************");
-    console.log(formattedResult);
-    return formattedResult;
+    return {
+      ...item,
+      actual_in_at_formatted: formattedDate,
+    };
+  });
+
+  console.log("********************************************");
+  console.log(formattedResult);
+  return formattedResult;
 
 
 
@@ -796,847 +1164,847 @@ export const getRealTimeItemTracking = async (payload: TrackTraceDashboardPayloa
 
 
 export const getMachineStatus1 = async (payload: TrackTraceDashboardPayload) => {
-    try {
-        const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
+  try {
+    const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
 
-        const machines = await prisma.machineMaster.findMany({
-            include: {
-                userMachineMappings: {
-                    where: {
-                        status: 'ACTIVE'
-                    },
-                    include: {
-                        user: {
-                            select: {
-                                user_name: true,
-                                id: true
-                            }
-                        }
-                    },
-                    take: 1
-                }
-            },
-            orderBy: {
-                machine_name: 'asc'
+    const machines = await prisma.machineMaster.findMany({
+      include: {
+        userMachineMappings: {
+          where: {
+            status: 'ACTIVE'
+          },
+          include: {
+            user: {
+              select: {
+                user_name: true,
+                id: true
+              }
             }
+          },
+          take: 1
+        }
+      },
+      orderBy: {
+        machine_name: 'asc'
+      }
+    });
+
+    // Calculate utilization for each machine
+    const machinesWithUtilization = await Promise.all(
+      machines.map(async (machine) => {
+        // Get all scans for this machine today, ordered by time
+        const todayScans = await prisma.cutListMachineMapping.findMany({
+          where: {
+            machine_id: machine.id,
+            actual_in_at: {
+              gte: todayStart
+            }
+          },
+          orderBy: {
+            actual_in_at: 'asc'
+          },
+          select: {
+            id: true,
+            actual_in_at: true,
+            cut_list_id: true,
+          }
         });
 
-        // Calculate utilization for each machine
-        const machinesWithUtilization = await Promise.all(
-            machines.map(async (machine) => {
-                // Get all scans for this machine today, ordered by time
-                const todayScans = await prisma.cutListMachineMapping.findMany({
-                    where: {
-                        machine_id: machine.id,
-                        actual_in_at: {
-                            gte: todayStart
-                        }
-                    },
-                    orderBy: {
-                        actual_in_at: 'asc'
-                    },
-                    select: {
-                        id: true,
-                        actual_in_at: true,
-                        cut_list_id: true,
-                    }
-                });
+        // Calculate active time by pairing IN and OUT scans
+        let totalActiveSeconds = 0;
+        const itemSessions = new Map<string, Date>(); // cutListId -> last IN time
 
-                // Calculate active time by pairing IN and OUT scans
-                let totalActiveSeconds = 0;
-                const itemSessions = new Map<string, Date>(); // cutListId -> last IN time
+        for (const scan of todayScans) {
+          const timestamp = scan.actual_in_at;
+          if (timestamp != null) {
+            itemSessions.set(String(scan.cut_list_id), timestamp);
+          }
+        }
 
-                for (const scan of todayScans) {
-                    const timestamp = scan.actual_in_at;
-                    if (timestamp != null) {
-                        itemSessions.set(String(scan.cut_list_id), timestamp);
-                    }
-                }
+        // Add time for items currently in process (IN but not OUT yet)
+        const now = new Date();
+        itemSessions.forEach((startTime) => {
+          const duration = (now.getTime() - startTime.getTime()) / 1000;
+          totalActiveSeconds += duration;
+        });
 
-                // Add time for items currently in process (IN but not OUT yet)
-                const now = new Date();
-                itemSessions.forEach((startTime) => {
-                    const duration = (now.getTime() - startTime.getTime()) / 1000;
-                    totalActiveSeconds += duration;
-                });
+        // Calculate utilization
+        const workingSeconds = 8 * 60 * 60; // 8 hours
+        const utilization = machine.status === 'MAINTENANCE' || machine.status === 'INACTIVE'
+          ? 0
+          : Math.min(Math.round((totalActiveSeconds / workingSeconds) * 100), 100);
 
-                // Calculate utilization
-                const workingSeconds = 8 * 60 * 60; // 8 hours
-                const utilization = machine.status === 'MAINTENANCE' || machine.status === 'INACTIVE'
-                    ? 0
-                    : Math.min(Math.round((totalActiveSeconds / workingSeconds) * 100), 100);
+        // Check if currently processing (has items with IN scan but no matching OUT)
+        const currentlyProcessing = itemSessions.size > 0;
 
-                // Check if currently processing (has items with IN scan but no matching OUT)
-                const currentlyProcessing = itemSessions.size > 0;
+        // Count completed items today (items that have both IN and OUT scans)
+        const completedItems = await prisma.cutListMachineMapping.groupBy({
+          by: ['cut_list_id'],
+          where: {
+            machine_id: machine.id,
+            actual_in_at: {
+              gte: todayStart
+            }
+          }
+        });
 
-                // Count completed items today (items that have both IN and OUT scans)
-                const completedItems = await prisma.cutListMachineMapping.groupBy({
-                    by: ['cut_list_id'],
-                    where: {
-                        machine_id: machine.id,
-                        actual_in_at: {
-                            gte: todayStart
-                        }
-                    }
-                });
+        const operator = machine.userMachineMappings[0]?.user
+          ? `${machine.userMachineMappings[0].user.user_name}`
+          : undefined;
 
-                const operator = machine.userMachineMappings[0]?.user
-                    ? `${machine.userMachineMappings[0].user.user_name}`
-                    : undefined;
+        return {
+          id: machine.id,
+          name: machine.machine_name,
+          status: currentlyProcessing && machine.status === 'ACTIVE'
+            ? 'ACTIVE'
+            : machine.status === 'ACTIVE'
+              ? 'IDLE'
+              : machine.status,
+          operator,
+          utilization,
+          itemsProcessedToday: completedItems.length
+        };
+      })
+    );
 
-                return {
-                    id: machine.id,
-                    name: machine.machine_name,
-                    status: currentlyProcessing && machine.status === 'ACTIVE'
-                        ? 'ACTIVE'
-                        : machine.status === 'ACTIVE'
-                            ? 'IDLE'
-                            : machine.status,
-                    operator,
-                    utilization,
-                    itemsProcessedToday: completedItems.length
-                };
-            })
-        );
-
-        machinesWithUtilization.sort(
-            (a, b) => b.utilization - a.utilization
-        );
-        return machinesWithUtilization;
-    } catch (error) {
-        console.error('Error fetching machines:', error);
-    }
+    machinesWithUtilization.sort(
+      (a, b) => b.utilization - a.utilization
+    );
+    return machinesWithUtilization;
+  } catch (error) {
+    console.error('Error fetching machines:', error);
+  }
 };
 
 
 export const getHourlyProduction1 = async (payload: TrackTraceDashboardPayload) => {
 
-    try {
-        const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
-        const hours = [];
-        const labels = [];
-        const data = [];
+  try {
+    const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
+    const hours = [];
+    const labels = [];
+    const data = [];
 
-        for (let hour = 8; hour <= 20; hour++) {
-            const hourStart = new Date(todayStart);
-            hourStart.setHours(hour, 0, 0, 0);
+    for (let hour = 8; hour <= 20; hour++) {
+      const hourStart = new Date(todayStart);
+      hourStart.setHours(hour, 0, 0, 0);
 
-            const hourEnd = new Date(todayStart);
-            hourEnd.setHours(hour + 1, 0, 0, 0);
+      const hourEnd = new Date(todayStart);
+      hourEnd.setHours(hour + 1, 0, 0, 0);
 
-            const count = await prisma.cutListMachineMapping.count({
-                where: {
-                    actual_in_at: {
-                        gte: hourStart,
-                        lt: hourEnd,
-                        not: null
-                    }
-                }
-            });
-
-            const hourLabel = hour === 12
-                ? '12 PM'
-                : hour > 12
-                    ? `${hour - 12} PM`
-                    : `${hour} AM`;
-
-            labels.push(hourLabel);
-            data.push(count);
+      const count = await prisma.cutListMachineMapping.count({
+        where: {
+          actual_in_at: {
+            gte: hourStart,
+            lt: hourEnd,
+            not: null
+          }
         }
+      });
 
-        // Target is 60 items per hour
-        const target = new Array(labels.length).fill(60);
+      const hourLabel = hour === 12
+        ? '12 PM'
+        : hour > 12
+          ? `${hour - 12} PM`
+          : `${hour} AM`;
 
-        return {
-            labels,
-            datasets: [
-                {
-                    label: 'Items Processed',
-                    data,
-                    borderColor: '#111827',
-                    backgroundColor: 'rgba(17, 24, 39, 0.1)',
-                },
-                {
-                    label: 'Target',
-                    data: target,
-                    borderColor: '#9CA3AF',
-                    backgroundColor: 'transparent',
-                }
-            ]
-        };
-    } catch (error) {
-        console.error('Error fetching hourly production:', error);
+      labels.push(hourLabel);
+      data.push(count);
     }
+
+    // Target is 60 items per hour
+    const target = new Array(labels.length).fill(60);
+
+    return {
+      labels,
+      datasets: [
+        {
+          label: 'Items Processed',
+          data,
+          borderColor: '#111827',
+          backgroundColor: 'rgba(17, 24, 39, 0.1)',
+        },
+        {
+          label: 'Target',
+          data: target,
+          borderColor: '#9CA3AF',
+          backgroundColor: 'transparent',
+        }
+      ]
+    };
+  } catch (error) {
+    console.error('Error fetching hourly production:', error);
+  }
 };
 
 export const getHourlyProduction = async (
-    payload: TrackTraceDashboardPayload
+  payload: TrackTraceDashboardPayload
 ) => {
-    try {
-        const timeZone = 'Asia/Kolkata';
+  try {
+    const timeZone = 'Asia/Kolkata';
 
-        // Today's date in vendor timezone
-        const todayStr = new Date().toLocaleDateString('en-CA', { timeZone }); // "2025-04-08"
+    // Today's date in vendor timezone
+    const todayStr = new Date().toLocaleDateString('en-CA', { timeZone }); // "2025-04-08"
 
-        // Get vendor's UTC offset in ms
-        // e.g. Asia/Kolkata = +5:30 = +19800000ms
-        const offsetMs = (() => {
-            const utcDate = new Date(`${todayStr}T12:00:00Z`);
-            const localStr = utcDate.toLocaleString('en-CA', { timeZone, hour12: false })
-                .replace(',', '');
-            const localDate = new Date(localStr + 'Z');
-            return localDate.getTime() - utcDate.getTime();
-        })();
+    // Get vendor's UTC offset in ms
+    // e.g. Asia/Kolkata = +5:30 = +19800000ms
+    const offsetMs = (() => {
+      const utcDate = new Date(`${todayStr}T12:00:00Z`);
+      const localStr = utcDate.toLocaleString('en-CA', { timeZone, hour12: false })
+        .replace(',', '');
+      const localDate = new Date(localStr + 'Z');
+      return localDate.getTime() - utcDate.getTime();
+    })();
 
-        const labels: string[] = [];
-        const data: number[] = [];
+    const labels: string[] = [];
+    const data: number[] = [];
 
-        for (let hour = 8; hour <= 20; hour++) {
-            // Build hour boundaries as if in vendor timezone, then shift to UTC
-            const hourStartUTC = new Date(
-                new Date(`${todayStr}T${String(hour).padStart(2, '0')}:00:00Z`).getTime() - offsetMs
-            );
-            const hourEndUTC = new Date(
-                new Date(`${todayStr}T${String(hour + 1).padStart(2, '0')}:00:00Z`).getTime() - offsetMs
-            );
+    for (let hour = 8; hour <= 20; hour++) {
+      // Build hour boundaries as if in vendor timezone, then shift to UTC
+      const hourStartUTC = new Date(
+        new Date(`${todayStr}T${String(hour).padStart(2, '0')}:00:00Z`).getTime() - offsetMs
+      );
+      const hourEndUTC = new Date(
+        new Date(`${todayStr}T${String(hour + 1).padStart(2, '0')}:00:00Z`).getTime() - offsetMs
+      );
 
-            const baseWhere: any = {
-                vendor_id: payload.vendor_id,
-                actual_in_at: {
-                    gte: hourStartUTC,
-                    lt: hourEndUTC,
-                    not: null,
-                },
-            };
+      const baseWhere: any = {
+        vendor_id: payload.vendor_id,
+        actual_in_at: {
+          gte: hourStartUTC,
+          lt: hourEndUTC,
+          not: null,
+        },
+      };
 
-            if (payload.project_id) baseWhere.project_id = Number(payload.project_id);
-            if (payload.machine_id) baseWhere.machine_id = Number(payload.machine_id);
-            if (payload.created_by) baseWhere.operator = Number(payload.created_by);
+      if (payload.project_id) baseWhere.project_id = Number(payload.project_id);
+      if (payload.machine_id) baseWhere.machine_id = Number(payload.machine_id);
+      if (payload.created_by) baseWhere.operator = Number(payload.created_by);
 
-            const scans = await prisma.cutListMachineMapping.findMany({
-                where: baseWhere,
-                include: {
-                    cut_list: {
-                        select: {
-                            length: true,
-                            width: true,
-                        },
-                    },
-                },
-            });
+      const scans = await prisma.cutListMachineMapping.findMany({
+        where: baseWhere,
+        include: {
+          cut_list: {
+            select: {
+              length: true,
+              width: true,
+            },
+          },
+        },
+      });
 
-            let sqftThisHour = 0;
-            for (const scan of scans) {
-                if (!scan.cut_list) continue;
-                sqftThisHour +=
-                    (Number(scan.cut_list.length) * Number(scan.cut_list.width)) / 92903;
-            }
+      let sqftThisHour = 0;
+      for (const scan of scans) {
+        if (!scan.cut_list) continue;
+        sqftThisHour +=
+          (Number(scan.cut_list.length) * Number(scan.cut_list.width)) / 92903;
+      }
 
-            const hourLabel =
-                hour === 12 ? '12 PM' : hour > 12 ? `${hour - 12} PM` : `${hour} AM`;
+      const hourLabel =
+        hour === 12 ? '12 PM' : hour > 12 ? `${hour - 12} PM` : `${hour} AM`;
 
-            labels.push(hourLabel);
-            data.push(Math.round(sqftThisHour * 100) / 100);
-        }
-
-        const targetSqftPerHour = 500;
-        const target = new Array(labels.length).fill(targetSqftPerHour);
-
-        return {
-            labels,
-            datasets: [
-                {
-                    label: 'SQFT Processed',
-                    data,
-                    borderColor: '#111827',
-                    backgroundColor: 'rgba(17, 24, 39, 0.1)',
-                },
-                {
-                    label: 'Target SQFT',
-                    data: target,
-                    borderColor: '#9CA3AF',
-                    backgroundColor: 'transparent',
-                    borderDash: [6, 6],
-                },
-            ],
-        };
-    } catch (error) {
-        console.error('Error fetching hourly production:', error);
-        throw error;
+      labels.push(hourLabel);
+      data.push(Math.round(sqftThisHour * 100) / 100);
     }
+
+    const targetSqftPerHour = 500;
+    const target = new Array(labels.length).fill(targetSqftPerHour);
+
+    return {
+      labels,
+      datasets: [
+        {
+          label: 'SQFT Processed',
+          data,
+          borderColor: '#111827',
+          backgroundColor: 'rgba(17, 24, 39, 0.1)',
+        },
+        {
+          label: 'Target SQFT',
+          data: target,
+          borderColor: '#9CA3AF',
+          backgroundColor: 'transparent',
+          borderDash: [6, 6],
+        },
+      ],
+    };
+  } catch (error) {
+    console.error('Error fetching hourly production:', error);
+    throw error;
+  }
 };
 
 
 export const getMachineUtilization1 = async (payload: TrackTraceDashboardPayload) => {
-    try {
-        const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
+  try {
+    const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
 
-        // Get all machines
-        const machines = await prisma.machineMaster.findMany({
-            select: {
-                id: true,
-                machine_name: true,
-                status: true
-            }
-        });
+    // Get all machines
+    const machines = await prisma.machineMaster.findMany({
+      select: {
+        id: true,
+        machine_name: true,
+        status: true
+      }
+    });
 
-        // Group machines by type (extracted from name)
-        const machineTypes = new Map<string, { total: number; active: number }>();
+    // Group machines by type (extracted from name)
+    const machineTypes = new Map<string, { total: number; active: number }>();
 
-        for (const machine of machines) {
-            // Extract type from name (e.g., "CNC Router #1" -> "CNC Router")
-            const typeMatch = machine.machine_name.match(/^(.*?)\s*#?\d*$/);
-            const type = typeMatch ? typeMatch[1].trim() : machine.machine_name;
+    for (const machine of machines) {
+      // Extract type from name (e.g., "CNC Router #1" -> "CNC Router")
+      const typeMatch = machine.machine_name.match(/^(.*?)\s*#?\d*$/);
+      const type = typeMatch ? typeMatch[1].trim() : machine.machine_name;
 
-            if (!machineTypes.has(type)) {
-                machineTypes.set(type, { total: 0, active: 0 });
-            }
+      if (!machineTypes.has(type)) {
+        machineTypes.set(type, { total: 0, active: 0 });
+      }
 
-            const stats = machineTypes.get(type)!;
+      const stats = machineTypes.get(type)!;
 
-            // Get all scans for this machine today
-            const scans = await prisma.cutListMachineMapping.findMany({
-                where: {
-                    machine_id: machine.id,
-                    actual_in_at: {
-                        gte: todayStart
-                    }
-                },
-                orderBy: {
-                    actual_in_at: 'asc'
-                },
-                select: {
-                    cut_list_id: true,
-                    actual_in_at: true,
-                    actual_out_at: true,
-                    created_at: true
-                }
-            });
-
-            // Calculate active time by pairing IN and OUT scans
-            const itemSessions = new Map<string, Date>();
-            let activeSeconds = 0;
-
-            for (const scan of scans) {
-                // Use actual_in_at if available, otherwise created_at
-                const timestamp = scan.actual_in_at || scan.created_at;
-
-                itemSessions.set(String(scan.cut_list_id), timestamp);
-            }
-
-            // Add time for items currently in process (IN but not OUT yet)
-            const now = new Date();
-            itemSessions.forEach((startTime) => {
-                const duration = (now.getTime() - startTime.getTime()) / 1000;
-                activeSeconds += duration;
-            });
-
-            // Calculate utilization
-            const workingSeconds = 8 * 60 * 60; // 8 hours
-            const utilization = machine.status === 'MAINTENANCE' || machine.status === 'INACTIVE'
-                ? 0
-                : Math.min(Math.round((activeSeconds / workingSeconds) * 100), 100);
-
-            stats.total += utilization;
-            stats.active += 1;
+      // Get all scans for this machine today
+      const scans = await prisma.cutListMachineMapping.findMany({
+        where: {
+          machine_id: machine.id,
+          actual_in_at: {
+            gte: todayStart
+          }
+        },
+        orderBy: {
+          actual_in_at: 'asc'
+        },
+        select: {
+          cut_list_id: true,
+          actual_in_at: true,
+          actual_out_at: true,
+          created_at: true
         }
+      });
 
-        // Calculate average utilization per type
-        const labels: string[] = [];
-        const data: number[] = [];
-        const colors: string[] = [];
+      // Calculate active time by pairing IN and OUT scans
+      const itemSessions = new Map<string, Date>();
+      let activeSeconds = 0;
 
-        const colorPalette = [
-            '#111827', '#1F2937', '#374151', '#4B5563', '#6B7280', '#9CA3AF'
-        ];
+      for (const scan of scans) {
+        // Use actual_in_at if available, otherwise created_at
+        const timestamp = scan.actual_in_at || scan.created_at;
 
-        let colorIndex = 0;
-        machineTypes.forEach((stats, type) => {
-            labels.push(type);
-            const avgUtilization = stats.active > 0
-                ? Math.round(stats.total / stats.active)
-                : 0;
-            data.push(avgUtilization);
-            colors.push(colorPalette[colorIndex % colorPalette.length]);
-            colorIndex++;
-        });
+        itemSessions.set(String(scan.cut_list_id), timestamp);
+      }
 
-        return {
-            labels,
-            datasets: [
-                {
-                    label: 'Utilization %',
-                    data,
-                    backgroundColor: colors,
-                }
-            ]
-        };
-    } catch (error) {
-        console.error('Error fetching machine utilization:', error);
-        throw new Error('Failed to fetch machine utilization data');
+      // Add time for items currently in process (IN but not OUT yet)
+      const now = new Date();
+      itemSessions.forEach((startTime) => {
+        const duration = (now.getTime() - startTime.getTime()) / 1000;
+        activeSeconds += duration;
+      });
+
+      // Calculate utilization
+      const workingSeconds = 8 * 60 * 60; // 8 hours
+      const utilization = machine.status === 'MAINTENANCE' || machine.status === 'INACTIVE'
+        ? 0
+        : Math.min(Math.round((activeSeconds / workingSeconds) * 100), 100);
+
+      stats.total += utilization;
+      stats.active += 1;
     }
+
+    // Calculate average utilization per type
+    const labels: string[] = [];
+    const data: number[] = [];
+    const colors: string[] = [];
+
+    const colorPalette = [
+      '#111827', '#1F2937', '#374151', '#4B5563', '#6B7280', '#9CA3AF'
+    ];
+
+    let colorIndex = 0;
+    machineTypes.forEach((stats, type) => {
+      labels.push(type);
+      const avgUtilization = stats.active > 0
+        ? Math.round(stats.total / stats.active)
+        : 0;
+      data.push(avgUtilization);
+      colors.push(colorPalette[colorIndex % colorPalette.length]);
+      colorIndex++;
+    });
+
+    return {
+      labels,
+      datasets: [
+        {
+          label: 'Utilization %',
+          data,
+          backgroundColor: colors,
+        }
+      ]
+    };
+  } catch (error) {
+    console.error('Error fetching machine utilization:', error);
+    throw new Error('Failed to fetch machine utilization data');
+  }
 };
 
 
 export const getMachineUtilization = async (
-    payload: TrackTraceDashboardPayload
+  payload: TrackTraceDashboardPayload
 ) => {
-    try {
-        const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
-        const now = new Date();
+  try {
+    const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
+    const now = new Date();
 
-        // configurable benchmark (important)
-        const WORKING_SECONDS = 8 * 60 * 60;
-        const EXPECTED_SQFT_PER_MACHINE = 500; // tune per factory
+    // configurable benchmark (important)
+    const WORKING_SECONDS = 8 * 60 * 60;
+    const EXPECTED_SQFT_PER_MACHINE = 500; // tune per factory
 
-        const baseWhere: any = {
-            vendor_id: payload.vendor_id,
-        };
+    const baseWhere: any = {
+      vendor_id: payload.vendor_id,
+    };
 
-        // if (payload.project_id) {
-        //     baseWhere.project_id = Number(payload.project_id);
-        // }
+    // if (payload.project_id) {
+    //     baseWhere.project_id = Number(payload.project_id);
+    // }
 
-        if (payload.machine_id) {
-            baseWhere.id = Number(payload.machine_id);
-        }
-
-        // if (payload.created_by) {
-        //     baseWhere.operator = Number(payload.created_by);
-        // }
-
-        const machines = await prisma.machineMaster.findMany({
-            where: baseWhere,
-            select: {
-                id: true,
-                machine_name: true,
-                status: true,
-            },
-        });
-
-        console.log("=============");
-        console.log(machines)
-
-        const machineTypes = new Map<
-            string,
-            { weightedSeconds: number; count: number }
-        >();
-
-        for (const machine of machines) {
-            const typeMatch = machine.machine_name.match(/^(.*?)\s*#?\d*$/);
-            const type = typeMatch ? typeMatch[1].trim() : machine.machine_name;
-
-            if (!machineTypes.has(type)) {
-                machineTypes.set(type, { weightedSeconds: 0, count: 0 });
-            }
-
-            if (machine.status !== 'ACTIVE') continue;
-
-            const scans = await prisma.cutListMachineMapping.findMany({
-                where: {
-                    machine_id: machine.id,
-                    actual_in_at: { gte: todayStart },
-                },
-                orderBy: { actual_in_at: 'asc' },
-                include: {
-                    cut_list: {
-                        select: {
-                            length: true,
-                            width: true,
-                        },
-                    },
-                },
-            });
-
-            //   console.log(scans);
-
-            let weightedActiveSeconds = 0;
-
-            for (let i = 0; i < scans.length; i++) {
-                const current = scans[i];
-                const next = scans[i + 1];
-
-                if (!current.actual_in_at || !current.cut_list) continue;
-
-                const start = current.actual_in_at;
-                const end = next?.actual_in_at ?? now;
-
-                const durationSeconds =
-                    (end.getTime() - start.getTime()) / 1000;
-
-                const sqft =
-                    (Number(current.cut_list.length) * Number(current.cut_list.width)) / 92903;
-
-                weightedActiveSeconds += durationSeconds * sqft;
-                // console.log(weightedActiveSeconds);
-            }
-
-            const stats = machineTypes.get(type)!;
-            stats.weightedSeconds += weightedActiveSeconds;
-            stats.count += 1;
-        }
-
-        const labels: string[] = [];
-        const data: number[] = [];
-        const colors: string[] = [];
-
-        const colorPalette = [
-            '#111827',
-            '#1F2937',
-            '#374151',
-            '#4B5563',
-            '#6B7280',
-            '#9CA3AF',
-        ];
-
-        let colorIndex = 0;
-
-
-        machineTypes.forEach((stats, type) => {
-            const maxWeightedSeconds =
-                WORKING_SECONDS * EXPECTED_SQFT_PER_MACHINE * stats.count;
-
-            const utilization =
-                maxWeightedSeconds > 0
-                    ? Math.min(
-                        Math.round(
-                            (stats.weightedSeconds / maxWeightedSeconds) * 100
-                        ),
-                        100
-                    )
-                    : 0;
-
-            labels.push(type);
-            data.push(utilization);
-            colors.push(colorPalette[colorIndex % colorPalette.length]);
-            colorIndex++;
-        });
-
-        // console.log(data)
-
-        return {
-            labels,
-            datasets: [
-                {
-                    label: 'SQFT Weighted Utilization %',
-                    data,
-                    backgroundColor: colors,
-                },
-            ],
-        };
-    } catch (error) {
-        console.error('Error fetching machine utilization:', error);
-        throw new Error('Failed to fetch machine utilization data');
+    if (payload.machine_id) {
+      baseWhere.id = Number(payload.machine_id);
     }
+
+    // if (payload.created_by) {
+    //     baseWhere.operator = Number(payload.created_by);
+    // }
+
+    const machines = await prisma.machineMaster.findMany({
+      where: baseWhere,
+      select: {
+        id: true,
+        machine_name: true,
+        status: true,
+      },
+    });
+
+    console.log("=============");
+    console.log(machines)
+
+    const machineTypes = new Map<
+      string,
+      { weightedSeconds: number; count: number }
+    >();
+
+    for (const machine of machines) {
+      const typeMatch = machine.machine_name.match(/^(.*?)\s*#?\d*$/);
+      const type = typeMatch ? typeMatch[1].trim() : machine.machine_name;
+
+      if (!machineTypes.has(type)) {
+        machineTypes.set(type, { weightedSeconds: 0, count: 0 });
+      }
+
+      if (machine.status !== 'ACTIVE') continue;
+
+      const scans = await prisma.cutListMachineMapping.findMany({
+        where: {
+          machine_id: machine.id,
+          actual_in_at: { gte: todayStart },
+        },
+        orderBy: { actual_in_at: 'asc' },
+        include: {
+          cut_list: {
+            select: {
+              length: true,
+              width: true,
+            },
+          },
+        },
+      });
+
+      //   console.log(scans);
+
+      let weightedActiveSeconds = 0;
+
+      for (let i = 0; i < scans.length; i++) {
+        const current = scans[i];
+        const next = scans[i + 1];
+
+        if (!current.actual_in_at || !current.cut_list) continue;
+
+        const start = current.actual_in_at;
+        const end = next?.actual_in_at ?? now;
+
+        const durationSeconds =
+          (end.getTime() - start.getTime()) / 1000;
+
+        const sqft =
+          (Number(current.cut_list.length) * Number(current.cut_list.width)) / 92903;
+
+        weightedActiveSeconds += durationSeconds * sqft;
+        // console.log(weightedActiveSeconds);
+      }
+
+      const stats = machineTypes.get(type)!;
+      stats.weightedSeconds += weightedActiveSeconds;
+      stats.count += 1;
+    }
+
+    const labels: string[] = [];
+    const data: number[] = [];
+    const colors: string[] = [];
+
+    const colorPalette = [
+      '#111827',
+      '#1F2937',
+      '#374151',
+      '#4B5563',
+      '#6B7280',
+      '#9CA3AF',
+    ];
+
+    let colorIndex = 0;
+
+
+    machineTypes.forEach((stats, type) => {
+      const maxWeightedSeconds =
+        WORKING_SECONDS * EXPECTED_SQFT_PER_MACHINE * stats.count;
+
+      const utilization =
+        maxWeightedSeconds > 0
+          ? Math.min(
+            Math.round(
+              (stats.weightedSeconds / maxWeightedSeconds) * 100
+            ),
+            100
+          )
+          : 0;
+
+      labels.push(type);
+      data.push(utilization);
+      colors.push(colorPalette[colorIndex % colorPalette.length]);
+      colorIndex++;
+    });
+
+    // console.log(data)
+
+    return {
+      labels,
+      datasets: [
+        {
+          label: 'SQFT Weighted Utilization %',
+          data,
+          backgroundColor: colors,
+        },
+      ],
+    };
+  } catch (error) {
+    console.error('Error fetching machine utilization:', error);
+    throw new Error('Failed to fetch machine utilization data');
+  }
 };
 
 
 export const getMachineStatus = async (payload: TrackTraceDashboardPayload) => {
-    try {
-        const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
-        const now = new Date();
+  try {
+    const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
+    const now = new Date();
 
 
 
-        const baseWhere: any = {
-            vendor_id: payload.vendor_id,
-            status: 'ACTIVE'
+    const baseWhere: any = {
+      vendor_id: payload.vendor_id,
+      status: 'ACTIVE'
+    };
+
+    // if (payload.project_id) {
+    //     baseWhere.project_id = Number(payload.project_id);
+    // }
+
+    // const machineWhere: any = {
+    //     payload.machine_id;
+    // };
+
+    if (payload.machine_id) {
+      baseWhere.id = Number(payload.machine_id);
+    }
+
+    if (payload.created_by) {
+      baseWhere.operator = Number(payload.created_by);
+    }
+
+    const baseWhereMachine: any = {
+      vendor_id: payload.vendor_id,
+      status: 'ACTIVE'
+    };
+
+    if (payload.machine_id) {
+      baseWhereMachine.id = Number(payload.machine_id);
+    }
+
+
+
+
+    console.log("baseWhere", baseWhere);
+    const machines = await prisma.machineMaster.findMany({
+      where: baseWhereMachine,
+      include: {
+        userMachineMappings: {
+          where: baseWhere,
+          include: {
+            user: { select: { user_name: true, id: true } }
+          },
+          take: 1
+        }
+      },
+      orderBy: { machine_name: 'asc' }
+    });
+
+
+
+
+
+
+    // if (payload.project_id) {
+    //     baseWhere.project_id = Number(payload.project_id);
+    // }
+
+    // const machineWhere: any = {
+    //     payload.machine_id;
+    // };
+
+    if (payload.machine_id) {
+      baseWhere.id = Number(payload.machine_id);
+    }
+
+    if (payload.created_by) {
+      baseWhere.operator = Number(payload.created_by);
+    }
+
+
+
+    const machinesWithMetrics = await Promise.all(
+      machines.map(async (machine) => {
+
+        const baseWhereMatrics: any = {
+          vendor_id: payload.vendor_id,
+          machine_id: machine.id,
+          actual_in_at: { gte: todayStart }
         };
 
-        // if (payload.project_id) {
-        //     baseWhere.project_id = Number(payload.project_id);
-        // }
+        if (payload.project_id) {
+          baseWhereMatrics.project_id = Number(payload.project_id);
+        }
 
-        // const machineWhere: any = {
-        //     payload.machine_id;
-        // };
 
         if (payload.machine_id) {
-            baseWhere.id = Number(payload.machine_id);
+          baseWhereMatrics.id = Number(payload.machine_id);
         }
 
         if (payload.created_by) {
-            baseWhere.operator = Number(payload.created_by);
+          baseWhereMatrics.operator = Number(payload.created_by);
         }
 
-        const baseWhereMachine: any = {
-            vendor_id: payload.vendor_id,
-            status: 'ACTIVE'
-        };
-
-        if (payload.machine_id) {
-            baseWhereMachine.id = Number(payload.machine_id);
-        }
-
-
-
-
-        console.log("baseWhere", baseWhere);
-        const machines = await prisma.machineMaster.findMany({
-            where: baseWhereMachine,
-            include: {
-                userMachineMappings: {
-                    where: baseWhere,
-                    include: {
-                        user: { select: { user_name: true, id: true } }
-                    },
-                    take: 1
-                }
-            },
-            orderBy: { machine_name: 'asc' }
+        const scans = await prisma.cutListMachineMapping.findMany({
+          where: baseWhereMatrics,
+          orderBy: { actual_in_at: 'asc' },
+          include: {
+            cut_list: {
+              select: {
+                id: true,
+                length: true,
+                width: true
+              }
+            }
+          }
         });
 
+        let totalActiveSeconds = 0;
+        let sqftProcessedToday = 0;
+        let sqftInProcess = 0;
 
+        for (let i = 0; i < scans.length; i++) {
+          const current = scans[i];
+          const next = scans[i + 1];
 
+          if (!current.actual_in_at || !current.cut_list) continue;
 
+          const start = current.actual_in_at;
+          const end = next?.actual_in_at ?? now;
 
+          const durationSeconds =
+            (end.getTime() - start.getTime()) / 1000;
 
-        // if (payload.project_id) {
-        //     baseWhere.project_id = Number(payload.project_id);
-        // }
+          totalActiveSeconds += durationSeconds;
 
-        // const machineWhere: any = {
-        //     payload.machine_id;
-        // };
+          const sqft =
+            (Number(current.cut_list.length) * Number(current.cut_list.width)) / 92903;
 
-        if (payload.machine_id) {
-            baseWhere.id = Number(payload.machine_id);
+          if (next) {
+            sqftProcessedToday += sqft;
+          } else {
+            sqftInProcess += sqft;
+          }
         }
 
-        if (payload.created_by) {
-            baseWhere.operator = Number(payload.created_by);
-        }
+        const workingSeconds = 8 * 60 * 60;
 
+        const utilization =
+          machine.status !== 'ACTIVE'
+            ? 0
+            : Math.min(
+              Math.round((totalActiveSeconds / workingSeconds) * 100),
+              100
+            );
 
+        const operator = machine.userMachineMappings[0]?.user?.user_name;
 
-        const machinesWithMetrics = await Promise.all(
-            machines.map(async (machine) => {
+        return {
+          id: machine.id,
+          name: machine.machine_name,
+          status:
+            sqftInProcess > 0 && machine.status === 'ACTIVE'
+              ? 'ACTIVE'
+              : machine.status === 'ACTIVE'
+                ? 'IDLE'
+                : machine.status,
+          operator,
+          utilization,
+          sqftProcessedToday: Math.round(sqftProcessedToday * 100) / 100,
+          sqftInProcess: Math.round(sqftInProcess * 100) / 100
+        };
+      })
+    );
 
-                const baseWhereMatrics: any = {
-                    vendor_id: payload.vendor_id,
-                    machine_id: machine.id,
-                    actual_in_at: { gte: todayStart }
-                };
-
-                if (payload.project_id) {
-                    baseWhereMatrics.project_id = Number(payload.project_id);
-                }
-
-
-                if (payload.machine_id) {
-                    baseWhereMatrics.id = Number(payload.machine_id);
-                }
-
-                if (payload.created_by) {
-                    baseWhereMatrics.operator = Number(payload.created_by);
-                }
-
-                const scans = await prisma.cutListMachineMapping.findMany({
-                    where: baseWhereMatrics,
-                    orderBy: { actual_in_at: 'asc' },
-                    include: {
-                        cut_list: {
-                            select: {
-                                id: true,
-                                length: true,
-                                width: true
-                            }
-                        }
-                    }
-                });
-
-                let totalActiveSeconds = 0;
-                let sqftProcessedToday = 0;
-                let sqftInProcess = 0;
-
-                for (let i = 0; i < scans.length; i++) {
-                    const current = scans[i];
-                    const next = scans[i + 1];
-
-                    if (!current.actual_in_at || !current.cut_list) continue;
-
-                    const start = current.actual_in_at;
-                    const end = next?.actual_in_at ?? now;
-
-                    const durationSeconds =
-                        (end.getTime() - start.getTime()) / 1000;
-
-                    totalActiveSeconds += durationSeconds;
-
-                    const sqft =
-                        (Number(current.cut_list.length) * Number(current.cut_list.width)) / 92903;
-
-                    if (next) {
-                        sqftProcessedToday += sqft;
-                    } else {
-                        sqftInProcess += sqft;
-                    }
-                }
-
-                const workingSeconds = 8 * 60 * 60;
-
-                const utilization =
-                    machine.status !== 'ACTIVE'
-                        ? 0
-                        : Math.min(
-                            Math.round((totalActiveSeconds / workingSeconds) * 100),
-                            100
-                        );
-
-                const operator = machine.userMachineMappings[0]?.user?.user_name;
-
-                return {
-                    id: machine.id,
-                    name: machine.machine_name,
-                    status:
-                        sqftInProcess > 0 && machine.status === 'ACTIVE'
-                            ? 'ACTIVE'
-                            : machine.status === 'ACTIVE'
-                                ? 'IDLE'
-                                : machine.status,
-                    operator,
-                    utilization,
-                    sqftProcessedToday: Math.round(sqftProcessedToday * 100) / 100,
-                    sqftInProcess: Math.round(sqftInProcess * 100) / 100
-                };
-            })
-        );
-
-        return machinesWithMetrics.sort(
-            (a, b) => b.utilization - a.utilization
-        );
-    } catch (error) {
-        console.error('Error fetching machines:', error);
-        throw error;
-    }
+    return machinesWithMetrics.sort(
+      (a, b) => b.utilization - a.utilization
+    );
+  } catch (error) {
+    console.error('Error fetching machines:', error);
+    throw error;
+  }
 };
 
 
 
 export const getTopPerformer = async (payload: TrackTraceDashboardPayload) => {
-    try {
-        // Get today's start
-        const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
+  try {
+    // Get today's start
+    const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
 
 
-        const baseWhere: any = {
-            status: 'ACTIVE',
-            vendor_id: payload.vendor_id,
-        };
+    const baseWhere: any = {
+      status: 'ACTIVE',
+      vendor_id: payload.vendor_id,
+    };
 
-        // if (payload.project_id) {
-        //     baseWhere.project_id = Number(payload.project_id);
-        // }
+    // if (payload.project_id) {
+    //     baseWhere.project_id = Number(payload.project_id);
+    // }
 
-        if (payload.machine_id) {
-            baseWhere.machine_id = Number(payload.machine_id);
+    if (payload.machine_id) {
+      baseWhere.machine_id = Number(payload.machine_id);
+    }
+
+    // if (payload.created_by) {
+    //     baseWhere.operator = Number(payload.created_by);
+    // }
+
+    // Get all active user-machine mappings
+    const userMappings = await prisma.userMachineMapping.findMany({
+      where: baseWhere,
+      include: {
+        user: {
+          select: {
+            id: true,
+            user_name: true,
+          }
+        },
+        machine: {
+          select: {
+            id: true,
+            machine_name: true
+          }
         }
+      }
+    });
 
-        // if (payload.created_by) {
-        //     baseWhere.operator = Number(payload.created_by);
-        // }
-
-        // Get all active user-machine mappings
-        const userMappings = await prisma.userMachineMapping.findMany({
-            where: baseWhere,
-            include: {
-                user: {
-                    select: {
-                        id: true,
-                        user_name: true,
-                    }
-                },
-                machine: {
-                    select: {
-                        id: true,
-                        machine_name: true
-                    }
-                }
+    const operatorPerformance = await Promise.all(
+      userMappings.map(async (mapping) => {
+        // Get all items scanned on this machine today
+        const scannedItems = await prisma.cutListMachineMapping.findMany({
+          where: {
+            machine_id: mapping.machine_id,
+            actual_in_at: {
+              gte: todayStart,
+              not: null
             }
+          },
+          orderBy: {
+            actual_in_at: 'asc'
+          },
+          select: {
+            cut_list_id: true,
+            actual_in_at: true,
+          }
         });
 
-        const operatorPerformance = await Promise.all(
-            userMappings.map(async (mapping) => {
-                // Get all items scanned on this machine today
-                const scannedItems = await prisma.cutListMachineMapping.findMany({
-                    where: {
-                        machine_id: mapping.machine_id,
-                        actual_in_at: {
-                            gte: todayStart,
-                            not: null
-                        }
-                    },
-                    orderBy: {
-                        actual_in_at: 'asc'
-                    },
-                    select: {
-                        cut_list_id: true,
-                        actual_in_at: true,
-                    }
-                });
+        const itemsProcessed = scannedItems.length;
 
-                const itemsProcessed = scannedItems.length;
+        // Calculate average time between scans (throughput rate)
+        let totalGapSeconds = 0;
+        for (let i = 1; i < scannedItems.length; i++) {
+          const gap = (scannedItems[i].actual_in_at!.getTime() - scannedItems[i - 1].actual_in_at!.getTime()) / 1000;
+          totalGapSeconds += gap;
+        }
 
-                // Calculate average time between scans (throughput rate)
-                let totalGapSeconds = 0;
-                for (let i = 1; i < scannedItems.length; i++) {
-                    const gap = (scannedItems[i].actual_in_at!.getTime() - scannedItems[i - 1].actual_in_at!.getTime()) / 1000;
-                    totalGapSeconds += gap;
-                }
+        const avgTimeSeconds = scannedItems.length > 1
+          ? totalGapSeconds / (scannedItems.length - 1)
+          : 0;
+        const avgTimeMinutes = Math.round(avgTimeSeconds / 60 * 10) / 10;
 
-                const avgTimeSeconds = scannedItems.length > 1
-                    ? totalGapSeconds / (scannedItems.length - 1)
-                    : 0;
-                const avgTimeMinutes = Math.round(avgTimeSeconds / 60 * 10) / 10;
+        // Calculate efficiency based on throughput
+        // Target: 1 item every 10 minutes (6 items per hour)
+        const targetTimeSeconds = 10 * 60;
+        const efficiency = avgTimeSeconds > 0
+          ? Math.min(Math.round((targetTimeSeconds / avgTimeSeconds) * 100), 100)
+          : 0;
 
-                // Calculate efficiency based on throughput
-                // Target: 1 item every 10 minutes (6 items per hour)
-                const targetTimeSeconds = 10 * 60;
-                const efficiency = avgTimeSeconds > 0
-                    ? Math.min(Math.round((targetTimeSeconds / avgTimeSeconds) * 100), 100)
-                    : 0;
+        return {
+          id: mapping.user_id,
+          name: `${mapping.user.user_name}`,
+          machine: mapping.machine.machine_name,
+          itemsProcessed,
+          avgTime: itemsProcessed > 1 ? `${avgTimeMinutes}m` : '-',
+          efficiency: itemsProcessed > 1 ? efficiency : 0
+        };
+      })
+    );
 
-                return {
-                    id: mapping.user_id,
-                    name: `${mapping.user.user_name}`,
-                    machine: mapping.machine.machine_name,
-                    itemsProcessed,
-                    avgTime: itemsProcessed > 1 ? `${avgTimeMinutes}m` : '-',
-                    efficiency: itemsProcessed > 1 ? efficiency : 0
-                };
-            })
-        );
-
-        const sortedOperators = operatorPerformance
-            .filter(op => op.itemsProcessed > 0)
-            .sort((a, b) => b.itemsProcessed - a.itemsProcessed)
-            .slice(0, 10);
+    const sortedOperators = operatorPerformance
+      .filter(op => op.itemsProcessed > 0)
+      .sort((a, b) => b.itemsProcessed - a.itemsProcessed)
+      .slice(0, 10);
 
 
-        return sortedOperators;
-    } catch (error) {
-        console.error('Error fetching operator performance:', error);
+    return sortedOperators;
+  } catch (error) {
+    console.error('Error fetching operator performance:', error);
 
-    }
+  }
 };
 
 
 
 export const getProjectProgress = async (payload: TrackTraceDashboardPayload) => {
-    try {
+  try {
 
-        const result = await prisma.$queryRaw<
-            {
-                item_name: string;
-                lead_code: string;
-                project_name: string;
-                processed: number;
-                pending: number;
-                sqft_processed: number;
-                sqft_pending: number;
+    const result = await prisma.$queryRaw<
+      {
+        item_name: string;
+        lead_code: string;
+        project_name: string;
+        processed: number;
+        pending: number;
+        sqft_processed: number;
+        sqft_pending: number;
 
-            }[]
-        >`
+      }[]
+    >`
 SELECT
     cl.item_name,
     lm.lead_code,
@@ -1665,201 +2033,201 @@ GROUP BY
 `;
 
 
-        const enrichedResult = result.map(item => {
-            const total = item.pending + item.processed;
-            const progress =
-                total > 0
-                    ? Math.round((item.processed / total) * 100)
-                    : 0;
+    const enrichedResult = result.map(item => {
+      const total = item.pending + item.processed;
+      const progress =
+        total > 0
+          ? Math.round((item.processed / total) * 100)
+          : 0;
 
-            const total_sqft = item.sqft_pending + item.sqft_processed;
-            const progress_sqft =
-                total > 0
-                    ? Math.round((item.sqft_processed / total_sqft) * 100)
-                    : 0;
+      const total_sqft = item.sqft_pending + item.sqft_processed;
+      const progress_sqft =
+        total > 0
+          ? Math.round((item.sqft_processed / total_sqft) * 100)
+          : 0;
 
-            return {
-                ...item,
-                total,
-                progress, // percentage
-                progress_sqft
-            };
-        });
-
-
+      return {
+        ...item,
+        total,
+        progress, // percentage
+        progress_sqft
+      };
+    });
 
 
-        return enrichedResult;
 
 
-    } catch (error) {
-        console.error('Error fetching projects:', error);
+    return enrichedResult;
 
-    }
+
+  } catch (error) {
+    console.error('Error fetching projects:', error);
+
+  }
 }
 
 export const getBottleNeck = async (payload: TrackTraceDashboardPayload) => {
-    try {
-        const machines = await prisma.machineMaster.findMany({
-            where: {
-                status: {
-                    in: ['ACTIVE']
-                },
-                vendor_id: payload.vendor_id
-            },
-            include: {
-                userMachineMappings: {
-                    where: {
-                        status: 'ACTIVE',
-                        vendor_id: payload.vendor_id
-                    },
-                    include: {
-                        user: {
-                            select: {
-                                user_name: true,
-                            }
-                        }
-                    },
-                    take: 1
-                },
-                cutListMachineMapping: {
-                    where: {
-                        actual_in_at: null  // Items not yet completed (queued items)
-                    },
-                    include: {
-                        cut_list: true
-                    }
-                }
+  try {
+    const machines = await prisma.machineMaster.findMany({
+      where: {
+        status: {
+          in: ['ACTIVE']
+        },
+        vendor_id: payload.vendor_id
+      },
+      include: {
+        userMachineMappings: {
+          where: {
+            status: 'ACTIVE',
+            vendor_id: payload.vendor_id
+          },
+          include: {
+            user: {
+              select: {
+                user_name: true,
+              }
             }
+          },
+          take: 1
+        },
+        cutListMachineMapping: {
+          where: {
+            actual_in_at: null  // Items not yet completed (queued items)
+          },
+          include: {
+            cut_list: true
+          }
+        }
+      }
+    });
+
+    const bottlenecks = await Promise.all(
+      machines.map(async (machine) => {
+        // Queue count = items not yet completed
+        const queueCount = machine.cutListMachineMapping.length;
+
+        // Get recent scans to calculate average processing rate
+        const recentScans = await prisma.cutListMachineMapping.findMany({
+          where: {
+            machine_id: machine.id,
+            actual_in_at: {
+              not: null,
+              gte: new Date(Date.now() - 24 * 60 * 60 * 1000) // Last 24 hours
+            }
+          },
+          orderBy: {
+            actual_in_at: 'asc'
+          },
+          select: {
+            actual_in_at: true,
+          },
+          take: 20
         });
 
-        const bottlenecks = await Promise.all(
-            machines.map(async (machine) => {
-                // Queue count = items not yet completed
-                const queueCount = machine.cutListMachineMapping.length;
+        let avgWaitMinutes = 10; // Default: 10 minutes per item
 
-                // Get recent scans to calculate average processing rate
-                const recentScans = await prisma.cutListMachineMapping.findMany({
-                    where: {
-                        machine_id: machine.id,
-                        actual_in_at: {
-                            not: null,
-                            gte: new Date(Date.now() - 24 * 60 * 60 * 1000) // Last 24 hours
-                        }
-                    },
-                    orderBy: {
-                        actual_in_at: 'asc'
-                    },
-                    select: {
-                        actual_in_at: true,
-                    },
-                    take: 20
-                });
+        // Calculate average time between scans (processing rate)
+        if (recentScans.length > 1) {
+          let totalGapSeconds = 0;
+          for (let i = 1; i < recentScans.length; i++) {
+            const gap = (recentScans[i].actual_in_at!.getTime() - recentScans[i - 1].actual_in_at!.getTime()) / 1000;
+            totalGapSeconds += gap;
+          }
+          avgWaitMinutes = Math.round((totalGapSeconds / (recentScans.length - 1)) / 60);
+        }
 
-                let avgWaitMinutes = 10; // Default: 10 minutes per item
+        const avgWait = avgWaitMinutes >= 60
+          ? `${Math.round(avgWaitMinutes / 60)}h ${avgWaitMinutes % 60}m`
+          : `${avgWaitMinutes}m`;
 
-                // Calculate average time between scans (processing rate)
-                if (recentScans.length > 1) {
-                    let totalGapSeconds = 0;
-                    for (let i = 1; i < recentScans.length; i++) {
-                        const gap = (recentScans[i].actual_in_at!.getTime() - recentScans[i - 1].actual_in_at!.getTime()) / 1000;
-                        totalGapSeconds += gap;
-                    }
-                    avgWaitMinutes = Math.round((totalGapSeconds / (recentScans.length - 1)) / 60);
-                }
+        // Estimate total wait time for queue
+        const estimatedWaitMinutes = avgWaitMinutes * queueCount;
 
-                const avgWait = avgWaitMinutes >= 60
-                    ? `${Math.round(avgWaitMinutes / 60)}h ${avgWaitMinutes % 60}m`
-                    : `${avgWaitMinutes}m`;
+        // Determine severity based on queue size and estimated wait
+        let severity: 'high' | 'medium' | 'low';
+        let percentage: number;
 
-                // Estimate total wait time for queue
-                const estimatedWaitMinutes = avgWaitMinutes * queueCount;
+        if (queueCount > 20 || estimatedWaitMinutes > 120) {
+          severity = 'high';
+          percentage = Math.min(100, Math.round((estimatedWaitMinutes / 180) * 100));
+        } else if (queueCount > 10 || estimatedWaitMinutes > 60) {
+          severity = 'medium';
+          percentage = Math.round((estimatedWaitMinutes / 120) * 100);
+        } else {
+          severity = 'low';
+          percentage = Math.round((estimatedWaitMinutes / 60) * 100);
+        }
 
-                // Determine severity based on queue size and estimated wait
-                let severity: 'high' | 'medium' | 'low';
-                let percentage: number;
+        const operator = machine.userMachineMappings[0]?.user
+          ? `${machine.userMachineMappings[0].user.user_name}`
+          : undefined;
 
-                if (queueCount > 20 || estimatedWaitMinutes > 120) {
-                    severity = 'high';
-                    percentage = Math.min(100, Math.round((estimatedWaitMinutes / 180) * 100));
-                } else if (queueCount > 10 || estimatedWaitMinutes > 60) {
-                    severity = 'medium';
-                    percentage = Math.round((estimatedWaitMinutes / 120) * 100);
-                } else {
-                    severity = 'low';
-                    percentage = Math.round((estimatedWaitMinutes / 60) * 100);
-                }
+        return {
+          machine: machine.machine_name,
+          operator,
+          queueCount,
+          avgWait,
+          severity,
+          percentage: Math.min(percentage, 100)
+        };
+      })
+    );
 
-                const operator = machine.userMachineMappings[0]?.user
-                    ? `${machine.userMachineMappings[0].user.user_name}`
-                    : undefined;
+    // Sort by severity (high first) and queue count
+    const sortedBottlenecks = bottlenecks
+      .sort((a, b) => {
+        const severityOrder = { high: 3, medium: 2, low: 1 };
+        if (severityOrder[a.severity] !== severityOrder[b.severity]) {
+          return severityOrder[b.severity] - severityOrder[a.severity];
+        }
+        return b.queueCount - a.queueCount;
+      })
+      .slice(0, 5);
 
-                return {
-                    machine: machine.machine_name,
-                    operator,
-                    queueCount,
-                    avgWait,
-                    severity,
-                    percentage: Math.min(percentage, 100)
-                };
-            })
-        );
-
-        // Sort by severity (high first) and queue count
-        const sortedBottlenecks = bottlenecks
-            .sort((a, b) => {
-                const severityOrder = { high: 3, medium: 2, low: 1 };
-                if (severityOrder[a.severity] !== severityOrder[b.severity]) {
-                    return severityOrder[b.severity] - severityOrder[a.severity];
-                }
-                return b.queueCount - a.queueCount;
-            })
-            .slice(0, 5);
-
-        return sortedBottlenecks;
-    } catch (error) {
-        console.error('Error fetching bottlenecks:', error);
-        throw new Error('Failed to fetch bottleneck data');
-    }
+    return sortedBottlenecks;
+  } catch (error) {
+    console.error('Error fetching bottlenecks:', error);
+    throw new Error('Failed to fetch bottleneck data');
+  }
 };
 
 
 
 export const getAllProjectsByVendorId = (vendor_id: number) => {
-    return prisma.projectMaster.findMany({
-        where: {
-            vendor_id: vendor_id,
-        },
-        orderBy: {
-            project_name: 'asc', // or 'desc'
-        },
+  return prisma.projectMaster.findMany({
+    where: {
+      vendor_id: vendor_id,
+    },
+    orderBy: {
+      project_name: 'asc', // or 'desc'
+    },
 
-    });
+  });
 };
 
 
 export const getAllMachinesByVendorId = (vendor_id: number) => {
-    return prisma.machineMaster.findMany({
-        where: {
-            vendor_id: vendor_id,
-        },
-        orderBy: {
-            machine_name: 'asc', // or 'desc'
-        },
+  return prisma.machineMaster.findMany({
+    where: {
+      vendor_id: vendor_id,
+    },
+    orderBy: {
+      machine_name: 'asc', // or 'desc'
+    },
 
-    });
+  });
 };
 
 export const getAllUsersByVendorId = (vendor_id: number) => {
-    return prisma.userMaster.findMany({
-        where: {
-            vendor_id: vendor_id,
-        },
-        orderBy: {
-            user_name: 'asc', // or 'desc'
-        },
+  return prisma.userMaster.findMany({
+    where: {
+      vendor_id: vendor_id,
+    },
+    orderBy: {
+      user_name: 'asc', // or 'desc'
+    },
 
-    });
+  });
 };
 
 
@@ -1966,103 +2334,103 @@ export const getAllUsersByVendorId = (vendor_id: number) => {
 
 
 export const getCutListMachine = async (
-    vendorId: number,
-    unique_project_id: string,
+  vendorId: number,
+  unique_project_id: string,
 ) => {
-    const projectMaster = await prisma.projectMaster.findFirst({
-        where: {
-            unique_project_id: unique_project_id,
-        },
-        select: {
-            id: true,
-        },
-    });
+  const projectMaster = await prisma.projectMaster.findFirst({
+    where: {
+      unique_project_id: unique_project_id,
+    },
+    select: {
+      id: true,
+    },
+  });
 
-    const projectId = projectMaster?.id;
+  const projectId = projectMaster?.id;
 
-    // Step 1: Get all machines for this vendor (regardless of cutlist assignments)
-    const allMachines = await prisma.machineMaster.findMany({
-        where: {
-            vendor_id: vendorId, // Assuming MachineMaster has vendor_id
-        },
-        select: {
-            id: true,
-            machine_code: true,
-            machine_type_id: true,
-        },
-        orderBy: {
-            sequence_no: "asc",
-        },
-    });
+  // Step 1: Get all machines for this vendor (regardless of cutlist assignments)
+  const allMachines = await prisma.machineMaster.findMany({
+    where: {
+      vendor_id: vendorId, // Assuming MachineMaster has vendor_id
+    },
+    select: {
+      id: true,
+      machine_code: true,
+      machine_type_id: true,
+    },
+    orderBy: {
+      sequence_no: "asc",
+    },
+  });
 
-    const machineColumns = allMachines.map((m) => m.machine_code);
+  const machineColumns = allMachines.map((m) => m.machine_code);
 
-    // Step 2: Fetch all cutlists with relations
-    const cutLists = await prisma.cutList.findMany({
-        where: {
-            vendor_id: vendorId,
-            project_id: projectId,
-        },
+  // Step 2: Fetch all cutlists with relations
+  const cutLists = await prisma.cutList.findMany({
+    where: {
+      vendor_id: vendorId,
+      project_id: projectId,
+    },
+    include: {
+      cutListMachineMapping: {
         include: {
-            cutListMachineMapping: {
-                include: {
-                    machine: {
-                        select: {
-                            id: true,
-                            machine_code: true,
-                        },
-                    },
-                },
+          machine: {
+            select: {
+              id: true,
+              machine_code: true,
             },
+          },
         },
+      },
+    },
+  });
+
+  // Step 3: Transform to flat structure
+  //   const result = cutLists.map(cutList => {
+  //     const row = { ...cutList } as any;
+  //     delete row.cutListMachineMapping; // Remove nested data
+
+  //     // Initialize all machine columns with 'No'
+  //     machineColumns.forEach(machineName => {
+  //       row[machineName] = 'No';
+  //     });
+
+  //     // Mark machines that are assigned to this cutlist
+  //     cutList.cutListMachineMapping.forEach(mapping => {
+  //       row[mapping.machine.machine_name] = 'Yes';
+  //     });
+
+  //     return row;
+  //   });
+
+  const result = cutLists.map((cutList) => {
+    const row: any = { ...cutList };
+    delete row.cutListMachineMapping;
+
+    // Initialize using real machine IDs
+    allMachines.forEach((machine) => {
+      row[machine.machine_code] = {
+        assigned: false,
+        machineId: machine.id,
+        machine_type_id: machine.machine_type_id,
+      };
     });
 
-    // Step 3: Transform to flat structure
-    //   const result = cutLists.map(cutList => {
-    //     const row = { ...cutList } as any;
-    //     delete row.cutListMachineMapping; // Remove nested data
-
-    //     // Initialize all machine columns with 'No'
-    //     machineColumns.forEach(machineName => {
-    //       row[machineName] = 'No';
-    //     });
-
-    //     // Mark machines that are assigned to this cutlist
-    //     cutList.cutListMachineMapping.forEach(mapping => {
-    //       row[mapping.machine.machine_name] = 'Yes';
-    //     });
-
-    //     return row;
-    //   });
-
-    const result = cutLists.map((cutList) => {
-        const row: any = { ...cutList };
-        delete row.cutListMachineMapping;
-
-        // Initialize using real machine IDs
-        allMachines.forEach((machine) => {
-            row[machine.machine_code] = {
-                assigned: false,
-                machineId: machine.id,
-                machine_type_id: machine.machine_type_id,
-            };
-        });
-
-        // Mark assigned machines
-        cutList.cutListMachineMapping.forEach((mapping) => {
-            row[mapping.machine.machine_code] = {
-                assigned: true,
-                machineId: mapping.machine.id,
-            };
-        });
-
-        return row;
+    // Mark assigned machines
+    cutList.cutListMachineMapping.forEach((mapping) => {
+      row[mapping.machine.machine_code] = {
+        assigned: true,
+        machineId: mapping.machine.id,
+      };
     });
 
-    return {
-        data: result,
-        machineColumns: machineColumns,
-    };
+    return row;
+  });
+
+  return {
+    data: result,
+    machineColumns: machineColumns,
+  };
 };
 
 
@@ -2070,219 +2438,219 @@ export const getCutListMachine = async (
 
 export const assignMachine = async (payload: CutListSavePayload) => {
 
-    try {
-        console.log("payload.project_id", payload.project_id);
-        const projectMaster = await prisma.projectMaster.findFirst({
-            where: {
-                unique_project_id: payload.project_id
-            },
-            select: {
-                id: true
-            }
-        });
+  try {
+    console.log("payload.project_id", payload.project_id);
+    const projectMaster = await prisma.projectMaster.findFirst({
+      where: {
+        unique_project_id: payload.project_id
+      },
+      select: {
+        id: true
+      }
+    });
 
-        console.log("projectMaster", projectMaster);
+    console.log("projectMaster", projectMaster);
 
-        const projectId = projectMaster?.id;
+    const projectId = projectMaster?.id;
 
-        if (!projectId) {
-            return validationResponse(0, 'Project not found');
-        }
-
-        const cutListIdArray = payload.cutListIds
-            .split(",")
-            .map(id => Number(id.trim()))
-            .filter(id => !isNaN(id));
-
-        return await prisma.$transaction(async (tx) => {
-
-            if (!payload.assigned) {
-                await tx.cutListMachineMapping.deleteMany({
-                    where: {
-                        cut_list_id: { in: cutListIdArray },
-                        machine_id: payload.machine_id,
-                        project_id: Number(projectId)
-                    }
-                });
-
-                return validationResponse(1, 'Machine unmapped');
-            }
-
-            // ✅ Fetch cutList rows to get qty and lead_id per cut_list_id
-            const cutListRows = await tx.cutList.findMany({
-                where: {
-                    id: { in: cutListIdArray }
-                },
-                select: {
-                    id: true,
-                    qty: true,
-                    lead_id: true
-                }
-            });
-
-            console.log(cutListRows);
-
-            // ✅ Find which cut_list_ids already have mapping for this machine
-            const existing = await tx.cutListMachineMapping.findMany({
-                where: {
-                    cut_list_id: { in: cutListIdArray },
-                    machine_id: payload.machine_id,
-                    project_id: Number(projectId)
-                },
-                select: { cut_list_id: true }
-            });
-
-            const existingIds = new Set(existing.map(e => e.cut_list_id));
-
-            // ✅ Only process cut_list_ids that don't already have a mapping
-            const newCutListRows = cutListRows.filter(row => !existingIds.has(row.id));
-
-            if (newCutListRows.length === 0) {
-                return validationResponse(1, 'Machine mapped successfully');
-            }
-
-            const machine = await tx.machineMaster.findFirst({
-                where: {
-                    id: payload.machine_id
-                }
-            });
-
-            const sequence = machine?.sequence_no;
-            if (sequence == null) {
-                return validationResponse(0, 'Machine sequence not set');
-            }
-
-            // ✅ Build mapping rows — one entry per qty unit per cut_list_id
-            const mappingData: {
-                cut_list_id: number;
-                machine_id: number;
-                project_id: number;
-                vendor_id: number;
-                lead_id: number;
-                sequence_no: number;
-                status: string;
-                created_by: number;
-                expected_in: boolean;
-            }[] = [];
-
-            for (const cutListRow of newCutListRows) {
-                const qty = Number(cutListRow.qty) || 1;
-                const lead_id = Number(cutListRow.lead_id) || 0;
-
-                for (let i = 0; i < qty; i++) {
-                    mappingData.push({
-                        cut_list_id: cutListRow.id,
-                        machine_id: payload.machine_id,
-                        project_id: projectId,
-                        vendor_id: payload.vendor_id,
-                        lead_id: lead_id,
-                        sequence_no: sequence,
-                        status: "Pending",
-                        created_by: Number(payload.created_by),
-                        expected_in: true
-                    });
-                }
-            }
-
-            await tx.cutListMachineMapping.createMany({
-                data: mappingData
-            });
-
-            return validationResponse(1, 'Machine mapped successfully');
-
-        });
-    } catch (error) {
-        console.log(error);
-        return validationResponse(0, 'Something went wrong');
+    if (!projectId) {
+      return validationResponse(0, 'Project not found');
     }
+
+    const cutListIdArray = payload.cutListIds
+      .split(",")
+      .map(id => Number(id.trim()))
+      .filter(id => !isNaN(id));
+
+    return await prisma.$transaction(async (tx) => {
+
+      if (!payload.assigned) {
+        await tx.cutListMachineMapping.deleteMany({
+          where: {
+            cut_list_id: { in: cutListIdArray },
+            machine_id: payload.machine_id,
+            project_id: Number(projectId)
+          }
+        });
+
+        return validationResponse(1, 'Machine unmapped');
+      }
+
+      // ✅ Fetch cutList rows to get qty and lead_id per cut_list_id
+      const cutListRows = await tx.cutList.findMany({
+        where: {
+          id: { in: cutListIdArray }
+        },
+        select: {
+          id: true,
+          qty: true,
+          lead_id: true
+        }
+      });
+
+      console.log(cutListRows);
+
+      // ✅ Find which cut_list_ids already have mapping for this machine
+      const existing = await tx.cutListMachineMapping.findMany({
+        where: {
+          cut_list_id: { in: cutListIdArray },
+          machine_id: payload.machine_id,
+          project_id: Number(projectId)
+        },
+        select: { cut_list_id: true }
+      });
+
+      const existingIds = new Set(existing.map(e => e.cut_list_id));
+
+      // ✅ Only process cut_list_ids that don't already have a mapping
+      const newCutListRows = cutListRows.filter(row => !existingIds.has(row.id));
+
+      if (newCutListRows.length === 0) {
+        return validationResponse(1, 'Machine mapped successfully');
+      }
+
+      const machine = await tx.machineMaster.findFirst({
+        where: {
+          id: payload.machine_id
+        }
+      });
+
+      const sequence = machine?.sequence_no;
+      if (sequence == null) {
+        return validationResponse(0, 'Machine sequence not set');
+      }
+
+      // ✅ Build mapping rows — one entry per qty unit per cut_list_id
+      const mappingData: {
+        cut_list_id: number;
+        machine_id: number;
+        project_id: number;
+        vendor_id: number;
+        lead_id: number;
+        sequence_no: number;
+        status: string;
+        created_by: number;
+        expected_in: boolean;
+      }[] = [];
+
+      for (const cutListRow of newCutListRows) {
+        const qty = Number(cutListRow.qty) || 1;
+        const lead_id = Number(cutListRow.lead_id) || 0;
+
+        for (let i = 0; i < qty; i++) {
+          mappingData.push({
+            cut_list_id: cutListRow.id,
+            machine_id: payload.machine_id,
+            project_id: projectId,
+            vendor_id: payload.vendor_id,
+            lead_id: lead_id,
+            sequence_no: sequence,
+            status: "Pending",
+            created_by: Number(payload.created_by),
+            expected_in: true
+          });
+        }
+      }
+
+      await tx.cutListMachineMapping.createMany({
+        data: mappingData
+      });
+
+      return validationResponse(1, 'Machine mapped successfully');
+
+    });
+  } catch (error) {
+    console.log(error);
+    return validationResponse(0, 'Something went wrong');
+  }
 };
 
 
 export const createQR = async (payload: QRParam) => {
 
-    try {
+  try {
 
 
-        const projectId = await prisma.projectMaster.findFirst({
-            where: {
-                unique_project_id: payload.projectId
-            },
+    const projectId = await prisma.projectMaster.findFirst({
+      where: {
+        unique_project_id: payload.projectId
+      },
+      select: {
+        id: true
+      }
+    })
+
+    // console.log(payload.cutListIds)
+    if (projectId) {
+      let cutListIds: number[] | undefined;
+      if (payload.cutListIds) {
+        cutListIds = payload.cutListIds
+          .split(",")
+          .map((id) => Number(id.trim()))
+          .filter((id) => !isNaN(id));
+      }
+
+
+      console.log("cutListIds", cutListIds)
+
+      const cutLists = await prisma.cutListMachineMapping.findMany({
+        where: {
+          vendor_id: Number(payload.vendorId),
+          project_id: Number(projectId.id),
+          ...(cutListIds && cutListIds.length > 0
+            ? { cut_list_id: { in: cutListIds } }
+            : {}),
+        },
+        distinct: ['cut_list_id'],
+        select: {
+          id: true, // clmm.id
+          cut_list: {
             select: {
-                id: true
-            }
-        })
+              unique_code: true,
+              description: true,
+            },
+          },
+        },
+      });
 
-        // console.log(payload.cutListIds)
-        if (projectId) {
-            let cutListIds: number[] | undefined;
-            if (payload.cutListIds) {
-                cutListIds = payload.cutListIds
-                    .split(",")
-                    .map((id) => Number(id.trim()))
-                    .filter((id) => !isNaN(id));
-            }
+      console.log("cutLists", cutLists)
+      if (cutLists.length > 0) {
+        return cutLists;
+      } else {
+        return null;
+      }
 
-
-            console.log("cutListIds", cutListIds)
-
-            const cutLists = await prisma.cutListMachineMapping.findMany({
-                where: {
-                    vendor_id: Number(payload.vendorId),
-                    project_id: Number(projectId.id),
-                    ...(cutListIds && cutListIds.length > 0
-                        ? { cut_list_id: { in: cutListIds } }
-                        : {}),
-                },
-                distinct: ['cut_list_id'],
-                select: {
-                    id: true, // clmm.id
-                    cut_list: {
-                        select: {
-                            unique_code: true,
-                            description: true,
-                        },
-                    },
-                },
-            });
-
-            console.log("cutLists", cutLists)
-            if (cutLists.length > 0) {
-                return cutLists;
-            } else {
-                return null;
-            }
-
-            // const cutLists = await prisma.cutListMachineMapping.findMany({
-            //     where: {
-            //         vendor_id: Number(payload.vendorId),
-            //         project_id: Number(projectId.id),
-            //         ...(cutListIds && cutListIds.length > 0
-            //             ? { id: { in: cutListIds } }
-            //             : {}),
-            //     },
-            //     include: {
-            //         cut_list: true,
-            //     },
-            //     select: {
-            //         id: true,
-            //         unique_code: true,
-            //         description: true,
-            //     },
-            // });
+      // const cutLists = await prisma.cutListMachineMapping.findMany({
+      //     where: {
+      //         vendor_id: Number(payload.vendorId),
+      //         project_id: Number(projectId.id),
+      //         ...(cutListIds && cutListIds.length > 0
+      //             ? { id: { in: cutListIds } }
+      //             : {}),
+      //     },
+      //     include: {
+      //         cut_list: true,
+      //     },
+      //     select: {
+      //         id: true,
+      //         unique_code: true,
+      //         description: true,
+      //     },
+      // });
 
 
-        }
-
-
-
-
-
-
-
-    } catch (error) {
-        console.error('Error generating QR code:', error);
-        throw error;
     }
+
+
+
+
+
+
+
+  } catch (error) {
+    console.error('Error generating QR code:', error);
+    throw error;
+  }
 }
 
 
@@ -2292,142 +2660,142 @@ export const createQR = async (payload: QRParam) => {
 
 
 export const downloadCutListExcel = async (
-    vendorId: number,
-    unique_project_id: string,
-    baseUrl: string,
+  vendorId: number,
+  unique_project_id: string,
+  baseUrl: string,
 ) => {
-    // Get the data using the existing function
+  // Get the data using the existing function
 
-    const { data, machineColumns } = await getCutListMachine(
-        vendorId,
-        unique_project_id,
-    );
+  const { data, machineColumns } = await getCutListMachine(
+    vendorId,
+    unique_project_id,
+  );
 
-    //   return data;
+  //   return data;
 
-    // Transform data for Excel
-    const excelData = data.map((row) => {
-        const excelRow: any = {
-            Description: row.description,
-            Length: row.length ? Number(row.length) : 0, // ✅ Convert to number
-            Width: row.width ? Number(row.width) : 0, // ✅ Convert to number
-            Thickness: row.thickness ? Number(row.thickness) : 0,
-            Qty: row.qty,
-            "Material Details": row.material_details,
-            "Item Name": row.item_name,
-            "Unique Code": row.unique_code,
-            "Unique Code 2": row.unique_code_2,
-            ELF: row.elf || "",
-            ELB: row.elb || "",
-            ESL: row.esl || "",
-            ESR: row.esr || "",
-        };
+  // Transform data for Excel
+  const excelData = data.map((row) => {
+    const excelRow: any = {
+      Description: row.description,
+      Length: row.length ? Number(row.length) : 0, // ✅ Convert to number
+      Width: row.width ? Number(row.width) : 0, // ✅ Convert to number
+      Thickness: row.thickness ? Number(row.thickness) : 0,
+      Qty: row.qty,
+      "Material Details": row.material_details,
+      "Item Name": row.item_name,
+      "Unique Code": row.unique_code,
+      "Unique Code 2": row.unique_code_2,
+      ELF: row.elf || "",
+      ELB: row.elb || "",
+      ESL: row.esl || "",
+      ESR: row.esr || "",
+    };
 
-        // Add machine columns (1 or 0)
-        machineColumns.forEach((machineName) => {
-            const machineData = row[machineName];
-            excelRow[machineName] = machineData?.assigned ? 1 : 0;
-        });
-
-        return excelRow;
+    // Add machine columns (1 or 0)
+    machineColumns.forEach((machineName) => {
+      const machineData = row[machineName];
+      excelRow[machineName] = machineData?.assigned ? 1 : 0;
     });
 
-    //   return excelData;
+    return excelRow;
+  });
 
-    // Create workbook and worksheet
-    const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet("Cut List");
+  //   return excelData;
 
-    // Set columns from keys of first row
-    const headers = excelData.length > 0 ? Object.keys(excelData[0]) : [];
-    const fixedWidths: number[] = [30, 12, 12, 12, 8, 35, 30, 20, 20, 15, 15, 15, 15];
-    worksheet.columns = headers.map((header, i) => ({
-        header,
-        key: header,
-        width: i < fixedWidths.length ? fixedWidths[i] : 15,
-    }));
+  // Create workbook and worksheet
+  const workbook = new ExcelJS.Workbook();
+  const worksheet = workbook.addWorksheet("Cut List");
 
-    // Add rows
-    excelData.forEach((row) => worksheet.addRow(row));
+  // Set columns from keys of first row
+  const headers = excelData.length > 0 ? Object.keys(excelData[0]) : [];
+  const fixedWidths: number[] = [30, 12, 12, 12, 8, 35, 30, 20, 20, 15, 15, 15, 15];
+  worksheet.columns = headers.map((header, i) => ({
+    header,
+    key: header,
+    width: i < fixedWidths.length ? fixedWidths[i] : 15,
+  }));
 
-    // ✅ Define the directory path
-    // const publicDir = process.cwd();
-    const publicDir = path.join(process.cwd(), "public");
+  // Add rows
+  excelData.forEach((row) => worksheet.addRow(row));
 
-    const excelDir = path.join(publicDir, "assets", "track-trace", "excel");
+  // ✅ Define the directory path
+  // const publicDir = process.cwd();
+  const publicDir = path.join(process.cwd(), "public");
 
-    // ✅ Create directory if it doesn't exist
-    if (!fs.existsSync(excelDir)) {
-        fs.mkdirSync(excelDir, { recursive: true });
-    }
+  const excelDir = path.join(publicDir, "assets", "track-trace", "excel");
 
-    // ✅ Generate unique filename
-    const timestamp = Date.now();
-    const filename = `cutlist-${unique_project_id}-${timestamp}.xlsx`;
-    const filePath = path.join(excelDir, filename);
+  // ✅ Create directory if it doesn't exist
+  if (!fs.existsSync(excelDir)) {
+    fs.mkdirSync(excelDir, { recursive: true });
+  }
 
-    // ✅ Write the Excel file to disk
-    await workbook.xlsx.writeFile(filePath);
+  // ✅ Generate unique filename
+  const timestamp = Date.now();
+  const filename = `cutlist-${unique_project_id}-${timestamp}.xlsx`;
+  const filePath = path.join(excelDir, filename);
 
-    // ✅ Return filename; API will build a served URL
-    return filename;
+  // ✅ Write the Excel file to disk
+  await workbook.xlsx.writeFile(filePath);
+
+  // ✅ Return filename; API will build a served URL
+  return filename;
 };
 
 
 
 
 export const getVendorLead = async (vendorId: number, search?: string) => {
-    const leads = await prisma.leadMaster.findMany({
-        where: {
-            vendor_id: vendorId,
-            ...(search?.trim()
-                ? {
-                    OR: [
-                        { lead_code: { contains: search, mode: "insensitive" } },
-                        { firstname: { contains: search, mode: "insensitive" } },
-                        { lastname: { contains: search, mode: "insensitive" } },
-                    ],
-                }
-                : {}),
-        },
-        select: {
-            id: true,
-            lead_code: true,
-            firstname: true,
-            lastname: true
-        },
-        orderBy: {
-            lead_code: "asc",
-        },
-        take: 20, // limit results for search dropdown
-    });
+  const leads = await prisma.leadMaster.findMany({
+    where: {
+      vendor_id: vendorId,
+      ...(search?.trim()
+        ? {
+          OR: [
+            { lead_code: { contains: search, mode: "insensitive" } },
+            { firstname: { contains: search, mode: "insensitive" } },
+            { lastname: { contains: search, mode: "insensitive" } },
+          ],
+        }
+        : {}),
+    },
+    select: {
+      id: true,
+      lead_code: true,
+      firstname: true,
+      lastname: true
+    },
+    orderBy: {
+      lead_code: "asc",
+    },
+    take: 20, // limit results for search dropdown
+  });
 
-    return leads;
+  return leads;
 };
 
 
 export const linkLeadToProject = async (vendorId: number, leadId: number, projectId: number) => {
-    return await prisma.$transaction(async (tx) => {
-        // 1. Update lead_id on ProjectMaster
-        await tx.projectMaster.update({
-            where: { id: projectId },
-            data: { lead_id: leadId },
-        });
-
-        // 2. Update lead_id on all CutList rows for this project
-        await tx.cutList.updateMany({
-            where: { project_id: projectId },
-            data: { lead_id: leadId },
-        });
-
-        // 3. Update lead_id on all CutListMachineMapping rows for this project
-        await tx.cutListMachineMapping.updateMany({
-            where: { project_id: projectId },
-            data: { lead_id: leadId },
-        });
-
-        return validationResponse(1, 'Lead Updated Successfully');
+  return await prisma.$transaction(async (tx) => {
+    // 1. Update lead_id on ProjectMaster
+    await tx.projectMaster.update({
+      where: { id: projectId },
+      data: { lead_id: leadId },
     });
+
+    // 2. Update lead_id on all CutList rows for this project
+    await tx.cutList.updateMany({
+      where: { project_id: projectId },
+      data: { lead_id: leadId },
+    });
+
+    // 3. Update lead_id on all CutListMachineMapping rows for this project
+    await tx.cutListMachineMapping.updateMany({
+      where: { project_id: projectId },
+      data: { lead_id: leadId },
+    });
+
+    return validationResponse(1, 'Lead Updated Successfully');
+  });
 
 
 };
@@ -2437,149 +2805,589 @@ export const linkLeadToProject = async (vendorId: number, leadId: number, projec
 
 export const get_defect = async (vendorId: number) => {
 
-    const defects = await prisma.defectMaster.findMany({
+  const defects = await prisma.defectMaster.findMany({
+    where: {
+      OR: [
+        { vendor_id: null },
+        { vendor_id: vendorId }
+      ]
+    },
+    select: {
+      id: true,
+      defect_name: true
+    },
+    orderBy: {
+      defect_name: "asc"
+    }
+  });
+  return {
+    data: defects,
+  };
+};
+
+export const mark_Defect_old = async (payload: MarkDefectPayload) => {
+
+  console.log("payload.cut_list_machine_mapping_id", payload.cut_list_machine_mapping_id);
+  return await prisma.$transaction(async (tx) => {
+
+    const cut_list_id = payload.cut_list_id;
+
+    const mapping = await tx.cutListMachineMapping.findFirst({
+      where: {
+        cut_list_id: cut_list_id,
+        actual_in_at: {
+          not: null,
+        },
+      },
+      select: {
+        id: true,
+        machine_id: true,
+        actual_in_at: true,
+        in_operator: true,
+      },
+      orderBy: {
+        actual_in_at: "desc",
+      },
+    });
+
+    // let previous_scanned_by: number | null = null;
+    // let previous_scanned_at: Date | null = null;
+    // let previous_scanned_machine_id: number | null = null;
+    // let previous_scanned_id: number | null = null;
+
+    // if (mapping) {
+    //     previous_scanned_by = mapping.in_operator;
+    //     previous_scanned_at = mapping.actual_in_at;
+    //     previous_scanned_machine_id = mapping.machine_id;
+    //     //previous_scanned_id = mapping.id
+    // }
+
+    await tx.defectedItem.create({
+      data: {
+        vendor_id: payload.vendor_id,
+        project_id: payload.project_id,
+        cut_list_machine_mapping_id: payload.cut_list_machine_mapping_id,
+        machine_id: payload.machine_id,
+        defect_id: payload.defect_id > 0 ? payload.defect_id : null,
+        remark: payload.defect_name,
+        created_by: payload.created_by,
+        cut_list_id: payload.cut_list_id,
+
+      },
+    });
+
+
+    //console.log("previous_scanned_id", previous_scanned_id);
+
+    // if (previous_scanned_id) {
+    //     await tx.cutListMachineMapping.update({
+    //         where: {
+    //             id: previous_scanned_id,
+    //         },
+    //         data: {
+    //             actual_in_at: null,
+    //             in_operator: null,
+    //         },
+    //     });
+    // }
+
+    await tx.cutListMachineMapping.updateMany({
+      where: {
+        cut_list_id: payload.cut_list_id,
+      },
+      data: {
+        actual_in_at: null,
+        in_operator: null,
+      },
+    });
+
+
+
+    return validationResponse(1, "Defect Marked Successfully");
+  });
+};
+
+export const mark_Defect = async (
+  payload: MarkDefectPayload,
+  files: Express.Multer.File[],
+  vendorId: number
+) => {
+  return await prisma.$transaction(async (tx) => {
+
+    const existingDefect = await tx.defectedItem.findFirst({
+      where: {
+        cut_list_id: payload.cut_list_id,
+        defect_status: { not: "Completed" },
+      },
+      orderBy: { created_at: "desc" },
+    });
+
+    if (existingDefect) {
+      return validationResponse(0, "Item is already marked as defected and has not been completed yet");
+    }
+
+
+    const defectedItem = await tx.defectedItem.create({
+      data: {
+        vendor_id: payload.vendor_id,
+        project_id: payload.project_id,
+        cut_list_machine_mapping_id: payload.cut_list_machine_mapping_id,
+        machine_id: payload.machine_id,
+        defect_id: payload.defect_id > 0 ? payload.defect_id : null,
+        remark: payload.defect_name,
+        created_by: payload.created_by,
+        cut_list_id: payload.cut_list_id,
+        action: payload.action,
+        rework_machine_id: payload.rework_machine_id
+      },
+    });
+
+    // upload to wasabi now that we have defectedItem.id
+    const uploadedImages = await uploadToWasabiDefectedItems(files, vendorId, defectedItem.id);
+
+    if (uploadedImages.length > 0) {
+      await tx.defectedItemImage.createMany({
+        data: uploadedImages.map((img) => ({
+          defected_item_id: defectedItem.id,
+          doc_og_name: img.originalName,
+          doc_sys_name: img.systemName,
+        })),
+      });
+    }
+
+    console.log("payload.action:", payload.action);
+    console.log("payload.rework_machine_id:", payload.rework_machine_id);
+
+    if (payload.action == "replace") {
+      await tx.cutListMachineMapping.updateMany({
+        where: { cut_list_id: payload.cut_list_id },
+        data: { actual_in_at: null, in_operator: null },
+      });
+    }
+    else if (payload.action == "rework" && payload.rework_machine_id) {
+      console.log("Triggered");
+      await tx.cutListMachineMapping.updateMany({
         where: {
-            OR: [
-                { vendor_id: null },
-                { vendor_id: vendorId }
-            ]
+          cut_list_id: payload.cut_list_id,
+          machine_id: payload.rework_machine_id,
         },
-        select: {
-            id: true,
-            defect_name: true
-        },
-        orderBy: {
-            defect_name: "asc"
+        data: { actual_in_at: null, in_operator: null },
+      });
+    }
+
+
+    /*else if (payload.action === "rework" && payload.rework_machine_id) {
+
+      // get sequence_no of the rework machine
+      const reworkMachine = await tx.machineMaster.findFirst({
+        where: { id: payload.rework_machine_id },
+        select: { sequence_no: true },
+      });
+
+      if (reworkMachine?.sequence_no !== null && reworkMachine?.sequence_no !== undefined) {
+
+        // get all machine IDs with sequence_no >= rework machine (includes rework machine itself)
+        const machinesFromRework = await tx.machineMaster.findMany({
+          where: {
+            vendor_id: payload.vendor_id,
+            sequence_no: { gte: reworkMachine.sequence_no },
+          },
+          select: { id: true },
+        });
+
+        const machineIds = machinesFromRework.map(m => m.id);
+
+        if (machineIds.length > 0) {
+          await tx.cutListMachineMapping.updateMany({
+            where: {
+              cut_list_id: payload.cut_list_id,
+              machine_id: { in: machineIds },
+            },
+            data: { actual_in_at: null, in_operator: null },
+          });
         }
-    });
-    return {
-        data: defects,
-    };
+      }
+    }*/
+
+
+
+
+    return validationResponse(1, "Defect Marked Successfully");
+  });
 };
-
-export const mark_Defect = async (payload: MarkDefectPayload) => {
-
-    console.log("payload.cut_list_machine_mapping_id", payload.cut_list_machine_mapping_id);
-    return await prisma.$transaction(async (tx) => {
-
-        const cut_list_id = payload.cut_list_id;
-
-        const mapping = await tx.cutListMachineMapping.findFirst({
-            where: {
-                cut_list_id: cut_list_id,
-                actual_in_at: {
-                    not: null,
-                },
-            },
-            select: {
-                id: true,
-                machine_id: true,
-                actual_in_at: true,
-                in_operator: true,
-            },
-            orderBy: {
-                actual_in_at: "desc",
-            },
-        });
-
-        // let previous_scanned_by: number | null = null;
-        // let previous_scanned_at: Date | null = null;
-        // let previous_scanned_machine_id: number | null = null;
-        // let previous_scanned_id: number | null = null;
-
-        // if (mapping) {
-        //     previous_scanned_by = mapping.in_operator;
-        //     previous_scanned_at = mapping.actual_in_at;
-        //     previous_scanned_machine_id = mapping.machine_id;
-        //     //previous_scanned_id = mapping.id
-        // }
-
-        await tx.defectedItem.create({
-            data: {
-                vendor_id: payload.vendor_id,
-                project_id: payload.project_id,
-                cut_list_machine_mapping_id: payload.cut_list_machine_mapping_id,
-                machine_id: payload.machine_id,
-                defect_id: payload.defect_id > 0 ? payload.defect_id : null,
-                remark: payload.defect_name,
-                created_by: payload.created_by,
-                cut_list_id: payload.cut_list_id,
-
-            },
-        });
-
-
-        //console.log("previous_scanned_id", previous_scanned_id);
-
-        // if (previous_scanned_id) {
-        //     await tx.cutListMachineMapping.update({
-        //         where: {
-        //             id: previous_scanned_id,
-        //         },
-        //         data: {
-        //             actual_in_at: null,
-        //             in_operator: null,
-        //         },
-        //     });
-        // }
-
-        await tx.cutListMachineMapping.updateMany({
-            where: {
-                cut_list_id: payload.cut_list_id,
-            },
-            data: {
-                actual_in_at: null,
-                in_operator: null,
-            },
-        });
-
-
-
-        return validationResponse(1, "Defect Marked Successfully");
-    });
-};
-
 
 
 export const getScanStatsDashboard = async (vendor_id: number, user_id: number) => {
-    try {
+  try {
 
-        const startOfToday = new Date();
-        startOfToday.setHours(0, 0, 0, 0);
+    const startOfToday = new Date();
+    startOfToday.setHours(0, 0, 0, 0);
 
-        const total_items_scanned_today =
-            await prisma.cutListMachineMapping.count({
-                where: {
-                    vendor_id,
-                    in_operator: user_id,
-                    actual_in_at: {
-                        gte: startOfToday,
-                    },
+    const total_items_scanned_today =
+      await prisma.cutListMachineMapping.count({
+        where: {
+          vendor_id,
+          in_operator: user_id,
+          actual_in_at: {
+            gte: startOfToday,
+          },
+        },
+      });
+
+    const total_items_pending_to_scan =
+      await prisma.cutListMachineMapping.count({
+        where: {
+          vendor_id,
+          actual_in_at: null,
+          machine: {
+            userMachineMappings: {
+              some: {
+                user_id,
+              },
+            },
+          },
+        },
+      });
+
+    return validationResponse(1, "Scan stats fetched", {
+      total_items_scanned_today,
+      total_items_pending_to_scan,
+    });
+
+  } catch (error) {
+    console.error(error);
+    return validationResponse(0, "Failed to fetch stats");
+  }
+};
+export const getReworkMachines = async (vendor_id: number, machine_id: number) => {
+
+
+  const currentMachine = await prisma.machineMaster.findFirst({
+    where: { id: machine_id, vendor_id },
+    select: { sequence_no: true },
+  });
+
+  console.log(currentMachine)
+
+  if (!currentMachine || currentMachine.sequence_no === null) return [];
+
+  const machines = await prisma.machineMaster.findMany({
+    where: {
+      vendor_id,
+      sequence_no: { lte: currentMachine.sequence_no },
+      status: "ACTIVE",
+    },
+    select: {
+      id: true,
+      machine_name: true,
+      sequence_no: true,
+    },
+    orderBy: { sequence_no: "asc" },
+  });
+
+  return machines;
+};
+
+// service: getUserModules
+export const getUserModules = async (vendor_id: number, user_id: number) => {
+  try {
+    // Get all machine type IDs assigned to this user
+    const mappings = await prisma.userMachineMapping.findMany({
+      where: {
+        user_id,
+        vendor_id,
+        status: "ACTIVE",
+      },
+      select: {
+        machine: {
+          select: {
+            machine_type_id: true,
+          },
+        },
+      },
+    });
+
+    // Collect unique machine_type_ids
+    const typeIds = [...new Set(
+      mappings
+        .map(m => m.machine.machine_type_id)
+        .filter((id): id is number => id !== null)
+    )];
+
+    const modules = {
+      track_and_trace: false,
+      quality_check: false,
+      scan_and_pack: false,
+    };
+
+    for (const typeId of typeIds) {
+      if (typeId === 17) {
+        modules.quality_check = true;
+      } else if (typeId === 18) {
+        modules.scan_and_pack = true;
+      } else {
+        modules.track_and_trace = true;
+      }
+    }
+
+    return validationResponse(1, "", { modules });
+  } catch (error) {
+    console.log("Error in getUserModules", error);
+    return validationResponse(0, "Something went wrong");
+  }
+};
+
+
+export const getQualityCheckProjects = async (vendor_id: number) => {
+  try {
+    // Get the quality check machine (machine_type_id = 17) for this vendor
+    const qualityMachine = await prisma.machineMaster.findFirst({
+      where: {
+        vendor_id,
+        machine_type_id: 17,
+        status: 'ACTIVE',
+      },
+      select: { id: true, sequence_no: true, machine_name: true },
+    });
+
+    if (!qualityMachine) {
+      return validationResponse(1, '', { projects: [] });
+    }
+
+    const qualityMachineId = qualityMachine.id;
+    const qualitySequenceNo = qualityMachine.sequence_no ?? 0;
+
+    console.log("qualitySequenceNo", qualitySequenceNo);
+
+    // Find all projects that have at least 1 item:
+    // - pending in quality machine (actual_in_at = null, machine_id = qualityMachineId)
+    // - AND all previous machines (sequence_no < qualitySequenceNo, non-PASS) are scanned
+    const projects = await prisma.projectMaster.findMany({
+      where: {
+        vendor_id,
+        cutListMachineMapping: {
+          some: {
+            machine_id: qualityMachineId,
+            actual_in_at: null,
+            expected_in: true,
+            cut_list: {
+              cutListMachineMapping: {
+                none: {
+                  vendor_id,
+                  actual_in_at: null,
+                  sequence_no: { lt: qualitySequenceNo },
+                  machine: {
+                    scan_type: { not: 'PASS' },
+                  },
                 },
-            });
+              },
+            },
+          },
+        },
+      },
+      select: {
+        id: true,
+        project_name: true,
+        project_status: true,
+        track_trace_status: true,
+        created_at: true,
+      },
+    });
 
-        const total_items_pending_to_scan =
-            await prisma.cutListMachineMapping.count({
-                where: {
-                    vendor_id,
-                    actual_in_at: null,
-                    machine: {
-                        userMachineMappings: {
-                            some: {
-                                user_id,
-                            },
-                        },
-                    },
+    // Get pending count per project
+    const projectsWithCount = await Promise.all(
+      projects.map(async (project) => {
+        const pending_count = await prisma.cutListMachineMapping.count({
+          where: {
+            project_id: project.id,
+            vendor_id,
+            machine_id: qualityMachineId,
+            actual_in_at: null,
+            expected_in: true,
+            cut_list: {
+              cutListMachineMapping: {
+                none: {
+                  vendor_id,
+                  actual_in_at: null,
+                  sequence_no: { lt: qualitySequenceNo },
+                  machine: {
+                    scan_type: { not: 'PASS' },
+                  },
                 },
-            });
-
-        return validationResponse(1, "Scan stats fetched", {
-            total_items_scanned_today,
-            total_items_pending_to_scan,
+              },
+            },
+          },
         });
 
-    } catch (error) {
-        console.error(error);
-        return validationResponse(0, "Failed to fetch stats");
-    }
+        return { ...project, pending_count, qualityMachineId, qualityMachineName: qualityMachine.machine_name };
+      })
+    );
+
+    return validationResponse(1, '', { projects: projectsWithCount });
+  } catch (error) {
+    console.log('Error in getQualityCheckProjects', error);
+    return validationResponse(0, 'Something went wrong');
+  }
+};
+
+
+// ─── Helper: sum qty of cut_lists by their ids ────────────────────────────────
+async function sumQty(cutListIds: number[]): Promise<number> {
+  if (cutListIds.length === 0) return 0;
+  const result = await prisma.cutList.aggregate({
+    where: { id: { in: cutListIds } },
+    _sum: { qty: true },
+  });
+  return result._sum.qty ?? 0;
+}
+
+
+
+// ─── Helper: sum qty of cut_list rows from CutListMachineMapping ──────────────
+// Each mapping row corresponds to one panel instance.
+// We use the cut_list.qty indirectly — one mapping row per panel is already
+// how the data is structured (qty=4 on CutList → 4 mapping rows per machine).
+// So COUNT of mapping rows = total panels correctly.
+
+export const getTraceTraceDashboard = async (vendor_id: number) => {
+  try {
+
+    
+
+    // ── 1. Fetch all projects for this vendor ──────────────────────────────
+    const projects = await prisma.projectMaster.findMany({
+      where: { vendor_id },
+      select: {
+        id: true,
+        project_name: true,
+        project_status: true,
+        track_trace_status: true,
+        created_at: true,
+      },
+      orderBy: { created_at: "desc" },
+    });
+
+    // ── 2. Fetch all non-PASS machines ordered by sequence ─────────────────
+    const machines = await prisma.machineMaster.findMany({
+      where: {
+        vendor_id,
+        status: "ACTIVE",
+        scan_type: { not: "PASS" },
+      },
+      select: { id: true, machine_name: true, sequence_no: true },
+      orderBy: { sequence_no: "asc" },
+    });
+
+    // ── 3. For each project, compute per-machine counts ────────────────────
+    const buildProjectStatus = async (project: (typeof projects)[0]) => {
+
+      // Pre-compute scanned count per machine for this project (used for waterfall)
+      const scannedPerMachine: Map<number, number> = new Map();
+      for (const machine of machines) {
+        const count = await prisma.cutListMachineMapping.count({
+          where: {
+            project_id: project.id,
+            vendor_id,
+            machine_id: machine.id,
+            expected_in: true,
+            actual_in_at: { not: null },
+          },
+        });
+        scannedPerMachine.set(machine.id, count);
+      }
+
+      const machineStatuses = await Promise.all(
+        machines.map(async (machine, index) => {
+          // Check if this machine is assigned to this project at all
+          const assigned = await prisma.cutListMachineMapping.count({
+            where: {
+              project_id: project.id,
+              vendor_id,
+              machine_id: machine.id,
+              expected_in: true,
+            },
+          });
+
+          if (assigned === 0) return null;
+
+          const scanned = scannedPerMachine.get(machine.id) ?? 0;
+
+          // Waterfall total:
+          // - First machine (index 0): total = all assigned rows
+          // - Machine N: total = scanned count of previous machine
+          //   because each scan at machine N-1 unlocks exactly one panel for machine N
+          let total: number;
+          if (index === 0) {
+            total = assigned;
+          } else {
+            const prevMachine = machines[index - 1];
+            total = scannedPerMachine.get(prevMachine.id) ?? 0;
+          }
+
+          const pending = Math.max(0, total - scanned);
+
+          return {
+            machine_id: machine.id,
+            machine_name: machine.machine_name,
+            sequence_no: machine.sequence_no ?? 0,
+            total,
+            scanned,
+            pending,
+            all_scanned: total > 0 && scanned >= total,
+          };
+        })
+      );
+
+      // ── Panels: total and fully scanned ───────────────────────────────────
+      // total_panels = assigned rows on first machine (each row = 1 panel)
+      // panels_scanned = scanned rows on last machine (passed all machines)
+      const firstMachine = machines[0];
+      const lastMachine = machines[machines.length - 1];
+
+      const total_panels = firstMachine
+        ? await prisma.cutListMachineMapping.count({
+          where: {
+            project_id: project.id,
+            vendor_id,
+            machine_id: firstMachine.id,
+            expected_in: true,
+          },
+        })
+        : 0;
+
+      const panels_scanned = lastMachine
+        ? (scannedPerMachine.get(lastMachine.id) ?? 0)
+        : 0;
+
+      return {
+        project_id: project.id,
+        project_name: project.project_name,
+        project_status: project.project_status,
+        track_trace_status: project.track_trace_status,
+        created_at: project.created_at.toISOString(),
+        panels_scanned,
+        total_panels,
+        machines: machineStatuses.filter(Boolean),
+      };
+    };
+
+    const allStatuses = await Promise.all(projects.map(buildProjectStatus));
+
+    // ── 4. Split into active vs archived ───────────────────────────────────
+    const activeStatuses = ["Initiated", "Started"];
+    const active = allStatuses.filter((p) => activeStatuses.includes(p.project_status));
+    const archived = allStatuses.filter((p) => !activeStatuses.includes(p.project_status));
+
+
+
+    return validationResponse(1, "", {
+      active,
+      archived,
+      active_count: active.length,
+      archived_count: archived.length,
+    });
+  } catch (error) {
+    console.error("Error in getTraceTraceDashboard", error);
+    return validationResponse(0, "Something went wrong");
+  }
 };

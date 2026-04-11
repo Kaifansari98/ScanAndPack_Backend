@@ -883,9 +883,6 @@ export const handelItems = async (
     let resolvedVendorId: number | null = null;
     let resolvedProjectId: number | null = null;
 
-
-
-
     try {
       await prisma.apiRequestLog.create({
         data: {
@@ -1127,6 +1124,51 @@ export const handelItems = async (
             });
           }
         }
+
+
+
+
+
+
+        // ✅ Default machines: type 17 and 18
+        const defaultMachineTypeIds = [17, 18];
+
+        for (const typeId of defaultMachineTypeIds) {
+          const machine = await tx.machineMaster.findFirst({
+            where: {
+              vendor_id: Number(vendor.id),
+              machine_type_id: typeId,
+            },
+            select: {
+              id: true,
+              sequence_no: true,
+            },
+          });
+
+          if (machine) {
+            const machine_type_id = machine.id;
+            const sequence_no = machine.sequence_no ?? 0;
+
+            for (let i = 0; i < quantity; i++) {
+              await tx.cutListMachineMapping.create({
+                data: {
+                  cut_list_id: row.id,
+                  machine_id: machine_type_id,
+                  project_id: project.id,
+                  vendor_id: vendor.id,
+                  lead_id: lead_id,
+                  sequence_no: sequence_no,
+                  status: "Pending",
+                  created_by: createdByUserId,
+                  expected_in: true,
+                },
+              });
+            }
+          }
+        }
+
+
+
       }
 
       return project;

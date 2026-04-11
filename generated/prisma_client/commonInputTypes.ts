@@ -653,6 +653,23 @@ export type EnumMachineTypeMasterStatusWithAggregatesFilter<$PrismaModel = never
   _max?: Prisma.NestedEnumMachineTypeMasterStatusFilter<$PrismaModel>
 }
 
+export type EnumDefectStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.DefectStatus | Prisma.EnumDefectStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.DefectStatus[] | Prisma.ListEnumDefectStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DefectStatus[] | Prisma.ListEnumDefectStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDefectStatusFilter<$PrismaModel> | $Enums.DefectStatus
+}
+
+export type EnumDefectStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DefectStatus | Prisma.EnumDefectStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.DefectStatus[] | Prisma.ListEnumDefectStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DefectStatus[] | Prisma.ListEnumDefectStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDefectStatusWithAggregatesFilter<$PrismaModel> | $Enums.DefectStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDefectStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDefectStatusFilter<$PrismaModel>
+}
+
 export type EnumUserActivityTypeFilter<$PrismaModel = never> = {
   equals?: $Enums.UserActivityType | Prisma.EnumUserActivityTypeFieldRefInput<$PrismaModel>
   in?: $Enums.UserActivityType[] | Prisma.ListEnumUserActivityTypeFieldRefInput<$PrismaModel>
@@ -1434,6 +1451,23 @@ export type NestedEnumMachineTypeMasterStatusWithAggregatesFilter<$PrismaModel =
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumMachineTypeMasterStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumMachineTypeMasterStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumDefectStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.DefectStatus | Prisma.EnumDefectStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.DefectStatus[] | Prisma.ListEnumDefectStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DefectStatus[] | Prisma.ListEnumDefectStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDefectStatusFilter<$PrismaModel> | $Enums.DefectStatus
+}
+
+export type NestedEnumDefectStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DefectStatus | Prisma.EnumDefectStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.DefectStatus[] | Prisma.ListEnumDefectStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DefectStatus[] | Prisma.ListEnumDefectStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDefectStatusWithAggregatesFilter<$PrismaModel> | $Enums.DefectStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDefectStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDefectStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumUserActivityTypeFilter<$PrismaModel = never> = {

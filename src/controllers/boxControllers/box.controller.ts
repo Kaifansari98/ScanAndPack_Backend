@@ -57,6 +57,8 @@ export const getAllBoxes = async (req: Request, res: Response) => {
 
 export const getBoxesByVendorAndProject = async (req: Request, res: Response) => {
   try {
+
+    console.log("getBoxesByVendorAndProject");
     const vendorId = Number(req.params.vendorId);
     const projectId = Number(req.params.projectId);
 

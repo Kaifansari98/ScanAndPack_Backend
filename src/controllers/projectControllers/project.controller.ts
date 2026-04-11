@@ -62,6 +62,7 @@ export const getAllProjectItems = async (_req: Request, res: Response) => {
   
 export const getProjectById = async (req: Request, res: Response) => {
   try {
+    console.log("getProjectById")
     const id = Number(req.params.id);
     const project = await projectService.getProjectById(id);
 

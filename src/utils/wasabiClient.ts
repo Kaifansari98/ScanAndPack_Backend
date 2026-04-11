@@ -1642,19 +1642,7 @@ export const uploadToWasabiMachineImage = async (
 
   await upload.done();
 
-  // 2️⃣ Generate signed URL
-  const command = new GetObjectCommand({
-    Bucket: process.env.WASABI_BUCKET_NAME!,
-    Key: key,
-    ResponseContentDisposition: "inline",
-  });
-
-  const signedUrl = await getSignedUrl(wasabi, command, {
-    expiresIn: 60 * 60, // 1 hour
-  });
-
-  // 3️⃣ return signed URL
-  return signedUrl;
+  return key;
 };
 
 export const uploadToWasabiProjectExcel = async (
@@ -1702,4 +1690,120 @@ export const uploadToWasabiProjectExcel = async (
   } catch (error: any) {
     throw error;
   }
+};
+
+
+
+export const uploadToWasabiItems = async (
+  filePath: string,
+  vendorId: number,
+  defected_item_id: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `defect/${vendorId}/${defected_item_id}/${uuidv4()}.${ext}`;
+
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
+
+  return sysName;
+};
+
+export interface UploadedImage {
+  url: string;
+  key: string;
+  originalName: string;
+  systemName: string;
+}
+export const uploadToWasabiDefectedItems = async (
+  files: Express.Multer.File[],
+  vendorId: number,
+  defectedItemId: number
+): Promise<UploadedImage[]> => {
+  const uploads = files.map(async (file) => {
+    const sysName = await uploadToWasabiItems(
+      file.path,
+      vendorId,
+      defectedItemId,
+      file.originalname,
+      file.mimetype,
+    );
+
+    const url = `${process.env.WASABI_ENDPOINT}/${process.env.WASABI_BUCKET_NAME}/${sysName}`;
+
+    return {
+      url,
+      key: sysName,
+      originalName: file.originalname,
+      systemName: sysName,
+    };
+  });
+
+  return Promise.all(uploads);
+};
+
+
+export const uploadToWasabiCompletionItem = async (
+  filePath: string,
+  vendorId: number,
+  mappingId: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `completion/${vendorId}/${mappingId}/${uuidv4()}.${ext}`;
+
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
+  return sysName;
+};
+
+export const uploadToWasabiCompletionPhotos = async (
+  files: Express.Multer.File[],
+  vendorId: number,
+  mappingId: number
+): Promise<UploadedImage[]> => {
+  const uploads = files.map(async (file) => {
+    const sysName = await uploadToWasabiCompletionItem(
+      file.path,
+      vendorId,
+      mappingId,
+      file.originalname,
+      file.mimetype,
+    );
+
+    const url = `${process.env.WASABI_ENDPOINT}/${process.env.WASABI_BUCKET_NAME}/${sysName}`;
+
+    return {
+      url,
+      key: sysName,
+      originalName: file.originalname,
+      systemName: sysName,
+    };
+  });
+
+  return Promise.all(uploads);
 };

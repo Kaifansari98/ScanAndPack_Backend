@@ -231,3 +231,11 @@ export const ServiceClosureReason = {
 } as const
 
 export type ServiceClosureReason = (typeof ServiceClosureReason)[keyof typeof ServiceClosureReason]
+
+
+export const DefectStatus = {
+  Pending: 'Pending',
+  Completed: 'Completed'
+} as const
+
+export type DefectStatus = (typeof DefectStatus)[keyof typeof DefectStatus]
