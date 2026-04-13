@@ -4,6 +4,8 @@ import {
   Prisma,
   SuperAdminApprovalType,
 } from "../../prisma/generated";
+import logger from "../../utils/logger";
+import { sendBookingDoneApprovalRequiredEmail } from "../email/brevoEmail.service";
 import { NotificationService } from "../notification/notification.service";
 
 type TxClient = Prisma.TransactionClient;
@@ -31,6 +33,22 @@ interface ApproveBookingDoneTaskInput {
 export class LeadSuperAdminApprovalLockInService {
   private getDb(tx?: TxClient) {
     return tx ?? prisma;
+  }
+
+  private formatDisplayDate(date: Date) {
+    return new Intl.DateTimeFormat("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    }).format(date);
+  }
+
+  private getClientBaseUrl() {
+    return (
+      process.env.CLIENT_BASE_URL ||
+      process.env.FRONTEND_URL ||
+      "http://localhost:3000"
+    );
   }
 
   private getNextDayDueDate(baseDate: Date = new Date()) {
@@ -81,6 +99,8 @@ export class LeadSuperAdminApprovalLockInService {
       },
       select: {
         id: true,
+        user_name: true,
+        user_email: true,
       },
     });
 
@@ -172,18 +192,48 @@ export class LeadSuperAdminApprovalLockInService {
       const leadCode =
         lead.lead_code ?? `LEAD-${String(lead.id).padStart(4, "0")}`;
       const displayLead = leadName ? `${leadCode} - ${leadName}` : leadCode;
-
-      await NotificationService.createAndSend({
-        vendor_id: input.vendor_id,
-        user_id: superAdmin.id,
-        sender_id: input.created_by,
-        type: NotificationType.TASK_ASSIGNED,
-        title: "Booking Done approval pending",
-        message: `A Booking Done approval task has been assigned for ${displayLead}.`,
-        entity_type: "lead_super_admin_approval_lockin",
-        entity_id: approval.id,
-        redirect_url: "/dashboard/my-tasks",
+      const dueDateText = this.formatDisplayDate(task.due_date ?? new Date());
+      const actionDate = this.formatDisplayDate(input.base_date ?? new Date());
+      const taskUrl = `${this.getClientBaseUrl()}/dashboard/my-tasks?taskId=${task.id}`;
+      const movedByUser = await db.userMaster.findUnique({
+        where: { id: input.created_by },
+        select: { user_name: true },
       });
+      const movedByName = movedByUser?.user_name ?? "User";
+
+      try {
+        await NotificationService.createAndSend({
+          vendor_id: input.vendor_id,
+          user_id: superAdmin.id,
+          sender_id: input.created_by,
+          type: NotificationType.TASK_ASSIGNED,
+          title: "Approval Required – Booking Done",
+          message: `${displayLead} is awaiting your approval at the Booking Done stage. Due by ${dueDateText}.`,
+          entity_type: "lead_super_admin_approval_lockin",
+          entity_id: approval.id,
+          redirect_url: `/dashboard/my-tasks?taskId=${task.id}`,
+        });
+
+        if (superAdmin.user_email) {
+          await sendBookingDoneApprovalRequiredEmail({
+            vendor_id: input.vendor_id,
+            toEmail: superAdmin.user_email,
+            toName: superAdmin.user_name ?? undefined,
+            leadCode,
+            leadName: leadName || "Lead",
+            movedBy: movedByName,
+            dateOfAction: actionDate,
+            dueDate: dueDateText,
+            ctaLink: taskUrl,
+          });
+        }
+      } catch (notificationError: any) {
+        logger.warn("Booking Done approval notification/email failed", {
+          error: notificationError?.message,
+          lead_id: input.lead_id,
+          super_admin_id: superAdmin.id,
+        });
+      }
     }
 
     return {

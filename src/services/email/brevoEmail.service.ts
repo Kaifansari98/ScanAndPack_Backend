@@ -13,6 +13,7 @@ export type BrevoEmailPayload = {
   replyToEmail?: string;
   replyToName?: string;
   senderName?: string;
+  allowSuperAdmin?: boolean;
 };
 
 export type BrevoEmailResult =
@@ -191,6 +192,18 @@ export interface LeadMarkedActiveEmailPayload {
   leadUrl?: string;
 }
 
+export type BookingDoneApprovalRequiredEmailPayload = {
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  leadCode: string;
+  leadName: string;
+  movedBy: string;
+  dateOfAction: string;
+  dueDate: string;
+  ctaLink?: string;
+};
+
 const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
 const LEAD_CREATED_TEMPLATE_KEY = "LEAD_CREATED";
 const LEAD_ASSIGNED_TEMPLATE_KEY = "LEAD_ASSIGNED";
@@ -218,6 +231,8 @@ const TECH_CHECK_REJECTED_TEMPLATE_KEY = "TECHCHECK_DOCUMENT_REJECT";
 const REVISED_DOCUMENTS_UPLOADED_TEMPLATE_KEY = "REVISED_DOCUMENTS_UPLOADED";
 const ORDER_LOGIN_ENABLED_TEMPLATE_KEY = "ORDER_LOGIN_ENABLED";
 const ORDER_LOGIN_ASSIGNED_TEMPLATE_KEY = "ORDER_LOGIN_ASSIGNED";
+const BOOKING_DONE_APPROVAL_REQUIRED_TEMPLATE_KEY =
+  "BOOKING_DONE_APPROVAL_REQUIRED";
 
 export const LEAD_STAGE_TEMPLATE_KEYS = {
   ISM_STAGE: "LEAD_MOVED_TO_ISM_STAGE",
@@ -278,11 +293,18 @@ export const sendBrevoEmail = async (
     where: { user_email: payload.toEmail },
     select: { user_type: { select: { user_type: true } } },
   });
-  if (recipientUser?.user_type?.user_type?.toLowerCase() === "super-admin") {
+  if (
+    recipientUser?.user_type?.user_type?.toLowerCase() === "super-admin" &&
+    !payload.allowSuperAdmin
+  ) {
     logger.info("Email skipped: recipient is super-admin", {
       to: payload.toEmail,
     });
-    return { success: false, skipped: true, reason: "Skipped: recipient is super-admin" };
+    return {
+      success: false,
+      skipped: true,
+      reason: "Skipped: recipient is super-admin",
+    };
   }
 
   if (!apiKey || !senderEmail) {
@@ -7312,6 +7334,196 @@ export const sendOrderLoginAssignedEmail = async (payload: {
       subject,
       text,
       html,
+    },
+    identity,
+  );
+};
+
+export const sendBookingDoneApprovalRequiredEmail = async (
+  payload: BookingDoneApprovalRequiredEmailPayload,
+): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Approval Required: ${payload.leadCode} - ${payload.leadName} moved to Booking Done Stage`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "A lead has been moved to the Booking Done stage and requires your approval to proceed further.",
+    "",
+    "Lead Details:",
+    `Lead Name: ${payload.leadName}`,
+    `Lead Code: ${payload.leadCode}`,
+    `Moved By: ${payload.movedBy}`,
+    `Date of Action: ${payload.dateOfAction}`,
+    `A task has been created for you with a due date of ${payload.dueDate}.`,
+    "Please review and take action:",
+    payload.ctaLink ? `Click here to review: ${payload.ctaLink}` : "",
+    "",
+    "Note: Further actions (FM Task Assignment) will only be enabled post approval.",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background-color:#f3f4f6;font-family:'Helvetica Neue',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f3f4f6;padding:32px 16px;">
+    <tr>
+      <td align="center">
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+          <tr>
+            <td style="background-color:#111827;padding:24px 32px;">
+              <p style="margin:0;font-size:20px;font-weight:700;color:#ffffff;">Approval Required: Booking Done</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:32px;">
+              <p style="margin:0 0 24px;font-size:15px;color:#374151;">Hello ${payload.toName ?? "there"},</p>
+              <p style="margin:0 0 24px;font-size:15px;color:#374151;">
+                A lead has been moved to the Booking Done stage and requires your approval to proceed further.
+              </p>
+              <p style="margin:0 0 12px;font-size:15px;color:#111827;font-weight:600;">Lead Details:</p>
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;border-top:1px solid #e5e7eb;">
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
+                  <div class="lead-info-row">
+                    <span class="lead-info-label">Lead Name</span>
+                    <span class="lead-info-value">${payload.leadName}</span>
+                  </div>
+                </td></tr>
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
+                  <div class="lead-info-row">
+                    <span class="lead-info-label">Lead Code</span>
+                    <span class="lead-info-value">${payload.leadCode}</span>
+                  </div>
+                </td></tr>
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
+                  <div class="lead-info-row">
+                    <span class="lead-info-label">Moved By</span>
+                    <span class="lead-info-value">${payload.movedBy}</span>
+                  </div>
+                </td></tr>
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
+                  <div class="lead-info-row">
+                    <span class="lead-info-label">Date of Action</span>
+                    <span class="lead-info-value">${payload.dateOfAction}</span>
+                  </div>
+                </td></tr>
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
+                  <div class="lead-info-row">
+                    <span class="lead-info-label">Due Date</span>
+                    <span class="lead-info-value">${payload.dueDate}</span>
+                  </div>
+                </td></tr>
+              </table>
+              <p style="margin:0 0 20px;font-size:15px;color:#374151;">
+                A task has been created for you with a due date of ${payload.dueDate}.
+              </p>
+              ${
+                payload.ctaLink
+                  ? `<table cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+                      <tr>
+                        <td style="background-color:#111827;border-radius:6px;padding:12px 24px;">
+                          <a href="${payload.ctaLink}" style="color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;">Click here to review</a>
+                        </td>
+                      </tr>
+                    </table>`
+                  : ""
+              }
+              <p style="margin:0;font-size:14px;color:#4b5563;">
+                Note: Further actions (FM Task Assignment) will only be enabled post approval.
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    movedBy: payload.movedBy,
+    dateOfAction: payload.dateOfAction,
+    dueDate: payload.dueDate,
+    ctaLink: payload.ctaLink ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: BOOKING_DONE_APPROVAL_REQUIRED_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: BOOKING_DONE_APPROVAL_REQUIRED_TEMPLATE_KEY,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+      allowSuperAdmin: true,
     },
     identity,
   );
