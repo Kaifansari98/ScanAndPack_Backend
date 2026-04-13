@@ -15,4 +15,9 @@ leadSuperAdminApprovalLockInRouter.patch(
   leadSuperAdminApprovalLockInController.approveLockIn,
 );
 
+leadSuperAdminApprovalLockInRouter.patch(
+  "/booking-done/lead/:leadId/task/:taskId/approve",
+  leadSuperAdminApprovalLockInController.approveBookingDoneTask,
+);
+
 export default leadSuperAdminApprovalLockInRouter;

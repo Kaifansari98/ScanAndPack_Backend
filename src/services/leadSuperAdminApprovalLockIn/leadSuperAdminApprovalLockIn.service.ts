@@ -21,6 +21,13 @@ interface ApproveLockInInput {
   approval_remark?: string | null;
 }
 
+interface ApproveBookingDoneTaskInput {
+  lead_id: number;
+  task_id: number;
+  approved_by: number;
+  approval_remark?: string | null;
+}
+
 export class LeadSuperAdminApprovalLockInService {
   private getDb(tx?: TxClient) {
     return tx ?? prisma;
@@ -236,6 +243,98 @@ export class LeadSuperAdminApprovalLockInService {
           },
         },
       },
+    });
+  }
+
+  async approveBookingDoneTask(input: ApproveBookingDoneTaskInput) {
+    return prisma.$transaction(async (tx) => {
+      const task = await tx.userLeadTask.findFirst({
+        where: {
+          id: input.task_id,
+          lead_id: input.lead_id,
+        },
+        include: {
+          lead: {
+            select: {
+              vendor_id: true,
+              account_id: true,
+              firstname: true,
+              lastname: true,
+              lead_code: true,
+            },
+          },
+        },
+      });
+
+      if (!task) {
+        throw new Error(
+          `Task ${input.task_id} not found for lead ${input.lead_id}`,
+        );
+      }
+
+      if (task.task_type !== "Booking Done Approval") {
+        throw new Error("This task is not a Booking Done Approval task");
+      }
+
+      const approval = await tx.leadSuperAdminApprovalLocIns.findFirst({
+        where: {
+          vendor_id: task.vendor_id,
+          lead_id: input.lead_id,
+          approval_type: SuperAdminApprovalType.booking_done,
+        },
+      });
+
+      if (!approval) {
+        throw new Error("Booking Done lock-in entry not found");
+      }
+
+      const approvedLockIn = await tx.leadSuperAdminApprovalLocIns.update({
+        where: { id: approval.id },
+        data: {
+          is_approved: true,
+          approved_at: new Date(),
+          approved_by: input.approved_by,
+          approval_remark: input.approval_remark ?? null,
+        },
+      });
+
+      const completedTask = await tx.userLeadTask.update({
+        where: { id: input.task_id },
+        data: {
+          status: "completed",
+          updated_by: input.approved_by,
+          updated_at: new Date(),
+          closed_by: input.approved_by,
+          closed_at: new Date(),
+          ...(input.approval_remark !== undefined
+            ? { remark: input.approval_remark }
+            : {}),
+        },
+      });
+
+      let actionMessage =
+        "Super Admin approved the Booking Done lock-in. Final Measurement can now be assigned.";
+
+      if (input.approval_remark && input.approval_remark.trim() !== "") {
+        actionMessage += ` — Remark: ${input.approval_remark.trim()}`;
+      }
+
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: task.vendor_id,
+          lead_id: input.lead_id,
+          account_id: task.account_id,
+          action: actionMessage,
+          action_type: "UPDATE",
+          created_by: input.approved_by,
+          created_at: new Date(),
+        },
+      });
+
+      return {
+        approval: approvedLockIn,
+        task: completedTask,
+      };
     });
   }
 }
