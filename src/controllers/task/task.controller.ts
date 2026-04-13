@@ -777,9 +777,17 @@ export class TaskController {
     try {
       const vendorId = Number(req.params.vendorId);
       const leadId = Number(req.params.leadId);
-      const franchiseId = Number(req.query.franchise_id);
+      const rawFranchiseId = req.query.franchise_id;
+      const franchiseId =
+        rawFranchiseId === undefined || rawFranchiseId === null || rawFranchiseId === ""
+          ? undefined
+          : Number(rawFranchiseId);
 
-      if (isNaN(vendorId) || isNaN(leadId) || isNaN(franchiseId)) {
+      if (
+        isNaN(vendorId) ||
+        isNaN(leadId) ||
+        (franchiseId !== undefined && isNaN(franchiseId))
+      ) {
         return res
           .status(400)
           .json({

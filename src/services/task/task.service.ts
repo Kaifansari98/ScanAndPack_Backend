@@ -1530,13 +1530,13 @@ private static mapTaskWithLead(task: any) {
   static async getActiveTasksByVendorAndLead(
     vendorId: number,
     leadId: number,
-    franchiseId: number,
+    franchiseId?: number,
   ) {
     return prisma.userLeadTask.findMany({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
-        franchise_id: franchiseId,
+        ...(franchiseId !== undefined ? { franchise_id: franchiseId } : {}),
         status: { in: ["open", "in_progress"] },
       },
       select: {
