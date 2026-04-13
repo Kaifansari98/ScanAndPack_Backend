@@ -187,6 +187,7 @@ model UserMaster {
   orderLoginPoFilesDeleted                   OrderLoginPoFileMapping[]            @relation("OrderLoginPoFileDeletedBy")
   paymentsCreated                            PaymentInfo[]
   leadSuperAdminApprovalsApproved            LeadSuperAdminApprovalLocIns[]       @relation("LeadSuperAdminApprovalApprovedBy")
+  leadSuperAdminApprovalsCreated             LeadSuperAdminApprovalLocIns[]       @relation("LeadSuperAdminApprovalCreatedBy")
   createdProjects                            ProjectMaster[]                      @relation("CreatedByUser")
   scanItemsCreated                           ScanAndPackItem[]
   siteReadinessCreated                       SiteReadiness[]                      @relation("SiteReadinessCreatedBy")
@@ -489,12 +490,15 @@ model LeadSuperAdminApprovalLocIns {
   franchise_id    Int?
   lead_id         Int
   approval_type   SuperAdminApprovalType
+  created_by      Int
+  created_at      DateTime               @default(now())
   is_approved     Boolean                @default(false)
   approved_at     DateTime?
   approved_by     Int?
   approval_remark String?
   franchise       FranchiseMaster?       @relation(fields: [franchise_id], references: [id])
   lead            LeadMaster             @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  createdBy       UserMaster             @relation("LeadSuperAdminApprovalCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   approvedBy      UserMaster?            @relation("LeadSuperAdminApprovalApprovedBy", fields: [approved_by], references: [id])
   vendor          VendorMaster           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
@@ -502,6 +506,7 @@ model LeadSuperAdminApprovalLocIns {
   @@index([vendor_id])
   @@index([franchise_id])
   @@index([lead_id])
+  @@index([created_by])
   @@index([approved_by])
 }
 

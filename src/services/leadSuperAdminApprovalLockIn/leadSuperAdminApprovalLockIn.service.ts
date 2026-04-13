@@ -126,6 +126,8 @@ export class LeadSuperAdminApprovalLockInService {
           franchise_id: lead.franchise_id ?? null,
           lead_id: input.lead_id,
           approval_type: SuperAdminApprovalType.booking_done,
+          created_by: input.created_by,
+          created_at: new Date(),
           is_approved: false,
         },
       });

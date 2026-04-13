@@ -456,6 +456,8 @@ export const LeadSuperAdminApprovalLocInsScalarFieldEnum = {
   franchise_id: 'franchise_id',
   lead_id: 'lead_id',
   approval_type: 'approval_type',
+  created_by: 'created_by',
+  created_at: 'created_at',
   is_approved: 'is_approved',
   approved_at: 'approved_at',
   approved_by: 'approved_by',

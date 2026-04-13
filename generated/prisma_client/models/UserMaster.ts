@@ -337,6 +337,7 @@ export type UserMasterWhereInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingListRelationFilter
   paymentsCreated?: Prisma.PaymentInfoListRelationFilter
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsListRelationFilter
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsListRelationFilter
   createdProjects?: Prisma.ProjectMasterListRelationFilter
   scanItemsCreated?: Prisma.ScanAndPackItemListRelationFilter
   siteReadinessCreated?: Prisma.SiteReadinessListRelationFilter
@@ -430,6 +431,7 @@ export type UserMasterOrderByWithRelationInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingOrderByRelationAggregateInput
   paymentsCreated?: Prisma.PaymentInfoOrderByRelationAggregateInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsOrderByRelationAggregateInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsOrderByRelationAggregateInput
   createdProjects?: Prisma.ProjectMasterOrderByRelationAggregateInput
   scanItemsCreated?: Prisma.ScanAndPackItemOrderByRelationAggregateInput
   siteReadinessCreated?: Prisma.SiteReadinessOrderByRelationAggregateInput
@@ -526,6 +528,7 @@ export type UserMasterWhereUniqueInput = Prisma.AtLeast<{
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingListRelationFilter
   paymentsCreated?: Prisma.PaymentInfoListRelationFilter
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsListRelationFilter
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsListRelationFilter
   createdProjects?: Prisma.ProjectMasterListRelationFilter
   scanItemsCreated?: Prisma.ScanAndPackItemListRelationFilter
   siteReadinessCreated?: Prisma.SiteReadinessListRelationFilter
@@ -653,6 +656,7 @@ export type UserMasterCreateInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -746,6 +750,7 @@ export type UserMasterUncheckedCreateInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -832,6 +837,7 @@ export type UserMasterUpdateInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -925,6 +931,7 @@ export type UserMasterUncheckedUpdateInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -1257,10 +1264,24 @@ export type UserMasterUpdateOneWithoutLeadsUpdatedNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutLeadsUpdatedInput, Prisma.UserMasterUpdateWithoutLeadsUpdatedInput>, Prisma.UserMasterUncheckedUpdateWithoutLeadsUpdatedInput>
 }
 
+export type UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutLeadSuperAdminApprovalsCreatedInput, Prisma.UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsCreatedInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutLeadSuperAdminApprovalsCreatedInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+}
+
 export type UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsApprovedInput = {
   create?: Prisma.XOR<Prisma.UserMasterCreateWithoutLeadSuperAdminApprovalsApprovedInput, Prisma.UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsApprovedInput>
   connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutLeadSuperAdminApprovalsApprovedInput
   connect?: Prisma.UserMasterWhereUniqueInput
+}
+
+export type UserMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalsCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutLeadSuperAdminApprovalsCreatedInput, Prisma.UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsCreatedInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutLeadSuperAdminApprovalsCreatedInput
+  upsert?: Prisma.UserMasterUpsertWithoutLeadSuperAdminApprovalsCreatedInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutLeadSuperAdminApprovalsCreatedInput, Prisma.UserMasterUpdateWithoutLeadSuperAdminApprovalsCreatedInput>, Prisma.UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsCreatedInput>
 }
 
 export type UserMasterUpdateOneWithoutLeadSuperAdminApprovalsApprovedNestedInput = {
@@ -2355,6 +2376,7 @@ export type UserMasterCreateWithoutVendorInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -2446,6 +2468,7 @@ export type UserMasterUncheckedCreateWithoutVendorInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -2576,6 +2599,7 @@ export type UserMasterCreateWithoutUser_typeInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -2667,6 +2691,7 @@ export type UserMasterUncheckedCreateWithoutUser_typeInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -2779,6 +2804,7 @@ export type UserMasterCreateWithoutDocumentsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -2871,6 +2897,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -2972,6 +2999,7 @@ export type UserMasterUpdateWithoutDocumentsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -3064,6 +3092,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -3149,6 +3178,7 @@ export type UserMasterCreateWithoutCreatedProjectsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
@@ -3241,6 +3271,7 @@ export type UserMasterUncheckedCreateWithoutCreatedProjectsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -3342,6 +3373,7 @@ export type UserMasterUpdateWithoutCreatedProjectsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
@@ -3434,6 +3466,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedProjectsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -3519,6 +3552,7 @@ export type UserMasterCreateWithoutScanItemsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
@@ -3611,6 +3645,7 @@ export type UserMasterUncheckedCreateWithoutScanItemsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -3712,6 +3747,7 @@ export type UserMasterUpdateWithoutScanItemsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
@@ -3804,6 +3840,7 @@ export type UserMasterUncheckedUpdateWithoutScanItemsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -3888,6 +3925,7 @@ export type UserMasterCreateWithoutLeadsAssignedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -3980,6 +4018,7 @@ export type UserMasterUncheckedCreateWithoutLeadsAssignedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -4070,6 +4109,7 @@ export type UserMasterCreateWithoutLeadsDelegatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -4162,6 +4202,7 @@ export type UserMasterUncheckedCreateWithoutLeadsDelegatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -4252,6 +4293,7 @@ export type UserMasterCreateWithoutLeadsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -4344,6 +4386,7 @@ export type UserMasterUncheckedCreateWithoutLeadsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -4434,6 +4477,7 @@ export type UserMasterCreateWithoutLeadsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -4526,6 +4570,7 @@ export type UserMasterUncheckedCreateWithoutLeadsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -4627,6 +4672,7 @@ export type UserMasterUpdateWithoutLeadsAssignedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -4719,6 +4765,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsAssignedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -4815,6 +4862,7 @@ export type UserMasterUpdateWithoutLeadsDelegatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -4907,6 +4955,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsDelegatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -5003,6 +5052,7 @@ export type UserMasterUpdateWithoutLeadsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -5095,6 +5145,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -5191,6 +5242,7 @@ export type UserMasterUpdateWithoutLeadsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -5283,6 +5335,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -5305,6 +5358,190 @@ export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
   externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+}
+
+export type UserMasterCreateWithoutLeadSuperAdminApprovalsCreatedInput = {
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageCreateNestedManyWithoutSenderInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsCreateNestedManyWithoutDeletedByInput
+  leadsAssigned?: Prisma.LeadMasterCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutUpdatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutSupervisorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
+  scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractCreateNestedManyWithoutUpdatedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutUpdatedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleCreateNestedManyWithoutRejectedByInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
+  user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
+  pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
+}
+
+export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsCreatedInput = {
+  id?: number
+  vendor_id: number
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  user_type_id: number
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  franchise_id?: number | null
+  accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutSenderInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDeletedByInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutUpdatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerUncheckedCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutRejectedByInput
+  pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
+}
+
+export type UserMasterCreateOrConnectWithoutLeadSuperAdminApprovalsCreatedInput = {
+  where: Prisma.UserMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutLeadSuperAdminApprovalsCreatedInput, Prisma.UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsCreatedInput>
 }
 
 export type UserMasterCreateWithoutLeadSuperAdminApprovalsApprovedInput = {
@@ -5368,6 +5605,7 @@ export type UserMasterCreateWithoutLeadSuperAdminApprovalsApprovedInput = {
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -5460,6 +5698,7 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsApprovedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -5487,6 +5726,196 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsApprovedInput
 export type UserMasterCreateOrConnectWithoutLeadSuperAdminApprovalsApprovedInput = {
   where: Prisma.UserMasterWhereUniqueInput
   create: Prisma.XOR<Prisma.UserMasterCreateWithoutLeadSuperAdminApprovalsApprovedInput, Prisma.UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsApprovedInput>
+}
+
+export type UserMasterUpsertWithoutLeadSuperAdminApprovalsCreatedInput = {
+  update: Prisma.XOR<Prisma.UserMasterUpdateWithoutLeadSuperAdminApprovalsCreatedInput, Prisma.UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsCreatedInput>
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutLeadSuperAdminApprovalsCreatedInput, Prisma.UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsCreatedInput>
+  where?: Prisma.UserMasterWhereInput
+}
+
+export type UserMasterUpdateToOneWithWhereWithoutLeadSuperAdminApprovalsCreatedInput = {
+  where?: Prisma.UserMasterWhereInput
+  data: Prisma.XOR<Prisma.UserMasterUpdateWithoutLeadSuperAdminApprovalsCreatedInput, Prisma.UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsCreatedInput>
+}
+
+export type UserMasterUpdateWithoutLeadSuperAdminApprovalsCreatedInput = {
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUpdateManyWithoutSenderNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUpdateManyWithoutDeletedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutUpdatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutSupervisorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUpdateManyWithoutUpdatedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUpdateManyWithoutUpdatedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUpdateManyWithoutRejectedByNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
+  user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
+  pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
+}
+
+export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsCreatedInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutRejectedByNestedInput
+  pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadSuperAdminApprovalsApprovedInput = {
@@ -5561,6 +5990,7 @@ export type UserMasterUpdateWithoutLeadSuperAdminApprovalsApprovedInput = {
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -5653,6 +6083,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsApprovedInput
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -5738,6 +6169,7 @@ export type UserMasterCreateWithoutLeadUserCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -5830,6 +6262,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -5920,6 +6353,7 @@ export type UserMasterCreateWithoutLeadUserUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -6012,6 +6446,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -6102,6 +6537,7 @@ export type UserMasterCreateWithoutLeadUserAsUserInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -6194,6 +6630,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserAsUserInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -6295,6 +6732,7 @@ export type UserMasterUpdateWithoutLeadUserCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -6387,6 +6825,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -6483,6 +6922,7 @@ export type UserMasterUpdateWithoutLeadUserUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -6575,6 +7015,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -6671,6 +7112,7 @@ export type UserMasterUpdateWithoutLeadUserAsUserInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -6763,6 +7205,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserAsUserInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -6848,6 +7291,7 @@ export type UserMasterCreateWithoutLeadActivityStatusLogInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -6940,6 +7384,7 @@ export type UserMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -7041,6 +7486,7 @@ export type UserMasterUpdateWithoutLeadActivityStatusLogInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -7133,6 +7579,7 @@ export type UserMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -7218,6 +7665,7 @@ export type UserMasterCreateWithoutAccountsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -7310,6 +7758,7 @@ export type UserMasterUncheckedCreateWithoutAccountsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -7400,6 +7849,7 @@ export type UserMasterCreateWithoutAccountsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -7492,6 +7942,7 @@ export type UserMasterUncheckedCreateWithoutAccountsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -7593,6 +8044,7 @@ export type UserMasterUpdateWithoutAccountsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -7685,6 +8137,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -7781,6 +8234,7 @@ export type UserMasterUpdateWithoutAccountsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -7873,6 +8327,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -7958,6 +8413,7 @@ export type UserMasterCreateWithoutLeadProductsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -8050,6 +8506,7 @@ export type UserMasterUncheckedCreateWithoutLeadProductsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -8151,6 +8608,7 @@ export type UserMasterUpdateWithoutLeadProductsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -8243,6 +8701,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProductsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -8328,6 +8787,7 @@ export type UserMasterCreateWithoutDocumentsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -8420,6 +8880,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -8510,6 +8971,7 @@ export type UserMasterCreateWithoutDocumentsDeletedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -8602,6 +9064,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsDeletedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -8703,6 +9166,7 @@ export type UserMasterUpdateWithoutDocumentsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -8795,6 +9259,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -8891,6 +9356,7 @@ export type UserMasterUpdateWithoutDocumentsDeletedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -8983,6 +9449,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsDeletedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -9068,6 +9535,7 @@ export type UserMasterCreateWithoutLeadChatMembersAddedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -9160,6 +9628,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersAddedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -9250,6 +9719,7 @@ export type UserMasterCreateWithoutLeadChatMembersInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -9342,6 +9812,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -9443,6 +9914,7 @@ export type UserMasterUpdateWithoutLeadChatMembersAddedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -9535,6 +10007,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersAddedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -9631,6 +10104,7 @@ export type UserMasterUpdateWithoutLeadChatMembersInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -9723,6 +10197,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -9808,6 +10283,7 @@ export type UserMasterCreateWithoutLeadChatMessagesSentInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -9900,6 +10376,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMessagesSentInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -10001,6 +10478,7 @@ export type UserMasterUpdateWithoutLeadChatMessagesSentInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -10093,6 +10571,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMessagesSentInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -10178,6 +10657,7 @@ export type UserMasterCreateWithoutLeadChatMentionsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -10270,6 +10750,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMentionsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -10371,6 +10852,7 @@ export type UserMasterUpdateWithoutLeadChatMentionsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -10463,6 +10945,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMentionsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -10548,6 +11031,7 @@ export type UserMasterCreateWithoutLeadChatDocumentsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -10640,6 +11124,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -10730,6 +11215,7 @@ export type UserMasterCreateWithoutLeadChatDocumentsDeletedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -10822,6 +11308,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsDeletedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -10923,6 +11410,7 @@ export type UserMasterUpdateWithoutLeadChatDocumentsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -11015,6 +11503,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -11111,6 +11600,7 @@ export type UserMasterUpdateWithoutLeadChatDocumentsDeletedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -11203,6 +11693,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsDeletedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -11288,6 +11779,7 @@ export type UserMasterCreateWithoutProductStructureInstancesInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -11380,6 +11872,7 @@ export type UserMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -11481,6 +11974,7 @@ export type UserMasterUpdateWithoutProductStructureInstancesInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -11573,6 +12067,7 @@ export type UserMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -11658,6 +12153,7 @@ export type UserMasterCreateWithoutPaymentsCreatedInput = {
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -11750,6 +12246,7 @@ export type UserMasterUncheckedCreateWithoutPaymentsCreatedInput = {
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -11851,6 +12348,7 @@ export type UserMasterUpdateWithoutPaymentsCreatedInput = {
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -11943,6 +12441,7 @@ export type UserMasterUncheckedUpdateWithoutPaymentsCreatedInput = {
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -12028,6 +12527,7 @@ export type UserMasterCreateWithoutLedgersCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -12120,6 +12620,7 @@ export type UserMasterUncheckedCreateWithoutLedgersCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -12221,6 +12722,7 @@ export type UserMasterUpdateWithoutLedgersCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -12313,6 +12815,7 @@ export type UserMasterUncheckedUpdateWithoutLedgersCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -12399,6 +12902,7 @@ export type UserMasterCreateWithoutLeadAmcContractsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -12491,6 +12995,7 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -12581,6 +13086,7 @@ export type UserMasterCreateWithoutLeadAmcContractsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -12673,6 +13179,7 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -12774,6 +13281,7 @@ export type UserMasterUpdateWithoutLeadAmcContractsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -12866,6 +13374,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -12962,6 +13471,7 @@ export type UserMasterUpdateWithoutLeadAmcContractsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -13054,6 +13564,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -13139,6 +13650,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesCompletedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -13231,6 +13743,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCompletedInput =
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -13321,6 +13834,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -13413,6 +13927,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -13503,6 +14018,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesRejectedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -13595,6 +14111,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesRejectedInput = 
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -13685,6 +14202,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -13777,6 +14295,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -13878,6 +14397,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesCompletedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -13970,6 +14490,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCompletedInput =
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -14066,6 +14587,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -14158,6 +14680,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -14254,6 +14777,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesRejectedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -14346,6 +14870,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesRejectedInput = 
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -14442,6 +14967,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -14534,6 +15060,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -14618,6 +15145,7 @@ export type UserMasterCreateWithoutLeadStatusLogsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -14710,6 +15238,7 @@ export type UserMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -14811,6 +15340,7 @@ export type UserMasterUpdateWithoutLeadStatusLogsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -14903,6 +15433,7 @@ export type UserMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -14988,6 +15519,7 @@ export type UserMasterCreateWithoutDesignMeetingsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -15080,6 +15612,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -15170,6 +15703,7 @@ export type UserMasterCreateWithoutDesignMeetingsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -15262,6 +15796,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -15363,6 +15898,7 @@ export type UserMasterUpdateWithoutDesignMeetingsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -15455,6 +15991,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -15551,6 +16088,7 @@ export type UserMasterUpdateWithoutDesignMeetingsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -15643,6 +16181,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -15728,6 +16267,7 @@ export type UserMasterCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -15820,6 +16360,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingDocsMappingForCreatedBY
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -15921,6 +16462,7 @@ export type UserMasterUpdateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -16013,6 +16555,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingDocsMappingForCreatedBY
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -16098,6 +16641,7 @@ export type UserMasterCreateWithoutDesignSelectionsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -16190,6 +16734,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -16280,6 +16825,7 @@ export type UserMasterCreateWithoutDesignSelectionsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -16372,6 +16918,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -16473,6 +17020,7 @@ export type UserMasterUpdateWithoutDesignSelectionsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -16565,6 +17113,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -16661,6 +17210,7 @@ export type UserMasterUpdateWithoutDesignSelectionsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -16753,6 +17303,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -16838,6 +17389,7 @@ export type UserMasterCreateWithoutSupervisorMappingsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -16930,6 +17482,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -17020,6 +17573,7 @@ export type UserMasterCreateWithoutSupervisorMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -17112,6 +17666,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -17213,6 +17768,7 @@ export type UserMasterUpdateWithoutSupervisorMappingsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -17305,6 +17861,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -17401,6 +17958,7 @@ export type UserMasterUpdateWithoutSupervisorMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -17493,6 +18051,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -17579,6 +18138,7 @@ export type UserMasterCreateWithoutLeadTasksClosedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -17671,6 +18231,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksClosedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -17761,6 +18322,7 @@ export type UserMasterCreateWithoutLeadTasksCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -17853,6 +18415,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -17943,6 +18506,7 @@ export type UserMasterCreateWithoutLeadTasksAssignedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -18035,6 +18599,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksAssignedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -18136,6 +18701,7 @@ export type UserMasterUpdateWithoutLeadTasksClosedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -18228,6 +18794,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksClosedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -18324,6 +18891,7 @@ export type UserMasterUpdateWithoutLeadTasksCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -18416,6 +18984,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -18512,6 +19081,7 @@ export type UserMasterUpdateWithoutLeadTasksAssignedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -18604,6 +19174,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksAssignedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -18688,6 +19259,7 @@ export type UserMasterCreateWithoutLeadDetailedLogsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -18780,6 +19352,7 @@ export type UserMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -18881,6 +19454,7 @@ export type UserMasterUpdateWithoutLeadDetailedLogsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -18973,6 +19547,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -19058,6 +19633,7 @@ export type UserMasterCreateWithoutLeadDocumentLogsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -19150,6 +19726,7 @@ export type UserMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -19251,6 +19828,7 @@ export type UserMasterUpdateWithoutLeadDocumentLogsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -19343,6 +19921,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -19428,6 +20007,7 @@ export type UserMasterCreateWithoutCompanyVendorsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -19520,6 +20100,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -19610,6 +20191,7 @@ export type UserMasterCreateWithoutCompanyVendorsDeletedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -19702,6 +20284,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsDeletedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -19792,6 +20375,7 @@ export type UserMasterCreateWithoutCompanyVendorsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -19884,6 +20468,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -19985,6 +20570,7 @@ export type UserMasterUpdateWithoutCompanyVendorsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -20077,6 +20663,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -20173,6 +20760,7 @@ export type UserMasterUpdateWithoutCompanyVendorsDeletedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -20265,6 +20853,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsDeletedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -20361,6 +20950,7 @@ export type UserMasterUpdateWithoutCompanyVendorsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -20453,6 +21043,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -20538,6 +21129,7 @@ export type UserMasterCreateWithoutOrderLoginDetailsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -20630,6 +21222,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -20720,6 +21313,7 @@ export type UserMasterCreateWithoutOrderLoginsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -20812,6 +21406,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -20913,6 +21508,7 @@ export type UserMasterUpdateWithoutOrderLoginDetailsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -21005,6 +21601,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -21101,6 +21698,7 @@ export type UserMasterUpdateWithoutOrderLoginsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -21193,6 +21791,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginsUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -21279,6 +21878,7 @@ export type UserMasterCreateWithoutSiteReadinessCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
@@ -21371,6 +21971,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -21461,6 +22062,7 @@ export type UserMasterCreateWithoutSiteReadinessUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -21553,6 +22155,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -21654,6 +22257,7 @@ export type UserMasterUpdateWithoutSiteReadinessCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
@@ -21746,6 +22350,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -21842,6 +22447,7 @@ export type UserMasterUpdateWithoutSiteReadinessUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -21934,6 +22540,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -22018,6 +22625,7 @@ export type UserMasterCreateWithoutInstallersCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -22110,6 +22718,7 @@ export type UserMasterUncheckedCreateWithoutInstallersCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -22211,6 +22820,7 @@ export type UserMasterUpdateWithoutInstallersCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -22303,6 +22913,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -22388,6 +22999,7 @@ export type UserMasterCreateWithoutInstallersAssignedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -22480,6 +23092,7 @@ export type UserMasterUncheckedCreateWithoutInstallersAssignedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -22581,6 +23194,7 @@ export type UserMasterUpdateWithoutInstallersAssignedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -22673,6 +23287,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersAssignedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -22758,6 +23373,7 @@ export type UserMasterCreateWithoutInstallationUpdatesCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -22850,6 +23466,7 @@ export type UserMasterUncheckedCreateWithoutInstallationUpdatesCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -22951,6 +23568,7 @@ export type UserMasterUpdateWithoutInstallationUpdatesCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -23043,6 +23661,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationUpdatesCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -23128,6 +23747,7 @@ export type UserMasterCreateWithoutMiscCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -23220,6 +23840,7 @@ export type UserMasterUncheckedCreateWithoutMiscCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -23310,6 +23931,7 @@ export type UserMasterCreateWithoutMiscUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -23402,6 +24024,7 @@ export type UserMasterUncheckedCreateWithoutMiscUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -23503,6 +24126,7 @@ export type UserMasterUpdateWithoutMiscCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -23595,6 +24219,7 @@ export type UserMasterUncheckedUpdateWithoutMiscCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -23691,6 +24316,7 @@ export type UserMasterUpdateWithoutMiscUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -23783,6 +24409,7 @@ export type UserMasterUncheckedUpdateWithoutMiscUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -23868,6 +24495,7 @@ export type UserMasterCreateWithoutMiscDocumentsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -23960,6 +24588,7 @@ export type UserMasterUncheckedCreateWithoutMiscDocumentsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -24061,6 +24690,7 @@ export type UserMasterUpdateWithoutMiscDocumentsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -24153,6 +24783,7 @@ export type UserMasterUncheckedUpdateWithoutMiscDocumentsCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -24238,6 +24869,7 @@ export type UserMasterCreateWithoutInstallationIssueLogMasterInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -24330,6 +24962,7 @@ export type UserMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -24431,6 +25064,7 @@ export type UserMasterUpdateWithoutInstallationIssueLogMasterInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -24523,6 +25157,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -24608,6 +25243,7 @@ export type UserMasterCreateWithoutNotificationsSentInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -24700,6 +25336,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsSentInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -24790,6 +25427,7 @@ export type UserMasterCreateWithoutNotificationsReceivedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -24882,6 +25520,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsReceivedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -24983,6 +25622,7 @@ export type UserMasterUpdateWithoutNotificationsSentInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -25075,6 +25715,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsSentInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -25171,6 +25812,7 @@ export type UserMasterUpdateWithoutNotificationsReceivedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -25263,6 +25905,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsReceivedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -25349,6 +25992,7 @@ export type UserMasterCreateWithoutPushTokensInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -25441,6 +26085,7 @@ export type UserMasterUncheckedCreateWithoutPushTokensInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -25542,6 +26187,7 @@ export type UserMasterUpdateWithoutPushTokensInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -25634,6 +26280,7 @@ export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -25718,6 +26365,7 @@ export type UserMasterCreateWithoutOperatorInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -25810,6 +26458,7 @@ export type UserMasterUncheckedCreateWithoutOperatorInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -25911,6 +26560,7 @@ export type UserMasterUpdateWithoutOperatorInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -26003,6 +26653,7 @@ export type UserMasterUncheckedUpdateWithoutOperatorInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -26089,6 +26740,7 @@ export type UserMasterCreateWithoutCreatedUserMachineMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -26181,6 +26833,7 @@ export type UserMasterUncheckedCreateWithoutCreatedUserMachineMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -26271,6 +26924,7 @@ export type UserMasterCreateWithoutUpdatedUserMachineMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -26363,6 +27017,7 @@ export type UserMasterUncheckedCreateWithoutUpdatedUserMachineMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -26453,6 +27108,7 @@ export type UserMasterCreateWithoutUserMachineMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -26545,6 +27201,7 @@ export type UserMasterUncheckedCreateWithoutUserMachineMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -26646,6 +27303,7 @@ export type UserMasterUpdateWithoutCreatedUserMachineMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -26738,6 +27396,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedUserMachineMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -26834,6 +27493,7 @@ export type UserMasterUpdateWithoutUpdatedUserMachineMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -26926,6 +27586,7 @@ export type UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -27022,6 +27683,7 @@ export type UserMasterUpdateWithoutUserMachineMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -27114,6 +27776,7 @@ export type UserMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -27198,6 +27861,7 @@ export type UserMasterCreateWithoutOrderLoginPoFilesCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -27290,6 +27954,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -27380,6 +28045,7 @@ export type UserMasterCreateWithoutOrderLoginPoFilesDeletedInput = {
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -27472,6 +28138,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput = {
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -27573,6 +28240,7 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -27665,6 +28333,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -27761,6 +28430,7 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesDeletedInput = {
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -27853,6 +28523,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput = {
   orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -27938,6 +28609,7 @@ export type UserMasterCreateWithoutCreatedDefectsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -28030,6 +28702,7 @@ export type UserMasterUncheckedCreateWithoutCreatedDefectsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -28131,6 +28804,7 @@ export type UserMasterUpdateWithoutCreatedDefectsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -28223,6 +28897,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -28309,6 +28984,7 @@ export type UserMasterCreateWithoutFranchiseInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -28400,6 +29076,7 @@ export type UserMasterUncheckedCreateWithoutFranchiseInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -28511,6 +29188,7 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -28603,6 +29281,7 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsC
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -28693,6 +29372,7 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -28785,6 +29465,7 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsI
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -28886,6 +29567,7 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -28978,6 +29660,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsC
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -29074,6 +29757,7 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -29166,6 +29850,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsI
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -29252,6 +29937,7 @@ export type UserMasterCreateWithoutUserGeographicalMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -29344,6 +30030,7 @@ export type UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -29445,6 +30132,7 @@ export type UserMasterUpdateWithoutUserGeographicalMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -29537,6 +30225,7 @@ export type UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -29622,6 +30311,7 @@ export type UserMasterCreateWithoutActivityLogsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -29714,6 +30404,7 @@ export type UserMasterUncheckedCreateWithoutActivityLogsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -29815,6 +30506,7 @@ export type UserMasterUpdateWithoutActivityLogsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -29907,6 +30599,7 @@ export type UserMasterUncheckedUpdateWithoutActivityLogsInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -29992,6 +30685,7 @@ export type UserMasterCreateWithoutExternalPlatformTokensCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -30084,6 +30778,7 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensCreatedInput =
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -30174,6 +30869,7 @@ export type UserMasterCreateWithoutExternalPlatformTokensUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
@@ -30266,6 +30962,7 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensUpdatedInput =
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
   createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
@@ -30367,6 +31064,7 @@ export type UserMasterUpdateWithoutExternalPlatformTokensCreatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -30459,6 +31157,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensCreatedInput =
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -30555,6 +31254,7 @@ export type UserMasterUpdateWithoutExternalPlatformTokensUpdatedInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -30647,6 +31347,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensUpdatedInput =
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -30746,6 +31447,7 @@ export type UserMasterUpdateWithoutVendorInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -30837,6 +31539,7 @@ export type UserMasterUncheckedUpdateWithoutVendorInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -30951,6 +31654,7 @@ export type UserMasterUpdateWithoutUser_typeInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -31042,6 +31746,7 @@ export type UserMasterUncheckedUpdateWithoutUser_typeInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -31156,6 +31861,7 @@ export type UserMasterUpdateWithoutFranchiseInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
@@ -31247,6 +31953,7 @@ export type UserMasterUncheckedUpdateWithoutFranchiseInput = {
   orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
   paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
   leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
   createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
   scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -31344,6 +32051,7 @@ export type UserMasterCountOutputType = {
   orderLoginPoFilesDeleted: number
   paymentsCreated: number
   leadSuperAdminApprovalsApproved: number
+  leadSuperAdminApprovalsCreated: number
   createdProjects: number
   scanItemsCreated: number
   siteReadinessCreated: number
@@ -31422,6 +32130,7 @@ export type UserMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   orderLoginPoFilesDeleted?: boolean | UserMasterCountOutputTypeCountOrderLoginPoFilesDeletedArgs
   paymentsCreated?: boolean | UserMasterCountOutputTypeCountPaymentsCreatedArgs
   leadSuperAdminApprovalsApproved?: boolean | UserMasterCountOutputTypeCountLeadSuperAdminApprovalsApprovedArgs
+  leadSuperAdminApprovalsCreated?: boolean | UserMasterCountOutputTypeCountLeadSuperAdminApprovalsCreatedArgs
   createdProjects?: boolean | UserMasterCountOutputTypeCountCreatedProjectsArgs
   scanItemsCreated?: boolean | UserMasterCountOutputTypeCountScanItemsCreatedArgs
   siteReadinessCreated?: boolean | UserMasterCountOutputTypeCountSiteReadinessCreatedArgs
@@ -31830,6 +32539,13 @@ export type UserMasterCountOutputTypeCountLeadSuperAdminApprovalsApprovedArgs<Ex
 /**
  * UserMasterCountOutputType without action
  */
+export type UserMasterCountOutputTypeCountLeadSuperAdminApprovalsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadSuperAdminApprovalLocInsWhereInput
+}
+
+/**
+ * UserMasterCountOutputType without action
+ */
 export type UserMasterCountOutputTypeCountCreatedProjectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ProjectMasterWhereInput
 }
@@ -32048,6 +32764,7 @@ export type UserMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   orderLoginPoFilesDeleted?: boolean | Prisma.UserMaster$orderLoginPoFilesDeletedArgs<ExtArgs>
   paymentsCreated?: boolean | Prisma.UserMaster$paymentsCreatedArgs<ExtArgs>
   leadSuperAdminApprovalsApproved?: boolean | Prisma.UserMaster$leadSuperAdminApprovalsApprovedArgs<ExtArgs>
+  leadSuperAdminApprovalsCreated?: boolean | Prisma.UserMaster$leadSuperAdminApprovalsCreatedArgs<ExtArgs>
   createdProjects?: boolean | Prisma.UserMaster$createdProjectsArgs<ExtArgs>
   scanItemsCreated?: boolean | Prisma.UserMaster$scanItemsCreatedArgs<ExtArgs>
   siteReadinessCreated?: boolean | Prisma.UserMaster$siteReadinessCreatedArgs<ExtArgs>
@@ -32182,6 +32899,7 @@ export type UserMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   orderLoginPoFilesDeleted?: boolean | Prisma.UserMaster$orderLoginPoFilesDeletedArgs<ExtArgs>
   paymentsCreated?: boolean | Prisma.UserMaster$paymentsCreatedArgs<ExtArgs>
   leadSuperAdminApprovalsApproved?: boolean | Prisma.UserMaster$leadSuperAdminApprovalsApprovedArgs<ExtArgs>
+  leadSuperAdminApprovalsCreated?: boolean | Prisma.UserMaster$leadSuperAdminApprovalsCreatedArgs<ExtArgs>
   createdProjects?: boolean | Prisma.UserMaster$createdProjectsArgs<ExtArgs>
   scanItemsCreated?: boolean | Prisma.UserMaster$scanItemsCreatedArgs<ExtArgs>
   siteReadinessCreated?: boolean | Prisma.UserMaster$siteReadinessCreatedArgs<ExtArgs>
@@ -32276,6 +32994,7 @@ export type $UserMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     orderLoginPoFilesDeleted: Prisma.$OrderLoginPoFileMappingPayload<ExtArgs>[]
     paymentsCreated: Prisma.$PaymentInfoPayload<ExtArgs>[]
     leadSuperAdminApprovalsApproved: Prisma.$LeadSuperAdminApprovalLocInsPayload<ExtArgs>[]
+    leadSuperAdminApprovalsCreated: Prisma.$LeadSuperAdminApprovalLocInsPayload<ExtArgs>[]
     createdProjects: Prisma.$ProjectMasterPayload<ExtArgs>[]
     scanItemsCreated: Prisma.$ScanAndPackItemPayload<ExtArgs>[]
     siteReadinessCreated: Prisma.$SiteReadinessPayload<ExtArgs>[]
@@ -32762,6 +33481,7 @@ export interface Prisma__UserMasterClient<T, Null = never, ExtArgs extends runti
   orderLoginPoFilesDeleted<T extends Prisma.UserMaster$orderLoginPoFilesDeletedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$orderLoginPoFilesDeletedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderLoginPoFileMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   paymentsCreated<T extends Prisma.UserMaster$paymentsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$paymentsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentInfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadSuperAdminApprovalsApproved<T extends Prisma.UserMaster$leadSuperAdminApprovalsApprovedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$leadSuperAdminApprovalsApprovedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadSuperAdminApprovalLocInsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadSuperAdminApprovalsCreated<T extends Prisma.UserMaster$leadSuperAdminApprovalsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$leadSuperAdminApprovalsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadSuperAdminApprovalLocInsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdProjects<T extends Prisma.UserMaster$createdProjectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$createdProjectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   scanItemsCreated<T extends Prisma.UserMaster$scanItemsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$scanItemsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScanAndPackItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   siteReadinessCreated<T extends Prisma.UserMaster$siteReadinessCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$siteReadinessCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SiteReadinessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -34475,6 +35195,30 @@ export type UserMaster$paymentsCreatedArgs<ExtArgs extends runtime.Types.Extensi
  * UserMaster.leadSuperAdminApprovalsApproved
  */
 export type UserMaster$leadSuperAdminApprovalsApprovedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadSuperAdminApprovalLocIns
+   */
+  select?: Prisma.LeadSuperAdminApprovalLocInsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadSuperAdminApprovalLocIns
+   */
+  omit?: Prisma.LeadSuperAdminApprovalLocInsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadSuperAdminApprovalLocInsInclude<ExtArgs> | null
+  where?: Prisma.LeadSuperAdminApprovalLocInsWhereInput
+  orderBy?: Prisma.LeadSuperAdminApprovalLocInsOrderByWithRelationInput | Prisma.LeadSuperAdminApprovalLocInsOrderByWithRelationInput[]
+  cursor?: Prisma.LeadSuperAdminApprovalLocInsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadSuperAdminApprovalLocInsScalarFieldEnum | Prisma.LeadSuperAdminApprovalLocInsScalarFieldEnum[]
+}
+
+/**
+ * UserMaster.leadSuperAdminApprovalsCreated
+ */
+export type UserMaster$leadSuperAdminApprovalsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the LeadSuperAdminApprovalLocIns
    */
