@@ -51,6 +51,7 @@ export type NotificationWithDelivery = Notification & {
 export type ListNotificationsResult = {
   notifications: NotificationWithDelivery[];
   unread_count: number;
+  total_count: number;
 };
 
 export const NotificationService = {
@@ -229,12 +230,13 @@ export const NotificationService = {
     options: ListNotificationsOptions = {},
   ): Promise<ListNotificationsResult> {
     const { is_read, take = 20, skip = 0 } = options;
+    const whereClause = {
+      vendor_id: vendorId,
+      user_id: userId,
+      ...(typeof is_read === "boolean" ? { is_read } : {}),
+    };
     const notifications = await prisma.notification.findMany({
-      where: {
-        vendor_id: vendorId,
-        user_id: userId,
-        ...(typeof is_read === "boolean" ? { is_read } : {}),
-      },
+      where: whereClause,
       orderBy: { created_at: "desc" },
       take,
       skip,
@@ -254,9 +256,12 @@ export const NotificationService = {
         is_read: false,
       },
     });
+    const total_count = await prisma.notification.count({
+      where: whereClause,
+    });
 
     if (notifications.length === 0) {
-      return { notifications: [], unread_count };
+      return { notifications: [], unread_count, total_count };
     }
 
     const notificationIds = notifications.map((item) => item.id);
@@ -286,7 +291,11 @@ export const NotificationService = {
         },
       }));
 
-    return { notifications: notificationsWithDelivery, unread_count };
+    return {
+      notifications: notificationsWithDelivery,
+      unread_count,
+      total_count,
+    };
   },
 
   async markRead(notificationId: number, userId: number) {

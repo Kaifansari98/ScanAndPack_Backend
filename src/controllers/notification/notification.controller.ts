@@ -83,7 +83,7 @@ export class NotificationController {
         });
       }
 
-      const { notifications, unread_count } =
+      const { notifications, unread_count, total_count } =
         await NotificationService.listForUser(vendorId, userId, {
           is_read: isRead,
           take,
@@ -94,6 +94,7 @@ export class NotificationController {
         success: true,
         count: notifications.length,
         unread_count,
+        total_count,
         data: notifications,
       });
     } catch (error: any) {
