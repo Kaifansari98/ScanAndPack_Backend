@@ -320,6 +320,23 @@ export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedBoolNullableFilter<$PrismaModel>
 }
 
+export type EnumSuperAdminApprovalTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.SuperAdminApprovalType | Prisma.EnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.SuperAdminApprovalType[] | Prisma.ListEnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SuperAdminApprovalType[] | Prisma.ListEnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSuperAdminApprovalTypeFilter<$PrismaModel> | $Enums.SuperAdminApprovalType
+}
+
+export type EnumSuperAdminApprovalTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SuperAdminApprovalType | Prisma.EnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.SuperAdminApprovalType[] | Prisma.ListEnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SuperAdminApprovalType[] | Prisma.ListEnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSuperAdminApprovalTypeWithAggregatesFilter<$PrismaModel> | $Enums.SuperAdminApprovalType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSuperAdminApprovalTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSuperAdminApprovalTypeFilter<$PrismaModel>
+}
+
 export type EnumLeadUserStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.LeadUserStatus | Prisma.EnumLeadUserStatusFieldRefInput<$PrismaModel>
   in?: $Enums.LeadUserStatus[] | Prisma.ListEnumLeadUserStatusFieldRefInput<$PrismaModel>
@@ -1101,6 +1118,23 @@ export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedBoolNullableFilter<$PrismaModel>
   _max?: Prisma.NestedBoolNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumSuperAdminApprovalTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.SuperAdminApprovalType | Prisma.EnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.SuperAdminApprovalType[] | Prisma.ListEnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SuperAdminApprovalType[] | Prisma.ListEnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSuperAdminApprovalTypeFilter<$PrismaModel> | $Enums.SuperAdminApprovalType
+}
+
+export type NestedEnumSuperAdminApprovalTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SuperAdminApprovalType | Prisma.EnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.SuperAdminApprovalType[] | Prisma.ListEnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SuperAdminApprovalType[] | Prisma.ListEnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSuperAdminApprovalTypeWithAggregatesFilter<$PrismaModel> | $Enums.SuperAdminApprovalType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSuperAdminApprovalTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSuperAdminApprovalTypeFilter<$PrismaModel>
 }
 
 export type NestedEnumLeadUserStatusFilter<$PrismaModel = never> = {

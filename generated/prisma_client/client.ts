@@ -108,6 +108,11 @@ export type ClientMaster = Prisma.ClientMasterModel
  */
 export type LeadMaster = Prisma.LeadMasterModel
 /**
+ * Model LeadSuperAdminApprovalLocIns
+ * 
+ */
+export type LeadSuperAdminApprovalLocIns = Prisma.LeadSuperAdminApprovalLocInsModel
+/**
  * Model LeadUserMapping
  * 
  */

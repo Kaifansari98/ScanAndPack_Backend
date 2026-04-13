@@ -45,6 +45,7 @@ import emailNotificationMasterRoutes from "./notification/emailNotificationMaste
 import contactUsRoutes from "./generic/contactUs.routes";
 import franchiseRoutes from "./franchise/franchise.routes";
 import geographyMasterRoutes from "./generic/geographyMaster.routes";
+import leadSuperAdminApprovalLockInRouter from "./leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.routes";
 
 import trackTraceRoutes from "./trackTraceRoutes/track-trace.routes";
 import trackTraceMasterRoutes from "./trackTraceRoutes/trackTraceMaster.routes";
@@ -79,6 +80,10 @@ router.use("/leads/bookingStage", bookingStageRouter);
 router.use("/leads/final-measurement", finalMeasurementRouter);
 router.use("/leads/client-documentation", ClientDocumentationRouter);
 router.use("/leads/tasks", taskRouter);
+router.use(
+  "/leads/super-admin-approval-lockins",
+  leadSuperAdminApprovalLockInRouter,
+);
 router.use("/leads/lead-activity-status", leadActivityStatusRouter);
 router.use("/leads/client-approval", clientApprovalRouter);
 

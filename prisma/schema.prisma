@@ -8,86 +8,87 @@ datasource db {
 }
 
 model VendorMaster {
-  id                                  Int                                  @id @default(autoincrement())
-  vendor_name                         String
-  vendor_code                         String
-  vendor_report_code                  String?                              @map("vendor-report-code")
-  primary_contact_number              String
-  primary_contact_email               String
-  primary_contact_name                String
-  country_code                        String
-  head_office_id                      Int?
-  status                              String                               @default("inactive")
-  logo                                String
-  time_zone                           String
-  createdAt                           DateTime                             @default(now())
-  updatedAt                           DateTime                             @updatedAt
-  accounts                            AccountMaster[]
-  boxes                               BoxMaster[]
-  CompanyVendorsMaster                CompanyVendorsMaster[]
-  CutList                             CutList[]
-  cutListMachineMapping               CutListMachineMapping[]
-  defectMaster                        DefectMaster[]
-  defectedItems                       DefectedItem[]
-  documentTypes                       DocumentTypeMaster[]
-  notificationMasters                 EmailNotificationMaster[]
-  franchises                          FranchiseMaster[]
-  headSiteSupervisorFranchiseMappings HeadSiteSupervisorFranchiseMapping[]
-  installationIssueLogMaster          InstallationIssueLogMaster[]
-  installationUpdates                 InstallationUpdate[]
-  installationUpdateDocs              InstallationUpdateDocuments[]
-  installerMappings                   InstallerUserMapping[]
-  installers                          InstallerUserMaster[]
-  issueLogTypeMaster                  IssueLogTypeMaster[]
-  leadActivityStatusLog               LeadActivityStatusLog[]
-  leadChatDocuments                   LeadChatDocument[]
-  leadChatRooms                       LeadChatRoom[]
-  designMeeting                       LeadDesignMeeting[]
-  designMeetingDocsMapping            LeadDesignMeetingDocumentsMapping[]
-  designSelection                     LeadDesignSelection[]
-  leadDetailedLogs                    LeadDetailedLogs[]
-  leadDocumentLogs                    LeadDocumentLogs[]
-  documents                           LeadDocuments[]
-  leads                               LeadMaster[]
-  leadAmcContracts                    LeadAmcContract[]
-  leadProductMaps                     LeadProductMapping[]
-  productStructureInstances           LeadProductStructureInstance[]
-  leadProductStructureMapping         LeadProductStructureMapping[]
-  leadServiceSchedules                LeadServiceSchedule[]
-  siteSupervisors                     LeadSiteSupervisorMapping[]
-  leadStatusLogs                      LeadStatusLogs[]
-  leadUserMappings                    LeadUserMapping[]
-  ledgers                             Ledger[]
-  machineMaster                       MachineMaster[]
-  miscellaneousDocument               MiscellaneousDocument[]
-  miscellaneousMaster                 MiscellaneousMaster[]
-  miscellaneousTeamMaster             MiscellaneousTeamMaster[]
-  miscellaneousTypeMaster             MiscellaneousTypeMaster[]
-  notifications                       Notification[]
-  orderLoginDetails                   OrderLoginDetails[]
-  payments                            PaymentInfo[]
-  paymentTypeMaster                   PaymentTypeMaster[]
-  productStructure                    ProductStructure[]
-  productTypes                        ProductTypeMaster[]
-  projectDetails                      ProjectDetails[]
-  projectItems                        ProjectItemsMaster[]
-  projects                            ProjectMaster[]
-  scanItems                           ScanAndPackItem[]
-  siteReadiness                       SiteReadiness[]
-  siteTypes                           SiteTypeMaster[]
-  sources                             SourceMaster[]
-  statusTypes                         StatusTypeMaster[]
-  themes                              ThemeMaster[]
-  userLeadTasks                       UserLeadTask[]
-  userMachineMapping                  UserMachineMapping[]
-  users                               UserMaster[]
-  userPushTokens                      UserPushToken[]
-  addresses                           VendorAddress[]
-  vendorModulesMappings               VendorModulesMapping[]
-  vendorSetting                       VendorSetting[]
-  taxInfo                             VendorTaxInfo[]
-  tokens                              VendorTokens[]
-  externalPlatformTokens              ExternalPlatformToken[]
+  id                                   Int                                   @id @default(autoincrement())
+  vendor_name                          String
+  vendor_code                          String
+  vendor_report_code                   String?                               @map("vendor-report-code")
+  primary_contact_number               String
+  primary_contact_email                String
+  primary_contact_name                 String
+  country_code                         String
+  head_office_id                       Int?
+  status                               String                                @default("inactive")
+  logo                                 String
+  time_zone                            String
+  createdAt                            DateTime                              @default(now())
+  updatedAt                            DateTime                              @updatedAt
+  accounts                             AccountMaster[]
+  boxes                                BoxMaster[]
+  CompanyVendorsMaster                 CompanyVendorsMaster[]
+  CutList                              CutList[]
+  cutListMachineMapping                CutListMachineMapping[]
+  defectMaster                         DefectMaster[]
+  defectedItems                        DefectedItem[]
+  documentTypes                        DocumentTypeMaster[]
+  notificationMasters                  EmailNotificationMaster[]
+  franchises                           FranchiseMaster[]
+  headSiteSupervisorFranchiseMappings  HeadSiteSupervisorFranchiseMapping[]
+  installationIssueLogMaster           InstallationIssueLogMaster[]
+  installationUpdates                  InstallationUpdate[]
+  installationUpdateDocs               InstallationUpdateDocuments[]
+  installerMappings                    InstallerUserMapping[]
+  installers                           InstallerUserMaster[]
+  issueLogTypeMaster                   IssueLogTypeMaster[]
+  leadActivityStatusLog                LeadActivityStatusLog[]
+  leadChatDocuments                    LeadChatDocument[]
+  leadChatRooms                        LeadChatRoom[]
+  designMeeting                        LeadDesignMeeting[]
+  designMeetingDocsMapping             LeadDesignMeetingDocumentsMapping[]
+  designSelection                      LeadDesignSelection[]
+  leadDetailedLogs                     LeadDetailedLogs[]
+  leadDocumentLogs                     LeadDocumentLogs[]
+  documents                            LeadDocuments[]
+  leads                                LeadMaster[]
+  leadAmcContracts                     LeadAmcContract[]
+  leadSuperAdminApprovalLocIns         LeadSuperAdminApprovalLocIns[]
+  leadProductMaps                      LeadProductMapping[]
+  productStructureInstances            LeadProductStructureInstance[]
+  leadProductStructureMapping          LeadProductStructureMapping[]
+  leadServiceSchedules                 LeadServiceSchedule[]
+  siteSupervisors                      LeadSiteSupervisorMapping[]
+  leadStatusLogs                       LeadStatusLogs[]
+  leadUserMappings                     LeadUserMapping[]
+  ledgers                              Ledger[]
+  machineMaster                        MachineMaster[]
+  miscellaneousDocument                MiscellaneousDocument[]
+  miscellaneousMaster                  MiscellaneousMaster[]
+  miscellaneousTeamMaster              MiscellaneousTeamMaster[]
+  miscellaneousTypeMaster              MiscellaneousTypeMaster[]
+  notifications                        Notification[]
+  orderLoginDetails                    OrderLoginDetails[]
+  payments                             PaymentInfo[]
+  paymentTypeMaster                    PaymentTypeMaster[]
+  productStructure                     ProductStructure[]
+  productTypes                         ProductTypeMaster[]
+  projectDetails                       ProjectDetails[]
+  projectItems                         ProjectItemsMaster[]
+  projects                             ProjectMaster[]
+  scanItems                            ScanAndPackItem[]
+  siteReadiness                        SiteReadiness[]
+  siteTypes                            SiteTypeMaster[]
+  sources                              SourceMaster[]
+  statusTypes                          StatusTypeMaster[]
+  themes                               ThemeMaster[]
+  userLeadTasks                        UserLeadTask[]
+  userMachineMapping                   UserMachineMapping[]
+  users                                UserMaster[]
+  userPushTokens                       UserPushToken[]
+  addresses                            VendorAddress[]
+  vendorModulesMappings                VendorModulesMapping[]
+  vendorSetting                        VendorSetting[]
+  taxInfo                              VendorTaxInfo[]
+  tokens                               VendorTokens[]
+  externalPlatformTokens               ExternalPlatformToken[]
   leadExternalPlatformCustomerMappings LeadExternalPlatformCustomerMapping[]
 }
 
@@ -185,6 +186,7 @@ model UserMaster {
   orderLoginPoFilesCreated                   OrderLoginPoFileMapping[]            @relation("OrderLoginPoFileCreatedBy")
   orderLoginPoFilesDeleted                   OrderLoginPoFileMapping[]            @relation("OrderLoginPoFileDeletedBy")
   paymentsCreated                            PaymentInfo[]
+  leadSuperAdminApprovalsApproved            LeadSuperAdminApprovalLocIns[]       @relation("LeadSuperAdminApprovalApprovedBy")
   createdProjects                            ProjectMaster[]                      @relation("CreatedByUser")
   scanItemsCreated                           ScanAndPackItem[]
   siteReadinessCreated                       SiteReadiness[]                      @relation("SiteReadinessCreatedBy")
@@ -359,7 +361,7 @@ model ClientMaster {
 }
 
 model LeadMaster {
-  id                                          Int                                 @id @default(autoincrement())
+  id                                          Int                                   @id @default(autoincrement())
   firstname                                   String
   lastname                                    String
   country_code                                String
@@ -372,37 +374,37 @@ model LeadMaster {
   archetech_name                              String?
   designer_remark                             String?
   created_by                                  Int
-  created_at                                  DateTime                            @default(now())
+  created_at                                  DateTime                              @default(now())
   updated_by                                  Int?
-  updated_at                                  DateTime                            @updatedAt
+  updated_at                                  DateTime                              @updatedAt
   vendor_id                                   Int
   assign_to                                   Int?
   assigned_by                                 Int?
   account_id                                  Int?
   deleted_at                                  DateTime?
   deleted_by                                  Int?
-  is_deleted                                  Boolean                             @default(false)
+  is_deleted                                  Boolean                               @default(false)
   status_id                                   Int?
   priority                                    String?
   initial_site_measurement_date               DateTime?
-  final_desc_note                             String?                             @db.VarChar(2000)
+  final_desc_note                             String?                               @db.VarChar(2000)
   advance_payment_date                        DateTime?
   site_map_link                               String?
-  activity_status                             ActivityStatus                      @default(onGoing)
-  activity_status_remark                      String?                             @db.VarChar(2000)
+  activity_status                             ActivityStatus                        @default(onGoing)
+  activity_status_remark                      String?                               @db.VarChar(2000)
   booking_amount                              Float?
   pending_amount                              Float?
   total_project_amount                        Float?
-  is_draft                                    Boolean                             @default(false)
+  is_draft                                    Boolean                               @default(false)
   lead_code                                   String
-  is_client_approval_submitted                Boolean                             @default(false)
+  is_client_approval_submitted                Boolean                               @default(false)
   client_required_order_login_complition_date DateTime?
   expected_order_login_ready_date             DateTime?
   no_of_client_documents_initially_submitted  Int?
-  hardware_packing_details_remark             String?                             @db.VarChar(2000)
-  woodwork_packing_details_remark             String?                             @db.VarChar(2000)
+  hardware_packing_details_remark             String?                               @db.VarChar(2000)
+  woodwork_packing_details_remark             String?                               @db.VarChar(2000)
   no_of_boxes                                 Int?
-  dispatch_planning_remark                    String?                             @db.VarChar(2000)
+  dispatch_planning_remark                    String?                               @db.VarChar(2000)
   material_lift_availability                  Boolean?
   vehicle_approachability_for_dispatch        Boolean?
   onsite_contact_person_name                  String?
@@ -411,27 +413,27 @@ model LeadMaster {
   alt_onsite_contact_person_name              String?
   alt_onsite_contact_person_number            String?
   dispatch_date                               DateTime?
-  dispatch_remark                             String?                             @db.VarChar(2000)
-  driver_name                                 String?                             @db.VarChar(255)
-  driver_number                               String?                             @db.VarChar(50)
-  vehicle_no                                  String?                             @db.VarChar(100)
+  dispatch_remark                             String?                               @db.VarChar(2000)
+  driver_name                                 String?                               @db.VarChar(255)
+  driver_number                               String?                               @db.VarChar(50)
+  vehicle_no                                  String?                               @db.VarChar(100)
   tech_check_reached_at                       DateTime?
   tech_check_completed_at                     DateTime?
   actual_installation_start_date              DateTime?
   actual_installation_completion_at           DateTime?
   carcass_installation_completion_date        DateTime?
   expected_installation_end_date              DateTime?
-  is_carcass_installation_completed           Boolean?                            @default(false)
-  is_shutter_installation_completed           Boolean?                            @default(false)
+  is_carcass_installation_completed           Boolean?                              @default(false)
+  is_shutter_installation_completed           Boolean?                              @default(false)
   shutter_installation_completion_date        DateTime?
   usable_handover_pending_work_details        String?
   mrp_value                                   Float?
-  usable_handover_completed                   Boolean?                            @default(false)
+  usable_handover_completed                   Boolean?                              @default(false)
   usable_handover_completed_at                DateTime?
-  is_amc_opted                               Boolean?                            @default(false)
-  amc_opted_at                               DateTime?
-  amc_plan_started_at                        DateTime?
-  amc_plan_closed_at                         DateTime?
+  is_amc_opted                                Boolean?                              @default(false)
+  amc_opted_at                                DateTime?
+  amc_plan_started_at                         DateTime?
+  amc_plan_closed_at                          DateTime?
   final_handover_marked_at                    DateTime?
   franchise_id                                Int?
   order_login_prod_files_remark               String?
@@ -450,16 +452,17 @@ model LeadMaster {
   leadDocumentLogs                            LeadDocumentLogs[]
   documents                                   LeadDocuments[]
   amcContracts                                LeadAmcContract[]
-  account                                     AccountMaster?                      @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  assignedTo                                  UserMaster?                         @relation("LeadAssignedTo", fields: [assign_to], references: [id])
-  assignedBy                                  UserMaster?                         @relation("LeadAssignedBy", fields: [assigned_by], references: [id])
-  createdBy                                   UserMaster                          @relation("LeadCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
-  franchise                                   FranchiseMaster?                    @relation(fields: [franchise_id], references: [id])
-  siteType                                    SiteTypeMaster?                     @relation(fields: [site_type_id], references: [id], onDelete: Cascade)
-  source                                      SourceMaster?                       @relation(fields: [source_id], references: [id], onDelete: Cascade)
-  statusType                                  StatusTypeMaster?                   @relation(fields: [status_id], references: [id], onDelete: Cascade)
-  updatedBy                                   UserMaster?                         @relation("LeadUpdatedBy", fields: [updated_by], references: [id])
-  vendor                                      VendorMaster                        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  superAdminApprovalLocIns                    LeadSuperAdminApprovalLocIns[]
+  account                                     AccountMaster?                        @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  assignedTo                                  UserMaster?                           @relation("LeadAssignedTo", fields: [assign_to], references: [id])
+  assignedBy                                  UserMaster?                           @relation("LeadAssignedBy", fields: [assigned_by], references: [id])
+  createdBy                                   UserMaster                            @relation("LeadCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  franchise                                   FranchiseMaster?                      @relation(fields: [franchise_id], references: [id])
+  siteType                                    SiteTypeMaster?                       @relation(fields: [site_type_id], references: [id], onDelete: Cascade)
+  source                                      SourceMaster?                         @relation(fields: [source_id], references: [id], onDelete: Cascade)
+  statusType                                  StatusTypeMaster?                     @relation(fields: [status_id], references: [id], onDelete: Cascade)
+  updatedBy                                   UserMaster?                           @relation("LeadUpdatedBy", fields: [updated_by], references: [id])
+  vendor                                      VendorMaster                          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   productMappings                             LeadProductMapping[]
   productStructureInstances                   LeadProductStructureInstance[]
   leadProductStructureMapping                 LeadProductStructureMapping[]
@@ -478,6 +481,28 @@ model LeadMaster {
   externalPlatformCustomerMappings            LeadExternalPlatformCustomerMapping[]
 
   @@unique([vendor_id, lead_code], name: "uniq_vendor_lead_code")
+}
+
+model LeadSuperAdminApprovalLocIns {
+  id              Int                    @id @default(autoincrement())
+  vendor_id       Int
+  franchise_id    Int?
+  lead_id         Int
+  approval_type   SuperAdminApprovalType
+  is_approved     Boolean                @default(false)
+  approved_at     DateTime?
+  approved_by     Int?
+  approval_remark String?
+  franchise       FranchiseMaster?       @relation(fields: [franchise_id], references: [id])
+  lead            LeadMaster             @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  approvedBy      UserMaster?            @relation("LeadSuperAdminApprovalApprovedBy", fields: [approved_by], references: [id])
+  vendor          VendorMaster           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  @@unique([vendor_id, lead_id, approval_type], name: "uniq_lead_super_admin_approval_lockin")
+  @@index([vendor_id])
+  @@index([franchise_id])
+  @@index([lead_id])
+  @@index([approved_by])
 }
 
 model LeadUserMapping {
@@ -625,9 +650,9 @@ model LeadDocuments {
   product_structure_instance_id Int?
   installationUpdateDocs        InstallationUpdateDocuments[] @relation("InstallationUpdateDocumentLink")
   leadDocumentLogs              LeadDocumentLogs[]
-  amcContracts                  LeadAmcContract[]          @relation("LeadAmcContractDocument")
+  amcContracts                  LeadAmcContract[]             @relation("LeadAmcContractDocument")
   account                       AccountMaster?                @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  completedServiceSchedules     LeadServiceSchedule[]      @relation("LeadServiceScheduleCompletionDocument")
+  completedServiceSchedules     LeadServiceSchedule[]         @relation("LeadServiceScheduleCompletionDocument")
   createdBy                     UserMaster                    @relation("DocumentCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   deletedBy                     UserMaster?                   @relation("DocumentDeletedBy", fields: [deleted_by], references: [id])
   documentType                  DocumentTypeMaster            @relation(fields: [doc_type_id], references: [id], onDelete: Cascade)
@@ -866,37 +891,37 @@ model LeadAmcContract {
 }
 
 model LeadServiceSchedule {
-  id                     Int                  @id @default(autoincrement())
+  id                     Int                   @id @default(autoincrement())
   vendor_id              Int
   lead_id                Int
   account_id             Int
   service_no             Int
-  service_type           ServiceVisitType     @default(free)
+  service_type           ServiceVisitType      @default(free)
   scheduled_for          DateTime
   original_scheduled_for DateTime
-  status                 ServiceVisitStatus   @default(open)
-  rescheduled_once       Boolean              @default(false)
+  status                 ServiceVisitStatus    @default(open)
+  rescheduled_once       Boolean               @default(false)
   rescheduled_from       DateTime?
   completed_at           DateTime?
   completed_by           Int?
-  completion_remark      String?              @db.VarChar(2000)
+  completion_remark      String?               @db.VarChar(2000)
   completion_document_id Int?
   rejected_at            DateTime?
   rejected_by            Int?
-  rejection_remark       String?              @db.VarChar(2000)
+  rejection_remark       String?               @db.VarChar(2000)
   closure_reason         ServiceClosureReason?
   created_by             Int
-  created_at             DateTime             @default(now())
+  created_at             DateTime              @default(now())
   updated_by             Int?
-  updated_at             DateTime             @updatedAt
-  account                AccountMaster        @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  completedBy            UserMaster?          @relation("LeadServiceScheduleCompletedBy", fields: [completed_by], references: [id])
-  completionDocument     LeadDocuments?       @relation("LeadServiceScheduleCompletionDocument", fields: [completion_document_id], references: [id])
-  createdBy              UserMaster           @relation("LeadServiceScheduleCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
-  lead                   LeadMaster           @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  rejectedBy             UserMaster?          @relation("LeadServiceScheduleRejectedBy", fields: [rejected_by], references: [id])
-  updatedBy              UserMaster?          @relation("LeadServiceScheduleUpdatedBy", fields: [updated_by], references: [id])
-  vendor                 VendorMaster         @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  updated_at             DateTime              @updatedAt
+  account                AccountMaster         @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  completedBy            UserMaster?           @relation("LeadServiceScheduleCompletedBy", fields: [completed_by], references: [id])
+  completionDocument     LeadDocuments?        @relation("LeadServiceScheduleCompletionDocument", fields: [completion_document_id], references: [id])
+  createdBy              UserMaster            @relation("LeadServiceScheduleCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  lead                   LeadMaster            @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  rejectedBy             UserMaster?           @relation("LeadServiceScheduleRejectedBy", fields: [rejected_by], references: [id])
+  updatedBy              UserMaster?           @relation("LeadServiceScheduleUpdatedBy", fields: [updated_by], references: [id])
+  vendor                 VendorMaster          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
   @@unique([lead_id, service_no, service_type], name: "uniq_lead_service_no_type")
   @@index([vendor_id, status, scheduled_for])
@@ -1482,7 +1507,6 @@ model CutList {
   procurement           String?
   category_name         String?
 
-
   @@index([unique_code])
 }
 
@@ -1655,6 +1679,7 @@ model FranchiseMaster {
   vendor                              VendorMaster                         @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   headSiteSupervisorFranchiseMappings HeadSiteSupervisorFranchiseMapping[]
   leads                               LeadMaster[]
+  leadSuperAdminApprovalLocIns        LeadSuperAdminApprovalLocIns[]
   users                               UserMaster[]
 
   @@unique([vendor_id, franchise_code])
@@ -1778,48 +1803,47 @@ model ThemeMapping {
 
 model ApiRequestLog {
   id           Int      @id @default(autoincrement())
-  endpoint     String                        // e.g. "handelItems"
-  vendor_token String?                       // token used
-  vendor_id    Int?                          // resolved vendor id
-  payload      Json                          // full incoming payload
-  success      Boolean                       // true/false outcome
-  response     Json                          // full response returned
-  error        String?                       // error message if crashed
-  project_id   Int?                          // project created (if success)
+  endpoint     String // e.g. "handelItems"
+  vendor_token String? // token used
+  vendor_id    Int? // resolved vendor id
+  payload      Json // full incoming payload
+  success      Boolean // true/false outcome
+  response     Json // full response returned
+  error        String? // error message if crashed
+  project_id   Int? // project created (if success)
   created_at   DateTime @default(now())
 
   @@index([vendor_id])
   @@index([created_at])
 }
 
-
 model ExternalPlatformMaster {
-  id                     Int                      @id @default(autoincrement())
-  external_platform_name String
-  type                   String?                  @unique
-  active                 ExternalPlatformMasterActiveStatus             @default(Yes)
-  tokens                 ExternalPlatformToken[]
+  id                                   Int                                   @id @default(autoincrement())
+  external_platform_name               String
+  type                                 String?                               @unique
+  active                               ExternalPlatformMasterActiveStatus    @default(Yes)
+  tokens                               ExternalPlatformToken[]
   leadExternalPlatformCustomerMappings LeadExternalPlatformCustomerMapping[]
 }
 
 model ExternalPlatformToken {
-  id                   Int                    @id @default(autoincrement())
-  external_platform_id Int
-  token                String
-  email                String
-  name                 String
-  user_id              String
-  company_id           String
-  vendor_id            Int
-  created_at           DateTime               @default(now())
-  created_by           Int
-  updated_at           DateTime               @updatedAt
-  updated_by           Int
-  active               ExternalPlatformTokenActiveStatus           @default(Yes)
-  externalPlatform     ExternalPlatformMaster @relation(fields: [external_platform_id], references: [id], onDelete: Cascade)
-  vendor               VendorMaster           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  createdByUser        UserMaster             @relation("ExternalPlatformTokenCreatedBy", fields: [created_by], references: [id])
-  updatedByUser        UserMaster             @relation("ExternalPlatformTokenUpdatedBy", fields: [updated_by], references: [id])
+  id                                   Int                                   @id @default(autoincrement())
+  external_platform_id                 Int
+  token                                String
+  email                                String
+  name                                 String
+  user_id                              String
+  company_id                           String
+  vendor_id                            Int
+  created_at                           DateTime                              @default(now())
+  created_by                           Int
+  updated_at                           DateTime                              @updatedAt
+  updated_by                           Int
+  active                               ExternalPlatformTokenActiveStatus     @default(Yes)
+  externalPlatform                     ExternalPlatformMaster                @relation(fields: [external_platform_id], references: [id], onDelete: Cascade)
+  vendor                               VendorMaster                          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdByUser                        UserMaster                            @relation("ExternalPlatformTokenCreatedBy", fields: [created_by], references: [id])
+  updatedByUser                        UserMaster                            @relation("ExternalPlatformTokenUpdatedBy", fields: [updated_by], references: [id])
   leadExternalPlatformCustomerMappings LeadExternalPlatformCustomerMapping[]
 }
 
@@ -1859,6 +1883,12 @@ enum NotificationType {
   CHAT_MENTION
   LEAD_MILESTONE
   LEAD_ACTION
+}
+
+enum SuperAdminApprovalType {
+  booking_done
+  order_login
+  dispatch_planning
 }
 
 enum BoxStatus {

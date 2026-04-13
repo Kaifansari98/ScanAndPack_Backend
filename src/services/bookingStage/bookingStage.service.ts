@@ -21,6 +21,7 @@ import {
 } from "../email/brevoEmail.service";
 import { AssignTaskBookingInput } from "../../types/leadModule.types";
 import Joi from "joi";
+import { LeadSuperAdminApprovalLockInService } from "../leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.service";
 
 const assignTaskBookingSchema = Joi.object({
   lead_id: Joi.number().integer().positive().required(),
@@ -34,6 +35,9 @@ const assignTaskBookingSchema = Joi.object({
 });
 
 export class BookingStageService {
+  private leadSuperAdminApprovalLockInService =
+    new LeadSuperAdminApprovalLockInService();
+
   // Helper to avoid repeating include structure
   private static leadIncludes() {
     return {
@@ -399,6 +403,20 @@ export class BookingStageService {
             created_at: new Date(),
           },
         });
+
+        const bookingDoneLockIn =
+          await this.leadSuperAdminApprovalLockInService.createBookingDoneLockIn(
+            {
+              vendor_id: data.vendor_id,
+              lead_id: data.lead_id,
+              created_by: data.created_by,
+              base_date: new Date(),
+            },
+            tx,
+          );
+
+        response.superAdminApprovalLockIn = bookingDoneLockIn.approval;
+        response.superAdminApprovalTask = bookingDoneLockIn.task;
 
         await cache.del(
           `performance:snapshot:${data.vendor_id}:${data.created_by}`,

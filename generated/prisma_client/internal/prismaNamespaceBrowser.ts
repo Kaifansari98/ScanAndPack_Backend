@@ -65,6 +65,7 @@ export const ModelName = {
   VendorTokens: 'VendorTokens',
   ClientMaster: 'ClientMaster',
   LeadMaster: 'LeadMaster',
+  LeadSuperAdminApprovalLocIns: 'LeadSuperAdminApprovalLocIns',
   LeadUserMapping: 'LeadUserMapping',
   LeadActivityStatusLog: 'LeadActivityStatusLog',
   SiteTypeMaster: 'SiteTypeMaster',
@@ -447,6 +448,21 @@ export const LeadMasterScalarFieldEnum = {
 } as const
 
 export type LeadMasterScalarFieldEnum = (typeof LeadMasterScalarFieldEnum)[keyof typeof LeadMasterScalarFieldEnum]
+
+
+export const LeadSuperAdminApprovalLocInsScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  franchise_id: 'franchise_id',
+  lead_id: 'lead_id',
+  approval_type: 'approval_type',
+  is_approved: 'is_approved',
+  approved_at: 'approved_at',
+  approved_by: 'approved_by',
+  approval_remark: 'approval_remark'
+} as const
+
+export type LeadSuperAdminApprovalLocInsScalarFieldEnum = (typeof LeadSuperAdminApprovalLocInsScalarFieldEnum)[keyof typeof LeadSuperAdminApprovalLocInsScalarFieldEnum]
 
 
 export const LeadUserMappingScalarFieldEnum = {

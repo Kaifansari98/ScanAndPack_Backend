@@ -398,6 +398,7 @@ export const ModelName = {
   VendorTokens: 'VendorTokens',
   ClientMaster: 'ClientMaster',
   LeadMaster: 'LeadMaster',
+  LeadSuperAdminApprovalLocIns: 'LeadSuperAdminApprovalLocIns',
   LeadUserMapping: 'LeadUserMapping',
   LeadActivityStatusLog: 'LeadActivityStatusLog',
   SiteTypeMaster: 'SiteTypeMaster',
@@ -494,7 +495,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1531,6 +1532,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.LeadMasterCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.LeadMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    LeadSuperAdminApprovalLocIns: {
+      payload: Prisma.$LeadSuperAdminApprovalLocInsPayload<ExtArgs>
+      fields: Prisma.LeadSuperAdminApprovalLocInsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadSuperAdminApprovalLocInsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSuperAdminApprovalLocInsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadSuperAdminApprovalLocInsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSuperAdminApprovalLocInsPayload>
+        }
+        findFirst: {
+          args: Prisma.LeadSuperAdminApprovalLocInsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSuperAdminApprovalLocInsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadSuperAdminApprovalLocInsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSuperAdminApprovalLocInsPayload>
+        }
+        findMany: {
+          args: Prisma.LeadSuperAdminApprovalLocInsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSuperAdminApprovalLocInsPayload>[]
+        }
+        create: {
+          args: Prisma.LeadSuperAdminApprovalLocInsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSuperAdminApprovalLocInsPayload>
+        }
+        createMany: {
+          args: Prisma.LeadSuperAdminApprovalLocInsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadSuperAdminApprovalLocInsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSuperAdminApprovalLocInsPayload>[]
+        }
+        delete: {
+          args: Prisma.LeadSuperAdminApprovalLocInsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSuperAdminApprovalLocInsPayload>
+        }
+        update: {
+          args: Prisma.LeadSuperAdminApprovalLocInsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSuperAdminApprovalLocInsPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadSuperAdminApprovalLocInsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadSuperAdminApprovalLocInsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadSuperAdminApprovalLocInsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSuperAdminApprovalLocInsPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadSuperAdminApprovalLocInsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadSuperAdminApprovalLocInsPayload>
+        }
+        aggregate: {
+          args: Prisma.LeadSuperAdminApprovalLocInsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadSuperAdminApprovalLocIns>
+        }
+        groupBy: {
+          args: Prisma.LeadSuperAdminApprovalLocInsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadSuperAdminApprovalLocInsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadSuperAdminApprovalLocInsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadSuperAdminApprovalLocInsCountAggregateOutputType> | number
         }
       }
     }
@@ -7852,6 +7927,21 @@ export const LeadMasterScalarFieldEnum = {
 export type LeadMasterScalarFieldEnum = (typeof LeadMasterScalarFieldEnum)[keyof typeof LeadMasterScalarFieldEnum]
 
 
+export const LeadSuperAdminApprovalLocInsScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  franchise_id: 'franchise_id',
+  lead_id: 'lead_id',
+  approval_type: 'approval_type',
+  is_approved: 'is_approved',
+  approved_at: 'approved_at',
+  approved_by: 'approved_by',
+  approval_remark: 'approval_remark'
+} as const
+
+export type LeadSuperAdminApprovalLocInsScalarFieldEnum = (typeof LeadSuperAdminApprovalLocInsScalarFieldEnum)[keyof typeof LeadSuperAdminApprovalLocInsScalarFieldEnum]
+
+
 export const LeadUserMappingScalarFieldEnum = {
   id: 'id',
   account_id: 'account_id',
@@ -9200,6 +9290,20 @@ export type ListEnumActivityStatusFieldRefInput<$PrismaModel> = FieldRefInputTyp
 
 
 /**
+ * Reference to a field of type 'SuperAdminApprovalType'
+ */
+export type EnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SuperAdminApprovalType'>
+    
+
+
+/**
+ * Reference to a field of type 'SuperAdminApprovalType[]'
+ */
+export type ListEnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SuperAdminApprovalType[]'>
+    
+
+
+/**
  * Reference to a field of type 'LeadUserStatus'
  */
 export type EnumLeadUserStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadUserStatus'>
@@ -9629,6 +9733,7 @@ export type GlobalOmitConfig = {
   vendorTokens?: Prisma.VendorTokensOmit
   clientMaster?: Prisma.ClientMasterOmit
   leadMaster?: Prisma.LeadMasterOmit
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsOmit
   leadUserMapping?: Prisma.LeadUserMappingOmit
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogOmit
   siteTypeMaster?: Prisma.SiteTypeMasterOmit

@@ -44,6 +44,15 @@ export const NotificationType = {
 export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
 
 
+export const SuperAdminApprovalType = {
+  booking_done: 'booking_done',
+  order_login: 'order_login',
+  dispatch_planning: 'dispatch_planning'
+} as const
+
+export type SuperAdminApprovalType = (typeof SuperAdminApprovalType)[keyof typeof SuperAdminApprovalType]
+
+
 export const BoxStatus = {
   packed: 'packed',
   unpacked: 'unpacked'
