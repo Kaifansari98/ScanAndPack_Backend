@@ -16,6 +16,7 @@ interface TrackTracePayload {
   machine_id: number;
   unique_code: string;
   created_by: number;
+  box_id?:number;
 }
 export const scan_item_old = async (req: Request, res: Response) => {
     console.log("Query params:", req.body);
@@ -60,6 +61,8 @@ export const scan_item = async (_req: Request, res: Response) => {
       machine_id: Number(_req.body.machine_id),
       unique_code: String(_req.body.unique_code),
       created_by: Number(_req.body.created_by),
+    box_id: _req.body.box_id ? Number(_req.body.box_id) : undefined,
+
     };
 
     const serviceResponse = await trackTraceService.updateScannedItem(payload, false, files);
@@ -848,5 +851,87 @@ export const getTraceTraceDashboard = async (_req: Request, res: Response) => {
   }
   return res.status(200).json(
     ApiResponse.success(serviceResponse.data,'',200)
+  );
+};
+
+
+
+export const getProjectCategories = async (_req: Request, res: Response) => {
+  const { vendor_id } = _req.params;
+  const serviceResponse = await trackTraceService.getProjectCategories(Number(vendor_id));
+  if (serviceResponse.status == 0) {
+    return res.status(200).json(ApiResponse.error(serviceResponse.message, 500));
+  }
+  return res.status(200).json(
+    ApiResponse.success(serviceResponse.data,'',200)
+  );
+};
+
+
+export const getProjectCategoryTypes = async (_req: Request, res: Response) => {
+  const { vendor_id } = _req.params;
+  const serviceResponse = await trackTraceService.getProjectCategoryTypes();
+  if (serviceResponse.status == 0) {
+    return res.status(200).json(ApiResponse.error(serviceResponse.message, 500));
+  }
+  return res.status(200).json(
+    ApiResponse.success(serviceResponse.data,'',200)
+  );
+};
+
+
+// Controller
+export const createProjectCategory = async (_req: Request, res: Response) => {
+  const { vendor_id, category_name, type_ids, created_by } = _req.body;
+
+  const serviceResponse = await trackTraceService.createProjectCategory(
+    Number(vendor_id),
+    String(category_name),
+    Array.isArray(type_ids) ? type_ids.map(Number) : [],
+    Number(created_by)
+  );
+
+  if (serviceResponse.status == 0) {
+    return res.status(200).json(ApiResponse.error(serviceResponse.message, 500));
+  }
+  return res.status(200).json(
+    ApiResponse.success(serviceResponse.data, '', 200)
+  );
+};
+
+export const updateProjectCategory = async (_req: Request, res: Response) => {
+  const { id, vendor_id, category_name, type_ids, updated_by, status } = _req.body;
+
+  const serviceResponse = await trackTraceService.updateProjectCategory(
+    Number(id),
+    Number(vendor_id),
+    String(category_name),
+    status as "Yes" | "No",
+    Array.isArray(type_ids) ? type_ids.map(Number) : [],
+    Number(updated_by)
+  );
+
+  if (serviceResponse.status == 0) {
+    return res.status(200).json(ApiResponse.error(serviceResponse.message, 500));
+  }
+  return res.status(200).json(
+    ApiResponse.success(serviceResponse.data, '', 200)
+  );
+};
+
+
+export const toggleProjectCategoryStatus = async (_req: Request, res: Response) => {
+  const { id,status } = _req.body;
+
+  const serviceResponse = await trackTraceService.toggleProjectCategoryStatus(
+    Number(id),    
+    status as "Yes" | "No",
+  );
+
+  if (serviceResponse.status == 0) {
+    return res.status(200).json(ApiResponse.error(serviceResponse.message, 500));
+  }
+  return res.status(200).json(
+    ApiResponse.success(serviceResponse.data, '', 200)
   );
 };

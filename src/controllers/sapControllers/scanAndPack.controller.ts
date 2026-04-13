@@ -13,15 +13,16 @@ export const addScanAndPackItem = async (req: Request, res: Response) => {
 
 export const getScanAndPackItemsByFields = async (req: Request, res: Response) => {
   try {
-    const { project_id, vendor_id, client_id, box_id } = req.body;
+    console.log(req.body);
+    const { project_id, vendor_id, box_id } = req.body;
 
-    if (!project_id || !vendor_id || !client_id || !box_id) {
+    if (!project_id || !vendor_id || !box_id) {
       return res.status(400).json({
         error: 'All fields are required: project_id, vendor_id, client_id, box_id',
       });
     }
 
-    const items = await getScanItemsByFields({ project_id, vendor_id, client_id, box_id });
+    const items = await getScanItemsByFields({ project_id, vendor_id, box_id });
 
     return res.status(200).json({
       message: 'Scan and Pack items fetched successfully',

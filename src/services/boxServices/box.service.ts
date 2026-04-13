@@ -3,13 +3,13 @@ import { BoxStatus } from '../../prisma/generated';
 import { CreateBoxInput } from '../../types/boxTypes';
 
 export const createBox = async (data: CreateBoxInput) => {
-  const { vendor_id, project_id, client_id, box_name } = data;
+  const { vendor_id, project_id, lead_id, box_name } = data;
 
   const existingBox = await prisma.boxMaster.findFirst({
     where: {
       vendor_id,
       project_id,
-      client_id,
+      lead_id,
       box_name,
       is_deleted: false, // also respect soft delete
     },
@@ -21,7 +21,7 @@ export const createBox = async (data: CreateBoxInput) => {
 
   return prisma.boxMaster.create({
     data,
-    select: { id: true, box_name: true, project_id: true, vendor_id: true, client_id: true, box_status: true }
+    select: { id: true, box_name: true, project_id: true, vendor_id: true, lead_id: true, box_status: true }
   });
 };
 
@@ -29,7 +29,7 @@ export const updateBoxName = async (
   id: number,
   vendor_id: number,
   project_id: number,
-  client_id: number,
+  lead_id: number,
   newBoxName: string
 ) => {
   // Check if box exists with these fields
@@ -38,7 +38,7 @@ export const updateBoxName = async (
       id,
       vendor_id,
       project_id,
-      client_id,
+      lead_id,
       is_deleted: false,
     },
   });
@@ -52,7 +52,7 @@ export const updateBoxName = async (
     where: {
       vendor_id,
       project_id,
-      client_id,
+      lead_id,
       box_name: newBoxName,
       is_deleted: false,
       NOT: {
@@ -88,7 +88,7 @@ export const getAllBoxes = async () => {
 };
 
 export const getBoxesByVendorAndProject = async (vendorId: number, projectId: number) => {
-  return await prisma.boxMaster.findMany({
+  const boxes = await prisma.boxMaster.findMany({
     where: {
       vendor_id: vendorId,
       project_id: projectId,
@@ -96,13 +96,29 @@ export const getBoxesByVendorAndProject = async (vendorId: number, projectId: nu
     },
     include: {
       details: true,
-      _count: {
-        select: {
-          items: true,
-        },
-      },
     },
   });
+
+  // ── Enrich each box with item count from CutListMachineMapping ─────────────
+  const enriched = await Promise.all(
+    boxes.map(async (box) => {
+      const items_count = await prisma.cutListMachineMapping.count({
+        where: {
+          box_id: box.id,
+          project_id: projectId,
+          vendor_id: vendorId,
+          actual_in_at: { not: null },
+        },
+      });
+
+      return {
+        ...box,
+        items_count,
+      };
+    })
+  );
+
+  return enriched;
 };
 
 export const getBoxDetailsWithItems = async (
@@ -151,7 +167,7 @@ export const getBoxDetailsWithItems = async (
         where: {
           project_id: item.project_id,
           vendor_id: item.vendor_id,
-          client_id: item.client_id,
+          lead_id: item.lead_id,
           unique_id: item.unique_id,
         },
       });
@@ -196,7 +212,7 @@ export const getAllBoxesWithItemCountService = async (
     where: {
       project_id: projectId,
       vendor_id: vendorId,
-      client_id: clientId,
+      lead_id: clientId,
       is_deleted: false,
     },
   });

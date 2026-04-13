@@ -20,7 +20,7 @@ router.get('/vendor/:vendorId/project/:projectId', getBoxesByVendorAndProject); 
 
 // 🔥 NEW API: Get full box + vendor + item details
 router.get(
-  '/details/vendor/:vendorId/project/:projectId/client/:clientId/box/:boxId',
+  '/details/vendor/:vendorId/project/:projectId/box/:boxId',
   getBoxDetailsWithItems
 );
 

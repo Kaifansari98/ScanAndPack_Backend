@@ -273,6 +273,17 @@ export class LeadStatsService {
         statusType: { vendor_id: vendorId, tag: "Type 17" },
       },
     });
+    const totalServicingStageLeads = await prisma.leadMaster.count({
+      where: {
+        ...baseLeadScope,
+        statusType: { vendor_id: vendorId, tag: "Type 17" },
+        serviceSchedules: {
+          some: {
+            status: "open",
+          },
+        },
+      },
+    });
 
     console.log("[LeadStatsService] counts snapshot", {
       totalLeads,
@@ -294,6 +305,7 @@ export class LeadStatsService {
       totalUnderInstallationStageLeads,
       totalFinalhandoverStageLeads,
       totalProjectCompletedStageLeads,
+      totalServicingStageLeads,
     });
 
     // GROUP TOTALS
@@ -349,6 +361,7 @@ export class LeadStatsService {
       total_under_installation_stage_leads: totalUnderInstallationStageLeads,
       total_final_handover_stage_leads: totalFinalhandoverStageLeads,
       total_project_completed_stage_leads: totalProjectCompletedStageLeads,
+      total_servicing_stage_leads: totalServicingStageLeads,
 
       // =====================
       // GROUP TOTALS (NEW)

@@ -90,6 +90,10 @@ model VendorMaster {
   externalPlatformTokens              ExternalPlatformToken[]
   completionPhotos  DefectCompletionPhoto[]
 
+  leadExternalPlatformCustomerMappings LeadExternalPlatformCustomerMapping[]
+  projectCategoriesMaster  ProjectCategoriesMaster[]
+  projectCategoriesVendorMappings  ProjectCategoriesMasterVendorMapping[]
+
 }
 
 model VendorAddress {
@@ -212,6 +216,10 @@ model UserMaster {
   externalPlatformTokensCreated              ExternalPlatformToken[]              @relation("ExternalPlatformTokenCreatedBy")
   externalPlatformTokensUpdated              ExternalPlatformToken[]              @relation("ExternalPlatformTokenUpdatedBy")
   completionPhotos  DefectCompletionPhoto[]  
+  projectCategoriesVendorMappingsCreated  ProjectCategoriesMasterVendorMapping[]  @relation("ProjectCategoriesVendorMapping_createdBy")
+  projectCategoriesVendorMappingsUpdated  ProjectCategoriesMasterVendorMapping[]  @relation("ProjectCategoriesVendorMapping_updatedBy")
+
+
 
 }
 
@@ -253,17 +261,17 @@ model ProjectDetails {
   id                        Int                  @id @default(autoincrement())
   project_id                Int
   vendor_id                 Int
-  client_id                 Int
+  lead_id                   Int?
   total_items               Int                  @default(0)
   total_packed              Int                  @default(0)
   total_unpacked            Int                  @default(0)
   actual_completion_date    DateTime?
-  estimated_completion_date DateTime
+  estimated_completion_date DateTime?
   start_date                DateTime             @default(now())
   is_grouping               Boolean              @default(false)
   room_name                 String
   boxes                     BoxMaster[]          @relation("BoxDetails")
-  client                    ClientMaster         @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  leadMaster    LeadMaster?  @relation(fields: [lead_id], references: [id])
   project                   ProjectMaster        @relation(fields: [project_id], references: [id], onDelete: Cascade)
   vendor                    VendorMaster         @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   items                     ProjectItemsMaster[]
@@ -274,7 +282,6 @@ model ProjectItemsMaster {
   id                 Int            @id @default(autoincrement())
   project_id         Int
   vendor_id          Int
-  client_id          Int
   category           String
   unique_id          String
   item_name          String
@@ -285,7 +292,6 @@ model ProjectItemsMaster {
   project_details_id Int
   group              String
   weight             Float          @default(0)
-  client             ClientMaster   @relation(fields: [client_id], references: [id], onDelete: Cascade)
   details            ProjectDetails @relation(fields: [project_details_id], references: [id], onDelete: Cascade)
   project            ProjectMaster  @relation(fields: [project_id], references: [id], onDelete: Cascade)
   vendor             VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
@@ -295,7 +301,7 @@ model BoxMaster {
   id                 Int               @id @default(autoincrement())
   project_id         Int
   vendor_id          Int
-  client_id          Int
+  lead_id            Int
   box_name           String
   box_status         BoxStatus
   created_by         Int
@@ -304,11 +310,13 @@ model BoxMaster {
   deleted_by         Int?
   is_deleted         Boolean           @default(false)
   project_details_id Int
-  client             ClientMaster      @relation(fields: [client_id], references: [id], onDelete: Cascade)
+
   details            ProjectDetails    @relation("BoxDetails", fields: [project_details_id], references: [id], onDelete: Cascade)
   project            ProjectMaster     @relation(fields: [project_id], references: [id], onDelete: Cascade)
   vendor             VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   items              ScanAndPackItem[]
+  leadMaster         LeadMaster[]
+  cutListMachineMapping CutListMachineMapping[]
 }
 
 model ScanAndPackItem {
@@ -353,10 +361,8 @@ model ClientMaster {
   country     String
   pincode     String
   clientCode  String
-  boxes       BoxMaster[]
+
   ledgers     Ledger[]
-  details     ProjectDetails[]
-  items       ProjectItemsMaster[]
   projects    ProjectMaster[]
   scanItems   ScanAndPackItem[]
 }
@@ -478,6 +484,10 @@ model LeadMaster {
   serviceSchedules                            LeadServiceSchedule[]
   siteReadiness                               SiteReadiness[]
   tasks                                       UserLeadTask[]
+  externalPlatformCustomerMappings            LeadExternalPlatformCustomerMapping[]
+  projectDetails  ProjectDetails[]
+  BoxMaster       BoxMaster[]
+
 
   @@unique([vendor_id, lead_code], name: "uniq_vendor_lead_code")
 }
@@ -1508,6 +1518,7 @@ model CutListMachineMapping {
   out_operator  Int?
   created_by    Int
   created_at    DateTime       @default(now())
+  box_id        Int?
   cut_list      CutList        @relation(fields: [cut_list_id], references: [id])
   operator      UserMaster?    @relation(fields: [in_operator], references: [id])
   lead          LeadMaster?    @relation(fields: [lead_id], references: [id])
@@ -1516,6 +1527,8 @@ model CutListMachineMapping {
   vendor        VendorMaster   @relation(fields: [vendor_id], references: [id])
   defectedItems DefectedItem[]
   completionPhotos  DefectCompletionPhoto[]
+  boxMaster        BoxMaster?   @relation(fields: [box_id], references: [id])
+
 
 
   @@index([cut_list_id])
@@ -1812,8 +1825,10 @@ model ApiRequestLog {
 model ExternalPlatformMaster {
   id                     Int                      @id @default(autoincrement())
   external_platform_name String
+  type                   String?                  @unique
   active                 ExternalPlatformMasterActiveStatus             @default(Yes)
   tokens                 ExternalPlatformToken[]
+  leadExternalPlatformCustomerMappings LeadExternalPlatformCustomerMapping[]
 }
 
 model ExternalPlatformToken {
@@ -1834,6 +1849,22 @@ model ExternalPlatformToken {
   vendor               VendorMaster           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   createdByUser        UserMaster             @relation("ExternalPlatformTokenCreatedBy", fields: [created_by], references: [id])
   updatedByUser        UserMaster             @relation("ExternalPlatformTokenUpdatedBy", fields: [updated_by], references: [id])
+  leadExternalPlatformCustomerMappings LeadExternalPlatformCustomerMapping[]
+}
+
+model LeadExternalPlatformCustomerMapping {
+  id                            Int                    @id @default(autoincrement())
+  vendor_id                     Int
+  lead_id                       Int
+  external_platform_customer_id String
+  external_platform_id          Int
+  external_platform_token_id    Int
+  vendor                        VendorMaster           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead                          LeadMaster             @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  externalPlatform              ExternalPlatformMaster @relation(fields: [external_platform_id], references: [id], onDelete: Cascade)
+  externalPlatformToken         ExternalPlatformToken  @relation(fields: [external_platform_token_id], references: [id], onDelete: Cascade)
+
+  @@unique([vendor_id, lead_id, external_platform_id], name: "uniq_vendor_lead_external_platform_customer_mapping")
 }
 
 model DefectedItemImage {
@@ -1867,6 +1898,51 @@ model DefectCompletionPhoto {
   @@index([cut_list_machine_mapping_id])
   @@index([cut_list_id])
   @@index([vendor_id])
+}
+
+model ProjectCategoriesTypeMaster {
+  id          Int      @id @default(autoincrement())
+  module_name String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+    projectCategoriesMasterVendorMapping  ProjectCategoriesMasterVendorMapping[]
+}
+
+model ProjectCategoriesMaster {
+  id              Int                          @id @default(autoincrement())
+  category_name   String
+  status          ProjectCategoriesStatus      @default(Yes)
+  vendor_id       Int
+  created_at      DateTime                     @default(now())
+  updated_at      DateTime                     @updatedAt
+  vendor          VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  projectCategoriesMasterVendorMapping  ProjectCategoriesMasterVendorMapping[]
+
+
+}
+
+model ProjectCategoriesMasterVendorMapping {
+  id                                Int                          @id @default(autoincrement())
+  project_categories_master_id      Int
+  project_categories_type_master_id Int
+  vendor_id                         Int
+  created_at                        DateTime                     @default(now())
+  updated_at                        DateTime                     @updatedAt
+  created_by                        Int
+  updated_by                        Int
+
+  projectCategoriesMaster      ProjectCategoriesMaster      @relation(fields: [project_categories_master_id], references: [id], onDelete: Cascade)
+  projectCategoriesTypeMaster  ProjectCategoriesTypeMaster  @relation(fields: [project_categories_type_master_id], references: [id], onDelete: Cascade)
+  vendor                       VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdBy                    UserMaster                   @relation("ProjectCategoriesVendorMapping_createdBy", fields: [created_by], references: [id])
+  updatedBy                    UserMaster                   @relation("ProjectCategoriesVendorMapping_updatedBy", fields: [updated_by], references: [id])
+}
+
+
+
+enum ProjectCategoriesStatus {
+  Yes
+  No
 }
 
 enum ExternalPlatformTokenActiveStatus {

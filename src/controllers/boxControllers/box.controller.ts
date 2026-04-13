@@ -10,6 +10,7 @@ import { BoxStatus } from '../../prisma/generated';
 
 export const createBox = async (req: Request, res: Response) => {
   try {
+    console.log(req.body);
     const newBox = await boxService.createBox(req.body);
     res.status(201).json({
       message: 'Box created successfully',
@@ -57,7 +58,6 @@ export const getAllBoxes = async (req: Request, res: Response) => {
 
 export const getBoxesByVendorAndProject = async (req: Request, res: Response) => {
   try {
-
     console.log("getBoxesByVendorAndProject");
     const vendorId = Number(req.params.vendorId);
     const projectId = Number(req.params.projectId);
@@ -68,13 +68,7 @@ export const getBoxesByVendorAndProject = async (req: Request, res: Response) =>
 
     const boxes = await boxService.getBoxesByVendorAndProject(vendorId, projectId);
 
-    const transformed = boxes.map((box: any) => ({
-      ...box,
-      items_count: box._count.items,
-      _count: undefined, // Optional: remove raw _count
-    }));
-
-    res.status(200).json(transformed);
+    res.status(200).json(boxes);
   } catch (err: any) {
     res.status(500).json({ error: err.message });
   }
@@ -84,7 +78,7 @@ export const getBoxDetailsWithItems = async (req: Request, res: Response) => {
   try {
     const vendorId = Number(req.params.vendorId);
     const projectId = Number(req.params.projectId);
-    const clientId = Number(req.params.clientId);
+    const clientId = Number(0);
     const boxId = Number(req.params.boxId);
 
     if ([vendorId, projectId, clientId, boxId].some(isNaN)) {

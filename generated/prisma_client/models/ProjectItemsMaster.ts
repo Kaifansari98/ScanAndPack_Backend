@@ -30,7 +30,6 @@ export type ProjectItemsMasterAvgAggregateOutputType = {
   id: number | null
   project_id: number | null
   vendor_id: number | null
-  client_id: number | null
   qty: number | null
   project_details_id: number | null
   weight: number | null
@@ -40,7 +39,6 @@ export type ProjectItemsMasterSumAggregateOutputType = {
   id: number | null
   project_id: number | null
   vendor_id: number | null
-  client_id: number | null
   qty: number | null
   project_details_id: number | null
   weight: number | null
@@ -50,7 +48,6 @@ export type ProjectItemsMasterMinAggregateOutputType = {
   id: number | null
   project_id: number | null
   vendor_id: number | null
-  client_id: number | null
   category: string | null
   unique_id: string | null
   item_name: string | null
@@ -67,7 +64,6 @@ export type ProjectItemsMasterMaxAggregateOutputType = {
   id: number | null
   project_id: number | null
   vendor_id: number | null
-  client_id: number | null
   category: string | null
   unique_id: string | null
   item_name: string | null
@@ -84,7 +80,6 @@ export type ProjectItemsMasterCountAggregateOutputType = {
   id: number
   project_id: number
   vendor_id: number
-  client_id: number
   category: number
   unique_id: number
   item_name: number
@@ -103,7 +98,6 @@ export type ProjectItemsMasterAvgAggregateInputType = {
   id?: true
   project_id?: true
   vendor_id?: true
-  client_id?: true
   qty?: true
   project_details_id?: true
   weight?: true
@@ -113,7 +107,6 @@ export type ProjectItemsMasterSumAggregateInputType = {
   id?: true
   project_id?: true
   vendor_id?: true
-  client_id?: true
   qty?: true
   project_details_id?: true
   weight?: true
@@ -123,7 +116,6 @@ export type ProjectItemsMasterMinAggregateInputType = {
   id?: true
   project_id?: true
   vendor_id?: true
-  client_id?: true
   category?: true
   unique_id?: true
   item_name?: true
@@ -140,7 +132,6 @@ export type ProjectItemsMasterMaxAggregateInputType = {
   id?: true
   project_id?: true
   vendor_id?: true
-  client_id?: true
   category?: true
   unique_id?: true
   item_name?: true
@@ -157,7 +148,6 @@ export type ProjectItemsMasterCountAggregateInputType = {
   id?: true
   project_id?: true
   vendor_id?: true
-  client_id?: true
   category?: true
   unique_id?: true
   item_name?: true
@@ -261,7 +251,6 @@ export type ProjectItemsMasterGroupByOutputType = {
   id: number
   project_id: number
   vendor_id: number
-  client_id: number
   category: string
   unique_id: string
   item_name: string
@@ -301,7 +290,6 @@ export type ProjectItemsMasterWhereInput = {
   id?: Prisma.IntFilter<"ProjectItemsMaster"> | number
   project_id?: Prisma.IntFilter<"ProjectItemsMaster"> | number
   vendor_id?: Prisma.IntFilter<"ProjectItemsMaster"> | number
-  client_id?: Prisma.IntFilter<"ProjectItemsMaster"> | number
   category?: Prisma.StringFilter<"ProjectItemsMaster"> | string
   unique_id?: Prisma.StringFilter<"ProjectItemsMaster"> | string
   item_name?: Prisma.StringFilter<"ProjectItemsMaster"> | string
@@ -312,7 +300,6 @@ export type ProjectItemsMasterWhereInput = {
   project_details_id?: Prisma.IntFilter<"ProjectItemsMaster"> | number
   group?: Prisma.StringFilter<"ProjectItemsMaster"> | string
   weight?: Prisma.FloatFilter<"ProjectItemsMaster"> | number
-  client?: Prisma.XOR<Prisma.ClientMasterScalarRelationFilter, Prisma.ClientMasterWhereInput>
   details?: Prisma.XOR<Prisma.ProjectDetailsScalarRelationFilter, Prisma.ProjectDetailsWhereInput>
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -322,7 +309,6 @@ export type ProjectItemsMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
   category?: Prisma.SortOrder
   unique_id?: Prisma.SortOrder
   item_name?: Prisma.SortOrder
@@ -333,7 +319,6 @@ export type ProjectItemsMasterOrderByWithRelationInput = {
   project_details_id?: Prisma.SortOrder
   group?: Prisma.SortOrder
   weight?: Prisma.SortOrder
-  client?: Prisma.ClientMasterOrderByWithRelationInput
   details?: Prisma.ProjectDetailsOrderByWithRelationInput
   project?: Prisma.ProjectMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
@@ -346,7 +331,6 @@ export type ProjectItemsMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ProjectItemsMasterWhereInput | Prisma.ProjectItemsMasterWhereInput[]
   project_id?: Prisma.IntFilter<"ProjectItemsMaster"> | number
   vendor_id?: Prisma.IntFilter<"ProjectItemsMaster"> | number
-  client_id?: Prisma.IntFilter<"ProjectItemsMaster"> | number
   category?: Prisma.StringFilter<"ProjectItemsMaster"> | string
   unique_id?: Prisma.StringFilter<"ProjectItemsMaster"> | string
   item_name?: Prisma.StringFilter<"ProjectItemsMaster"> | string
@@ -357,7 +341,6 @@ export type ProjectItemsMasterWhereUniqueInput = Prisma.AtLeast<{
   project_details_id?: Prisma.IntFilter<"ProjectItemsMaster"> | number
   group?: Prisma.StringFilter<"ProjectItemsMaster"> | string
   weight?: Prisma.FloatFilter<"ProjectItemsMaster"> | number
-  client?: Prisma.XOR<Prisma.ClientMasterScalarRelationFilter, Prisma.ClientMasterWhereInput>
   details?: Prisma.XOR<Prisma.ProjectDetailsScalarRelationFilter, Prisma.ProjectDetailsWhereInput>
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -367,7 +350,6 @@ export type ProjectItemsMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
   category?: Prisma.SortOrder
   unique_id?: Prisma.SortOrder
   item_name?: Prisma.SortOrder
@@ -392,7 +374,6 @@ export type ProjectItemsMasterScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"ProjectItemsMaster"> | number
   project_id?: Prisma.IntWithAggregatesFilter<"ProjectItemsMaster"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"ProjectItemsMaster"> | number
-  client_id?: Prisma.IntWithAggregatesFilter<"ProjectItemsMaster"> | number
   category?: Prisma.StringWithAggregatesFilter<"ProjectItemsMaster"> | string
   unique_id?: Prisma.StringWithAggregatesFilter<"ProjectItemsMaster"> | string
   item_name?: Prisma.StringWithAggregatesFilter<"ProjectItemsMaster"> | string
@@ -415,7 +396,6 @@ export type ProjectItemsMasterCreateInput = {
   qty: number
   group: string
   weight?: number
-  client: Prisma.ClientMasterCreateNestedOneWithoutItemsInput
   details: Prisma.ProjectDetailsCreateNestedOneWithoutItemsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutItemsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectItemsInput
@@ -425,7 +405,6 @@ export type ProjectItemsMasterUncheckedCreateInput = {
   id?: number
   project_id: number
   vendor_id: number
-  client_id: number
   category: string
   unique_id: string
   item_name: string
@@ -448,7 +427,6 @@ export type ProjectItemsMasterUpdateInput = {
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   group?: Prisma.StringFieldUpdateOperationsInput | string
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutItemsNestedInput
   details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutItemsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutItemsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectItemsNestedInput
@@ -458,7 +436,6 @@ export type ProjectItemsMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
   category?: Prisma.StringFieldUpdateOperationsInput | string
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -475,7 +452,6 @@ export type ProjectItemsMasterCreateManyInput = {
   id?: number
   project_id: number
   vendor_id: number
-  client_id: number
   category: string
   unique_id: string
   item_name: string
@@ -504,7 +480,6 @@ export type ProjectItemsMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
   category?: Prisma.StringFieldUpdateOperationsInput | string
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -531,7 +506,6 @@ export type ProjectItemsMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
   category?: Prisma.SortOrder
   unique_id?: Prisma.SortOrder
   item_name?: Prisma.SortOrder
@@ -548,7 +522,6 @@ export type ProjectItemsMasterAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
   qty?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
   weight?: Prisma.SortOrder
@@ -558,7 +531,6 @@ export type ProjectItemsMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
   category?: Prisma.SortOrder
   unique_id?: Prisma.SortOrder
   item_name?: Prisma.SortOrder
@@ -575,7 +547,6 @@ export type ProjectItemsMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
   category?: Prisma.SortOrder
   unique_id?: Prisma.SortOrder
   item_name?: Prisma.SortOrder
@@ -592,7 +563,6 @@ export type ProjectItemsMasterSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
   qty?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
   weight?: Prisma.SortOrder
@@ -732,48 +702,6 @@ export type FloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type ProjectItemsMasterCreateNestedManyWithoutClientInput = {
-  create?: Prisma.XOR<Prisma.ProjectItemsMasterCreateWithoutClientInput, Prisma.ProjectItemsMasterUncheckedCreateWithoutClientInput> | Prisma.ProjectItemsMasterCreateWithoutClientInput[] | Prisma.ProjectItemsMasterUncheckedCreateWithoutClientInput[]
-  connectOrCreate?: Prisma.ProjectItemsMasterCreateOrConnectWithoutClientInput | Prisma.ProjectItemsMasterCreateOrConnectWithoutClientInput[]
-  createMany?: Prisma.ProjectItemsMasterCreateManyClientInputEnvelope
-  connect?: Prisma.ProjectItemsMasterWhereUniqueInput | Prisma.ProjectItemsMasterWhereUniqueInput[]
-}
-
-export type ProjectItemsMasterUncheckedCreateNestedManyWithoutClientInput = {
-  create?: Prisma.XOR<Prisma.ProjectItemsMasterCreateWithoutClientInput, Prisma.ProjectItemsMasterUncheckedCreateWithoutClientInput> | Prisma.ProjectItemsMasterCreateWithoutClientInput[] | Prisma.ProjectItemsMasterUncheckedCreateWithoutClientInput[]
-  connectOrCreate?: Prisma.ProjectItemsMasterCreateOrConnectWithoutClientInput | Prisma.ProjectItemsMasterCreateOrConnectWithoutClientInput[]
-  createMany?: Prisma.ProjectItemsMasterCreateManyClientInputEnvelope
-  connect?: Prisma.ProjectItemsMasterWhereUniqueInput | Prisma.ProjectItemsMasterWhereUniqueInput[]
-}
-
-export type ProjectItemsMasterUpdateManyWithoutClientNestedInput = {
-  create?: Prisma.XOR<Prisma.ProjectItemsMasterCreateWithoutClientInput, Prisma.ProjectItemsMasterUncheckedCreateWithoutClientInput> | Prisma.ProjectItemsMasterCreateWithoutClientInput[] | Prisma.ProjectItemsMasterUncheckedCreateWithoutClientInput[]
-  connectOrCreate?: Prisma.ProjectItemsMasterCreateOrConnectWithoutClientInput | Prisma.ProjectItemsMasterCreateOrConnectWithoutClientInput[]
-  upsert?: Prisma.ProjectItemsMasterUpsertWithWhereUniqueWithoutClientInput | Prisma.ProjectItemsMasterUpsertWithWhereUniqueWithoutClientInput[]
-  createMany?: Prisma.ProjectItemsMasterCreateManyClientInputEnvelope
-  set?: Prisma.ProjectItemsMasterWhereUniqueInput | Prisma.ProjectItemsMasterWhereUniqueInput[]
-  disconnect?: Prisma.ProjectItemsMasterWhereUniqueInput | Prisma.ProjectItemsMasterWhereUniqueInput[]
-  delete?: Prisma.ProjectItemsMasterWhereUniqueInput | Prisma.ProjectItemsMasterWhereUniqueInput[]
-  connect?: Prisma.ProjectItemsMasterWhereUniqueInput | Prisma.ProjectItemsMasterWhereUniqueInput[]
-  update?: Prisma.ProjectItemsMasterUpdateWithWhereUniqueWithoutClientInput | Prisma.ProjectItemsMasterUpdateWithWhereUniqueWithoutClientInput[]
-  updateMany?: Prisma.ProjectItemsMasterUpdateManyWithWhereWithoutClientInput | Prisma.ProjectItemsMasterUpdateManyWithWhereWithoutClientInput[]
-  deleteMany?: Prisma.ProjectItemsMasterScalarWhereInput | Prisma.ProjectItemsMasterScalarWhereInput[]
-}
-
-export type ProjectItemsMasterUncheckedUpdateManyWithoutClientNestedInput = {
-  create?: Prisma.XOR<Prisma.ProjectItemsMasterCreateWithoutClientInput, Prisma.ProjectItemsMasterUncheckedCreateWithoutClientInput> | Prisma.ProjectItemsMasterCreateWithoutClientInput[] | Prisma.ProjectItemsMasterUncheckedCreateWithoutClientInput[]
-  connectOrCreate?: Prisma.ProjectItemsMasterCreateOrConnectWithoutClientInput | Prisma.ProjectItemsMasterCreateOrConnectWithoutClientInput[]
-  upsert?: Prisma.ProjectItemsMasterUpsertWithWhereUniqueWithoutClientInput | Prisma.ProjectItemsMasterUpsertWithWhereUniqueWithoutClientInput[]
-  createMany?: Prisma.ProjectItemsMasterCreateManyClientInputEnvelope
-  set?: Prisma.ProjectItemsMasterWhereUniqueInput | Prisma.ProjectItemsMasterWhereUniqueInput[]
-  disconnect?: Prisma.ProjectItemsMasterWhereUniqueInput | Prisma.ProjectItemsMasterWhereUniqueInput[]
-  delete?: Prisma.ProjectItemsMasterWhereUniqueInput | Prisma.ProjectItemsMasterWhereUniqueInput[]
-  connect?: Prisma.ProjectItemsMasterWhereUniqueInput | Prisma.ProjectItemsMasterWhereUniqueInput[]
-  update?: Prisma.ProjectItemsMasterUpdateWithWhereUniqueWithoutClientInput | Prisma.ProjectItemsMasterUpdateWithWhereUniqueWithoutClientInput[]
-  updateMany?: Prisma.ProjectItemsMasterUpdateManyWithWhereWithoutClientInput | Prisma.ProjectItemsMasterUpdateManyWithWhereWithoutClientInput[]
-  deleteMany?: Prisma.ProjectItemsMasterScalarWhereInput | Prisma.ProjectItemsMasterScalarWhereInput[]
-}
-
 export type ProjectItemsMasterCreateWithoutVendorInput = {
   category: string
   unique_id: string
@@ -784,7 +712,6 @@ export type ProjectItemsMasterCreateWithoutVendorInput = {
   qty: number
   group: string
   weight?: number
-  client: Prisma.ClientMasterCreateNestedOneWithoutItemsInput
   details: Prisma.ProjectDetailsCreateNestedOneWithoutItemsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutItemsInput
 }
@@ -792,7 +719,6 @@ export type ProjectItemsMasterCreateWithoutVendorInput = {
 export type ProjectItemsMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   project_id: number
-  client_id: number
   category: string
   unique_id: string
   item_name: string
@@ -838,7 +764,6 @@ export type ProjectItemsMasterScalarWhereInput = {
   id?: Prisma.IntFilter<"ProjectItemsMaster"> | number
   project_id?: Prisma.IntFilter<"ProjectItemsMaster"> | number
   vendor_id?: Prisma.IntFilter<"ProjectItemsMaster"> | number
-  client_id?: Prisma.IntFilter<"ProjectItemsMaster"> | number
   category?: Prisma.StringFilter<"ProjectItemsMaster"> | string
   unique_id?: Prisma.StringFilter<"ProjectItemsMaster"> | string
   item_name?: Prisma.StringFilter<"ProjectItemsMaster"> | string
@@ -861,7 +786,6 @@ export type ProjectItemsMasterCreateWithoutProjectInput = {
   qty: number
   group: string
   weight?: number
-  client: Prisma.ClientMasterCreateNestedOneWithoutItemsInput
   details: Prisma.ProjectDetailsCreateNestedOneWithoutItemsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectItemsInput
 }
@@ -869,7 +793,6 @@ export type ProjectItemsMasterCreateWithoutProjectInput = {
 export type ProjectItemsMasterUncheckedCreateWithoutProjectInput = {
   id?: number
   vendor_id: number
-  client_id: number
   category: string
   unique_id: string
   item_name: string
@@ -918,7 +841,6 @@ export type ProjectItemsMasterCreateWithoutDetailsInput = {
   qty: number
   group: string
   weight?: number
-  client: Prisma.ClientMasterCreateNestedOneWithoutItemsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutItemsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectItemsInput
 }
@@ -927,7 +849,6 @@ export type ProjectItemsMasterUncheckedCreateWithoutDetailsInput = {
   id?: number
   project_id: number
   vendor_id: number
-  client_id: number
   category: string
   unique_id: string
   item_name: string
@@ -965,67 +886,9 @@ export type ProjectItemsMasterUpdateManyWithWhereWithoutDetailsInput = {
   data: Prisma.XOR<Prisma.ProjectItemsMasterUpdateManyMutationInput, Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutDetailsInput>
 }
 
-export type ProjectItemsMasterCreateWithoutClientInput = {
-  category: string
-  unique_id: string
-  item_name: string
-  L1: string
-  L2: string
-  L3: string
-  qty: number
-  group: string
-  weight?: number
-  details: Prisma.ProjectDetailsCreateNestedOneWithoutItemsInput
-  project: Prisma.ProjectMasterCreateNestedOneWithoutItemsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectItemsInput
-}
-
-export type ProjectItemsMasterUncheckedCreateWithoutClientInput = {
-  id?: number
-  project_id: number
-  vendor_id: number
-  category: string
-  unique_id: string
-  item_name: string
-  L1: string
-  L2: string
-  L3: string
-  qty: number
-  project_details_id: number
-  group: string
-  weight?: number
-}
-
-export type ProjectItemsMasterCreateOrConnectWithoutClientInput = {
-  where: Prisma.ProjectItemsMasterWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProjectItemsMasterCreateWithoutClientInput, Prisma.ProjectItemsMasterUncheckedCreateWithoutClientInput>
-}
-
-export type ProjectItemsMasterCreateManyClientInputEnvelope = {
-  data: Prisma.ProjectItemsMasterCreateManyClientInput | Prisma.ProjectItemsMasterCreateManyClientInput[]
-  skipDuplicates?: boolean
-}
-
-export type ProjectItemsMasterUpsertWithWhereUniqueWithoutClientInput = {
-  where: Prisma.ProjectItemsMasterWhereUniqueInput
-  update: Prisma.XOR<Prisma.ProjectItemsMasterUpdateWithoutClientInput, Prisma.ProjectItemsMasterUncheckedUpdateWithoutClientInput>
-  create: Prisma.XOR<Prisma.ProjectItemsMasterCreateWithoutClientInput, Prisma.ProjectItemsMasterUncheckedCreateWithoutClientInput>
-}
-
-export type ProjectItemsMasterUpdateWithWhereUniqueWithoutClientInput = {
-  where: Prisma.ProjectItemsMasterWhereUniqueInput
-  data: Prisma.XOR<Prisma.ProjectItemsMasterUpdateWithoutClientInput, Prisma.ProjectItemsMasterUncheckedUpdateWithoutClientInput>
-}
-
-export type ProjectItemsMasterUpdateManyWithWhereWithoutClientInput = {
-  where: Prisma.ProjectItemsMasterScalarWhereInput
-  data: Prisma.XOR<Prisma.ProjectItemsMasterUpdateManyMutationInput, Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutClientInput>
-}
-
 export type ProjectItemsMasterCreateManyVendorInput = {
   id?: number
   project_id: number
-  client_id: number
   category: string
   unique_id: string
   item_name: string
@@ -1048,7 +911,6 @@ export type ProjectItemsMasterUpdateWithoutVendorInput = {
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   group?: Prisma.StringFieldUpdateOperationsInput | string
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutItemsNestedInput
   details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutItemsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutItemsNestedInput
 }
@@ -1056,7 +918,6 @@ export type ProjectItemsMasterUpdateWithoutVendorInput = {
 export type ProjectItemsMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
   category?: Prisma.StringFieldUpdateOperationsInput | string
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1072,7 +933,6 @@ export type ProjectItemsMasterUncheckedUpdateWithoutVendorInput = {
 export type ProjectItemsMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
   category?: Prisma.StringFieldUpdateOperationsInput | string
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1088,7 +948,6 @@ export type ProjectItemsMasterUncheckedUpdateManyWithoutVendorInput = {
 export type ProjectItemsMasterCreateManyProjectInput = {
   id?: number
   vendor_id: number
-  client_id: number
   category: string
   unique_id: string
   item_name: string
@@ -1111,7 +970,6 @@ export type ProjectItemsMasterUpdateWithoutProjectInput = {
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   group?: Prisma.StringFieldUpdateOperationsInput | string
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutItemsNestedInput
   details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutItemsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectItemsNestedInput
 }
@@ -1119,7 +977,6 @@ export type ProjectItemsMasterUpdateWithoutProjectInput = {
 export type ProjectItemsMasterUncheckedUpdateWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
   category?: Prisma.StringFieldUpdateOperationsInput | string
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1135,7 +992,6 @@ export type ProjectItemsMasterUncheckedUpdateWithoutProjectInput = {
 export type ProjectItemsMasterUncheckedUpdateManyWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
   category?: Prisma.StringFieldUpdateOperationsInput | string
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1152,7 +1008,6 @@ export type ProjectItemsMasterCreateManyDetailsInput = {
   id?: number
   project_id: number
   vendor_id: number
-  client_id: number
   category: string
   unique_id: string
   item_name: string
@@ -1174,7 +1029,6 @@ export type ProjectItemsMasterUpdateWithoutDetailsInput = {
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   group?: Prisma.StringFieldUpdateOperationsInput | string
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutItemsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutItemsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectItemsNestedInput
 }
@@ -1183,7 +1037,6 @@ export type ProjectItemsMasterUncheckedUpdateWithoutDetailsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
   category?: Prisma.StringFieldUpdateOperationsInput | string
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1199,7 +1052,6 @@ export type ProjectItemsMasterUncheckedUpdateManyWithoutDetailsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
   category?: Prisma.StringFieldUpdateOperationsInput | string
   unique_id?: Prisma.StringFieldUpdateOperationsInput | string
   item_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1207,69 +1059,6 @@ export type ProjectItemsMasterUncheckedUpdateManyWithoutDetailsInput = {
   L2?: Prisma.StringFieldUpdateOperationsInput | string
   L3?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
-  group?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
-}
-
-export type ProjectItemsMasterCreateManyClientInput = {
-  id?: number
-  project_id: number
-  vendor_id: number
-  category: string
-  unique_id: string
-  item_name: string
-  L1: string
-  L2: string
-  L3: string
-  qty: number
-  project_details_id: number
-  group: string
-  weight?: number
-}
-
-export type ProjectItemsMasterUpdateWithoutClientInput = {
-  category?: Prisma.StringFieldUpdateOperationsInput | string
-  unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  item_name?: Prisma.StringFieldUpdateOperationsInput | string
-  L1?: Prisma.StringFieldUpdateOperationsInput | string
-  L2?: Prisma.StringFieldUpdateOperationsInput | string
-  L3?: Prisma.StringFieldUpdateOperationsInput | string
-  qty?: Prisma.IntFieldUpdateOperationsInput | number
-  group?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutItemsNestedInput
-  project?: Prisma.ProjectMasterUpdateOneRequiredWithoutItemsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectItemsNestedInput
-}
-
-export type ProjectItemsMasterUncheckedUpdateWithoutClientInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  category?: Prisma.StringFieldUpdateOperationsInput | string
-  unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  item_name?: Prisma.StringFieldUpdateOperationsInput | string
-  L1?: Prisma.StringFieldUpdateOperationsInput | string
-  L2?: Prisma.StringFieldUpdateOperationsInput | string
-  L3?: Prisma.StringFieldUpdateOperationsInput | string
-  qty?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
-  group?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.FloatFieldUpdateOperationsInput | number
-}
-
-export type ProjectItemsMasterUncheckedUpdateManyWithoutClientInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  category?: Prisma.StringFieldUpdateOperationsInput | string
-  unique_id?: Prisma.StringFieldUpdateOperationsInput | string
-  item_name?: Prisma.StringFieldUpdateOperationsInput | string
-  L1?: Prisma.StringFieldUpdateOperationsInput | string
-  L2?: Prisma.StringFieldUpdateOperationsInput | string
-  L3?: Prisma.StringFieldUpdateOperationsInput | string
-  qty?: Prisma.IntFieldUpdateOperationsInput | number
-  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
   group?: Prisma.StringFieldUpdateOperationsInput | string
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
 }
@@ -1280,7 +1069,6 @@ export type ProjectItemsMasterSelect<ExtArgs extends runtime.Types.Extensions.In
   id?: boolean
   project_id?: boolean
   vendor_id?: boolean
-  client_id?: boolean
   category?: boolean
   unique_id?: boolean
   item_name?: boolean
@@ -1291,7 +1079,6 @@ export type ProjectItemsMasterSelect<ExtArgs extends runtime.Types.Extensions.In
   project_details_id?: boolean
   group?: boolean
   weight?: boolean
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
   details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1301,7 +1088,6 @@ export type ProjectItemsMasterSelectCreateManyAndReturn<ExtArgs extends runtime.
   id?: boolean
   project_id?: boolean
   vendor_id?: boolean
-  client_id?: boolean
   category?: boolean
   unique_id?: boolean
   item_name?: boolean
@@ -1312,7 +1098,6 @@ export type ProjectItemsMasterSelectCreateManyAndReturn<ExtArgs extends runtime.
   project_details_id?: boolean
   group?: boolean
   weight?: boolean
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
   details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1322,7 +1107,6 @@ export type ProjectItemsMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.
   id?: boolean
   project_id?: boolean
   vendor_id?: boolean
-  client_id?: boolean
   category?: boolean
   unique_id?: boolean
   item_name?: boolean
@@ -1333,7 +1117,6 @@ export type ProjectItemsMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.
   project_details_id?: boolean
   group?: boolean
   weight?: boolean
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
   details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1343,7 +1126,6 @@ export type ProjectItemsMasterSelectScalar = {
   id?: boolean
   project_id?: boolean
   vendor_id?: boolean
-  client_id?: boolean
   category?: boolean
   unique_id?: boolean
   item_name?: boolean
@@ -1356,21 +1138,18 @@ export type ProjectItemsMasterSelectScalar = {
   weight?: boolean
 }
 
-export type ProjectItemsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "client_id" | "category" | "unique_id" | "item_name" | "L1" | "L2" | "L3" | "qty" | "project_details_id" | "group" | "weight", ExtArgs["result"]["projectItemsMaster"]>
+export type ProjectItemsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "category" | "unique_id" | "item_name" | "L1" | "L2" | "L3" | "qty" | "project_details_id" | "group" | "weight", ExtArgs["result"]["projectItemsMaster"]>
 export type ProjectItemsMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
   details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type ProjectItemsMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
   details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type ProjectItemsMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
   details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1379,7 +1158,6 @@ export type ProjectItemsMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime
 export type $ProjectItemsMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProjectItemsMaster"
   objects: {
-    client: Prisma.$ClientMasterPayload<ExtArgs>
     details: Prisma.$ProjectDetailsPayload<ExtArgs>
     project: Prisma.$ProjectMasterPayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
@@ -1388,7 +1166,6 @@ export type $ProjectItemsMasterPayload<ExtArgs extends runtime.Types.Extensions.
     id: number
     project_id: number
     vendor_id: number
-    client_id: number
     category: string
     unique_id: string
     item_name: string
@@ -1793,7 +1570,6 @@ readonly fields: ProjectItemsMasterFieldRefs;
  */
 export interface Prisma__ProjectItemsMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  client<T extends Prisma.ClientMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ClientMasterClient<runtime.Types.Result.GetResult<Prisma.$ClientMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   details<T extends Prisma.ProjectDetailsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDetailsDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectDetailsClient<runtime.Types.Result.GetResult<Prisma.$ProjectDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   project<T extends Prisma.ProjectMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectMasterClient<runtime.Types.Result.GetResult<Prisma.$ProjectMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
@@ -1829,7 +1605,6 @@ export interface ProjectItemsMasterFieldRefs {
   readonly id: Prisma.FieldRef<"ProjectItemsMaster", 'Int'>
   readonly project_id: Prisma.FieldRef<"ProjectItemsMaster", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"ProjectItemsMaster", 'Int'>
-  readonly client_id: Prisma.FieldRef<"ProjectItemsMaster", 'Int'>
   readonly category: Prisma.FieldRef<"ProjectItemsMaster", 'String'>
   readonly unique_id: Prisma.FieldRef<"ProjectItemsMaster", 'String'>
   readonly item_name: Prisma.FieldRef<"ProjectItemsMaster", 'String'>

@@ -16,6 +16,7 @@ interface TrackTracePayload {
   machine_id: number;
   unique_code: string;
   created_by: number;
+  box_id?:number;
 }
 
 // export const updateScannedItem = async (payload: TrackTracePayload) => {
@@ -453,10 +454,21 @@ export const updateScannedItem = async (
   files: Express.Multer.File[] = [],
 ) => {
   try {
-    const { project_id, vendor_id, machine_id, unique_code, created_by } = payload;
+    const { project_id, vendor_id, machine_id, unique_code, created_by, box_id } = payload;
 
     // conditionally add project_id filter if provided
     const projectFilter = project_id ? { project_id } : {};
+
+    // ── Validate box_id if provided ────────────────────────────────────────
+    if (box_id) {
+      const box = await prisma.boxMaster.findFirst({
+        where: { id: box_id, vendor_id, project_id, is_deleted: false },
+        select: { id: true },
+      });
+      if (!box) {
+        return validationResponse(0, "Invalid box_id: box not found for this project");
+      }
+    }
 
     // check if item is mapped to any machine
     const currentMapping = await prisma.cutListMachineMapping.findFirst({
@@ -693,12 +705,13 @@ export const updateScannedItem = async (
           console.log(`Auto-passed ${passMachines.length} machines with scan_type='pass'`);
         }
 
-        // update current machine as scanned
+        // update current machine as scanned — include box_id if provided
         await prisma.cutListMachineMapping.update({
           where: { id: id },
           data: {
             actual_in_at: new Date(),
             in_operator: created_by,
+            ...(box_id ? { box_id } : {}),
           },
         });
 
@@ -765,7 +778,6 @@ export const updateScannedItem = async (
     return validationResponse(0, 'Something went wrong');
   }
 };
-
 
 export const check_defect = async (payload: TrackTracePayload) => {
   console.log(payload);
@@ -3251,9 +3263,7 @@ async function sumQty(cutListIds: number[]): Promise<number> {
 
 export const getTraceTraceDashboard = async (vendor_id: number) => {
   try {
-
-    
-
+ 
     // ── 1. Fetch all projects for this vendor ──────────────────────────────
     const projects = await prisma.projectMaster.findMany({
       where: { vendor_id },
@@ -3266,7 +3276,7 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
       },
       orderBy: { created_at: "desc" },
     });
-
+ 
     // ── 2. Fetch all non-PASS machines ordered by sequence ─────────────────
     const machines = await prisma.machineMaster.findMany({
       where: {
@@ -3274,13 +3284,13 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
         status: "ACTIVE",
         scan_type: { not: "PASS" },
       },
-      select: { id: true, machine_name: true, sequence_no: true },
+      select: { id: true, machine_name: true, sequence_no: true, machine_type_id: true },
       orderBy: { sequence_no: "asc" },
     });
-
+ 
     // ── 3. For each project, compute per-machine counts ────────────────────
     const buildProjectStatus = async (project: (typeof projects)[0]) => {
-
+ 
       // Pre-compute scanned count per machine for this project (used for waterfall)
       const scannedPerMachine: Map<number, number> = new Map();
       for (const machine of machines) {
@@ -3295,7 +3305,7 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
         });
         scannedPerMachine.set(machine.id, count);
       }
-
+ 
       const machineStatuses = await Promise.all(
         machines.map(async (machine, index) => {
           // Check if this machine is assigned to this project at all
@@ -3307,25 +3317,139 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
               expected_in: true,
             },
           });
-
+ 
           if (assigned === 0) return null;
-
+ 
           const scanned = scannedPerMachine.get(machine.id) ?? 0;
-
-          // Waterfall total:
-          // - First machine (index 0): total = all assigned rows
-          // - Machine N: total = scanned count of previous machine
-          //   because each scan at machine N-1 unlocks exactly one panel for machine N
+ 
+          // ── Waterfall total ──────────────────────────────────────────────
+          // total = rows at this machine where this cut_list's LAST assigned
+          // machine before this one has been scanned (actual_in_at != null).
+          // This correctly handles cut_lists that skip intermediate machines.
           let total: number;
+ 
+          const isQCStation = machine.machine_type_id === 17 || machine.machine_type_id === 18;
+ 
           if (index === 0) {
+            // First machine: total = all assigned rows
             total = assigned;
+ 
+          } else if (isQCStation) {
+            // QC Station:
+            // Part A — cut_lists that DO have a prior machine assignment:
+            //   eligible if their last assigned machine before QC is scanned
+            // Part B — cut_lists with NO prior machine assignment (QC-only):
+            //   always eligible (count all their QC rows)
+ 
+            // Find cut_list_ids that have at least one row at seq < QC seq
+            const cutListsWithPrior = await prisma.cutListMachineMapping.findMany({
+              where: {
+                project_id: project.id,
+                vendor_id,
+                sequence_no: { lt: machine.sequence_no ?? 0 },
+                expected_in: true,
+              },
+              select: { cut_list_id: true },
+              distinct: ["cut_list_id"],
+            });
+            const cutListIdsWithPrior = cutListsWithPrior.map((r) => r.cut_list_id);
+ 
+            // Part A: rows at QC where cut_list HAS prior machines
+            // eligible = the immediately previous assigned machine for that cut_list is scanned
+            // We count QC rows where the cut_list's max-seq prior row has actual_in_at != null
+            const partARows = await prisma.cutListMachineMapping.findMany({
+              where: {
+                project_id: project.id,
+                vendor_id,
+                machine_id: machine.id,
+                expected_in: true,
+                cut_list_id: cutListIdsWithPrior.length > 0
+                  ? { in: cutListIdsWithPrior }
+                  : { in: [-1] }, // empty set
+              },
+              select: { cut_list_id: true, id: true },
+            });
+ 
+            // For each Part A row, check if the last prior machine is scanned
+            let partAEligible = 0;
+            for (const row of partARows) {
+              // Find the highest sequence_no prior machine row for this cut_list
+              const lastPriorRow = await prisma.cutListMachineMapping.findFirst({
+                where: {
+                  project_id: project.id,
+                  vendor_id,
+                  cut_list_id: row.cut_list_id,
+                  sequence_no: { lt: machine.sequence_no ?? 0 },
+                  expected_in: true,
+                },
+                orderBy: { sequence_no: "desc" },
+                select: { actual_in_at: true },
+              });
+              if (lastPriorRow?.actual_in_at !== null) {
+                partAEligible++;
+              }
+            }
+ 
+            // Part B: QC-only rows (no prior machine at all) — always eligible
+            const partBCount = await prisma.cutListMachineMapping.count({
+              where: {
+                project_id: project.id,
+                vendor_id,
+                machine_id: machine.id,
+                expected_in: true,
+                ...(cutListIdsWithPrior.length > 0
+                  ? { cut_list_id: { notIn: cutListIdsWithPrior } }
+                  : { cut_list_id: { notIn: [-1] } } // empty set — nothing qualifies as prior-less if no prior exists at all
+                ),
+              },
+            });
+ 
+            total = partAEligible + partBCount;
+ 
           } else {
-            const prevMachine = machines[index - 1];
-            total = scannedPerMachine.get(prevMachine.id) ?? 0;
+            // Normal machines: count rows at this machine where
+            // the last assigned machine before this one (for that cut_list) is scanned
+            const thisMachineRows = await prisma.cutListMachineMapping.findMany({
+              where: {
+                project_id: project.id,
+                vendor_id,
+                machine_id: machine.id,
+                expected_in: true,
+              },
+              select: { cut_list_id: true },
+            });
+ 
+            let eligible = 0;
+            for (const row of thisMachineRows) {
+              // Find the last machine assigned to this cut_list before current seq
+              const lastPriorRow = await prisma.cutListMachineMapping.findFirst({
+                where: {
+                  project_id: project.id,
+                  vendor_id,
+                  cut_list_id: row.cut_list_id,
+                  sequence_no: { lt: machine.sequence_no ?? 0 },
+                  expected_in: true,
+                },
+                orderBy: { sequence_no: "desc" },
+                select: { actual_in_at: true },
+              });
+ 
+              if (!lastPriorRow) {
+                // No prior machine for this cut_list — not eligible yet
+                // (shouldn't happen for non-first machines in normal flow)
+                continue;
+              }
+ 
+              if (lastPriorRow.actual_in_at !== null) {
+                eligible++;
+              }
+            }
+ 
+            total = eligible;
           }
-
+ 
           const pending = Math.max(0, total - scanned);
-
+ 
           return {
             machine_id: machine.id,
             machine_name: machine.machine_name,
@@ -3337,28 +3461,26 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
           };
         })
       );
-
+ 
       // ── Panels: total and fully scanned ───────────────────────────────────
-      // total_panels = assigned rows on first machine (each row = 1 panel)
-      // panels_scanned = scanned rows on last machine (passed all machines)
       const firstMachine = machines[0];
       const lastMachine = machines[machines.length - 1];
-
+ 
       const total_panels = firstMachine
         ? await prisma.cutListMachineMapping.count({
-          where: {
-            project_id: project.id,
-            vendor_id,
-            machine_id: firstMachine.id,
-            expected_in: true,
-          },
-        })
+            where: {
+              project_id: project.id,
+              vendor_id,
+              machine_id: firstMachine.id,
+              expected_in: true,
+            },
+          })
         : 0;
-
+ 
       const panels_scanned = lastMachine
         ? (scannedPerMachine.get(lastMachine.id) ?? 0)
         : 0;
-
+ 
       return {
         project_id: project.id,
         project_name: project.project_name,
@@ -3370,16 +3492,14 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
         machines: machineStatuses.filter(Boolean),
       };
     };
-
+ 
     const allStatuses = await Promise.all(projects.map(buildProjectStatus));
-
+ 
     // ── 4. Split into active vs archived ───────────────────────────────────
     const activeStatuses = ["Initiated", "Started"];
     const active = allStatuses.filter((p) => activeStatuses.includes(p.project_status));
     const archived = allStatuses.filter((p) => !activeStatuses.includes(p.project_status));
-
-
-
+ 
     return validationResponse(1, "", {
       active,
       archived,
@@ -3388,6 +3508,146 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
     });
   } catch (error) {
     console.error("Error in getTraceTraceDashboard", error);
+    return validationResponse(0, "Something went wrong");
+  }
+};
+
+
+
+export const getProjectCategories = async (vendor_id: number) => {
+  try {
+    const categories = await prisma.projectCategoriesMaster.findMany({
+      where: { vendor_id },
+      orderBy: { category_name: "asc" },
+      select: {
+        id: true,
+        category_name: true,
+        status: true,
+        created_at: true,
+        projectCategoriesMasterVendorMapping: {
+          select: {
+            id: true,
+            project_categories_type_master_id: true,
+            projectCategoriesTypeMaster: {
+              select: { id: true, module_name: true },
+            },
+          },
+        },
+      },
+    });
+ 
+    return validationResponse(1, "", { categories });
+  } catch (error) {
+    console.error("Error in getProjectCategories", error);
+    return validationResponse(0, "Something went wrong");
+  }
+};
+ 
+// ─── Get all type masters ─────────────────────────────────────────────────────
+export const getProjectCategoryTypes = async () => {
+  try {
+    const types = await prisma.projectCategoriesTypeMaster.findMany({
+      orderBy: { module_name: "asc" },
+      select: { id: true, module_name: true },
+    });
+ 
+    return validationResponse(1, "", { types });
+  } catch (error) {
+    console.error("Error in getProjectCategoryTypes", error);
+    return validationResponse(0, "Something went wrong");
+  }
+};
+ 
+// ─── Create category + assign type mappings ───────────────────────────────────
+export const createProjectCategory = async (
+  vendor_id: number,
+  category_name: string,
+  type_ids: number[],
+  created_by: number
+) => {
+  try {
+    const result = await prisma.$transaction(async (tx) => {
+      const category = await tx.projectCategoriesMaster.create({
+        data: { category_name, vendor_id, status: "Yes" },
+      });
+ 
+      if (type_ids.length > 0) {
+        await tx.projectCategoriesMasterVendorMapping.createMany({
+          data: type_ids.map((type_id) => ({
+            project_categories_master_id: category.id,
+            project_categories_type_master_id: type_id,
+            vendor_id,
+            created_by,
+            updated_by: created_by,
+          })),
+        });
+      }
+ 
+      return category;
+    });
+ 
+    return validationResponse(1, "Category created successfully", { id: result.id });
+  } catch (error) {
+    console.error("Error in createProjectCategory", error);
+    return validationResponse(0, "Something went wrong");
+  }
+};
+ 
+// ─── Update category name, status, and type mappings ─────────────────────────
+export const updateProjectCategory = async (
+  id: number,
+  vendor_id: number,
+  category_name: string,
+  status: "Yes" | "No",
+  type_ids: number[],
+  updated_by: number
+) => {
+  try {
+    await prisma.$transaction(async (tx) => {
+      await tx.projectCategoriesMaster.update({
+        where: { id },
+        data: { category_name, status },
+      });
+ 
+      // Delete existing mappings and re-insert (clean replace)
+      await tx.projectCategoriesMasterVendorMapping.deleteMany({
+        where: { project_categories_master_id: id },
+      });
+ 
+      if (type_ids.length > 0) {
+        await tx.projectCategoriesMasterVendorMapping.createMany({
+          data: type_ids.map((type_id) => ({
+            project_categories_master_id: id,
+            project_categories_type_master_id: type_id,
+            vendor_id,
+            created_by: updated_by,
+            updated_by,
+          })),
+        });
+      }
+    });
+ 
+    return validationResponse(1, "Category updated successfully");
+  } catch (error) {
+    console.error("Error in updateProjectCategory", error);
+    return validationResponse(0, "Something went wrong");
+  }
+};
+ 
+// ─── Toggle status ────────────────────────────────────────────────────────────
+export const toggleProjectCategoryStatus = async (
+  id: number,
+  status: "Yes" | "No"
+) => {
+  try {
+    await prisma.projectCategoriesMaster.update({
+      where: { id },
+      data: { status },
+    });
+ 
+    return validationResponse(1, `Category ${status === "Yes" ? "activated" : "deactivated"} successfully`);
+  } catch (error) {
+    console.error("Error in toggleProjectCategoryStatus", error);
     return validationResponse(0, "Something went wrong");
   }
 };

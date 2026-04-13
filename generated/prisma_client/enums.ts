@@ -9,6 +9,14 @@
 * 🟢 You can import this file directly.
 */
 
+export const ProjectCategoriesStatus = {
+  Yes: 'Yes',
+  No: 'No'
+} as const
+
+export type ProjectCategoriesStatus = (typeof ProjectCategoriesStatus)[keyof typeof ProjectCategoriesStatus]
+
+
 export const ExternalPlatformTokenActiveStatus = {
   Yes: 'Yes',
   No: 'No'

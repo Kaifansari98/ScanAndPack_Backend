@@ -62,36 +62,21 @@ export const getAllProjectItems = async (_req: Request, res: Response) => {
   
 export const getProjectById = async (req: Request, res: Response) => {
   try {
-    console.log("getProjectById")
+    console.log("getProjectById");
     const id = Number(req.params.id);
     const project = await projectService.getProjectById(id);
+    console.log("-----------");
+    console.log(project);
 
     if (!project) {
       return res.status(404).json({ error: 'Project not found' });
     }
 
-    // Calculate totals
-    const total_items = project.details.reduce((sum, d) => sum + d.total_items, 0);
-    const total_packed = project.details.reduce((sum, d) => sum + d.total_packed, 0);
-    const total_unpacked = project.details.reduce((sum, d) => sum + d.total_unpacked, 0);
-    const total_items_count = project.items.length;
-    const total_weight = project.items.reduce((sum, item) => sum + (item.weight * item.qty || 0), 0);
-
-    // Send combined response
-    res.json({
-      ...project,
-      totals: {
-        total_items,
-        total_packed,
-        total_unpacked,
-        total_items_count,
-        total_weight
-      }
-    });
+    res.json(project);
   } catch (err) {
     res.status(500).json({
       error: 'Failed to fetch project by ID',
-      details: err
+      details: err,
     });
   }
 };
@@ -119,6 +104,7 @@ export const getProjectItemById = async (req: Request, res: Response) => {
 
 export const getProjectsByVendorId = async (req: Request, res: Response) => {
   try {
+    console.log("getProjectsByVendorId");
     const vendorId = Number(req.params.vendorId);
 
     if (isNaN(vendorId)) {

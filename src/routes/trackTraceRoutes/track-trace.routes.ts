@@ -28,6 +28,11 @@ import {
   getUserModules,
   getQualityCheckProjects,
   getTraceTraceDashboard,
+  getProjectCategoryTypes,
+  getProjectCategories,
+  createProjectCategory,
+  updateProjectCategory,
+  toggleProjectCategoryStatus,
 } from "../../controllers/trackTraceController/trackTrace.controller";
 
 import { 
@@ -111,6 +116,13 @@ router.post(
   upload.single("file"),
   uploadMachineExcel,
 );
+
+
+router.get("/project-categories/types", getProjectCategoryTypes);
+router.get("/project-categories/:vendor_id", getProjectCategories);
+router.post("/project-categories", createProjectCategory);
+router.put("/project-categories/:id", updateProjectCategory);
+router.patch("/project-categories/:id/status", toggleProjectCategoryStatus);
 
 
 // router.post(

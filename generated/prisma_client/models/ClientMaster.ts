@@ -264,10 +264,7 @@ export type ClientMasterWhereInput = {
   country?: Prisma.StringFilter<"ClientMaster"> | string
   pincode?: Prisma.StringFilter<"ClientMaster"> | string
   clientCode?: Prisma.StringFilter<"ClientMaster"> | string
-  boxes?: Prisma.BoxMasterListRelationFilter
   ledgers?: Prisma.LedgerListRelationFilter
-  details?: Prisma.ProjectDetailsListRelationFilter
-  items?: Prisma.ProjectItemsMasterListRelationFilter
   projects?: Prisma.ProjectMasterListRelationFilter
   scanItems?: Prisma.ScanAndPackItemListRelationFilter
 }
@@ -284,10 +281,7 @@ export type ClientMasterOrderByWithRelationInput = {
   country?: Prisma.SortOrder
   pincode?: Prisma.SortOrder
   clientCode?: Prisma.SortOrder
-  boxes?: Prisma.BoxMasterOrderByRelationAggregateInput
   ledgers?: Prisma.LedgerOrderByRelationAggregateInput
-  details?: Prisma.ProjectDetailsOrderByRelationAggregateInput
-  items?: Prisma.ProjectItemsMasterOrderByRelationAggregateInput
   projects?: Prisma.ProjectMasterOrderByRelationAggregateInput
   scanItems?: Prisma.ScanAndPackItemOrderByRelationAggregateInput
 }
@@ -307,10 +301,7 @@ export type ClientMasterWhereUniqueInput = Prisma.AtLeast<{
   country?: Prisma.StringFilter<"ClientMaster"> | string
   pincode?: Prisma.StringFilter<"ClientMaster"> | string
   clientCode?: Prisma.StringFilter<"ClientMaster"> | string
-  boxes?: Prisma.BoxMasterListRelationFilter
   ledgers?: Prisma.LedgerListRelationFilter
-  details?: Prisma.ProjectDetailsListRelationFilter
-  items?: Prisma.ProjectItemsMasterListRelationFilter
   projects?: Prisma.ProjectMasterListRelationFilter
   scanItems?: Prisma.ScanAndPackItemListRelationFilter
 }, "id">
@@ -362,10 +353,7 @@ export type ClientMasterCreateInput = {
   country: string
   pincode: string
   clientCode: string
-  boxes?: Prisma.BoxMasterCreateNestedManyWithoutClientInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutClientInput
   projects?: Prisma.ProjectMasterCreateNestedManyWithoutClientInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutClientInput
 }
@@ -382,10 +370,7 @@ export type ClientMasterUncheckedCreateInput = {
   country: string
   pincode: string
   clientCode: string
-  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutClientInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutClientInput
   projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutClientInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutClientInput
 }
@@ -401,10 +386,7 @@ export type ClientMasterUpdateInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   pincode?: Prisma.StringFieldUpdateOperationsInput | string
   clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUpdateManyWithoutClientNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUpdateManyWithoutClientNestedInput
   projects?: Prisma.ProjectMasterUpdateManyWithoutClientNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutClientNestedInput
 }
@@ -421,10 +403,7 @@ export type ClientMasterUncheckedUpdateInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   pincode?: Prisma.StringFieldUpdateOperationsInput | string
   clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutClientNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutClientNestedInput
   projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutClientNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutClientNestedInput
 }
@@ -546,48 +525,6 @@ export type ClientMasterUpdateOneWithoutProjectsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClientMasterUpdateToOneWithWhereWithoutProjectsInput, Prisma.ClientMasterUpdateWithoutProjectsInput>, Prisma.ClientMasterUncheckedUpdateWithoutProjectsInput>
 }
 
-export type ClientMasterCreateNestedOneWithoutDetailsInput = {
-  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutDetailsInput, Prisma.ClientMasterUncheckedCreateWithoutDetailsInput>
-  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutDetailsInput
-  connect?: Prisma.ClientMasterWhereUniqueInput
-}
-
-export type ClientMasterUpdateOneRequiredWithoutDetailsNestedInput = {
-  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutDetailsInput, Prisma.ClientMasterUncheckedCreateWithoutDetailsInput>
-  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutDetailsInput
-  upsert?: Prisma.ClientMasterUpsertWithoutDetailsInput
-  connect?: Prisma.ClientMasterWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ClientMasterUpdateToOneWithWhereWithoutDetailsInput, Prisma.ClientMasterUpdateWithoutDetailsInput>, Prisma.ClientMasterUncheckedUpdateWithoutDetailsInput>
-}
-
-export type ClientMasterCreateNestedOneWithoutItemsInput = {
-  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutItemsInput, Prisma.ClientMasterUncheckedCreateWithoutItemsInput>
-  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutItemsInput
-  connect?: Prisma.ClientMasterWhereUniqueInput
-}
-
-export type ClientMasterUpdateOneRequiredWithoutItemsNestedInput = {
-  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutItemsInput, Prisma.ClientMasterUncheckedCreateWithoutItemsInput>
-  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutItemsInput
-  upsert?: Prisma.ClientMasterUpsertWithoutItemsInput
-  connect?: Prisma.ClientMasterWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ClientMasterUpdateToOneWithWhereWithoutItemsInput, Prisma.ClientMasterUpdateWithoutItemsInput>, Prisma.ClientMasterUncheckedUpdateWithoutItemsInput>
-}
-
-export type ClientMasterCreateNestedOneWithoutBoxesInput = {
-  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutBoxesInput, Prisma.ClientMasterUncheckedCreateWithoutBoxesInput>
-  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutBoxesInput
-  connect?: Prisma.ClientMasterWhereUniqueInput
-}
-
-export type ClientMasterUpdateOneRequiredWithoutBoxesNestedInput = {
-  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutBoxesInput, Prisma.ClientMasterUncheckedCreateWithoutBoxesInput>
-  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutBoxesInput
-  upsert?: Prisma.ClientMasterUpsertWithoutBoxesInput
-  connect?: Prisma.ClientMasterWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ClientMasterUpdateToOneWithWhereWithoutBoxesInput, Prisma.ClientMasterUpdateWithoutBoxesInput>, Prisma.ClientMasterUncheckedUpdateWithoutBoxesInput>
-}
-
 export type ClientMasterCreateNestedOneWithoutScanItemsInput = {
   create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutScanItemsInput, Prisma.ClientMasterUncheckedCreateWithoutScanItemsInput>
   connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutScanItemsInput
@@ -629,10 +566,7 @@ export type ClientMasterCreateWithoutProjectsInput = {
   country: string
   pincode: string
   clientCode: string
-  boxes?: Prisma.BoxMasterCreateNestedManyWithoutClientInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutClientInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutClientInput
 }
 
@@ -648,10 +582,7 @@ export type ClientMasterUncheckedCreateWithoutProjectsInput = {
   country: string
   pincode: string
   clientCode: string
-  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutClientInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutClientInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutClientInput
 }
 
@@ -682,10 +613,7 @@ export type ClientMasterUpdateWithoutProjectsInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   pincode?: Prisma.StringFieldUpdateOperationsInput | string
   clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUpdateManyWithoutClientNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUpdateManyWithoutClientNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutClientNestedInput
 }
 
@@ -701,280 +629,7 @@ export type ClientMasterUncheckedUpdateWithoutProjectsInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   pincode?: Prisma.StringFieldUpdateOperationsInput | string
   clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutClientNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutClientNestedInput
-  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutClientNestedInput
-}
-
-export type ClientMasterCreateWithoutDetailsInput = {
-  name: string
-  contact: string
-  alt_contact?: string | null
-  email: string
-  address: string
-  city: string
-  state: string
-  country: string
-  pincode: string
-  clientCode: string
-  boxes?: Prisma.BoxMasterCreateNestedManyWithoutClientInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutClientInput
-  projects?: Prisma.ProjectMasterCreateNestedManyWithoutClientInput
-  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutClientInput
-}
-
-export type ClientMasterUncheckedCreateWithoutDetailsInput = {
-  id?: number
-  name: string
-  contact: string
-  alt_contact?: string | null
-  email: string
-  address: string
-  city: string
-  state: string
-  country: string
-  pincode: string
-  clientCode: string
-  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutClientInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutClientInput
-  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutClientInput
-  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutClientInput
-}
-
-export type ClientMasterCreateOrConnectWithoutDetailsInput = {
-  where: Prisma.ClientMasterWhereUniqueInput
-  create: Prisma.XOR<Prisma.ClientMasterCreateWithoutDetailsInput, Prisma.ClientMasterUncheckedCreateWithoutDetailsInput>
-}
-
-export type ClientMasterUpsertWithoutDetailsInput = {
-  update: Prisma.XOR<Prisma.ClientMasterUpdateWithoutDetailsInput, Prisma.ClientMasterUncheckedUpdateWithoutDetailsInput>
-  create: Prisma.XOR<Prisma.ClientMasterCreateWithoutDetailsInput, Prisma.ClientMasterUncheckedCreateWithoutDetailsInput>
-  where?: Prisma.ClientMasterWhereInput
-}
-
-export type ClientMasterUpdateToOneWithWhereWithoutDetailsInput = {
-  where?: Prisma.ClientMasterWhereInput
-  data: Prisma.XOR<Prisma.ClientMasterUpdateWithoutDetailsInput, Prisma.ClientMasterUncheckedUpdateWithoutDetailsInput>
-}
-
-export type ClientMasterUpdateWithoutDetailsInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  contact?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUpdateManyWithoutClientNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUpdateManyWithoutClientNestedInput
-  projects?: Prisma.ProjectMasterUpdateManyWithoutClientNestedInput
-  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutClientNestedInput
-}
-
-export type ClientMasterUncheckedUpdateWithoutDetailsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  contact?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutClientNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutClientNestedInput
-  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutClientNestedInput
-  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutClientNestedInput
-}
-
-export type ClientMasterCreateWithoutItemsInput = {
-  name: string
-  contact: string
-  alt_contact?: string | null
-  email: string
-  address: string
-  city: string
-  state: string
-  country: string
-  pincode: string
-  clientCode: string
-  boxes?: Prisma.BoxMasterCreateNestedManyWithoutClientInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsCreateNestedManyWithoutClientInput
-  projects?: Prisma.ProjectMasterCreateNestedManyWithoutClientInput
-  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutClientInput
-}
-
-export type ClientMasterUncheckedCreateWithoutItemsInput = {
-  id?: number
-  name: string
-  contact: string
-  alt_contact?: string | null
-  email: string
-  address: string
-  city: string
-  state: string
-  country: string
-  pincode: string
-  clientCode: string
-  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutClientInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutClientInput
-  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutClientInput
-  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutClientInput
-}
-
-export type ClientMasterCreateOrConnectWithoutItemsInput = {
-  where: Prisma.ClientMasterWhereUniqueInput
-  create: Prisma.XOR<Prisma.ClientMasterCreateWithoutItemsInput, Prisma.ClientMasterUncheckedCreateWithoutItemsInput>
-}
-
-export type ClientMasterUpsertWithoutItemsInput = {
-  update: Prisma.XOR<Prisma.ClientMasterUpdateWithoutItemsInput, Prisma.ClientMasterUncheckedUpdateWithoutItemsInput>
-  create: Prisma.XOR<Prisma.ClientMasterCreateWithoutItemsInput, Prisma.ClientMasterUncheckedCreateWithoutItemsInput>
-  where?: Prisma.ClientMasterWhereInput
-}
-
-export type ClientMasterUpdateToOneWithWhereWithoutItemsInput = {
-  where?: Prisma.ClientMasterWhereInput
-  data: Prisma.XOR<Prisma.ClientMasterUpdateWithoutItemsInput, Prisma.ClientMasterUncheckedUpdateWithoutItemsInput>
-}
-
-export type ClientMasterUpdateWithoutItemsInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  contact?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUpdateManyWithoutClientNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUpdateManyWithoutClientNestedInput
-  projects?: Prisma.ProjectMasterUpdateManyWithoutClientNestedInput
-  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutClientNestedInput
-}
-
-export type ClientMasterUncheckedUpdateWithoutItemsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  contact?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutClientNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutClientNestedInput
-  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutClientNestedInput
-  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutClientNestedInput
-}
-
-export type ClientMasterCreateWithoutBoxesInput = {
-  name: string
-  contact: string
-  alt_contact?: string | null
-  email: string
-  address: string
-  city: string
-  state: string
-  country: string
-  pincode: string
-  clientCode: string
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutClientInput
-  projects?: Prisma.ProjectMasterCreateNestedManyWithoutClientInput
-  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutClientInput
-}
-
-export type ClientMasterUncheckedCreateWithoutBoxesInput = {
-  id?: number
-  name: string
-  contact: string
-  alt_contact?: string | null
-  email: string
-  address: string
-  city: string
-  state: string
-  country: string
-  pincode: string
-  clientCode: string
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutClientInput
-  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutClientInput
-  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutClientInput
-}
-
-export type ClientMasterCreateOrConnectWithoutBoxesInput = {
-  where: Prisma.ClientMasterWhereUniqueInput
-  create: Prisma.XOR<Prisma.ClientMasterCreateWithoutBoxesInput, Prisma.ClientMasterUncheckedCreateWithoutBoxesInput>
-}
-
-export type ClientMasterUpsertWithoutBoxesInput = {
-  update: Prisma.XOR<Prisma.ClientMasterUpdateWithoutBoxesInput, Prisma.ClientMasterUncheckedUpdateWithoutBoxesInput>
-  create: Prisma.XOR<Prisma.ClientMasterCreateWithoutBoxesInput, Prisma.ClientMasterUncheckedCreateWithoutBoxesInput>
-  where?: Prisma.ClientMasterWhereInput
-}
-
-export type ClientMasterUpdateToOneWithWhereWithoutBoxesInput = {
-  where?: Prisma.ClientMasterWhereInput
-  data: Prisma.XOR<Prisma.ClientMasterUpdateWithoutBoxesInput, Prisma.ClientMasterUncheckedUpdateWithoutBoxesInput>
-}
-
-export type ClientMasterUpdateWithoutBoxesInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  contact?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  ledgers?: Prisma.LedgerUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUpdateManyWithoutClientNestedInput
-  projects?: Prisma.ProjectMasterUpdateManyWithoutClientNestedInput
-  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutClientNestedInput
-}
-
-export type ClientMasterUncheckedUpdateWithoutBoxesInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  contact?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutClientNestedInput
-  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutClientNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutClientNestedInput
 }
 
@@ -989,10 +644,7 @@ export type ClientMasterCreateWithoutScanItemsInput = {
   country: string
   pincode: string
   clientCode: string
-  boxes?: Prisma.BoxMasterCreateNestedManyWithoutClientInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutClientInput
   projects?: Prisma.ProjectMasterCreateNestedManyWithoutClientInput
 }
 
@@ -1008,10 +660,7 @@ export type ClientMasterUncheckedCreateWithoutScanItemsInput = {
   country: string
   pincode: string
   clientCode: string
-  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutClientInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutClientInput
   projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutClientInput
 }
 
@@ -1042,10 +691,7 @@ export type ClientMasterUpdateWithoutScanItemsInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   pincode?: Prisma.StringFieldUpdateOperationsInput | string
   clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUpdateManyWithoutClientNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUpdateManyWithoutClientNestedInput
   projects?: Prisma.ProjectMasterUpdateManyWithoutClientNestedInput
 }
 
@@ -1061,10 +707,7 @@ export type ClientMasterUncheckedUpdateWithoutScanItemsInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   pincode?: Prisma.StringFieldUpdateOperationsInput | string
   clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutClientNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutClientNestedInput
   projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutClientNestedInput
 }
 
@@ -1079,9 +722,6 @@ export type ClientMasterCreateWithoutLedgersInput = {
   country: string
   pincode: string
   clientCode: string
-  boxes?: Prisma.BoxMasterCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutClientInput
   projects?: Prisma.ProjectMasterCreateNestedManyWithoutClientInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutClientInput
 }
@@ -1098,9 +738,6 @@ export type ClientMasterUncheckedCreateWithoutLedgersInput = {
   country: string
   pincode: string
   clientCode: string
-  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutClientInput
   projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutClientInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutClientInput
 }
@@ -1132,9 +769,6 @@ export type ClientMasterUpdateWithoutLedgersInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   pincode?: Prisma.StringFieldUpdateOperationsInput | string
   clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUpdateManyWithoutClientNestedInput
   projects?: Prisma.ProjectMasterUpdateManyWithoutClientNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutClientNestedInput
 }
@@ -1151,9 +785,6 @@ export type ClientMasterUncheckedUpdateWithoutLedgersInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   pincode?: Prisma.StringFieldUpdateOperationsInput | string
   clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutClientNestedInput
   projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutClientNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutClientNestedInput
 }
@@ -1164,19 +795,13 @@ export type ClientMasterUncheckedUpdateWithoutLedgersInput = {
  */
 
 export type ClientMasterCountOutputType = {
-  boxes: number
   ledgers: number
-  details: number
-  items: number
   projects: number
   scanItems: number
 }
 
 export type ClientMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  boxes?: boolean | ClientMasterCountOutputTypeCountBoxesArgs
   ledgers?: boolean | ClientMasterCountOutputTypeCountLedgersArgs
-  details?: boolean | ClientMasterCountOutputTypeCountDetailsArgs
-  items?: boolean | ClientMasterCountOutputTypeCountItemsArgs
   projects?: boolean | ClientMasterCountOutputTypeCountProjectsArgs
   scanItems?: boolean | ClientMasterCountOutputTypeCountScanItemsArgs
 }
@@ -1194,29 +819,8 @@ export type ClientMasterCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types
 /**
  * ClientMasterCountOutputType without action
  */
-export type ClientMasterCountOutputTypeCountBoxesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.BoxMasterWhereInput
-}
-
-/**
- * ClientMasterCountOutputType without action
- */
 export type ClientMasterCountOutputTypeCountLedgersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LedgerWhereInput
-}
-
-/**
- * ClientMasterCountOutputType without action
- */
-export type ClientMasterCountOutputTypeCountDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ProjectDetailsWhereInput
-}
-
-/**
- * ClientMasterCountOutputType without action
- */
-export type ClientMasterCountOutputTypeCountItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ProjectItemsMasterWhereInput
 }
 
 /**
@@ -1246,10 +850,7 @@ export type ClientMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   country?: boolean
   pincode?: boolean
   clientCode?: boolean
-  boxes?: boolean | Prisma.ClientMaster$boxesArgs<ExtArgs>
   ledgers?: boolean | Prisma.ClientMaster$ledgersArgs<ExtArgs>
-  details?: boolean | Prisma.ClientMaster$detailsArgs<ExtArgs>
-  items?: boolean | Prisma.ClientMaster$itemsArgs<ExtArgs>
   projects?: boolean | Prisma.ClientMaster$projectsArgs<ExtArgs>
   scanItems?: boolean | Prisma.ClientMaster$scanItemsArgs<ExtArgs>
   _count?: boolean | Prisma.ClientMasterCountOutputTypeDefaultArgs<ExtArgs>
@@ -1299,10 +900,7 @@ export type ClientMasterSelectScalar = {
 
 export type ClientMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "contact" | "alt_contact" | "email" | "address" | "city" | "state" | "country" | "pincode" | "clientCode", ExtArgs["result"]["clientMaster"]>
 export type ClientMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  boxes?: boolean | Prisma.ClientMaster$boxesArgs<ExtArgs>
   ledgers?: boolean | Prisma.ClientMaster$ledgersArgs<ExtArgs>
-  details?: boolean | Prisma.ClientMaster$detailsArgs<ExtArgs>
-  items?: boolean | Prisma.ClientMaster$itemsArgs<ExtArgs>
   projects?: boolean | Prisma.ClientMaster$projectsArgs<ExtArgs>
   scanItems?: boolean | Prisma.ClientMaster$scanItemsArgs<ExtArgs>
   _count?: boolean | Prisma.ClientMasterCountOutputTypeDefaultArgs<ExtArgs>
@@ -1313,10 +911,7 @@ export type ClientMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types
 export type $ClientMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ClientMaster"
   objects: {
-    boxes: Prisma.$BoxMasterPayload<ExtArgs>[]
     ledgers: Prisma.$LedgerPayload<ExtArgs>[]
-    details: Prisma.$ProjectDetailsPayload<ExtArgs>[]
-    items: Prisma.$ProjectItemsMasterPayload<ExtArgs>[]
     projects: Prisma.$ProjectMasterPayload<ExtArgs>[]
     scanItems: Prisma.$ScanAndPackItemPayload<ExtArgs>[]
   }
@@ -1726,10 +1321,7 @@ readonly fields: ClientMasterFieldRefs;
  */
 export interface Prisma__ClientMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  boxes<T extends Prisma.ClientMaster$boxesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMaster$boxesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ledgers<T extends Prisma.ClientMaster$ledgersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMaster$ledgersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  details<T extends Prisma.ClientMaster$detailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMaster$detailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  items<T extends Prisma.ClientMaster$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMaster$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectItemsMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projects<T extends Prisma.ClientMaster$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMaster$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   scanItems<T extends Prisma.ClientMaster$scanItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMaster$scanItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScanAndPackItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -2160,30 +1752,6 @@ export type ClientMasterDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
- * ClientMaster.boxes
- */
-export type ClientMaster$boxesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the BoxMaster
-   */
-  select?: Prisma.BoxMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the BoxMaster
-   */
-  omit?: Prisma.BoxMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.BoxMasterInclude<ExtArgs> | null
-  where?: Prisma.BoxMasterWhereInput
-  orderBy?: Prisma.BoxMasterOrderByWithRelationInput | Prisma.BoxMasterOrderByWithRelationInput[]
-  cursor?: Prisma.BoxMasterWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.BoxMasterScalarFieldEnum | Prisma.BoxMasterScalarFieldEnum[]
-}
-
-/**
  * ClientMaster.ledgers
  */
 export type ClientMaster$ledgersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2205,54 +1773,6 @@ export type ClientMaster$ledgersArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.LedgerScalarFieldEnum | Prisma.LedgerScalarFieldEnum[]
-}
-
-/**
- * ClientMaster.details
- */
-export type ClientMaster$detailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ProjectDetails
-   */
-  select?: Prisma.ProjectDetailsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ProjectDetails
-   */
-  omit?: Prisma.ProjectDetailsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ProjectDetailsInclude<ExtArgs> | null
-  where?: Prisma.ProjectDetailsWhereInput
-  orderBy?: Prisma.ProjectDetailsOrderByWithRelationInput | Prisma.ProjectDetailsOrderByWithRelationInput[]
-  cursor?: Prisma.ProjectDetailsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ProjectDetailsScalarFieldEnum | Prisma.ProjectDetailsScalarFieldEnum[]
-}
-
-/**
- * ClientMaster.items
- */
-export type ClientMaster$itemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ProjectItemsMaster
-   */
-  select?: Prisma.ProjectItemsMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ProjectItemsMaster
-   */
-  omit?: Prisma.ProjectItemsMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ProjectItemsMasterInclude<ExtArgs> | null
-  where?: Prisma.ProjectItemsMasterWhereInput
-  orderBy?: Prisma.ProjectItemsMasterOrderByWithRelationInput | Prisma.ProjectItemsMasterOrderByWithRelationInput[]
-  cursor?: Prisma.ProjectItemsMasterWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ProjectItemsMasterScalarFieldEnum | Prisma.ProjectItemsMasterScalarFieldEnum[]
 }
 
 /**

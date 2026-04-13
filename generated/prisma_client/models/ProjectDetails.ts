@@ -30,7 +30,7 @@ export type ProjectDetailsAvgAggregateOutputType = {
   id: number | null
   project_id: number | null
   vendor_id: number | null
-  client_id: number | null
+  lead_id: number | null
   total_items: number | null
   total_packed: number | null
   total_unpacked: number | null
@@ -40,7 +40,7 @@ export type ProjectDetailsSumAggregateOutputType = {
   id: number | null
   project_id: number | null
   vendor_id: number | null
-  client_id: number | null
+  lead_id: number | null
   total_items: number | null
   total_packed: number | null
   total_unpacked: number | null
@@ -50,7 +50,7 @@ export type ProjectDetailsMinAggregateOutputType = {
   id: number | null
   project_id: number | null
   vendor_id: number | null
-  client_id: number | null
+  lead_id: number | null
   total_items: number | null
   total_packed: number | null
   total_unpacked: number | null
@@ -65,7 +65,7 @@ export type ProjectDetailsMaxAggregateOutputType = {
   id: number | null
   project_id: number | null
   vendor_id: number | null
-  client_id: number | null
+  lead_id: number | null
   total_items: number | null
   total_packed: number | null
   total_unpacked: number | null
@@ -80,7 +80,7 @@ export type ProjectDetailsCountAggregateOutputType = {
   id: number
   project_id: number
   vendor_id: number
-  client_id: number
+  lead_id: number
   total_items: number
   total_packed: number
   total_unpacked: number
@@ -97,7 +97,7 @@ export type ProjectDetailsAvgAggregateInputType = {
   id?: true
   project_id?: true
   vendor_id?: true
-  client_id?: true
+  lead_id?: true
   total_items?: true
   total_packed?: true
   total_unpacked?: true
@@ -107,7 +107,7 @@ export type ProjectDetailsSumAggregateInputType = {
   id?: true
   project_id?: true
   vendor_id?: true
-  client_id?: true
+  lead_id?: true
   total_items?: true
   total_packed?: true
   total_unpacked?: true
@@ -117,7 +117,7 @@ export type ProjectDetailsMinAggregateInputType = {
   id?: true
   project_id?: true
   vendor_id?: true
-  client_id?: true
+  lead_id?: true
   total_items?: true
   total_packed?: true
   total_unpacked?: true
@@ -132,7 +132,7 @@ export type ProjectDetailsMaxAggregateInputType = {
   id?: true
   project_id?: true
   vendor_id?: true
-  client_id?: true
+  lead_id?: true
   total_items?: true
   total_packed?: true
   total_unpacked?: true
@@ -147,7 +147,7 @@ export type ProjectDetailsCountAggregateInputType = {
   id?: true
   project_id?: true
   vendor_id?: true
-  client_id?: true
+  lead_id?: true
   total_items?: true
   total_packed?: true
   total_unpacked?: true
@@ -249,12 +249,12 @@ export type ProjectDetailsGroupByOutputType = {
   id: number
   project_id: number
   vendor_id: number
-  client_id: number
+  lead_id: number | null
   total_items: number
   total_packed: number
   total_unpacked: number
   actual_completion_date: Date | null
-  estimated_completion_date: Date
+  estimated_completion_date: Date | null
   start_date: Date
   is_grouping: boolean
   room_name: string
@@ -287,17 +287,17 @@ export type ProjectDetailsWhereInput = {
   id?: Prisma.IntFilter<"ProjectDetails"> | number
   project_id?: Prisma.IntFilter<"ProjectDetails"> | number
   vendor_id?: Prisma.IntFilter<"ProjectDetails"> | number
-  client_id?: Prisma.IntFilter<"ProjectDetails"> | number
+  lead_id?: Prisma.IntNullableFilter<"ProjectDetails"> | number | null
   total_items?: Prisma.IntFilter<"ProjectDetails"> | number
   total_packed?: Prisma.IntFilter<"ProjectDetails"> | number
   total_unpacked?: Prisma.IntFilter<"ProjectDetails"> | number
   actual_completion_date?: Prisma.DateTimeNullableFilter<"ProjectDetails"> | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFilter<"ProjectDetails"> | Date | string
+  estimated_completion_date?: Prisma.DateTimeNullableFilter<"ProjectDetails"> | Date | string | null
   start_date?: Prisma.DateTimeFilter<"ProjectDetails"> | Date | string
   is_grouping?: Prisma.BoolFilter<"ProjectDetails"> | boolean
   room_name?: Prisma.StringFilter<"ProjectDetails"> | string
   boxes?: Prisma.BoxMasterListRelationFilter
-  client?: Prisma.XOR<Prisma.ClientMasterScalarRelationFilter, Prisma.ClientMasterWhereInput>
+  leadMaster?: Prisma.XOR<Prisma.LeadMasterNullableScalarRelationFilter, Prisma.LeadMasterWhereInput> | null
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   items?: Prisma.ProjectItemsMasterListRelationFilter
@@ -308,17 +308,17 @@ export type ProjectDetailsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
   total_items?: Prisma.SortOrder
   total_packed?: Prisma.SortOrder
   total_unpacked?: Prisma.SortOrder
   actual_completion_date?: Prisma.SortOrderInput | Prisma.SortOrder
-  estimated_completion_date?: Prisma.SortOrder
+  estimated_completion_date?: Prisma.SortOrderInput | Prisma.SortOrder
   start_date?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
   room_name?: Prisma.SortOrder
   boxes?: Prisma.BoxMasterOrderByRelationAggregateInput
-  client?: Prisma.ClientMasterOrderByWithRelationInput
+  leadMaster?: Prisma.LeadMasterOrderByWithRelationInput
   project?: Prisma.ProjectMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   items?: Prisma.ProjectItemsMasterOrderByRelationAggregateInput
@@ -332,17 +332,17 @@ export type ProjectDetailsWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ProjectDetailsWhereInput | Prisma.ProjectDetailsWhereInput[]
   project_id?: Prisma.IntFilter<"ProjectDetails"> | number
   vendor_id?: Prisma.IntFilter<"ProjectDetails"> | number
-  client_id?: Prisma.IntFilter<"ProjectDetails"> | number
+  lead_id?: Prisma.IntNullableFilter<"ProjectDetails"> | number | null
   total_items?: Prisma.IntFilter<"ProjectDetails"> | number
   total_packed?: Prisma.IntFilter<"ProjectDetails"> | number
   total_unpacked?: Prisma.IntFilter<"ProjectDetails"> | number
   actual_completion_date?: Prisma.DateTimeNullableFilter<"ProjectDetails"> | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFilter<"ProjectDetails"> | Date | string
+  estimated_completion_date?: Prisma.DateTimeNullableFilter<"ProjectDetails"> | Date | string | null
   start_date?: Prisma.DateTimeFilter<"ProjectDetails"> | Date | string
   is_grouping?: Prisma.BoolFilter<"ProjectDetails"> | boolean
   room_name?: Prisma.StringFilter<"ProjectDetails"> | string
   boxes?: Prisma.BoxMasterListRelationFilter
-  client?: Prisma.XOR<Prisma.ClientMasterScalarRelationFilter, Prisma.ClientMasterWhereInput>
+  leadMaster?: Prisma.XOR<Prisma.LeadMasterNullableScalarRelationFilter, Prisma.LeadMasterWhereInput> | null
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   items?: Prisma.ProjectItemsMasterListRelationFilter
@@ -353,12 +353,12 @@ export type ProjectDetailsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
   total_items?: Prisma.SortOrder
   total_packed?: Prisma.SortOrder
   total_unpacked?: Prisma.SortOrder
   actual_completion_date?: Prisma.SortOrderInput | Prisma.SortOrder
-  estimated_completion_date?: Prisma.SortOrder
+  estimated_completion_date?: Prisma.SortOrderInput | Prisma.SortOrder
   start_date?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
   room_name?: Prisma.SortOrder
@@ -376,12 +376,12 @@ export type ProjectDetailsScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"ProjectDetails"> | number
   project_id?: Prisma.IntWithAggregatesFilter<"ProjectDetails"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"ProjectDetails"> | number
-  client_id?: Prisma.IntWithAggregatesFilter<"ProjectDetails"> | number
+  lead_id?: Prisma.IntNullableWithAggregatesFilter<"ProjectDetails"> | number | null
   total_items?: Prisma.IntWithAggregatesFilter<"ProjectDetails"> | number
   total_packed?: Prisma.IntWithAggregatesFilter<"ProjectDetails"> | number
   total_unpacked?: Prisma.IntWithAggregatesFilter<"ProjectDetails"> | number
   actual_completion_date?: Prisma.DateTimeNullableWithAggregatesFilter<"ProjectDetails"> | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeWithAggregatesFilter<"ProjectDetails"> | Date | string
+  estimated_completion_date?: Prisma.DateTimeNullableWithAggregatesFilter<"ProjectDetails"> | Date | string | null
   start_date?: Prisma.DateTimeWithAggregatesFilter<"ProjectDetails"> | Date | string
   is_grouping?: Prisma.BoolWithAggregatesFilter<"ProjectDetails"> | boolean
   room_name?: Prisma.StringWithAggregatesFilter<"ProjectDetails"> | string
@@ -392,12 +392,12 @@ export type ProjectDetailsCreateInput = {
   total_packed?: number
   total_unpacked?: number
   actual_completion_date?: Date | string | null
-  estimated_completion_date: Date | string
+  estimated_completion_date?: Date | string | null
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutDetailsInput
-  client: Prisma.ClientMasterCreateNestedOneWithoutDetailsInput
+  leadMaster?: Prisma.LeadMasterCreateNestedOneWithoutProjectDetailsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutDetailsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectDetailsInput
   items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutDetailsInput
@@ -408,12 +408,12 @@ export type ProjectDetailsUncheckedCreateInput = {
   id?: number
   project_id: number
   vendor_id: number
-  client_id: number
+  lead_id?: number | null
   total_items?: number
   total_packed?: number
   total_unpacked?: number
   actual_completion_date?: Date | string | null
-  estimated_completion_date: Date | string
+  estimated_completion_date?: Date | string | null
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
@@ -427,12 +427,12 @@ export type ProjectDetailsUpdateInput = {
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
   actual_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUpdateManyWithoutDetailsNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutDetailsNestedInput
+  leadMaster?: Prisma.LeadMasterUpdateOneWithoutProjectDetailsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutDetailsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectDetailsNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutDetailsNestedInput
@@ -443,12 +443,12 @@ export type ProjectDetailsUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_items?: Prisma.IntFieldUpdateOperationsInput | number
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
   actual_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -461,12 +461,12 @@ export type ProjectDetailsCreateManyInput = {
   id?: number
   project_id: number
   vendor_id: number
-  client_id: number
+  lead_id?: number | null
   total_items?: number
   total_packed?: number
   total_unpacked?: number
   actual_completion_date?: Date | string | null
-  estimated_completion_date: Date | string
+  estimated_completion_date?: Date | string | null
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
@@ -477,7 +477,7 @@ export type ProjectDetailsUpdateManyMutationInput = {
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
   actual_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -487,12 +487,12 @@ export type ProjectDetailsUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_items?: Prisma.IntFieldUpdateOperationsInput | number
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
   actual_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -512,7 +512,7 @@ export type ProjectDetailsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
   total_items?: Prisma.SortOrder
   total_packed?: Prisma.SortOrder
   total_unpacked?: Prisma.SortOrder
@@ -527,7 +527,7 @@ export type ProjectDetailsAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
   total_items?: Prisma.SortOrder
   total_packed?: Prisma.SortOrder
   total_unpacked?: Prisma.SortOrder
@@ -537,7 +537,7 @@ export type ProjectDetailsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
   total_items?: Prisma.SortOrder
   total_packed?: Prisma.SortOrder
   total_unpacked?: Prisma.SortOrder
@@ -552,7 +552,7 @@ export type ProjectDetailsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
   total_items?: Prisma.SortOrder
   total_packed?: Prisma.SortOrder
   total_unpacked?: Prisma.SortOrder
@@ -567,7 +567,7 @@ export type ProjectDetailsSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
   total_items?: Prisma.SortOrder
   total_packed?: Prisma.SortOrder
   total_unpacked?: Prisma.SortOrder
@@ -708,45 +708,45 @@ export type ProjectDetailsUpdateOneRequiredWithoutScanItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectDetailsUpdateToOneWithWhereWithoutScanItemsInput, Prisma.ProjectDetailsUpdateWithoutScanItemsInput>, Prisma.ProjectDetailsUncheckedUpdateWithoutScanItemsInput>
 }
 
-export type ProjectDetailsCreateNestedManyWithoutClientInput = {
-  create?: Prisma.XOR<Prisma.ProjectDetailsCreateWithoutClientInput, Prisma.ProjectDetailsUncheckedCreateWithoutClientInput> | Prisma.ProjectDetailsCreateWithoutClientInput[] | Prisma.ProjectDetailsUncheckedCreateWithoutClientInput[]
-  connectOrCreate?: Prisma.ProjectDetailsCreateOrConnectWithoutClientInput | Prisma.ProjectDetailsCreateOrConnectWithoutClientInput[]
-  createMany?: Prisma.ProjectDetailsCreateManyClientInputEnvelope
+export type ProjectDetailsCreateNestedManyWithoutLeadMasterInput = {
+  create?: Prisma.XOR<Prisma.ProjectDetailsCreateWithoutLeadMasterInput, Prisma.ProjectDetailsUncheckedCreateWithoutLeadMasterInput> | Prisma.ProjectDetailsCreateWithoutLeadMasterInput[] | Prisma.ProjectDetailsUncheckedCreateWithoutLeadMasterInput[]
+  connectOrCreate?: Prisma.ProjectDetailsCreateOrConnectWithoutLeadMasterInput | Prisma.ProjectDetailsCreateOrConnectWithoutLeadMasterInput[]
+  createMany?: Prisma.ProjectDetailsCreateManyLeadMasterInputEnvelope
   connect?: Prisma.ProjectDetailsWhereUniqueInput | Prisma.ProjectDetailsWhereUniqueInput[]
 }
 
-export type ProjectDetailsUncheckedCreateNestedManyWithoutClientInput = {
-  create?: Prisma.XOR<Prisma.ProjectDetailsCreateWithoutClientInput, Prisma.ProjectDetailsUncheckedCreateWithoutClientInput> | Prisma.ProjectDetailsCreateWithoutClientInput[] | Prisma.ProjectDetailsUncheckedCreateWithoutClientInput[]
-  connectOrCreate?: Prisma.ProjectDetailsCreateOrConnectWithoutClientInput | Prisma.ProjectDetailsCreateOrConnectWithoutClientInput[]
-  createMany?: Prisma.ProjectDetailsCreateManyClientInputEnvelope
+export type ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput = {
+  create?: Prisma.XOR<Prisma.ProjectDetailsCreateWithoutLeadMasterInput, Prisma.ProjectDetailsUncheckedCreateWithoutLeadMasterInput> | Prisma.ProjectDetailsCreateWithoutLeadMasterInput[] | Prisma.ProjectDetailsUncheckedCreateWithoutLeadMasterInput[]
+  connectOrCreate?: Prisma.ProjectDetailsCreateOrConnectWithoutLeadMasterInput | Prisma.ProjectDetailsCreateOrConnectWithoutLeadMasterInput[]
+  createMany?: Prisma.ProjectDetailsCreateManyLeadMasterInputEnvelope
   connect?: Prisma.ProjectDetailsWhereUniqueInput | Prisma.ProjectDetailsWhereUniqueInput[]
 }
 
-export type ProjectDetailsUpdateManyWithoutClientNestedInput = {
-  create?: Prisma.XOR<Prisma.ProjectDetailsCreateWithoutClientInput, Prisma.ProjectDetailsUncheckedCreateWithoutClientInput> | Prisma.ProjectDetailsCreateWithoutClientInput[] | Prisma.ProjectDetailsUncheckedCreateWithoutClientInput[]
-  connectOrCreate?: Prisma.ProjectDetailsCreateOrConnectWithoutClientInput | Prisma.ProjectDetailsCreateOrConnectWithoutClientInput[]
-  upsert?: Prisma.ProjectDetailsUpsertWithWhereUniqueWithoutClientInput | Prisma.ProjectDetailsUpsertWithWhereUniqueWithoutClientInput[]
-  createMany?: Prisma.ProjectDetailsCreateManyClientInputEnvelope
+export type ProjectDetailsUpdateManyWithoutLeadMasterNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectDetailsCreateWithoutLeadMasterInput, Prisma.ProjectDetailsUncheckedCreateWithoutLeadMasterInput> | Prisma.ProjectDetailsCreateWithoutLeadMasterInput[] | Prisma.ProjectDetailsUncheckedCreateWithoutLeadMasterInput[]
+  connectOrCreate?: Prisma.ProjectDetailsCreateOrConnectWithoutLeadMasterInput | Prisma.ProjectDetailsCreateOrConnectWithoutLeadMasterInput[]
+  upsert?: Prisma.ProjectDetailsUpsertWithWhereUniqueWithoutLeadMasterInput | Prisma.ProjectDetailsUpsertWithWhereUniqueWithoutLeadMasterInput[]
+  createMany?: Prisma.ProjectDetailsCreateManyLeadMasterInputEnvelope
   set?: Prisma.ProjectDetailsWhereUniqueInput | Prisma.ProjectDetailsWhereUniqueInput[]
   disconnect?: Prisma.ProjectDetailsWhereUniqueInput | Prisma.ProjectDetailsWhereUniqueInput[]
   delete?: Prisma.ProjectDetailsWhereUniqueInput | Prisma.ProjectDetailsWhereUniqueInput[]
   connect?: Prisma.ProjectDetailsWhereUniqueInput | Prisma.ProjectDetailsWhereUniqueInput[]
-  update?: Prisma.ProjectDetailsUpdateWithWhereUniqueWithoutClientInput | Prisma.ProjectDetailsUpdateWithWhereUniqueWithoutClientInput[]
-  updateMany?: Prisma.ProjectDetailsUpdateManyWithWhereWithoutClientInput | Prisma.ProjectDetailsUpdateManyWithWhereWithoutClientInput[]
+  update?: Prisma.ProjectDetailsUpdateWithWhereUniqueWithoutLeadMasterInput | Prisma.ProjectDetailsUpdateWithWhereUniqueWithoutLeadMasterInput[]
+  updateMany?: Prisma.ProjectDetailsUpdateManyWithWhereWithoutLeadMasterInput | Prisma.ProjectDetailsUpdateManyWithWhereWithoutLeadMasterInput[]
   deleteMany?: Prisma.ProjectDetailsScalarWhereInput | Prisma.ProjectDetailsScalarWhereInput[]
 }
 
-export type ProjectDetailsUncheckedUpdateManyWithoutClientNestedInput = {
-  create?: Prisma.XOR<Prisma.ProjectDetailsCreateWithoutClientInput, Prisma.ProjectDetailsUncheckedCreateWithoutClientInput> | Prisma.ProjectDetailsCreateWithoutClientInput[] | Prisma.ProjectDetailsUncheckedCreateWithoutClientInput[]
-  connectOrCreate?: Prisma.ProjectDetailsCreateOrConnectWithoutClientInput | Prisma.ProjectDetailsCreateOrConnectWithoutClientInput[]
-  upsert?: Prisma.ProjectDetailsUpsertWithWhereUniqueWithoutClientInput | Prisma.ProjectDetailsUpsertWithWhereUniqueWithoutClientInput[]
-  createMany?: Prisma.ProjectDetailsCreateManyClientInputEnvelope
+export type ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectDetailsCreateWithoutLeadMasterInput, Prisma.ProjectDetailsUncheckedCreateWithoutLeadMasterInput> | Prisma.ProjectDetailsCreateWithoutLeadMasterInput[] | Prisma.ProjectDetailsUncheckedCreateWithoutLeadMasterInput[]
+  connectOrCreate?: Prisma.ProjectDetailsCreateOrConnectWithoutLeadMasterInput | Prisma.ProjectDetailsCreateOrConnectWithoutLeadMasterInput[]
+  upsert?: Prisma.ProjectDetailsUpsertWithWhereUniqueWithoutLeadMasterInput | Prisma.ProjectDetailsUpsertWithWhereUniqueWithoutLeadMasterInput[]
+  createMany?: Prisma.ProjectDetailsCreateManyLeadMasterInputEnvelope
   set?: Prisma.ProjectDetailsWhereUniqueInput | Prisma.ProjectDetailsWhereUniqueInput[]
   disconnect?: Prisma.ProjectDetailsWhereUniqueInput | Prisma.ProjectDetailsWhereUniqueInput[]
   delete?: Prisma.ProjectDetailsWhereUniqueInput | Prisma.ProjectDetailsWhereUniqueInput[]
   connect?: Prisma.ProjectDetailsWhereUniqueInput | Prisma.ProjectDetailsWhereUniqueInput[]
-  update?: Prisma.ProjectDetailsUpdateWithWhereUniqueWithoutClientInput | Prisma.ProjectDetailsUpdateWithWhereUniqueWithoutClientInput[]
-  updateMany?: Prisma.ProjectDetailsUpdateManyWithWhereWithoutClientInput | Prisma.ProjectDetailsUpdateManyWithWhereWithoutClientInput[]
+  update?: Prisma.ProjectDetailsUpdateWithWhereUniqueWithoutLeadMasterInput | Prisma.ProjectDetailsUpdateWithWhereUniqueWithoutLeadMasterInput[]
+  updateMany?: Prisma.ProjectDetailsUpdateManyWithWhereWithoutLeadMasterInput | Prisma.ProjectDetailsUpdateManyWithWhereWithoutLeadMasterInput[]
   deleteMany?: Prisma.ProjectDetailsScalarWhereInput | Prisma.ProjectDetailsScalarWhereInput[]
 }
 
@@ -755,12 +755,12 @@ export type ProjectDetailsCreateWithoutVendorInput = {
   total_packed?: number
   total_unpacked?: number
   actual_completion_date?: Date | string | null
-  estimated_completion_date: Date | string
+  estimated_completion_date?: Date | string | null
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutDetailsInput
-  client: Prisma.ClientMasterCreateNestedOneWithoutDetailsInput
+  leadMaster?: Prisma.LeadMasterCreateNestedOneWithoutProjectDetailsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutDetailsInput
   items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutDetailsInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutDetailsInput
@@ -769,12 +769,12 @@ export type ProjectDetailsCreateWithoutVendorInput = {
 export type ProjectDetailsUncheckedCreateWithoutVendorInput = {
   id?: number
   project_id: number
-  client_id: number
+  lead_id?: number | null
   total_items?: number
   total_packed?: number
   total_unpacked?: number
   actual_completion_date?: Date | string | null
-  estimated_completion_date: Date | string
+  estimated_completion_date?: Date | string | null
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
@@ -816,12 +816,12 @@ export type ProjectDetailsScalarWhereInput = {
   id?: Prisma.IntFilter<"ProjectDetails"> | number
   project_id?: Prisma.IntFilter<"ProjectDetails"> | number
   vendor_id?: Prisma.IntFilter<"ProjectDetails"> | number
-  client_id?: Prisma.IntFilter<"ProjectDetails"> | number
+  lead_id?: Prisma.IntNullableFilter<"ProjectDetails"> | number | null
   total_items?: Prisma.IntFilter<"ProjectDetails"> | number
   total_packed?: Prisma.IntFilter<"ProjectDetails"> | number
   total_unpacked?: Prisma.IntFilter<"ProjectDetails"> | number
   actual_completion_date?: Prisma.DateTimeNullableFilter<"ProjectDetails"> | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFilter<"ProjectDetails"> | Date | string
+  estimated_completion_date?: Prisma.DateTimeNullableFilter<"ProjectDetails"> | Date | string | null
   start_date?: Prisma.DateTimeFilter<"ProjectDetails"> | Date | string
   is_grouping?: Prisma.BoolFilter<"ProjectDetails"> | boolean
   room_name?: Prisma.StringFilter<"ProjectDetails"> | string
@@ -832,12 +832,12 @@ export type ProjectDetailsCreateWithoutProjectInput = {
   total_packed?: number
   total_unpacked?: number
   actual_completion_date?: Date | string | null
-  estimated_completion_date: Date | string
+  estimated_completion_date?: Date | string | null
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutDetailsInput
-  client: Prisma.ClientMasterCreateNestedOneWithoutDetailsInput
+  leadMaster?: Prisma.LeadMasterCreateNestedOneWithoutProjectDetailsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectDetailsInput
   items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutDetailsInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutDetailsInput
@@ -846,12 +846,12 @@ export type ProjectDetailsCreateWithoutProjectInput = {
 export type ProjectDetailsUncheckedCreateWithoutProjectInput = {
   id?: number
   vendor_id: number
-  client_id: number
+  lead_id?: number | null
   total_items?: number
   total_packed?: number
   total_unpacked?: number
   actual_completion_date?: Date | string | null
-  estimated_completion_date: Date | string
+  estimated_completion_date?: Date | string | null
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
@@ -891,12 +891,12 @@ export type ProjectDetailsCreateWithoutItemsInput = {
   total_packed?: number
   total_unpacked?: number
   actual_completion_date?: Date | string | null
-  estimated_completion_date: Date | string
+  estimated_completion_date?: Date | string | null
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutDetailsInput
-  client: Prisma.ClientMasterCreateNestedOneWithoutDetailsInput
+  leadMaster?: Prisma.LeadMasterCreateNestedOneWithoutProjectDetailsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutDetailsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectDetailsInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutDetailsInput
@@ -906,12 +906,12 @@ export type ProjectDetailsUncheckedCreateWithoutItemsInput = {
   id?: number
   project_id: number
   vendor_id: number
-  client_id: number
+  lead_id?: number | null
   total_items?: number
   total_packed?: number
   total_unpacked?: number
   actual_completion_date?: Date | string | null
-  estimated_completion_date: Date | string
+  estimated_completion_date?: Date | string | null
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
@@ -940,12 +940,12 @@ export type ProjectDetailsUpdateWithoutItemsInput = {
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
   actual_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUpdateManyWithoutDetailsNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutDetailsNestedInput
+  leadMaster?: Prisma.LeadMasterUpdateOneWithoutProjectDetailsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutDetailsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectDetailsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutDetailsNestedInput
@@ -955,12 +955,12 @@ export type ProjectDetailsUncheckedUpdateWithoutItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_items?: Prisma.IntFieldUpdateOperationsInput | number
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
   actual_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -973,11 +973,11 @@ export type ProjectDetailsCreateWithoutBoxesInput = {
   total_packed?: number
   total_unpacked?: number
   actual_completion_date?: Date | string | null
-  estimated_completion_date: Date | string
+  estimated_completion_date?: Date | string | null
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
-  client: Prisma.ClientMasterCreateNestedOneWithoutDetailsInput
+  leadMaster?: Prisma.LeadMasterCreateNestedOneWithoutProjectDetailsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutDetailsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectDetailsInput
   items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutDetailsInput
@@ -988,12 +988,12 @@ export type ProjectDetailsUncheckedCreateWithoutBoxesInput = {
   id?: number
   project_id: number
   vendor_id: number
-  client_id: number
+  lead_id?: number | null
   total_items?: number
   total_packed?: number
   total_unpacked?: number
   actual_completion_date?: Date | string | null
-  estimated_completion_date: Date | string
+  estimated_completion_date?: Date | string | null
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
@@ -1022,11 +1022,11 @@ export type ProjectDetailsUpdateWithoutBoxesInput = {
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
   actual_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutDetailsNestedInput
+  leadMaster?: Prisma.LeadMasterUpdateOneWithoutProjectDetailsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutDetailsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectDetailsNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutDetailsNestedInput
@@ -1037,12 +1037,12 @@ export type ProjectDetailsUncheckedUpdateWithoutBoxesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_items?: Prisma.IntFieldUpdateOperationsInput | number
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
   actual_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1055,12 +1055,12 @@ export type ProjectDetailsCreateWithoutScanItemsInput = {
   total_packed?: number
   total_unpacked?: number
   actual_completion_date?: Date | string | null
-  estimated_completion_date: Date | string
+  estimated_completion_date?: Date | string | null
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutDetailsInput
-  client: Prisma.ClientMasterCreateNestedOneWithoutDetailsInput
+  leadMaster?: Prisma.LeadMasterCreateNestedOneWithoutProjectDetailsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutDetailsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectDetailsInput
   items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutDetailsInput
@@ -1070,12 +1070,12 @@ export type ProjectDetailsUncheckedCreateWithoutScanItemsInput = {
   id?: number
   project_id: number
   vendor_id: number
-  client_id: number
+  lead_id?: number | null
   total_items?: number
   total_packed?: number
   total_unpacked?: number
   actual_completion_date?: Date | string | null
-  estimated_completion_date: Date | string
+  estimated_completion_date?: Date | string | null
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
@@ -1104,12 +1104,12 @@ export type ProjectDetailsUpdateWithoutScanItemsInput = {
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
   actual_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUpdateManyWithoutDetailsNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutDetailsNestedInput
+  leadMaster?: Prisma.LeadMasterUpdateOneWithoutProjectDetailsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutDetailsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectDetailsNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutDetailsNestedInput
@@ -1119,12 +1119,12 @@ export type ProjectDetailsUncheckedUpdateWithoutScanItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_items?: Prisma.IntFieldUpdateOperationsInput | number
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
   actual_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1132,12 +1132,12 @@ export type ProjectDetailsUncheckedUpdateWithoutScanItemsInput = {
   items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutDetailsNestedInput
 }
 
-export type ProjectDetailsCreateWithoutClientInput = {
+export type ProjectDetailsCreateWithoutLeadMasterInput = {
   total_items?: number
   total_packed?: number
   total_unpacked?: number
   actual_completion_date?: Date | string | null
-  estimated_completion_date: Date | string
+  estimated_completion_date?: Date | string | null
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
@@ -1148,7 +1148,7 @@ export type ProjectDetailsCreateWithoutClientInput = {
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutDetailsInput
 }
 
-export type ProjectDetailsUncheckedCreateWithoutClientInput = {
+export type ProjectDetailsUncheckedCreateWithoutLeadMasterInput = {
   id?: number
   project_id: number
   vendor_id: number
@@ -1156,7 +1156,7 @@ export type ProjectDetailsUncheckedCreateWithoutClientInput = {
   total_packed?: number
   total_unpacked?: number
   actual_completion_date?: Date | string | null
-  estimated_completion_date: Date | string
+  estimated_completion_date?: Date | string | null
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
@@ -1165,41 +1165,41 @@ export type ProjectDetailsUncheckedCreateWithoutClientInput = {
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutDetailsInput
 }
 
-export type ProjectDetailsCreateOrConnectWithoutClientInput = {
+export type ProjectDetailsCreateOrConnectWithoutLeadMasterInput = {
   where: Prisma.ProjectDetailsWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProjectDetailsCreateWithoutClientInput, Prisma.ProjectDetailsUncheckedCreateWithoutClientInput>
+  create: Prisma.XOR<Prisma.ProjectDetailsCreateWithoutLeadMasterInput, Prisma.ProjectDetailsUncheckedCreateWithoutLeadMasterInput>
 }
 
-export type ProjectDetailsCreateManyClientInputEnvelope = {
-  data: Prisma.ProjectDetailsCreateManyClientInput | Prisma.ProjectDetailsCreateManyClientInput[]
+export type ProjectDetailsCreateManyLeadMasterInputEnvelope = {
+  data: Prisma.ProjectDetailsCreateManyLeadMasterInput | Prisma.ProjectDetailsCreateManyLeadMasterInput[]
   skipDuplicates?: boolean
 }
 
-export type ProjectDetailsUpsertWithWhereUniqueWithoutClientInput = {
+export type ProjectDetailsUpsertWithWhereUniqueWithoutLeadMasterInput = {
   where: Prisma.ProjectDetailsWhereUniqueInput
-  update: Prisma.XOR<Prisma.ProjectDetailsUpdateWithoutClientInput, Prisma.ProjectDetailsUncheckedUpdateWithoutClientInput>
-  create: Prisma.XOR<Prisma.ProjectDetailsCreateWithoutClientInput, Prisma.ProjectDetailsUncheckedCreateWithoutClientInput>
+  update: Prisma.XOR<Prisma.ProjectDetailsUpdateWithoutLeadMasterInput, Prisma.ProjectDetailsUncheckedUpdateWithoutLeadMasterInput>
+  create: Prisma.XOR<Prisma.ProjectDetailsCreateWithoutLeadMasterInput, Prisma.ProjectDetailsUncheckedCreateWithoutLeadMasterInput>
 }
 
-export type ProjectDetailsUpdateWithWhereUniqueWithoutClientInput = {
+export type ProjectDetailsUpdateWithWhereUniqueWithoutLeadMasterInput = {
   where: Prisma.ProjectDetailsWhereUniqueInput
-  data: Prisma.XOR<Prisma.ProjectDetailsUpdateWithoutClientInput, Prisma.ProjectDetailsUncheckedUpdateWithoutClientInput>
+  data: Prisma.XOR<Prisma.ProjectDetailsUpdateWithoutLeadMasterInput, Prisma.ProjectDetailsUncheckedUpdateWithoutLeadMasterInput>
 }
 
-export type ProjectDetailsUpdateManyWithWhereWithoutClientInput = {
+export type ProjectDetailsUpdateManyWithWhereWithoutLeadMasterInput = {
   where: Prisma.ProjectDetailsScalarWhereInput
-  data: Prisma.XOR<Prisma.ProjectDetailsUpdateManyMutationInput, Prisma.ProjectDetailsUncheckedUpdateManyWithoutClientInput>
+  data: Prisma.XOR<Prisma.ProjectDetailsUpdateManyMutationInput, Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterInput>
 }
 
 export type ProjectDetailsCreateManyVendorInput = {
   id?: number
   project_id: number
-  client_id: number
+  lead_id?: number | null
   total_items?: number
   total_packed?: number
   total_unpacked?: number
   actual_completion_date?: Date | string | null
-  estimated_completion_date: Date | string
+  estimated_completion_date?: Date | string | null
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
@@ -1210,12 +1210,12 @@ export type ProjectDetailsUpdateWithoutVendorInput = {
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
   actual_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUpdateManyWithoutDetailsNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutDetailsNestedInput
+  leadMaster?: Prisma.LeadMasterUpdateOneWithoutProjectDetailsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutDetailsNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutDetailsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutDetailsNestedInput
@@ -1224,12 +1224,12 @@ export type ProjectDetailsUpdateWithoutVendorInput = {
 export type ProjectDetailsUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_items?: Prisma.IntFieldUpdateOperationsInput | number
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
   actual_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1241,12 +1241,12 @@ export type ProjectDetailsUncheckedUpdateWithoutVendorInput = {
 export type ProjectDetailsUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_items?: Prisma.IntFieldUpdateOperationsInput | number
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
   actual_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1255,12 +1255,12 @@ export type ProjectDetailsUncheckedUpdateManyWithoutVendorInput = {
 export type ProjectDetailsCreateManyProjectInput = {
   id?: number
   vendor_id: number
-  client_id: number
+  lead_id?: number | null
   total_items?: number
   total_packed?: number
   total_unpacked?: number
   actual_completion_date?: Date | string | null
-  estimated_completion_date: Date | string
+  estimated_completion_date?: Date | string | null
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
@@ -1271,12 +1271,12 @@ export type ProjectDetailsUpdateWithoutProjectInput = {
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
   actual_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
   boxes?: Prisma.BoxMasterUpdateManyWithoutDetailsNestedInput
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutDetailsNestedInput
+  leadMaster?: Prisma.LeadMasterUpdateOneWithoutProjectDetailsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectDetailsNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutDetailsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutDetailsNestedInput
@@ -1285,12 +1285,12 @@ export type ProjectDetailsUpdateWithoutProjectInput = {
 export type ProjectDetailsUncheckedUpdateWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_items?: Prisma.IntFieldUpdateOperationsInput | number
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
   actual_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1302,18 +1302,18 @@ export type ProjectDetailsUncheckedUpdateWithoutProjectInput = {
 export type ProjectDetailsUncheckedUpdateManyWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_items?: Prisma.IntFieldUpdateOperationsInput | number
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
   actual_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
-export type ProjectDetailsCreateManyClientInput = {
+export type ProjectDetailsCreateManyLeadMasterInput = {
   id?: number
   project_id: number
   vendor_id: number
@@ -1321,18 +1321,18 @@ export type ProjectDetailsCreateManyClientInput = {
   total_packed?: number
   total_unpacked?: number
   actual_completion_date?: Date | string | null
-  estimated_completion_date: Date | string
+  estimated_completion_date?: Date | string | null
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
 }
 
-export type ProjectDetailsUpdateWithoutClientInput = {
+export type ProjectDetailsUpdateWithoutLeadMasterInput = {
   total_items?: Prisma.IntFieldUpdateOperationsInput | number
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
   actual_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1343,7 +1343,7 @@ export type ProjectDetailsUpdateWithoutClientInput = {
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutDetailsNestedInput
 }
 
-export type ProjectDetailsUncheckedUpdateWithoutClientInput = {
+export type ProjectDetailsUncheckedUpdateWithoutLeadMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1351,7 +1351,7 @@ export type ProjectDetailsUncheckedUpdateWithoutClientInput = {
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
   actual_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1360,7 +1360,7 @@ export type ProjectDetailsUncheckedUpdateWithoutClientInput = {
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutDetailsNestedInput
 }
 
-export type ProjectDetailsUncheckedUpdateManyWithoutClientInput = {
+export type ProjectDetailsUncheckedUpdateManyWithoutLeadMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1368,7 +1368,7 @@ export type ProjectDetailsUncheckedUpdateManyWithoutClientInput = {
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
   actual_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  estimated_completion_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1427,7 +1427,7 @@ export type ProjectDetailsSelect<ExtArgs extends runtime.Types.Extensions.Intern
   id?: boolean
   project_id?: boolean
   vendor_id?: boolean
-  client_id?: boolean
+  lead_id?: boolean
   total_items?: boolean
   total_packed?: boolean
   total_unpacked?: boolean
@@ -1437,7 +1437,7 @@ export type ProjectDetailsSelect<ExtArgs extends runtime.Types.Extensions.Intern
   is_grouping?: boolean
   room_name?: boolean
   boxes?: boolean | Prisma.ProjectDetails$boxesArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  leadMaster?: boolean | Prisma.ProjectDetails$leadMasterArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   items?: boolean | Prisma.ProjectDetails$itemsArgs<ExtArgs>
@@ -1449,7 +1449,7 @@ export type ProjectDetailsSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   id?: boolean
   project_id?: boolean
   vendor_id?: boolean
-  client_id?: boolean
+  lead_id?: boolean
   total_items?: boolean
   total_packed?: boolean
   total_unpacked?: boolean
@@ -1458,7 +1458,7 @@ export type ProjectDetailsSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   start_date?: boolean
   is_grouping?: boolean
   room_name?: boolean
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  leadMaster?: boolean | Prisma.ProjectDetails$leadMasterArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectDetails"]>
@@ -1467,7 +1467,7 @@ export type ProjectDetailsSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   id?: boolean
   project_id?: boolean
   vendor_id?: boolean
-  client_id?: boolean
+  lead_id?: boolean
   total_items?: boolean
   total_packed?: boolean
   total_unpacked?: boolean
@@ -1476,7 +1476,7 @@ export type ProjectDetailsSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   start_date?: boolean
   is_grouping?: boolean
   room_name?: boolean
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  leadMaster?: boolean | Prisma.ProjectDetails$leadMasterArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectDetails"]>
@@ -1485,7 +1485,7 @@ export type ProjectDetailsSelectScalar = {
   id?: boolean
   project_id?: boolean
   vendor_id?: boolean
-  client_id?: boolean
+  lead_id?: boolean
   total_items?: boolean
   total_packed?: boolean
   total_unpacked?: boolean
@@ -1496,10 +1496,10 @@ export type ProjectDetailsSelectScalar = {
   room_name?: boolean
 }
 
-export type ProjectDetailsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "client_id" | "total_items" | "total_packed" | "total_unpacked" | "actual_completion_date" | "estimated_completion_date" | "start_date" | "is_grouping" | "room_name", ExtArgs["result"]["projectDetails"]>
+export type ProjectDetailsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "lead_id" | "total_items" | "total_packed" | "total_unpacked" | "actual_completion_date" | "estimated_completion_date" | "start_date" | "is_grouping" | "room_name", ExtArgs["result"]["projectDetails"]>
 export type ProjectDetailsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   boxes?: boolean | Prisma.ProjectDetails$boxesArgs<ExtArgs>
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  leadMaster?: boolean | Prisma.ProjectDetails$leadMasterArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   items?: boolean | Prisma.ProjectDetails$itemsArgs<ExtArgs>
@@ -1507,12 +1507,12 @@ export type ProjectDetailsInclude<ExtArgs extends runtime.Types.Extensions.Inter
   _count?: boolean | Prisma.ProjectDetailsCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectDetailsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  leadMaster?: boolean | Prisma.ProjectDetails$leadMasterArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type ProjectDetailsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  leadMaster?: boolean | Prisma.ProjectDetails$leadMasterArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
@@ -1521,7 +1521,7 @@ export type $ProjectDetailsPayload<ExtArgs extends runtime.Types.Extensions.Inte
   name: "ProjectDetails"
   objects: {
     boxes: Prisma.$BoxMasterPayload<ExtArgs>[]
-    client: Prisma.$ClientMasterPayload<ExtArgs>
+    leadMaster: Prisma.$LeadMasterPayload<ExtArgs> | null
     project: Prisma.$ProjectMasterPayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     items: Prisma.$ProjectItemsMasterPayload<ExtArgs>[]
@@ -1531,12 +1531,12 @@ export type $ProjectDetailsPayload<ExtArgs extends runtime.Types.Extensions.Inte
     id: number
     project_id: number
     vendor_id: number
-    client_id: number
+    lead_id: number | null
     total_items: number
     total_packed: number
     total_unpacked: number
     actual_completion_date: Date | null
-    estimated_completion_date: Date
+    estimated_completion_date: Date | null
     start_date: Date
     is_grouping: boolean
     room_name: string
@@ -1935,7 +1935,7 @@ readonly fields: ProjectDetailsFieldRefs;
 export interface Prisma__ProjectDetailsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   boxes<T extends Prisma.ProjectDetails$boxesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDetails$boxesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  client<T extends Prisma.ClientMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ClientMasterClient<runtime.Types.Result.GetResult<Prisma.$ClientMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  leadMaster<T extends Prisma.ProjectDetails$leadMasterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDetails$leadMasterArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   project<T extends Prisma.ProjectMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectMasterClient<runtime.Types.Result.GetResult<Prisma.$ProjectMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   items<T extends Prisma.ProjectDetails$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDetails$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectItemsMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1972,7 +1972,7 @@ export interface ProjectDetailsFieldRefs {
   readonly id: Prisma.FieldRef<"ProjectDetails", 'Int'>
   readonly project_id: Prisma.FieldRef<"ProjectDetails", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"ProjectDetails", 'Int'>
-  readonly client_id: Prisma.FieldRef<"ProjectDetails", 'Int'>
+  readonly lead_id: Prisma.FieldRef<"ProjectDetails", 'Int'>
   readonly total_items: Prisma.FieldRef<"ProjectDetails", 'Int'>
   readonly total_packed: Prisma.FieldRef<"ProjectDetails", 'Int'>
   readonly total_unpacked: Prisma.FieldRef<"ProjectDetails", 'Int'>
@@ -2398,6 +2398,25 @@ export type ProjectDetails$boxesArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.BoxMasterScalarFieldEnum | Prisma.BoxMasterScalarFieldEnum[]
+}
+
+/**
+ * ProjectDetails.leadMaster
+ */
+export type ProjectDetails$leadMasterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadMaster
+   */
+  select?: Prisma.LeadMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadMaster
+   */
+  omit?: Prisma.LeadMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadMasterInclude<ExtArgs> | null
+  where?: Prisma.LeadMasterWhereInput
 }
 
 /**
