@@ -1908,7 +1908,7 @@ export const getSalesExecutivesByVendor = async (
         user_type_id: salesExecutiveType.id,
         // Optionally filter only active users
         status: "active",
-        ...(franchiseId ? { franchise_id: franchiseId } : {}),
+        ...(franchiseId !== undefined ? { franchise_id: franchiseId } : {}),
       },
       include: {
         user_type: true,
