@@ -1061,10 +1061,44 @@ export class LeadSuperAdminApprovalLockInService {
         result.approval.approved_at ?? new Date(),
       );
 
+      const orderLoginTasks = await prisma.userLeadTask.findMany({
+        where: {
+          vendor_id: result.lead.vendor_id,
+          lead_id: input.lead_id,
+          task_type: "Order Login",
+          status: { in: ["open", "in_progress"] },
+        },
+        select: {
+          id: true,
+          user_id: true,
+          instance_id: true,
+          user: {
+            select: {
+              user_name: true,
+              user_email: true,
+            },
+          },
+        },
+      });
+      const primaryOrderLoginTask = orderLoginTasks[0] ?? null;
+
       if (salesExecMappings.length > 0) {
-        const redirectPath = result.lead.account_id
-          ? `/dashboard/production/order-login/details/${input.lead_id}?accountId=${result.lead.account_id}`
-          : `/dashboard/production/order-login/details/${input.lead_id}`;
+        const salesExecRedirectParams = new URLSearchParams({
+          tab: "orderLogin",
+        });
+        if (result.lead.account_id) {
+          salesExecRedirectParams.set(
+            "accountId",
+            String(result.lead.account_id),
+          );
+        }
+        if (primaryOrderLoginTask?.instance_id) {
+          salesExecRedirectParams.set(
+            "instance_id",
+            String(primaryOrderLoginTask.instance_id),
+          );
+        }
+        const redirectPath = `/dashboard/production/order-login/details/${input.lead_id}?${salesExecRedirectParams.toString()}`;
         const ctaLink = `${this.getClientBaseUrl()}${redirectPath}`;
 
         const seenIds = new Set<number>();
@@ -1106,32 +1140,14 @@ export class LeadSuperAdminApprovalLockInService {
         );
       }
 
-      const orderLoginTasks = await prisma.userLeadTask.findMany({
-        where: {
-          vendor_id: result.lead.vendor_id,
-          lead_id: input.lead_id,
-          task_type: "Order Login",
-          status: { in: ["open", "in_progress"] },
-        },
-        select: {
-          id: true,
-          user_id: true,
-          instance_id: true,
-          user: {
-            select: {
-              user_name: true,
-              user_email: true,
-            },
-          },
-        },
-      });
-
       if (orderLoginTasks.length > 0) {
         await Promise.allSettled(
           orderLoginTasks.map(async (task) => {
             if (task.user_id === input.approved_by) return;
 
-            const redirectParams = new URLSearchParams();
+            const redirectParams = new URLSearchParams({
+              tab: "orderLogin",
+            });
             if (result.lead.account_id) {
               redirectParams.set("accountId", String(result.lead.account_id));
             }
@@ -1140,7 +1156,7 @@ export class LeadSuperAdminApprovalLockInService {
             }
 
             const queryString = redirectParams.toString();
-            const redirectPath = `/dashboard/leads/details/${input.lead_id}${
+            const redirectPath = `/dashboard/production/order-login/details/${input.lead_id}${
               queryString ? `?${queryString}` : ""
             }`;
             const projectUrl = `${this.getClientBaseUrl()}${redirectPath}`;
