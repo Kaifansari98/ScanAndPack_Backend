@@ -6,6 +6,7 @@ import {
   sendOrderLoginAssignedEmail,
 } from "../../../../src/services/email/brevoEmail.service";
 import { resolveLeadCode } from "../../../../src/utils/fileUtils";
+import { LeadSuperAdminApprovalLockInService } from "../../leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.service";
 
 export type ApproveTechCheckResult =
   | {
@@ -24,13 +25,18 @@ export type ApproveTechCheckResult =
       moved_to_order_login: true;
       assign_to_user_id: number;
       account_id: number;
+      order_login_lock_in: any;
     }
   | {
       updatedLead: any;
       mapping: any;
+      order_login_lock_in: any;
     };
 
 export class TechCheckService {
+  private leadSuperAdminApprovalLockInService =
+    new LeadSuperAdminApprovalLockInService();
+
   public async getInstanceTechCheckStatus(
     vendorId: number,
     leadId: number,
@@ -227,6 +233,16 @@ export class TechCheckService {
               },
             });
 
+            const orderLoginLockIn =
+              await this.leadSuperAdminApprovalLockInService.createOrderLoginLockIn(
+                {
+                  vendor_id: vendorId,
+                  lead_id: leadId,
+                  created_by: userId,
+                },
+                tx,
+              );
+
             return {
               mode: "instance_and_lead_moved",
               instance_id: updatedInstance.id,
@@ -237,6 +253,7 @@ export class TechCheckService {
               moved_to_order_login: true,
               assign_to_user_id: assignToUserId,
               account_id: effectiveAccountId,
+              order_login_lock_in: orderLoginLockIn,
             };
           }
           return {
@@ -358,7 +375,17 @@ export class TechCheckService {
           },
         });
 
-        return { updatedLead, mapping };
+        const orderLoginLockIn =
+          await this.leadSuperAdminApprovalLockInService.createOrderLoginLockIn(
+            {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              created_by: userId,
+            },
+            tx,
+          );
+
+        return { updatedLead, mapping, order_login_lock_in: orderLoginLockIn };
       },
     );
 
