@@ -10,6 +10,11 @@ import {
   sendDispatchPlanningApprovalRequiredEmail,
   sendOrderLoginApprovalRequiredEmail,
 } from "../email/brevoEmail.service";
+import {
+  sendBookingDoneApprovedEmail,
+  sendDispatchPlanningApprovedEmail,
+  sendOrderLoginApprovedEmail,
+} from "../email/brevoEmail2.service";
 import { NotificationService } from "../notification/notification.service";
 
 type TxClient = Prisma.TransactionClient;
@@ -727,7 +732,7 @@ export class LeadSuperAdminApprovalLockInService {
   }
 
   async approveBookingDoneTask(input: ApproveBookingDoneTaskInput) {
-    return prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx) => {
       const task = await tx.userLeadTask.findFirst({
         where: {
           id: input.task_id,
@@ -814,12 +819,113 @@ export class LeadSuperAdminApprovalLockInService {
       return {
         approval: approvedLockIn,
         task: completedTask,
+        lead: task.lead,
       };
     });
+
+    try {
+      const [approvedByUser, salesExecMappings] = await Promise.all([
+        prisma.userMaster.findUnique({
+          where: { id: input.approved_by },
+          select: { user_name: true },
+        }),
+        prisma.leadUserMapping.findMany({
+          where: {
+            lead_id: input.lead_id,
+            vendor_id: result.lead.vendor_id,
+            status: "active",
+            user: {
+              user_type: {
+                user_type: {
+                  equals: "sales-executive",
+                  mode: "insensitive",
+                },
+              },
+            },
+          },
+          select: {
+            user: {
+              select: {
+                id: true,
+                user_name: true,
+                user_email: true,
+              },
+            },
+          },
+        }),
+      ]);
+
+      if (salesExecMappings.length > 0) {
+        const leadName =
+          `${result.lead.firstname ?? ""} ${result.lead.lastname ?? ""}`.trim() ||
+          "Lead";
+        const leadCode =
+          result.lead.lead_code ??
+          `LEAD-${String(input.lead_id).padStart(4, "0")}`;
+        const displayLead = `${leadCode} - ${leadName}`;
+        const approvedByName = approvedByUser?.user_name ?? "Super Admin";
+        const approvalDate = this.formatDisplayDate(
+          result.approval.approved_at ?? new Date(),
+        );
+        const redirectPath = result.lead.account_id
+          ? `/dashboard/leads/booking-stage/details/${input.lead_id}?accountId=${result.lead.account_id}`
+          : `/dashboard/leads/booking-stage/details/${input.lead_id}`;
+        const ctaLink = `${this.getClientBaseUrl()}${redirectPath}`;
+
+        const seenIds = new Set<number>();
+        const uniqueSalesExecs = salesExecMappings
+          .map((mapping) => mapping.user)
+          .filter((user) => {
+            if (seenIds.has(user.id)) return false;
+            seenIds.add(user.id);
+            return true;
+          });
+
+        await Promise.allSettled(
+          uniqueSalesExecs.map(async (user) => {
+            await NotificationService.createAndSend({
+              vendor_id: result.lead.vendor_id,
+              user_id: user.id,
+              sender_id: input.approved_by,
+              type: NotificationType.LEAD_ACTION,
+              title: "Booking Done Approved",
+              message: `${displayLead} approved. You can now assign the FM task.`,
+              entity_type: "lead",
+              entity_id: input.lead_id,
+              redirect_url: redirectPath,
+            });
+
+            if (user.user_email) {
+              await sendBookingDoneApprovedEmail({
+                vendor_id: result.lead.vendor_id,
+                toEmail: user.user_email,
+                toName: user.user_name ?? undefined,
+                leadCode,
+                leadName,
+                approvedBy: approvedByName,
+                approvalDate,
+                ctaLink,
+              });
+            }
+          }),
+        );
+      }
+    } catch (notificationError: any) {
+      logger.warn("Booking Done approved notification/email failed", {
+        error: notificationError?.message,
+        lead_id: input.lead_id,
+        task_id: input.task_id,
+      });
+    }
+
+    return {
+      approval: result.approval,
+      task: result.task,
+    };
   }
 
   async approveOrderLoginTask(input: ApproveOrderLoginTaskInput) {
-    return prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx) => {
       const task = await tx.userLeadTask.findFirst({
         where: {
           id: input.task_id,
@@ -906,12 +1012,113 @@ export class LeadSuperAdminApprovalLockInService {
       return {
         approval: approvedLockIn,
         task: completedTask,
+        lead: task.lead,
       };
     });
+
+    try {
+      const [approvedByUser, salesExecMappings] = await Promise.all([
+        prisma.userMaster.findUnique({
+          where: { id: input.approved_by },
+          select: { user_name: true },
+        }),
+        prisma.leadUserMapping.findMany({
+          where: {
+            lead_id: input.lead_id,
+            vendor_id: result.lead.vendor_id,
+            status: "active",
+            user: {
+              user_type: {
+                user_type: {
+                  equals: "backend",
+                  mode: "insensitive",
+                },
+              },
+            },
+          },
+          select: {
+            user: {
+              select: {
+                id: true,
+                user_name: true,
+                user_email: true,
+              },
+            },
+          },
+        }),
+      ]);
+
+      if (salesExecMappings.length > 0) {
+        const leadName =
+          `${result.lead.firstname ?? ""} ${result.lead.lastname ?? ""}`.trim() ||
+          "Lead";
+        const leadCode =
+          result.lead.lead_code ??
+          `LEAD-${String(input.lead_id).padStart(4, "0")}`;
+        const displayLead = `${leadCode} - ${leadName}`;
+        const approvedByName = approvedByUser?.user_name ?? "Super Admin";
+        const approvalDate = this.formatDisplayDate(
+          result.approval.approved_at ?? new Date(),
+        );
+        const redirectPath = result.lead.account_id
+          ? `/dashboard/production/order-login/details/${input.lead_id}?accountId=${result.lead.account_id}`
+          : `/dashboard/production/order-login/details/${input.lead_id}`;
+        const ctaLink = `${this.getClientBaseUrl()}${redirectPath}`;
+
+        const seenIds = new Set<number>();
+        const uniqueSalesExecs = salesExecMappings
+          .map((mapping) => mapping.user)
+          .filter((user) => {
+            if (seenIds.has(user.id)) return false;
+            seenIds.add(user.id);
+            return true;
+          });
+
+        await Promise.allSettled(
+          uniqueSalesExecs.map(async (user) => {
+            await NotificationService.createAndSend({
+              vendor_id: result.lead.vendor_id,
+              user_id: user.id,
+              sender_id: input.approved_by,
+              type: NotificationType.LEAD_ACTION,
+              title: "Order Login Approved",
+              message: `${displayLead} approved. Proceed with Order Login actions.`,
+              entity_type: "lead",
+              entity_id: input.lead_id,
+              redirect_url: redirectPath,
+            });
+
+            if (user.user_email) {
+              await sendOrderLoginApprovedEmail({
+                vendor_id: result.lead.vendor_id,
+                toEmail: user.user_email,
+                toName: user.user_name ?? undefined,
+                leadCode,
+                leadName,
+                approvedBy: approvedByName,
+                approvalDate,
+                ctaLink,
+              });
+            }
+          }),
+        );
+      }
+    } catch (notificationError: any) {
+      logger.warn("Order Login approved notification/email failed", {
+        error: notificationError?.message,
+        lead_id: input.lead_id,
+        task_id: input.task_id,
+      });
+    }
+
+    return {
+      approval: result.approval,
+      task: result.task,
+    };
   }
 
   async approveDispatchPlanningTask(input: ApproveDispatchPlanningTaskInput) {
-    return prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx) => {
       const task = await tx.userLeadTask.findFirst({
         where: {
           id: input.task_id,
@@ -998,7 +1205,108 @@ export class LeadSuperAdminApprovalLockInService {
       return {
         approval: approvedLockIn,
         task: completedTask,
+        lead: task.lead,
       };
     });
+
+    try {
+      const [approvedByUser, salesExecMappings] = await Promise.all([
+        prisma.userMaster.findUnique({
+          where: { id: input.approved_by },
+          select: { user_name: true },
+        }),
+        prisma.leadUserMapping.findMany({
+          where: {
+            lead_id: input.lead_id,
+            vendor_id: result.lead.vendor_id,
+            status: "active",
+            user: {
+              user_type: {
+                user_type: {
+                  equals: "sales-executive",
+                  mode: "insensitive",
+                },
+              },
+            },
+          },
+          select: {
+            user: {
+              select: {
+                id: true,
+                user_name: true,
+                user_email: true,
+              },
+            },
+          },
+        }),
+      ]);
+
+      if (salesExecMappings.length > 0) {
+        const leadName =
+          `${result.lead.firstname ?? ""} ${result.lead.lastname ?? ""}`.trim() ||
+          "Lead";
+        const leadCode =
+          result.lead.lead_code ??
+          `LEAD-${String(input.lead_id).padStart(4, "0")}`;
+        const displayLead = `${leadCode} - ${leadName}`;
+        const approvedByName = approvedByUser?.user_name ?? "Super Admin";
+        const approvalDate = this.formatDisplayDate(
+          result.approval.approved_at ?? new Date(),
+        );
+        const redirectPath = result.lead.account_id
+          ? `/dashboard/installation/dispatch-planning/details/${input.lead_id}?accountId=${result.lead.account_id}`
+          : `/dashboard/installation/dispatch-planning/details/${input.lead_id}`;
+        const ctaLink = `${this.getClientBaseUrl()}${redirectPath}`;
+
+        const seenIds = new Set<number>();
+        const uniqueSalesExecs = salesExecMappings
+          .map((mapping) => mapping.user)
+          .filter((user) => {
+            if (seenIds.has(user.id)) return false;
+            seenIds.add(user.id);
+            return true;
+          });
+
+        await Promise.allSettled(
+          uniqueSalesExecs.map(async (user) => {
+            await NotificationService.createAndSend({
+              vendor_id: result.lead.vendor_id,
+              user_id: user.id,
+              sender_id: input.approved_by,
+              type: NotificationType.LEAD_ACTION,
+              title: "Dispatch Planning Approved",
+              message: `${displayLead} approved. You can now update dispatch planning details.`,
+              entity_type: "lead",
+              entity_id: input.lead_id,
+              redirect_url: redirectPath,
+            });
+
+            if (user.user_email) {
+              await sendDispatchPlanningApprovedEmail({
+                vendor_id: result.lead.vendor_id,
+                toEmail: user.user_email,
+                toName: user.user_name ?? undefined,
+                leadCode,
+                leadName,
+                approvedBy: approvedByName,
+                approvalDate,
+                ctaLink,
+              });
+            }
+          }),
+        );
+      }
+    } catch (notificationError: any) {
+      logger.warn("Dispatch Planning approved notification/email failed", {
+        error: notificationError?.message,
+        lead_id: input.lead_id,
+        task_id: input.task_id,
+      });
+    }
+
+    return {
+      approval: result.approval,
+      task: result.task,
+    };
   }
 }
