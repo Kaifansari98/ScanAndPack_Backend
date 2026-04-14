@@ -303,7 +303,6 @@ export class ReadyToDispatchController {
         const isSelfAssigned =
           Boolean(actorId) && Number(actorId) === Number(user_id);
         const franchiseId = lead?.franchise_id ?? null;
-        const stageTag = lead?.statusType?.tag;
 
         if (
           !isSelfAssigned &&
@@ -323,10 +322,7 @@ export class ReadyToDispatchController {
             entity_type: "lead",
             entity_id: result.lead.id,
             redirect_url: (() => {
-              const base =
-                stageTag && STAGE_PATH_BY_TAG[stageTag]
-                  ? `${STAGE_PATH_BY_TAG[stageTag]}/${result.lead.id}`
-                  : `/dashboard/installation/site-readiness/details/${result.lead.id}`;
+              const base = `/dashboard/leads/details/${result.lead.id}`;
               const qp = new URLSearchParams();
               if (lead?.account_id) qp.set("accountId", String(lead.account_id));
               if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
