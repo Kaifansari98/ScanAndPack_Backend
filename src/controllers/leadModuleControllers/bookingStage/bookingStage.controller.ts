@@ -1105,8 +1105,8 @@ export class BookingStageController {
                 title: "Site Supervisor Assigned",
                 message:
                   leadName.length > 0
-                    ? `Site Supervisor ${supervisorName} has been assigned to ${leadCode} - ${leadName}. Kindly assign the Final Measurement task.`
-                    : `Site Supervisor ${supervisorName} has been assigned to ${leadCode}. Kindly assign the Final Measurement task.`,
+                    ? `Site Supervisor ${supervisorName} has been assigned to ${leadCode} - ${leadName}.`
+                    : `Site Supervisor ${supervisorName} has been assigned to ${leadCode}.`,
                 entity_type: "lead",
                 entity_id: leadId,
                 redirect_url: redirectPath,

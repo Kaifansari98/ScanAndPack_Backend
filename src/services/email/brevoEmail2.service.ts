@@ -1610,7 +1610,6 @@ export const sendSiteSupervisorAssignedEmail = async (payload: {
     `Assigned To: ${payload.assignedTo}`,
     `Assigned On: ${payload.assignedOn}`,
     "",
-    "Kindly assign the Final Measurement task to the site supervisor.",
     `View Lead Details: ${payload.leadUrl}`,
   ]
     .filter(Boolean)
@@ -1664,7 +1663,6 @@ export const sendSiteSupervisorAssignedEmail = async (payload: {
               <div class="lead-info-value">${payload.assignedOn}</div>
             </div>
           </div>
-          <p style="margin: 16px 0 0; color: #4b5563;">Kindly assign the Final Measurement task to the site supervisor.</p>
           <div style="margin: 16px 0 0; text-align: start;">
             <a href="${payload.leadUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 16px; border-radius: 6px; font-size: 14px;" target="_blank" rel="noopener noreferrer">
               View Lead Details
