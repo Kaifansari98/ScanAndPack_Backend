@@ -188,4 +188,46 @@ export class LeadSuperAdminApprovalLockInController {
       });
     }
   };
+
+  public approveDispatchPlanningTask = async (
+    req: Request,
+    res: Response,
+  ): Promise<void> => {
+    try {
+      const leadId = Number(req.params.leadId);
+      const taskId = Number(req.params.taskId);
+      const approvedBy = Number(req.body.approved_by);
+      const approvalRemark =
+        req.body.approval_remark !== undefined
+          ? String(req.body.approval_remark)
+          : null;
+
+      if (isNaN(leadId) || isNaN(taskId) || isNaN(approvedBy)) {
+        res.status(400).json({
+          success: false,
+          message: "Invalid leadId, taskId, or approved_by",
+        });
+        return;
+      }
+
+      const data = await this.lockInService.approveDispatchPlanningTask({
+        lead_id: leadId,
+        task_id: taskId,
+        approved_by: approvedBy,
+        approval_remark: approvalRemark,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Dispatch Planning approval completed successfully",
+        data,
+      });
+    } catch (error: any) {
+      res.status(500).json({
+        success: false,
+        message: "Failed to approve Dispatch Planning task",
+        error: error.message,
+      });
+    }
+  };
 }

@@ -25,4 +25,9 @@ leadSuperAdminApprovalLockInRouter.patch(
   leadSuperAdminApprovalLockInController.approveOrderLoginTask,
 );
 
+leadSuperAdminApprovalLockInRouter.patch(
+  "/dispatch-planning/lead/:leadId/task/:taskId/approve",
+  leadSuperAdminApprovalLockInController.approveDispatchPlanningTask,
+);
+
 export default leadSuperAdminApprovalLockInRouter;

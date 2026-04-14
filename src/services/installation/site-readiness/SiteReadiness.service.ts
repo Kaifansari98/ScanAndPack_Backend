@@ -7,6 +7,7 @@ import { NotificationService } from "../../../../src/services/notification/notif
 import { sendLeadMovedToDispatchPlanningEmail } from "../../../../src/services/email/brevoEmail.service";
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
+import { LeadSuperAdminApprovalLockInService } from "../../leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.service";
 
 interface SiteReadinessPayload {
   account_id: number;
@@ -17,6 +18,9 @@ interface SiteReadinessPayload {
 }
 
 export class SiteReadinessService {
+  private static leadSuperAdminApprovalLockInService =
+    new LeadSuperAdminApprovalLockInService();
+
   /** ✅ Fetch all leads with status = Type 12 (Site Readiness) */
   async getLeadsWithStatusSiteReadiness(
     vendorId: number,
@@ -561,6 +565,15 @@ export class SiteReadinessService {
         statusId: toStatus.id,
         createdBy: updatedBy,
       });
+
+      await SiteReadinessService.leadSuperAdminApprovalLockInService.createDispatchPlanningLockIn(
+        {
+          vendor_id: vendorId,
+          lead_id: lead.id,
+          created_by: updatedBy,
+        },
+        tx,
+      );
 
       logger.info("[SERVICE] Lead moved to Dispatch Planning", {
         lead_id: lead.id,
