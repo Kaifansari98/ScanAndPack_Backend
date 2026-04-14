@@ -1727,7 +1727,6 @@ export const sendBookingDoneApprovedEmail = async (payload: {
     `Approval Date: ${payload.approvalDate}`,
     "",
     "You may now proceed with the next step:",
-    "Assign FM task to the tagged Site Supervisor",
     `Click here to proceed: ${payload.ctaLink}`,
   ].join("\n");
 
@@ -1776,7 +1775,6 @@ export const sendBookingDoneApprovedEmail = async (payload: {
             </div>
           </div>
           <p style="margin: 16px 0 0; color: #4b5563;">You may now proceed with the next step:</p>
-          <p style="margin: 8px 0 0; color: #111827; font-weight: 600;">Assign FM task to the tagged Site Supervisor</p>
           <div style="margin: 16px 0 0; text-align: start;">
             <a href="${payload.ctaLink}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 16px; border-radius: 6px; font-size: 14px;" target="_blank" rel="noopener noreferrer">
               Click here to proceed

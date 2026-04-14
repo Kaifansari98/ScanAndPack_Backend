@@ -8,6 +8,7 @@ import logger from "../../utils/logger";
 import {
   sendBookingDoneApprovalRequiredEmail,
   sendDispatchPlanningApprovalRequiredEmail,
+  sendOrderLoginAssignedEmail,
   sendOrderLoginApprovalRequiredEmail,
 } from "../email/brevoEmail.service";
 import {
@@ -798,7 +799,7 @@ export class LeadSuperAdminApprovalLockInService {
       });
 
       let actionMessage =
-        "Super Admin approved the Booking Done lock-in. Final Measurement can now be assigned.";
+        "Super Admin approved the Booking Done Approval.";
 
       if (input.approval_remark && input.approval_remark.trim() !== "") {
         actionMessage += ` — Remark: ${input.approval_remark.trim()}`;
@@ -889,7 +890,7 @@ export class LeadSuperAdminApprovalLockInService {
               sender_id: input.approved_by,
               type: NotificationType.LEAD_ACTION,
               title: "Booking Done Approved",
-              message: `${displayLead} approved. You can now assign the FM task.`,
+              message: `Booking done for ${displayLead} is now approved.`,
               entity_type: "lead",
               entity_id: input.lead_id,
               redirect_url: redirectPath,
@@ -1048,18 +1049,19 @@ export class LeadSuperAdminApprovalLockInService {
         }),
       ]);
 
+      const leadName =
+        `${result.lead.firstname ?? ""} ${result.lead.lastname ?? ""}`.trim() ||
+        "Lead";
+      const leadCode =
+        result.lead.lead_code ??
+        `LEAD-${String(input.lead_id).padStart(4, "0")}`;
+      const displayLead = `${leadCode} - ${leadName}`;
+      const approvedByName = approvedByUser?.user_name ?? "Super Admin";
+      const approvalDate = this.formatDisplayDate(
+        result.approval.approved_at ?? new Date(),
+      );
+
       if (salesExecMappings.length > 0) {
-        const leadName =
-          `${result.lead.firstname ?? ""} ${result.lead.lastname ?? ""}`.trim() ||
-          "Lead";
-        const leadCode =
-          result.lead.lead_code ??
-          `LEAD-${String(input.lead_id).padStart(4, "0")}`;
-        const displayLead = `${leadCode} - ${leadName}`;
-        const approvedByName = approvedByUser?.user_name ?? "Super Admin";
-        const approvalDate = this.formatDisplayDate(
-          result.approval.approved_at ?? new Date(),
-        );
         const redirectPath = result.lead.account_id
           ? `/dashboard/production/order-login/details/${input.lead_id}?accountId=${result.lead.account_id}`
           : `/dashboard/production/order-login/details/${input.lead_id}`;
@@ -1098,6 +1100,76 @@ export class LeadSuperAdminApprovalLockInService {
                 approvedBy: approvedByName,
                 approvalDate,
                 ctaLink,
+              });
+            }
+          }),
+        );
+      }
+
+      const orderLoginTasks = await prisma.userLeadTask.findMany({
+        where: {
+          vendor_id: result.lead.vendor_id,
+          lead_id: input.lead_id,
+          task_type: "Order Login",
+          status: { in: ["open", "in_progress"] },
+        },
+        select: {
+          id: true,
+          user_id: true,
+          instance_id: true,
+          user: {
+            select: {
+              user_name: true,
+              user_email: true,
+            },
+          },
+        },
+      });
+
+      if (orderLoginTasks.length > 0) {
+        await Promise.allSettled(
+          orderLoginTasks.map(async (task) => {
+            if (task.user_id === input.approved_by) return;
+
+            const redirectParams = new URLSearchParams();
+            if (result.lead.account_id) {
+              redirectParams.set("accountId", String(result.lead.account_id));
+            }
+            if (task.instance_id) {
+              redirectParams.set("instance_id", String(task.instance_id));
+            }
+
+            const queryString = redirectParams.toString();
+            const redirectPath = `/dashboard/leads/details/${input.lead_id}${
+              queryString ? `?${queryString}` : ""
+            }`;
+            const projectUrl = `${this.getClientBaseUrl()}${redirectPath}`;
+            const assignedAt = this.formatDisplayDate(
+              result.approval.approved_at ?? new Date(),
+            );
+
+            await NotificationService.createAndSend({
+              vendor_id: result.lead.vendor_id,
+              user_id: task.user_id,
+              sender_id: input.approved_by,
+              type: NotificationType.TASK_ASSIGNED,
+              title: "Order Login Task Assigned",
+              message: `${displayLead} has been assigned to you for Order Login.`,
+              entity_type: "lead",
+              entity_id: input.lead_id,
+              redirect_url: redirectPath,
+            });
+
+            if (task.user?.user_email) {
+              await sendOrderLoginAssignedEmail({
+                vendor_id: result.lead.vendor_id,
+                toEmail: task.user.user_email,
+                toName: task.user.user_name ?? undefined,
+                leadCode,
+                leadName,
+                assignedBy: approvedByName,
+                assignedAt,
+                projectUrl,
               });
             }
           }),

@@ -2,9 +2,6 @@ import { NotificationType, Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import logger from "../../../utils/logger";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
-import {
-  sendOrderLoginAssignedEmail,
-} from "../../../../src/services/email/brevoEmail.service";
 import { resolveLeadCode } from "../../../../src/utils/fileUtils";
 import { LeadSuperAdminApprovalLockInService } from "../../leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.service";
 
@@ -498,86 +495,6 @@ export class TechCheckService {
         });
       }
 
-      // ===============================
-      // ORDER LOGIN ASSIGNMENT → BACKEND USER NOTIFICATION
-      // ===============================
-      try {
-        const assignedUserId = assignToUserId;
-
-        if (assignedUserId !== userId) {
-          const [lead, assigner, assignee] = await Promise.all([
-            prisma.leadMaster.findUnique({
-              where: { id: leadId },
-              select: {
-                firstname: true,
-                lastname: true,
-                lead_code: true,
-                vendor_id: true,
-                account_id: true,
-              },
-            }),
-
-            prisma.userMaster.findUnique({
-              where: { id: userId },
-              select: { user_name: true },
-            }),
-
-            prisma.userMaster.findUnique({
-              where: { id: assignedUserId },
-              select: {
-                user_name: true,
-                user_email: true,
-              },
-            }),
-          ]);
-
-          if (!lead || !assignee) return;
-
-          const leadName =
-            `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
-
-          const assignedAt = new Date().toLocaleString("en-IN", {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-          });
-
-          // ✅ redirectPath with instance_id
-          const redirectPath = buildRedirectPath(lead.account_id);
-          const projectUrl = `${baseUrl}${redirectPath}`;
-
-          await NotificationService.createAndSend({
-            vendor_id: lead.vendor_id,
-            user_id: assignedUserId,
-            sender_id: userId,
-            type: NotificationType.TASK_ASSIGNED,
-            title: "Order Login Task Assigned",
-            message: `${leadCode} - ${leadName} has been assigned to you for Order Login.`,
-            entity_type: "lead",
-            entity_id: leadId,
-            redirect_url: redirectPath, // ✅ instance_id included
-          });
-
-          if (assignee.user_email) {
-            await sendOrderLoginAssignedEmail({
-              vendor_id: lead.vendor_id,
-              toEmail: assignee.user_email,
-              toName: assignee.user_name,
-              leadCode, // ✅ vloq-46.1 ya vloq-46
-              leadName,
-              assignedBy: assigner?.user_name ?? "System",
-              assignedAt,
-              projectUrl, // ✅ instance_id included
-            });
-          }
-        }
-      } catch (err: any) {
-        logger.warn("⚠️ Order login assignment notification failed", {
-          lead_id: leadId,
-          assigned_user_id: assignToUserId,
-          error: err?.message,
-        });
-      }
     };
 
     void notify();
