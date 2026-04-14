@@ -151,14 +151,24 @@ export class LeadSuperAdminApprovalLockInService {
       isNewApproval = true;
     }
 
-    const leadStage = lead.status_id
-      ? (
-          await db.statusTypeMaster.findUnique({
-            where: { id: lead.status_id },
-            select: { type: true },
-          })
-        )?.type ?? null
-      : null;
+    const orderLoginStatusType = await db.statusTypeMaster.findFirst({
+      where: {
+        vendor_id: input.vendor_id,
+        tag: "Type 9",
+      },
+      select: { type: true },
+    });
+
+    const leadStage =
+      orderLoginStatusType?.type ??
+      (lead.status_id
+        ? (
+            await db.statusTypeMaster.findUnique({
+              where: { id: lead.status_id },
+              select: { type: true },
+            })
+          )?.type ?? null
+        : null);
 
     let task = await db.userLeadTask.findFirst({
       where: {

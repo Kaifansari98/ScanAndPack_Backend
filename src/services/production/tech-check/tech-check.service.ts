@@ -142,7 +142,30 @@ export class TechCheckService {
             },
           });
 
+          let orderLoginLockIn: any = null;
+
           if (pendingInstances === 0) {
+            try {
+              orderLoginLockIn =
+                await this.leadSuperAdminApprovalLockInService.createOrderLoginLockIn(
+                  {
+                    vendor_id: vendorId,
+                    lead_id: leadId,
+                    created_by: userId,
+                  },
+                  tx,
+                );
+            } catch (lockInError: any) {
+              logger.warn(
+                "Early Order Login lock-in creation failed after tech-check instance completion",
+                {
+                  lead_id: leadId,
+                  instance_id: productStructureInstanceId,
+                  error: lockInError?.message,
+                },
+              );
+            }
+
             if (!assignToUserId || !effectiveAccountId) {
               throw new Error(
                 "assign_to_user_id and account_id are required to move lead to Order Login",
@@ -233,15 +256,17 @@ export class TechCheckService {
               },
             });
 
-            const orderLoginLockIn =
-              await this.leadSuperAdminApprovalLockInService.createOrderLoginLockIn(
-                {
-                  vendor_id: vendorId,
-                  lead_id: leadId,
-                  created_by: userId,
-                },
-                tx,
-              );
+            if (!orderLoginLockIn) {
+              orderLoginLockIn =
+                await this.leadSuperAdminApprovalLockInService.createOrderLoginLockIn(
+                  {
+                    vendor_id: vendorId,
+                    lead_id: leadId,
+                    created_by: userId,
+                  },
+                  tx,
+                );
+            }
 
             return {
               mode: "instance_and_lead_moved",
