@@ -1213,12 +1213,12 @@ export class PostProductionService {
         orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
       });
 
-      const rtdBase = `${STAGE_PATH_BY_TAG["Type 11"]}/${leadId}`;
+      const leadDetailsBase = `/dashboard/leads/details/${leadId}`;
       const rtdParams = new URLSearchParams();
       if (leadMeta.account_id) rtdParams.set("accountId", String(leadMeta.account_id));
       if (firstInstance?.id) rtdParams.set("instance_id", String(firstInstance.id));
       const rtdQs = rtdParams.toString();
-      const redirectPath = rtdQs ? `${rtdBase}?${rtdQs}` : rtdBase;
+      const redirectPath = rtdQs ? `${leadDetailsBase}?${rtdQs}` : leadDetailsBase;
 
       const projectUrl = `${baseUrl}${redirectPath}`;
 
@@ -1302,12 +1302,12 @@ export class PostProductionService {
         orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
       });
 
-      const adminRtdBase = `${STAGE_PATH_BY_TAG["Type 11"]}/${leadId}`;
+      const adminLeadDetailsBase = `/dashboard/leads/details/${leadId}`;
       const adminRtdParams = new URLSearchParams();
       if (lead.account_id) adminRtdParams.set("accountId", String(lead.account_id));
       if (adminFirstInstance?.id) adminRtdParams.set("instance_id", String(adminFirstInstance.id));
       const adminRtdQs = adminRtdParams.toString();
-      const redirectPath = adminRtdQs ? `${adminRtdBase}?${adminRtdQs}` : adminRtdBase;
+      const redirectPath = adminRtdQs ? `${adminLeadDetailsBase}?${adminRtdQs}` : adminLeadDetailsBase;
 
       // Fetch Active Admin Users
       const admins = await prisma.userMaster.findMany({
