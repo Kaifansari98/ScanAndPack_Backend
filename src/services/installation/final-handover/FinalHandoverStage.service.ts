@@ -619,6 +619,15 @@ export class FinalHandoverStageService {
           lead_code: true,
           firstname: true,
           lastname: true,
+          productMappings: {
+            select: {
+              productType: {
+                select: {
+                  tag: true,
+                },
+              },
+            },
+          },
         },
       });
 
@@ -654,6 +663,10 @@ export class FinalHandoverStageService {
         throw new Error("Active site supervisor is not assigned to this lead");
       }
 
+      const isSmallOrderLead = lead.productMappings.some(
+        (mapping) => mapping.productType?.tag === "Type 7",
+      );
+
       const freeServiceSchedules = await tx.leadServiceSchedule.findMany({
         where: {
           vendor_id: vendorId,
@@ -670,7 +683,7 @@ export class FinalHandoverStageService {
         },
       });
 
-      if (freeServiceSchedules.length < 3) {
+      if (!isSmallOrderLead && freeServiceSchedules.length < 3) {
         throw new Error(
           "Free service schedule is not ready. Complete usable handover first.",
         );
