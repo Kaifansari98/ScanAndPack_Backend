@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.4.1
- * Query Engine version: 55ae170b1ced7fc6ed07a15f110549408c501bb3
+ * Prisma Client JS version: 7.7.0
+ * Query Engine version: 75cbdc1eb7150937890ad5465d861175c6624711
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.4.1",
-  engine: "55ae170b1ced7fc6ed07a15f110549408c501bb3"
+  client: "7.7.0",
+  engine: "75cbdc1eb7150937890ad5465d861175c6624711"
 }
 
 /**
@@ -8092,7 +8092,11 @@ export const BoxMasterScalarFieldEnum = {
   deleted_at: 'deleted_at',
   deleted_by: 'deleted_by',
   is_deleted: 'is_deleted',
-  project_details_id: 'project_details_id'
+  project_details_id: 'project_details_id',
+  factory_out_by: 'factory_out_by',
+  factory_out_at: 'factory_out_at',
+  site_in_by: 'site_in_by',
+  site_in_at: 'site_in_at'
 } as const
 
 export type BoxMasterScalarFieldEnum = (typeof BoxMasterScalarFieldEnum)[keyof typeof BoxMasterScalarFieldEnum]

@@ -33,6 +33,9 @@ import {
   createProjectCategory,
   updateProjectCategory,
   toggleProjectCategoryStatus,
+  unsetBoxFromMapping,
+  markBoxFactoryOut,
+  markBoxSiteIn
 } from "../../controllers/trackTraceController/trackTrace.controller";
 
 import { 
@@ -103,6 +106,8 @@ router.get('/quality-check-projects/:vendor_id', getQualityCheckProjects);
 router.get('/dashboard/:vendor_id', getTraceTraceDashboard);
 
 
+router.patch("/mapping/:id/:project_id/:vendor_id/unset-box", unsetBoxFromMapping);
+
 
 
 
@@ -123,6 +128,10 @@ router.get("/project-categories/:vendor_id", getProjectCategories);
 router.post("/project-categories", createProjectCategory);
 router.put("/project-categories/:id", updateProjectCategory);
 router.patch("/project-categories/:id/status", toggleProjectCategoryStatus);
+
+router.patch("/boxes/:box_id/factory-out", markBoxFactoryOut);
+router.patch("/boxes/:box_id/site-in",     markBoxSiteIn);
+
 
 
 // router.post(

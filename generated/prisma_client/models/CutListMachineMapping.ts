@@ -323,7 +323,7 @@ export type CutListMachineMappingGroupByOutputType = {
   _max: CutListMachineMappingMaxAggregateOutputType | null
 }
 
-type GetCutListMachineMappingGroupByPayload<T extends CutListMachineMappingGroupByArgs> = Prisma.PrismaPromise<
+export type GetCutListMachineMappingGroupByPayload<T extends CutListMachineMappingGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<CutListMachineMappingGroupByOutputType, T['by']> &
       {
@@ -3207,6 +3207,11 @@ export type CutListMachineMappingFindManyArgs<ExtArgs extends runtime.Types.Exte
    * Skip the first `n` CutListMachineMappings.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of CutListMachineMappings.
+   */
   distinct?: Prisma.CutListMachineMappingScalarFieldEnum | Prisma.CutListMachineMappingScalarFieldEnum[]
 }
 

@@ -1807,3 +1807,71 @@ export const uploadToWasabiCompletionPhotos = async (
 
   return Promise.all(uploads);
 };
+
+export const uploadPdfToWasabi = async (
+  localFilePath: string,
+  vendorId: number,
+  boxId: number,
+  fileName: string
+): Promise<string> => {
+  const key = `pdfs/boxes/${vendorId}/${boxId}/${uuidv4()}_${fileName}`;
+ 
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: key,
+      Body: fs.createReadStream(localFilePath),
+      ContentType: "application/pdf",
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+ 
+  await upload.done();
+  return key;
+};
+ 
+// ── Generate a signed download URL for a Wasabi object ────────────────────────
+// disposition: "attachment" triggers browser download, "inline" opens in browser
+ 
+export const getPdfSignedUrl = async (
+  key: string,
+  expiresIn: number = 3600,
+  disposition: "inline" | "attachment" = "attachment"
+): Promise<string> => {
+  const command = new GetObjectCommand({
+    Bucket: process.env.WASABI_BUCKET_NAME!,
+    Key: key,
+    ResponseContentDisposition: disposition,
+  });
+ 
+  return getSignedUrl(wasabi, command, { expiresIn });
+};
+
+
+export const uploadPdfAndGetSignedUrl = async (
+  localFilePath: string,
+  vendorId: number,
+  boxId: number,
+  fileName: string,
+  expiresIn: number = 3600
+): Promise<{ signedUrl: string; wasabiKey: string }> => {
+  try {
+    const wasabiKey = await uploadPdfToWasabi(
+      localFilePath,
+      vendorId,
+      boxId,
+      fileName
+    );
+ 
+    const signedUrl = await getPdfSignedUrl(wasabiKey, expiresIn, "attachment");
+ 
+    return { signedUrl, wasabiKey };
+  } finally {
+    // Always delete temp file whether upload succeeded or failed
+    if (fs.existsSync(localFilePath)) {
+      fs.unlinkSync(localFilePath);
+    }
+  }
+};

@@ -227,7 +227,7 @@ export type VloqEmailLogsGroupByOutputType = {
   _max: VloqEmailLogsMaxAggregateOutputType | null
 }
 
-type GetVloqEmailLogsGroupByPayload<T extends VloqEmailLogsGroupByArgs> = Prisma.PrismaPromise<
+export type GetVloqEmailLogsGroupByPayload<T extends VloqEmailLogsGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<VloqEmailLogsGroupByOutputType, T['by']> &
       {
@@ -1135,6 +1135,11 @@ export type VloqEmailLogsFindManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Skip the first `n` VloqEmailLogs.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of VloqEmailLogs.
+   */
   distinct?: Prisma.VloqEmailLogsScalarFieldEnum | Prisma.VloqEmailLogsScalarFieldEnum[]
 }
 

@@ -3651,3 +3651,145 @@ export const toggleProjectCategoryStatus = async (
     return validationResponse(0, "Something went wrong");
   }
 };
+
+export const unsetBoxFromMappingService = async (
+  mapping_id: number,
+  project_id: number,
+  vendor_id: number
+) => {
+  try {
+
+    
+ 
+    // ── 1. Find the mapping row scoped to project + vendor ───────────────────
+    const mapping = await prisma.cutListMachineMapping.findFirst({
+      where: {
+        id: mapping_id,
+        project_id,
+        vendor_id,
+      },
+      select: {
+        id: true,
+        box_id: true,
+      },
+    });
+ 
+    if (!mapping)        return validationResponse(0, "Mapping not found");
+    if (!mapping.box_id) return validationResponse(0, "Item is not assigned to any box");
+ 
+    // ── 2. Get project_details_id from the box ───────────────────────────────
+    const box = await prisma.boxMaster.findFirst({
+      where: {
+        id: mapping.box_id,
+        project_id,
+        vendor_id,
+        is_deleted: false,
+      },
+      select: { project_details_id: true },
+    });
+ 
+    if (!box) return validationResponse(0, "Box not found");
+ 
+    // ── 3 & 4. Atomic transaction: unset box + update ProjectDetails ─────────
+    await prisma.$transaction([
+      prisma.cutListMachineMapping.update({
+        where: { id: mapping_id },
+        data: {
+          box_id:       null,
+          actual_in_at: null,
+          in_operator:  null,
+        },
+      }),
+      prisma.projectDetails.update({
+        where: { id: box.project_details_id },
+        data: {
+          total_packed:   { decrement: 1 },
+          total_unpacked: { increment: 1 },
+        },
+      }),
+    ]);
+ 
+    return validationResponse(1, "Item removed from box successfully", {
+      mapping_id,
+      project_details_id: box.project_details_id,
+    });
+ 
+  } catch (error) {
+    console.error("Error in unsetBoxFromMappingService:", error);
+    return validationResponse(0, "Failed to remove item from box");
+  }
+};
+
+
+
+
+export const markBoxFactoryOutService = async (
+  box_id: number,
+  project_id: number,
+  vendor_id: number,
+  user_id: number
+) => {
+  try {
+    const box = await prisma.boxMaster.findFirst({
+      where: { id: box_id, project_id, vendor_id, is_deleted: false },
+      select: { id: true, box_status: true, factory_out_at: true },
+    });
+ 
+    if (!box)                          return validationResponse(0, "Box not found");
+    if (box.box_status !== "packed")   return validationResponse(0, "Only packed boxes can be marked as factory out");
+    if (box.factory_out_at)            return validationResponse(0, "Box already marked as factory out");
+ 
+    const updated = await prisma.boxMaster.update({
+      where: { id: box_id },
+      data: {
+        factory_out_at: new Date(),
+        factory_out_by: user_id,
+      },
+      select: { id: true, box_name: true, factory_out_at: true, factory_out_by: true },
+    });
+ 
+    return validationResponse(1, "Box marked as factory out successfully", updated);
+ 
+  } catch (error) {
+    console.error("Error in markBoxFactoryOutService:", error);
+    return validationResponse(0, "Failed to mark factory out");
+  }
+};
+ 
+// ── Mark site_in_at on a box ──────────────────────────────────────────────────
+export const markBoxSiteInService = async (
+  box_id: number,
+  project_id: number,
+  vendor_id: number,
+  user_id: number
+) => {
+  try {
+    const box = await prisma.boxMaster.findFirst({
+      where: { id: box_id, project_id, vendor_id, is_deleted: false },
+      select: { id: true, box_status: true, factory_out_at: true, site_in_at: true },
+    });
+ 
+    if (!box)                        return validationResponse(0, "Box not found");
+    if (box.box_status !== "packed") return validationResponse(0, "Only packed boxes can be marked as site in");
+    if (!box.factory_out_at)         return validationResponse(0, "Box has not been marked as factory out yet");
+    if (box.site_in_at)              return validationResponse(0, "Box already marked as site in");
+ 
+    const updated = await prisma.boxMaster.update({
+      where: { id: box_id },
+      data: {
+        site_in_at: new Date(),
+        site_in_by: user_id,
+      },
+      select: { id: true, box_name: true, site_in_at: true, site_in_by: true },
+    });
+ 
+    return validationResponse(1, "Box marked as site in successfully", updated);
+ 
+  } catch (error) {
+    console.error("Error in markBoxSiteInService:", error);
+    return validationResponse(0, "Failed to mark site in");
+  }
+};
+
+
+

@@ -218,6 +218,8 @@ model UserMaster {
   completionPhotos  DefectCompletionPhoto[]  
   projectCategoriesVendorMappingsCreated  ProjectCategoriesMasterVendorMapping[]  @relation("ProjectCategoriesVendorMapping_createdBy")
   projectCategoriesVendorMappingsUpdated  ProjectCategoriesMasterVendorMapping[]  @relation("ProjectCategoriesVendorMapping_updatedBy")
+  boxesFactoryOut    BoxMaster[]       @relation("BoxFactoryOutBy")
+  boxesSiteIn        BoxMaster[]       @relation("BoxSiteInBy")
 
 
 
@@ -310,6 +312,10 @@ model BoxMaster {
   deleted_by         Int?
   is_deleted         Boolean           @default(false)
   project_details_id Int
+  factory_out_by     Int?
+  factory_out_at     DateTime?
+  site_in_by         Int?
+  site_in_at         DateTime?
 
   details            ProjectDetails    @relation("BoxDetails", fields: [project_details_id], references: [id], onDelete: Cascade)
   project            ProjectMaster     @relation(fields: [project_id], references: [id], onDelete: Cascade)
@@ -317,6 +323,9 @@ model BoxMaster {
   items              ScanAndPackItem[]
   leadMaster         LeadMaster[]
   cutListMachineMapping CutListMachineMapping[]
+  factoryOutByUser   UserMaster?       @relation("BoxFactoryOutBy", fields: [factory_out_by], references: [id])
+  siteInByUser       UserMaster?       @relation("BoxSiteInBy", fields: [site_in_by], references: [id])
+
 }
 
 model ScanAndPackItem {

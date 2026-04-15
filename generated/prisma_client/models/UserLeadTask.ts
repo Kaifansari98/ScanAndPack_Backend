@@ -319,7 +319,7 @@ export type UserLeadTaskGroupByOutputType = {
   _max: UserLeadTaskMaxAggregateOutputType | null
 }
 
-type GetUserLeadTaskGroupByPayload<T extends UserLeadTaskGroupByArgs> = Prisma.PrismaPromise<
+export type GetUserLeadTaskGroupByPayload<T extends UserLeadTaskGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<UserLeadTaskGroupByOutputType, T['by']> &
       {
@@ -2850,6 +2850,11 @@ export type UserLeadTaskFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Skip the first `n` UserLeadTasks.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of UserLeadTasks.
+   */
   distinct?: Prisma.UserLeadTaskScalarFieldEnum | Prisma.UserLeadTaskScalarFieldEnum[]
 }
 

@@ -199,7 +199,7 @@ export type VendorSettingKeyGroupByOutputType = {
   _max: VendorSettingKeyMaxAggregateOutputType | null
 }
 
-type GetVendorSettingKeyGroupByPayload<T extends VendorSettingKeyGroupByArgs> = Prisma.PrismaPromise<
+export type GetVendorSettingKeyGroupByPayload<T extends VendorSettingKeyGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<VendorSettingKeyGroupByOutputType, T['by']> &
       {
@@ -1159,6 +1159,11 @@ export type VendorSettingKeyFindManyArgs<ExtArgs extends runtime.Types.Extension
    * Skip the first `n` VendorSettingKeys.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of VendorSettingKeys.
+   */
   distinct?: Prisma.VendorSettingKeyScalarFieldEnum | Prisma.VendorSettingKeyScalarFieldEnum[]
 }
 

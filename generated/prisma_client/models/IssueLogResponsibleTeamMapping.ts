@@ -186,7 +186,7 @@ export type IssueLogResponsibleTeamMappingGroupByOutputType = {
   _max: IssueLogResponsibleTeamMappingMaxAggregateOutputType | null
 }
 
-type GetIssueLogResponsibleTeamMappingGroupByPayload<T extends IssueLogResponsibleTeamMappingGroupByArgs> = Prisma.PrismaPromise<
+export type GetIssueLogResponsibleTeamMappingGroupByPayload<T extends IssueLogResponsibleTeamMappingGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<IssueLogResponsibleTeamMappingGroupByOutputType, T['by']> &
       {
@@ -1216,6 +1216,11 @@ export type IssueLogResponsibleTeamMappingFindManyArgs<ExtArgs extends runtime.T
    * Skip the first `n` IssueLogResponsibleTeamMappings.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of IssueLogResponsibleTeamMappings.
+   */
   distinct?: Prisma.IssueLogResponsibleTeamMappingScalarFieldEnum | Prisma.IssueLogResponsibleTeamMappingScalarFieldEnum[]
 }
 

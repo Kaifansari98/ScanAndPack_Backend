@@ -757,7 +757,7 @@ export type LeadMasterGroupByOutputType = {
   _max: LeadMasterMaxAggregateOutputType | null
 }
 
-type GetLeadMasterGroupByPayload<T extends LeadMasterGroupByArgs> = Prisma.PrismaPromise<
+export type GetLeadMasterGroupByPayload<T extends LeadMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LeadMasterGroupByOutputType, T['by']> &
       {
@@ -26374,6 +26374,11 @@ export type LeadMasterFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Skip the first `n` LeadMasters.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of LeadMasters.
+   */
   distinct?: Prisma.LeadMasterScalarFieldEnum | Prisma.LeadMasterScalarFieldEnum[]
 }
 

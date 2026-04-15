@@ -270,15 +270,15 @@ export const getProjectItemById = (id: number) => {
 
 
 export const getProjectsByVendorIdService = async (vendorId: number) => {
-
-  // ── 1. Fetch packaging machine for this vendor (type 18) ──────────────────
+ 
+  // ── 1. Fetch packaging machine ───────────────────────────────────────────
   const packagingMachine = await prisma.machineMaster.findFirst({
     where: { vendor_id: vendorId, machine_type_id: 18 },
     select: { id: true, sequence_no: true },
     orderBy: { id: "asc" },
   });
-
-  // ── 2. Fetch all projects ─────────────────────────────────────────────────
+ 
+  // ── 2. Fetch all projects ────────────────────────────────────────────────
   const projects = await prisma.projectMaster.findMany({
     where: { vendor_id: vendorId },
     select: {
@@ -314,9 +314,8 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
       },
     },
   });
-
+ 
   if (!packagingMachine) {
-    // No packaging machine configured — return projects with zero totals
     return projects.map((project) => ({
       id: project.id,
       project_name: project.project_name,
@@ -327,22 +326,17 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
       createdByUser: project.createdByUser,
       details: project.details,
       aggregatedTotals: { total_items: 0, total_packed: 0, total_unpacked: 0 },
+      factory_out_at: null,
+      site_in_at: null,
     }));
   }
-
+ 
   const pkgMachineId  = packagingMachine.id;
   const pkgMachineSeq = packagingMachine.sequence_no ?? 0;
-
-  // ── 3. Pre-fetch all CutListMachineMapping rows at seq < packaging seq ─────
-  // Used for Part A waterfall check (per cut_list, was its last prior machine scanned?)
-  // and Part B (cut_lists with no prior machines).
-  // Fetch once for all projects to avoid N+1.
   const allProjectIds = projects.map((p) => p.id);
-
-  const [
-    priorRows,          // rows at machines BEFORE packaging
-    packagingRows,      // rows at packaging machine
-  ] = await Promise.all([
+ 
+  // ── 3. Fetch CutListMachineMapping rows + boxes for all projects ──────────
+  const [priorRows, packagingRows, allBoxes] = await Promise.all([
     prisma.cutListMachineMapping.findMany({
       where: {
         vendor_id: vendorId,
@@ -357,7 +351,6 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
         actual_in_at: true,
       },
     }),
-
     prisma.cutListMachineMapping.findMany({
       where: {
         vendor_id: vendorId,
@@ -371,42 +364,22 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
         box_id: true,
       },
     }),
+    // ── Boxes: get factory_out_at and site_in_at per project ──────────────
+    prisma.boxMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        project_id: { in: allProjectIds },
+        is_deleted: false,
+      },
+      select: {
+        project_id: true,
+        factory_out_at: true,
+        site_in_at: true,
+      },
+    }),
   ]);
-
-  // ── 4. Build lookup maps ───────────────────────────────────────────────────
-
-  // Map: project_id → Set of cut_list_ids that have prior machine rows
-  const cutListsWithPriorByProject = new Map<number, Set<number>>();
-  // Map: `${project_id}-${cut_list_id}` → max sequence_no prior row's actual_in_at
-  // We only need the LAST (highest seq) prior row per cut_list per project
-  const lastPriorRowByKey = new Map<string, Date | null>();
-
-  for (const row of priorRows) {
-    const key = `${row.project_id}-${row.cut_list_id}`;
-
-    // Track cut_lists that have prior rows
-    if (!cutListsWithPriorByProject.has(row.project_id)) {
-      cutListsWithPriorByProject.set(row.project_id, new Set());
-    }
-    cutListsWithPriorByProject.get(row.project_id)!.add(row.cut_list_id);
-
-    // Keep only the highest-seq prior row per (project, cut_list)
-    const existing = lastPriorRowByKey.get(key);
-    if (existing === undefined) {
-      lastPriorRowByKey.set(key, row.actual_in_at);
-    } else {
-      // We want the row with highest sequence_no — since we haven't sorted,
-      // compare: if current row seq is higher, update
-      // Actually we need seq info — re-approach: track per (project, cut_list) the highest seq scanned status
-      // Simplest: store actual_in_at of the last prior row (highest seq)
-      // Since we fetched all prior rows, we overwrite — but we need highest seq.
-      // The map below handles this properly.
-    }
-  }
-
-  // Rebuild correctly: for each (project_id, cut_list_id), find the row with MAX sequence_no
-  const lastPriorActualMap = new Map<string, Date | null>();
-  // Group prior rows by key, pick max seq
+ 
+  // ── 4. Build lookup maps ─────────────────────────────────────────────────
   const priorByKey = new Map<string, typeof priorRows[0]>();
   for (const row of priorRows) {
     const key = `${row.project_id}-${row.cut_list_id}`;
@@ -415,60 +388,78 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
       priorByKey.set(key, row);
     }
   }
+ 
+  const lastPriorActualMap = new Map<string, Date | null>();
   for (const [key, row] of priorByKey) {
     lastPriorActualMap.set(key, row.actual_in_at);
   }
-
-  // ── 5. Compute totals per project ─────────────────────────────────────────
-
-  const result = projects.map((project) => {
-    const pid = project.id;
-    const hasPrior = cutListsWithPriorByProject.get(pid) ?? new Set<number>();
-
-    const projPkgRows = packagingRows.filter((r) => r.project_id === pid);
-
-    let total_items  = 0;
-    let total_packed = 0;
-
-    for (const row of projPkgRows) {
-      const clId = row.cut_list_id;
-
-      if (hasPrior.has(clId)) {
-        // Part A: eligible only if last prior machine was scanned
-        const lastPriorActual = lastPriorActualMap.get(`${pid}-${clId}`);
-        if (lastPriorActual !== null && lastPriorActual !== undefined) {
-          total_items++;
-        }
-      } else {
-        // Part B: no prior machine — always eligible
-        total_items++;
-      }
-
-      // Packed = box_id is set
-      if (row.box_id !== null) {
-        total_packed++;
-      }
+ 
+  const cutListsWithPriorByProject = new Map<number, Set<number>>();
+  for (const row of priorRows) {
+    if (!cutListsWithPriorByProject.has(row.project_id)) {
+      cutListsWithPriorByProject.set(row.project_id, new Set());
     }
-
-    // Deduplicate: groupBy cut_list_id for both total and packed
-    // (qty > 1 creates multiple rows — count distinct cut_list_ids)
+    cutListsWithPriorByProject.get(row.project_id)!.add(row.cut_list_id);
+  }
+ 
+  // ── 5. Build factory_out / site_in status per project ────────────────────
+  // factory_out_at: latest factory_out_at across all boxes (null if any box has it null)
+  // site_in_at:     latest site_in_at across all boxes (null if any box has it null)
+  const boxesByProject = new Map<number, typeof allBoxes>();
+  for (const box of allBoxes) {
+    if (!boxesByProject.has(box.project_id)) {
+      boxesByProject.set(box.project_id, []);
+    }
+    boxesByProject.get(box.project_id)!.push(box);
+  }
+ 
+  // ── 6. Compute totals + dispatch status per project ──────────────────────
+  const result = projects.map((project) => {
+    const pid     = project.id;
+    const hasPrior = cutListsWithPriorByProject.get(pid) ?? new Set<number>();
+    const projPkgRows = packagingRows.filter((r) => r.project_id === pid);
+ 
     const eligibleCutLists = new Set<number>();
     const packedCutLists   = new Set<number>();
-
+ 
     for (const row of projPkgRows) {
       const clId = row.cut_list_id;
       const isEligible = hasPrior.has(clId)
         ? (lastPriorActualMap.get(`${pid}-${clId}`) ?? null) !== null
         : true;
-
       if (isEligible) eligibleCutLists.add(clId);
       if (row.box_id !== null) packedCutLists.add(clId);
     }
-
-    const totalItems   = eligibleCutLists.size;
-    const totalPacked  = packedCutLists.size;
+ 
+    const totalItems    = eligibleCutLists.size;
+    const totalPacked   = packedCutLists.size;
     const totalUnpacked = Math.max(0, totalItems - totalPacked);
-
+ 
+    // ── Dispatch status ──────────────────────────────────────────────────
+    // factory_out_at = null if ANY box hasn't been dispatched yet
+    // site_in_at     = null if ANY box hasn't arrived at site yet
+    const projectBoxes = boxesByProject.get(pid) ?? [];
+ 
+    const anyFactoryOutNull = projectBoxes.length === 0 || projectBoxes.some((b) => b.factory_out_at === null);
+    const allFactoryOutSet  = projectBoxes.length > 0 && projectBoxes.every((b) => b.factory_out_at !== null);
+    const anyFactoryOutSet  = projectBoxes.some((b) => b.factory_out_at !== null);
+    const anySiteInNull     = projectBoxes.some((b) => b.site_in_at === null);
+ 
+    // Latest timestamps for display
+    const latestFactoryOutAt = anyFactoryOutNull
+      ? null
+      : projectBoxes.reduce<Date | null>((latest, b) => {
+          if (!b.factory_out_at) return latest;
+          return !latest || b.factory_out_at > latest ? b.factory_out_at : latest;
+        }, null);
+ 
+    const latestSiteInAt = !allFactoryOutSet || anySiteInNull
+      ? null
+      : projectBoxes.reduce<Date | null>((latest, b) => {
+          if (!b.site_in_at) return latest;
+          return !latest || b.site_in_at > latest ? b.site_in_at : latest;
+        }, null);
+ 
     return {
       id: project.id,
       project_name: project.project_name,
@@ -479,15 +470,24 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
       createdByUser: project.createdByUser,
       details: project.details,
       aggregatedTotals: {
-        total_items:   totalItems,
-        total_packed:  totalPacked,
+        total_items:    totalItems,
+        total_packed:   totalPacked,
         total_unpacked: totalUnpacked,
       },
+      // null = not all boxes dispatched, Date = all dispatched
+      factory_out_at:  latestFactoryOutAt,
+      // null = not all boxes received at site, Date = all received
+      site_in_at:      latestSiteInAt,
+      // true = every box has factory_out_at set
+      all_factory_out: allFactoryOutSet,
+      // true = at least one box has factory_out_at set
+      any_factory_out: anyFactoryOutSet,
     };
   });
-
+ 
   return result;
 };
+
 
 export const getProjectItemByFields = async (params: {
   project_id: number;

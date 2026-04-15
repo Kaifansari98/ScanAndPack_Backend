@@ -9,7 +9,11 @@ import {
   markBoxAsPacked,
   markBoxAsUnpacked,
   deleteBoxAndItsScanItems,
-  getGroupedItemInfo
+  getGroupedItemInfo,
+  generateBoxPdf,
+  generateProjectBoxPdf,
+  generateAllBoxesPdf,
+  generateProjectFullReport
 } from '../../controllers/boxControllers/box.controller';
 
 const router = Router();
@@ -37,5 +41,16 @@ router.put('/status/unpacked/:boxId', markBoxAsUnpacked);
 router.delete('/delete/:boxId', deleteBoxAndItsScanItems);
 
 router.get('/grouped-info/:boxId', getGroupedItemInfo);
+
+router.get('/boxes/pdf/:boxId/:project_id/:vendor_id', generateBoxPdf);
+router.get('/boxes/projects/:project_id/:vendor_id', generateProjectBoxPdf);
+router.get("/all-boxes-pdf/:project_id/:vendor_id", generateAllBoxesPdf);
+
+router.get("/project-full-report/:project_id/:vendor_id", generateProjectFullReport);
+
+
+
+
+
 
 export default router;

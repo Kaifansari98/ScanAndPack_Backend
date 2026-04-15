@@ -935,3 +935,78 @@ export const toggleProjectCategoryStatus = async (_req: Request, res: Response) 
     ApiResponse.success(serviceResponse.data, '', 200)
   );
 };
+
+export const unsetBoxFromMapping = async (req: Request, res: Response) => {
+  try {
+    console.log("req.params:",req.params);
+    const mapping_id = Number(req.params.id);
+    const project_id = Number(req.params.project_id ?? req.params.project_id);
+    const vendor_id  = Number(req.params.vendor_id  ?? req.params.vendor_id);
+ 
+    if (isNaN(mapping_id) || isNaN(project_id) || isNaN(vendor_id)) {
+      return res.status(400).json(ApiResponse.error("Invalid id, project_id or vendor_id", 400));
+    }
+ 
+    const result = await trackTraceService.unsetBoxFromMappingService(mapping_id, project_id, vendor_id);
+ 
+    if (result.status === 0) {
+      return res.status(200).json(ApiResponse.error(result.message, 500));
+    }
+ 
+    return res.status(200).json(
+      ApiResponse.success(result.data, result.message, 200)
+    );
+  } catch (err) {
+    console.error("unsetBoxFromMapping controller error:", err);
+    return res.status(500).json(ApiResponse.error("Internal server error", 500));
+  }
+};
+
+
+export const markBoxFactoryOut = async (req: Request, res: Response) => {
+  try {
+    const box_id     = Number(req.params.box_id);
+    const project_id = Number(req.body.project_id);
+    const vendor_id  = Number(req.body.vendor_id);
+    const user_id    = Number(req.body.user_id);
+ 
+    if ([box_id, project_id, vendor_id, user_id].some(isNaN)) {
+      return res.status(400).json(ApiResponse.error("Invalid parameters", 400));
+    }
+ 
+    const result = await trackTraceService.markBoxFactoryOutService(box_id, project_id, vendor_id, user_id);
+ 
+    if (result.status === 0) {
+      return res.status(200).json(ApiResponse.error(result.message, 500));
+    }
+ 
+    return res.status(200).json(ApiResponse.success(result.data, result.message, 200));
+  } catch (err) {
+    console.error("markBoxFactoryOut error:", err);
+    return res.status(500).json(ApiResponse.error("Internal server error", 500));
+  }
+};
+ 
+export const markBoxSiteIn = async (req: Request, res: Response) => {
+  try {
+    const box_id     = Number(req.params.box_id);
+    const project_id = Number(req.body.project_id);
+    const vendor_id  = Number(req.body.vendor_id);
+    const user_id    = Number(req.body.user_id);
+ 
+    if ([box_id, project_id, vendor_id, user_id].some(isNaN)) {
+      return res.status(400).json(ApiResponse.error("Invalid parameters", 400));
+    }
+ 
+    const result = await trackTraceService.markBoxSiteInService(box_id, project_id, vendor_id, user_id);
+ 
+    if (result.status === 0) {
+      return res.status(200).json(ApiResponse.error(result.message, 500));
+    }
+ 
+    return res.status(200).json(ApiResponse.success(result.data, result.message, 200));
+  } catch (err) {
+    console.error("markBoxSiteIn error:", err);
+    return res.status(500).json(ApiResponse.error("Internal server error", 500));
+  }
+};

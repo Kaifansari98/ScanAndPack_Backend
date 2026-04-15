@@ -213,7 +213,7 @@ export type UserActivityLogGroupByOutputType = {
   _max: UserActivityLogMaxAggregateOutputType | null
 }
 
-type GetUserActivityLogGroupByPayload<T extends UserActivityLogGroupByArgs> = Prisma.PrismaPromise<
+export type GetUserActivityLogGroupByPayload<T extends UserActivityLogGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<UserActivityLogGroupByOutputType, T['by']> &
       {
@@ -1270,6 +1270,11 @@ export type UserActivityLogFindManyArgs<ExtArgs extends runtime.Types.Extensions
    * Skip the first `n` UserActivityLogs.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of UserActivityLogs.
+   */
   distinct?: Prisma.UserActivityLogScalarFieldEnum | Prisma.UserActivityLogScalarFieldEnum[]
 }
 

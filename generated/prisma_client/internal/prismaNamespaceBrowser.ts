@@ -319,7 +319,11 @@ export const BoxMasterScalarFieldEnum = {
   deleted_at: 'deleted_at',
   deleted_by: 'deleted_by',
   is_deleted: 'is_deleted',
-  project_details_id: 'project_details_id'
+  project_details_id: 'project_details_id',
+  factory_out_by: 'factory_out_by',
+  factory_out_at: 'factory_out_at',
+  site_in_by: 'site_in_by',
+  site_in_at: 'site_in_at'
 } as const
 
 export type BoxMasterScalarFieldEnum = (typeof BoxMasterScalarFieldEnum)[keyof typeof BoxMasterScalarFieldEnum]

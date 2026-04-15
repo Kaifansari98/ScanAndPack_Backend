@@ -182,7 +182,7 @@ export type StateMasterGroupByOutputType = {
   _max: StateMasterMaxAggregateOutputType | null
 }
 
-type GetStateMasterGroupByPayload<T extends StateMasterGroupByArgs> = Prisma.PrismaPromise<
+export type GetStateMasterGroupByPayload<T extends StateMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<StateMasterGroupByOutputType, T['by']> &
       {
@@ -1200,6 +1200,11 @@ export type StateMasterFindManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Skip the first `n` StateMasters.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of StateMasters.
+   */
   distinct?: Prisma.StateMasterScalarFieldEnum | Prisma.StateMasterScalarFieldEnum[]
 }
 

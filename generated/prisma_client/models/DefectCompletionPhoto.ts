@@ -240,7 +240,7 @@ export type DefectCompletionPhotoGroupByOutputType = {
   _max: DefectCompletionPhotoMaxAggregateOutputType | null
 }
 
-type GetDefectCompletionPhotoGroupByPayload<T extends DefectCompletionPhotoGroupByArgs> = Prisma.PrismaPromise<
+export type GetDefectCompletionPhotoGroupByPayload<T extends DefectCompletionPhotoGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<DefectCompletionPhotoGroupByOutputType, T['by']> &
       {
@@ -1899,6 +1899,11 @@ export type DefectCompletionPhotoFindManyArgs<ExtArgs extends runtime.Types.Exte
    * Skip the first `n` DefectCompletionPhotos.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of DefectCompletionPhotos.
+   */
   distinct?: Prisma.DefectCompletionPhotoScalarFieldEnum | Prisma.DefectCompletionPhotoScalarFieldEnum[]
 }
 

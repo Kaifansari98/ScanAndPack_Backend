@@ -259,7 +259,7 @@ export type VendorMasterGroupByOutputType = {
   _max: VendorMasterMaxAggregateOutputType | null
 }
 
-type GetVendorMasterGroupByPayload<T extends VendorMasterGroupByArgs> = Prisma.PrismaPromise<
+export type GetVendorMasterGroupByPayload<T extends VendorMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<VendorMasterGroupByOutputType, T['by']> &
       {
@@ -28780,6 +28780,11 @@ export type VendorMasterFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Skip the first `n` VendorMasters.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of VendorMasters.
+   */
   distinct?: Prisma.VendorMasterScalarFieldEnum | Prisma.VendorMasterScalarFieldEnum[]
 }
 

@@ -193,7 +193,7 @@ export type LeadChatRoomGroupByOutputType = {
   _max: LeadChatRoomMaxAggregateOutputType | null
 }
 
-type GetLeadChatRoomGroupByPayload<T extends LeadChatRoomGroupByArgs> = Prisma.PrismaPromise<
+export type GetLeadChatRoomGroupByPayload<T extends LeadChatRoomGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LeadChatRoomGroupByOutputType, T['by']> &
       {
@@ -1459,6 +1459,11 @@ export type LeadChatRoomFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Skip the first `n` LeadChatRooms.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of LeadChatRooms.
+   */
   distinct?: Prisma.LeadChatRoomScalarFieldEnum | Prisma.LeadChatRoomScalarFieldEnum[]
 }
 

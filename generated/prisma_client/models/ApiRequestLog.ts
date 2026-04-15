@@ -227,7 +227,7 @@ export type ApiRequestLogGroupByOutputType = {
   _max: ApiRequestLogMaxAggregateOutputType | null
 }
 
-type GetApiRequestLogGroupByPayload<T extends ApiRequestLogGroupByArgs> = Prisma.PrismaPromise<
+export type GetApiRequestLogGroupByPayload<T extends ApiRequestLogGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<ApiRequestLogGroupByOutputType, T['by']> &
       {
@@ -1135,6 +1135,11 @@ export type ApiRequestLogFindManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Skip the first `n` ApiRequestLogs.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of ApiRequestLogs.
+   */
   distinct?: Prisma.ApiRequestLogScalarFieldEnum | Prisma.ApiRequestLogScalarFieldEnum[]
 }
 
