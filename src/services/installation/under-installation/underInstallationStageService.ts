@@ -2797,6 +2797,15 @@ export class UnderInstallationStageService {
           id: true,
           account_id: true,
           usable_handover_completed_at: true,
+          productMappings: {
+            select: {
+              productType: {
+                select: {
+                  tag: true,
+                },
+              },
+            },
+          },
         },
       });
 
@@ -2821,34 +2830,40 @@ export class UnderInstallationStageService {
         },
       });
 
-      for (const [index, monthGap] of [4, 8, 12].entries()) {
-        const scheduledDate =
-          UnderInstallationStageService.addMonthsPreservingDay(
-            usableHandoverCompletedAt,
-            monthGap,
-          );
+      const isSmallOrderLead = existingLead.productMappings.some(
+        (mapping) => mapping.productType?.tag === "Type 7",
+      );
 
-        await tx.leadServiceSchedule.upsert({
-          where: {
-            uniq_lead_service_no_type: {
+      if (!isSmallOrderLead) {
+        for (const [index, monthGap] of [4, 8, 12].entries()) {
+          const scheduledDate =
+            UnderInstallationStageService.addMonthsPreservingDay(
+              usableHandoverCompletedAt,
+              monthGap,
+            );
+
+          await tx.leadServiceSchedule.upsert({
+            where: {
+              uniq_lead_service_no_type: {
+                lead_id,
+                service_no: index + 1,
+                service_type: "free",
+              },
+            },
+            update: {},
+            create: {
+              vendor_id,
               lead_id,
+              account_id: existingLead.account_id,
               service_no: index + 1,
               service_type: "free",
+              scheduled_for: scheduledDate,
+              original_scheduled_for: scheduledDate,
+              created_by: updated_by,
+              updated_by,
             },
-          },
-          update: {},
-          create: {
-            vendor_id,
-            lead_id,
-            account_id: existingLead.account_id,
-            service_no: index + 1,
-            service_type: "free",
-            scheduled_for: scheduledDate,
-            original_scheduled_for: scheduledDate,
-            created_by: updated_by,
-            updated_by,
-          },
-        });
+          });
+        }
       }
 
       await tx.leadDetailedLogs.create({
