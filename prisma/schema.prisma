@@ -220,6 +220,7 @@ model UserMaster {
   projectCategoriesVendorMappingsUpdated  ProjectCategoriesMasterVendorMapping[]  @relation("ProjectCategoriesVendorMapping_updatedBy")
   boxesFactoryOut    BoxMaster[]       @relation("BoxFactoryOutBy")
   boxesSiteIn        BoxMaster[]       @relation("BoxSiteInBy")
+  mappingSiteIns CutListMachineMapping[] @relation("MappingSiteInBy")
 
 
 
@@ -1528,6 +1529,9 @@ model CutListMachineMapping {
   created_by    Int
   created_at    DateTime       @default(now())
   box_id        Int?
+  site_in_at   DateTime?
+site_in_by   Int?
+
   cut_list      CutList        @relation(fields: [cut_list_id], references: [id])
   operator      UserMaster?    @relation(fields: [in_operator], references: [id])
   lead          LeadMaster?    @relation(fields: [lead_id], references: [id])
@@ -1537,6 +1541,8 @@ model CutListMachineMapping {
   defectedItems DefectedItem[]
   completionPhotos  DefectCompletionPhoto[]
   boxMaster        BoxMaster?   @relation(fields: [box_id], references: [id])
+  siteInByUser UserMaster? @relation("MappingSiteInBy", fields: [site_in_by], references: [id])
+
 
 
 
@@ -1924,6 +1930,7 @@ model ProjectCategoriesMaster {
   vendor_id       Int
   created_at      DateTime                     @default(now())
   updated_at      DateTime                     @updatedAt
+  external_category_id Int?
   vendor          VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   projectCategoriesMasterVendorMapping  ProjectCategoriesMasterVendorMapping[]
 

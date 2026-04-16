@@ -857,6 +857,7 @@ export const getTraceTraceDashboard = async (_req: Request, res: Response) => {
 
 
 export const getProjectCategories = async (_req: Request, res: Response) => {
+    
   const { vendor_id } = _req.params;
   const serviceResponse = await trackTraceService.getProjectCategories(Number(vendor_id));
   if (serviceResponse.status == 0) {
@@ -1007,6 +1008,45 @@ export const markBoxSiteIn = async (req: Request, res: Response) => {
     return res.status(200).json(ApiResponse.success(result.data, result.message, 200));
   } catch (err) {
     console.error("markBoxSiteIn error:", err);
+    return res.status(500).json(ApiResponse.error("Internal server error", 500));
+  }
+};
+
+
+// POST /project-categories/sync
+export const syncCategories = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.body.vendor_id ?? req.query.vendor_id);
+    if (isNaN(vendor_id)) {
+      return res.status(400).json(ApiResponse.error("Invalid vendor_id", 400));
+    }
+ 
+    const result = await trackTraceService.syncCategoriesFromExternalService(vendor_id);
+ 
+    if (result.status === 0) {
+      return res.status(200).json(ApiResponse.error(result.message, 500));
+    }
+ 
+    return res.status(200).json(ApiResponse.success(result.data, result.message, 200));
+  } catch (err) {
+    console.error("syncCategories error:", err);
+    return res.status(500).json(ApiResponse.error("Internal server error", 500));
+  }
+};
+ 
+// GET /project-categories/check-token?vendor_id=
+export const checkToken = async (req: Request, res: Response) => {
+    console.log("checkToken",req.query);
+  try {
+    const vendor_id = Number(req.query.vendor_id);
+    if (isNaN(vendor_id)) {
+      return res.status(400).json(ApiResponse.error("Invalid vendor_id", 400));
+    }
+ 
+    const result = await trackTraceService.checkExternalTokenService(vendor_id);
+    return res.status(200).json(ApiResponse.success(result.data, result.message, 200));
+  } catch (err) {
+    console.error("checkToken error:", err);
     return res.status(500).json(ApiResponse.error("Internal server error", 500));
   }
 };

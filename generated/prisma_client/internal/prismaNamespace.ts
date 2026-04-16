@@ -9117,7 +9117,9 @@ export const CutListMachineMappingScalarFieldEnum = {
   out_operator: 'out_operator',
   created_by: 'created_by',
   created_at: 'created_at',
-  box_id: 'box_id'
+  box_id: 'box_id',
+  site_in_at: 'site_in_at',
+  site_in_by: 'site_in_by'
 } as const
 
 export type CutListMachineMappingScalarFieldEnum = (typeof CutListMachineMappingScalarFieldEnum)[keyof typeof CutListMachineMappingScalarFieldEnum]
@@ -9466,7 +9468,8 @@ export const ProjectCategoriesMasterScalarFieldEnum = {
   status: 'status',
   vendor_id: 'vendor_id',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  external_category_id: 'external_category_id'
 } as const
 
 export type ProjectCategoriesMasterScalarFieldEnum = (typeof ProjectCategoriesMasterScalarFieldEnum)[keyof typeof ProjectCategoriesMasterScalarFieldEnum]

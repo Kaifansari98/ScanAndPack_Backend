@@ -13,7 +13,9 @@ import {
   generateBoxPdf,
   generateProjectBoxPdf,
   generateAllBoxesPdf,
-  generateProjectFullReport
+  generateProjectFullReport,
+    markItemSiteIn,
+    getBoxSiteInStatus
 } from '../../controllers/boxControllers/box.controller';
 
 const router = Router();
@@ -48,7 +50,8 @@ router.get("/all-boxes-pdf/:project_id/:vendor_id", generateAllBoxesPdf);
 
 router.get("/project-full-report/:project_id/:vendor_id", generateProjectFullReport);
 
-
+router.patch("/boxes/:box_id/items/site-in", markItemSiteIn);
+router.get("/boxes/:box_id/site-in-status",               getBoxSiteInStatus);
 
 
 

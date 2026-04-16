@@ -1,5 +1,5 @@
 import { validationResponse } from '../../../src/utils/validationResponse';
-
+import axios from "axios";
 import { prisma } from '../../prisma/client';
 import { Prisma, CutListMachineMapping } from '../../prisma/generated';
 import { CutListSavePayload, MarkDefectPayload, QRParam, TrackTraceDashboardPayload } from '../../../src/types/track-trace';
@@ -3792,4 +3792,121 @@ export const markBoxSiteInService = async (
 };
 
 
+const CADBID_API_URL = "https://cadbid.com/api/category/get-ct";
+const CADBID_PLATFORM_ID = 1;
+ 
+export const syncCategoriesFromExternalService = async (vendor_id: number) => {
+  try {
+ 
+    // ── 1. Check ExternalPlatformToken for this vendor ───────────────────────
+    const tokenRecord = await prisma.externalPlatformToken.findFirst({
+      where: {
+        vendor_id,
+        external_platform_id: CADBID_PLATFORM_ID,
+        active: "Yes",
+      },
+      select: { id: true, token: true },
+    });
+ 
+    console.log("tokenRecord.token:",tokenRecord?.token);
+    if (!tokenRecord) {
+      return validationResponse(0, "No active token found for this vendor. Please connect your CadBid account first.");
+    }
+ 
+    // ── 2. Call CadBid API ───────────────────────────────────────────────────
+    let externalCategories: { nItemCategoryId: number; sName: string }[] = [];
+ 
+    try {
+      const response = await axios.get(CADBID_API_URL, {
+        headers: {
+          "Authorization": `Bearer ${tokenRecord.token}`,
+        },
+        timeout: 15000,
+      });
+      
+      // externalCategories = Array.isArray(response.data.categories) ? response.data : [];
+      externalCategories = Array.isArray(response.data?.categories) ? response.data.categories : [];
 
+      console.log("externalCategories count:", externalCategories.length);
+    } catch (apiErr: any) {
+      console.error("CadBid API error:", apiErr?.response?.data ?? apiErr.message);
+      return validationResponse(0, "Failed to fetch categories from CadBid. Please check your token.");
+    }
+ 
+    if (externalCategories.length === 0) {
+      return validationResponse(0, "No categories returned from CadBid");
+    }
+ 
+    // ── 3. Upsert into ProjectCategoriesMaster ───────────────────────────────
+    // Upsert key: external_category_id + vendor_id
+    // ProjectCategoriesMaster has no unique constraint on those two fields,
+    // so we do a manual find-then-create-or-update.
+ 
+    let created = 0;
+    let updated = 0;
+ 
+    for (const cat of externalCategories) {
+      const { nItemCategoryId, sName } = cat;
+      if (!nItemCategoryId || !sName) continue;
+ 
+      const existing = await prisma.projectCategoriesMaster.findFirst({
+        where: {
+          external_category_id: nItemCategoryId,
+          vendor_id,
+        },
+        select: { id: true, category_name: true },
+      });
+ 
+      if (existing) {
+        // Update name if changed
+        if (existing.category_name !== sName) {
+          await prisma.projectCategoriesMaster.update({
+            where: { id: existing.id },
+            data: { category_name: sName },
+          });
+          updated++;
+        }
+      } else {
+        await prisma.projectCategoriesMaster.create({
+          data: {
+            vendor_id,
+            category_name:       sName,
+            external_category_id: nItemCategoryId,
+            status:              "Yes",
+          },
+        });
+        created++;
+      }
+    }
+ 
+    return validationResponse(1, `Sync complete. ${created} created, ${updated} updated.`, {
+      total:   externalCategories.length,
+      created,
+      updated,
+      skipped: externalCategories.length - created - updated,
+    });
+ 
+  } catch (error) {
+    console.error("Error in syncCategoriesFromExternalService:", error);
+    return validationResponse(0, "Sync failed");
+  }
+};
+ 
+// ── Check if vendor has an active token ──────────────────────────────────────
+export const checkExternalTokenService = async (vendor_id: number) => {
+  try {
+    const token = await prisma.externalPlatformToken.findFirst({
+      where: {
+        vendor_id,
+        external_platform_id: CADBID_PLATFORM_ID,
+        active: "Yes",
+      },
+      select: { id: true, name: true, email: true, created_at: true },
+    });
+ 
+    return validationResponse(1, "Token status fetched", { has_token: !!token, token });
+  } catch (error) {
+    console.error("Error in checkExternalTokenService:", error);
+    return validationResponse(0, "Failed to check token");
+  }
+};

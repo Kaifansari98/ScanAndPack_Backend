@@ -1637,3 +1637,217 @@ export const generateProjectFullReportService = async (
 };
 
 
+export const markItemSiteInService = async (
+  unique_code: string,
+  box_id: number,
+  project_id: number,
+  vendor_id: number,
+  user_id: number
+) => {
+  try {
+ 
+    // ── 1. Verify the box exists and is marked site_in ───────────────────────
+    const box = await prisma.boxMaster.findFirst({
+      where: {
+        id: box_id,
+        project_id,
+        vendor_id,
+        is_deleted: false,
+        box_status: "packed",
+      },
+      select: { id: true, site_in_at: true },
+    });
+ 
+    if (!box)            return validationResponse(0, "Box not found");
+    if (!box.site_in_at) return validationResponse(0, "Box has not been marked as site in yet");
+ 
+    // ── 2. Look up cut_list by unique_code scoped to project + vendor ────────
+    const cutList = await prisma.cutList.findFirst({
+      where: {
+        unique_code,
+        project_id,
+        vendor_id,
+      },
+      select: { id: true, item_name: true, unique_code: true },
+    });
+ 
+    if (!cutList) return validationResponse(0, "Item not found for this QR code");
+ 
+    // ── 3. Find the packaging machine ────────────────────────────────────────
+    const packagingMachine = await prisma.machineMaster.findFirst({
+      where: { vendor_id, machine_type_id: 18 },
+      select: { id: true },
+      orderBy: { id: "asc" },
+    });
+ 
+    if (!packagingMachine) return validationResponse(0, "Packaging machine not configured");
+ 
+    // ── 4. Find the mapping row for this item IN THIS SPECIFIC BOX ──────────
+    // A cut_list with qty > 1 creates multiple mapping rows — one per unit.
+    // Some units may be in different boxes. We find the one assigned to box_id
+    // that hasn't been marked site_in yet (so scanning marks them one by one).
+    const mapping = await prisma.cutListMachineMapping.findFirst({
+      where: {
+        cut_list_id:  cutList.id,
+        box_id:       box_id,       // ← scoped to this box
+        project_id,
+        vendor_id,
+        machine_id:   packagingMachine.id,
+        expected_in:  true,
+        actual_in_at: { not: null }, // must have been scanned in
+        site_in_at:   null,          // not yet received at site
+      },
+      select: {
+        id: true,
+        box_id: true,
+        actual_in_at: true,
+        site_in_at: true,
+      },
+    });
+ 
+    if (!mapping) {
+      // Distinguish between "wrong box" and "all units already received"
+      const anyInBox = await prisma.cutListMachineMapping.findFirst({
+        where: {
+          cut_list_id: cutList.id,
+          box_id:      box_id,
+          project_id,
+          vendor_id,
+          machine_id:  packagingMachine.id,
+          expected_in: true,
+        },
+        select: { id: true, site_in_at: true, actual_in_at: true },
+      });
+ 
+      if (!anyInBox) {
+        return validationResponse(0, "Item is not packed in this box");
+      }
+      if (!anyInBox.actual_in_at) {
+        return validationResponse(0, "Item has not been scanned into the box yet");
+      }
+      // All units of this item in this box are already received
+      return validationResponse(0, "All units of this item are already marked as received at site");
+    }
+ 
+    // ── 5. Mark site_in on this mapping row ──────────────────────────────────
+    const updated = await prisma.cutListMachineMapping.update({
+      where: { id: mapping.id },
+      data: {
+        site_in_at: new Date(),
+        site_in_by: user_id,
+      },
+      select: {
+        id: true,
+        site_in_at: true,
+        site_in_by: true,
+        cut_list: { select: { item_name: true, unique_code: true } },
+      },
+    });
+ 
+    // Count remaining units of this item in this box not yet received
+    const remaining = await prisma.cutListMachineMapping.count({
+      where: {
+        cut_list_id:  cutList.id,
+        box_id:       box_id,
+        project_id,
+        vendor_id,
+        machine_id:   packagingMachine.id,
+        expected_in:  true,
+        actual_in_at: { not: null },
+        site_in_at:   null,
+      },
+    });
+ 
+    const message = remaining > 0
+      ? `Item received. ${remaining} more unit${remaining > 1 ? "s" : ""} of this item pending`
+      : "Item marked as received at site";
+ 
+    return validationResponse(1, message, { ...updated, remaining_units: remaining });
+ 
+  } catch (error) {
+    console.error("Error in markItemSiteInService:", error);
+    return validationResponse(0, "Failed to mark item as received at site");
+  }
+};
+ 
+// ── Get all items in a box with their site_in status ─────────────────────────
+export const getBoxSiteInStatusService = async (
+  box_id: number,
+  project_id: number,
+  vendor_id: number
+) => {
+  try {
+    const box = await prisma.boxMaster.findFirst({
+      where: { id: box_id, project_id, vendor_id, is_deleted: false },
+      select: {
+        id: true,
+        box_name: true,
+        box_status: true,
+        site_in_at: true,
+        factory_out_at: true,
+      },
+    });
+ 
+    if (!box) return validationResponse(0, "Box not found");
+ 
+    const packagingMachine = await prisma.machineMaster.findFirst({
+      where: { vendor_id, machine_type_id: 18 },
+      select: { id: true },
+      orderBy: { id: "asc" },
+    });
+ 
+    if (!packagingMachine) return validationResponse(0, "Packaging machine not configured");
+ 
+    const items = await prisma.cutListMachineMapping.findMany({
+      where: {
+        box_id,
+        project_id,
+        vendor_id,
+        machine_id: packagingMachine.id,
+        expected_in: true,
+      },
+      select: {
+        id: true,
+        site_in_at: true,
+        site_in_by: true,
+        cut_list: {
+          select: {
+            id: true,
+            item_name: true,
+            category_name: true,
+            group_name: true,
+            unique_code: true,
+            qty: true,
+          },
+        },
+      },
+      orderBy: { id: "asc" },
+    });
+ 
+    const totalItems    = items.length;
+    const receivedItems = items.filter((i) => i.site_in_at !== null).length;
+ 
+    return validationResponse(1, "Box site in status fetched", {
+      box,
+      total_items:    totalItems,
+      received_items: receivedItems,
+      pending_items:  totalItems - receivedItems,
+      items: items.map((i) => ({
+        mapping_id:    i.id,
+        cut_list_id:   i.cut_list.id,
+        item_name:     i.cut_list.item_name,
+        category_name: i.cut_list.category_name,
+        group_name:    i.cut_list.group_name,
+        unique_code:   i.cut_list.unique_code,
+        qty:           i.cut_list.qty,
+        site_in_at:    i.site_in_at,
+        site_in_by:    i.site_in_by,
+        is_received:   i.site_in_at !== null,
+      })),
+    });
+ 
+  } catch (error) {
+    console.error("Error in getBoxSiteInStatusService:", error);
+    return validationResponse(0, "Failed to fetch box site in status");
+  }
+};

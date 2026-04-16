@@ -35,7 +35,9 @@ import {
   toggleProjectCategoryStatus,
   unsetBoxFromMapping,
   markBoxFactoryOut,
-  markBoxSiteIn
+  markBoxSiteIn,
+  checkToken,
+  syncCategories
 } from "../../controllers/trackTraceController/trackTrace.controller";
 
 import { 
@@ -131,6 +133,10 @@ router.patch("/project-categories/:id/status", toggleProjectCategoryStatus);
 
 router.patch("/boxes/:box_id/factory-out", markBoxFactoryOut);
 router.patch("/boxes/:box_id/site-in",     markBoxSiteIn);
+
+
+router.get("/category/project-categories/check-token", checkToken);
+router.post("/category/project-categories/sync", syncCategories);
 
 
 
