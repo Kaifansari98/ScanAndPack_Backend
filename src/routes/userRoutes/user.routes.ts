@@ -4,6 +4,7 @@ import * as userController from '../../controllers/userControllers/user.controll
 const router = Router();
 
 router.post('/create-user', userController.createUserController);
+router.patch('/update-user/:userId', userController.updateUserController);
 router.get("/vendor/:vendorId", userController.getUsersByVendorController);
 
 router.post("/reset-password-admin", userController.masterResetPasswordController);

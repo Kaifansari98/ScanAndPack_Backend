@@ -74,16 +74,66 @@ export const MasterResetPasswordService = async ({
   return { message: "Password reset successfully" };
 };
 
+export const updateUserService = async (
+  userId: number,
+  data: {
+    user_name?: string;
+    user_contact?: string;
+    user_email?: string;
+    user_timezone?: string;
+    password?: string;
+    user_type_id?: number;
+    franchise_id?: number | null;
+    status?: string;
+  },
+) => {
+  const user = await prisma.userMaster.findUnique({
+    where: { id: userId },
+    select: { id: true },
+  });
+
+  if (!user) {
+    const error = new Error("User not found");
+    (error as any).statusCode = 404;
+    throw error;
+  }
+
+  const updateData: Record<string, any> = {};
+
+  if (data.user_name !== undefined) updateData.user_name = data.user_name;
+  if (data.user_contact !== undefined) updateData.user_contact = data.user_contact;
+  if (data.user_email !== undefined) updateData.user_email = data.user_email;
+  if (data.user_timezone !== undefined) updateData.user_timezone = data.user_timezone;
+  if (data.user_type_id !== undefined) updateData.user_type_id = data.user_type_id;
+  if (data.franchise_id !== undefined) updateData.franchise_id = data.franchise_id;
+  if (data.status !== undefined) updateData.status = data.status;
+
+  if (data.password) {
+    updateData.password = await bcrypt.hash(data.password, 10);
+  }
+
+  if (Object.keys(updateData).length === 0) {
+    return { message: "No changes to update" };
+  }
+
+  return prisma.userMaster.update({
+    where: { id: userId },
+    data: updateData,
+  });
+};
+
 export const getUsersByVendorService = async ({
   vendorId,
   page = 1,
   limit = 20,
   search = "",
+  franchise_id,
 }: {
   vendorId: number;
   page?: number;
   limit?: number;
   search?: string;
+  franchise_id?: number;
 }) => {
   if (!vendorId) {
     const error = new Error("vendorId is required");
@@ -97,6 +147,7 @@ export const getUsersByVendorService = async ({
 
   const where = {
     vendor_id: vendorId,
+    ...(franchise_id ? { franchise_id } : {}),
     ...(normalizedSearch
       ? {
           OR: [
