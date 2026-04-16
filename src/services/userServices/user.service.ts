@@ -73,3 +73,95 @@ export const MasterResetPasswordService = async ({
 
   return { message: "Password reset successfully" };
 };
+
+export const getUsersByVendorService = async ({
+  vendorId,
+  page = 1,
+  limit = 20,
+  search = "",
+}: {
+  vendorId: number;
+  page?: number;
+  limit?: number;
+  search?: string;
+}) => {
+  if (!vendorId) {
+    const error = new Error("vendorId is required");
+    (error as any).statusCode = 400;
+    throw error;
+  }
+
+  const pageNum = Number.isFinite(page) && page > 0 ? page : 1;
+  const limitNum = Number.isFinite(limit) && limit > 0 ? limit : 20;
+  const normalizedSearch = search.trim();
+
+  const where = {
+    vendor_id: vendorId,
+    ...(normalizedSearch
+      ? {
+          OR: [
+            { user_name: { contains: normalizedSearch, mode: "insensitive" as const } },
+            { user_contact: { contains: normalizedSearch, mode: "insensitive" as const } },
+            { user_email: { contains: normalizedSearch, mode: "insensitive" as const } },
+            { status: { contains: normalizedSearch, mode: "insensitive" as const } },
+            {
+              user_type: {
+                user_type: { contains: normalizedSearch, mode: "insensitive" as const },
+              },
+            },
+            {
+              franchise: {
+                franchise_name: {
+                  contains: normalizedSearch,
+                  mode: "insensitive" as const,
+                },
+              },
+            },
+          ],
+        }
+      : {}),
+  };
+
+  const [users, count] = await Promise.all([
+    prisma.userMaster.findMany({
+      where,
+      orderBy: { id: "desc" },
+      skip: (pageNum - 1) * limitNum,
+      take: limitNum,
+      select: {
+        id: true,
+        vendor_id: true,
+        franchise_id: true,
+        user_name: true,
+        user_contact: true,
+        user_email: true,
+        user_timezone: true,
+        status: true,
+        created_at: true,
+        user_type: {
+          select: {
+            user_type: true,
+          },
+        },
+        franchise: {
+          select: {
+            franchise_name: true,
+          },
+        },
+      },
+    }),
+    prisma.userMaster.count({ where }),
+  ]);
+
+  return {
+    count,
+    data: users,
+    pagination: {
+      currentPage: pageNum,
+      totalPages: Math.ceil(count / limitNum),
+      totalRecoards: count,
+      hasNext: pageNum < Math.ceil(count / limitNum),
+      hasPrev: pageNum > 1,
+    },
+  };
+};

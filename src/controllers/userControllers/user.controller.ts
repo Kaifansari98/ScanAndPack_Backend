@@ -42,3 +42,38 @@ export const masterResetPasswordController = async (
     });
   }
 };
+
+export const getUsersByVendorController = async (req: Request, res: Response) => {
+  try {
+    const vendorId = Number(req.params.vendorId);
+    const page = Number(req.query.page ?? 1);
+    const limit = Number(req.query.limit ?? 20);
+    const search = String(req.query.search ?? "");
+
+    if (!vendorId) {
+      return res.status(400).json({
+        success: false,
+        message: "vendorId is required",
+      });
+    }
+
+    const users = await userService.getUsersByVendorService({
+      vendorId,
+      page,
+      limit,
+      search,
+    });
+
+    return res.status(200).json({
+      success: true,
+      count: users.count,
+      data: users.data,
+      pagination: users.pagination,
+    });
+  } catch (error: any) {
+    return res.status(error.statusCode || 500).json({
+      success: false,
+      message: error.message || "Failed to fetch users",
+    });
+  }
+};
