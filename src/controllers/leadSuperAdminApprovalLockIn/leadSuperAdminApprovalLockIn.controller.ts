@@ -59,7 +59,7 @@ export class LeadSuperAdminApprovalLockInController {
     } catch (error: any) {
       res.status(500).json({
         success: false,
-        message: "Failed to fetch super admin approval lock-ins",
+        message: "Failed to fetch accounts approval lock-ins",
         error: error.message,
       });
     }
@@ -93,13 +93,13 @@ export class LeadSuperAdminApprovalLockInController {
 
       res.status(200).json({
         success: true,
-        message: "Super admin approval lock-in approved successfully",
+        message: "Accounts approval lock-in approved successfully",
         data,
       });
     } catch (error: any) {
       res.status(500).json({
         success: false,
-        message: "Failed to approve super admin approval lock-in",
+        message: "Failed to approve accounts approval lock-in",
         error: error.message,
       });
     }

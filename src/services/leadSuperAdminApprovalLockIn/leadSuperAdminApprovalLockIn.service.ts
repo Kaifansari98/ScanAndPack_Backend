@@ -229,7 +229,7 @@ export class LeadSuperAdminApprovalLockInService {
           vendor_id: input.vendor_id,
           lead_id: input.lead_id,
           account_id: lead.account_id,
-          action: `Lead moved to Booking Done and is now waiting for Super Admin approval before Final Measurement can be assigned.`,
+          action: `Lead moved to Booking Done and is now waiting for Accounts approval before Final Measurement can be assigned.`,
           action_type: "CREATE",
           created_by: input.created_by,
           created_at: new Date(),
@@ -417,7 +417,7 @@ export class LeadSuperAdminApprovalLockInService {
           lead_id: input.lead_id,
           account_id: lead.account_id,
           action:
-            "Lead moved to Order Login and is now waiting for Super Admin approval before Production Files and Order Login can be filled.",
+            "Lead moved to Order Login and is now waiting for Accounts approval before Production Files and Order Login can be filled.",
           action_type: "CREATE",
           created_by: input.created_by,
           created_at: new Date(),
@@ -615,7 +615,7 @@ export class LeadSuperAdminApprovalLockInService {
           lead_id: input.lead_id,
           account_id: lead.account_id,
           action:
-            "Lead moved to Dispatch Planning and is now waiting for Super Admin approval before Dispatch Planning inputs can be filled.",
+            "Lead moved to Dispatch Planning and is now waiting for Accounts approval before Dispatch Planning inputs can be filled.",
           action_type: "CREATE",
           created_by: input.created_by,
           created_at: new Date(),
